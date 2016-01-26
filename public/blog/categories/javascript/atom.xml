@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Javascript | 何幻]]></title>
+  <link href="https://thzt.github.io/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="https://thzt.github.io/"/>
+  <updated>2016-01-26T20:47:21+08:00</updated>
+  <id>https://thzt.github.io/</id>
+  <author>
+    <name><![CDATA[thzt]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Y Combinator in Javascript]]></title>
+    <link href="https://thzt.github.io/blog/2015/01/27/y-combinator-in-javascript/"/>
+    <updated>2015-01-27T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2015/01/27/y-combinator-in-javascript</id>
+    <content type="html"><![CDATA[<p>本文借助阶乘函数，在javascript中推导了Y combinator。</p>
+
+<p><br/></p>
+
+<h2><strong>原始的阶乘函数定义</strong></h2>
+
+<p>var fact=function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*fact(n-1);</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>console.assert(fact(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>把递归函数作为参数传递</strong></h2>
+
+<p>var highFact=function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*f(f)(n-1);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>console.assert(highFact(highFact)(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>借助辅助函数消除对自身的调用</strong></h2>
+
+<p>var fact=(function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*f(f)(n-1);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>}));</p>
+
+<p><br/></p>
+
+<p>console.assert(fact(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>构造递归原型</strong></h2>
+
+<p>var fact=(function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var factProto=function(h){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(x){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return x==0?1:x*h(x-1);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return factProto(f(f))(n);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>}));</p>
+
+<p><br/></p>
+
+<p>console.assert(fact(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>将递归原型提取出来</strong></h2>
+
+<p>var factProto=function(h){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(x){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return x==0?1:x*h(x-1);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>var fact=(function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return factProto(f(f))(n);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>}));</p>
+
+<p><br/></p>
+
+<p>console.assert(fact(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>把递归原型变成形参</strong></h2>
+
+<p>var fact=(function(k){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return (function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return k(f(f))(n);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}));</p>
+
+<p>}(factProto));</p>
+
+<p><br/></p>
+
+<p>console.assert(fact(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>得到Y combinator</strong></h2>
+
+<p>var yCombinator=function(k){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return (function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return k(f(f))(n);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}));</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>console.assert(yCombinator(factProto)(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>扩展为多参数形式</strong></h2>
+
+<p>var yCombinator=function(k){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return (function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return k(f(f)).apply(null,arguments);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}));</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>console.assert(yCombinator(factProto)(5)==120);</p>
+]]></content>
+  </entry>
+  
+</feed>

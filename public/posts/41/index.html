@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="S表达式，是Lisp语言的特色， 让我们有能力对程序和数据进行统一编码。 这种一致性， 使得我们可以和处理数据一样处理Lisp代码， 正因为这样，才可以建立其他语言无法比拟的宏系统（macro system）。 S表达式真是天才之作呀。 它是凭空想出来的吗？ 不是的。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/posts/41/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/02/s-expression/">理解S表达式</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-02T00:00:00+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>S表达式，是Lisp语言的特色，</p>
+
+<p>让我们有能力对程序和数据进行统一编码。</p>
+
+<p><br/></p>
+
+<p>这种一致性，</p>
+
+<p>使得我们可以和处理数据一样处理Lisp代码，</p>
+
+<p>正因为这样，才可以建立其他语言无法比拟的宏系统（macro system）。</p>
+
+<p><br/></p>
+
+<p>S表达式真是天才之作呀。</p>
+
+<p>它是凭空想出来的吗？</p>
+
+<p><br/></p>
+
+<p>不是的。</p>
+
+<p>S表达式是<strong>二叉树的一种线性编码</strong>。</p>
+
+<p><br/></p>
+
+<h2><strong>二叉树</strong></h2>
+
+<p>我们知道二叉树是很重要的数据结构，</p>
+
+<p>可以用来存储结构化的数据。</p>
+
+<p>例如：</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</p>
+
+<p>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\</p>
+
+<p>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</p>
+
+<p>&nbsp;/&nbsp;\&nbsp;&nbsp;&nbsp;/&nbsp;\</p>
+
+<p>a&nbsp;&nbsp;&nbsp;b&nbsp;c&nbsp;&nbsp;&nbsp;d</p>
+
+<p><br/></p>
+
+<p>二叉树的每个节点，</p>
+
+<p>或者是叶节点，或者有2个子节点，</p>
+
+<p>叶节点可以用来存储数据。</p>
+
+<p><br/></p>
+
+<p>可是，这样表示二叉树，太麻烦了。</p>
+
+<p>不容易书写。</p>
+
+<p><br/></p>
+
+<p>于是，先哲们发明了<strong>点对表示法</strong>，</p>
+
+<p>((a . b) . (c . d))可以表示上面的二叉树，</p>
+
+<p>其中“.”表示节点。</p>
+
+<p><br/></p>
+
+<p><strong>S表达式</strong>是点对表示法的形式定义：</p>
+
+<p>原子 -> 数字 | 符号</p>
+
+<p>S表达式 -> 原子 | (S表达式 . S表达式)</p>
+
+<p><br/></p>
+
+<p>所以，S表达式或者是原子，</p>
+
+<p>或者是递归的由其他S表达式构成的点对。</p>
+
+<p><br/></p>
+
+<h2><strong>S表达式的化简</strong></h2>
+
+<p>实际使用时，</p>
+
+<p>书写S表达式，还要同时写很多点号“.”，</p>
+
+<p>这也是一件麻烦的事情。</p>
+
+<p><br/></p>
+
+<p>因此，Lisp语言定义了一套S表达式的化简规则。</p>
+
+<p>（1）如果一个点号右邻一个左括号，那么就可以将这个点号，左括号以及匹配的右括号，一起去掉。</p>
+
+<p>例如：(a . (b . c)) &lt;=> (a b . c)</p>
+
+<p><br/></p>
+
+<p>（2）如果一个点号右邻<strong>原子nil</strong>，那么就可以把这个点号和原子nil，一起去掉。</p>
+
+<p>例如：(a . (b . nil)) &lt;=> (a b . nil) &lt;=> (a b)</p>
+
+<p><br/></p>
+
+<p><strong>列表</strong>是一种特殊类型的S表达式，</p>
+
+<p>如果一个S表达式不是原子，</p>
+
+<p>而且经过化简可以把点号都去掉，</p>
+
+<p>就说这个S表达式是一个列表。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>(a . (b . (c . nil))) &lt;=> (a b c)</p>
+
+<p>是一个列表。</p>
+
+<p><br/></p>
+
+<p>为了使用方便，还允许有<strong>空表</strong>，</p>
+
+<p>而且还定义空表等价于原子nil。</p>
+
+<p>( ) &lt;=> nil</p>
+
+<p>例如：</p>
+
+<p>(a . (b . ( ))) &lt;=> (a . (b . nil)) &lt;=> (a b)</p>
+
+<p><br/></p>
+
+<p>值得注意的是，</p>
+
+<p>空表的记法，使nil身兼三职，</p>
+
+<p>（1）nil表示一个原子</p>
+
+<p>（2）nil表示空表</p>
+
+<p>（3）nil表示逻辑值“假”</p>
+
+<p>nil成为了Lisp语言中唯一的<strong>既是原子又是列表</strong>的表达式。</p>
+
+<p><br/></p>
+
+<h2><strong>常用函数pair?，cons和car</strong></h2>
+
+<p>Scheme语言是Lisp的一种方言，</p>
+
+<p>它没有nil的概念，只有空表( )。</p>
+
+<p><br/></p>
+
+<p>在介绍常用函数之前，</p>
+
+<p>我们需要知道，Scheme语言的<a href="http://en.wikipedia.org/wiki/Evaluation_strategy">求值策略</a>（evaluation strategy）。</p>
+
+<p><br/></p>
+
+<p>Scheme语言中的函数是按值调用的（call by value），</p>
+
+<p>在求值函数体之前，实参会先被求值。</p>
+
+<p><br/></p>
+
+<p>因此，(display (* 2 3))中，</p>
+
+<p>(* 2 3)并不会被看成是具有3个元素的列表，而是看成乘法函数调用，</p>
+
+<p>在display调用之前，会先求值(* 2 3) => 6，结果是显示6。</p>
+
+<p><br/></p>
+
+<p>假如，我们一定要把(* 2 3)看成是列表呢？</p>
+
+<p>就需要引用它。(display &lsquo;(* 2 3))</p>
+
+<p>此时，'(<em> 2 3)求值为列表(</em> 2 3)。</p>
+
+<p>结果是显示(* 2 3)。</p>
+
+<p><br/></p>
+
+<p>我们来看pair?函数，</p>
+
+<p>它只有在参数是点对的情况下返回#t，其余都返回#f。</p>
+
+<p>例如：</p>
+
+<p>(pair? &lsquo;(a . c)) => #t</p>
+
+<p>(pair? &lsquo;(a b c)) => #t</p>
+
+<p>(pair? &lsquo;( )) => #f</p>
+
+<p>(pair? &lsquo;abc) => #f</p>
+
+<p><br/></p>
+
+<p>值得注意的是，</p>
+
+<p>（1）空表不是点对。</p>
+
+<p>因为它是原子nil，虽然Scheme语言中没有内置原子nil。</p>
+
+<p>可以通过另外一个函数看出来，atom?用来判断参数是否原子。</p>
+
+<p>(atom? &lsquo;( )) => #t</p>
+
+<p><br/></p>
+
+<p>（2）<strong>列表</strong>是点对的简写。</p>
+
+<p>(a b c) &lt;=> (a . (b . (c . ( ))))</p>
+
+<p><br/></p>
+
+<p>我们再来看cons函数，</p>
+
+<p>cons接受两个参数，将他们拼成一个点对，</p>
+
+<p>结果是<strong>化简后的</strong>S表达式。</p>
+
+<p>例如：</p>
+
+<p>(cons &lsquo;a 'b) => (a . b)</p>
+
+<p>(cons &lsquo;a &rsquo;(b)) => (a . (b)) &lt;=> (a b)</p>
+
+<p>(cons &lsquo;(a) &rsquo;(b)) => ((a) . (b)) &lt;=> ((a) b)</p>
+
+<p><br/></p>
+
+<p>最后来看一下car和cdr函数，</p>
+
+<p>它们接受一个点对作为参数，</p>
+
+<p>car获取点对的左元素，cdr获取右元素。</p>
+
+<p><br/></p>
+
+<p>(car &lsquo;(a . b)) => a</p>
+
+<p>(cdr &lsquo;(a . b)) => b</p>
+
+<p>(car &lsquo;(a b)) &lt;=> (car &rsquo;(a . (b))) => a</p>
+
+<p>(cdr &lsquo;(a b)) &lt;=> (car &rsquo;(a . (b))) => (b)</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>刚学Lisp语言的时候，</p>
+
+<p>查看了很多书，对S表达式的解释，总是不够清楚。</p>
+
+<p><br/></p>
+
+<p>无意间找到了<strong>马希文</strong>老师的《LISP语言》，</p>
+
+<p>书中用中国人的方式写了对Lisp语言的理解，</p>
+
+<p>言简意赅。</p>
+
+<p><br/></p>
+
+<p>让我认识到了，</p>
+
+<p>真正精髓的知识，都一定是简单的，</p>
+
+<p>难以理解的东西，可能作者也没有搞明白。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/42">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/40">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

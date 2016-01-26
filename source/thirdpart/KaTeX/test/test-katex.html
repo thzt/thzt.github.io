@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+
+		<script src="../../jQuery/jquery-1.11.1.js"></script>
+		<link href="../katex.min.css" rel="stylesheet"/>
+		<script src="../katex.min.js"></script>
+
+        <style>
+		#source{
+			width:90%;
+			height:200px;
+			margin-bottom:10px;
+		}
+        </style>
+    </head>
+    <body>
+
+        <textarea id="source"></textarea>
+        <div id="target"></div>
+		
+		<script>
+		$('#source').on('keyup',function(){
+			window.katex.render($('#source').val(),$('#target')[0]);
+		});
+		</script>
+    </body>
+</html>

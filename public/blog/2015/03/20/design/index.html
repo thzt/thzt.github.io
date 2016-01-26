@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>设计的连续性 - 何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="一个人不可能完成庞大的工程。单独模块必须一个人来完成，从设计到实现，是为连续。而模块之间如何处理输入输出，是为保护。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/blog/2015/03/20/design/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">设计的连续性</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-20T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>代码写的好，主要原因并不在于文字的输入水平。</p>
+
+<p>而在于编写者在进行什么样的思考。</p>
+
+<p>软件就是这样一点一滴逐步构建起来的。</p>
+
+<p><br/></p>
+
+<p>微小的改变累积起来，它的影响就是可观的。</p>
+
+<p>是编写者无时无刻进行的选择，造就了软件的演变。</p>
+
+<p>编写者的作用，经常被低估。</p>
+
+<p><br/></p>
+
+<p>好的设计，才能产生好的产品。</p>
+
+<p>而不同于其他行业的是，</p>
+
+<p>软件设计在设计之初是无法具体化的。</p>
+
+<p><br/></p>
+
+<p>只有设计者才能实现他的设计。</p>
+
+<p>在遇到意外情况时，</p>
+
+<p>也只有设计者知道怎样调整，才能保持一致。</p>
+
+<p><br/></p>
+
+<p>像行云和流水一样，</p>
+
+<p>优美的设计体现在它遇到困难时的应变选择上，</p>
+
+<p>而不体现在于它现阶段的实现方式上。</p>
+
+<p><br/></p>
+
+<p>好的设计，也会遇到问题，</p>
+
+<p>但只有设计者才知道，</p>
+
+<p>怎样用准备好的方式来解决它。</p>
+
+<p><br/></p>
+
+<h2><strong>设计和实现</strong></h2>
+
+<p>水平较高的程序员，通常会被安排做设计。</p>
+
+<p>而普通程序员，则要求去实现他们的设计。</p>
+
+<p><br/></p>
+
+<p>这其实是非常危险的。</p>
+
+<p><br/></p>
+
+<p>一方面，</p>
+
+<p>设计的好坏，主要在面对具体问题时的选择上，</p>
+
+<p>而这些选择，其实是由普通程序员来完成的。</p>
+
+<p>设计者的水平虽高，却没有起到任何作用。</p>
+
+<p><br/></p>
+
+<p>另一方面，</p>
+
+<p>设计者，如果不设身处地的遭遇问题，</p>
+
+<p>就不能提供合适的解决方案。</p>
+
+<p>因此，他的设计很可能是偏离实际的。</p>
+
+<p><br/></p>
+
+<p>最后，</p>
+
+<p>高明的想法，是不容易被理解的。</p>
+
+<p>普通程序员按着自己的理解，来编写代码。</p>
+
+<p>会导致设计者遇到本来不会出现的问题。</p>
+
+<p><br/></p>
+
+<p>因此，不同的人，可以负责不同的功能模块，</p>
+
+<p>但是，对问题的思考和解决，必须由一个人来完成。</p>
+
+<p><br/></p>
+
+<p>“我是这么想的，你来做吧。”</p>
+
+<p>在软件行业中，通常是行不通的。</p>
+
+<p><br/></p>
+
+<p>高水平的程序员，可以被安排去做复杂的模块。</p>
+
+<p>普通程序员，可以去做简单的模块。</p>
+
+<p>让他们互相隔离，尽量少的产生影响。</p>
+
+<p><br/></p>
+
+<h2><strong>模块的自我保护——输入保护</strong></h2>
+
+<p>软件提供的功能是分层次的，</p>
+
+<p>虽然整个软件是交由目标用户来使用的，</p>
+
+<p>但是，也可能软件的一部分是另一个部分的用户。</p>
+
+<p><br/></p>
+
+<p>处理好层次之间的依赖性，</p>
+
+<p>才能保证软件稳定。</p>
+
+<p><br/></p>
+
+<p>作为功能的使用者来说，</p>
+
+<p>最担心的就是，我们所依赖的模块发生变化了。</p>
+
+<p><br/></p>
+
+<p>这种变化其实是不可避免的。</p>
+
+<p>因为，不断演变，是软件的本质特征，</p>
+
+<p>就算不变坏，变好也是变化的一种。</p>
+
+<p><br/></p>
+
+<p>那该怎么办呢？</p>
+
+<p><br/></p>
+
+<p>事实上，我们需要知道自己想要什么，</p>
+
+<p>并且，用可替换的方式实现自己的想要的功能。</p>
+
+<p><br/></p>
+
+<p>也就是说，我们并不依赖任何模块，</p>
+
+<p>只依赖于我们的需要。</p>
+
+<p>至于如何实现我们的需要，是灵活的，经得起变化的。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>在web应用中，我们需要一个对话框。</p>
+
+<p>并不关心它是如何实现的。</p>
+
+<p><br/></p>
+
+<p>为了避免产生依赖，</p>
+
+<p>我们首先封装自己的需要。</p>
+
+<p>我们需要一个dialog，它可以弹出消息，dialog.pop(message)。</p>
+
+<p><br/></p>
+
+<p>然后，我们可以寻找任何已有的组件来实现需要。</p>
+
+<p>var dialog={</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pop:function(message){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//调用已有组件，实现弹出消息功能</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>这样的话，如果我们用来实现功能的组件发生了变化，</p>
+
+<p>我们的需要并没有改变。</p>
+
+<p>只需要用另一个组件来实现dialog.pop(message)即可。</p>
+
+<p><br/></p>
+
+<p>可以这样做的原因就是，</p>
+
+<p>需要通常是稳定的，</p>
+
+<p>而实现方式，通常是不稳定的。</p>
+
+<p><br/></p>
+
+<p>我们清楚的知道自己需要什么，</p>
+
+<p>而别人提供的功能，我们并不清楚。</p>
+
+<p><br/></p>
+
+<h2><strong>模块的自我保护——输出保护</strong></h2>
+
+<p>好的模块，内部也是层次良好的。</p>
+
+<p>它们不是为同一目的而服务的。</p>
+
+<p>也像整个软件那样，模块的一部分为另一部分提供服务。</p>
+
+<p><br/></p>
+
+<p>整个模块是变化中的，</p>
+
+<p>其主要推动力在于，别人对模块的需求在不断变化。</p>
+
+<p><br/></p>
+
+<p>任何外在表现的更改，总是会影响到内部结构。</p>
+
+<p>但是影响的方式，却与模块内部层次的划分有关。</p>
+
+<p><br/></p>
+
+<p>怎样保证在需求变更时，影响最小呢？</p>
+
+<p><br/></p>
+
+<p>这一次，我们就不能再使用封装的办法了。</p>
+
+<p>因为我们无法封装变动的需求。</p>
+
+<p>这也是面向对象思想，经常误用的地方。</p>
+
+<p><br/></p>
+
+<p>应该避免跟随别人的需要进行编程。</p>
+
+<p>我们要有自己的功能集，</p>
+
+<p>就像一个车厂要随时准备好零件一样。</p>
+
+<p><br/></p>
+
+<p>我们打算用零件来拼装需求。</p>
+
+<p>当需求变更后，我们只需要添加或更换零件即可。</p>
+
+<p>中国的“活字印刷术”就是这种思想的应用。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>在web应用中，我们需要提供一个对话框。</p>
+
+<p>通常使用者会告诉我们，他们需要，dialog.pop(message)。</p>
+
+<p><br/></p>
+
+<p>为了避免需求的变化过度影响我们，</p>
+
+<p>我们将需要的功能划分为可拼装的零件。</p>
+
+<p><br/></p>
+
+<p>myDialog.create(html);</p>
+
+<p>myDialog.addClass(style);</p>
+
+<p>myDialog.bindEvent(event);</p>
+
+<p>myDialog.setMessage(message);</p>
+
+<p><br/></p>
+
+<p>这些足够了，我们并不想创建多余的功能。</p>
+
+<p>然后，我们拼装产品。</p>
+
+<p><br/></p>
+
+<p>var dialog={</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pop:function(message){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.create(html);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.addClass(style);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.bindEvent(event);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.setMessage(message);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>这样的话，当需求发生变化时，myDialog不会整体受到影响，</p>
+
+<p>增加或者更改部分功能以后，就可以制造新的产品了。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>对模块的保护，在输入端和输出端，是不同的。</p>
+
+<p>不进行保护，或者不区分的进行保护，</p>
+
+<p>都是危险的。</p>
+
+<p><br/></p>
+
+<p>模块的设计和实现，必须由一个人来完成。</p>
+
+<p>因为，模块是可替换的，</p>
+
+<p>而设计和实现是相联系的。</p>
+
+<p><br/></p>
+
+<p>本文提到的方法，只是一种解决方案。</p>
+
+<p>其中包含的思想才是重要的。</p>
+
+<p>可惜的是，它们包含的思想，也可能是过时的。</p>
+
+<p>而发现这些思想的方法，是永不落伍的。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">thzt</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-03-20T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/design/'>design</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/03/19/closures-are-objects/" title="Previous Post: 闭包就是对象">&laquo; 闭包就是对象</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/03/22/hygienic-macro/" title="Next Post: 简介卫生宏">简介卫生宏 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

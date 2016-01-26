@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="Robert Sedgewick/Kevin Wayne的《算法》一书中， 强调了科学方法， 细致的观察真实世界的特点。 根据观察结果提出假设模型。 根据模型预测未来的事件。 继续观察并核实预测的准确性。 如此反复直到确认预测和观察一致。 可是， 我们永远也没法知道某个假设是否永远正确， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/posts/29/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/24/model/">模型观</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-24T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Robert Sedgewick/Kevin Wayne的《算法》一书中，</p>
+
+<p>强调了科学方法，</p>
+
+<p><br/></p>
+
+<p>细致的观察真实世界的特点。</p>
+
+<p><strong>根据观察结果提出假设模型</strong>。</p>
+
+<p>根据模型预测未来的事件。</p>
+
+<p>继续观察并核实预测的准确性。</p>
+
+<p>如此反复直到确认预测和观察一致。</p>
+
+<p><br/></p>
+
+<p>可是，</p>
+
+<p>我们永远也没法知道某个假设是否<strong>永远正确</strong>，</p>
+
+<p>我们只能验证它和我们的观察的一致性。</p>
+
+<p><br/></p>
+
+<p>爱因斯坦说，</p>
+
+<p>再多的实验也不一定能够证明我是对的，</p>
+
+<p>但只需要一个实验就能证明我是错的。</p>
+
+<p><br/></p>
+
+<p>科学方法可能大家都很清楚，</p>
+
+<p>但是遇到具体问题，</p>
+
+<p>人们却容易忽视它。</p>
+
+<p><br/></p>
+
+<p>实践是检验真理的唯一标准，</p>
+
+<p>大胆假设，小心求证，</p>
+
+<p>建立正确的<strong>模型观</strong>，</p>
+
+<p>可以少走很多弯路。</p>
+
+<p><br/></p>
+
+<h2><strong>模型与目标系统</strong></h2>
+
+<p>我们经常混淆<strong>模型</strong>与<strong>目标系统</strong>的区别，</p>
+
+<p>把符号“1”，“2”，“3”,&hellip;</p>
+
+<p>当做数学对象中的自然数本身。</p>
+
+<p><br/></p>
+
+<p>这只是用印刷符号对<strong>自然数</strong>进行建模，</p>
+
+<p>实际上还有不同的模型，</p>
+
+<p>除了阿拉伯数字，还有罗马数字，中国筹，等等，</p>
+
+<p>甚至还有Church number。</p>
+
+<p><br/></p>
+
+<p>这个世界上<strong>并没有本质的道理</strong>，</p>
+
+<p>因为，我们无法验证什么是绝对正确的。</p>
+
+<p><br/></p>
+
+<p>我们只能拿着模型来进行<strong>假设</strong>，</p>
+
+<p>然后通过实验<strong>验证</strong>它的准确性。</p>
+
+<p><br/></p>
+
+<p>使用模型，我们可以从不同侧面，</p>
+
+<p>对目标系统进行研究。</p>
+
+<p><br/></p>
+
+<h2><strong>模型的发展与多样性</strong></h2>
+
+<p>对观察结果提出的模型，</p>
+
+<p>是一直在发展的，</p>
+
+<p>并没有哪一个是终极的。</p>
+
+<p><br/></p>
+
+<p>当我们问“<strong>到底是什么</strong>”的时候，</p>
+
+<p><strong>其实是以静态的观点，分析动态发展中的事物</strong>。</p>
+
+<p><br/></p>
+
+<p>模型在不断修正和演进中，</p>
+
+<p>对目标系统做出更精确的<strong>解释</strong>。</p>
+
+<p><br/></p>
+
+<p>例如，lambda calculus，</p>
+
+<p>是一种计算模型，</p>
+
+<p>一开始是无类型的，</p>
+
+<p>但是同样也得不到类型系统的种种好处。</p>
+
+<p><br/></p>
+
+<p>因此lambda calculus就被扩展了，</p>
+
+<p>变成了typed lambda calculus的一个<strong>特例</strong>。</p>
+
+<p><br/></p>
+
+<p>对计算建模的方法也并<strong>不唯一</strong>，</p>
+
+<p>图灵机，combinatory logic，形式语言，等等，</p>
+
+<p>都是和lambda calculus具有相同计算能力的模型。</p>
+
+<p><br/></p>
+
+<h2><strong>编程语言</strong></h2>
+
+<p>编程语言是一种形式语言，</p>
+
+<p>不同的编程语言，只是用不同的一堆<strong>符号</strong>，</p>
+
+<p>按着不同的<strong>文法规则</strong>，</p>
+
+<p>对计算进行建模。</p>
+
+<p><br/></p>
+
+<p>根据形式语言理论，</p>
+
+<p>不受限文法，与图灵机等价。</p>
+
+<p><br/></p>
+
+<p>可以把不同的编程语言，</p>
+
+<p>看做计算过程的多样化模型。</p>
+
+<p><br/></p>
+
+<p>同样，它们的建模方式也在演化，</p>
+
+<p>语言的规范在发展。</p>
+
+<p><br/></p>
+
+<p>遇到具体问题，</p>
+
+<p><strong>我们需要选择合适的编程语言</strong>。</p>
+
+<p><br/></p>
+
+<p>而编程范型，</p>
+
+<p>是语义上的一种分类，</p>
+
+<p>并没有明确的界线。</p>
+
+<p><br/></p>
+
+<p>我们也没必要成见太深，</p>
+
+<p>强行把语言用在<strong>不适用</strong>的场景中。</p>
+
+<p><br/></p>
+
+<p>毕竟，语言是用来沟通和表达的。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>当我还是孩子的时候，</p>
+
+<p>对大自然，就喜欢问“到底是什么”，</p>
+
+<p>它指引我沿着科学之路越走越远。</p>
+
+<p><br/></p>
+
+<p>随着学习的深入，</p>
+
+<p>让我开始懂得<strong>反思问题本身</strong>，</p>
+
+<p>站在更高的角度。</p>
+
+<p><br/></p>
+
+<p>从模型角度来看，</p>
+
+<p>物理学就是对大自然现实世界的建模，</p>
+
+<p>耳熟能详的物理学理论，也只是<strong>可行的模型之一</strong>。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>牛顿的万有引力理论，</p>
+
+<p>爱因斯坦的广义相对论，</p>
+
+<p>都是引力理论。</p>
+
+<p><br/></p>
+
+<p>当然还有其他的引力理论，</p>
+
+<p><strong>他们都是数学模型，用来解释目标系统</strong>，</p>
+
+<p>并不是大自然本身。</p>
+
+<p><br/></p>
+
+<p>终极理论之梦，</p>
+
+<p>可能会随着认识的提高，</p>
+
+<p>不再成为问题了。</p>
+
+<p><br/></p>
+
+<p>就像“没有银弹”一样，</p>
+
+<p><strong>任何领域都没有一劳永逸的事情</strong>。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/30">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/28">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

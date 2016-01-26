@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Haskell的纯函数性 - 何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，这种说法，其实是为了解释给不熟悉的人看的。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/blog/2015/03/27/purity/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Haskell的纯函数性</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-27T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>表达式是在环境中求值的。</p>
+
+<p>如果允许表达式改变环境，</p>
+
+<p>那么，其他表达式的求值结果，就是不可预料的。</p>
+
+<p><br/></p>
+
+<p>环境，是专业术语，也可称为执行环境，</p>
+
+<p>里面保存的是，变量和值的绑定关系。</p>
+
+<p><br/></p>
+
+<p>Haskell是一门纯函数式语言，</p>
+
+<p>并不是说，函数的每次求值结果都相同。</p>
+
+<p>而是说，<strong>任何函数都不会修改它的执行环境</strong>。</p>
+
+<p><br/></p>
+
+<p>例如，对于从屏幕上读取字符的函数，</p>
+
+<p>每次调用，并不一定会返回相同的值。</p>
+
+<p>但是，执行后，它确实不会影响环境中的绑定关系。</p>
+
+<p><br/></p>
+
+<p>因此，输入输出操作，也是纯函数，</p>
+
+<p>理解执行环境和现实世界的区别，是关键。</p>
+
+<p><br/></p>
+
+<h2><strong>IO</strong></h2>
+
+<p>Haskell是一门静态强类型的语言。</p>
+
+<p>任何表达式在编译前类型都是确定的。</p>
+
+<p><br/></p>
+
+<p>输入输出与IO a类型有关。</p>
+
+<p>其中，IO是类型构造器，:k IO = * -> *</p>
+
+<p>因此，IO a才是一个具体类型。</p>
+
+<p><br/></p>
+
+<p>IO是如何定义的呢？</p>
+
+<p>type IO a = World -> (a, World)</p>
+
+<p>World类型的值表示现实世界的状态。</p>
+
+<p><br/></p>
+
+<p>IO a类型的值是一个函数，它接受现实世界的当前状态作为参数，</p>
+
+<p>返回一个元组，这个元组由类型a的值和对现实世界改变后的状态构成。</p>
+
+<p><br/></p>
+
+<p>由于，我们并不需要手动传递World类型的值作为参数来调用，</p>
+
+<p>所以，应该<strong>把IO a类型的值理解为一个惰性求值的表达式</strong>，</p>
+
+<p>对该表达式按需求值，得到一个a类型的值。</p>
+
+<p><br/></p>
+
+<p>IO a类型的表达式，称为<strong>action</strong>。</p>
+
+<p>IO a类型的action中，惰性包含了一个a类型的值。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>getChar :: IO Char</p>
+
+<p>求值getChar表达式，就会得到一个Char类型的值。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>IO ( )</p>
+
+<p>其中，( )表示空元组类型，该类型只有一个值，空元组( )。</p>
+
+<p>“( )”既可以表示类型，又可以表示值，取决于它出现的上下文。</p>
+
+<p>另外，Haskell中习惯将空元组看做无用数据。</p>
+
+<p><br/></p>
+
+<p>在IO ( )中，( )是作为IO类型构造器的参数出现的，表示空元组类型，</p>
+
+<p>所以说，IO ( )类型的action中，惰性包含了一个空元组值。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>putStrLn :: String -> IO ( )</p>
+
+<p>putStrLn是一个函数，</p>
+
+<p>它接受String类型的值作为参数，</p>
+
+<p>返回一个IO ( )类型的action。</p>
+
+<p><br/></p>
+
+<h2><strong>do</strong></h2>
+
+<p>main :: IO ( )</p>
+
+<p>main = do</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn &ldquo;Please input: &rdquo;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;inpStr &lt;- getLine</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p><br/></p>
+
+<p>以上程序定义了main函数，是一个IO ( )类型的action。</p>
+
+<p><br/></p>
+
+<p>do关键字，是Haskell中的一种写法，</p>
+
+<p>用来表示顺序执行。</p>
+
+<p><br/></p>
+
+<p>其中，</p>
+
+<p>putStrLn :: String -> IO ( )</p>
+
+<p>getLine :: IO String</p>
+
+<p><br/></p>
+
+<p>putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p>= putStrLn ( &ldquo;Hello &rdquo; ++ inpStr )</p>
+
+<p><br/></p>
+
+<p>因此，</p>
+
+<p>putStrLn &ldquo;Please input: &rdquo; :: IO ( )，在屏幕上输出字符串“Please input: ”，</p>
+
+<p>inpStr &lt;- getLine，求值惰性表达式getLine，<strong>把action里面包含的值拿出来</strong>，绑定到inpStr上。</p>
+
+<p>putStrLn $ &ldquo;Hello &rdquo; ++ inpStr，在屏幕上输出字符串"Hello &ldquo;与变量inpStr连接后的结果。</p>
+
+<p><br/></p>
+
+<p>IO操作，每次执行的效果并不相同，</p>
+
+<p>但<strong>仍然都是纯函数</strong>，</p>
+
+<p>在于它们不会修改执行环境中的变量绑定关系。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，</p>
+
+<p>这种说法，其实是为了解释给不熟悉的人看的。</p>
+
+<p>事实上，<strong>Haskell中的任何函数都是纯函数</strong>。</p>
+
+<p><br/></p>
+
+<p>类似的，</p>
+
+<p>Haskell语言中Bug的数量可以控制到非常少，</p>
+
+<p>并不是因为通过Monad将IO和其他函数分离开，</p>
+
+<p>而是因为任何函数都不能改变环境中变量的绑定关系，</p>
+
+<p>即，函数的纯粹性。</p>
+
+<p><br/></p>
+
+<p>此外，Monad，Applicative和Functor这些类型类，</p>
+
+<p>提高了语言的抽象程度，让复杂度更可控，</p>
+
+<p>我想，这才是Bug数量少的真正原因吧。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">thzt</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-03-27T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/haskell/'>haskell</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/03/26/great/" title="Previous Post: 巨人与泥足">&laquo; 巨人与泥足</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/03/31/choice/" title="Next Post: 可替换的设计策略">可替换的设计策略 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

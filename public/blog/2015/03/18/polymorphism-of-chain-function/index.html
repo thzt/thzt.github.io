@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>函数>>=的多态性 - 何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="Monad类型类定义的>>=函数是一个多态函数，这保证了do notaion的灵活性。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/blog/2015/03/18/polymorphism-of-chain-function/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">函数>>=的多态性</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-18T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Haskell中一些函数可以作用在多种类型上。</p>
+
+<p>例如：</p>
+
+<p>ghci> length [1, 2]</p>
+
+<p>2</p>
+
+<p>length :: [Int] -> Int</p>
+
+<p><br/></p>
+
+<p>ghci> length [&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;]</p>
+
+<p>3</p>
+
+<p>length :: [String] -> Int</p>
+
+<p><br/></p>
+
+<p>我们看length的类型，</p>
+
+<p>length :: [a] -> Int</p>
+
+<p>它类型签名中，包含类型变量，类型变量可以具体化为任意类型。</p>
+
+<p><br/></p>
+
+<p>像这样的函数，称为多态函数。</p>
+
+<p><br/></p>
+
+<h2><strong>函数>>=</strong></h2>
+
+<p>函数>>=定义在Monad类型类中，</p>
+
+<p>class Monad m where</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(>>=) :: m a -> (a -> m b) -> m b</p>
+
+<p><br/></p>
+
+<p>其中，m是Monad类型类的实例类型，它的kind是<em> -> </em>，</p>
+
+<p>:k m = * -> *</p>
+
+<p>类型m a是一个具体类型，该类型的值称为monad value。</p>
+
+<p><br/></p>
+
+<p>我们看到，在m确定的情况下，>>=的类型签名中仍然包含类型变量。</p>
+
+<p>因此，对Monad类型类的某个实例来说，</p>
+
+<p>>>=可以操作相同m类型但是不同a类型的monad value :: m a。</p>
+
+<p><br/></p>
+
+<h2><strong>IO monad</strong></h2>
+
+<p>以Monad类型类的实例IO为例，对于IO来说，IO monad value称为IO action。</p>
+
+<p>main = do</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn &ldquo;Please input: &rdquo;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;inpStr &lt;- getLine</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p><br/></p>
+
+<p>其中，</p>
+
+<p>putStrLn :: String -> IO ( )</p>
+
+<p>getLine :: IO String</p>
+
+<p><br/></p>
+
+<p>我们来分析一下这3个IO action的类型，</p>
+
+<p>putStrLn &ldquo;Please input: &rdquo; :: IO ( )</p>
+
+<p>getLine :: IO String</p>
+
+<p>putStrLn $ &ldquo;Hello &rdquo; ++ inpStr :: IO ( )</p>
+
+<p><br/></p>
+
+<p>它们的具体类型都是m a，</p>
+
+<p>m相同，m = IO。而a不同，分别是( )，String，( )。</p>
+
+<p><br/></p>
+
+<p>在do notation中，如果某一行我们没有使用&lt;-为monad value绑定值，</p>
+
+<p>就相当于使用了函数>>，表示不需要这个绑定值。</p>
+
+<p>(>>) :: x >> y = x >>= \ _ -> y</p>
+
+<p><br/></p>
+
+<p>这样的话，我们就可以将main函数还原成>>和>>=的串联形式了，</p>
+
+<p>putStrLn &ldquo;Please input: &rdquo; >> getLine >>= \inpStr -> putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p>= putStrLn &ldquo;Please input: &rdquo; >>= \ _ -> getLine >>= \inpStr -> putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p>= putStrLn &ldquo;Please input: &rdquo; >>= ( \ _ -> getLine >>= ( \inpStr -> putStrLn $ &ldquo;Hello &rdquo; ++ inpStr ) )</p>
+
+<p><br/></p>
+
+<h2><strong>类型不同的>>=同时出现</strong></h2>
+
+<p>对于第一个>>=，我们能推断出它的大概类型，</p>
+
+<p>>>= :: IO ( ) -> (( ) -> IO ?) -> IO ?</p>
+
+<p>其中“?”表示尚未确定的类型。</p>
+
+<p><br/></p>
+
+<p>而第二个>>=的类型，可以完全确定下来。</p>
+
+<p>getLine >>= \inpStr -> putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p>>>= :: IO String -> (String -> IO ( )) -> IO ( )</p>
+
+<p><br/></p>
+
+<p>那么，第一个>>=的类型也就可以完全确定下来了，</p>
+
+<p>>>= :: IO ( ) -> (( ) -> IO ( )) -> IO ( )</p>
+
+<p><br/></p>
+
+<p>由此可见，</p>
+
+<p>第一个>>= :: IO ( ) -> (( ) -> IO ( )) -> IO ( )</p>
+
+<p>第二个>>= :: IO String -> (String -> IO ( )) -> IO ( )</p>
+
+<p>两个>>=的类型不同，它们同时出现了。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>do notation是>>和>>=串联形式的语法糖，IO action是 IO monad value，因此可以使用它。</p>
+
+<p>认为do notation中每行的monad value类型必须相同，是不正确的。</p>
+
+<p>事实上，他们的类型是m a，m是相同的，而a可以不同。</p>
+
+<p><br/></p>
+
+<p>相似的，Functor和Applicative类型类也定义了一些多态函数。</p>
+
+<p><br/></p>
+
+<p>此外，对于IO类型，《Programming in Haskell》P88说的最清楚</p>
+
+<p>type IO a = World -> (a, World)</p>
+
+<p><br/></p>
+
+<p>World类型的值表示环境的当前状态。</p>
+
+<p>World -> (a, World)类型的值是一个函数，</p>
+
+<p>它接受环境状态作为参数，返回一个a类型的值，并影响了环境状态。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">thzt</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-03-18T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/haskell/'>haskell</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/03/17/quotation/" title="Previous Post: Lisp语言中的引用">&laquo; Lisp语言中的引用</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/03/19/closures-are-objects/" title="Next Post: 闭包就是对象">闭包就是对象 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>设计的正交性 - 何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="为什么我们总是被需求牵着鼻子走。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/blog/2015/02/07/design-for-orthogonality/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">设计的正交性</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-07T00:00:00+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>从前，客户需要一个矢量(1 2 3)。</p>
+
+<p>于是，我们就打造了它。</p>
+
+<p><br/></p>
+
+<p>可是，一段时间之后，客户觉得这个矢量不好，不能满足需要。</p>
+
+<p>他们实际需要的是(6 5 4)。</p>
+
+<p><br/></p>
+
+<p>为了避免从头开始。</p>
+
+<p>我们聪明的使用了原来的矢量(1 2 3)，并增加了新功能(5 3 1)。</p>
+
+<p>于是(1 2 3)+(5 3 1)=(6 5 4)。</p>
+
+<p><br/></p>
+
+<p>我们降低了生产成本，很高兴。</p>
+
+<p><br/></p>
+
+<p>又过了一段时间，客户觉得(6 5 4)还是不好。</p>
+
+<p>他们真正需要的是(3 6 9)。</p>
+
+<p><br/></p>
+
+<p>我们很无奈，再用老办法吧。</p>
+
+<p>(6 5 4)+(-3 1 5)=(3 6 9)</p>
+
+<p>这里出现了负号，意思就是有些功能不需要了，删掉它。</p>
+
+<p><br/></p>
+
+<p>这时候，我们心里有点不舒服了。</p>
+
+<p>增加功能还可以接受，有成就感。</p>
+
+<p><br/></p>
+
+<p>而删除功能，很不舒服。</p>
+
+<p>当时加班加点做了，现在又不要了。</p>
+
+<p>出尔反尔。</p>
+
+<p><br/></p>
+
+<p>随后的日子里，你也知道。</p>
+
+<p>事情经常会像你不敢想的那样发展。</p>
+
+<p>客户的需求一直在变，我们没办法预测它。</p>
+
+<p><br/></p>
+
+<h2><strong>问题和答案</strong></h2>
+
+<p>到底是哪里出现问题了呢？</p>
+
+<p><br/></p>
+
+<p>有人说，需求变更是软件项目的本质特征，控制需求一个是软件工程问题。</p>
+
+<p>这是对的，过度频繁的变更是有问题的。</p>
+
+<p><br/></p>
+
+<p>但是，通常一方面的问题也会掩盖其他方面的问题。</p>
+
+<p>人们通常会认为后果只是由一个原因造成的。</p>
+
+<p><br/></p>
+
+<p>比如，设计，难道就没有问题了吗？</p>
+
+<p>除了紧跟着客户的需要来做，我们还能做什么？</p>
+
+<p><br/></p>
+
+<p>我们发现，关键在于，</p>
+
+<p>不要想着让软件去适应未来，这是不可能的。</p>
+
+<p>我们要提供所需的基本功能，用它去实现未来。</p>
+
+<p><br/></p>
+
+<h2><strong>正交化的设计</strong></h2>
+
+<p>回到文章开始那个例子上。</p>
+
+<p><br/></p>
+
+<p>假如客户需要一个矢量(1 2 3)。</p>
+
+<p>而我们实现的是(1 0 0)，(0 1 0)和(0 0 1)。</p>
+
+<p>会怎样？</p>
+
+<p><br/></p>
+
+<p>首先，这三个基本矢量，足够少。</p>
+
+<p>因为，任何一个矢量都不能用剩下的两个来实现它。</p>
+
+<p><br/></p>
+
+<p>其次，它们又足够多。</p>
+
+<p>实现客户的需求是没问题的。</p>
+
+<p>1 * (1 0 0)+2 * (0 1 0)+3 * (0 0 1)=(1 2 3)</p>
+
+<p><br/></p>
+
+<p>当客户的需求变化了，他们想要(6 5 4)。</p>
+
+<p>我们就不需要更改基本的三个矢量了。</p>
+
+<p>我们只需要重新拼装它们。</p>
+
+<p>6 * (1 0 0)+5 * (0 1 0)+4 * (0 0 1)=(6 5 4)</p>
+
+<p><br/></p>
+
+<p>对于(3 6 9)亦然。</p>
+
+<p>3 * (1 0 0)+6 * (0 1 0)+9 * (0 0 1)=(3 6 9)</p>
+
+<p><br/></p>
+
+<h2><strong>反思</strong></h2>
+
+<p>这个例子并不是一个实际问题，</p>
+
+<p>但是却能让我们学会很多。</p>
+
+<p><br/></p>
+
+<p>作为一个功能提供商，我们并没有直接提供功能。</p>
+
+<p>我们提供的是一个正交的功能集。</p>
+
+<p>再由这些功能集来实现客户的需求。</p>
+
+<p><br/></p>
+
+<p>好处是什么呢？</p>
+
+<p>原则上，我们永远不需要更改或删除已有的功能了。</p>
+
+<p>我们只需要增加新的正交分量即可。</p>
+
+<p><br/></p>
+
+<p>并且，随着时间的积累，</p>
+
+<p>功能集会越来越大，可以用来实现各种各样的需要。</p>
+
+<p>对未来来说，他们是无价之宝。</p>
+
+<p><br/></p>
+
+<p>Don&rsquo;t base your venture on a plan.</p>
+
+<p>Instead base it on a strategic foundation.</p>
+
+<p>——《How google works》</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>编程，不只是体力劳动。</p>
+
+<p>我更倾向于认为它是一个设计过程。</p>
+
+<p>好的软件是秉承一系列优秀设计实践，逐渐发展起来的。</p>
+
+<p>而正交化的设计，只是好的设计实践中的一种。</p>
+
+<p><br/></p>
+
+<p>就像小说一样，文学作品的好坏，不在于字数。</p>
+
+<p>阅读它，能给读者带来多少思考，能营造什么气氛。</p>
+
+<p>这才是重要的。</p>
+
+<p><br/></p>
+
+<p>好的软件，功能稳定，结构优雅。</p>
+
+<p><br/></p>
+
+<h2><strong>后记</strong></h2>
+
+<p>假如客户需要矢量(1 2 3 4)，怎么办呢？</p>
+
+<p>我会写一个函数f(x y z)=(x y z 0)，然后再写一个矢量(0 0 0 1)。</p>
+
+<p>1 * f(1 0 0)+2 * f(0 1 0)+3 * f(0 0 1)+4 * (0 0 0 1)=(1 2 3 4)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">thzt</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-02-07T00:00:00+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/design/'>design</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/01/30/cps-and-tail-recursion/" title="Previous Post: 使用CPS将fact和fib改为tail recursion">&laquo; 使用CPS将fact和fib改为tail recursion</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/02/28/genius/" title="Next Post: 优秀的程序员在哪里">优秀的程序员在哪里 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

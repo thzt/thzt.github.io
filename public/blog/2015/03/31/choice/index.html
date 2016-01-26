@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>可替换的设计策略 - 何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="为什么我们的软件后期越来越难维护，为什么我们背负的包袱越来越重，原因是我们把软件设计成了按这样发展，而改变结果唯一的可能就是先改变设计。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/blog/2015/03/31/choice/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">可替换的设计策略</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>人生就像一棵决策树，</p>
+
+<p>每一次选择，走向了不同的子节点。</p>
+
+<p>我们不能后退，也没办法消除历史的影响。</p>
+
+<p><br/></p>
+
+<p>因为时间是单向的，</p>
+
+<p>没有办法更改历史，</p>
+
+<p>只能以今天为基础继续向前。</p>
+
+<p><br/></p>
+
+<p>对于软件，我们也倾向于持有相同的观点。</p>
+
+<p>认为软件的维护成本在后期是不可能缩减的，</p>
+
+<p>不得不背负以前失误的包袱。</p>
+
+<p><br/></p>
+
+<p>然而，幸运的是，</p>
+
+<p>软件其实并非如此。</p>
+
+<p><br/></p>
+
+<p>软件问题，大多数都是设计的问题。</p>
+
+<p><br/></p>
+
+<h2><strong>抽象和具体</strong></h2>
+
+<p>和人生不同，</p>
+
+<p>软件功能的实现，</p>
+
+<p>限制条件相对宽松。</p>
+
+<p><br/></p>
+
+<p>毕业生，决定考研还是就业,</p>
+
+<p>只能选一个。</p>
+
+<p>但是，软件可以选择DoWork。</p>
+
+<p><br/></p>
+
+<p>越抽象，适用范围就越广。</p>
+
+<p>越具体，就越容易被证明是个错误。</p>
+
+<p><br/></p>
+
+<p>好的设计实践，</p>
+
+<p>是把抽象和具体分开，</p>
+
+<p>抽象的每一种实现都是可替换的。</p>
+
+<p><br/></p>
+
+<p>随着软件的发展，</p>
+
+<p>后期的维护成本才可能是常量复杂度的，</p>
+
+<p>因为每一个历史性的错误实现，都是可更改的。</p>
+
+<p><br/></p>
+
+<h2><strong>平凡的模块</strong></h2>
+
+<p>武功高强的人们，</p>
+
+<p>不会频出诡异的绝招，</p>
+
+<p>招数越平凡，内耗就越小。</p>
+
+<p><br/></p>
+
+<p>向外提供抽象接口的人，是在玩小伎俩，</p>
+
+<p>不要将具体的实现方法托付给别人，</p>
+
+<p>当问题出现时，让别人更改实现方案，是不可能的。</p>
+
+<p><br/></p>
+
+<p>我们应该提供具体的功能，</p>
+
+<p>功能内部，封装了我们自己的抽象和实现。</p>
+
+<p><br/></p>
+
+<p>其中，抽象是对需求的提取，用来规范模块的外在表现，</p>
+
+<p>实现是当前采用的解决方案。</p>
+
+<p><br/></p>
+
+<p>随着时间的发展，当模块不再适用时，</p>
+
+<p>我们就能在外在表现不变的前提下，</p>
+
+<p>更改解决方案了。</p>
+
+<p><br/></p>
+
+<p>不是只提供抽象接口，</p>
+
+<p>而是把具体功能封装在抽象的接口下，</p>
+
+<p>一起提供。</p>
+
+<p><br/></p>
+
+<h2><strong>层次与后路</strong></h2>
+
+<p>代码量增加，软件会越来越复杂，</p>
+
+<p>难以定位问题，增加功能，</p>
+
+<p>这其实是没有建立合理的代码层次。</p>
+
+<p><br/></p>
+
+<p>在不同深度的层次上切换。</p>
+
+<p>可以让我们总是面对简单可控的问题。</p>
+
+<p><br/></p>
+
+<p>一千行的函数太复杂了，</p>
+
+<p>那是因为代码本来不该写在一个函数中。</p>
+
+<p><br/></p>
+
+<p>一万行代码太复杂了，</p>
+
+<p>那是因为它本来不该写到一个文件中。</p>
+
+<p><br/></p>
+
+<p>一百个文件太复杂了，</p>
+
+<p>那是因为它们本来不该在一个文件夹下。</p>
+
+<p><br/></p>
+
+<p>划分层次，才能留有后路。</p>
+
+<p>每天关闭电脑前，检查自己的后路，是个好习惯。</p>
+
+<p>可以让我们再打开电脑时，问题还是像今天这样简单。</p>
+
+<p><br/></p>
+
+<h2><strong>唯一性和可选性</strong></h2>
+
+<p>当我们遇到紧急问题时，</p>
+
+<p>通常首先会想到一个权宜之计。</p>
+
+<p><br/></p>
+
+<p>但是，从长久来看，</p>
+
+<p>不得不做的事情总是会带来麻烦，</p>
+
+<p>身不由己的决定，也是错误的根源。</p>
+
+<p><br/></p>
+
+<p>我们应该想尽办法，推迟决定。</p>
+
+<p>直到我们有两个方案，可以从中选择。</p>
+
+<p>可选性意味着可控的未来。</p>
+
+<p><br/></p>
+
+<p>软件的发展，像棋局一样，</p>
+
+<p>必须仔细斟酌局势的变化，</p>
+
+<p>才能避免因小失大。</p>
+
+<p><br/></p>
+
+<p>在客观条件限制的范围内，</p>
+
+<p>有经验的人做出选择，</p>
+
+<p>新手慌张决定，</p>
+
+<p>在尽可能多的选择中，才能酝酿出好的设计。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>软件不同于人生之处在于，</p>
+
+<p>软件可以设计，还可以更改，</p>
+
+<p>只是成本有别。</p>
+
+<p><br/></p>
+
+<p>好的功能模块，在于内部的良好设计。</p>
+
+<p>虽然外在表现没有什么不同。</p>
+
+<p><br/></p>
+
+<p>好的设计和代码组织方式，</p>
+
+<p>威力连绵不绝。</p>
+
+<p><br/></p>
+
+<p>多一种选择，多一种可能。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">thzt</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/design/'>design</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/03/27/purity/" title="Previous Post: Haskell的纯函数性">&laquo; Haskell的纯函数性</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/04/02/s-expression/" title="Next Post: 理解S表达式">理解S表达式 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

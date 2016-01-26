@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>封装的内涵 - 何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="有些思想是与编程范型无关的。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/blog/2015/01/29/encapsulation/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">封装的内涵</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-29T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>函数式编程越来越流行了。</p>
+
+<p>号称使用它可以大幅度的提高工作效率。</p>
+
+<p>人们也开始厌恶面向对象编程了。</p>
+
+<p><br/></p>
+
+<p>面向对象的思想该淘汰了吗？</p>
+
+<p>函数式真的有这么先进吗？</p>
+
+<p><br/></p>
+
+<p>其实不然。</p>
+
+<p><br/></p>
+
+<p>因为，程序员具有哪些思维才是重要的。</p>
+
+<p>通过学习不同范型的编程语言，积累的是有用的编程思想。</p>
+
+<p>然后，在实际工作中灵活运用。</p>
+
+<p><br/></p>
+
+<p>没有人规定剑客不可以用刀法御敌。</p>
+
+<p>未来属于那些活学活用的人。</p>
+
+<p><br/></p>
+
+<p>本文，以面向对象的封装思想为例。</p>
+
+<p>我们要挖掘一下，隐藏在封装思想中的深刻内涵。</p>
+
+<p><br/></p>
+
+<h2><strong>将独立的部分隔离起来</strong></h2>
+
+<p>很多人对封装的认识，来自于“将数据和对它的操作放在一起”这种说法中。</p>
+
+<p>其实，这只是对封装思想的一种应用而已。</p>
+
+<p><br/></p>
+
+<p>初学者，可能会写出一个巨类。</p>
+
+<p>很多函数和它们操作的数据都在这一个类中。</p>
+
+<p><br/></p>
+
+<p>而事实上，隔离才是这么做的原因。</p>
+
+<p>将不需要访问的数据隔离出去，将不需要使用的函数也隔离出去。</p>
+
+<p><br/></p>
+
+<p>这样，一个巨类就可以拆分成几个小类。</p>
+
+<p>他们之间的函数和数据，互相独立，互不影响。</p>
+
+<p><br/></p>
+
+<p>函数式是怎样处理的呢？</p>
+
+<p>函数式中使用了闭包的概念，将数据存储在具有词法作用域的变量中。</p>
+
+<p><br/></p>
+
+<h2><strong>将功能的提供者和使用者分层</strong></h2>
+
+<p>有些人，学会了写很多小类。</p>
+
+<p>但是这些小类之间互相使用，看起来十分混乱。</p>
+
+<p>其实，这是因为没有分层所致。</p>
+
+<p><br/></p>
+
+<p>分层也是封装思想的一种应用。</p>
+
+<p>当多个独立的小部分，共同提供一个功能时，就构成了一个层次。</p>
+
+<p><br/></p>
+
+<p>将功能的提供者和使用者分层，有三个好处。</p>
+
+<p>首先，依赖关系图就退化成了依赖关系树。</p>
+
+<p>其次，我们可以有效的避免跨层调用和逆向调用。</p>
+
+<p>最后，同一层次的重新组合，就可以调整上层所需的功能，而对下层不会产生影响。</p>
+
+<p><br/></p>
+
+<p>函数式是怎样处理的呢？</p>
+
+<p>函数式中的高阶函数是实现分层的方式之一。</p>
+
+<p>一般的函数提供功能集，高阶函数使用它们。</p>
+
+<p><br/></p>
+
+<h2><strong>将语言的描述和实现分开</strong></h2>
+
+<p>不知道为什么，有些人很鄙视设计模式。</p>
+
+<p>这些人通常没有从丰富自身的角度考虑问题。</p>
+
+<p><br/></p>
+
+<p>对自己有用的东西，往往并不是整块出现的。</p>
+
+<p>我们必须有能力把它们挑选出来。</p>
+
+<p><br/></p>
+
+<p>取其精华，去其糟粕。</p>
+
+<p><br/></p>
+
+<p>我认为，设计模式提供了很多素材（内部结构和外部场景）。</p>
+
+<p>让我们有能力设计出更富表现力的用户接口。</p>
+
+<p><br/></p>
+
+<p>站在每个功能层次上，我们都需要考虑上层如何使用。</p>
+
+<p>学习设计模式，会丰富我们的语言，灵活的设计上层接口。</p>
+
+<p><br/></p>
+
+<p>这也是封装吗？</p>
+
+<p>是的，实现细节封装在用户接口的描述中了。</p>
+
+<p>其实，编程语言本身，就是封装的一种应用。</p>
+
+<p><br/></p>
+
+<h2><strong>封装业务领域</strong></h2>
+
+<p>什么是好的程序员？</p>
+
+<p>好的程序员应该在代码与功能之间建立了一个抽象的隔离层，</p>
+
+<p>让外行人可以在讨论功能的时候不用关心代码的细节，</p>
+
+<p>这是面向对象的封装思想在项目上的应用。</p>
+
+<p><br/></p>
+
+<p>既然别人不强求程序员理解他们，程序员也无需强求他们理解代码。</p>
+
+<p>不是吗？</p>
+
+<p><br/></p>
+
+<p>好的合作，就是尽量隐藏属于自己业务范围内的事情，因为别人并不关心。</p>
+
+<p>和好的程序员合作，你不用关心他代码的问题，你看不到他在调整。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>正所谓，长视者把目的当作手段，短视者把手段当作目的。</p>
+
+<p>让我们正确看待编程思想的演变吧，以丰富自身的眼光。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">thzt</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-01-29T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/experience/'>experience</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/01/27/y-combinator-in-lisp/" title="Previous Post: Y combinator in lisp">&laquo; Y combinator in lisp</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/01/30/cps-and-tail-recursion/" title="Next Post: 使用CPS将fact和fib改为tail recursion">使用CPS将fact和fib改为tail recursion &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

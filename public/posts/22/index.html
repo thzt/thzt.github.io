@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="从最终用户来看， 软件是一个整体， 所有的代码提供一个功能。 从工程师的角度来看， 软件由多个互相联系的模块组成， 每个模块提供一部分功能。 然而，这些都是静态的观点， 是在软件发布的那一瞬间观察到的。 实际上呢？ 实际上，软件是一个动态的事物， 像一个生命体一样活着， 软件发布，只是它的一次快照 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/posts/22/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/11/hierarchy-of-abstraction/">抽象的层次</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-11T00:00:00+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>从最终用户来看，</p>
+
+<p>软件是一个整体，</p>
+
+<p>所有的代码提供一个功能。</p>
+
+<p><br/></p>
+
+<p>从工程师的角度来看，</p>
+
+<p>软件由多个互相联系的模块组成，</p>
+
+<p>每个模块提供一部分功能。</p>
+
+<p><br/></p>
+
+<p><strong>然而，这些都是静态的观点，</strong></p>
+
+<p>是在软件发布的那一瞬间观察到的。</p>
+
+<p><br/></p>
+
+<p>实际上呢？</p>
+
+<p><br/></p>
+
+<p><strong>实际上，软件是一个动态的事物，</strong></p>
+
+<p>像一个生命体一样活着，</p>
+
+<p>软件发布，只是它的一次快照。</p>
+
+<p><br/></p>
+
+<p>这就提醒了我们，</p>
+
+<p>不能像设计建筑一样设计软件。</p>
+
+<p><br/></p>
+
+<p>更要考虑到它的成长。</p>
+
+<p><br/></p>
+
+<h2><strong>模块间的接口</strong></h2>
+
+<p>我们永远不能假定，</p>
+
+<p>软件提供的功能只被人来使用。</p>
+
+<p><br/></p>
+
+<p>其实，更多的是，</p>
+
+<p>被其他软件系统来调用。</p>
+
+<p><br/></p>
+
+<p>这就要求我们，</p>
+
+<p><strong>首先提供程序可调用的接口，</strong></p>
+
+<p>而不是人机交互界面。</p>
+
+<p><br/></p>
+
+<p>这其实是测试驱动开发的直接结果，</p>
+
+<p>我们首先要有自动化的用例，</p>
+
+<p>才能保证功能的稳定。</p>
+
+<p><br/></p>
+
+<h2><strong>变化的接口</strong></h2>
+
+<p>当我们确定了模块的调用接口后，</p>
+
+<p>目的性就更加明确了。</p>
+
+<p><br/></p>
+
+<p>似乎，无论内部怎样设计，</p>
+
+<p>只需要实现功能就行了。</p>
+
+<p><br/></p>
+
+<p>其实不然。</p>
+
+<p><br/></p>
+
+<p>根本原因就在于，</p>
+
+<p><strong>模块的调用接口是变化的。</strong></p>
+
+<p><br/></p>
+
+<p>模块内的设计，</p>
+
+<p>要有能力快速响应这种变化。</p>
+
+<p><br/></p>
+
+<h2><strong>不同的意见</strong></h2>
+
+<p>有人认为，</p>
+
+<p>接口设计的初衷，就是为了把变化隔离开，</p>
+
+<p>接口发生变化了，设计本身就是不对的。</p>
+
+<p><br/></p>
+
+<p>诚然。</p>
+
+<p><br/></p>
+
+<p>但是，回想一下我们做过的项目，</p>
+
+<p>有哪一个功能是稳定的？</p>
+
+<p>又有哪一个设计能预判未来呢？</p>
+
+<p><br/></p>
+
+<p>因此，</p>
+
+<p><strong>接口是隔离变化的手段之一，</strong></p>
+
+<p>它只能<strong>尽量</strong>把变化压缩到模块内部。</p>
+
+<p><br/></p>
+
+<h2><strong>可扩展的设计</strong></h2>
+
+<p>对于功能变更，不要埋怨，</p>
+
+<p>否则，说起来好像我们一开始不知道似的。</p>
+
+<p><br/></p>
+
+<p>精巧的设计，</p>
+
+<p>在设计之初就考虑到了这些，</p>
+
+<p>留有扩展的余地。</p>
+
+<p><br/></p>
+
+<p>什么样的设计才是可扩展的呢？</p>
+
+<p><br/></p>
+
+<p>那就要求我们提取模式，</p>
+
+<p><strong>只对抽象进行编程。</strong></p>
+
+<p><br/></p>
+
+<p>使得接口需要的功能，</p>
+
+<p>作为抽象设计的特定情形。</p>
+
+<p><br/></p>
+
+<p>这样的话，</p>
+
+<p>任何改变，都是抽象设计的不同应用。</p>
+
+<p><br/></p>
+
+<h2><strong>层次性</strong></h2>
+
+<p>何必要这么麻烦呢？</p>
+
+<p>直接提供功能不行吗？</p>
+
+<p><br/></p>
+
+<p>为什么还要先写一个抽象，</p>
+
+<p>然后再具体化呢？</p>
+
+<p><br/></p>
+
+<p><strong>这是因为抽象隔离了变化。</strong></p>
+
+<p>具体功能易变，而功能的模式更稳定。</p>
+
+<p><br/></p>
+
+<p>甚至，随着软件的日益复杂，</p>
+
+<p>功能模式已经不再适用时。</p>
+
+<p><br/></p>
+
+<p>我们还要进一步抽象，</p>
+
+<p>让现在的抽象层变成更高层的实例。</p>
+
+<p><br/></p>
+
+<h2><strong>友好的外观</strong></h2>
+
+<p>优雅的设计，</p>
+
+<p>内部的抽象层次是分明的，</p>
+
+<p><strong>外观同样也是简易的。</strong></p>
+
+<p><br/></p>
+
+<p>这就像人一样，</p>
+
+<p>越是有好的修养，</p>
+
+<p>越是内心华丽，外表朴实。</p>
+
+<p><br/></p>
+
+<p>把精妙藏于简易的接口内部，</p>
+
+<p>是一种艺术。</p>
+
+<p><br/></p>
+
+<p>这需要我们做很多努力，</p>
+
+<p>不要把复杂开放给别人。</p>
+
+<p><br/></p>
+
+<p>不要炫耀。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>与其说，设计是一种创造性的活动，</p>
+
+<p>不如说，设计是一种心智的锻炼活动。</p>
+
+<p><br/></p>
+
+<p>我们在努力学习软件的时候，</p>
+
+<p>也不能忘记磨练自己的品行。</p>
+
+<p><br/></p>
+
+<p><strong>没有藏锋内敛的修养，</strong></p>
+
+<p><strong>就难以完成大巧若拙的设计。</strong></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/23">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/21">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

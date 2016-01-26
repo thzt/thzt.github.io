@@ -1,0 +1,695 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="Scheme是一门支持Proper tail recursion的语言， 实际上这是对语言本身的约束， 任何实现都必须满足， 我们可以依赖它写出可移植的程序。 那么，到底什么是尾递归呢？ 什么样的才是Proper呢？ 它给我们带来了什么好处呢？ 这还要从函数的尾调用说起。 我们发现， Proper &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/posts/25/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/25/proper-tail-recursion/">尾递归优化</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-25T00:00:00+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Scheme是一门支持Proper tail recursion的语言，</p>
+
+<p>实际上这是对语言本身的约束，</p>
+
+<p>任何实现都必须满足，</p>
+
+<p>我们可以依赖它写出可移植的程序。</p>
+
+<p><br/></p>
+
+<p>那么，到底什么是尾递归呢？</p>
+
+<p>什么样的才是Proper呢？</p>
+
+<p>它给我们带来了什么好处呢？</p>
+
+<p><br/></p>
+
+<p>这还要从函数的尾调用说起。</p>
+
+<p>我们发现，</p>
+
+<p>Proper tail recursion和continuation有很深的关联。</p>
+
+<p><br/></p>
+
+<p>下文为了叙述方便，</p>
+
+<p>我们用术语尾递归优化（tail recursion optimization）,</p>
+
+<p>来介绍Proper tail recursion的技术细节。</p>
+
+<p><br/></p>
+
+<h2><strong>尾调用</strong></h2>
+
+<p>这是一个很常见的概念，</p>
+
+<p>但是为了完整性，这里还是要说一说。</p>
+
+<p><br/></p>
+
+<p>我们看两个函数，f和g，他们的定义如下，</p>
+
+<p><br/></p>
+
+<p>(define (f a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a))</p>
+
+<p><br/></p>
+
+<p>(define (g b)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display b))</p>
+
+<p><br/></p>
+
+<p>(f 1)</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>21</p>
+
+<p><br/></p>
+
+<p>我们分析一下实际的调用过程，</p>
+
+<p>求值(f 1)，会导致f的函数体被求值，</p>
+
+<p>于是，先求值(g 2)，导致g的函数体被求值，输出2，</p>
+
+<p>然后<strong>函数g返回</strong>了，返回到f的函数体中，</p>
+
+<p>再接着执行下一条语句，输出1。</p>
+
+<p><br/></p>
+
+<p>我们看到，对g的调用，不是f的最后一个调用。</p>
+
+<p>称为<strong>g不是f的尾调用</strong>。</p>
+
+<p><br/></p>
+
+<p>我们改一下例子，</p>
+
+<p><br/></p>
+
+<p>(define (f a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2))</p>
+
+<p><br/></p>
+
+<p>(define (g b)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display b))</p>
+
+<p><br/></p>
+
+<p>(f 1)</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>12</p>
+
+<p><br/></p>
+
+<p>现在g是f的尾调用了。</p>
+
+<p><br/></p>
+
+<p>为什么要强调尾调用呢？</p>
+
+<p>因为，如果g是f的尾调用，</p>
+
+<p><strong>g就可以不返回到f中</strong>，</p>
+
+<p><strong>而直接返回到f该返回的地方</strong>。</p>
+
+<p><br/></p>
+
+<p>调用g的时候，就不会增长调用栈，</p>
+
+<p>而是废弃原来f的调用环境即可。</p>
+
+<p><br/></p>
+
+<p>不必要的调用栈不会增加，</p>
+
+<p>使得尾递归可以在常量的调用栈空间中执行，</p>
+
+<p>我们就可以放心的使用尾递归来替代循环了。</p>
+
+<p><br/></p>
+
+<h2><strong>调用栈和调用图</strong></h2>
+
+<p>从语言的实现角度来看，</p>
+
+<p>每一次函数调用会初始化一个新的frame，</p>
+
+<p>frame中保存着形参与实参的绑定。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>(f 1)会产生一个frame，[(a 1)]</p>
+
+<p><br/></p>
+
+<p>而环境，是一个frame的<strong>链表</strong>，</p>
+
+<p>top-level环境中只有一个frame，表示了变量f和g的绑定，</p>
+
+<p>[(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]</p>
+
+<p><br/></p>
+
+<p>所以，进入f的函数体后，</p>
+
+<p>新创建的frame会添加到<strong>f定义时的环境</strong>头部，</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
+
+<p>环境中有两个frame了。</p>
+
+<p><br/></p>
+
+<p>f的函数体是在这个新环境中求值的。</p>
+
+<p>f函数体的执行环境是对定义时环境的扩展，</p>
+
+<p>这是<strong>词法作用域</strong>规则的简单实现。</p>
+
+<p><br/></p>
+
+<p>我们再调用g，看看环境会怎样变化，</p>
+
+<p>调用g会创建一个新的frame，[(b 2)]</p>
+
+<p>这个frame会添加到<strong>g定义时的环境</strong>头部，</p>
+
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
+
+<p><br/></p>
+
+<p>注意，环境并没有变成，</p>
+
+<p>([(b 2)] <strong>[(a 1)]</strong> [(f #&lt;procedure>) (g #&lt;procedure&gt;)])</p>
+
+<p>新的frame并不会添加到<strong>调用g时的环境</strong>中去。</p>
+
+<p><br/></p>
+
+<p>当g返回时，</p>
+
+<p>环境又变成了f的执行环境，</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
+
+<p><br/></p>
+
+<p>跟踪运行环境的变化，我们发现，</p>
+
+<p>在实现词法作用域之后，环境并不是一个栈结构的。</p>
+
+<p><br/></p>
+
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;top-level： frame0</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;进入f： frame1 &lt;- frame0</p>
+
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;进入g： frame2 &lt;- frame0</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;回到f： frame1 &lt;- frame0</p>
+
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;回到top-level： frame0</p>
+
+<p><br/></p>
+
+<p>我们可以把frame0看成树根，</p>
+
+<p>frame1，frame2看成子节点，</p>
+
+<p>于是，<strong>环境构成了一棵树</strong>，</p>
+
+<p>这就是为什么我们之前说环境是frame的<strong>链表</strong>，而不是<strong>列表</strong>的原因了。</p>
+
+<p><br/></p>
+
+<p>既然这样，</p>
+
+<p>那么尾调用也就不必服从弹栈规则了，</p>
+
+<p>g返回，可以让执行环境返回到f该返回的状态。</p>
+
+<p><br/></p>
+
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;top-level： frame0</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入f： frame1 &lt;- frame0</p>
+
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入g： frame2 &lt;- frame0</p>
+
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]))    ;<strong>直接返回到top-level</strong>： frame0</p>
+
+<p><br/></p>
+
+<p>这种技术，称为<strong>尾调用优化</strong>。</p>
+
+<p><br/></p>
+
+<h2><strong>尾递归的执行环境</strong></h2>
+
+<p>我们来分析一下尾递归的执行环境，</p>
+
+<p>请看阶乘函数的尾递归版本，</p>
+
+<p><br/></p>
+
+<p>(define (fact n <strong>result</strong>)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>result</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1) (* result n))))</p>
+
+<p><br/></p>
+
+<p>(+ 4 (fact 3 1))</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>10</p>
+
+<p><br/></p>
+
+<p>top-level环境：([(fact #&lt;procedure&gt;)])</p>
+
+<p>要计算(+ 4 (fact 3 1))，先要求值(fact 3 1)，</p>
+
+<p>调用(fact 3 1)，进入函数体：(<strong>[(n 3) (result 1)]</strong> [(fact #&lt;procedure&gt;)])</p>
+
+<p>再次调用(fact 2 3)：(<strong>[(n 2) (result 3)]</strong> [(fact #&lt;procedure&gt;)])，</p>
+
+<p>词法作用域规则，扩展定义环境，</p>
+
+<p>然后调用(fact 1 6)：(<strong>[(n 1) (result 6)]</strong> [(fact #&lt;procedure&gt;)])，</p>
+
+<p>这里要返回result了，值为6。</p>
+
+<p><br/></p>
+
+<p>可是要返回到哪里呢？</p>
+
+<p>我们看到以上的一系列调用都是<strong>尾调用</strong>，</p>
+
+<p>所以，直接返回到了最开始调用(fact 3 1)的地方，</p>
+
+<p>执行环境变成了，([(fact #<procedure>)])，</p>
+
+<p>于是，在这环境中求值(+ 4 6) -> 10</p>
+
+<p><br/></p>
+
+<h2><strong>与continuation的关联</strong></h2>
+
+<p>我们看到，要想实现这样的调用结构，</p>
+
+<p>需要把环境中的绑定关系分配在<strong>内存堆</strong>中，</p>
+
+<p>这样就可以让函数的调用者，显式控制返回环境了。</p>
+
+<p><br/></p>
+
+<p>实现了尾调用优化后，</p>
+
+<p>函数的调用者多了一种选择，</p>
+
+<p>或者让函数执行后，<strong>返回到调用前的执行环境</strong>，</p>
+
+<p>或者<strong>返回到调用者该返回的执行环境</strong>。</p>
+
+<p><br/></p>
+
+<p>这其实是一种continuation的操作。</p>
+
+<p>即，f调用g，g的continuation，</p>
+
+<p>或者是f调用g后的continuation，</p>
+
+<p>或者是f的continuation。</p>
+
+<p><br/></p>
+
+<p>我们用CPS改写一下上面的例子，</p>
+
+<p><br/></p>
+
+<p><strong>非尾调用</strong>的情况，</p>
+
+<p>(define *cont*</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) x))</p>
+
+<p><br/></p>
+
+<p>(define (f a cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v)</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(cont (display a)))</strong>))</p>
+
+<p><br/></p>
+
+<p>(define (g b cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display b)))</p>
+
+<p><br/></p>
+
+<p>(f 1 *cont*)</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>21</p>
+
+<p><br/></p>
+
+<p>我们看到非尾调用的g的continuation，</p>
+
+<p>是执行display，再执行f的continuation。即，</p>
+
+<p>(lambda (v)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display a)))</p>
+
+<p><br/></p>
+
+<p>我们再看<strong>尾调用</strong>情况，</p>
+
+<p>(define *cont*</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) x))</p>
+
+<p><br/></p>
+
+<p>(define (f a cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2 <strong>cont</strong>))</p>
+
+<p><br/></p>
+
+<p>(define (g b cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display b)))</p>
+
+<p><br/></p>
+
+<p>(f 1 *cont*)</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>12</p>
+
+<p><br/></p>
+
+<p>尾调用g的continuation，</p>
+
+<p>是f的continuation。</p>
+
+<p><br/></p>
+
+<p>这给了我们一种方案，在写解释器的时候，</p>
+
+<p>可以使用CPS来进行尾调用优化。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>为了进行尾调用优化，</p>
+
+<p>语言实现必须对调用图进行控制，</p>
+
+<p>或者说，显式的控制continuation。</p>
+
+<p><br/></p>
+
+<p>与其把这种显式的控制隐藏在语言的实现里面，</p>
+
+<p><strong>不如开放给语言的使用者</strong>，</p>
+
+<p>因为开放出来并不是特别困难。</p>
+
+<p><br/></p>
+
+<p>这种非弹栈形式的跳转，</p>
+
+<p>称为<strong>非局部跳转</strong>（non-local jump），</p>
+
+<p>类似C语言的setjmp和longjmp。</p>
+
+<p><br/></p>
+
+<p>call/cc就是这样产生的，</p>
+
+<p>并不是为了追求另类，</p>
+
+<p><strong>而是实现尾调用优化的直接后果</strong>。</p>
+
+<p><br/></p>
+
+<p>而且，call/cc捕获的continuation是<strong>first-class</strong>的，</p>
+
+<p>可以当做参数传递，或者返回，</p>
+
+<p>这极大的丰富的Scheme语言的表现力，</p>
+
+<p>让程序员可以最大限度的控制跳转范围。</p>
+
+<p><br/></p>
+
+<p>参考：</p>
+
+<p><a href="http://www.cs.rpi.edu/academics/courses/fall00/ai/scheme/reference/schintro-v14/schintro_toc.html">An Introduction to Scheme and its Implementation</a></p>
+
+<p><a href="http://book.douban.com/subject/4030015/">Essentials of Programming Languages</a></p>
+
+<p><a href="http://book.douban.com/subject/1456904/">Lisp in small pieces</a></p>
+
+<p><a href="http://book.douban.com/subject/2587705/">Concepts in Programming Languages</a></p>
+
+<p><a href="http://book.douban.com/subject/1762126/">Compiling with continuations</a></p>
+
+<p><a href="http://www.scheme.com/tspl4/">The Scheme Programming Language</a></p>
+
+<p><a href="http://scheme-reports.org/">RnRS</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/26">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/24">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

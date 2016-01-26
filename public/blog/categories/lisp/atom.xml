@@ -1,0 +1,2507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Lisp | 何幻]]></title>
+  <link href="https://thzt.github.io/blog/categories/lisp/atom.xml" rel="self"/>
+  <link href="https://thzt.github.io/"/>
+  <updated>2016-01-26T20:47:21+08:00</updated>
+  <id>https://thzt.github.io/</id>
+  <author>
+    <name><![CDATA[thzt]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Scheme元编程]]></title>
+    <link href="https://thzt.github.io/blog/2015/09/21/define-syntax/"/>
+    <updated>2015-09-21T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2015/09/21/define-syntax</id>
+    <content type="html"><![CDATA[<p><a href="https://en.wikipedia.org/wiki/Homoiconicity">同相性</a>，指的是，</p>
+
+<p>程序和程序所操作的数据采用了统一编码。</p>
+
+<p><br/></p>
+
+<p>Lisp语言使用了S表达式，</p>
+
+<p>例如，(fn x)</p>
+
+<p>既可以看做是程序，用参数x调用函数fn，</p>
+
+<p>也可以看做是数据，由符号fn和符号x构成的列表。</p>
+
+<p><br/></p>
+
+<p><strong>同相性使得我们，可以像处理数据一样处理代码。</strong></p>
+
+<p>做一些代码转换之类的工作，十分简单。</p>
+
+<p><br/></p>
+
+<p>例如，</p>
+
+<p>当遇到(fn x)时，</p>
+
+<p>我们可以让它先转换成，</p>
+
+<p>(begin</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(gn x))</p>
+
+<p>然后再执行。</p>
+
+<p><br/></p>
+
+<p>甚至也可以用来定义变量，</p>
+
+<p>(define-with-display (f a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g a))</p>
+
+<p><br/></p>
+
+<p>转换成，</p>
+
+<p>(define (f a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g a))</p>
+
+<p><br/></p>
+
+<p>这种代码层面的转换称为“宏”(macro)。</p>
+
+<p><br/></p>
+
+<h2><strong>定义一个宏</strong></h2>
+
+<p>Scheme是Lisp的一个简洁方言，</p>
+
+<p>它使用define-syntax来定义宏。</p>
+
+<p><br/></p>
+
+<p>本质上，宏是一个特殊的标识符，</p>
+
+<p>它关联了转换器函数。</p>
+
+<p><br/></p>
+
+<p>表达式的求值过程，分为了3个阶段，</p>
+
+<p>读取期，宏展开期，运行期。</p>
+
+<p><br/></p>
+
+<p>在遇到宏调用的时候，</p>
+
+<p>Scheme会先调用与之关联的转换器，进行代码转换，(宏展开期)</p>
+
+<p><strong>然后再求值结果表达式</strong>。(运行期)</p>
+
+<p><br/></p>
+
+<p>在解释器中，宏展开和表达式求值可能是交替进行的，</p>
+
+<p>而在编译器中，他们是两个独立的阶段。</p>
+
+<p><br/></p>
+
+<p>(define-syntax or</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(syntax-rules ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_) #f]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e) e]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e1 e2 e3 &hellip;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (let ([t e1]) (if t t (or e2 e3 &hellip;)))]))</p>
+
+<p><br/></p>
+
+<p>以上代码定义了一个宏，or，</p>
+
+<p>它用来对(or &hellip;)表达式进行变换。</p>
+
+<p><br/></p>
+
+<p>(or)转换成了#f</p>
+
+<p>(or a)转换成了a</p>
+
+<p>(or a b)转换成了(let ([t a]) (if t t (or b)))</p>
+
+<p><br/></p>
+
+<p>我们看到，</p>
+
+<p>宏展开是支持递归调用的。</p>
+
+<p><br/></p>
+
+<h2><strong>模式匹配</strong></h2>
+
+<p>syntax-rules使用了模式匹配来定义转换器，</p>
+
+<p>它的每一条语句给定了形如“[模式 模板]”的转换规则，</p>
+
+<p>如果模式匹配成功了，</p>
+
+<p>就按着模板的方式进行转换。</p>
+
+<p><br/></p>
+
+<p>[(_ e) e]</p>
+
+<p><br/></p>
+
+<p>其中，</p>
+
+<p>模式是(_ e)，</p>
+
+<p>模板是e，</p>
+
+<p>“_”表示通配符。</p>
+
+<p><br/></p>
+
+<p>这个模式匹配了(or e)，</p>
+
+<p>转换结果为e，</p>
+
+<p>即它能把(or a)转换成a。</p>
+
+<p><br/></p>
+
+<p>我们再来看(_ e1 e2 e3 &hellip;)，</p>
+
+<p>其中的省略号“&hellip;”，</p>
+
+<p><strong>并不是为了演示方便故意省略了。</strong></p>
+
+<p><br/></p>
+
+<p>“&hellip;”是一个标识符，是模式匹配的一部分，</p>
+
+<p>它用来代表“和前面一样的匹配”。</p>
+
+<p>模板中也出现了“&hellip;”，</p>
+
+<p>它会根据模式中“&hellip;”来进行填充。</p>
+
+<p><br/></p>
+
+<p>Scheme中使用的模式匹配，是一个庞大的主题，</p>
+
+<p>甚至<strong>模式匹配已经构成了一门新的语言，</strong></p>
+
+<p>TSPL4中进行了详细的解释，<a href="http://www.scheme.com/tspl4/syntax.html#./syntax:h2">Syntax-Rules Transformers</a></p>
+
+<p><br/></p>
+
+<h2><strong>转换器函数</strong></h2>
+
+<p>另外一种定义宏的方式是，</p>
+
+<p>显式的指定宏展开器函数。</p>
+
+<p><br/></p>
+
+<p>(define-syntax r</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(display x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;\n&rdquo;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#t))</p>
+
+<p><br/></p>
+
+<p>我们用lambda定义了一个匿名函数，</p>
+
+<p>并让它与宏标识符r相关联。</p>
+
+<p><br/></p>
+
+<p>我们直接在REPL中看看r是什么，</p>
+
+<p><br/></p>
+
+<p>#&lt;syntax r&gt;</p>
+
+<p>#t</p>
+
+<p><br/></p>
+
+<p>第一行是(display x)副作用，</p>
+
+<p>可见x的值是#&lt;syntax r&gt;，称为<strong>语法对象</strong>(syntax object)。</p>
+
+<p><br/></p>
+
+<p>然后r被转换成#t，</p>
+
+<p>第二行是REPL中打印了#t的值。</p>
+
+<p><br/></p>
+
+<p>为了处理转换器中匹配到的语法对象，</p>
+
+<p>Scheme语言提供了syntax-case特殊形式。</p>
+
+<p><br/></p>
+
+<p>(define-syntax or</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_) #&lsquo;#f]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e) #&lsquo;e]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e1 e2 e3 &hellip;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&lsquo;(let ([t e1]) (if t t (or e2 e3 &hellip;)))])))</p>
+
+<p><br/></p>
+
+<p>它使用了与syntax-rules相同的模式匹配规则，</p>
+
+<p>不同的是，我们还需要<strong>显式构造模板中的语法对象</strong>。</p>
+
+<p><br/></p>
+
+<p>对于宏调用(or a b)来说，x的值是#&lt;syntax (or a b)&gt;，</p>
+
+<p><strong>syntax-case会先求值x，然后解开语法对象的封装</strong>，得到(or a b)，</p>
+
+<p>再进行模式匹配。</p>
+
+<p><br/></p>
+
+<h2><strong>语法对象</strong></h2>
+
+<p>语法对象，包装了标识符的作用域信息。</p>
+
+<p><br/></p>
+
+<p>我们知道Scheme的宏是卫生的(hygienic)，</p>
+
+<p><strong>宏展开后的标识符还处在其来源处的词法作用域中，</strong></p>
+
+<p>为了达成这个目的，作用域信息就要被保存起来。</p>
+
+<p><br/></p>
+
+<p>Scheme的不同实现有不同的做法，</p>
+
+<p><a href="http://www.scheme.com/download/">Petite Chez Scheme</a>使用了<strong>语法对象</strong>进行封装。</p>
+
+<p><br/></p>
+
+<p>语法对象由syntax特殊形式创建，(syntax e)</p>
+
+<p>#&lsquo;e是它的简写，</p>
+
+<p>在程序的读取阶段会被展开为(syntax e)。</p>
+
+<p><br/></p>
+
+<p>前文我们说，</p>
+
+<p>“模式匹配构成了一门新的语言”，并不为过，</p>
+
+<p>因为#&lsquo;有很多规则(<strong>坑</strong>)需要我们了解。</p>
+
+<p><br/></p>
+
+<p>（1）出现在“模式”中的变量，称为模式变量(pattern variable)，</p>
+
+<p><strong>模式变量的值是它匹配的值</strong>。</p>
+
+<p>例如：(_ a b)匹配(or x y)，a和b就是模式变量，a的值是x，b的值是y</p>
+
+<p><br/></p>
+
+<p>（2）#&lsquo;e的值是一个语法对象，<strong>e可以是模式变量也可以不是</strong>。</p>
+
+<p>如果e是模式变量，则值为#&lt;syntax e匹配的值&gt;，</p>
+
+<p>如果e不是模式变量，则值为#&lt;syntax e&gt;。</p>
+
+<p><br/></p>
+
+<p>（3）“模板”中的模式变量，必须出现在#&lsquo;或者#&rsquo;(&hellip;)中，<strong>不能裸写</strong>。</p>
+
+<p><a href="http://www.scheme.com/tspl4/syntax.html#./syntax:h3">Pattern variables, however, can be referenced only within syntax expressions</a></p>
+
+<p><br/></p>
+
+<p>（4）<strong>#&lsquo;(a b)不是一个语法对象，而是由语法对象构成的列表</strong>，(#'a #'b)</p>
+
+<p>例如：[(_ a) #&lsquo;(a b)]，结果是(#&lt;syntax a匹配的值&gt; #&lt;syntax b&gt;)</p>
+
+<p>注意到b不是模式变量。</p>
+
+<p><br/></p>
+
+<p>（5）多层#&lsquo;，读取器会先将每一层展开成(syntax &hellip;)再求值。</p>
+
+<p>例如：#&lsquo;#'a实际上是(syntax (syntax a))，</p>
+
+<p>求值为(#&lt;syntax syntax&gt; (#&lt;syntax syntax&gt; #&lt;syntax a匹配的值&gt;))。</p>
+
+<p>注意到syntax不是模式变量。</p>
+
+<p><br/></p>
+
+<h2><strong>可以定义宏的宏</strong></h2>
+
+<p>syntax-rules是用来定义宏的，</p>
+
+<p>然而，它也是一个宏，它最终被展开为syntax-case。</p>
+
+<p><br/></p>
+
+<p>(define-syntax syntax-rules</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ (i &hellip;) ((keyword . pattern) template) &hellip;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&lsquo;(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (syntax-case x (i &hellip;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [(_ . pattern) #&lsquo;template] &hellip;))])))</p>
+
+<p><br/></p>
+
+<p>syntax-rules的目的，</p>
+
+<p>是为了避免显式的书写lambda和#&lsquo;。</p>
+
+<p><br/></p>
+
+<p>像这种生成syntax-case的宏还有很多，</p>
+
+<p>例如，with-syntax。</p>
+
+<p><br/></p>
+
+<p>(define-syntax with-syntax</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ ((p e) &hellip;) b1 b2 &hellip;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&lsquo;(syntax-case (list e &hellip;) ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [(p &hellip;) (let () b1 b2 &hellip;)])])))</p>
+
+<p><br/></p>
+
+<p>with-syntax的目的，</p>
+
+<p>是把匹配条件写在一起，</p>
+
+<p>最后输出到一个模板中。</p>
+
+<p><br/></p>
+
+<p>从这里我们可以看到，</p>
+
+<p>syntax-case第一个参数的值，</p>
+
+<p>可以是语法对象的列表。</p>
+
+<p><br/></p>
+
+<p>syntax-case会对列表中的语法对象，</p>
+
+<p>解除#&lt;syntax &hellip;&gt;的封装，</p>
+
+<p>然后再进行模式匹配。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>Lisp的宏非常强大，</p>
+
+<p>很多人只是听说过，</p>
+
+<p>没有切身使用过，</p>
+
+<p>隐约觉得宏可以解决任何问题。</p>
+
+<p><br/></p>
+
+<p>其实不然，</p>
+
+<p><strong>Lisp宏只是做了一些代码的变换，</strong></p>
+
+<p><strong>简化了已完成功能的描述方式。</strong></p>
+
+<p><br/></p>
+
+<p>本文对Scheme宏的定义和使用做了简单介绍，</p>
+
+<p>希望能揭开它的神秘面纱。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Call/cc是怎样实现的]]></title>
+    <link href="https://thzt.github.io/blog/2015/08/20/implementation-of-callcc/"/>
+    <updated>2015-08-20T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2015/08/20/implementation-of-callcc</id>
+    <content type="html"><![CDATA[<p>想象力比知识更重要。</p>
+
+<p>——爱因斯坦</p>
+
+<p><br/></p>
+
+<p><strong>在大脑中第一个构想出来的人是天才，</strong></p>
+
+<p><strong>后人只是一遍又一遍实现它最初的设想罢了。</strong></p>
+
+<p><br/></p>
+
+<p>call/cc如此，</p>
+
+<p>lisp语言本身又何尝不是？</p>
+
+<p><br/></p>
+
+<p>一堆括号字母和空格，</p>
+
+<p>构筑了美妙的外观。</p>
+
+<p><br/></p>
+
+<p>才有了后来者各种各样的实现。</p>
+
+<p><br/></p>
+
+<p><strong>这是一种自顶向下的设计思路，</strong></p>
+
+<p>用构想作为目的，</p>
+
+<p>用实现来支撑。</p>
+
+<p><br/></p>
+
+<p>与测试驱动开发，</p>
+
+<p>有异曲同工之妙。</p>
+
+<p><br/></p>
+
+<h2><strong>放飞自己的想象力</strong></h2>
+
+<p><strong>假如</strong>，我们有了一堆符号，</p>
+
+<p>如何手动控制程序跳转？</p>
+
+<p><br/></p>
+
+<p>这个跳转方式，既然可以手动触发，</p>
+
+<p>那一定是可以调用的。(k)</p>
+
+<p><br/></p>
+
+<p>k是哪来的？</p>
+
+<p>一定是从什么地方创建的。</p>
+
+<p><br/></p>
+
+<p>跳转到哪里？</p>
+
+<p>一定是跳转到创建它的位置之后。</p>
+
+<p><br/></p>
+
+<p>这个k是怎么过来的？</p>
+
+<p>它一定当做参数传递过来的。</p>
+
+<p><br/></p>
+
+<p>k需要传递参数过去吗？</p>
+
+<p>最好是需要，我们不想纯粹依赖副作用编程。(k 1)</p>
+
+<p><br/></p>
+
+<p><strong>假如</strong>我们已经有k了，</p>
+
+<p>并且在一个函数执行过程中调用了它，</p>
+
+<p>(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;0</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k 2)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;3)</p>
+
+<p>执行完(k 2)后面的3还执行吗？</p>
+
+<p>不执行了。</p>
+
+<p>当前执行的这个函数还返回吗？</p>
+
+<p>我们希望直接跳转到k定义的位置了。</p>
+
+<p><br/></p>
+
+<p>那么函数的执行过程就要重新理解了，</p>
+
+<p>先求值函数体，</p>
+
+<p>然后跳转到给定的位置。</p>
+
+<p><br/></p>
+
+<p>函数执行的结果，</p>
+
+<p>并不一定是“返回”到调用的位置了。</p>
+
+<p><br/></p>
+
+<p>这个跳转可否理解成调用了k呢？</p>
+
+<p>在函数调用处定义k，</p>
+
+<p>执行完以后，用函数体的值v，调用k，</p>
+
+<p>(k v)。</p>
+
+<p><br/></p>
+
+<p>嗯嗯，</p>
+
+<p>就这么干，先从函数体执行后，</p>
+
+<p>可以控制跳转位置开始。</p>
+
+<p><br/></p>
+
+<h2><strong>把以后要做什么当做参数传过去</strong></h2>
+
+<p>我们先看看，</p>
+
+<p>旧观念中的“函数返回”是怎么绑架我们思维的。</p>
+
+<p><strong>为什么函数一定要“返回”？</strong></p>
+
+<p><br/></p>
+
+<p>实际上，从机器的角度来看，</p>
+
+<p>并不存在自动的返回机制，</p>
+
+<p>调用一个函数，会把调用前的代码位置，先存起来。</p>
+
+<p>然后去执行函数体的中代码，这可能在代码段的其他位置，</p>
+
+<p>执行完后，再把以前存起来的位置恢复，</p>
+
+<p>就完成了“返回”操作。</p>
+
+<p><br/></p>
+
+<p>现在我们不想这么干了，</p>
+
+<p>我们不想让底层实现自动决定如何返回。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>(define (fn x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x 1))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>(define (gn y)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>(gn 2)</p>
+
+<p><br/></p>
+
+<p>我们调用了gn，gn又调用了fn，</p>
+
+<p>fn执行完以后，返回gn，然后gn又返回，</p>
+
+<p>像fn这样返回以后，调用者也返回的调用，称为<strong>尾调用</strong>。</p>
+
+<p><br/></p>
+
+<p>尾调用fn，本来没有必要返回gn内部，</p>
+
+<p>直接返回gn该返回的位置就行了。</p>
+
+<p><br/></p>
+
+<p><strong>这就要求我们把函数执行完以后，</strong></p>
+
+<p><strong>把“要做什么”当做参数传过去。</strong></p>
+
+<p><br/></p>
+
+<p>(define (final-cont v)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v))</p>
+
+<p><br/></p>
+
+<p>(define (fn x cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (+ x 1)))</p>
+
+<p><br/></p>
+
+<p>(define (gn y cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y (lambda (v)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(cont v))))</p>
+
+<p><br/></p>
+
+<p>我们在REPL中，一个表达式求值以后，就是打印它。</p>
+
+<p>所以，我们创建一个最终要做的事情，final-cont</p>
+
+<p><br/></p>
+
+<p>先调用fn试试。</p>
+
+<p>(fn 2 final-cont)</p>
+
+<p>果然打印出了3。</p>
+
+<p><br/></p>
+
+<p>因为我们把打印这件事当做函数传过去了，</p>
+
+<p>随时都可以调用。</p>
+
+<p><br/></p>
+
+<p>至于(cont (+ x 1))执行完后，fn不是还要返回的吗？</p>
+
+<p>我们暂时可以认为是无用的数据，丢弃了，</p>
+
+<p>后面再深入讨论。</p>
+
+<p><br/></p>
+
+<p>然后再调用(gn 2)试试。</p>
+
+<p>(gn 2 final-cont)</p>
+
+<p>就会去调用</p>
+
+<p>(fn y (lambda (v)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont v)))</p>
+
+<p>这里cont是final-cont</p>
+
+<p><br/></p>
+
+<p>然后调用fn了，(cont (+ x 1))</p>
+
+<p>fn中的cont就是</p>
+
+<p>(lambda (v)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(final-cont v))</p>
+
+<p><br/></p>
+
+<p>结果也是打印了3，正确输出。</p>
+
+<p><br/></p>
+
+<p>这是一个常函数，为什么要执行呢，</p>
+
+<p>这是模拟fn执行完以后返回gn。</p>
+
+<p>实际上，因为fn是尾调用，</p>
+
+<p>我们只需要把gn中的cont传递给fn即可。</p>
+
+<p><br/></p>
+
+<p>(define (gn y cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y cont))</p>
+
+<p><br/></p>
+
+<p>gn中的cont本来是final-cont，</p>
+
+<p>是gn执行完以后要做的事情，</p>
+
+<p>现在不加改变的，传递给了fn，</p>
+
+<p>是不是相当于fn直接返回到gn该返回的位置了呢？</p>
+
+<p>非常巧妙。</p>
+
+<p><br/></p>
+
+<p>其中，作为参数传递的cont，称为<strong>Continuation</strong>，</p>
+
+<p>这种把“要做什么”当做参数传递的手法，称为<strong>Continuation传递风格（CPS）</strong>。</p>
+
+<p><br/></p>
+
+<h2><strong>用call/cc设置跳转点</strong></h2>
+
+<p>我们实际上不想每次都传递continuation，</p>
+
+<p>只想在需要的时候调用它，</p>
+
+<p>怎样产生我们需要的跳转点呢？</p>
+
+<p><br/></p>
+
+<p>call/cc就是做这个的。</p>
+
+<p><br/></p>
+
+<p>;before</p>
+
+<p>(call/cc (lambda(k)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(define (fn x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (+ x 1)))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(define (gn y)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fn y))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(gn 2))</p>
+
+<p>;after</p>
+
+<p><br/></p>
+
+<p>用call/cc产生了一个跳转点，</p>
+
+<p>它把call/cc位置处“以后要做什么”，包装成了参数k。</p>
+
+<p><br/></p>
+
+<p>对的，k虽然是函数的参数，</p>
+
+<p>但是它也可以是一个函数。</p>
+
+<p><br/></p>
+
+<p><strong>其实k不是函数，是一个包装了continuation的对象，</strong></p>
+
+<p><strong>它的调用机制，就是把包装的continuation提取出来调用一下。</strong></p>
+
+<p><br/></p>
+
+<p>反正k可以当做函数的参数传递，</p>
+
+<p>像这样可以当做参数传递，可以作为函数的返回值的，k</p>
+
+<p>称为first-class的，<strong>first-class continuation</strong>。</p>
+
+<p><br/></p>
+
+<p>我们看下执行流程，</p>
+
+<p>先调用call/cc，设置了跳转点。</p>
+
+<p><br/></p>
+
+<p>然后，就进入(lambda (k) &hellip;)中了，</p>
+
+<p>其中k是call/cc处的continuation，</p>
+
+<p>可以表示为</p>
+
+<p>k = (lambda (v)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;;after</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>拿着call/cc的值，再执行after操作，</p>
+
+<p>不就是“要做什么”的意思吗？</p>
+
+<p><br/></p>
+
+<p>进入(lambda (k) &hellip;)以后，</p>
+
+<p>定义了两个函数，fn和gn，</p>
+
+<p>然后调用gn。</p>
+
+<p><br/></p>
+
+<p>gn调用了fn，fn又调用了k，</p>
+
+<p>那么call/cc就直接返回了，程序跑到了k所示的跳转点了，</p>
+
+<p>接着执行after操作。</p>
+
+<p><br/></p>
+
+<h2><strong>一种实现方式</strong></h2>
+
+<p>有了用例，</p>
+
+<p>实现起来就简单多了。</p>
+
+<p><br/></p>
+
+<p>call/cc有很多方式实现，</p>
+
+<p>我们只看下简单的解释实现。</p>
+
+<p><br/></p>
+
+<p>首先解释器的入口eval-exp要改，</p>
+
+<p>(eval-exp &lsquo;1 *env* *cont*)</p>
+
+<p>需要传递一个最原始的“以后要做什么”，</p>
+
+<p>(define *cont* (lambda (v)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v)))</p>
+
+<p><br/></p>
+
+<p>然后，遇到(call/cc &hellip;)，我们这样处理，</p>
+
+<p><br/></p>
+
+<p>(define (eval-call/cc exp env cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;eval-call/cc\n&rdquo;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let ((fn (cadr exp))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(continuation (make-continuation cont)))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(eval-function-call-list `(,fn ,continuation) env cont)))</p>
+
+<p><br/></p>
+
+<p>先拿到call/cc后面的那个lamabda，</p>
+
+<p>然后用一个包装过的对象调用它，</p>
+
+<p><strong>k就是这个包装过的对象continuation了</strong>。</p>
+
+<p><br/></p>
+
+<p>我们再看看continuation对象调用的时候怎么处理，</p>
+
+<p><br/></p>
+
+<p>(define (eval-continuation-call exp env cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;eval-continuation-call\n&rdquo;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(eval-exp (car exp) env</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (continuation)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let ((wrapped-cont (continuation-cont continuation)))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(eval-exp (cadr exp) env</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (arg)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(wrapped-cont arg)))))))</p>
+
+<p><br/></p>
+
+<p>嵌套很深嘛，</p>
+
+<p>没关系，其实只是解开continuation对象的封装，</p>
+
+<p>把原始的cont拿出来，</p>
+
+<p>然后先求值(k (+ x 1))中的(+ x 1)，</p>
+
+<p>求值完了以后，</p>
+
+<p>再调用包装中的cont。</p>
+
+<p><br/></p>
+
+<p><strong>这里比较新颖的地方是，因为整个解释器已经改成了CPS方式</strong>，</p>
+
+<p><strong>所以，顺序结构都要改成回调方式，</strong></p>
+
+<p>(let ((arg (eval-exp (cadr exp) env)))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(wrapped-cont arg))</p>
+
+<p><br/></p>
+
+<p>要变成，</p>
+
+<p>(eval-exp (cadr exp) env</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (arg)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(wrapped-cont arg)))</p>
+
+<p><br/></p>
+
+<p>然后呢，</p>
+
+<p>还需要做什么呢？</p>
+
+<p>没有了。</p>
+
+<p>就完了。</p>
+
+<p><br/></p>
+
+<h2><strong>偷偷借用的Scheme尾调用优化机制</strong></h2>
+
+<p><strong>我们前面埋了一个雷。</strong></p>
+
+<p><br/></p>
+
+<p>重新来看看，</p>
+
+<p>(define (final-cont v)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v))</p>
+
+<p><br/></p>
+
+<p>(define (fn x cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (+ x 1)))</p>
+
+<p><br/></p>
+
+<p>(define (gn y cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y cont))</p>
+
+<p><br/></p>
+
+<p>(gn 2)</p>
+
+<p><br/></p>
+
+<p>感觉上的执行过程是这样的，</p>
+
+<p>gn调用了fn，fn调用cont，</p>
+
+<p>cont返回，fn返回，gn返回，</p>
+
+<p>回到了top-level。</p>
+
+<p><br/></p>
+
+<p>并非我们想的，</p>
+
+<p>gn调用fn，fn调用cont，</p>
+
+<p>cont直接返回到top-level。</p>
+
+<p><br/></p>
+
+<p>其实，在Scheme语言中，后者是对的。</p>
+
+<p>确实直接返回到了top-level。</p>
+
+<p><br/></p>
+
+<p>因为语言规范指定，</p>
+
+<p><strong>Scheme必须实现尾调用优化，</strong></p>
+
+<p>指的就是这个。</p>
+
+<p><br/></p>
+
+<p>如果是尾调用，那么不用返回到调用处了，</p>
+
+<p>只需要返回到调用者该返回的地方即可。</p>
+
+<p><br/></p>
+
+<p>这样我们解释器里面实现的call/cc，</p>
+
+<p>更理直气壮了。</p>
+
+<p>哪怕我们把*cont*传的再远，</p>
+
+<p>也会直接返回到top-level，</p>
+
+<p>不会导致一系列的调用栈弹栈操作。</p>
+
+<p><br/></p>
+
+<p>因为解释器实现中所有的函数调用都是尾调用。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>实际上，call/cc的编译实现还是比较麻烦的，</p>
+
+<p><br/></p>
+
+<p>本来调用结构是<strong>栈型</strong>的，</p>
+
+<p>函数调用时，新建一个frame，添加到环境顶端，</p>
+
+<p>返回时，弹栈。</p>
+
+<p><br/></p>
+
+<p>后来，为了实现闭包，</p>
+
+<p>因为闭包具有无限生存期，</p>
+
+<p>这个frame有可能以后还会用到，</p>
+
+<p>所以，我们必须用<strong>链表</strong>来表示环境了，</p>
+
+<p>函数返回后，并不会删除frame，只是暂时不链接到它了，</p>
+
+<p>等待垃圾回收器来处理。</p>
+
+<p><br/></p>
+
+<p>再以后，</p>
+
+<p>我们的执行过程，可以往前跳转了，</p>
+
+<p>跳转到设置好的点，再分叉执行，</p>
+
+<p>结果，环境就是一个<strong>树型</strong>结构了。</p>
+
+<p><br/></p>
+
+<p>每调用一个函数，</p>
+
+<p>树增加了一个子节点，</p>
+
+<p>函数返回，或者调用k，返回到以前的某个父节点，</p>
+
+<p>因为还可能再回来，也可能重新执行一遍，</p>
+
+<p>所以，再回来和重新执行必须同时保存下来，</p>
+
+<p>成了两个分支。</p>
+
+<p><br/></p>
+
+<p>然而，这种<strong>树型调用图</strong>，</p>
+
+<p>比<strong>goto语句</strong>更容易控制，</p>
+
+<p>这也是call/cc的巧妙之处。</p>
+
+<p><br/></p>
+
+<p>当然call/cc用的时候，最好也封装一下，</p>
+
+<p>免得k传递的到处都是。</p>
+
+<p>不是吗，工具早就有了，</p>
+
+<p>用的好不好，体现了工程师的水平。</p>
+
+<p><br/></p>
+
+<p>参考：</p>
+
+<p><a href="https://github.com/thzt/scheme-interpreter/tree/master/continuation">源码</a></p>
+
+<p><a href="https://github.com/ultimate-lambda/book-reviews/wiki/Essentials-of-Programming-Languages">Essentials of Programming Languages</a></p>
+
+<p><a href="https://github.com/ultimate-lambda/book-reviews/wiki/Concepts-in-Programming-Languages">Concepts in Programming Languages</a></p>
+
+<p><a href="http://book.douban.com/subject/1456904/">Lisp in small pieces</a></p>
+
+<p><a href="http://book.douban.com/subject/1762126/">Compiling with Continuations</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[词法作用域是怎样实现的]]></title>
+    <link href="https://thzt.github.io/blog/2015/08/15/implementation-of-lexical-scope/"/>
+    <updated>2015-08-15T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2015/08/15/implementation-of-lexical-scope</id>
+    <content type="html"><![CDATA[<p>自从Scheme引入词法作用域以来，</p>
+
+<p>越来越多的编程语言，加入了这个特性。</p>
+
+<p><br/></p>
+
+<p>函数调用时，</p>
+
+<p>所引用的自由变量，</p>
+
+<p>要去<strong>函数定义时的环境</strong>中去查找，</p>
+
+<p>而不是在<strong>执行环境</strong>中查找。</p>
+
+<p><br/></p>
+
+<p>这对寻找自由变量到底在哪定义，</p>
+
+<p>是很方便的。</p>
+
+<p><br/></p>
+
+<p>可是，</p>
+
+<p>词法作用域到底有什么好的，</p>
+
+<p>又是怎样实现的呢？</p>
+
+<p><br/></p>
+
+<p>这还要从环境说起。</p>
+
+<p><br/></p>
+
+<h2><strong>环境的表示</strong></h2>
+
+<p>调用一个函数，它的形参有可能会<strong>遮挡</strong>外层的变量，</p>
+
+<p>等函数执行完后，这个被遮挡的值还要恢复，</p>
+
+<p>所以我们必须把要被遮挡的值存起来。</p>
+
+<p><br/></p>
+
+<p>我们可以用一个列表表示环境。</p>
+
+<p><br/></p>
+
+<p>(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 1) (y 2)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>它表示一个环境，每个元素称为一个<strong>frame</strong>，</p>
+
+<p>例如，这个环境包含了两个frame，</p>
+
+<p>frame[(x 3)]中的x，遮挡了frame[(x 1) (y 2)]中的x。</p>
+
+<p><br/></p>
+
+<p><strong>frame是用来表示形参和实参的绑定关系的</strong>，</p>
+
+<p><strong>整个环境用来表示调用栈</strong>。</p>
+
+<p><br/></p>
+
+<p>当调用函数时，会创建一个新的frame，</p>
+
+<p>例如，[(x 4) (y 5) (z 6)]</p>
+
+<p>并把frame放到环境顶端。</p>
+
+<p><br/></p>
+
+<p>(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 4) (y 5) (z 6)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 1) (y 2)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>函数执行完后，环境要恢复成以前的样子，</p>
+
+<p><br/></p>
+
+<p>(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 1) (y 2)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<h2><strong>动态作用域：top-level变量</strong></h2>
+
+<p>Emacs Lisp 24.1之前，还是动态作用域的，</p>
+
+<p>之后可以选择性的使用，只需要设置buffer-local变量，</p>
+
+<p>lexical-binding不为nil即可。</p>
+
+<p><br/></p>
+
+<p>我们来看看动态作用域到底带来了哪些麻烦。</p>
+
+<p><br/></p>
+
+<p>环境：()</p>
+
+<p><br/></p>
+
+<p>(define a 1)</p>
+
+<p><br/></p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(define (fn x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x a))</p>
+
+<p><br/></p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>注意，</p>
+
+<p><strong>定义并不增加frame，而是改变当前frame。</strong></p>
+
+<p><br/></p>
+
+<p>(fn 2)</p>
+
+<p>=> (+ x a)</p>
+
+<p><br/></p>
+
+<p><strong>调用函数了，在环境中增加一个frame，</strong></p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 2)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>在环境中，找到了x的值是2，a的值是1，</p>
+
+<p>因此，(+ x a) => 3</p>
+
+<p><br/></p>
+
+<p>函数返回后，</p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<h2><strong>动态作用域：被遮挡的top-level变量</strong></h2>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(define (gn a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn 2))</p>
+
+<p><br/></p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)</p>
+
+<p>=> (fn 2)</p>
+
+<p><br/></p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)</p>
+
+<p>=> (fn 2)</p>
+
+<p>=> (+ x a)</p>
+
+<p><br/></p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 2)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>在环境中，找到了x的值是2，a的值是3，</p>
+
+<p>因此，(+ x a) => 5</p>
+
+<p><br/></p>
+
+<p>(fn 2)调用结束后，</p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)调用结束后，</p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<h2><strong>动态作用域：意料之外</strong></h2>
+
+<p>在使用动态作用域时，我们发现，</p>
+
+<p>(fn 2)的值，是根据它被使用的位置决定的，</p>
+
+<p><strong>函数中的自由变量a，在不同的执行环境中，可能有不同的值。</strong></p>
+
+<p><br/></p>
+
+<p>这样，我们就总要注意，</p>
+
+<p>不要<strong>意外遮挡</strong>了(fn 2)中的a。</p>
+
+<p><br/></p>
+
+<p>但是，fn如果是别人写的呢？</p>
+
+<p>我们并不知道fn中的有一个名字为a的变量不能被遮挡。</p>
+
+<p><br/></p>
+
+<p>这也对fn的实现者提出了挑战，</p>
+
+<p>不能写带有自由变量的函数，否则这个自由变量的值，</p>
+
+<p>随着函数调用位置的不同是不同的。</p>
+
+<p><br/></p>
+
+<p>此外，<strong>跟踪一个自由变量的值</strong>，</p>
+
+<p>也是很麻烦，我们必须把调用栈写出来，</p>
+
+<p>或者在脑子里记住调用顺序。</p>
+
+<p><br/></p>
+
+<p>这对较大规模的工程来说，是非常耗时的。</p>
+
+<p><br/></p>
+
+<h2><strong>词法作用域：被遮挡的top-level变量</strong></h2>
+
+<p>词法作用域的环境变化规则是不同的，</p>
+
+<p>假如函数调用前的环境是#<env>，</p>
+
+<p><strong>（1）函数调用时，frame要添加到该函数定义时的环境#<env-fn>中去，</strong></p>
+
+<p><strong>（2）函数返回后，整个环境要恢复成调用函数之前的环境#<env>。</strong></p>
+
+<p><br/></p>
+
+<p>第（1）点是为了保证自由变量在函数定义时的环境中查找。</p>
+
+<p>第（2）点是因为#<env>和#<env-fn>通常是不同的。</p>
+
+<p><br/></p>
+
+<p>环境#<env-fn>：()</p>
+
+<p><br/></p>
+
+<p>(define a 1)</p>
+
+<p><br/></p>
+
+<p>环境#<env-fn>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(define (fn x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x a))</p>
+
+<p><br/></p>
+
+<p>环境#<env-fn>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(define (gn a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn 2))</p>
+
+<p><br/></p>
+
+<p>环境#<env-fn>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)</p>
+
+<p>=> (fn 2)</p>
+
+<p><br/></p>
+
+<p>环境#<env>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)</p>
+
+<p>=> (fn 2)</p>
+
+<p>=> (+ x a)</p>
+
+<p><br/></p>
+
+<p>注意，这里fn定义时的环境是，</p>
+
+<p>环境#<env-fn>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><strong>并且frame是最后被修改的状态</strong>。</p>
+
+<p><br/></p>
+
+<p>所以调用fn后，</p>
+
+<p>环境#<env-fn-extended>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 2)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>因此，(+ x a) => 3</p>
+
+<p><br/></p>
+
+<p>(fn 2)调用结束后，<strong>要恢复成调用之前环境，</strong></p>
+
+<p>环境#<env>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)调用结束后，</p>
+
+<p>环境#<env-fn>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<h2><strong>词法作用域：实现方式</strong></h2>
+
+<p>怎样实现词法作用域呢？</p>
+
+<p>这里的关键在于拿到函数定义时的环境。</p>
+
+<p><br/></p>
+
+<p><strong>最好把函数的形参列表，函数体，和定义时的环境打包成一个对象，</strong></p>
+
+<p>(define-record-type closure</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fields param body env))</p>
+
+<p><br/></p>
+
+<p>这个打包好的对象，就称为“<strong>闭包</strong>”。</p>
+
+<p><br/></p>
+
+<p>(define (eval-lambda exp env)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;eval-lambda\n&rdquo;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let ((param (caadr exp))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(body (caddr exp)))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(make-closure param body env)))</p>
+
+<p><br/></p>
+
+<p>当调用一个函数时，</p>
+
+<p>我们先将定义时的环境提取出来，</p>
+
+<p>然后用形参与实参的绑定关系构成一个frame来扩展它，</p>
+
+<p>最后让函数体在这个扩展后的环境中执行即可。</p>
+
+<p><br/></p>
+
+<p>(define (eval-function-call-list exp env)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;eval-function-call-list\n&rdquo;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let* ((closure (eval-exp (car exp) env))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(arg (eval-exp (cadr exp) env))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(body (closure-body closure))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lexical-env</strong> (closure-env closure))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(param (closure-param closure))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(frame (create-frame)))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(extend-frame frame param arg)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let ((executing-env (extend-env <strong>lexical-env</strong> frame)))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(eval-exp body executing-env))))</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>要理解一个概念，</p>
+
+<p>只从使用者的角度来看，</p>
+
+<p>是不够的。</p>
+
+<p><br/></p>
+
+<p><strong>我们还要学会切换角色，</strong></p>
+
+<p>从实现者的角度来看。</p>
+
+<p><br/></p>
+
+<p>当然，实现的方式并不是唯一的，</p>
+
+<p>考虑不同的实现，也能增广我们的见闻。</p>
+
+<p><br/></p>
+
+<p>参考：</p>
+
+<p><a href="https://github.com/thzt/scheme-interpreter/tree/master/lexical-scope">源码</a></p>
+
+<p><a href="https://github.com/ultimate-lambda/book-reviews/wiki/The-Structure-And-Interpretation-of-Computer-Programs">The Structure And Interpretation of Computer Programs</a></p>
+
+<p><a href="https://github.com/ultimate-lambda/book-reviews/wiki/Essentials-of-Programming-Languages">Essentials of Programming Languages</a></p>
+
+<p><a href="https://github.com/ultimate-lambda/book-reviews/wiki/Concepts-in-Programming-Languages">Concepts in Programming Languages</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[尾递归优化]]></title>
+    <link href="https://thzt.github.io/blog/2015/07/25/proper-tail-recursion/"/>
+    <updated>2015-07-25T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2015/07/25/proper-tail-recursion</id>
+    <content type="html"><![CDATA[<p>Scheme是一门支持Proper tail recursion的语言，</p>
+
+<p>实际上这是对语言本身的约束，</p>
+
+<p>任何实现都必须满足，</p>
+
+<p>我们可以依赖它写出可移植的程序。</p>
+
+<p><br/></p>
+
+<p>那么，到底什么是尾递归呢？</p>
+
+<p>什么样的才是Proper呢？</p>
+
+<p>它给我们带来了什么好处呢？</p>
+
+<p><br/></p>
+
+<p>这还要从函数的尾调用说起。</p>
+
+<p>我们发现，</p>
+
+<p>Proper tail recursion和continuation有很深的关联。</p>
+
+<p><br/></p>
+
+<p>下文为了叙述方便，</p>
+
+<p>我们用术语尾递归优化（tail recursion optimization）,</p>
+
+<p>来介绍Proper tail recursion的技术细节。</p>
+
+<p><br/></p>
+
+<h2><strong>尾调用</strong></h2>
+
+<p>这是一个很常见的概念，</p>
+
+<p>但是为了完整性，这里还是要说一说。</p>
+
+<p><br/></p>
+
+<p>我们看两个函数，f和g，他们的定义如下，</p>
+
+<p><br/></p>
+
+<p>(define (f a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a))</p>
+
+<p><br/></p>
+
+<p>(define (g b)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display b))</p>
+
+<p><br/></p>
+
+<p>(f 1)</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>21</p>
+
+<p><br/></p>
+
+<p>我们分析一下实际的调用过程，</p>
+
+<p>求值(f 1)，会导致f的函数体被求值，</p>
+
+<p>于是，先求值(g 2)，导致g的函数体被求值，输出2，</p>
+
+<p>然后<strong>函数g返回</strong>了，返回到f的函数体中，</p>
+
+<p>再接着执行下一条语句，输出1。</p>
+
+<p><br/></p>
+
+<p>我们看到，对g的调用，不是f的最后一个调用。</p>
+
+<p>称为<strong>g不是f的尾调用</strong>。</p>
+
+<p><br/></p>
+
+<p>我们改一下例子，</p>
+
+<p><br/></p>
+
+<p>(define (f a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2))</p>
+
+<p><br/></p>
+
+<p>(define (g b)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display b))</p>
+
+<p><br/></p>
+
+<p>(f 1)</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>12</p>
+
+<p><br/></p>
+
+<p>现在g是f的尾调用了。</p>
+
+<p><br/></p>
+
+<p>为什么要强调尾调用呢？</p>
+
+<p>因为，如果g是f的尾调用，</p>
+
+<p><strong>g就可以不返回到f中</strong>，</p>
+
+<p><strong>而直接返回到f该返回的地方</strong>。</p>
+
+<p><br/></p>
+
+<p>调用g的时候，就不会增长调用栈，</p>
+
+<p>而是废弃原来f的调用环境即可。</p>
+
+<p><br/></p>
+
+<p>不必要的调用栈不会增加，</p>
+
+<p>使得尾递归可以在常量的调用栈空间中执行，</p>
+
+<p>我们就可以放心的使用尾递归来替代循环了。</p>
+
+<p><br/></p>
+
+<h2><strong>调用栈和调用图</strong></h2>
+
+<p>从语言的实现角度来看，</p>
+
+<p>每一次函数调用会初始化一个新的frame，</p>
+
+<p>frame中保存着形参与实参的绑定。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>(f 1)会产生一个frame，[(a 1)]</p>
+
+<p><br/></p>
+
+<p>而环境，是一个frame的<strong>链表</strong>，</p>
+
+<p>top-level环境中只有一个frame，表示了变量f和g的绑定，</p>
+
+<p>[(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]</p>
+
+<p><br/></p>
+
+<p>所以，进入f的函数体后，</p>
+
+<p>新创建的frame会添加到<strong>f定义时的环境</strong>头部，</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
+
+<p>环境中有两个frame了。</p>
+
+<p><br/></p>
+
+<p>f的函数体是在这个新环境中求值的。</p>
+
+<p>f函数体的执行环境是对定义时环境的扩展，</p>
+
+<p>这是<strong>词法作用域</strong>规则的简单实现。</p>
+
+<p><br/></p>
+
+<p>我们再调用g，看看环境会怎样变化，</p>
+
+<p>调用g会创建一个新的frame，[(b 2)]</p>
+
+<p>这个frame会添加到<strong>g定义时的环境</strong>头部，</p>
+
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
+
+<p><br/></p>
+
+<p>注意，环境并没有变成，</p>
+
+<p>([(b 2)] <strong>[(a 1)]</strong> [(f #&lt;procedure>) (g #&lt;procedure&gt;)])</p>
+
+<p>新的frame并不会添加到<strong>调用g时的环境</strong>中去。</p>
+
+<p><br/></p>
+
+<p>当g返回时，</p>
+
+<p>环境又变成了f的执行环境，</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
+
+<p><br/></p>
+
+<p>跟踪运行环境的变化，我们发现，</p>
+
+<p>在实现词法作用域之后，环境并不是一个栈结构的。</p>
+
+<p><br/></p>
+
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;top-level： frame0</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;进入f： frame1 &lt;- frame0</p>
+
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;进入g： frame2 &lt;- frame0</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;回到f： frame1 &lt;- frame0</p>
+
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;回到top-level： frame0</p>
+
+<p><br/></p>
+
+<p>我们可以把frame0看成树根，</p>
+
+<p>frame1，frame2看成子节点，</p>
+
+<p>于是，<strong>环境构成了一棵树</strong>，</p>
+
+<p>这就是为什么我们之前说环境是frame的<strong>链表</strong>，而不是<strong>列表</strong>的原因了。</p>
+
+<p><br/></p>
+
+<p>既然这样，</p>
+
+<p>那么尾调用也就不必服从弹栈规则了，</p>
+
+<p>g返回，可以让执行环境返回到f该返回的状态。</p>
+
+<p><br/></p>
+
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;top-level： frame0</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入f： frame1 &lt;- frame0</p>
+
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入g： frame2 &lt;- frame0</p>
+
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]))    ;<strong>直接返回到top-level</strong>： frame0</p>
+
+<p><br/></p>
+
+<p>这种技术，称为<strong>尾调用优化</strong>。</p>
+
+<p><br/></p>
+
+<h2><strong>尾递归的执行环境</strong></h2>
+
+<p>我们来分析一下尾递归的执行环境，</p>
+
+<p>请看阶乘函数的尾递归版本，</p>
+
+<p><br/></p>
+
+<p>(define (fact n <strong>result</strong>)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>result</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1) (* result n))))</p>
+
+<p><br/></p>
+
+<p>(+ 4 (fact 3 1))</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>10</p>
+
+<p><br/></p>
+
+<p>top-level环境：([(fact #&lt;procedure&gt;)])</p>
+
+<p>要计算(+ 4 (fact 3 1))，先要求值(fact 3 1)，</p>
+
+<p>调用(fact 3 1)，进入函数体：(<strong>[(n 3) (result 1)]</strong> [(fact #&lt;procedure&gt;)])</p>
+
+<p>再次调用(fact 2 3)：(<strong>[(n 2) (result 3)]</strong> [(fact #&lt;procedure&gt;)])，</p>
+
+<p>词法作用域规则，扩展定义环境，</p>
+
+<p>然后调用(fact 1 6)：(<strong>[(n 1) (result 6)]</strong> [(fact #&lt;procedure&gt;)])，</p>
+
+<p>这里要返回result了，值为6。</p>
+
+<p><br/></p>
+
+<p>可是要返回到哪里呢？</p>
+
+<p>我们看到以上的一系列调用都是<strong>尾调用</strong>，</p>
+
+<p>所以，直接返回到了最开始调用(fact 3 1)的地方，</p>
+
+<p>执行环境变成了，([(fact #<procedure>)])，</p>
+
+<p>于是，在这环境中求值(+ 4 6) -> 10</p>
+
+<p><br/></p>
+
+<h2><strong>与continuation的关联</strong></h2>
+
+<p>我们看到，要想实现这样的调用结构，</p>
+
+<p>需要把环境中的绑定关系分配在<strong>内存堆</strong>中，</p>
+
+<p>这样就可以让函数的调用者，显式控制返回环境了。</p>
+
+<p><br/></p>
+
+<p>实现了尾调用优化后，</p>
+
+<p>函数的调用者多了一种选择，</p>
+
+<p>或者让函数执行后，<strong>返回到调用前的执行环境</strong>，</p>
+
+<p>或者<strong>返回到调用者该返回的执行环境</strong>。</p>
+
+<p><br/></p>
+
+<p>这其实是一种continuation的操作。</p>
+
+<p>即，f调用g，g的continuation，</p>
+
+<p>或者是f调用g后的continuation，</p>
+
+<p>或者是f的continuation。</p>
+
+<p><br/></p>
+
+<p>我们用CPS改写一下上面的例子，</p>
+
+<p><br/></p>
+
+<p><strong>非尾调用</strong>的情况，</p>
+
+<p>(define *cont*</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) x))</p>
+
+<p><br/></p>
+
+<p>(define (f a cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v)</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(cont (display a)))</strong>))</p>
+
+<p><br/></p>
+
+<p>(define (g b cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display b)))</p>
+
+<p><br/></p>
+
+<p>(f 1 *cont*)</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>21</p>
+
+<p><br/></p>
+
+<p>我们看到非尾调用的g的continuation，</p>
+
+<p>是执行display，再执行f的continuation。即，</p>
+
+<p>(lambda (v)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display a)))</p>
+
+<p><br/></p>
+
+<p>我们再看<strong>尾调用</strong>情况，</p>
+
+<p>(define *cont*</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) x))</p>
+
+<p><br/></p>
+
+<p>(define (f a cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2 <strong>cont</strong>))</p>
+
+<p><br/></p>
+
+<p>(define (g b cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display b)))</p>
+
+<p><br/></p>
+
+<p>(f 1 *cont*)</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>12</p>
+
+<p><br/></p>
+
+<p>尾调用g的continuation，</p>
+
+<p>是f的continuation。</p>
+
+<p><br/></p>
+
+<p>这给了我们一种方案，在写解释器的时候，</p>
+
+<p>可以使用CPS来进行尾调用优化。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>为了进行尾调用优化，</p>
+
+<p>语言实现必须对调用图进行控制，</p>
+
+<p>或者说，显式的控制continuation。</p>
+
+<p><br/></p>
+
+<p>与其把这种显式的控制隐藏在语言的实现里面，</p>
+
+<p><strong>不如开放给语言的使用者</strong>，</p>
+
+<p>因为开放出来并不是特别困难。</p>
+
+<p><br/></p>
+
+<p>这种非弹栈形式的跳转，</p>
+
+<p>称为<strong>非局部跳转</strong>（non-local jump），</p>
+
+<p>类似C语言的setjmp和longjmp。</p>
+
+<p><br/></p>
+
+<p>call/cc就是这样产生的，</p>
+
+<p>并不是为了追求另类，</p>
+
+<p><strong>而是实现尾调用优化的直接后果</strong>。</p>
+
+<p><br/></p>
+
+<p>而且，call/cc捕获的continuation是<strong>first-class</strong>的，</p>
+
+<p>可以当做参数传递，或者返回，</p>
+
+<p>这极大的丰富的Scheme语言的表现力，</p>
+
+<p>让程序员可以最大限度的控制跳转范围。</p>
+
+<p><br/></p>
+
+<p>参考：</p>
+
+<p><a href="http://www.cs.rpi.edu/academics/courses/fall00/ai/scheme/reference/schintro-v14/schintro_toc.html">An Introduction to Scheme and its Implementation</a></p>
+
+<p><a href="http://book.douban.com/subject/4030015/">Essentials of Programming Languages</a></p>
+
+<p><a href="http://book.douban.com/subject/1456904/">Lisp in small pieces</a></p>
+
+<p><a href="http://book.douban.com/subject/2587705/">Concepts in Programming Languages</a></p>
+
+<p><a href="http://book.douban.com/subject/1762126/">Compiling with continuations</a></p>
+
+<p><a href="http://www.scheme.com/tspl4/">The Scheme Programming Language</a></p>
+
+<p><a href="http://scheme-reports.org/">RnRS</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[EcmaScript 2015引入的generator]]></title>
+    <link href="https://thzt.github.io/blog/2015/06/19/generator/"/>
+    <updated>2015-06-19T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2015/06/19/generator</id>
+    <content type="html"><![CDATA[<p>Ecmascript 2015刚刚发布了，</p>
+
+<p>新增了很多<strong>特性</strong>，</p>
+
+<p>例如，let，promise，iterator，generator，</p>
+
+<p>proxy，class，module等等。</p>
+
+<p><br/></p>
+
+<p>其中<strong>generator</strong>更是引人注目，</p>
+
+<p>可以便捷的产生一个iterator。</p>
+
+<p><br/></p>
+
+<p>function* gen() {</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>yield</strong> 1;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>yield</strong> 2;</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 3;</p>
+
+<p>}</p>
+
+<p><br/></p>
+
+<p>var i = gen();</p>
+
+<p><br/></p>
+
+<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//1</p>
+
+<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//2</p>
+
+<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//3</p>
+
+<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//undefined</p>
+
+<p><br/></p>
+
+<p>可见，每次调用i.next，</p>
+
+<p>gen都会从上一次的<strong>yield</strong>后继续执行。</p>
+
+<p><br/></p>
+
+<p>这在Ecmascript之前版本看来，</p>
+
+<p>是不可思议的。</p>
+
+<p><br/></p>
+
+<h2><strong>用call/cc实现</strong></h2>
+
+<p>从Scheme的角度来看，</p>
+
+<p>从断点处继续执行，</p>
+
+<p>其实就是，<strong>调用yield断点处的continuation</strong>。</p>
+
+<p><br/></p>
+
+<p>所以，yield并不是一个新概念，</p>
+
+<p>我们用call/cc实现一下。</p>
+
+<p><br/></p>
+
+<p>(define (gen x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define <strong>k-body</strong> #f)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define <strong>k-yield</strong> #f)</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define (yield x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k2)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! <strong>k-yield</strong> k2)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>k-body</strong> x))))</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k1)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (eq? <strong>k-body</strong> #f)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(begin</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! <strong>k-body</strong> k1)</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield (+ x 1))</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x 2))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>k-yield</strong>))))))</p>
+
+<p><br/></p>
+
+<p>(define i (gen 1))</p>
+
+<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;1</p>
+
+<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;2</p>
+
+<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
+
+<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
+
+<p><br/></p>
+
+<p>仅最后一次调用与Ecmascript不同。</p>
+
+<p>无伤大雅。</p>
+
+<p><br/></p>
+
+<h2><strong>用macro进行抽象</strong></h2>
+
+<p>像上面那样为每一个generator写call/cc，</p>
+
+<p>太繁琐了，</p>
+
+<p>Scheme程序员是不能容忍的。</p>
+
+<p><br/></p>
+
+<p>先看看我们<strong>希望</strong>怎样调用，</p>
+
+<p>(<strong>make-generator</strong> (gen x y)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield y)</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y))</p>
+
+<p><br/></p>
+
+<p>(define i (gen 1 2))</p>
+
+<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;1</p>
+
+<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;2</p>
+
+<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
+
+<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
+
+<p><br/></p>
+
+<p>这样就清爽多了，</p>
+
+<p>还把generator改成了可接收<strong>多参数</strong>的形式。</p>
+
+<p>make-generator是一个<strong>宏</strong>，它可以<strong>用来定义</strong>generator。</p>
+
+<p><br/></p>
+
+<p>具体实现如下，</p>
+
+<p>(define-syntax make-generator</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (form)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case form ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(keyword (name &hellip;) . body)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case (<strong>datum->syntax</strong> #&lsquo;keyword 'yield) ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[yield</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&lsquo;(define (name &hellip;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define k-body #f)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define k-yield #f)</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define (yield . args)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k2)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! k-yield k2)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(apply k-body args))))</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k1)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (eq? k-body #f)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(begin</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! k-body k1) . body)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k-yield))))))])])))</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>Ecmascript 2015加入了很多特性，</p>
+
+<p>把自己搞的更加复杂了，</p>
+
+<p>这在走一些臃肿语言的老路。</p>
+
+<p><br/></p>
+
+<p>Scheme也不例外，</p>
+
+<p>R6RS就是膨胀的版本，</p>
+
+<p>不过还好，从那之后，</p>
+
+<p>语言分为了两个分支，R7RS力求简洁，</p>
+
+<p>另一个分支正在进行中，为了工业应用。</p>
+
+<p><br/></p>
+
+<p>追求完美，并不是要增加特性，</p>
+
+<p>而是要尽量减少特性。</p>
+
+<p><br/></p>
+
+<p>简洁有效，</p>
+
+<p>包含了太深刻的内涵。</p>
+]]></content>
+  </entry>
+  
+</feed>

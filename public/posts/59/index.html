@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="本文借助阶乘函数，在javascript中推导了Y combinator。 原始的阶乘函数定义 var fact=function(n){ &nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*fact(n-1); }; console.assert(fact(5)== &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/posts/59/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="thzt.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/27/y-combinator-in-javascript/">Y Combinator in Javascript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-27T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文借助阶乘函数，在javascript中推导了Y combinator。</p>
+
+<p><br/></p>
+
+<h2><strong>原始的阶乘函数定义</strong></h2>
+
+<p>var fact=function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*fact(n-1);</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>console.assert(fact(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>把递归函数作为参数传递</strong></h2>
+
+<p>var highFact=function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*f(f)(n-1);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>console.assert(highFact(highFact)(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>借助辅助函数消除对自身的调用</strong></h2>
+
+<p>var fact=(function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*f(f)(n-1);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>}));</p>
+
+<p><br/></p>
+
+<p>console.assert(fact(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>构造递归原型</strong></h2>
+
+<p>var fact=(function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var factProto=function(h){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(x){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return x==0?1:x*h(x-1);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return factProto(f(f))(n);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>}));</p>
+
+<p><br/></p>
+
+<p>console.assert(fact(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>将递归原型提取出来</strong></h2>
+
+<p>var factProto=function(h){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(x){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return x==0?1:x*h(x-1);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>var fact=(function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return factProto(f(f))(n);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>}));</p>
+
+<p><br/></p>
+
+<p>console.assert(fact(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>把递归原型变成形参</strong></h2>
+
+<p>var fact=(function(k){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return (function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return k(f(f))(n);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}));</p>
+
+<p>}(factProto));</p>
+
+<p><br/></p>
+
+<p>console.assert(fact(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>得到Y combinator</strong></h2>
+
+<p>var yCombinator=function(k){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return (function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return k(f(f))(n);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}));</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>console.assert(yCombinator(factProto)(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>扩展为多参数形式</strong></h2>
+
+<p>var yCombinator=function(k){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return (function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return k(f(f)).apply(null,arguments);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}));</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>console.assert(yCombinator(factProto)(5)==120);</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/60">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/58">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (6)</a></li>
+<li class='category'><a href='/blog/categories/experience/'>experience (40)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (14)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (1)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/less-is-more/">多做，少做，不做，去做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/defend-the-advantage/">守住天赋</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/25/fanatic-for-cleanliness-on-solving-problems/">问题洁癖</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/30/preparation/">先后之分</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
