@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Software
 title: 加班的艺术
 description: 有人说，软件行业不加班是不可能的，确实如此。良莠不齐，关键看加班的目的和内容。
 ---

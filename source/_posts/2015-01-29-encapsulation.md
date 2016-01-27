@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Design
 title: 封装的内涵
 description: 有些思想是与编程范型无关的。
 ---

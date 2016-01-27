@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Software
 title: 愉快的三天
 description: 处理一个奇怪的Bug，会强迫自己产生很多不同角度的想法，结论并不是特别重要，这个过程对于锻炼思路帮助很大。
 ---

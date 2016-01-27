@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Lisp
 title: 闭包就是对象
 description: 闭包和对象是实现封装的两种形式，函数式简洁的与面向对象之间交相辉映。
 ---

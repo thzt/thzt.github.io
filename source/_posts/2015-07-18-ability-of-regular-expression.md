@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Software
 title: 正则表达式的能力范围
 description: 什么样的正则表达式可以判断JSON的合法性？什么？没有？是你写不出来吧，我去问别人。
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Software
 title: 软件开发的节奏
 description: 无论外界压力多大，都不要忘记软件工程师职责是要让项目成功。身为一名软件工程师，没有努力把项目调整到正确的轨道，而是选择傻傻的加班。我觉得，这才是团队的悲哀。
 ---

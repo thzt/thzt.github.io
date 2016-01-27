@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Software
 title: 前端程序员的自我修养
 description: 前端是一个很繁杂的领域，已经远不止HTML+CSS+JavaScript那么简单了。从事前端的程序员，更要思路清晰，务实努力。
 ---

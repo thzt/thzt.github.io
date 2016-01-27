@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Software
 title: 刻舟求剑
 description: 软件是发展中的事物，不是发布时静态的快照。
 ---

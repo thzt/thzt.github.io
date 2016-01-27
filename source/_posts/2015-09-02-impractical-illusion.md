@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Software
 title: 无法扭转的颓势
 description: 有一些事情，糟糕了，就无法挽救了，只能重新来过。为了不致使这样的事情发生，首先我们得承认自己确实无力回天。
 ---

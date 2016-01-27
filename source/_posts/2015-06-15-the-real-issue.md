@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Software
 title: 真正的难题
 description: 世界上有很多问题，解决起来非常困难，然而，退一步改变自己的做事风格，可能这些难题根本就不会出现。
 ---

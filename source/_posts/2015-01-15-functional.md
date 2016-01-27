@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Lisp
 title: 回调函数
 description: 嵌套函数层数太深，不是函数式语言的弊端，而是程序员使用的方式不对。
 ---

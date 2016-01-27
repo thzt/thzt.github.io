@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Software
 title: 积极成长
 description: 软件工程师应该把自己定位成善于成长的人群，他们喜欢新事物，喜欢挑战，乐于改变自己，这些积极的学习能力，应该不仅仅停留在编程层面。
 ---
