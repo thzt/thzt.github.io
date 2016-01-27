@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 第四重境界
 description: 我们究竟是需要智慧，还是无知，是大智若愚，还是悲悯苍生，是穷则独善其身，还是达则兼济天下。
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 运行机制
 description: 别人的经验，并不是促使他成功的原因，而是他对成功的体会。成功是不能复制的，只有改变自己的运行机制，自我成长，才能以自己方式做好事情。
 ---

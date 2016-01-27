@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 道德的不对称性
 description: 我们通常希望，别人按我们对待他们的方式对待我们，也经常会，按别人对待我们的方式对待他们。这些，往往不可得。怎样缓解这样的矛盾呢？
 ---

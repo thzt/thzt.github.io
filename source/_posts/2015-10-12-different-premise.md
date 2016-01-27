@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 不同的前提
 description: 不考虑前提来考虑对策和结果，是不理智的。我们应该清楚的认识到前提的不同，世界一下子美好了很多。
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 先后之分
 description: 做事情是有先后之分的，级别够了，才不会被怪物秒杀，级别不够，只会被一击毙命。
 ---

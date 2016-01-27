@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 英雄悖论
 description: 以能建奇功者，称为英雄。然而，这些险情又何以恶化至此呢。避免灾祸的人们，功绩却又不为人知了。
 ---

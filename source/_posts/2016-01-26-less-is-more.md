@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 多做不如少做，不做不如去做
 description: 少做就是多做，做了还不如不做，不做不如勇敢的去做。
 ---

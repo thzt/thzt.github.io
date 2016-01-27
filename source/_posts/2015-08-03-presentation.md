@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 怎样阐述一个论点
 description: 表达出一个观点，并不是简单的事情，需要我们考虑的因素很多。我们该不该为了读者的认可，降低讨论的深度呢？这也好比软件，我们该不该为了提供友好的接口，而忽略设计的结构呢？
 ---

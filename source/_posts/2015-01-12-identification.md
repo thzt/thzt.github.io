@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 相同与不同
 description: 自己是和别人不同的，这是显而易见却又容易被忽略的事实。
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 清醒的选择
 description: 有多少事情是自己主动想要完成的，又有多少事情是为了实现别人的梦想，同时受多人摆布，会让棋子也有变聪明的时候。
 ---

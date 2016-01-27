@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 自省能力
 description: 能够自我反省，认识自我，是一件有趣的事情。但是程序员有程序员的绝招，他们可以做的更好。
 ---

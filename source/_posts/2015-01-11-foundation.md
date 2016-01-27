@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 驽马十驾
 description: 专注于自身的积累。
 ---

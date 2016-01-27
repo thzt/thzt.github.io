@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 难易程度
 description: 不要让别人的描述曲解了问题的难度，赶快行动起来，提高自己的水平。
 ---

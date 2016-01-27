@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 论证与直觉
 description: 论证能力是需要锻炼的，没有人会觉得可疑，但是想象力也是需要锻炼的，就不那么容易被接受了。
 ---

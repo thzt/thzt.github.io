@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 高手为何剑不出鞘
 description: 我们经常看到一些人，他们对各个领域都有涉猎，他们是怎么做到的。为什么说，好的程序员必定是全栈的？
 ---

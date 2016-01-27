@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 真相只是缺少发现
 description: 解决问题就像破案一样，我们从福尔摩斯那里学会了什么。
 ---

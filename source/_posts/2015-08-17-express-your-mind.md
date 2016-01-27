@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 思想与表达
 description: 编程是一种技艺，精巧代码出自能工巧匠，和普通代码差距是天壤之别。
 ---

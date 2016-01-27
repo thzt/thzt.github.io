@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 你有多少时间用来创造
 description: 面对纷繁芜杂的信息冲击，该如何应付。
 ---

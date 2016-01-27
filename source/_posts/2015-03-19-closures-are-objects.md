@@ -381,7 +381,7 @@ field对于get-value和set-value!来说是**共享的**，
 
 它有几层含义，表达了很多与编程范型无关的思想，
 
-“[封装的内涵](https://thzt.github.io/experience/2015/01/29/encapsulation/)”和大家一起详细探讨了这些内容。
+“[封装的内涵](https://thzt.github.io/blog/2015/01/29/encapsulation/)”和大家一起详细探讨了这些内容。
 
 
 

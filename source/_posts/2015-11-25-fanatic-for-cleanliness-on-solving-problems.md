@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 问题洁癖
 description: 你是否急于处理一个问题，而不计成本，解决了以后又能怎么样，谁能受益？对别人有没有帮助？回过头来想一想，这个问题真的是个问题吗？
 ---

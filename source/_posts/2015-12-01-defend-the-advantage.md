@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 守住天赋
 description: 学习是一件很重要的事情，好比进攻，掠夺着知识资源，然而，防守也很重要，让我们看清努力的方向，稳中求胜。
 ---

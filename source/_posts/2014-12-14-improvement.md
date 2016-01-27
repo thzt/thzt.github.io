@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Experience
+categories: Mind
 title: 怎样学习
 description: 学习方法和知识一样重要，为什么大家都忽视学习方法，怎样学习才能事半功倍。
 ---
