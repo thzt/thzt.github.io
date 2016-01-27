@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: JavaScript
+categories: Lisp
 title: Y combinator in javascript
 description: javascript中推导Y组合子。
 ---
