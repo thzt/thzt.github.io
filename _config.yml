@@ -64,10 +64,10 @@ default_asides: [asides/category_list.html, asides/recent_posts.html, asides/git
 # ----------------------- #
 
 # Github repositories
-github_user: 
+github_user: thzt
 github_repo_count: 0
 github_show_profile_link:
-github_skip_forks: true
+github_skip_forks:
 
 # Twitter
 twitter_user:
