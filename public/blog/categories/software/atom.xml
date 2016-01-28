@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Software | 何幻]]></title>
+  <title><![CDATA[Category: software | 何幻]]></title>
   <link href="https://thzt.github.io/blog/categories/software/atom.xml" rel="self"/>
   <link href="https://thzt.github.io/"/>
-  <updated>2016-01-28T08:25:02+08:00</updated>
+  <updated>2016-01-28T08:28:32+08:00</updated>
   <id>https://thzt.github.io/</id>
   <author>
     <name><![CDATA[thzt]]></name>

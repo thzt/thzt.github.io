@@ -4,7 +4,7 @@
   <title><![CDATA[何幻]]></title>
   <link href="https://thzt.github.io/atom.xml" rel="self"/>
   <link href="https://thzt.github.io/"/>
-  <updated>2016-01-28T08:25:02+08:00</updated>
+  <updated>2016-01-28T08:28:32+08:00</updated>
   <id>https://thzt.github.io/</id>
   <author>
     <name><![CDATA[thzt]]></name>
@@ -5151,7 +5151,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Call/cc是怎样实现的]]></title>
+    <title type="html"><![CDATA[call/cc是怎样实现的]]></title>
     <link href="https://thzt.github.io/blog/2015/08/20/implementation-of-callcc/"/>
     <updated>2015-08-20T00:00:00+08:00</updated>
     <id>https://thzt.github.io/blog/2015/08/20/implementation-of-callcc</id>
