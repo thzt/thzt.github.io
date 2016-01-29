@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://thzt.github.io/blog/2016/01/29/computer-science/</loc>
+<lastmod>2016-01-29T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>https://thzt.github.io/blog/2016/01/26/less-is-more/</loc>
 <lastmod>2016-01-26T00:00:00+08:00</lastmod>
 </url>
@@ -496,6 +500,9 @@
 </url>
 <url>
 <loc>https://thzt.github.io/posts/68/</loc>
+</url>
+<url>
+<loc>https://thzt.github.io/posts/69/</loc>
 </url>
 <url>
 <loc>https://thzt.github.io/thirdpart/KaTeX/test/test-katex.html</loc>
