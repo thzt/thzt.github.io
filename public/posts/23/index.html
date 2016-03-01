@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="从最终用户来看， 软件是一个整体， 所有的代码提供一个功能。 从工程师的角度来看， 软件由多个互相联系的模块组成， 每个模块提供一部分功能。 然而，这些都是静态的观点， 是在软件发布的那一瞬间观察到的。 实际上呢？ 实际上，软件是一个动态的事物， 像一个生命体一样活着， 软件发布，只是它的一次快照 &hellip;">
+  <meta name="description" content="自从Scheme引入词法作用域以来， 越来越多的编程语言，加入了这个特性。 函数调用时， 所引用的自由变量， 要去函数定义时的环境中去查找， 而不是在执行环境中查找。 这对寻找自由变量到底在哪定义， 是很方便的。 可是， 词法作用域到底有什么好的， 又是怎样实现的呢？ 这还要从环境说起。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,7 +64,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/08/11/hierarchy-of-abstraction/">抽象的层次</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/08/15/implementation-of-lexical-scope/">词法作用域是怎样实现的</a></h1>
     
     
       <p class="meta">
@@ -73,268 +73,570 @@
 
 
 
-<time class='entry-date' datetime='2015-08-11T00:00:00+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-08-15T00:00:00+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>从最终用户来看，</p>
+  <div class="entry-content"><p>自从Scheme引入词法作用域以来，</p>
 
-<p>软件是一个整体，</p>
-
-<p>所有的代码提供一个功能。</p>
+<p>越来越多的编程语言，加入了这个特性。</p>
 
 <p><br/></p>
 
-<p>从工程师的角度来看，</p>
+<p>函数调用时，</p>
 
-<p>软件由多个互相联系的模块组成，</p>
+<p>所引用的自由变量，</p>
 
-<p>每个模块提供一部分功能。</p>
+<p>要去<strong>函数定义时的环境</strong>中去查找，</p>
 
-<p><br/></p>
-
-<p><strong>然而，这些都是静态的观点，</strong></p>
-
-<p>是在软件发布的那一瞬间观察到的。</p>
+<p>而不是在<strong>执行环境</strong>中查找。</p>
 
 <p><br/></p>
 
-<p>实际上呢？</p>
+<p>这对寻找自由变量到底在哪定义，</p>
+
+<p>是很方便的。</p>
 
 <p><br/></p>
 
-<p><strong>实际上，软件是一个动态的事物，</strong></p>
+<p>可是，</p>
 
-<p>像一个生命体一样活着，</p>
+<p>词法作用域到底有什么好的，</p>
 
-<p>软件发布，只是它的一次快照。</p>
-
-<p><br/></p>
-
-<p>这就提醒了我们，</p>
-
-<p>不能像设计建筑一样设计软件。</p>
+<p>又是怎样实现的呢？</p>
 
 <p><br/></p>
 
-<p>更要考虑到它的成长。</p>
+<p>这还要从环境说起。</p>
 
 <p><br/></p>
 
-<h2><strong>模块间的接口</strong></h2>
+<h2><strong>环境的表示</strong></h2>
 
-<p>我们永远不能假定，</p>
+<p>调用一个函数，它的形参有可能会<strong>遮挡</strong>外层的变量，</p>
 
-<p>软件提供的功能只被人来使用。</p>
+<p>等函数执行完后，这个被遮挡的值还要恢复，</p>
 
-<p><br/></p>
-
-<p>其实，更多的是，</p>
-
-<p>被其他软件系统来调用。</p>
+<p>所以我们必须把要被遮挡的值存起来。</p>
 
 <p><br/></p>
 
-<p>这就要求我们，</p>
-
-<p><strong>首先提供程序可调用的接口，</strong></p>
-
-<p>而不是人机交互界面。</p>
+<p>我们可以用一个列表表示环境。</p>
 
 <p><br/></p>
 
-<p>这其实是测试驱动开发的直接结果，</p>
+<p>(</p>
 
-<p>我们首先要有自动化的用例，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 3)]</p>
 
-<p>才能保证功能的稳定。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 1) (y 2)]</p>
 
-<p><br/></p>
-
-<h2><strong>变化的接口</strong></h2>
-
-<p>当我们确定了模块的调用接口后，</p>
-
-<p>目的性就更加明确了。</p>
+<p>)</p>
 
 <p><br/></p>
 
-<p>似乎，无论内部怎样设计，</p>
+<p>它表示一个环境，每个元素称为一个<strong>frame</strong>，</p>
 
-<p>只需要实现功能就行了。</p>
+<p>例如，这个环境包含了两个frame，</p>
 
-<p><br/></p>
-
-<p>其实不然。</p>
+<p>frame[(x 3)]中的x，遮挡了frame[(x 1) (y 2)]中的x。</p>
 
 <p><br/></p>
 
-<p>根本原因就在于，</p>
+<p><strong>frame是用来表示形参和实参的绑定关系的</strong>，</p>
 
-<p><strong>模块的调用接口是变化的。</strong></p>
-
-<p><br/></p>
-
-<p>模块内的设计，</p>
-
-<p>要有能力快速响应这种变化。</p>
+<p><strong>整个环境用来表示调用栈</strong>。</p>
 
 <p><br/></p>
 
-<h2><strong>不同的意见</strong></h2>
+<p>当调用函数时，会创建一个新的frame，</p>
 
-<p>有人认为，</p>
+<p>例如，[(x 4) (y 5) (z 6)]</p>
 
-<p>接口设计的初衷，就是为了把变化隔离开，</p>
-
-<p>接口发生变化了，设计本身就是不对的。</p>
+<p>并把frame放到环境顶端。</p>
 
 <p><br/></p>
 
-<p>诚然。</p>
+<p>(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 4) (y 5) (z 6)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 1) (y 2)]</p>
+
+<p>)</p>
 
 <p><br/></p>
 
-<p>但是，回想一下我们做过的项目，</p>
-
-<p>有哪一个功能是稳定的？</p>
-
-<p>又有哪一个设计能预判未来呢？</p>
+<p>函数执行完后，环境要恢复成以前的样子，</p>
 
 <p><br/></p>
 
-<p>因此，</p>
+<p>(</p>
 
-<p><strong>接口是隔离变化的手段之一，</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 3)]</p>
 
-<p>它只能<strong>尽量</strong>把变化压缩到模块内部。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 1) (y 2)]</p>
 
-<p><br/></p>
-
-<h2><strong>可扩展的设计</strong></h2>
-
-<p>对于功能变更，不要埋怨，</p>
-
-<p>否则，说起来好像我们一开始不知道似的。</p>
+<p>)</p>
 
 <p><br/></p>
 
-<p>精巧的设计，</p>
+<h2><strong>动态作用域：top-level变量</strong></h2>
 
-<p>在设计之初就考虑到了这些，</p>
+<p>Emacs Lisp 24.1之前，还是动态作用域的，</p>
 
-<p>留有扩展的余地。</p>
+<p>之后可以选择性的使用，只需要设置buffer-local变量，</p>
 
-<p><br/></p>
-
-<p>什么样的设计才是可扩展的呢？</p>
+<p>lexical-binding不为nil即可。</p>
 
 <p><br/></p>
 
-<p>那就要求我们提取模式，</p>
-
-<p><strong>只对抽象进行编程。</strong></p>
+<p>我们来看看动态作用域到底带来了哪些麻烦。</p>
 
 <p><br/></p>
 
-<p>使得接口需要的功能，</p>
-
-<p>作为抽象设计的特定情形。</p>
+<p>环境：()</p>
 
 <p><br/></p>
 
-<p>这样的话，</p>
-
-<p>任何改变，都是抽象设计的不同应用。</p>
+<p>(define a 1)</p>
 
 <p><br/></p>
 
-<h2><strong>层次性</strong></h2>
+<p>环境：(</p>
 
-<p>何必要这么麻烦呢？</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1)]</p>
 
-<p>直接提供功能不行吗？</p>
-
-<p><br/></p>
-
-<p>为什么还要先写一个抽象，</p>
-
-<p>然后再具体化呢？</p>
+<p>)</p>
 
 <p><br/></p>
 
-<p><strong>这是因为抽象隔离了变化。</strong></p>
+<p>(define (fn x)</p>
 
-<p>具体功能易变，而功能的模式更稳定。</p>
-
-<p><br/></p>
-
-<p>甚至，随着软件的日益复杂，</p>
-
-<p>功能模式已经不再适用时。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x a))</p>
 
 <p><br/></p>
 
-<p>我们还要进一步抽象，</p>
+<p>环境：(</p>
 
-<p>让现在的抽象层变成更高层的实例。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
 
-<p><br/></p>
-
-<h2><strong>友好的外观</strong></h2>
-
-<p>优雅的设计，</p>
-
-<p>内部的抽象层次是分明的，</p>
-
-<p><strong>外观同样也是简易的。</strong></p>
+<p>)</p>
 
 <p><br/></p>
 
-<p>这就像人一样，</p>
+<p>注意，</p>
 
-<p>越是有好的修养，</p>
-
-<p>越是内心华丽，外表朴实。</p>
+<p><strong>定义并不增加frame，而是改变当前frame。</strong></p>
 
 <p><br/></p>
 
-<p>把精妙藏于简易的接口内部，</p>
+<p>(fn 2)</p>
 
-<p>是一种艺术。</p>
-
-<p><br/></p>
-
-<p>这需要我们做很多努力，</p>
-
-<p>不要把复杂开放给别人。</p>
+<p>=> (+ x a)</p>
 
 <p><br/></p>
 
-<p>不要炫耀。</p>
+<p><strong>调用函数了，在环境中增加一个frame，</strong></p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 2)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>在环境中，找到了x的值是2，a的值是1，</p>
+
+<p>因此，(+ x a) => 3</p>
+
+<p><br/></p>
+
+<p>函数返回后，</p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<h2><strong>动态作用域：被遮挡的top-level变量</strong></h2>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(define (gn a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn 2))</p>
+
+<p><br/></p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)</p>
+
+<p>=> (fn 2)</p>
+
+<p><br/></p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)</p>
+
+<p>=> (fn 2)</p>
+
+<p>=> (+ x a)</p>
+
+<p><br/></p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 2)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>在环境中，找到了x的值是2，a的值是3，</p>
+
+<p>因此，(+ x a) => 5</p>
+
+<p><br/></p>
+
+<p>(fn 2)调用结束后，</p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)调用结束后，</p>
+
+<p>环境：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<h2><strong>动态作用域：意料之外</strong></h2>
+
+<p>在使用动态作用域时，我们发现，</p>
+
+<p>(fn 2)的值，是根据它被使用的位置决定的，</p>
+
+<p><strong>函数中的自由变量a，在不同的执行环境中，可能有不同的值。</strong></p>
+
+<p><br/></p>
+
+<p>这样，我们就总要注意，</p>
+
+<p>不要<strong>意外遮挡</strong>了(fn 2)中的a。</p>
+
+<p><br/></p>
+
+<p>但是，fn如果是别人写的呢？</p>
+
+<p>我们并不知道fn中的有一个名字为a的变量不能被遮挡。</p>
+
+<p><br/></p>
+
+<p>这也对fn的实现者提出了挑战，</p>
+
+<p>不能写带有自由变量的函数，否则这个自由变量的值，</p>
+
+<p>随着函数调用位置的不同是不同的。</p>
+
+<p><br/></p>
+
+<p>此外，<strong>跟踪一个自由变量的值</strong>，</p>
+
+<p>也是很麻烦，我们必须把调用栈写出来，</p>
+
+<p>或者在脑子里记住调用顺序。</p>
+
+<p><br/></p>
+
+<p>这对较大规模的工程来说，是非常耗时的。</p>
+
+<p><br/></p>
+
+<h2><strong>词法作用域：被遮挡的top-level变量</strong></h2>
+
+<p>词法作用域的环境变化规则是不同的，</p>
+
+<p>假如函数调用前的环境是#<env>，</p>
+
+<p><strong>（1）函数调用时，frame要添加到该函数定义时的环境#<env-fn>中去，</strong></p>
+
+<p><strong>（2）函数返回后，整个环境要恢复成调用函数之前的环境#<env>。</strong></p>
+
+<p><br/></p>
+
+<p>第（1）点是为了保证自由变量在函数定义时的环境中查找。</p>
+
+<p>第（2）点是因为#<env>和#<env-fn>通常是不同的。</p>
+
+<p><br/></p>
+
+<p>环境#<env-fn>：()</p>
+
+<p><br/></p>
+
+<p>(define a 1)</p>
+
+<p><br/></p>
+
+<p>环境#<env-fn>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(define (fn x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x a))</p>
+
+<p><br/></p>
+
+<p>环境#<env-fn>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(define (gn a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn 2))</p>
+
+<p><br/></p>
+
+<p>环境#<env-fn>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)</p>
+
+<p>=> (fn 2)</p>
+
+<p><br/></p>
+
+<p>环境#<env>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)</p>
+
+<p>=> (fn 2)</p>
+
+<p>=> (+ x a)</p>
+
+<p><br/></p>
+
+<p>注意，这里fn定义时的环境是，</p>
+
+<p>环境#<env-fn>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><strong>并且frame是最后被修改的状态</strong>。</p>
+
+<p><br/></p>
+
+<p>所以调用fn后，</p>
+
+<p>环境#<env-fn-extended>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 2)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>因此，(+ x a) => 3</p>
+
+<p><br/></p>
+
+<p>(fn 2)调用结束后，<strong>要恢复成调用之前环境，</strong></p>
+
+<p>环境#<env>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<p>(gn 3)调用结束后，</p>
+
+<p>环境#<env-fn>：(</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+
+<p>)</p>
+
+<p><br/></p>
+
+<h2><strong>词法作用域：实现方式</strong></h2>
+
+<p>怎样实现词法作用域呢？</p>
+
+<p>这里的关键在于拿到函数定义时的环境。</p>
+
+<p><br/></p>
+
+<p><strong>最好把函数的形参列表，函数体，和定义时的环境打包成一个对象，</strong></p>
+
+<p>(define-record-type closure</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fields param body env))</p>
+
+<p><br/></p>
+
+<p>这个打包好的对象，就称为“<strong>闭包</strong>”。</p>
+
+<p><br/></p>
+
+<p>(define (eval-lambda exp env)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;eval-lambda\n&rdquo;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let ((param (caadr exp))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(body (caddr exp)))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(make-closure param body env)))</p>
+
+<p><br/></p>
+
+<p>当调用一个函数时，</p>
+
+<p>我们先将定义时的环境提取出来，</p>
+
+<p>然后用形参与实参的绑定关系构成一个frame来扩展它，</p>
+
+<p>最后让函数体在这个扩展后的环境中执行即可。</p>
+
+<p><br/></p>
+
+<p>(define (eval-function-call-list exp env)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;eval-function-call-list\n&rdquo;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let* ((closure (eval-exp (car exp) env))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(arg (eval-exp (cadr exp) env))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(body (closure-body closure))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lexical-env</strong> (closure-env closure))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(param (closure-param closure))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(frame (create-frame)))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(extend-frame frame param arg)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let ((executing-env (extend-env <strong>lexical-env</strong> frame)))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(eval-exp body executing-env))))</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>与其说，设计是一种创造性的活动，</p>
+<p>要理解一个概念，</p>
 
-<p>不如说，设计是一种心智的锻炼活动。</p>
+<p>只从使用者的角度来看，</p>
 
-<p><br/></p>
-
-<p>我们在努力学习软件的时候，</p>
-
-<p>也不能忘记磨练自己的品行。</p>
+<p>是不够的。</p>
 
 <p><br/></p>
 
-<p><strong>没有藏锋内敛的修养，</strong></p>
+<p><strong>我们还要学会切换角色，</strong></p>
 
-<p><strong>就难以完成大巧若拙的设计。</strong></p>
+<p>从实现者的角度来看。</p>
+
+<p><br/></p>
+
+<p>当然，实现的方式并不是唯一的，</p>
+
+<p>考虑不同的实现，也能增广我们的见闻。</p>
+
+<p><br/></p>
+
+<p>参考：</p>
+
+<p><a href="https://github.com/thzt/scheme-interpreter/tree/master/lexical-scope">源码</a></p>
+
+<p><a href="https://github.com/ultimate-lambda/book-reviews/wiki/The-Structure-And-Interpretation-of-Computer-Programs">The Structure And Interpretation of Computer Programs</a></p>
+
+<p><a href="https://github.com/ultimate-lambda/book-reviews/wiki/Essentials-of-Programming-Languages">Essentials of Programming Languages</a></p>
+
+<p><a href="https://github.com/ultimate-lambda/book-reviews/wiki/Concepts-in-Programming-Languages">Concepts in Programming Languages</a></p>
 </div>
   
   
@@ -360,7 +662,7 @@
 		<li class='category'><a href='/blog/categories/design/'>design (7)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (3)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
 <li class='category'><a href='/blog/categories/mind/'>mind (24)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
@@ -369,6 +671,10 @@
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/03/01/proof-and-deduction/">形式证明与逻辑推理</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/01/29/computer-science/">真实在哪里</a>
@@ -404,10 +710,6 @@
     
       <li class="post">
         <a href="/blog/2015/11/23/introduction-to-mathematical-logic/">数理逻辑定义汇总</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/11/08/demonstration-and-intuition/">论证与直觉</a>
       </li>
     
   </ul>
