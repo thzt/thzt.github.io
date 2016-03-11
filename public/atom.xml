@@ -4,7 +4,7 @@
   <title><![CDATA[何幻]]></title>
   <link href="https://thzt.github.io/atom.xml" rel="self"/>
   <link href="https://thzt.github.io/"/>
-  <updated>2016-03-08T15:51:32+08:00</updated>
+  <updated>2016-03-11T21:47:06+08:00</updated>
   <id>https://thzt.github.io/</id>
   <author>
     <name><![CDATA[thzt]]></name>
@@ -12,6 +12,327 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[论工具]]></title>
+    <link href="https://thzt.github.io/blog/2016/03/11/tools/"/>
+    <updated>2016-03-11T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2016/03/11/tools</id>
+    <content type="html"><![CDATA[<p>中学的历史课本上曾经讲过，</p>
+
+<p>学会制作工具，是人类进步的标志。</p>
+
+<p><br/></p>
+
+<p>我深以为然。</p>
+
+<p>可是现实生活中，<strong>存在着对工具很多的误解</strong>。</p>
+
+<p><br/></p>
+
+<p>有的人，认为制作工具浪费时间和精力，做了不必要的事情，</p>
+
+<p>有的人，认为既然有现成的工具可用，为什么还要自己造轮子。</p>
+
+<p>有的人，认为应该专门区分开制作工具的人和使用工具的人。</p>
+
+<p><br/></p>
+
+<p>这些看法，在各自的角度来讲，都说的通，</p>
+
+<p>可以没有对工具有个<strong>全面的</strong>认识。</p>
+
+<p><br/></p>
+
+<p>下面，我们仔细分析一下，</p>
+
+<p>看能不能从更高的角度来看待它，</p>
+
+<p>做好工具，用好工具。</p>
+
+<p><br/></p>
+
+<h2><strong>工具就是解决方案</strong></h2>
+
+<p>无论是日常生活中，还是在软件开发中，</p>
+
+<p>我们经常有直接解决问题的场景，</p>
+
+<p>貌似并没有使用工具。</p>
+
+<p><br/></p>
+
+<p>这就给了人们一种<strong>假象</strong>，</p>
+
+<p>那种特意找来的才叫工具，</p>
+
+<p>用了别人的东西，才叫用了工具。</p>
+
+<p><br/></p>
+
+<p>其实不然。</p>
+
+<p>一个<strong>解决方案</strong>，实际上就是一个具体的工具了，</p>
+
+<p>只不过它只能用来解决那个问题罢了。</p>
+
+<p><br/></p>
+
+<p>好的解决方案，就好比适用的工具，</p>
+
+<p>用最直接的办法解决了问题，</p>
+
+<p>不拖泥带水，不带来附加的问题。</p>
+
+<p><br/></p>
+
+<h2><strong>不得已而造轮子</strong></h2>
+
+<p>着手实施的过程，</p>
+
+<p>实际上就是将目前的项目问题<strong>还原</strong>成历史上已经解决过问题的过程。</p>
+
+<p><br/></p>
+
+<p>这个阶段，我们在进行问题求解。</p>
+
+<p>为了尽可能的少耗费精力，我们总会优先选择已经成型的工具，</p>
+
+<p>在软件开发中，相当于找到各种类库，框架来用。</p>
+
+<p><br/></p>
+
+<p>可是，市面上广为流传的那些通用工具，</p>
+
+<p>并不一定非常切题，我们必须做出调整，甚至废弃一部分功能，</p>
+
+<p>这个时候，就有点造轮子的萌芽了。</p>
+
+<p><br/></p>
+
+<p>随着业务的发展，业务模型逐渐清晰起来了，</p>
+
+<p>没有趁手的工具，也无法跟得上业务的发展需要了，</p>
+
+<p><strong>只能从基础开始，借用各种工具的设计思想，让工具和业务共同发展。</strong></p>
+
+<p><br/></p>
+
+<p>此之所谓，重新造轮子。</p>
+
+<p><br/></p>
+
+<p>这样不好吗？</p>
+
+<p>在项目初期，诚然不太合适，</p>
+
+<p>但是，全程中我们的目的都是为了找到合适的工具解决问题呀，</p>
+
+<p>并没有偏离主题，并没有为了造而造。</p>
+
+<p><br/></p>
+
+<p>这也是<strong>不得已而为之</strong>的事情。</p>
+
+<p><br/></p>
+
+<h2><strong>工具的创造者和使用者</strong></h2>
+
+<p>在大多数人眼中，</p>
+
+<p>工具都是一些人造出来，给另外一些不同的人来使用的，</p>
+
+<p>这里就又有误区了。</p>
+
+<p><br/></p>
+
+<p>其实不必强制如此，</p>
+
+<p>一个能工巧匠，必然有<strong>自己的</strong>一套工具箱，</p>
+
+<p>这些工具箱中都是他趁手的工具。</p>
+
+<p><br/></p>
+
+<p>这些工具，全是跟别人一样的吗？</p>
+
+<p>未必啊。</p>
+
+<p>有雷同的，有调整过的，更有自创的。</p>
+
+<p><br/></p>
+
+<p>工具完全可以自己造给自己用，是<strong>为了给自己的工作助力</strong>，</p>
+
+<p>在软件行业，这有一个名词叫『dog fooding』，</p>
+
+<p>很多软件公司都深谙此道。</p>
+
+<p><br/></p>
+
+<p>比如，Visual Studio本来只是Microsoft内部使用的一个编辑器，</p>
+
+<p>随着不断完善，它完全可以作为一个产品来卖了，</p>
+
+<p>那么就可以拿出来了，面向普通大众开放了。</p>
+
+<p><br/></p>
+
+<p>再比如，Facebook很多项目都主张尽量开源，</p>
+
+<p>首先解决本公司自己的问题，</p>
+
+<p>再通过解决社区的问题逐渐完善，同时也降低了维护成本。</p>
+
+<p><br/></p>
+
+<p>此外，如果不事先限定工具的未来使用者的话，</p>
+
+<p>还会促进人们对工具进行更好的设计。</p>
+
+<p><br/></p>
+
+<p>另一方面，有些人喜欢写工具给别人用，</p>
+
+<p>但是，<strong>眼高手低，只是解决一些假想的问题</strong>，过于理想主义。</p>
+
+<p><br/></p>
+
+<p>不能解决问题的工具，还不如没有，</p>
+
+<p>它会造成解决方案的混乱，加大原始问题的难度。</p>
+
+<p><br/></p>
+
+<p>因此，工具的创造者和使用者，必须紧密合作。</p>
+
+<p>工具才能发挥它最大的作用。</p>
+
+<p><br/></p>
+
+<h2><strong>业务逻辑并不啰嗦</strong></h2>
+
+<p>有些人不喜欢写业务逻辑，说是因为它繁琐。</p>
+
+<p>我觉得这是对编程认识的<strong>偏见</strong>。</p>
+
+<p><br/></p>
+
+<p>因为编程就是用代码解决问题的，</p>
+
+<p>业务逻辑繁琐，本身就是一个问题。</p>
+
+<p><br/></p>
+
+<p>我们完全可以写一个业务逻辑的管理器，</p>
+
+<p>把这些复杂业务逻辑分离开，然后用这个管理器统筹规划，</p>
+
+<p>非常干净清爽了，不是吗？</p>
+
+<p><br/></p>
+
+<p>因此，这种情况下，代码要做的事情不是关键，</p>
+
+<p><strong>关键在于，怎样写，用什么样的策略来写，</strong></p>
+
+<p><strong>没有注定繁琐的代码，只有不合理的繁琐表述。</strong></p>
+
+<p><br/></p>
+
+<h2><strong>工具还可以用来制造工具</strong></h2>
+
+<p>只要存在问题，我们就可以想到借助工具来解决它，</p>
+
+<p>那么假设这里有好多人需要斧子这种工具，</p>
+
+<p>就要造出那么多斧子来吗，好累啊。</p>
+
+<p><br/></p>
+
+<p>其实，这引出了另外一个问题，</p>
+
+<p>那就是如何制造多个斧子的问题。</p>
+
+<p><br/></p>
+
+<p>我们可以造一个机器，它用来生产斧子，</p>
+
+<p>这个机器，就是<strong>用来制造工具的工具</strong>，</p>
+
+<p>而制作这个机器所用的道具，同样也是工具。</p>
+
+<p><br/></p>
+
+<p>原来，世界这么奇妙，</p>
+
+<p>工具可以组合，还可以互相影响。</p>
+
+<p><br/></p>
+
+<h2><strong>学会别人的设计思想</strong></h2>
+
+<p>当我们定位问题后，怎样将适用工具制造出来呢？</p>
+
+<p>现存的解决方案是怎样想出来的呢？</p>
+
+<p><br/></p>
+
+<p>这就得求助历史了，求助于同行们前辈们的经验教训。</p>
+
+<p><br/></p>
+
+<p>我们要先找到类似的工具，</p>
+
+<p><strong>看它是如何解决问题的，用了什么办法，它的作者是怎么想的。</strong></p>
+
+<p><br/></p>
+
+<p>学会了这些，抓住思考问题的方式，</p>
+
+<p>我们就能<strong>随机应变，灵活处理</strong>，做出趁手适用的工具来。</p>
+
+<p><br/></p>
+
+<p>其他工具中任何有用的部分，都可以借来，只要能达到目的。</p>
+
+<p>即，目的明确后，方法可以灵活多变。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>过分的依赖工具和过度的排斥工具，都是盲目的。</p>
+
+<p><strong>做到正视一个事物，是非常困难的。</strong></p>
+
+<p><br/></p>
+
+<p>jQuery的作者在《Secrets of the JavaScript Ninja》中所言，</p>
+
+<p>很多人都被教导说，不要使用eval，这是不对的，</p>
+
+<p>相反，<strong>我们应该学会它，从而才有能力善用它。</strong></p>
+
+<p><br/></p>
+
+<p>对于其他事物也是如此啊，</p>
+
+<p>全盘接受和全盘否定，都会丢掉半壁江山，</p>
+
+<p>我们要深入理解，目的是把它用到可以用的地方，发挥它的作用。</p>
+
+<p><br/></p>
+
+<p>不理解它，怎么做到在需要的时候使用呢？</p>
+
+<p><br/></p>
+
+<p>君子生非异也，善假于物也。</p>
+
+<p>——荀子《劝学》</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[软件工程师的前瞻性]]></title>
@@ -5537,269 +5858,6 @@
 <p>不然等到那一天，</p>
 
 <p>一切都太迟了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[前端程序员的自我修养]]></title>
-    <link href="https://thzt.github.io/blog/2015/09/01/an-introduction-to-web-front-end/"/>
-    <updated>2015-09-01T00:00:00+08:00</updated>
-    <id>https://thzt.github.io/blog/2015/09/01/an-introduction-to-web-front-end</id>
-    <content type="html"><![CDATA[<p><strong>读史使人明智。——弗兰西斯.培根</strong></p>
-
-<p><br/></p>
-
-<p>学习历史，</p>
-
-<p>可以帮助我们看清现在的决定，</p>
-
-<p>并为以后的发展做好准备。</p>
-
-<p><br/></p>
-
-<p>前端技术，是<strong>界面技术</strong>的一种应用。</p>
-
-<p><u>字符界面</u> <em>DOS</em></p>
-
-<p><u>图形界面</u> <em>GUI</em></p>
-
-<p><u>浏览器界面</u> <em>Browser</em></p>
-
-<p><br/></p>
-
-<p>前端项目，属于B/S类型的<strong>平台体系结构</strong>。</p>
-
-<p><u>文件/服务器</u> <em>F/S</em></p>
-
-<p><u>客户端/服务器</u> <em>C/S</em></p>
-
-<p><u>浏览器/服务器</u> <em>B/S</em></p>
-
-<p><br/></p>
-
-<p>JavaScript，是最流行的<strong>客户端技术</strong>，</p>
-
-<p>其他的还有，<em>Java-Applet Flash ActiveX Silverlight</em></p>
-
-<p><br/></p>
-
-<p>Web前端，是<strong>网页技术</strong>一个发展阶段，</p>
-
-<p>在这个过程中，服务器端经历了，CGI，Web框架，MVC，</p>
-
-<p>客户端经历了，HTML，CSS，AJAX，前端MVC，前端组件化。</p>
-
-<p><br/></p>
-
-<p>JavaScript也推广到了服务器端，</p>
-
-<p><u>服务器端脚本</u> <em>Node.js</em>，</p>
-
-<p><u>数据库</u> <em>MongoDB</em>，</p>
-
-<p><u>WebApp</u> <em>React-Native</em>，</p>
-
-<p><u>桌面应用</u> <em>nw.js</em></p>
-
-<p><br/></p>
-
-<p><strong>总结</strong></p>
-
-<p>前端技术是一个处理<strong>人机交互</strong>的关键环节，</p>
-
-<p>各种技术都汇聚于此，</p>
-
-<p>随着云计算需要，以及移动设备的出现，</p>
-
-<p>前端已经变的越来越丰富多彩，</p>
-
-<p>大有平分天下的趋势。</p>
-
-<p><br/></p>
-
-<h2><strong>前端技术栈</strong></h2>
-
-<p><strong>语言只是一种工具，对一个聪明的程序员来说，用没用过什么工具主要是由他原来的工作需要决定，并不能代表他全部的技能。</strong></p>
-
-<p><strong>——请不要说自己是XX程序员</strong></p>
-
-<p><br/></p>
-
-<p>前端技术浩如烟海，</p>
-
-<p>单纯JavaScript语言来说，也有数不清的细节，</p>
-
-<p>为了有一个整体的印象，我们分类来看。</p>
-
-<p><br/></p>
-
-<p><strong>精一行，必先通十行。</strong></p>
-
-<p><br/></p>
-
-<p><u>浏览器环境</u> <em>IE6~8 IE9+ Chrome Firefox Safari Opera Edge</em></p>
-
-<p><u>HTTP协议</u> <em>URI Cache Session Cookie Request Response</em></p>
-
-<p><u>HTML</u> <em>W3C HTML4.01 HTML5 DOM 语义化</em></p>
-
-<p><u>CSS</u> <em>CSS1~3 选择器 盒模型 Flex 媒体检测 响应式 渲染引擎</em></p>
-
-<p><u>JavaScript</u> <em>EcmaScript3~5~6 Lexical-scope prototype-chain AJAX js引擎</em></p>
-
-<p><u>编辑器</u> <em>Emacs Vim WebStorm Atom Sublime-Text</em></p>
-
-<p><u>发布部署</u> <em>合并 压缩 单元测试 Node.js Grunt Gulp Yeoman Phantom JSLint</em></p>
-
-<p><u>框架类库</u> <em>jQuery Zepto UnderScore Backbone Knockout React AngularJS</em></p>
-
-<p><u>模块管理</u> <em>CommonJS Webpack</em></p>
-
-<p><u>UI框架</u> <em>BootStrap SemanticUI jQueryUI Foundation</em></p>
-
-<p><u>推送技术</u> <em>WebSocket 轮询 长连接</em></p>
-
-<p><u>跨域技术</u> <em>iframe JSONP CORS</em></p>
-
-<p><u>数据可视化</u> <em>D3 Echarts HighCharts Canvas</em></p>
-
-<p><u>异步编程</u> <em>Promise $.Deferred Generator</em></p>
-
-<p><u>CSS预处理器</u> <em>LESS SASS Stylus</em></p>
-
-<p><u>客户端模板</u> <em>Handlebars Haml Jade Mustache</em></p>
-
-<p><u>相关语言</u> <em>CoffeeScript TypeScript Dart WebAssembly</em></p>
-
-<p><u>WebApp/PC</u> <em>React-native ionic</em></p>
-
-<p><br/></p>
-
-<p>以上提到的这些，<strong>几乎成了前端程序员的标配了</strong>，</p>
-
-<p>所以，我们需要很努力，才不会被淘汰。</p>
-
-<p><br/></p>
-
-<p>JavaScript是一个动态弱类型的，原型继承的，函数式的编程语言，</p>
-
-<p>掌握它并不简单，也为了与服务器端程序员愉快的沟通，</p>
-
-<p>我们还要再学习一些<strong>编程语言</strong>。</p>
-
-<p><br/></p>
-
-<p>C/Rust/Go</p>
-
-<p>C#/Java</p>
-
-<p>Scheme/Haskell</p>
-
-<p>PHP/Python/Ruby</p>
-
-<p>Prolog/Erlang</p>
-
-<p><br/></p>
-
-<p>包括命令式，面向对象，函数式，逻辑式，</p>
-
-<p>各种典型的编程泛型。</p>
-
-<p><br/></p>
-
-<h2><strong>少争论多读书</strong></h2>
-
-<p><strong>思而不学则殆。——孔子</strong></p>
-
-<p>我们之所以迷惑，不是因为缺少思考，</p>
-
-<p>而是缺少学习。</p>
-
-<p><br/></p>
-
-<p><strong>前端的书籍</strong>越来越容易找到了，</p>
-
-<p>除了EmcaScript语言规范之外，还有一些有趣的读物。</p>
-
-<p><br/></p>
-
-<p>JavaScript权威指南</p>
-
-<p>JavaScript高级程序设计</p>
-
-<p>JavaScript语言精粹</p>
-
-<p>JavaScript模式</p>
-
-<p>JavaScript DOM高级程序设计</p>
-
-<p>高性能JavaScript编程</p>
-
-<p>JavaScript异步编程</p>
-
-<p>JavaScript忍者的秘密</p>
-
-<p><br/></p>
-
-<p>基于MVC的JavaScript Web富应用开发</p>
-
-<p>jQuery权威指南</p>
-
-<p>犀利开发jQuery内核详解与实践</p>
-
-<p>jQuery Mobile权威指南</p>
-
-<p>用AngularJS开发下一代Web应用</p>
-
-<p>Node.js开发指南</p>
-
-<p>高性能网站建设指南</p>
-
-<p>响应式Web设计</p>
-
-<p><br/></p>
-
-<p>快速软件开发</p>
-
-<p>测试驱动开发</p>
-
-<p>重构</p>
-
-<p>人月神话</p>
-
-<p>敏捷软件开发：原则，模式与实践</p>
-
-<p>面向模式的软件架构</p>
-
-<p>计算机程序的构造与解释</p>
-
-<p><br/></p>
-
-<p>读书是一个愉快的过程。</p>
-
-<p><br/></p>
-
-<h2><strong>参考</strong></h2>
-
-<p><a href="http://wenku.baidu.com/link?url=cGPDDS0nM8fKJgWVzf7YsgagTCfTrM_6U9BwvWg3w8YkjMH11ZA7bWZ7L68Aq_swpvFzOEcYS5I-fZpcpATU1nSfYpH6UW2ZPd4dd6b28py">「浅论CS和BS体系结构」</a></p>
-
-<p><a href="http://blog.jobbole.com/45169/">「Web开发的发展史」</a></p>
-
-<p><a href="http://wenku.baidu.com/link?url=m8fPjYHf5Q8_6hke8GttfLN9qtHpICgFCVtUsC7TYbjq5wb5HPjGGJaMwWp-zFEdfdNnLW4iKh4LfRKPVR71LywoZ4SPSp-3KTGigv8G9ve">「Web的发展史」</a></p>
-
-<p><a href="https://github.com/fouber/blog/issues/10">「前端工程——基础篇」</a></p>
-
-<p><a href="http://javascript.info/tutorial/overview">「Overview: JavaScript, Flash, Java, Silverlight and ActiveX」</a></p>
-
-<p><a href="http://hechuanzhen.iteye.com/blog/1680685">「jQuery,Extjs,YUI,Prototype,Dojo 等JS框架的区别和应用场景简述」</a></p>
-
-<p><a href="http://blog.jobbole.com/45170/">「Web开发技术的演变」</a></p>
-
-<p><a href="http://www.oschina.net/question/2320925_227508">「请不要说自己是Java程序员」</a></p>
-
-<p><a href="https://github.com/unruledboy/WebFrontEndStack">「WebFrontEndStack」</a></p>
-
-<p><a href="http://wenku.baidu.com/link?url=TGWloxxKzDXe2CxwtKUxVVlX_ytO05K5-nH_CJPUlljpkU_Q60gpcoQuRIVrR-xsQtBPHJqv6-e8QcMWEPFtoXTfoD5D4JvyP_0DwAU1rXS">「服务器内容推送技术」</a></p>
 ]]></content>
   </entry>
   
