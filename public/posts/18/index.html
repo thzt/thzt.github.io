@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="同相性，指的是， 程序和程序所操作的数据采用了统一编码。 Lisp语言使用了S表达式， 例如，(fn x) 既可以看做是程序，用参数x调用函数fn， 也可以看做是数据，由符号fn和符号x构成的列表。 同相性使得我们，可以像处理数据一样处理代码。 做一些代码转换之类的工作，十分简单。 例如， 当遇到 &hellip;">
+  <meta name="description" content="在对待数学问题时， 我们知道， 要在相同的前提下考虑问题。 否则， 所得到的结论之间没有可比性。 但是，在处理其他问题的时候， 我们容易忽略这一点， 烦恼和迷惑就随之而来了。 换位思考 某位高管收了多少贿赂，你骂他贪官， 某个明星聚众吸毒，你骂他可笑， 某某富二代超速飙车，你骂他废柴。 诚然， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/09/21/define-syntax/">Scheme元编程</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/10/12/different-premise/">不同的前提</a></h1>
     
     
       <p class="meta">
@@ -83,458 +83,230 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-09-21T00:00:00+08:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-10-12T00:00:00+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><a href="https://en.wikipedia.org/wiki/Homoiconicity">同相性</a>，指的是，</p>
+  <div class="entry-content"><p>在对待数学问题时，</p>
 
-<p>程序和程序所操作的数据采用了统一编码。</p>
+<p>我们知道，</p>
 
-<p><br/></p>
-
-<p>Lisp语言使用了S表达式，</p>
-
-<p>例如，(fn x)</p>
-
-<p>既可以看做是程序，用参数x调用函数fn，</p>
-
-<p>也可以看做是数据，由符号fn和符号x构成的列表。</p>
+<p>要在相同的前提下考虑问题。</p>
 
 <p><br/></p>
 
-<p><strong>同相性使得我们，可以像处理数据一样处理代码。</strong></p>
+<p>否则，</p>
 
-<p>做一些代码转换之类的工作，十分简单。</p>
-
-<p><br/></p>
-
-<p>例如，</p>
-
-<p>当遇到(fn x)时，</p>
-
-<p>我们可以让它先转换成，</p>
-
-<p>(begin</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(display x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(gn x))</p>
-
-<p>然后再执行。</p>
+<p>所得到的结论之间没有可比性。</p>
 
 <p><br/></p>
 
-<p>甚至也可以用来定义变量，</p>
+<p>但是，在处理其他问题的时候，</p>
 
-<p>(define-with-display (f a)</p>
+<p>我们容易忽略这一点，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(g a))</p>
-
-<p><br/></p>
-
-<p>转换成，</p>
-
-<p>(define (f a)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(g a))</p>
+<p>烦恼和迷惑就随之而来了。</p>
 
 <p><br/></p>
 
-<p>这种代码层面的转换称为“宏”(macro)。</p>
+<h2><strong>换位思考</strong></h2>
+
+<p>某位高管收了多少贿赂，你骂他贪官，</p>
+
+<p>某个明星聚众吸毒，你骂他可笑，</p>
+
+<p>某某富二代超速飙车，你骂他废柴。</p>
 
 <p><br/></p>
 
-<h2><strong>定义一个宏</strong></h2>
+<p>诚然，</p>
 
-<p>Scheme是Lisp的一个简洁方言，</p>
-
-<p>它使用define-syntax来定义宏。</p>
+<p>这是不对的。</p>
 
 <p><br/></p>
 
-<p>本质上，宏是一个特殊的标识符，</p>
+<p><strong>但是，换作我们，</strong></p>
 
-<p>它关联了转换器函数。</p>
-
-<p><br/></p>
-
-<p>表达式的求值过程，分为了3个阶段，</p>
-
-<p>读取期，宏展开期，运行期。</p>
+<p><strong>在他们的位置，也不一定能洁身自好。</strong></p>
 
 <p><br/></p>
 
-<p>在遇到宏调用的时候，</p>
-
-<p>Scheme会先调用与之关联的转换器，进行代码转换，(宏展开期)</p>
-
-<p><strong>然后再求值结果表达式</strong>。(运行期)</p>
+<p>因为，普通人并没有遭遇同等级别的诱惑。</p>
 
 <p><br/></p>
 
-<p>在解释器中，宏展开和表达式求值可能是交替进行的，</p>
+<p>每个人都有爱好，</p>
 
-<p>而在编译器中，他们是两个独立的阶段。</p>
+<p>你喜好什么，别人就利用什么，</p>
 
-<p><br/></p>
-
-<p>(define-syntax or</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(syntax-rules ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_) #f]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e) e]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e1 e2 e3 &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (let ([t e1]) (if t t (or e2 e3 &hellip;)))]))</p>
+<p>要想全身而退，非常困难。</p>
 
 <p><br/></p>
 
-<p>以上代码定义了一个宏，or，</p>
+<p>某位领导在台上吹嘘拍马，你说他忽悠，</p>
 
-<p>它用来对(or &hellip;)表达式进行变换。</p>
+<p>某个产品经理的需求几经调整，你说他不专业，</p>
 
-<p><br/></p>
-
-<p>(or)转换成了#f</p>
-
-<p>(or a)转换成了a</p>
-
-<p>(or a b)转换成了(let ([t a]) (if t t (or b)))</p>
+<p>某个程序员写的代码Bug不少，你说他技术不行。</p>
 
 <p><br/></p>
 
-<p>我们看到，</p>
+<p>诚然，</p>
 
-<p>宏展开是支持递归调用的。</p>
-
-<p><br/></p>
-
-<h2><strong>模式匹配</strong></h2>
-
-<p>syntax-rules使用了模式匹配来定义转换器，</p>
-
-<p>它的每一条语句给定了形如“[模式 模板]”的转换规则，</p>
-
-<p>如果模式匹配成功了，</p>
-
-<p>就按着模板的方式进行转换。</p>
+<p>他们应该可以做的更好。</p>
 
 <p><br/></p>
 
-<p>[(_ e) e]</p>
+<p><strong>但是，换做我们，</strong></p>
+
+<p><strong>在他们的位置，未必能达到他们现在的水平。</strong></p>
 
 <p><br/></p>
 
-<p>其中，</p>
-
-<p>模式是(_ e)，</p>
-
-<p>模板是e，</p>
-
-<p>“_”表示通配符。</p>
+<p>因为，外行人并没有看到专业人士遇到的困难。</p>
 
 <p><br/></p>
 
-<p>这个模式匹配了(or e)，</p>
+<p>在专业领域有很多限制条件，</p>
 
-<p>转换结果为e，</p>
+<p>这大大缩小了决策范围，</p>
 
-<p>即它能把(or a)转换成a。</p>
-
-<p><br/></p>
-
-<p>我们再来看(_ e1 e2 e3 &hellip;)，</p>
-
-<p>其中的省略号“&hellip;”，</p>
-
-<p><strong>并不是为了演示方便故意省略了。</strong></p>
+<p>外行的建议，往往不能兼顾这些限制条件。</p>
 
 <p><br/></p>
 
-<p>“&hellip;”是一个标识符，是模式匹配的一部分，</p>
+<h2><strong>严于律己</strong></h2>
 
-<p>它用来代表“和前面一样的匹配”。</p>
+<p>不要为自己找借口，</p>
 
-<p>模板中也出现了“&hellip;”，</p>
+<p>前提并不是影响结果的唯一因素，</p>
 
-<p>它会根据模式中“&hellip;”来进行填充。</p>
-
-<p><br/></p>
-
-<p>Scheme中使用的模式匹配，是一个庞大的主题，</p>
-
-<p>甚至<strong>模式匹配已经构成了一门新的语言，</strong></p>
-
-<p>TSPL4中进行了详细的解释，<a href="http://www.scheme.com/tspl4/syntax.html#./syntax:h2">Syntax-Rules Transformers</a></p>
+<p><strong>同样的前提，别人可以做的更好。</strong></p>
 
 <p><br/></p>
 
-<h2><strong>转换器函数</strong></h2>
+<p>在电视剧《GOLD》中，</p>
 
-<p>另外一种定义宏的方式是，</p>
+<p>早乙女悠里在监狱中的演讲，</p>
 
-<p>显式的指定宏展开器函数。</p>
-
-<p><br/></p>
-
-<p>(define-syntax r</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(display x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;\n&rdquo;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#t))</p>
+<p>说明了这一点。</p>
 
 <p><br/></p>
 
-<p>我们用lambda定义了一个匿名函数，</p>
+<p>很多被害者的遗属，带着几近绝望的愤怒抗诉，</p>
 
-<p>并让它与宏标识符r相关联。</p>
-
-<p><br/></p>
-
-<p>我们直接在REPL中看看r是什么，</p>
+<p>要求给犯罪者更重的刑罚，要求处以极刑。</p>
 
 <p><br/></p>
 
-<p>#&lt;syntax r&gt;</p>
+<p>要说为什么他们的愤怒会如此强烈，</p>
 
-<p>#t</p>
+<p>那是因为这些犯人中，</p>
 
-<p><br/></p>
+<p>很多人都不为自己犯下的罪行感到悔恨，</p>
 
-<p>第一行是(display x)副作用，</p>
-
-<p>可见x的值是#&lt;syntax r&gt;，称为<strong>语法对象</strong>(syntax object)。</p>
+<p>唯一悔恨的只是自己被逮住。</p>
 
 <p><br/></p>
 
-<p>然后r被转换成#t，</p>
+<p>为了让审判对自己有利，</p>
 
-<p>第二行是REPL中打印了#t的值。</p>
+<p>他们会演一些令人作呕的小把戏，</p>
 
-<p><br/></p>
-
-<p>为了处理转换器中匹配到的语法对象，</p>
-
-<p>Scheme语言提供了syntax-case特殊形式。</p>
+<p>这样的小把戏，被害人家属一眼就能看穿。</p>
 
 <p><br/></p>
 
-<p>(define-syntax or</p>
+<p>他们说自己的成长经历，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>说自己不被父母爱护，说社会对自己不理不睬，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_) #&lsquo;#f]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e) #&lsquo;e]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e1 e2 e3 &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&lsquo;(let ([t e1]) (if t t (or e2 e3 &hellip;)))])))</p>
+<p>尽说这些让人腻烦的狡辩和自欺的废话。</p>
 
 <p><br/></p>
 
-<p>它使用了与syntax-rules相同的模式匹配规则，</p>
+<p><strong>我告诉你们，即便是被塞进同样的环境，</strong></p>
 
-<p>不同的是，我们还需要<strong>显式构造模板中的语法对象</strong>。</p>
+<p><strong>不，即便是遭遇更残酷的命运，</strong></p>
 
-<p><br/></p>
-
-<p>对于宏调用(or a b)来说，x的值是#&lt;syntax (or a b)&gt;，</p>
-
-<p><strong>syntax-case会先求值x，然后解开语法对象的封装</strong>，得到(or a b)，</p>
-
-<p>再进行模式匹配。</p>
+<p><strong>很多人也绝不会犯罪。</strong></p>
 
 <p><br/></p>
 
-<h2><strong>语法对象</strong></h2>
+<p>绝不会去伤害，欺骗，抢劫，杀害他人，</p>
 
-<p>语法对象，包装了标识符的作用域信息。</p>
+<p>沾染毒品，欺诈老年人，汇款欺诈，</p>
 
-<p><br/></p>
-
-<p>我们知道Scheme的宏是卫生的(hygienic)，</p>
-
-<p><strong>宏展开后的标识符还处在其来源处的词法作用域中，</strong></p>
-
-<p>为了达成这个目的，作用域信息就要被保存起来。</p>
+<p>抢劫，强奸，杀人。</p>
 
 <p><br/></p>
 
-<p>Scheme的不同实现有不同的做法，</p>
+<p>会那么轻易的剥夺他人的尊严的人，</p>
 
-<p><a href="http://www.scheme.com/download/">Petite Chez Scheme</a>使用了<strong>语法对象</strong>进行封装。</p>
-
-<p><br/></p>
-
-<p>语法对象由syntax特殊形式创建，(syntax e)</p>
-
-<p>#&lsquo;e是它的简写，</p>
-
-<p>在程序的读取阶段会被展开为(syntax e)。</p>
+<p>它心琴的弦早就一根不剩了，一根不剩。</p>
 
 <p><br/></p>
 
-<p>前文我们说，</p>
+<h2><strong>宽以待人</strong></h2>
 
-<p>“模式匹配构成了一门新的语言”，并不为过，</p>
+<p>我们眼中，自己才是最好的，</p>
 
-<p>因为#&lsquo;有很多规则(<strong>坑</strong>)需要我们了解。</p>
-
-<p><br/></p>
-
-<p>（1）出现在“模式”中的变量，称为模式变量(pattern variable)，</p>
-
-<p><strong>模式变量的值是它匹配的值</strong>。</p>
-
-<p>例如：(_ a b)匹配(or x y)，a和b就是模式变量，a的值是x，b的值是y</p>
+<p>不幸的是，每个人都是这样认为的。</p>
 
 <p><br/></p>
 
-<p>（2）#&lsquo;e的值是一个语法对象，<strong>e可以是模式变量也可以不是</strong>。</p>
+<p>别人是否失误，</p>
 
-<p>如果e是模式变量，则值为#&lt;syntax e匹配的值&gt;，</p>
+<p>是站在自己的前提考虑的，</p>
 
-<p>如果e不是模式变量，则值为#&lt;syntax e&gt;。</p>
-
-<p><br/></p>
-
-<p>（3）“模板”中的模式变量，必须出现在#&lsquo;或者#&rsquo;(&hellip;)中，<strong>不能裸写</strong>。</p>
-
-<p><a href="http://www.scheme.com/tspl4/syntax.html#./syntax:h3">Pattern variables, however, can be referenced only within syntax expressions</a></p>
+<p><strong>我们能看到别人看不到的盲区。</strong></p>
 
 <p><br/></p>
 
-<p>（4）<strong>#&lsquo;(a b)不是一个语法对象，而是由语法对象构成的列表</strong>，(#'a #'b)</p>
+<p>常见的一句话是，</p>
 
-<p>例如：[(_ a) #&lsquo;(a b)]，结果是(#&lt;syntax a匹配的值&gt; #&lt;syntax b&gt;)</p>
+<p>你不知道怎么不问呢？</p>
 
-<p>注意到b不是模式变量。</p>
-
-<p><br/></p>
-
-<p>（5）多层#&lsquo;，读取器会先将每一层展开成(syntax &hellip;)再求值。</p>
-
-<p>例如：#&lsquo;#'a实际上是(syntax (syntax a))，</p>
-
-<p>求值为(#&lt;syntax syntax&gt; (#&lt;syntax syntax&gt; #&lt;syntax a匹配的值&gt;))。</p>
-
-<p>注意到syntax不是模式变量。</p>
+<p>然而，他既然不知道，怎么会意识到要问？</p>
 
 <p><br/></p>
 
-<h2><strong>可以定义宏的宏</strong></h2>
+<p>曹植说，</p>
 
-<p>syntax-rules是用来定义宏的，</p>
+<p>东海广且深，由卑下百川；</p>
 
-<p>然而，它也是一个宏，它最终被展开为syntax-case。</p>
-
-<p><br/></p>
-
-<p>(define-syntax syntax-rules</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ (i &hellip;) ((keyword . pattern) template) &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&lsquo;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (syntax-case x (i &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [(_ . pattern) #&lsquo;template] &hellip;))])))</p>
+<p>五岳虽高大，不逆垢与尘。</p>
 
 <p><br/></p>
 
-<p>syntax-rules的目的，</p>
+<p>循循善诱，克制好自己的愤怒和嘲讽，</p>
 
-<p>是为了避免显式的书写lambda和#&lsquo;。</p>
-
-<p><br/></p>
-
-<p>像这种生成syntax-case的宏还有很多，</p>
-
-<p>例如，with-syntax。</p>
+<p><strong>实力相差悬殊的对手之间，没有仇恨。</strong></p>
 
 <p><br/></p>
 
-<p>(define-syntax with-syntax</p>
+<p>这世界很奇怪，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>高人常常以隐瞒自己的实力为乐，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ ((p e) &hellip;) b1 b2 &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&lsquo;(syntax-case (list e &hellip;) ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [(p &hellip;) (let () b1 b2 &hellip;)])])))</p>
+<p>不能韬光养晦，也成不了高人。</p>
 
 <p><br/></p>
 
-<p>with-syntax的目的，</p>
+<p><strong>所以，你觉得别人很差，</strong></p>
 
-<p>是把匹配条件写在一起，</p>
-
-<p>最后输出到一个模板中。</p>
-
-<p><br/></p>
-
-<p>从这里我们可以看到，</p>
-
-<p>syntax-case第一个参数的值，</p>
-
-<p>可以是语法对象的列表。</p>
-
-<p><br/></p>
-
-<p>syntax-case会对列表中的语法对象，</p>
-
-<p>解除#&lt;syntax &hellip;&gt;的封装，</p>
-
-<p>然后再进行模式匹配。</p>
+<p><strong>他也有可能在逗你。</strong></p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>Lisp的宏非常强大，</p>
+<p>事了拂衣去，深藏身与名。</p>
 
-<p>很多人只是听说过，</p>
-
-<p>没有切身使用过，</p>
-
-<p>隐约觉得宏可以解决任何问题。</p>
-
-<p><br/></p>
-
-<p>其实不然，</p>
-
-<p><strong>Lisp宏只是做了一些代码的变换，</strong></p>
-
-<p><strong>简化了已完成功能的描述方式。</strong></p>
-
-<p><br/></p>
-
-<p>本文对Scheme宏的定义和使用做了简单介绍，</p>
-
-<p>希望能揭开它的神秘面纱。</p>
+<p>——《李白》</p>
 </div>
   
   
@@ -561,7 +333,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (25)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (26)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -569,6 +341,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/03/14/alphago/">观看AlphaGo与李世石比赛有感</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/03/11/tools/">论工具</a>
@@ -604,10 +380,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/12/22/grow-up-positively/">积极成长</a>
       </li>
     
   </ul>
