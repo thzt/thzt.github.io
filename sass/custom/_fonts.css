@@ -1,5 +1,4 @@
-@charset "UTF-8";
-body {
-  font-family: "微软雅黑" !important; }
+.main-navigation, .entry-date, aside.sidebar > section {
+  font-family: arial !important; }
 
 /*# sourceMappingURL=_fonts.css.map */
