@@ -4,7 +4,7 @@
   <title><![CDATA[何幻]]></title>
   <link href="https://thzt.github.io/atom.xml" rel="self"/>
   <link href="https://thzt.github.io/"/>
-  <updated>2016-03-18T18:01:45+08:00</updated>
+  <updated>2016-03-22T11:11:02+08:00</updated>
   <id>https://thzt.github.io/</id>
   <author>
     <name><![CDATA[thzt]]></name>
@@ -18,7 +18,9 @@
     <link href="https://thzt.github.io/blog/2016/03/18/education-and-career/"/>
     <updated>2016-03-18T00:00:00+08:00</updated>
     <id>https://thzt.github.io/blog/2016/03/18/education-and-career</id>
-    <content type="html"><![CDATA[<p>随着工作年限的增加，职业路线的明确，越来越多关心我的朋友，对我大学专业和现在从事的职业产生了疑问。
+    <content type="html"><![CDATA[<p><link href="https://thzt.github.io/stylesheets/p.css" rel="stylesheet"/></p>
+
+<p>随着工作年限的增加，职业路线的明确，越来越多关心我的朋友，对我大学专业和现在从事的职业产生了疑问。
 我是一个物理学专业的学生，研究生专业也选择了理论物理，可为什么目前从事软件开发工作呢？
 当我被问及此事时，总是难以简要的回答。</p>
 
