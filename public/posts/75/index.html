@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="传说中的lisp语言 学习c语言，能让你成为一个更好的程序员。 而学习lisp语言，则一定能让你成为一个程序员。 lisp这门编程语言真有这种魔力吗？ 它确实能改变一个人的思维方式吗？ 使用lisp编程，就能成为业界大牛吗？ 学习并不是一件值得骄傲的事情 没有学习它时，我们听到看到的都是别人的说法 &hellip;">
+  <meta name="description" content="做软件，除了编程还有什么呀？ 请不要紧张，这并不是一个数学问题。 但是却很值得深思。 我们犯下了很多错误，就是因为没有想明白这个问题。 我们自以为是，结果总是捉襟见肘，也是因为小看了这个问题。 我们效率低下，沟通困难，还是因为忽略了这个问题。 真的这么重要吗？ 是的，且听我慢慢道来。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/12/06/lisper/">在Lisp的光环之下</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/12/07/project/">软件 - 编程 = ？</a></h1>
     
     
       <p class="meta">
@@ -83,251 +83,304 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2014-12-06T00:00:00+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2014-12-07T00:00:00+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2><strong>传说中的lisp语言</strong></h2>
-
-<p>学习<a href="http://zh.wikipedia.org/wiki/C%E8%AF%AD%E8%A8%80">c语言</a>，能让你成为一个更好的程序员。</p>
-
-<p>而学习<a href="http://zh.wikipedia.org/wiki/LISP">lisp语言</a>，则一定能让你成为一个程序员。</p>
+  <div class="entry-content"><p>做软件，除了编程还有什么呀？</p>
 
 <p><br/></p>
 
-<p>lisp这门编程语言真有这种魔力吗？</p>
+<p>请不要紧张，这并不是一个数学问题。</p>
 
-<p>它确实能改变一个人的思维方式吗？</p>
-
-<p>使用lisp编程，就能成为业界大牛吗？</p>
+<p>但是却很值得深思。</p>
 
 <p><br/></p>
 
-<h2><strong>学习并不是一件值得骄傲的事情</strong></h2>
+<p>我们犯下了很多错误，就是因为没有想明白这个问题。</p>
 
-<p>没有学习它时，我们听到看到的都是别人的说法。lisp语言的真实面目，淹没在了他人的<a href="http://developer.51cto.com/art/201105/262930.htm">赞美</a>之中。</p>
+<p>我们自以为是，结果总是捉襟见肘，也是因为小看了这个问题。</p>
 
-<p>我们看不到负面消息，得不出有价值的判断。就像<a href="http://zh.wikipedia.org/wiki/%E5%9C%8B%E7%8E%8B%E7%9A%84%E6%96%B0%E8%A1%A3">皇帝的新衣</a>一样，似乎你说lisp语言坏话就证明你愚蠢一样。</p>
-
-<p>我不能忍受这种想法，也为了验证怎样才能确实成为一个程序员，于是我就开始学习lisp了。</p>
+<p>我们效率低下，沟通困难，还是因为忽略了这个问题。</p>
 
 <p><br/></p>
 
-<p>摆正自己的学习态度其实很重要。</p>
+<p>真的这么重要吗？</p>
 
-<p>如果你想成为神枪手，偷了他的枪是没有用的。</p>
-
-<p>学习lisp并不是一件值得吹嘘的事情。</p>
-
-<p>应该虔诚的看待这一门古老的语言。因为无知，所以学习。</p>
+<p>是的，且听我慢慢道来。</p>
 
 <p><br/></p>
 
-<p>学习过程中，我路过了我所谓的lisp语言的“三座大山”：词法<a href="http://zh.wikipedia.org/wiki/%E4%BD%9C%E7%94%A8%E5%9F%9F">作用域</a>，continuation，<a href="http://zh.wikipedia.org/wiki/%E5%B7%A8%E9%9B%86">宏</a>。</p>
+<h2><strong>不能有效解决问题的软件不是好软件</strong></h2>
 
-<p>为什么称为“三座大山”呢，因为学习起来颇费周折，总是不能给自己一个满意的答案。</p>
+<p>你可能遇到过这种情况。</p>
 
-<p>然而每过一座大山，我都感觉好像脱胎换骨一样。</p>
+<p>你想下载一个编辑器，结果广告太多，居然下载了一个播放器。</p>
 
-<p><br/></p>
-
-<p>为了学习词法作用域，我看了编译原理，学了<a href="http://zh.wikipedia.org/wiki/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90">词法分析</a>，<a href="http://zh.wikipedia.org/wiki/%E8%AA%9E%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8">语法分析</a>，明白了静态作用域和动态作用域。知道了什么是<a href="http://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6">闭包</a>)，知道了<a href="http://zh.wikipedia.org/wiki/%E7%AC%A6%E5%8F%B7%E8%A1%A8">符号表</a>，理解了<a href="http://zh.wikipedia.org/wiki/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0">高阶函数</a>是怎样实现的。</p>
-
-<p>为了学习continuation和宏，几乎把<a href="http://www.scheme.com/tspl4/">TSPL4</a>翻译了一遍。call/cc，CPS，编译宏，读取宏。学习了<a href="http://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E5%99%A8">编译器</a>设计，区分了读取期，编译期和运行期。理解了<a href="http://zh.wikipedia.org/wiki/%E5%85%83%E7%BC%96%E7%A8%8B">元编程</a>。</p>
+<p>那么，你是凑合用呢，还是继续找编辑器呢？</p>
 
 <p><br/></p>
 
-<p>就这样，lisp的面目逐渐清晰了，也不是那么神秘了。</p>
+<p>很显然，播放器是不能做编辑的。你需要的是一个可用的编辑器。</p>
 
-<p>这正是，不识庐山真面目，只缘身在此山中啊。</p>
+<p>那么是因为播放器的代码写的不好吗？</p>
 
-<p>欲穷千里目，更上一层楼。</p>
-
-<p><br/></p>
-
-<h2><strong>平淡的认识</strong></h2>
-
-<p>随着学习的深入，和其他小知识的触类旁通。lisp语言在我眼中已经不再是万能的了，它是那么暗淡又深沉。</p>
-
-<p>同时我也认为任何学习都会经历这个过程，从抵触到崇拜，再到宠辱不惊。</p>
-
-<p>人的世界观真的会随着知识的积累而改变呀。</p>
+<p>谁还管这个呀。</p>
 
 <p><br/></p>
 
-<p>然而，我知道以后的路还长着呢，我这才刚起步。</p>
+<p>这道理大家都明白。</p>
+
+<p>所以，你在给客户的说软件功能的时候，敷衍是没有任何作用的。</p>
+
+<p>客户需要一个编辑器，你说你的软件能解码各种格式的视频也是没有用的。</p>
 
 <p><br/></p>
 
-<p>我回想了一下当时的心态，确实是有些不同了。</p>
+<p>因此，解决客户的问题，才是软件得以存在的原因，软件才能实现价值。</p>
 
 <p><br/></p>
 
-<ul>
-<li>编程语言是什么</li>
-</ul>
+<p>确定客户想解决什么问题，是编码之外的事情。</p>
 
-
-<p>首先，编程语言是一个<a href="http://baike.baidu.com/view/448623.htm">模型</a>，它编码了计算过程。</p>
-
-<p>而区分模型和它<a href="http://baike.baidu.com/view/5159429.htm">指代</a>的东西很重要。</p>
-
-<p>正如1,2,3,&hellip;代表了自然数一样，这些符号其实不是自然数本身，它们只是自然数的一种表示而已。</p>
-
-<p>学过<a href="http://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97">λ演算</a>的话，就知道了<a href="http://zh.wikipedia.org/wiki/%E9%82%B1%E5%A5%87%E6%95%B0">Church数</a>也是自然数一种表示。</p>
+<p>而且弄错了就会导致整个软件项目南辕北辙。</p>
 
 <p><br/></p>
 
-<p>有了这样的认识，对理解宏，理解编程语言，很有帮助。</p>
+<p>确定客户问题的过程叫做<a href="http://zh.wikipedia.org/wiki/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90">需求分析</a>。</p>
 
-<p>一般的编程语言，解决实际工作问题，比如写个网站呀，做个科学计算什么的。</p>
-
-<p>而宏语言是建立在这个编程语言之上的，专门解决这个编程语言代码的问题，比如制作一个模板来生成代码，对代码进行分析等等。</p>
-
-<p>而lisp的可贵之处在于，实际工作问题中数据的表示方式和lisp语言代码的表示方式是一样的。</p>
-
-<p>这是天大的好事，因为这样的话就可以用统一的语法来处理了。</p>
-
-<p>这事实上不自主的暗中扩大的语言使用者的能力。</p>
+<p>客户是想要一匹更快的马，还是想行动更快捷。决定了你是去找千里马，还是要发明汽车。</p>
 
 <p><br/></p>
 
-<p>为什么这么说呢，如果不是高级程序员，一般不会想到编程来处理代码。</p>
+<p>不重视需求的项目团队，会遭遇无休止的返工。</p>
 
-<p>他们只会做编程语言的“分内之事”，因为程序代码是一串字符，没办法轻易操作。</p>
-
-<p>例如：你没有直接办法从字符串中，取出一个函数的定义。</p>
+<p>直到某一天撞大运，碰巧满足了客户的需求为止。</p>
 
 <p><br/></p>
 
-<p>你得使用<a href="http://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式</a>或<a href="http://baike.baidu.com/view/1268934.htm">antlr</a>进行分析。c语言的话你可能得使用<a href="http://baike.baidu.com/view/1212084.htm">lex</a>和<a href="http://baike.baidu.com/view/553546.htm">yacc</a>。</p>
+<h2><strong>需求在变化，软件在演化</strong></h2>
 
-<p>但是lisp语言处理lisp代码就出奇的简单。</p>
+<p>软件，就像一只小动物一样，它是活的。</p>
 
-<p>因为lisp代码本身就是lisp语言的一个“内置对象”，列表，你可以轻易取出函数名，函数体，形参列表等等。</p>
+<p>只要软件还在被人使用，它就在不断的演化。</p>
 
-<p>如果操作简单，你就会有更多的思考倾向，所以lisp语言暗中帮助了你。</p>
-
-<p><br/></p>
-
-<p>打破了处理代码比较困难这层隔阂之后。</p>
-
-<p>你就不再惧怕用编程方式解决问题了。</p>
-
-<p>你就学会了用程序员的眼睛来看世界了。</p>
-
-<p>这也许就是lisp语言一定能让成为一个程序员的原因所在吧。</p>
+<p>因此，我们不要对一切相关的事物的意外变化感到惊讶。</p>
 
 <p><br/></p>
 
-<ul>
-<li>工具是拿来用的</li>
-</ul>
+<p>甚至，我们会主动促进这种演化。</p>
 
+<p>我们要<a href="http://baike.baidu.com/view/6818418.htm">持续交付</a>，加速运转。</p>
 
-<p>其次，编程语言是工具的一种，没有最好的，只有适用的。</p>
-
-<p>编程语言是为了解决具体问题而已发明的，所以一种编程语言不可能解决所有的问题。</p>
-
-<p>就像<a href="http://zh.wikipedia.org/wiki/%E5%81%9C%E6%9C%BA%E9%97%AE%E9%A2%98">停机问题</a>一样，有些问题事实上是不可解的。</p>
-
-<p>语言在面对各种问题时，也是具有优缺点的。</p>
-
-<p>就像人一样，都有擅长处理和不擅长处理的事情。</p>
+<p>反馈是进化的源泉。</p>
 
 <p><br/></p>
 
-<p>编程语言之争，只存在于初级程序员的圈子里，因为他们只会一门或一两门语言，不懂语法分析过程，不知道<a href="http://baike.baidu.com/view/1874022.htm">AST</a>，不了解编译器优化，不知道有<a href="http://zh.wikipedia.org/wiki/%E9%93%BE%E6%8E%A5%E5%99%A8">链接</a>过程，更不知道<a href="http://baike.baidu.com/view/1616623.htm">DSL</a>。</p>
+<p>最近刮来一阵很酷的龙卷风，叫做<a href="http://zh.wikipedia.org/wiki/%E6%95%8F%E6%8D%B7%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91">敏捷开发</a>。</p>
+
+<p>其中就有这种思想。</p>
 
 <p><br/></p>
 
-<p>那么，争论一门语言好坏，也就是只能靠语感了吧。</p>
+<h2><strong>如果说软件是一个产品，那么编码只是产品的生产环节</strong></h2>
+
+<p>正如生产在工厂中的地位一样。</p>
+
+<p>与生产相关的产品设计，产线控制，质量管理，甚至产品说明书，都是不可缺少的。</p>
 
 <p><br/></p>
 
-<p>当然，即便如此，争论也并没有错。</p>
+<p>产品设计相当于架构设计和程序设计。</p>
 
-<p>参与争论把自己搞糊涂，通过努力学习来解惑。</p>
+<p>好的设计产生好的产品。</p>
 
-<p><br/></p>
+<p>不幸的是，软件在演化过程中，这些设计难以保持不变。</p>
 
-<p>把各种编程语言平等对待，是很好的编程实践。</p>
-
-<p>这样的话，能始终让你找到简洁的解决方案。</p>
+<p>而幸运的是，我们提前知道了这些。</p>
 
 <p><br/></p>
 
-<p>读取宏就是这样的一个概念，它赋予了你对读取器进行编程的能力。</p>
-
-<p>使得你读到的任何字符，都会在编译前转换成了lisp代码。</p>
-
-<p>拥有这种能力，你就好像带着一个神奇的眼镜一样，看到的任何东西都是lisp。</p>
+<p>所以，一开始就要面向变化进行设计。</p>
 
 <p><br/></p>
 
-<p>然而，不能过分迷恋某个事物，应该时常提醒自己，谨防一叶障目不见泰山。</p>
+<p>软件不是组装起来的，而是逐渐丰富起来的。</p>
+
+<p>因此，产线控制就是要控制软件每时每刻的发展情况。</p>
 
 <p><br/></p>
 
-<ul>
-<li>是什么改变了思维方式</li>
-</ul>
+<p>这叫做<a href="http://zh.wikipedia.org/wiki/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">版本控制</a>。</p>
 
-
-<p>最后，编程语言确实会影响一个人的思维方式，这一点我不否认。</p>
-
-<p>但是，产生影响的作用效果，却不是在使用过程中发挥的，而是在学习过程中发挥的。</p>
-
-<p>你看到黑客在使用lisp编程，不代表着用lisp编程的都是黑客。</p>
+<p>你能拿到任何时刻的软件版本，降低了调整和修复的成本。</p>
 
 <p><br/></p>
 
-<p>学习一门新的编程语言，无论如何都是有帮助的。</p>
-
-<p>它可以开阔视野，放低姿态，击碎傲慢，保持谦虚。</p>
-
-<p>甚至，还可以淘汰一些不爱学习的人。</p>
+<p>代码质量这是一个很大的话题，后面再说吧。</p>
 
 <p><br/></p>
 
-<p>lisp之所以能对一个学习者产生深远影响，正在于学习它的过程。</p>
+<p>再就是产品说明书了，简称文档。</p>
 
-<p>为了学明白，可能不得已而去学习<a href="http://zh.wikipedia.org/wiki/%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">形式语言</a>与<a href="http://baike.baidu.com/view/409351.htm">自动机</a>，<a href="http://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B8%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80">函数式编程</a>，<a href="http://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97">λ演算</a>，<a href="http://zh.wikipedia.org/wiki/%E5%8F%AF%E8%AE%A1%E7%AE%97%E6%80%A7">可计算性</a>与<a href="http://zh.wikipedia.org/wiki/%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E6%80%A7%E7%90%86%E8%AB%96">计算复杂度</a>，<a href="http://zh.wikipedia.org/wiki/%E5%BD%A2%E5%BC%8F%E8%AF%AD%E4%B9%89%E5%AD%A6">语义学</a>，还有一些数学，英语等等。</p>
+<p>这是最容易被人忽略的。</p>
 
-<p>为了进行比较，我也先后学习了很多种编程语言。</p>
+<p>我们看到字典也没有说明书，但并不会感到奇怪。</p>
 
-<p><a href="http://zh.wikipedia.org/wiki/C%E8%AF%AD%E8%A8%80">C</a> <a href="http://zh.wikipedia.org/wiki/C%2B%2B">C++</a> <a href="http://zh.wikipedia.org/wiki/C%E2%99%AF">C#</a> <a href="http://zh.wikipedia.org/wiki/Java">Java</a> <a href="http://zh.wikipedia.org/wiki/Scheme">Scheme</a> <a href="http://zh.wikipedia.org/wiki/Common_Lisp">CL</a> <a href="http://zh.wikipedia.org/wiki/Haskell">Haskell</a> <a href="http://zh.wikipedia.org/wiki/Erlang">Erlang</a> <a href="http://zh.wikipedia.org/wiki/Python">Python</a> <a href="http://zh.wikipedia.org/wiki/Ruby">Ruby</a> <a href="http://zh.wikipedia.org/wiki/JavaScript">JavaScript</a> <a href="http://zh.wikipedia.org/wiki/Go">Go</a> <a href="http://zh.wikipedia.org/wiki/Clojure">Clojure</a>。</p>
-
-<p>当然，这些语言我都不熟悉也不精通，刚刚了解。</p>
+<p>可能是因为字典是文字，说明书也是文字吧。</p>
 
 <p><br/></p>
 
-<p>这些收获对于一个程序员的修炼是至关重要的。</p>
+<p>代码是文字，就很难想到给它写文字的说明书了。</p>
 
-<p>能为你从专业的角度来看待问题打下了坚实的基础。</p>
+<p>我们会想，需要看说明的话，读源代码不行吗？</p>
 
 <p><br/></p>
 
-<p>当然，对于软件开发来说，这些知识简直是沧海之一粟，就算成为一个合格的软件工程师都比较勉强。</p>
+<p>然而，软件的使用者是不会去读源代码的。</p>
 
-<p>所以，避开lisp的光环，谦虚自信的学习，不卑不亢。</p>
+<p>或者说，读源代码并不会实现软件的价值。</p>
 
-<p>就把lisp当做漫长学习路上的一段崎岖小路吧。</p>
+<p>因此，没有说明书的产品是不友好的，甚至可以说是功能不全的。</p>
+
+<p>并且，没准哪天，你还可能<a href="http://blog.sciencenet.cn/blog-455307-346584.html">吃自己的狗粮</a>呀。</p>
+
+<p><br/></p>
+
+<h2><strong>不直接用二进制进行编码，而是用编程语言，就是要促使你写出人能读懂的代码</strong></h2>
+
+<p>对于发展中的事物，就要用发展的眼光看待。</p>
+
+<p>如果你没办法预测未来，那就尽量避免假设。</p>
+
+<p><br/></p>
+
+<p>例如，不要假设你的代码只有你自己阅读。</p>
+
+<p>想象下一个读你代码的人，脾气暴躁，体壮如牛。</p>
+
+<p><br/></p>
+
+<p>例如，不要假设只有人会去读你的代码。</p>
+
+<p>想象各种分析工具在你的代码上踱来踱去。</p>
+
+<p><br/></p>
+
+<p>发展中的东西控制质量和品质很困难，一不小心，就越来越烂。</p>
+
+<p>因为孤立系统的<a href="http://baike.baidu.com/subview/936/14415075.htm">熵</a>是<a href="http://baike.baidu.com/view/354435.htm">不减少</a>的。</p>
+
+<p><br/></p>
+
+<p>怎样才能控制熵增呢？</p>
+
+<p>或者说，怎样才能保持代码的优雅呢？</p>
+
+<p>那就要及时调整，持续<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84">重构</a>。</p>
+
+<p><br/></p>
+
+<p>为了保持干净，要经常打扫房间。</p>
+
+<p>不要总是让别人替你打扫。</p>
+
+<p><br/></p>
+
+<p>另一方面，同时让更多的人保持安静，是很困难的。</p>
+
+<p>软件项目也是一样，让更多的人代码风格一致，也是很困难的。</p>
+
+<p><br/></p>
+
+<p>所以，要想改善代码质量，就要限制团队的规模。</p>
+
+<p>给编码设置权限，划分功能，每个功能只让部分人参与编码。</p>
+
+<p>参与的人越少，就越有希望减小噪音。</p>
+
+<p><br/></p>
+
+<p>如果有人不文明，随地大小便。</p>
+
+<p>那就别留情面，把它赶出去。</p>
+
+<p>就如同它在你家卧室方便一样。</p>
+
+<p><br/></p>
+
+<h2><strong>你容易低估软件的成本，因为你觉得软件无非就是编程而已</strong></h2>
+
+<p>通过上面的分析，编程相对于软件，真是小巫见大巫了。</p>
+
+<p>这就要求我们计算软件成本时，不要只考虑到编码的成本。</p>
+
+<p><br/></p>
+
+<p>否则，你就是在执行一项不可能完成的任务。</p>
+
+<p><br/></p>
+
+<p>如果人们一直在埋头编码，无暇顾及其他时，那就有问题了。</p>
+
+<p>将要大祸临头了。</p>
+
+<p>因为很多该做的重要事情一定没有人在做。</p>
+
+<p><br/></p>
+
+<p>程序员的价值，体现在他能做出多好的软件，而不是他能写多少坨代码。</p>
+
+<p>更多的代码意味着阅读和维护成本更高。</p>
+
+<p>代码产量少的程序员，不一定是能力差的程序员。</p>
+
+<p><br/></p>
+
+<p>沟通也是需要成本的，不是免费的午餐。</p>
+
+<p>多一个人，他就要和其余每个人进行沟通。</p>
+
+<p><a href="http://zh.wikipedia.org/wiki/%E4%BA%BA%E6%9C%88%E7%A5%9E%E8%AF%9D">向一个进度落后的项目中添加人手，只会使项目更落后</a>，就是这个道理。</p>
+
+<p><br/></p>
+
+<p>控制软件项目成本就像摆放多米诺骨牌一样不稳定。</p>
+
+<p>任何一个环节出错，都会毁掉它。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>如果在你的项目组中，发现了一个lisp程序员。</p>
+<p>以上这些讨论，也并不全面。</p>
 
-<p>他思维诡异，别人经常都不知道他在说什么，似乎很蠢。</p>
+<p>把所有这些提到的和未提到的汇总起来，就构成了<a href="http://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B">软件工程</a>。</p>
 
-<p>也请接纳他，付之一笑吧。</p>
+<p><br/></p>
 
-<p>因为，至少他是个好学之人呀。</p>
+<p>即使你会写代码，也不一定懂得写软件。</p>
+
+<p>软件项目之所以步履维艰，就是总有一些人自以为是。</p>
+
+<p>害人害己。</p>
+
+<p><br/></p>
+
+<p>不过，也没事。</p>
+
+<p>孔子云，<a href="http://baike.baidu.com/view/1695989.htm">人不知而不愠，不亦君子乎</a>。</p>
+
+<p><br/></p>
+
+<p>如果说软件项目有<a href="http://zh.wikipedia.org/wiki/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a>的话。</p>
+
+<p>那就是尊重那些具有工程思想的人吧。</p>
+
+<p>因为说到底，产品的竞争，最终还是人的竞争。</p>
 </div>
   
   
@@ -336,6 +389,8 @@ var _hmt = _hmt || [];
     </article>
   
   <div class="pagination">
+    
+      <a class="prev" href="/posts/76">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -352,7 +407,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (27)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (28)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -360,6 +415,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/27/surprise-move/">出奇制胜</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/03/18/education-and-career/">教育和职业</a>
@@ -395,10 +454,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
       </li>
     
   </ul>

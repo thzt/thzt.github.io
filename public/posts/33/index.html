@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="实际项目中， 有很多需要处理字符串的场景， 判断用户输入的文本是否合法， 从一段文本中提取一些信息， 等等。 正则表达式， 简直是神兵利器， 一般的问题，都可以轻易解决。 然而， 它也不是万能的， 有着自身的能力范围。 例如， 我们无法用正则表达式处理JSON， 无法用正则表达式分析HTML， &hellip;">
+  <meta name="description" content="Scheme是一门支持Proper tail recursion的语言， 实际上这是对语言本身的约束， 任何实现都必须满足， 我们可以依赖它写出可移植的程序。 那么，到底什么是尾递归呢？ 什么样的才是Proper呢？ 它给我们带来了什么好处呢？ 这还要从函数的尾调用说起。 我们发现， Proper &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/07/18/ability-of-regular-expression/">正则表达式的能力范围</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/07/25/proper-tail-recursion/">尾递归优化</a></h1>
     
     
       <p class="meta">
@@ -83,468 +83,512 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-07-18T00:00:00+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-07-25T00:00:00+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>实际项目中，</p>
+  <div class="entry-content"><p>Scheme是一门支持Proper tail recursion的语言，</p>
 
-<p>有很多需要<strong>处理字符串</strong>的场景，</p>
+<p>实际上这是对语言本身的约束，</p>
 
-<p>判断用户输入的文本是否合法，</p>
+<p>任何实现都必须满足，</p>
 
-<p>从一段文本中提取一些信息，</p>
-
-<p>等等。</p>
+<p>我们可以依赖它写出可移植的程序。</p>
 
 <p><br/></p>
 
-<p>正则表达式，</p>
+<p>那么，到底什么是尾递归呢？</p>
 
-<p>简直是神兵利器，</p>
+<p>什么样的才是Proper呢？</p>
 
-<p>一般的问题，都可以轻易解决。</p>
-
-<p><br/></p>
-
-<p>然而，</p>
-
-<p><strong>它也不是万能的</strong>，</p>
-
-<p>有着自身的能力范围。</p>
+<p>它给我们带来了什么好处呢？</p>
 
 <p><br/></p>
 
-<p>例如，</p>
+<p>这还要从函数的尾调用说起。</p>
 
-<p>我们无法用正则表达式处理JSON，</p>
+<p>我们发现，</p>
 
-<p>无法用正则表达式分析HTML，</p>
-
-<p>甚至无法从一段代码中把嵌套注释提取出来。</p>
+<p>Proper tail recursion和continuation有很深的关联。</p>
 
 <p><br/></p>
 
-<p>是不是我们写的不好，</p>
+<p>下文为了叙述方便，</p>
 
-<p>有没有精巧的写法，</p>
+<p>我们用术语尾递归优化（tail recursion optimization）,</p>
 
-<p>来达到上述目的呢？</p>
-
-<p><br/></p>
-
-<p>一般而言，</p>
-
-<p>要证明可以，只需要一个例子就行，</p>
-
-<p><strong>而要证明不可以，就很难了</strong>。</p>
+<p>来介绍Proper tail recursion的技术细节。</p>
 
 <p><br/></p>
 
-<p>所以，</p>
+<h2><strong>尾调用</strong></h2>
 
-<p>我们要好好学习一下<strong>理论基础</strong>，</p>
+<p>这是一个很常见的概念，</p>
 
-<p>看一下正则表达式的真面目。</p>
-
-<p><br/></p>
-
-<h2><strong>形式语言</strong></h2>
-
-<p>日常生活中，</p>
-
-<p>也有这样的认识，</p>
-
-<p>我们所了解的汉字是<strong>有限的</strong>，</p>
-
-<p>但是我们能说的话，却是<strong>无限的</strong>。</p>
+<p>但是为了完整性，这里还是要说一说。</p>
 
 <p><br/></p>
 
-<p>因为，至少我们可以说出任意长度的汉字序列。</p>
+<p>我们看两个函数，f和g，他们的定义如下，</p>
 
 <p><br/></p>
 
-<p>程序语言也是如此。</p>
+<p>(define (f a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a))</p>
 
 <p><br/></p>
 
-<p>有人说编程，不就是输入A到Z吗，</p>
+<p>(define (g b)</p>
 
-<p>指的就是这个编程语言的“字母表”，</p>
-
-<p>字母表所包含的字母，是有限的，</p>
-
-<p>但是可以写出无限多个“句子”。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display b))</p>
 
 <p><br/></p>
 
-<p>“语言”，正是这些“句子”的集合。</p>
+<p>(f 1)</p>
 
 <p><br/></p>
 
-<p>事实上，</p>
+<p>结果：</p>
 
-<p>以上简短的描述中，</p>
-
-<p>包含了很深刻的思想。</p>
+<p>21</p>
 
 <p><br/></p>
 
-<p>当初，为了研究语言的性质，</p>
+<p>我们分析一下实际的调用过程，</p>
 
-<p>人们从两个角度出发，</p>
+<p>求值(f 1)，会导致f的函数体被求值，</p>
 
-<p>一个是从语言的识别角度来看，</p>
+<p>于是，先求值(g 2)，导致g的函数体被求值，输出2，</p>
 
-<p>有一套<strong>自动机理论</strong>。</p>
+<p>然后<strong>函数g返回</strong>了，返回到f的函数体中，</p>
 
-<p><br/></p>
-
-<p>另一个是从语言的生成角度来看，</p>
-
-<p>有乔姆斯基开创的<strong>形式语言理论</strong>。</p>
+<p>再接着执行下一条语句，输出1。</p>
 
 <p><br/></p>
 
-<p>而这两个理论之间，</p>
+<p>我们看到，对g的调用，不是f的最后一个调用。</p>
 
-<p>又是互相关联的。</p>
-
-<p><br/></p>
-
-<p>在形式语言理论中，</p>
-
-<p>一个形式语言，</p>
-
-<p>是一个字母表上的某些有限长字符串的集合。</p>
+<p>称为<strong>g不是f的尾调用</strong>。</p>
 
 <p><br/></p>
 
-<p><strong>这给了我们用有限来描述无限的能力</strong>。</p>
+<p>我们改一下例子，</p>
 
 <p><br/></p>
 
-<h2><strong>文法</strong></h2>
+<p>(define (f a)</p>
 
-<p>为了描述语言的结构，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
 
-<p>John Backus和Peter Naur创造了一种<strong>语言的描述方法</strong>，</p>
-
-<p>称为BNF（Backus-Naur Form）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2))</p>
 
 <p><br/></p>
 
-<p>expr ::= term {&ldquo;+&rdquo; term | &ldquo;-&rdquo; term}.</p>
+<p>(define (g b)</p>
 
-<p>term ::= factor {&ldquo;*&rdquo; factor | &ldquo;/&rdquo; factor}.</p>
-
-<p>factor ::= &ldquo;(&rdquo; expr &ldquo;)&rdquo;.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display b))</p>
 
 <p><br/></p>
 
-<p>BNF表示中的每一行，称为一个“产生式”，</p>
-
-<p>::=表示左边的项可以由右边的项来产生。</p>
-
-<p>其中，用引号括起来的项，称为“终结符”，相当于字面量。</p>
-
-<p>不用引号括起来的项，称为“非终结符”，它们可以由其他项组成。</p>
+<p>(f 1)</p>
 
 <p><br/></p>
 
-<p>{&hellip;}是约定好了的符号，</p>
+<p>结果：</p>
 
-<p>用来表示它包含的项可以出现0次或更多次。</p>
-
-<p><br/></p>
-
-<p>常用的还有[&hellip;]，</p>
-
-<p>用来表示，可以出现也可以不出现。</p>
+<p>12</p>
 
 <p><br/></p>
 
-<p>以上BNF描述了算术表达式的语法。</p>
-
-<p>例如：1*(2+3)，可以从exp开始生成出来，</p>
-
-<p>expr</p>
-
-<p>=> factor &ldquo;*&rdquo; factor</p>
-
-<p>=> factor &ldquo;*&rdquo; &ldquo;(&rdquo; expr &ldquo;)&rdquo;</p>
-
-<p>=> factor &ldquo;*&rdquo; &ldquo;(&rdquo; term &ldquo;+&rdquo; term &ldquo;)&rdquo;</p>
-
-<p>=> 1 &ldquo;*&rdquo; &ldquo;(&rdquo; 2 &ldquo;+&rdquo; 3 &ldquo;)&rdquo;</p>
+<p>现在g是f的尾调用了。</p>
 
 <p><br/></p>
 
-<p>expr称为“开始符号”。</p>
+<p>为什么要强调尾调用呢？</p>
+
+<p>因为，如果g是f的尾调用，</p>
+
+<p><strong>g就可以不返回到f中</strong>，</p>
+
+<p><strong>而直接返回到f该返回的地方</strong>。</p>
 
 <p><br/></p>
 
-<p>综上，</p>
+<p>调用g的时候，就不会增长调用栈，</p>
 
-<p>一个语言的所有终结符，非终结符，产生式，开始符号，</p>
-
-<p>构成了这个<strong>语言的文法</strong>。</p>
+<p>而是废弃原来f的调用环境即可。</p>
 
 <p><br/></p>
 
-<h2><strong>语言的分类</strong></h2>
+<p>不必要的调用栈不会增加，</p>
 
-<p>乔姆斯基，根据语言文法产生式的特点，</p>
+<p>使得尾递归可以在常量的调用栈空间中执行，</p>
 
-<p>把语言分为了4类。</p>
-
-<p><br/></p>
-
-<p>不同的文法，能描述不能范围的语言集合。</p>
-
-<p>虽然它们都是无限集。</p>
+<p>我们就可以放心的使用尾递归来替代循环了。</p>
 
 <p><br/></p>
 
-<p>0型文法，能力最强，可以产生递归可枚举语言。</p>
+<h2><strong>调用栈和调用图</strong></h2>
 
-<p>1型文法，能力稍弱，可以产生上下文有关语言。</p>
+<p>从语言的实现角度来看，</p>
 
-<p>2型文法，能力次之，可以产生上下文无关语言。</p>
+<p>每一次函数调用会初始化一个新的frame，</p>
 
-<p>3型文法，能力最弱，可以产生正则语言。</p>
-
-<p><br/></p>
-
-<p>这些文法，</p>
-
-<p>建立了一个从大到小，互相包含的，</p>
-
-<p>语言集合的层次关系。</p>
+<p>frame中保存着形参与实参的绑定。</p>
 
 <p><br/></p>
 
 <p>例如：</p>
 
-<p>正则语言，一定是上下文无关语言，</p>
-
-<p>反之，则不成立。</p>
+<p>(f 1)会产生一个frame，[(a 1)]</p>
 
 <p><br/></p>
 
-<p>其中，</p>
+<p>而环境，是一个frame的<strong>链表</strong>，</p>
 
-<p>2型和3型文法用的最多，有特殊的名字，</p>
+<p>top-level环境中只有一个frame，表示了变量f和g的绑定，</p>
 
-<p>称为，<strong>上下文无关文法</strong>，<strong>正则文法</strong>。</p>
-
-<p><br/></p>
-
-<p>我们似乎发现了，</p>
-
-<p>这里也出现了“正则”两个字，</p>
-
-<p>难道与正则表达式有关？</p>
+<p>[(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]</p>
 
 <p><br/></p>
 
-<p>确实，</p>
+<p>所以，进入f的函数体后，</p>
 
-<p>正则表达式，是正则文法的便利写法。</p>
+<p>新创建的frame会添加到<strong>f定义时的环境</strong>头部，</p>
 
-<p><strong>正则表达式所描述的语言，是正则语言</strong>。</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
 
-<p><br/></p>
-
-<p>而JSON，HTML，包含嵌套注释文本，</p>
-
-<p>它们都属于<strong>上下文无关语言</strong>，</p>
-
-<p>正则表达式是无能为力的。</p>
+<p>环境中有两个frame了。</p>
 
 <p><br/></p>
 
-<p>那么如何判断语言不是正则语言呢？</p>
+<p>f的函数体是在这个新环境中求值的。</p>
 
-<p>这还需要用到<a href="http://baike.baidu.com/link?url=QF5rQxOWA6OA8NpOrQv3ThcPGZ2FF0Wzu7BWjwnLOtJE4AFgX2IN9pf6FWDVuOxV98GdMGWoHNMal5b61j7h__">泵引理</a>这个重要工具。</p>
+<p>f函数体的执行环境是对定义时环境的扩展，</p>
 
-<p>水深危险。</p>
-
-<p><br/></p>
-
-<h2><strong>自动机</strong></h2>
-
-<p>自动机，是一种假想的机器，</p>
-
-<p>常被人提及的是“图灵机”。</p>
-
-<p>它是各种自动机中运算能力最强的机器。</p>
+<p>这是<strong>词法作用域</strong>规则的简单实现。</p>
 
 <p><br/></p>
 
-<p>当初为了准确定义什么是“算法”，</p>
+<p>我们再调用g，看看环境会怎样变化，</p>
 
-<p>图灵发明了它。</p>
+<p>调用g会创建一个新的frame，[(b 2)]</p>
 
-<p><br/></p>
+<p>这个frame会添加到<strong>g定义时的环境</strong>头部，</p>
 
-<p>图灵机有一条无限长的纸带，</p>
-
-<p>纸带分成了一个个小方格，每个方格有不同的颜色。</p>
-
-<p>有一个具有内部状态的机器头在纸带上移来移去。</p>
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
 
 <p><br/></p>
 
-<p>机器头根据自身状态和当前方格的颜色，</p>
+<p>注意，环境并没有变成，</p>
 
-<p>来决定下一步的位置。</p>
+<p>([(b 2)] <strong>[(a 1)]</strong> [(f #&lt;procedure>) (g #&lt;procedure&gt;)])</p>
 
-<p><br/></p>
-
-<p>这么简易的装置，</p>
-
-<p>居然具有和现代计算机同等的计算能力。</p>
-
-<p>实际上，现代计算机就是从这个思想逐渐演化而来的。</p>
+<p>新的frame并不会添加到<strong>调用g时的环境</strong>中去。</p>
 
 <p><br/></p>
 
-<p>自动机，也可以用来识别语言。</p>
+<p>当g返回时，</p>
 
-<p>而且，与形式语言还有着<strong>优美的对应关系</strong>。</p>
+<p>环境又变成了f的执行环境，</p>
 
-<p><br/></p>
-
-<p>图灵机，能识别0型文法所生成的语言。</p>
-
-<p>为图灵机加上限制，<strong>下推自动机</strong>，识别上下文无关语言，</p>
-
-<p><strong>有穷自动机</strong>，识别正则语言。</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
 
 <p><br/></p>
 
-<p>在程序语言的编译器设计中，</p>
+<p>跟踪运行环境的变化，我们发现，</p>
 
-<p>这些理论是非常重要的。</p>
-
-<p><br/></p>
-
-<p>我们通过正则文法，构建有穷自动机，</p>
-
-<p>对字符流进行<strong>分词</strong>（tokenize）。</p>
-
-<p>通过上下文无关文法，构建下推自动机，</p>
-
-<p>对词汇流进行<strong>解析</strong>（parse）。</p>
+<p>在实现词法作用域之后，环境并不是一个栈结构的。</p>
 
 <p><br/></p>
 
-<h2><strong>计算模型</strong></h2>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;top-level： frame0</p>
 
-<p><strong>形式语言</strong>和<strong>自动机</strong>，</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;进入f： frame1 &lt;- frame0</p>
 
-<p>可以看做是两种<strong>计算模型</strong>，</p>
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;进入g： frame2 &lt;- frame0</p>
 
-<p>它们从不同的角度描述了同一个问题。</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;回到f： frame1 &lt;- frame0</p>
 
-<p><br/></p>
-
-<p>其他的计算模型，还有很多。</p>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;回到top-level： frame0</p>
 
 <p><br/></p>
 
-<p><strong>lambda演算</strong>就是一个，</p>
+<p>我们可以把frame0看成树根，</p>
 
-<p>它是一个符号化的形式系统，</p>
+<p>frame1，frame2看成子节点，</p>
 
-<p>用来研究函数及其函数的调用。</p>
+<p>于是，<strong>环境构成了一棵树</strong>，</p>
 
-<p><br/></p>
-
-<p><strong>递归函数论</strong>，又是一个，</p>
-
-<p>它从递归的角度，</p>
-
-<p>为可计算性划分了界限。</p>
+<p>这就是为什么我们之前说环境是frame的<strong>链表</strong>，而不是<strong>列表</strong>的原因了。</p>
 
 <p><br/></p>
 
-<p><strong>命题逻辑</strong>，也是，</p>
+<p>既然这样，</p>
 
-<p>它是逻辑系统的演算规则，</p>
+<p>那么尾调用也就不必服从弹栈规则了，</p>
 
-<p>用来研究推理过程。</p>
-
-<p><br/></p>
-
-<p>然而，这些计算模型的计算能力，</p>
-
-<p>都等价于图灵机。</p>
+<p>g返回，可以让执行环境返回到f该返回的状态。</p>
 
 <p><br/></p>
 
-<p>这一结论称为，Church-Turing论题。</p>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;top-level： frame0</p>
+
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入f： frame1 &lt;- frame0</p>
+
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入g： frame2 &lt;- frame0</p>
+
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]))    ;<strong>直接返回到top-level</strong>： frame0</p>
+
+<p><br/></p>
+
+<p>这种技术，称为<strong>尾调用优化</strong>。</p>
+
+<p><br/></p>
+
+<h2><strong>尾递归的执行环境</strong></h2>
+
+<p>我们来分析一下尾递归的执行环境，</p>
+
+<p>请看阶乘函数的尾递归版本，</p>
+
+<p><br/></p>
+
+<p>(define (fact n <strong>result</strong>)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>result</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1) (* result n))))</p>
+
+<p><br/></p>
+
+<p>(+ 4 (fact 3 1))</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>10</p>
+
+<p><br/></p>
+
+<p>top-level环境：([(fact #&lt;procedure&gt;)])</p>
+
+<p>要计算(+ 4 (fact 3 1))，先要求值(fact 3 1)，</p>
+
+<p>调用(fact 3 1)，进入函数体：(<strong>[(n 3) (result 1)]</strong> [(fact #&lt;procedure&gt;)])</p>
+
+<p>再次调用(fact 2 3)：(<strong>[(n 2) (result 3)]</strong> [(fact #&lt;procedure&gt;)])，</p>
+
+<p>词法作用域规则，扩展定义环境，</p>
+
+<p>然后调用(fact 1 6)：(<strong>[(n 1) (result 6)]</strong> [(fact #&lt;procedure&gt;)])，</p>
+
+<p>这里要返回result了，值为6。</p>
+
+<p><br/></p>
+
+<p>可是要返回到哪里呢？</p>
+
+<p>我们看到以上的一系列调用都是<strong>尾调用</strong>，</p>
+
+<p>所以，直接返回到了最开始调用(fact 3 1)的地方，</p>
+
+<p>执行环境变成了，([(fact #<procedure>)])，</p>
+
+<p>于是，在这环境中求值(+ 4 6) -> 10</p>
+
+<p><br/></p>
+
+<h2><strong>与continuation的关联</strong></h2>
+
+<p>我们看到，要想实现这样的调用结构，</p>
+
+<p>需要把环境中的绑定关系分配在<strong>内存堆</strong>中，</p>
+
+<p>这样就可以让函数的调用者，显式控制返回环境了。</p>
+
+<p><br/></p>
+
+<p>实现了尾调用优化后，</p>
+
+<p>函数的调用者多了一种选择，</p>
+
+<p>或者让函数执行后，<strong>返回到调用前的执行环境</strong>，</p>
+
+<p>或者<strong>返回到调用者该返回的执行环境</strong>。</p>
+
+<p><br/></p>
+
+<p>这其实是一种continuation的操作。</p>
+
+<p>即，f调用g，g的continuation，</p>
+
+<p>或者是f调用g后的continuation，</p>
+
+<p>或者是f的continuation。</p>
+
+<p><br/></p>
+
+<p>我们用CPS改写一下上面的例子，</p>
+
+<p><br/></p>
+
+<p><strong>非尾调用</strong>的情况，</p>
+
+<p>(define *cont*</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) x))</p>
+
+<p><br/></p>
+
+<p>(define (f a cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v)</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(cont (display a)))</strong>))</p>
+
+<p><br/></p>
+
+<p>(define (g b cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display b)))</p>
+
+<p><br/></p>
+
+<p>(f 1 *cont*)</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>21</p>
+
+<p><br/></p>
+
+<p>我们看到非尾调用的g的continuation，</p>
+
+<p>是执行display，再执行f的continuation。即，</p>
+
+<p>(lambda (v)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display a)))</p>
+
+<p><br/></p>
+
+<p>我们再看<strong>尾调用</strong>情况，</p>
+
+<p>(define *cont*</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) x))</p>
+
+<p><br/></p>
+
+<p>(define (f a cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2 <strong>cont</strong>))</p>
+
+<p><br/></p>
+
+<p>(define (g b cont)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display b)))</p>
+
+<p><br/></p>
+
+<p>(f 1 *cont*)</p>
+
+<p><br/></p>
+
+<p>结果：</p>
+
+<p>12</p>
+
+<p><br/></p>
+
+<p>尾调用g的continuation，</p>
+
+<p>是f的continuation。</p>
+
+<p><br/></p>
+
+<p>这给了我们一种方案，在写解释器的时候，</p>
+
+<p>可以使用CPS来进行尾调用优化。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>各种计算模型，虽然在能力上是相同的，</p>
+<p>为了进行尾调用优化，</p>
 
-<p>但是它们<strong>各有所长</strong>，</p>
+<p>语言实现必须对调用图进行控制，</p>
 
-<p>于是被用到了形形色色的地方。</p>
-
-<p><br/></p>
-
-<p>例如，</p>
-
-<p>形式语言，可以用来研究语言的结构，</p>
-
-<p>自动机，可以用来识别语言。</p>
-
-<p>lambda演算，可以用来研究语言的操作语义。</p>
-
-<p>递归函数论，可以用来研究语言的指称语义。</p>
-
-<p>命题逻辑，可以用来研究语言的类型系统。</p>
+<p>或者说，显式的控制continuation。</p>
 
 <p><br/></p>
 
-<p>编程世界，</p>
+<p>与其把这种显式的控制隐藏在语言的实现里面，</p>
 
-<p>原来这么好玩。</p>
+<p><strong>不如开放给语言的使用者</strong>，</p>
+
+<p>因为开放出来并不是特别困难。</p>
 
 <p><br/></p>
 
-<p>其实编程，不就是输入A到Z吗？</p>
+<p>这种非弹栈形式的跳转，</p>
+
+<p>称为<strong>非局部跳转</strong>（non-local jump），</p>
+
+<p>类似C语言的setjmp和longjmp。</p>
+
+<p><br/></p>
+
+<p>call/cc就是这样产生的，</p>
+
+<p>并不是为了追求另类，</p>
+
+<p><strong>而是实现尾调用优化的直接后果</strong>。</p>
+
+<p><br/></p>
+
+<p>而且，call/cc捕获的continuation是<strong>first-class</strong>的，</p>
+
+<p>可以当做参数传递，或者返回，</p>
+
+<p>这极大的丰富的Scheme语言的表现力，</p>
+
+<p>让程序员可以最大限度的控制跳转范围。</p>
 
 <p><br/></p>
 
 <p>参考：</p>
 
-<p><a href="http://book.douban.com/subject/1709302/">数学.计算.逻辑</a></p>
+<p><a href="http://www.cs.rpi.edu/academics/courses/fall00/ai/scheme/reference/schintro-v14/schintro_toc.html">An Introduction to Scheme and its Implementation</a></p>
 
-<p><a href="http://book.douban.com/subject/2179488/">形式语言与自动机理论</a></p>
+<p><a href="http://book.douban.com/subject/4030015/">Essentials of Programming Languages</a></p>
 
-<p><a href="http://book.douban.com/subject/1729578/">A Mathematical Introduction to Logic</a></p>
+<p><a href="http://book.douban.com/subject/1456904/">Lisp in small pieces</a></p>
 
-<p><a href="http://book.douban.com/subject/10482195/">Language Implementation Patterns</a></p>
+<p><a href="http://book.douban.com/subject/2587705/">Concepts in Programming Languages</a></p>
 
-<p><a href="http://book.douban.com/subject/20436488/">编译器设计</a></p>
+<p><a href="http://book.douban.com/subject/1762126/">Compiling with continuations</a></p>
 
-<p><a href="http://book.douban.com/subject/10779604/">图灵的秘密</a></p>
+<p><a href="http://www.scheme.com/tspl4/">The Scheme Programming Language</a></p>
 
-<p><a href="http://book.douban.com/subject/4323391/">Lambda-Calculus and Combinators</a></p>
-
-<p><a href="http://book.douban.com/subject/1318672/">Types and programming languages</a></p>
-
-<p><a href="http://book.douban.com/subject/1291204/">哥德尔.艾舍尔.巴赫_集异璧之大成</a></p>
+<p><a href="http://scheme-reports.org/">RnRS</a></p>
 </div>
   
   
@@ -571,7 +615,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (27)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (28)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -579,6 +623,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/27/surprise-move/">出奇制胜</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/03/18/education-and-career/">教育和职业</a>
@@ -614,10 +662,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/18/the-fourth-level/">第四重境界</a>
       </li>
     
   </ul>
