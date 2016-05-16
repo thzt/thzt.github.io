@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="宏（macro）是Lisp语言进行元编程的手段， 它分为两种，读取宏（read macro）和编译宏（compilation macro）。 可以用来编写读取期和编译期运行的代码。 宏，事实上进行了代码的转换。 每一个宏都与一个转换器（transformer）相关联。 代码转换后， &hellip;">
+  <meta name="description" content="类库，框架，层出不穷。 Web前端，似乎经历着历史上已经发生过很多次的事情。 很多人找不到自己的努力方向了， Backbone，Ember，AngularJS，ReactJS，&hellip; 到底该学哪个？ 一阵阵枪林弹雨，扫的我们抬不起头来， 各大公司为了抢占资源，霸占程序员的时间， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/22/hygienic-macro/">简介卫生宏</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/03/24/jquery-plugin/">jQuery插件的把玩方式</a></h1>
     
     
       <p class="meta">
@@ -83,472 +83,747 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-03-22T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-03-24T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>宏（macro）是Lisp语言进行元编程的手段，</p>
+  <div class="entry-content"><p>类库，框架，层出不穷。</p>
 
-<p>它分为两种，读取宏（read macro）和编译宏（compilation macro）。</p>
-
-<p>可以用来编写读取期和编译期运行的代码。</p>
+<p>Web前端，似乎经历着历史上已经发生过很多次的事情。</p>
 
 <p><br/></p>
 
-<p>宏，事实上进行了代码的转换。</p>
+<p>很多人找不到自己的努力方向了，</p>
 
-<p>每一个宏都与一个转换器（transformer）相关联。</p>
+<p>Backbone，Ember，AngularJS，ReactJS，&hellip;</p>
 
-<p>代码转换后，会替换到原来的位置。</p>
-
-<p>这个过程，称为宏展开（expansion）。</p>
+<p>到底该学哪个？</p>
 
 <p><br/></p>
 
-<p>区分读取期，编译期和运行期，是很重要的。</p>
+<p>一阵阵枪林弹雨，扫的我们抬不起头来，</p>
 
-<p>这是3个独立的阶段，</p>
+<p>各大公司为了抢占资源，霸占程序员的时间，</p>
 
-<p>尤其在运行期，不存在任何未展开的宏。</p>
-
-<p><br/></p>
-
-<p>我们使用“a -> b”来表示，表达式a展开为b。</p>
-
-<p>而使用“a => b”表示，表达式a的值为b。</p>
+<p>总是宣传它们的东西是最好的。</p>
 
 <p><br/></p>
 
-<p>例子：</p>
+<p>其实，我们不必太较真，</p>
 
-<p>&lsquo;a -> (quote a)，其中“'”是一个读取宏。</p>
+<p>我们只需要抓住已有知识的精髓即可，</p>
 
-<p>读取宏可以将任意表达式转换为S表达式。</p>
-
-<p><br/></p>
-
-<p>很多常见的表达式调用，其实是编译宏。</p>
-
-<p>(and test1 test2) -> (if test1 test2 #f)</p>
-
-<p>编译宏可以将一个S表达式转换为另一个S表达式。</p>
+<p>举一反三，用创造力改变世界。</p>
 
 <p><br/></p>
 
-<p>我们通常说的宏，指的是编译宏。</p>
+<p>编程，就好像古时候写诗一样。</p>
 
-<p>Scheme语言暂时不支持自定义的读取宏。</p>
+<p>伟大的诗人，不一定会背所有的诗词。</p>
 
-<p><br/></p>
-
-<h2><strong>定义一个宏</strong></h2>
-
-<p>Scheme语言中使用define-syntax来定义宏，</p>
-
-<p>定义一个宏，有时也称为绑定一个关键字（keyword binding）。</p>
-
-<p>宏展开的结果，最终都转换成了一些Scheme语言内置的表达式。</p>
+<p>他们的伟大之处在于借鉴。</p>
 
 <p><br/></p>
 
-<p>例如：宏and是这样的定义的，</p>
+<p>学习别人好的思想，拿来灵活运用，恰如其分的表达，</p>
 
-<p>(define-syntax and</p>
+<p>就足够了，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(syntax-rules ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(and) #t]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(and test) test]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(and test1 test2 &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if test1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(and test2 &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#f)]))</p>
+<p>至于是否伟大，让后人去说吧。</p>
 
 <p><br/></p>
 
-<p>其中，(syntax-rules &hellip;)的值是一个转换器。</p>
+<p>比如说，jQuery过时了吗，</p>
 
-<p>define-syntax将关键字and和这个转换器相关联。</p>
+<p>前端各种MVC框架，MVVM框架，说的比什么都好听。</p>
 
-<p><br/></p>
-
-<p>Scheme语言中有很多表达式可以返回转换器，</p>
-
-<p>而syntax-rules是最常用的一个。</p>
-
-<p>它内置了一个模板语言（pattern language）</p>
+<p>好像不用框架就没办法生存似的。</p>
 
 <p><br/></p>
 
-<p>syntax-rules后面紧跟的一个括号，里面可以设置辅助关键字。</p>
+<p>作为一个学过辩证法的人，</p>
 
-<p>至于辅助关键字，可以参考Scheme语言手册了解使用情况。</p>
+<p>我们马上就意识到了，这可能是有人在故意炒作它。</p>
 
-<p><br/></p>
-
-<p>后续的每一个表达式，都具有“[模式，模板]”这样的结构。</p>
-
-<p>对于[(and) #t]来说，</p>
-
-<p>模式 = (and)</p>
-
-<p>模板 = #t</p>
+<p>另一方面，我们也知道这些框架确实也有可取之处。</p>
 
 <p><br/></p>
 
-<p>模式和模板中的“&hellip;”是syntax-rules模板语言的一部分。</p>
+<p>要做到不骄不躁，</p>
 
-<p>具体用法，也可以参考Scheme语言手册。</p>
-
-<p><br/></p>
-
-<p>如果宏调用匹配了某个模式，就会按照相应模板展开。</p>
-
-<p>下面3个宏调用，展开结果如下：</p>
-
-<p>(and) -> #t</p>
-
-<p>(and x) -> x</p>
-
-<p>(and x y) -> (if x (and y) #f) -> (if x y #f)</p>
+<p>只有强大自身，这一个办法了。</p>
 
 <p><br/></p>
 
-<p>宏是可以递归展开的，一直到结果表达式中不再含有宏为止。</p>
+<p>慢慢的，我们就发现了，</p>
+
+<p>框架也只不过是别人活学活用的成果罢了。</p>
 
 <p><br/></p>
 
-<p>模式中的第一个元素，因为肯定是宏的名字，</p>
+<h2><strong>扩展性</strong></h2>
 
-<p>所以也可以替换成通配符“_”，</p>
-
-<p>[(_) #t]</p>
-
-<p>[(_ test) test]</p>
+<p>我们来学习一下jQuery的设计思想。</p>
 
 <p><br/></p>
 
-<h2><strong>卫生宏</strong></h2>
+<p>JavaScript经常做的，</p>
 
-<p>Scheme是第一个支持卫生宏（hygienic macro）的Lisp方言。</p>
-
-<p>也是第一个支持卫生宏的编程语言。</p>
+<p>大概就是选取页面的元素，然后做一些事情了。</p>
 
 <p><br/></p>
 
-<p>“卫生”这个词表示，宏展开后，不会污染原来的词法作用域。</p>
+<p>而怎样选取元素呢，CSS已经给我们提供办法了，</p>
 
-<p>我们还是举例来说明吧，最后，我们再总结规律。</p>
+<p>那就是CSS选择器selector，</p>
 
-<p><br/></p>
-
-<p>例1：宏展开后，原表达式处于新的词法环境中。</p>
-
-<p>(let-syntax [(insert-binding (syntax-rules ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;[(_ x) (let [(a 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x a))]))]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3))))</p>
-
-<p>=> 6</p>
+<p>这样选中的其实是满足条件的HTML元素集合。</p>
 
 <p><br/></p>
 
-<p>其中，let-syntax用来绑定局部关键字。</p>
+<p>如果能在集合上定义自己的操作就好了，</p>
 
-<p>就像let可用来绑定局部变量一样。</p>
+<p>我们就可以把选中的集合整体看做一个对象，</p>
 
-<p><br/></p>
-
-<p>在let-syntax表达式内部，我们定义了宏insert-binding。</p>
-
-<p>它绑定到syntax-rules求值后得到的转换器上。</p>
+<p>调用这个对象的方法。</p>
 
 <p><br/></p>
 
-<p>根据定义，我们知道(insert-binding x) -> (let [(a 1)] (+ x a))</p>
-
-<p>原表达式x，处于含有新的绑定a => 1的词法环境中。</p>
+<p>这其实就是面向对象的思想呀。</p>
 
 <p><br/></p>
 
-<p>如果原表达式x中含有a，就出现问题了。</p>
+<p>有了这个想法之后，我们先设计测试用例。</p>
 
-<p>我们的例子就是这种情况。</p>
+<p>也就是说，我们要考虑，假如我们已经有了某个类库，</p>
 
-<p><br/></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
-
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(a 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) a)))</p>
-
-<p>=> 5</p>
+<p>我们将如何使用它呢？</p>
 
 <p><br/></p>
 
-<p>结果出错了。</p>
+<p>这其实是编程活动中，最具创造力的环节。</p>
 
-<p>从(+ a 3)所在的原始词法环境来看，</p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
-
-<p>(+ a 3)中a的值，应该是2才对。</p>
-
-<p>宏展开污染了原始的词法环境。</p>
+<p>也是自顶向下编程，或者测试驱动开发思想的一种应用。</p>
 
 <p><br/></p>
 
-<p>这是不“卫生”的。</p>
+<p>jQuery作者是这样设计的，</p>
 
-<p>Scheme通过给绑定的值改名字来实现卫生宏。</p>
+<p>类库的使用者接口如下，</p>
 
-<p><br/></p>
-
-<p>宏展开(insert-binding x) -> (let [(a 1)] (+ x a))</p>
-
-<p>改成了(insert-binding x) -> (let [(:g0001 1)] (+ x :g0001))</p>
-
-<p>其中，:g0001是语言实现生成的唯一名字，不会与任何已有的名字冲突。</p>
+<p>$(selector).method(parameter);</p>
 
 <p><br/></p>
 
-<p>(let [(a 2)]</p>
+<p>类库的开发者接口如下，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
+<p>扩展静态方法，</p>
 
-<p>-></p>
+<p>$.extend({</p>
 
-<p>(let [(a 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;staticMethod:function(){}</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(:g0001 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) :g0001)))</p>
-
-<p>=> 6</p>
+<p>});</p>
 
 <p><br/></p>
 
-<p>这样就得到了正确的结果。</p>
+<p>扩展实例方法，</p>
+
+<p>$.prototype.extend({</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;instanceMethod:function(){}</p>
+
+<p>});</p>
 
 <p><br/></p>
 
-<p>例2：宏展开后，引入了不在原来词法作用域中的标识符。</p>
+<p>这种思路，很值得借鉴，</p>
 
-<p>(let [(a 1)]</p>
+<p>它说明，最灵活的设计，是那些只包含扩展方法的设计。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(let-syntax [(insert-free (syntax-rules ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ x) (+ x a)]))]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))))</p>
-
-<p>=> 6</p>
+<p>类库中所有的功能，都是用统一的方式扩展出来的。</p>
 
 <p><br/></p>
 
-<p>同样根据定义，我们知道(insert-free x) -> (+ x a)</p>
+<p>类库自带的功能越多，</p>
+
+<p>以后修改这些功能的可能性就越大。</p>
 
 <p><br/></p>
 
-<p>所以，</p>
+<h2><strong>实现</strong></h2>
 
-<p>(let [(a 2)]</p>
+<p>至于如何实现，网上可以找到很多教程，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))</p>
-
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) a))</p>
-
-<p>=> 7</p>
+<p>下面只写了一下我自己的实现。</p>
 
 <p><br/></p>
 
-<p>结果又出错了。</p>
+<p>(function(global,document){</p>
 
-<p>哪里出现问题了？</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;jQuery.prototype=InstanceCreation.prototype;</p>
 
-<p><br/></p>
-
-<p>宏定义的模式/模板[(_ x) (+ x a)]))]中的a，应该是第一行的绑定，(let [(a 1)]</p>
-
-<p>而展开式(let [(a 2)] (+ (+ a 3) a))覆盖了外层对a的绑定。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;jQuery.extend=jQuery.prototype.extend=extend;</p>
 
 <p><br/></p>
 
-<p>因此，宏展开式的行为，将取决于展开后的环境，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function jQuery(selector){</p>
 
-<p>展开到不同的环境中，行为是不同的。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new InstanceCreation(selector);</p>
 
-<p>失去了宏调用的“引用透明性”。</p>
-
-<p><br/></p>
-
-<p>Scheme是怎么解决的呢？</p>
-
-<p>语言规范指出，宏展开式中的自由标识符，处于宏定义时的词法作用域中。</p>
-
-<p>即，宏展开式(+ x a)中，a具有宏定义环境中的值a => 1，(insert-free x) -> (+ x 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 
 <p><br/></p>
 
-<p>(let [(a 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function InstanceCreation(selector){</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))</p>
-
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) 1))</p>
-
-<p>=> 6</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var instance=this;</p>
 
 <p><br/></p>
 
-<h2><strong>规律总结</strong></h2>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instance[0]=document.querySelector(selector);</p>
 
-<p>我们遇到了一个问题。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;</p>
 
-<p>我们知道，“+”在Scheme中表示加法函数，</p>
-
-<p>它和a地位相同，也是一个变量，只不过它的值是一个函数。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 
 <p><br/></p>
 
-<p>那么，以上两个例子中，变量+的值分别来自哪个词法作用域呢？</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function extend(material){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var depository=this;</p>
 
 <p><br/></p>
 
-<p>例1中，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(var property in material){</p>
 
-<p>(let [(a 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!material.hasOwnProperty(property)){</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;</p>
 
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(:g0001 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) :g0001)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 
 <p><br/></p>
 
-<p>经过分析，我们知道了，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depository[property]=material[property];</p>
 
-<p>(+ (+ a 3) :g0001)))中第一个+来自宏定义处的词法作用域，</p>
-
-<p>第二个+来自宏替换处的词法作用域。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 
 <p><br/></p>
 
-<p>例2中，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;</p>
 
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))</p>
-
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) 1))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
 
 <p><br/></p>
 
-<p>同样经过分析，我们知道了，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;//export:</p>
 
-<p>(+ (+ a 3) 1))中第一个+来自宏定义处的词法作用域，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;global.$=jQuery;</p>
 
-<p>第二个+来自宏替换处的词法作用域。</p>
-
-<p><br/></p>
-
-<p>因此，</p>
-
-<p>我们找到了一个规律，这也是卫生宏的目的所在。即，</p>
-
-<p><strong>宏展开式中的所有标识符，仍处于其来源处的词法作用域中。</strong></p>
+<p>}(window,document));</p>
 
 <p><br/></p>
 
-<p>我们试着分析一下这两个例子。</p>
+<p>对实现不详细描述，还有其他原因，</p>
 
-<p>例1展开式，</p>
+<p>因为，实现是灵活的，而用户接口是用来表达思想的。</p>
 
-<p>(let [(a 2)]</p>
+<p>任何一种实现都能达到目的，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(let [(:g0001 1)]</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(+</strong> (+ a 3) <strong>:g0001))</strong>)</p>
-
-<p>粗体来源于宏定义处，普通字体来源于宏替换处。</p>
-
-<p>展开后，它们仍然处于各自来源处的词法作用域中。</p>
+<p>但并非所有人都能设计出具有表现力的用户接口。</p>
 
 <p><br/></p>
 
-<p>例2展开式，</p>
+<p>贴到这里，而不是放置Github超链接，</p>
 
-<p>(let [(a 2)]</p>
+<p>是为了有个直观的印象，jQuery核心其实很小。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(+</strong> (+ a 3) <strong>1)</strong>)</p>
-
-<p>上述规则同样满足。</p>
+<p>所有其他功能都是扩展出来的。</p>
 
 <p><br/></p>
 
-<p>宏展开式中的标识符，虽然来源不同，但互不污染。</p>
+<h2><strong>插件</strong></h2>
 
-<p>这就达到卫生宏的目的了。</p>
+<p>类似jQuery这样，</p>
+
+<p>提供基础核心，再提供对核心的扩展方式，</p>
+
+<p>称为插件式开发。</p>
+
+<p><br/></p>
+
+<p>我们只需要使用</p>
+
+<p>$.prototype.extend({</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pluginName:function(){}</p>
+
+<p>});</p>
+
+<p><br/></p>
+
+<p>$(selector)就有了一个pluginName方法了。$(selector).pluginName</p>
+
+<p><br/></p>
+
+<p>正因为有这么便捷的功能，</p>
+
+<p>jQuery插件的数量才惊人的多。</p>
+
+<p><br/></p>
+
+<p>我们还可以把页面切分为几个部分，</p>
+
+<p>每个部分是一个插件对象，只对这一块元素进行操作，</p>
+
+<p>这符合面向对象的思想。</p>
+
+<p><br/></p>
+
+<p>$(container1).pluginName1(&hellip;);</p>
+
+<p>$(container1).pluginName2(&hellip;);</p>
+
+<p><br/></p>
+
+<p>我们把问题简化了，</p>
+
+<p>对整个页面的控制，转换成对这些自定义插件的控制了。</p>
+
+<p><br/></p>
+
+<h2><strong>缺点和改进</strong></h2>
+
+<p>经过一段时间使用后，</p>
+
+<p>我们发现jQuery插件有一个缺点，</p>
+
+<p>$(container).pluginName(&hellip;);</p>
+
+<p><br/></p>
+
+<p>一个插件的所有操作，都必须放到同一个pluginName方法中。</p>
+
+<p>如果我们想初始化和取值，就不得不这样操作，</p>
+
+<p>$(container).pluginName(&lsquo;init&rsquo;,data);</p>
+
+<p>$(container).pluginName(&lsquo;getValue&rsquo;);</p>
+
+<p><br/></p>
+
+<p>后果就是pluginName这个函数中，我们就要写很多switch语句。</p>
+
+<p>$.prototype.extend({</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pluginName:function(operationName,arg0){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch(operationName){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case &lsquo;init&rsquo;:</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case &lsquo;getValue&rsquo;:</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+
+<p>});</p>
+
+<p><br/></p>
+
+<p>还算清晰，</p>
+
+<p>不过最致命的就是，如果我们想添加一个对插件的操作，</p>
+
+<p>我们必须去改同一个文件，在switch中添加case子句。</p>
+
+<p>这太烦人了。</p>
+
+<p><br/></p>
+
+<p>而且，取data的值也比较麻烦。</p>
+
+<p>按理说它是init操作的第1个参数，</p>
+
+<p>但是它实际上是作为pluginName的第2个参数传递的。</p>
+
+<p><br/></p>
+
+<p>我们为什么不能设计一个工具，来改变现状呢？</p>
+
+<p>让我们踏上程序设计之路吧。</p>
+
+<p>假如我们已经设计好了，想这样用。pluginManager.extend</p>
+
+<p><br/></p>
+
+<p>(function($){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.extend(&lsquo;pluginName&rsquo;,{</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init:initPlugin</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function initPlugin(){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this;</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//arguments[0]===data</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+
+<p>}(jQuery));</p>
+
+<p><br/></p>
+
+<p>(function($){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.extend(&lsquo;pluginName&rsquo;,{</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getValue:getValueFromPlugin</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function getValueFromPlugin(){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this;</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+
+<p>}(jQuery));</p>
+
+<p><br/></p>
+
+<p>我们避免了为插件添加操作的麻烦，</p>
+
+<p>还把data参数的位置调节好了。</p>
+
+<p>并且将插件操作的具体实现，分离到了不同的文件中。</p>
+
+<p><br/></p>
+
+<p>这能实现吗？</p>
+
+<p>可以的，我已经做好了。</p>
+
+<p>但是，实现并不重要，关键是思想。</p>
+
+<p><br/></p>
+
+<h2><strong>持续改进</strong></h2>
+
+<p>并不是技术本身想要更新，</p>
+
+<p>是创新的业务需要，促进了创新的技术出现，</p>
+
+<p>不适应性越强烈，改进工具的可能性就越大。</p>
+
+<p><br/></p>
+
+<p>随着时间的发展，</p>
+
+<p>我们发现了另一个问题。</p>
+
+<p><br/></p>
+
+<p>插件在使用过程中，可能会设置一些缺省值，</p>
+
+<p>例如：初始化，</p>
+
+<p>$(container).pluginName(&lsquo;init&rsquo;,data);</p>
+
+<p>$(container).pluginName(&lsquo;init&rsquo;);</p>
+
+<p>都是有可能的。</p>
+
+<p><br/></p>
+
+<p>每个插件中都单独处理缺省值，是很啰嗦的事情。</p>
+
+<p>function initPlugin(){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this,</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data=arguments[0]||&lsquo;Hello&rsquo;;</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;
+}</p>
+
+<p><br/></p>
+
+<p>啰嗦也就罢了，</p>
+
+<p>最不能容忍的是，代码中出现了硬编码。</p>
+
+<p>&lsquo;Hello'是业务数据，跟插件本身无关。</p>
+
+<p><br/></p>
+
+<p>还记得吗，</p>
+
+<p>类库自带的功能越多，</p>
+
+<p>以后修改这些功能的可能性就越大。</p>
+
+<p><br/></p>
+
+<p>所以，我们得想一个办法把他们分离出去。pluginManager.filter</p>
+
+<p>(function($){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.extend(&lsquo;pluginName&rsquo;,{</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init:initPlugin</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function initPlugin(){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this,</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data=arguments[0];</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+
+<p>}(jQuery));</p>
+
+<p><br/></p>
+
+<p>(function($){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.<strong>filter</strong>(&lsquo;pluginName&rsquo;,{</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init:filterInit</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function filterInit(){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this;</p>
+
+<p><br/></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return [</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arguments[0]||&lsquo;Hello&rsquo;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;];</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+
+<p>}(jQuery));</p>
+
+<p><br/></p>
+
+<p>因此，我们增加了一层，</p>
+
+<p>作为插件核心的开发者，接受所有需要配置的参数。</p>
+
+<p><br/></p>
+
+<p>作为实际插件的使用者，为了避免多次配置，</p>
+
+<p>可以一次性为插件设置默认值。</p>
+
+<p>filter将pluginName插件的init操作实际调用的实参，</p>
+
+<p>转换一下，传递给了核心。</p>
+
+<p><br/></p>
+
+<p>这样的话，插件核心的开发者，就可以提供更松散的功能，</p>
+
+<p>不用假设实际的使用情况，</p>
+
+<p>实际和具体业务相关的处理，放到了filter里面。</p>
+
+<p><br/></p>
+
+<p>另外，我们看到filter是很灵活的，</p>
+
+<p>它可以将任何实参，以任何方式转换成核心需要的实参，</p>
+
+<p>哪怕核心需要的实参是一个函数。</p>
+
+<p><br/></p>
+
+<p>这能实现吗？</p>
+
+<p>也是可以的，我也已经做好了。</p>
+
+<p>但是，实现并不重要，关键是思想。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>在Lisp编程中，宏展开后造成了非预期的污染，是经常出现问题的地方。</p>
+<p>我们分析了jQuery的设计思想，</p>
 
-<p>Common Lisp目前并不支持卫生宏，</p>
-
-<p>但是可以实现自己的宏定义，用自己的宏来定义宏，达到简洁可控的目的。</p>
+<p>并拿来随机应变，设计了自己的插件管理器。</p>
 
 <p><br/></p>
 
-<p>当然，卫生宏也造成了表达能力的损失，</p>
+<p>使用框架了吗？</p>
 
-<p>在特殊情况下，可以使用syntax-case以及datum->syntax来弥补。</p>
+<p>并没有。</p>
+
+<p>连jQuery核心也是自己写的。</p>
+
+<p><br/></p>
+
+<p>但是，在思考过程中，无处不闪烁着许多优秀框架的思想。</p>
+
+<p><br/></p>
+
+<p>因此，我们也应该知道了，</p>
+
+<p>插件管理器本身，并没有什么，</p>
+
+<p>关键是思考过程，以及我们想到什么样的办法解决实际问题。</p>
+
+<p><br/></p>
+
+<p>我们的所能掌握的知识，总是不够的。</p>
+
+<p>但这不影响我们去创造好用的工具。</p>
+
+<p><br/></p>
+
+<p>比如，为了借鉴MVVM的思想，不必使用knockout.js，</p>
+
+<p>我们可以自己写一个bindTemplate来进行模板的读写操作。</p>
+
+<p><br/></p>
+
+<p>设置值</p>
+
+<p>$(container).bindTemplate(&lsquo;setData&rsquo;,{</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;attr:&lsquo;data-model&rsquo;,</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;data:json,</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;set:setFieldValue</p>
+
+<p>});</p>
+
+<p><br/></p>
+
+<p>读取值</p>
+
+<p>$(container).bindTemplate(&lsquo;getData&rsquo;,{</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;attr:&lsquo;data-model&rsquo;,</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;get:getFieldValue</p>
+
+<p>});</p>
+
+<p><br/></p>
+
+<p>我们可以把json对象，绑定到HTML对象上，再从HTML中取回同样结构的json对象。</p>
+
+<p>而与HTML元素的排列方式无关。</p>
+
+<p>json=[</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;0,</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;{</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val:1</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+
+<p>];</p>
+
+<p><br/></p>
+
+<p>&lt;span data-model=&ldquo;[0]&rdquo;&gt;&lt;/span&gt;</p>
+
+<p>&lt;div></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;span data-model=&ldquo;[1].val&rdquo;&gt;&lt;/span&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p><br/></p>
+
+<p>setFieldValue与getFieldValue我设置成了函数，</p>
+
+<p>用来询问对于某个HTML元素，如何绑定值，如何获取值，</p>
+
+<p>以获得最大的灵活性。</p>
+
+<p><br/></p>
+
+<p>并且，利用$.pluginManager.filter，接口可以简化成，</p>
+
+<p>$(container).bindTemplate(&lsquo;setData&rsquo;,{</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;data:json</p>
+
+<p>});</p>
+
+<p>$(container).bindTemplate(&lsquo;getData&rsquo;);</p>
+
+<p><br/></p>
+
+<p>源代码如下：</p>
+
+<p><a href="https://github.com/thzt/web.frontend.component/blob/master/library/jquerycore/jquerycore.js">jQuery core</a></p>
+
+<p><a href="https://github.com/thzt/web.frontend.component/blob/master/library/pluginmanager/pluginmanager.js">plugin Manager</a></p>
+
+<p>还好Github可以控制版本，如果以后文件更改了，还能找到今天的版本。</p>
+
+<p><br/></p>
+
+<p>于是，阳光还是那么灿烂，日子还是那么美好。</p>
+
+<p>关键是生活的方式。</p>
 </div>
   
   
@@ -571,7 +846,7 @@ var _hmt = _hmt || [];
     <section>
 	<h1>Categories</h1>
 	<ul id="categories">
-		<li class='category'><a href='/blog/categories/design/'>design (9)</a></li>
+		<li class='category'><a href='/blog/categories/design/'>design (10)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
@@ -583,6 +858,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之术</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
@@ -618,10 +897,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/01/29/computer-science/">真实在哪里</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/26/less-is-more/">多做不如少做，不做不如去做</a>
       </li>
     
   </ul>
