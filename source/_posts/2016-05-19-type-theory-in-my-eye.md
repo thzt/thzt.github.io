@@ -93,7 +93,7 @@ description:
 
 类型理论的实用内容还有很多，
 
-Gradual typing的动静结合，例如flow，contracts.js，
+Gradual typing的动静结合，例如flow，
 
 以及Rust和Linear typeing的应用，
 

@@ -4,7 +4,7 @@
   <title><![CDATA[何幻]]></title>
   <link href="https://thzt.github.io/atom.xml" rel="self"/>
   <link href="https://thzt.github.io/"/>
-  <updated>2016-05-19T17:10:14+08:00</updated>
+  <updated>2016-05-19T19:27:54+08:00</updated>
   <id>https://thzt.github.io/</id>
   <author>
     <name><![CDATA[thzt]]></name>
@@ -106,7 +106,7 @@
 
 <p>类型理论的实用内容还有很多，</p>
 
-<p>Gradual typing的动静结合，例如flow，contracts.js，</p>
+<p>Gradual typing的动静结合，例如flow，</p>
 
 <p>以及Rust和Linear typeing的应用，</p>
 
