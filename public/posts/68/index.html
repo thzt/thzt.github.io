@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="fact的尾递归化 非尾递归的fact定义 (define fact &nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 1) &nbsp;&nbsp;&nbsp &hellip;">
+  <meta name="description" content="从前，客户需要一个矢量(1 2 3)。 于是，我们就打造了它。 可是，一段时间之后，客户觉得这个矢量不好，不能满足需要。 他们实际需要的是(6 5 4)。 为了避免从头开始。 我们聪明的使用了原来的矢量(1 2 3)，并增加了新功能(5 3 1)。 于是(1 2 3)+(5 3 1)=(6 5 4 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/01/30/cps-and-tail-recursion/">使用CPS将fact和fib改为tail Recursion</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/02/07/design-for-orthogonality/">设计的正交性</a></h1>
     
     
       <p class="meta">
@@ -83,268 +83,220 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-01-30T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-02-07T00:00:00+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2><strong>fact的尾递归化</strong></h2>
+  <div class="entry-content"><p>从前，客户需要一个矢量(1 2 3)。</p>
+
+<p>于是，我们就打造了它。</p>
 
 <p><br/></p>
 
-<p>非尾递归的fact定义</p>
+<p>可是，一段时间之后，客户觉得这个矢量不好，不能满足需要。</p>
 
-<p>(define fact</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* x (fact (- x 1))))))</p>
+<p>他们实际需要的是(6 5 4)。</p>
 
 <p><br/></p>
 
-<p>尾递归的fact-tail定义</p>
+<p>为了避免从头开始。</p>
 
-<p>(define fact-tail</p>
+<p>我们聪明的使用了原来的矢量(1 2 3)，并增加了新功能(5 3 1)。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k 1)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail (- x 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (y) (k (* y x)))</strong>))))</p>
+<p>于是(1 2 3)+(5 3 1)=(6 5 4)。</p>
 
 <p><br/></p>
 
-<p>分析调用过程</p>
-
-<p>(fact-tail 3</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n))</p>
-
-<p>&lt;=></p>
-
-<p>(fact-tail 2</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 3)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
-
-<p>&lt;=></p>
-
-<p>(fact-tail 1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
-
-<p>&lt;=></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>)</p>
-
-<p>&lt;=></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(* 1 2)</p>
-
-<p>)</p>
-
-<p>&lt;=></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(<em> (</em> 1 2) 3)</p>
-
-<p>)</p>
-
-<p>&lt;=></p>
-
-<p>(<em> (</em> 1 2) 3)</p>
+<p>我们降低了生产成本，很高兴。</p>
 
 <p><br/></p>
 
-<h2><strong>fib的尾递归化</strong></h2>
+<p>又过了一段时间，客户觉得(6 5 4)还是不好。</p>
 
-<p>非尾递归的fib定义</p>
-
-<p>(define fib</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (fib (- n 1))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2))))))</p>
+<p>他们真正需要的是(3 6 9)。</p>
 
 <p><br/></p>
 
-<p>尾递归的fib-tail定义</p>
+<p>我们很无奈，再用老办法吧。</p>
 
-<p>(define fib-tail</p>
+<p>(6 5 4)+(-3 1 5)=(3 6 9)</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k 1)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fib-tail (- n 1)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (x)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fact-tail (- n 2)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (y)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (+ x y))))))</strong>)))</p>
+<p>这里出现了负号，意思就是有些功能不需要了，删掉它。</p>
 
 <p><br/></p>
 
-<p>分析调用过程</p>
+<p>这时候，我们心里有点不舒服了。</p>
 
-<p>(fib-tail 3</p>
+<p>增加功能还可以接受，有成就感。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z))</p>
+<p><br/></p>
 
-<p>&lt;=></p>
+<p>而删除功能，很不舒服。</p>
 
-<p>(fib-tail 2</p>
+<p>当时加班加点做了，现在又不要了。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>出尔反尔。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail 1</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
+<p>随后的日子里，你也知道。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
+<p>事情经常会像你不敢想的那样发展。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
+<p>客户的需求一直在变，我们没办法预测它。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)))))</p>
+<h2><strong>问题和答案</strong></h2>
 
-<p>&lt;=></p>
+<p>到底是哪里出现问题了呢？</p>
 
-<p>(</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>有人说，需求变更是软件项目的本质特征，控制需求一个是软件工程问题。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail 1</p>
+<p>这是对的，过度频繁的变更是有问题的。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
+<p>但是，通常一方面的问题也会掩盖其他方面的问题。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
+<p>人们通常会认为后果只是由一个原因造成的。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))))</p>
+<p>比如，设计，难道就没有问题了吗？</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>除了紧跟着客户的需要来做，我们还能做什么？</p>
 
-<p>)</p>
+<p><br/></p>
 
-<p>&lt;=></p>
+<p>我们发现，关键在于，</p>
 
-<p>(fact-tail 1</p>
+<p>不要想着让软件去适应未来，这是不可能的。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
+<p>我们要提供所需的基本功能，用它去实现未来。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
+<h2><strong>正交化的设计</strong></h2>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 y)</p>
+<p>回到文章开始那个例子上。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
+<p><br/></p>
 
-<p>&lt;=></p>
+<p>假如客户需要一个矢量(1 2 3)。</p>
 
-<p>(</p>
+<p>而我们实现的是(1 0 0)，(0 1 0)和(0 0 1)。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
+<p>会怎样？</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
+<p>首先，这三个基本矢量，足够少。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 y)</p>
+<p>因为，任何一个矢量都不能用剩下的两个来实现它。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>其次，它们又足够多。</p>
 
-<p>)</p>
+<p>实现客户的需求是没问题的。</p>
 
-<p>&lt;=></p>
+<p>1 * (1 0 0)+2 * (0 1 0)+3 * (0 0 1)=(1 2 3)</p>
 
-<p>(</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
+<p>当客户的需求变化了，他们想要(6 5 4)。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 1)</p>
+<p>我们就不需要更改基本的三个矢量了。</p>
 
-<p>)</p>
+<p>我们只需要重新拼装它们。</p>
 
-<p>&lt;=></p>
+<p>6 * (1 0 0)+5 * (0 1 0)+4 * (0 0 1)=(6 5 4)</p>
 
-<p>(+ 1 1)</p>
+<p><br/></p>
+
+<p>对于(3 6 9)亦然。</p>
+
+<p>3 * (1 0 0)+6 * (0 1 0)+9 * (0 0 1)=(3 6 9)</p>
+
+<p><br/></p>
+
+<h2><strong>反思</strong></h2>
+
+<p>这个例子并不是一个实际问题，</p>
+
+<p>但是却能让我们学会很多。</p>
+
+<p><br/></p>
+
+<p>作为一个功能提供商，我们并没有直接提供功能。</p>
+
+<p>我们提供的是一个正交的功能集。</p>
+
+<p>再由这些功能集来实现客户的需求。</p>
+
+<p><br/></p>
+
+<p>好处是什么呢？</p>
+
+<p>原则上，我们永远不需要更改或删除已有的功能了。</p>
+
+<p>我们只需要增加新的正交分量即可。</p>
+
+<p><br/></p>
+
+<p>并且，随着时间的积累，</p>
+
+<p>功能集会越来越大，可以用来实现各种各样的需要。</p>
+
+<p>对未来来说，他们是无价之宝。</p>
+
+<p><br/></p>
+
+<p>Don&rsquo;t base your venture on a plan.</p>
+
+<p>Instead base it on a strategic foundation.</p>
+
+<p>——《How google works》</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>编程，不只是体力劳动。</p>
+
+<p>我更倾向于认为它是一个设计过程。</p>
+
+<p>好的软件是秉承一系列优秀设计实践，逐渐发展起来的。</p>
+
+<p>而正交化的设计，只是好的设计实践中的一种。</p>
+
+<p><br/></p>
+
+<p>就像小说一样，文学作品的好坏，不在于字数。</p>
+
+<p>阅读它，能给读者带来多少思考，能营造什么气氛。</p>
+
+<p>这才是重要的。</p>
+
+<p><br/></p>
+
+<p>好的软件，功能稳定，结构优雅。</p>
+
+<p><br/></p>
+
+<h2><strong>后记</strong></h2>
+
+<p>假如客户需要矢量(1 2 3 4)，怎么办呢？</p>
+
+<p>我会写一个函数f(x y z)=(x y z 0)，然后再写一个矢量(0 0 0 1)。</p>
+
+<p>1 * f(1 0 0)+2 * f(0 1 0)+3 * f(0 0 1)+4 * (0 0 0 1)=(1 2 3 4)</p>
 </div>
   
   
@@ -367,7 +319,7 @@ var _hmt = _hmt || [];
     <section>
 	<h1>Categories</h1>
 	<ul id="categories">
-		<li class='category'><a href='/blog/categories/design/'>design (10)</a></li>
+		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (5)</a></li>
@@ -379,6 +331,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/05/29/let-things-happen/">让事情去发生</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/05/19/type-theory-in-my-eye/">类型理论之拙见</a>
@@ -414,10 +370,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/03/08/forward-looking-engineer/">软件工程师的前瞻性</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/03/06/game-theory-in-team-building/">团队建设中的博弈论</a>
       </li>
     
   </ul>
