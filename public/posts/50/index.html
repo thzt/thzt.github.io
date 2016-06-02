@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="Scheme语言中，可以使用call/cc， 得到当前表达式的Continuation。 例如： (+ 1 (call/cc (lambda (k) &nbsp;&nbsp;&nbsp;&nbsp;(* 2 (k 3))))) => 4 CPS，是Continuation Passing &hellip;">
+  <meta name="description" content="每当我看到一篇好文章的时候， 都会问自己这样一个问题， 为什么我没有写出它来？ 每当我听别人说出一个启发性的观点， 都会问自己类似的问题， 为什么我以前没有想到它？ 是什么驱使他们产生好的观点？ 是什么让他们乐于思考？ 他们和别人有什么不同？ 在于运行机制。 理解成功学 听到成功人士分享经验， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/05/23/role-of-cps/">CPS的地位</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/05/26/mechanism/">运行机制</a></h1>
     
     
       <p class="meta">
@@ -83,711 +83,160 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-05-23T00:00:00+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-05-26T00:00:00+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Scheme语言中，可以使用call/cc，</p>
+  <div class="entry-content"><p>每当我看到一篇好文章的时候，</p>
 
-<p>得到当前表达式的Continuation。</p>
+<p>都会问自己这样一个问题，</p>
 
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>(+ 1 (call/cc (lambda (k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(* 2 (k 3)))))</p>
-
-<p>=> 4</p>
-
-<p><br/></p>
-
-<p>CPS，是Continuation Passing Style的缩写，</p>
-
-<p>它是一种编码风格，</p>
-
-<p>函数执行完以后，并不通过返回值，</p>
-
-<p>而是调用它自己的Continuation来完成计算。</p>
-
-<p><br/></p>
-
-<p>例如，</p>
-
-<p>函数通过返回值的方式，通常这样写，</p>
-
-<p>(define (add x y)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x y))</p>
-
-<p><br/></p>
-
-<p>(display (add 1 2))</p>
-
-<p>=> 3</p>
-
-<p><br/></p>
-
-<p>改写成CPS方式，</p>
-
-<p>(define (add x y <strong>k</strong>)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k</strong> (+ x y)<strong>)</strong>)</p>
-
-<p><br/></p>
-
-<p>(add 1 2 <strong>display</strong>)</p>
-
-<p>=> 3</p>
-
-<p><br/></p>
-
-<p>其中display这个单参函数是表达式add的Continuation，</p>
-
-<p>在调用add函数的时候，我们把它的Continuation当做附加参数传递过去了，</p>
-
-<p>等add函数体的计算(+ x y)执行完后，</p>
-
-<p>并没有通过返回值，而是直接调用了它的Continuation——k。</p>
-
-<p><br/></p>
-
-<h2><strong>CPS的误区</strong></h2>
-
-<p>CPS是一种代码风格，</p>
-
-<p>它可以用来做任何适当的事情，</p>
-
-<p>并不是为了call/cc而出现的。</p>
-
-<p><br/></p>
-
-<p>CPS可以<strong>显式的指明程序的计算过程</strong>，</p>
-
-<p>在函数式语言的编译器中，常用来作为代码的<strong>中间表示</strong>（IR）。</p>
-
-<p><br/></p>
-
-<p>例如：Standard ML of New Jersey编译器，大致有以下几个处理过程。</p>
-
-<p>（1）词法分析，语法分析，类型检查，建立抽象语法树</p>
-
-<p>（2）转换成lambda演算的某种表示</p>
-
-<p>（3）对用lambda演算表示的程序进行优化</p>
-
-<p>（4）转换成CPS的某种表示</p>
-
-<p>（5）优化CPS</p>
-
-<p>（6）闭包变换（closure conversion），消除函数的自由变量</p>
-
-<p>（7）去除嵌套作用域，得到一系列无嵌套的相互递归函数</p>
-
-<p>（8）处理寄存器溢出，每个函数至多含有n个变量，n是目标机器寄存器数</p>
-
-<p>（9）生成目标机器指令</p>
-
-<p><br/></p>
-
-<p>CPS与尾递归，也没有必然的联系。</p>
-
-<p>虽然很多地方都喜欢通过把函数转换成尾递归化来介绍CPS。</p>
-
-<p><br/></p>
-
-<h2><strong>转换成CPS</strong></h2>
-
-<p>有关CPS的研究很多，</p>
-
-<p>将任意函数转换成CPS，</p>
-
-<p>已经不是困难的事情了。</p>
-
-<p><br/></p>
-
-<p>我们不做形式化的探讨，</p>
-
-<p>只手动处理，借几个例子来体会一下。</p>
-
-<p><br/></p>
-
-<p><strong>例一：</strong>含有自由变量的函数</p>
-
-<p>(define y 1)</p>
-
-<p><br/></p>
-
-<p>(define (f x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x <strong>y</strong>))</p>
-
-<p><br/></p>
-
-<p>(display (f 2))</p>
-
-<p>=> 3</p>
-
-<p><br/></p>
-
-<p>我们看到f的函数体中(+ x y)，y是自由的，</p>
-
-<p>它没有在函数体中定义。</p>
-
-<p><br/></p>
-
-<p>根据词法作用域规则，</p>
-
-<p>y，应该去<strong>定义f的环境中</strong>查找。</p>
-
-<p>得到y => 1。</p>
-
-<p><br/></p>
-
-<p>我们通过<strong>为f增加附加参数k</strong>的方法，
-将具有返回值的函数转换成CPS。</p>
-
-<p>(define y 1)</p>
-
-<p><br/></p>
-
-<p>(define (f x <strong>k</strong>)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k</strong> (+ x y)<strong>)</strong>)</p>
-
-<p><br/></p>
-
-<p>(f 2 display)</p>
-
-<p>=> 3</p>
-
-<p><br/></p>
-
-<p><strong>例二：</strong>阶乘函数</p>
-
-<p><br/></p>
-
-<p>(define (fact n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* (fact (- n 1)) n)))</p>
-
-<p><br/></p>
-
-<p>(display (fact 5))</p>
-
-<p>=> 120</p>
-
-<p><br/></p>
-
-<p>fact函数是递归的，为了转换成CPS，在增加附加参数k时候，</p>
-
-<p>所有fact调用的地方都要修改，(define (fact n k)</p>
-
-<p>难以修改的地方，可以思考一下实际的计算顺序，作为方向。</p>
-
-<p><br/></p>
-
-<p>(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;n</p>
-
-<p>这里，返回n后要执行k所示的剩余计算，</p>
-
-<p>相当于(k n)。</p>
-
-<p><br/></p>
-
-<p>(* (fact (- n 1)) n)</p>
-
-<p>考虑运算顺序，先执行(fact (- n 1))，</p>
-
-<p>增加附加参数以后，变成了(fact (- n 1) ?)，</p>
-
-<p>其中“?”表示该表达式后续的剩余计算，是什么呢，</p>
-
-<p>考虑计算顺序，如果计算完成，则要先乘以n，在执行k所示的剩余计算。</p>
-
-<p><br/></p>
-
-<p>所以，</p>
-
-<p>? =></p>
-
-<p>(lambda (v)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(k (* v n)))</p>
-
-<p><br/></p>
-
-<p>整理得，</p>
-
-<p>(define (fact n <strong>k</strong>)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k</strong> n<strong>)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (* v n)))</strong>)))</p>
-
-<p><br/></p>
-
-<p>(fact 5 display)</p>
-
-<p>=> 120</p>
-
-<p><br/></p>
-
-<p><strong>例三：</strong>斐波那契函数</p>
-
-<p><br/></p>
-
-<p>(define (fib n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (fib (- n 1)) (fib (- n 2)))))</p>
-
-<p><br/></p>
-
-<p>(display (fib 5))</p>
-
-<p>=> 5</p>
-
-<p><br/></p>
-
-<p>先为函数增加附加参数k，</p>
+<p>为什么我没有写出它来？</p>
 
-<p>(define (fib n k)</p>
-
-<p><br/></p>
-
-<p>再改变非递归情况的返回值方式，</p>
-
-<p>(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p><br/></p>
-
-<p>(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(k 1)</p>
-
-<p><br/></p>
-
-<p>然后考虑(+ (fib (- n 1)) (fib (- n 2)))的运算顺序，</p>
-
-<p>是从计算(fib (- n 1))开始的，</p>
-
-<p>增加附加参数后，改写为，(fib (- n 1) ?)</p>
-
-<p><br/></p>
-
-<p>“?”是什么呢，它表示(fib (- n 1))表达式后续的计算：</p>
-
-<p>先计算(fib (- n 2))，再把结果值相加，最后执行k所示的计算。</p>
-
-<p><br/></p>
-
-<p>? =></p>
-
-<p>(lambda (v1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fib (- n 2) ??)</strong>)</p>
-
-<p>=></p>
-
-<p>(lambda (v1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v2)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (+ v1 v2)))</strong>))</p>
-
-<p><br/></p>
-
-<p>整理得，</p>
-
-<p>(define (fib n k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k</strong> 1<strong>)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v1)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v2)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (+ v1 v2)))))</strong>)))</p>
-
-<p><br/></p>
-
-<p>(fib 5 display)</p>
-
-<p>=> 5</p>
-
-<p><br/></p>
-
-<p>总结一下，</p>
-
-<p><strong>函数调用的返回值变成了，Continuation的参数</strong>，</p>
-
-<p>然后<strong>在Continuation中处理后续的计算</strong>。</p>
-
-<p><br/></p>
-
-<p>(fn x)</p>
-
-<p>=> (fn x (lambda (v) &hellip;))</p>
-
-<p>其中v是原来(fn x)的返回值，</p>
-
-<p>(fn x)的后续计算，写在“&hellip;”处。</p>
-
-<p><br/></p>
-
-<h2><strong>闭包变换</strong></h2>
-
-<p>限于目前大多数计算机的体系结构，</p>
-
-<p>函数求值时，并不直接支持对词法变量的查找规则。</p>
-
-<p><br/></p>
-
-<p>我们可以继续改变CPS，</p>
-
-<p>使得每个函数都不包含自由变量。</p>
-
-<p>这种改变方式，称为<strong>闭包变换</strong>，</p>
-
-<p>这种代码风格，称为Closure Passing Style。</p>
-
-<p><br/></p>
-
-<p>对于任意含有自由变量的函数，我们都可以进行闭包变换，</p>
-
-<p><strong>并不一定是已经表示成CPS风格的程序</strong>，</p>
-
-<p>只是CPS变换与闭包变换有些相似之处。</p>
-
-<p><br/></p>
-
-<p>我们知道，</p>
-
-<p>词法作用域规则，是当我们查找函数中自由变量的时候，</p>
-
-<p>到定义该函数的环境中去查找。</p>
-
-<p><br/></p>
-
-<p>为了在运行时得到函数定义时的环境，</p>
-
-<p>我们需要再增加一个或几个参数，来表示函数定义时的环境。</p>
-
-<p><br/></p>
-
-<p>为了连贯性，我们直接使用上文CPS转换后的结果，作为下一步闭包变换的起点。</p>
-
-<p><br/></p>
-
-<p><strong>例一：</strong>含有自由变量的函数</p>
-
-<p>(define y 1)</p>
-
-<p><br/></p>
-
-<p>(define (f x k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(k (+ x y)))</p>
-
-<p><br/></p>
-
-<p>(f 2 display)</p>
-
-<p>=> 3</p>
-
-<p><br/></p>
-
-<p>我们再增加一个参数e，来表示函数定义时的环境。</p>
-
-<p>(define y 1)</p>
-
-<p>(define (f x k <strong>e</strong>)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define y (vector-ref e 0))</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(k (+ x y)))</p>
-
-<p><br/></p>
-
-<p><strong>(define e0 (vector y f))</strong></p>
-
-<p>(f 2 display <strong>e0</strong>)</p>
-
-<p>=> 3</p>
-
-<p><br/></p>
-
-<p>注：</p>
-
-<p>(vector y f))，用vector表示环境，y是第0个元素，f是第1个元素。</p>
-
-<p>(vector-ref e 0))，取环境中第0个元素，y</p>
-
-<p><br/></p>
-
-<p><strong>例二：</strong>阶乘函数</p>
-
-<p>(define (fact n k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (v)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (* v n))))))</p>
-
-<p><br/></p>
-
-<p>(fact 5 display)</p>
-
-<p>=> 120</p>
-
-<p><br/></p>
-
-<p>我们先将Continuation中的lambda表达式写成定义式，便于理解，</p>
-
-<p>(define (fact n k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define (k1 v)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (* v n)))</strong></p>
-
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>每当我听别人说出一个启发性的观点，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k n)</p>
+<p>都会问自己类似的问题，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1) <strong>k1</strong>)))</p>
+<p>为什么我以前没有想到它？</p>
 
 <p><br/></p>
 
-<p>我们看到，在Continuation函数中也包含了自由变量，</p>
+<p>是什么驱使他们产生好的观点？</p>
 
-<p>所以，情况比较复杂，</p>
+<p>是什么让他们乐于思考？</p>
 
-<p>我们需要再传递一个参数，来表示Continuation定义时的环境，</p>
+<p>他们和别人有什么不同？</p>
 
-<p>用来区分fact函数定义时的环境。</p>
-
 <p><br/></p>
-
-<p>(define (k0 v <strong>e</strong>)</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v))</p>
+<p>在于运行机制。</p>
 
 <p><br/></p>
-
-<p>(define (fact n k <strong>fact-e k-e</strong>)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(define (k1 v <strong>e</strong>)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define n (vector-ref e 0))</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k (vector-ref e 1))</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k-e (vector-ref e 3))</strong></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (* v n) <strong>k-e</strong>))</p>
+<h2><strong>理解成功学</strong></h2>
 
-<p><br/></p>
+<p>听到成功人士分享经验，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define fact (vector-ref fact-e 1))</strong></p>
+<p>总是认为他们说的有道理，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k1-e (vector n k fact-e k-e k1 fact))</strong></p>
+<p>好像这样做就能复制成功似的。</p>
 
 <p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k n <strong>k-e</strong>)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1) k1 <strong>fact-e k1-e</strong>)))</p>
-
-<p><br/></p>
+<p>然而，其实并非他们所说的内容，</p>
 
-<p><strong>(define fact-e0 (vector k0 fact))</strong></p>
+<p>而是，能让他们得出这些结论的能力，</p>
 
-<p><strong>(define k-e0 fact-e0)</strong></p>
+<p>导致了他们成功。</p>
 
 <p><br/></p>
 
-<p>(fact 5 k0 <strong>fact-e0 k-e0</strong>)</p>
+<p>为什么呢？</p>
 
-<p>=> 120</p>
+<p>因为成功者所说的，</p>
 
-<p><br/></p>
+<p>并不是成功的原因，而是成功后的体会。</p>
 
-<p>关键点在于，从定义时的环境中得到词法变量。</p>
-
 <p><br/></p>
-
-<p><strong>例三：</strong>斐波那契函数</p>
-
-<p>(define (fib n k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k 1)</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 1)</p>
+<p>人好比机器，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (v1)</p>
+<p>有输入，有内在的运行机制，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2)</p>
+<p>还有输出。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (v2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (+ v1 v2))))))))</p>
-
-<p><br/></p>
-
-<p>(fib 5 display)</p>
-
-<p>=> 5</p>
-
 <p><br/></p>
-
-<p>先将Continuation中的lambda表达式写成定义式</p>
-
-<p>(define (fib n k)</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define (k1 v1)</strong></p>
+<p>决定成功的，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define (k2 v2)</strong></p>
+<p>是输入和运行机制，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (+ v1 v2)))</strong></p>
+<p>并不是输出。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fib (- n 2) k2))</strong></p>
-
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>而且，好的运行机制，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k 1)</p>
+<p>可以过滤输入，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 1) <strong>k1</strong>)))</p>
-
-<p><br/></p>
+<p>可以将输出反馈到自身，</p>
 
-<p>将函数定义时的环境，当做附加参数传递，</p>
+<p>还可以调整自己。</p>
 
 <p><br/></p>
 
-<p>(define (k0 v <strong>fib-e k-e</strong>)</p>
+<p>因此，构建良性的运行机制，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v))</p>
+<p>才是成功的秘诀。</p>
 
 <p><br/></p>
 
-<p>(define (fib n k <strong>fib-e k-e</strong>)</p>
+<h2><strong>培养人才</strong></h2>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(define (k1 v1 <strong>fib-e k-e</strong>)</p>
+<p>有人说，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define (k2 v2 <strong>fib-e k-e</strong>)</p>
+<p>人才只能培养，不能创造。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k (vector-ref (vector-ref k-e 2) 1))</strong></p>
+<p>我认为有理。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define v1 (vector-ref k-e 0))</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k-k-e (vector-ref (vector-ref k-e 2) 3))</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (+ v1 v2) <strong>fib-e k-k-e</strong>))</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define fib (vector-ref fib-e 1))</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define n (vector-ref k-e 0))</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k2-e (vector v1 fib-e k-e k2 fib n))</strong></p>
-
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2) k2 <strong>fib-e k2-e</strong>))</p>
+<p>培养人才，</p>
 
-<p><br/></p>
+<p>并不是培养出像教师一样思考的人，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define fib (vector-ref fib-e 1))</strong></p>
+<p>而是培养出像人才一样的思考的人。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k1-e (vector n k fib-e k-e k1 fib))</strong></p>
-
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>通过改变输入，让他进行不同的思考，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k 1 <strong>fib-e k-e</strong>)</p>
+<p>然后，引导他思考自己的结论，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 1) k1 <strong>fib-e k1-e</strong>)))</p>
+<p>激励他自我调整。</p>
 
 <p><br/></p>
 
-<p><strong>(define fib-e0 (vector k0 fib))</strong></p>
+<p>让他可以自我完善，</p>
 
-<p><strong>(define k-e0 fib-e0)</strong></p>
+<p>改变他的运行机制。</p>
 
 <p><br/></p>
 
-<p>(fib 5 k0 <strong>fib-e0 k-e0</strong>)</p>
+<p>学习别人成功的经验，</p>
 
-<p>=> 5</p>
+<p>只是一种方法，</p>
 
-<p><br/></p>
+<p>能自我成长，</p>
 
-<p>至此，三个例子中，所有的函数都没有自由变量了。</p>
+<p>才能做出令人惊叹的事情。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>本文只是手动处理了CPS变换和闭包变换。</p>
+<p>你可能会想，</p>
 
-<p>CPS的用处还不止于此。</p>
+<p>为什么我能写出这样的文章来，</p>
 
-<p>然而，我认为，<strong>重要的是这种附加参数的思想</strong>。</p>
-
-<p><br/></p>
-
-<p>学会了思想，我们才能灵活运用它。</p>
-
-<p>发现更神奇的计算本质。</p>
+<p>而你没有。</p>
 
 <p><br/></p>
 
-<p>本文参考：《Compiling with Continuations》</p>
+<p>这可能也是运行机制不同吧。</p>
+
+<p><br/></p>
+
+<p>此外，培养人才的方法，</p>
+
+<p>也可以用来培养自己，</p>
+
+<p>这就是反馈吧。</p>
 </div>
   
   
@@ -814,7 +263,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (5)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (30)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (31)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -822,6 +271,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/06/02/requirement-change/">如何应对需求变更</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/05/29/let-things-happen/">让事情去发生</a>
@@ -857,10 +310,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/03/11/tools/">论工具</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/03/08/forward-looking-engineer/">软件工程师的前瞻性</a>
       </li>
     
   </ul>
