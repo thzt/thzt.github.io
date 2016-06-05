@@ -119,7 +119,7 @@ Go，Java，C#，PHP，Python，Ruby，JavaScript，Clojure，Swift，C++。
 
 目前有一些遗憾，那就是同调代数，代数拓扑，同伦类型论还没有看，希望以后坚持读下去，
 
-《Practical Fundations of Programming Languages》是一本好书，只读了一半，希望能认真读完，
+《Practical Fundations of Programming Languages》是一本好书，只读了一半，希望能读完，
 
 《程序设计语言的理论基础》，《计算机语言的形式语义》值得认真研究。
 
