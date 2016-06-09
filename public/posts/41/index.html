@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="据说Haskell是一种惰性求值的语言， 表达式的求值策略是按需求值，即call-by-need。 但是到底什么才是按需的， 求值到什么程度。 刚开始学习的时候，总是很模糊。 随着学习的深入，才慢慢了解， Haskell规范中，并没有涉及惰性求值， 只说它是一种non-strict &hellip;">
+  <meta name="description" content="实际项目中， 有很多需要处理字符串的场景， 判断用户输入的文本是否合法， 从一段文本中提取一些信息， 等等。 正则表达式， 简直是神兵利器， 一般的问题，都可以轻易解决。 然而， 它也不是万能的， 有着自身的能力范围。 例如， 我们无法用正则表达式处理JSON， 无法用正则表达式分析HTML， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/07/12/lazy-evaluation/">惰性求值</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/07/18/ability-of-regular-expression/">正则表达式的能力范围</a></h1>
     
     
       <p class="meta">
@@ -83,427 +83,468 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-07-12T00:00:00+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-07-18T00:00:00+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><strong>据说</strong>Haskell是一种惰性求值的语言，</p>
+  <div class="entry-content"><p>实际项目中，</p>
 
-<p>表达式的求值策略是按需求值，即call-by-need。</p>
+<p>有很多需要<strong>处理字符串</strong>的场景，</p>
 
-<p><br/></p>
+<p>判断用户输入的文本是否合法，</p>
 
-<p>但是到底什么才是按需的，</p>
+<p>从一段文本中提取一些信息，</p>
 
-<p>求值到什么程度。</p>
-
-<p>刚开始学习的时候，总是很模糊。</p>
+<p>等等。</p>
 
 <p><br/></p>
 
-<p>随着学习的深入，才慢慢了解，</p>
+<p>正则表达式，</p>
 
-<p>Haskell规范中，并没有涉及惰性求值，</p>
+<p>简直是神兵利器，</p>
 
-<p>只说它是一种<strong>non-strict language</strong>，</p>
-
-<p>求值策略取决于具体的实现。</p>
+<p>一般的问题，都可以轻易解决。</p>
 
 <p><br/></p>
 
-<p>这是怎么回事呢？</p>
+<p>然而，</p>
 
-<p>又要从头开始了。</p>
+<p><strong>它也不是万能的</strong>，</p>
 
-<p><br/></p>
-
-<h2><strong>non-strictness</strong></h2>
-
-<p>non-strict function，是<strong>指称语义</strong>中的概念，</p>
-
-<p>指称语义将每一段代码，与一个数学对象相对应，</p>
-
-<p>借此来研究程序的语义。</p>
+<p>有着自身的能力范围。</p>
 
 <p><br/></p>
 
-<p>一开始我们认为，程序中的函数，</p>
+<p>例如，</p>
 
-<p>会有直接的数学函数与之对应。</p>
+<p>我们无法用正则表达式处理JSON，</p>
 
-<p><br/></p>
+<p>无法用正则表达式分析HTML，</p>
 
-<p>其实不然，</p>
-
-<p>因为，程序中的很多函数，在处理某些参数的时候，</p>
-
-<p>行为是“未定义的”，得不到有用的信息，</p>
-
-<p>这样的数学函数称为<strong>部分函数</strong>（partial function）。</p>
+<p>甚至无法从一段代码中把嵌套注释提取出来。</p>
 
 <p><br/></p>
 
-<p>这里尽量<a href="http://www.vex.net/~trebla/haskell/lazy.xhtml">不要提及“不能终止的”</a>，</p>
+<p>是不是我们写的不好，</p>
 
-<p>因为指称语义并不考虑求值过程。</p>
+<p>有没有精巧的写法，</p>
 
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>partialFn :: Integer -> Integer</p>
-
-<p>partialFn 0 = 0</p>
-
-<p>partialFn n = test $ n + 1</p>
+<p>来达到上述目的呢？</p>
 
 <p><br/></p>
 
-<p>可以看到partial只在参数为0的时候是有意义的。</p>
+<p>一般而言，</p>
 
-<p>所以，与程序中的函数对应的，</p>
+<p>要证明可以，只需要一个例子就行，</p>
 
-<p>就不是普通意义上的数学函数了，</p>
-
-<p>还需要<strong>扩充定义域和值域</strong>。</p>
+<p><strong>而要证明不可以，就很难了</strong>。</p>
 
 <p><br/></p>
 
-<p>我们为每个集合增加一个新的值“<strong>⊥</strong>”，称为bottom，</p>
+<p>所以，</p>
 
-<p>用来表示“未定义”。</p>
+<p>我们要好好学习一下<strong>理论基础</strong>，</p>
 
-<p>函数f(n)={0,n=0;⊥,n≠0}，就能表示partialFn了。</p>
-
-<p><br/></p>
-
-<p>Haskell用undefined来表示⊥，</p>
-
-<p>undefined也确实包含在所有类型中，</p>
-
-<p>> :t undefined</p>
-
-<p>> undefined :: a</p>
+<p>看一下正则表达式的真面目。</p>
 
 <p><br/></p>
 
-<p>通常情况下，</p>
+<h2><strong>形式语言</strong></h2>
 
-<p>如果一个数学函数的参数是⊥，则结果就是⊥。</p>
+<p>日常生活中，</p>
 
-<p>这样的函数称为<strong>strict function</strong>。</p>
+<p>也有这样的认识，</p>
 
-<p><br/></p>
+<p>我们所了解的汉字是<strong>有限的</strong>，</p>
 
-<p>而Haskell中函数则不同。</p>
-
-<p>例如：</p>
-
-<p>nonStrictFn :: Integer -> Integer</p>
-
-<p>nonStrictFn 0 _ = 0</p>
+<p>但是我们能说的话，却是<strong>无限的</strong>。</p>
 
 <p><br/></p>
 
-<p>nonStrictFn 0 undefined
-> 0</p>
+<p>因为，至少我们可以说出任意长度的汉字序列。</p>
 
 <p><br/></p>
 
-<p>函数nonStrictFn在参数包含undefined的时候，</p>
-
-<p>并没有得到undefined，而是得到了一个明确的值0，</p>
-
-<p>它对应的数学函数是<strong>non-strict function</strong>。</p>
+<p>程序语言也是如此。</p>
 
 <p><br/></p>
 
-<p>函数的指称语义是non-strict function，</p>
+<p>有人说编程，不就是输入A到Z吗，</p>
 
-<p>这样的语言，称为non-strict language。</p>
+<p>指的就是这个编程语言的“字母表”，</p>
 
-<p><br/></p>
+<p>字母表所包含的字母，是有限的，</p>
 
-<h2><strong>lazy evaluation</strong></h2>
-
-<p>求值，是<strong>操作语义</strong>中的概念。</p>
-
-<p><strong>能实现non-strict指称语义的求值策略并不是唯一的</strong>。</p>
+<p>但是可以写出无限多个“句子”。</p>
 
 <p><br/></p>
 
-<p>GHC是Haskell目前最流行的编译器，</p>
-
-<p>它使用了<strong>惰性求值</strong>（lazy evaluation）。</p>
+<p>“语言”，正是这些“句子”的集合。</p>
 
 <p><br/></p>
 
-<p>例如：</p>
+<p>事实上，</p>
 
-<p>x = 1</p>
+<p>以上简短的描述中，</p>
 
-<p>y = 2</p>
-
-<p>z = (x, y)</p>
+<p>包含了很深刻的思想。</p>
 
 <p><br/></p>
 
-<p>> :sprint x</p>
+<p>当初，为了研究语言的性质，</p>
 
-<p>> x = _</p>
+<p>人们从两个角度出发，</p>
 
-<p>> :sprint y</p>
+<p>一个是从语言的识别角度来看，</p>
 
-<p>> y = _</p>
-
-<p>> :sprint z</p>
-
-<p>> y = _</p>
+<p>有一套<strong>自动机理论</strong>。</p>
 
 <p><br/></p>
 
-<p>这里“:sprint”只是打印表达式，而不会求值它。</p>
+<p>另一个是从语言的生成角度来看，</p>
 
-<p>“_”用来表示“未求值的”，或称为一个“<strong>thunk</strong>”。</p>
-
-<p><br/></p>
-
-<p>thunk在使用的时候，<strong>并不一定被完全求值</strong>。</p>
-
-<p>> let first = (u, _) = u</p>
-
-<p>> first z</p>
-
-<p>> 1</p>
+<p>有乔姆斯基开创的<strong>形式语言理论</strong>。</p>
 
 <p><br/></p>
 
-<p>> :sprint x</p>
+<p>而这两个理论之间，</p>
 
-<p>> x = 1</p>
-
-<p>> :sprint y</p>
-
-<p>> y = _</p>
-
-<p>> :sprint z</p>
-
-<p>> y = (1, _)</p>
+<p>又是互相关联的。</p>
 
 <p><br/></p>
 
-<p>first函数，只求值了第一个参数，</p>
+<p>在形式语言理论中，</p>
 
-<p>第二个参数，仍然是未求值的。</p>
+<p>一个形式语言，</p>
 
-<p><br/></p>
-
-<p>实际上，<strong>thunk的求值是分层次的</strong>，</p>
-
-<p>为了尽量少的求值，每一次只将表达式求值为<strong>WHNF</strong>（weak head normal form），</p>
-
-<p>其中的子表达式，仍然是未求值的thunk。</p>
+<p>是一个字母表上的某些有限长字符串的集合。</p>
 
 <p><br/></p>
 
-<p>如果不能满足需要，</p>
-
-<p>就会继续将对应的sub-thunk，再求值为WHNF。</p>
+<p><strong>这给了我们用有限来描述无限的能力</strong>。</p>
 
 <p><br/></p>
 
-<h2><strong>Weak head normal form</strong></h2>
+<h2><strong>文法</strong></h2>
 
-<p>一个WHNF（weak head normal form），</p>
+<p>为了描述语言的结构，</p>
 
-<p>是表达式求值的一种结果形式。</p>
+<p>John Backus和Peter Naur创造了一种<strong>语言的描述方法</strong>，</p>
 
-<p><br/></p>
-
-<p>WHNF，只将表达式求值到，</p>
-
-<p>最外层的<strong>值构造器</strong>或者<strong>lambda抽象</strong>为止。</p>
+<p>称为BNF（Backus-Naur Form）。</p>
 
 <p><br/></p>
 
-<p>例如：以下表达式是WHNF，</p>
+<p>expr ::= term {&ldquo;+&rdquo; term | &ldquo;-&rdquo; term}.</p>
 
-<p>(1 + 1, 2 + 2)，最外层是一个值构造器，(,)</p>
+<p>term ::= factor {&ldquo;*&rdquo; factor | &ldquo;/&rdquo; factor}.</p>
 
-<p>\x -> 2 + 2，最外层是一个lambda抽象，</p>
-
-<p>&lsquo;h&rsquo; : (&ldquo;e&rdquo; ++ &ldquo;llo&rdquo;)，最外层是一个值构造器，(:)</p>
+<p>factor ::= &ldquo;(&rdquo; expr &ldquo;)&rdquo;.</p>
 
 <p><br/></p>
 
-<p>以下表达式不是WHNF：</p>
+<p>BNF表示中的每一行，称为一个“产生式”，</p>
 
-<p>1 + 2，最外层是加法函数调用，(+)</p>
+<p>::=表示左边的项可以由右边的项来产生。</p>
 
-<p>(\x -> x + 1) 2，最外层是一个匿名函数调用</p>
+<p>其中，用引号括起来的项，称为“终结符”，相当于字面量。</p>
 
-<p>&ldquo;he&rdquo; ++ &ldquo;llo"，最外层是列表的连接函数调用，(++)</p>
+<p>不用引号括起来的项，称为“非终结符”，它们可以由其他项组成。</p>
 
 <p><br/></p>
 
-<p>因此，</p>
+<p>{&hellip;}是约定好了的符号，</p>
 
-<p>表达式(1 + 1, 2 + 2)会按需首先求值为(thunk1,thunk2),</p>
+<p>用来表示它包含的项可以出现0次或更多次。</p>
 
-<p>如果还需要thunk1的值，thunk1会求值为2。</p>
+<p><br/></p>
+
+<p>常用的还有[&hellip;]，</p>
+
+<p>用来表示，可以出现也可以不出现。</p>
+
+<p><br/></p>
+
+<p>以上BNF描述了算术表达式的语法。</p>
+
+<p>例如：1*(2+3)，可以从exp开始生成出来，</p>
+
+<p>expr</p>
+
+<p>=> factor &ldquo;*&rdquo; factor</p>
+
+<p>=> factor &ldquo;*&rdquo; &ldquo;(&rdquo; expr &ldquo;)&rdquo;</p>
+
+<p>=> factor &ldquo;*&rdquo; &ldquo;(&rdquo; term &ldquo;+&rdquo; term &ldquo;)&rdquo;</p>
+
+<p>=> 1 &ldquo;*&rdquo; &ldquo;(&rdquo; 2 &ldquo;+&rdquo; 3 &ldquo;)&rdquo;</p>
+
+<p><br/></p>
+
+<p>expr称为“开始符号”。</p>
+
+<p><br/></p>
+
+<p>综上，</p>
+
+<p>一个语言的所有终结符，非终结符，产生式，开始符号，</p>
+
+<p>构成了这个<strong>语言的文法</strong>。</p>
+
+<p><br/></p>
+
+<h2><strong>语言的分类</strong></h2>
+
+<p>乔姆斯基，根据语言文法产生式的特点，</p>
+
+<p>把语言分为了4类。</p>
+
+<p><br/></p>
+
+<p>不同的文法，能描述不能范围的语言集合。</p>
+
+<p>虽然它们都是无限集。</p>
+
+<p><br/></p>
+
+<p>0型文法，能力最强，可以产生递归可枚举语言。</p>
+
+<p>1型文法，能力稍弱，可以产生上下文有关语言。</p>
+
+<p>2型文法，能力次之，可以产生上下文无关语言。</p>
+
+<p>3型文法，能力最弱，可以产生正则语言。</p>
+
+<p><br/></p>
+
+<p>这些文法，</p>
+
+<p>建立了一个从大到小，互相包含的，</p>
+
+<p>语言集合的层次关系。</p>
 
 <p><br/></p>
 
 <p>例如：</p>
 
-<p>testFn1 _ = 1</p>
+<p>正则语言，一定是上下文无关语言，</p>
 
-<p>testFn2 (<em>, </em>) = 2</p>
-
-<p>tettFn3 (u, _) = 3</p>
-
-<p>这3个函数会导致表达式(1 + 1, 2 + 2)进行<strong>不同层次</strong>的求值。</p>
+<p>反之，则不成立。</p>
 
 <p><br/></p>
 
-<h2><strong>seq</strong></h2>
+<p>其中，</p>
 
-<p>为了控制求值程度，</p>
+<p>2型和3型文法用的最多，有特殊的名字，</p>
 
-<p>GHC内置了seq函数。</p>
-
-<p><br/></p>
-
-<p>> :t seq</p>
-
-<p>> seq :: a -> b -> b</p>
+<p>称为，<strong>上下文无关文法</strong>，<strong>正则文法</strong>。</p>
 
 <p><br/></p>
 
-<p>它表示，<strong>在结果求值为WHNF之前</strong>，</p>
+<p>我们似乎发现了，</p>
 
-<p><strong>会先将seq的第一个参数求值为WHNF</strong>。</p>
+<p>这里也出现了“正则”两个字，</p>
 
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>u = 1</p>
-
-<p>v = (u, u)</p>
+<p>难道与正则表达式有关？</p>
 
 <p><br/></p>
 
-<p>x = 1</p>
+<p>确实，</p>
 
-<p>y = seq x (x, x)</p>
+<p>正则表达式，是正则文法的便利写法。</p>
 
-<p><br/></p>
-
-<p>> :sprint u</p>
-
-<p>> u = _</p>
-
-<p>> :sprint v</p>
-
-<p>> v = _</p>
+<p><strong>正则表达式所描述的语言，是正则语言</strong>。</p>
 
 <p><br/></p>
 
-<p>> :sprint x</p>
+<p>而JSON，HTML，包含嵌套注释文本，</p>
 
-<p>> x = _</p>
+<p>它们都属于<strong>上下文无关语言</strong>，</p>
 
-<p>> :sprint y</p>
-
-<p>> y = _</p>
+<p>正则表达式是无能为力的。</p>
 
 <p><br/></p>
 
-<p>我们定义一个函数，用来把参数求值WHNF，</p>
+<p>那么如何判断语言不是正则语言呢？</p>
 
-<p>> let whnf (<em>, </em>) = ()</p>
+<p>这还需要用到<a href="http://baike.baidu.com/link?url=QF5rQxOWA6OA8NpOrQv3ThcPGZ2FF0Wzu7BWjwnLOtJE4AFgX2IN9pf6FWDVuOxV98GdMGWoHNMal5b61j7h__">泵引理</a>这个重要工具。</p>
 
-<p><br/></p>
-
-<p>则，</p>
-
-<p>> whnf v</p>
-
-<p>> ()</p>
-
-<p>> whnf y</p>
-
-<p>> ()</p>
+<p>水深危险。</p>
 
 <p><br/></p>
 
-<p>> :sprint u</p>
+<h2><strong>自动机</strong></h2>
 
-<p>> u = _</p>
+<p>自动机，是一种假想的机器，</p>
 
-<p>> :sprint v</p>
+<p>常被人提及的是“图灵机”。</p>
 
-<p>> v = (<em>, </em>)</p>
-
-<p><br/></p>
-
-<p>> :sprint x</p>
-
-<p>> x = 1</p>
-
-<p>> :sprint y</p>
-
-<p>> y = (1, 1)</p>
+<p>它是各种自动机中运算能力最强的机器。</p>
 
 <p><br/></p>
 
-<p>使用seq控制求值深度，</p>
+<p>当初为了准确定义什么是“算法”，</p>
 
-<p>可以防止创建过多的thunk。</p>
+<p>图灵发明了它。</p>
+
+<p><br/></p>
+
+<p>图灵机有一条无限长的纸带，</p>
+
+<p>纸带分成了一个个小方格，每个方格有不同的颜色。</p>
+
+<p>有一个具有内部状态的机器头在纸带上移来移去。</p>
+
+<p><br/></p>
+
+<p>机器头根据自身状态和当前方格的颜色，</p>
+
+<p>来决定下一步的位置。</p>
+
+<p><br/></p>
+
+<p>这么简易的装置，</p>
+
+<p>居然具有和现代计算机同等的计算能力。</p>
+
+<p>实际上，现代计算机就是从这个思想逐渐演化而来的。</p>
+
+<p><br/></p>
+
+<p>自动机，也可以用来识别语言。</p>
+
+<p>而且，与形式语言还有着<strong>优美的对应关系</strong>。</p>
+
+<p><br/></p>
+
+<p>图灵机，能识别0型文法所生成的语言。</p>
+
+<p>为图灵机加上限制，<strong>下推自动机</strong>，识别上下文无关语言，</p>
+
+<p><strong>有穷自动机</strong>，识别正则语言。</p>
+
+<p><br/></p>
+
+<p>在程序语言的编译器设计中，</p>
+
+<p>这些理论是非常重要的。</p>
+
+<p><br/></p>
+
+<p>我们通过正则文法，构建有穷自动机，</p>
+
+<p>对字符流进行<strong>分词</strong>（tokenize）。</p>
+
+<p>通过上下文无关文法，构建下推自动机，</p>
+
+<p>对词汇流进行<strong>解析</strong>（parse）。</p>
+
+<p><br/></p>
+
+<h2><strong>计算模型</strong></h2>
+
+<p><strong>形式语言</strong>和<strong>自动机</strong>，</p>
+
+<p>可以看做是两种<strong>计算模型</strong>，</p>
+
+<p>它们从不同的角度描述了同一个问题。</p>
+
+<p><br/></p>
+
+<p>其他的计算模型，还有很多。</p>
+
+<p><br/></p>
+
+<p><strong>lambda演算</strong>就是一个，</p>
+
+<p>它是一个符号化的形式系统，</p>
+
+<p>用来研究函数及其函数的调用。</p>
+
+<p><br/></p>
+
+<p><strong>递归函数论</strong>，又是一个，</p>
+
+<p>它从递归的角度，</p>
+
+<p>为可计算性划分了界限。</p>
+
+<p><br/></p>
+
+<p><strong>命题逻辑</strong>，也是，</p>
+
+<p>它是逻辑系统的演算规则，</p>
+
+<p>用来研究推理过程。</p>
+
+<p><br/></p>
+
+<p>然而，这些计算模型的计算能力，</p>
+
+<p>都等价于图灵机。</p>
+
+<p><br/></p>
+
+<p>这一结论称为，Church-Turing论题。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>当我们在REPL中输入一个表达式时，</p>
+<p>各种计算模型，虽然在能力上是相同的，</p>
 
-<p>实际上调用了print函数，</p>
+<p>但是它们<strong>各有所长</strong>，</p>
 
-<p>它会对表达式完全求值。</p>
-
-<p><br/></p>
-
-<p>因此，表达式求值的层次问题，</p>
-
-<p><strong>是很难从REPL中看出来的</strong>。</p>
+<p>于是被用到了形形色色的地方。</p>
 
 <p><br/></p>
 
-<p>另一方面，WHNF将求值过程分成了一系列节点，</p>
+<p>例如，</p>
 
-<p>能清晰的刻画求值程度，</p>
+<p>形式语言，可以用来研究语言的结构，</p>
 
-<p>这可能是我们学习Haskell入门的起点吧。</p>
+<p>自动机，可以用来识别语言。</p>
+
+<p>lambda演算，可以用来研究语言的操作语义。</p>
+
+<p>递归函数论，可以用来研究语言的指称语义。</p>
+
+<p>命题逻辑，可以用来研究语言的类型系统。</p>
+
+<p><br/></p>
+
+<p>编程世界，</p>
+
+<p>原来这么好玩。</p>
+
+<p><br/></p>
+
+<p>其实编程，不就是输入A到Z吗？</p>
 
 <p><br/></p>
 
 <p>参考：</p>
 
-<p><a href="">Haskell/Denotational semantics</a></p>
+<p><a href="http://book.douban.com/subject/1709302/">数学.计算.逻辑</a></p>
 
-<p><a href="https://en.wikibooks.org/wiki/Haskell/Laziness">Haskell/Laziness</a></p>
+<p><a href="http://book.douban.com/subject/2179488/">形式语言与自动机理论</a></p>
 
-<p><a href="http://stackoverflow.com/questions/6872898/haskell-what-is-weak-head-normal-form">Haskell: What is Weak Head Normal Form?</a></p>
+<p><a href="http://book.douban.com/subject/1729578/">A Mathematical Introduction to Logic</a></p>
 
-<p><a href="http://book.douban.com/subject/24294415/">Parallel and Concurrent Programming in Haskell</a></p>
+<p><a href="http://book.douban.com/subject/10482195/">Language Implementation Patterns</a></p>
 
-<p><a href="https://hackhands.com/lazy-evaluation-works-haskell/">How Lazy Evaluation Works in Haskell</a></p>
+<p><a href="http://book.douban.com/subject/20436488/">编译器设计</a></p>
 
-<p><a href="http://www.vex.net/~trebla/haskell/lazy.xhtml">Lazy Evaluation of Haskell</a></p>
+<p><a href="http://book.douban.com/subject/10779604/">图灵的秘密</a></p>
+
+<p><a href="http://book.douban.com/subject/4323391/">Lambda-Calculus and Combinators</a></p>
+
+<p><a href="http://book.douban.com/subject/1318672/">Types and programming languages</a></p>
+
+<p><a href="http://book.douban.com/subject/1291204/">哥德尔.艾舍尔.巴赫_集异璧之大成</a></p>
 </div>
   
   
@@ -529,7 +570,7 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (5)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (6)</a></li>
 <li class='category'><a href='/blog/categories/mind/'>mind (31)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
@@ -538,6 +579,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/06/08/algebraic-data-type/">代数数据类型的语法和语义</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/06/02/requirement-change/">如何应对需求变更</a>
@@ -573,10 +618,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/03/14/alphago/">观看AlphaGo与李世石比赛有感</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/03/11/tools/">论工具</a>
       </li>
     
   </ul>

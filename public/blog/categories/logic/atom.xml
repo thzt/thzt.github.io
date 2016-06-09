@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Logic | 何幻]]></title>
   <link href="https://thzt.github.io/blog/categories/logic/atom.xml" rel="self"/>
   <link href="https://thzt.github.io/"/>
-  <updated>2016-06-05T10:01:11+08:00</updated>
+  <updated>2016-06-09T13:57:24+08:00</updated>
   <id>https://thzt.github.io/</id>
   <author>
     <name><![CDATA[thzt]]></name>
@@ -12,6 +12,338 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[代数数据类型的语法和语义]]></title>
+    <link href="https://thzt.github.io/blog/2016/06/08/algebraic-data-type/"/>
+    <updated>2016-06-08T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2016/06/08/algebraic-data-type</id>
+    <content type="html"><![CDATA[<script src="https://thzt.github.io/thirdpart/jQuery/jquery-1.11.1.js"></script>
+
+
+<p><link href="https://thzt.github.io/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
+
+<script src="https://thzt.github.io/thirdpart/KaTeX/katex.min.js"></script>
+
+
+<script src="https://thzt.github.io/javascripts/katex.js"></script>
+
+
+<h3><strong>代数数据类型</strong></h3>
+
+<p>一个代数数据类型，由值的一些集合，以及这些集合之间的一些函数构成。</p>
+
+<p>这些函数都是一阶函数，不能以其他函数作为参数。</p>
+
+<p><br/></p>
+
+<h3><strong>泛代数</strong></h3>
+
+<p>泛代数（universal algebra）也称为等式逻辑（equational logic），</p>
+
+<p>是用于研究代数数据类型的一个数学框架。</p>
+
+<p><br/></p>
+
+<p>在泛代数中，代数数据类型的语法由代数项（algebraic term）描述，公理语义用项之间的等式集（a set of equations）描述，</p>
+
+<p>而指称语义对应于一个<span data-katex="\Sigma"></span>代数，操作语义通过给等式设定方向来表示。</p>
+
+<hr />
+
+<h2><strong>代数数据类型的语法</strong></h2>
+
+<h3><strong>代数项和签名</strong></h3>
+
+<p>一个代数项（algebraic term）由符号和类型来定义，</p>
+
+<p>这些信息放在一起称为代数项的签名（signature）。</p>
+
+<p><br/></p>
+
+<p>构成代数项的基本类型称为sort。</p>
+
+<p><br/></p>
+
+<p>一个签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>，由以下几个部分构成，</p>
+
+<p>（1）以sort为元素构成的集合</p>
+
+<p>（2）sort上函数符号的集合<span data-katex="F=\left \{ f:s_1\times \cdots \times s_k\rightarrow s \right \}"></span></p>
+
+<p>其中，<span data-katex="s_1,\cdots ,s_k,s\in S"></span>，<span data-katex="f"></span>称为类型化的函数符号，</p>
+
+<p>每个函数符号的类型是唯一的。</p>
+
+<p><br/></p>
+
+<p>例如，自然数表达式的签名是<span data-katex="\Sigma_N=\left \langle S,F \right \rangle"></span>，</p>
+
+<p>其中<span data-katex="S=\left \{ nat \right \}"></span>，只包含一个sort，</p>
+
+<p><span data-katex="F"></span>给出以下几个函数符号，</p>
+
+<p><span data-katex="0:nat"></span>，<span data-katex="1:nat"></span>，<span data-katex="+:nat\times nat\rightarrow nat"></span>，<span data-katex="*:nat\times nat\rightarrow nat"></span>。</p>
+
+<p>习惯上为了节省空间，通常把签名写成一个表格形式，</p>
+
+<p><span data-katex="sorts:nat"></span></p>
+
+<p><span data-katex="fctns:0,1:nat"></span></p>
+
+<p><span data-katex="+,*:nat\times nat\rightarrow nat"></span></p>
+
+<p><br/></p>
+
+<h3><strong>变量的指派</strong></h3>
+
+<p>一个指派（sort assignment），是如下一个有限集合，用来指定变量的类型，</p>
+
+<p><span data-katex="\Gamma=\left \{ x_1:s_1,\cdots ,x_k:s_k \right \}"></span></p>
+
+<p>不能为同一个变量指派不同的sort。</p>
+
+<p><br/></p>
+
+<h3><strong>合法代数项的集合</strong></h3>
+
+<p>基于签名<span data-katex="\Sigma"></span>和指派<span data-katex="\Gamma"></span>，可以定义一个sort为<span data-katex="s"></span>的代数项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>，</p>
+
+<p>它满足以下几个条件，</p>
+
+<p>（1）如果<span data-katex="x:s\in \Gamma"></span>则<span data-katex="x\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
+
+<p>（2）如果<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>且<span data-katex="M_i\in Terms^{s_i}\left ( \Sigma,\Gamma \right )"></span>，</p>
+
+<p><span data-katex="i=1,\cdots ,n"></span>，则<span data-katex="fM_1\cdots M_k\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
+
+<hr />
+
+<h2><strong>代数数据类型的指称语义</strong></h2>
+
+<h3><strong><span data-katex="\Sigma"></span>代数</strong></h3>
+
+<p><span data-katex="\Sigma"></span>代数是一种数学结构，它为代数项提供了含义或指称语义。</p>
+
+<p><br/></p>
+
+<p>一个<span data-katex="\Sigma"></span>代数，包含了一个或多个集合，称为载体（carrier），</p>
+
+<p>以及一些特征元素，和载体上的一些一阶函数，</p>
+
+<p><span data-katex="f:A_1\times \cdots \times A_k \rightarrow A"></span></p>
+
+<p><br/></p>
+
+<p>例如，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,* \right \rangle"></span></p>
+
+<p>具有载体<span data-katex="N"></span>，它是自然数集，</p>
+
+<p>具有特征元素，<span data-katex="0,1\in N"></span>，</p>
+
+<p>以及函数，<span data-katex="+,*:N \times N \rightarrow N"></span>。</p>
+
+<p>其中，特征元素可以看成零元函数。</p>
+
+<p><br/></p>
+
+<p>带有多个载体的例子是<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}_{pcf}=\left \langle N,B,0,1,\cdots ,+,true,false,Eq?,\cdots ,\right \rangle"></span></p>
+
+<p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
+
+<p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
+
+<p><br/></p>
+
+<h3><strong>代数项的解释</strong></h3>
+
+<p>我们说<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>是与所有合法代数项<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>对应的<span data-katex="\Sigma"></span>代数，</p>
+
+<p>指的是如下对应关系成立，</p>
+
+<p>（1）每一个sort，<span data-katex="s\in S"></span>，恰好对应一个载体<span data-katex="A^s"></span></p>
+
+<p>（2）每一个函数符号<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>，恰好对应一个函数<span data-katex="\mathscr{I}(f):A^{s_1}\times \cdots \times A^{s_k}\rightarrow A^s"></span></p>
+
+<p>习惯上把<span data-katex="\mathscr{I}(f)"></span>写成<span data-katex="f^{\mathscr{A}}"></span>。</p>
+
+<p><br/></p>
+
+<h3><strong>含变量代数项的解释</strong></h3>
+
+<p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射。</p>
+
+<p><span data-katex="\eta :\mathscr{V} \rightarrow\cup _sA^s"></span></p>
+
+<p>需要环境的原因是，对于含变量<span data-katex="x"></span>的项<span data-katex="M"></span>，叙述<span data-katex="M"></span>的含义必须先给<span data-katex="x"></span>指定一个确定的值。</p>
+
+<p>如果对于每个<span data-katex="x:s\in \Gamma"></span>，都有<span data-katex="\eta (x)\in A^s"></span>，就说环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>。</p>
+
+<p><br/></p>
+
+<p>假定<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的一个环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，</p>
+
+<p>则可以把环境<span data-katex="\eta"></span>下的任何项<span data-katex="M\in Terms\left ( \Sigma ,\Gamma \right )"></span>的含义<span data-katex="\mathscr{A}[[M]]\eta"></span>定义如下，</p>
+
+<p>（1）<span data-katex="\mathscr{A}[[M]]\eta =\eta (x)"></span></p>
+
+<p>（2）<span data-katex="\mathscr{A}[[fM_1\cdots M_k]]\eta =f^{\mathscr{A}}(\mathscr{A}[[M_1]]\eta ,\cdots ,\mathscr{A}[[M_k]]\eta )"></span></p>
+
+<p><br/></p>
+
+<p>若<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在上下文中是明确的，通常省略<span data-katex="\mathscr{A}"></span>而直接写<span data-katex="[[M]]\eta"></span>，</p>
+
+<p>若<span data-katex="M"></span>中没有变量，则<span data-katex="\mathscr{A}[[M]]\eta"></span>不依赖于<span data-katex="\eta"></span>，可以写为<span data-katex="\mathscr{A}[[M]]"></span>。</p>
+
+<hr />
+
+<h2><strong>语法和语义的关系</strong></h2>
+
+<h3><strong>可靠性与完备性</strong></h3>
+
+<p>代数数据类型的公理语义是由代数项之间的等式集给出的，签名和等式集合称代数规范（algebraic specification）。</p>
+
+<p>一个代数规范，或者可以使用等式证明系统推导出代数项之间的其他等式，或者可以检验代数项对应的<span data-katex="\Sigma"></span>代数是否满足这些等式的要求。</p>
+
+<p><br/></p>
+
+<p>代数项对应的<span data-katex="\Sigma"></span>代数并不是唯一的。</p>
+
+<p>从一个代数规范推导得到的等式，在该规范对应的任何<span data-katex="\Sigma"></span>代数中都成立，就称该代数证明系统是可靠的（sound）。</p>
+
+<p>一个代数规范对应的任何<span data-katex="\Sigma"></span>代数中都成立的等式，在该规范中都可证，就称该代数证明系统是完备的（complete）。</p>
+
+<p><br/></p>
+
+<h3><strong>等式的可满足性</strong></h3>
+
+<p>等式（equation）是一个公式<span data-katex="M=N[\Gamma ]"></span>，其中<span data-katex="M,N\in Terms^s\left ( \Sigma ,\Gamma \right )"></span>，<span data-katex="s\in S"></span>。</p>
+
+<p>如果环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，且<span data-katex="[[M]]\eta =[[N]]\eta"></span>，</p>
+
+<p>就说<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在环境<span data-katex="\eta"></span>下满足<span data-katex="M=N[\Gamma ]"></span>，记为</p>
+
+<p><span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span></p>
+
+<p><br/></p>
+
+<p>对于含变量的项，我们更感兴趣的是一个等式是否在变量所有可能的取值情况下都成立，</p>
+
+<p>而不是在一个特别的环境中成立。</p>
+
+<p>如果对于满足<span data-katex="\Gamma"></span>的任何一个环境<span data-katex="\eta"></span>都有<span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span>，</p>
+
+<p>就可以说，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>满足等式<span data-katex="M=N[\Gamma ]"></span>，记为</p>
+
+<p><span data-katex="\mathscr{A} \models M=N[\Gamma]"></span></p>
+
+<p><br/></p>
+
+<p>可满足性也可以扩展到等式集和代数集，</p>
+
+<p>设<span data-katex="E"></span>是一个等式集，如果<span data-katex="\mathscr{A}"></span>满足所有等式，就说<span data-katex="\mathscr{A}"></span>满足<span data-katex="E"></span>。</p>
+
+<p>类似的，若<span data-katex="C"></span>是一类<span data-katex="\Sigma"></span>代数，且对每个<span data-katex="\mathscr{A}\in C"></span>都有<span data-katex="\mathscr{A}\models M=N[\Gamma ]"></span>，则<span data-katex="C\models M=N[\Gamma ]"></span></p>
+
+<p><br/></p>
+
+<p>若任何一个<span data-katex="\Sigma"></span>代数都满足代数项之间的等式<span data-katex="M=N[\Gamma ]"></span>，就说该等式是永真的（valid），写为<span data-katex="\models M=N[\Gamma ]"></span>。</p>
+
+<p>例如，<span data-katex="x=x[x:s]"></span>就是永真的。</p>
+
+<p><br/></p>
+
+<p>若<span data-katex="\mathscr{A}"></span>满足签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>上的所有等式，就说<span data-katex="\Sigma"></span>代数是平凡的（trivial）。</p>
+
+<p><br/></p>
+
+<h3><strong>语义蕴含（semantic implication）</strong></h3>
+
+<p>若满足等式集<span data-katex="E"></span>的每一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>都满足等式<span data-katex="M=N[\Gamma ]"></span>，</p>
+
+<p>则称签名<span data-katex="\Sigma"></span>上的等式集<span data-katex="E"></span>在语义上蕴含等式<span data-katex="M=N[\Gamma ]"></span>，记为，</p>
+
+<p><span data-katex="E\models M=N[\Gamma ]"></span></p>
+
+<p><br/></p>
+
+<p>有了签名<span data-katex="\Sigma"></span>和等式集<span data-katex="E"></span>，我们定义代数规范<span data-katex="Spec=\left \langle \Sigma,E \right \rangle"></span>，</p>
+
+<p>则满足代数规范的，在所有<span data-katex="\Sigma"></span>代数中都成立的等式，就是那些由等式集<span data-katex="E"></span>语义蕴含的等式。</p>
+
+<p><br/></p>
+
+<h3><strong>语义理论</strong></h3>
+
+<p>如果等式集<span data-katex="E"></span>在语义蕴含下封闭（closed），则把它称为一个理论（theory）。</p>
+
+<p>更准确的说，如果<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语义理论（semantic theory）。</p>
+
+<p>一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的理论<span data-katex="Th(\mathscr{A})"></span>，就是在<span data-katex="\mathscr{A}"></span>中成立的所有等式的集合。</p>
+
+<p>可以证明一个<span data-katex="\Sigma"></span>代数的理论是一个语义理论。</p>
+
+<p><br/></p>
+
+<h3><strong>形式证明</strong></h3>
+
+<p>一个证明系统的推导规则如下，<span data-katex="\frac{antecedent}{consequent}"></span>，</p>
+
+<p>使得从前件（antecedent）的任何实例出发，通过使用该证明系统的公理和其他规则，</p>
+
+<p>可以推导出后件（consequent）的相应实例。</p>
+
+<p><br/></p>
+
+<p>例如：<span data-katex="\frac{M=N[\Gamma ],N=P[\Gamma ],P=Q[\Gamma ]}{M=Q[\Gamma ]}"></span></p>
+
+<p><br/></p>
+
+<p>若证明了一条规则是可推导的，则能够把它当做系统的一条证明规则来使用。</p>
+
+<p>如果某条规则没有前件，则称它是证明系统的一条公理（axiom）。</p>
+
+<p><br/></p>
+
+<p>我们说等式<span data-katex="M=N[\Gamma ]"></span>是可证的（provable），记为<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
+
+<p>如果从<span data-katex="E"></span>到<span data-katex="M=N[\Gamma ]"></span>存在一个等式序列，</p>
+
+<p>使得每个等式或者是公理（axiom），或者是<span data-katex="E"></span>中的等式，</p>
+
+<p>或者是从序列中之前出现的一个或多个等式经一步推导得到的结果。</p>
+
+<p><br/></p>
+
+<h3><strong>语法理论</strong></h3>
+
+<p>若在可证性下等式集<span data-katex="E"></span>是封闭的，则称<span data-katex="E"></span>是一个语法理论（syntactic theory）。</p>
+
+<p>换句话说，如果<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语法理论。</p>
+
+<p><span data-katex="E"></span>的语法理论<span data-katex="Th(E)"></span>就是从<span data-katex="E"></span>可证的所有等式的集合。</p>
+
+<p><br/></p>
+
+<h3><strong>等式证明系统的性质</strong></h3>
+
+<p>可靠性（soundness）：若<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="E\models M=N[\Gamma ]"></span></p>
+
+<p>演绎完备性（deductive completeness）：若<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
+
+<hr />
+
+<h2><strong>结语</strong></h2>
+
+<p>《<a href="https://book.douban.com/subject/1761918/">Foundations for Programming Languages</a>》是一本好书，</p>
+
+<p>可是中文的翻译《<a href="https://book.douban.com/subject/1944729/">程序设计语言理论基础</a>》简直是晦涩难懂，</p>
+
+<p>把sort翻译为『类子』，把signature翻译为『基调』，容易让人误以为和同调代数有什么联系。</p>
+
+<p>原版书拿到后，看起来轻松了不少，这里只是对第三章部分内容做了个小结，以便卸下包袱轻装上阵。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[类型理论之拙见]]></title>
@@ -1316,259 +1648,6 @@
 <p><a href="http://www.logicmatters.net/tyl/">Teach Yourself Logic 2015</a></p>
 
 <p><a href="http://book.douban.com/subject/2878521/">logic and structure</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[模型观]]></title>
-    <link href="https://thzt.github.io/blog/2015/06/24/model/"/>
-    <updated>2015-06-24T00:00:00+08:00</updated>
-    <id>https://thzt.github.io/blog/2015/06/24/model</id>
-    <content type="html"><![CDATA[<p>Robert Sedgewick/Kevin Wayne的《算法》一书中，</p>
-
-<p>强调了科学方法，</p>
-
-<p><br/></p>
-
-<p>细致的观察真实世界的特点。</p>
-
-<p><strong>根据观察结果提出假设模型</strong>。</p>
-
-<p>根据模型预测未来的事件。</p>
-
-<p>继续观察并核实预测的准确性。</p>
-
-<p>如此反复直到确认预测和观察一致。</p>
-
-<p><br/></p>
-
-<p>可是，</p>
-
-<p>我们永远也没法知道某个假设是否<strong>永远正确</strong>，</p>
-
-<p>我们只能验证它和我们的观察的一致性。</p>
-
-<p><br/></p>
-
-<p>爱因斯坦说，</p>
-
-<p>再多的实验也不一定能够证明我是对的，</p>
-
-<p>但只需要一个实验就能证明我是错的。</p>
-
-<p><br/></p>
-
-<p>科学方法可能大家都很清楚，</p>
-
-<p>但是遇到具体问题，</p>
-
-<p>人们却容易忽视它。</p>
-
-<p><br/></p>
-
-<p>实践是检验真理的唯一标准，</p>
-
-<p>大胆假设，小心求证，</p>
-
-<p>建立正确的<strong>模型观</strong>，</p>
-
-<p>可以少走很多弯路。</p>
-
-<p><br/></p>
-
-<h2><strong>模型与目标系统</strong></h2>
-
-<p>我们经常混淆<strong>模型</strong>与<strong>目标系统</strong>的区别，</p>
-
-<p>把符号“1”，“2”，“3”,&hellip;</p>
-
-<p>当做数学对象中的自然数本身。</p>
-
-<p><br/></p>
-
-<p>这只是用印刷符号对<strong>自然数</strong>进行建模，</p>
-
-<p>实际上还有不同的模型，</p>
-
-<p>除了阿拉伯数字，还有罗马数字，中国筹，等等，</p>
-
-<p>甚至还有Church number。</p>
-
-<p><br/></p>
-
-<p>这个世界上<strong>并没有本质的道理</strong>，</p>
-
-<p>因为，我们无法验证什么是绝对正确的。</p>
-
-<p><br/></p>
-
-<p>我们只能拿着模型来进行<strong>假设</strong>，</p>
-
-<p>然后通过实验<strong>验证</strong>它的准确性。</p>
-
-<p><br/></p>
-
-<p>使用模型，我们可以从不同侧面，</p>
-
-<p>对目标系统进行研究。</p>
-
-<p><br/></p>
-
-<h2><strong>模型的发展与多样性</strong></h2>
-
-<p>对观察结果提出的模型，</p>
-
-<p>是一直在发展的，</p>
-
-<p>并没有哪一个是终极的。</p>
-
-<p><br/></p>
-
-<p>当我们问“<strong>到底是什么</strong>”的时候，</p>
-
-<p><strong>其实是以静态的观点，分析动态发展中的事物</strong>。</p>
-
-<p><br/></p>
-
-<p>模型在不断修正和演进中，</p>
-
-<p>对目标系统做出更精确的<strong>解释</strong>。</p>
-
-<p><br/></p>
-
-<p>例如，lambda calculus，</p>
-
-<p>是一种计算模型，</p>
-
-<p>一开始是无类型的，</p>
-
-<p>但是同样也得不到类型系统的种种好处。</p>
-
-<p><br/></p>
-
-<p>因此lambda calculus就被扩展了，</p>
-
-<p>变成了typed lambda calculus的一个<strong>特例</strong>。</p>
-
-<p><br/></p>
-
-<p>对计算建模的方法也并<strong>不唯一</strong>，</p>
-
-<p>图灵机，combinatory logic，形式语言，等等，</p>
-
-<p>都是和lambda calculus具有相同计算能力的模型。</p>
-
-<p><br/></p>
-
-<h2><strong>编程语言</strong></h2>
-
-<p>编程语言是一种形式语言，</p>
-
-<p>不同的编程语言，只是用不同的一堆<strong>符号</strong>，</p>
-
-<p>按着不同的<strong>文法规则</strong>，</p>
-
-<p>对计算进行建模。</p>
-
-<p><br/></p>
-
-<p>根据形式语言理论，</p>
-
-<p>不受限文法，与图灵机等价。</p>
-
-<p><br/></p>
-
-<p>可以把不同的编程语言，</p>
-
-<p>看做计算过程的多样化模型。</p>
-
-<p><br/></p>
-
-<p>同样，它们的建模方式也在演化，</p>
-
-<p>语言的规范在发展。</p>
-
-<p><br/></p>
-
-<p>遇到具体问题，</p>
-
-<p><strong>我们需要选择合适的编程语言</strong>。</p>
-
-<p><br/></p>
-
-<p>而编程范型，</p>
-
-<p>是语义上的一种分类，</p>
-
-<p>并没有明确的界线。</p>
-
-<p><br/></p>
-
-<p>我们也没必要成见太深，</p>
-
-<p>强行把语言用在<strong>不适用</strong>的场景中。</p>
-
-<p><br/></p>
-
-<p>毕竟，语言是用来沟通和表达的。</p>
-
-<p><br/></p>
-
-<h2><strong>结语</strong></h2>
-
-<p>当我还是孩子的时候，</p>
-
-<p>对大自然，就喜欢问“到底是什么”，</p>
-
-<p>它指引我沿着科学之路越走越远。</p>
-
-<p><br/></p>
-
-<p>随着学习的深入，</p>
-
-<p>让我开始懂得<strong>反思问题本身</strong>，</p>
-
-<p>站在更高的角度。</p>
-
-<p><br/></p>
-
-<p>从模型角度来看，</p>
-
-<p>物理学就是对大自然现实世界的建模，</p>
-
-<p>耳熟能详的物理学理论，也只是<strong>可行的模型之一</strong>。</p>
-
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>牛顿的万有引力理论，</p>
-
-<p>爱因斯坦的广义相对论，</p>
-
-<p>都是引力理论。</p>
-
-<p><br/></p>
-
-<p>当然还有其他的引力理论，</p>
-
-<p><strong>他们都是数学模型，用来解释目标系统</strong>，</p>
-
-<p>并不是大自然本身。</p>
-
-<p><br/></p>
-
-<p>终极理论之梦，</p>
-
-<p>可能会随着认识的提高，</p>
-
-<p>不再成为问题了。</p>
-
-<p><br/></p>
-
-<p>就像“没有银弹”一样，</p>
-
-<p><strong>任何领域都没有一劳永逸的事情</strong>。</p>
 ]]></content>
   </entry>
   
