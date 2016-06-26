@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="想象力比知识更重要。 ——爱因斯坦 在大脑中第一个构想出来的人是天才， 后人只是一遍又一遍实现它最初的设想罢了。 call/cc如此， lisp语言本身又何尝不是？ 一堆括号字母和空格， 构筑了美妙的外观。 才有了后来者各种各样的实现。 这是一种自顶向下的设计思路， 用构想作为目的， 用实现来支撑 &hellip;">
+  <meta name="description" content="如果我们紧跟技术潮流的话， 就会发现， 日新月异的并不是技术本身， 而是人们对技术的宣传。 大小的商业集团， 为了争夺市场， 吹捧着他们的最佳实践， 掠夺着劳动力。 我们做着量产的事情， 拿着微薄的收入， 赚钱的事情怎么会让给我们呢， 推手们获得丰厚的利润。 在过去的任何年代， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/08/20/implementation-of-callcc/">Call/cc是怎样实现的</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/08/23/tendency/">潮流的推手</a></h1>
     
     
       <p class="meta">
@@ -83,710 +83,152 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-08-20T00:00:00+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-08-23T00:00:00+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>想象力比知识更重要。</p>
+  <div class="entry-content"><p>如果我们紧跟技术潮流的话，</p>
 
-<p>——爱因斯坦</p>
+<p>就会发现，</p>
 
-<p><br/></p>
-
-<p><strong>在大脑中第一个构想出来的人是天才，</strong></p>
-
-<p><strong>后人只是一遍又一遍实现它最初的设想罢了。</strong></p>
-
-<p><br/></p>
-
-<p>call/cc如此，</p>
-
-<p>lisp语言本身又何尝不是？</p>
-
-<p><br/></p>
-
-<p>一堆括号字母和空格，</p>
-
-<p>构筑了美妙的外观。</p>
-
-<p><br/></p>
-
-<p>才有了后来者各种各样的实现。</p>
-
-<p><br/></p>
-
-<p><strong>这是一种自顶向下的设计思路，</strong></p>
-
-<p>用构想作为目的，</p>
-
-<p>用实现来支撑。</p>
-
-<p><br/></p>
-
-<p>与测试驱动开发，</p>
-
-<p>有异曲同工之妙。</p>
-
-<p><br/></p>
-
-<h2><strong>放飞自己的想象力</strong></h2>
-
-<p><strong>假如</strong>，我们有了一堆符号，</p>
-
-<p>如何手动控制程序跳转？</p>
-
-<p><br/></p>
-
-<p>这个跳转方式，既然可以手动触发，</p>
-
-<p>那一定是可以调用的。(k)</p>
-
-<p><br/></p>
-
-<p>k是哪来的？</p>
-
-<p>一定是从什么地方创建的。</p>
-
-<p><br/></p>
-
-<p>跳转到哪里？</p>
-
-<p>一定是跳转到创建它的位置之后。</p>
-
-<p><br/></p>
-
-<p>这个k是怎么过来的？</p>
-
-<p>它一定当做参数传递过来的。</p>
-
-<p><br/></p>
-
-<p>k需要传递参数过去吗？</p>
-
-<p>最好是需要，我们不想纯粹依赖副作用编程。(k 1)</p>
-
-<p><br/></p>
-
-<p><strong>假如</strong>我们已经有k了，</p>
-
-<p>并且在一个函数执行过程中调用了它，</p>
-
-<p>(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;0</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(k 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;3)</p>
-
-<p>执行完(k 2)后面的3还执行吗？</p>
-
-<p>不执行了。</p>
-
-<p>当前执行的这个函数还返回吗？</p>
-
-<p>我们希望直接跳转到k定义的位置了。</p>
-
-<p><br/></p>
-
-<p>那么函数的执行过程就要重新理解了，</p>
-
-<p>先求值函数体，</p>
-
-<p>然后跳转到给定的位置。</p>
-
-<p><br/></p>
-
-<p>函数执行的结果，</p>
-
-<p>并不一定是“返回”到调用的位置了。</p>
-
-<p><br/></p>
-
-<p>这个跳转可否理解成调用了k呢？</p>
-
-<p>在函数调用处定义k，</p>
-
-<p>执行完以后，用函数体的值v，调用k，</p>
-
-<p>(k v)。</p>
-
-<p><br/></p>
-
-<p>嗯嗯，</p>
-
-<p>就这么干，先从函数体执行后，</p>
-
-<p>可以控制跳转位置开始。</p>
-
-<p><br/></p>
-
-<h2><strong>把以后要做什么当做参数传过去</strong></h2>
-
-<p>我们先看看，</p>
-
-<p>旧观念中的“函数返回”是怎么绑架我们思维的。</p>
-
-<p><strong>为什么函数一定要“返回”？</strong></p>
-
-<p><br/></p>
-
-<p>实际上，从机器的角度来看，</p>
-
-<p>并不存在自动的返回机制，</p>
-
-<p>调用一个函数，会把调用前的代码位置，先存起来。</p>
-
-<p>然后去执行函数体的中代码，这可能在代码段的其他位置，</p>
-
-<p>执行完后，再把以前存起来的位置恢复，</p>
-
-<p>就完成了“返回”操作。</p>
-
-<p><br/></p>
-
-<p>现在我们不想这么干了，</p>
-
-<p>我们不想让底层实现自动决定如何返回。</p>
-
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>(define (fn x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x 1))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>(define (gn y)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>(gn 2)</p>
-
-<p><br/></p>
-
-<p>我们调用了gn，gn又调用了fn，</p>
-
-<p>fn执行完以后，返回gn，然后gn又返回，</p>
-
-<p>像fn这样返回以后，调用者也返回的调用，称为<strong>尾调用</strong>。</p>
-
-<p><br/></p>
-
-<p>尾调用fn，本来没有必要返回gn内部，</p>
-
-<p>直接返回gn该返回的位置就行了。</p>
-
-<p><br/></p>
-
-<p><strong>这就要求我们把函数执行完以后，</strong></p>
-
-<p><strong>把“要做什么”当做参数传过去。</strong></p>
-
-<p><br/></p>
-
-<p>(define (final-cont v)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v))</p>
-
-<p><br/></p>
-
-<p>(define (fn x cont)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (+ x 1)))</p>
-
-<p><br/></p>
-
-<p>(define (gn y cont)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y (lambda (v)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(cont v))))</p>
-
-<p><br/></p>
-
-<p>我们在REPL中，一个表达式求值以后，就是打印它。</p>
-
-<p>所以，我们创建一个最终要做的事情，final-cont</p>
-
-<p><br/></p>
-
-<p>先调用fn试试。</p>
-
-<p>(fn 2 final-cont)</p>
-
-<p>果然打印出了3。</p>
-
-<p><br/></p>
-
-<p>因为我们把打印这件事当做函数传过去了，</p>
-
-<p>随时都可以调用。</p>
-
-<p><br/></p>
-
-<p>至于(cont (+ x 1))执行完后，fn不是还要返回的吗？</p>
-
-<p>我们暂时可以认为是无用的数据，丢弃了，</p>
-
-<p>后面再深入讨论。</p>
-
-<p><br/></p>
-
-<p>然后再调用(gn 2)试试。</p>
-
-<p>(gn 2 final-cont)</p>
-
-<p>就会去调用</p>
-
-<p>(fn y (lambda (v)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont v)))</p>
-
-<p>这里cont是final-cont</p>
-
-<p><br/></p>
-
-<p>然后调用fn了，(cont (+ x 1))</p>
-
-<p>fn中的cont就是</p>
-
-<p>(lambda (v)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(final-cont v))</p>
-
-<p><br/></p>
-
-<p>结果也是打印了3，正确输出。</p>
-
-<p><br/></p>
-
-<p>这是一个常函数，为什么要执行呢，</p>
-
-<p>这是模拟fn执行完以后返回gn。</p>
-
-<p>实际上，因为fn是尾调用，</p>
+<p>日新月异的并不是技术本身，</p>
 
-<p>我们只需要把gn中的cont传递给fn即可。</p>
+<p>而是人们对技术的宣传。</p>
 
 <p><br/></p>
 
-<p>(define (gn y cont)</p>
+<p>大小的商业集团，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y cont))</p>
+<p>为了争夺市场，</p>
 
-<p><br/></p>
-
-<p>gn中的cont本来是final-cont，</p>
-
-<p>是gn执行完以后要做的事情，</p>
-
-<p>现在不加改变的，传递给了fn，</p>
-
-<p>是不是相当于fn直接返回到gn该返回的位置了呢？</p>
-
-<p>非常巧妙。</p>
-
-<p><br/></p>
-
-<p>其中，作为参数传递的cont，称为<strong>Continuation</strong>，</p>
-
-<p>这种把“要做什么”当做参数传递的手法，称为<strong>Continuation传递风格（CPS）</strong>。</p>
-
-<p><br/></p>
-
-<h2><strong>用call/cc设置跳转点</strong></h2>
-
-<p>我们实际上不想每次都传递continuation，</p>
-
-<p>只想在需要的时候调用它，</p>
-
-<p>怎样产生我们需要的跳转点呢？</p>
-
-<p><br/></p>
-
-<p>call/cc就是做这个的。</p>
-
-<p><br/></p>
-
-<p>;before</p>
-
-<p>(call/cc (lambda(k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(define (fn x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (+ x 1)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(define (gn y)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fn y))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(gn 2))</p>
-
-<p>;after</p>
-
-<p><br/></p>
-
-<p>用call/cc产生了一个跳转点，</p>
-
-<p>它把call/cc位置处“以后要做什么”，包装成了参数k。</p>
-
-<p><br/></p>
-
-<p>对的，k虽然是函数的参数，</p>
-
-<p>但是它也可以是一个函数。</p>
-
-<p><br/></p>
-
-<p><strong>其实k不是函数，是一个包装了continuation的对象，</strong></p>
-
-<p><strong>它的调用机制，就是把包装的continuation提取出来调用一下。</strong></p>
-
-<p><br/></p>
-
-<p>反正k可以当做函数的参数传递，</p>
-
-<p>像这样可以当做参数传递，可以作为函数的返回值的，k</p>
-
-<p>称为first-class的，<strong>first-class continuation</strong>。</p>
-
-<p><br/></p>
-
-<p>我们看下执行流程，</p>
-
-<p>先调用call/cc，设置了跳转点。</p>
-
-<p><br/></p>
-
-<p>然后，就进入(lambda (k) &hellip;)中了，</p>
-
-<p>其中k是call/cc处的continuation，</p>
-
-<p>可以表示为</p>
-
-<p>k = (lambda (v)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;;after</p>
-
-<p>)</p>
-
-<p><br/></p>
-
-<p>拿着call/cc的值，再执行after操作，</p>
-
-<p>不就是“要做什么”的意思吗？</p>
-
-<p><br/></p>
-
-<p>进入(lambda (k) &hellip;)以后，</p>
-
-<p>定义了两个函数，fn和gn，</p>
-
-<p>然后调用gn。</p>
-
-<p><br/></p>
-
-<p>gn调用了fn，fn又调用了k，</p>
-
-<p>那么call/cc就直接返回了，程序跑到了k所示的跳转点了，</p>
-
-<p>接着执行after操作。</p>
-
-<p><br/></p>
-
-<h2><strong>一种实现方式</strong></h2>
-
-<p>有了用例，</p>
-
-<p>实现起来就简单多了。</p>
-
-<p><br/></p>
-
-<p>call/cc有很多方式实现，</p>
-
-<p>我们只看下简单的解释实现。</p>
-
-<p><br/></p>
-
-<p>首先解释器的入口eval-exp要改，</p>
-
-<p>(eval-exp &lsquo;1 *env* *cont*)</p>
+<p>吹捧着他们的最佳实践，</p>
 
-<p>需要传递一个最原始的“以后要做什么”，</p>
+<p>掠夺着劳动力。</p>
 
-<p>(define *cont* (lambda (v)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v)))</p>
-
-<p><br/></p>
-
-<p>然后，遇到(call/cc &hellip;)，我们这样处理，</p>
-
-<p><br/></p>
-
-<p>(define (eval-call/cc exp env cont)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;eval-call/cc\n&rdquo;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let ((fn (cadr exp))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(continuation (make-continuation cont)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(eval-function-call-list `(,fn ,continuation) env cont)))</p>
-
-<p><br/></p>
-
-<p>先拿到call/cc后面的那个lamabda，</p>
-
-<p>然后用一个包装过的对象调用它，</p>
-
-<p><strong>k就是这个包装过的对象continuation了</strong>。</p>
-
-<p><br/></p>
-
-<p>我们再看看continuation对象调用的时候怎么处理，</p>
-
-<p><br/></p>
-
-<p>(define (eval-continuation-call exp env cont)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;eval-continuation-call\n&rdquo;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(eval-exp (car exp) env</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (continuation)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let ((wrapped-cont (continuation-cont continuation)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(eval-exp (cadr exp) env</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (arg)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(wrapped-cont arg)))))))</p>
-
-<p><br/></p>
-
-<p>嵌套很深嘛，</p>
-
-<p>没关系，其实只是解开continuation对象的封装，</p>
-
-<p>把原始的cont拿出来，</p>
-
-<p>然后先求值(k (+ x 1))中的(+ x 1)，</p>
-
-<p>求值完了以后，</p>
-
-<p>再调用包装中的cont。</p>
-
-<p><br/></p>
-
-<p><strong>这里比较新颖的地方是，因为整个解释器已经改成了CPS方式</strong>，</p>
-
-<p><strong>所以，顺序结构都要改成回调方式，</strong></p>
-
-<p>(let ((arg (eval-exp (cadr exp) env)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(wrapped-cont arg))</p>
-
-<p><br/></p>
-
-<p>要变成，</p>
-
-<p>(eval-exp (cadr exp) env</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (arg)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(wrapped-cont arg)))</p>
-
 <p><br/></p>
-
-<p>然后呢，</p>
 
-<p>还需要做什么呢？</p>
+<p>我们做着量产的事情，</p>
 
-<p>没有了。</p>
-
-<p>就完了。</p>
-
-<p><br/></p>
+<p>拿着微薄的收入，</p>
 
-<h2><strong>偷偷借用的Scheme尾调用优化机制</strong></h2>
+<p>赚钱的事情怎么会让给我们呢，</p>
 
-<p><strong>我们前面埋了一个雷。</strong></p>
+<p>推手们获得丰厚的利润。</p>
 
 <p><br/></p>
 
-<p>重新来看看，</p>
+<p>在过去的任何年代，</p>
 
-<p>(define (final-cont v)</p>
+<p>历史都不是一脉相承的，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v))</p>
+<p>各个流派百家争鸣，</p>
 
-<p><br/></p>
-
-<p>(define (fn x cont)</p>
+<p>共同影响着那个时代的人。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (+ x 1)))</p>
-
 <p><br/></p>
-
-<p>(define (gn y cont)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y cont))</p>
 
-<p><br/></p>
+<p>培根说，</p>
 
-<p>(gn 2)</p>
+<p>读史使人明智。</p>
 
 <p><br/></p>
-
-<p>感觉上的执行过程是这样的，</p>
-
-<p>gn调用了fn，fn调用cont，</p>
 
-<p>cont返回，fn返回，gn返回，</p>
-
-<p>回到了top-level。</p>
-
-<p><br/></p>
+<p>只有梳理好过去，</p>
 
-<p>并非我们想的，</p>
+<p>才能看清舞台上的小丑，</p>
 
-<p>gn调用fn，fn调用cont，</p>
+<p>方法其实是多样的，</p>
 
-<p>cont直接返回到top-level。</p>
+<p>言语代表了各自的立场。</p>
 
 <p><br/></p>
 
-<p>其实，在Scheme语言中，后者是对的。</p>
+<p>Fortran,Lisp,Basic,Pascal,</p>
 
-<p>确实直接返回到了top-level。</p>
+<p>C,Prolog,ML,SmallTalk,</p>
 
-<p><br/></p>
-
-<p>因为语言规范指定，</p>
+<p>Scheme,C++,Common Lisp,Matlab,</p>
 
-<p><strong>Scheme必须实现尾调用优化，</strong></p>
+<p>Objective-C,Erlang,Perl,Haskell,</p>
 
-<p>指的就是这个。</p>
+<p>Python,Visual Basic,Ruby,</p>
 
-<p><br/></p>
+<p>Lua,Java,Delphi,JavaScript,</p>
 
-<p>如果是尾调用，那么不用返回到调用处了，</p>
+<p>PHP,D,C#,Go,Rust&hellip;</p>
 
-<p>只需要返回到调用者该返回的地方即可。</p>
-
 <p><br/></p>
-
-<p>这样我们解释器里面实现的call/cc，</p>
 
-<p>更理直气壮了。</p>
+<p>就只拿编程语言来说，</p>
 
-<p>哪怕我们把*cont*传的再远，</p>
+<p>他们的发展也不是线性的，</p>
 
-<p>也会直接返回到top-level，</p>
+<p>而是构成了一个图，</p>
 
-<p>不会导致一系列的调用栈弹栈操作。</p>
+<p>互相作用互相影响着。</p>
 
 <p><br/></p>
 
-<p>因为解释器实现中所有的函数调用都是尾调用。</p>
-
-<p><br/></p>
-
-<h2><strong>结语</strong></h2>
-
-<p>实际上，call/cc的编译实现还是比较麻烦的，</p>
-
-<p><br/></p>
+<p>以前火爆的技术，</p>
 
-<p>本来调用结构是<strong>栈型</strong>的，</p>
+<p>现在去了哪里，</p>
 
-<p>函数调用时，新建一个frame，添加到环境顶端，</p>
+<p>立于不败之地，</p>
 
-<p>返回时，弹栈。</p>
+<p>不是技术最终的归宿。</p>
 
 <p><br/></p>
 
-<p>后来，为了实现闭包，</p>
+<p>HTML,Java Applet,JavaScript,CSS,</p>
 
-<p>因为闭包具有无限生存期，</p>
+<p>QuickTime,ActiveX,Flash,CGI,</p>
 
-<p>这个frame有可能以后还会用到，</p>
+<p>PHP,.NET,J2EE,AJAX,</p>
 
-<p>所以，我们必须用<strong>链表</strong>来表示环境了，</p>
+<p>Rails,jQuery,Node,Backbone,</p>
 
-<p>函数返回后，并不会删除frame，只是暂时不链接到它了，</p>
+<p>Angular,BootStrap,RESTful,React,nw.js&hellip;</p>
 
-<p>等待垃圾回收器来处理。</p>
-
 <p><br/></p>
 
-<p>再以后，</p>
+<p>转眼几年间，</p>
 
-<p>我们的执行过程，可以往前跳转了，</p>
+<p>Web技术产生了翻天覆地的变化，</p>
 
-<p>跳转到设置好的点，再分叉执行，</p>
+<p>那些过去的辉煌，</p>
 
-<p>结果，环境就是一个<strong>树型</strong>结构了。</p>
+<p>现在怎么样了。</p>
 
 <p><br/></p>
-
-<p>每调用一个函数，</p>
-
-<p>树增加了一个子节点，</p>
-
-<p>函数返回，或者调用k，返回到以前的某个父节点，</p>
-
-<p>因为还可能再回来，也可能重新执行一遍，</p>
 
-<p>所以，再回来和重新执行必须同时保存下来，</p>
+<p>虽然我们没有机会改变世界，</p>
 
-<p>成了两个分支。</p>
+<p>但是可以见证它的发展，</p>
 
-<p><br/></p>
-
-<p>然而，这种<strong>树型调用图</strong>，</p>
-
-<p>比<strong>goto语句</strong>更容易控制，</p>
+<p>同时代的新同学们，</p>
 
-<p>这也是call/cc的巧妙之处。</p>
+<p>可能没有这么幸运。</p>
 
 <p><br/></p>
 
-<p>当然call/cc用的时候，最好也封装一下，</p>
+<p>浪潮的一个短暂扰动，</p>
 
-<p>免得k传递的到处都是。</p>
+<p>就可能让我们以为发现了真理，</p>
 
-<p>不是吗，工具早就有了，</p>
+<p>紧握手中的冰刃，</p>
 
-<p>用的好不好，体现了工程师的水平。</p>
+<p>看不到更尖端的科技。</p>
 
 <p><br/></p>
-
-<p>参考：</p>
-
-<p><a href="https://github.com/thzt/scheme-interpreter/tree/master/continuation">源码</a></p>
-
-<p><a href="https://github.com/ultimate-lambda/book-reviews/wiki/Essentials-of-Programming-Languages">Essentials of Programming Languages</a></p>
 
-<p><a href="https://github.com/ultimate-lambda/book-reviews/wiki/Concepts-in-Programming-Languages">Concepts in Programming Languages</a></p>
+<p>无所谓了，</p>
 
-<p><a href="http://book.douban.com/subject/1456904/">Lisp in small pieces</a></p>
+<p>世界以前就是这样的，</p>
 
-<p><a href="http://book.douban.com/subject/1762126/">Compiling with Continuations</a></p>
+<p>今后还是会如此。</p>
 </div>
   
   
@@ -812,7 +254,7 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (6)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
 <li class='category'><a href='/blog/categories/mind/'>mind (31)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
@@ -821,6 +263,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/06/25/complete-partial-order/">不动点算子与完全偏序</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/06/08/algebraic-data-type/">代数数据类型的语法和语义</a>
@@ -856,10 +302,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/03/18/education-and-career/">教育和职业</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/03/14/alphago/">观看AlphaGo与李世石比赛有感</a>
       </li>
     
   </ul>
