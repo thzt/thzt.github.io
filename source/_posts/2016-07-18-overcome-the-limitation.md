@@ -1,7 +1,7 @@
 ---
 layout: post
 categories: Mind
-title: 超越极限
+title: 挑战极限
 description:
 ---
 
