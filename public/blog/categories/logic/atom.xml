@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Logic | 何幻]]></title>
   <link href="https://thzt.github.io/blog/categories/logic/atom.xml" rel="self"/>
   <link href="https://thzt.github.io/"/>
-  <updated>2016-07-18T09:19:22+08:00</updated>
+  <updated>2016-07-23T17:02:57+08:00</updated>
   <id>https://thzt.github.io/</id>
   <author>
     <name><![CDATA[thzt]]></name>
@@ -12,6 +12,474 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[可计算性理论名词释义]]></title>
+    <link href="https://thzt.github.io/blog/2016/07/23/computability/"/>
+    <updated>2016-07-23T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2016/07/23/computability</id>
+    <content type="html"><![CDATA[<script src="https://thzt.github.io/thirdpart/jQuery/jquery-1.11.1.js"></script>
+
+
+<p><link href="https://thzt.github.io/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
+
+<script src="https://thzt.github.io/thirdpart/KaTeX/katex.min.js"></script>
+
+
+<script src="https://thzt.github.io/javascripts/katex.js"></script>
+
+
+<h2><strong>部分数论函数</strong></h2>
+
+<p><strong>二元关系</strong></p>
+
+<p>集合<span data-katex="S"></span>和<span data-katex="T"></span>，</p>
+
+<p><span data-katex="S\times T"></span>的元素<span data-katex="(a,b)"></span>称为有序对，</p>
+
+<p><span data-katex="S\times T"></span>的子集称为从<span data-katex="S"></span>到<span data-katex="T"></span>的二元关系，</p>
+
+<p>从<span data-katex="S"></span>到<span data-katex="S"></span>的二元关系，称为<span data-katex="S"></span>上的二元关系。</p>
+
+<p><br/></p>
+
+<p><strong>定义域和值域</strong></p>
+
+<p>设<span data-katex="R"></span>是从<span data-katex="S"></span>到<span data-katex="T"></span>的二元关系，</p>
+
+<p>则称<span data-katex="R"></span>的定义域为<span data-katex="dom\ R=\{a|\exists b\ (a,b)\in R\}"></span>，</p>
+
+<p><span data-katex="R"></span>的值域为<span data-katex="ran\ R=\{b|\exists a\ (a,b)\in R\}"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>象</strong></p>
+
+<p><span data-katex="A\subseteq S"></span>，则称<span data-katex="A"></span>在<span data-katex="R"></span>下的象为，</p>
+
+<p><span data-katex="R(A)=\{b|\exists a\ (a\in A \wedge (a,b)\in R)\}"></span>，</p>
+
+<p>特别的，如果<span data-katex="a\in A"></span>，那么把<span data-katex="\{a\}"></span>在<span data-katex="R"></span>下的象简记为<span data-katex="a"></span>在<span data-katex="R"></span>下的象，记为<span data-katex="R(a)"></span>。</p>
+
+<p>即，<span data-katex="R(a)=\{b|(a,b)\in R\}"></span></p>
+
+<p><br/></p>
+
+<p><strong>部分函数</strong></p>
+
+<p>如果<span data-katex="f"></span>是从<span data-katex="S"></span>到<span data-katex="T"></span>的二元关系，且<span data-katex="\forall a\in S"></span>，<span data-katex="f(a)=\varnothing"></span>或<span data-katex="\{b\}"></span>，</p>
+
+<p>则称<span data-katex="f"></span>是从<span data-katex="S"></span>到<span data-katex="T"></span>的部分函数，或<span data-katex="S"></span>上的部分函数。</p>
+
+<p>若<span data-katex="f(a)=\{b\}"></span>，则称<span data-katex="f(a)"></span>有定义，记为<span data-katex="f(a)\downarrow"></span>，</p>
+
+<p><span data-katex="b"></span>称为<span data-katex="f"></span>在<span data-katex="a"></span>点的函数值，记为<span data-katex="f(a)=b"></span>，</p>
+
+<p>若<span data-katex="f(a)=\varnothing"></span>，则称<span data-katex="f(a)"></span>无定义，记为<span data-katex="f(a)\uparrow"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>全函数</strong></p>
+
+<p>如果<span data-katex="\forall a\in S"></span>都有<span data-katex="f(a)\downarrow"></span>，即<span data-katex="dom\ f=S"></span>，则称<span data-katex="f"></span>是<span data-katex="S"></span>上的全函数，</p>
+
+<p>此时，可以记为<span data-katex="f:S\rightarrow T"></span>。</p>
+
+<p><br/></p>
+
+<p><strong><span data-katex="n"></span>元部分函数</strong></p>
+
+<p>设<span data-katex="f"></span>是笛卡尔积<span data-katex="S_1\times S_2\times \cdots \times S_n"></span>上的部分函数，</p>
+
+<p>则通常把<span data-katex="f((a_1,a_2,\cdots ,a_n))"></span>，简记为<span data-katex="f(a_1,a_2,\cdots ,a_n)"></span>。</p>
+
+<p><br/></p>
+
+<p>集合<span data-katex="S^n=S\times S\times \cdots \times S"></span>上的部分函数，称为<span data-katex="S"></span>上的<span data-katex="n"></span>元部分函数。</p>
+
+<p>自然数集<span data-katex="N=\{0,1,2,\cdots \}"></span>，从<span data-katex="N^n"></span>到<span data-katex="N"></span>的部分函数，称为<span data-katex="n"></span>元部分数论函数。</p>
+
+<p>下文中提到的函数，默认为数论函数。</p>
+
+<p><br/></p>
+
+<p><strong>字函数</strong></p>
+
+<p>字母表是一个非空有穷集合，</p>
+
+<p>设<span data-katex="A"></span>是一个字母表，<span data-katex="A"></span>中元素的有穷序列<span data-katex="w=(a_1,a_2,\cdots ,a_m)"></span>称为<span data-katex="A"></span>上的字符串或字，</p>
+
+<p>简记为<span data-katex="w=a_1a_2\cdots a_m"></span>。</p>
+
+<p><span data-katex="w"></span>中符号的个数，称为字符串的长度，记为<span data-katex="|w|"></span>。</p>
+
+<p>我们用<span data-katex="\epsilon"></span>表示空串，它不包含任何符号，是唯一的长度为<span data-katex="0"></span>的字符串。</p>
+
+<p><br/></p>
+
+<p><span data-katex="A"></span>上字符串的全体，记为<span data-katex="A^*"></span>。</p>
+
+<p>设<span data-katex="u,v\in A^*"></span>，把<span data-katex="v"></span>连接在<span data-katex="u"></span>后面得到的字符串记为<span data-katex="uv"></span>。</p>
+
+<p><br/></p>
+
+<p>设<span data-katex="u\in A^*"></span>，规定，<span data-katex="u^0=\epsilon"></span>，<span data-katex="u^{n+1}=u^n u\ ,n\in N"></span>，</p>
+
+<p>当<span data-katex="n>0"></span>时，<span data-katex="u^n"></span>等于<span data-katex="n"></span>个<span data-katex="u"></span>连接在一起。</p>
+
+<p><br/></p>
+
+<p><span data-katex="(A^*)^n"></span>到<span data-katex="A^*"></span>的部分函数，称为<span data-katex="A"></span>上的<span data-katex="n"></span>元部分字函数。</p>
+
+<p><br/></p>
+
+<h2><strong>程序设计语言<span data-katex="\mathscr{S}"></span></strong></h2>
+
+<p><strong>变量</strong></p>
+
+<p>语言<span data-katex="\mathscr{S}"></span>使用三种变量，</p>
+
+<p>输入变量<span data-katex="X_1,X_2,\cdots"></span>，输出变量<span data-katex="Y"></span>，中间变量<span data-katex="Z_1,Z_2,\cdots"></span>，</p>
+
+<p>变量可以取任何自然数值<span data-katex="n\in N"></span>。</p>
+
+<p>语言还可以使用标号<span data-katex="A_1,A_2,\cdots"></span>。</p>
+
+<p>当下标为<span data-katex="1"></span>时，可以略去。例如，<span data-katex="X_1"></span>和<span data-katex="X"></span>表示同一个变量。</p>
+
+<p><br/></p>
+
+<p><strong>语句</strong></p>
+
+<p>语言<span data-katex="\mathscr{S}"></span>有三种类型的语句，</p>
+
+<p>（1）增量语句<span data-katex="V\leftarrow V+1"></span>，表示变量V的值加<span data-katex="1"></span></p>
+
+<p>（2）减量语句<span data-katex="V\leftarrow V-1"></span>，若变量<span data-katex="V"></span>的当前值为<span data-katex="0"></span>，则<span data-katex="V"></span>的值保持不变，否则<span data-katex="V"></span>的值减<span data-katex="1"></span>。</p>
+
+<p>（3）条件转移语句<span data-katex="IF\ V\neq 0\ GOTO\ L"></span>，如果变量<span data-katex="V"></span>的值不等于<span data-katex="0"></span>，则下一步执行带标号<span data-katex="L"></span>的指令，否则顺序执行下一条指令。</p>
+
+<p><br/></p>
+
+<p><strong>执行</strong></p>
+
+<p>开始执行程序时，中间变量和输出变量的值都为<span data-katex="0"></span>，</p>
+
+<p>从第一条指令开始，一条一条的顺序执行，除非遇到条件转移语句，</p>
+
+<p>当程序没有指令可执行时，计算结束，</p>
+
+<p>此时<span data-katex="Y"></span>的值为程序的输出值。</p>
+
+<p><br/></p>
+
+<p>例如，</p>
+
+<p><span data-katex="[A]\ X\leftarrow X-1"></span></p>
+
+<p><span data-katex="\ \ \ \ Y\leftarrow Y+1"></span></p>
+
+<p><span data-katex="\ \ \ \ IF\ X\neq 0\ GOTO\ A"></span></p>
+
+<p>这里<span data-katex="A"></span>是第一条指令的标号，我们可以看到，这个程序计算的函数是，</p>
+
+<p><span data-katex="f(x)=x,\ if\ x>0"></span></p>
+
+<p><span data-katex="f(x)=1,\ else"></span></p>
+
+<p><br/></p>
+
+<p><strong>状态</strong></p>
+
+<p>设<span data-katex="\sigma"></span>是形如等式<span data-katex="V=m"></span>的有穷集合，其中<span data-katex="V"></span>是一个变量，<span data-katex="m"></span>是一个数。</p>
+
+<p>如果，</p>
+
+<p>（1）对于每一个变量<span data-katex="V"></span>，<span data-katex="\sigma"></span>中至多含有一个等式<span data-katex="V=m"></span></p>
+
+<p>（2）如果在程序<span data-katex="\mathscr{P}"></span>中出现变量<span data-katex="V"></span>，则<span data-katex="\sigma"></span>中必含有等式<span data-katex="V=m"></span></p>
+
+<p>那么，称<span data-katex="\sigma"></span>是程序<span data-katex="\mathscr{P}"></span>的一个状态。</p>
+
+<p><br/></p>
+
+<p>状态描述程序在执行的某一步各个变量的值，</p>
+
+<p>我们约定，如果<span data-katex="\sigma"></span>中不含关于<span data-katex="V"></span>的等式，则变量<span data-katex="V"></span>的值自动取<span data-katex="0"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>快相</strong></p>
+
+<p>程序的一个快相，是一个有序对<span data-katex="(i,\sigma )"></span>，</p>
+
+<p>表示程序的当前状态为<span data-katex="\sigma"></span>，即将执行第<span data-katex="i"></span>条指令。</p>
+
+<p><span data-katex="1\leqslant i \leqslant q"></span>，其中，<span data-katex="q"></span>是程序的长度，</p>
+
+<p>如果<span data-katex="i=q+1"></span>，就表示程序结束，<span data-katex="(q+1,\sigma )"></span>称为程序的终点快相。</p>
+
+<p><br/></p>
+
+<p>除了输入变量外，所有变量值为0的状态称为初始状态，</p>
+
+<p>如果<span data-katex="\sigma"></span>是初始状态，则称<span data-katex="(1,\sigma )"></span>是初始快相。</p>
+
+<p><br/></p>
+
+<p><strong>程序的计算</strong></p>
+
+<p>设<span data-katex="s_1,s_2,\cdots"></span>是程序<span data-katex="\mathscr{P}"></span>的一个快相序列，长度为<span data-katex="k"></span>，</p>
+
+<p>如果，</p>
+
+<p>（1）<span data-katex="s_1"></span>是初始快相</p>
+
+<p>（2）对于每一个<span data-katex="i(1\leqslant i<k)"></span>，<span data-katex="s_{i+1}"></span>是<span data-katex="s_i"></span>的后继</p>
+
+<p>（3）当<span data-katex="k<\infty"></span>时，<span data-katex="s_k"></span>是终点快相</p>
+
+<p>则称该序列是<span data-katex="\mathscr{P}"></span>的一个计算。</p>
+
+<p><br/></p>
+
+<h2><strong>函数的可计算性</strong></h2>
+
+<p><strong>程序计算的函数</strong></p>
+
+<p>设<span data-katex="\mathscr{P}"></span>是语言<span data-katex="\mathscr{S}"></span>的一个程序，<span data-katex="n"></span>是一个正整数，</p>
+
+<p>称函数<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>为程序<span data-katex="\mathscr{P}"></span>计算的<span data-katex="n"></span>元部分函数，</p>
+
+<p>如果，s_1"></span>是初始快相，其中输入变量为<span data-katex="X_1=x_1,X_2=x_2,\cdots ,X_n=x_n"></span>，输出变量为<span data-katex="Y"></span>，</p>
+
+<p>（1）从<span data-katex="s_1"></span>开始的计算是有穷序列<span data-katex="s_1,s_2,\cdots ,s_k"></span>，则<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>等于<span data-katex="Y"></span>在<span data-katex="s_k"></span>中的值</p>
+
+<p>（2）从<span data-katex="s_1"></span>开始的计算是无穷序列<span data-katex="s_1,s_2,\cdots"></span>，则<span data-katex="\psi (x_1,x_2,\cdots ,x_n)\uparrow"></span></p>
+
+<p><br/></p>
+
+<p><strong>部分可计算性与可计算性</strong></p>
+
+<p>设<span data-katex="f(x_1,x_2,\cdots ,x_n)"></span>是一个部分函数，如果存在程序<span data-katex="\mathscr{P}"></span>计算<span data-katex="f"></span>，</p>
+
+<p>则称<span data-katex="f"></span>是部分可计算的。</p>
+
+<p><br/></p>
+
+<p>如果一个函数，既是部分可计算的，又是全函数，则称这个函数是可计算的。</p>
+
+<p><br/></p>
+
+<p><strong>谓词的可计算性</strong></p>
+
+<p>我们可以把谓词看作取值为<span data-katex="0"></span>或<span data-katex="1"></span>的全函数，</p>
+
+<p>并把真值等同于<span data-katex="1"></span>，假值等同于<span data-katex="0"></span>。</p>
+
+<p><br/></p>
+
+<p>如果谓词<span data-katex="P(x_1,x_2,\cdots ,x_n)"></span>作为一个全函数是可计算的，</p>
+
+<p>则称该谓词是可计算的。</p>
+
+<p><br/></p>
+
+<h2><strong>函数的递归性</strong></h2>
+
+<p><strong>合成运算</strong></p>
+
+<p>设<span data-katex="f"></span>是<span data-katex="k"></span>元部分函数，<span data-katex="g_1,g_2,\cdots ,g_k"></span>是<span data-katex="k"></span>个<span data-katex="n"></span>元部分递归函数，</p>
+
+<p><span data-katex="h(x_1,\cdots ,x_n)=f(g_1(x_1,\cdots ,x_n),\cdots ,g_k(x_1,\cdots ,x_n))"></span></p>
+
+<p>则称<span data-katex="h"></span>是由<span data-katex="f"></span>和<span data-katex="g_1,g_2,\cdots ,g_k"></span>，经过合成运算得到的。</p>
+
+<p><br/></p>
+
+<p>可证，如果<span data-katex="h"></span>是由（部分）可计算函数<span data-katex="f"></span>和<span data-katex="g_1,g_2,\cdots ,g_k"></span>合成得到的，</p>
+
+<p>则<span data-katex="h"></span>也是（部分）可计算函数。</p>
+
+<p><br/></p>
+
+<p><strong>原始递归运算</strong></p>
+
+<p>设<span data-katex="g"></span>是一个<span data-katex="2"></span>元全函数，<span data-katex="k"></span>是一个常数，</p>
+
+<p><span data-katex="h(0)=k"></span></p>
+
+<p><span data-katex="h(t+1)=g(t,h(t))"></span></p>
+
+<p>则称<span data-katex="h"></span>是由<span data-katex="g"></span>经过原始递归运算得到的。</p>
+
+<p><br/></p>
+
+<p>可证，如果<span data-katex="g"></span>是可计算的，则<span data-katex="h"></span>是可计算的。</p>
+
+<p><br/></p>
+
+<p>设<span data-katex="f"></span>是一个<span data-katex="n"></span>元全函数，<span data-katex="g"></span>是<span data-katex="n+2"></span>元全函数，</p>
+
+<p><span data-katex="h(x_1,\cdots ,x_n,0)=f(x_1,\cdots ,x_n)"></span></p>
+
+<p><span data-katex="h(x_1,\cdots ,x_n,t+1)=g(t,h(x_1,\cdots ,x_n,t),x_1,\cdots ,x_n)"></span></p>
+
+<p>则称<span data-katex="h"></span>是由<span data-katex="f"></span>和<span data-katex="g"></span>经过原始递归运算得到的。</p>
+
+<p><br/></p>
+
+<p>可证，如果<span data-katex="f"></span>和<span data-katex="g"></span>都是可计算的，则<span data-katex="h"></span>是可计算的。</p>
+
+<p><br/></p>
+
+<p><strong>原始递归函数类</strong></p>
+
+<p>设初始函数包括，</p>
+
+<p>（1）零函数<span data-katex="n(x)=0"></span></p>
+
+<p>（2）后继函数<span data-katex="s(x)=x+1"></span></p>
+
+<p>（3）投影函数<span data-katex="u^n_i(x_1,\cdots ,x_n)=x_i"></span>，<span data-katex="i\leqslant i\leqslant n"></span></p>
+
+<p>则，由初始函数经过有限次合成运算和原始递归运算得到的函数，称为原始递归函数。</p>
+
+<p><br/></p>
+
+<p>可证，由原始递归函数经过合成运算或原始递归运算，得到的函数仍为原始递归函数。</p>
+
+<p>每一个原始递归函数都是可计算的。</p>
+
+<p><br/></p>
+
+<p>常用原始递归函数举例，</p>
+
+<p>常数<span data-katex="k"></span>，<span data-katex="x"></span>，<span data-katex="x+y"></span>，<span data-katex="x\cdot y"></span>，<span data-katex="x!"></span>，<span data-katex="x^y"></span>，前驱函数<span data-katex="p(x)"></span>，<span data-katex="|x-y|"></span></p>
+
+<p><br/></p>
+
+<p><strong>原始递归谓词</strong></p>
+
+<p>如果一个谓词看作取值为<span data-katex="0"></span>或<span data-katex="1"></span>的全函数是原始递归的，则称该谓词是原始递归的。</p>
+
+<p>可证，如果<span data-katex="P"></span>和<span data-katex="Q"></span>是原始递归谓词，则<span data-katex="\neg P"></span>，<span data-katex="P\wedge Q"></span>和<span data-katex="P\vee Q"></span>也是原始递归谓词。</p>
+
+<p><br/></p>
+
+<p><strong>极小化运算</strong></p>
+
+<p>设<span data-katex="P(x_1,\cdots ,x_n,t)"></span>是一个谓词，</p>
+
+<p><span data-katex="f(x_1,\cdots ,x_n)=min\ P(x_1,\cdots ,x_n,t)"></span>，</p>
+
+<p><span data-katex="f(x_1,\cdots ,x_n)"></span>的值，或者是使<span data-katex="P(x_1,\cdots ,x_n,t)"></span>为真的<span data-katex="t"></span>的最小值，</p>
+
+<p>或者无定义，如果不存在<span data-katex="t"></span>使得<span data-katex="P(x_1,\cdots ,x_n,t)"></span>为真。</p>
+
+<p>其中，<span data-katex="min"></span>为极小化运算，</p>
+
+<p>也称部分函数<span data-katex="f"></span>，是由谓词<span data-katex="P"></span>经过极小化运算得到的。</p>
+
+<p><br/></p>
+
+<p>设<span data-katex="g(x_1,\cdots ,x_n,t)"></span>是一个<span data-katex="n+1"></span>元全函数，</p>
+
+<p><span data-katex="f(x_1,\cdots ,x_n)=min\ {g(x_1,\cdots ,x_n,t)=0}"></span>，</p>
+
+<p>则称<span data-katex="f"></span>是由函数<span data-katex="g"></span>经过极小化运算得到的。</p>
+
+<p><br/></p>
+
+<p><strong>递归函数类</strong></p>
+
+<p>由初始函数经过有限次合成运算，原始递归运算和极小化运算，得到的函数称为部分递归函数，</p>
+
+<p>部分递归的全函数称为递归函数。</p>
+
+<p><br/></p>
+
+<p>如果一个谓词看作取值为<span data-katex="0"></span>或<span data-katex="1"></span>的全函数是递归的，则称该谓词是递归的。</p>
+
+<p><br/></p>
+
+<p><strong>递归性与可计算性</strong></p>
+
+<p>可证，部分递归函数是部分可计算函数。</p>
+
+<p>递归函数是可计算函数，递归谓词是可计算谓词。</p>
+
+<p><br/></p>
+
+<p>可证，原始递归函数类是可计算函数类的真子集。</p>
+
+<p><br/></p>
+
+<p>因为，至少存在一个Ackermann函数<span data-katex="A(k,x)"></span>是可计算的，但不是原始递归的。</p>
+
+<p><span data-katex="A(0,x)=x+1"></span></p>
+
+<p><span data-katex="A(k+1,0)=A(k,1)"></span></p>
+
+<p><span data-katex="A(K+1,x+1)=A(k,A(k+1,x))"></span></p>
+
+<p><br/></p>
+
+<h2><strong>集合和语言的递归性</strong></h2>
+
+<p><strong>集合识别问题</strong></p>
+
+<p>所谓集合识别问题，是指对于给定的集合，任给一个元素，问这个元素是否属于该集合，</p>
+
+<p>也称为集合的成员资格问题。</p>
+
+<p><br/></p>
+
+<p><strong>集合特征函数</strong></p>
+
+<p>设<span data-katex="B\subseteq N"></span>，<span data-katex="B"></span>的特征函数<span data-katex="\chi _B"></span>是一个谓词，定义为，</p>
+
+<p><span data-katex="\chi _B\equiv x\in B,\ \forall x\in N"></span>，</p>
+
+<p>集合<span data-katex="B"></span>可以用它的特征函数表示为，<span data-katex="B=\{x\in N|\chi _B(x)\}"></span>。</p>
+
+<p><br/></p>
+
+<p>如果特征函数<span data-katex="\chi _B"></span>是可计算的，则成集合<span data-katex="B"></span>是递归的。</p>
+
+<p>如果存在部分可计算函数<span data-katex="g"></span>使得<span data-katex="B=\{x\in N|g(x)\downarrow \}"></span>，</p>
+
+<p>则称集合<span data-katex="B"></span>是递归可枚举的。</p>
+
+<p><br/></p>
+
+<p>可证，如果集合<span data-katex="B"></span>和<span data-katex="C"></span>都是递归的，则集合<span data-katex="\bar{B}"></span>，<span data-katex="B\cap C"></span>和<span data-katex="B\cup C"></span>都是递归的。</p>
+
+<p>递归集一定是递归可枚举的。</p>
+
+<p>集合<span data-katex="B"></span>是递归的，当且仅当<span data-katex="B"></span>和<span data-katex="\bar{B}"></span>都是递归可枚举的。</p>
+
+<p>如果集合<span data-katex="B"></span>和<span data-katex="C"></span>是递归可枚举的，则集合<span data-katex="B\cap C"></span>和<span data-katex="B\cup C"></span>也是递归可枚举的。</p>
+
+<p><br/></p>
+
+<p><strong>语言识别问题</strong></p>
+
+<p>设字母表<span data-katex="A=\{s_1,s_2,\cdots ,s_n\}"></span>，<span data-katex="A^*"></span>的任何子集<span data-katex="L"></span>称为<span data-katex="A"></span>上的语言。</p>
+
+<p><span data-katex="A^*"></span>上集合的识别问题，有称为<span data-katex="A"></span>上的语言识别问题。</p>
+
+<p><br/></p>
+
+<p>语言的特征函数定义为，<span data-katex="\chi _L\equiv w\in L,\ \forall w\in A^*"></span>，</p>
+
+<p>如果语言<span data-katex="L"></span>的特征函数<span data-katex="\chi _L"></span>是可计算的，则称语言<span data-katex="L"></span>是递归的。</p>
+
+<p>如果存在<span data-katex="A"></span>上的部分可计算函数<span data-katex="g"></span>使得，<span data-katex="L=\{w\in A^*|g(w)\downarrow \}"></span>，</p>
+
+<p>则称语言<span data-katex="L"></span>是递归可枚举的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[不动点算子与完全偏序]]></title>
@@ -1201,175 +1669,6 @@
 <p><br/></p>
 
 <p>现代逻辑学已经应用到了越来越多的学科之中。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[真实在哪里]]></title>
-    <link href="https://thzt.github.io/blog/2016/01/29/computer-science/"/>
-    <updated>2016-01-29T00:00:00+08:00</updated>
-    <id>https://thzt.github.io/blog/2016/01/29/computer-science</id>
-    <content type="html"><![CDATA[<h2><strong>引子</strong></h2>
-
-<p>以下，我总结了这些年对理想的追求，以及看的一些书，还有走的一些弯路，目的是为了把回忆保存起来，过几年再仔细品味。</p>
-
-<p><br/></p>
-
-<h2><strong>导火线</strong></h2>
-
-<p>游客问毕加索：为什么你的画不像照片上的那么真实呢？毕加索说：你觉得照片上的，就是真实的你吗？</p>
-
-<p>是啊，到底什么是真实的，什么是虚幻的？这句话是我初中时看到的，影响了我十几年，一直为我指引方向。</p>
-
-<p><br/></p>
-
-<h2><strong>学生时代</strong></h2>
-
-<p>我找到了当时在国内很火的『第一推动系列』，《时间简史》《皇帝新脑》《黑洞与时间弯曲》。</p>
-
-<p>当我认识到物理学是一门研究大自然的学科时，不顾父母发对，选择了冷门的大学专业。</p>
-
-<p>与很多调剂过来的同学不同的是，我的收获简直是太大了，每一门课都认真的学着，并努力向这个『真实』的方向靠拢。</p>
-
-<p>除了把基础物理学好之外，我又对编程产生了浓厚的兴趣，我依稀记得当时，通宵的编写VB，彻夜的学习汇编，仔细的理解C与C++。</p>
-
-<p>终于到了毕业季，本来已经找到工作的我，由于社会的压力，父亲良言相劝，让我读研，至今我觉得这件事情非常正确。</p>
-
-<p>当时有两个选择，跨专业考计算机或者继续学习物理，对物理学我还是比较执着，于是就选择了理论物理。并且，至今我也没有后悔这个决定。</p>
-
-<p>研究生阶段，学的最多的其实是数学，数学基本功渐渐体现出来了。然而，当我了解到国内的科研现状后，我决定还是不要读博了。</p>
-
-<p><br/></p>
-
-<h2><strong>厚积而薄发</strong></h2>
-
-<p>毕业后，我找了一个程序员的工作，不为什么，因为社会需要。能力再大也没用，社会稀缺才是重要的，这能保证我的生活一直很轻松。</p>
-
-<p>既然选择了程序员的道路，我就决定好好研究一下编程，把基础打牢，同时不忘自己对『真实性』的追求。编程不就是写写代码吗？有什么基础可言？我不这么认为。</p>
-
-<p>因为已经有了很多年的编程经验，一万小时定律已经不算什么了，这才让我能更清醒的做出选择。把基础再打牢一些，基础决定了最后的高度，欲速则不达。</p>
-
-<p>我先是重新研读了《计算机程序的构造与解释》，这本圣经早有耳闻，但只是翻着看了看，我后悔一开始没有认真的阅读，否则可能就改写我当时的学习路线了。</p>
-
-<p>这本书让我对Lisp语言产生了好感，于是，开始疯狂学习大法，『把市面上所有能找到的书都看一遍』。当然，这是不可能的，这不过是一种决心罢了。</p>
-
-<p>不过在这之前，我面临了一个选择，Lisp两大方言中，到底是学Common Lisp还是Scheme？不错，当时Racket还没有这么火。</p>
-
-<p>我做出了艰难的决定，选择大而全的Common Lisp，不为别的，就是因为他可能『更不必需』。</p>
-
-<p>这一向是我的决策准则，在大方向上，总是选择『更不必需』的方案，广度优先。否则，如果不这么做，就可能一辈子都不会再接触它了，总是有更重要的事情等着我。</p>
-
-<p>《ANSI Common Lisp》《Land of Lisp》《Pratical Common Lisp》《On Lisp》《Let Over Lambda》《Lisp语言（马希文）》《Lisp in small pieces》</p>
-
-<p>好了，这些看完后，对Common Lisp有了一个基本的认识了，于是该学Scheme了吧，这个『更必需』一点，看吧，必需的东西早晚会去学的。</p>
-
-<p>《R5RS》《The Litter Schemer》《The Scheme Promgramming Language》《Essentials of Programming Languages》《An Introduction to Scheme and its Implementation》</p>
-
-<p>可以看到Scheme的书更学术一些，如果没有Common Lisp的基础，这里就比较费力了。</p>
-
-<p>在读Scheme的过程中，发现了自己编译原理很弱，于是恶补了一下，不懂形式语言和编译原理，都不敢说自己学计算机的。</p>
-
-<p>《编程语言实现模式》《程序设计语言·实践之路》《形式语言与自动机》《自动机理论，语言和计算导论》《编译原理》《编译器设计》</p>
-
-<p>然后，又发现自己算法很弱，恶补了几本算法。不懂算法，都不敢做工程啊。《算法导论》《算法》《具体数学》</p>
-
-<p>这些刷完之后，我马上发现了更基础的薄弱环节，那就是Lambda演算。Lisp是函数式语言的一种，一门很像Lambda演算的语言，究竟有什么渊源呢，还得看书，同时各种语言的实现原理也吸引了我。</p>
-
-<p>《Lambda-Calculus and Combinators, an Introduction》《Concept in Programming Languages》《Compiling Continuations》《Lecture notes on the Lambda Calculus》《数学·计算·逻辑（陆汝钤）》《哥德尔·爱舍尔·巴赫 集异璧之大成》</p>
-
-<p>刷怪的途中，是不可能绕过Haskell的，身为函数式家族的一朵奇葩，必须得学，是该死磕一下的时候了。</p>
-
-<p>《Learn you a Haskell for Great good》《Real world Haskell》《A History of Haskell》《Beginning Haskell》《Programming in Haskell》《Haskell函数式编程入门》《Parallel and Concurrent Programming in Haskell》《Haskell: The Craft of Functional Programming》</p>
-
-<p>好吧，我承认，Lisp中遇到Continuation，Haskell中遇到Monad的时候，我真的跪了，只能硬着头皮看，谁叫我不知道别人也跪了呢。这其实也表明学习时最好不要看别人，自己学才能走的更远。</p>
-
-<p><br/></p>
-
-<h2><strong>放松一下</strong></h2>
-
-<p>把这些放一放，容我先把其他主流语言刷一遍，压压惊。</p>
-
-<p>《C与指针》《C专家编程》《程序员的自我修养》《Rust Essentials》《Realm of Racket》《Seven Concurrency Models in Seven Weeks》《Programming in Standard ML》《Learn you some Erlang for Great Good》《Scala编程》《C++模板元编程》</p>
-
-<p>各种工业级的语言就不说了，语法过一下就行了，反正以后有的是机会学的，这些不是『更不必需』的。</p>
-
-<p>Go，Java，C#，PHP，Python，Ruby，JavaScript，Clojure，Swift，C++。</p>
-
-<p><br/></p>
-
-<h2><strong>数学与逻辑学交相呼应</strong></h2>
-
-<p>好了，有了这些『基本功』之后，让我们再来一战吧。那我必须先把类型理论搞一搞，这个始终是个没有填的坑。</p>
-
-<p>《类型和程序设计语言》《Type Systems》《The Litter Prover》</p>
-
-<p>然后，发现类型其实和逻辑学有一腿，逻辑学可是一个大的方向，琢磨了好几天，我决定还是先尝试一下吧。</p>
-
-<p>《Teach yourself Logic 2015》《Logic and Structure》《数理逻辑》《计算机科学中的现代逻辑学》</p>
-
-<p>其实，决定后发现并不是那么难，难的是决定不是决定后的行动。让我感到惊讶的是，逻辑学的很多结论都暗示着人们对『真实性』问题的探索，我非常幸运走到了这里。</p>
-
-<p>以集合论，证明论，递归论，模型论为基础的逻辑学，完美的诠释了『真实性』问题的最新进展。</p>
-
-<p>感叹之余，可以绕回来了学学数学了，读读范畴论，然而还要从抽象代数开始。</p>
-
-<p>《近世代数基础》《Categories for the Working Mathematician》</p>
-
-<p>幸亏研究生阶段学了一些数学，群论，集合论，拓扑学，微分流形，都已经学过，这里就相对容易了一些。</p>
-
-<p>到后来才发现了计算机科学的数学基础，《离散数学教程》——北大版，其中包含了集合论，图论，代数结构，组合数学，数理逻辑，5大部分，早看这本就好了。</p>
-
-<p>其中，逻辑和代数，分别在语法和语义层面为计算机科学打下了坚实基础。</p>
-
-<p>目前有一些遗憾，那就是同调代数，代数拓扑，同伦类型论还没有看，希望以后坚持读下去，</p>
-
-<p>《Practical Fundations of Programming Languages》是一本好书，只读了一半，希望能读完，《程序设计语言的理论基础》，《计算机语言的形式语义》值得认真学习。</p>
-
-<p><br/></p>
-
-<h2><strong>其他的</strong></h2>
-
-<p>其实以上过程中，我故意的隐藏了作为一个软件工程师应该读的那部分书。</p>
-
-<p>让我们来看看吧，软件工程是一个不小的领域，也是需要修炼的，幸亏是工作需要，让我不得不学好它。</p>
-
-<p>从哪开始呢，当然是设计模式了，不懂设计模式，怎么进行『面向对象』的编程呢？《大话设计模式》《设计模式之禅》《软件架构模式》</p>
-
-<p>然后是代码质量，《测试驱动开发》《代码大全》《程序员修炼之道》《重构》《重构与模式》</p>
-
-<p>软件开发方法论，《快速软件开发》《软件需求模式》《人月神话》《大教堂与市集》《没有银弹》《敏捷软件开发: 原则，模式与实践》</p>
-
-<p>编程思想，《UNIX编程艺术》《代码之殇》《高效程序员的奥秘》《理解专业程序员》《软件随想录》《程序员的呐喊》《黑客与画家》《代码的未来》《图灵的秘密》《你的灯亮着吗》</p>
-
-<p>新潮的东西也该玩玩，《大数据时代》《集体智慧编程》《统计学习方法》</p>
-
-<p>有过Lisp的基础，Emacs应该是正常的选择了吧，《GNU Emacs Lisp Reference Manual》</p>
-
-<p>还有很多没有看完的书，太难的太无聊的，或者印象不够深刻的书，没有提到，希望以后能够再有机会拿起来读一下。不过，也可能根本就没有这个机会了。</p>
-
-<p>总结一下，Scheme和Haskell绝对是两个正确的切入点，越早接触越好。同时也会更早接触到领域内的大神，粉碎自尊与自傲，含着泪跪着走完剩下的路。</p>
-
-<p><br/></p>
-
-<h2><strong>结语</strong></h2>
-
-<p>那么，言归正传，到底什么是真实呢？我的理解是，科学方法就是目前最有效的对真实性的保障。</p>
-
-<p>科学方法讲究从假设出发，约定一套推理规则，那么就可以推导出很多结论来了。然而这些结论并不是现实世界本身，这些结论与现实世界之间的解释关系构成了一个数学模型。</p>
-
-<p>我们看到，不同的假设和推理规则构成了不同的公理系统，连同对它们的解释又构成了不同的模型，所解释的现实世界是公理系统的语义。</p>
-
-<p>怎样证明某个公理系统是『对』的呢？不幸的是，无法证明，只能证伪。而且，只需要找出一个反例即可。</p>
-
-<p>这就是科学方法。以上是数学（集合论），逻辑学（一阶逻辑），哲学（科学哲学），自然科学（物理学），计算机科学（可计算性理论）的交汇点。</p>
-
-<p>我庆幸之前的所有选择，给了我这样的认识，我还会一直坚持下去，直到有更深入的理解。</p>
-
-<p>我觉得一个人终究会走到自己想要去的地方，不管经过何种途径，沿途中任何我们所做的积累都是有用的，未来的某一天真的就能用上。</p>
-
-<p>人们也不可能在一个阶段同时抓住两件东西，只能舍弃一个，没关系，舍弃说明你得到了更重要的那个，过后你完全可以再有机会得到失去的那个，只要你坚持自己的梦想。</p>
-
-<p>相反，如果当时你拥有了失去的那个，应得的就会被错过，人生本来就是不完美的。</p>
 ]]></content>
   </entry>
   

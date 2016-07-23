@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="Ecmascript 2015刚刚发布了， 新增了很多特性， 例如，let，promise，iterator，generator， proxy，class，module等等。 其中generator更是引人注目， 可以便捷的产生一个iterator。 function* gen() { &nbsp &hellip;">
+  <meta name="description" content="Robert Sedgewick/Kevin Wayne的《算法》一书中， 强调了科学方法， 细致的观察真实世界的特点。 根据观察结果提出假设模型。 根据模型预测未来的事件。 继续观察并核实预测的准确性。 如此反复直到确认预测和观察一致。 可是， 我们永远也没法知道某个假设是否永远正确， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/06/19/generator/">EcmaScript 2015引入的generator</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/06/24/model/">模型观</a></h1>
     
     
       <p class="meta">
@@ -83,266 +83,258 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-06-19T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-06-24T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Ecmascript 2015刚刚发布了，</p>
+  <div class="entry-content"><p>Robert Sedgewick/Kevin Wayne的《算法》一书中，</p>
 
-<p>新增了很多<strong>特性</strong>，</p>
-
-<p>例如，let，promise，iterator，generator，</p>
-
-<p>proxy，class，module等等。</p>
+<p>强调了科学方法，</p>
 
 <p><br/></p>
 
-<p>其中<strong>generator</strong>更是引人注目，</p>
+<p>细致的观察真实世界的特点。</p>
 
-<p>可以便捷的产生一个iterator。</p>
+<p><strong>根据观察结果提出假设模型</strong>。</p>
 
-<p><br/></p>
+<p>根据模型预测未来的事件。</p>
 
-<p>function* gen() {</p>
+<p>继续观察并核实预测的准确性。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>yield</strong> 1;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>yield</strong> 2;</p>
+<p>如此反复直到确认预测和观察一致。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 3;</p>
+<p>可是，</p>
 
-<p>}</p>
+<p>我们永远也没法知道某个假设是否<strong>永远正确</strong>，</p>
 
-<p><br/></p>
-
-<p>var i = gen();</p>
+<p>我们只能验证它和我们的观察的一致性。</p>
 
 <p><br/></p>
 
-<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//1</p>
+<p>爱因斯坦说，</p>
 
-<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//2</p>
+<p>再多的实验也不一定能够证明我是对的，</p>
 
-<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//3</p>
-
-<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//undefined</p>
+<p>但只需要一个实验就能证明我是错的。</p>
 
 <p><br/></p>
 
-<p>可见，每次调用i.next，</p>
+<p>科学方法可能大家都很清楚，</p>
 
-<p>gen都会从上一次的<strong>yield</strong>后继续执行。</p>
+<p>但是遇到具体问题，</p>
 
-<p><br/></p>
-
-<p>这在Ecmascript之前版本看来，</p>
-
-<p>是不可思议的。</p>
+<p>人们却容易忽视它。</p>
 
 <p><br/></p>
 
-<h2><strong>用call/cc实现</strong></h2>
+<p>实践是检验真理的唯一标准，</p>
 
-<p>从Scheme的角度来看，</p>
+<p>大胆假设，小心求证，</p>
 
-<p>从断点处继续执行，</p>
+<p>建立正确的<strong>模型观</strong>，</p>
 
-<p>其实就是，<strong>调用yield断点处的continuation</strong>。</p>
-
-<p><br/></p>
-
-<p>所以，yield并不是一个新概念，</p>
-
-<p>我们用call/cc实现一下。</p>
+<p>可以少走很多弯路。</p>
 
 <p><br/></p>
 
-<p>(define (gen x)</p>
+<h2><strong>模型与目标系统</strong></h2>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define <strong>k-body</strong> #f)</p>
+<p>我们经常混淆<strong>模型</strong>与<strong>目标系统</strong>的区别，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define <strong>k-yield</strong> #f)</p>
+<p>把符号“1”，“2”，“3”,&hellip;</p>
 
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define (yield x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! <strong>k-yield</strong> k2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>k-body</strong> x))))</p>
+<p>当做数学对象中的自然数本身。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda ()</p>
+<p>这只是用印刷符号对<strong>自然数</strong>进行建模，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k1)</p>
+<p>实际上还有不同的模型，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (eq? <strong>k-body</strong> #f)</p>
+<p>除了阿拉伯数字，还有罗马数字，中国筹，等等，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(begin</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! <strong>k-body</strong> k1)</p>
+<p>甚至还有Church number。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield x)</p>
+<p>这个世界上<strong>并没有本质的道理</strong>，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield (+ x 1))</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x 2))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>k-yield</strong>))))))</p>
+<p>因为，我们无法验证什么是绝对正确的。</p>
 
 <p><br/></p>
 
-<p>(define i (gen 1))</p>
+<p>我们只能拿着模型来进行<strong>假设</strong>，</p>
 
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;1</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;2</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
+<p>然后通过实验<strong>验证</strong>它的准确性。</p>
 
 <p><br/></p>
 
-<p>仅最后一次调用与Ecmascript不同。</p>
+<p>使用模型，我们可以从不同侧面，</p>
 
-<p>无伤大雅。</p>
-
-<p><br/></p>
-
-<h2><strong>用macro进行抽象</strong></h2>
-
-<p>像上面那样为每一个generator写call/cc，</p>
-
-<p>太繁琐了，</p>
-
-<p>Scheme程序员是不能容忍的。</p>
+<p>对目标系统进行研究。</p>
 
 <p><br/></p>
 
-<p>先看看我们<strong>希望</strong>怎样调用，</p>
+<h2><strong>模型的发展与多样性</strong></h2>
 
-<p>(<strong>make-generator</strong> (gen x y)</p>
+<p>对观察结果提出的模型，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield x)</p>
+<p>是一直在发展的，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield y)</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y))</p>
+<p>并没有哪一个是终极的。</p>
 
 <p><br/></p>
 
-<p>(define i (gen 1 2))</p>
+<p>当我们问“<strong>到底是什么</strong>”的时候，</p>
 
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;1</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;2</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
+<p><strong>其实是以静态的观点，分析动态发展中的事物</strong>。</p>
 
 <p><br/></p>
 
-<p>这样就清爽多了，</p>
+<p>模型在不断修正和演进中，</p>
 
-<p>还把generator改成了可接收<strong>多参数</strong>的形式。</p>
-
-<p>make-generator是一个<strong>宏</strong>，它可以<strong>用来定义</strong>generator。</p>
+<p>对目标系统做出更精确的<strong>解释</strong>。</p>
 
 <p><br/></p>
 
-<p>具体实现如下，</p>
+<p>例如，lambda calculus，</p>
 
-<p>(define-syntax make-generator</p>
+<p>是一种计算模型，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (form)</p>
+<p>一开始是无类型的，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case form ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(keyword (name &hellip;) . body)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case (<strong>datum->syntax</strong> #&lsquo;keyword 'yield) ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[yield</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&lsquo;(define (name &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define k-body #f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define k-yield #f)</p>
+<p>但是同样也得不到类型系统的种种好处。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define (yield . args)</p>
+<p>因此lambda calculus就被扩展了，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! k-yield k2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(apply k-body args))))</p>
+<p>变成了typed lambda calculus的一个<strong>特例</strong>。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda ()</p>
+<p>对计算建模的方法也并<strong>不唯一</strong>，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k1)</p>
+<p>图灵机，combinatory logic，形式语言，等等，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (eq? k-body #f)</p>
+<p>都是和lambda calculus具有相同计算能力的模型。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(begin</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! k-body k1) . body)</p>
+<h2><strong>编程语言</strong></h2>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k-yield))))))])])))</p>
+<p>编程语言是一种形式语言，</p>
+
+<p>不同的编程语言，只是用不同的一堆<strong>符号</strong>，</p>
+
+<p>按着不同的<strong>文法规则</strong>，</p>
+
+<p>对计算进行建模。</p>
+
+<p><br/></p>
+
+<p>根据形式语言理论，</p>
+
+<p>不受限文法，与图灵机等价。</p>
+
+<p><br/></p>
+
+<p>可以把不同的编程语言，</p>
+
+<p>看做计算过程的多样化模型。</p>
+
+<p><br/></p>
+
+<p>同样，它们的建模方式也在演化，</p>
+
+<p>语言的规范在发展。</p>
+
+<p><br/></p>
+
+<p>遇到具体问题，</p>
+
+<p><strong>我们需要选择合适的编程语言</strong>。</p>
+
+<p><br/></p>
+
+<p>而编程范型，</p>
+
+<p>是语义上的一种分类，</p>
+
+<p>并没有明确的界线。</p>
+
+<p><br/></p>
+
+<p>我们也没必要成见太深，</p>
+
+<p>强行把语言用在<strong>不适用</strong>的场景中。</p>
+
+<p><br/></p>
+
+<p>毕竟，语言是用来沟通和表达的。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>Ecmascript 2015加入了很多特性，</p>
+<p>当我还是孩子的时候，</p>
 
-<p>把自己搞的更加复杂了，</p>
+<p>对大自然，就喜欢问“到底是什么”，</p>
 
-<p>这在走一些臃肿语言的老路。</p>
-
-<p><br/></p>
-
-<p>Scheme也不例外，</p>
-
-<p>R6RS就是膨胀的版本，</p>
-
-<p>不过还好，从那之后，</p>
-
-<p>语言分为了两个分支，R7RS力求简洁，</p>
-
-<p>另一个分支正在进行中，为了工业应用。</p>
+<p>它指引我沿着科学之路越走越远。</p>
 
 <p><br/></p>
 
-<p>追求完美，并不是要增加特性，</p>
+<p>随着学习的深入，</p>
 
-<p>而是要尽量减少特性。</p>
+<p>让我开始懂得<strong>反思问题本身</strong>，</p>
+
+<p>站在更高的角度。</p>
 
 <p><br/></p>
 
-<p>简洁有效，</p>
+<p>从模型角度来看，</p>
 
-<p>包含了太深刻的内涵。</p>
+<p>物理学就是对大自然现实世界的建模，</p>
+
+<p>耳熟能详的物理学理论，也只是<strong>可行的模型之一</strong>。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>牛顿的万有引力理论，</p>
+
+<p>爱因斯坦的广义相对论，</p>
+
+<p>都是引力理论。</p>
+
+<p><br/></p>
+
+<p>当然还有其他的引力理论，</p>
+
+<p><strong>他们都是数学模型，用来解释目标系统</strong>，</p>
+
+<p>并不是大自然本身。</p>
+
+<p><br/></p>
+
+<p>终极理论之梦，</p>
+
+<p>可能会随着认识的提高，</p>
+
+<p>不再成为问题了。</p>
+
+<p><br/></p>
+
+<p>就像“没有银弹”一样，</p>
+
+<p><strong>任何领域都没有一劳永逸的事情</strong>。</p>
 </div>
   
   
@@ -368,8 +360,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -379,7 +371,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -408,14 +408,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

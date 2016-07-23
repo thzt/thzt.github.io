@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="形式系统是一套符号化的系统， 这些符号，遵循了某些规则， 模型化了待研究的现实世界。 例如： (lambda (x) x) 是由符号“(”，“)”，“lambda”和“x”构成的。 它们符合“S表达式”的语法规则， 以及Lisp函数调用的推导规则， 表示了一个数学函数f(a)=a。 &hellip;">
+  <meta name="description" content="世界上有一些道理， 没有人会主动告诉我们。 因为，不知道的人越多，才会越有用。 很多事情， 只有听者无知，才能达到目的。 这让很多人受到控制，身不由己。 卖药的，不会说药品是为了缓解， 而会强调，病情严重。 要想了解事实，就要先摒弃妄想， 相信好事永远不会主动降临。 没有人会关心我们， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/04/11/lambda-calculus/">Lisp程序员眼中的λ演算</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/05/17/conscious-choice/">清醒的选择</a></h1>
     
     
       <p class="meta">
@@ -83,555 +83,222 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-04-11T00:00:00+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-05-17T00:00:00+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>形式系统是一套符号化的系统，</p>
+  <div class="entry-content"><p>世界上有一些道理，</p>
 
-<p>这些符号，遵循了某些规则，</p>
+<p>没有人会主动告诉我们。</p>
 
-<p>模型化了待研究的现实世界。</p>
-
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>(lambda (x) x)</p>
-
-<p>是由符号“(”，“)”，“lambda”和“x”构成的。</p>
-
-<p>它们符合“S表达式”的语法规则，</p>
-
-<p>以及Lisp函数调用的推导规则，</p>
-
-<p>表示了一个数学函数f(a)=a。</p>
+<p>因为，不知道的人越多，才会越有用。</p>
 
 <p><br/></p>
 
-<p>区分符号和它指称的事物，</p>
+<p>很多事情，</p>
 
-<p>是很重要的。</p>
+<p>只有听者无知，才能达到目的。</p>
 
-<p><br/></p>
-
-<p>我们要研究的这些符号构成了一种语言，</p>
-
-<p>称为<strong>目标语言</strong>。</p>
-
-<p>而符号所指称的事物也构成了一种语言，</p>
-
-<p>称为<strong>元语言</strong>。</p>
+<p>这让很多人受到控制，身不由己。</p>
 
 <p><br/></p>
 
-<p>例如：</p>
+<p>卖药的，不会说药品是为了缓解，</p>
 
-<p>符号1，我们通常认为它是自然数1。</p>
-
-<p>但这只是通俗的说法。</p>
+<p>而会强调，病情严重。</p>
 
 <p><br/></p>
 
-<p>事实上，符号1，符号2，符号3，&hellip;属于目标语言范围，</p>
+<p>要想了解事实，就要先摒弃妄想，</p>
 
-<p>而自然数1，自然数2，自然数3，&hellip;属于元语言范围。</p>
+<p><strong>相信好事永远不会主动降临</strong>。</p>
 
-<p><br/></p>
-
-<p>符号1和自然数1是不同的，</p>
-
-<p>如果愿意，我们当然可以用符号a表示自然数1。</p>
+<p>没有人会关心我们，除非牵连到了别人。</p>
 
 <p><br/></p>
 
-<h2><strong>λ演算——形式语法</strong></h2>
+<p>事物本身没有好坏之分，</p>
 
-<p>λ演算系统，是一个形式系统，</p>
-
-<p>用来研究编程语言。</p>
+<p>而优劣之见，是有些人强加进去的。</p>
 
 <p><br/></p>
 
-<p>在内容上，大体分为几个部分。</p>
+<p>宣传，可以让更多的人了解它。</p>
 
-<p><strong>形式语法，公理语义，不动点，操作语义，指称语义</strong>。</p>
-
-<p><br/></p>
-
-<p><strong>形式语法</strong>，</p>
-
-<p>用来说明合法表达式的组成方式。</p>
-
-<p>定义如下：</p>
-
-<p>M ::= x | MM | λx.M</p>
+<p>也让更多的人，忽略它本来的面目。</p>
 
 <p><br/></p>
 
-<p>这是一个递归定义，</p>
+<h2><strong>善良</strong></h2>
 
-<p>它表示，在λ演算系统中，合法的表达式，</p>
+<p>善良的人，会经常反省自己。</p>
 
-<p>要么是一个变量x，</p>
+<p>设身处地为别人着想，</p>
 
-<p>要么是一个函数调用（application），</p>
-
-<p>要么是一个函数抽象（lambda abstraction）。</p>
+<p>但是与所有人和睦共处是不可能的。</p>
 
 <p><br/></p>
 
-<p>例如：如下表达式就是合法的，</p>
+<p><strong>我们不知道想成为什么样的人</strong>，</p>
 
-<p>x，变量x</p>
-
-<p>(λx.x)5，函数调用</p>
-
-<p>λx.y，函数抽象</p>
+<p><strong>是因为别人总是希望我们成为他们希望的那样</strong>。</p>
 
 <p><br/></p>
 
-<p>我们看到合法的lambda表达式，</p>
+<p>看起来对我们好的建议，</p>
 
-<p>在语法上和Lisp中的S表达式很相似。</p>
-
-<p><br/></p>
-
-<p>x &lt;=> x</p>
-
-<p>(λx.x)5 &lt;=> ((lambda (x) x) 5)</p>
-
-<p>λx.y &lt;=> (lambda (x) y)</p>
+<p>大多数是对别人自己有益。</p>
 
 <p><br/></p>
 
-<p>事实上，Lisp语言的语法，</p>
+<p>然而，善良并不是过错，</p>
 
-<p>确实受到了λ演算的影响。</p>
+<p>相反，我们要头脑清醒。</p>
 
-<p><br/></p>
+<p>与别人相处时，要<strong>在衡量中做出选择</strong>，</p>
 
-<p>在不影响歧义的情况下，</p>
-
-<p>我们将采用Lisp语言来讨论λ演算。</p>
-
-<p>因为，他们可以看做只是语法不同的两套形式系统。</p>
+<p>而不是盲目的顺从。</p>
 
 <p><br/></p>
 
-<h2><strong>λ演算——公理语义</strong></h2>
+<p>我们可以相信别人的出发点总是好的，</p>
 
-<p><strong>公理语义</strong>，</p>
-
-<p>是一套等式证明系统，</p>
-
-<p>用来区分一个形式系统中的两个表达式，</p>
-
-<p>是不是等价。</p>
+<p>但是，其中可能有连他自己都不知道的内心期望。</p>
 
 <p><br/></p>
 
-<p>正如不同的语法规则，给出了不同的形式语言，</p>
+<p>我们要化被动为主动，学会拒绝，</p>
 
-<p>不同的等价性条件，给出了有不同公理语义的形式系统。</p>
-
-<p><br/></p>
-
-<p>给λ演算添加不同的等价性规则，</p>
-
-<p>会导致不同的λ演算系统。</p>
+<p>找到自己的方向。</p>
 
 <p><br/></p>
 
-<p>最常用的两种等价规则是，</p>
+<h2><strong>布道与殉道</strong></h2>
 
-<p><strong>α等价</strong>，和<strong>β等价</strong>。</p>
+<p>忙碌经常会让人忘记忙碌的意义。</p>
 
-<p><br/></p>
+<p>就像古代的战争一样，</p>
 
-<p><strong>α等价</strong>指出，</p>
-
-<p>函数的形参只是占位符，</p>
-
-<p>替换形参和函数体中相应名字的符号，</p>
-
-<p>所产生的新表达式与原表达式等价。</p>
+<p>有哪个参与杀戮的人知道杀戮的目的。</p>
 
 <p><br/></p>
 
-<p>例如：</p>
+<p>《三国演义》中的每一路诸侯，</p>
 
-<p>(lambda (x) x)和(lambda (y) y)</p>
+<p>都好比今天每一家企业一样，</p>
 
-<p>是等价的。</p>
-
-<p><br/></p>
-
-<p>这里还没有谈到这两个表达式的指称语义。</p>
-
-<p>无论这些符号指称什么，</p>
-
-<p>在公理语义的约束下，都是等价的。</p>
+<p>坚持着自己的名义，笼络着信奉他们的人。</p>
 
 <p><br/></p>
 
-<p><strong>β等价</strong>指出，</p>
+<p>从古代到现代，</p>
 
-<p>函数调用表达式，等价于，</p>
+<p>争夺资源，变成了没有硝烟的战争。</p>
 
-<p>把函数体中的形参替换成实参后的表达式。</p>
-
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>((lambda (x) (+ a x)) y)等价于(+ a y)</p>
+<p>瓜分天下，只是换了一种方式罢了。</p>
 
 <p><br/></p>
 
-<p>需要注意的是，</p>
+<p>义愤填膺的言辞，</p>
 
-<p>实参含有自由变量，</p>
-
-<p>可能会与替换后环境中的绑定变量冲突。</p>
+<p>让人们<strong>忽略了布道与殉道的区别</strong>。</p>
 
 <p><br/></p>
 
-<p>例如：</p>
+<p>企业不是我们的，</p>
 
-<p>(</p>
+<p>团队不是我们的，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(- a y)</p>
-
-<p>)</p>
+<p>但工作是我们的。</p>
 
 <p><br/></p>
 
-<p>如果我们单纯把形参x替换成(- a y)</p>
+<p>说明我们走在了殉道的路上。</p>
 
-<p>结果如下：</p>
+<p>我们成就的不是自己的事业，</p>
 
-<p>(lambda (y)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (- a y) y))</p>
-
-<p>其中，函数体(+ (- a y) y)中，</p>
-
-<p>第一个y就会被绑定的符号y所捕获。</p>
+<p>而是别人的理想。</p>
 
 <p><br/></p>
 
-<p>这容易引起歧义，</p>
+<p>然而，消极厌世，不是办法。</p>
 
-<p>因此，在这种情况下，我们需要为绑定变量更名。即，</p>
+<p><strong>我们需要的只是清醒</strong>，</p>
 
-<p>(lambda (z)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (- a y) z))</p>
+<p><strong>哪怕仍然做出现在的选择</strong>。</p>
 
 <p><br/></p>
 
-<h2><strong>λ演算——不动点</strong></h2>
+<p>与杀手不同，</p>
 
-<p>我们看到λ演算中，所有函数都是匿名的，</p>
-
-<p>这样在函数体内部引用函数本身，是很困难的事情。</p>
+<p>高手出招，捍卫的是自己的尊严。</p>
 
 <p><br/></p>
 
-<p>例如，阶乘函数，</p>
+<h2><strong>以己之名，道发千钧</strong></h2>
 
-<p>(define fact</p>
+<p>各种新<strong>概念</strong>，席卷而来，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
+<p>为之探索的人，可能是替别人铺平道路，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n (fact (- n 1))))))</p>
-
-<p>函数内部引用了函数本身。</p>
+<p>努力实现了别人的梦想。</p>
 
 <p><br/></p>
 
-<p>改写成等式形式，</p>
+<p><strong>创业</strong>之潮，汹涌澎湃，</p>
 
-<p>fact = (lambda (n)</p>
+<p>参与创业的人，未必真的在创业，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n (fact (- n 1)))))</p>
-
-<p>我们发现，在等式两边都出现了fact。</p>
+<p>合伙人很可能是在帮助别人成就伟业。</p>
 
 <p><br/></p>
 
-<p>这使得我们回忆起了<strong>代数学</strong>中，</p>
+<p>理论<strong>模型</strong>，层出不穷，</p>
 
-<p>求解以下方程式。</p>
+<p>进行科学验证的人，可能只是在提供实验基础，</p>
 
-<p>x = G(x)。</p>
-
-<p><br/></p>
-
-<p>其中，</p>
-
-<p>G(f) = (lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n (f (- n 1)))))</p>
-
-<p>或，</p>
-
-<p>G = (lambda (f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n (f (- n 1))))))</p>
+<p>提高的是别人想法的可靠程度。</p>
 
 <p><br/></p>
 
-<p>待求取的函数fact，是这个方程的解。即，</p>
+<p><strong>参与者，一直是被误导的目标</strong>，</p>
 
-<p>fact = G(fact)。</p>
-
-<p>我们称，方程x = G(x)的解为函数G的<strong>不动点</strong>。</p>
+<p>所以，不要把别人的路，想象为自己的路。</p>
 
 <p><br/></p>
 
-<p>那么这个方程有解吗？</p>
+<p>邀请别人，共同完成一件事情，</p>
 
-<p>幸运的是，人们已经找到了求解不动点的办法。</p>
-
-<p><br/></p>
-
-<p>方法如下：</p>
-
-<p>人们发现存在一个称为<strong>Y组合子</strong>（Y combinator）的函数，</p>
-
-<p>可以得到任意函数G的不动点。即，</p>
-
-<p>令x = YG，则x = G(x)</p>
+<p>这是参与者是无法体会的。</p>
 
 <p><br/></p>
 
-<p>因此，上例中，</p>
+<p>事实上，自己真正要做的事情，</p>
 
-<p>fact = YG</p>
+<p>都不得不以自己的名义，<strong>主动完成</strong>，</p>
 
-<p><br/></p>
-
-<p>其中，</p>
-
-<p>Y = (lambda (k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((lambda (g) (g g))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((k (f f))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n)))))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>这里需要注意，<strong>Y本身不是G的不动点</strong>，</p>
-
-<p>YG才是。</p>
+<p>参与任何人的事业，都没有办法替代。</p>
 
 <p><br/></p>
 
-<h2><strong>λ演算——操作语义</strong></h2>
+<p>最后，被别人利用，也并不完全是一件坏事，</p>
 
-<p><strong>操作语义</strong>，</p>
+<p>难得的是有清醒的认识，</p>
 
-<p>是一套推导规则，</p>
-
-<p>据此表达式可以规约成更简单的形式。</p>
-
-<p><br/></p>
-
-<p>与等式证明系统不同的是，</p>
-
-<p>推导规则具有方向性。</p>
-
-<p><br/></p>
-
-<p>相同之处在于，</p>
-
-<p>在不同个数规约规则的限制下，</p>
-
-<p>得到了不同的λ演算系统。</p>
-
-<p><br/></p>
-
-<p>最常用的规约规则，称为<strong>β规约</strong>。</p>
-
-<p>它是β等价的有向形式。</p>
-
-<p><br/></p>
-
-<p>记法如下：</p>
-
-<p>((lambda (x) (+ a x)) y) -> (+ a y)</p>
-
-<p><br/></p>
-
-<p>另外，某些表达式，β规约<strong>不可终止</strong>的。</p>
-
-<p>例如：</p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x x))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x x))</p>
-
-<p>)</p>
-
-<p>-></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x x))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x x))</p>
-
-<p>)</p>
-
-<p>-> &hellip;</p>
-
-<p><br/></p>
-
-<p>对于β规约可终止的表达式，人们发现，</p>
-
-<p>按不同的次序，对表达式进行规约，</p>
-
-<p>总是可以得到相同的最终表达式，</p>
-
-<p>称为<strong>范式</strong>（normal form）。</p>
-
-<p>这种性质，称为<strong>汇聚性</strong>（confluence）。</p>
-
-<p><br/></p>
-
-<h2><strong>λ演算——指称语义</strong></h2>
-
-<p><strong>指称语义</strong>，</p>
-
-<p>是通过为每一个表达式指定一个数学对象，</p>
-
-<p>作为该表达式的指称，</p>
-
-<p>来说明表达式语义的一种办法。</p>
-
-<p><br/></p>
-
-<p>能这样做，是建立在<strong>语义合成性</strong>（compositionality）前提之下的。</p>
-
-<p>即，表达式的语义，只由它的子表达式语义决定。</p>
-
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>对于加法表达式，</p>
-
-<p>(+ 1 2)</p>
-
-<p><br/></p>
-
-<p>符号+，指称数学函数，加法函数，</p>
-
-<p>符号1，指称自然数1，</p>
-
-<p>符号2，指称自然数2。</p>
-
-<p><br/></p>
-
-<p>整个表达式指称，自然数1与自然数2的加法操作。</p>
-
-<p><br/></p>
-
-<p>记为：
-E[[+]] = 加法函数</p>
-
-<p>E[[1]] = 自然数1</p>
-
-<p>E[[2]] = 自然数2</p>
-
-<p>E[[e1+e2]] = E[[e1]]+E[[e2]]</p>
-
-<p>其中，等式右边的+表示自然数加法操作。</p>
+<p><strong>做出自己的选择</strong>。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>λ演算虽然语法简单，但是内涵丰富，</p>
+<p>有人的地方，就有江湖。</p>
 
-<p>这很符合<strong>Scheme语言</strong>的设计哲学。</p>
+<p>而江湖不止是仇杀，</p>
 
-<p><br/></p>
-
-<p>从模型论的角度来看，</p>
-
-<p>如果说物理学是对现实世界的建模，</p>
-
-<p>那么程序设计语言，就是对计算的建模。</p>
-
-<p><br/></p>
-
-<p>λ演算和其他编程语言一样，采用形式方法，</p>
-
-<p>用满足特定规则的一组符号，</p>
-
-<p>建立了计算模型。</p>
-
-<p><br/></p>
-
-<p>图灵机，递归函数论等，采用了其他方式建模，</p>
-
-<p>虽然复杂一些，但是与λ演算具有相同的计算能力。</p>
-
-<p><br/></p>
-
-<p>λ演算很值得学习，</p>
-
-<p>会了解到很多数学上的基础问题，</p>
-
-<p>集合论，证明论，递归论，模型论，</p>
-
-<p>都有不同程度的应用。</p>
+<p>还有可能是有人在<strong>激起</strong>仇杀。</p>
 </div>
   
   
@@ -657,8 +324,8 @@ E[[+]] = 加法函数</p>
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -668,7 +335,15 @@ E[[+]] = 加法函数</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -697,14 +372,6 @@ E[[+]] = 加法函数</p>
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

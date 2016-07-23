@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="宏（macro）是Lisp语言进行元编程的手段， 它分为两种，读取宏（read macro）和编译宏（compilation macro）。 可以用来编写读取期和编译期运行的代码。 宏，事实上进行了代码的转换。 每一个宏都与一个转换器（transformer）相关联。 代码转换后， &hellip;">
+  <meta name="description" content="术业有专攻。 每个人都有自己擅长的技能。 完成擅长的任务，是一件愉快的事情。 在一个团队中，最默契的配合， 就是大家都在各自擅长的领域中工作。 互相之间都是不可替代的。 这样的生活， 每天都有幸福感。 因为我们得到了尊重。 然而，有些人的生活却并非如此。 他们做着自己不想做的事情， 但是又无力改变 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/22/hygienic-macro/">简介卫生宏</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/03/26/great/">巨人与泥足</a></h1>
     
     
       <p class="meta">
@@ -83,472 +83,190 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-03-22T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-03-26T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>宏（macro）是Lisp语言进行元编程的手段，</p>
+  <div class="entry-content"><p>术业有专攻。</p>
 
-<p>它分为两种，读取宏（read macro）和编译宏（compilation macro）。</p>
+<p>每个人都有自己擅长的技能。</p>
 
-<p>可以用来编写读取期和编译期运行的代码。</p>
-
-<p><br/></p>
-
-<p>宏，事实上进行了代码的转换。</p>
-
-<p>每一个宏都与一个转换器（transformer）相关联。</p>
-
-<p>代码转换后，会替换到原来的位置。</p>
-
-<p>这个过程，称为宏展开（expansion）。</p>
+<p>完成擅长的任务，是一件愉快的事情。</p>
 
 <p><br/></p>
 
-<p>区分读取期，编译期和运行期，是很重要的。</p>
+<p>在一个团队中，最默契的配合，</p>
 
-<p>这是3个独立的阶段，</p>
+<p>就是大家都在各自擅长的领域中工作。</p>
 
-<p>尤其在运行期，不存在任何未展开的宏。</p>
-
-<p><br/></p>
-
-<p>我们使用“a -> b”来表示，表达式a展开为b。</p>
-
-<p>而使用“a => b”表示，表达式a的值为b。</p>
+<p>互相之间都是不可替代的。</p>
 
 <p><br/></p>
 
-<p>例子：</p>
+<p>这样的生活，</p>
 
-<p>&lsquo;a -> (quote a)，其中“'”是一个读取宏。</p>
+<p>每天都有幸福感。</p>
 
-<p>读取宏可以将任意表达式转换为S表达式。</p>
-
-<p><br/></p>
-
-<p>很多常见的表达式调用，其实是编译宏。</p>
-
-<p>(and test1 test2) -> (if test1 test2 #f)</p>
-
-<p>编译宏可以将一个S表达式转换为另一个S表达式。</p>
+<p>因为我们得到了尊重。</p>
 
 <p><br/></p>
 
-<p>我们通常说的宏，指的是编译宏。</p>
-
-<p>Scheme语言暂时不支持自定义的读取宏。</p>
+<p>然而，有些人的生活却并非如此。</p>
 
 <p><br/></p>
 
-<h2><strong>定义一个宏</strong></h2>
+<p>他们做着自己不想做的事情，</p>
 
-<p>Scheme语言中使用define-syntax来定义宏，</p>
-
-<p>定义一个宏，有时也称为绑定一个关键字（keyword binding）。</p>
-
-<p>宏展开的结果，最终都转换成了一些Scheme语言内置的表达式。</p>
+<p>但是又无力改变。</p>
 
 <p><br/></p>
 
-<p>例如：宏and是这样的定义的，</p>
-
-<p>(define-syntax and</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(syntax-rules ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(and) #t]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(and test) test]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(and test1 test2 &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if test1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(and test2 &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#f)]))</p>
+<p>为什么不能让他们去做自己喜欢的工作呢？</p>
 
 <p><br/></p>
 
-<p>其中，(syntax-rules &hellip;)的值是一个转换器。</p>
+<p>其实，原因很简单，</p>
 
-<p>define-syntax将关键字and和这个转换器相关联。</p>
-
-<p><br/></p>
-
-<p>Scheme语言中有很多表达式可以返回转换器，</p>
-
-<p>而syntax-rules是最常用的一个。</p>
-
-<p>它内置了一个模板语言（pattern language）</p>
+<p>他们并不擅长自己向往的工作。</p>
 
 <p><br/></p>
 
-<p>syntax-rules后面紧跟的一个括号，里面可以设置辅助关键字。</p>
+<p>因此，擅长什么，</p>
 
-<p>至于辅助关键字，可以参考Scheme语言手册了解使用情况。</p>
+<p>就会被要求做什么，</p>
 
-<p><br/></p>
-
-<p>后续的每一个表达式，都具有“[模式，模板]”这样的结构。</p>
-
-<p>对于[(and) #t]来说，</p>
-
-<p>模式 = (and)</p>
-
-<p>模板 = #t</p>
+<p>不论我们是否愿意。</p>
 
 <p><br/></p>
 
-<p>模式和模板中的“&hellip;”是syntax-rules模板语言的一部分。</p>
+<h2><strong>额外的努力</strong></h2>
 
-<p>具体用法，也可以参考Scheme语言手册。</p>
+<p>重复，在软件行业中，是一个敏感的话题。</p>
 
-<p><br/></p>
+<p>因为，重复是可以用软件办法解决的，</p>
 
-<p>如果宏调用匹配了某个模式，就会按照相应模板展开。</p>
-
-<p>下面3个宏调用，展开结果如下：</p>
-
-<p>(and) -> #t</p>
-
-<p>(and x) -> x</p>
-
-<p>(and x y) -> (if x (and y) #f) -> (if x y #f)</p>
+<p>大量重复，可能意味着没有使用软件思维来考虑问题。</p>
 
 <p><br/></p>
 
-<p>宏是可以递归展开的，一直到结果表达式中不再含有宏为止。</p>
+<p>现如今，几乎所有的软件问题，</p>
+
+<p>都能找到大量的类库和框架。</p>
 
 <p><br/></p>
 
-<p>模式中的第一个元素，因为肯定是宏的名字，</p>
+<p>高级程序员，经常叮嘱新人，</p>
 
-<p>所以也可以替换成通配符“_”，</p>
+<p>绝不要重新造车轮。</p>
 
-<p>[(_) #t]</p>
-
-<p>[(_ test) test]</p>
+<p>如果有能用的，一定要用现成的。</p>
 
 <p><br/></p>
 
-<h2><strong>卫生宏</strong></h2>
+<p>站在巨人的肩膀上，</p>
 
-<p>Scheme是第一个支持卫生宏（hygienic macro）的Lisp方言。</p>
-
-<p>也是第一个支持卫生宏的编程语言。</p>
+<p>我们的软件开发效率才会越来越高。</p>
 
 <p><br/></p>
 
-<p>“卫生”这个词表示，宏展开后，不会污染原来的词法作用域。</p>
+<p>但有时候，现存的工具，并不是很完美。</p>
 
-<p>我们还是举例来说明吧，最后，我们再总结规律。</p>
-
-<p><br/></p>
-
-<p>例1：宏展开后，原表达式处于新的词法环境中。</p>
-
-<p>(let-syntax [(insert-binding (syntax-rules ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;[(_ x) (let [(a 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x a))]))]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3))))</p>
-
-<p>=> 6</p>
+<p>甚至，瑕疵多的令人难以忍受。</p>
 
 <p><br/></p>
 
-<p>其中，let-syntax用来绑定局部关键字。</p>
+<p>我们该怎么办呢？</p>
 
-<p>就像let可用来绑定局部变量一样。</p>
-
-<p><br/></p>
-
-<p>在let-syntax表达式内部，我们定义了宏insert-binding。</p>
-
-<p>它绑定到syntax-rules求值后得到的转换器上。</p>
+<p>忍痛修补，还是重新创造？</p>
 
 <p><br/></p>
 
-<p>根据定义，我们知道(insert-binding x) -> (let [(a 1)] (+ x a))</p>
+<p>答案就是。</p>
 
-<p>原表达式x，处于含有新的绑定a => 1的词法环境中。</p>
-
-<p><br/></p>
-
-<p>如果原表达式x中含有a，就出现问题了。</p>
-
-<p>我们的例子就是这种情况。</p>
+<p>我们需要<strong>用额外的努力做自己选择的事情</strong>。</p>
 
 <p><br/></p>
 
-<p>(let [(a 2)]</p>
+<p>重新制造的车轮，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
+<p>如果拿来用，就是浪费时间。</p>
 
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(a 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) a)))</p>
-
-<p>=> 5</p>
+<p>但是，如果拿来思考，那就是积累经验。</p>
 
 <p><br/></p>
 
-<p>结果出错了。</p>
+<p>当我们用额外的努力，做任何事情的时候，</p>
 
-<p>从(+ a 3)所在的原始词法环境来看，</p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
-
-<p>(+ a 3)中a的值，应该是2才对。</p>
-
-<p>宏展开污染了原始的词法环境。</p>
+<p>没有人会批评我们。</p>
 
 <p><br/></p>
 
-<p>这是不“卫生”的。</p>
-
-<p>Scheme通过给绑定的值改名字来实现卫生宏。</p>
+<p>这才是走自己路的正确方式。</p>
 
 <p><br/></p>
 
-<p>宏展开(insert-binding x) -> (let [(a 1)] (+ x a))</p>
+<h2><strong>根基</strong></h2>
 
-<p>改成了(insert-binding x) -> (let [(:g0001 1)] (+ x :g0001))</p>
+<p>像冰山一样，我们的基本功隐藏在微末的表象之下，</p>
 
-<p>其中，:g0001是语言实现生成的唯一名字，不会与任何已有的名字冲突。</p>
+<p>而我们进行的这些积累，其实很少来源于相关的工作，</p>
 
-<p><br/></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
-
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(:g0001 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) :g0001)))</p>
-
-<p>=> 6</p>
+<p>主要在于自己额外的努力。</p>
 
 <p><br/></p>
 
-<p>这样就得到了正确的结果。</p>
+<p>努力，会改变我们擅长的事情，</p>
+
+<p>改变我们的想法，</p>
+
+<p>从而影响今后的工作内容。</p>
 
 <p><br/></p>
 
-<p>例2：宏展开后，引入了不在原来词法作用域中的标识符。</p>
+<p>如果想成为一个巨人，</p>
 
-<p>(let [(a 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(let-syntax [(insert-free (syntax-rules ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ x) (+ x a)]))]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))))</p>
-
-<p>=> 6</p>
+<p>没有额外的努力，就好像把根基建立在泥足之上。</p>
 
 <p><br/></p>
 
-<p>同样根据定义，我们知道(insert-free x) -> (+ x a)</p>
+<p>人们只看到巨人很高，</p>
+
+<p>却没看到他的基础更牢。</p>
 
 <p><br/></p>
 
-<p>所以，</p>
+<p>努力，并不限于技术，</p>
 
-<p>(let [(a 2)]</p>
+<p>就好像武功不只是招式一样，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))</p>
-
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) a))</p>
-
-<p>=> 7</p>
+<p>还有心法，以及个人的修养和认识。</p>
 
 <p><br/></p>
 
-<p>结果又出错了。</p>
+<p>这些见解，</p>
 
-<p>哪里出现问题了？</p>
+<p>只有真正的思考，和认真的活着，</p>
 
-<p><br/></p>
-
-<p>宏定义的模式/模板[(_ x) (+ x a)]))]中的a，应该是第一行的绑定，(let [(a 1)]</p>
-
-<p>而展开式(let [(a 2)] (+ (+ a 3) a))覆盖了外层对a的绑定。</p>
-
-<p><br/></p>
-
-<p>因此，宏展开式的行为，将取决于展开后的环境，</p>
-
-<p>展开到不同的环境中，行为是不同的。</p>
-
-<p>失去了宏调用的“引用透明性”。</p>
-
-<p><br/></p>
-
-<p>Scheme是怎么解决的呢？</p>
-
-<p>语言规范指出，宏展开式中的自由标识符，处于宏定义时的词法作用域中。</p>
-
-<p>即，宏展开式(+ x a)中，a具有宏定义环境中的值a => 1，(insert-free x) -> (+ x 1)</p>
-
-<p><br/></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))</p>
-
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) 1))</p>
-
-<p>=> 6</p>
-
-<p><br/></p>
-
-<h2><strong>规律总结</strong></h2>
-
-<p>我们遇到了一个问题。</p>
-
-<p>我们知道，“+”在Scheme中表示加法函数，</p>
-
-<p>它和a地位相同，也是一个变量，只不过它的值是一个函数。</p>
-
-<p><br/></p>
-
-<p>那么，以上两个例子中，变量+的值分别来自哪个词法作用域呢？</p>
-
-<p><br/></p>
-
-<p>例1中，</p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
-
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(:g0001 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) :g0001)))</p>
-
-<p><br/></p>
-
-<p>经过分析，我们知道了，</p>
-
-<p>(+ (+ a 3) :g0001)))中第一个+来自宏定义处的词法作用域，</p>
-
-<p>第二个+来自宏替换处的词法作用域。</p>
-
-<p><br/></p>
-
-<p>例2中，</p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))</p>
-
-<p>-></p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) 1))</p>
-
-<p><br/></p>
-
-<p>同样经过分析，我们知道了，</p>
-
-<p>(+ (+ a 3) 1))中第一个+来自宏定义处的词法作用域，</p>
-
-<p>第二个+来自宏替换处的词法作用域。</p>
-
-<p><br/></p>
-
-<p>因此，</p>
-
-<p>我们找到了一个规律，这也是卫生宏的目的所在。即，</p>
-
-<p><strong>宏展开式中的所有标识符，仍处于其来源处的词法作用域中。</strong></p>
-
-<p><br/></p>
-
-<p>我们试着分析一下这两个例子。</p>
-
-<p>例1展开式，</p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(let [(:g0001 1)]</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(+</strong> (+ a 3) <strong>:g0001))</strong>)</p>
-
-<p>粗体来源于宏定义处，普通字体来源于宏替换处。</p>
-
-<p>展开后，它们仍然处于各自来源处的词法作用域中。</p>
-
-<p><br/></p>
-
-<p>例2展开式，</p>
-
-<p>(let [(a 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(+</strong> (+ a 3) <strong>1)</strong>)</p>
-
-<p>上述规则同样满足。</p>
-
-<p><br/></p>
-
-<p>宏展开式中的标识符，虽然来源不同，但互不污染。</p>
-
-<p>这就达到卫生宏的目的了。</p>
+<p>才能得到。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>在Lisp编程中，宏展开后造成了非预期的污染，是经常出现问题的地方。</p>
+<p>在《边城浪子》中，阿飞说：</p>
 
-<p>Common Lisp目前并不支持卫生宏，</p>
+<p>我知道，你们这一辈的年轻人，不止是聪明，用功。</p>
 
-<p>但是可以实现自己的宏定义，用自己的宏来定义宏，达到简洁可控的目的。</p>
+<p>比我们当年还要高出很多倍。</p>
 
-<p><br/></p>
+<p>但是，我仍然希望，你们明白一点。</p>
 
-<p>当然，卫生宏也造成了表达能力的损失，</p>
+<p>就是，真正伟大的武功，并不是单靠聪明和用功，就能够练的出来的。</p>
 
-<p>在特殊情况下，可以使用syntax-case以及datum->syntax来弥补。</p>
+<p>是<strong>先要有一颗伟大的心，才能够真正的练到伟大的武功</strong>。</p>
 </div>
   
   
@@ -574,8 +292,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -585,7 +303,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -614,14 +340,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="程序员们都讨厌重复， 因为他们知道， 这是可以避免的冗余工作量。 ——代码坏味 如果本来就不可避免， 那只好认了， 就好像需求不可能不变的事实一样。 但是，盲目的消除重复， 并不是正确的姿势， 反而会把简单的事情搞复杂。 为什么程序员们甘心写那么多“public class XXX {}”， &hellip;">
+  <meta name="description" content="在对待数学问题时， 我们知道， 要在相同的前提下考虑问题。 否则， 所得到的结论之间没有可比性。 但是，在处理其他问题的时候， 我们容易忽略这一点， 烦恼和迷惑就随之而来了。 换位思考 某位高管收了多少贿赂，你骂他贪官， 某个明星聚众吸毒，你骂他可笑， 某某富二代超速飙车，你骂他废柴。 诚然， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/09/11/reuse-oriented-programming/">消除重复与可复用相距多远</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/10/12/different-premise/">不同的前提</a></h1>
     
     
       <p class="meta">
@@ -83,306 +83,230 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-09-11T00:00:00+08:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-10-12T00:00:00+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>程序员们都讨厌重复，</p>
+  <div class="entry-content"><p>在对待数学问题时，</p>
 
-<p>因为他们知道，</p>
+<p>我们知道，</p>
 
-<p>这是可以避免的冗余工作量。</p>
-
-<p>——代码坏味</p>
+<p>要在相同的前提下考虑问题。</p>
 
 <p><br/></p>
 
-<p>如果本来就不可避免，</p>
+<p>否则，</p>
 
-<p>那只好认了，</p>
-
-<p>就好像需求不可能不变的事实一样。</p>
+<p>所得到的结论之间没有可比性。</p>
 
 <p><br/></p>
 
-<p>但是，<strong>盲目的消除重复</strong>，</p>
+<p>但是，在处理其他问题的时候，</p>
 
-<p>并不是正确的姿势，</p>
+<p>我们容易忽略这一点，</p>
 
-<p>反而会把简单的事情搞复杂。</p>
-
-<p><br/></p>
-
-<p>为什么程序员们甘心写那么多“public class XXX {}”，</p>
-
-<p>甘心写那么多“END”，“;”或者“)”，</p>
-
-<p>而不设法避免呢？</p>
+<p>烦恼和迷惑就随之而来了。</p>
 
 <p><br/></p>
 
-<p>为什么不把所有的“this”都提取出来，</p>
+<h2><strong>换位思考</strong></h2>
 
-<p>放在一个地方，</p>
+<p>某位高管收了多少贿赂，你骂他贪官，</p>
 
-<p>在编译前，再把他们塞入代码中呢。</p>
+<p>某个明星聚众吸毒，你骂他可笑，</p>
 
-<p><br/></p>
-
-<p>诚然，通过macro，</p>
-
-<p>可以做一些代码生成之类的事情，</p>
-
-<p>但是直觉告诉我们，不能乱来。</p>
+<p>某某富二代超速飙车，你骂他废柴。</p>
 
 <p><br/></p>
 
-<p>原因是什么？</p>
+<p>诚然，</p>
 
-<p>消除重复与面向复用其实还相距太远。</p>
-
-<p><br/></p>
-
-<h2>什么是面向复用的编程</h2>
-
-<p>“面向”，指的是目的，目标。</p>
+<p>这是不对的。</p>
 
 <p><br/></p>
 
-<p>方法论告诉我们，</p>
+<p><strong>但是，换作我们，</strong></p>
 
-<p>要完成一件事需要3个步骤，</p>
-
-<p>（1）确定目标</p>
-
-<p>（2）分析差距</p>
-
-<p>（3）缩小差距</p>
+<p><strong>在他们的位置，也不一定能洁身自好。</strong></p>
 
 <p><br/></p>
 
-<p>确定目标是第一步。</p>
+<p>因为，普通人并没有遭遇同等级别的诱惑。</p>
 
 <p><br/></p>
 
-<p>要想让我们的程序被复用，</p>
+<p>每个人都有爱好，</p>
 
-<p>首先他要设计成<strong>可以</strong>被复用的，</p>
+<p>你喜好什么，别人就利用什么，</p>
 
-<p>不是哪天要用了，忽然就行了。</p>
-
-<p><br/></p>
-
-<p>而且，在一套软件中，</p>
-
-<p>并不是所有的代码都是可复用的，</p>
-
-<p>有些根本无法复用。</p>
+<p>要想全身而退，非常困难。</p>
 
 <p><br/></p>
 
-<p>承认了这两个事实以后，</p>
+<p>某位领导在台上吹嘘拍马，你说他忽悠，</p>
 
-<p>任务一下子简单了很多。</p>
+<p>某个产品经理的需求几经调整，你说他不专业，</p>
 
-<p><br/></p>
-
-<h2><strong>提取并不意味着抽象</strong></h2>
-
-<p>一段代码，在很多地方都出现了，</p>
-
-<p>我们马上就能想到，</p>
-
-<p>把它<strong>提取</strong>到了一个函数中。</p>
+<p>某个程序员写的代码Bug不少，你说他技术不行。</p>
 
 <p><br/></p>
 
-<p>然而这对可复用并没有任何作用，</p>
+<p>诚然，</p>
 
-<p>我们只是凑巧成功了几次。</p>
-
-<p><br/></p>
-
-<p>假如某个调用处的<strong>业务逻辑</strong>发生了变化，</p>
-
-<p>我们就遇到麻烦了，</p>
-
-<p>不能修改提取出去的代码，因为别人也在用，</p>
-
-<p>还要把代码再复制回去，只调整这一块。</p>
+<p>他们应该可以做的更好。</p>
 
 <p><br/></p>
 
-<p>自讨苦吃啊。</p>
+<p><strong>但是，换做我们，</strong></p>
 
-<p>那可如何是好？</p>
-
-<p><br/></p>
-
-<p>这是因为，提取和抽象是不同的，</p>
-
-<p>提取是文本层次的观察，</p>
-
-<p>而抽象是逻辑层次的考察。</p>
+<p><strong>在他们的位置，未必能达到他们现在的水平。</strong></p>
 
 <p><br/></p>
 
-<p>这段代码虽然在很多地方出现了，</p>
-
-<p>可是它却由不同的<strong>逻辑单元</strong>组成，</p>
-
-<p>这就隐藏了很多引起它改变的因素。</p>
-
-<p>——单一职责原则</p>
+<p>因为，外行人并没有看到专业人士遇到的困难。</p>
 
 <p><br/></p>
 
-<p>我们应该先把这些逻辑单元封装好，</p>
+<p>在专业领域有很多限制条件，</p>
 
-<p>然后<strong>拼装</strong>出统一的抽象接口，</p>
+<p>这大大缩小了决策范围，</p>
 
-<p>各处对接口进行调用。</p>
-
-<p>——依赖倒置原则</p>
-
-<p>——合成/聚合复用原则</p>
+<p>外行的建议，往往不能兼顾这些限制条件。</p>
 
 <p><br/></p>
 
-<p>一旦某个逻辑单元需要调整了，</p>
+<h2><strong>严于律己</strong></h2>
 
-<p>那么只需要单独为某处调用，</p>
+<p>不要为自己找借口，</p>
 
-<p>再<strong>实现</strong>一个新的接口函数就行了。</p>
+<p>前提并不是影响结果的唯一因素，</p>
 
-<p>——开-闭原则</p>
-
-<p><br/></p>
-
-<h2><strong>外表要简单，内心不要太简单</strong></h2>
-
-<p>有人觉得有个<strong>拼装层</strong>太麻烦了，</p>
-
-<p>还不如直接提取函数好呢，</p>
-
-<p>这其实是混淆了抽象与实现。</p>
+<p><strong>同样的前提，别人可以做的更好。</strong></p>
 
 <p><br/></p>
 
-<p>接口的使用者是看不到实现方式的，</p>
+<p>在电视剧《GOLD》中，</p>
 
-<p>实现很复杂是为了有更高的灵活性。</p>
+<p>早乙女悠里在监狱中的演讲，</p>
 
-<p>——迪米特法则</p>
-
-<p><br/></p>
-
-<p><strong>语言的魅力不就是，把复杂藏于只言片语之后吗？</strong></p>
-
-<p>编程的目的不就是，为多变的业务逻辑提供简洁的描述语言吗？</p>
-
-<p>——领域特定语言</p>
+<p>说明了这一点。</p>
 
 <p><br/></p>
 
-<p>一切都应该尽可能地简单,但不要太简单。</p>
+<p>很多被害者的遗属，带着几近绝望的愤怒抗诉，</p>
 
-<p>——爱因斯坦</p>
-
-<p><br/></p>
-
-<h2><strong>业务与功能</strong></h2>
-
-<p>经常变动的是业务逻辑，</p>
-
-<p>而可复用的是功能模块。</p>
+<p>要求给犯罪者更重的刑罚，要求处以极刑。</p>
 
 <p><br/></p>
 
-<p>对逻辑我们要抽象，</p>
+<p>要说为什么他们的愤怒会如此强烈，</p>
 
-<p>而对功能我们要封装。</p>
+<p>那是因为这些犯人中，</p>
 
-<p><br/></p>
+<p>很多人都不为自己犯下的罪行感到悔恨，</p>
 
-<p><strong>很多新手认为，</strong></p>
-
-<p><strong>把相关的代码组织在一起就是封装了，</strong></p>
-
-<p><strong>这与认为把代码提取出来了就是抽象了一样失败。</strong></p>
+<p>唯一悔恨的只是自己被逮住。</p>
 
 <p><br/></p>
 
-<p>要封装，是因为它们“能够封装”，</p>
+<p>为了让审判对自己有利，</p>
 
-<p>而不是代码恰好出现在了一起。</p>
+<p>他们会演一些令人作呕的小把戏，</p>
 
-<p><br/></p>
-
-<p>只有<strong>与要描述的业务无关</strong>的功能，</p>
-
-<p>才是可复用的单元。</p>
+<p>这样的小把戏，被害人家属一眼就能看穿。</p>
 
 <p><br/></p>
 
-<p>每个页面都发送AJAX请求，</p>
+<p>他们说自己的成长经历，</p>
 
-<p>然后更新一个id=&ldquo;message"的标签，</p>
+<p>说自己不被父母爱护，说社会对自己不理不睬，</p>
 
-<p>这是不可封装的。</p>
-
-<p><br/></p>
-
-<p>而发送AJAX模块，</p>
-
-<p>更新任一标签内容的模块，</p>
-
-<p>才是可封装的。</p>
+<p>尽说这些让人腻烦的狡辩和自欺的废话。</p>
 
 <p><br/></p>
 
-<p>一致的业务流程，也是可以封装的。</p>
+<p><strong>我告诉你们，即便是被塞进同样的环境，</strong></p>
 
-<p>例如，如果有定时任务，</p>
+<p><strong>不，即便是遭遇更残酷的命运，</strong></p>
 
-<p>可以封装一个定时任务管理器，</p>
-
-<p>只需要挂载任务的配置信息就可以自动执行。</p>
+<p><strong>很多人也绝不会犯罪。</strong></p>
 
 <p><br/></p>
 
-<p>对了，别人有写好了的，</p>
+<p>绝不会去伤害，欺骗，抢劫，杀害他人，</p>
 
-<p>不用自己做，</p>
+<p>沾染毒品，欺诈老年人，汇款欺诈，</p>
 
-<p>但我们要这么想。</p>
+<p>抢劫，强奸，杀人。</p>
+
+<p><br/></p>
+
+<p>会那么轻易的剥夺他人的尊严的人，</p>
+
+<p>它心琴的弦早就一根不剩了，一根不剩。</p>
+
+<p><br/></p>
+
+<h2><strong>宽以待人</strong></h2>
+
+<p>我们眼中，自己才是最好的，</p>
+
+<p>不幸的是，每个人都是这样认为的。</p>
+
+<p><br/></p>
+
+<p>别人是否失误，</p>
+
+<p>是站在自己的前提考虑的，</p>
+
+<p><strong>我们能看到别人看不到的盲区。</strong></p>
+
+<p><br/></p>
+
+<p>常见的一句话是，</p>
+
+<p>你不知道怎么不问呢？</p>
+
+<p>然而，他既然不知道，怎么会意识到要问？</p>
+
+<p><br/></p>
+
+<p>曹植说，</p>
+
+<p>东海广且深，由卑下百川；</p>
+
+<p>五岳虽高大，不逆垢与尘。</p>
+
+<p><br/></p>
+
+<p>循循善诱，克制好自己的愤怒和嘲讽，</p>
+
+<p><strong>实力相差悬殊的对手之间，没有仇恨。</strong></p>
+
+<p><br/></p>
+
+<p>这世界很奇怪，</p>
+
+<p>高人常常以隐瞒自己的实力为乐，</p>
+
+<p>不能韬光养晦，也成不了高人。</p>
+
+<p><br/></p>
+
+<p><strong>所以，你觉得别人很差，</strong></p>
+
+<p><strong>他也有可能在逗你。</strong></p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>能闻到坏味是好事，</p>
+<p>事了拂衣去，深藏身与名。</p>
 
-<p>但是不正确的打扫方法，</p>
-
-<p>反而会使代码更难维护。</p>
-
-<p><br/></p>
-
-<p>消除重复是表象，</p>
-
-<p>而面向复用才是目的。</p>
-
-<p><br/></p>
-
-<p><strong>和别人读同样的书，</strong></p>
-
-<p><strong>不一定考上一样的大学，</strong></p>
-
-<p><strong>更不一定有相同的人生。</strong></p>
+<p>——《李白》</p>
 </div>
   
   
@@ -408,8 +332,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -419,7 +343,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -448,14 +380,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

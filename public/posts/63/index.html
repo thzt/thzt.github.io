@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="类库，框架，层出不穷。 Web前端，似乎经历着历史上已经发生过很多次的事情。 很多人找不到自己的努力方向了， Backbone，Ember，AngularJS，ReactJS，&hellip; 到底该学哪个？ 一阵阵枪林弹雨，扫的我们抬不起头来， 各大公司为了抢占资源，霸占程序员的时间， &hellip;">
+  <meta name="description" content="表达式是在环境中求值的。 如果允许表达式改变环境， 那么，其他表达式的求值结果，就是不可预料的。 环境，是专业术语，也可称为执行环境， 里面保存的是，变量和值的绑定关系。 Haskell是一门纯函数式语言， 并不是说，函数的每次求值结果都相同。 而是说，任何函数都不会修改它的执行环境。 例如， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/24/jquery-plugin/">jQuery插件的把玩方式</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/03/27/purity/">Haskell的纯函数性</a></h1>
     
     
       <p class="meta">
@@ -83,747 +83,214 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-03-24T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-03-27T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>类库，框架，层出不穷。</p>
+  <div class="entry-content"><p>表达式是在环境中求值的。</p>
 
-<p>Web前端，似乎经历着历史上已经发生过很多次的事情。</p>
+<p>如果允许表达式改变环境，</p>
 
-<p><br/></p>
-
-<p>很多人找不到自己的努力方向了，</p>
-
-<p>Backbone，Ember，AngularJS，ReactJS，&hellip;</p>
-
-<p>到底该学哪个？</p>
-
-<p><br/></p>
-
-<p>一阵阵枪林弹雨，扫的我们抬不起头来，</p>
-
-<p>各大公司为了抢占资源，霸占程序员的时间，</p>
-
-<p>总是宣传它们的东西是最好的。</p>
-
-<p><br/></p>
-
-<p>其实，我们不必太较真，</p>
-
-<p>我们只需要抓住已有知识的精髓即可，</p>
-
-<p>举一反三，用创造力改变世界。</p>
-
-<p><br/></p>
-
-<p>编程，就好像古时候写诗一样。</p>
-
-<p>伟大的诗人，不一定会背所有的诗词。</p>
-
-<p>他们的伟大之处在于借鉴。</p>
-
-<p><br/></p>
-
-<p>学习别人好的思想，拿来灵活运用，恰如其分的表达，</p>
-
-<p>就足够了，</p>
-
-<p>至于是否伟大，让后人去说吧。</p>
-
-<p><br/></p>
-
-<p>比如说，jQuery过时了吗，</p>
-
-<p>前端各种MVC框架，MVVM框架，说的比什么都好听。</p>
-
-<p>好像不用框架就没办法生存似的。</p>
-
-<p><br/></p>
-
-<p>作为一个学过辩证法的人，</p>
-
-<p>我们马上就意识到了，这可能是有人在故意炒作它。</p>
-
-<p>另一方面，我们也知道这些框架确实也有可取之处。</p>
-
-<p><br/></p>
-
-<p>要做到不骄不躁，</p>
-
-<p>只有强大自身，这一个办法了。</p>
-
-<p><br/></p>
-
-<p>慢慢的，我们就发现了，</p>
-
-<p>框架也只不过是别人活学活用的成果罢了。</p>
-
-<p><br/></p>
-
-<h2><strong>扩展性</strong></h2>
-
-<p>我们来学习一下jQuery的设计思想。</p>
-
-<p><br/></p>
-
-<p>JavaScript经常做的，</p>
-
-<p>大概就是选取页面的元素，然后做一些事情了。</p>
-
-<p><br/></p>
-
-<p>而怎样选取元素呢，CSS已经给我们提供办法了，</p>
-
-<p>那就是CSS选择器selector，</p>
-
-<p>这样选中的其实是满足条件的HTML元素集合。</p>
-
-<p><br/></p>
-
-<p>如果能在集合上定义自己的操作就好了，</p>
-
-<p>我们就可以把选中的集合整体看做一个对象，</p>
-
-<p>调用这个对象的方法。</p>
-
-<p><br/></p>
-
-<p>这其实就是面向对象的思想呀。</p>
-
-<p><br/></p>
-
-<p>有了这个想法之后，我们先设计测试用例。</p>
-
-<p>也就是说，我们要考虑，假如我们已经有了某个类库，</p>
-
-<p>我们将如何使用它呢？</p>
-
-<p><br/></p>
-
-<p>这其实是编程活动中，最具创造力的环节。</p>
-
-<p>也是自顶向下编程，或者测试驱动开发思想的一种应用。</p>
-
-<p><br/></p>
-
-<p>jQuery作者是这样设计的，</p>
-
-<p>类库的使用者接口如下，</p>
-
-<p>$(selector).method(parameter);</p>
-
-<p><br/></p>
-
-<p>类库的开发者接口如下，</p>
-
-<p>扩展静态方法，</p>
-
-<p>$.extend({</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;staticMethod:function(){}</p>
-
-<p>});</p>
-
-<p><br/></p>
-
-<p>扩展实例方法，</p>
-
-<p>$.prototype.extend({</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;instanceMethod:function(){}</p>
-
-<p>});</p>
-
-<p><br/></p>
-
-<p>这种思路，很值得借鉴，</p>
-
-<p>它说明，最灵活的设计，是那些只包含扩展方法的设计。</p>
-
-<p>类库中所有的功能，都是用统一的方式扩展出来的。</p>
-
-<p><br/></p>
-
-<p>类库自带的功能越多，</p>
-
-<p>以后修改这些功能的可能性就越大。</p>
-
-<p><br/></p>
-
-<h2><strong>实现</strong></h2>
-
-<p>至于如何实现，网上可以找到很多教程，</p>
-
-<p>下面只写了一下我自己的实现。</p>
-
-<p><br/></p>
-
-<p>(function(global,document){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;jQuery.prototype=InstanceCreation.prototype;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;jQuery.extend=jQuery.prototype.extend=extend;</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;function jQuery(selector){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new InstanceCreation(selector);</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;function InstanceCreation(selector){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var instance=this;</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instance[0]=document.querySelector(selector);</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;function extend(material){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var depository=this;</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(var property in material){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!material.hasOwnProperty(property)){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>那么，其他表达式的求值结果，就是不可预料的。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depository[property]=material[property];</p>
+<p>环境，是专业术语，也可称为执行环境，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>里面保存的是，变量和值的绑定关系。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;</p>
+<p>Haskell是一门纯函数式语言，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+<p>并不是说，函数的每次求值结果都相同。</p>
 
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;//export:</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;global.$=jQuery;</p>
-
-<p>}(window,document));</p>
-
-<p><br/></p>
-
-<p>对实现不详细描述，还有其他原因，</p>
-
-<p>因为，实现是灵活的，而用户接口是用来表达思想的。</p>
-
-<p>任何一种实现都能达到目的，</p>
-
-<p>但并非所有人都能设计出具有表现力的用户接口。</p>
-
-<p><br/></p>
-
-<p>贴到这里，而不是放置Github超链接，</p>
-
-<p>是为了有个直观的印象，jQuery核心其实很小。</p>
-
-<p>所有其他功能都是扩展出来的。</p>
-
-<p><br/></p>
-
-<h2><strong>插件</strong></h2>
-
-<p>类似jQuery这样，</p>
-
-<p>提供基础核心，再提供对核心的扩展方式，</p>
-
-<p>称为插件式开发。</p>
-
-<p><br/></p>
-
-<p>我们只需要使用</p>
-
-<p>$.prototype.extend({</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;pluginName:function(){}</p>
-
-<p>});</p>
-
-<p><br/></p>
-
-<p>$(selector)就有了一个pluginName方法了。$(selector).pluginName</p>
-
-<p><br/></p>
-
-<p>正因为有这么便捷的功能，</p>
-
-<p>jQuery插件的数量才惊人的多。</p>
-
-<p><br/></p>
-
-<p>我们还可以把页面切分为几个部分，</p>
-
-<p>每个部分是一个插件对象，只对这一块元素进行操作，</p>
-
-<p>这符合面向对象的思想。</p>
-
-<p><br/></p>
-
-<p>$(container1).pluginName1(&hellip;);</p>
-
-<p>$(container1).pluginName2(&hellip;);</p>
-
-<p><br/></p>
-
-<p>我们把问题简化了，</p>
-
-<p>对整个页面的控制，转换成对这些自定义插件的控制了。</p>
-
-<p><br/></p>
-
-<h2><strong>缺点和改进</strong></h2>
-
-<p>经过一段时间使用后，</p>
-
-<p>我们发现jQuery插件有一个缺点，</p>
-
-<p>$(container).pluginName(&hellip;);</p>
-
-<p><br/></p>
-
-<p>一个插件的所有操作，都必须放到同一个pluginName方法中。</p>
-
-<p>如果我们想初始化和取值，就不得不这样操作，</p>
-
-<p>$(container).pluginName(&lsquo;init&rsquo;,data);</p>
-
-<p>$(container).pluginName(&lsquo;getValue&rsquo;);</p>
-
-<p><br/></p>
-
-<p>后果就是pluginName这个函数中，我们就要写很多switch语句。</p>
-
-<p>$.prototype.extend({</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;pluginName:function(operationName,arg0){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch(operationName){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case &lsquo;init&rsquo;:</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
+<p>而是说，<strong>任何函数都不会修改它的执行环境</strong>。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case &lsquo;getValue&rsquo;:</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
-
-<p>});</p>
-
-<p><br/></p>
-
-<p>还算清晰，</p>
-
-<p>不过最致命的就是，如果我们想添加一个对插件的操作，</p>
-
-<p>我们必须去改同一个文件，在switch中添加case子句。</p>
-
-<p>这太烦人了。</p>
-
 <p><br/></p>
 
-<p>而且，取data的值也比较麻烦。</p>
+<p>例如，对于从屏幕上读取字符的函数，</p>
 
-<p>按理说它是init操作的第1个参数，</p>
+<p>每次调用，并不一定会返回相同的值。</p>
 
-<p>但是它实际上是作为pluginName的第2个参数传递的。</p>
+<p>但是，执行后，它确实不会影响环境中的绑定关系。</p>
 
 <p><br/></p>
-
-<p>我们为什么不能设计一个工具，来改变现状呢？</p>
-
-<p>让我们踏上程序设计之路吧。</p>
-
-<p>假如我们已经设计好了，想这样用。pluginManager.extend</p>
-
-<p><br/></p>
-
-<p>(function($){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.extend(&lsquo;pluginName&rsquo;,{</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init:initPlugin</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;function initPlugin(){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this;</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//arguments[0]===data</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>因此，输入输出操作，也是纯函数，</p>
 
-<p>}(jQuery));</p>
+<p>理解执行环境和现实世界的区别，是关键。</p>
 
 <p><br/></p>
 
-<p>(function($){</p>
+<h2><strong>IO</strong></h2>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.extend(&lsquo;pluginName&rsquo;,{</p>
+<p>Haskell是一门静态强类型的语言。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getValue:getValueFromPlugin</p>
+<p>任何表达式在编译前类型都是确定的。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
-
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;function getValueFromPlugin(){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this;</p>
-
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
+<p>输入输出与IO a类型有关。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>其中，IO是类型构造器，:k IO = * -> *</p>
 
-<p>}(jQuery));</p>
+<p>因此，IO a才是一个具体类型。</p>
 
 <p><br/></p>
 
-<p>我们避免了为插件添加操作的麻烦，</p>
+<p>IO是如何定义的呢？</p>
 
-<p>还把data参数的位置调节好了。</p>
+<p>type IO a = World -> (a, World)</p>
 
-<p>并且将插件操作的具体实现，分离到了不同的文件中。</p>
+<p>World类型的值表示现实世界的状态。</p>
 
 <p><br/></p>
-
-<p>这能实现吗？</p>
 
-<p>可以的，我已经做好了。</p>
+<p>IO a类型的值是一个函数，它接受现实世界的当前状态作为参数，</p>
 
-<p>但是，实现并不重要，关键是思想。</p>
+<p>返回一个元组，这个元组由类型a的值和对现实世界改变后的状态构成。</p>
 
 <p><br/></p>
-
-<h2><strong>持续改进</strong></h2>
-
-<p>并不是技术本身想要更新，</p>
 
-<p>是创新的业务需要，促进了创新的技术出现，</p>
+<p>由于，我们并不需要手动传递World类型的值作为参数来调用，</p>
 
-<p>不适应性越强烈，改进工具的可能性就越大。</p>
+<p>所以，应该<strong>把IO a类型的值理解为一个惰性求值的表达式</strong>，</p>
 
-<p><br/></p>
-
-<p>随着时间的发展，</p>
+<p>对该表达式按需求值，得到一个a类型的值。</p>
 
-<p>我们发现了另一个问题。</p>
-
 <p><br/></p>
-
-<p>插件在使用过程中，可能会设置一些缺省值，</p>
 
-<p>例如：初始化，</p>
+<p>IO a类型的表达式，称为<strong>action</strong>。</p>
 
-<p>$(container).pluginName(&lsquo;init&rsquo;,data);</p>
+<p>IO a类型的action中，惰性包含了一个a类型的值。</p>
 
-<p>$(container).pluginName(&lsquo;init&rsquo;);</p>
-
-<p>都是有可能的。</p>
-
 <p><br/></p>
 
-<p>每个插件中都单独处理缺省值，是很啰嗦的事情。</p>
+<p>例如：</p>
 
-<p>function initPlugin(){</p>
+<p>getChar :: IO Char</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this,</p>
+<p>求值getChar表达式，就会得到一个Char类型的值。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data=arguments[0]||&lsquo;Hello&rsquo;;</p>
-
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;
-}</p>
+<p>例如：</p>
 
-<p><br/></p>
+<p>IO ( )</p>
 
-<p>啰嗦也就罢了，</p>
+<p>其中，( )表示空元组类型，该类型只有一个值，空元组( )。</p>
 
-<p>最不能容忍的是，代码中出现了硬编码。</p>
+<p>“( )”既可以表示类型，又可以表示值，取决于它出现的上下文。</p>
 
-<p>&lsquo;Hello'是业务数据，跟插件本身无关。</p>
+<p>另外，Haskell中习惯将空元组看做无用数据。</p>
 
 <p><br/></p>
-
-<p>还记得吗，</p>
 
-<p>类库自带的功能越多，</p>
+<p>在IO ( )中，( )是作为IO类型构造器的参数出现的，表示空元组类型，</p>
 
-<p>以后修改这些功能的可能性就越大。</p>
+<p>所以说，IO ( )类型的action中，惰性包含了一个空元组值。</p>
 
 <p><br/></p>
 
-<p>所以，我们得想一个办法把他们分离出去。pluginManager.filter</p>
+<p>例如：</p>
 
-<p>(function($){</p>
+<p>putStrLn :: String -> IO ( )</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.extend(&lsquo;pluginName&rsquo;,{</p>
+<p>putStrLn是一个函数，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init:initPlugin</p>
+<p>它接受String类型的值作为参数，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
+<p>返回一个IO ( )类型的action。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;function initPlugin(){</p>
+<h2><strong>do</strong></h2>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this,</p>
+<p>main :: IO ( )</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data=arguments[0];</p>
+<p>main = do</p>
 
-<p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&hellip;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn &ldquo;Please input: &rdquo;</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;inpStr &lt;- getLine</p>
 
-<p>}(jQuery));</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
 
 <p><br/></p>
-
-<p>(function($){</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.<strong>filter</strong>(&lsquo;pluginName&rsquo;,{</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init:filterInit</p>
+<p>以上程序定义了main函数，是一个IO ( )类型的action。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
-
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;function filterInit(){</p>
+<p>do关键字，是Haskell中的一种写法，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this;</p>
+<p>用来表示顺序执行。</p>
 
 <p><br/></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return [</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arguments[0]||&lsquo;Hello&rsquo;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;];</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>其中，</p>
 
-<p>}(jQuery));</p>
+<p>putStrLn :: String -> IO ( )</p>
 
-<p><br/></p>
-
-<p>因此，我们增加了一层，</p>
+<p>getLine :: IO String</p>
 
-<p>作为插件核心的开发者，接受所有需要配置的参数。</p>
-
 <p><br/></p>
-
-<p>作为实际插件的使用者，为了避免多次配置，</p>
 
-<p>可以一次性为插件设置默认值。</p>
+<p>putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
 
-<p>filter将pluginName插件的init操作实际调用的实参，</p>
+<p>= putStrLn ( &ldquo;Hello &rdquo; ++ inpStr )</p>
 
-<p>转换一下，传递给了核心。</p>
-
 <p><br/></p>
-
-<p>这样的话，插件核心的开发者，就可以提供更松散的功能，</p>
 
-<p>不用假设实际的使用情况，</p>
-
-<p>实际和具体业务相关的处理，放到了filter里面。</p>
-
-<p><br/></p>
+<p>因此，</p>
 
-<p>另外，我们看到filter是很灵活的，</p>
+<p>putStrLn &ldquo;Please input: &rdquo; :: IO ( )，在屏幕上输出字符串“Please input: ”，</p>
 
-<p>它可以将任何实参，以任何方式转换成核心需要的实参，</p>
+<p>inpStr &lt;- getLine，求值惰性表达式getLine，<strong>把action里面包含的值拿出来</strong>，绑定到inpStr上。</p>
 
-<p>哪怕核心需要的实参是一个函数。</p>
+<p>putStrLn $ &ldquo;Hello &rdquo; ++ inpStr，在屏幕上输出字符串"Hello &ldquo;与变量inpStr连接后的结果。</p>
 
 <p><br/></p>
 
-<p>这能实现吗？</p>
+<p>IO操作，每次执行的效果并不相同，</p>
 
-<p>也是可以的，我也已经做好了。</p>
+<p>但<strong>仍然都是纯函数</strong>，</p>
 
-<p>但是，实现并不重要，关键是思想。</p>
+<p>在于它们不会修改执行环境中的变量绑定关系。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>我们分析了jQuery的设计思想，</p>
+<p>很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，</p>
 
-<p>并拿来随机应变，设计了自己的插件管理器。</p>
+<p>这种说法，其实是为了解释给不熟悉的人看的。</p>
 
-<p><br/></p>
-
-<p>使用框架了吗？</p>
-
-<p>并没有。</p>
-
-<p>连jQuery核心也是自己写的。</p>
+<p>事实上，<strong>Haskell中的任何函数都是纯函数</strong>。</p>
 
 <p><br/></p>
 
-<p>但是，在思考过程中，无处不闪烁着许多优秀框架的思想。</p>
+<p>类似的，</p>
+
+<p>Haskell语言中Bug的数量可以控制到非常少，</p>
+
+<p>并不是因为通过Monad将IO和其他函数分离开，</p>
+
+<p>而是因为任何函数都不能改变环境中变量的绑定关系，</p>
+
+<p>即，函数的纯粹性。</p>
 
 <p><br/></p>
 
-<p>因此，我们也应该知道了，</p>
+<p>此外，Monad，Applicative和Functor这些类型类，</p>
 
-<p>插件管理器本身，并没有什么，</p>
+<p>提高了语言的抽象程度，让复杂度更可控，</p>
 
-<p>关键是思考过程，以及我们想到什么样的办法解决实际问题。</p>
-
-<p><br/></p>
-
-<p>我们的所能掌握的知识，总是不够的。</p>
-
-<p>但这不影响我们去创造好用的工具。</p>
-
-<p><br/></p>
-
-<p>比如，为了借鉴MVVM的思想，不必使用knockout.js，</p>
-
-<p>我们可以自己写一个bindTemplate来进行模板的读写操作。</p>
-
-<p><br/></p>
-
-<p>设置值</p>
-
-<p>$(container).bindTemplate(&lsquo;setData&rsquo;,{</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;attr:&lsquo;data-model&rsquo;,</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;data:json,</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;set:setFieldValue</p>
-
-<p>});</p>
-
-<p><br/></p>
-
-<p>读取值</p>
-
-<p>$(container).bindTemplate(&lsquo;getData&rsquo;,{</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;attr:&lsquo;data-model&rsquo;,</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;get:getFieldValue</p>
-
-<p>});</p>
-
-<p><br/></p>
-
-<p>我们可以把json对象，绑定到HTML对象上，再从HTML中取回同样结构的json对象。</p>
-
-<p>而与HTML元素的排列方式无关。</p>
-
-<p>json=[</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;0,</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;{</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val:1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
-
-<p>];</p>
-
-<p><br/></p>
-
-<p>&lt;span data-model=&ldquo;[0]&rdquo;&gt;&lt;/span&gt;</p>
-
-<p>&lt;div></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;span data-model=&ldquo;[1].val&rdquo;&gt;&lt;/span&gt;</p>
-
-<p>&lt;/div&gt;</p>
-
-<p><br/></p>
-
-<p>setFieldValue与getFieldValue我设置成了函数，</p>
-
-<p>用来询问对于某个HTML元素，如何绑定值，如何获取值，</p>
-
-<p>以获得最大的灵活性。</p>
-
-<p><br/></p>
-
-<p>并且，利用$.pluginManager.filter，接口可以简化成，</p>
-
-<p>$(container).bindTemplate(&lsquo;setData&rsquo;,{</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;data:json</p>
-
-<p>});</p>
-
-<p>$(container).bindTemplate(&lsquo;getData&rsquo;);</p>
-
-<p><br/></p>
-
-<p>源代码如下：</p>
-
-<p><a href="https://github.com/thzt/web.frontend.component/blob/master/library/jquerycore/jquerycore.js">jQuery core</a></p>
-
-<p><a href="https://github.com/thzt/web.frontend.component/blob/master/library/pluginmanager/pluginmanager.js">plugin Manager</a></p>
-
-<p>还好Github可以控制版本，如果以后文件更改了，还能找到今天的版本。</p>
-
-<p><br/></p>
-
-<p>于是，阳光还是那么灿烂，日子还是那么美好。</p>
-
-<p>关键是生活的方式。</p>
+<p>我想，这才是Bug数量少的真正原因吧。</p>
 </div>
   
   
@@ -849,8 +316,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -860,7 +327,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -889,14 +364,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

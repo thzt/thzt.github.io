@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="当我们决定做一件事情的时候， 就不要理会别人对这件事难易程度的说法， 因为，我们更相信，这件事是困难的。 对于未知的事物， 我们宁可相信它的是困难的， 这是认同感在作怪。 而事实上， 事情并不是别人说的那么难， 除非，别人也没做过。 对于有争论的问题， 与别人讨论再多也是没有用的， 通过讨论学会的 &hellip;">
+  <meta name="description" content="Haskell中一些函数可以作用在多种类型上。 例如： ghci> length [1, 2] 2 length :: [Int] -> Int ghci> length [&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;] 3 length &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/14/difficulty/">难易程度</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/03/18/polymorphism-of-chain-function/">函数>>=的多态性</a></h1>
     
     
       <p class="meta">
@@ -83,194 +83,186 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-03-14T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-03-18T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>当我们决定做一件事情的时候，</p>
+  <div class="entry-content"><p>Haskell中一些函数可以作用在多种类型上。</p>
 
-<p>就不要理会别人对这件事难易程度的说法，</p>
+<p>例如：</p>
 
-<p>因为，我们更相信，这件事是困难的。</p>
+<p>ghci> length [1, 2]</p>
 
-<p><br/></p>
+<p>2</p>
 
-<p>对于未知的事物，</p>
-
-<p>我们宁可相信它的是困难的，</p>
-
-<p>这是认同感在作怪。</p>
+<p>length :: [Int] -> Int</p>
 
 <p><br/></p>
 
-<p>而事实上，</p>
+<p>ghci> length [&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;]</p>
 
-<p>事情并不是别人说的那么难，</p>
+<p>3</p>
 
-<p>除非，别人也没做过。</p>
-
-<p><br/></p>
-
-<p>对于有争论的问题，</p>
-
-<p>与别人讨论再多也是没有用的，</p>
-
-<p>通过讨论学会的，多半是对知识的曲解，</p>
-
-<p>应该努力学习，让自己提升到，能回答这个问题的水平。</p>
+<p>length :: [String] -> Int</p>
 
 <p><br/></p>
 
-<h2><strong>行动可以打消顾虑</strong></h2>
+<p>我们看length的类型，</p>
 
-<p>天下事有难易乎？</p>
+<p>length :: [a] -> Int</p>
 
-<p>为之，则难者亦易矣；</p>
-
-<p>不为，则易者亦难矣。</p>
-
-<p>——彭端淑</p>
+<p>它类型签名中，包含类型变量，类型变量可以具体化为任意类型。</p>
 
 <p><br/></p>
 
-<p>想把一件事情做好，只听别人说是没有用的，</p>
-
-<p>重要的还是要行动。</p>
+<p>像这样的函数，称为多态函数。</p>
 
 <p><br/></p>
 
-<p>行动之前的顾虑，是烦恼的根源，</p>
+<h2><strong>函数>>=</strong></h2>
 
-<p>到底该不该做？</p>
+<p>函数>>=定义在Monad类型类中，</p>
 
-<p>到底要从哪里开始？</p>
+<p>class Monad m where</p>
 
-<p><br/></p>
-
-<p>这些其实并不重要，</p>
-
-<p>因为在你开始行动的那一刻，这些顾虑就烟消云散了。</p>
-
-<p>回想起来，顾虑只是我们安于现状的借口。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(>>=) :: m a -> (a -> m b) -> m b</p>
 
 <p><br/></p>
 
-<h2><strong>好的想法不如好的实现</strong></h2>
+<p>其中，m是Monad类型类的实例类型，它的kind是<em> -> </em>，</p>
 
-<p>如果你有一个好的想法，</p>
+<p>:k m = * -> *</p>
 
-<p>多数情况下，它并不独特，</p>
-
-<p>除非你正在写博士论文。</p>
+<p>类型m a是一个具体类型，该类型的值称为monad value。</p>
 
 <p><br/></p>
 
-<p>可是，虽然想法陈旧，</p>
+<p>我们看到，在m确定的情况下，>>=的类型签名中仍然包含类型变量。</p>
 
-<p>能实现它的人，却并不多。</p>
+<p>因此，对Monad类型类的某个实例来说，</p>
 
-<p><br/></p>
-
-<p>所以，如果你有了一个好想法，</p>
-
-<p>那就用实现去证明它。</p>
-
-<p>多说无益。</p>
+<p>>>=可以操作相同m类型但是不同a类型的monad value :: m a。</p>
 
 <p><br/></p>
 
-<p>而相反，尚未实现的想法，</p>
+<h2><strong>IO monad</strong></h2>
 
-<p>只是空想罢了。</p>
+<p>以Monad类型类的实例IO为例，对于IO来说，IO monad value称为IO action。</p>
 
-<p><br/></p>
+<p>main = do</p>
 
-<h2><strong>不要替别人浪费时间</strong></h2>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn &ldquo;Please input: &rdquo;</p>
 
-<p>有些人，经常有好的想法，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;inpStr &lt;- getLine</p>
 
-<p>但是，却从未自己实现过。</p>
-
-<p><br/></p>
-
-<p>那么，无论他说的多么可行，</p>
-
-<p>也不要替他浪费时间。</p>
-
-<p>因为实现起来，总是不会像他当时构想的那么简单。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
 
 <p><br/></p>
 
-<p>你可以把他的想法，看成是一个建议，</p>
+<p>其中，</p>
 
-<p>来指导自己。</p>
+<p>putStrLn :: String -> IO ( )</p>
 
-<p>多听取别人的建议，才能事半功倍。</p>
-
-<p><br/></p>
-
-<p>只会按别人说法去做的人，</p>
-
-<p>会丧失独立思考的能力，</p>
-
-<p>被别人垫在脚下。</p>
+<p>getLine :: IO String</p>
 
 <p><br/></p>
 
-<h2><strong>成功与失败</strong></h2>
+<p>我们来分析一下这3个IO action的类型，</p>
 
-<p>成功人士，喜欢分享自己的经验。</p>
+<p>putStrLn &ldquo;Please input: &rdquo; :: IO ( )</p>
 
-<p>他们会提供一系列指导方针，</p>
+<p>getLine :: IO String</p>
 
-<p>听起来让人觉得，好像照做就能成功一样。</p>
-
-<p><br/></p>
-
-<p>这是危险的，</p>
-
-<p>像别人那样做，并不会收到同样的效果，</p>
-
-<p>因为，做法并不是成功的原因。</p>
+<p>putStrLn $ &ldquo;Hello &rdquo; ++ inpStr :: IO ( )</p>
 
 <p><br/></p>
 
-<p>那什么是原因呢？</p>
+<p>它们的具体类型都是m a，</p>
 
-<p>执行力。</p>
-
-<p><br/></p>
-
-<p>能想到这么做，并坚定的执行下去。</p>
-
-<p>决定了未来的成功。</p>
-
-<p>至于做什么，就不那么重要了。</p>
+<p>m相同，m = IO。而a不同，分别是( )，String，( )。</p>
 
 <p><br/></p>
 
-<p>成功的方法很多，</p>
+<p>在do notation中，如果某一行我们没有使用&lt;-为monad value绑定值，</p>
 
-<p>而失败只有一种，那就是半途而废。</p>
+<p>就相当于使用了函数>>，表示不需要这个绑定值。</p>
 
-<p>——罗永浩</p>
+<p>(>>) :: x >> y = x >>= \ _ -> y</p>
+
+<p><br/></p>
+
+<p>这样的话，我们就可以将main函数还原成>>和>>=的串联形式了，</p>
+
+<p>putStrLn &ldquo;Please input: &rdquo; >> getLine >>= \inpStr -> putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p>= putStrLn &ldquo;Please input: &rdquo; >>= \ _ -> getLine >>= \inpStr -> putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p>= putStrLn &ldquo;Please input: &rdquo; >>= ( \ _ -> getLine >>= ( \inpStr -> putStrLn $ &ldquo;Hello &rdquo; ++ inpStr ) )</p>
+
+<p><br/></p>
+
+<h2><strong>类型不同的>>=同时出现</strong></h2>
+
+<p>对于第一个>>=，我们能推断出它的大概类型，</p>
+
+<p>>>= :: IO ( ) -> (( ) -> IO ?) -> IO ?</p>
+
+<p>其中“?”表示尚未确定的类型。</p>
+
+<p><br/></p>
+
+<p>而第二个>>=的类型，可以完全确定下来。</p>
+
+<p>getLine >>= \inpStr -> putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p>>>= :: IO String -> (String -> IO ( )) -> IO ( )</p>
+
+<p><br/></p>
+
+<p>那么，第一个>>=的类型也就可以完全确定下来了，</p>
+
+<p>>>= :: IO ( ) -> (( ) -> IO ( )) -> IO ( )</p>
+
+<p><br/></p>
+
+<p>由此可见，</p>
+
+<p>第一个>>= :: IO ( ) -> (( ) -> IO ( )) -> IO ( )</p>
+
+<p>第二个>>= :: IO String -> (String -> IO ( )) -> IO ( )</p>
+
+<p>两个>>=的类型不同，它们同时出现了。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>梁丘据谓晏子曰：吾至死不及夫子矣！</p>
+<p>do notation是>>和>>=串联形式的语法糖，IO action是 IO monad value，因此可以使用它。</p>
 
-<p>晏子曰：婴闻之，<strong>为者常成，行者常至</strong>。婴非有异于人也。常为而不置，常行而不休者，故难及也？</p>
+<p>认为do notation中每行的monad value类型必须相同，是不正确的。</p>
 
-<p>吴生曰：所谓不在三更早、五更迟，只怕一暴，十日寒。</p>
+<p>事实上，他们的类型是m a，m是相同的，而a可以不同。</p>
 
-<p>读书者当观此。</p>
+<p><br/></p>
 
-<p>——《晏子春秋》</p>
+<p>相似的，Functor和Applicative类型类也定义了一些多态函数。</p>
+
+<p><br/></p>
+
+<p>此外，对于IO类型，《Programming in Haskell》P88说的最清楚</p>
+
+<p>type IO a = World -> (a, World)</p>
+
+<p><br/></p>
+
+<p>World类型的值表示环境的当前状态。</p>
+
+<p>World -> (a, World)类型的值是一个函数，</p>
+
+<p>它接受环境状态作为参数，返回一个a类型的值，并影响了环境状态。</p>
 </div>
   
   
@@ -296,8 +288,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -307,7 +299,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -336,14 +336,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

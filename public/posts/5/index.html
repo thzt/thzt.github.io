@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="对需求的误解 同学们经常提及的需求变更，其实变更的并不是需求，而是需求的实现方案。 首先，我们要对需求和方案进行区分。 需求包括以下几个方面，需求背景，需求目的，需求范围，需求的详细规格，以及错误处理方式。 UI/UE/UX，前端，后端，共同实现了需求，是同一个解决方案的不同侧面。 &hellip;">
+  <meta name="description" content="域论模型 类型化lambda演算，有两个常用模型。 其一，域论模型。其二，递归函数论模型。 在众多域论模型中， 主要关心的是一种具有完全偏序（complete partial order）结构的域，简称CPO。 研究它的主要原因是，它是带有不动点算子的模型， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/06/02/requirement-change/">如何应对需求变更</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/06/25/complete-partial-order/">不动点算子与完全偏序</a></h1>
     
     
       <p class="meta">
@@ -83,214 +83,341 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2016-06-02T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2016-06-25T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2><strong>对需求的误解</strong></h2>
+  <div class="entry-content"><script src="/thirdpart/jQuery/jquery-1.11.1.js"></script>
 
-<p>同学们经常提及的需求变更，其实变更的并不是需求，而是需求的实现方案。</p>
 
-<p>首先，我们要对需求和方案进行区分。</p>
+<p><link href="/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
 
-<p>需求包括以下几个方面，需求背景，需求目的，需求范围，需求的详细规格，以及错误处理方式。</p>
+<script src="/thirdpart/KaTeX/katex.min.js"></script>
 
-<p>UI/UE/UX，前端，后端，共同实现了需求，是同一个解决方案的不同侧面。</p>
 
-<p><br/></p>
+<script src="/javascripts/katex.js"></script>
 
-<p>因此从广义上来讲，开发者之间的内部沟通，不属于需求变更范畴。</p>
 
-<p>软件的大部分问题，存在于开发者之间的沟通上面，而不是开发者对需求的理解上面。</p>
+<h2><strong>域论模型</strong></h2>
 
-<p>只有理解了什么是需求，才能衡量出需求是否变更了。</p>
+<p>类型化lambda演算，有两个常用模型。</p>
 
-<p><br/></p>
-
-<blockquote><p>在软件工程中，需求分析指的是在建立一个新的或改变一个现存的电脑系统时描写新系统的目的、范围、定义和功能时所要做的所有的工作。</p></blockquote>
+<p>其一，域论模型。其二，递归函数论模型。</p>
 
 <p><br/></p>
 
-<h2><strong>从方法到目的</strong></h2>
+<p>在众多域论模型中，</p>
 
-<p>实现一个目的有多种方法，如何看到这些方法的共性呢？</p>
+<p>主要关心的是一种具有完全偏序（complete partial order）结构的域，简称CPO。</p>
 
-<p>最快的方式就是找到这些方法要解决的问题。</p>
+<p>研究它的主要原因是，它是带有不动点算子的模型，</p>
 
-<p>软件是以解决问题为目的的，不能解决问题的软件没有任何作用。</p>
+<p>而且它还提供了一种解释递归类型表达式的方法。</p>
 
-<p><br/></p>
-
-<p>这要分两方面来说，</p>
-
-<p>其一，当产品经理发起需求变更时，我们要积极配合。因为，需求变更的主要原因在于当前软件不能解决某些问题。</p>
-
-<p>不配合，那么做出的软件就没有用，我们的工作就没有价值。</p>
+<p>域论方法是递归函数论模型的基础。</p>
 
 <p><br/></p>
 
-<p>其二，我们要知道当前软件要解决的问题是什么，才能灵活的改变策略。</p>
+<h2><strong>递归</strong></h2>
 
-<p>甚至可以利用工程师的领域特长，找到更合适的解决方案。</p>
+<p>加入递归之后，对表达式进行归约就可能会无限的进行下去，</p>
 
-<p><br/></p>
+<p>因此将出现没有范式（normal form）的表达式。</p>
 
-<h2><strong>变更与管控</strong></h2>
+<p>于是，把每个表达式指称为一个数值，这种想法就可能有问题了。</p>
 
-<p>我们不怕变化，怕的是对变化失去控制。</p>
-
-<p>当产品经理发起需求变更时，我们要重新安排未完成任务的优先级，这是需要与产品经理沟通的。</p>
-
-<p>因为，变更是需要成本的，意味着原计划要做的某些事情不能做完了，我们得让他们知道。</p>
+<p>下面我们引入不动点算子（fixed-point operator），用来它定义递归。</p>
 
 <p><br/></p>
 
-<p>我们自己首先得有一个任务列表。</p>
+<p><span data-katex="letrec~f:\sigma=M~in~N"></span></p>
 
-<p>然后以优先级的方式管理待办事项。</p>
+<p>它表示<span data-katex="N"></span>，但是<span data-katex="N"></span>中f的值，是等式<span data-katex="f=M"></span>的解。</p>
 
-<p><br/></p>
+<p>而<span data-katex="M"></span>中可能会包含<span data-katex="f"></span>。</p>
 
-<h2><strong>知识共享</strong></h2>
-
-<p>不同的人，对需求的理解不同。</p>
-
-<p>每个人都会按照自己的方式去实现想法。</p>
-
-<p>如何设计一个策略，怎样实现这个设计，大相径庭。</p>
+<p><span data-katex="M"></span>的类型根据等式<span data-katex="f=M"></span>也是<span data-katex="\sigma"></span>。</p>
 
 <p><br/></p>
 
-<p>因此，我们要预先做一些知识的分享。</p>
+<p>我们将看到，<span data-katex="letrec"></span>是<span data-katex="let"></span>与不动点算子的语法糖（syntactic sugar）。</p>
 
-<p>在设计阶段排除问题，会比在实现阶段排除问题，成本低很多。</p>
+<p>首先，我们先用<span data-katex="letrec"></span>定义阶乘函数，来计算<span data-katex="5!"></span>。</p>
 
-<p>我们不妨谈一谈，我计划怎样解决这个问题，我打算怎样实现。</p>
-
-<p>因为，很有可能，这个计划就是错的。</p>
+<p><span data-katex="letrec~f:nat\rightarrow nat=\lambda y:nat.~(if~Eq?~y~0~then~1~else~y*f(y-1))~in~f~5"></span></p>
 
 <p><br/></p>
 
-<h2><strong>主动去沟通</strong></h2>
+<p>其中<span data-katex="f"></span>是下列等式的解。</p>
 
-<p>如果我想改某个文件，担心其他人也在改，以后合并起来麻烦，怎么办？</p>
-
-<p>去问他/她。</p>
-
-<p>某位同学的代码我看不懂，不敢改怎么办？</p>
-
-<p>去问他/她。</p>
-
-<p>产品经理对需求的描述不清楚，我理解不了怎么办？</p>
-
-<p>去问他/她。</p>
-
-<p>交互稿中文案可能有错误，逻辑矛盾，怎么办？</p>
-
-<p>去问他/她。</p>
-
-<p>测试提了一个缺陷，可是我不知道在说什么，也不知道在哪个场景中会出现，怎么办？</p>
-
-<p>去问他/她。</p>
+<p><span data-katex="f=\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
 
 <p><br/></p>
 
-<p>&ldquo;问"，这个简单的动作，会节省大量的时间。</p>
+<h2><strong>不动点算子</strong></h2>
 
-<p>如果不想打断别人的工作，可以用一些非即时沟通工具。</p>
+<p>从数学的角度来看，并不是所有形如<span data-katex="f:\sigma =M"></span>的等式都有解，</p>
 
-<p>或者走到他旁边，让他注意到你时，你再发问。</p>
+<p>如果有多个解，也不知道选择哪个解。</p>
 
-<p><br/></p>
-
-<p>提问，并不愚蠢，不问才蠢。</p>
-
-<p>要相信大部分工程师都是喜欢被问的。</p>
+<p>我们先假设每个这样的等式都有解，为此我们增加一个不动点算子来得到这个解。</p>
 
 <p><br/></p>
 
-<h2><strong>让设计灵活响应变更</strong></h2>
+<p>一般的，如果<span data-katex="F:\sigma \rightarrow \sigma"></span>是某一类型到自身的函数。</p>
 
-<p>好的设计，在变更中灵活响应。</p>
-
-<p>这实际上是对设计提出了更高的要求，不止是实现功能那么简单了。</p>
+<p>那么<span data-katex="F"></span>的一个不动点，是使得<span data-katex="x=F(x)"></span>的值<span data-katex="x:\sigma"></span>。</p>
 
 <p><br/></p>
 
-<p>因为现实世界是发展中的，业务场景也在与时俱进。</p>
+<p>经过观察我们发现，阶乘函数<span data-katex="f"></span>是以下函数的<span data-katex="F"></span>的不动点，即满足<span data-katex="f=F(f)"></span>。</p>
 
-<p>因此，需求本身不可能是不变的。</p>
+<p><span data-katex="F=_{def}\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
 
-<p>软件是一个解决动态问题的方案。</p>
-
-<p><br/></p>
-
-<p>程序设计是用来解决发展中问题的。</p>
-
-<p>我们要看到问题的发展趋势，结合整个过程进行设计。</p>
-
-<p>给未来留下余地，不局限于当前状态进行设计。</p>
+<p>其中，<span data-katex="f:nat\rightarrow nat"></span>，<span data-katex="F:(nat\rightarrow nat)\rightarrow (nat\rightarrow nat)"></span></p>
 
 <p><br/></p>
 
-<p>需求你怎么改都行，因为你不得不改，我也不得不照做，不然软件本身就没用了。</p>
+<p>我们定义，<span data-katex="fix_\sigma :(\sigma \rightarrow \sigma )\rightarrow \sigma"></span>，是对应于每个类型<span data-katex="\sigma"></span>的不动点算子。</p>
 
-<p>但是我的设计保障我修改的成本最低。</p>
+<p>满足的如下等式公理，</p>
 
-<p><br/></p>
-
-<h2><strong>原谅别人的失误</strong></h2>
-
-<p>人非圣贤孰能无过。</p>
-
-<p>我们会因为手误打错代码，也会因为大脑一时短路犯逻辑错误。</p>
-
-<p>那么，产品经理同样也会对需求理解和描述产生偏差。</p>
-
-<p>我们不能要求别人做到完美。</p>
+<p><span data-katex="fix_\sigma =\lambda f:\sigma \rightarrow \sigma .~f(fix_\sigma f)"></span></p>
 
 <p><br/></p>
 
-<p>一方面，我们要原谅他们，但要让他们知道大家的代价。</p>
+<p>可知，对任意的<span data-katex="F:\sigma \rightarrow \sigma"></span>，<span data-katex="fix_\sigma F"></span>是<span data-katex="F"></span>的不动点，即，</p>
 
-<p>另一方面，我们要听思想，不要听描述。抓住中心思想，忽略细节。</p>
+<p><span data-katex="fix_\sigma F=F(fix_\sigma F)"></span></p>
 
 <p><br/></p>
 
-<p>严于律己，宽以待人。</p>
+<p>我们就可以用<span data-katex="let"></span>和<span data-katex="fix_\sigma"></span>表示<span data-katex="letrec"></span>了。</p>
+
+<p><span data-katex="letrec~f:\sigma =M~in~N=_{def}let~f:\sigma =(fix_\sigma \lambda f:\sigma .~M)~in~N"></span></p>
+
+<p><br/></p>
+
+<h2><strong>归约</strong></h2>
+
+<p>我们以阶乘函数为例，来说明带有不动点算子的表达式是如何归约的。</p>
+
+<p>为了行文方便，我们省略<span data-katex="fix_{nat\rightarrow nat}"></span>的下标，直接记为<span data-katex="fix"></span>。</p>
+
+<p>定义阶乘函数<span data-katex="fact=_{def}fix~F"></span>，其中，</p>
+
+<p><span data-katex="F=_{def}\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
+
+<p><br/></p>
+
+<p>我们来计算<span data-katex="fact~n"></span>。</p>
+
+<p><span data-katex="fact~n=(fix~F)~n"></span></p>
+
+<p><span data-katex="=((\lambda f:nat\rightarrow nat.~f(fix~f))~F)~n"></span></p>
+
+<p><span data-katex="=(F~(fix~F))~n"></span></p>
+
+<p><span data-katex="=((\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1))~(fix~F))~n"></span></p>
+
+<p><span data-katex="=(if~Eq?~n~0~then~1~else~n*(fix~F))~(n-1)"></span></p>
+
+<p><br/></p>
+
+<h2><strong>无法终止的运算</strong></h2>
+
+<p>由于递归允许我们写出没有范式的表达式，</p>
+
+<p>所以我们相应的必须给这样的表达式赋予含义。</p>
+
+<p><br/></p>
+
+<p>例如，</p>
+
+<p><span data-katex="letrec~f:nat\rightarrow nat=\lambda x:nat.~f(x+1)~in~f~3"></span></p>
+
+<p>尽管该表达式的类型是<span data-katex="nat"></span>，但是我们无法把它简化为一个数值。</p>
+
+<p>所以该表达式的含义就不是一个自然数了。</p>
+
+<p><br/></p>
+
+<p>一方面，认为该表达式的类型是<span data-katex="nat"></span>是合理的，它是类型规则的推导结论。</p>
+
+<p>另一方面，如果我们说该表达式的值是『未定义的』，</p>
+
+<p>那么<span data-katex="f"></span>的语义就变成了部分函数（partial function）。</p>
+
+<p><br/></p>
+
+<p>我们不如给自然数集附加一个值<span data-katex="\perp _{nat}"></span>，</p>
+
+<p>用来表示类型<span data-katex="nat"></span>上无法终止的运算（nonterminating computation）。</p>
+
+<p>这给了我们一个把部分函数看成完全函数（total function）的方法。</p>
+
+<p><br/></p>
+
+<h2><strong>CPO</strong></h2>
+
+<p><strong>偏序</strong></p>
+
+<p>一个偏序（partial order）<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个集合<span data-katex="D"></span>，以及集合上的一个关系（relation）<span data-katex="\leqslant"></span>，</p>
+
+<p>这个关系具有自反性，反对称性，和传递性。</p>
+
+<p><br/></p>
+
+<p>若对于任意<span data-katex="d\in D"></span>有<span data-katex="d\leqslant d"></span>，则称<span data-katex="\leqslant"></span>具有自反性（reflexive）。</p>
+
+<p>若<span data-katex="a\leqslant b"></span>且<span data-katex="b\leqslant a"></span>有<span data-katex="a=b"></span>，则称<span data-katex="\leqslant"></span>具有反对称性（anti-symmetric）。</p>
+
+<p>若<span data-katex="a\leqslant b"></span>且<span data-katex="b\leqslant c"></span>有<span data-katex="a\leqslant c"></span>，则称<span data-katex="\leqslant"></span>具有传递性（transitive）。</p>
+
+<p><br/></p>
+
+<p><strong>上界与最小上界</strong></p>
+
+<p>如果<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个偏序，则子集<span data-katex="S\subseteq D"></span>的上界（upper bound），</p>
+
+<p>是<span data-katex="D"></span>中的一个元素<span data-katex="x\in D"></span>，使得对于任意的<span data-katex="y\in S"></span>有<span data-katex="y\leqslant x"></span>。</p>
+
+<p>最小上界（least upper bound）是那个<span data-katex="\leqslant"></span>任何其它上界的元素。</p>
+
+<p><br/></p>
+
+<p><strong>有向集</strong></p>
+
+<p>如果<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个偏序，称子集<span data-katex="S\subseteq D"></span>是有向的（directed），</p>
+
+<p>如果<span data-katex="S"></span>的每一个有限子集<span data-katex="S_0\subseteq S"></span>在<span data-katex="S"></span>中都有上界。</p>
+
+<p>有向集（directed set）的一个性质是，所有有向集都非空。</p>
+
+<p><br/></p>
+
+<p><strong>完全偏序</strong></p>
+
+<p>完全偏序（complete partial order）简称CPO，它是一个偏序<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>，</p>
+
+<p>且每一个有向子集<span data-katex="S\subseteq D"></span>都有最小上界，我们把这个最小上界记为<span data-katex="\bigvee S"></span>。</p>
+
+<p>可证，任何一个有限的偏序，都是完全偏序。</p>
+
+<p><br/></p>
+
+<p>一个不是CPO的例子是自然数集，自然数集<span data-katex="N"></span>本身是有向的，但没有最小上界。</p>
+
+<p>如果我们加入一个比其他自然数都大的元素<span data-katex="\infty"></span>，我们就得到了一个CPO。</p>
+
+<p><br/></p>
+
+<h2><strong>CPO的提升</strong></h2>
+
+<p><strong>有奇点的CPO</strong></p>
+
+<p>如果<span data-katex="\mathscr{D}=\left \langle D,\leqslant  \right \rangle"></span>是一个有最小元（least element）的偏序，</p>
+
+<p>则称为<span data-katex="\mathscr{D}"></span>是有奇点（pointed）的，我们用<span data-katex="\perp _D"></span>表示<span data-katex="D"></span>的最小元。</p>
+
+<p><br/></p>
+
+<p><strong>提升集</strong></p>
+
+<p>对于任意的集合<span data-katex="A"></span>，我们构建一个CPO，<span data-katex="A_\perp =\left \langle A\cup \{\perp \} ,\leqslant  \right \rangle"></span>，</p>
+
+<p>其中，<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=\perp"></span>或<span data-katex="x=y"></span>。</p>
+
+<p>我们称<span data-katex="A_\perp"></span>为<span data-katex="A"></span>的提升集（lifted set）。</p>
+
+<p><br/></p>
+
+<p>用这个方法，我们可以提升任何一个CPO，<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D  \right \rangle"></span>，</p>
+
+<p>得到<span data-katex="\mathscr{D}_\perp =\left \langle D\cup \{\perp \},\leqslant \right \rangle"></span>，</p>
+
+<p>其中<span data-katex="\perp"></span>与<span data-katex="D"></span>中的任何元素都不等，新的序关系<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=\perp"></span>或<span data-katex="x\leqslant _D y"></span>。</p>
+
+<p><br/></p>
+
+<p>可证，如果<span data-katex="\mathscr{D}"></span>是一个CPO，则<span data-katex="\mathscr{D}_\perp"></span>是一个有奇点的CPO。</p>
+
+<p><br/></p>
+
+<h2><strong>连续函数</strong></h2>
+
+<p><strong>单调函数</strong></p>
+
+<p>设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>和<span data-katex="\mathscr{E}=\left \langle E,\leqslant _E \right \rangle"></span>是CPO，</p>
+
+<p><span data-katex="f:D\rightarrow E"></span>是集合<span data-katex="D"></span>到<span data-katex="E"></span>的一个函数，我们说<span data-katex="f"></span>是单调的（monotonic），</p>
+
+<p>如果<span data-katex="a\leqslant b"></span>就有<span data-katex="f(a)\leqslant f(b)"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>连续函数</strong></p>
+
+<p>一个单调函数<span data-katex="f"></span>是连续的（continuous），如果对于任意有向子集<span data-katex="S\subseteq D"></span>，有<span data-katex="f(\bigvee S)=\bigvee f(S)"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>提升函数</strong></p>
+
+<p>我们定义<span data-katex="f:D\rightarrow E"></span>对应的提升函数（lifted function）为<span data-katex="f_\perp =(D\cup\{ \perp \})\rightarrow (E\cup\{ \perp \})"></span>。</p>
+
+<p>其中，如果<span data-katex="a\in D"></span>，则<span data-katex="f_\perp (a)=f(a)"></span>，否则<span data-katex="f_\perp (a)=\perp"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>函数集构成CPO</strong></p>
+
+<p>假设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>和<span data-katex="\mathscr{E}=\left \langle E,\leqslant _E \right \rangle"></span>是CPO，</p>
+
+<p>对于连续函数<span data-katex="f,g:D\rightarrow E"></span>，我们称<span data-katex="f\leqslant_{D\rightarrow E} g"></span>，如果对于任意<span data-katex="d\in D"></span>，都有<span data-katex="f(d)\leqslant _E g(d)"></span>。</p>
+
+<p>于是，所有这些连续函数构成了一个CPO，记为<span data-katex="\mathscr{D}\rightarrow \mathscr{E}=\left \langle D\rightarrow E,\leqslant _{D\rightarrow E} \right \rangle"></span>。</p>
+
+<p><br/></p>
+
+<h2><strong>最小不动点</strong></h2>
+
+<p>我们称<span data-katex="a"></span>是<span data-katex="f"></span>的最小不动点（least fixed point），</p>
+
+<p>如果<span data-katex="a=f(a)"></span>且对于任意的<span data-katex="b=f(b)"></span>，我们有<span data-katex="a\leqslant b"></span>。</p>
+
+<p><br/></p>
+
+<p>如果<span data-katex="\mathscr{D}"></span>是一个有奇点的CPO，且<span data-katex="f:D\rightarrow D"></span>是连续的，则<span data-katex="f"></span>有最小不动点，</p>
+
+<p><span data-katex="fix_D f=\bigvee \{ f^n(\perp )~|~n\geqslant 0 \}"></span>，</p>
+
+<p>且<span data-katex="fix_D"></span>是连续的。</p>
+
+<p><br/></p>
+
+<p>例如，设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>是有奇点的CPO，则恒等函数<span data-katex="id:D\rightarrow D"></span>的最小不动点是<span data-katex="\perp _D"></span>。</p>
+
+<p><span data-katex="fix_D~id=\bigvee \{ id^n(\perp _D)~|~n\geqslant 0 \}=\bigvee \{ \perp _D \}=\perp _D"></span></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>大部分软件从业者，没有软件工程相关的培训，也没有阅读过相关书籍，</p>
+<p>初等数学中，某些函数是没有不动点的。</p>
 
-<p>是依靠自己的感觉来做软件的。</p>
+<p>那么在什么情况下，形如<span data-katex="f:\sigma =M"></span>的表达式有解呢？</p>
 
-<p><br/></p>
-
-<p>结果会沿用一些不恰当的类比来理解软件，</p>
-
-<p>也会逐渐形成小作坊式的软件开发过程。</p>
-
-<p>当团队规模扩大时，问题就会越来越严重。</p>
+<p>定义了递归之后，对类型化lambda演算的模型产生了什么影响呢？</p>
 
 <p><br/></p>
 
-<p>不过，没关系，这有什么。</p>
+<p>这是一直以来我心中是一个问题。</p>
 
-<p>痛了才会想办法去解决，也无需过度设计。</p>
+<p>诚然，类型化lambda演算有不同的解释方式，但以上域论模型通俗易懂，</p>
 
-<p>只是现在我们是否该学一些软件工程的知识了呢？</p>
-
-<p><br/></p>
-
-<p><strong>参考：</strong></p>
-
-<p><a href="https://book.douban.com/subject/1007738/">快速软件开发</a></p>
-
-<p><a href="https://book.douban.com/subject/1140457/">敏捷软件开发 : 原则、模式与实践</a></p>
+<p>也算是告一段落吧，以后的路还长着呢。</p>
 </div>
   
   
@@ -316,8 +443,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -327,7 +454,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -356,14 +491,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

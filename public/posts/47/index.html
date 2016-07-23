@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="Robert Sedgewick/Kevin Wayne的《算法》一书中， 强调了科学方法， 细致的观察真实世界的特点。 根据观察结果提出假设模型。 根据模型预测未来的事件。 继续观察并核实预测的准确性。 如此反复直到确认预测和观察一致。 可是， 我们永远也没法知道某个假设是否永远正确， &hellip;">
+  <meta name="description" content="据说Haskell是一种惰性求值的语言， 表达式的求值策略是按需求值，即call-by-need。 但是到底什么才是按需的， 求值到什么程度。 刚开始学习的时候，总是很模糊。 随着学习的深入，才慢慢了解， Haskell规范中，并没有涉及惰性求值， 只说它是一种non-strict &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/06/24/model/">模型观</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/07/12/lazy-evaluation/">惰性求值</a></h1>
     
     
       <p class="meta">
@@ -83,258 +83,427 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-06-24T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-07-12T00:00:00+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Robert Sedgewick/Kevin Wayne的《算法》一书中，</p>
+  <div class="entry-content"><p><strong>据说</strong>Haskell是一种惰性求值的语言，</p>
 
-<p>强调了科学方法，</p>
-
-<p><br/></p>
-
-<p>细致的观察真实世界的特点。</p>
-
-<p><strong>根据观察结果提出假设模型</strong>。</p>
-
-<p>根据模型预测未来的事件。</p>
-
-<p>继续观察并核实预测的准确性。</p>
-
-<p>如此反复直到确认预测和观察一致。</p>
+<p>表达式的求值策略是按需求值，即call-by-need。</p>
 
 <p><br/></p>
 
-<p>可是，</p>
+<p>但是到底什么才是按需的，</p>
 
-<p>我们永远也没法知道某个假设是否<strong>永远正确</strong>，</p>
+<p>求值到什么程度。</p>
 
-<p>我们只能验证它和我们的观察的一致性。</p>
-
-<p><br/></p>
-
-<p>爱因斯坦说，</p>
-
-<p>再多的实验也不一定能够证明我是对的，</p>
-
-<p>但只需要一个实验就能证明我是错的。</p>
+<p>刚开始学习的时候，总是很模糊。</p>
 
 <p><br/></p>
 
-<p>科学方法可能大家都很清楚，</p>
+<p>随着学习的深入，才慢慢了解，</p>
 
-<p>但是遇到具体问题，</p>
+<p>Haskell规范中，并没有涉及惰性求值，</p>
 
-<p>人们却容易忽视它。</p>
+<p>只说它是一种<strong>non-strict language</strong>，</p>
 
-<p><br/></p>
-
-<p>实践是检验真理的唯一标准，</p>
-
-<p>大胆假设，小心求证，</p>
-
-<p>建立正确的<strong>模型观</strong>，</p>
-
-<p>可以少走很多弯路。</p>
+<p>求值策略取决于具体的实现。</p>
 
 <p><br/></p>
 
-<h2><strong>模型与目标系统</strong></h2>
+<p>这是怎么回事呢？</p>
 
-<p>我们经常混淆<strong>模型</strong>与<strong>目标系统</strong>的区别，</p>
-
-<p>把符号“1”，“2”，“3”,&hellip;</p>
-
-<p>当做数学对象中的自然数本身。</p>
+<p>又要从头开始了。</p>
 
 <p><br/></p>
 
-<p>这只是用印刷符号对<strong>自然数</strong>进行建模，</p>
+<h2><strong>non-strictness</strong></h2>
 
-<p>实际上还有不同的模型，</p>
+<p>non-strict function，是<strong>指称语义</strong>中的概念，</p>
 
-<p>除了阿拉伯数字，还有罗马数字，中国筹，等等，</p>
+<p>指称语义将每一段代码，与一个数学对象相对应，</p>
 
-<p>甚至还有Church number。</p>
-
-<p><br/></p>
-
-<p>这个世界上<strong>并没有本质的道理</strong>，</p>
-
-<p>因为，我们无法验证什么是绝对正确的。</p>
+<p>借此来研究程序的语义。</p>
 
 <p><br/></p>
 
-<p>我们只能拿着模型来进行<strong>假设</strong>，</p>
+<p>一开始我们认为，程序中的函数，</p>
 
-<p>然后通过实验<strong>验证</strong>它的准确性。</p>
-
-<p><br/></p>
-
-<p>使用模型，我们可以从不同侧面，</p>
-
-<p>对目标系统进行研究。</p>
+<p>会有直接的数学函数与之对应。</p>
 
 <p><br/></p>
 
-<h2><strong>模型的发展与多样性</strong></h2>
+<p>其实不然，</p>
 
-<p>对观察结果提出的模型，</p>
+<p>因为，程序中的很多函数，在处理某些参数的时候，</p>
 
-<p>是一直在发展的，</p>
+<p>行为是“未定义的”，得不到有用的信息，</p>
 
-<p>并没有哪一个是终极的。</p>
-
-<p><br/></p>
-
-<p>当我们问“<strong>到底是什么</strong>”的时候，</p>
-
-<p><strong>其实是以静态的观点，分析动态发展中的事物</strong>。</p>
+<p>这样的数学函数称为<strong>部分函数</strong>（partial function）。</p>
 
 <p><br/></p>
 
-<p>模型在不断修正和演进中，</p>
+<p>这里尽量<a href="http://www.vex.net/~trebla/haskell/lazy.xhtml">不要提及“不能终止的”</a>，</p>
 
-<p>对目标系统做出更精确的<strong>解释</strong>。</p>
-
-<p><br/></p>
-
-<p>例如，lambda calculus，</p>
-
-<p>是一种计算模型，</p>
-
-<p>一开始是无类型的，</p>
-
-<p>但是同样也得不到类型系统的种种好处。</p>
-
-<p><br/></p>
-
-<p>因此lambda calculus就被扩展了，</p>
-
-<p>变成了typed lambda calculus的一个<strong>特例</strong>。</p>
-
-<p><br/></p>
-
-<p>对计算建模的方法也并<strong>不唯一</strong>，</p>
-
-<p>图灵机，combinatory logic，形式语言，等等，</p>
-
-<p>都是和lambda calculus具有相同计算能力的模型。</p>
-
-<p><br/></p>
-
-<h2><strong>编程语言</strong></h2>
-
-<p>编程语言是一种形式语言，</p>
-
-<p>不同的编程语言，只是用不同的一堆<strong>符号</strong>，</p>
-
-<p>按着不同的<strong>文法规则</strong>，</p>
-
-<p>对计算进行建模。</p>
-
-<p><br/></p>
-
-<p>根据形式语言理论，</p>
-
-<p>不受限文法，与图灵机等价。</p>
-
-<p><br/></p>
-
-<p>可以把不同的编程语言，</p>
-
-<p>看做计算过程的多样化模型。</p>
-
-<p><br/></p>
-
-<p>同样，它们的建模方式也在演化，</p>
-
-<p>语言的规范在发展。</p>
-
-<p><br/></p>
-
-<p>遇到具体问题，</p>
-
-<p><strong>我们需要选择合适的编程语言</strong>。</p>
-
-<p><br/></p>
-
-<p>而编程范型，</p>
-
-<p>是语义上的一种分类，</p>
-
-<p>并没有明确的界线。</p>
-
-<p><br/></p>
-
-<p>我们也没必要成见太深，</p>
-
-<p>强行把语言用在<strong>不适用</strong>的场景中。</p>
-
-<p><br/></p>
-
-<p>毕竟，语言是用来沟通和表达的。</p>
-
-<p><br/></p>
-
-<h2><strong>结语</strong></h2>
-
-<p>当我还是孩子的时候，</p>
-
-<p>对大自然，就喜欢问“到底是什么”，</p>
-
-<p>它指引我沿着科学之路越走越远。</p>
-
-<p><br/></p>
-
-<p>随着学习的深入，</p>
-
-<p>让我开始懂得<strong>反思问题本身</strong>，</p>
-
-<p>站在更高的角度。</p>
-
-<p><br/></p>
-
-<p>从模型角度来看，</p>
-
-<p>物理学就是对大自然现实世界的建模，</p>
-
-<p>耳熟能详的物理学理论，也只是<strong>可行的模型之一</strong>。</p>
+<p>因为指称语义并不考虑求值过程。</p>
 
 <p><br/></p>
 
 <p>例如：</p>
 
-<p>牛顿的万有引力理论，</p>
+<p>partialFn :: Integer -> Integer</p>
 
-<p>爱因斯坦的广义相对论，</p>
+<p>partialFn 0 = 0</p>
 
-<p>都是引力理论。</p>
-
-<p><br/></p>
-
-<p>当然还有其他的引力理论，</p>
-
-<p><strong>他们都是数学模型，用来解释目标系统</strong>，</p>
-
-<p>并不是大自然本身。</p>
+<p>partialFn n = test $ n + 1</p>
 
 <p><br/></p>
 
-<p>终极理论之梦，</p>
+<p>可以看到partial只在参数为0的时候是有意义的。</p>
 
-<p>可能会随着认识的提高，</p>
+<p>所以，与程序中的函数对应的，</p>
 
-<p>不再成为问题了。</p>
+<p>就不是普通意义上的数学函数了，</p>
+
+<p>还需要<strong>扩充定义域和值域</strong>。</p>
 
 <p><br/></p>
 
-<p>就像“没有银弹”一样，</p>
+<p>我们为每个集合增加一个新的值“<strong>⊥</strong>”，称为bottom，</p>
 
-<p><strong>任何领域都没有一劳永逸的事情</strong>。</p>
+<p>用来表示“未定义”。</p>
+
+<p>函数f(n)={0,n=0;⊥,n≠0}，就能表示partialFn了。</p>
+
+<p><br/></p>
+
+<p>Haskell用undefined来表示⊥，</p>
+
+<p>undefined也确实包含在所有类型中，</p>
+
+<p>> :t undefined</p>
+
+<p>> undefined :: a</p>
+
+<p><br/></p>
+
+<p>通常情况下，</p>
+
+<p>如果一个数学函数的参数是⊥，则结果就是⊥。</p>
+
+<p>这样的函数称为<strong>strict function</strong>。</p>
+
+<p><br/></p>
+
+<p>而Haskell中函数则不同。</p>
+
+<p>例如：</p>
+
+<p>nonStrictFn :: Integer -> Integer</p>
+
+<p>nonStrictFn 0 _ = 0</p>
+
+<p><br/></p>
+
+<p>nonStrictFn 0 undefined
+> 0</p>
+
+<p><br/></p>
+
+<p>函数nonStrictFn在参数包含undefined的时候，</p>
+
+<p>并没有得到undefined，而是得到了一个明确的值0，</p>
+
+<p>它对应的数学函数是<strong>non-strict function</strong>。</p>
+
+<p><br/></p>
+
+<p>函数的指称语义是non-strict function，</p>
+
+<p>这样的语言，称为non-strict language。</p>
+
+<p><br/></p>
+
+<h2><strong>lazy evaluation</strong></h2>
+
+<p>求值，是<strong>操作语义</strong>中的概念。</p>
+
+<p><strong>能实现non-strict指称语义的求值策略并不是唯一的</strong>。</p>
+
+<p><br/></p>
+
+<p>GHC是Haskell目前最流行的编译器，</p>
+
+<p>它使用了<strong>惰性求值</strong>（lazy evaluation）。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>x = 1</p>
+
+<p>y = 2</p>
+
+<p>z = (x, y)</p>
+
+<p><br/></p>
+
+<p>> :sprint x</p>
+
+<p>> x = _</p>
+
+<p>> :sprint y</p>
+
+<p>> y = _</p>
+
+<p>> :sprint z</p>
+
+<p>> y = _</p>
+
+<p><br/></p>
+
+<p>这里“:sprint”只是打印表达式，而不会求值它。</p>
+
+<p>“_”用来表示“未求值的”，或称为一个“<strong>thunk</strong>”。</p>
+
+<p><br/></p>
+
+<p>thunk在使用的时候，<strong>并不一定被完全求值</strong>。</p>
+
+<p>> let first = (u, _) = u</p>
+
+<p>> first z</p>
+
+<p>> 1</p>
+
+<p><br/></p>
+
+<p>> :sprint x</p>
+
+<p>> x = 1</p>
+
+<p>> :sprint y</p>
+
+<p>> y = _</p>
+
+<p>> :sprint z</p>
+
+<p>> y = (1, _)</p>
+
+<p><br/></p>
+
+<p>first函数，只求值了第一个参数，</p>
+
+<p>第二个参数，仍然是未求值的。</p>
+
+<p><br/></p>
+
+<p>实际上，<strong>thunk的求值是分层次的</strong>，</p>
+
+<p>为了尽量少的求值，每一次只将表达式求值为<strong>WHNF</strong>（weak head normal form），</p>
+
+<p>其中的子表达式，仍然是未求值的thunk。</p>
+
+<p><br/></p>
+
+<p>如果不能满足需要，</p>
+
+<p>就会继续将对应的sub-thunk，再求值为WHNF。</p>
+
+<p><br/></p>
+
+<h2><strong>Weak head normal form</strong></h2>
+
+<p>一个WHNF（weak head normal form），</p>
+
+<p>是表达式求值的一种结果形式。</p>
+
+<p><br/></p>
+
+<p>WHNF，只将表达式求值到，</p>
+
+<p>最外层的<strong>值构造器</strong>或者<strong>lambda抽象</strong>为止。</p>
+
+<p><br/></p>
+
+<p>例如：以下表达式是WHNF，</p>
+
+<p>(1 + 1, 2 + 2)，最外层是一个值构造器，(,)</p>
+
+<p>\x -> 2 + 2，最外层是一个lambda抽象，</p>
+
+<p>&lsquo;h&rsquo; : (&ldquo;e&rdquo; ++ &ldquo;llo&rdquo;)，最外层是一个值构造器，(:)</p>
+
+<p><br/></p>
+
+<p>以下表达式不是WHNF：</p>
+
+<p>1 + 2，最外层是加法函数调用，(+)</p>
+
+<p>(\x -> x + 1) 2，最外层是一个匿名函数调用</p>
+
+<p>&ldquo;he&rdquo; ++ &ldquo;llo"，最外层是列表的连接函数调用，(++)</p>
+
+<p><br/></p>
+
+<p>因此，</p>
+
+<p>表达式(1 + 1, 2 + 2)会按需首先求值为(thunk1,thunk2),</p>
+
+<p>如果还需要thunk1的值，thunk1会求值为2。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>testFn1 _ = 1</p>
+
+<p>testFn2 (<em>, </em>) = 2</p>
+
+<p>tettFn3 (u, _) = 3</p>
+
+<p>这3个函数会导致表达式(1 + 1, 2 + 2)进行<strong>不同层次</strong>的求值。</p>
+
+<p><br/></p>
+
+<h2><strong>seq</strong></h2>
+
+<p>为了控制求值程度，</p>
+
+<p>GHC内置了seq函数。</p>
+
+<p><br/></p>
+
+<p>> :t seq</p>
+
+<p>> seq :: a -> b -> b</p>
+
+<p><br/></p>
+
+<p>它表示，<strong>在结果求值为WHNF之前</strong>，</p>
+
+<p><strong>会先将seq的第一个参数求值为WHNF</strong>。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>u = 1</p>
+
+<p>v = (u, u)</p>
+
+<p><br/></p>
+
+<p>x = 1</p>
+
+<p>y = seq x (x, x)</p>
+
+<p><br/></p>
+
+<p>> :sprint u</p>
+
+<p>> u = _</p>
+
+<p>> :sprint v</p>
+
+<p>> v = _</p>
+
+<p><br/></p>
+
+<p>> :sprint x</p>
+
+<p>> x = _</p>
+
+<p>> :sprint y</p>
+
+<p>> y = _</p>
+
+<p><br/></p>
+
+<p>我们定义一个函数，用来把参数求值WHNF，</p>
+
+<p>> let whnf (<em>, </em>) = ()</p>
+
+<p><br/></p>
+
+<p>则，</p>
+
+<p>> whnf v</p>
+
+<p>> ()</p>
+
+<p>> whnf y</p>
+
+<p>> ()</p>
+
+<p><br/></p>
+
+<p>> :sprint u</p>
+
+<p>> u = _</p>
+
+<p>> :sprint v</p>
+
+<p>> v = (<em>, </em>)</p>
+
+<p><br/></p>
+
+<p>> :sprint x</p>
+
+<p>> x = 1</p>
+
+<p>> :sprint y</p>
+
+<p>> y = (1, 1)</p>
+
+<p><br/></p>
+
+<p>使用seq控制求值深度，</p>
+
+<p>可以防止创建过多的thunk。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>当我们在REPL中输入一个表达式时，</p>
+
+<p>实际上调用了print函数，</p>
+
+<p>它会对表达式完全求值。</p>
+
+<p><br/></p>
+
+<p>因此，表达式求值的层次问题，</p>
+
+<p><strong>是很难从REPL中看出来的</strong>。</p>
+
+<p><br/></p>
+
+<p>另一方面，WHNF将求值过程分成了一系列节点，</p>
+
+<p>能清晰的刻画求值程度，</p>
+
+<p>这可能是我们学习Haskell入门的起点吧。</p>
+
+<p><br/></p>
+
+<p>参考：</p>
+
+<p><a href="">Haskell/Denotational semantics</a></p>
+
+<p><a href="https://en.wikibooks.org/wiki/Haskell/Laziness">Haskell/Laziness</a></p>
+
+<p><a href="http://stackoverflow.com/questions/6872898/haskell-what-is-weak-head-normal-form">Haskell: What is Weak Head Normal Form?</a></p>
+
+<p><a href="http://book.douban.com/subject/24294415/">Parallel and Concurrent Programming in Haskell</a></p>
+
+<p><a href="https://hackhands.com/lazy-evaluation-works-haskell/">How Lazy Evaluation Works in Haskell</a></p>
+
+<p><a href="http://www.vex.net/~trebla/haskell/lazy.xhtml">Lazy Evaluation of Haskell</a></p>
 </div>
   
   
@@ -360,8 +529,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -371,7 +540,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -400,14 +577,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

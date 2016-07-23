@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="小时候，我就对侦探非常着迷， 买了很多介绍破案的漫画书，故事书，小说。 什么《大宇神秘惊奇系列》啊， 《名侦探柯南》啊， 《福尔摩斯探案全集》啊，等等。 可是，对于什么是推理， 以及怎样进行推理， 并没有清晰系统的认识。 学生时代，从平面几何开始， 我们就知道了证明题。 经过一步一步的推导， &hellip;">
+  <meta name="description" content="受过多年学校教育的我们，容易产生一个误区。 我们学会了很多知识，学会了怎样解决问题， 但是却不知道这些问题是怎么来的， 以后将要如何发展。 我们要解决的问题都是静态的， 只要我们给出方案， 那它就永远是这个问题的解。 然而，现实生活中的问题，却复杂得多。 我们不仅需要考虑问题的解法， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/03/01/proof-and-deduction/">形式证明与逻辑推理</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/03/08/forward-looking-engineer/">软件工程师的前瞻性</a></h1>
     
     
       <p class="meta">
@@ -83,399 +83,222 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2016-03-01T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2016-03-08T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><script src="/thirdpart/jQuery/jquery-1.11.1.js"></script>
+  <div class="entry-content"><p>受过多年学校教育的我们，容易产生一个误区。</p>
 
+<p>我们学会了很多知识，学会了怎样解决问题，</p>
 
-<p><link href="/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
+<p>但是却不知道这些问题是怎么来的，</p>
 
-<script src="/thirdpart/KaTeX/katex.min.js"></script>
-
-
-<script src="/javascripts/katex.js"></script>
-
-
-<p>小时候，我就对侦探非常着迷，</p>
-
-<p>买了很多介绍破案的漫画书，故事书，小说。</p>
+<p>以后将要如何发展。</p>
 
 <p><br/></p>
 
-<p>什么《大宇神秘惊奇系列》啊，</p>
+<p>我们要解决的问题都是静态的，</p>
 
-<p>《名侦探柯南》啊，</p>
+<p>只要我们给出方案，</p>
 
-<p>《福尔摩斯探案全集》啊，等等。</p>
-
-<p><br/></p>
-
-<p>可是，对于<strong>什么是推理</strong>，</p>
-
-<p>以及怎样进行推理，</p>
-
-<p>并没有清晰系统的认识。</p>
+<p>那它就永远是这个问题的解。</p>
 
 <p><br/></p>
 
-<p>学生时代，从平面几何开始，</p>
-
-<p>我们就知道了证明题。</p>
-
-<p>经过一步一步的推导，</p>
-
-<p>最后证明结论成立。</p>
+<p>然而，现实生活中的问题，却复杂得多。</p>
 
 <p><br/></p>
 
-<p>可是，对于<strong>什么是证明</strong>，</p>
+<p>我们不仅需要考虑问题的解法，</p>
 
-<p>并没有人能说出精确的定义。</p>
+<p>而且更重要的还要考虑问题本身。</p>
 
-<p><br/></p>
+<p>我们当前是否在把精力用于解决一个正确的问题，还说不定，</p>
 
-<p>这一切，难道真是只是个谜吗？</p>
-
-<p>是人类的未知领域吗？</p>
+<p>我们的方案是否在一段时间内仍然有效，也未可知。</p>
 
 <p><br/></p>
 
-<p>其实不然。</p>
-
-<p><strong>逻辑学</strong>就是研究推理和证明的学科，</p>
-
-<p>研究思维的形式，规律和方法。</p>
+<p>这也是软件行业的主要特点。</p>
 
 <p><br/></p>
 
-<p>其中，数理逻辑是逻辑学与数学的交叉学科，</p>
+<h2><strong>困难的软件工程</strong></h2>
 
-<p>用数学的方法研究逻辑，</p>
+<p>人们常把软件工程比作建筑，我认为这极不合理。</p>
 
-<p>我想，答案应该在这里吧。</p>
-
-<p><br/></p>
-
-<h2><strong>大局观</strong></h2>
-
-<p>数理逻辑虽然博大精深，</p>
-
-<p>但是研究方法却非常简洁优美。</p>
+<p>完全忽视了软件的本质特点。</p>
 
 <p><br/></p>
 
-<p>给定一套逻辑系统，</p>
+<p>与建筑行业不同的是，软件所解决的问题都是动态的，</p>
 
-<p>分别从两个侧面来描述这个系统的性质。</p>
+<p>楼还没有盖完，我们的图纸就变了，</p>
 
-<p>语法层面，语义层面。</p>
-
-<p><br/></p>
-
-<p><strong>语法</strong>，指的是构成这个逻辑系统的符号规则，</p>
-
-<p>由公理和定理的推导规则组成，</p>
-
-<p>让我们可以从一串合法的符号得到另一串合法符号，</p>
-
-<p>称之为<strong>形式证明</strong>。</p>
+<p>怎样在这种情况下把楼盖起来，才是软件工程所面临的问题。</p>
 
 <p><br/></p>
 
-<p><strong>语义</strong>，指的是用什么样的数学对象可以解释这些符号，</p>
+<p>诚然，用户的需求是不稳定的，今天说这个，明天说那个，</p>
 
-<p>由论域和解释函数组成，我们得到的是一些代数结构，</p>
+<p>但这并不是一个主要方面。</p>
 
-<p>而且，从已知符号串的语义性质得到了其他符号串的性质，</p>
-
-<p>称之为<strong>逻辑推理</strong>。</p>
+<p>短期内，需求的稳定性取决于我们的挖掘和控制。</p>
 
 <p><br/></p>
 
-<p>学校中的数理逻辑教科书，介绍了<strong>命题演算</strong>和<strong>一阶谓词演算</strong>这两个典型的逻辑系统。</p>
+<p>然而，从长远来看，市场在变，业务在变，</p>
 
-<p>它们各自的语义解释，恰好描述了日常生活中推理问题。</p>
+<p>用户使用软件的目的就会改变，</p>
 
-<p><br/></p>
-
-<p>总之，数理逻辑，用一套符号，对生活中常见的逻辑问题，进行了数学建模，</p>
-
-<p>研究它，希望得到与证明和推理相关的更多性质和结论。</p>
+<p>软件岂能不变？</p>
 
 <p><br/></p>
 
-<h2><strong>形式证明</strong></h2>
+<p>采取什么样的方案，应对这些发展中的业务需要，</p>
 
-<p>为了说明问题，而又不引入过多的逻辑学概念，</p>
-
-<p>我们从命题逻辑开始。</p>
+<p>才是软件要解决的本质问题。</p>
 
 <p><br/></p>
 
-<p>命题逻辑的形式化演算系统大体上可分为两种类型，</p>
-
-<p>一是<strong>希尔伯特式</strong>的公理化演算系统，</p>
-
-<p>二是<strong>甘岑(Gentzen)式</strong>的自然推理系统。</p>
+<p>这是困难的。</p>
 
 <p><br/></p>
 
-<p>这两个系统各有所长，</p>
+<p>且不谈增加新功能了，</p>
 
-<p>前者更能体现公理化的思想，但其推理过程比较繁琐，</p>
+<p>甚至对于有缺陷的地方进行修改，也得慎重考虑。</p>
 
-<p>后者形式推理比较自然，但是规则较多。</p>
-
-<p><br/></p>
-
-<p>下面只说<strong>命题演算的自然推理系统</strong>。</p>
+<p>所有依赖这个错误的特性而表现良好的程序，都是有问题的。</p>
 
 <p><br/></p>
 
-<p><strong>语法：</strong></p>
-
-<p>（1）可数个命题符号：<span data-katex="p_1,p_2,\cdots"></span></p>
-
-<p>（2）5个联接词符号：<span data-katex="\neg,\lor,\land,\to,\leftrightarrow"></span></p>
-
-<p>（3）2个辅助符号：<span data-katex="),("></span></p>
+<p>每改一处都可能意味着全盘重写。</p>
 
 <p><br/></p>
 
-<p><strong>公式：（BNF）</strong></p>
+<h2><strong>编程层面的技术修炼</strong></h2>
 
-<p><span data-katex="\alpha::=p|(\neg\alpha)|(\alpha_1\lor\alpha_2)|(\alpha_1\land\alpha_2)|(\alpha_1\to\alpha_2)|(\alpha_1\leftrightarrow\alpha_2)"></span></p>
+<p>好的软件工程师，可以隔离变化，简化依赖关系。</p>
 
-<p><br/></p>
+<p>他们通过抽象搭建框架，通过组装分离影响，</p>
 
-<p><strong>推导规则：</strong></p>
-
-<p>（1）<span data-katex=""></span>包含律：<span data-katex="\frac{\alpha\in\Gamma}{\Gamma\vdash\alpha}"></span></p>
-
-<p>（2）<span data-katex="\neg"></span>消去律：<span data-katex="\frac{\Gamma,\neg\alpha\vdash\beta;\Gamma,\neg\alpha\vdash\neg\beta}{\Gamma\vdash\alpha}"></span></p>
-
-<p>（3）<span data-katex="\to"></span>消去律：<span data-katex="\frac{\Gamma\vdash(\alpha\to\beta);\Gamma\to\alpha}{\Gamma\vdash\beta}"></span></p>
-
-<p>（4）<span data-katex="\to"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta}{\Gamma\vdash\alpha\to\beta}"></span></p>
-
-<p>（5）<span data-katex="\lor"></span>消去律：<span data-katex="\frac{\Gamma,\alpha\vdash\gamma;\Gamma,\beta\vdash\gamma}{\Gamma,\alpha\lor\beta\vdash\gamma}"></span></p>
-
-<p>（6）<span data-katex="\lor"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha}{\Gamma\vdash\alpha\lor\beta;\Gamma\vdash\beta\lor\alpha}"></span></p>
-
-<p>（7）<span data-katex="\land"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\land\beta}{\Gamma\vdash\alpha;\Gamma\vdash\beta}"></span></p>
-
-<p>（8）<span data-katex="\land"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha;\Gamma\vdash\beta}{\Gamma\vdash\alpha\land\beta}"></span></p>
-
-<p>（9）<span data-katex="\leftrightarrow"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\alpha}{\Gamma\vdash\beta}"></span>，<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\beta}{\Gamma\vdash\alpha}"></span></p>
-
-<p>（10）<span data-katex="\leftrightarrow"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta;\Gamma,\beta\vdash\alpha}{\Gamma\vdash\alpha\leftrightarrow\beta}"></span></p>
+<p>让每一个功能点都是可拆卸的。</p>
 
 <p><br/></p>
 
-<p><strong>例子：</strong></p>
+<p>为了抽象，就得理解问题背后的数学结构，</p>
 
-<p>使用这些推理规则，我们就可以从一些合法的符号串，</p>
-
-<p>推导出另一些合法的符号串了。</p>
+<p>为了封装，就得理解子问题之间的逻辑关联。</p>
 
 <p><br/></p>
 
-<p>（1）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha\to\beta"></span>：<span data-katex=""></span>包含律</p>
+<p>好的代码，行云流水，层次分明，逻辑清晰，赏心悦目，</p>
 
-<p>（2）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha"></span>：<span data-katex=""></span>包含律</p>
-
-<p>（3）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\beta"></span>：<span data-katex="\to"></span>消去律，式（1），式（2）</p>
-
-<p>（4）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\beta\to\alpha"></span>：<span data-katex=""></span>包含律</p>
-
-<p>（5）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\gamma"></span>：<span data-katex="\to"></span>消去律，式（3），式（4）</p>
-
-<p>（6）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha\to\gamma"></span>：<span data-katex="\to"></span>引入律，式（5）</p>
+<p>更重要的是，解决了当前问题，并留有余地。</p>
 
 <p><br/></p>
 
-<p>有了这些以后，我们就可以定义什么是一个<strong>证明</strong>了。</p>
+<p>到了这一步，才可以谈论软件是如何进行设计的了，</p>
 
-<p><strong>证明序列：</strong></p>
+<p>的确，编程是一门设计手法，</p>
 
-<p>若有限序列，<span data-katex="\Gamma_1\vdash\alpha_1,\Gamma_2\vdash\alpha_2,\cdots ,\Gamma_n\vdash\alpha_n"></span>满足，</p>
-
-<p>（1）<span data-katex="\Gamma_1,\Gamma_2,\cdots ,\Gamma_n"></span>为有限公式集</p>
-
-<p>（2）<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>为公式</p>
-
-<p>（3）每个<span data-katex="\Gamma_i\vdash\alpha_i(1\leq i\leq n)"></span>都是它之前若干个<span data-katex="\Gamma_j\vdash\alpha_j(1\leq j<i\leq n)"></span>应用某条推导规则得到的</p>
+<p>更多的是考虑如何描述，如何组织，如何扩展等等问题。</p>
 
 <p><br/></p>
 
-<p>则称这个有限序列为<span data-katex="\Gamma_n\vdash\alpha_n"></span>的一个<strong>（形式）证明序列</strong>。</p>
+<p>不但如此，一个架构师，还要考虑如何量产，</p>
 
-<p>此时，也称<span data-katex="\alpha_n"></span>可由<span data-katex="\Gamma_n"></span><strong>（形式）证明</strong>，</p>
+<p>如何并行开发，如何降低抽象层次，</p>
 
-<p>记为<span data-katex="\Gamma_n\vdash_N\alpha_n"></span>，其中<span data-katex="N"></span>表示自然推理系统。</p>
-
-<p><br/></p>
-
-<h2><strong>逻辑推理</strong></h2>
-
-<p>上文提到的是命题演算的自然推理系统，</p>
-
-<p>这是一个形式系统，我们介绍了它的语法和推导规则，</p>
-
-<p>根据这些推导规则，可以从一些合法的符号串推导出另一些，</p>
-
-<p>在这个基础上，我们定义了什么叫做（形式）证明。</p>
+<p>如何交流，如何推广。</p>
 
 <p><br/></p>
 
-<p>如何<strong>解释</strong>这些符号呢？</p>
-
-<p>它们有什么含义呢？</p>
+<p>这绝对是一门手艺。</p>
 
 <p><br/></p>
 
-<p>我们给每一个合法的<strong>公式</strong>指定一个<strong>逻辑命题</strong>，作为这个公式的解释。</p>
+<h2><strong>工程师需要前瞻性</strong></h2>
 
-<p>为每一个<strong>联接词符号</strong>指定一个<strong>真值函数</strong>，作为这个联接词符号的解释。</p>
+<p>要想给出一个灵活可扩展的方案，</p>
 
-<p><br/></p>
+<p>只是知道用动态的观点看待问题，作用是微小的。</p>
 
-<p><strong>命题：</strong></p>
-
-<p>命题是可以判断真假值的句子。</p>
+<p>我们还需要明白业务场景，分析它的趋势，看到它的未来。</p>
 
 <p><br/></p>
 
-<p><strong>真值函数：</strong></p>
+<p>随着业务规模扩大，软件越来越复杂，</p>
 
-<p><span data-katex="\{0,1\}"></span>上的<span data-katex="n"></span>元函数，<span data-katex="f:\{0,1\}^n\to\{0,1\}"></span></p>
+<p>前瞻性将是衡量一个软件工程师的首要标准了，</p>
 
-<p>称为一个<span data-katex="n"></span>元真值函数。</p>
-
-<p><br/></p>
-
-<p>我们将每个联接词与一个真值函数一一对应起来，</p>
-
-<p>那么，复合命题的真假值就可以通过子命题的真假值计算出来了。</p>
+<p>这也是工程与编程的重要区别。</p>
 
 <p><br/></p>
 
-<p><strong>指派：</strong></p>
+<p>可是，要想获得前瞻性是很难的，</p>
 
-<p>设<span data-katex="\alpha"></span>为一个命题，<span data-katex="\alpha"></span>中出现的所有命题变元构成了一个序列<span data-katex="p_1,p_2,\cdots ,p_n"></span>，</p>
+<p>我们必须先认识当前，明白现状，</p>
 
-<p>对该序列指定的任一真假值序列<span data-katex="t_1,t_2,\cdots ,t_n"></span>称为<span data-katex="\alpha"></span>关于<span data-katex="p_1,p_2,\cdots ,p_n"></span>的一个<strong>指派</strong>，</p>
-
-<p>其中<span data-katex="t_i=0,1"></span>。</p>
+<p>必须跳出当前的生活，从更高的角度俯视它。</p>
 
 <p><br/></p>
 
-<p><strong>真值表：</strong></p>
+<p>我们得看到，现行方案已经帮助问题解决到了什么程度，</p>
 
-<p>命题在所有可能的指派下，所取值列成的表，称为真值表。</p>
+<p>当前的痛点在哪，客观约束条件有哪些，</p>
 
-<p><br/></p>
-
-<p><strong>永真式：</strong></p>
-
-<p>如果命题关于其中出现命题变元的所有指派均为真，则称该命题是一个永真式。</p>
+<p>只有看清这些，才能确定目的地和实现路线。</p>
 
 <p><br/></p>
 
-<p>有了这些以后，我们就可以定义<strong>推理</strong>了。</p>
+<p>没有前瞻性的工程师是可怕的，</p>
 
-<p>设<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n,\beta"></span>都是命题，</p>
+<p>因为他自己都不知道要去哪，以及正在做什么，</p>
 
-<p>称<strong>推理『<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>推出<span data-katex="\beta"></span>』是有效的</strong>，</p>
-
-<p>如果对<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n,\beta"></span>中出现的命题变元的任一指派，</p>
-
-<p>若<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>都为真，则<span data-katex="\beta"></span>也为真，</p>
-
-<p>记为<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n\models\beta"></span></p>
-
-<p>否则，称推理『<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>推出<span data-katex="\beta"></span>』是无效的。</p>
+<p>那么他当前选择的路线就可能是盲目的，有风险的。</p>
 
 <p><br/></p>
 
-<p><strong>例子：</strong></p>
+<p>只有确定目标，并逐步实现，</p>
 
-<p><span data-katex="\alpha\to\beta,\alpha\models\beta"></span></p>
-
-<p><span data-katex="\alpha\lor\beta,\neg\alpha\models\beta"></span></p>
+<p>才有达到目标的可能。</p>
 
 <p><br/></p>
 
-<h2><strong>证明与推理之间的关系</strong></h2>
-
-<p>命题演算的自然推理系统，有很多性质，其中，</p>
-
-<p><br/></p>
-
-<p><strong>可靠性</strong></p>
-
-<p><span data-katex="\Gamma\vdash\alpha\Rightarrow\Gamma\models\alpha"></span></p>
-
-<p><br/></p>
-
-<p><strong>完备性</strong></p>
-
-<p><span data-katex="\Gamma\models\alpha\Rightarrow\Gamma\vdash\alpha"></span></p>
-
-<p><br/></p>
-
-<p>它们表明，如果一个公式可以被证明，那么它所对应命题的推理就是有效的，</p>
-
-<p>如果某些命题的推理是有效的，那么它就可以被证明。</p>
-
-<p><br/></p>
-
-<p>然而，形式化系统这种研究方法，并不是完美无缺的。</p>
-
-<p><strong>哥德尔不完全性定理</strong></p>
-
-<p>如果<span data-katex="\Gamma"></span>是一个有穷并包含初等算术<span data-katex="\Pi"></span>的形式理论，那么<span data-katex="\Gamma"></span>是一个不完全的形式理论。</p>
-
-<p><br/></p>
-
-<p><strong>哥德尔协调性定理</strong></p>
-
-<p>如果形式理论<span data-katex="\Gamma"></span>包含初等算术<span data-katex="\Pi"></span>，那么<span data-katex="\Pi"></span>的协调性不能在<span data-katex="\Gamma"></span>中被证明。</p>
+<p>世界上，可没有那么多的巧合出现。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>证明和推理也是可以研究的，</p>
+<p>知道自己在哪里，有计划要去哪里，</p>
 
-<p>并且，一直以来都是人们的感兴趣的研究对象。</p>
-
-<p><br/></p>
-
-<p>逻辑学对自动定理证明，程序设计语言中的类型系统，</p>
-
-<p>协议验证，软硬件的安全等领域，</p>
-
-<p>有很重要的理论价值。</p>
+<p>并努力付诸实践，才能达成目标。</p>
 
 <p><br/></p>
 
-<p>以命题逻辑和一阶谓词逻辑为基础，</p>
+<p>人们在计划出行时，总是这么考虑，</p>
 
-<p>人们构造出了各式各样种类繁多的逻辑系统，</p>
-
-<p>包括模态逻辑，直觉主义逻辑，时序逻辑，动态逻辑，</p>
-
-<p>多值逻辑，模糊逻辑，非单调逻辑，λ演算，组合逻辑等等。</p>
+<p>然而在其他问题上却容易迷茫</p>
 
 <p><br/></p>
 
-<p>现代逻辑学已经应用到了越来越多的学科之中。</p>
+<p>其实，当不知道自己要去哪里的时候，</p>
+
+<p>往往是对现在做的事情，不求甚解。</p>
+
+<p><br/></p>
+
+<p>还是从认识自己开始吧，</p>
+
+<p>锻炼有前瞻性的思维习惯，</p>
+
+<p>才能越走越稳，看尽沿途的风光美景。</p>
 </div>
   
   
@@ -501,8 +324,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -512,7 +335,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -541,14 +372,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="表达式是在环境中求值的。 如果允许表达式改变环境， 那么，其他表达式的求值结果，就是不可预料的。 环境，是专业术语，也可称为执行环境， 里面保存的是，变量和值的绑定关系。 Haskell是一门纯函数式语言， 并不是说，函数的每次求值结果都相同。 而是说，任何函数都不会修改它的执行环境。 例如， &hellip;">
+  <meta name="description" content="S表达式，是Lisp语言的特色， 让我们有能力对程序和数据进行统一编码。 这种一致性， 使得我们可以和处理数据一样处理Lisp代码， 正因为这样，才可以建立其他语言无法比拟的宏系统（macro system）。 S表达式真是天才之作呀。 它是凭空想出来的吗？ 不是的。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/27/purity/">Haskell的纯函数性</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/04/02/s-expression/">理解S表达式</a></h1>
     
     
       <p class="meta">
@@ -83,214 +83,290 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-03-27T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-04-02T00:00:00+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>表达式是在环境中求值的。</p>
+  <div class="entry-content"><p>S表达式，是Lisp语言的特色，</p>
 
-<p>如果允许表达式改变环境，</p>
-
-<p>那么，其他表达式的求值结果，就是不可预料的。</p>
+<p>让我们有能力对程序和数据进行统一编码。</p>
 
 <p><br/></p>
 
-<p>环境，是专业术语，也可称为执行环境，</p>
+<p>这种一致性，</p>
 
-<p>里面保存的是，变量和值的绑定关系。</p>
+<p>使得我们可以和处理数据一样处理Lisp代码，</p>
 
-<p><br/></p>
-
-<p>Haskell是一门纯函数式语言，</p>
-
-<p>并不是说，函数的每次求值结果都相同。</p>
-
-<p>而是说，<strong>任何函数都不会修改它的执行环境</strong>。</p>
+<p>正因为这样，才可以建立其他语言无法比拟的宏系统（macro system）。</p>
 
 <p><br/></p>
 
-<p>例如，对于从屏幕上读取字符的函数，</p>
+<p>S表达式真是天才之作呀。</p>
 
-<p>每次调用，并不一定会返回相同的值。</p>
-
-<p>但是，执行后，它确实不会影响环境中的绑定关系。</p>
+<p>它是凭空想出来的吗？</p>
 
 <p><br/></p>
 
-<p>因此，输入输出操作，也是纯函数，</p>
+<p>不是的。</p>
 
-<p>理解执行环境和现实世界的区别，是关键。</p>
-
-<p><br/></p>
-
-<h2><strong>IO</strong></h2>
-
-<p>Haskell是一门静态强类型的语言。</p>
-
-<p>任何表达式在编译前类型都是确定的。</p>
+<p>S表达式是<strong>二叉树的一种线性编码</strong>。</p>
 
 <p><br/></p>
 
-<p>输入输出与IO a类型有关。</p>
+<h2><strong>二叉树</strong></h2>
 
-<p>其中，IO是类型构造器，:k IO = * -> *</p>
+<p>我们知道二叉树是很重要的数据结构，</p>
 
-<p>因此，IO a才是一个具体类型。</p>
+<p>可以用来存储结构化的数据。</p>
 
-<p><br/></p>
+<p>例如：</p>
 
-<p>IO是如何定义的呢？</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</p>
 
-<p>type IO a = World -> (a, World)</p>
+<p>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\</p>
 
-<p>World类型的值表示现实世界的状态。</p>
+<p>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</p>
 
-<p><br/></p>
+<p>&nbsp;/&nbsp;\&nbsp;&nbsp;&nbsp;/&nbsp;\</p>
 
-<p>IO a类型的值是一个函数，它接受现实世界的当前状态作为参数，</p>
-
-<p>返回一个元组，这个元组由类型a的值和对现实世界改变后的状态构成。</p>
+<p>a&nbsp;&nbsp;&nbsp;b&nbsp;c&nbsp;&nbsp;&nbsp;d</p>
 
 <p><br/></p>
 
-<p>由于，我们并不需要手动传递World类型的值作为参数来调用，</p>
+<p>二叉树的每个节点，</p>
 
-<p>所以，应该<strong>把IO a类型的值理解为一个惰性求值的表达式</strong>，</p>
+<p>或者是叶节点，或者有2个子节点，</p>
 
-<p>对该表达式按需求值，得到一个a类型的值。</p>
+<p>叶节点可以用来存储数据。</p>
 
 <p><br/></p>
 
-<p>IO a类型的表达式，称为<strong>action</strong>。</p>
+<p>可是，这样表示二叉树，太麻烦了。</p>
 
-<p>IO a类型的action中，惰性包含了一个a类型的值。</p>
+<p>不容易书写。</p>
+
+<p><br/></p>
+
+<p>于是，先哲们发明了<strong>点对表示法</strong>，</p>
+
+<p>((a . b) . (c . d))可以表示上面的二叉树，</p>
+
+<p>其中“.”表示节点。</p>
+
+<p><br/></p>
+
+<p><strong>S表达式</strong>是点对表示法的形式定义：</p>
+
+<p>原子 -> 数字 | 符号</p>
+
+<p>S表达式 -> 原子 | (S表达式 . S表达式)</p>
+
+<p><br/></p>
+
+<p>所以，S表达式或者是原子，</p>
+
+<p>或者是递归的由其他S表达式构成的点对。</p>
+
+<p><br/></p>
+
+<h2><strong>S表达式的化简</strong></h2>
+
+<p>实际使用时，</p>
+
+<p>书写S表达式，还要同时写很多点号“.”，</p>
+
+<p>这也是一件麻烦的事情。</p>
+
+<p><br/></p>
+
+<p>因此，Lisp语言定义了一套S表达式的化简规则。</p>
+
+<p>（1）如果一个点号右邻一个左括号，那么就可以将这个点号，左括号以及匹配的右括号，一起去掉。</p>
+
+<p>例如：(a . (b . c)) &lt;=> (a b . c)</p>
+
+<p><br/></p>
+
+<p>（2）如果一个点号右邻<strong>原子nil</strong>，那么就可以把这个点号和原子nil，一起去掉。</p>
+
+<p>例如：(a . (b . nil)) &lt;=> (a b . nil) &lt;=> (a b)</p>
+
+<p><br/></p>
+
+<p><strong>列表</strong>是一种特殊类型的S表达式，</p>
+
+<p>如果一个S表达式不是原子，</p>
+
+<p>而且经过化简可以把点号都去掉，</p>
+
+<p>就说这个S表达式是一个列表。</p>
 
 <p><br/></p>
 
 <p>例如：</p>
 
-<p>getChar :: IO Char</p>
+<p>(a . (b . (c . nil))) &lt;=> (a b c)</p>
 
-<p>求值getChar表达式，就会得到一个Char类型的值。</p>
+<p>是一个列表。</p>
 
 <p><br/></p>
+
+<p>为了使用方便，还允许有<strong>空表</strong>，</p>
+
+<p>而且还定义空表等价于原子nil。</p>
+
+<p>( ) &lt;=> nil</p>
 
 <p>例如：</p>
 
-<p>IO ( )</p>
-
-<p>其中，( )表示空元组类型，该类型只有一个值，空元组( )。</p>
-
-<p>“( )”既可以表示类型，又可以表示值，取决于它出现的上下文。</p>
-
-<p>另外，Haskell中习惯将空元组看做无用数据。</p>
+<p>(a . (b . ( ))) &lt;=> (a . (b . nil)) &lt;=> (a b)</p>
 
 <p><br/></p>
 
-<p>在IO ( )中，( )是作为IO类型构造器的参数出现的，表示空元组类型，</p>
+<p>值得注意的是，</p>
 
-<p>所以说，IO ( )类型的action中，惰性包含了一个空元组值。</p>
+<p>空表的记法，使nil身兼三职，</p>
+
+<p>（1）nil表示一个原子</p>
+
+<p>（2）nil表示空表</p>
+
+<p>（3）nil表示逻辑值“假”</p>
+
+<p>nil成为了Lisp语言中唯一的<strong>既是原子又是列表</strong>的表达式。</p>
 
 <p><br/></p>
+
+<h2><strong>常用函数pair?，cons和car</strong></h2>
+
+<p>Scheme语言是Lisp的一种方言，</p>
+
+<p>它没有nil的概念，只有空表( )。</p>
+
+<p><br/></p>
+
+<p>在介绍常用函数之前，</p>
+
+<p>我们需要知道，Scheme语言的<a href="http://en.wikipedia.org/wiki/Evaluation_strategy">求值策略</a>（evaluation strategy）。</p>
+
+<p><br/></p>
+
+<p>Scheme语言中的函数是按值调用的（call by value），</p>
+
+<p>在求值函数体之前，实参会先被求值。</p>
+
+<p><br/></p>
+
+<p>因此，(display (* 2 3))中，</p>
+
+<p>(* 2 3)并不会被看成是具有3个元素的列表，而是看成乘法函数调用，</p>
+
+<p>在display调用之前，会先求值(* 2 3) => 6，结果是显示6。</p>
+
+<p><br/></p>
+
+<p>假如，我们一定要把(* 2 3)看成是列表呢？</p>
+
+<p>就需要引用它。(display &lsquo;(* 2 3))</p>
+
+<p>此时，'(<em> 2 3)求值为列表(</em> 2 3)。</p>
+
+<p>结果是显示(* 2 3)。</p>
+
+<p><br/></p>
+
+<p>我们来看pair?函数，</p>
+
+<p>它只有在参数是点对的情况下返回#t，其余都返回#f。</p>
 
 <p>例如：</p>
 
-<p>putStrLn :: String -> IO ( )</p>
+<p>(pair? &lsquo;(a . c)) => #t</p>
 
-<p>putStrLn是一个函数，</p>
+<p>(pair? &lsquo;(a b c)) => #t</p>
 
-<p>它接受String类型的值作为参数，</p>
+<p>(pair? &lsquo;( )) => #f</p>
 
-<p>返回一个IO ( )类型的action。</p>
-
-<p><br/></p>
-
-<h2><strong>do</strong></h2>
-
-<p>main :: IO ( )</p>
-
-<p>main = do</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn &ldquo;Please input: &rdquo;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;inpStr &lt;- getLine</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+<p>(pair? &lsquo;abc) => #f</p>
 
 <p><br/></p>
 
-<p>以上程序定义了main函数，是一个IO ( )类型的action。</p>
+<p>值得注意的是，</p>
+
+<p>（1）空表不是点对。</p>
+
+<p>因为它是原子nil，虽然Scheme语言中没有内置原子nil。</p>
+
+<p>可以通过另外一个函数看出来，atom?用来判断参数是否原子。</p>
+
+<p>(atom? &lsquo;( )) => #t</p>
 
 <p><br/></p>
 
-<p>do关键字，是Haskell中的一种写法，</p>
+<p>（2）<strong>列表</strong>是点对的简写。</p>
 
-<p>用来表示顺序执行。</p>
-
-<p><br/></p>
-
-<p>其中，</p>
-
-<p>putStrLn :: String -> IO ( )</p>
-
-<p>getLine :: IO String</p>
+<p>(a b c) &lt;=> (a . (b . (c . ( ))))</p>
 
 <p><br/></p>
 
-<p>putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+<p>我们再来看cons函数，</p>
 
-<p>= putStrLn ( &ldquo;Hello &rdquo; ++ inpStr )</p>
+<p>cons接受两个参数，将他们拼成一个点对，</p>
+
+<p>结果是<strong>化简后的</strong>S表达式。</p>
+
+<p>例如：</p>
+
+<p>(cons &lsquo;a 'b) => (a . b)</p>
+
+<p>(cons &lsquo;a &rsquo;(b)) => (a . (b)) &lt;=> (a b)</p>
+
+<p>(cons &lsquo;(a) &rsquo;(b)) => ((a) . (b)) &lt;=> ((a) b)</p>
 
 <p><br/></p>
 
-<p>因此，</p>
+<p>最后来看一下car和cdr函数，</p>
 
-<p>putStrLn &ldquo;Please input: &rdquo; :: IO ( )，在屏幕上输出字符串“Please input: ”，</p>
+<p>它们接受一个点对作为参数，</p>
 
-<p>inpStr &lt;- getLine，求值惰性表达式getLine，<strong>把action里面包含的值拿出来</strong>，绑定到inpStr上。</p>
-
-<p>putStrLn $ &ldquo;Hello &rdquo; ++ inpStr，在屏幕上输出字符串"Hello &ldquo;与变量inpStr连接后的结果。</p>
+<p>car获取点对的左元素，cdr获取右元素。</p>
 
 <p><br/></p>
 
-<p>IO操作，每次执行的效果并不相同，</p>
+<p>(car &lsquo;(a . b)) => a</p>
 
-<p>但<strong>仍然都是纯函数</strong>，</p>
+<p>(cdr &lsquo;(a . b)) => b</p>
 
-<p>在于它们不会修改执行环境中的变量绑定关系。</p>
+<p>(car &lsquo;(a b)) &lt;=> (car &rsquo;(a . (b))) => a</p>
+
+<p>(cdr &lsquo;(a b)) &lt;=> (car &rsquo;(a . (b))) => (b)</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，</p>
+<p>刚学Lisp语言的时候，</p>
 
-<p>这种说法，其实是为了解释给不熟悉的人看的。</p>
-
-<p>事实上，<strong>Haskell中的任何函数都是纯函数</strong>。</p>
+<p>查看了很多书，对S表达式的解释，总是不够清楚。</p>
 
 <p><br/></p>
 
-<p>类似的，</p>
+<p>无意间找到了<strong>马希文</strong>老师的《LISP语言》，</p>
 
-<p>Haskell语言中Bug的数量可以控制到非常少，</p>
+<p>书中用中国人的方式写了对Lisp语言的理解，</p>
 
-<p>并不是因为通过Monad将IO和其他函数分离开，</p>
-
-<p>而是因为任何函数都不能改变环境中变量的绑定关系，</p>
-
-<p>即，函数的纯粹性。</p>
+<p>言简意赅。</p>
 
 <p><br/></p>
 
-<p>此外，Monad，Applicative和Functor这些类型类，</p>
+<p>让我认识到了，</p>
 
-<p>提高了语言的抽象程度，让复杂度更可控，</p>
+<p>真正精髓的知识，都一定是简单的，</p>
 
-<p>我想，这才是Bug数量少的真正原因吧。</p>
+<p>难以理解的东西，可能作者也没有搞明白。</p>
 </div>
   
   
@@ -316,8 +392,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -327,7 +403,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -356,14 +440,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

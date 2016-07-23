@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="类型系统，是指一种根据所计算出值的种类，对词语进行分类， 从而证明某程序行为不会发生的， 可行语法手段。——《TAPL》 可见类型系统是形式方法的一种， 也是一种证明方法。 当我们把自己写好的程序提交给别人时， 如果别人质疑『你怎么证明它是对的』， 是不好回答的。 因为通过测试用例来检测程序行为 &hellip;">
+  <meta name="description" content="对需求的误解 同学们经常提及的需求变更，其实变更的并不是需求，而是需求的实现方案。 首先，我们要对需求和方案进行区分。 需求包括以下几个方面，需求背景，需求目的，需求范围，需求的详细规格，以及错误处理方式。 UI/UE/UX，前端，后端，共同实现了需求，是同一个解决方案的不同侧面。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/05/19/type-theory-in-my-eye/">类型理论之拙见</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/06/02/requirement-change/">如何应对需求变更</a></h1>
     
     
       <p class="meta">
@@ -83,134 +83,214 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2016-05-19T00:00:00+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2016-06-02T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>类型系统，是指一种根据所计算出值的种类，对词语进行分类，</p>
+  <div class="entry-content"><h2><strong>对需求的误解</strong></h2>
 
-<p>从而证明某程序行为不会发生的，</p>
+<p>同学们经常提及的需求变更，其实变更的并不是需求，而是需求的实现方案。</p>
 
-<p>可行语法手段。——《TAPL》</p>
+<p>首先，我们要对需求和方案进行区分。</p>
 
-<p><br/></p>
+<p>需求包括以下几个方面，需求背景，需求目的，需求范围，需求的详细规格，以及错误处理方式。</p>
 
-<p>可见类型系统是形式方法的一种，</p>
-
-<p>也是一种证明方法。</p>
+<p>UI/UE/UX，前端，后端，共同实现了需求，是同一个解决方案的不同侧面。</p>
 
 <p><br/></p>
 
-<p>当我们把自己写好的程序提交给别人时，</p>
+<p>因此从广义上来讲，开发者之间的内部沟通，不属于需求变更范畴。</p>
 
-<p>如果别人质疑『你怎么证明它是对的』，</p>
+<p>软件的大部分问题，存在于开发者之间的沟通上面，而不是开发者对需求的理解上面。</p>
 
-<p>是不好回答的。</p>
-
-<p><br/></p>
-
-<p>因为通过测试用例来检测程序行为，</p>
-
-<p>本身就是在进行不完全归纳，</p>
-
-<p>我们只能断定验证过的事情是正确，</p>
-
-<p>却不能断定一般性质。</p>
+<p>只有理解了什么是需求，才能衡量出需求是否变更了。</p>
 
 <p><br/></p>
 
-<p>类型理论与数学，逻辑学，计算机科学相关，</p>
-
-<p>甚至渗透到了其他学科之中。</p>
+<blockquote><p>在软件工程中，需求分析指的是在建立一个新的或改变一个现存的电脑系统时描写新系统的目的、范围、定义和功能时所要做的所有的工作。</p></blockquote>
 
 <p><br/></p>
 
-<p>类型系统是程序语言之上的一套逻辑系统，</p>
+<h2><strong>从方法到目的</strong></h2>
 
-<p>可以对程序进行推理，来断定某些性质。</p>
+<p>实现一个目的有多种方法，如何看到这些方法的共性呢？</p>
 
-<p>不同的逻辑系统，『诱导』出了不同的类型系统。</p>
+<p>最快的方式就是找到这些方法要解决的问题。</p>
 
-<p><br/></p>
-
-<p>形式系统有个特点，那就是稍微改变一点约束条件，</p>
-
-<p>就会得到一系列好玩的附加特性，</p>
-
-<p>有大量丰富的逻辑系统可以玩。</p>
-
-<p>例如，直觉主义逻辑，模态逻辑，时态逻辑，等等。</p>
+<p>软件是以解决问题为目的的，不能解决问题的软件没有任何作用。</p>
 
 <p><br/></p>
 
-<p>可是，仅从代码进行静态分析，来断定程序运行时的所有行为，是不可判定的。</p>
+<p>这要分两方面来说，</p>
 
-<p>因此只能保证well typed的程序没有某类错误，</p>
+<p>其一，当产品经理发起需求变更时，我们要积极配合。因为，需求变更的主要原因在于当前软件不能解决某些问题。</p>
 
-<p>每个类型系统有各自要阻止的行为。</p>
-
-<p><br/></p>
-
-<p>类型系统种类繁多，支持各种好玩的特性，</p>
-
-<p>例如，支持Polymorphism的类型系统，某类型可以由其他类型参数化，</p>
-
-<p>支持Dependent type的系统，类型可以由值来决定，</p>
-
-<p>子类型允许我们适当放宽类型要求，</p>
-
-<p>递归类型，存在类型，全称类型。</p>
+<p>不配合，那么做出的软件就没有用，我们的工作就没有价值。</p>
 
 <p><br/></p>
 
-<p>1934年，Curry意识到简单类型化lambda演算中的类型，与直觉主义逻辑之间的关系，</p>
+<p>其二，我们要知道当前软件要解决的问题是什么，才能灵活的改变策略。</p>
 
-<p>后面的研究发现，人们把这种对应关系推广为了Curry-Howard-Lambek Correspondance，</p>
-
-<p>它将程序语言的类型，逻辑系统中的命题，和指称语义笛卡尔闭范畴，联系起来了。</p>
-
-<p>一个合法项的存在，就证明了对应它类型的一个命题为真，程序即构造出来的证明。</p>
+<p>甚至可以利用工程师的领域特长，找到更合适的解决方案。</p>
 
 <p><br/></p>
 
-<p>类型理论的实用内容还有很多，</p>
+<h2><strong>变更与管控</strong></h2>
 
-<p>Gradual typing的动静结合，例如flow，</p>
+<p>我们不怕变化，怕的是对变化失去控制。</p>
 
-<p>以及Rust和Linear typeing的应用，</p>
+<p>当产品经理发起需求变更时，我们要重新安排未完成任务的优先级，这是需要与产品经理沟通的。</p>
 
-<p>另外还有，Hindley–Milner类型推导算法。</p>
-
-<p><br/></p>
-
-<p>类型系统有一些性质可以衡量，</p>
-
-<p>例如，type soundness，type safety，</p>
-
-<p>以及检查类型的方式，static check，dynamic check，</p>
-
-<p>包括某些语言是explicitly typed，而某些是implicitly typed，</p>
-
-<p>某些语言是被stronger checked，有些则是weaker checked。</p>
+<p>因为，变更是需要成本的，意味着原计划要做的某些事情不能做完了，我们得让他们知道。</p>
 
 <p><br/></p>
 
-<p>现在是学习时间了。</p>
+<p>我们自己首先得有一个任务列表。</p>
+
+<p>然后以优先级的方式管理待办事项。</p>
 
 <p><br/></p>
 
-<p>参考：</p>
+<h2><strong>知识共享</strong></h2>
 
-<p><a href="https://wiki.haskell.org/Curry-Howard-Lambek_correspondence">Curry-Howard-Lambek correspondence</a></p>
+<p>不同的人，对需求的理解不同。</p>
 
-<p><a href="https://book.douban.com/subject/1318672/">类型和程序设计语言</a></p>
+<p>每个人都会按照自己的方式去实现想法。</p>
 
-<p><a href="http://lucacardelli.name/papers/typesystems.pdf">Type System - Luca Cardelli</a></p>
+<p>如何设计一个策略，怎样实现这个设计，大相径庭。</p>
 
-<p><a href="https://book.douban.com/subject/1944729/">程序设计语言理论基础</a></p>
+<p><br/></p>
+
+<p>因此，我们要预先做一些知识的分享。</p>
+
+<p>在设计阶段排除问题，会比在实现阶段排除问题，成本低很多。</p>
+
+<p>我们不妨谈一谈，我计划怎样解决这个问题，我打算怎样实现。</p>
+
+<p>因为，很有可能，这个计划就是错的。</p>
+
+<p><br/></p>
+
+<h2><strong>主动去沟通</strong></h2>
+
+<p>如果我想改某个文件，担心其他人也在改，以后合并起来麻烦，怎么办？</p>
+
+<p>去问他/她。</p>
+
+<p>某位同学的代码我看不懂，不敢改怎么办？</p>
+
+<p>去问他/她。</p>
+
+<p>产品经理对需求的描述不清楚，我理解不了怎么办？</p>
+
+<p>去问他/她。</p>
+
+<p>交互稿中文案可能有错误，逻辑矛盾，怎么办？</p>
+
+<p>去问他/她。</p>
+
+<p>测试提了一个缺陷，可是我不知道在说什么，也不知道在哪个场景中会出现，怎么办？</p>
+
+<p>去问他/她。</p>
+
+<p><br/></p>
+
+<p>&ldquo;问"，这个简单的动作，会节省大量的时间。</p>
+
+<p>如果不想打断别人的工作，可以用一些非即时沟通工具。</p>
+
+<p>或者走到他旁边，让他注意到你时，你再发问。</p>
+
+<p><br/></p>
+
+<p>提问，并不愚蠢，不问才蠢。</p>
+
+<p>要相信大部分工程师都是喜欢被问的。</p>
+
+<p><br/></p>
+
+<h2><strong>让设计灵活响应变更</strong></h2>
+
+<p>好的设计，在变更中灵活响应。</p>
+
+<p>这实际上是对设计提出了更高的要求，不止是实现功能那么简单了。</p>
+
+<p><br/></p>
+
+<p>因为现实世界是发展中的，业务场景也在与时俱进。</p>
+
+<p>因此，需求本身不可能是不变的。</p>
+
+<p>软件是一个解决动态问题的方案。</p>
+
+<p><br/></p>
+
+<p>程序设计是用来解决发展中问题的。</p>
+
+<p>我们要看到问题的发展趋势，结合整个过程进行设计。</p>
+
+<p>给未来留下余地，不局限于当前状态进行设计。</p>
+
+<p><br/></p>
+
+<p>需求你怎么改都行，因为你不得不改，我也不得不照做，不然软件本身就没用了。</p>
+
+<p>但是我的设计保障我修改的成本最低。</p>
+
+<p><br/></p>
+
+<h2><strong>原谅别人的失误</strong></h2>
+
+<p>人非圣贤孰能无过。</p>
+
+<p>我们会因为手误打错代码，也会因为大脑一时短路犯逻辑错误。</p>
+
+<p>那么，产品经理同样也会对需求理解和描述产生偏差。</p>
+
+<p>我们不能要求别人做到完美。</p>
+
+<p><br/></p>
+
+<p>一方面，我们要原谅他们，但要让他们知道大家的代价。</p>
+
+<p>另一方面，我们要听思想，不要听描述。抓住中心思想，忽略细节。</p>
+
+<p><br/></p>
+
+<p>严于律己，宽以待人。</p>
+
+<h2><strong>结语</strong></h2>
+
+<p>大部分软件从业者，没有软件工程相关的培训，也没有阅读过相关书籍，</p>
+
+<p>是依靠自己的感觉来做软件的。</p>
+
+<p><br/></p>
+
+<p>结果会沿用一些不恰当的类比来理解软件，</p>
+
+<p>也会逐渐形成小作坊式的软件开发过程。</p>
+
+<p>当团队规模扩大时，问题就会越来越严重。</p>
+
+<p><br/></p>
+
+<p>不过，没关系，这有什么。</p>
+
+<p>痛了才会想办法去解决，也无需过度设计。</p>
+
+<p>只是现在我们是否该学一些软件工程的知识了呢？</p>
+
+<p><br/></p>
+
+<p><strong>参考：</strong></p>
+
+<p><a href="https://book.douban.com/subject/1007738/">快速软件开发</a></p>
+
+<p><a href="https://book.douban.com/subject/1140457/">敏捷软件开发 : 原则、模式与实践</a></p>
 </div>
   
   
@@ -236,8 +316,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -247,7 +327,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -276,14 +364,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

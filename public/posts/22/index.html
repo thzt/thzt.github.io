@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="范畴论是一个迷人的领域， 它是一门研究数学结构以及结构之间关系的理论。 不知道我们学群论时， 是否感觉到了群同态与集合间映射的相似性。 学拓扑学时， 是否感觉到了连续映射与微分流形间光滑映射的相似性。 范畴论统一了这些相似结构。 然而，这还要从抽象代数说起。 幺半群（monoid） 在抽象代数中， &hellip;">
+  <meta name="description" content="有时候，在软件项目的巨大压力下， 我们会不由自主的做出，违反自然规律的事情。 短期来看，确实受益了， 然而，长期看来，无异于揠苗助长， 流毒无穷。 人们以为， 软件行业中，加班是家常便饭， 但实际上，这是管理上缺陷。 处于底层的程序员们，无力涉足管理， 但也可以认真想一想，如何高效的加班。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/01/11/monad-in-hask-category/">Hask范畴上的Monad</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/01/21/the-rhythm-of-the-development/">软件开发的节奏</a></h1>
     
     
       <p class="meta">
@@ -83,488 +83,312 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2016-01-11T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2016-01-21T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>范畴论是一个迷人的领域，</p>
+  <div class="entry-content"><p>有时候，在软件项目的巨大压力下，</p>
 
-<p>它是一门研究<strong>数学结构</strong>以及<strong>结构之间关系</strong>的理论。</p>
-
-<p><br/></p>
-
-<p>不知道我们学群论时，</p>
-
-<p>是否感觉到了群同态与集合间映射的相似性。</p>
-
-<p>学拓扑学时，</p>
-
-<p>是否感觉到了连续映射与微分流形间光滑映射的相似性。</p>
+<p>我们会不由自主的做出，违反<strong>自然规律</strong>的事情。</p>
 
 <p><br/></p>
 
-<p>范畴论统一了这些相似结构。</p>
+<p>短期来看，确实受益了，</p>
 
-<p>然而，这还要从抽象代数说起。</p>
+<p>然而，长期看来，无异于<strong>揠苗助长</strong>，</p>
 
-<p><br/></p>
-
-<h2>幺半群（monoid）</h2>
-
-<p>在抽象代数中，<strong>幺半群</strong>是这样定义的。</p>
+<p>流毒无穷。</p>
 
 <p><br/></p>
 
-<p>集合S和S上满足结合律的封闭二元运算"•"，</p>
+<p>人们以为，</p>
 
-<p>所形成的代数结构称为<strong>半群</strong>，记为(S, •)，简记为S</p>
+<p>软件行业中，<strong>加班</strong>是家常便饭，</p>
 
-<p><br/></p>
-
-<p>设S是半群，元素e∈S，称为半群S的<strong>幺元素</strong>，</p>
-
-<p>如果对于每一个x∈S，有xe=ex=x</p>
+<p>但实际上，这是管理上缺陷。</p>
 
 <p><br/></p>
 
-<p>如果半群S有幺元素e，则它是唯一的。</p>
+<p>处于底层的程序员们，无力涉足管理，</p>
 
-<p>含有幺元素的半群称为<strong>幺半群</strong>。</p>
-
-<p><br/></p>
-
-<p>注：</p>
-
-<p>半群G如果有幺元素，且每个元素均可逆，</p>
-
-<p>则称G为<strong>群</strong></p>
+<p>但也可以认真想一想，<strong>如何高效的加班</strong>。</p>
 
 <p><br/></p>
 
-<h2>图示法（diagram）</h2>
-
-<p>一个幺半群M，可以描述为一个集合M，和两个函数</p>
-
-<p>µ : M × M -> M</p>
-
-<p>η : 1 -> M</p>
+<p>我们先从几个角度来看看加班这件事吧。</p>
 
 <p><br/></p>
 
-<p>其中，1 = {0}是只有一个元素的集合。</p>
+<h2>从收支上看加班</h2>
+
+<p>长期加班并不是一件好事，</p>
+
+<p>因为，它增加了投入。</p>
 
 <p><br/></p>
 
-<pre>           1 × µ<br>M × M × M -------&gt; M × M<br>    |                |<br>    | µ × 1          | µ<br>    |                |<br>    v                v<br>  M × M   -------&gt;   M<br>             µ</pre>
+<p>这还不好吗？</p>
 
-
-
-
-<pre>        η × 1          1 × η<br>1 × M -------&gt; M × M &lt; ------- M × 1<br>  |              |               |<br>  | α            | µ             | β<br>  |              |               |<br>  v              v               v<br>  M      =       M        =      M</pre>
-
+<p>其实不然。</p>
 
 <p><br/></p>
 
-<p>用元素来表示图表，可以写为，</p>
+<p>因为一件事情的<strong>代价</strong>，</p>
+
+<p>在很大程度上，影响了我们的<strong>决策</strong>。</p>
 
 <p><br/></p>
 
-<pre>&lt;x,y,z&gt; |-------&gt;    &lt;x,yz&gt;<br>   -                   -<br>   |                   |<br>   |                   |<br>   v                   v<br>&lt;xy,z&gt;  |-------&gt; (xy)z=x(yz)</pre>
+<p>如果在计划阶段，</p>
 
+<p>认为不加班可以做完，</p>
 
-
-
-<pre>&lt;0,x&gt; |-------&gt; &lt;e,x&gt;    &lt;x,e&gt; &lt;-------| &lt;x,0&gt;<br>  -               -        -               -<br>  |               |        |               |<br>  |               |        |               |<br>  v               v        v               v<br>  x       =      ex       xe       =       x</pre>
-
+<p>最后结果是加班做完的。</p>
 
 <p><br/></p>
 
-<p>可以看出，(xy)z=x(yz)表示了群乘法的结合律，</p>
+<p>这只能说明我们低估了成本，</p>
 
-<p>x=ex,xe=x表示了幺元e，因此图表展示了幺半群的结构。</p>
-
-<p><br/></p>
-
-<h2>范畴（category）</h2>
-
-<p>一个<strong>范畴</strong>C由一系列<strong>对象</strong>（object）和<strong>箭头</strong>（arrow）组成。</p>
-
-<p>对于每一个箭头f，有两个对象与之关联，</p>
-
-<p>称为箭头f的定义域（domain）和值域（codomain）。</p>
-
-<p>并且，满足以下几条规则，</p>
-
-<p>（1）对于每一个对象a，存在恒等箭头（identity arrow），i:a->a</p>
-
-<p>（2）箭头满足结合律，对于任意的箭头f,g,h有(f•g)•h=f•(g•h)</p>
-
-<p>（3）箭头的集合在箭头组合运算下是封闭的</p>
+<p>那么做这件事情就可能不是那么值得了。</p>
 
 <p><br/></p>
 
-<p>注：</p>
+<p>因此，<strong>加班会影响我们去评判某一选择的正确性</strong>，</p>
 
-<p>f•g表示g和f的组合运算，它也是一个箭头，其中g的值域是f的定义域</p>
-
-<p><br/></p>
-
-<p>例：</p>
-
-<p>所有的集合，以集合作为对象，集合间的映射作为箭头，构成了一个范畴，</p>
-
-<p>所有的群，以群作为对象，群同态作为箭头，构成了一个范畴，</p>
-
-<p>所有的拓扑空间，以拓扑空间作为对象，拓扑空间之间的连续映射为箭头，构成了一个范畴，</p>
-
-<p>所有的微分流形，以微分流形作为对象，流形间的光滑映射为箭头，构成了一个范畴，</p>
-
-<p>Haskell中，以类型作为对象（类型是值的集合），函数作为箭头，构成了一个范畴（<strong>Hask范畴</strong>）。</p>
+<p><strong>还会让我们继续做出错误的决定</strong>。</p>
 
 <p><br/></p>
 
-<h2>函子（functor）</h2>
+<h2>从工作性质上看加班</h2>
 
-<p>如果把范畴看做对象，则函子可以看做箭头。</p>
+<p>短期加班，是很有效果的，</p>
 
-<p><br/></p>
+<p>但是，人不能不休息，</p>
 
-<p>一个<strong>函子</strong>F是范畴C到范畴D的箭头，F:C -> D，</p>
-
-<p>它满足以下条件，</p>
-
-<p>F把C中的对象c映射为D中的对象F c，把C中的箭头f映射为D中的箭头F f。</p>
-
-<p>且满足分配律，F (f•g)=(F f)•(F g)</p>
+<p>软件工程师也不能不重新思考自己的设计。</p>
 
 <p><br/></p>
 
-<p>注：</p>
+<p>加班会迫使人们把工作赶出来，</p>
 
-<p>等式左边的"•"表示C中的箭头组合运算，</p>
-
-<p>等式右边的"•"表示D中的箭头组合运算。</p>
+<p>那么任何有创造力的事情都将被错过。</p>
 
 <p><br/></p>
 
-<p>范畴C到自身的函子，称为<strong>自函子</strong>（endofunctor）。</p>
+<p>而且，代码质量会变差，</p>
+
+<p><strong>添加新功能的成本也会越来也大</strong>。</p>
 
 <p><br/></p>
 
-<p>Hask范畴的自函子把Haskell中的类型a映射为另一个类型f a，</p>
+<p>经常发生的事情是，</p>
 
-<p>把类型a到类型b的函数，映射为类型f a到类型f b的函数。</p>
+<p>本来很简单的一个功能，因为有历史原因，</p>
 
-<p><br/></p>
-
-<p>class Functor f where</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmap :: (a -> b) -> f a -> f b</p>
+<p>才不得不使用复杂的实现方案。</p>
 
 <p><br/></p>
 
-<p>class Functor f => Applicative f where</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pure :: a -> f a</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;*>) :: f (a -> b) -> f a -> f b</p>
+<p>加班会让这件事更频繁的发生。</p>
 
 <p><br/></p>
 
-<p>我们看到，pure和fmap放在一起，</p>
+<h2>从工作总量上看加班</h2>
 
-<p>构成了一个Hask范畴的自函子。</p>
+<p>短期内，工作总量是会增加的，</p>
 
-<p><br/></p>
+<p>因为前几天人们都不累，</p>
 
-<h2>自然变换（natural transformation）</h2>
-
-<p>如果把函子看做对象，则自然变换可以看做箭头。</p>
+<p>延长了工作时间，代码总量肯定是会增加的。</p>
 
 <p><br/></p>
 
-<p>若F和G是范畴C到D的函子，则<strong>自然变换</strong>τ是一个箭头，τ: F -> G，</p>
+<p>然而，长期加班会导致人们效率下降，</p>
 
-<p>它满足以下条件，</p>
+<p>在明知道要加班的情况下，</p>
 
-<p><br/></p>
+<p>会更有意识的降低自己的工作效率，</p>
 
-<pre>     f<br>a -------&gt; b</pre>
-
-
-
-
-<pre>      F f<br>F a -------&gt; F b<br>|            |<br>| τ a        | τ b<br>|            |<br>v            v<br>G a -------&gt; G b<br>      G f</pre>
-
+<p>反正要加班嘛。</p>
 
 <p><br/></p>
 
-<p>注：</p>
-
-<p>F a是D中与a对应的对象，F b是D中与b对应的对象，F f是D中与f对应的箭头</p>
+<p>因此，工作总量不增反降。</p>
 
 <p><br/></p>
 
-<h2>函子范畴（functor category）</h2>
+<p>另外，人是不可能违背自然规律的，</p>
 
-<p>以范畴C到D的函子为对象，以函子间的自然变换为箭头，</p>
+<p><strong>没有必要用第二天一整天的无精打采</strong>，</p>
 
-<p>构成了一个范畴，称为<strong>函子范畴</strong>。</p>
-
-<p><br/></p>
-
-<p>易知，自然变换可以进行组合运算，</p>
-
-<p>设µ a : F a -> G a，η a : G a -> H a</p>
-
-<p>则可以定义一个新的自然变换(η • µ) a = F a -> H a</p>
-
-<p>可证自然变换的组合运算满足结合律。</p>
+<p><strong>来换取今天几个小时的加班</strong>。</p>
 
 <p><br/></p>
 
-<p>注：</p>
+<p>只是改变了生物钟，</p>
 
-<p>函子范畴的对象，不是一个集合，</p>
-
-<p>函子范畴的箭头，也不是映射。</p>
+<p>没有什么意义呀。</p>
 
 <p><br/></p>
 
-<h2>Monad</h2>
+<p>而且，代码多一定不是好事，</p>
 
-<p>范畴C上的monad，是一个<strong>三元组</strong>(F,µ,η)，其中</p>
-
-<p>F是范畴C上的自函子，</p>
-
-<p>µ是F<sup>2</sup>到F的自然变换，µ:F<sup>2</sup>->F，</p>
-
-<p>η是单位自函子I到F的自然变换，η:I->F</p>
+<p><strong>错的越多，要改的就越多</strong>。</p>
 
 <p><br/></p>
 
-<p>且满足以下条件</p>
+<h2>从软件工程来看加班</h2>
+
+<p>如果去饭店吃饭，</p>
+
+<p>厨师说做一个鱼香肉丝要10分钟，</p>
+
+<p>我们再急，也不会要求厨师5分钟把它做出来，</p>
+
+<p>让他加班也没用。</p>
 
 <p><br/></p>
 
-<pre>           F • µ<br>F • F • F -------&gt; F • F<br>    |                |<br>    | µ • F          | µ<br>    |                |<br>    v                v<br>  F • F   -------&gt;   F<br>             µ</pre>
+<p>一个女人，必须经过10月怀胎，</p>
 
+<p>才能生下小孩，</p>
 
+<p>肯定不会有人强迫她5个月就生下来，</p>
 
-
-<pre>        η • F          F • η<br>I • F -------&gt; F • F &lt; ------- F • I<br>                 |                <br>  ||             | µ            ||<br>                 |               <br>                 v                <br>  F      =       F        =      F</pre>
-
-
-<p><br/></p>
-
-<p>在Haskell中可以这样表示：</p>
+<p>让她加班，给她加人手也没用。</p>
 
 <p><br/></p>
 
-<p>{- 自函子F，作用在对象上时 -}</p>
+<p>经验表明，</p>
 
-<p>fObj :: (Applicative f) => a -> f a</p>
-
-<p>fObj = pure</p>
+<p><strong>有些事情经历的时间是不可压缩的</strong>。</p>
 
 <p><br/></p>
 
-<p>{- 自函子F，作用在箭头上时 -}</p>
+<p>因此可以说，</p>
 
-<p>fArr :: (Applicative f) => (a -> b) -> (f a -> f b)</p>
+<p>当工期足够短的情况下，</p>
 
-<p>fArr = fmap</p>
-
-<p><br/></p>
-
-<p>{- 自函子F<sup>2</sup> -}</p>
+<p>加再多的人也是徒劳的。</p>
 
 <p><br/></p>
 
-<p>f2Obj :: (Applicative f) => a -> f (f a)</p>
+<p>这时候，我们应该努力反思了，</p>
 
-<p>f2Obj = fObj . fObj</p>
+<p><strong>为什么我们要做那么多的事</strong>，</p>
 
-<p><br/></p>
-
-<p>f2Arr :: (Applicative f) => (a -> b) -> (f (f a) -> f (f b))</p>
-
-<p>f2Arr :: fArr . fArr</p>
+<p><strong>却还剩下了这么少的时间</strong>？</p>
 
 <p><br/></p>
 
-<p>{- 单位自函子，作用到对象上时 -}</p>
+<h2>工程师的价值</h2>
 
-<p>iObj :: a -> a</p>
+<p>以上的分析不少了，</p>
 
-<p>iObj = id</p>
+<p>我相信如果有领导看到这里，</p>
 
-<p><br/></p>
-
-<p>{- 单位自函子，作用到箭头上时 -}</p>
-
-<p>iArr :: (a -> b) -> (a -> b)</p>
-
-<p>iArr = id</p>
+<p>还是想让你加班，那就是故意的了。</p>
 
 <p><br/></p>
 
-<p>{- 自然变换µ:F<sup>2</sup>->F，（µ a:F<sup>2</sup> a->F a） -}</p>
+<p>在不可抗拒的情况下，</p>
 
-<p>µ :: (Applicative f) => a -> f (f a) -> f a</p>
+<p>底层程序员们，实际上应该考虑，</p>
 
-<p><br/></p>
-
-<p>{- 自然变换η:I->F，（η a:I a->F a） -}</p>
-
-<p>η :: (Applicative f) => a -> a -> (f a)</p>
+<p><strong>高效加班的办法</strong>。</p>
 
 <p><br/></p>
 
-<h2>自函子范畴上的幺半群</h2>
+<p>因为，只有我们明白软件，</p>
 
-<p>以范畴C上的自函子为对象，自然变换为箭头，</p>
+<p>知道它的生命周期，</p>
 
-<p>构成的函子范畴，称为<strong>自函子范畴</strong>。</p>
+<p>了解它的特性，</p>
 
-<p><br/></p>
-
-<p>对比Monad定义中的自函子F与幺半群中的集合M，</p>
+<p>更知道怎么做好它。</p>
 
 <p><br/></p>
 
-<p><strong>结合律</strong>：</p>
+<p>我们在工期紧的情况下，</p>
 
-<pre>           1 × µ<br>M × M × M -------&gt; M × M<br>    |                |<br>    | µ × 1          | µ<br>    |                |<br>    v                v<br>  M × M   -------&gt;   M<br>             µ</pre>
+<p>最应该做的事情就是，</p>
 
-
-
-
-<pre>           F • µ<br>F • F • F -------&gt; F • F<br>    |                |<br>    | µ • F          | µ<br>    |                |<br>    v                v<br>  F • F   -------&gt;   F<br>             µ</pre>
-
-
-<p><strong>幺元</strong>：</p>
-
-<pre>        η × 1          1 × η<br>1 × M -------&gt; M × M &lt; ------- M × 1<br>  |              |               |<br>  | α            | µ             | β<br>  |              |               |<br>  v              v               v<br>  M      =       M        =      M</pre>
-
-
-
-
-<pre>        η • F          F • η<br>I • F -------&gt; F • F &lt; ------- F • I<br>                 |                <br>  ||             | µ            ||<br>                 |               <br>                 v                <br>  F      =       F        =      F</pre>
-
+<p><strong>管理好自己的时间，调节好工作状态</strong>。</p>
 
 <p><br/></p>
 
-<p>可知，自函子F相当于群的集合M，自然变换µ相当于群乘法，单位自函子相当于幺元，它们构成了一个<strong>幺半群</strong>，</p>
-
-<p>即<strong>Monad是Hask自函子范畴上的幺半群</strong>。</p>
+<p>用正确的姿势走好每一步。</p>
 
 <p><br/></p>
 
-<p>注：</p>
+<h2>保持节奏</h2>
 
-<p>M × M × M表示集合M的笛卡尔积，</p>
+<p>无论外界有多么大的压力，</p>
 
-<p>而F • F • F表示自函子F的组合。</p>
-
-<p><br/></p>
-
-<h2>幺半群范畴（monoidal category）</h2>
-
-<p>幺半群在范畴论中是有了新的意义，</p>
-
-<p>比群论中的概念更一般化。</p>
+<p>我们都要<strong>保持自己的节奏</strong>。</p>
 
 <p><br/></p>
 
-<p>我们可以为范畴增加一个满足结合律的二元函子，</p>
+<p>这不但是对自己负责，</p>
 
-<p>构成一个『范畴论意义上的』<strong>幺半群</strong>（monoid）。</p>
-
-<p><br/></p>
-
-<p>说一个范畴是具有幺半群结构的（monodial），</p>
-
-<p>如果它有一个像笛卡尔积，或者直和，张量积，那样的『乘积』，</p>
-
-<p>并且，这个『乘积』满足结合律，还有一个单位元。</p>
+<p>也是从专业的角度对项目负责。</p>
 
 <p><br/></p>
 
-<p>即，一个<strong>严格幺半群范畴</strong>（strict monoidal category）是范畴B上的一个结构&lt;B,□,e&gt;，</p>
+<p><strong>我们只有保持节奏的产出</strong>，</p>
 
-<p>其中□是一个满足结合律的二元函子，□: B × B -> B，</p>
-
-<p>□ (□ × 1) = □ (1 × □) : B × B × B -> B</p>
-
-<p>而且存在对象e是二元函子□的单位元，</p>
-
-<p>□ (e × 1) = id(B) = □ (1 × e)</p>
+<p><strong>才能帮助项目成功</strong>。</p>
 
 <p><br/></p>
 
-<p>然后就可以在任意的幺半群范畴&lt;B,□,e&gt;中定义幺半群了。</p>
+<p>不能为了速度一味的牺牲质量，</p>
+
+<p>也不能因为洁癖，减缓前进的步伐。</p>
 
 <p><br/></p>
 
-<p>幺半群范畴B上的<strong>幺半群</strong>由三部分组成，&lt;c,µ,η&gt;，</p>
+<p>其实，更多情况下，我们是自乱阵脚。</p>
 
-<p>其中c是B中的对象，µ : c □ c -> c，η : e -> c是范畴B中的箭头，</p>
+<p><br/></p>
 
-<p>且满足以下条件</p>
+<p>别人不了解软件，让我们精疲力尽，让项目走向失败，</p>
 
-<pre>               σ                  µ □ 1<br>c □ (c □ c) -------&gt; (c □ c) □ c -------&gt; c □ c<br>    |                                       |<br>    | 1 □ µ                                 | µ<br>    |                                       |<br>    v                                       v<br>  c □ c ----------------------------------&gt; c<br>                        µ</pre>
+<p>如果就听之任之的话，那就只能怪我们自己了。</p>
 
+<p><br/></p>
 
+<p><strong>身为一名软件工程师</strong>，</p>
 
+<p><strong>没有努力把项目调整到正确的轨道</strong>，</p>
 
-<pre>        η □ 1          1 □ η<br>e □ c -------&gt; c □ c &lt; ------- c □ e<br>  |              |               |<br>  | α            | µ             | β<br>  |              |               |<br>  v              v               v<br>  c      =       c        =      c</pre>
+<p><strong>而是选择傻傻的加班</strong>。</p>
 
+<p><br/></p>
+
+<p><strong>我觉得，这才是团队的悲哀</strong>。</p>
 
 <p><br/></p>
 
 <h2>结语</h2>
 
-<p>『All told, a monad in X is just a monoid in the category of endofunctors of X,</p>
+<p>再多的加班，</p>
 
-<p>with the product × replaced by composition of endofunctors</p>
-
-<p>and unit set by the identity endofunctor.』</p>
+<p>也比不上想人们在主观上想把它做好。</p>
 
 <p><br/></p>
 
-<p>一语成谶，很多人都是因为这句话入坑的，</p>
-
-<p>然而理解它真的很不容易，</p>
-
-<p>原来这个『幺半群』应该在范畴论意义上进行理解，</p>
-
-<p>已经不是集合论基础上群论的内容了。</p>
+<p>可惜，可惜。</p>
 
 <p><br/></p>
 
-<p>在写这篇文章时，我甚至还没有入门，有错误在所难免，</p>
+<p>欲将心事付瑶筝，</p>
 
-<p>但是多年坚持下来，似乎对这个问题有些眉目了，</p>
+<p>知音少，弦断有谁听？</p>
 
-<p>于是就赶紧整理了一下，希望接下来以此为起点继续努力，勇往直前。</p>
-
-<p><br/></p>
-
-<p><strong>参考</strong>：</p>
-
-<p>《<a href="http://book.douban.com/subject/4201293/">近世代数引论</a>》</p>
-
-<p>《<a href="http://book.douban.com/subject/1823110/">Categories for the Working Mathematician 2nd</a>》</p>
-
-<p><a href="https://medium.com/@brettwines/implementing-a-category-theoretic-hask-monad-in-haskell-7bf662f2e98b">Implementing a category-theoretic Hask-monad in Haskell</a></p>
-
-<p><a href="http://stackoverflow.com/questions/3870088/a-monad-is-just-a-monoid-in-the-category-of-endofunctors-whats-the-problem">A monad is just a monoid in the category of endofunctors, what&rsquo;s the problem?</a></p>
-
-<p><a href="http://slides.com/julientournay/a-monad-is-just-a-monoid-in-the-category-of-endofunctors-what-s-the-problem/fullscreen">A MONAD IS JUST A MONOID IN THE CATEGORY OF ENDOFUNCTORS. WHAT&rsquo;S THE PROBLEM ?</a></p>
+<p>——《小重山》岳飞</p>
 </div>
   
   
@@ -590,8 +414,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -601,7 +425,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -630,14 +462,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

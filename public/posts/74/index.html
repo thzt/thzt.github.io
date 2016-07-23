@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="fact的尾递归化 非尾递归的fact定义 (define fact &nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 1) &nbsp;&nbsp;&nbsp &hellip;">
+  <meta name="description" content="我们都希望招聘到优秀的程序员。 因为他们能解决棘手的问题。 还能缩短工期。 但是，我们总是找不到想象中那样的。 千军万马之中取上将首级，如探囊取物一般。 优秀的程序员在哪里呀？ 其实，他们就在你我身边。 他们是那些运气好，遇不到困难的事情的人。 有些人好像真是如此。 他们上班时仿佛一直在偷懒， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/01/30/cps-and-tail-recursion/">使用CPS将fact和fib改为tail Recursion</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/02/28/genius/">优秀的程序员在哪里</a></h1>
     
     
       <p class="meta">
@@ -83,268 +83,184 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-01-30T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-02-28T00:00:00+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2><strong>fact的尾递归化</strong></h2>
+  <div class="entry-content"><p>我们都希望招聘到优秀的程序员。</p>
+
+<p>因为他们能解决棘手的问题。</p>
+
+<p>还能缩短工期。</p>
 
 <p><br/></p>
 
-<p>非尾递归的fact定义</p>
+<p>但是，我们总是找不到想象中那样的。</p>
 
-<p>(define fact</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* x (fact (- x 1))))))</p>
+<p>千军万马之中取上将首级，如探囊取物一般。</p>
 
 <p><br/></p>
 
-<p>尾递归的fact-tail定义</p>
-
-<p>(define fact-tail</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k 1)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail (- x 1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (y) (k (* y x)))</strong>))))</p>
+<p>优秀的程序员在哪里呀？</p>
 
 <p><br/></p>
 
-<p>分析调用过程</p>
+<p>其实，他们就在你我身边。</p>
 
-<p>(fact-tail 3</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n))</p>
-
-<p>&lt;=></p>
-
-<p>(fact-tail 2</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 3)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
-
-<p>&lt;=></p>
-
-<p>(fact-tail 1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
-
-<p>&lt;=></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>)</p>
-
-<p>&lt;=></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(* 1 2)</p>
-
-<p>)</p>
-
-<p>&lt;=></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(<em> (</em> 1 2) 3)</p>
-
-<p>)</p>
-
-<p>&lt;=></p>
-
-<p>(<em> (</em> 1 2) 3)</p>
+<p>他们是那些运气好，遇不到困难的事情的人。</p>
 
 <p><br/></p>
 
-<h2><strong>fib的尾递归化</strong></h2>
+<p>有些人好像真是如此。</p>
 
-<p>非尾递归的fib定义</p>
+<p>他们上班时仿佛一直在偷懒，不务正业。</p>
 
-<p>(define fib</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (fib (- n 1))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2))))))</p>
+<p>一会看看手机，一会浏览一些似乎不相关的网页。</p>
 
 <p><br/></p>
 
-<p>尾递归的fib-tail定义</p>
-
-<p>(define fib-tail</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k 1)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fib-tail (- n 1)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (x)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fact-tail (- n 2)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (y)</strong></p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (+ x y))))))</strong>)))</p>
+<p>好不容易开始写代码了，似乎也在写一些不关痛痒的东西。</p>
 
 <p><br/></p>
 
-<p>分析调用过程</p>
+<p>这哪像程序员呀？</p>
 
-<p>(fib-tail 3</p>
+<p>程序员应该键盘声不断，持续的输出代码。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z))</p>
+<p>要知道对于软件来说，代码就是产品，不是吗？</p>
 
-<p>&lt;=></p>
+<p><br/></p>
 
-<p>(fib-tail 2</p>
+<p>我们总是按捺不住火气想批评他们。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>尤其是等到他们做完以后，才发现这么简单的问题还做了那么久。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail 1</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
+<h2><strong>误区</strong></h2>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
+<p>不理解专业程序员的人们，通常会存在一些误区。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y)</p>
+<p>首先，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)))))</p>
+<p>问题是否棘手，这与我们认为是否困难有关。</p>
 
-<p>&lt;=></p>
+<p>我们认为困难的问题，有人解决了，才会觉得这个人很强。</p>
 
-<p>(</p>
+<p>简单的解决方案，会误导我们对问题难易的判断。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail 1</p>
+<p>能否缩短工期，这与我们认为的工期长短有关。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
+<p>我们认为工期缩短了，是因为有人在更短时间内完成了它。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
+<p>简单的解决方案，会误导我们认为工期理应很短。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y)</p>
+<p>其次，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))))</p>
+<p>软件问题并不像行军打仗一样，能一眼看出问题的难易程度。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>所以，别人是否在“千军万马之中取上将首级，如探囊取物一般”，是很难看出来的。</p>
 
-<p>)</p>
+<p><br/></p>
 
-<p>&lt;=></p>
+<p>再次，</p>
 
-<p>(fact-tail 1</p>
+<p>对于软件来说，代码不是产品。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
+<p>代码提供的软件服务才是产品，代码只是服务的载体罢了。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
+<p>因此，更多的代码，并不意味着更快的进度，也不意味着更好的软件。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 y)</p>
+<p>最后，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
+<p>有些人总是被分配到简单的任务，并不是因为运气好。</p>
 
-<p>&lt;=></p>
+<p>而是因为，对于复杂的问题，他们总是能想到简单的方法去解决它。</p>
 
-<p>(</p>
+<p>最后的解决方案简单，并不意味着问题本身也是简单的。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
+<h2><strong>灵光一闪</strong></h2>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
+<p>世有伯乐，然后有千里马。——韩愈</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 y)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))</p>
+<p>我们只有理解了优秀的程序员，才能找到他们。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>识别不出优秀所在，身边只会留下平庸之辈。</p>
 
-<p>)</p>
+<p><br/></p>
 
-<p>&lt;=></p>
+<p>肥沃的土壤，才能长出鲜花。</p>
 
-<p>(</p>
+<p>宽容的工作环境，才能吸引人才。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 1)</p>
+<p>优秀的程序员之所以优秀，是因为他们有独立思考的习惯。</p>
 
-<p>)</p>
+<p>他们有解决问题的独特方式。</p>
 
-<p>&lt;=></p>
+<p>他们不像别人那样工作，因此才能达到别人不能达到的水平。</p>
 
-<p>(+ 1 1)</p>
+<p><br/></p>
+
+<p>他们在玩手机，可能是在圈子里回答别人提出的编程难题。</p>
+
+<p>他们在浏览无聊的网页，也可能是在了解国内外软件架构的发展趋势。</p>
+
+<p><br/></p>
+
+<p>可是这些都与工作无关呀。</p>
+
+<p>是呀，一遍一遍的写垃圾代码，确实才是与工作有关的。</p>
+
+<p>但只不过是，还要加班把他们删掉罢了。</p>
+
+<p><br/></p>
+
+<p>而且，我们认为的与工作无关，也只是我们认为的而已。</p>
+
+<p>编程是一项设计过程，好的设计思想一直坐着是想不出来的。</p>
+
+<p>总要做点别的，无论什么。去寻找一些灵感。</p>
+
+<p><br/></p>
+
+<p>一个的好的主意，可以节省大量编码和维护的时间。</p>
+
+<p>很多问题之所以麻烦，实际上是程序员自己制造的困难。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>区分一个人是在娱乐，还是在思考，是一件困难的事情。</p>
+
+<p>否则，为什么我们是老板，别人是员工呢？</p>
+
+<p><br/></p>
+
+<p>一个人可以把牛拉到水边，但是十个人都没有办法让它喝水。</p>
+
+<p>同样，我们可以不费力的要求程序员去写代码，但是却很难要求他们去思考。</p>
+
+<p><br/></p>
+
+<p>多一份理解，才能多一份拥有。</p>
 </div>
   
   
@@ -370,8 +286,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -381,7 +297,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -410,14 +334,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>

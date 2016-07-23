@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="很多人都参与过失败的项目， 代码脏乱差，补丁套补丁， 硬编码，版本紊乱， 加班严重，人肉文档， 幻想中的需求，人心涣散。 我们都不想看着它失败， 但是又无能为力。 不少能人异士， 提出建设性的方针， 提高开发能力，架构能力， 管控需求，加强团队建设。 似乎可以力挽狂澜一样， 好像真的可以。 实际上 &hellip;">
+  <meta name="description" content="同相性，指的是， 程序和程序所操作的数据采用了统一编码。 Lisp语言使用了S表达式， 例如，(fn x) 既可以看做是程序，用参数x调用函数fn， 也可以看做是数据，由符号fn和符号x构成的列表。 同相性使得我们，可以像处理数据一样处理代码。 做一些代码转换之类的工作，十分简单。 例如， 当遇到 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/09/02/impractical-illusion/">无法扭转的颓势</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/09/21/define-syntax/">Scheme元编程</a></h1>
     
     
       <p class="meta">
@@ -83,282 +83,458 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-09-02T00:00:00+08:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-09-21T00:00:00+08:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>很多人都参与过失败的项目，</p>
+  <div class="entry-content"><p><a href="https://en.wikipedia.org/wiki/Homoiconicity">同相性</a>，指的是，</p>
 
-<p>代码脏乱差，补丁套补丁，</p>
-
-<p>硬编码，版本紊乱，</p>
-
-<p>加班严重，人肉文档，</p>
-
-<p>幻想中的需求，人心涣散。</p>
+<p>程序和程序所操作的数据采用了统一编码。</p>
 
 <p><br/></p>
 
-<p>我们都不想看着它失败，</p>
+<p>Lisp语言使用了S表达式，</p>
 
-<p>但是又无能为力。</p>
+<p>例如，(fn x)</p>
 
-<p><br/></p>
+<p>既可以看做是程序，用参数x调用函数fn，</p>
 
-<p>不少能人异士，</p>
-
-<p>提出建设性的方针，</p>
-
-<p>提高开发能力，架构能力，</p>
-
-<p>管控需求，加强团队建设。</p>
+<p>也可以看做是数据，由符号fn和符号x构成的列表。</p>
 
 <p><br/></p>
 
-<p>似乎可以力挽狂澜一样，</p>
+<p><strong>同相性使得我们，可以像处理数据一样处理代码。</strong></p>
 
-<p>好像真的可以。</p>
-
-<p><br/></p>
-
-<p>实际上，<strong>地基如果坏了，</strong></p>
-
-<p><strong>项目就已经完了，是无法挽救的，</strong></p>
-
-<p>不如想想怎样重新来过吧。</p>
+<p>做一些代码转换之类的工作，十分简单。</p>
 
 <p><br/></p>
 
-<p>我们需要做的，</p>
+<p>例如，</p>
 
-<p>不是抱怨，也不是消极处理，</p>
+<p>当遇到(fn x)时，</p>
 
-<p>而是<strong>承认事实，理智对待</strong>。</p>
+<p>我们可以让它先转换成，</p>
 
-<p><br/></p>
+<p>(begin</p>
 
-<h2><strong>质量只会变得更差</strong></h2>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display x)</p>
 
-<p><strong>软件质量，一旦比昨天差，</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(gn x))</p>
 
-<p><strong>明天只会更差。</strong></p>
-
-<p><br/></p>
-
-<p>一个房子如果窗户破了，没有人去修补，</p>
-
-<p>隔不久，其它的窗户也会莫名其妙地被人打破。</p>
-
-<p>——破窗效应</p>
+<p>然后再执行。</p>
 
 <p><br/></p>
 
-<p>明天有明天的事情，</p>
+<p>甚至也可以用来定义变量，</p>
 
-<p>如果明天替今天买单，</p>
+<p>(define-with-display (f a)</p>
 
-<p>那今天还不如不做。</p>
-
-<p><br/></p>
-
-<p>期望以后来整理它，</p>
-
-<p>那么这个时间永远都不会到来，</p>
-
-<p>除非那天你不务正业。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g a))</p>
 
 <p><br/></p>
 
-<p>当天的事情，当天解决。</p>
+<p>转换成，</p>
+
+<p>(define (f a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g a))</p>
 
 <p><br/></p>
 
-<p>永远保持离开时的露营地比你发现它时更整洁。</p>
-
-<p>——童子军规则</p>
+<p>这种代码层面的转换称为“宏”(macro)。</p>
 
 <p><br/></p>
 
-<p>如果发现代码质量出了问题，</p>
+<h2><strong>定义一个宏</strong></h2>
 
-<p><strong>唯一的办法就是停下手头的活，</strong></p>
+<p>Scheme是Lisp的一个简洁方言，</p>
 
-<p><strong>偿还技术债务，</strong></p>
-
-<p><strong>把它弄好了再继续。</strong></p>
+<p>它使用define-syntax来定义宏。</p>
 
 <p><br/></p>
 
-<p>否则，明天需要偿还的会更多。</p>
+<p>本质上，宏是一个特殊的标识符，</p>
+
+<p>它关联了转换器函数。</p>
 
 <p><br/></p>
 
-<h2><strong>需求不需要稳定，需要控制</strong></h2>
+<p>表达式的求值过程，分为了3个阶段，</p>
 
-<p><strong>没有稳定的需求，</strong></p>
-
-<p><strong>作为专业程序员，</strong></p>
-
-<p><strong>早就应该承认这一点。</strong></p>
+<p>读取期，宏展开期，运行期。</p>
 
 <p><br/></p>
 
-<p>需求是不可能不变的，</p>
+<p>在遇到宏调用的时候，</p>
 
-<p>软件的存在就是为了适应变化的需求。</p>
+<p>Scheme会先调用与之关联的转换器，进行代码转换，(宏展开期)</p>
 
-<p><br/></p>
-
-<p>但是，这并不是说我们不用去控制它，</p>
-
-<p>至少我们应该让它<strong>阶段性的稳定</strong>。</p>
+<p><strong>然后再求值结果表达式</strong>。(运行期)</p>
 
 <p><br/></p>
 
-<p>而且，程序员不是仅仅抱怨一下就完了，</p>
+<p>在解释器中，宏展开和表达式求值可能是交替进行的，</p>
 
-<p>软件本来就应该采用灵活的设计。</p>
-
-<p><br/></p>
-
-<p>如果需求乱了，并不是一个人的问题，</p>
-
-<p>抱怨也没有用，所有人都该停下来，</p>
-
-<p>承认事实，再想办法。</p>
+<p>而在编译器中，他们是两个独立的阶段。</p>
 
 <p><br/></p>
 
-<h2><strong>早就该调整的架构</strong></h2>
+<p>(define-syntax or</p>
 
-<p>没有永远合理的架构，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(syntax-rules ()</p>
 
-<p>架构是随着业务发展演变的。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_) #f]</p>
 
-<p><br/></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e) e]</p>
 
-<p><strong>好的架构，</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e1 e2 e3 &hellip;)</p>
 
-<p><strong>是适用的，同时也应该是易于调整的。</strong></p>
-
-<p><br/></p>
-
-<p>当所有人都意识到模块划分不合理的时候，</p>
-
-<p>早就应该调整结构了，</p>
-
-<p>很多人都知道应该怎么做，</p>
-
-<p>但是，几乎没有人做过，</p>
-
-<p>是因为现在做起来成本太大。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (let ([t e1]) (if t t (or e2 e3 &hellip;)))]))</p>
 
 <p><br/></p>
 
-<p>这就给了人们一个假象，</p>
+<p>以上代码定义了一个宏，or，</p>
 
-<p>结构调整是复杂的，</p>
-
-<p>不是短期就成实现的。</p>
+<p>它用来对(or &hellip;)表达式进行变换。</p>
 
 <p><br/></p>
 
-<p>其实不然，</p>
+<p>(or)转换成了#f</p>
 
-<p>治理的最高境界，</p>
+<p>(or a)转换成了a</p>
 
-<p>在于<strong>防患于未然</strong>。</p>
-
-<p><br/></p>
-
-<p>善战者无赫赫之功，善医者无煌煌之名。</p>
-
-<p>——《曹选》</p>
+<p>(or a b)转换成了(let ([t a]) (if t t (or b)))</p>
 
 <p><br/></p>
 
-<p><strong>持续调整，成本并不大</strong>，</p>
+<p>我们看到，</p>
 
-<p>累积起来，就变成不可能完成的事情了。</p>
-
-<p><br/></p>
-
-<h2><strong>团结是每天都需要保持的</strong></h2>
-
-<p>等到涣散了再考虑人心，</p>
-
-<p>为时已晚。</p>
+<p>宏展开是支持递归调用的。</p>
 
 <p><br/></p>
 
-<p>不团队的队伍，</p>
+<h2><strong>模式匹配</strong></h2>
 
-<p>再训练也无法变得团结一心。</p>
+<p>syntax-rules使用了模式匹配来定义转换器，</p>
 
-<p><br/></p>
+<p>它的每一条语句给定了形如“[模式 模板]”的转换规则，</p>
 
-<p>开除任何一个人，</p>
+<p>如果模式匹配成功了，</p>
 
-<p>也无法改善已有的状态。</p>
-
-<p><br/></p>
-
-<p>那怎么办？</p>
-
-<p>我们得承认事实，</p>
-
-<p><strong>有的事情糟了，确实是不可挽救的。</strong></p>
+<p>就按着模板的方式进行转换。</p>
 
 <p><br/></p>
 
-<p>真到了这个地步，</p>
-
-<p>只能全部都干掉。</p>
+<p>[(_ e) e]</p>
 
 <p><br/></p>
 
-<p>或者下更大的成本，</p>
+<p>其中，</p>
 
-<p>用新人组织新的团队，</p>
+<p>模式是(_ e)，</p>
 
-<p>只加入一个老兵。</p>
+<p>模板是e，</p>
+
+<p>“_”表示通配符。</p>
 
 <p><br/></p>
 
-<p>我们可不想到这一天，</p>
+<p>这个模式匹配了(or e)，</p>
 
-<p>那么我们今天要怎么做？</p>
+<p>转换结果为e，</p>
 
-<p>还能没有办法吗？</p>
+<p>即它能把(or a)转换成a。</p>
+
+<p><br/></p>
+
+<p>我们再来看(_ e1 e2 e3 &hellip;)，</p>
+
+<p>其中的省略号“&hellip;”，</p>
+
+<p><strong>并不是为了演示方便故意省略了。</strong></p>
+
+<p><br/></p>
+
+<p>“&hellip;”是一个标识符，是模式匹配的一部分，</p>
+
+<p>它用来代表“和前面一样的匹配”。</p>
+
+<p>模板中也出现了“&hellip;”，</p>
+
+<p>它会根据模式中“&hellip;”来进行填充。</p>
+
+<p><br/></p>
+
+<p>Scheme中使用的模式匹配，是一个庞大的主题，</p>
+
+<p>甚至<strong>模式匹配已经构成了一门新的语言，</strong></p>
+
+<p>TSPL4中进行了详细的解释，<a href="http://www.scheme.com/tspl4/syntax.html#./syntax:h2">Syntax-Rules Transformers</a></p>
+
+<p><br/></p>
+
+<h2><strong>转换器函数</strong></h2>
+
+<p>另外一种定义宏的方式是，</p>
+
+<p>显式的指定宏展开器函数。</p>
+
+<p><br/></p>
+
+<p>(define-syntax r</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(display x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(display &ldquo;\n&rdquo;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#t))</p>
+
+<p><br/></p>
+
+<p>我们用lambda定义了一个匿名函数，</p>
+
+<p>并让它与宏标识符r相关联。</p>
+
+<p><br/></p>
+
+<p>我们直接在REPL中看看r是什么，</p>
+
+<p><br/></p>
+
+<p>#&lt;syntax r&gt;</p>
+
+<p>#t</p>
+
+<p><br/></p>
+
+<p>第一行是(display x)副作用，</p>
+
+<p>可见x的值是#&lt;syntax r&gt;，称为<strong>语法对象</strong>(syntax object)。</p>
+
+<p><br/></p>
+
+<p>然后r被转换成#t，</p>
+
+<p>第二行是REPL中打印了#t的值。</p>
+
+<p><br/></p>
+
+<p>为了处理转换器中匹配到的语法对象，</p>
+
+<p>Scheme语言提供了syntax-case特殊形式。</p>
+
+<p><br/></p>
+
+<p>(define-syntax or</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_) #&lsquo;#f]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e) #&lsquo;e]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e1 e2 e3 &hellip;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&lsquo;(let ([t e1]) (if t t (or e2 e3 &hellip;)))])))</p>
+
+<p><br/></p>
+
+<p>它使用了与syntax-rules相同的模式匹配规则，</p>
+
+<p>不同的是，我们还需要<strong>显式构造模板中的语法对象</strong>。</p>
+
+<p><br/></p>
+
+<p>对于宏调用(or a b)来说，x的值是#&lt;syntax (or a b)&gt;，</p>
+
+<p><strong>syntax-case会先求值x，然后解开语法对象的封装</strong>，得到(or a b)，</p>
+
+<p>再进行模式匹配。</p>
+
+<p><br/></p>
+
+<h2><strong>语法对象</strong></h2>
+
+<p>语法对象，包装了标识符的作用域信息。</p>
+
+<p><br/></p>
+
+<p>我们知道Scheme的宏是卫生的(hygienic)，</p>
+
+<p><strong>宏展开后的标识符还处在其来源处的词法作用域中，</strong></p>
+
+<p>为了达成这个目的，作用域信息就要被保存起来。</p>
+
+<p><br/></p>
+
+<p>Scheme的不同实现有不同的做法，</p>
+
+<p><a href="http://www.scheme.com/download/">Petite Chez Scheme</a>使用了<strong>语法对象</strong>进行封装。</p>
+
+<p><br/></p>
+
+<p>语法对象由syntax特殊形式创建，(syntax e)</p>
+
+<p>#&lsquo;e是它的简写，</p>
+
+<p>在程序的读取阶段会被展开为(syntax e)。</p>
+
+<p><br/></p>
+
+<p>前文我们说，</p>
+
+<p>“模式匹配构成了一门新的语言”，并不为过，</p>
+
+<p>因为#&lsquo;有很多规则(<strong>坑</strong>)需要我们了解。</p>
+
+<p><br/></p>
+
+<p>（1）出现在“模式”中的变量，称为模式变量(pattern variable)，</p>
+
+<p><strong>模式变量的值是它匹配的值</strong>。</p>
+
+<p>例如：(_ a b)匹配(or x y)，a和b就是模式变量，a的值是x，b的值是y</p>
+
+<p><br/></p>
+
+<p>（2）#&lsquo;e的值是一个语法对象，<strong>e可以是模式变量也可以不是</strong>。</p>
+
+<p>如果e是模式变量，则值为#&lt;syntax e匹配的值&gt;，</p>
+
+<p>如果e不是模式变量，则值为#&lt;syntax e&gt;。</p>
+
+<p><br/></p>
+
+<p>（3）“模板”中的模式变量，必须出现在#&lsquo;或者#&rsquo;(&hellip;)中，<strong>不能裸写</strong>。</p>
+
+<p><a href="http://www.scheme.com/tspl4/syntax.html#./syntax:h3">Pattern variables, however, can be referenced only within syntax expressions</a></p>
+
+<p><br/></p>
+
+<p>（4）<strong>#&lsquo;(a b)不是一个语法对象，而是由语法对象构成的列表</strong>，(#'a #'b)</p>
+
+<p>例如：[(_ a) #&lsquo;(a b)]，结果是(#&lt;syntax a匹配的值&gt; #&lt;syntax b&gt;)</p>
+
+<p>注意到b不是模式变量。</p>
+
+<p><br/></p>
+
+<p>（5）多层#&lsquo;，读取器会先将每一层展开成(syntax &hellip;)再求值。</p>
+
+<p>例如：#&lsquo;#'a实际上是(syntax (syntax a))，</p>
+
+<p>求值为(#&lt;syntax syntax&gt; (#&lt;syntax syntax&gt; #&lt;syntax a匹配的值&gt;))。</p>
+
+<p>注意到syntax不是模式变量。</p>
+
+<p><br/></p>
+
+<h2><strong>可以定义宏的宏</strong></h2>
+
+<p>syntax-rules是用来定义宏的，</p>
+
+<p>然而，它也是一个宏，它最终被展开为syntax-case。</p>
+
+<p><br/></p>
+
+<p>(define-syntax syntax-rules</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ (i &hellip;) ((keyword . pattern) template) &hellip;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&lsquo;(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (syntax-case x (i &hellip;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [(_ . pattern) #&lsquo;template] &hellip;))])))</p>
+
+<p><br/></p>
+
+<p>syntax-rules的目的，</p>
+
+<p>是为了避免显式的书写lambda和#&lsquo;。</p>
+
+<p><br/></p>
+
+<p>像这种生成syntax-case的宏还有很多，</p>
+
+<p>例如，with-syntax。</p>
+
+<p><br/></p>
+
+<p>(define-syntax with-syntax</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ ((p e) &hellip;) b1 b2 &hellip;)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&lsquo;(syntax-case (list e &hellip;) ()</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [(p &hellip;) (let () b1 b2 &hellip;)])])))</p>
+
+<p><br/></p>
+
+<p>with-syntax的目的，</p>
+
+<p>是把匹配条件写在一起，</p>
+
+<p>最后输出到一个模板中。</p>
+
+<p><br/></p>
+
+<p>从这里我们可以看到，</p>
+
+<p>syntax-case第一个参数的值，</p>
+
+<p>可以是语法对象的列表。</p>
+
+<p><br/></p>
+
+<p>syntax-case会对列表中的语法对象，</p>
+
+<p>解除#&lt;syntax &hellip;&gt;的封装，</p>
+
+<p>然后再进行模式匹配。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>有时候，<strong>人们之所以乏力，</strong></p>
+<p>Lisp的宏非常强大，</p>
 
-<p><strong>是因为还在抱有幻想，</strong></p>
+<p>很多人只是听说过，</p>
 
-<p><strong>不承认既定事实。</strong></p>
+<p>没有切身使用过，</p>
 
-<p><br/></p>
-
-<p>如果一开始就认为，</p>
-
-<p>软件项目做烂了是无法挽救的。</p>
+<p>隐约觉得宏可以解决任何问题。</p>
 
 <p><br/></p>
 
-<p>那什么都不一样了，</p>
+<p>其实不然，</p>
 
-<p>今天我们只会竭尽所能避免它变坏，</p>
+<p><strong>Lisp宏只是做了一些代码的变换，</strong></p>
 
-<p>不然等到那一天，</p>
+<p><strong>简化了已完成功能的描述方式。</strong></p>
 
-<p>一切都太迟了。</p>
+<p><br/></p>
+
+<p>本文对Scheme宏的定义和使用做了简单介绍，</p>
+
+<p>希望能揭开它的神秘面纱。</p>
 </div>
   
   
@@ -384,8 +560,8 @@ var _hmt = _hmt || [];
 		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (7)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -395,7 +571,15 @@ var _hmt = _hmt || [];
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -424,14 +608,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/12/break-through-the-bottleneck/">如何突破瓶颈</a>
       </li>
     
   </ul>
