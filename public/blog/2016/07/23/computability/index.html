@@ -547,6 +547,78 @@ var _hmt = _hmt || [];
 <p>如果存在<span data-katex="A"></span>上的部分可计算函数<span data-katex="g"></span>使得，<span data-katex="L=\{w\in A^*|g(w)\downarrow \}"></span>，</p>
 
 <p>则称语言<span data-katex="L"></span>是递归可枚举的。</p>
+
+<p><br/></p>
+
+<p><strong>递归可枚举集</strong></p>
+
+<p>设<span data-katex="B\subseteq N"></span>，且<span data-katex="B"></span>是递归可枚举的，</p>
+
+<p>则存在原始递归谓词<span data-katex="R(x,t)"></span>使得，<span data-katex="B=\{x|\exists t\ R(x,t)\}"></span></p>
+
+<p><br/></p>
+
+<p>设<span data-katex="B"></span>是一个非空递归可枚举集，则存在原始递归函数<span data-katex="f(x)"></span>使得，</p>
+
+<p><span data-katex="B=\{f(x)|x\in N\}"></span></p>
+
+<p><br/></p>
+
+<p>集合<span data-katex="B"></span>是递归可枚举的，当且仅当存在部分可计算函数<span data-katex="f(x)"></span>，使得，</p>
+
+<p><span data-katex="B=\{f(x)|f(x)\downarrow \}"></span></p>
+
+<p><br/></p>
+
+<p>总之，如果<span data-katex="B"></span>非空，则以下命题是等价的，</p>
+
+<p>（1）<span data-katex="B"></span>是递归可枚举的，即<span data-katex="B"></span>是一个部分可计算函数的定义域，</p>
+
+<p>（2）<span data-katex="B"></span>是第一个原始递归函数的值域，</p>
+
+<p>（3）<span data-katex="B"></span>是一个可计算函数的值域，</p>
+
+<p>（4）<span data-katex="B"></span>是一个部分可计算函数的值域。</p>
+
+<p><br/></p>
+
+<h2><strong>可判定性与半可判定性</strong></h2>
+
+<p><span data-katex="\mathscr{S}"></span>程序设计语言，递归函数，Turing机，文法等计算模型，</p>
+
+<p>可以证明它们是等价的，即计算相同的函数类——部分可计算函数。</p>
+
+<p>它们可以识别相同的语言类，递归可枚举语言。</p>
+
+<p><br/></p>
+
+<p>如果语言<span data-katex="L"></span>是递归的，那么存在一台总停机的DTM（确定型图灵机）<span data-katex="\mathscr{M}"></span>识别<span data-katex="L"></span>，</p>
+
+<p>任给一个字符串<span data-katex="x"></span>，<span data-katex="\mathscr{M}"></span>总能在有限步内回答<span data-katex="x\in L"></span>还是<span data-katex="x\notin L"></span>，</p>
+
+<p>因而，我们说<span data-katex="L"></span>为可判定的。</p>
+
+<p><br/></p>
+
+<p>如果<span data-katex="L"></span>的递归可枚举的，情况就不同了，识别<span data-katex="L"></span>的DTM可能永不停机，</p>
+
+<p>只有当<span data-katex="x\in L"></span>时，<span data-katex="\mathscr{M}"></span>才能保证一定能在有限步内停机并接受<span data-katex="x"></span>，</p>
+
+<p>而当<span data-katex="x\notin L"></span>时，<span data-katex="\mathscr{M}"></span>可能永不停机，</p>
+
+<p>在这种情况下，我们不知道是暂时没有停机，还是永不停机，</p>
+
+<p>这时，我们说<span data-katex="L"></span>是半可判定的。</p>
+
+<p><br/></p>
+
+<p>因此，递归语言是可判定的，而递归可枚举语言是半可判定的，</p>
+
+<p>同样的，直观可计算函数是可计算函数，而部分可计算函数是半可计算的，</p>
+
+<p>可计算谓词是可判定的，它定义的集合是递归的，</p>
+
+<p>如果谓词定义的集合是递归可枚举的，则该谓词是半可判定的。</p>
 </div>
 
 
