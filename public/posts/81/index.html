@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="人们对函数式编程的认识，一般分为两种： 函数的参数可以是另一个函数。 函数的调用没有副作用。 副作用，这是关于引用透明性的。 即任何表达式所出现的位置上，都可以用它的值来替换。 而不产生其他影响。 本文不讨论这个话题。 我们要讨论的是关于回调函数的。 如果函数的参数可以是另一个函数， &hellip;">
+  <meta name="description" content="如果现在说，人生就是一段认识自己的过程。 我觉得，这并不过分。 由于无法作为旁观者，我们对自己真的很不了解。 而且，无时无刻我们自身也在经历着变化。 认识自己，是一个不断改进的过程。 如今，我很庆幸认识到了自己是和别人不同的。 这个观点是如此的显然，以至于都难以被人发现了。 论坛上， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/01/15/functional/">回调函数</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/01/12/identification/">相同与不同</a></h1>
     
     
       <p class="meta">
@@ -83,394 +83,108 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-01-15T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-01-12T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>人们对函数式编程的认识，一般分为两种：</p>
+  <div class="entry-content"><p>如果现在说，人生就是一段认识自己的过程。</p>
 
-<p>函数的参数可以是另一个函数。</p>
+<p>我觉得，这并不过分。</p>
 
-<p>函数的调用没有副作用。</p>
-
-<p><br/></p>
-
-<p>副作用，这是关于引用透明性的。</p>
-
-<p>即任何表达式所出现的位置上，都可以用它的值来替换。</p>
-
-<p>而不产生其他影响。</p>
+<p>由于无法作为旁观者，我们对自己真的很不了解。</p>
 
 <p><br/></p>
 
-<p>本文不讨论这个话题。</p>
+<p>而且，无时无刻我们自身也在经历着变化。</p>
 
-<p>我们要讨论的是关于回调函数的。</p>
-
-<p>如果函数的参数可以是另一个函数，这将是一个有趣的事情。</p>
+<p>认识自己，是一个不断改进的过程。</p>
 
 <p><br/></p>
 
-<h2><strong>闭包</strong></h2>
+<p>如今，我很庆幸认识到了自己是和别人不同的。</p>
 
-<p>先写几个简单的小函数，来练练手。</p>
-
-<p>看看函数是怎样作为参数传递的。</p>
-
-<p>我们先定义一个高阶函数，它接受一个数字和函数作为参数。</p>
-
-<p>(define (high-order-fn data fn)</p>
-
-<p>&nbsp;&nbsp;(fn data))</p>
+<p>这个观点是如此的显然，以至于都难以被人发现了。</p>
 
 <p><br/></p>
 
-<p>我们使用数字1和函数“-”作为参数调用高阶函数。</p>
+<p>论坛上，有位大神给出了程序员新手的几个建议。</p>
 
-<p>(high-order-fn 1 -)</p>
+<p>于是就有一些小白，傻傻的完全按着这些建议去做了。</p>
 
-<p>=> -1</p>
-
-<p><br/></p>
-
-<p>我们使用数字1和一个lambda表达式作为参数调用。</p>
-
-<p>(high-order-fn 1</p>
-
-<p>&nbsp;&nbsp;(lambda (x) (+ 1 x)))</p>
-
-<p>=> 2</p>
+<p>结果发现，并没有成为大神。</p>
 
 <p><br/></p>
 
-<p>我们看一下函数的副作用。</p>
+<p>哪里出问题了？</p>
 
-<p>(high-order-fn 1</p>
-
-<p>&nbsp;&nbsp;(lambda (x) (display x)))</p>
-
-<p>=> 1</p>
+<p>你和别人是不同的。</p>
 
 <p><br/></p>
 
-<p>看起来很简单，不是吗。</p>
+<p>生活中，有个妹子自觉样貌出众，性格谦和。</p>
 
-<p>只是需要注意，前两个例子的输出是表达式的值，</p>
-
-<p>最后一个是表达式的副作用。</p>
+<p>可是，比自己条件还差的闺蜜却能找到优秀的老公。</p>
 
 <p><br/></p>
 
-<p>那么，请猜一下：</p>
+<p>为什么这样呢？</p>
 
-<p>(high-order-fn 1</p>
-
-<p>&nbsp;&nbsp;(let [(y 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) (+ x y))))</p>
+<p>你和别人是不同的。</p>
 
 <p><br/></p>
 
-<p>答案是3，因为这看起来十分“显然”。</p>
+<p>在学校，有些人拼命读书，刻苦学习，而另外有些人似乎不务正业。</p>
 
-<p>然而，这里面却藏有玄机。</p>
-
-<p><br/></p>
-
-<p>我们变换一下，将函数参数拿出来，并把它放在一个let表达式下面。</p>
-
-<p>(define callback</p>
-
-<p>&nbsp;&nbsp;(let [(y 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) (+ x y))))</p>
+<p>走到社会后，比自己学习差的，反而有了更好的工作。</p>
 
 <p><br/></p>
 
-<p>然后我们用let表达式把高阶函数的调用包装起来。</p>
+<p>这是不公平吗？</p>
 
-<p>(let ([y 3])</p>
-
-<p>&nbsp;&nbsp;(high-order-fn 1 callback))</p>
-
-<p>=> 3</p>
+<p>你和别人是不同的。</p>
 
 <p><br/></p>
 
-<p>我们用另一个表达式把高阶函数的调用包装起来。</p>
+<p>相似的例子简直太多了。</p>
 
-<p>(let ([y 4])</p>
+<p>很多苦恼的来源，都是因为拿自己跟别人进行比较。</p>
 
-<p>&nbsp;&nbsp;(high-order-fn 1 callback))</p>
+<p>然而，你和别人是不同的，根本没有可比性。</p>
 
-<p>=> 3</p>
-
-<p><br/></p>
-
-<p>这两个结果是相同的，</p>
-
-<p>这说明callback函数体中(+ x y)里面，y是不会受外界影响的。</p>
-
-<p>求值(+ x y)时，我们只会找在文本范围上最近的y。</p>
+<p>你像别人那样做，反而可能会比今天更差。</p>
 
 <p><br/></p>
 
-<p>如果变量具有这样的查找方式，我们就称这个变量具有词法作用域，也叫静态作用域。</p>
+<p>我们要开始创造一个独立的自己了。</p>
 
-<p>与之相应的还有动态作用域，这里就先不详细介绍了。</p>
+<p>能独立的思考，判断和选择。</p>
 
-<p><br/></p>
+<p>只有这样，我们的人生才能正式开始。</p>
 
-<p>再看上面的例子，(high-order-fn 1 callback)表达式中的callback，</p>
-
-<p>它是一个函数，不太准确的可以表示为(lambda (x) (+ x y))。</p>
-
-<p>重要的是，callback是带着自己定义时的环境传递给high-order-fn的，</p>
-
-<p>以至于在调用callback的时候，y还是可以从callback携带的环境中找到y值。</p>
+<p>而事实上，我们能把握住的，只有自己。</p>
 
 <p><br/></p>
 
-<p>于是，专业一点的话，我们把函数体加上函数定义时的环境，称为一个闭包。</p>
+<p>因此，模仿别人的行为，并不意味着你有同样的遭遇。</p>
 
-<p>因为闭包包含了环境，所以是具有内部状态的。</p>
+<p>别人可以做到的事情，自己未必能轻易解决。</p>
 
-<p>如果你有面向对象的经验的话，可能瞬间会想到，这不就是一个“对象”吗？</p>
+<p>别人做不到的事情，自己也可能有希望完成。</p>
 
-<p><br/></p>
-
-<p>确实如此，一个闭包就是一个对象。</p>
-
-<p>而在面向对象语言中，我们却要先建立一个类，再new一个对象。</p>
-
-<p>如果想了解更多的对应关系，可以参考《Let Over Lambda》。</p>
+<p>没有可比性，对比就失去了意义，徒增烦恼。</p>
 
 <p><br/></p>
 
-<h2><strong>嵌套回调函数</strong></h2>
-
-<p>很多人说自己讨厌函数式编程，</p>
-
-<p>一方面，可能是觉得闭包太抽象了。</p>
-
-<p>另一方面，可能是听别人说嵌套回调函数会导致逻辑混乱。</p>
+<p>简单的，其实只要今天的自己与昨天不同就足够了。</p>
 
 <p><br/></p>
 
-<p>让我们先看一下回调函数到底能混乱到什么程度吧。</p>
+<p>圣人所不知，未必不为愚人之所知也；愚人之所能，未必非圣人之不能也。</p>
 
-<p>为了不引入其他语言擅长的场景，这里虚构了一个小问题。</p>
-
-<p><br/></p>
-
-<p>首先，我们定义了一个小函数，它接受一个数字和两个函数作为参数。</p>
-
-<p>如果数字小于10，就执行success回调函数，否则就执行error回调函数。</p>
-
-<p>(define (async-task data success error)</p>
-
-<p>&nbsp;&nbsp;(if (&lt; data 10)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(success data)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(error)))</p>
-
-<p><br/></p>
-
-<p>然后，我们拿数字1来试试，并设置success显示这个值，success显示-1。</p>
-
-<p>(async-task 1</p>
-
-<p>&nbsp;&nbsp;(lambda (x) (display (list x)))</p>
-
-<p>&nbsp;&nbsp;(lambda () (display -1)))</p>
-
-<p>=> (1)</p>
-
-<p><br/></p>
-
-<p>现在，我们想这么做，</p>
-
-<p>如果第一个async-task执行成功，我们就再拿2调用，</p>
-
-<p>否则就直接失败(display -1)。</p>
-
-<p>为了这样做，我们只能把async-task的第二次调用写在success回调函数中。</p>
-
-<p>(async-task 1</p>
-
-<p>&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(async-task 2</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (display (list x y)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda () (display -1))))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda () (display -1)))</p>
-
-<p>=> (1 2)</p>
-
-<p><br/></p>
-
-<p>逻辑也不是太混乱，可以理顺它。</p>
-
-<p>别忙，紧接着我们要在第二次async-task执行成功后，再拿3调用。</p>
-
-<p>那我们再写一层吧。</p>
-
-<p>(async-task 1</p>
-
-<p>&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(async-task 2</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(async-task 3</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (display (list x y z)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda () (display -1))))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda () (display -1))))</p>
-
-<p>&nbsp;&nbsp;(lambda () (display -1)))</p>
-
-<p>=> (1 2 3)</p>
-
-<p><br/></p>
-
-<p>看吧，人们所说的嵌套回调函数问题果然出现了。</p>
-
-<p>一眼望去，根本不知道在做什么。</p>
-
-<p>这样下去，我们想继续拿4,5&hellip;9,10调用，那要写多少层呀。</p>
-
-<p><br/></p>
-
-<p>很多人看到这里就断定，函数式编程是反人类的。</p>
-
-<p>这也是情有可原的。</p>
-
-<p><br/></p>
-
-<p>让我们静一静，把急躁的心平静下来。</p>
-
-<p>想一想有没有好的办法，而不是一味的抱怨。</p>
-
-<p><br/></p>
-
-<p>仔细观察后，我们发现，async-task这个函数我们会频繁调用。</p>
-
-<p>我们何不写一个辅助函数来协助完成这件事呢？</p>
-
-<p>于是，我们定义了一个辅助函数execute，这个函数实现很简单，暂可以略过，</p>
-
-<p>我们只需要看看它怎么使用的。</p>
-
-<p>(define (execute value-list fn)</p>
-
-<p>&nbsp;&nbsp;(define (continue value-list result-list)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn value-list result-list continue))</p>
-
-<p>&nbsp;&nbsp;(continue value-list &lsquo;()))</p>
-
-<p><br/></p>
-
-<p>使用execute函数之后，我们就可以这样写了。</p>
-
-<p>(execute &lsquo;(1 2 3 4 5 6 7 8 9)</p>
-
-<p>&nbsp;&nbsp;(lambda (values results continue)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (not (null? values))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(async-task (car values)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let [(remainders (cdr values))]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! results (append results (list x)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (null? remainders)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(display results)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(continue remainders results))))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda () (display -1))))))</p>
-
-<p>=> (1 2 3 4 5 6 7 8 9)</p>
-
-<p><br/></p>
-
-<p>太好了，我们就不用写很多层嵌套回调函数了。</p>
-
-<p>这个函数的关键点是，我们巧妙的利用了一个continue函数，</p>
-
-<p>用来循环执行同样的async-task。</p>
-
-<p><br/></p>
-
-<p>至于函数的解释，限于篇幅，还是请直接阅读源代码吧。</p>
-
-<p>因为，源代码是最好的对计算过程的描述方式。</p>
-
-<p><br/></p>
-
-<h2><strong>总结</strong></h2>
-
-<p>以上回调函数的例子，</p>
-
-<p>源于某次讨论中，有人问及如何连续使用JavaScript发送AJAX请求。</p>
-
-<p>先有一些聪明的人说，async这个库实现了，去看吧。</p>
-
-<p>再有一些大牛的人说，为了避免嵌套回调函数，还是用Promise来实现吧。</p>
-
-<p>最后，有一些有工作经验的人总结道，函数式编程很垃圾。</p>
-
-<p><br/></p>
-
-<p>我那时忽然感到很惶恐，</p>
-
-<p>是不是我眼中的世界太美好，使我看不到黑暗了？</p>
-
-<p>于是，我就简单实现了一个AJAX控制器，消除了嵌套循环。</p>
-
-<p>当然，实现方式不止我这一种。</p>
-
-<p>我才发现，不是工具本身的问题，而是有些人不会制造工具来解决问题。</p>
-
-<p><br/></p>
-
-<p>我也明白了，一个人的盲区就在于那些他瞧不起的事物。</p>
-
-<p>一旦有了成见，就很难再突破自我的限制了。</p>
-
-<p><br/></p>
-
-<p>对于这个问题来说，在Haskell中有类似的概念，称为monad。</p>
-
-<p>它指定了一个函数“>>=”，将各个回调函数串联起来，用来实现顺序操作。</p>
-
-<p>有兴趣的可以了解一下。</p>
-
-<p>另外，我是不会告诉你，这种实现方式是和continuation有联系的，哈哈。</p>
-
-<p><br/></p>
-
-<p>正所谓，不识庐山真面目，只缘身在此山中。</p>
-
-<p>不过，也可能那些聪明的/大牛们/有工作经验的人，说的是对的。</p>
-
-<p>我不会限制自己，我还要继续努力来达到更高的水平。</p>
+<p>——刘开</p>
 </div>
   
   
@@ -497,7 +211,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -512,10 +226,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -544,6 +254,10 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
       </li>
     
   </ul>

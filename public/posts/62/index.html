@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="人生就像一棵决策树， 每一次选择，走向了不同的子节点。 我们不能后退，也没办法消除历史的影响。 因为时间是单向的， 没有办法更改历史， 只能以今天为基础继续向前。 对于软件，我们也倾向于持有相同的观点。 认为软件的维护成本在后期是不可能缩减的， 不得不背负以前失误的包袱。 然而，幸运的是， &hellip;">
+  <meta name="description" content="表达式是在环境中求值的。 如果允许表达式改变环境， 那么，其他表达式的求值结果，就是不可预料的。 环境，是专业术语，也可称为执行环境， 里面保存的是，变量和值的绑定关系。 Haskell是一门纯函数式语言， 并不是说，函数的每次求值结果都相同。 而是说，任何函数都不会修改它的执行环境。 例如， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/31/choice/">可替换的设计策略</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/03/27/purity/">Haskell的纯函数性</a></h1>
     
     
       <p class="meta">
@@ -83,240 +83,214 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-03-31T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-03-27T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>人生就像一棵决策树，</p>
+  <div class="entry-content"><p>表达式是在环境中求值的。</p>
 
-<p>每一次选择，走向了不同的子节点。</p>
+<p>如果允许表达式改变环境，</p>
 
-<p>我们不能后退，也没办法消除历史的影响。</p>
-
-<p><br/></p>
-
-<p>因为时间是单向的，</p>
-
-<p>没有办法更改历史，</p>
-
-<p>只能以今天为基础继续向前。</p>
+<p>那么，其他表达式的求值结果，就是不可预料的。</p>
 
 <p><br/></p>
 
-<p>对于软件，我们也倾向于持有相同的观点。</p>
+<p>环境，是专业术语，也可称为执行环境，</p>
 
-<p>认为软件的维护成本在后期是不可能缩减的，</p>
-
-<p>不得不背负以前失误的包袱。</p>
+<p>里面保存的是，变量和值的绑定关系。</p>
 
 <p><br/></p>
 
-<p>然而，幸运的是，</p>
+<p>Haskell是一门纯函数式语言，</p>
 
-<p>软件其实并非如此。</p>
+<p>并不是说，函数的每次求值结果都相同。</p>
 
-<p><br/></p>
-
-<p>软件问题，大多数都是设计的问题。</p>
+<p>而是说，<strong>任何函数都不会修改它的执行环境</strong>。</p>
 
 <p><br/></p>
 
-<h2><strong>抽象和具体</strong></h2>
+<p>例如，对于从屏幕上读取字符的函数，</p>
 
-<p>和人生不同，</p>
+<p>每次调用，并不一定会返回相同的值。</p>
 
-<p>软件功能的实现，</p>
-
-<p>限制条件相对宽松。</p>
+<p>但是，执行后，它确实不会影响环境中的绑定关系。</p>
 
 <p><br/></p>
 
-<p>毕业生，决定考研还是就业,</p>
+<p>因此，输入输出操作，也是纯函数，</p>
 
-<p>只能选一个。</p>
-
-<p>但是，软件可以选择DoWork。</p>
+<p>理解执行环境和现实世界的区别，是关键。</p>
 
 <p><br/></p>
 
-<p>越抽象，适用范围就越广。</p>
+<h2><strong>IO</strong></h2>
 
-<p>越具体，就越容易被证明是个错误。</p>
+<p>Haskell是一门静态强类型的语言。</p>
 
-<p><br/></p>
-
-<p>好的设计实践，</p>
-
-<p>是把抽象和具体分开，</p>
-
-<p>抽象的每一种实现都是可替换的。</p>
+<p>任何表达式在编译前类型都是确定的。</p>
 
 <p><br/></p>
 
-<p>随着软件的发展，</p>
+<p>输入输出与IO a类型有关。</p>
 
-<p>后期的维护成本才可能是常量复杂度的，</p>
+<p>其中，IO是类型构造器，:k IO = * -> *</p>
 
-<p>因为每一个历史性的错误实现，都是可更改的。</p>
-
-<p><br/></p>
-
-<h2><strong>平凡的模块</strong></h2>
-
-<p>武功高强的人们，</p>
-
-<p>不会频出诡异的绝招，</p>
-
-<p>招数越平凡，内耗就越小。</p>
+<p>因此，IO a才是一个具体类型。</p>
 
 <p><br/></p>
 
-<p>向外提供抽象接口的人，是在玩小伎俩，</p>
+<p>IO是如何定义的呢？</p>
 
-<p>不要将具体的实现方法托付给别人，</p>
+<p>type IO a = World -> (a, World)</p>
 
-<p>当问题出现时，让别人更改实现方案，是不可能的。</p>
-
-<p><br/></p>
-
-<p>我们应该提供具体的功能，</p>
-
-<p>功能内部，封装了我们自己的抽象和实现。</p>
+<p>World类型的值表示现实世界的状态。</p>
 
 <p><br/></p>
 
-<p>其中，抽象是对需求的提取，用来规范模块的外在表现，</p>
+<p>IO a类型的值是一个函数，它接受现实世界的当前状态作为参数，</p>
 
-<p>实现是当前采用的解决方案。</p>
-
-<p><br/></p>
-
-<p>随着时间的发展，当模块不再适用时，</p>
-
-<p>我们就能在外在表现不变的前提下，</p>
-
-<p>更改解决方案了。</p>
+<p>返回一个元组，这个元组由类型a的值和对现实世界改变后的状态构成。</p>
 
 <p><br/></p>
 
-<p>不是只提供抽象接口，</p>
+<p>由于，我们并不需要手动传递World类型的值作为参数来调用，</p>
 
-<p>而是把具体功能封装在抽象的接口下，</p>
+<p>所以，应该<strong>把IO a类型的值理解为一个惰性求值的表达式</strong>，</p>
 
-<p>一起提供。</p>
-
-<p><br/></p>
-
-<h2><strong>层次与后路</strong></h2>
-
-<p>代码量增加，软件会越来越复杂，</p>
-
-<p>难以定位问题，增加功能，</p>
-
-<p>这其实是没有建立合理的代码层次。</p>
+<p>对该表达式按需求值，得到一个a类型的值。</p>
 
 <p><br/></p>
 
-<p>在不同深度的层次上切换。</p>
+<p>IO a类型的表达式，称为<strong>action</strong>。</p>
 
-<p>可以让我们总是面对简单可控的问题。</p>
-
-<p><br/></p>
-
-<p>一千行的函数太复杂了，</p>
-
-<p>那是因为代码本来不该写在一个函数中。</p>
+<p>IO a类型的action中，惰性包含了一个a类型的值。</p>
 
 <p><br/></p>
 
-<p>一万行代码太复杂了，</p>
+<p>例如：</p>
 
-<p>那是因为它本来不该写到一个文件中。</p>
+<p>getChar :: IO Char</p>
 
-<p><br/></p>
-
-<p>一百个文件太复杂了，</p>
-
-<p>那是因为它们本来不该在一个文件夹下。</p>
+<p>求值getChar表达式，就会得到一个Char类型的值。</p>
 
 <p><br/></p>
 
-<p>划分层次，才能留有后路。</p>
+<p>例如：</p>
 
-<p>每天关闭电脑前，检查自己的后路，是个好习惯。</p>
+<p>IO ( )</p>
 
-<p>可以让我们再打开电脑时，问题还是像今天这样简单。</p>
+<p>其中，( )表示空元组类型，该类型只有一个值，空元组( )。</p>
 
-<p><br/></p>
+<p>“( )”既可以表示类型，又可以表示值，取决于它出现的上下文。</p>
 
-<h2><strong>唯一性和可选性</strong></h2>
-
-<p>当我们遇到紧急问题时，</p>
-
-<p>通常首先会想到一个权宜之计。</p>
+<p>另外，Haskell中习惯将空元组看做无用数据。</p>
 
 <p><br/></p>
 
-<p>但是，从长久来看，</p>
+<p>在IO ( )中，( )是作为IO类型构造器的参数出现的，表示空元组类型，</p>
 
-<p>不得不做的事情总是会带来麻烦，</p>
-
-<p>身不由己的决定，也是错误的根源。</p>
+<p>所以说，IO ( )类型的action中，惰性包含了一个空元组值。</p>
 
 <p><br/></p>
 
-<p>我们应该想尽办法，推迟决定。</p>
+<p>例如：</p>
 
-<p>直到我们有两个方案，可以从中选择。</p>
+<p>putStrLn :: String -> IO ( )</p>
 
-<p>可选性意味着可控的未来。</p>
+<p>putStrLn是一个函数，</p>
 
-<p><br/></p>
+<p>它接受String类型的值作为参数，</p>
 
-<p>软件的发展，像棋局一样，</p>
-
-<p>必须仔细斟酌局势的变化，</p>
-
-<p>才能避免因小失大。</p>
+<p>返回一个IO ( )类型的action。</p>
 
 <p><br/></p>
 
-<p>在客观条件限制的范围内，</p>
+<h2><strong>do</strong></h2>
 
-<p>有经验的人做出选择，</p>
+<p>main :: IO ( )</p>
 
-<p>新手慌张决定，</p>
+<p>main = do</p>
 
-<p>在尽可能多的选择中，才能酝酿出好的设计。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn &ldquo;Please input: &rdquo;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;inpStr &lt;- getLine</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p><br/></p>
+
+<p>以上程序定义了main函数，是一个IO ( )类型的action。</p>
+
+<p><br/></p>
+
+<p>do关键字，是Haskell中的一种写法，</p>
+
+<p>用来表示顺序执行。</p>
+
+<p><br/></p>
+
+<p>其中，</p>
+
+<p>putStrLn :: String -> IO ( )</p>
+
+<p>getLine :: IO String</p>
+
+<p><br/></p>
+
+<p>putStrLn $ &ldquo;Hello &rdquo; ++ inpStr</p>
+
+<p>= putStrLn ( &ldquo;Hello &rdquo; ++ inpStr )</p>
+
+<p><br/></p>
+
+<p>因此，</p>
+
+<p>putStrLn &ldquo;Please input: &rdquo; :: IO ( )，在屏幕上输出字符串“Please input: ”，</p>
+
+<p>inpStr &lt;- getLine，求值惰性表达式getLine，<strong>把action里面包含的值拿出来</strong>，绑定到inpStr上。</p>
+
+<p>putStrLn $ &ldquo;Hello &rdquo; ++ inpStr，在屏幕上输出字符串"Hello &ldquo;与变量inpStr连接后的结果。</p>
+
+<p><br/></p>
+
+<p>IO操作，每次执行的效果并不相同，</p>
+
+<p>但<strong>仍然都是纯函数</strong>，</p>
+
+<p>在于它们不会修改执行环境中的变量绑定关系。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>软件不同于人生之处在于，</p>
+<p>很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，</p>
 
-<p>软件可以设计，还可以更改，</p>
+<p>这种说法，其实是为了解释给不熟悉的人看的。</p>
 
-<p>只是成本有别。</p>
-
-<p><br/></p>
-
-<p>好的功能模块，在于内部的良好设计。</p>
-
-<p>虽然外在表现没有什么不同。</p>
+<p>事实上，<strong>Haskell中的任何函数都是纯函数</strong>。</p>
 
 <p><br/></p>
 
-<p>好的设计和代码组织方式，</p>
+<p>类似的，</p>
 
-<p>威力连绵不绝。</p>
+<p>Haskell语言中Bug的数量可以控制到非常少，</p>
+
+<p>并不是因为通过Monad将IO和其他函数分离开，</p>
+
+<p>而是因为任何函数都不能改变环境中变量的绑定关系，</p>
+
+<p>即，函数的纯粹性。</p>
 
 <p><br/></p>
 
-<p>多一种选择，多一种可能。</p>
+<p>此外，Monad，Applicative和Functor这些类型类，</p>
+
+<p>提高了语言的抽象程度，让复杂度更可控，</p>
+
+<p>我想，这才是Bug数量少的真正原因吧。</p>
 </div>
   
   
@@ -343,7 +317,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (8)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -358,10 +332,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/07/17/the-upper-limit/">能力的上限</a>
       </li>
     
       <li class="post">
@@ -390,6 +360,10 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/18/do-not-rely-on-the-hearsay/">不要依赖『道听途说』</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/05/16/pain-oriented-design/">面向痛点的应变之道</a>
       </li>
     
   </ul>
