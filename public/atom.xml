@@ -4,7 +4,7 @@
   <title><![CDATA[何幻]]></title>
   <link href="https://thzt.github.io/atom.xml" rel="self"/>
   <link href="https://thzt.github.io/"/>
-  <updated>2016-07-25T09:04:08+08:00</updated>
+  <updated>2016-08-02T15:12:21+08:00</updated>
   <id>https://thzt.github.io/</id>
   <author>
     <name><![CDATA[thzt]]></name>
@@ -12,6 +12,542 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[懵逼的上同调群]]></title>
+    <link href="https://thzt.github.io/blog/2016/08/02/cohomology-group/"/>
+    <updated>2016-08-02T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2016/08/02/cohomology-group</id>
+    <content type="html"><![CDATA[<script src="https://thzt.github.io/thirdpart/jQuery/jquery-1.11.1.js"></script>
+
+
+<p><link href="https://thzt.github.io/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
+
+<script src="https://thzt.github.io/thirdpart/KaTeX/katex.min.js"></script>
+
+
+<script src="https://thzt.github.io/javascripts/katex.js"></script>
+
+
+<h2><strong>代数结构</strong></h2>
+
+<p><strong>代数运算</strong></p>
+
+<p>设<span data-katex="A"></span>为集合，函数<span data-katex="f:A\times A\rightarrow A"></span>称为<span data-katex="A"></span>上的一个二元代数运算，</p>
+
+<p>简称二元运算。</p>
+
+<p><br/></p>
+
+<p>设<span data-katex="A"></span>为集合，<span data-katex="n"></span>为正整数，<span data-katex="A^n=A\times A\times \cdots \times A"></span>表示<span data-katex="A"></span>的<span data-katex="n"></span>阶笛卡尔积，</p>
+
+<p>函数<span data-katex="f:A^n\rightarrow A"></span>称为<span data-katex="A"></span>上的一个<span data-katex="n"></span>元代数运算，简称<span data-katex="n"></span>元运算。</p>
+
+<p>如果<span data-katex="f"></span>是<span data-katex="A"></span>上的运算，也可以称<span data-katex="A"></span>在运算<span data-katex="f"></span>下是封闭的。</p>
+
+<p><br/></p>
+
+<p><strong>单位元和零元</strong></p>
+
+<p>设<span data-katex="\circ"></span>为集合<span data-katex="A"></span>上的二元运算，</p>
+
+<p>若存在<span data-katex="e_l\in A"></span>（或<span data-katex="e_r\in A"></span>）使得<span data-katex="\forall x\in A"></span>都有<span data-katex="e_l\circ x=x"></span>（或<span data-katex="x\circ e_r=x"></span>），</p>
+
+<p>则称<span data-katex="e_l"></span>（或<span data-katex="e_r"></span>）是<span data-katex="A"></span>中关于<span data-katex="\circ"></span>运算的左（或右）单位元。</p>
+
+<p>若<span data-katex="e\in A"></span>关于<span data-katex="\circ"></span>运算既为左单位元又为右单位元，则称<span data-katex="e"></span>为<span data-katex="A"></span>中关于<span data-katex="\circ"></span>运算的单位元。</p>
+
+<p><br/></p>
+
+<p>若存在<span data-katex="\theta_l\in A"></span>（或<span data-katex="\theta_r\in A"></span>）使得<span data-katex="\forall x\in A"></span>都有<span data-katex="\theta_l\circ x=\theta_l"></span>（或<span data-katex="x\circ \theta_r=\theta_r"></span>），</p>
+
+<p>则称<span data-katex="\theta_l"></span>（或<span data-katex="\theta_r"></span>）是<span data-katex="A"></span>中关于<span data-katex="\circ"></span>运算的左（或右）零元。</p>
+
+<p>若<span data-katex="\theta\in A"></span>关于<span data-katex="\circ"></span>运算既为左零元又为右零元，则称<span data-katex="e"></span>为<span data-katex="A"></span>中关于<span data-katex="\circ"></span>运算的零元。</p>
+
+<p><br/></p>
+
+<p>可证，</p>
+
+<p>如果集合<span data-katex="A"></span>中的任意元素，关于<span data-katex="\circ"></span>运算既有左单位元，又有右单位元，则左单位元等于右单位元，且是<span data-katex="A"></span>中唯一的单位元。</p>
+
+<p>如果集合<span data-katex="A"></span>中的任意元素，关于<span data-katex="\circ"></span>运算既有左零元，又有右零元，则左零元等于右零元，且是<span data-katex="A"></span>中唯一的零元。</p>
+
+<p><br/></p>
+
+<p><strong>逆元</strong></p>
+
+<p>设<span data-katex="\circ"></span>为集合<span data-katex="A"></span>上的二元运算，<span data-katex="e\in A"></span>是关于<span data-katex="\circ"></span>运算的单位元。</p>
+
+<p>对于<span data-katex="x\in A"></span>，若存在<span data-katex="y_l\in A"></span>（或<span data-katex="y_r\in A"></span>）使得<span data-katex="y_l\circ x=e"></span>（或<span data-katex="x\circ y_r=e"></span>），</p>
+
+<p>则称<span data-katex="y_l"></span>（或<span data-katex="y_r"></span>）是<span data-katex="x"></span>关于<span data-katex="\circ"></span>运算的左（或右）逆元。</p>
+
+<p>若<span data-katex="y\in A"></span>既是<span data-katex="x"></span>关于<span data-katex="\circ"></span>运算的左逆元，又是<span data-katex="x"></span>关于<span data-katex="\circ"></span>运算的右逆元，</p>
+
+<p>则称<span data-katex="y"></span>是<span data-katex="x"></span>关于<span data-katex="\circ"></span>运算的逆元。</p>
+
+<p><br/></p>
+
+<p>可证，如果集合<span data-katex="A"></span>中的任意元素，关于<span data-katex="\circ"></span>运算既有左逆元，又有右逆元，则左逆元等于右逆元，且是该元素唯一的逆元。</p>
+
+<p><br/></p>
+
+<p><strong>代数系统</strong></p>
+
+<p>一个代数系统是一个三元组<span data-katex="V=\left \langle A,\Omega ,K \right \rangle"></span>，</p>
+
+<p>其中<span data-katex="A"></span>是一个非空的对象集合，称为<span data-katex="V"></span>的载体，</p>
+
+<p><span data-katex="\Omega"></span>是一个非空的运算集合，即<span data-katex="\Omega=\;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize j=1}\end{matrix}}\;\Omega_j"></span>，<span data-katex="\Omega_j"></span>是<span data-katex="A"></span>上所有<span data-katex="j"></span>元运算的集合，</p>
+
+<p><span data-katex="K\subseteq A"></span>是代数常数的集合。</p>
+
+<p><br/></p>
+
+<p>对于任何代数常数<span data-katex="k\in K"></span>，可以把<span data-katex="k"></span>看成<span data-katex="A"></span>上的零元运算，</p>
+
+<p>这时可将代数系统<span data-katex="V"></span>写作<span data-katex="\left \langle A,\Omega \right \rangle"></span>，</p>
+
+<p>这时<span data-katex="\Omega=\;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize j=0}\end{matrix}}\;\Omega_j"></span>，<span data-katex="\Omega_0=K"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>同类型的代数系统</strong></p>
+
+<p>设<span data-katex="V_1=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，<span data-katex="V_2=\left \langle B,\overline{o_1},\overline{o_2},\cdots,\overline{o_r} \right \rangle"></span>是具有<span data-katex="r"></span>个运算的代数系统，<span data-katex="r\geqslant 1"></span>。</p>
+
+<p>若对于<span data-katex="i=1,2,\cdots ,r"></span>，<span data-katex="o_i"></span>和<span data-katex="\overline{o_i}"></span>具有同样的元数，</p>
+
+<p>则称<span data-katex="V_1"></span>和<span data-katex="V_2"></span>是同类型的代数系统。</p>
+
+<p><br/></p>
+
+<p><strong>子代数</strong></p>
+
+<p>设<span data-katex="V=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>是代数系统，<span data-katex="B"></span>是<span data-katex="A"></span>的非空子集，</p>
+
+<p>若<span data-katex="B"></span>对<span data-katex="V"></span>中所有的运算封闭，则称<span data-katex="V'=\left \langle B,o_1,o_2,\cdots,o_r \right \rangle"></span>是<span data-katex="V"></span>的子代数系统，</p>
+
+<p>简称子代数。</p>
+
+<p><br/></p>
+
+<p>当<span data-katex="B"></span>是<span data-katex="A"></span>的真子集时，称<span data-katex="V'"></span>是<span data-katex="V"></span>的真子代数。</p>
+
+<p><br/></p>
+
+<p><strong>同态与同构</strong></p>
+
+<p>设<span data-katex="V_1=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，<span data-katex="V_2=\left \langle B,\overline{o_1},\overline{o_2},\cdots,\overline{o_r} \right \rangle"></span>是同类型的代数系统，</p>
+
+<p>对于<span data-katex="i=1,2,\cdots ,r"></span>，<span data-katex="o_i"></span>和<span data-katex="\overline{o_i}"></span>是<span data-katex="k_i"></span>元运算，</p>
+
+<p>函数<span data-katex="\varphi :A\rightarrow B"></span>对于所有的运算<span data-katex="o_i"></span>，<span data-katex="\overline{o_i}"></span>都有，</p>
+
+<p><span data-katex="\varphi(o_i(x_1,x_2,\cdots ,x_{k_i}))=\overline{o_i}(\varphi(x_1),\varphi(x_2),\cdots ,\varphi(x_{k_i}))"></span></p>
+
+<p>则称<span data-katex="\varphi"></span>是代数系统<span data-katex="V_1"></span>到<span data-katex="V_2"></span>的同态映射，简称同态。</p>
+
+<p><br/></p>
+
+<p>若<span data-katex="\varphi"></span>是满射，则称<span data-katex="\varphi"></span>是满同态，</p>
+
+<p>若<span data-katex="\varphi"></span>是单射，则称<span data-katex="\varphi"></span>是单同态，</p>
+
+<p>若<span data-katex="\varphi"></span>是双射，则称<span data-katex="\varphi"></span>是同构，</p>
+
+<p>若<span data-katex="V_1=V_2"></span>，则称<span data-katex="\varphi"></span>是自同态，若<span data-katex="\varphi"></span>又是双射，则称<span data-katex="\varphi"></span>是自同构。</p>
+
+<p><br/></p>
+
+<p><strong>同态像</strong></p>
+
+<p>设<span data-katex="V_1=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，<span data-katex="V_2=\left \langle B,\overline{o_1},\overline{o_2},\cdots,\overline{o_r} \right \rangle"></span>是同类型的代数系统，</p>
+
+<p>对于<span data-katex="i=1,2,\cdots ,r"></span>，<span data-katex="o_i"></span>和<span data-katex="\overline{o_i}"></span>是<span data-katex="k_i"></span>元运算，</p>
+
+<p><span data-katex="\varphi :A\rightarrow B"></span>是<span data-katex="V_1"></span>到<span data-katex="V_2"></span>的同态，</p>
+
+<p>则<span data-katex="\varphi(A)"></span>关于<span data-katex="V_2"></span>中的运算构成了一个代数系统，且是<span data-katex="V_2"></span>的子代数，</p>
+
+<p>称为<span data-katex="V_1"></span>在<span data-katex="\varphi"></span>下的同态像。</p>
+
+<p><br/></p>
+
+<p><strong>同余关系</strong></p>
+
+<p>设代数系统<span data-katex="V=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，其中<span data-katex="o_i"></span>是<span data-katex="k_i"></span>元运算，</p>
+
+<p>关系<span data-katex="\sim"></span>是<span data-katex="A"></span>上的等价关系，</p>
+
+<p>任取<span data-katex="A"></span>上<span data-katex="2k_i"></span>个元素，<span data-katex="a_1,a_2,\cdots ,a_{k_i}"></span>和<span data-katex="b_1,b_2,\cdots ,b_{k_i}"></span>，</p>
+
+<p>如果对<span data-katex="j=1,2,\cdots ,k_i"></span>，<span data-katex="a_j\sim b_j"></span>成立，就有</p>
+
+<p><span data-katex="o_i(a_1,a_2,\cdots ,a_{k_i})\sim o_i(b_1,b_2,\cdots ,b_{k_i})"></span></p>
+
+<p>则称等价关系\sim"></span>对运算<span data-katex="o_i"></span>具有置换性质。</p>
+
+<p><br/></p>
+
+<p>如果等价关系<span data-katex="\sim"></span>对<span data-katex="V"></span>中的所有运算都具有置换性质，</p>
+
+<p>则称关系<span data-katex="\sim"></span>是<span data-katex="V"></span>上的同余关系，</p>
+
+<p>称<span data-katex="A"></span>中关于<span data-katex="\sim"></span>的等价类为<span data-katex="V"></span>上的同余类。</p>
+
+<p><br/></p>
+
+<p><strong>商代数</strong></p>
+
+<p>设代数系统<span data-katex="V=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，其中<span data-katex="o_i"></span>是<span data-katex="k_i"></span>元运算，</p>
+
+<p>关系<span data-katex="\sim"></span>是<span data-katex="V"></span>上的同余关系，</p>
+
+<p><span data-katex="V"></span>关于同余关系<span data-katex="\sim"></span>的商代数记作<span data-katex="V/\sim =\left \langle A/\sim ,\overline{o_1},\overline{o_2},\cdots,\overline{o_r} \right \rangle"></span>，</p>
+
+<p>其中<span data-katex="A/\sim"></span>是<span data-katex="A"></span>关于同余关系<span data-katex="\sim"></span>的商集。</p>
+
+<p><br/></p>
+
+<p>对于<span data-katex="i=1,2,\cdots ,r"></span>，运算<span data-katex="\overline{o_i}"></span>规定为：</p>
+
+<p><span data-katex="\forall [a_1],[a_2],\cdots ,[a_{k_i}]\in A/\sim"></span>，有</p>
+
+<p><span data-katex="\overline{o_i}([a_1],[a_2],\cdots ,[a_{k_i}])=[o_i(a_1,a_2,\cdots ,a_{k_i})]"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>同态导出的等价关系</strong></p>
+
+<p>若<span data-katex="\varphi :A\rightarrow B"></span>是<span data-katex="V_1"></span>到<span data-katex="V_2"></span>的同态，</p>
+
+<p>定义等价关系<span data-katex="x\sim y"></span>当且仅当<span data-katex="\varphi(x)=\varphi(y)"></span>，<span data-katex="\forall x,y\in A"></span>。</p>
+
+<p>则称，该等价关系是同态<span data-katex="\varphi"></span>导出的等价关系。</p>
+
+<p><br/></p>
+
+<p>可证，同态<span data-katex="\varphi"></span>导出的等价关系是<span data-katex="V_1"></span>上的同余关系。</p>
+
+<p><br/></p>
+
+<p><strong>自然映射</strong></p>
+
+<p>设<span data-katex="V=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>是代数系统，</p>
+
+<p>其中<span data-katex="o_i"></span>是<span data-katex="k_i"></span>元运算，<span data-katex="i=1,2,\cdots ,r"></span>，<span data-katex="\sim"></span>是<span data-katex="V"></span>上的同余关系，</p>
+
+<p>则自然映射<span data-katex="g:A\rightarrow A/\sim"></span>，<span data-katex="\forall a\in A,\ g(a)=[a]"></span>，</p>
+
+<p>是从<span data-katex="V"></span>到<span data-katex="V/\sim"></span>上的同态映射。</p>
+
+<p><br/></p>
+
+<p><strong>同态基本定理</strong></p>
+
+<p>设<span data-katex="V_1=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，<span data-katex="V_2=\left \langle B,\overline{o_1},\overline{o_2},\cdots,\overline{o_r} \right \rangle"></span>是同类型的代数系统，</p>
+
+<p>对于<span data-katex="i=1,2,\cdots ,r"></span>，<span data-katex="o_i"></span>和<span data-katex="\overline{o_i}"></span>是<span data-katex="k_i"></span>元运算，</p>
+
+<p><span data-katex="\varphi :A\rightarrow B"></span>是<span data-katex="V_1"></span>到<span data-katex="V_2"></span>的同态，</p>
+
+<p>关系<span data-katex="\sim"></span>是<span data-katex="\varphi"></span>导出的<span data-katex="V_1"></span>上的同余关系，</p>
+
+<p>则<span data-katex="V_1"></span>关于同余关系<span data-katex="\sim"></span>的商代数，同构于<span data-katex="V_1"></span>在<span data-katex="\varphi"></span>下的同态像，即</p>
+
+<p><span data-katex="V_1/\sim \ \cong \ \left \langle \varphi(A),\overline{o_1},\overline{o_2},\cdots ,\overline{o_r} \right \rangle"></span></p>
+
+<p><br/></p>
+
+<p>同态基本定理告诉我们，任何代数系统<span data-katex="V"></span>的商代数是它的一个同态像。</p>
+
+<p>反之，如果<span data-katex="V'"></span>是<span data-katex="V"></span>的同态像，则<span data-katex="V'"></span>与<span data-katex="V"></span>的一个商代数同构。</p>
+
+<p><br/></p>
+
+<h2><strong>群结构</strong></h2>
+
+<p><strong>半群</strong></p>
+
+<p>设<span data-katex="\circ"></span>是集合<span data-katex="S"></span>上的二元运算，若<span data-katex="\circ"></span>运算在<span data-katex="S"></span>上是可结合的，</p>
+
+<p>则称代数系统<span data-katex="V=\left \langle S,\circ \right \rangle"></span>是半群。</p>
+
+<p><br/></p>
+
+<p><strong>幺半群</strong></p>
+
+<p>设<span data-katex="V=\left \langle S,\circ \right \rangle"></span>是半群，</p>
+
+<p>若存在<span data-katex="e\in S"></span>为<span data-katex="V"></span>中关于运<span data-katex="\circ"></span>运算的单位元，</p>
+
+<p>则称<span data-katex="V=\left \langle S,\circ ,e \right \rangle"></span>的幺半群。</p>
+
+<p><br/></p>
+
+<p><strong>群</strong></p>
+
+<p><span data-katex="\left \langle G,\circ \right \rangle"></span>是含有一个二元运算的代数系统，</p>
+
+<p>如果满足以下条件：</p>
+
+<p>（1）<span data-katex="\circ"></span>运算是可结合的，</p>
+
+<p>（2）存在<span data-katex="e\in G"></span>是关于<span data-katex="\circ"></span>运算的单位元，</p>
+
+<p>（3）任何<span data-katex="x\in G"></span>，<span data-katex="x"></span>关于<span data-katex="\circ"></span>运算的逆元<span data-katex="x^{-1}\in G"></span>。</p>
+
+<p>则称<span data-katex="G"></span>是一个群。</p>
+
+<p><br/></p>
+
+<p><strong>交换群</strong></p>
+
+<p>若群<span data-katex="G"></span>中运算满足交换律，则称<span data-katex="G"></span>为交换群，或Abel群。</p>
+
+<p><br/></p>
+
+<p><strong>子群</strong></p>
+
+<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的非空子集，若<span data-katex="H"></span>关于<span data-katex="G"></span>中的运算构成一个群，</p>
+
+<p>则称<span data-katex="H"></span>是<span data-katex="G"></span>的子群，记为<span data-katex="H\leqslant G"></span>。</p>
+
+<p>如果子群<span data-katex="H"></span>是<span data-katex="G"></span>的真子集，则称<span data-katex="H"></span>是<span data-katex="G"></span>的真子群，记为<span data-katex="H<G"></span>。</p>
+
+<p><br/></p>
+
+<p>若把群看做是具有一个可结合的二元运算，一个求逆元的一元运算，</p>
+
+<p>和一个零元运算（二元运算的单位元）的代数系统，</p>
+
+<p>可以证明，<span data-katex="G"></span>的子群就是代数系统<span data-katex="\left \langle G_1,\bullet,\ ^{-1},e_1 \right \rangle"></span>的子代数。</p>
+
+<p><br/></p>
+
+<p><strong>陪集分解</strong></p>
+
+<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的子群，<span data-katex="a\in G"></span>，定义</p>
+
+<p><span data-katex="Ha=\{ha|h\in H\}"></span></p>
+
+<p>则称<span data-katex="Ha"></span>是子群<span data-katex="H"></span>在<span data-katex="G"></span>中的一个右陪集。</p>
+
+<p><br/></p>
+
+<p>可以证明，</p>
+
+<p>（1）<span data-katex="He=H"></span>，</p>
+
+<p>（2）<span data-katex="\forall A\in G,\ a\in Ha"></span>，</p>
+
+<p>（3）<span data-katex="a\in Hb \Leftrightarrow Ha=Hb \Leftrightarrow ab^{-1}\in H"></span></p>
+
+<p><br/></p>
+
+<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的子群，</p>
+
+<p>在<span data-katex="G"></span>上定义二元关系<span data-katex="R"></span>，<span data-katex="\forall a,b\in G"></span>有</p>
+
+<p><span data-katex="aRb\Leftrightarrow ab^{-1}\in H"></span></p>
+
+<p>则<span data-katex="R"></span>为<span data-katex="G"></span>上的等价关系，且<span data-katex="[a]_R=Ha"></span>。</p>
+
+<p><br/></p>
+
+<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的子群，则<span data-katex="\forall a,b\in G"></span>，</p>
+
+<p>或者<span data-katex="Ha\cap Hb=\varnothing"></span>，或者<span data-katex="Ha=Hb"></span>，</p>
+
+<p>且<span data-katex="\;{\tiny\begin{matrix}\\ \normalsize \cup \\ ^{\scriptsize a\in R}\end{matrix}}\;Ha=G"></span></p>
+
+<p>因此，子群<span data-katex="H"></span>的右陪集构成了群<span data-katex="G"></span>的一个划分。</p>
+
+<p><br/></p>
+
+<p><strong>正规子群</strong></p>
+
+<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的子群，若<span data-katex="\forall a\in G"></span>都有<span data-katex="Ha=aH"></span>，</p>
+
+<p>则称<span data-katex="H"></span>是<span data-katex="G"></span>的正规子群，记为<span data-katex="H\trianglelefteq G"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>商群</strong></p>
+
+<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的正规子群，</p>
+
+<p>定义<span data-katex="G/H=\{Hg|g\in G\}"></span>为<span data-katex="H"></span>在<span data-katex="G"></span>中的所有右陪集构成的集合，</p>
+
+<p>在<span data-katex="G/H"></span>上定义运算<span data-katex="\circ"></span>，对任意的<span data-katex="Ha,Hb\in G/H"></span>，</p>
+
+<p>有<span data-katex="Ha\circ Hb=Hab"></span>。</p>
+
+<p>则<span data-katex="G/H"></span>关于<span data-katex="\circ"></span>运算构成了一个群，称为<span data-katex="G"></span>的商群。</p>
+
+<p><br/></p>
+
+<p>注：如果<span data-katex="H"></span>不是正规子群，商仍可以得到，但结果将不是群，</p>
+
+<p>而是<a href="https://zh.wikipedia.org/wiki/%E9%BD%90%E6%80%A7%E7%A9%BA%E9%97%B4">齐次空间</a>。</p>
+
+<p><br/></p>
+
+<p><strong>群同态</strong></p>
+
+<p>设<span data-katex="G_1"></span>和<span data-katex="G_2"></span>是群，<span data-katex="\varphi"></span>是<span data-katex="G_1"></span>到<span data-katex="G_2"></span>的映射，</p>
+
+<p>若对于任意<span data-katex="x,y\in G"></span>有<span data-katex="\varphi(xy)=\varphi(x)\varphi(y)"></span>，</p>
+
+<p>则称<span data-katex="\varphi"></span>是群<span data-katex="G_1"></span>到<span data-katex="G_2"></span>的同态映射，简称同态。</p>
+
+<p><br/></p>
+
+<p>若把群看做是具有一个可结合的二元运算，一个求逆元的一元运算，</p>
+
+<p>和一个零元运算（二元运算的单位元）的代数系统，</p>
+
+<p>则上述定义的群同态，就是代数系统<span data-katex="\left \langle G_1,\bullet,\ ^{-1},e_1 \right \rangle"></span></p>
+
+<p>到<span data-katex="\left \langle G_2,\bullet,\ ^{-1},e_2 \right \rangle"></span>的同态。</p>
+
+<p><br/></p>
+
+<p><strong>同态核与同态像</strong></p>
+
+<p>设<span data-katex="\varphi :G_1\rightarrow G_2"></span>是群<span data-katex="G_1"></span>到<span data-katex="G_2"></span>的同态，则</p>
+
+<p><span data-katex="ker\ \varphi=\{x|x\in G\wedge \varphi(x)=e_2\}"></span></p>
+
+<p><span data-katex="im\ \varphi=\{\varphi(x)|x\in G_1\}"></span></p>
+
+<p><br/></p>
+
+<p>可证，同态核<span data-katex="ker\ \varphi"></span>是<span data-katex="G_1"></span>的正规子群，</p>
+
+<p>而同态像<span data-katex="im\ \varphi"></span>是<span data-katex="G_2"></span>的子群。</p>
+
+<p><br/></p>
+
+<p><strong>群同态基本定理</strong></p>
+
+<p>设<span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的正规子群，则<span data-katex="G"></span>的商群<span data-katex="G/H"></span>是<span data-katex="G"></span>的同态像。</p>
+
+<p>不难看出，群同态基本定理就是一般代数系统同态基本定理的特例。</p>
+
+<p><br/></p>
+
+<p>特别的，如果<span data-katex="\varphi :G_1\rightarrow G_2"></span>是群<span data-katex="G_1"></span>到<span data-katex="G_2"></span>的同态，</p>
+
+<p>则<span data-katex="G_1/(ker\ \varphi)\ \cong\ im\ \varphi"></span>。</p>
+
+<p><br/></p>
+
+<h2><strong>链复形与同调群</strong></h2>
+
+<p><strong>链复形</strong></p>
+
+<p>在数学上，同调代数领域中的一个链复形<span data-katex="(A_\bullet  ,d_\bullet )"></span>，</p>
+
+<p>是一个交换群或者模的序列，<span data-katex="A_0,A_1,A_2,\cdots"></span>，</p>
+
+<p>通过一系列同态<span data-katex="d_n:A_n\rightarrow A_{n-1}"></span>相连，</p>
+
+<p>使得每两个接连的映射复合为零，即<span data-katex="\forall n,\ d_n\circ d_{n+1}=0"></span>。</p>
+
+<p><br/></p>
+
+<p>它们常写作如下形式：</p>
+
+<p><span data-katex="\cdots \longrightarrow A_{n+1}\;{\tiny\begin{matrix}d_{n+1}\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A_n\;{\tiny\begin{matrix}d_n\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;\cdots\;{\tiny\begin{matrix}d_2\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A_1\;{\tiny\begin{matrix}d_1\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A_0\;{\tiny\begin{matrix}d_0\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;0"></span></p>
+
+<p><br/></p>
+
+<p><strong>同调群</strong></p>
+
+<p>定义链复形的同调群为<span data-katex="H_n(A_\bullet):=Ker(d_n)/Im(d_{n+1})"></span>，</p>
+
+<p>当所有同调群为零时，此链复形为正合的。</p>
+
+<p><br/></p>
+
+<p><strong>上链复形</strong></p>
+
+<p>链复形概念的一个变种是上链复形。</p>
+
+<p>一个上链复形<span data-katex="(A^\bullet  ,d^\bullet )"></span>，是一个交换群或者模的序列<span data-katex="A^0,A^1,A^2,\cdots"></span>，</p>
+
+<p>由一系列同态<span data-katex="d^n:A^n\rightarrow A^{n+1}"></span>相连，</p>
+
+<p>使得任何两个接连的映射复合为零，即<span data-katex="\forall n,\ d^{n+1}\circ d^n=0"></span>。</p>
+
+<p><span data-katex="0\longrightarrow A^0\;{\tiny\begin{matrix}d^0\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A^1\;{\tiny\begin{matrix}d^1\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;\cdots\;{\tiny\begin{matrix}d^{n-1}\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A^n\;{\tiny\begin{matrix}d^n\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A^{n+1}\longrightarrow \cdots"></span></p>
+
+<p><br/></p>
+
+<p><strong>上同调群</strong></p>
+
+<p>定义上链复形的上同调群为<span data-katex="H^n(A^\bullet):=Ker(d^n)/Im(d^{n-1})"></span>，</p>
+
+<p>当所有上同调群为零时，此上链复形正合。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>我们看到上同调群<span data-katex="H^n(A^\bullet)"></span>，</p>
+
+<p>是<span data-katex="Ker(d^n)"></span>关于<span data-katex="Im(d^{n-1})"></span>的商群。</p>
+
+<p><br/></p>
+
+<p>下面我们证明<span data-katex="Im(d^{n-1})"></span>是<span data-katex="Ker(d^n)"></span>的正规子群。</p>
+
+<p>（1）我们先证<span data-katex="Im(d^{n-1})"></span>是<span data-katex="Ker(d^n)"></span>的子群。</p>
+
+<p>对于上链复形，任何两个接连的映射复合为零，说明<span data-katex="Im(d^{n-1})\subseteq Ker(d^n)"></span>。</p>
+
+<p>且<span data-katex="Im(d^{n-1})"></span>是同态像，所以<span data-katex="Im(d^{n-1})\leqslant A^n"></span>，</p>
+
+<p>因此<span data-katex="Im(d^{n-1})"></span>关于群运算封闭，</p>
+
+<p>所以，根据子群的定义，<span data-katex="Im(d^{n-1})\leqslant Ker(d^n)"></span>。</p>
+
+<p><br/></p>
+
+<p>（2）我们再证<span data-katex="Im(d^{n-1})"></span>是<span data-katex="Ker(d^n)"></span>的正规子群。</p>
+
+<p>因为<span data-katex="A^n"></span>是交换群，所以它的子群也是交换群。</p>
+
+<p>而交换群的任一子群<span data-katex="H"></span>都有，<span data-katex="Ha={ha|h\in H}={ah|h\in H}=aH"></span>，</p>
+
+<p>因此交换群的任一子群都是正规子群。</p>
+
+<p><br/></p>
+
+<p>综上，<span data-katex="Im(d^{n-1})\trianglelefteq Ker(d^n)"></span>。</p>
+
+<p><br/></p>
+
+<p>所以，<span data-katex="H^n(A^\bullet):=Ker(d^n)/Im(d^{n-1})"></span>构成了一个群，</p>
+
+<p>它的元素是<span data-katex="Im(d^{n-1})"></span>的陪集，这些陪集划分了<span data-katex="Ker(d^n)"></span>。</p>
+
+<p><br/></p>
+
+<h2><strong>参考</strong></h2>
+
+<p><a href="https://zh.wikipedia.org/wiki/%E5%95%86%E7%BE%A4">商群</a></p>
+
+<p><a href="https://zh.wikipedia.org/wiki/%E7%BE%A4%E5%90%8C%E6%85%8B">群同态</a></p>
+
+<p><a href="https://zh.wikipedia.org/wiki/%E9%93%BE%E5%A4%8D%E5%BD%A2">链复形</a></p>
+
+<p><a href="https://book.douban.com/subject/1230394/">离散数学教程</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[可计算性理论名词释义]]></title>
@@ -550,6 +1086,10 @@
 <p>可计算谓词是可判定的，它定义的集合是递归的，</p>
 
 <p>如果谓词定义的集合是递归可枚举的，则该谓词是半可判定的。</p>
+
+<h2><strong>参考</strong></h2>
+
+<p><a href="https://book.douban.com/subject/1310925/">可计算性与计算复杂性导引</a></p>
 ]]></content>
   </entry>
   
@@ -4575,317 +5115,6 @@ JavaScript权威指南，JavaScript高级编程，JavaScrip DOM高级程序设�
 <p>人们也不可能在一个阶段同时抓住两件东西，只能舍弃一个，没关系，舍弃说明你得到了更重要的那个，过后你完全可以再有机会得到失去的那个，只要你坚持自己的梦想。</p>
 
 <p>相反，如果当时你拥有了失去的那个，应得的就会被错过，人生本来就是不完美的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[多做不如少做，不做不如去做]]></title>
-    <link href="https://thzt.github.io/blog/2016/01/26/less-is-more/"/>
-    <updated>2016-01-26T00:00:00+08:00</updated>
-    <id>https://thzt.github.io/blog/2016/01/26/less-is-more</id>
-    <content type="html"><![CDATA[<p>喜欢忙碌并不是勤奋。——塞内加</p>
-
-<p><br/></p>
-
-<p>在生活节奏日益加快的今天，</p>
-
-<p>忙碌似乎已经成了普遍现象了，</p>
-
-<p>大家急匆匆的做这个，</p>
-
-<p>忙着做那个，口里说着<strong>没时间</strong>。</p>
-
-<p><br/></p>
-
-<p>且不说对自身的影响，</p>
-
-<p><strong>我们这么忙，真的对要做的事情有益吗</strong>？</p>
-
-<p><br/></p>
-
-<p>有人说，</p>
-
-<p>初级人才，完成任务。</p>
-
-<p>中级人才，解决问题。</p>
-
-<p>高级人才，<strong>带来价值</strong>。</p>
-
-<p><br/></p>
-
-<p>我十分同意这种说法。</p>
-
-<p><br/></p>
-
-<p>上帝安排我们来到这个世界上，</p>
-
-<p>是希望我们有自己的活法，</p>
-
-<p>给世界带来不同。</p>
-
-<p><br/></p>
-
-<p>公司雇佣我们，</p>
-
-<p>是因为我们数十年的人生积累，</p>
-
-<p>可以帮助公司为客户带来价值，</p>
-
-<p>而不是仅仅忙起来这么简单。</p>
-
-<p><br/></p>
-
-<p>相似的，</p>
-
-<p>程序员应该把自己定位成解决方案的提供者，</p>
-
-<p>而不是帮助别人实现想法的人。</p>
-
-<p><br/></p>
-
-<p><strong>带来更大价值的事情是思考</strong>，</p>
-
-<p>要有成效，而不是忙碌起来。</p>
-
-<p><br/></p>
-
-<h2>有效的思考时间</h2>
-
-<p>如果回顾一下的话，</p>
-
-<p>每天中，我们的有效思考时间，</p>
-
-<p>实际上只占很少一部分，</p>
-
-<p><strong>可能只有短短几秒钟</strong>。</p>
-
-<p><br/></p>
-
-<p>那么，我们经过这么多年的，</p>
-
-<p>科学教育，人生阅历，挑灯苦读，</p>
-
-<p>都白白浪费了。</p>
-
-<p><br/></p>
-
-<p>事实上，<strong>多思考才对得起别人支付的薪水</strong>，</p>
-
-<p>否则，为什么请我们来做这件事情呢？</p>
-
-<p>好吧，我们其实并不是那么重要。</p>
-
-<p>不过，要先有这个自信。</p>
-
-<p><br/></p>
-
-<p>如果我们做的事情，</p>
-
-<p>当初不必努力学习，现在就可以做，</p>
-
-<p>那对企业来说就是资源浪费，</p>
-
-<p>也可能我们并不适合这个地方。</p>
-
-<p><br/></p>
-
-<p>因此，要<strong>尽可能的延长自己每天中的有效思考时间</strong>，</p>
-
-<p>这些通过思考而得来的结论，是我们的王牌，</p>
-
-<p>也是我们唯一的价值所在。</p>
-
-<p><br/></p>
-
-<p>与此同时，也不要走到另一个极端。</p>
-
-<p><strong>空想没有任何好处</strong>，</p>
-
-<p>还必须为自己的想法给出实现，</p>
-
-<p>落到实处。</p>
-
-<p><br/></p>
-
-<p>所以，我们一定是在实现自己的想法，</p>
-
-<p>而不是别人的想法。</p>
-
-<p><br/></p>
-
-<p>想法也必须由自己实现，</p>
-
-<p>才可以得到最直接的反馈，</p>
-
-<p>做出<strong>快速的调整</strong>。</p>
-
-<p><br/></p>
-
-<h2>学会拒绝</h2>
-
-<p>一个人的底线是什么，</p>
-
-<p>他在社会中对外界的表现就是什么。</p>
-
-<p><br/></p>
-
-<p>无论他能力超群，</p>
-
-<p>还是技高一筹，</p>
-
-<p>或者出类拔萃，</p>
-
-<p>这些都没有用。</p>
-
-<p><br/></p>
-
-<p><strong>同别人合作时</strong>，</p>
-
-<p><strong>迟早会迫使退回自己的底线</strong>，</p>
-
-<p>无法完全施展。</p>
-
-<p><br/></p>
-
-<p>所以说，在现实项目中，</p>
-
-<p>一个程序员的代码好坏，</p>
-
-<p>不止取决于自身的编码水平，</p>
-
-<p>还取决于他的底线。</p>
-
-<p><br/></p>
-
-<p>没有不紧的工期，</p>
-
-<p>没有资源足够的工程，</p>
-
-<p>如果一个程序员不坚守底线，哪怕水平再高，</p>
-
-<p>也只能编写劣质的软件。</p>
-
-<p><br/></p>
-
-<p>因为，实际安排工作的人，</p>
-
-<p>并不会面面俱到，亲自落实每一件事情，</p>
-
-<p>总会有一个折衷处理。</p>
-
-<p><br/></p>
-
-<p>学会拒绝吧。</p>
-
-<p><br/></p>
-
-<p>压力是我们自己造成的，</p>
-
-<p>除了吃饭睡觉之外，</p>
-
-<p>再<strong>没有不得不做的事情</strong>了。</p>
-
-<p><br/></p>
-
-<p>拒绝，还可以让安排工作的人清晰的认识到，</p>
-
-<p>他<strong>对资源的可控程度</strong>。</p>
-
-<p><br/></p>
-
-<p>很简单，<strong>要想有时间，那就少做点事情</strong>。</p>
-
-<p>如果可以多做，</p>
-
-<p>就不会考虑怎样在少做的情况下，</p>
-
-<p>达到相同的效果了。</p>
-
-<p><br/></p>
-
-<p>人们都会多做，很忙，</p>
-
-<p>然而对<strong>结果</strong>可能并没有什么帮助。</p>
-
-<p><br/></p>
-
-<h2>勇气</h2>
-
-<p>勇者，气也。</p>
-
-<p>气之所至，力亦至焉。</p>
-
-<p><strong>心</strong>之所至，气乃至焉。</p>
-
-<p><br/></p>
-
-<p>首先要有想法去做某件事情，</p>
-
-<p>又很想把它做好，才会有勇气。</p>
-
-<p><br/></p>
-
-<p>如果说从多做到少做，是第一步，</p>
-
-<p>从少做到不做，是第二步，</p>
-
-<p>那么从不做到<strong>去做</strong>，就是第三步了。</p>
-
-<p><br/></p>
-
-<p>在选择不做的前提下，</p>
-
-<p>在仔细分析了后果的条件下，</p>
-
-<p>我们要<strong>勇于做一些自认为正确的事情</strong>。</p>
-
-<p><br/></p>
-
-<p>对于所有的事情而言，</p>
-
-<p>如果不主动说出来，就没有人会理解，</p>
-
-<p>如果没有人开始，就不可能继续下去。</p>
-
-<p><br/></p>
-
-<p>没有勇气的人，</p>
-
-<p>对社会没有价值，</p>
-
-<p>对他人没有帮助。</p>
-
-<p><br/></p>
-
-<p><strong>有拈叶飞花都可以伤人的武功，却消极逃避</strong>，</p>
-
-<p><strong>不如，一把钝剑，勇于济世</strong>。</p>
-
-<p><br/></p>
-
-<h2>结语</h2>
-
-<p>如果心脏病发作了，</p>
-
-<p>每天只能工作4个小时，</p>
-
-<p>我们会怎样工作？</p>
-
-<p><br/></p>
-
-<p>怎么可能每天的工作，都恰好8个小时可以做完？</p>
-
-<p><br/></p>
-
-<p>人生不是通过加速就可以体味到更多。——莫罕达斯·甘地</p>
-
-<p>忙碌的人忙于任何事情，除了生活。——塞内加</p>
-
-<p><br/></p>
-
-<p>参考：</p>
-
-<p>《<a href="http://book.douban.com/subject/10786476/">每周工作4小时</a>》</p>
 ]]></content>
   </entry>
   
