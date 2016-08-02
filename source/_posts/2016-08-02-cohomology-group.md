@@ -498,11 +498,11 @@ description:
 
 <br/>
 
-（2）我们再证<span data-katex="Im(d^{n-1})"></span>是<span data-katex="Ker(d^n)"></span>的正规子群。
+（2）我们再证交换群的子群是正规子群。
 
 因为<span data-katex="A^n"></span>是交换群，所以它的子群也是交换群。
 
-而交换群的任一子群<span data-katex="H"></span>都有，<span data-katex="Ha={ha|h\in H}={ah|h\in H}=aH"></span>，
+而交换群的任一子群<span data-katex="H"></span>都有，<span data-katex="Ha=\{ha|h\in H\}=\{ah|h\in H\}=aH"></span>，
 
 因此交换群的任一子群都是正规子群。
 
