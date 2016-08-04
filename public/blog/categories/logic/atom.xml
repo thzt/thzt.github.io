@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Logic | 何幻]]></title>
   <link href="https://thzt.github.io/blog/categories/logic/atom.xml" rel="self"/>
   <link href="https://thzt.github.io/"/>
-  <updated>2016-08-02T15:22:39+08:00</updated>
+  <updated>2016-08-04T19:00:17+08:00</updated>
   <id>https://thzt.github.io/</id>
   <author>
     <name><![CDATA[thzt]]></name>
@@ -957,7 +957,7 @@
 
 <p><span data-katex="A(k+1,0)=A(k,1)"></span></p>
 
-<p><span data-katex="A(K+1,x+1)=A(k,A(k+1,x))"></span></p>
+<p><span data-katex="A(k+1,x+1)=A(k,A(k+1,x))"></span></p>
 
 <p><br/></p>
 

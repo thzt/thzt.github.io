@@ -402,7 +402,7 @@ description:
 
 <span data-katex="A(k+1,0)=A(k,1)"></span>
 
-<span data-katex="A(K+1,x+1)=A(k,A(k+1,x))"></span>
+<span data-katex="A(k+1,x+1)=A(k,A(k+1,x))"></span>
 
 <br/>
 
