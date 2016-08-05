@@ -183,7 +183,29 @@ The limits of your language are the limits of your world.
 
 <br/>
 
-**参考**
+## **结语**
+
+我们已经听说过一万小时定律了，然而我觉得它并不靠谱，
+
+并不是每个人都适合做程序员，尤其是成为专业人士，
+
+就像写了这么多年作文，也无法成为作家一样。
+
+我们得接受现实，做自己能力范围之内爱好的事情。
+
+<br/>
+
+如果硬要总结出编程行业门槛的话，我想应该是这样的，
+
+要想学会编程，就需要我们敢于先把未知放下，等羽翼丰满后，回过头来再战。
+
+Don't sweat the stuff you don't understand immediately. Keep moving!
+
+Only people who die very young learn all they really need to know in kindergarten.
+
+<br/>
+
+## **参考**
 
 [理解专业程序员](https://book.douban.com/subject/1866824/)
 
