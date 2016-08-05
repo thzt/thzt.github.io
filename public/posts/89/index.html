@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>何幻</title>
+  <meta name="author" content="thzt">
+
+  
+  <meta name="description" content="传说中的lisp语言 学习c语言，能让你成为一个更好的程序员。 而学习lisp语言，则一定能让你成为一个程序员。 lisp这门编程语言真有这种魔力吗？ 它确实能改变一个人的思维方式吗？ 使用lisp编程，就能成为业界大牛吗？ 学习并不是一件值得骄傲的事情 没有学习它时，我们听到看到的都是别人的说法 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://thzt.github.io/posts/89/" />
+  <link type="favicon" rel="shortcut icon" href="/favicon.ico" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="何幻" type="application/atom+xml" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.useso.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.useso.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">何幻</a></h1>
+  
+    <h2>Programming is about ideas, languages are just a way to express them.</h2>
+  
+</hgroup>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "//hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<ul class="main-navigation">
+	<li><a href="/">Newest</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/06/lisper/">在Lisp的光环之下</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-06T00:00:00+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2><strong>传说中的lisp语言</strong></h2>
+
+<p>学习<a href="http://zh.wikipedia.org/wiki/C%E8%AF%AD%E8%A8%80">c语言</a>，能让你成为一个更好的程序员。</p>
+
+<p>而学习<a href="http://zh.wikipedia.org/wiki/LISP">lisp语言</a>，则一定能让你成为一个程序员。</p>
+
+<p><br/></p>
+
+<p>lisp这门编程语言真有这种魔力吗？</p>
+
+<p>它确实能改变一个人的思维方式吗？</p>
+
+<p>使用lisp编程，就能成为业界大牛吗？</p>
+
+<p><br/></p>
+
+<h2><strong>学习并不是一件值得骄傲的事情</strong></h2>
+
+<p>没有学习它时，我们听到看到的都是别人的说法。lisp语言的真实面目，淹没在了他人的<a href="http://developer.51cto.com/art/201105/262930.htm">赞美</a>之中。</p>
+
+<p>我们看不到负面消息，得不出有价值的判断。就像<a href="http://zh.wikipedia.org/wiki/%E5%9C%8B%E7%8E%8B%E7%9A%84%E6%96%B0%E8%A1%A3">皇帝的新衣</a>一样，似乎你说lisp语言坏话就证明你愚蠢一样。</p>
+
+<p>我不能忍受这种想法，也为了验证怎样才能确实成为一个程序员，于是我就开始学习lisp了。</p>
+
+<p><br/></p>
+
+<p>摆正自己的学习态度其实很重要。</p>
+
+<p>如果你想成为神枪手，偷了他的枪是没有用的。</p>
+
+<p>学习lisp并不是一件值得吹嘘的事情。</p>
+
+<p>应该虔诚的看待这一门古老的语言。因为无知，所以学习。</p>
+
+<p><br/></p>
+
+<p>学习过程中，我路过了我所谓的lisp语言的“三座大山”：词法<a href="http://zh.wikipedia.org/wiki/%E4%BD%9C%E7%94%A8%E5%9F%9F">作用域</a>，continuation，<a href="http://zh.wikipedia.org/wiki/%E5%B7%A8%E9%9B%86">宏</a>。</p>
+
+<p>为什么称为“三座大山”呢，因为学习起来颇费周折，总是不能给自己一个满意的答案。</p>
+
+<p>然而每过一座大山，我都感觉好像脱胎换骨一样。</p>
+
+<p><br/></p>
+
+<p>为了学习词法作用域，我看了编译原理，学了<a href="http://zh.wikipedia.org/wiki/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90">词法分析</a>，<a href="http://zh.wikipedia.org/wiki/%E8%AA%9E%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8">语法分析</a>，明白了静态作用域和动态作用域。知道了什么是<a href="http://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6">闭包</a>)，知道了<a href="http://zh.wikipedia.org/wiki/%E7%AC%A6%E5%8F%B7%E8%A1%A8">符号表</a>，理解了<a href="http://zh.wikipedia.org/wiki/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0">高阶函数</a>是怎样实现的。</p>
+
+<p>为了学习continuation和宏，几乎把<a href="http://www.scheme.com/tspl4/">TSPL4</a>翻译了一遍。call/cc，CPS，编译宏，读取宏。学习了<a href="http://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E5%99%A8">编译器</a>设计，区分了读取期，编译期和运行期。理解了<a href="http://zh.wikipedia.org/wiki/%E5%85%83%E7%BC%96%E7%A8%8B">元编程</a>。</p>
+
+<p><br/></p>
+
+<p>就这样，lisp的面目逐渐清晰了，也不是那么神秘了。</p>
+
+<p>这正是，不识庐山真面目，只缘身在此山中啊。</p>
+
+<p>欲穷千里目，更上一层楼。</p>
+
+<p><br/></p>
+
+<h2><strong>平淡的认识</strong></h2>
+
+<p>随着学习的深入，和其他小知识的触类旁通。lisp语言在我眼中已经不再是万能的了，它是那么暗淡又深沉。</p>
+
+<p>同时我也认为任何学习都会经历这个过程，从抵触到崇拜，再到宠辱不惊。</p>
+
+<p>人的世界观真的会随着知识的积累而改变呀。</p>
+
+<p><br/></p>
+
+<p>然而，我知道以后的路还长着呢，我这才刚起步。</p>
+
+<p><br/></p>
+
+<p>我回想了一下当时的心态，确实是有些不同了。</p>
+
+<p><br/></p>
+
+<ul>
+<li>编程语言是什么</li>
+</ul>
+
+
+<p>首先，编程语言是一个<a href="http://baike.baidu.com/view/448623.htm">模型</a>，它编码了计算过程。</p>
+
+<p>而区分模型和它<a href="http://baike.baidu.com/view/5159429.htm">指代</a>的东西很重要。</p>
+
+<p>正如1,2,3,&hellip;代表了自然数一样，这些符号其实不是自然数本身，它们只是自然数的一种表示而已。</p>
+
+<p>学过<a href="http://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97">λ演算</a>的话，就知道了<a href="http://zh.wikipedia.org/wiki/%E9%82%B1%E5%A5%87%E6%95%B0">Church数</a>也是自然数一种表示。</p>
+
+<p><br/></p>
+
+<p>有了这样的认识，对理解宏，理解编程语言，很有帮助。</p>
+
+<p>一般的编程语言，解决实际工作问题，比如写个网站呀，做个科学计算什么的。</p>
+
+<p>而宏语言是建立在这个编程语言之上的，专门解决这个编程语言代码的问题，比如制作一个模板来生成代码，对代码进行分析等等。</p>
+
+<p>而lisp的可贵之处在于，实际工作问题中数据的表示方式和lisp语言代码的表示方式是一样的。</p>
+
+<p>这是天大的好事，因为这样的话就可以用统一的语法来处理了。</p>
+
+<p>这事实上不自主的暗中扩大的语言使用者的能力。</p>
+
+<p><br/></p>
+
+<p>为什么这么说呢，如果不是高级程序员，一般不会想到编程来处理代码。</p>
+
+<p>他们只会做编程语言的“分内之事”，因为程序代码是一串字符，没办法轻易操作。</p>
+
+<p>例如：你没有直接办法从字符串中，取出一个函数的定义。</p>
+
+<p><br/></p>
+
+<p>你得使用<a href="http://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式</a>或<a href="http://baike.baidu.com/view/1268934.htm">antlr</a>进行分析。c语言的话你可能得使用<a href="http://baike.baidu.com/view/1212084.htm">lex</a>和<a href="http://baike.baidu.com/view/553546.htm">yacc</a>。</p>
+
+<p>但是lisp语言处理lisp代码就出奇的简单。</p>
+
+<p>因为lisp代码本身就是lisp语言的一个“内置对象”，列表，你可以轻易取出函数名，函数体，形参列表等等。</p>
+
+<p>如果操作简单，你就会有更多的思考倾向，所以lisp语言暗中帮助了你。</p>
+
+<p><br/></p>
+
+<p>打破了处理代码比较困难这层隔阂之后。</p>
+
+<p>你就不再惧怕用编程方式解决问题了。</p>
+
+<p>你就学会了用程序员的眼睛来看世界了。</p>
+
+<p>这也许就是lisp语言一定能让成为一个程序员的原因所在吧。</p>
+
+<p><br/></p>
+
+<ul>
+<li>工具是拿来用的</li>
+</ul>
+
+
+<p>其次，编程语言是工具的一种，没有最好的，只有适用的。</p>
+
+<p>编程语言是为了解决具体问题而已发明的，所以一种编程语言不可能解决所有的问题。</p>
+
+<p>就像<a href="http://zh.wikipedia.org/wiki/%E5%81%9C%E6%9C%BA%E9%97%AE%E9%A2%98">停机问题</a>一样，有些问题事实上是不可解的。</p>
+
+<p>语言在面对各种问题时，也是具有优缺点的。</p>
+
+<p>就像人一样，都有擅长处理和不擅长处理的事情。</p>
+
+<p><br/></p>
+
+<p>编程语言之争，只存在于初级程序员的圈子里，因为他们只会一门或一两门语言，不懂语法分析过程，不知道<a href="http://baike.baidu.com/view/1874022.htm">AST</a>，不了解编译器优化，不知道有<a href="http://zh.wikipedia.org/wiki/%E9%93%BE%E6%8E%A5%E5%99%A8">链接</a>过程，更不知道<a href="http://baike.baidu.com/view/1616623.htm">DSL</a>。</p>
+
+<p><br/></p>
+
+<p>那么，争论一门语言好坏，也就是只能靠语感了吧。</p>
+
+<p><br/></p>
+
+<p>当然，即便如此，争论也并没有错。</p>
+
+<p>参与争论把自己搞糊涂，通过努力学习来解惑。</p>
+
+<p><br/></p>
+
+<p>把各种编程语言平等对待，是很好的编程实践。</p>
+
+<p>这样的话，能始终让你找到简洁的解决方案。</p>
+
+<p><br/></p>
+
+<p>读取宏就是这样的一个概念，它赋予了你对读取器进行编程的能力。</p>
+
+<p>使得你读到的任何字符，都会在编译前转换成了lisp代码。</p>
+
+<p>拥有这种能力，你就好像带着一个神奇的眼镜一样，看到的任何东西都是lisp。</p>
+
+<p><br/></p>
+
+<p>然而，不能过分迷恋某个事物，应该时常提醒自己，谨防一叶障目不见泰山。</p>
+
+<p><br/></p>
+
+<ul>
+<li>是什么改变了思维方式</li>
+</ul>
+
+
+<p>最后，编程语言确实会影响一个人的思维方式，这一点我不否认。</p>
+
+<p>但是，产生影响的作用效果，却不是在使用过程中发挥的，而是在学习过程中发挥的。</p>
+
+<p>你看到黑客在使用lisp编程，不代表着用lisp编程的都是黑客。</p>
+
+<p><br/></p>
+
+<p>学习一门新的编程语言，无论如何都是有帮助的。</p>
+
+<p>它可以开阔视野，放低姿态，击碎傲慢，保持谦虚。</p>
+
+<p>甚至，还可以淘汰一些不爱学习的人。</p>
+
+<p><br/></p>
+
+<p>lisp之所以能对一个学习者产生深远影响，正在于学习它的过程。</p>
+
+<p>为了学明白，可能不得已而去学习<a href="http://zh.wikipedia.org/wiki/%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">形式语言</a>与<a href="http://baike.baidu.com/view/409351.htm">自动机</a>，<a href="http://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B8%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80">函数式编程</a>，<a href="http://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97">λ演算</a>，<a href="http://zh.wikipedia.org/wiki/%E5%8F%AF%E8%AE%A1%E7%AE%97%E6%80%A7">可计算性</a>与<a href="http://zh.wikipedia.org/wiki/%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E6%80%A7%E7%90%86%E8%AB%96">计算复杂度</a>，<a href="http://zh.wikipedia.org/wiki/%E5%BD%A2%E5%BC%8F%E8%AF%AD%E4%B9%89%E5%AD%A6">语义学</a>，还有一些数学，英语等等。</p>
+
+<p>为了进行比较，我也先后学习了很多种编程语言。</p>
+
+<p><a href="http://zh.wikipedia.org/wiki/C%E8%AF%AD%E8%A8%80">C</a> <a href="http://zh.wikipedia.org/wiki/C%2B%2B">C++</a> <a href="http://zh.wikipedia.org/wiki/C%E2%99%AF">C#</a> <a href="http://zh.wikipedia.org/wiki/Java">Java</a> <a href="http://zh.wikipedia.org/wiki/Scheme">Scheme</a> <a href="http://zh.wikipedia.org/wiki/Common_Lisp">CL</a> <a href="http://zh.wikipedia.org/wiki/Haskell">Haskell</a> <a href="http://zh.wikipedia.org/wiki/Erlang">Erlang</a> <a href="http://zh.wikipedia.org/wiki/Python">Python</a> <a href="http://zh.wikipedia.org/wiki/Ruby">Ruby</a> <a href="http://zh.wikipedia.org/wiki/JavaScript">JavaScript</a> <a href="http://zh.wikipedia.org/wiki/Go">Go</a> <a href="http://zh.wikipedia.org/wiki/Clojure">Clojure</a>。</p>
+
+<p>当然，这些语言我都不熟悉也不精通，刚刚了解。</p>
+
+<p><br/></p>
+
+<p>这些收获对于一个程序员的修炼是至关重要的。</p>
+
+<p>能为你从专业的角度来看待问题打下了坚实的基础。</p>
+
+<p><br/></p>
+
+<p>当然，对于软件开发来说，这些知识简直是沧海之一粟，就算成为一个合格的软件工程师都比较勉强。</p>
+
+<p>所以，避开lisp的光环，谦虚自信的学习，不卑不亢。</p>
+
+<p>就把lisp当做漫长学习路上的一段崎岖小路吧。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>如果在你的项目组中，发现了一个lisp程序员。</p>
+
+<p>他思维诡异，别人经常都不知道他在说什么，似乎很蠢。</p>
+
+<p>也请接纳他，付之一笑吧。</p>
+
+<p>因为，至少他是个好学之人呀。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/88">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Categories</h1>
+	<ul id="categories">
+		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
+<li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
+<li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (9)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
+<li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
+
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/08/05/professional-programmer/">专业程序猿的修炼指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/08/02/cohomology-group/">懵逼的上同调群</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/01/the-way-to-express/">重在表达</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/06/25/complete-partial-order/">不动点算子与完全偏序</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/06/08/algebraic-data-type/">代数数据类型的语法和语义</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/06/02/requirement-change/">如何应对需求变更</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/05/29/let-things-happen/">让事情去发生</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/05/19/type-theory-in-my-eye/">类型理论之拙见</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+	<h1>GitHub Repos</h1>
+	
+	
+    <ul>
+        <li><a href="https://github.com/thzt">@thzt</a> on GitHub</li>
+    </ul>
+	
+	
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - thzt -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
