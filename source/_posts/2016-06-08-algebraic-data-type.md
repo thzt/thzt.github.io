@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Logic
+categories: Math
 title: 代数数据类型的语法和语义
 description: 
 ---

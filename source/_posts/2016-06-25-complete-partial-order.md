@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Logic
+categories: Math
 title: 不动点算子与完全偏序
 description: 
 ---

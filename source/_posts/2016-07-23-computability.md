@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Logic
+categories: Math
 title: 可计算性理论名词释义
 description: 
 ---

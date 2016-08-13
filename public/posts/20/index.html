@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="小时候，我就对侦探非常着迷， 买了很多介绍破案的漫画书，故事书，小说。 什么《大宇神秘惊奇系列》啊， 《名侦探柯南》啊， 《福尔摩斯探案全集》啊，等等。 可是，对于什么是推理， 以及怎样进行推理， 并没有清晰系统的认识。 学生时代，从平面几何开始， 我们就知道了证明题。 经过一步一步的推导， &hellip;">
+  <meta name="description" content="博弈论又称为对策论（Game Theory）， 既是现代数学的一个分支，也是运筹学的一个重要学科。 博弈论思想古已有之， 中国古代的《孙子兵法》等著作就不仅是一部军事著作， 而且算是最早的一部博弈论著作。 故我欲战，敌虽高垒深沟，不得不与我战者，攻其所必救也； 我不欲战，画地而守之，敌不得与我战者 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/03/01/proof-and-deduction/">形式证明与逻辑推理</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/03/06/game-theory-in-team-building/">团队建设中的博弈论</a></h1>
     
     
       <p class="meta">
@@ -83,399 +83,268 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2016-03-01T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2016-03-06T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><script src="/thirdpart/jQuery/jquery-1.11.1.js"></script>
+  <div class="entry-content"><p>博弈论又称为对策论（Game Theory），</p>
 
-
-<p><link href="/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
-
-<script src="/thirdpart/KaTeX/katex.min.js"></script>
-
-
-<script src="/javascripts/katex.js"></script>
-
-
-<p>小时候，我就对侦探非常着迷，</p>
-
-<p>买了很多介绍破案的漫画书，故事书，小说。</p>
+<p>既是现代数学的一个分支，也是运筹学的一个重要学科。</p>
 
 <p><br/></p>
 
-<p>什么《大宇神秘惊奇系列》啊，</p>
+<p>博弈论思想古已有之，</p>
 
-<p>《名侦探柯南》啊，</p>
+<p>中国古代的《孙子兵法》等著作就不仅是一部军事著作，</p>
 
-<p>《福尔摩斯探案全集》啊，等等。</p>
-
-<p><br/></p>
-
-<p>可是，对于<strong>什么是推理</strong>，</p>
-
-<p>以及怎样进行推理，</p>
-
-<p>并没有清晰系统的认识。</p>
+<p>而且算是最早的一部博弈论著作。</p>
 
 <p><br/></p>
 
-<p>学生时代，从平面几何开始，</p>
+<p><strong>故我欲战，敌虽高垒深沟，不得不与我战者，攻其所必救也；</strong></p>
 
-<p>我们就知道了证明题。</p>
+<p><strong>我不欲战，画地而守之，敌不得与我战者，乖其所之也。</strong></p>
 
-<p>经过一步一步的推导，</p>
+<p>我想与敌交战，虽然敌人高筑防御工事也不得不出来与我交战，</p>
 
-<p>最后证明结论成立。</p>
+<p>是因为我攻击它必然要救援的地方；</p>
 
-<p><br/></p>
+<p>我不想同敌交战，只要在地上画个界线便可守住，敌人无法与我交锋，</p>
 
-<p>可是，对于<strong>什么是证明</strong>，</p>
-
-<p>并没有人能说出精确的定义。</p>
+<p>是因为我设法调动它，使它背离所要进攻的方向。</p>
 
 <p><br/></p>
 
-<p>这一切，难道真是只是个谜吗？</p>
+<p>敌军怎么肯听从调遣呢？</p>
 
-<p>是人类的未知领域吗？</p>
+<p>原因就在于，敌军可进行的所有选择中，</p>
 
-<p><br/></p>
-
-<p>其实不然。</p>
-
-<p><strong>逻辑学</strong>就是研究推理和证明的学科，</p>
-
-<p>研究思维的形式，规律和方法。</p>
+<p>我们安排了一条<strong>利益最大</strong>的选择使之中招。</p>
 
 <p><br/></p>
 
-<p>其中，数理逻辑是逻辑学与数学的交叉学科，</p>
-
-<p>用数学的方法研究逻辑，</p>
-
-<p>我想，答案应该在这里吧。</p>
+<p>这就是《孙子兵法》讲究的<strong>『势』</strong>了。</p>
 
 <p><br/></p>
 
-<h2><strong>大局观</strong></h2>
+<p><strong>故善战者，求之于势，不责于人。</strong></p>
 
-<p>数理逻辑虽然博大精深，</p>
-
-<p>但是研究方法却非常简洁优美。</p>
+<p>高明的指挥员，总是从自己造『势』中去追求胜利，而不苛求部下以苦战取胜。</p>
 
 <p><br/></p>
 
-<p>给定一套逻辑系统，</p>
+<p>可是，这是战争，和团队建设有什么关系呢？</p>
 
-<p>分别从两个侧面来描述这个系统的性质。</p>
-
-<p>语法层面，语义层面。</p>
+<p>和博弈论又有什么关系呢？</p>
 
 <p><br/></p>
 
-<p><strong>语法</strong>，指的是构成这个逻辑系统的符号规则，</p>
-
-<p>由公理和定理的推导规则组成，</p>
-
-<p>让我们可以从一串合法的符号得到另一串合法符号，</p>
-
-<p>称之为<strong>形式证明</strong>。</p>
+<p>这还要从一个例子说起。</p>
 
 <p><br/></p>
 
-<p><strong>语义</strong>，指的是用什么样的数学对象可以解释这些符号，</p>
+<h2><strong>势：囚徒困境与纳什均衡</strong></h2>
 
-<p>由论域和解释函数组成，我们得到的是一些代数结构，</p>
+<p>两个共谋犯罪的人被关入监狱，不能互相沟通。</p>
 
-<p>而且，从已知符号串的语义性质得到了其他符号串的性质，</p>
+<p>如果两个人都不揭发对方，则由于证据不确定，每个人都坐牢一年；</p>
 
-<p>称之为<strong>逻辑推理</strong>。</p>
+<p>若一人揭发，而另一人沉默，则揭发者因为立功而立即获释，沉默者因不合作而入狱五年；</p>
 
-<p><br/></p>
-
-<p>学校中的数理逻辑教科书，介绍了<strong>命题演算</strong>和<strong>一阶谓词演算</strong>这两个典型的逻辑系统。</p>
-
-<p>它们各自的语义解释，恰好描述了日常生活中推理问题。</p>
+<p>若互相揭发，则因证据确实，二者都判刑两年。</p>
 
 <p><br/></p>
 
-<p>总之，数理逻辑，用一套符号，对生活中常见的逻辑问题，进行了数学建模，</p>
+<p>在这种情况下，每个囚徒，都是这样考虑的。</p>
 
-<p>研究它，希望得到与证明和推理相关的更多性质和结论。</p>
+<p>如果对方不揭发，自己不揭发，判刑两年，自己揭发，免刑。</p>
 
-<p><br/></p>
-
-<h2><strong>形式证明</strong></h2>
-
-<p>为了说明问题，而又不引入过多的逻辑学概念，</p>
-
-<p>我们从命题逻辑开始。</p>
+<p>如果对方揭发，自己不揭发，判刑五年，自己揭发，判刑两年。</p>
 
 <p><br/></p>
 
-<p>命题逻辑的形式化演算系统大体上可分为两种类型，</p>
+<p><strong>可见，无论对方怎样选择，自己选择揭发总是最优的。</strong></p>
 
-<p>一是<strong>希尔伯特式</strong>的公理化演算系统，</p>
-
-<p>二是<strong>甘岑(Gentzen)式</strong>的自然推理系统。</p>
+<p>最终两个人由于互相揭发，各判两年。</p>
 
 <p><br/></p>
 
-<p>这两个系统各有所长，</p>
+<p>从博弈论来看，</p>
 
-<p>前者更能体现公理化的思想，但其推理过程比较繁琐，</p>
-
-<p>后者形式推理比较自然，但是规则较多。</p>
+<p>囚徒们所采取的这种策略，是囚徒困境中的一个<strong>纳什均衡</strong>。</p>
 
 <p><br/></p>
 
-<p>下面只说<strong>命题演算的自然推理系统</strong>。</p>
+<p>所谓纳什均衡，指的是参与人的这样一种策略组合，</p>
+
+<p>在该策略组合上，任何参与人单独改变策略，都不会得到好处。</p>
 
 <p><br/></p>
 
-<p><strong>语法：</strong></p>
+<p>可惜的是，纳什均衡并不一定是整体最优的。</p>
 
-<p>（1）可数个命题符号：<span data-katex="p_1,p_2,\cdots"></span></p>
-
-<p>（2）5个联接词符号：<span data-katex="\neg,\lor,\land,\to,\leftrightarrow"></span></p>
-
-<p>（3）2个辅助符号：<span data-katex="),("></span></p>
+<p>但是局中人所受的影响却是巨大的。</p>
 
 <p><br/></p>
 
-<p><strong>公式：（BNF）</strong></p>
+<h2><strong>险：团队凝聚之道</strong></h2>
 
-<p><span data-katex="\alpha::=p|(\neg\alpha)|(\alpha_1\lor\alpha_2)|(\alpha_1\land\alpha_2)|(\alpha_1\to\alpha_2)|(\alpha_1\leftrightarrow\alpha_2)"></span></p>
+<p>团队合作是一个老生常谈的问题，</p>
 
-<p><br/></p>
-
-<p><strong>推导规则：</strong></p>
-
-<p>（1）<span data-katex=""></span>包含律：<span data-katex="\frac{\alpha\in\Gamma}{\Gamma\vdash\alpha}"></span></p>
-
-<p>（2）<span data-katex="\neg"></span>消去律：<span data-katex="\frac{\Gamma,\neg\alpha\vdash\beta;\Gamma,\neg\alpha\vdash\neg\beta}{\Gamma\vdash\alpha}"></span></p>
-
-<p>（3）<span data-katex="\to"></span>消去律：<span data-katex="\frac{\Gamma\vdash(\alpha\to\beta);\Gamma\to\alpha}{\Gamma\vdash\beta}"></span></p>
-
-<p>（4）<span data-katex="\to"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta}{\Gamma\vdash\alpha\to\beta}"></span></p>
-
-<p>（5）<span data-katex="\lor"></span>消去律：<span data-katex="\frac{\Gamma,\alpha\vdash\gamma;\Gamma,\beta\vdash\gamma}{\Gamma,\alpha\lor\beta\vdash\gamma}"></span></p>
-
-<p>（6）<span data-katex="\lor"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha}{\Gamma\vdash\alpha\lor\beta;\Gamma\vdash\beta\lor\alpha}"></span></p>
-
-<p>（7）<span data-katex="\land"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\land\beta}{\Gamma\vdash\alpha;\Gamma\vdash\beta}"></span></p>
-
-<p>（8）<span data-katex="\land"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha;\Gamma\vdash\beta}{\Gamma\vdash\alpha\land\beta}"></span></p>
-
-<p>（9）<span data-katex="\leftrightarrow"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\alpha}{\Gamma\vdash\beta}"></span>，<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\beta}{\Gamma\vdash\alpha}"></span></p>
-
-<p>（10）<span data-katex="\leftrightarrow"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta;\Gamma,\beta\vdash\alpha}{\Gamma\vdash\alpha\leftrightarrow\beta}"></span></p>
+<p>怎样打造有凝聚力的团队，是重中之重。</p>
 
 <p><br/></p>
 
-<p><strong>例子：</strong></p>
-
-<p>使用这些推理规则，我们就可以从一些合法的符号串，</p>
-
-<p>推导出另一些合法的符号串了。</p>
+<p>《孙子兵法》有这样的一个例子。</p>
 
 <p><br/></p>
 
-<p>（1）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha\to\beta"></span>：<span data-katex=""></span>包含律</p>
+<p><strong>夫吴人与越人相恶也，当其同舟而济，遇风，其相救也如左右手。</strong></p>
 
-<p>（2）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha"></span>：<span data-katex=""></span>包含律</p>
+<p><strong>故善用兵者，携手若使一人，不得已也。</strong></p>
 
-<p>（3）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\beta"></span>：<span data-katex="\to"></span>消去律，式（1），式（2）</p>
+<p>吴人与越人是相互仇视的，当他们同船过渡突遇大风时，他们相互救助起来如同左右手。</p>
 
-<p>（4）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\beta\to\alpha"></span>：<span data-katex=""></span>包含律</p>
-
-<p>（5）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\gamma"></span>：<span data-katex="\to"></span>消去律，式（3），式（4）</p>
-
-<p>（6）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha\to\gamma"></span>：<span data-katex="\to"></span>引入律，式（5）</p>
+<p>因此，古代善于用兵的人，能使部队携手如同一个人一样服从指挥，是将部队置于不得已的情况下形成的。</p>
 
 <p><br/></p>
 
-<p>有了这些以后，我们就可以定义什么是一个<strong>证明</strong>了。</p>
+<p>这样看来，与其相信团队天生默契，</p>
 
-<p><strong>证明序列：</strong></p>
-
-<p>若有限序列，<span data-katex="\Gamma_1\vdash\alpha_1,\Gamma_2\vdash\alpha_2,\cdots ,\Gamma_n\vdash\alpha_n"></span>满足，</p>
-
-<p>（1）<span data-katex="\Gamma_1,\Gamma_2,\cdots ,\Gamma_n"></span>为有限公式集</p>
-
-<p>（2）<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>为公式</p>
-
-<p>（3）每个<span data-katex="\Gamma_i\vdash\alpha_i(1\leq i\leq n)"></span>都是它之前若干个<span data-katex="\Gamma_j\vdash\alpha_j(1\leq j<i\leq n)"></span>应用某条推导规则得到的</p>
+<p>不如把默契看做成员们不得已而为之的选择。</p>
 
 <p><br/></p>
 
-<p>则称这个有限序列为<span data-katex="\Gamma_n\vdash\alpha_n"></span>的一个<strong>（形式）证明序列</strong>。</p>
+<p><strong>故兵之情，围则御，不得已则斗，过则从。</strong></p>
 
-<p>此时，也称<span data-katex="\alpha_n"></span>可由<span data-katex="\Gamma_n"></span><strong>（形式）证明</strong>，</p>
+<p>士兵的心理变化规律是：</p>
 
-<p>记为<span data-katex="\Gamma_n\vdash_N\alpha_n"></span>，其中<span data-katex="N"></span>表示自然推理系统。</p>
-
-<p><br/></p>
-
-<h2><strong>逻辑推理</strong></h2>
-
-<p>上文提到的是命题演算的自然推理系统，</p>
-
-<p>这是一个形式系统，我们介绍了它的语法和推导规则，</p>
-
-<p>根据这些推导规则，可以从一些合法的符号串推导出另一些，</p>
-
-<p>在这个基础上，我们定义了什么叫做（形式）证明。</p>
+<p>被包围就会合力抵御，不得已时就会殊死奋战，陷于深重危难境地就非常听从指挥。</p>
 
 <p><br/></p>
 
-<p>如何<strong>解释</strong>这些符号呢？</p>
+<p>因此，要想让团队凝聚，就得营造一种危难的局势，</p>
 
-<p>它们有什么含义呢？</p>
-
-<p><br/></p>
-
-<p>我们给每一个合法的<strong>公式</strong>指定一个<strong>逻辑命题</strong>，作为这个公式的解释。</p>
-
-<p>为每一个<strong>联接词符号</strong>指定一个<strong>真值函数</strong>，作为这个联接词符号的解释。</p>
+<p>出于自救，大家才不得不团结起来。</p>
 
 <p><br/></p>
 
-<p><strong>命题：</strong></p>
+<h2><strong>动：机会把握的三种境界</strong></h2>
 
-<p>命题是可以判断真假值的句子。</p>
+<p>在其他领域，也会涉及团队和执行。</p>
 
-<p><br/></p>
+<p>例如，在篮球比赛中，怎么样评价一个战术执行者的优劣呢？</p>
 
-<p><strong>真值函数：</strong></p>
-
-<p><span data-katex="\{0,1\}"></span>上的<span data-katex="n"></span>元函数，<span data-katex="f:\{0,1\}^n\to\{0,1\}"></span></p>
-
-<p>称为一个<span data-katex="n"></span>元真值函数。</p>
+<p>（组织后卫是篮球比赛中的战术执行者）</p>
 
 <p><br/></p>
 
-<p>我们将每个联接词与一个真值函数一一对应起来，</p>
+<p>能力差的后卫，<strong>错过机会</strong>。</p>
 
-<p>那么，复合命题的真假值就可以通过子命题的真假值计算出来了。</p>
+<p>他的表现是，一直追赶之前错过的时间，</p>
 
-<p><br/></p>
-
-<p><strong>指派：</strong></p>
-
-<p>设<span data-katex="\alpha"></span>为一个命题，<span data-katex="\alpha"></span>中出现的所有命题变元构成了一个序列<span data-katex="p_1,p_2,\cdots ,p_n"></span>，</p>
-
-<p>对该序列指定的任一真假值序列<span data-katex="t_1,t_2,\cdots ,t_n"></span>称为<span data-katex="\alpha"></span>关于<span data-katex="p_1,p_2,\cdots ,p_n"></span>的一个<strong>指派</strong>，</p>
-
-<p>其中<span data-katex="t_i=0,1"></span>。</p>
+<p>让团队处于被动局面。</p>
 
 <p><br/></p>
 
-<p><strong>真值表：</strong></p>
+<p>可以类比，表现差的团队领导者，</p>
 
-<p>命题在所有可能的指派下，所取值列成的表，称为真值表。</p>
-
-<p><br/></p>
-
-<p><strong>永真式：</strong></p>
-
-<p>如果命题关于其中出现命题变元的所有指派均为真，则称该命题是一个永真式。</p>
+<p>使成员们仓促救火，疲于奔命。</p>
 
 <p><br/></p>
 
-<p>有了这些以后，我们就可以定义<strong>推理</strong>了。</p>
+<p>能力合格的后卫，<strong>抓住机会</strong>。</p>
 
-<p>设<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n,\beta"></span>都是命题，</p>
+<p>他目光敏锐，不错过任何可乘之隙，</p>
 
-<p>称<strong>推理『<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>推出<span data-katex="\beta"></span>』是有效的</strong>，</p>
-
-<p>如果对<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n,\beta"></span>中出现的命题变元的任一指派，</p>
-
-<p>若<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>都为真，则<span data-katex="\beta"></span>也为真，</p>
-
-<p>记为<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n\models\beta"></span></p>
-
-<p>否则，称推理『<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>推出<span data-katex="\beta"></span>』是无效的。</p>
+<p>是一个好的观察者。</p>
 
 <p><br/></p>
 
-<p><strong>例子：</strong></p>
+<p>正如合格的领导者一样，</p>
 
-<p><span data-katex="\alpha\to\beta,\alpha\models\beta"></span></p>
-
-<p><span data-katex="\alpha\lor\beta,\neg\alpha\models\beta"></span></p>
+<p>带领团队成员在正确的时间做着正确的事情。</p>
 
 <p><br/></p>
 
-<h2><strong>证明与推理之间的关系</strong></h2>
+<p>能力超群的后卫，<strong>创造机会</strong>。</p>
 
-<p>命题演算的自然推理系统，有很多性质，其中，</p>
+<p>他擅长打开局面，化腐朽为神奇，</p>
 
-<p><br/></p>
-
-<p><strong>可靠性</strong></p>
-
-<p><span data-katex="\Gamma\vdash\alpha\Rightarrow\Gamma\models\alpha"></span></p>
+<p>整个团队焕然一新。</p>
 
 <p><br/></p>
 
-<p><strong>完备性</strong></p>
+<p>优秀的团队领导者，正是如此，</p>
 
-<p><span data-katex="\Gamma\models\alpha\Rightarrow\Gamma\vdash\alpha"></span></p>
-
-<p><br/></p>
-
-<p>它们表明，如果一个公式可以被证明，那么它所对应命题的推理就是有效的，</p>
-
-<p>如果某些命题的推理是有效的，那么它就可以被证明。</p>
+<p>出奇制胜，力挽狂澜。</p>
 
 <p><br/></p>
 
-<p>然而，形式化系统这种研究方法，并不是完美无缺的。</p>
+<p>这就是把握机会的三种境界了。</p>
 
-<p><strong>哥德尔不完全性定理</strong></p>
-
-<p>如果<span data-katex="\Gamma"></span>是一个有穷并包含初等算术<span data-katex="\Pi"></span>的形式理论，那么<span data-katex="\Gamma"></span>是一个不完全的形式理论。</p>
+<p>那么如何做到优秀呢？</p>
 
 <p><br/></p>
 
-<p><strong>哥德尔协调性定理</strong></p>
+<h2><strong>变：应对与顺势</strong></h2>
 
-<p>如果形式理论<span data-katex="\Gamma"></span>包含初等算术<span data-katex="\Pi"></span>，那么<span data-katex="\Pi"></span>的协调性不能在<span data-katex="\Gamma"></span>中被证明。</p>
+<p><strong>水因地而制流，兵因敌而制胜。</strong></p>
+
+<p><strong>故兵无常势，水无常形，能因敌变化而取胜者，谓之神。</strong></p>
+
+<p>水流根据地形决定流向，用兵根据敌情采取致胜方略。</p>
+
+<p>战争无固定不变的态势，流水无固定不变的流向。</p>
+
+<p>能随着敌情发展变化而采取灵活变化的措施取胜的人，才称得上是神秘莫测的高明者。</p>
+
+<p><br/></p>
+
+<p>知道了『势』决定发展方向之后，</p>
+
+<p>就可以随机应变了。</p>
+
+<p><strong>造势，使团队向着健康的方向发展，</strong></p>
+
+<p><strong>设险，让团队更加团结。</strong></p>
+
+<p><br/></p>
+
+<p>方向健康，大家团结，</p>
+
+<p>才是一个有战斗力的团队。</p>
+
+<p><br/></p>
+
+<p>影响成员做出决定的外部条件是关键，</p>
+
+<p>我们怎样改变它，就能怎样改变团队的未来。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>证明和推理也是可以研究的，</p>
+<p>对于一个企业来说，</p>
 
-<p>并且，一直以来都是人们的感兴趣的研究对象。</p>
+<p>不获益，等待它的就只能是破产和灭亡，</p>
 
-<p><br/></p>
-
-<p>逻辑学对自动定理证明，程序设计语言中的类型系统，</p>
-
-<p>协议验证，软硬件的安全等领域，</p>
-
-<p>有很重要的理论价值。</p>
+<p>对于团队，甚至对于个人的成长来说，更是如此。</p>
 
 <p><br/></p>
 
-<p>以命题逻辑和一阶谓词逻辑为基础，</p>
+<p>利用好囚徒的心理，就可以顺势而为，</p>
 
-<p>人们构造出了各式各样种类繁多的逻辑系统，</p>
-
-<p>包括模态逻辑，直觉主义逻辑，时序逻辑，动态逻辑，</p>
-
-<p>多值逻辑，模糊逻辑，非单调逻辑，λ演算，组合逻辑等等。</p>
+<p>巧妙的调整得失，甚至还能做到全局最优。</p>
 
 <p><br/></p>
 
-<p>现代逻辑学已经应用到了越来越多的学科之中。</p>
+<p>相反，僵硬的改变，</p>
+
+<p>往往不尽人意，一事无成。</p>
 </div>
   
   
@@ -498,11 +367,12 @@ var _hmt = _hmt || [];
     <section>
 	<h1>Categories</h1>
 	<ul id="categories">
-		<li class='category'><a href='/blog/categories/design/'>design (11)</a></li>
+		<li class='category'><a href='/blog/categories/design/'>design (13)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
-<li class='category'><a href='/blog/categories/logic/'>logic (9)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
+<li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
+<li class='category'><a href='/blog/categories/math/'>math (5)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -510,6 +380,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/08/13/about-topology/">拓扑学拾趣</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/08/05/professional-programmer/">专业程序猿的修炼指南</a>
@@ -545,10 +419,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/05/29/let-things-happen/">让事情去发生</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/19/type-theory-in-my-eye/">类型理论之拙见</a>
       </li>
     
   </ul>

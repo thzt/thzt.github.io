@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Mind
+categories: Design
 title: 如何应对需求变更
 description: 
 ---

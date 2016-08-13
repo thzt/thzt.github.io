@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Logic
+categories: Design
 title: 真实在哪里
 description: 在追求真实的路上，科学方法是如此重要，没有绝对的真实，只有被证明的推论，和被实验证伪的结论。
 ---

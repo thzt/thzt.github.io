@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Logic
+categories: Math
 title: 懵逼的上同调群
 description: 
 ---

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Logic | 何幻]]></title>
   <link href="https://thzt.github.io/blog/categories/logic/atom.xml" rel="self"/>
   <link href="https://thzt.github.io/"/>
-  <updated>2016-08-06T00:11:14+08:00</updated>
+  <updated>2016-08-13T15:05:46+08:00</updated>
   <id>https://thzt.github.io/</id>
   <author>
     <name><![CDATA[thzt]]></name>
@@ -12,1754 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[懵逼的上同调群]]></title>
-    <link href="https://thzt.github.io/blog/2016/08/02/cohomology-group/"/>
-    <updated>2016-08-02T00:00:00+08:00</updated>
-    <id>https://thzt.github.io/blog/2016/08/02/cohomology-group</id>
-    <content type="html"><![CDATA[<script src="https://thzt.github.io/thirdpart/jQuery/jquery-1.11.1.js"></script>
-
-
-<p><link href="https://thzt.github.io/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
-
-<script src="https://thzt.github.io/thirdpart/KaTeX/katex.min.js"></script>
-
-
-<script src="https://thzt.github.io/javascripts/katex.js"></script>
-
-
-<h2><strong>代数结构</strong></h2>
-
-<p><strong>代数运算</strong></p>
-
-<p>设<span data-katex="A"></span>为集合，函数<span data-katex="f:A\times A\rightarrow A"></span>称为<span data-katex="A"></span>上的一个二元代数运算，</p>
-
-<p>简称二元运算。</p>
-
-<p><br/></p>
-
-<p>设<span data-katex="A"></span>为集合，<span data-katex="n"></span>为正整数，<span data-katex="A^n=A\times A\times \cdots \times A"></span>表示<span data-katex="A"></span>的<span data-katex="n"></span>阶笛卡尔积，</p>
-
-<p>函数<span data-katex="f:A^n\rightarrow A"></span>称为<span data-katex="A"></span>上的一个<span data-katex="n"></span>元代数运算，简称<span data-katex="n"></span>元运算。</p>
-
-<p>如果<span data-katex="f"></span>是<span data-katex="A"></span>上的运算，也可以称<span data-katex="A"></span>在运算<span data-katex="f"></span>下是封闭的。</p>
-
-<p><br/></p>
-
-<p><strong>单位元和零元</strong></p>
-
-<p>设<span data-katex="\circ"></span>为集合<span data-katex="A"></span>上的二元运算，</p>
-
-<p>若存在<span data-katex="e_l\in A"></span>（或<span data-katex="e_r\in A"></span>）使得<span data-katex="\forall x\in A"></span>都有<span data-katex="e_l\circ x=x"></span>（或<span data-katex="x\circ e_r=x"></span>），</p>
-
-<p>则称<span data-katex="e_l"></span>（或<span data-katex="e_r"></span>）是<span data-katex="A"></span>中关于<span data-katex="\circ"></span>运算的左（或右）单位元。</p>
-
-<p>若<span data-katex="e\in A"></span>关于<span data-katex="\circ"></span>运算既为左单位元又为右单位元，则称<span data-katex="e"></span>为<span data-katex="A"></span>中关于<span data-katex="\circ"></span>运算的单位元。</p>
-
-<p><br/></p>
-
-<p>若存在<span data-katex="\theta_l\in A"></span>（或<span data-katex="\theta_r\in A"></span>）使得<span data-katex="\forall x\in A"></span>都有<span data-katex="\theta_l\circ x=\theta_l"></span>（或<span data-katex="x\circ \theta_r=\theta_r"></span>），</p>
-
-<p>则称<span data-katex="\theta_l"></span>（或<span data-katex="\theta_r"></span>）是<span data-katex="A"></span>中关于<span data-katex="\circ"></span>运算的左（或右）零元。</p>
-
-<p>若<span data-katex="\theta\in A"></span>关于<span data-katex="\circ"></span>运算既为左零元又为右零元，则称<span data-katex="e"></span>为<span data-katex="A"></span>中关于<span data-katex="\circ"></span>运算的零元。</p>
-
-<p><br/></p>
-
-<p>可证，</p>
-
-<p>如果集合<span data-katex="A"></span>中的任意元素，关于<span data-katex="\circ"></span>运算既有左单位元，又有右单位元，则左单位元等于右单位元，且是<span data-katex="A"></span>中唯一的单位元。</p>
-
-<p>如果集合<span data-katex="A"></span>中的任意元素，关于<span data-katex="\circ"></span>运算既有左零元，又有右零元，则左零元等于右零元，且是<span data-katex="A"></span>中唯一的零元。</p>
-
-<p><br/></p>
-
-<p><strong>逆元</strong></p>
-
-<p>设<span data-katex="\circ"></span>为集合<span data-katex="A"></span>上的二元运算，<span data-katex="e\in A"></span>是关于<span data-katex="\circ"></span>运算的单位元。</p>
-
-<p>对于<span data-katex="x\in A"></span>，若存在<span data-katex="y_l\in A"></span>（或<span data-katex="y_r\in A"></span>）使得<span data-katex="y_l\circ x=e"></span>（或<span data-katex="x\circ y_r=e"></span>），</p>
-
-<p>则称<span data-katex="y_l"></span>（或<span data-katex="y_r"></span>）是<span data-katex="x"></span>关于<span data-katex="\circ"></span>运算的左（或右）逆元。</p>
-
-<p>若<span data-katex="y\in A"></span>既是<span data-katex="x"></span>关于<span data-katex="\circ"></span>运算的左逆元，又是<span data-katex="x"></span>关于<span data-katex="\circ"></span>运算的右逆元，</p>
-
-<p>则称<span data-katex="y"></span>是<span data-katex="x"></span>关于<span data-katex="\circ"></span>运算的逆元。</p>
-
-<p><br/></p>
-
-<p>可证，如果集合<span data-katex="A"></span>中的任意元素，关于<span data-katex="\circ"></span>运算既有左逆元，又有右逆元，则左逆元等于右逆元，且是该元素唯一的逆元。</p>
-
-<p><br/></p>
-
-<p><strong>代数系统</strong></p>
-
-<p>一个代数系统是一个三元组<span data-katex="V=\left \langle A,\Omega ,K \right \rangle"></span>，</p>
-
-<p>其中<span data-katex="A"></span>是一个非空的对象集合，称为<span data-katex="V"></span>的载体，</p>
-
-<p><span data-katex="\Omega"></span>是一个非空的运算集合，即<span data-katex="\Omega=\;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize j=1}\end{matrix}}\;\Omega_j"></span>，<span data-katex="\Omega_j"></span>是<span data-katex="A"></span>上所有<span data-katex="j"></span>元运算的集合，</p>
-
-<p><span data-katex="K\subseteq A"></span>是代数常数的集合。</p>
-
-<p><br/></p>
-
-<p>对于任何代数常数<span data-katex="k\in K"></span>，可以把<span data-katex="k"></span>看成<span data-katex="A"></span>上的零元运算，</p>
-
-<p>这时可将代数系统<span data-katex="V"></span>写作<span data-katex="\left \langle A,\Omega \right \rangle"></span>，</p>
-
-<p>这时<span data-katex="\Omega=\;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize j=0}\end{matrix}}\;\Omega_j"></span>，<span data-katex="\Omega_0=K"></span>。</p>
-
-<p><br/></p>
-
-<p><strong>同类型的代数系统</strong></p>
-
-<p>设<span data-katex="V_1=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，<span data-katex="V_2=\left \langle B,\overline{o_1},\overline{o_2},\cdots,\overline{o_r} \right \rangle"></span>是具有<span data-katex="r"></span>个运算的代数系统，<span data-katex="r\geqslant 1"></span>。</p>
-
-<p>若对于<span data-katex="i=1,2,\cdots ,r"></span>，<span data-katex="o_i"></span>和<span data-katex="\overline{o_i}"></span>具有同样的元数，</p>
-
-<p>则称<span data-katex="V_1"></span>和<span data-katex="V_2"></span>是同类型的代数系统。</p>
-
-<p><br/></p>
-
-<p><strong>子代数</strong></p>
-
-<p>设<span data-katex="V=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>是代数系统，<span data-katex="B"></span>是<span data-katex="A"></span>的非空子集，</p>
-
-<p>若<span data-katex="B"></span>对<span data-katex="V"></span>中所有的运算封闭，则称<span data-katex="V'=\left \langle B,o_1,o_2,\cdots,o_r \right \rangle"></span>是<span data-katex="V"></span>的子代数系统，</p>
-
-<p>简称子代数。</p>
-
-<p><br/></p>
-
-<p>当<span data-katex="B"></span>是<span data-katex="A"></span>的真子集时，称<span data-katex="V'"></span>是<span data-katex="V"></span>的真子代数。</p>
-
-<p><br/></p>
-
-<p><strong>同态与同构</strong></p>
-
-<p>设<span data-katex="V_1=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，<span data-katex="V_2=\left \langle B,\overline{o_1},\overline{o_2},\cdots,\overline{o_r} \right \rangle"></span>是同类型的代数系统，</p>
-
-<p>对于<span data-katex="i=1,2,\cdots ,r"></span>，<span data-katex="o_i"></span>和<span data-katex="\overline{o_i}"></span>是<span data-katex="k_i"></span>元运算，</p>
-
-<p>函数<span data-katex="\varphi :A\rightarrow B"></span>对于所有的运算<span data-katex="o_i"></span>，<span data-katex="\overline{o_i}"></span>都有，</p>
-
-<p><span data-katex="\varphi(o_i(x_1,x_2,\cdots ,x_{k_i}))=\overline{o_i}(\varphi(x_1),\varphi(x_2),\cdots ,\varphi(x_{k_i}))"></span></p>
-
-<p>则称<span data-katex="\varphi"></span>是代数系统<span data-katex="V_1"></span>到<span data-katex="V_2"></span>的同态映射，简称同态。</p>
-
-<p><br/></p>
-
-<p>若<span data-katex="\varphi"></span>是满射，则称<span data-katex="\varphi"></span>是满同态，</p>
-
-<p>若<span data-katex="\varphi"></span>是单射，则称<span data-katex="\varphi"></span>是单同态，</p>
-
-<p>若<span data-katex="\varphi"></span>是双射，则称<span data-katex="\varphi"></span>是同构，</p>
-
-<p>若<span data-katex="V_1=V_2"></span>，则称<span data-katex="\varphi"></span>是自同态，若<span data-katex="\varphi"></span>又是双射，则称<span data-katex="\varphi"></span>是自同构。</p>
-
-<p><br/></p>
-
-<p><strong>同态像</strong></p>
-
-<p>设<span data-katex="V_1=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，<span data-katex="V_2=\left \langle B,\overline{o_1},\overline{o_2},\cdots,\overline{o_r} \right \rangle"></span>是同类型的代数系统，</p>
-
-<p>对于<span data-katex="i=1,2,\cdots ,r"></span>，<span data-katex="o_i"></span>和<span data-katex="\overline{o_i}"></span>是<span data-katex="k_i"></span>元运算，</p>
-
-<p><span data-katex="\varphi :A\rightarrow B"></span>是<span data-katex="V_1"></span>到<span data-katex="V_2"></span>的同态，</p>
-
-<p>则<span data-katex="\varphi(A)"></span>关于<span data-katex="V_2"></span>中的运算构成了一个代数系统，且是<span data-katex="V_2"></span>的子代数，</p>
-
-<p>称为<span data-katex="V_1"></span>在<span data-katex="\varphi"></span>下的同态像。</p>
-
-<p><br/></p>
-
-<p><strong>同余关系</strong></p>
-
-<p>设代数系统<span data-katex="V=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，其中<span data-katex="o_i"></span>是<span data-katex="k_i"></span>元运算，</p>
-
-<p>关系<span data-katex="\sim"></span>是<span data-katex="A"></span>上的等价关系，</p>
-
-<p>任取<span data-katex="A"></span>上<span data-katex="2k_i"></span>个元素，<span data-katex="a_1,a_2,\cdots ,a_{k_i}"></span>和<span data-katex="b_1,b_2,\cdots ,b_{k_i}"></span>，</p>
-
-<p>如果对<span data-katex="j=1,2,\cdots ,k_i"></span>，<span data-katex="a_j\sim b_j"></span>成立，就有</p>
-
-<p><span data-katex="o_i(a_1,a_2,\cdots ,a_{k_i})\sim o_i(b_1,b_2,\cdots ,b_{k_i})"></span></p>
-
-<p>则称等价关系\sim"></span>对运算<span data-katex="o_i"></span>具有置换性质。</p>
-
-<p><br/></p>
-
-<p>如果等价关系<span data-katex="\sim"></span>对<span data-katex="V"></span>中的所有运算都具有置换性质，</p>
-
-<p>则称关系<span data-katex="\sim"></span>是<span data-katex="V"></span>上的同余关系，</p>
-
-<p>称<span data-katex="A"></span>中关于<span data-katex="\sim"></span>的等价类为<span data-katex="V"></span>上的同余类。</p>
-
-<p><br/></p>
-
-<p><strong>商代数</strong></p>
-
-<p>设代数系统<span data-katex="V=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，其中<span data-katex="o_i"></span>是<span data-katex="k_i"></span>元运算，</p>
-
-<p>关系<span data-katex="\sim"></span>是<span data-katex="V"></span>上的同余关系，</p>
-
-<p><span data-katex="V"></span>关于同余关系<span data-katex="\sim"></span>的商代数记作<span data-katex="V/\sim =\left \langle A/\sim ,\overline{o_1},\overline{o_2},\cdots,\overline{o_r} \right \rangle"></span>，</p>
-
-<p>其中<span data-katex="A/\sim"></span>是<span data-katex="A"></span>关于同余关系<span data-katex="\sim"></span>的商集。</p>
-
-<p><br/></p>
-
-<p>对于<span data-katex="i=1,2,\cdots ,r"></span>，运算<span data-katex="\overline{o_i}"></span>规定为：</p>
-
-<p><span data-katex="\forall [a_1],[a_2],\cdots ,[a_{k_i}]\in A/\sim"></span>，有</p>
-
-<p><span data-katex="\overline{o_i}([a_1],[a_2],\cdots ,[a_{k_i}])=[o_i(a_1,a_2,\cdots ,a_{k_i})]"></span>。</p>
-
-<p><br/></p>
-
-<p><strong>同态导出的等价关系</strong></p>
-
-<p>若<span data-katex="\varphi :A\rightarrow B"></span>是<span data-katex="V_1"></span>到<span data-katex="V_2"></span>的同态，</p>
-
-<p>定义等价关系<span data-katex="x\sim y"></span>当且仅当<span data-katex="\varphi(x)=\varphi(y)"></span>，<span data-katex="\forall x,y\in A"></span>。</p>
-
-<p>则称，该等价关系是同态<span data-katex="\varphi"></span>导出的等价关系。</p>
-
-<p><br/></p>
-
-<p>可证，同态<span data-katex="\varphi"></span>导出的等价关系是<span data-katex="V_1"></span>上的同余关系。</p>
-
-<p><br/></p>
-
-<p><strong>自然映射</strong></p>
-
-<p>设<span data-katex="V=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>是代数系统，</p>
-
-<p>其中<span data-katex="o_i"></span>是<span data-katex="k_i"></span>元运算，<span data-katex="i=1,2,\cdots ,r"></span>，<span data-katex="\sim"></span>是<span data-katex="V"></span>上的同余关系，</p>
-
-<p>则自然映射<span data-katex="g:A\rightarrow A/\sim"></span>，<span data-katex="\forall a\in A,\ g(a)=[a]"></span>，</p>
-
-<p>是从<span data-katex="V"></span>到<span data-katex="V/\sim"></span>上的同态映射。</p>
-
-<p><br/></p>
-
-<p><strong>同态基本定理</strong></p>
-
-<p>设<span data-katex="V_1=\left \langle A,o_1,o_2,\cdots,o_r \right \rangle"></span>，<span data-katex="V_2=\left \langle B,\overline{o_1},\overline{o_2},\cdots,\overline{o_r} \right \rangle"></span>是同类型的代数系统，</p>
-
-<p>对于<span data-katex="i=1,2,\cdots ,r"></span>，<span data-katex="o_i"></span>和<span data-katex="\overline{o_i}"></span>是<span data-katex="k_i"></span>元运算，</p>
-
-<p><span data-katex="\varphi :A\rightarrow B"></span>是<span data-katex="V_1"></span>到<span data-katex="V_2"></span>的同态，</p>
-
-<p>关系<span data-katex="\sim"></span>是<span data-katex="\varphi"></span>导出的<span data-katex="V_1"></span>上的同余关系，</p>
-
-<p>则<span data-katex="V_1"></span>关于同余关系<span data-katex="\sim"></span>的商代数，同构于<span data-katex="V_1"></span>在<span data-katex="\varphi"></span>下的同态像，即</p>
-
-<p><span data-katex="V_1/\sim \ \cong \ \left \langle \varphi(A),\overline{o_1},\overline{o_2},\cdots ,\overline{o_r} \right \rangle"></span></p>
-
-<p><br/></p>
-
-<p>同态基本定理告诉我们，任何代数系统<span data-katex="V"></span>的商代数是它的一个同态像。</p>
-
-<p>反之，如果<span data-katex="V'"></span>是<span data-katex="V"></span>的同态像，则<span data-katex="V'"></span>与<span data-katex="V"></span>的一个商代数同构。</p>
-
-<p><br/></p>
-
-<h2><strong>群结构</strong></h2>
-
-<p><strong>半群</strong></p>
-
-<p>设<span data-katex="\circ"></span>是集合<span data-katex="S"></span>上的二元运算，若<span data-katex="\circ"></span>运算在<span data-katex="S"></span>上是可结合的，</p>
-
-<p>则称代数系统<span data-katex="V=\left \langle S,\circ \right \rangle"></span>是半群。</p>
-
-<p><br/></p>
-
-<p><strong>幺半群</strong></p>
-
-<p>设<span data-katex="V=\left \langle S,\circ \right \rangle"></span>是半群，</p>
-
-<p>若存在<span data-katex="e\in S"></span>为<span data-katex="V"></span>中关于运<span data-katex="\circ"></span>运算的单位元，</p>
-
-<p>则称<span data-katex="V=\left \langle S,\circ ,e \right \rangle"></span>的幺半群。</p>
-
-<p><br/></p>
-
-<p><strong>群</strong></p>
-
-<p><span data-katex="\left \langle G,\circ \right \rangle"></span>是含有一个二元运算的代数系统，</p>
-
-<p>如果满足以下条件：</p>
-
-<p>（1）<span data-katex="\circ"></span>运算是可结合的，</p>
-
-<p>（2）存在<span data-katex="e\in G"></span>是关于<span data-katex="\circ"></span>运算的单位元，</p>
-
-<p>（3）任何<span data-katex="x\in G"></span>，<span data-katex="x"></span>关于<span data-katex="\circ"></span>运算的逆元<span data-katex="x^{-1}\in G"></span>。</p>
-
-<p>则称<span data-katex="G"></span>是一个群。</p>
-
-<p><br/></p>
-
-<p><strong>交换群</strong></p>
-
-<p>若群<span data-katex="G"></span>中运算满足交换律，则称<span data-katex="G"></span>为交换群，或Abel群。</p>
-
-<p><br/></p>
-
-<p><strong>子群</strong></p>
-
-<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的非空子集，若<span data-katex="H"></span>关于<span data-katex="G"></span>中的运算构成一个群，</p>
-
-<p>则称<span data-katex="H"></span>是<span data-katex="G"></span>的子群，记为<span data-katex="H\leqslant G"></span>。</p>
-
-<p>如果子群<span data-katex="H"></span>是<span data-katex="G"></span>的真子集，则称<span data-katex="H"></span>是<span data-katex="G"></span>的真子群，记为<span data-katex="H<G"></span>。</p>
-
-<p><br/></p>
-
-<p>若把群看做是具有一个可结合的二元运算，一个求逆元的一元运算，</p>
-
-<p>和一个零元运算（二元运算的单位元）的代数系统，</p>
-
-<p>可以证明，<span data-katex="G"></span>的子群就是代数系统<span data-katex="\left \langle G_1,\bullet,\ ^{-1},e_1 \right \rangle"></span>的子代数。</p>
-
-<p><br/></p>
-
-<p><strong>陪集分解</strong></p>
-
-<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的子群，<span data-katex="a\in G"></span>，定义</p>
-
-<p><span data-katex="Ha=\{ha|h\in H\}"></span></p>
-
-<p>则称<span data-katex="Ha"></span>是子群<span data-katex="H"></span>在<span data-katex="G"></span>中的一个右陪集。</p>
-
-<p><br/></p>
-
-<p>可以证明，</p>
-
-<p>（1）<span data-katex="He=H"></span>，</p>
-
-<p>（2）<span data-katex="\forall A\in G,\ a\in Ha"></span>，</p>
-
-<p>（3）<span data-katex="a\in Hb \Leftrightarrow Ha=Hb \Leftrightarrow ab^{-1}\in H"></span></p>
-
-<p><br/></p>
-
-<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的子群，</p>
-
-<p>在<span data-katex="G"></span>上定义二元关系<span data-katex="R"></span>，<span data-katex="\forall a,b\in G"></span>有</p>
-
-<p><span data-katex="aRb\Leftrightarrow ab^{-1}\in H"></span></p>
-
-<p>则<span data-katex="R"></span>为<span data-katex="G"></span>上的等价关系，且<span data-katex="[a]_R=Ha"></span>。</p>
-
-<p><br/></p>
-
-<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的子群，则<span data-katex="\forall a,b\in G"></span>，</p>
-
-<p>或者<span data-katex="Ha\cap Hb=\varnothing"></span>，或者<span data-katex="Ha=Hb"></span>，</p>
-
-<p>且<span data-katex="\;{\tiny\begin{matrix}\\ \normalsize \cup \\ ^{\scriptsize a\in R}\end{matrix}}\;Ha=G"></span></p>
-
-<p>因此，子群<span data-katex="H"></span>的右陪集构成了群<span data-katex="G"></span>的一个划分。</p>
-
-<p><br/></p>
-
-<p><strong>正规子群</strong></p>
-
-<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的子群，若<span data-katex="\forall a\in G"></span>都有<span data-katex="Ha=aH"></span>，</p>
-
-<p>则称<span data-katex="H"></span>是<span data-katex="G"></span>的正规子群，记为<span data-katex="H\trianglelefteq G"></span>。</p>
-
-<p><br/></p>
-
-<p><strong>商群</strong></p>
-
-<p><span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的正规子群，</p>
-
-<p>定义<span data-katex="G/H=\{Hg|g\in G\}"></span>为<span data-katex="H"></span>在<span data-katex="G"></span>中的所有右陪集构成的集合，</p>
-
-<p>在<span data-katex="G/H"></span>上定义运算<span data-katex="\circ"></span>，对任意的<span data-katex="Ha,Hb\in G/H"></span>，</p>
-
-<p>有<span data-katex="Ha\circ Hb=Hab"></span>。</p>
-
-<p>则<span data-katex="G/H"></span>关于<span data-katex="\circ"></span>运算构成了一个群，称为<span data-katex="G"></span>的商群。</p>
-
-<p><br/></p>
-
-<p>注：如果<span data-katex="H"></span>不是正规子群，商仍可以得到，但结果将不是群，</p>
-
-<p>而是<a href="https://zh.wikipedia.org/wiki/%E9%BD%90%E6%80%A7%E7%A9%BA%E9%97%B4">齐次空间</a>。</p>
-
-<p><br/></p>
-
-<p><strong>群同态</strong></p>
-
-<p>设<span data-katex="G_1"></span>和<span data-katex="G_2"></span>是群，<span data-katex="\varphi"></span>是<span data-katex="G_1"></span>到<span data-katex="G_2"></span>的映射，</p>
-
-<p>若对于任意<span data-katex="x,y\in G"></span>有<span data-katex="\varphi(xy)=\varphi(x)\varphi(y)"></span>，</p>
-
-<p>则称<span data-katex="\varphi"></span>是群<span data-katex="G_1"></span>到<span data-katex="G_2"></span>的同态映射，简称同态。</p>
-
-<p><br/></p>
-
-<p>若把群看做是具有一个可结合的二元运算，一个求逆元的一元运算，</p>
-
-<p>和一个零元运算（二元运算的单位元）的代数系统，</p>
-
-<p>则上述定义的群同态，就是代数系统<span data-katex="\left \langle G_1,\bullet,\ ^{-1},e_1 \right \rangle"></span></p>
-
-<p>到<span data-katex="\left \langle G_2,\bullet,\ ^{-1},e_2 \right \rangle"></span>的同态。</p>
-
-<p><br/></p>
-
-<p><strong>同态核与同态像</strong></p>
-
-<p>设<span data-katex="\varphi :G_1\rightarrow G_2"></span>是群<span data-katex="G_1"></span>到<span data-katex="G_2"></span>的同态，则</p>
-
-<p><span data-katex="ker\ \varphi=\{x|x\in G\wedge \varphi(x)=e_2\}"></span></p>
-
-<p><span data-katex="im\ \varphi=\{\varphi(x)|x\in G_1\}"></span></p>
-
-<p><br/></p>
-
-<p>可证，同态核<span data-katex="ker\ \varphi"></span>是<span data-katex="G_1"></span>的正规子群，</p>
-
-<p>而同态像<span data-katex="im\ \varphi"></span>是<span data-katex="G_2"></span>的子群。</p>
-
-<p><br/></p>
-
-<p><strong>群同态基本定理</strong></p>
-
-<p>设<span data-katex="G"></span>是群，<span data-katex="H"></span>是<span data-katex="G"></span>的正规子群，则<span data-katex="G"></span>的商群<span data-katex="G/H"></span>是<span data-katex="G"></span>的同态像。</p>
-
-<p>不难看出，群同态基本定理就是一般代数系统同态基本定理的特例。</p>
-
-<p><br/></p>
-
-<p>特别的，如果<span data-katex="\varphi :G_1\rightarrow G_2"></span>是群<span data-katex="G_1"></span>到<span data-katex="G_2"></span>的同态，</p>
-
-<p>则<span data-katex="G_1/(ker\ \varphi)\ \cong\ im\ \varphi"></span>。</p>
-
-<p><br/></p>
-
-<h2><strong>链复形与同调群</strong></h2>
-
-<p><strong>链复形</strong></p>
-
-<p>在数学上，同调代数领域中的一个链复形<span data-katex="(A_\bullet  ,d_\bullet )"></span>，</p>
-
-<p>是一个交换群或者模的序列，<span data-katex="A_0,A_1,A_2,\cdots"></span>，</p>
-
-<p>通过一系列同态<span data-katex="d_n:A_n\rightarrow A_{n-1}"></span>相连，</p>
-
-<p>使得每两个接连的映射复合为零，即<span data-katex="\forall n,\ d_n\circ d_{n+1}=0"></span>。</p>
-
-<p><br/></p>
-
-<p>它们常写作如下形式：</p>
-
-<p><span data-katex="\cdots \longrightarrow A_{n+1}\;{\tiny\begin{matrix}d_{n+1}\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A_n\;{\tiny\begin{matrix}d_n\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;\cdots\;{\tiny\begin{matrix}d_2\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A_1\;{\tiny\begin{matrix}d_1\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A_0\;{\tiny\begin{matrix}d_0\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;0"></span></p>
-
-<p><br/></p>
-
-<p><strong>同调群</strong></p>
-
-<p>定义链复形的同调群为<span data-katex="H_n(A_\bullet):=Ker(d_n)/Im(d_{n+1})"></span>，</p>
-
-<p>当所有同调群为零时，此链复形为正合的。</p>
-
-<p><br/></p>
-
-<p><strong>上链复形</strong></p>
-
-<p>链复形概念的一个变种是上链复形。</p>
-
-<p>一个上链复形<span data-katex="(A^\bullet  ,d^\bullet )"></span>，是一个交换群或者模的序列<span data-katex="A^0,A^1,A^2,\cdots"></span>，</p>
-
-<p>由一系列同态<span data-katex="d^n:A^n\rightarrow A^{n+1}"></span>相连，</p>
-
-<p>使得任何两个接连的映射复合为零，即<span data-katex="\forall n,\ d^{n+1}\circ d^n=0"></span>。</p>
-
-<p><span data-katex="0\longrightarrow A^0\;{\tiny\begin{matrix}d^0\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A^1\;{\tiny\begin{matrix}d^1\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;\cdots\;{\tiny\begin{matrix}d^{n-1}\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A^n\;{\tiny\begin{matrix}d^n\\ \normalsize \longrightarrow \\ ^{\scriptsize }\end{matrix}}\;A^{n+1}\longrightarrow \cdots"></span></p>
-
-<p><br/></p>
-
-<p><strong>上同调群</strong></p>
-
-<p>定义上链复形的上同调群为<span data-katex="H^n(A^\bullet):=Ker(d^n)/Im(d^{n-1})"></span>，</p>
-
-<p>当所有上同调群为零时，此上链复形正合。</p>
-
-<p><br/></p>
-
-<h2><strong>结语</strong></h2>
-
-<p>我们看到上同调群<span data-katex="H^n(A^\bullet)"></span>，</p>
-
-<p>是<span data-katex="Ker(d^n)"></span>关于<span data-katex="Im(d^{n-1})"></span>的商群。</p>
-
-<p><br/></p>
-
-<p>下面我们证明<span data-katex="Im(d^{n-1})"></span>是<span data-katex="Ker(d^n)"></span>的正规子群。</p>
-
-<p>（1）我们先证<span data-katex="Im(d^{n-1})"></span>是<span data-katex="Ker(d^n)"></span>的子群。</p>
-
-<p>对于上链复形，任何两个接连的映射复合为零，说明<span data-katex="Im(d^{n-1})\subseteq Ker(d^n)"></span>。</p>
-
-<p>且<span data-katex="Im(d^{n-1})"></span>是同态像，所以<span data-katex="Im(d^{n-1})\leqslant A^n"></span>，</p>
-
-<p>因此<span data-katex="Im(d^{n-1})"></span>关于群运算封闭，</p>
-
-<p>所以，根据子群的定义，<span data-katex="Im(d^{n-1})\leqslant Ker(d^n)"></span>。</p>
-
-<p><br/></p>
-
-<p>（2）我们再证交换群的子群是正规子群。</p>
-
-<p>因为<span data-katex="A^n"></span>是交换群，所以它的子群也是交换群。</p>
-
-<p>而交换群的任一子群<span data-katex="H"></span>都有，<span data-katex="Ha=\{ha|h\in H\}=\{ah|h\in H\}=aH"></span>，</p>
-
-<p>因此交换群的任一子群都是正规子群。</p>
-
-<p><br/></p>
-
-<p>综上，<span data-katex="Im(d^{n-1})\trianglelefteq Ker(d^n)"></span>。</p>
-
-<p><br/></p>
-
-<p>所以，<span data-katex="H^n(A^\bullet):=Ker(d^n)/Im(d^{n-1})"></span>构成了一个群，</p>
-
-<p>它的元素是<span data-katex="Im(d^{n-1})"></span>的陪集，这些陪集划分了<span data-katex="Ker(d^n)"></span>。</p>
-
-<p><br/></p>
-
-<h2><strong>参考</strong></h2>
-
-<p><a href="https://zh.wikipedia.org/wiki/%E5%95%86%E7%BE%A4">商群</a></p>
-
-<p><a href="https://zh.wikipedia.org/wiki/%E7%BE%A4%E5%90%8C%E6%85%8B">群同态</a></p>
-
-<p><a href="https://zh.wikipedia.org/wiki/%E9%93%BE%E5%A4%8D%E5%BD%A2">链复形</a></p>
-
-<p><a href="https://book.douban.com/subject/1230394/">离散数学教程</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[可计算性理论名词释义]]></title>
-    <link href="https://thzt.github.io/blog/2016/07/23/computability/"/>
-    <updated>2016-07-23T00:00:00+08:00</updated>
-    <id>https://thzt.github.io/blog/2016/07/23/computability</id>
-    <content type="html"><![CDATA[<script src="https://thzt.github.io/thirdpart/jQuery/jquery-1.11.1.js"></script>
-
-
-<p><link href="https://thzt.github.io/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
-
-<script src="https://thzt.github.io/thirdpart/KaTeX/katex.min.js"></script>
-
-
-<script src="https://thzt.github.io/javascripts/katex.js"></script>
-
-
-<h2><strong>部分数论函数</strong></h2>
-
-<p><strong>二元关系</strong></p>
-
-<p>集合<span data-katex="S"></span>和<span data-katex="T"></span>，</p>
-
-<p><span data-katex="S\times T"></span>的元素<span data-katex="(a,b)"></span>称为有序对，</p>
-
-<p><span data-katex="S\times T"></span>的子集称为从<span data-katex="S"></span>到<span data-katex="T"></span>的二元关系，</p>
-
-<p>从<span data-katex="S"></span>到<span data-katex="S"></span>的二元关系，称为<span data-katex="S"></span>上的二元关系。</p>
-
-<p><br/></p>
-
-<p><strong>定义域和值域</strong></p>
-
-<p>设<span data-katex="R"></span>是从<span data-katex="S"></span>到<span data-katex="T"></span>的二元关系，</p>
-
-<p>则称<span data-katex="R"></span>的定义域为<span data-katex="dom\ R=\{a|\exists b\ (a,b)\in R\}"></span>，</p>
-
-<p><span data-katex="R"></span>的值域为<span data-katex="ran\ R=\{b|\exists a\ (a,b)\in R\}"></span>。</p>
-
-<p><br/></p>
-
-<p><strong>象</strong></p>
-
-<p><span data-katex="A\subseteq S"></span>，则称<span data-katex="A"></span>在<span data-katex="R"></span>下的象为，</p>
-
-<p><span data-katex="R(A)=\{b|\exists a\ (a\in A \wedge (a,b)\in R)\}"></span>，</p>
-
-<p>特别的，如果<span data-katex="a\in A"></span>，那么把<span data-katex="\{a\}"></span>在<span data-katex="R"></span>下的象简记为<span data-katex="a"></span>在<span data-katex="R"></span>下的象，记为<span data-katex="R(a)"></span>。</p>
-
-<p>即，<span data-katex="R(a)=\{b|(a,b)\in R\}"></span></p>
-
-<p><br/></p>
-
-<p><strong>部分函数</strong></p>
-
-<p>如果<span data-katex="f"></span>是从<span data-katex="S"></span>到<span data-katex="T"></span>的二元关系，且<span data-katex="\forall a\in S"></span>，<span data-katex="f(a)=\varnothing"></span>或<span data-katex="\{b\}"></span>，</p>
-
-<p>则称<span data-katex="f"></span>是从<span data-katex="S"></span>到<span data-katex="T"></span>的部分函数，或<span data-katex="S"></span>上的部分函数。</p>
-
-<p>若<span data-katex="f(a)=\{b\}"></span>，则称<span data-katex="f(a)"></span>有定义，记为<span data-katex="f(a)\downarrow"></span>，</p>
-
-<p><span data-katex="b"></span>称为<span data-katex="f"></span>在<span data-katex="a"></span>点的函数值，记为<span data-katex="f(a)=b"></span>，</p>
-
-<p>若<span data-katex="f(a)=\varnothing"></span>，则称<span data-katex="f(a)"></span>无定义，记为<span data-katex="f(a)\uparrow"></span>。</p>
-
-<p><br/></p>
-
-<p><strong>全函数</strong></p>
-
-<p>如果<span data-katex="\forall a\in S"></span>都有<span data-katex="f(a)\downarrow"></span>，即<span data-katex="dom\ f=S"></span>，则称<span data-katex="f"></span>是<span data-katex="S"></span>上的全函数，</p>
-
-<p>此时，可以记为<span data-katex="f:S\rightarrow T"></span>。</p>
-
-<p><br/></p>
-
-<p><strong><span data-katex="n"></span>元部分函数</strong></p>
-
-<p>设<span data-katex="f"></span>是笛卡尔积<span data-katex="S_1\times S_2\times \cdots \times S_n"></span>上的部分函数，</p>
-
-<p>则通常把<span data-katex="f((a_1,a_2,\cdots ,a_n))"></span>，简记为<span data-katex="f(a_1,a_2,\cdots ,a_n)"></span>。</p>
-
-<p><br/></p>
-
-<p>集合<span data-katex="S^n=S\times S\times \cdots \times S"></span>上的部分函数，称为<span data-katex="S"></span>上的<span data-katex="n"></span>元部分函数。</p>
-
-<p>自然数集<span data-katex="N=\{0,1,2,\cdots \}"></span>，从<span data-katex="N^n"></span>到<span data-katex="N"></span>的部分函数，称为<span data-katex="n"></span>元部分数论函数。</p>
-
-<p>下文中提到的函数，默认为数论函数。</p>
-
-<p><br/></p>
-
-<p><strong>字函数</strong></p>
-
-<p>字母表是一个非空有穷集合，</p>
-
-<p>设<span data-katex="A"></span>是一个字母表，<span data-katex="A"></span>中元素的有穷序列<span data-katex="w=(a_1,a_2,\cdots ,a_m)"></span>称为<span data-katex="A"></span>上的字符串或字，</p>
-
-<p>简记为<span data-katex="w=a_1a_2\cdots a_m"></span>。</p>
-
-<p><span data-katex="w"></span>中符号的个数，称为字符串的长度，记为<span data-katex="|w|"></span>。</p>
-
-<p>我们用<span data-katex="\epsilon"></span>表示空串，它不包含任何符号，是唯一的长度为<span data-katex="0"></span>的字符串。</p>
-
-<p><br/></p>
-
-<p><span data-katex="A"></span>上字符串的全体，记为<span data-katex="A^*"></span>。</p>
-
-<p>设<span data-katex="u,v\in A^*"></span>，把<span data-katex="v"></span>连接在<span data-katex="u"></span>后面得到的字符串记为<span data-katex="uv"></span>。</p>
-
-<p><br/></p>
-
-<p>设<span data-katex="u\in A^*"></span>，规定，<span data-katex="u^0=\epsilon"></span>，<span data-katex="u^{n+1}=u^n u\ ,n\in N"></span>，</p>
-
-<p>当<span data-katex="n>0"></span>时，<span data-katex="u^n"></span>等于<span data-katex="n"></span>个<span data-katex="u"></span>连接在一起。</p>
-
-<p><br/></p>
-
-<p><span data-katex="(A^*)^n"></span>到<span data-katex="A^*"></span>的部分函数，称为<span data-katex="A"></span>上的<span data-katex="n"></span>元部分字函数。</p>
-
-<p><br/></p>
-
-<h2><strong>程序设计语言<span data-katex="\mathscr{S}"></span></strong></h2>
-
-<p><strong>变量</strong></p>
-
-<p>语言<span data-katex="\mathscr{S}"></span>使用三种变量，</p>
-
-<p>输入变量<span data-katex="X_1,X_2,\cdots"></span>，输出变量<span data-katex="Y"></span>，中间变量<span data-katex="Z_1,Z_2,\cdots"></span>，</p>
-
-<p>变量可以取任何自然数值<span data-katex="n\in N"></span>。</p>
-
-<p>语言还可以使用标号<span data-katex="A_1,A_2,\cdots"></span>。</p>
-
-<p>当下标为<span data-katex="1"></span>时，可以略去。例如，<span data-katex="X_1"></span>和<span data-katex="X"></span>表示同一个变量。</p>
-
-<p><br/></p>
-
-<p><strong>语句</strong></p>
-
-<p>语言<span data-katex="\mathscr{S}"></span>有三种类型的语句，</p>
-
-<p>（1）增量语句<span data-katex="V\leftarrow V+1"></span>，表示变量V的值加<span data-katex="1"></span></p>
-
-<p>（2）减量语句<span data-katex="V\leftarrow V-1"></span>，若变量<span data-katex="V"></span>的当前值为<span data-katex="0"></span>，则<span data-katex="V"></span>的值保持不变，否则<span data-katex="V"></span>的值减<span data-katex="1"></span>。</p>
-
-<p>（3）条件转移语句<span data-katex="IF\ V\neq 0\ GOTO\ L"></span>，如果变量<span data-katex="V"></span>的值不等于<span data-katex="0"></span>，则下一步执行带标号<span data-katex="L"></span>的指令，否则顺序执行下一条指令。</p>
-
-<p><br/></p>
-
-<p><strong>执行</strong></p>
-
-<p>开始执行程序时，中间变量和输出变量的值都为<span data-katex="0"></span>，</p>
-
-<p>从第一条指令开始，一条一条的顺序执行，除非遇到条件转移语句，</p>
-
-<p>当程序没有指令可执行时，计算结束，</p>
-
-<p>此时<span data-katex="Y"></span>的值为程序的输出值。</p>
-
-<p><br/></p>
-
-<p>例如，</p>
-
-<p><span data-katex="[A]\ X\leftarrow X-1"></span></p>
-
-<p><span data-katex="\ \ \ \ Y\leftarrow Y+1"></span></p>
-
-<p><span data-katex="\ \ \ \ IF\ X\neq 0\ GOTO\ A"></span></p>
-
-<p>这里<span data-katex="A"></span>是第一条指令的标号，我们可以看到，这个程序计算的函数是，</p>
-
-<p><span data-katex="f(x)=x,\ if\ x>0"></span></p>
-
-<p><span data-katex="f(x)=1,\ else"></span></p>
-
-<p><br/></p>
-
-<p><strong>状态</strong></p>
-
-<p>设<span data-katex="\sigma"></span>是形如等式<span data-katex="V=m"></span>的有穷集合，其中<span data-katex="V"></span>是一个变量，<span data-katex="m"></span>是一个数。</p>
-
-<p>如果，</p>
-
-<p>（1）对于每一个变量<span data-katex="V"></span>，<span data-katex="\sigma"></span>中至多含有一个等式<span data-katex="V=m"></span></p>
-
-<p>（2）如果在程序<span data-katex="\mathscr{P}"></span>中出现变量<span data-katex="V"></span>，则<span data-katex="\sigma"></span>中必含有等式<span data-katex="V=m"></span></p>
-
-<p>那么，称<span data-katex="\sigma"></span>是程序<span data-katex="\mathscr{P}"></span>的一个状态。</p>
-
-<p><br/></p>
-
-<p>状态描述程序在执行的某一步各个变量的值，</p>
-
-<p>我们约定，如果<span data-katex="\sigma"></span>中不含关于<span data-katex="V"></span>的等式，则变量<span data-katex="V"></span>的值自动取<span data-katex="0"></span>。</p>
-
-<p><br/></p>
-
-<p><strong>快相</strong></p>
-
-<p>程序的一个快相，是一个有序对<span data-katex="(i,\sigma )"></span>，</p>
-
-<p>表示程序的当前状态为<span data-katex="\sigma"></span>，即将执行第<span data-katex="i"></span>条指令。</p>
-
-<p><span data-katex="1\leqslant i \leqslant q"></span>，其中，<span data-katex="q"></span>是程序的长度，</p>
-
-<p>如果<span data-katex="i=q+1"></span>，就表示程序结束，<span data-katex="(q+1,\sigma )"></span>称为程序的终点快相。</p>
-
-<p><br/></p>
-
-<p>除了输入变量外，所有变量值为0的状态称为初始状态，</p>
-
-<p>如果<span data-katex="\sigma"></span>是初始状态，则称<span data-katex="(1,\sigma )"></span>是初始快相。</p>
-
-<p><br/></p>
-
-<p><strong>程序的计算</strong></p>
-
-<p>设<span data-katex="s_1,s_2,\cdots"></span>是程序<span data-katex="\mathscr{P}"></span>的一个快相序列，长度为<span data-katex="k"></span>，</p>
-
-<p>如果，</p>
-
-<p>（1）<span data-katex="s_1"></span>是初始快相</p>
-
-<p>（2）对于每一个<span data-katex="i(1\leqslant i<k)"></span>，<span data-katex="s_{i+1}"></span>是<span data-katex="s_i"></span>的后继</p>
-
-<p>（3）当<span data-katex="k<\infty"></span>时，<span data-katex="s_k"></span>是终点快相</p>
-
-<p>则称该序列是<span data-katex="\mathscr{P}"></span>的一个计算。</p>
-
-<p><br/></p>
-
-<h2><strong>函数的可计算性</strong></h2>
-
-<p><strong>程序计算的函数</strong></p>
-
-<p>设<span data-katex="\mathscr{P}"></span>是语言<span data-katex="\mathscr{S}"></span>的一个程序，<span data-katex="n"></span>是一个正整数，</p>
-
-<p>称函数<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>为程序<span data-katex="\mathscr{P}"></span>计算的<span data-katex="n"></span>元部分函数，</p>
-
-<p>如果，s_1"></span>是初始快相，其中输入变量为<span data-katex="X_1=x_1,X_2=x_2,\cdots ,X_n=x_n"></span>，输出变量为<span data-katex="Y"></span>，</p>
-
-<p>（1）从<span data-katex="s_1"></span>开始的计算是有穷序列<span data-katex="s_1,s_2,\cdots ,s_k"></span>，则<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>等于<span data-katex="Y"></span>在<span data-katex="s_k"></span>中的值</p>
-
-<p>（2）从<span data-katex="s_1"></span>开始的计算是无穷序列<span data-katex="s_1,s_2,\cdots"></span>，则<span data-katex="\psi (x_1,x_2,\cdots ,x_n)\uparrow"></span></p>
-
-<p><br/></p>
-
-<p><strong>部分可计算性与可计算性</strong></p>
-
-<p>设<span data-katex="f(x_1,x_2,\cdots ,x_n)"></span>是一个部分函数，如果存在程序<span data-katex="\mathscr{P}"></span>计算<span data-katex="f"></span>，</p>
-
-<p>则称<span data-katex="f"></span>是部分可计算的。</p>
-
-<p><br/></p>
-
-<p>如果一个函数，既是部分可计算的，又是全函数，则称这个函数是可计算的。</p>
-
-<p><br/></p>
-
-<p><strong>谓词的可计算性</strong></p>
-
-<p>我们可以把谓词看作取值为<span data-katex="0"></span>或<span data-katex="1"></span>的全函数，</p>
-
-<p>并把真值等同于<span data-katex="1"></span>，假值等同于<span data-katex="0"></span>。</p>
-
-<p><br/></p>
-
-<p>如果谓词<span data-katex="P(x_1,x_2,\cdots ,x_n)"></span>作为一个全函数是可计算的，</p>
-
-<p>则称该谓词是可计算的。</p>
-
-<p><br/></p>
-
-<h2><strong>函数的递归性</strong></h2>
-
-<p><strong>合成运算</strong></p>
-
-<p>设<span data-katex="f"></span>是<span data-katex="k"></span>元部分函数，<span data-katex="g_1,g_2,\cdots ,g_k"></span>是<span data-katex="k"></span>个<span data-katex="n"></span>元部分递归函数，</p>
-
-<p><span data-katex="h(x_1,\cdots ,x_n)=f(g_1(x_1,\cdots ,x_n),\cdots ,g_k(x_1,\cdots ,x_n))"></span></p>
-
-<p>则称<span data-katex="h"></span>是由<span data-katex="f"></span>和<span data-katex="g_1,g_2,\cdots ,g_k"></span>，经过合成运算得到的。</p>
-
-<p><br/></p>
-
-<p>可证，如果<span data-katex="h"></span>是由（部分）可计算函数<span data-katex="f"></span>和<span data-katex="g_1,g_2,\cdots ,g_k"></span>合成得到的，</p>
-
-<p>则<span data-katex="h"></span>也是（部分）可计算函数。</p>
-
-<p><br/></p>
-
-<p><strong>原始递归运算</strong></p>
-
-<p>设<span data-katex="g"></span>是一个<span data-katex="2"></span>元全函数，<span data-katex="k"></span>是一个常数，</p>
-
-<p><span data-katex="h(0)=k"></span></p>
-
-<p><span data-katex="h(t+1)=g(t,h(t))"></span></p>
-
-<p>则称<span data-katex="h"></span>是由<span data-katex="g"></span>经过原始递归运算得到的。</p>
-
-<p><br/></p>
-
-<p>可证，如果<span data-katex="g"></span>是可计算的，则<span data-katex="h"></span>是可计算的。</p>
-
-<p><br/></p>
-
-<p>设<span data-katex="f"></span>是一个<span data-katex="n"></span>元全函数，<span data-katex="g"></span>是<span data-katex="n+2"></span>元全函数，</p>
-
-<p><span data-katex="h(x_1,\cdots ,x_n,0)=f(x_1,\cdots ,x_n)"></span></p>
-
-<p><span data-katex="h(x_1,\cdots ,x_n,t+1)=g(t,h(x_1,\cdots ,x_n,t),x_1,\cdots ,x_n)"></span></p>
-
-<p>则称<span data-katex="h"></span>是由<span data-katex="f"></span>和<span data-katex="g"></span>经过原始递归运算得到的。</p>
-
-<p><br/></p>
-
-<p>可证，如果<span data-katex="f"></span>和<span data-katex="g"></span>都是可计算的，则<span data-katex="h"></span>是可计算的。</p>
-
-<p><br/></p>
-
-<p><strong>原始递归函数类</strong></p>
-
-<p>设初始函数包括，</p>
-
-<p>（1）零函数<span data-katex="n(x)=0"></span></p>
-
-<p>（2）后继函数<span data-katex="s(x)=x+1"></span></p>
-
-<p>（3）投影函数<span data-katex="u^n_i(x_1,\cdots ,x_n)=x_i"></span>，<span data-katex="i\leqslant i\leqslant n"></span></p>
-
-<p>则，由初始函数经过有限次合成运算和原始递归运算得到的函数，称为原始递归函数。</p>
-
-<p><br/></p>
-
-<p>可证，由原始递归函数经过合成运算或原始递归运算，得到的函数仍为原始递归函数。</p>
-
-<p>每一个原始递归函数都是可计算的。</p>
-
-<p><br/></p>
-
-<p>常用原始递归函数举例，</p>
-
-<p>常数<span data-katex="k"></span>，<span data-katex="x"></span>，<span data-katex="x+y"></span>，<span data-katex="x\cdot y"></span>，<span data-katex="x!"></span>，<span data-katex="x^y"></span>，前驱函数<span data-katex="p(x)"></span>，<span data-katex="|x-y|"></span></p>
-
-<p><br/></p>
-
-<p><strong>原始递归谓词</strong></p>
-
-<p>如果一个谓词看作取值为<span data-katex="0"></span>或<span data-katex="1"></span>的全函数是原始递归的，则称该谓词是原始递归的。</p>
-
-<p>可证，如果<span data-katex="P"></span>和<span data-katex="Q"></span>是原始递归谓词，则<span data-katex="\neg P"></span>，<span data-katex="P\wedge Q"></span>和<span data-katex="P\vee Q"></span>也是原始递归谓词。</p>
-
-<p><br/></p>
-
-<p><strong>极小化运算</strong></p>
-
-<p>设<span data-katex="P(x_1,\cdots ,x_n,t)"></span>是一个谓词，</p>
-
-<p><span data-katex="f(x_1,\cdots ,x_n)=min\ P(x_1,\cdots ,x_n,t)"></span>，</p>
-
-<p><span data-katex="f(x_1,\cdots ,x_n)"></span>的值，或者是使<span data-katex="P(x_1,\cdots ,x_n,t)"></span>为真的<span data-katex="t"></span>的最小值，</p>
-
-<p>或者无定义，如果不存在<span data-katex="t"></span>使得<span data-katex="P(x_1,\cdots ,x_n,t)"></span>为真。</p>
-
-<p>其中，<span data-katex="min"></span>为极小化运算，</p>
-
-<p>也称部分函数<span data-katex="f"></span>，是由谓词<span data-katex="P"></span>经过极小化运算得到的。</p>
-
-<p><br/></p>
-
-<p>设<span data-katex="g(x_1,\cdots ,x_n,t)"></span>是一个<span data-katex="n+1"></span>元全函数，</p>
-
-<p><span data-katex="f(x_1,\cdots ,x_n)=min\ {g(x_1,\cdots ,x_n,t)=0}"></span>，</p>
-
-<p>则称<span data-katex="f"></span>是由函数<span data-katex="g"></span>经过极小化运算得到的。</p>
-
-<p><br/></p>
-
-<p><strong>递归函数类</strong></p>
-
-<p>由初始函数经过有限次合成运算，原始递归运算和极小化运算，得到的函数称为部分递归函数，</p>
-
-<p>部分递归的全函数称为递归函数。</p>
-
-<p><br/></p>
-
-<p>如果一个谓词看作取值为<span data-katex="0"></span>或<span data-katex="1"></span>的全函数是递归的，则称该谓词是递归的。</p>
-
-<p><br/></p>
-
-<p><strong>递归性与可计算性</strong></p>
-
-<p>可证，部分递归函数是部分可计算函数。</p>
-
-<p>递归函数是可计算函数，递归谓词是可计算谓词。</p>
-
-<p><br/></p>
-
-<p>可证，原始递归函数类是可计算函数类的真子集。</p>
-
-<p><br/></p>
-
-<p>因为，至少存在一个Ackermann函数<span data-katex="A(k,x)"></span>是可计算的，但不是原始递归的。</p>
-
-<p><span data-katex="A(0,x)=x+1"></span></p>
-
-<p><span data-katex="A(k+1,0)=A(k,1)"></span></p>
-
-<p><span data-katex="A(k+1,x+1)=A(k,A(k+1,x))"></span></p>
-
-<p><br/></p>
-
-<h2><strong>集合和语言的递归性</strong></h2>
-
-<p><strong>集合识别问题</strong></p>
-
-<p>所谓集合识别问题，是指对于给定的集合，任给一个元素，问这个元素是否属于该集合，</p>
-
-<p>也称为集合的成员资格问题。</p>
-
-<p><br/></p>
-
-<p><strong>集合特征函数</strong></p>
-
-<p>设<span data-katex="B\subseteq N"></span>，<span data-katex="B"></span>的特征函数<span data-katex="\chi _B"></span>是一个谓词，定义为，</p>
-
-<p><span data-katex="\chi _B\equiv x\in B,\ \forall x\in N"></span>，</p>
-
-<p>集合<span data-katex="B"></span>可以用它的特征函数表示为，<span data-katex="B=\{x\in N|\chi _B(x)\}"></span>。</p>
-
-<p><br/></p>
-
-<p>如果特征函数<span data-katex="\chi _B"></span>是可计算的，则成集合<span data-katex="B"></span>是递归的。</p>
-
-<p>如果存在部分可计算函数<span data-katex="g"></span>使得<span data-katex="B=\{x\in N|g(x)\downarrow \}"></span>，</p>
-
-<p>则称集合<span data-katex="B"></span>是递归可枚举的。</p>
-
-<p><br/></p>
-
-<p>可证，如果集合<span data-katex="B"></span>和<span data-katex="C"></span>都是递归的，则集合<span data-katex="\bar{B}"></span>，<span data-katex="B\cap C"></span>和<span data-katex="B\cup C"></span>都是递归的。</p>
-
-<p>递归集一定是递归可枚举的。</p>
-
-<p>集合<span data-katex="B"></span>是递归的，当且仅当<span data-katex="B"></span>和<span data-katex="\bar{B}"></span>都是递归可枚举的。</p>
-
-<p>如果集合<span data-katex="B"></span>和<span data-katex="C"></span>是递归可枚举的，则集合<span data-katex="B\cap C"></span>和<span data-katex="B\cup C"></span>也是递归可枚举的。</p>
-
-<p><br/></p>
-
-<p><strong>语言识别问题</strong></p>
-
-<p>设字母表<span data-katex="A=\{s_1,s_2,\cdots ,s_n\}"></span>，<span data-katex="A^*"></span>的任何子集<span data-katex="L"></span>称为<span data-katex="A"></span>上的语言。</p>
-
-<p><span data-katex="A^*"></span>上集合的识别问题，有称为<span data-katex="A"></span>上的语言识别问题。</p>
-
-<p><br/></p>
-
-<p>语言的特征函数定义为，<span data-katex="\chi _L\equiv w\in L,\ \forall w\in A^*"></span>，</p>
-
-<p>如果语言<span data-katex="L"></span>的特征函数<span data-katex="\chi _L"></span>是可计算的，则称语言<span data-katex="L"></span>是递归的。</p>
-
-<p>如果存在<span data-katex="A"></span>上的部分可计算函数<span data-katex="g"></span>使得，<span data-katex="L=\{w\in A^*|g(w)\downarrow \}"></span>，</p>
-
-<p>则称语言<span data-katex="L"></span>是递归可枚举的。</p>
-
-<p><br/></p>
-
-<p><strong>递归可枚举集</strong></p>
-
-<p>设<span data-katex="B\subseteq N"></span>，且<span data-katex="B"></span>是递归可枚举的，</p>
-
-<p>则存在原始递归谓词<span data-katex="R(x,t)"></span>使得，<span data-katex="B=\{x|\exists t\ R(x,t)\}"></span></p>
-
-<p><br/></p>
-
-<p>设<span data-katex="B"></span>是一个非空递归可枚举集，则存在原始递归函数<span data-katex="f(x)"></span>使得，</p>
-
-<p><span data-katex="B=\{f(x)|x\in N\}"></span></p>
-
-<p><br/></p>
-
-<p>集合<span data-katex="B"></span>是递归可枚举的，当且仅当存在部分可计算函数<span data-katex="f(x)"></span>，使得，</p>
-
-<p><span data-katex="B=\{f(x)|f(x)\downarrow \}"></span></p>
-
-<p><br/></p>
-
-<p>总之，如果<span data-katex="B"></span>非空，则以下命题是等价的，</p>
-
-<p>（1）<span data-katex="B"></span>是递归可枚举的，即<span data-katex="B"></span>是一个部分可计算函数的定义域，</p>
-
-<p>（2）<span data-katex="B"></span>是第一个原始递归函数的值域，</p>
-
-<p>（3）<span data-katex="B"></span>是一个可计算函数的值域，</p>
-
-<p>（4）<span data-katex="B"></span>是一个部分可计算函数的值域。</p>
-
-<p><br/></p>
-
-<h2><strong>可判定性与半可判定性</strong></h2>
-
-<p><span data-katex="\mathscr{S}"></span>程序设计语言，递归函数，Turing机，文法等计算模型，</p>
-
-<p>可以证明它们是等价的，即计算相同的函数类——部分可计算函数。</p>
-
-<p>它们可以识别相同的语言类，递归可枚举语言。</p>
-
-<p><br/></p>
-
-<p>如果语言<span data-katex="L"></span>是递归的，那么存在一台总停机的DTM（确定型图灵机）<span data-katex="\mathscr{M}"></span>识别<span data-katex="L"></span>，</p>
-
-<p>任给一个字符串<span data-katex="x"></span>，<span data-katex="\mathscr{M}"></span>总能在有限步内回答<span data-katex="x\in L"></span>还是<span data-katex="x\notin L"></span>，</p>
-
-<p>因而，我们说<span data-katex="L"></span>为可判定的。</p>
-
-<p><br/></p>
-
-<p>如果<span data-katex="L"></span>的递归可枚举的，情况就不同了，识别<span data-katex="L"></span>的DTM可能永不停机，</p>
-
-<p>只有当<span data-katex="x\in L"></span>时，<span data-katex="\mathscr{M}"></span>才能保证一定能在有限步内停机并接受<span data-katex="x"></span>，</p>
-
-<p>而当<span data-katex="x\notin L"></span>时，<span data-katex="\mathscr{M}"></span>可能永不停机，</p>
-
-<p>在这种情况下，我们不知道是暂时没有停机，还是永不停机，</p>
-
-<p>这时，我们说<span data-katex="L"></span>是半可判定的。</p>
-
-<p><br/></p>
-
-<p>因此，递归语言是可判定的，而递归可枚举语言是半可判定的，</p>
-
-<p>同样的，直观可计算函数是可计算函数，而部分可计算函数是半可计算的，</p>
-
-<p>可计算谓词是可判定的，它定义的集合是递归的，</p>
-
-<p>如果谓词定义的集合是递归可枚举的，则该谓词是半可判定的。</p>
-
-<h2><strong>参考</strong></h2>
-
-<p><a href="https://book.douban.com/subject/1310925/">可计算性与计算复杂性导引</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[不动点算子与完全偏序]]></title>
-    <link href="https://thzt.github.io/blog/2016/06/25/complete-partial-order/"/>
-    <updated>2016-06-25T00:00:00+08:00</updated>
-    <id>https://thzt.github.io/blog/2016/06/25/complete-partial-order</id>
-    <content type="html"><![CDATA[<script src="https://thzt.github.io/thirdpart/jQuery/jquery-1.11.1.js"></script>
-
-
-<p><link href="https://thzt.github.io/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
-
-<script src="https://thzt.github.io/thirdpart/KaTeX/katex.min.js"></script>
-
-
-<script src="https://thzt.github.io/javascripts/katex.js"></script>
-
-
-<h2><strong>域论模型</strong></h2>
-
-<p>类型化lambda演算，有两个常用模型。</p>
-
-<p>其一，域论模型。其二，递归函数论模型。</p>
-
-<p><br/></p>
-
-<p>在众多域论模型中，</p>
-
-<p>主要关心的是一种具有完全偏序（complete partial order）结构的域，简称CPO。</p>
-
-<p>研究它的主要原因是，它是带有不动点算子的模型，</p>
-
-<p>而且它还提供了一种解释递归类型表达式的方法。</p>
-
-<p>域论方法是递归函数论模型的基础。</p>
-
-<p><br/></p>
-
-<h2><strong>递归</strong></h2>
-
-<p>加入递归之后，对表达式进行归约就可能会无限的进行下去，</p>
-
-<p>因此将出现没有范式（normal form）的表达式。</p>
-
-<p>于是，把每个表达式指称为一个数值，这种想法就可能有问题了。</p>
-
-<p>下面我们引入不动点算子（fixed-point operator），用来它定义递归。</p>
-
-<p><br/></p>
-
-<p><span data-katex="letrec~f:\sigma=M~in~N"></span></p>
-
-<p>它表示<span data-katex="N"></span>，但是<span data-katex="N"></span>中f的值，是等式<span data-katex="f=M"></span>的解。</p>
-
-<p>而<span data-katex="M"></span>中可能会包含<span data-katex="f"></span>。</p>
-
-<p><span data-katex="M"></span>的类型根据等式<span data-katex="f=M"></span>也是<span data-katex="\sigma"></span>。</p>
-
-<p><br/></p>
-
-<p>我们将看到，<span data-katex="letrec"></span>是<span data-katex="let"></span>与不动点算子的语法糖（syntactic sugar）。</p>
-
-<p>首先，我们先用<span data-katex="letrec"></span>定义阶乘函数，来计算<span data-katex="5!"></span>。</p>
-
-<p><span data-katex="letrec~f:nat\rightarrow nat=\lambda y:nat.~(if~Eq?~y~0~then~1~else~y*f(y-1))~in~f~5"></span></p>
-
-<p><br/></p>
-
-<p>其中<span data-katex="f"></span>是下列等式的解。</p>
-
-<p><span data-katex="f=\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
-
-<p><br/></p>
-
-<h2><strong>不动点算子</strong></h2>
-
-<p>从数学的角度来看，并不是所有形如<span data-katex="f:\sigma =M"></span>的等式都有解，</p>
-
-<p>如果有多个解，也不知道选择哪个解。</p>
-
-<p>我们先假设每个这样的等式都有解，为此我们增加一个不动点算子来得到这个解。</p>
-
-<p><br/></p>
-
-<p>一般的，如果<span data-katex="F:\sigma \rightarrow \sigma"></span>是某一类型到自身的函数。</p>
-
-<p>那么<span data-katex="F"></span>的一个不动点，是使得<span data-katex="x=F(x)"></span>的值<span data-katex="x:\sigma"></span>。</p>
-
-<p><br/></p>
-
-<p>经过观察我们发现，阶乘函数<span data-katex="f"></span>是以下函数的<span data-katex="F"></span>的不动点，即满足<span data-katex="f=F(f)"></span>。</p>
-
-<p><span data-katex="F=_{def}\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
-
-<p>其中，<span data-katex="f:nat\rightarrow nat"></span>，<span data-katex="F:(nat\rightarrow nat)\rightarrow (nat\rightarrow nat)"></span></p>
-
-<p><br/></p>
-
-<p>我们定义，<span data-katex="fix_\sigma :(\sigma \rightarrow \sigma )\rightarrow \sigma"></span>，是对应于每个类型<span data-katex="\sigma"></span>的不动点算子。</p>
-
-<p>满足的如下等式公理，</p>
-
-<p><span data-katex="fix_\sigma =\lambda f:\sigma \rightarrow \sigma .~f(fix_\sigma f)"></span></p>
-
-<p><br/></p>
-
-<p>可知，对任意的<span data-katex="F:\sigma \rightarrow \sigma"></span>，<span data-katex="fix_\sigma F"></span>是<span data-katex="F"></span>的不动点，即，</p>
-
-<p><span data-katex="fix_\sigma F=F(fix_\sigma F)"></span></p>
-
-<p><br/></p>
-
-<p>我们就可以用<span data-katex="let"></span>和<span data-katex="fix_\sigma"></span>表示<span data-katex="letrec"></span>了。</p>
-
-<p><span data-katex="letrec~f:\sigma =M~in~N=_{def}let~f:\sigma =(fix_\sigma \lambda f:\sigma .~M)~in~N"></span></p>
-
-<p><br/></p>
-
-<h2><strong>归约</strong></h2>
-
-<p>我们以阶乘函数为例，来说明带有不动点算子的表达式是如何归约的。</p>
-
-<p>为了行文方便，我们省略<span data-katex="fix_{nat\rightarrow nat}"></span>的下标，直接记为<span data-katex="fix"></span>。</p>
-
-<p>定义阶乘函数<span data-katex="fact=_{def}fix~F"></span>，其中，</p>
-
-<p><span data-katex="F=_{def}\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
-
-<p><br/></p>
-
-<p>我们来计算<span data-katex="fact~n"></span>。</p>
-
-<p><span data-katex="fact~n=(fix~F)~n"></span></p>
-
-<p><span data-katex="=((\lambda f:nat\rightarrow nat.~f(fix~f))~F)~n"></span></p>
-
-<p><span data-katex="=(F~(fix~F))~n"></span></p>
-
-<p><span data-katex="=((\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1))~(fix~F))~n"></span></p>
-
-<p><span data-katex="=(if~Eq?~n~0~then~1~else~n*(fix~F))~(n-1)"></span></p>
-
-<p><br/></p>
-
-<h2><strong>无法终止的运算</strong></h2>
-
-<p>由于递归允许我们写出没有范式的表达式，</p>
-
-<p>所以我们相应的必须给这样的表达式赋予含义。</p>
-
-<p><br/></p>
-
-<p>例如，</p>
-
-<p><span data-katex="letrec~f:nat\rightarrow nat=\lambda x:nat.~f(x+1)~in~f~3"></span></p>
-
-<p>尽管该表达式的类型是<span data-katex="nat"></span>，但是我们无法把它简化为一个数值。</p>
-
-<p>所以该表达式的含义就不是一个自然数了。</p>
-
-<p><br/></p>
-
-<p>一方面，认为该表达式的类型是<span data-katex="nat"></span>是合理的，它是类型规则的推导结论。</p>
-
-<p>另一方面，如果我们说该表达式的值是『未定义的』，</p>
-
-<p>那么<span data-katex="f"></span>的语义就变成了部分函数（partial function）。</p>
-
-<p><br/></p>
-
-<p>我们不如给自然数集附加一个值<span data-katex="\perp _{nat}"></span>，</p>
-
-<p>用来表示类型<span data-katex="nat"></span>上无法终止的运算（nonterminating computation）。</p>
-
-<p>这给了我们一个把部分函数看成完全函数（total function）的方法。</p>
-
-<p><br/></p>
-
-<h2><strong>CPO</strong></h2>
-
-<p><strong>偏序</strong></p>
-
-<p>一个偏序（partial order）<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个集合<span data-katex="D"></span>，以及集合上的一个关系（relation）<span data-katex="\leqslant"></span>，</p>
-
-<p>这个关系具有自反性，反对称性，和传递性。</p>
-
-<p><br/></p>
-
-<p>若对于任意<span data-katex="d\in D"></span>有<span data-katex="d\leqslant d"></span>，则称<span data-katex="\leqslant"></span>具有自反性（reflexive）。</p>
-
-<p>若<span data-katex="a\leqslant b"></span>且<span data-katex="b\leqslant a"></span>有<span data-katex="a=b"></span>，则称<span data-katex="\leqslant"></span>具有反对称性（anti-symmetric）。</p>
-
-<p>若<span data-katex="a\leqslant b"></span>且<span data-katex="b\leqslant c"></span>有<span data-katex="a\leqslant c"></span>，则称<span data-katex="\leqslant"></span>具有传递性（transitive）。</p>
-
-<p><br/></p>
-
-<p><strong>上界与最小上界</strong></p>
-
-<p>如果<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个偏序，则子集<span data-katex="S\subseteq D"></span>的上界（upper bound），</p>
-
-<p>是<span data-katex="D"></span>中的一个元素<span data-katex="x\in D"></span>，使得对于任意的<span data-katex="y\in S"></span>有<span data-katex="y\leqslant x"></span>。</p>
-
-<p>最小上界（least upper bound）是那个<span data-katex="\leqslant"></span>任何其它上界的元素。</p>
-
-<p><br/></p>
-
-<p><strong>有向集</strong></p>
-
-<p>如果<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个偏序，称子集<span data-katex="S\subseteq D"></span>是有向的（directed），</p>
-
-<p>如果<span data-katex="S"></span>的每一个有限子集<span data-katex="S_0\subseteq S"></span>在<span data-katex="S"></span>中都有上界。</p>
-
-<p>有向集（directed set）的一个性质是，所有有向集都非空。</p>
-
-<p><br/></p>
-
-<p><strong>完全偏序</strong></p>
-
-<p>完全偏序（complete partial order）简称CPO，它是一个偏序<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>，</p>
-
-<p>且每一个有向子集<span data-katex="S\subseteq D"></span>都有最小上界，我们把这个最小上界记为<span data-katex="\bigvee S"></span>。</p>
-
-<p>可证，任何一个有限的偏序，都是完全偏序。</p>
-
-<p><br/></p>
-
-<p>一个不是CPO的例子是自然数集，自然数集<span data-katex="N"></span>本身是有向的，但没有最小上界。</p>
-
-<p>如果我们加入一个比其他自然数都大的元素<span data-katex="\infty"></span>，我们就得到了一个CPO。</p>
-
-<p><br/></p>
-
-<h2><strong>CPO的提升</strong></h2>
-
-<p><strong>有奇点的CPO</strong></p>
-
-<p>如果<span data-katex="\mathscr{D}=\left \langle D,\leqslant  \right \rangle"></span>是一个有最小元（least element）的偏序，</p>
-
-<p>则称为<span data-katex="\mathscr{D}"></span>是有奇点（pointed）的，我们用<span data-katex="\perp _D"></span>表示<span data-katex="D"></span>的最小元。</p>
-
-<p><br/></p>
-
-<p><strong>提升集</strong></p>
-
-<p>对于任意的集合<span data-katex="A"></span>，我们构建一个CPO，<span data-katex="A_\perp =\left \langle A\cup \{\perp \} ,\leqslant  \right \rangle"></span>，</p>
-
-<p>其中，<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=\perp"></span>或<span data-katex="x=y"></span>。</p>
-
-<p>我们称<span data-katex="A_\perp"></span>为<span data-katex="A"></span>的提升集（lifted set）。</p>
-
-<p><br/></p>
-
-<p>用这个方法，我们可以提升任何一个CPO，<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D  \right \rangle"></span>，</p>
-
-<p>得到<span data-katex="\mathscr{D}_\perp =\left \langle D\cup \{\perp \},\leqslant \right \rangle"></span>，</p>
-
-<p>其中<span data-katex="\perp"></span>与<span data-katex="D"></span>中的任何元素都不等，新的序关系<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=\perp"></span>或<span data-katex="x\leqslant _D y"></span>。</p>
-
-<p><br/></p>
-
-<p>可证，如果<span data-katex="\mathscr{D}"></span>是一个CPO，则<span data-katex="\mathscr{D}_\perp"></span>是一个有奇点的CPO。</p>
-
-<p><br/></p>
-
-<h2><strong>连续函数</strong></h2>
-
-<p><strong>单调函数</strong></p>
-
-<p>设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>和<span data-katex="\mathscr{E}=\left \langle E,\leqslant _E \right \rangle"></span>是CPO，</p>
-
-<p><span data-katex="f:D\rightarrow E"></span>是集合<span data-katex="D"></span>到<span data-katex="E"></span>的一个函数，我们说<span data-katex="f"></span>是单调的（monotonic），</p>
-
-<p>如果<span data-katex="a\leqslant b"></span>就有<span data-katex="f(a)\leqslant f(b)"></span>。</p>
-
-<p><br/></p>
-
-<p><strong>连续函数</strong></p>
-
-<p>一个单调函数<span data-katex="f"></span>是连续的（continuous），如果对于任意有向子集<span data-katex="S\subseteq D"></span>，有<span data-katex="f(\bigvee S)=\bigvee f(S)"></span>。</p>
-
-<p><br/></p>
-
-<p><strong>提升函数</strong></p>
-
-<p>我们定义<span data-katex="f:D\rightarrow E"></span>对应的提升函数（lifted function）为<span data-katex="f_\perp =(D\cup\{ \perp \})\rightarrow (E\cup\{ \perp \})"></span>。</p>
-
-<p>其中，如果<span data-katex="a\in D"></span>，则<span data-katex="f_\perp (a)=f(a)"></span>，否则<span data-katex="f_\perp (a)=\perp"></span>。</p>
-
-<p><br/></p>
-
-<p><strong>函数集构成CPO</strong></p>
-
-<p>假设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>和<span data-katex="\mathscr{E}=\left \langle E,\leqslant _E \right \rangle"></span>是CPO，</p>
-
-<p>对于连续函数<span data-katex="f,g:D\rightarrow E"></span>，我们称<span data-katex="f\leqslant_{D\rightarrow E} g"></span>，如果对于任意<span data-katex="d\in D"></span>，都有<span data-katex="f(d)\leqslant _E g(d)"></span>。</p>
-
-<p>于是，所有这些连续函数构成了一个CPO，记为<span data-katex="\mathscr{D}\rightarrow \mathscr{E}=\left \langle D\rightarrow E,\leqslant _{D\rightarrow E} \right \rangle"></span>。</p>
-
-<p><br/></p>
-
-<h2><strong>最小不动点</strong></h2>
-
-<p>我们称<span data-katex="a"></span>是<span data-katex="f"></span>的最小不动点（least fixed point），</p>
-
-<p>如果<span data-katex="a=f(a)"></span>且对于任意的<span data-katex="b=f(b)"></span>，我们有<span data-katex="a\leqslant b"></span>。</p>
-
-<p><br/></p>
-
-<p>如果<span data-katex="\mathscr{D}"></span>是一个有奇点的CPO，且<span data-katex="f:D\rightarrow D"></span>是连续的，则<span data-katex="f"></span>有最小不动点，</p>
-
-<p><span data-katex="fix_D f=\bigvee \{ f^n(\perp )~|~n\geqslant 0 \}"></span>，</p>
-
-<p>且<span data-katex="fix_D"></span>是连续的。</p>
-
-<p><br/></p>
-
-<p>例如，设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>是有奇点的CPO，则恒等函数<span data-katex="id:D\rightarrow D"></span>的最小不动点是<span data-katex="\perp _D"></span>。</p>
-
-<p><span data-katex="fix_D~id=\bigvee \{ id^n(\perp _D)~|~n\geqslant 0 \}=\bigvee \{ \perp _D \}=\perp _D"></span></p>
-
-<h2><strong>结语</strong></h2>
-
-<p>初等数学中，某些函数是没有不动点的。</p>
-
-<p>那么在什么情况下，形如<span data-katex="f:\sigma =M"></span>的表达式有解呢？</p>
-
-<p>定义了递归之后，对类型化lambda演算的模型产生了什么影响呢？</p>
-
-<p><br/></p>
-
-<p>这是一直以来我心中是一个问题。</p>
-
-<p>诚然，类型化lambda演算有不同的解释方式，但以上域论模型通俗易懂，</p>
-
-<p>也算是告一段落吧，以后的路还长着呢。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[代数数据类型的语法和语义]]></title>
-    <link href="https://thzt.github.io/blog/2016/06/08/algebraic-data-type/"/>
-    <updated>2016-06-08T00:00:00+08:00</updated>
-    <id>https://thzt.github.io/blog/2016/06/08/algebraic-data-type</id>
-    <content type="html"><![CDATA[<script src="https://thzt.github.io/thirdpart/jQuery/jquery-1.11.1.js"></script>
-
-
-<p><link href="https://thzt.github.io/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
-
-<script src="https://thzt.github.io/thirdpart/KaTeX/katex.min.js"></script>
-
-
-<script src="https://thzt.github.io/javascripts/katex.js"></script>
-
-
-<h3><strong>代数数据类型</strong></h3>
-
-<p>一个代数数据类型，由值的一些集合，以及这些集合之间的一些函数构成。</p>
-
-<p>这些函数都是一阶函数，不能以其他函数作为参数。</p>
-
-<p><br/></p>
-
-<h3><strong>泛代数</strong></h3>
-
-<p>泛代数（universal algebra）也称为等式逻辑（equational logic），</p>
-
-<p>是用于研究代数数据类型的一个数学框架。</p>
-
-<p><br/></p>
-
-<p>在泛代数中，代数数据类型的语法由代数项（algebraic term）描述，公理语义用项之间的等式集（a set of equations）描述，</p>
-
-<p>而指称语义对应于一个<span data-katex="\Sigma"></span>代数，操作语义通过给等式设定方向来表示。</p>
-
-<hr />
-
-<h2><strong>代数数据类型的语法</strong></h2>
-
-<h3><strong>代数项和签名</strong></h3>
-
-<p>一个代数项（algebraic term）由符号和类型来定义，</p>
-
-<p>这些信息放在一起称为代数项的签名（signature）。</p>
-
-<p><br/></p>
-
-<p>构成代数项的基本类型称为sort。</p>
-
-<p><br/></p>
-
-<p>一个签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>，由以下几个部分构成，</p>
-
-<p>（1）以sort为元素构成的集合</p>
-
-<p>（2）sort上函数符号的集合<span data-katex="F=\left \{ f:s_1\times \cdots \times s_k\rightarrow s \right \}"></span></p>
-
-<p>其中，<span data-katex="s_1,\cdots ,s_k,s\in S"></span>，<span data-katex="f"></span>称为类型化的函数符号，</p>
-
-<p>每个函数符号的类型是唯一的。</p>
-
-<p><br/></p>
-
-<p>例如，自然数表达式的签名是<span data-katex="\Sigma_N=\left \langle S,F \right \rangle"></span>，</p>
-
-<p>其中<span data-katex="S=\left \{ nat \right \}"></span>，只包含一个sort，</p>
-
-<p><span data-katex="F"></span>给出以下几个函数符号，</p>
-
-<p><span data-katex="0:nat"></span>，<span data-katex="1:nat"></span>，<span data-katex="+:nat\times nat\rightarrow nat"></span>，<span data-katex="*:nat\times nat\rightarrow nat"></span>。</p>
-
-<p>习惯上为了节省空间，通常把签名写成一个表格形式，</p>
-
-<p><span data-katex="sorts:nat"></span></p>
-
-<p><span data-katex="fctns:0,1:nat"></span></p>
-
-<p><span data-katex="+,*:nat\times nat\rightarrow nat"></span></p>
-
-<p><br/></p>
-
-<h3><strong>变量的指派</strong></h3>
-
-<p>一个指派（sort assignment），是如下一个有限集合，用来指定变量的类型，</p>
-
-<p><span data-katex="\Gamma=\left \{ x_1:s_1,\cdots ,x_k:s_k \right \}"></span></p>
-
-<p>不能为同一个变量指派不同的sort。</p>
-
-<p><br/></p>
-
-<h3><strong>合法代数项的集合</strong></h3>
-
-<p>基于签名<span data-katex="\Sigma"></span>和指派<span data-katex="\Gamma"></span>，可以定义一个sort为<span data-katex="s"></span>的代数项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>，</p>
-
-<p>它满足以下几个条件，</p>
-
-<p>（1）如果<span data-katex="x:s\in \Gamma"></span>则<span data-katex="x\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
-
-<p>（2）如果<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>且<span data-katex="M_i\in Terms^{s_i}\left ( \Sigma,\Gamma \right )"></span>，</p>
-
-<p><span data-katex="i=1,\cdots ,n"></span>，则<span data-katex="fM_1\cdots M_k\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
-
-<hr />
-
-<h2><strong>代数数据类型的指称语义</strong></h2>
-
-<h3><strong><span data-katex="\Sigma"></span>代数</strong></h3>
-
-<p><span data-katex="\Sigma"></span>代数是一种数学结构，它为代数项提供了含义或指称语义。</p>
-
-<p><br/></p>
-
-<p>一个<span data-katex="\Sigma"></span>代数，包含了一个或多个集合，称为载体（carrier），</p>
-
-<p>以及一些特征元素，和载体上的一些一阶函数，</p>
-
-<p><span data-katex="f:A_1\times \cdots \times A_k \rightarrow A"></span></p>
-
-<p><br/></p>
-
-<p>例如，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,* \right \rangle"></span></p>
-
-<p>具有载体<span data-katex="N"></span>，它是自然数集，</p>
-
-<p>具有特征元素，<span data-katex="0,1\in N"></span>，</p>
-
-<p>以及函数，<span data-katex="+,*:N \times N \rightarrow N"></span>。</p>
-
-<p>其中，特征元素可以看成零元函数。</p>
-
-<p><br/></p>
-
-<p>带有多个载体的例子是<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}_{pcf}=\left \langle N,B,0,1,\cdots ,+,true,false,Eq?,\cdots ,\right \rangle"></span></p>
-
-<p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
-
-<p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
-
-<p><br/></p>
-
-<h3><strong>代数项的解释</strong></h3>
-
-<p>我们说<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>是与所有合法代数项<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>对应的<span data-katex="\Sigma"></span>代数，</p>
-
-<p>指的是如下对应关系成立，</p>
-
-<p>（1）每一个sort，<span data-katex="s\in S"></span>，恰好对应一个载体<span data-katex="A^s"></span></p>
-
-<p>（2）每一个函数符号<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>，恰好对应一个函数<span data-katex="\mathscr{I}(f):A^{s_1}\times \cdots \times A^{s_k}\rightarrow A^s"></span></p>
-
-<p>习惯上把<span data-katex="\mathscr{I}(f)"></span>写成<span data-katex="f^{\mathscr{A}}"></span>。</p>
-
-<p><br/></p>
-
-<h3><strong>含变量代数项的解释</strong></h3>
-
-<p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射。</p>
-
-<p><span data-katex="\eta :\mathscr{V} \rightarrow\cup _sA^s"></span></p>
-
-<p>需要环境的原因是，对于含变量<span data-katex="x"></span>的项<span data-katex="M"></span>，叙述<span data-katex="M"></span>的含义必须先给<span data-katex="x"></span>指定一个确定的值。</p>
-
-<p>如果对于每个<span data-katex="x:s\in \Gamma"></span>，都有<span data-katex="\eta (x)\in A^s"></span>，就说环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>。</p>
-
-<p><br/></p>
-
-<p>假定<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的一个环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，</p>
-
-<p>则可以把环境<span data-katex="\eta"></span>下的任何项<span data-katex="M\in Terms\left ( \Sigma ,\Gamma \right )"></span>的含义<span data-katex="\mathscr{A}[[M]]\eta"></span>定义如下，</p>
-
-<p>（1）<span data-katex="\mathscr{A}[[M]]\eta =\eta (x)"></span></p>
-
-<p>（2）<span data-katex="\mathscr{A}[[fM_1\cdots M_k]]\eta =f^{\mathscr{A}}(\mathscr{A}[[M_1]]\eta ,\cdots ,\mathscr{A}[[M_k]]\eta )"></span></p>
-
-<p><br/></p>
-
-<p>若<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在上下文中是明确的，通常省略<span data-katex="\mathscr{A}"></span>而直接写<span data-katex="[[M]]\eta"></span>，</p>
-
-<p>若<span data-katex="M"></span>中没有变量，则<span data-katex="\mathscr{A}[[M]]\eta"></span>不依赖于<span data-katex="\eta"></span>，可以写为<span data-katex="\mathscr{A}[[M]]"></span>。</p>
-
-<hr />
-
-<h2><strong>语法和语义的关系</strong></h2>
-
-<h3><strong>可靠性与完备性</strong></h3>
-
-<p>代数数据类型的公理语义是由代数项之间的等式集给出的，签名和等式集合称代数规范（algebraic specification）。</p>
-
-<p>一个代数规范，或者可以使用等式证明系统推导出代数项之间的其他等式，或者可以检验代数项对应的<span data-katex="\Sigma"></span>代数是否满足这些等式的要求。</p>
-
-<p><br/></p>
-
-<p>代数项对应的<span data-katex="\Sigma"></span>代数并不是唯一的。</p>
-
-<p>从一个代数规范推导得到的等式，在该规范对应的任何<span data-katex="\Sigma"></span>代数中都成立，就称该代数证明系统是可靠的（sound）。</p>
-
-<p>一个代数规范对应的任何<span data-katex="\Sigma"></span>代数中都成立的等式，在该规范中都可证，就称该代数证明系统是完备的（complete）。</p>
-
-<p><br/></p>
-
-<h3><strong>等式的可满足性</strong></h3>
-
-<p>等式（equation）是一个公式<span data-katex="M=N[\Gamma ]"></span>，其中<span data-katex="M,N\in Terms^s\left ( \Sigma ,\Gamma \right )"></span>，<span data-katex="s\in S"></span>。</p>
-
-<p>如果环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，且<span data-katex="[[M]]\eta =[[N]]\eta"></span>，</p>
-
-<p>就说<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在环境<span data-katex="\eta"></span>下满足<span data-katex="M=N[\Gamma ]"></span>，记为</p>
-
-<p><span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span></p>
-
-<p><br/></p>
-
-<p>对于含变量的项，我们更感兴趣的是一个等式是否在变量所有可能的取值情况下都成立，</p>
-
-<p>而不是在一个特别的环境中成立。</p>
-
-<p>如果对于满足<span data-katex="\Gamma"></span>的任何一个环境<span data-katex="\eta"></span>都有<span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span>，</p>
-
-<p>就可以说，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>满足等式<span data-katex="M=N[\Gamma ]"></span>，记为</p>
-
-<p><span data-katex="\mathscr{A} \models M=N[\Gamma]"></span></p>
-
-<p><br/></p>
-
-<p>可满足性也可以扩展到等式集和代数集，</p>
-
-<p>设<span data-katex="E"></span>是一个等式集，如果<span data-katex="\mathscr{A}"></span>满足所有等式，就说<span data-katex="\mathscr{A}"></span>满足<span data-katex="E"></span>。</p>
-
-<p>类似的，若<span data-katex="C"></span>是一类<span data-katex="\Sigma"></span>代数，且对每个<span data-katex="\mathscr{A}\in C"></span>都有<span data-katex="\mathscr{A}\models M=N[\Gamma ]"></span>，则<span data-katex="C\models M=N[\Gamma ]"></span></p>
-
-<p><br/></p>
-
-<p>若任何一个<span data-katex="\Sigma"></span>代数都满足代数项之间的等式<span data-katex="M=N[\Gamma ]"></span>，就说该等式是永真的（valid），写为<span data-katex="\models M=N[\Gamma ]"></span>。</p>
-
-<p>例如，<span data-katex="x=x[x:s]"></span>就是永真的。</p>
-
-<p><br/></p>
-
-<p>若<span data-katex="\mathscr{A}"></span>满足签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>上的所有等式，就说<span data-katex="\Sigma"></span>代数是平凡的（trivial）。</p>
-
-<p><br/></p>
-
-<h3><strong>语义蕴含（semantic implication）</strong></h3>
-
-<p>若满足等式集<span data-katex="E"></span>的每一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>都满足等式<span data-katex="M=N[\Gamma ]"></span>，</p>
-
-<p>则称签名<span data-katex="\Sigma"></span>上的等式集<span data-katex="E"></span>在语义上蕴含等式<span data-katex="M=N[\Gamma ]"></span>，记为，</p>
-
-<p><span data-katex="E\models M=N[\Gamma ]"></span></p>
-
-<p><br/></p>
-
-<p>有了签名<span data-katex="\Sigma"></span>和等式集<span data-katex="E"></span>，我们定义代数规范<span data-katex="Spec=\left \langle \Sigma,E \right \rangle"></span>，</p>
-
-<p>则满足代数规范的，在所有<span data-katex="\Sigma"></span>代数中都成立的等式，就是那些由等式集<span data-katex="E"></span>语义蕴含的等式。</p>
-
-<p><br/></p>
-
-<h3><strong>语义理论</strong></h3>
-
-<p>如果等式集<span data-katex="E"></span>在语义蕴含下封闭（closed），则把它称为一个理论（theory）。</p>
-
-<p>更准确的说，如果<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语义理论（semantic theory）。</p>
-
-<p>一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的理论<span data-katex="Th(\mathscr{A})"></span>，就是在<span data-katex="\mathscr{A}"></span>中成立的所有等式的集合。</p>
-
-<p>可以证明一个<span data-katex="\Sigma"></span>代数的理论是一个语义理论。</p>
-
-<p><br/></p>
-
-<h3><strong>形式证明</strong></h3>
-
-<p>一个证明系统的推导规则如下，<span data-katex="\frac{antecedent}{consequent}"></span>，</p>
-
-<p>使得从前件（antecedent）的任何实例出发，通过使用该证明系统的公理和其他规则，</p>
-
-<p>可以推导出后件（consequent）的相应实例。</p>
-
-<p><br/></p>
-
-<p>例如：<span data-katex="\frac{M=N[\Gamma ],N=P[\Gamma ],P=Q[\Gamma ]}{M=Q[\Gamma ]}"></span></p>
-
-<p><br/></p>
-
-<p>若证明了一条规则是可推导的，则能够把它当做系统的一条证明规则来使用。</p>
-
-<p>如果某条规则没有前件，则称它是证明系统的一条公理（axiom）。</p>
-
-<p><br/></p>
-
-<p>我们说等式<span data-katex="M=N[\Gamma ]"></span>是可证的（provable），记为<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
-
-<p>如果从<span data-katex="E"></span>到<span data-katex="M=N[\Gamma ]"></span>存在一个等式序列，</p>
-
-<p>使得每个等式或者是公理（axiom），或者是<span data-katex="E"></span>中的等式，</p>
-
-<p>或者是从序列中之前出现的一个或多个等式经一步推导得到的结果。</p>
-
-<p><br/></p>
-
-<h3><strong>语法理论</strong></h3>
-
-<p>若在可证性下等式集<span data-katex="E"></span>是封闭的，则称<span data-katex="E"></span>是一个语法理论（syntactic theory）。</p>
-
-<p>换句话说，如果<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语法理论。</p>
-
-<p><span data-katex="E"></span>的语法理论<span data-katex="Th(E)"></span>就是从<span data-katex="E"></span>可证的所有等式的集合。</p>
-
-<p><br/></p>
-
-<h3><strong>等式证明系统的性质</strong></h3>
-
-<p>可靠性（soundness）：若<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="E\models M=N[\Gamma ]"></span></p>
-
-<p>演绎完备性（deductive completeness）：若<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
-
-<hr />
-
-<h2><strong>结语</strong></h2>
-
-<p>《<a href="https://book.douban.com/subject/1761918/">Foundations for Programming Languages</a>》是一本好书，</p>
-
-<p>可是中文的翻译《<a href="https://book.douban.com/subject/1944729/">程序设计语言理论基础</a>》简直是晦涩难懂，</p>
-
-<p>把sort翻译为『类子』，把signature翻译为『基调』，容易让人误以为和同调代数有什么联系。</p>
-
-<p>原版书拿到后，看起来轻松了不少，这里只是对第三章部分内容做了个小结，以便卸下包袱轻装上阵。</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[类型理论之拙见]]></title>
@@ -1887,6 +139,1267 @@
 <p><a href="http://lucacardelli.name/papers/typesystems.pdf">Type System - Luca Cardelli</a></p>
 
 <p><a href="https://book.douban.com/subject/1944729/">程序设计语言理论基础</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[形式证明与逻辑推理]]></title>
+    <link href="https://thzt.github.io/blog/2016/03/01/proof-and-deduction/"/>
+    <updated>2016-03-01T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2016/03/01/proof-and-deduction</id>
+    <content type="html"><![CDATA[<script src="https://thzt.github.io/thirdpart/jQuery/jquery-1.11.1.js"></script>
+
+
+<p><link href="https://thzt.github.io/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
+
+<script src="https://thzt.github.io/thirdpart/KaTeX/katex.min.js"></script>
+
+
+<script src="https://thzt.github.io/javascripts/katex.js"></script>
+
+
+<p>小时候，我就对侦探非常着迷，</p>
+
+<p>买了很多介绍破案的漫画书，故事书，小说。</p>
+
+<p><br/></p>
+
+<p>什么《大宇神秘惊奇系列》啊，</p>
+
+<p>《名侦探柯南》啊，</p>
+
+<p>《福尔摩斯探案全集》啊，等等。</p>
+
+<p><br/></p>
+
+<p>可是，对于<strong>什么是推理</strong>，</p>
+
+<p>以及怎样进行推理，</p>
+
+<p>并没有清晰系统的认识。</p>
+
+<p><br/></p>
+
+<p>学生时代，从平面几何开始，</p>
+
+<p>我们就知道了证明题。</p>
+
+<p>经过一步一步的推导，</p>
+
+<p>最后证明结论成立。</p>
+
+<p><br/></p>
+
+<p>可是，对于<strong>什么是证明</strong>，</p>
+
+<p>并没有人能说出精确的定义。</p>
+
+<p><br/></p>
+
+<p>这一切，难道真是只是个谜吗？</p>
+
+<p>是人类的未知领域吗？</p>
+
+<p><br/></p>
+
+<p>其实不然。</p>
+
+<p><strong>逻辑学</strong>就是研究推理和证明的学科，</p>
+
+<p>研究思维的形式，规律和方法。</p>
+
+<p><br/></p>
+
+<p>其中，数理逻辑是逻辑学与数学的交叉学科，</p>
+
+<p>用数学的方法研究逻辑，</p>
+
+<p>我想，答案应该在这里吧。</p>
+
+<p><br/></p>
+
+<h2><strong>大局观</strong></h2>
+
+<p>数理逻辑虽然博大精深，</p>
+
+<p>但是研究方法却非常简洁优美。</p>
+
+<p><br/></p>
+
+<p>给定一套逻辑系统，</p>
+
+<p>分别从两个侧面来描述这个系统的性质。</p>
+
+<p>语法层面，语义层面。</p>
+
+<p><br/></p>
+
+<p><strong>语法</strong>，指的是构成这个逻辑系统的符号规则，</p>
+
+<p>由公理和定理的推导规则组成，</p>
+
+<p>让我们可以从一串合法的符号得到另一串合法符号，</p>
+
+<p>称之为<strong>形式证明</strong>。</p>
+
+<p><br/></p>
+
+<p><strong>语义</strong>，指的是用什么样的数学对象可以解释这些符号，</p>
+
+<p>由论域和解释函数组成，我们得到的是一些代数结构，</p>
+
+<p>而且，从已知符号串的语义性质得到了其他符号串的性质，</p>
+
+<p>称之为<strong>逻辑推理</strong>。</p>
+
+<p><br/></p>
+
+<p>学校中的数理逻辑教科书，介绍了<strong>命题演算</strong>和<strong>一阶谓词演算</strong>这两个典型的逻辑系统。</p>
+
+<p>它们各自的语义解释，恰好描述了日常生活中推理问题。</p>
+
+<p><br/></p>
+
+<p>总之，数理逻辑，用一套符号，对生活中常见的逻辑问题，进行了数学建模，</p>
+
+<p>研究它，希望得到与证明和推理相关的更多性质和结论。</p>
+
+<p><br/></p>
+
+<h2><strong>形式证明</strong></h2>
+
+<p>为了说明问题，而又不引入过多的逻辑学概念，</p>
+
+<p>我们从命题逻辑开始。</p>
+
+<p><br/></p>
+
+<p>命题逻辑的形式化演算系统大体上可分为两种类型，</p>
+
+<p>一是<strong>希尔伯特式</strong>的公理化演算系统，</p>
+
+<p>二是<strong>甘岑(Gentzen)式</strong>的自然推理系统。</p>
+
+<p><br/></p>
+
+<p>这两个系统各有所长，</p>
+
+<p>前者更能体现公理化的思想，但其推理过程比较繁琐，</p>
+
+<p>后者形式推理比较自然，但是规则较多。</p>
+
+<p><br/></p>
+
+<p>下面只说<strong>命题演算的自然推理系统</strong>。</p>
+
+<p><br/></p>
+
+<p><strong>语法：</strong></p>
+
+<p>（1）可数个命题符号：<span data-katex="p_1,p_2,\cdots"></span></p>
+
+<p>（2）5个联接词符号：<span data-katex="\neg,\lor,\land,\to,\leftrightarrow"></span></p>
+
+<p>（3）2个辅助符号：<span data-katex="),("></span></p>
+
+<p><br/></p>
+
+<p><strong>公式：（BNF）</strong></p>
+
+<p><span data-katex="\alpha::=p|(\neg\alpha)|(\alpha_1\lor\alpha_2)|(\alpha_1\land\alpha_2)|(\alpha_1\to\alpha_2)|(\alpha_1\leftrightarrow\alpha_2)"></span></p>
+
+<p><br/></p>
+
+<p><strong>推导规则：</strong></p>
+
+<p>（1）<span data-katex=""></span>包含律：<span data-katex="\frac{\alpha\in\Gamma}{\Gamma\vdash\alpha}"></span></p>
+
+<p>（2）<span data-katex="\neg"></span>消去律：<span data-katex="\frac{\Gamma,\neg\alpha\vdash\beta;\Gamma,\neg\alpha\vdash\neg\beta}{\Gamma\vdash\alpha}"></span></p>
+
+<p>（3）<span data-katex="\to"></span>消去律：<span data-katex="\frac{\Gamma\vdash(\alpha\to\beta);\Gamma\to\alpha}{\Gamma\vdash\beta}"></span></p>
+
+<p>（4）<span data-katex="\to"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta}{\Gamma\vdash\alpha\to\beta}"></span></p>
+
+<p>（5）<span data-katex="\lor"></span>消去律：<span data-katex="\frac{\Gamma,\alpha\vdash\gamma;\Gamma,\beta\vdash\gamma}{\Gamma,\alpha\lor\beta\vdash\gamma}"></span></p>
+
+<p>（6）<span data-katex="\lor"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha}{\Gamma\vdash\alpha\lor\beta;\Gamma\vdash\beta\lor\alpha}"></span></p>
+
+<p>（7）<span data-katex="\land"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\land\beta}{\Gamma\vdash\alpha;\Gamma\vdash\beta}"></span></p>
+
+<p>（8）<span data-katex="\land"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha;\Gamma\vdash\beta}{\Gamma\vdash\alpha\land\beta}"></span></p>
+
+<p>（9）<span data-katex="\leftrightarrow"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\alpha}{\Gamma\vdash\beta}"></span>，<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\beta}{\Gamma\vdash\alpha}"></span></p>
+
+<p>（10）<span data-katex="\leftrightarrow"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta;\Gamma,\beta\vdash\alpha}{\Gamma\vdash\alpha\leftrightarrow\beta}"></span></p>
+
+<p><br/></p>
+
+<p><strong>例子：</strong></p>
+
+<p>使用这些推理规则，我们就可以从一些合法的符号串，</p>
+
+<p>推导出另一些合法的符号串了。</p>
+
+<p><br/></p>
+
+<p>（1）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha\to\beta"></span>：<span data-katex=""></span>包含律</p>
+
+<p>（2）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha"></span>：<span data-katex=""></span>包含律</p>
+
+<p>（3）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\beta"></span>：<span data-katex="\to"></span>消去律，式（1），式（2）</p>
+
+<p>（4）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\beta\to\alpha"></span>：<span data-katex=""></span>包含律</p>
+
+<p>（5）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\gamma"></span>：<span data-katex="\to"></span>消去律，式（3），式（4）</p>
+
+<p>（6）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha\to\gamma"></span>：<span data-katex="\to"></span>引入律，式（5）</p>
+
+<p><br/></p>
+
+<p>有了这些以后，我们就可以定义什么是一个<strong>证明</strong>了。</p>
+
+<p><strong>证明序列：</strong></p>
+
+<p>若有限序列，<span data-katex="\Gamma_1\vdash\alpha_1,\Gamma_2\vdash\alpha_2,\cdots ,\Gamma_n\vdash\alpha_n"></span>满足，</p>
+
+<p>（1）<span data-katex="\Gamma_1,\Gamma_2,\cdots ,\Gamma_n"></span>为有限公式集</p>
+
+<p>（2）<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>为公式</p>
+
+<p>（3）每个<span data-katex="\Gamma_i\vdash\alpha_i(1\leq i\leq n)"></span>都是它之前若干个<span data-katex="\Gamma_j\vdash\alpha_j(1\leq j<i\leq n)"></span>应用某条推导规则得到的</p>
+
+<p><br/></p>
+
+<p>则称这个有限序列为<span data-katex="\Gamma_n\vdash\alpha_n"></span>的一个<strong>（形式）证明序列</strong>。</p>
+
+<p>此时，也称<span data-katex="\alpha_n"></span>可由<span data-katex="\Gamma_n"></span><strong>（形式）证明</strong>，</p>
+
+<p>记为<span data-katex="\Gamma_n\vdash_N\alpha_n"></span>，其中<span data-katex="N"></span>表示自然推理系统。</p>
+
+<p><br/></p>
+
+<h2><strong>逻辑推理</strong></h2>
+
+<p>上文提到的是命题演算的自然推理系统，</p>
+
+<p>这是一个形式系统，我们介绍了它的语法和推导规则，</p>
+
+<p>根据这些推导规则，可以从一些合法的符号串推导出另一些，</p>
+
+<p>在这个基础上，我们定义了什么叫做（形式）证明。</p>
+
+<p><br/></p>
+
+<p>如何<strong>解释</strong>这些符号呢？</p>
+
+<p>它们有什么含义呢？</p>
+
+<p><br/></p>
+
+<p>我们给每一个合法的<strong>公式</strong>指定一个<strong>逻辑命题</strong>，作为这个公式的解释。</p>
+
+<p>为每一个<strong>联接词符号</strong>指定一个<strong>真值函数</strong>，作为这个联接词符号的解释。</p>
+
+<p><br/></p>
+
+<p><strong>命题：</strong></p>
+
+<p>命题是可以判断真假值的句子。</p>
+
+<p><br/></p>
+
+<p><strong>真值函数：</strong></p>
+
+<p><span data-katex="\{0,1\}"></span>上的<span data-katex="n"></span>元函数，<span data-katex="f:\{0,1\}^n\to\{0,1\}"></span></p>
+
+<p>称为一个<span data-katex="n"></span>元真值函数。</p>
+
+<p><br/></p>
+
+<p>我们将每个联接词与一个真值函数一一对应起来，</p>
+
+<p>那么，复合命题的真假值就可以通过子命题的真假值计算出来了。</p>
+
+<p><br/></p>
+
+<p><strong>指派：</strong></p>
+
+<p>设<span data-katex="\alpha"></span>为一个命题，<span data-katex="\alpha"></span>中出现的所有命题变元构成了一个序列<span data-katex="p_1,p_2,\cdots ,p_n"></span>，</p>
+
+<p>对该序列指定的任一真假值序列<span data-katex="t_1,t_2,\cdots ,t_n"></span>称为<span data-katex="\alpha"></span>关于<span data-katex="p_1,p_2,\cdots ,p_n"></span>的一个<strong>指派</strong>，</p>
+
+<p>其中<span data-katex="t_i=0,1"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>真值表：</strong></p>
+
+<p>命题在所有可能的指派下，所取值列成的表，称为真值表。</p>
+
+<p><br/></p>
+
+<p><strong>永真式：</strong></p>
+
+<p>如果命题关于其中出现命题变元的所有指派均为真，则称该命题是一个永真式。</p>
+
+<p><br/></p>
+
+<p>有了这些以后，我们就可以定义<strong>推理</strong>了。</p>
+
+<p>设<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n,\beta"></span>都是命题，</p>
+
+<p>称<strong>推理『<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>推出<span data-katex="\beta"></span>』是有效的</strong>，</p>
+
+<p>如果对<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n,\beta"></span>中出现的命题变元的任一指派，</p>
+
+<p>若<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>都为真，则<span data-katex="\beta"></span>也为真，</p>
+
+<p>记为<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n\models\beta"></span></p>
+
+<p>否则，称推理『<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>推出<span data-katex="\beta"></span>』是无效的。</p>
+
+<p><br/></p>
+
+<p><strong>例子：</strong></p>
+
+<p><span data-katex="\alpha\to\beta,\alpha\models\beta"></span></p>
+
+<p><span data-katex="\alpha\lor\beta,\neg\alpha\models\beta"></span></p>
+
+<p><br/></p>
+
+<h2><strong>证明与推理之间的关系</strong></h2>
+
+<p>命题演算的自然推理系统，有很多性质，其中，</p>
+
+<p><br/></p>
+
+<p><strong>可靠性</strong></p>
+
+<p><span data-katex="\Gamma\vdash\alpha\Rightarrow\Gamma\models\alpha"></span></p>
+
+<p><br/></p>
+
+<p><strong>完备性</strong></p>
+
+<p><span data-katex="\Gamma\models\alpha\Rightarrow\Gamma\vdash\alpha"></span></p>
+
+<p><br/></p>
+
+<p>它们表明，如果一个公式可以被证明，那么它所对应命题的推理就是有效的，</p>
+
+<p>如果某些命题的推理是有效的，那么它就可以被证明。</p>
+
+<p><br/></p>
+
+<p>然而，形式化系统这种研究方法，并不是完美无缺的。</p>
+
+<p><strong>哥德尔不完全性定理</strong></p>
+
+<p>如果<span data-katex="\Gamma"></span>是一个有穷并包含初等算术<span data-katex="\Pi"></span>的形式理论，那么<span data-katex="\Gamma"></span>是一个不完全的形式理论。</p>
+
+<p><br/></p>
+
+<p><strong>哥德尔协调性定理</strong></p>
+
+<p>如果形式理论<span data-katex="\Gamma"></span>包含初等算术<span data-katex="\Pi"></span>，那么<span data-katex="\Pi"></span>的协调性不能在<span data-katex="\Gamma"></span>中被证明。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>证明和推理也是可以研究的，</p>
+
+<p>并且，一直以来都是人们的感兴趣的研究对象。</p>
+
+<p><br/></p>
+
+<p>逻辑学对自动定理证明，程序设计语言中的类型系统，</p>
+
+<p>协议验证，软硬件的安全等领域，</p>
+
+<p>有很重要的理论价值。</p>
+
+<p><br/></p>
+
+<p>以命题逻辑和一阶谓词逻辑为基础，</p>
+
+<p>人们构造出了各式各样种类繁多的逻辑系统，</p>
+
+<p>包括模态逻辑，直觉主义逻辑，时序逻辑，动态逻辑，</p>
+
+<p>多值逻辑，模糊逻辑，非单调逻辑，λ演算，组合逻辑等等。</p>
+
+<p><br/></p>
+
+<p>现代逻辑学已经应用到了越来越多的学科之中。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数理逻辑定义汇总]]></title>
+    <link href="https://thzt.github.io/blog/2015/11/23/introduction-to-mathematical-logic/"/>
+    <updated>2015-11-23T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2015/11/23/introduction-to-mathematical-logic</id>
+    <content type="html"><![CDATA[<script src="https://thzt.github.io/thirdpart/jQuery/jquery-1.11.1.js"></script>
+
+
+<p><link href="https://thzt.github.io/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
+
+<script src="https://thzt.github.io/thirdpart/KaTeX/katex.min.js"></script>
+
+
+<script src="https://thzt.github.io/javascripts/katex.js"></script>
+
+
+<p><strong>逻辑学</strong>真是博大精深，</p>
+
+<p>first-order logic，propositional logic，predicate logic，</p>
+
+<p>mathematical logic，second-order Logic，intuitionistic logic，</p>
+
+<p>modal logic，free logic，plural logic&hellip;</p>
+
+<p><br/></p>
+
+<p>所涉及的内容也很广，</p>
+
+<p>set theory，proof theory，model theory，recursion theory，</p>
+
+<p>theory of computation，computability and decidability&hellip;</p>
+
+<p><br/></p>
+
+<p>学习它，对<strong>数学</strong>，<strong>计算机科学</strong>或其他学科都有指导意义。</p>
+
+<p><br/></p>
+
+<p>例如，哥德尔协调性定理指出了公理化方法的局限性，</p>
+
+<p>它告诉我们，<strong>在理论上就不能通过逻辑推理解决所有的问题</strong>，</p>
+
+<p>必要时，要通过构造模型来进行检验。</p>
+
+<p>对软件进行测试，就是这样的一个例子。</p>
+
+<p><br/></p>
+
+<p>例如，<strong>类型系统</strong>，相当于加在程序语言语法层面上的(谓词)逻辑，</p>
+
+<p>类型系统的<strong>可靠性</strong>保证了语法正确的程序，</p>
+
+<p>语义上也是满足规范的。</p>
+
+<p><br/></p>
+
+<p>这样的例子还有很多，</p>
+
+<p>实际工作中，只有<strong>见多识广</strong>，站在更高的角度，</p>
+
+<p>才能做到庖丁解牛，<strong>游刃有余</strong>。</p>
+
+<p><br/></p>
+
+<p>到此，我们还是从一阶谓词逻辑开始，慢慢打好基础吧。</p>
+
+<p>以下摘自《<a href="http://book.douban.com/subject/2364517/">数理逻辑</a>》——李未</p>
+
+<p><br/></p>
+
+<h2><strong>一阶语言的定义</strong></h2>
+
+<p>每个一阶语言的字符集由两类符号集合组成。</p>
+
+<p>一类称为逻辑符号集合，另一类称为非逻辑符号集合。</p>
+
+<p><br/></p>
+
+<p><strong>逻辑符号集合</strong>包括：</p>
+
+<p><span data-katex="V"></span>：变元符号集合，<span data-katex="x_1, x_2, ..., x_n, ..."></span></p>
+
+<p><span data-katex="C"></span>：逻辑连接词符号集合，<span data-katex="\neg , \wedge , \vee , \rightarrow , \leftrightarrow"></span></p>
+
+<p><span data-katex="Q"></span>：量词符号集合，<span data-katex="\forall , \exists"></span></p>
+
+<p><span data-katex="E"></span>：等词符号集合，<span data-katex="\doteq"></span></p>
+
+<p><span data-katex="P"></span>：括号集合，<span data-katex="(, )"></span></p>
+
+<p><br/></p>
+
+<p><strong>非逻辑符号集合</strong>包括：</p>
+
+<p><span data-katex="\mathscr{L}_c"></span>：常元符号集合，<span data-katex="c_1, c_2, ..."></span></p>
+
+<p><span data-katex="\mathscr{L}_f"></span>：函数符号集合，<span data-katex="f_1, f_2, ..."></span></p>
+
+<p><span data-katex="\mathscr{L}_P"></span>：谓词符号集合，<span data-katex="P_1, P_2, ..."></span></p>
+
+<p><br/></p>
+
+<p><strong>例子：</strong>初等算术语言<span data-katex="\mathscr{A}"></span></p>
+
+<p>初等算术语言是一个一阶语言，</p>
+
+<p>它的常元符号集为<span data-katex="\{0\}"></span>，</p>
+
+<p>函数符号集为<span data-katex="\{S, +, \cdot \}"></span>，</p>
+
+<p>谓词符号集合为<span data-katex="\{<\}"></span>。</p>
+
+<p><br/></p>
+
+<h2><strong>项</strong></h2>
+
+<p>一阶语言<span data-katex="\mathscr{L}"></span>中的项被下述三个规则归纳的定义：</p>
+
+<p><span data-katex="T_1"></span>：每一个常元是一个项</p>
+
+<p><span data-katex="T_2"></span>：每一个变元是一个项</p>
+
+<p><span data-katex="T_3"></span>：如果<span data-katex="t_1, ..., t_n"></span>是项，而f是一个n元函数符号，那么，<span data-katex="ft_1\cdot \cdot \cdot t_n"></span>是一个项</p>
+
+<p><br/></p>
+
+<p>此定义也可以表述成下述形式：</p>
+
+<p><span data-katex="t ::= c | x | ft_1\cdot \cdot \cdot t_n"></span></p>
+
+<p><br/></p>
+
+<p><strong>例子：</strong><span data-katex="\mathscr{A}"></span>的项</p>
+
+<p><span data-katex="S0, Sx_1, +S0SSx, \cdot x_1+Sx_1x_2"></span></p>
+
+<p><br/></p>
+
+<h2><strong>逻辑公式</strong></h2>
+
+<p>语言<span data-katex="\mathscr{L}"></span>中的逻辑公式，简称<strong>公式</strong>，用大写字母<span data-katex="A, B, ..."></span>表示，并用下述五条规则归纳的定义：</p>
+
+<p><br/></p>
+
+<p><span data-katex="F_1"></span>：如果<span data-katex="t_1"></span>和<span data-katex="t_2"></span>为项，那么<span data-katex="t_1\doteq t_2"></span>是公式</p>
+
+<p><span data-katex="F_2"></span>：如果<span data-katex="t_1, ..., t_n"></span>为项，而<span data-katex="R"></span>是一个n元谓词，那么<span data-katex="Rt_1\cdot \cdot \cdot t_n"></span>是公式</p>
+
+<p><span data-katex="F_3"></span>：如果<span data-katex="A"></span>是公式，则<span data-katex="\neg A"></span>是公式</p>
+
+<p><span data-katex="F_4"></span>：若<span data-katex="A, B"></span>是公式，则<span data-katex="A\wedge B, A\vee B, A\rightarrow B, A\leftrightarrow B"></span>都是公式</p>
+
+<p><span data-katex="F_5"></span>：若<span data-katex="A"></span>是公式并且<span data-katex="x"></span>是一个变元，那么<span data-katex="\forall xA"></span>和<span data-katex="\exists xA"></span>也是公式，<span data-katex="x"></span>称为<strong>约束变元</strong></p>
+
+<p><br/></p>
+
+<p>上述结构归纳定义的Backus范式为：</p>
+
+<p><span data-katex="A ::= t_1\doteq t_2 | Rt_1\cdot \cdot \cdot t_n | \neg A | A\wedge B | A\vee B | A\rightarrow B | A\leftrightarrow B | \forall xA | \exists xA"></span></p>
+
+<p><br/></p>
+
+<p><strong>例子：</strong><span data-katex="\mathscr{A}"></span>的公式</p>
+
+<p><span data-katex="\forall x\neg (Sx\doteq 0), \forall x\forall y(< xy\rightarrow(\exists (y\doteq +xz)))"></span></p>
+
+<p><br/></p>
+
+<h2><strong><span data-katex="\mathscr{L}"></span>的结构</strong></h2>
+
+<p>一阶语言<span data-katex="\mathscr{L}"></span>的<strong>结构</strong><span data-katex="M"></span>是一个偶对，记为<span data-katex="M=(\mathbb{M}, I)"></span>，其中，</p>
+
+<p>（1）<span data-katex="\mathbb{M}"></span>是一个非空集合，称为<strong>论域</strong></p>
+
+<p>（2）<span data-katex="I"></span>是从<span data-katex="\mathscr{L}"></span>到<span data-katex="\mathbb{M}"></span>的映射，称为<strong>解释</strong>，记为<span data-katex="I:\mathscr{L} \rightarrow \mathbb{M}"></span>，它满足下面三个条件</p>
+
+<p>a) 对<span data-katex="\mathscr{L}"></span>中的每一个常元符号<span data-katex="c"></span>，<span data-katex="I(c)"></span>是<span data-katex="\mathbb{M}"></span>中的元素</p>
+
+<p>b) 对<span data-katex="\mathscr{L}"></span>中的每一个n元函数符号<span data-katex="f"></span>，<span data-katex="I(f)"></span>是<span data-katex="\mathbb{M}"></span>上的n元函数</p>
+
+<p>c) 对<span data-katex="\mathscr{L}"></span>中的每一个n元谓词符号<span data-katex="P"></span>，<span data-katex="I(P)"></span>是<span data-katex="\mathbb{M}"></span>上的一个n元关系</p>
+
+<p><br/></p>
+
+<p><strong>例子：</strong><span data-katex="\mathscr{A}"></span>的结构</p>
+
+<p><span data-katex="\mathscr{A}"></span>的常元符号为<span data-katex="0"></span>，</p>
+
+<p>函数符号有<span data-katex="\{S, +, \cdot \}"></span>，</p>
+
+<p>谓词符号只有一个，它是<span data-katex="<"></span>。</p>
+
+<p><br/></p>
+
+<p>我们定义偶对<span data-katex="N=(\mathbb{N}, I)"></span>，其中论域<span data-katex="\mathbb{N}"></span>为自然数系。</p>
+
+<p>令<span data-katex="s"></span>为<span data-katex="\mathbb{N}"></span>上的加1函数，即<span data-katex="s(x)=x+1"></span>，</p>
+
+<p><span data-katex="+, \cdot"></span>代表<span data-katex="\mathbb{N}"></span>上的加法和乘法，</p>
+
+<p><span data-katex="<"></span>为<span data-katex="\mathbb{N}"></span>上的小于关系。</p>
+
+<p><br/></p>
+
+<p>我们定义解释映射<span data-katex="I"></span>如下：</p>
+
+<p><span data-katex="I(0)=0, I(S)=s, I(+)=+, I(\cdot )=\cdot , I(<)=<"></span></p>
+
+<p><br/></p>
+
+<p>解释映射<span data-katex="I"></span>将常元符号<span data-katex="0"></span>解释为自然数<span data-katex="0"></span>，</p>
+
+<p>将一元函数符号<span data-katex="S"></span>解释为自然数集合上的加1运算<span data-katex="s"></span>，</p>
+
+<p>将二元函数符号<span data-katex="+"></span>和<span data-katex="\cdot"></span>分别解释为自然数集合上的加法和乘法，</p>
+
+<p>将二元谓词符号<span data-katex="<"></span>解释为自然数集合上的小于关系，</p>
+
+<p>而<span data-katex="N"></span>是初等算术语言<span data-katex="\mathscr{A}"></span>的一个结构。</p>
+
+<p><br/></p>
+
+<h2><strong>赋值</strong></h2>
+
+<p>赋值<span data-katex="\sigma"></span>是一个定义域为变元集合<span data-katex="V"></span>，值域为<span data-katex="\mathbb{M}"></span>的一个映射，记为<span data-katex="\sigma :V\rightarrow \mathbb{M}"></span>。</p>
+
+<p>赋值<span data-katex="\sigma"></span>把<span data-katex="\mathscr{L}"></span>中的每一个变元<span data-katex="x"></span>，赋以论域<span data-katex="\mathbb{M}"></span>中的一个元素<span data-katex="a\in \mathbb{M}"></span>，</p>
+
+<p>记为<span data-katex="\sigma (x)=a"></span>。</p>
+
+<p><br/></p>
+
+<h2><strong>模型</strong></h2>
+
+<p>给定一阶语言<span data-katex="\mathscr{L}"></span>，以及它的结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，</p>
+
+<p>偶对<span data-katex="(M, \sigma )"></span>称为<span data-katex="\mathscr{L}"></span>的一个<strong>模型</strong>。</p>
+
+<p><br/></p>
+
+<h2><strong>项的语义</strong></h2>
+
+<p>给定一阶语言<span data-katex="\mathscr{L}"></span>，结构<span data-katex="M=(\mathbb{M}, I)"></span>和赋值<span data-katex="\sigma :V\rightarrow \mathbb{M}"></span>。</p>
+
+<p>在模型<span data-katex="(M, \sigma )"></span>下，项<span data-katex="t"></span>的语义是<span data-katex="\mathbb{M}"></span>中的一个元素，它用<span data-katex="t_{M[\sigma]}"></span>表示，并被归纳的定义：</p>
+
+<p>（1）<span data-katex="x_{M[\sigma ]}=\sigma (x)"></span>，<span data-katex="x"></span>为变元符号</p>
+
+<p>（2）<span data-katex="c_{M[\sigma ]}=c_M"></span>，<span data-katex="c"></span>为常元符号</p>
+
+<p>（3）<span data-katex="(ft_1\cdot \cdot \cdot t_n)_{M[\sigma ]}=f_M((t_1)_{M[\sigma ]},\cdot \cdot \cdot (t_n)_{M[\sigma ]})"></span></p>
+
+<p><br/></p>
+
+<p><strong>例子：</strong><span data-katex="\mathscr{A}"></span>项的语义</p>
+
+<p><span data-katex="(+x_1Sx_7)_{N[\sigma ]}=(x_1)_{N[\sigma ]}+(Sx_7)_{N[\sigma ]}=1+((x_7)_{N[\sigma ]}+1)=1+(7+1)=9"></span></p>
+
+<p><br/></p>
+
+<h2><strong>逻辑连接词符号的语义</strong></h2>
+
+<p>为了避免逻辑连接词符号的多义性，我们把每一个逻辑连接词符号的语义都定义为一个真值函数，</p>
+
+<p>此函数的定义域是一个真值集合或两个真值集合的笛卡尔积，而函数值是一个真假值。</p>
+
+<p>对于一阶语言而言，逻辑连接词符号<span data-katex="\neg"></span>的真值函数为<span data-katex="B_\neg"></span>，</p>
+
+<p>其自变量是<span data-katex="X"></span>，<span data-katex="X"></span>只能取<span data-katex="T"></span>和<span data-katex="F"></span>，</p>
+
+<p>而函数值<span data-katex="B_\neg (X)"></span>由下述真值表定义：</p>
+
+<p><span data-katex="B_\neg (T)=F, B_\neg (F)=T"></span></p>
+
+<p><br/></p>
+
+<p>二元函数<span data-katex="B_\wedge, B_\vee, B_\rightarrow, B_\leftrightarrow"></span>分别为逻辑连接词符号<span data-katex="\wedge, \vee, \rightarrow, \leftrightarrow"></span>的真值函数。</p>
+
+<p><br/></p>
+
+<h2><strong>公式的语义</strong></h2>
+
+<p>设<span data-katex="M"></span>和<span data-katex="\sigma"></span>分别为一阶语言<span data-katex="\mathscr{L}"></span>的结构和赋值，而<span data-katex="A"></span>为<span data-katex="\mathscr{L}"></span>的公式。</p>
+
+<p>公式<span data-katex="A"></span>在模型<span data-katex="(M, \sigma )"></span>下的语义是一个真假值，用<span data-katex="A_{M[\sigma ]}"></span>表示，被归纳的定义如下：</p>
+
+<p>（1）<span data-katex="(Pt_1\cdot \cdot \cdot t_n)_{M[\sigma ]}=P_M((t_1)_{M[\sigma ]},\cdot \cdot \cdot ,(t_n)_{M[\sigma ]})"></span></p>
+
+<p>（2）<span data-katex="(t_1\doteq t_2)_{M[\sigma ]}=\begin{cases}T,&\text{if }(t_1)_{M[\sigma ]}=(t_2)_{M[\sigma ]}\\F,&\text{otherwise}\end{cases}"></span></p>
+
+<p>（3）<span data-katex="(\neg A)_{M[\sigma ]}=B_\neg (A_{M[\sigma ]})"></span></p>
+
+<p>（4）<span data-katex="(A\vee B)_{M[\sigma ]}=B_\vee (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
+
+<p>（5）<span data-katex="(A\wedge B)_{M[\sigma ]}=B_\wedge (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
+
+<p>（6）<span data-katex="(A\rightarrow B)_{M[\sigma ]}=B_\rightarrow (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
+
+<p>（7）<span data-katex="(A\leftrightarrow B)_{M[\sigma ]}=B_\leftrightarrow (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
+
+<p>（8）<span data-katex="(\forall x_iA)_{M[\sigma ]}=\begin{cases}T,&\forall a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&\text{otherwise}\end{cases}"></span></p>
+
+<p>（9）<span data-katex="(\exists x_iA)_{M[\sigma ]}=\begin{cases}T,&\exists a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&\text{otherwise}\end{cases}"></span></p>
+
+<p><br/></p>
+
+<h2><strong>可满足性</strong></h2>
+
+<p>给定一阶语言<span data-katex="\mathscr{L}"></span>和它的公式<span data-katex="A"></span>以及公式集合<span data-katex="\Gamma"></span>。</p>
+
+<p>如果存在模型<span data-katex="(M, \sigma )"></span>，使得<span data-katex="A_{M[\sigma ]}=T"></span>成立，</p>
+
+<p>那么称公式<span data-katex="A"></span>关于模型<span data-katex="(M, \sigma )"></span>是<strong>可满足的</strong>，</p>
+
+<p>简称<span data-katex="A"></span>可满足，也称为模型<span data-katex="(M, \sigma )"></span>满足<span data-katex="A"></span>，记为<span data-katex="M\models _\sigma A"></span>。</p>
+
+<p>如果<span data-katex="A"></span>是一个语句，那么记为<span data-katex="A"></span>，记为<span data-katex="M\models A"></span></p>
+
+<p><br/></p>
+
+<p>如果<span data-katex="\Gamma"></span>中的每一个公式关于模型<span data-katex="(M, \sigma )"></span>都是可满足的，即，</p>
+
+<p><span data-katex="M\models _\sigma A"></span>对于任意<span data-katex="A\in \Gamma"></span>成立，</p>
+
+<p>那么称为公式集合<span data-katex="\Gamma"></span>关于模型<span data-katex="(M, \sigma )"></span>可满足，</p>
+
+<p>简称公式集合<span data-katex="\Gamma"></span>可满足，</p>
+
+<p>也称模型<span data-katex="(M, \sigma )"></span>满足公式集合<span data-katex="\Gamma"></span>，或<span data-katex="(M, \sigma )"></span>是<span data-katex="\Gamma"></span>的模型，记为<span data-katex="M\models _\sigma \Gamma"></span>。</p>
+
+<p>如果<span data-katex="\Gamma"></span>是由语句组成的集合，那么记为<span data-katex="M\models \Gamma"></span>。</p>
+
+<p><br/></p>
+
+<h2><strong>永真性</strong></h2>
+
+<p>称公式<span data-katex="A"></span>是<strong>永真的</strong>或有效的，如果<span data-katex="A"></span>对<span data-katex="\mathscr{L}"></span>的任意模型<span data-katex="(M, \sigma )"></span>均可满足，</p>
+
+<p>即，对任意结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，<span data-katex="M\models _\sigma A"></span>成立，记为<span data-katex="\models A"></span>。</p>
+
+<p>称公式集合<span data-katex="\Gamma"></span>是永真的或有效的，如果<span data-katex="\Gamma"></span>中的每一个公式<span data-katex="A"></span>都是永真的，记为<span data-katex="\models \Gamma"></span></p>
+
+<p>永真公式，也称为重言式，是与模型无关的公式，它们在任何模型下都为真。</p>
+
+<p><br/></p>
+
+<p><strong>例子：</strong>重言式</p>
+
+<p><span data-katex="A\vee \neg A, \forall x(x\doteq x)"></span></p>
+
+<p><br/></p>
+
+<h2><strong>逻辑结论</strong></h2>
+
+<p>设<span data-katex="A"></span>为公式，<span data-katex="\Gamma"></span>为公式集合，如果<span data-katex="M"></span>为任意结构，<span data-katex="\sigma"></span>为任意赋值，并且，</p>
+
+<p>如果<span data-katex="M\models _\sigma \Gamma"></span>成立，则有<span data-katex="M\models _\sigma A"></span>成立，</p>
+
+<p>那么称<span data-katex="A"></span>是<span data-katex="\Gamma"></span>的<strong>逻辑结论</strong>或语义结论，记为<span data-katex="\Gamma \models A"></span>，也称<span data-katex="\Gamma \models A"></span>有效。</p>
+
+<p><br/></p>
+
+<p><strong>注：</strong>符号<span data-katex="\models"></span>可以出现在4种不同类型的语义关系式中，它们是，</p>
+
+<p><span data-katex="M\models _\sigma A, M\models A, \models A, \Gamma \models A"></span></p>
+
+<p><span data-katex="\models"></span>在每种语义关系式中的含义不同，</p>
+
+<p>区别这些关系式的简单办法是，</p>
+
+<p>当<span data-katex="M"></span>和<span data-katex="\sigma"></span>同时出现时，表示此式仅对给定的<span data-katex="M"></span>和<span data-katex="\sigma"></span>成立，</p>
+
+<p>当<span data-katex="\sigma"></span>不出现时，表示此式对任意<span data-katex="\sigma"></span>成立，</p>
+
+<p>当<span data-katex="M"></span>及<span data-katex="\sigma"></span>均不出现时，表示此式对任意<span data-katex="M"></span>和任意<span data-katex="\sigma"></span>成立。</p>
+
+<p><br/></p>
+
+<p><span data-katex="\Gamma \models A"></span>也是一个语义关系式，它表示对任意<span data-katex="M"></span>和任意<span data-katex="\sigma"></span>，</p>
+
+<p>如果<span data-katex="\Gamma"></span>为真，那么<span data-katex="A"></span>也为真。</p>
+
+<p><br/></p>
+
+<h2><strong>序贯</strong></h2>
+
+<p>设<span data-katex="\Gamma ,\Delta"></span>为公式的有穷集合，<span data-katex="\Gamma \vdash \Delta"></span>称为<strong>序贯</strong>。</p>
+
+<p><span data-katex="\Gamma"></span>称为序贯的前提，<span data-katex="\Delta"></span>称为序贯的结论。</p>
+
+<p><br/></p>
+
+<h2><strong>公理</strong></h2>
+
+<p>设<span data-katex="\Gamma ,\Delta ,\Lambda ,\Theta"></span>为有穷公式集合，<span data-katex="A"></span>为公式，</p>
+
+<p>则序贯<span data-katex="\Gamma ,A,\Delta \vdash \Lambda ,A,\Theta"></span>称为<strong>公理</strong>。</p>
+
+<p><br/></p>
+
+<p><strong>注：</strong>公理序贯之所以成立，是因为证明结论中至少有一个公式包含在公理序贯的前提之中。</p>
+
+<p><br/></p>
+
+<h2><strong>G推理系统</strong></h2>
+
+<p>（1）<span data-katex="\neg"></span>规则</p>
+
+<p><span data-katex="\neg -L:\frac{\Gamma ,\Delta \vdash A,\Lambda }{\Gamma ,\neg A,\Delta \vdash \Lambda}"></span></p>
+
+<p><span data-katex="\neg -R:\frac{A,\Gamma \vdash \Lambda ,\Delta }{\Gamma \vdash \Lambda ,\neg A,\Delta }"></span></p>
+
+<p>（2）<span data-katex="\vee"></span>规则</p>
+
+<p><span data-katex="\vee -L:\frac{\Gamma ,A,\Delta \vdash \Lambda \quad \Gamma ,B,\Delta \vdash \Lambda }{\Gamma ,A\vee B,\Delta \vdash \Lambda }"></span></p>
+
+<p><span data-katex="\vee -R:\frac{\Gamma \vdash \Lambda ,A,B,\Theta }{\Gamma \vdash \Lambda ,A\vee B,\Theta }"></span></p>
+
+<p>（3）<span data-katex="\wedge"></span>规则</p>
+
+<p><span data-katex="\wedge -L:\frac{\Gamma ,A,B,\Delta \vdash \Lambda }{\Gamma ,A\wedge B,\Delta \vdash \Lambda }"></span></p>
+
+<p><span data-katex="\wedge -R:\frac{\Gamma \vdash \Lambda ,A,\Theta \quad \Gamma \vdash \Lambda ,B,\Theta }{\Gamma \vdash \Lambda ,A\wedge B,\Theta }"></span></p>
+
+<p>（4）<span data-katex="\rightarrow"></span>规则</p>
+
+<p><span data-katex="\rightarrow -L:\frac{\Gamma ,\Delta \vdash A,\Lambda \quad B,\Gamma ,\Delta \vdash \Lambda }{\Gamma ,A\rightarrow B,\Delta \vdash \Lambda }"></span></p>
+
+<p><span data-katex="\rightarrow -R:\frac{A,\Gamma \vdash B,\Lambda ,\Theta }{\Gamma \vdash \Lambda ,A\rightarrow B,\Theta }"></span></p>
+
+<p>（5）<span data-katex="\forall"></span>规则</p>
+
+<p><span data-katex="\forall -L:\frac{\Gamma ,A[t/x],\forall xA(x),\Delta \vdash \Lambda }{\Gamma ,\forall xA(x),\Delta \vdash \Lambda }"></span></p>
+
+<p><span data-katex="\forall -R:\frac{\Gamma \vdash \Lambda ,A[y/x],\Theta }{\Gamma \vdash \Lambda ,\forall xA(x),\Theta }"></span></p>
+
+<p>（6）<span data-katex="\exists"></span>规则</p>
+
+<p><span data-katex="\exists -L:\frac{\Gamma ,A[y/x],\Delta \vdash \Lambda }{\Gamma ,\exists xA(x),\Delta \vdash \Lambda }"></span></p>
+
+<p><span data-katex="\exists -L:\frac{\Gamma ,A[y/x],\Delta \vdash \Lambda }{\Gamma ,\exists xA(x),\Delta \vdash \Lambda }"></span></p>
+
+<p><br/></p>
+
+<h2><strong>可靠性，紧致性，协调性，完全性</strong></h2>
+
+<p><strong>可靠性</strong></p>
+
+<p>如果序贯<span data-katex="\Gamma \vdash \Lambda"></span>可证，那么<span data-katex="\Gamma \models \Lambda"></span>成立。</p>
+
+<p><br/></p>
+
+<p><strong>紧致性</strong></p>
+
+<p>如果<span data-katex="\Gamma"></span>是一个公式集合，<span data-katex="A"></span>是一个公式，并且序贯<span data-katex="\Gamma \vdash A"></span>可证，</p>
+
+<p>那么必然存在有穷公式集合<span data-katex="\Delta"></span>，使得<span data-katex="\Delta \subseteq \Gamma"></span>并且<span data-katex="\Delta \vdash A"></span>可证。</p>
+
+<p><br/></p>
+
+<p><strong>协调性</strong></p>
+
+<p>设<span data-katex="\Gamma"></span>为公式集合，如果不存在一个公式<span data-katex="A"></span>使得序贯<span data-katex="\Gamma \vdash A"></span>与<span data-katex="\Gamma \vdash \neg A"></span>均可证，</p>
+
+<p>那么称<span data-katex="\Gamma"></span>是协调的。</p>
+
+<p><br/></p>
+
+<p><strong>完全性</strong></p>
+
+<p>令<span data-katex="\Gamma"></span>为一个公式集合，<span data-katex="A"></span>为一个公式，</p>
+
+<p>如果<span data-katex="\Gamma \models A"></span>成立，那么<span data-katex="\Gamma \vdash A"></span>可证。</p>
+
+<p><br/></p>
+
+<p><strong>定理：</strong>令<span data-katex="\Gamma"></span>为一个公式集合，<span data-katex="A"></span>为一个公式，</p>
+
+<p>（1）<span data-katex="\Gamma \models A"></span>有效，当且仅当<span data-katex="\Gamma \vdash A"></span></p>
+
+<p>（2）<span data-katex="\Gamma"></span>可满足，当且仅当<span data-katex="\Gamma"></span>协调</p>
+
+<p><br/></p>
+
+<h2><strong>形式理论</strong></h2>
+
+<p>设<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的有穷或可数无穷的语句集合，</p>
+
+<p>如果<span data-katex="\Gamma"></span>协调，则称<span data-katex="\Gamma"></span>是一阶语言的形式理论，简称<strong>形式理论</strong>。</p>
+
+<p>而称<span data-katex="\Gamma"></span>中的语句为<span data-katex="\Gamma"></span>的<strong>公理</strong>。</p>
+
+<p><br/></p>
+
+<p>如果<span data-katex="\Gamma"></span>是一个形式理论，</p>
+
+<p>那么称语句集合，<span data-katex="Th(\Gamma )=\{A|A"></span>是<span data-katex="\mathscr{L}"></span>的语句，并且<span data-katex="\Gamma \vdash A"></span>可证<span data-katex="\}"></span>，</p>
+
+<p>为<span data-katex="\Gamma"></span>的<strong>理论闭包</strong>。</p>
+
+<p><br/></p>
+
+<p>如果<span data-katex="\Gamma =\emptyset"></span>，那么，<span data-katex="Th(\emptyset )=\{A|A"></span>是<span data-katex="\mathscr{L}"></span>的语句，并且<span data-katex="\vdash A"></span>可证<span data-katex="\}"></span>，</p>
+
+<p>是由全体重言式组成的集合。</p>
+
+<p><br/></p>
+
+<p>如果<span data-katex="M"></span>是<span data-katex="\mathscr{L}"></span>的模型，并且<span data-katex="M\models \Gamma"></span>，那么称<span data-katex="M"></span>是<span data-katex="\Gamma"></span>的模型。</p>
+
+<p><br/></p>
+
+<h2><strong>关于模型的形式理论</strong></h2>
+
+<p>如果<span data-katex="M"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的模型，那么称语句集合，</p>
+
+<p><span data-katex="Th(M)=\{A|A"></span>是<span data-katex="\mathscr{L}"></span>的语句，并且<span data-katex="M\models A\}"></span></p>
+
+<p>为<span data-katex="\mathscr{L}"></span>关于模型<span data-katex="M"></span>的形式理论。</p>
+
+<p><br/></p>
+
+<h2><strong>形式理论的完全性</strong></h2>
+
+<p>称形式理论<span data-katex="\Gamma"></span>是完全的，如果对任意语句<span data-katex="A"></span>，</p>
+
+<p><span data-katex="\Gamma \vdash A"></span>及<span data-katex="\Gamma \vdash \neg A"></span>中必有一个可证。</p>
+
+<p><br/></p>
+
+<h2><strong>函数的可表示性</strong></h2>
+
+<p>设<span data-katex="f:\mathbb{N}^k\rightarrow \mathbb{N}"></span>是<span data-katex="\mathbb{N}"></span>上的<span data-katex="k"></span>元函数，</p>
+
+<p>如果存在<span data-katex="\mathscr{A}"></span>公式<span data-katex="A(x_1,...,x_{k+1})"></span>，使得对任意自然数<span data-katex="n_1,...,n_{k+1}"></span>，</p>
+
+<p>如果<span data-katex="f(n_1,...,n_k)=n_{k+1}"></span>，那么<span data-katex="\Pi \vdash A[S^{n_1}0,...,S^{n_{k+1}}0]"></span>可证</p>
+
+<p>如果<span data-katex="f(n_1,...,n_k)\neq n_{k+1}"></span>，那么<span data-katex="\Pi \vdash \neg A[S^{n_1}0,...,S^{n_{k+1}}0]"></span>可证</p>
+
+<p>在这种情况下，称函数<span data-katex="f"></span>在<span data-katex="\Pi"></span>中<strong>可表示</strong>，</p>
+
+<p>并称公式<span data-katex="A(x_1,...,x_k,x_{k+1})"></span>是函数<span data-katex="f"></span>在<span data-katex="\Pi"></span>中的<strong>表示</strong>。</p>
+
+<p><br/></p>
+
+<p><strong>定理：</strong>如果<span data-katex="f:\mathbb{N}^k\rightarrow \mathbb{N}"></span>是<span data-katex="\mathbb{N}"></span>上的<span data-katex="k"></span>元可计算函数，</p>
+
+<p>那么函数<span data-katex="f"></span>在<span data-katex="\Pi"></span>中可表示。</p>
+
+<p><br/></p>
+
+<h2><strong>关系的可表示性</strong></h2>
+
+<p>设<span data-katex="r"></span>是<span data-katex="\mathbb{N}"></span>上的<span data-katex="k"></span>元关系，</p>
+
+<p>如果存在<span data-katex="\mathscr{A}"></span>公式<span data-katex="A(x_1,...,x_{k+1})"></span>，使得对任意自然数<span data-katex="n_1,...,n_{k+1}"></span>，有</p>
+
+<p>如果<span data-katex="r(n_1,...,n_k)=n_{k+1}"></span>，那么<span data-katex="\Pi \vdash A[S^{n_1}0,...,S^{n_{k+1}}0]"></span>可证</p>
+
+<p>如果<span data-katex="r(n_1,...,n_k)\neq n_{k+1}"></span>，那么<span data-katex="\Pi \vdash \neg A[S^{n_1}0,...,S^{n_{k+1}}0]"></span>可证</p>
+
+<p>在这种情况下，称关系<span data-katex="r"></span>在<span data-katex="\Pi"></span>中<strong>可表示</strong>，</p>
+
+<p>并称公式<span data-katex="A(x_1,...,x_k,x_{k+1})"></span>在<span data-katex="\Pi"></span>中表示关系<span data-katex="r"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>定理：</strong>如果<span data-katex="r:\mathbb{N}^k\rightarrow \mathbb{N}"></span>是<span data-katex="\mathbb{N}"></span>上的<span data-katex="k"></span>元可判定关系，</p>
+
+<p>那么<span data-katex="r"></span>在<span data-katex="\Pi"></span>中可表示。</p>
+
+<p><br/></p>
+
+<h2><strong>哥德尔定理</strong></h2>
+
+<p><strong>哥德尔不完全性定理</strong></p>
+
+<p>如果<span data-katex="\Gamma"></span>是一个有穷并包含初等算术<span data-katex="\Pi"></span>的形式理论，</p>
+
+<p>那么<span data-katex="\Gamma"></span>是一个不完全的形式理论。</p>
+
+<p><br/></p>
+
+<p><strong>哥德尔协调性定理</strong></p>
+
+<p>如果形式理论<span data-katex="\Gamma"></span>包含初等算术<span data-katex="\Pi"></span>，</p>
+
+<p>那么<span data-katex="\Pi"></span>的协调性不能在<span data-katex="\Gamma"></span>中被证明。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>以上，只是对谓词逻辑中用到的部分公式，进行了整理，</p>
+
+<p>对建立<strong>用证明论和模型论的观点来理解公理系统</strong>，是很有帮助的。</p>
+
+<p>然而，从更高的角度来看，有些观点很有可能就是<strong>错误</strong>的，</p>
+
+<p>因此，此篇只是一个开始，督促我朝着更广阔的方向努力学习。</p>
+
+<p><br/></p>
+
+<p><strong>参考</strong></p>
+
+<p><a href="http://book.douban.com/subject/2364517/">数理逻辑</a></p>
+
+<p><a href="http://www.logicmatters.net/tyl/">Teach Yourself Logic 2015</a></p>
+
+<p><a href="http://book.douban.com/subject/2878521/">logic and structure</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[模型观]]></title>
+    <link href="https://thzt.github.io/blog/2015/06/24/model/"/>
+    <updated>2015-06-24T00:00:00+08:00</updated>
+    <id>https://thzt.github.io/blog/2015/06/24/model</id>
+    <content type="html"><![CDATA[<p>Robert Sedgewick/Kevin Wayne的《算法》一书中，</p>
+
+<p>强调了科学方法，</p>
+
+<p><br/></p>
+
+<p>细致的观察真实世界的特点。</p>
+
+<p><strong>根据观察结果提出假设模型</strong>。</p>
+
+<p>根据模型预测未来的事件。</p>
+
+<p>继续观察并核实预测的准确性。</p>
+
+<p>如此反复直到确认预测和观察一致。</p>
+
+<p><br/></p>
+
+<p>可是，</p>
+
+<p>我们永远也没法知道某个假设是否<strong>永远正确</strong>，</p>
+
+<p>我们只能验证它和我们的观察的一致性。</p>
+
+<p><br/></p>
+
+<p>爱因斯坦说，</p>
+
+<p>再多的实验也不一定能够证明我是对的，</p>
+
+<p>但只需要一个实验就能证明我是错的。</p>
+
+<p><br/></p>
+
+<p>科学方法可能大家都很清楚，</p>
+
+<p>但是遇到具体问题，</p>
+
+<p>人们却容易忽视它。</p>
+
+<p><br/></p>
+
+<p>实践是检验真理的唯一标准，</p>
+
+<p>大胆假设，小心求证，</p>
+
+<p>建立正确的<strong>模型观</strong>，</p>
+
+<p>可以少走很多弯路。</p>
+
+<p><br/></p>
+
+<h2><strong>模型与目标系统</strong></h2>
+
+<p>我们经常混淆<strong>模型</strong>与<strong>目标系统</strong>的区别，</p>
+
+<p>把符号“1”，“2”，“3”,&hellip;</p>
+
+<p>当做数学对象中的自然数本身。</p>
+
+<p><br/></p>
+
+<p>这只是用印刷符号对<strong>自然数</strong>进行建模，</p>
+
+<p>实际上还有不同的模型，</p>
+
+<p>除了阿拉伯数字，还有罗马数字，中国筹，等等，</p>
+
+<p>甚至还有Church number。</p>
+
+<p><br/></p>
+
+<p>这个世界上<strong>并没有本质的道理</strong>，</p>
+
+<p>因为，我们无法验证什么是绝对正确的。</p>
+
+<p><br/></p>
+
+<p>我们只能拿着模型来进行<strong>假设</strong>，</p>
+
+<p>然后通过实验<strong>验证</strong>它的准确性。</p>
+
+<p><br/></p>
+
+<p>使用模型，我们可以从不同侧面，</p>
+
+<p>对目标系统进行研究。</p>
+
+<p><br/></p>
+
+<h2><strong>模型的发展与多样性</strong></h2>
+
+<p>对观察结果提出的模型，</p>
+
+<p>是一直在发展的，</p>
+
+<p>并没有哪一个是终极的。</p>
+
+<p><br/></p>
+
+<p>当我们问“<strong>到底是什么</strong>”的时候，</p>
+
+<p><strong>其实是以静态的观点，分析动态发展中的事物</strong>。</p>
+
+<p><br/></p>
+
+<p>模型在不断修正和演进中，</p>
+
+<p>对目标系统做出更精确的<strong>解释</strong>。</p>
+
+<p><br/></p>
+
+<p>例如，lambda calculus，</p>
+
+<p>是一种计算模型，</p>
+
+<p>一开始是无类型的，</p>
+
+<p>但是同样也得不到类型系统的种种好处。</p>
+
+<p><br/></p>
+
+<p>因此lambda calculus就被扩展了，</p>
+
+<p>变成了typed lambda calculus的一个<strong>特例</strong>。</p>
+
+<p><br/></p>
+
+<p>对计算建模的方法也并<strong>不唯一</strong>，</p>
+
+<p>图灵机，combinatory logic，形式语言，等等，</p>
+
+<p>都是和lambda calculus具有相同计算能力的模型。</p>
+
+<p><br/></p>
+
+<h2><strong>编程语言</strong></h2>
+
+<p>编程语言是一种形式语言，</p>
+
+<p>不同的编程语言，只是用不同的一堆<strong>符号</strong>，</p>
+
+<p>按着不同的<strong>文法规则</strong>，</p>
+
+<p>对计算进行建模。</p>
+
+<p><br/></p>
+
+<p>根据形式语言理论，</p>
+
+<p>不受限文法，与图灵机等价。</p>
+
+<p><br/></p>
+
+<p>可以把不同的编程语言，</p>
+
+<p>看做计算过程的多样化模型。</p>
+
+<p><br/></p>
+
+<p>同样，它们的建模方式也在演化，</p>
+
+<p>语言的规范在发展。</p>
+
+<p><br/></p>
+
+<p>遇到具体问题，</p>
+
+<p><strong>我们需要选择合适的编程语言</strong>。</p>
+
+<p><br/></p>
+
+<p>而编程范型，</p>
+
+<p>是语义上的一种分类，</p>
+
+<p>并没有明确的界线。</p>
+
+<p><br/></p>
+
+<p>我们也没必要成见太深，</p>
+
+<p>强行把语言用在<strong>不适用</strong>的场景中。</p>
+
+<p><br/></p>
+
+<p>毕竟，语言是用来沟通和表达的。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>当我还是孩子的时候，</p>
+
+<p>对大自然，就喜欢问“到底是什么”，</p>
+
+<p>它指引我沿着科学之路越走越远。</p>
+
+<p><br/></p>
+
+<p>随着学习的深入，</p>
+
+<p>让我开始懂得<strong>反思问题本身</strong>，</p>
+
+<p>站在更高的角度。</p>
+
+<p><br/></p>
+
+<p>从模型角度来看，</p>
+
+<p>物理学就是对大自然现实世界的建模，</p>
+
+<p>耳熟能详的物理学理论，也只是<strong>可行的模型之一</strong>。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>牛顿的万有引力理论，</p>
+
+<p>爱因斯坦的广义相对论，</p>
+
+<p>都是引力理论。</p>
+
+<p><br/></p>
+
+<p>当然还有其他的引力理论，</p>
+
+<p><strong>他们都是数学模型，用来解释目标系统</strong>，</p>
+
+<p>并不是大自然本身。</p>
+
+<p><br/></p>
+
+<p>终极理论之梦，</p>
+
+<p>可能会随着认识的提高，</p>
+
+<p>不再成为问题了。</p>
+
+<p><br/></p>
+
+<p>就像“没有银弹”一样，</p>
+
+<p><strong>任何领域都没有一劳永逸的事情</strong>。</p>
 ]]></content>
   </entry>
   
