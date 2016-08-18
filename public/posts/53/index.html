@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="Ecmascript 2015刚刚发布了， 新增了很多特性， 例如，let，promise，iterator，generator， proxy，class，module等等。 其中generator更是引人注目， 可以便捷的产生一个iterator。 function* gen() { &nbsp &hellip;">
+  <meta name="description" content="国难出英雄。 祸乱中，才能凸显英雄。 他们力挽狂澜，建立了丰功伟绩。 然而， 这似乎并不是英雄的最高境界。 有些普通人，防微杜渐， 做着一些不起眼的小事， 让灾祸根本就不可能发生。 可是他们，却不能称之为英雄， 因为他们并没有救人于水火。 这真是一个值得深思的悖论。 里阳县令寇准 《杨家将》 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/06/19/generator/">EcmaScript 2015引入的generator</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/06/22/hero-paradox/">英雄悖论</a></h1>
     
     
       <p class="meta">
@@ -83,266 +83,204 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-06-19T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-06-22T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Ecmascript 2015刚刚发布了，</p>
-
-<p>新增了很多<strong>特性</strong>，</p>
-
-<p>例如，let，promise，iterator，generator，</p>
-
-<p>proxy，class，module等等。</p>
+  <div class="entry-content"><p>国难出英雄。</p>
 
 <p><br/></p>
 
-<p>其中<strong>generator</strong>更是引人注目，</p>
+<p>祸乱中，才能凸显英雄。</p>
 
-<p>可以便捷的产生一个iterator。</p>
-
-<p><br/></p>
-
-<p>function* gen() {</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>yield</strong> 1;</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>yield</strong> 2;</p>
+<p>他们力挽狂澜，建立了丰功伟绩。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 3;</p>
+<p>然而，</p>
 
-<p>}</p>
-
-<p><br/></p>
-
-<p>var i = gen();</p>
+<p>这似乎<strong>并不是英雄的最高境界</strong>。</p>
 
 <p><br/></p>
 
-<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//1</p>
+<p>有些普通人，防微杜渐，</p>
 
-<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//2</p>
+<p>做着一些不起眼的小事，</p>
 
-<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//3</p>
-
-<p>console.log(i.next().value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//undefined</p>
+<p><strong>让灾祸根本就不可能发生</strong>。</p>
 
 <p><br/></p>
 
-<p>可见，每次调用i.next，</p>
+<p>可是他们，却不能称之为英雄，</p>
 
-<p>gen都会从上一次的<strong>yield</strong>后继续执行。</p>
-
-<p><br/></p>
-
-<p>这在Ecmascript之前版本看来，</p>
-
-<p>是不可思议的。</p>
+<p>因为他们并没有救人于水火。</p>
 
 <p><br/></p>
 
-<h2><strong>用call/cc实现</strong></h2>
-
-<p>从Scheme的角度来看，</p>
-
-<p>从断点处继续执行，</p>
-
-<p>其实就是，<strong>调用yield断点处的continuation</strong>。</p>
+<p>这真是一个值得深思的悖论。</p>
 
 <p><br/></p>
 
-<p>所以，yield并不是一个新概念，</p>
+<h2><strong>里阳县令寇准</strong></h2>
 
-<p>我们用call/cc实现一下。</p>
+<p>《杨家将》中有一段，</p>
 
-<p><br/></p>
-
-<p>(define (gen x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define <strong>k-body</strong> #f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define <strong>k-yield</strong> #f)</p>
+<p>为了避嫌，包拯推荐寇准追查一个案件。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define (yield x)</p>
+<p>可是钦差到了里阳县后，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k2)</p>
+<p>却发现，<strong>县衙已经荒废很久了</strong>，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! <strong>k-yield</strong> k2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>k-body</strong> x))))</p>
+<p>人们都在门口摆摊做买卖。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda ()</p>
+<p>好不容易在后堂，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k1)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (eq? <strong>k-body</strong> #f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(begin</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! <strong>k-body</strong> k1)</p>
+<p>找到了在和衙役下棋的寇准。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield x)</p>
+<p>钦差对寇准说：</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield (+ x 1))</p>
+<p>你身为县令，</p>
 
-<p><br/></p>
+<p>不但官帽不戴，官服不穿，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x 2))</p>
+<p>而且还<strong>荒废职守</strong>。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>k-yield</strong>))))))</p>
-
-<p><br/></p>
-
-<p>(define i (gen 1))</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;1</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;2</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
+<p>外面是衙门，根本就<strong>不像衙门</strong>。</p>
 
 <p><br/></p>
 
-<p>仅最后一次调用与Ecmascript不同。</p>
+<p>寇准说：</p>
 
-<p>无伤大雅。</p>
-
-<p><br/></p>
-
-<h2><strong>用macro进行抽象</strong></h2>
-
-<p>像上面那样为每一个generator写call/cc，</p>
-
-<p>太繁琐了，</p>
-
-<p>Scheme程序员是不能容忍的。</p>
+<p>没关系的。</p>
 
 <p><br/></p>
 
-<p>先看看我们<strong>希望</strong>怎样调用，</p>
+<p>我们这儿，最近这几年，</p>
 
-<p>(<strong>make-generator</strong> (gen x y)</p>
+<p>真是路不拾遗，夜不闭户，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(yield y)</p>
+<p><strong>根本就没有人犯案的</strong>。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y))</p>
+<p>用不着升堂这么麻烦了，</p>
+
+<p>很清闲的。</p>
 
 <p><br/></p>
 
-<p>(define i (gen 1 2))</p>
+<h2><strong>用武之地</strong></h2>
 
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;1</p>
+<p>不做历史研究，</p>
 
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;2</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
-
-<p>(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;3</p>
+<p>仅限于故事之中。</p>
 
 <p><br/></p>
 
-<p>这样就清爽多了，</p>
+<p>能让人们安居乐业，</p>
 
-<p>还把generator改成了可接收<strong>多参数</strong>的形式。</p>
-
-<p>make-generator是一个<strong>宏</strong>，它可以<strong>用来定义</strong>generator。</p>
+<p>并不是一件容易的事情。</p>
 
 <p><br/></p>
 
-<p>具体实现如下，</p>
+<p>然而，</p>
 
-<p>(define-syntax make-generator</p>
+<p><strong>县令却没有以解决过离奇的案件</strong>，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (form)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case form ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(keyword (name &hellip;) . body)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case (<strong>datum->syntax</strong> #&lsquo;keyword 'yield) ()</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[yield</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&lsquo;(define (name &hellip;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define k-body #f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define k-yield #f)</p>
+<p><strong>而为人所知</strong>。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define (yield . args)</p>
+<p>一个人在事情发展过程中，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k2)</p>
+<p>起着什么作用，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! k-yield k2)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(apply k-body args))))</p>
+<p>外人通常是无法了解的。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda ()</p>
+<p><strong>没有让事情恶化到急需补救之时</strong>，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (k1)</p>
+<p><strong>才是最强大的处理方式</strong>。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (eq? k-body #f)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(begin</p>
+<h2><strong>渴而掘井</strong></h2>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! k-body k1) . body)</p>
+<p>夫病已成而后药之，乱已成而后治之，譬犹渴而穿井，斗而铸锥，不亦晚乎！</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k-yield))))))])])))</p>
+<p>——《素问·四气调神大论》</p>
+
+<p><br/></p>
+
+<p>已经病重了才用药防治，</p>
+
+<p>已经有人造反了才治理天下，</p>
+
+<p>就好比渴极了才挖井、</p>
+
+<p>要对阵了才去打造铁椎一样。</p>
+
+<p><br/></p>
+
+<p>这告诉我们，</p>
+
+<p><strong>要把努力放在点滴的小事上</strong>，</p>
+
+<p>绵绵不绝的为将来做准备。</p>
+
+<p><br/></p>
+
+<p>一个团队，</p>
+
+<p>等到人心涣散了，才去挽救，</p>
+
+<p>为时已晚。</p>
+
+<p><br/></p>
+
+<p>个人的知识储备，</p>
+
+<p>应该每时每刻都注意积累，</p>
+
+<p>用的时候才能游刃有余。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>Ecmascript 2015加入了很多特性，</p>
+<p>软件项目中，</p>
 
-<p>把自己搞的更加复杂了，</p>
-
-<p>这在走一些臃肿语言的老路。</p>
+<p>有很多问题，本来是可以避免的。</p>
 
 <p><br/></p>
 
-<p>Scheme也不例外，</p>
+<p>遇到的问题多，</p>
 
-<p>R6RS就是膨胀的版本，</p>
+<p>并把它们解决了，</p>
 
-<p>不过还好，从那之后，</p>
-
-<p>语言分为了两个分支，R7RS力求简洁，</p>
-
-<p>另一个分支正在进行中，为了工业应用。</p>
+<p>也不代表能力超群。</p>
 
 <p><br/></p>
 
-<p>追求完美，并不是要增加特性，</p>
+<p>项目管理，</p>
 
-<p>而是要尽量减少特性。</p>
+<p><strong>亡羊补牢，不如防患于未然</strong>。</p>
 
 <p><br/></p>
 
-<p>简洁有效，</p>
+<p>而团队建设，</p>
 
-<p>包含了太深刻的内涵。</p>
+<p><strong>求贤若渴，不如退而创造良好的环境</strong>。</p>
 </div>
   
   
@@ -370,7 +308,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
 <li class='category'><a href='/blog/categories/math/'>math (5)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (33)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -378,6 +316,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/08/18/imagination/">思路和想象力</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/08/13/about-topology/">拓扑学拾趣</a>
@@ -413,10 +355,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/06/02/requirement-change/">如何应对需求变更</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/29/let-things-happen/">让事情去发生</a>
       </li>
     
   </ul>
