@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="本文借助阶乘函数，在lisp中推导了Y combinator。 原始的fact定义 (define fact &nbsp;&nbsp;&nbsp;&nbsp;(lambda (n) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 0 &hellip;">
+  <meta name="description" content="函数式编程越来越流行了。 号称使用它可以大幅度的提高工作效率。 人们也开始厌恶面向对象编程了。 面向对象的思想该淘汰了吗？ 函数式真的有这么先进吗？ 其实不然。 因为，程序员具有哪些思维才是重要的。 通过学习不同范型的编程语言，积累的是有用的编程思想。 然后，在实际工作中灵活运用。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/01/27/y-combinator-in-lisp/">Y Combinator in Lisp</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/01/29/encapsulation/">封装的内涵</a></h1>
     
     
       <p class="meta">
@@ -83,276 +83,184 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-01-27T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-01-29T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>本文借助阶乘函数，在lisp中推导了Y combinator。</p>
+  <div class="entry-content"><p>函数式编程越来越流行了。</p>
+
+<p>号称使用它可以大幅度的提高工作效率。</p>
+
+<p>人们也开始厌恶面向对象编程了。</p>
 
 <p><br/></p>
 
-<h2><strong>原始的fact定义</strong></h2>
+<p>面向对象的思想该淘汰了吗？</p>
 
-<p>(define fact</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 0)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n (fact (- n 1))))))</p>
+<p>函数式真的有这么先进吗？</p>
 
 <p><br/></p>
 
-<h2><strong>定义下文中用到的两个函数high-fact与fact-proto</strong></h2>
-
-<p>(define high-fact</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 0)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n ((f f) (- n 1)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>)</p>
+<p>其实不然。</p>
 
 <p><br/></p>
 
-<p>(define fact-proto</p>
+<p>因为，程序员具有哪些思维才是重要的。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (h)</p>
+<p>通过学习不同范型的编程语言，积累的是有用的编程思想。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 0)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* x (h (- x 1)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>)</p>
+<p>然后，在实际工作中灵活运用。</p>
 
 <p><br/></p>
 
-<h2><strong>fact就是high-fact对自身的调用</strong></h2>
+<p>没有人规定剑客不可以用刀法御敌。</p>
 
-<p>fact&lt;=></p>
-
-<p>(high-fact high-fact)</p>
+<p>未来属于那些活学活用的人。</p>
 
 <p><br/></p>
 
-<h2><strong>使用一个辅助函数消除重复出现的两个high-fact</strong></h2>
+<p>本文，以面向对象的封装思想为例。</p>
 
-<p>fact&lt;=></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (g) (g g))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;high-fact</p>
-
-<p>)</p>
+<p>我们要挖掘一下，隐藏在封装思想中的深刻内涵。</p>
 
 <p><br/></p>
 
-<h2><strong>代入high-fact的定义</strong></h2>
+<h2><strong>将独立的部分隔离起来</strong></h2>
 
-<p>fact&lt;=></p>
+<p>很多人对封装的认识，来自于“将数据和对它的操作放在一起”这种说法中。</p>
 
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (g) (g g))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;;; 变换前</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 0)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((f f) (- n 1)))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>)</p>
+<p>其实，这只是对封装思想的一种应用而已。</p>
 
 <p><br/></p>
 
-<h2><strong>将局部表达式变换为对fact-proto的调用</strong></h2>
+<p>初学者，可能会写出一个巨类。</p>
 
-<p>fact&lt;=></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (g) (g g))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;;; 变换后</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-proto (f f))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>)</p>
+<p>很多函数和它们操作的数据都在这一个类中。</p>
 
 <p><br/></p>
 
-<h2><strong>将fact-proto变成形参</strong></h2>
+<p>而事实上，隔离才是这么做的原因。</p>
 
-<p>fact&lt;=></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (g) (g g))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (f f))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;fact-proto</p>
-
-<p>)</p>
+<p>将不需要访问的数据隔离出去，将不需要使用的函数也隔离出去。</p>
 
 <p><br/></p>
 
-<h2><strong>得到Y combinator</strong></h2>
+<p>这样，一个巨类就可以拆分成几个小类。</p>
 
-<p>fact&lt;=></p>
-
-<p>(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;y-combinator</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;fact-proto</p>
-
-<p>)</p>
+<p>他们之间的函数和数据，互相独立，互不影响。</p>
 
 <p><br/></p>
 
-<p>(define y-combinator</p>
+<p>函数式是怎样处理的呢？</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (k)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (g) (g g))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (f f))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-
-<p>)</p>
+<p>函数式中使用了闭包的概念，将数据存储在具有词法作用域的变量中。</p>
 
 <p><br/></p>
 
-<p>紧凑一点</p>
+<h2><strong>将功能的提供者和使用者分层</strong></h2>
 
-<p>(define y-combinator</p>
+<p>有些人，学会了写很多小类。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (k)</p>
+<p>但是这些小类之间互相使用，看起来十分混乱。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((lambda (g) (g g))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((k (f f))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n))))))</p>
+<p>其实，这是因为没有分层所致。</p>
 
 <p><br/></p>
 
-<h2><strong>扩展为多参数形式</strong></h2>
+<p>分层也是封装思想的一种应用。</p>
 
-<p>(define y-combinator</p>
+<p>当多个独立的小部分，共同提供一个功能时，就构成了一个层次。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (k)</p>
+<p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((lambda (g) (g g))</p>
+<p>将功能的提供者和使用者分层，有三个好处。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
+<p>首先，依赖关系图就退化成了依赖关系树。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda ns</p>
+<p>其次，我们可以有效的避免跨层调用和逆向调用。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(apply (k (f f)) ns))))))</p>
+<p>最后，同一层次的重新组合，就可以调整上层所需的功能，而对下层不会产生影响。</p>
+
+<p><br/></p>
+
+<p>函数式是怎样处理的呢？</p>
+
+<p>函数式中的高阶函数是实现分层的方式之一。</p>
+
+<p>一般的函数提供功能集，高阶函数使用它们。</p>
+
+<p><br/></p>
+
+<h2><strong>将语言的描述和实现分开</strong></h2>
+
+<p>不知道为什么，有些人很鄙视设计模式。</p>
+
+<p>这些人通常没有从丰富自身的角度考虑问题。</p>
+
+<p><br/></p>
+
+<p>对自己有用的东西，往往并不是整块出现的。</p>
+
+<p>我们必须有能力把它们挑选出来。</p>
+
+<p><br/></p>
+
+<p>取其精华，去其糟粕。</p>
+
+<p><br/></p>
+
+<p>我认为，设计模式提供了很多素材（内部结构和外部场景）。</p>
+
+<p>让我们有能力设计出更富表现力的用户接口。</p>
+
+<p><br/></p>
+
+<p>站在每个功能层次上，我们都需要考虑上层如何使用。</p>
+
+<p>学习设计模式，会丰富我们的语言，灵活的设计上层接口。</p>
+
+<p><br/></p>
+
+<p>这也是封装吗？</p>
+
+<p>是的，实现细节封装在用户接口的描述中了。</p>
+
+<p>其实，编程语言本身，就是封装的一种应用。</p>
+
+<p><br/></p>
+
+<h2><strong>封装业务领域</strong></h2>
+
+<p>什么是好的程序员？</p>
+
+<p>好的程序员应该在代码与功能之间建立了一个抽象的隔离层，</p>
+
+<p>让外行人可以在讨论功能的时候不用关心代码的细节，</p>
+
+<p>这是面向对象的封装思想在项目上的应用。</p>
+
+<p><br/></p>
+
+<p>既然别人不强求程序员理解他们，程序员也无需强求他们理解代码。</p>
+
+<p>不是吗？</p>
+
+<p><br/></p>
+
+<p>好的合作，就是尽量隐藏属于自己业务范围内的事情，因为别人并不关心。</p>
+
+<p>和好的程序员合作，你不用关心他代码的问题，你看不到他在调整。</p>
+
+<p><br/></p>
+
+<h2><strong>结语</strong></h2>
+
+<p>正所谓，长视者把目的当作手段，短视者把手段当作目的。</p>
+
+<p>让我们正确看待编程思想的演变吧，以丰富自身的眼光。</p>
 </div>
   
   
@@ -380,7 +288,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
 <li class='category'><a href='/blog/categories/math/'>math (5)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (34)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (35)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -388,6 +296,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/08/24/believed-in-the-absence-of-evidence/">相信不证自明</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/08/18/imagination/">思路和想象力</a>
@@ -423,10 +335,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/06/08/algebraic-data-type/">代数数据类型的语法和语义</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/06/02/requirement-change/">如何应对需求变更</a>
       </li>
     
   </ul>
