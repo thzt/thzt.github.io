@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="对需求的误解 同学们经常提及的需求变更，其实变更的并不是需求，而是需求的实现方案。 首先，我们要对需求和方案进行区分。 需求包括以下几个方面，需求背景，需求目的，需求范围，需求的详细规格，以及错误处理方式。 UI/UE/UX，前端，后端，共同实现了需求，是同一个解决方案的不同侧面。 &hellip;">
+  <meta name="description" content="代数数据类型 一个代数数据类型，由值的一些集合，以及这些集合之间的一些函数构成。 这些函数都是一阶函数，不能以其他函数作为参数。 泛代数 泛代数（universal algebra）也称为等式逻辑（equational logic）， 是用于研究代数数据类型的一个数学框架。 在泛代数中， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/06/02/requirement-change/">如何应对需求变更</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/06/08/algebraic-data-type/">代数数据类型的语法和语义</a></h1>
     
     
       <p class="meta">
@@ -83,214 +83,337 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2016-06-02T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2016-06-08T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2><strong>对需求的误解</strong></h2>
+  <div class="entry-content"><script src="/thirdpart/jQuery/jquery-1.11.1.js"></script>
 
-<p>同学们经常提及的需求变更，其实变更的并不是需求，而是需求的实现方案。</p>
 
-<p>首先，我们要对需求和方案进行区分。</p>
+<p><link href="/thirdpart/KaTeX/katex.min.css" rel="stylesheet"/></p>
 
-<p>需求包括以下几个方面，需求背景，需求目的，需求范围，需求的详细规格，以及错误处理方式。</p>
+<script src="/thirdpart/KaTeX/katex.min.js"></script>
 
-<p>UI/UE/UX，前端，后端，共同实现了需求，是同一个解决方案的不同侧面。</p>
 
-<p><br/></p>
+<script src="/javascripts/katex.js"></script>
 
-<p>因此从广义上来讲，开发者之间的内部沟通，不属于需求变更范畴。</p>
 
-<p>软件的大部分问题，存在于开发者之间的沟通上面，而不是开发者对需求的理解上面。</p>
+<h3><strong>代数数据类型</strong></h3>
 
-<p>只有理解了什么是需求，才能衡量出需求是否变更了。</p>
+<p>一个代数数据类型，由值的一些集合，以及这些集合之间的一些函数构成。</p>
 
-<p><br/></p>
-
-<blockquote><p>在软件工程中，需求分析指的是在建立一个新的或改变一个现存的电脑系统时描写新系统的目的、范围、定义和功能时所要做的所有的工作。</p></blockquote>
+<p>这些函数都是一阶函数，不能以其他函数作为参数。</p>
 
 <p><br/></p>
 
-<h2><strong>从方法到目的</strong></h2>
+<h3><strong>泛代数</strong></h3>
 
-<p>实现一个目的有多种方法，如何看到这些方法的共性呢？</p>
+<p>泛代数（universal algebra）也称为等式逻辑（equational logic），</p>
 
-<p>最快的方式就是找到这些方法要解决的问题。</p>
-
-<p>软件是以解决问题为目的的，不能解决问题的软件没有任何作用。</p>
+<p>是用于研究代数数据类型的一个数学框架。</p>
 
 <p><br/></p>
 
-<p>这要分两方面来说，</p>
+<p>在泛代数中，代数数据类型的语法由代数项（algebraic term）描述，公理语义用项之间的等式集（a set of equations）描述，</p>
 
-<p>其一，当产品经理发起需求变更时，我们要积极配合。因为，需求变更的主要原因在于当前软件不能解决某些问题。</p>
+<p>而指称语义对应于一个<span data-katex="\Sigma"></span>代数，操作语义通过给等式设定方向来表示。</p>
 
-<p>不配合，那么做出的软件就没有用，我们的工作就没有价值。</p>
+<hr />
 
-<p><br/></p>
+<h2><strong>代数数据类型的语法</strong></h2>
 
-<p>其二，我们要知道当前软件要解决的问题是什么，才能灵活的改变策略。</p>
+<h3><strong>代数项和签名</strong></h3>
 
-<p>甚至可以利用工程师的领域特长，找到更合适的解决方案。</p>
+<p>一个代数项（algebraic term）由符号和类型来定义，</p>
 
-<p><br/></p>
-
-<h2><strong>变更与管控</strong></h2>
-
-<p>我们不怕变化，怕的是对变化失去控制。</p>
-
-<p>当产品经理发起需求变更时，我们要重新安排未完成任务的优先级，这是需要与产品经理沟通的。</p>
-
-<p>因为，变更是需要成本的，意味着原计划要做的某些事情不能做完了，我们得让他们知道。</p>
+<p>这些信息放在一起称为代数项的签名（signature）。</p>
 
 <p><br/></p>
 
-<p>我们自己首先得有一个任务列表。</p>
-
-<p>然后以优先级的方式管理待办事项。</p>
+<p>构成代数项的基本类型称为sort。</p>
 
 <p><br/></p>
 
-<h2><strong>知识共享</strong></h2>
+<p>一个签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>，由以下几个部分构成，</p>
 
-<p>不同的人，对需求的理解不同。</p>
+<p>（1）以sort为元素构成的集合</p>
 
-<p>每个人都会按照自己的方式去实现想法。</p>
+<p>（2）sort上函数符号的集合<span data-katex="F=\left \{ f:s_1\times \cdots \times s_k\rightarrow s \right \}"></span></p>
 
-<p>如何设计一个策略，怎样实现这个设计，大相径庭。</p>
+<p>其中，<span data-katex="s_1,\cdots ,s_k,s\in S"></span>，<span data-katex="f"></span>称为类型化的函数符号，</p>
 
-<p><br/></p>
-
-<p>因此，我们要预先做一些知识的分享。</p>
-
-<p>在设计阶段排除问题，会比在实现阶段排除问题，成本低很多。</p>
-
-<p>我们不妨谈一谈，我计划怎样解决这个问题，我打算怎样实现。</p>
-
-<p>因为，很有可能，这个计划就是错的。</p>
+<p>每个函数符号的类型是唯一的。</p>
 
 <p><br/></p>
 
-<h2><strong>主动去沟通</strong></h2>
+<p>例如，自然数表达式的签名是<span data-katex="\Sigma_N=\left \langle S,F \right \rangle"></span>，</p>
 
-<p>如果我想改某个文件，担心其他人也在改，以后合并起来麻烦，怎么办？</p>
+<p>其中<span data-katex="S=\left \{ nat \right \}"></span>，只包含一个sort，</p>
 
-<p>去问他/她。</p>
+<p><span data-katex="F"></span>给出以下几个函数符号，</p>
 
-<p>某位同学的代码我看不懂，不敢改怎么办？</p>
+<p><span data-katex="0:nat"></span>，<span data-katex="1:nat"></span>，<span data-katex="+:nat\times nat\rightarrow nat"></span>，<span data-katex="*:nat\times nat\rightarrow nat"></span>。</p>
 
-<p>去问他/她。</p>
+<p>习惯上为了节省空间，通常把签名写成一个表格形式，</p>
 
-<p>产品经理对需求的描述不清楚，我理解不了怎么办？</p>
+<p><span data-katex="sorts:nat"></span></p>
 
-<p>去问他/她。</p>
+<p><span data-katex="fctns:0,1:nat"></span></p>
 
-<p>交互稿中文案可能有错误，逻辑矛盾，怎么办？</p>
-
-<p>去问他/她。</p>
-
-<p>测试提了一个缺陷，可是我不知道在说什么，也不知道在哪个场景中会出现，怎么办？</p>
-
-<p>去问他/她。</p>
+<p><span data-katex="+,*:nat\times nat\rightarrow nat"></span></p>
 
 <p><br/></p>
 
-<p>&ldquo;问"，这个简单的动作，会节省大量的时间。</p>
+<h3><strong>变量的指派</strong></h3>
 
-<p>如果不想打断别人的工作，可以用一些非即时沟通工具。</p>
+<p>一个指派（sort assignment），是如下一个有限集合，用来指定变量的类型，</p>
 
-<p>或者走到他旁边，让他注意到你时，你再发问。</p>
+<p><span data-katex="\Gamma=\left \{ x_1:s_1,\cdots ,x_k:s_k \right \}"></span></p>
 
-<p><br/></p>
-
-<p>提问，并不愚蠢，不问才蠢。</p>
-
-<p>要相信大部分工程师都是喜欢被问的。</p>
+<p>不能为同一个变量指派不同的sort。</p>
 
 <p><br/></p>
 
-<h2><strong>让设计灵活响应变更</strong></h2>
+<h3><strong>合法代数项的集合</strong></h3>
 
-<p>好的设计，在变更中灵活响应。</p>
+<p>基于签名<span data-katex="\Sigma"></span>和指派<span data-katex="\Gamma"></span>，可以定义一个sort为<span data-katex="s"></span>的代数项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>，</p>
 
-<p>这实际上是对设计提出了更高的要求，不止是实现功能那么简单了。</p>
+<p>它满足以下几个条件，</p>
 
-<p><br/></p>
+<p>（1）如果<span data-katex="x:s\in \Gamma"></span>则<span data-katex="x\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
 
-<p>因为现实世界是发展中的，业务场景也在与时俱进。</p>
+<p>（2）如果<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>且<span data-katex="M_i\in Terms^{s_i}\left ( \Sigma,\Gamma \right )"></span>，</p>
 
-<p>因此，需求本身不可能是不变的。</p>
+<p><span data-katex="i=1,\cdots ,n"></span>，则<span data-katex="fM_1\cdots M_k\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
 
-<p>软件是一个解决动态问题的方案。</p>
+<hr />
 
-<p><br/></p>
+<h2><strong>代数数据类型的指称语义</strong></h2>
 
-<p>程序设计是用来解决发展中问题的。</p>
+<h3><strong><span data-katex="\Sigma"></span>代数</strong></h3>
 
-<p>我们要看到问题的发展趋势，结合整个过程进行设计。</p>
-
-<p>给未来留下余地，不局限于当前状态进行设计。</p>
+<p><span data-katex="\Sigma"></span>代数是一种数学结构，它为代数项提供了含义或指称语义。</p>
 
 <p><br/></p>
 
-<p>需求你怎么改都行，因为你不得不改，我也不得不照做，不然软件本身就没用了。</p>
+<p>一个<span data-katex="\Sigma"></span>代数，包含了一个或多个集合，称为载体（carrier），</p>
 
-<p>但是我的设计保障我修改的成本最低。</p>
+<p>以及一些特征元素，和载体上的一些一阶函数，</p>
 
-<p><br/></p>
-
-<h2><strong>原谅别人的失误</strong></h2>
-
-<p>人非圣贤孰能无过。</p>
-
-<p>我们会因为手误打错代码，也会因为大脑一时短路犯逻辑错误。</p>
-
-<p>那么，产品经理同样也会对需求理解和描述产生偏差。</p>
-
-<p>我们不能要求别人做到完美。</p>
+<p><span data-katex="f:A_1\times \cdots \times A_k \rightarrow A"></span></p>
 
 <p><br/></p>
 
-<p>一方面，我们要原谅他们，但要让他们知道大家的代价。</p>
+<p>例如，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,* \right \rangle"></span></p>
 
-<p>另一方面，我们要听思想，不要听描述。抓住中心思想，忽略细节。</p>
+<p>具有载体<span data-katex="N"></span>，它是自然数集，</p>
+
+<p>具有特征元素，<span data-katex="0,1\in N"></span>，</p>
+
+<p>以及函数，<span data-katex="+,*:N \times N \rightarrow N"></span>。</p>
+
+<p>其中，特征元素可以看成零元函数。</p>
 
 <p><br/></p>
 
-<p>严于律己，宽以待人。</p>
+<p>带有多个载体的例子是<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}_{pcf}=\left \langle N,B,0,1,\cdots ,+,true,false,Eq?,\cdots ,\right \rangle"></span></p>
+
+<p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
+
+<p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
+
+<p><br/></p>
+
+<h3><strong>代数项的解释</strong></h3>
+
+<p>我们说<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>是与所有合法代数项<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>对应的<span data-katex="\Sigma"></span>代数，</p>
+
+<p>指的是如下对应关系成立，</p>
+
+<p>（1）每一个sort，<span data-katex="s\in S"></span>，恰好对应一个载体<span data-katex="A^s"></span></p>
+
+<p>（2）每一个函数符号<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>，恰好对应一个函数<span data-katex="\mathscr{I}(f):A^{s_1}\times \cdots \times A^{s_k}\rightarrow A^s"></span></p>
+
+<p>习惯上把<span data-katex="\mathscr{I}(f)"></span>写成<span data-katex="f^{\mathscr{A}}"></span>。</p>
+
+<p><br/></p>
+
+<h3><strong>含变量代数项的解释</strong></h3>
+
+<p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射。</p>
+
+<p><span data-katex="\eta :\mathscr{V} \rightarrow\cup _sA^s"></span></p>
+
+<p>需要环境的原因是，对于含变量<span data-katex="x"></span>的项<span data-katex="M"></span>，叙述<span data-katex="M"></span>的含义必须先给<span data-katex="x"></span>指定一个确定的值。</p>
+
+<p>如果对于每个<span data-katex="x:s\in \Gamma"></span>，都有<span data-katex="\eta (x)\in A^s"></span>，就说环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>。</p>
+
+<p><br/></p>
+
+<p>假定<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的一个环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，</p>
+
+<p>则可以把环境<span data-katex="\eta"></span>下的任何项<span data-katex="M\in Terms\left ( \Sigma ,\Gamma \right )"></span>的含义<span data-katex="\mathscr{A}[[M]]\eta"></span>定义如下，</p>
+
+<p>（1）<span data-katex="\mathscr{A}[[M]]\eta =\eta (x)"></span></p>
+
+<p>（2）<span data-katex="\mathscr{A}[[fM_1\cdots M_k]]\eta =f^{\mathscr{A}}(\mathscr{A}[[M_1]]\eta ,\cdots ,\mathscr{A}[[M_k]]\eta )"></span></p>
+
+<p><br/></p>
+
+<p>若<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在上下文中是明确的，通常省略<span data-katex="\mathscr{A}"></span>而直接写<span data-katex="[[M]]\eta"></span>，</p>
+
+<p>若<span data-katex="M"></span>中没有变量，则<span data-katex="\mathscr{A}[[M]]\eta"></span>不依赖于<span data-katex="\eta"></span>，可以写为<span data-katex="\mathscr{A}[[M]]"></span>。</p>
+
+<hr />
+
+<h2><strong>语法和语义的关系</strong></h2>
+
+<h3><strong>可靠性与完备性</strong></h3>
+
+<p>代数数据类型的公理语义是由代数项之间的等式集给出的，签名和等式集合称代数规范（algebraic specification）。</p>
+
+<p>一个代数规范，或者可以使用等式证明系统推导出代数项之间的其他等式，或者可以检验代数项对应的<span data-katex="\Sigma"></span>代数是否满足这些等式的要求。</p>
+
+<p><br/></p>
+
+<p>代数项对应的<span data-katex="\Sigma"></span>代数并不是唯一的。</p>
+
+<p>从一个代数规范推导得到的等式，在该规范对应的任何<span data-katex="\Sigma"></span>代数中都成立，就称该代数证明系统是可靠的（sound）。</p>
+
+<p>一个代数规范对应的任何<span data-katex="\Sigma"></span>代数中都成立的等式，在该规范中都可证，就称该代数证明系统是完备的（complete）。</p>
+
+<p><br/></p>
+
+<h3><strong>等式的可满足性</strong></h3>
+
+<p>等式（equation）是一个公式<span data-katex="M=N[\Gamma ]"></span>，其中<span data-katex="M,N\in Terms^s\left ( \Sigma ,\Gamma \right )"></span>，<span data-katex="s\in S"></span>。</p>
+
+<p>如果环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，且<span data-katex="[[M]]\eta =[[N]]\eta"></span>，</p>
+
+<p>就说<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在环境<span data-katex="\eta"></span>下满足<span data-katex="M=N[\Gamma ]"></span>，记为</p>
+
+<p><span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span></p>
+
+<p><br/></p>
+
+<p>对于含变量的项，我们更感兴趣的是一个等式是否在变量所有可能的取值情况下都成立，</p>
+
+<p>而不是在一个特别的环境中成立。</p>
+
+<p>如果对于满足<span data-katex="\Gamma"></span>的任何一个环境<span data-katex="\eta"></span>都有<span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span>，</p>
+
+<p>就可以说，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>满足等式<span data-katex="M=N[\Gamma ]"></span>，记为</p>
+
+<p><span data-katex="\mathscr{A} \models M=N[\Gamma]"></span></p>
+
+<p><br/></p>
+
+<p>可满足性也可以扩展到等式集和代数集，</p>
+
+<p>设<span data-katex="E"></span>是一个等式集，如果<span data-katex="\mathscr{A}"></span>满足所有等式，就说<span data-katex="\mathscr{A}"></span>满足<span data-katex="E"></span>。</p>
+
+<p>类似的，若<span data-katex="C"></span>是一类<span data-katex="\Sigma"></span>代数，且对每个<span data-katex="\mathscr{A}\in C"></span>都有<span data-katex="\mathscr{A}\models M=N[\Gamma ]"></span>，则<span data-katex="C\models M=N[\Gamma ]"></span></p>
+
+<p><br/></p>
+
+<p>若任何一个<span data-katex="\Sigma"></span>代数都满足代数项之间的等式<span data-katex="M=N[\Gamma ]"></span>，就说该等式是永真的（valid），写为<span data-katex="\models M=N[\Gamma ]"></span>。</p>
+
+<p>例如，<span data-katex="x=x[x:s]"></span>就是永真的。</p>
+
+<p><br/></p>
+
+<p>若<span data-katex="\mathscr{A}"></span>满足签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>上的所有等式，就说<span data-katex="\Sigma"></span>代数是平凡的（trivial）。</p>
+
+<p><br/></p>
+
+<h3><strong>语义蕴含（semantic implication）</strong></h3>
+
+<p>若满足等式集<span data-katex="E"></span>的每一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>都满足等式<span data-katex="M=N[\Gamma ]"></span>，</p>
+
+<p>则称签名<span data-katex="\Sigma"></span>上的等式集<span data-katex="E"></span>在语义上蕴含等式<span data-katex="M=N[\Gamma ]"></span>，记为，</p>
+
+<p><span data-katex="E\models M=N[\Gamma ]"></span></p>
+
+<p><br/></p>
+
+<p>有了签名<span data-katex="\Sigma"></span>和等式集<span data-katex="E"></span>，我们定义代数规范<span data-katex="Spec=\left \langle \Sigma,E \right \rangle"></span>，</p>
+
+<p>则满足代数规范的，在所有<span data-katex="\Sigma"></span>代数中都成立的等式，就是那些由等式集<span data-katex="E"></span>语义蕴含的等式。</p>
+
+<p><br/></p>
+
+<h3><strong>语义理论</strong></h3>
+
+<p>如果等式集<span data-katex="E"></span>在语义蕴含下封闭（closed），则把它称为一个理论（theory）。</p>
+
+<p>更准确的说，如果<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语义理论（semantic theory）。</p>
+
+<p>一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的理论<span data-katex="Th(\mathscr{A})"></span>，就是在<span data-katex="\mathscr{A}"></span>中成立的所有等式的集合。</p>
+
+<p>可以证明一个<span data-katex="\Sigma"></span>代数的理论是一个语义理论。</p>
+
+<p><br/></p>
+
+<h3><strong>形式证明</strong></h3>
+
+<p>一个证明系统的推导规则如下，<span data-katex="\frac{antecedent}{consequent}"></span>，</p>
+
+<p>使得从前件（antecedent）的任何实例出发，通过使用该证明系统的公理和其他规则，</p>
+
+<p>可以推导出后件（consequent）的相应实例。</p>
+
+<p><br/></p>
+
+<p>例如：<span data-katex="\frac{M=N[\Gamma ],N=P[\Gamma ],P=Q[\Gamma ]}{M=Q[\Gamma ]}"></span></p>
+
+<p><br/></p>
+
+<p>若证明了一条规则是可推导的，则能够把它当做系统的一条证明规则来使用。</p>
+
+<p>如果某条规则没有前件，则称它是证明系统的一条公理（axiom）。</p>
+
+<p><br/></p>
+
+<p>我们说等式<span data-katex="M=N[\Gamma ]"></span>是可证的（provable），记为<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
+
+<p>如果从<span data-katex="E"></span>到<span data-katex="M=N[\Gamma ]"></span>存在一个等式序列，</p>
+
+<p>使得每个等式或者是公理（axiom），或者是<span data-katex="E"></span>中的等式，</p>
+
+<p>或者是从序列中之前出现的一个或多个等式经一步推导得到的结果。</p>
+
+<p><br/></p>
+
+<h3><strong>语法理论</strong></h3>
+
+<p>若在可证性下等式集<span data-katex="E"></span>是封闭的，则称<span data-katex="E"></span>是一个语法理论（syntactic theory）。</p>
+
+<p>换句话说，如果<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语法理论。</p>
+
+<p><span data-katex="E"></span>的语法理论<span data-katex="Th(E)"></span>就是从<span data-katex="E"></span>可证的所有等式的集合。</p>
+
+<p><br/></p>
+
+<h3><strong>等式证明系统的性质</strong></h3>
+
+<p>可靠性（soundness）：若<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="E\models M=N[\Gamma ]"></span></p>
+
+<p>演绎完备性（deductive completeness）：若<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
+
+<hr />
 
 <h2><strong>结语</strong></h2>
 
-<p>大部分软件从业者，没有软件工程相关的培训，也没有阅读过相关书籍，</p>
+<p>《<a href="https://book.douban.com/subject/1761918/">Foundations for Programming Languages</a>》是一本好书，</p>
 
-<p>是依靠自己的感觉来做软件的。</p>
+<p>可是中文的翻译《<a href="https://book.douban.com/subject/1944729/">程序设计语言理论基础</a>》简直是晦涩难懂，</p>
 
-<p><br/></p>
+<p>把sort翻译为『类子』，把signature翻译为『基调』，容易让人误以为和同调代数有什么联系。</p>
 
-<p>结果会沿用一些不恰当的类比来理解软件，</p>
-
-<p>也会逐渐形成小作坊式的软件开发过程。</p>
-
-<p>当团队规模扩大时，问题就会越来越严重。</p>
-
-<p><br/></p>
-
-<p>不过，没关系，这有什么。</p>
-
-<p>痛了才会想办法去解决，也无需过度设计。</p>
-
-<p>只是现在我们是否该学一些软件工程的知识了呢？</p>
-
-<p><br/></p>
-
-<p><strong>参考：</strong></p>
-
-<p><a href="https://book.douban.com/subject/1007738/">快速软件开发</a></p>
-
-<p><a href="https://book.douban.com/subject/1140457/">敏捷软件开发 : 原则、模式与实践</a></p>
+<p>原版书拿到后，看起来轻松了不少，这里只是对第三章部分内容做了个小结，以便卸下包袱轻装上阵。</p>
 </div>
   
   
@@ -318,7 +441,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
 <li class='category'><a href='/blog/categories/math/'>math (5)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (36)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (37)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -326,6 +449,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/09/07/the-bias-of-the-author/">为什么作者无法不持有偏见</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/09/03/weakness/">性格的弱点</a>
@@ -361,10 +488,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/07/01/the-way-to-express/">重在表达</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/06/25/complete-partial-order/">不动点算子与完全偏序</a>
       </li>
     
   </ul>

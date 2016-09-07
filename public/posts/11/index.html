@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="代数数据类型 一个代数数据类型，由值的一些集合，以及这些集合之间的一些函数构成。 这些函数都是一阶函数，不能以其他函数作为参数。 泛代数 泛代数（universal algebra）也称为等式逻辑（equational logic）， 是用于研究代数数据类型的一个数学框架。 在泛代数中， &hellip;">
+  <meta name="description" content="域论模型 类型化lambda演算，有两个常用模型。 其一，域论模型。其二，递归函数论模型。 在众多域论模型中， 主要关心的是一种具有完全偏序（complete partial order）结构的域，简称CPO。 研究它的主要原因是，它是带有不动点算子的模型， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/06/08/algebraic-data-type/">代数数据类型的语法和语义</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/06/25/complete-partial-order/">不动点算子与完全偏序</a></h1>
     
     
       <p class="meta">
@@ -83,7 +83,7 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2016-06-08T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2016-06-25T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
@@ -101,319 +101,323 @@ var _hmt = _hmt || [];
 <script src="/javascripts/katex.js"></script>
 
 
-<h3><strong>代数数据类型</strong></h3>
+<h2><strong>域论模型</strong></h2>
 
-<p>一个代数数据类型，由值的一些集合，以及这些集合之间的一些函数构成。</p>
+<p>类型化lambda演算，有两个常用模型。</p>
 
-<p>这些函数都是一阶函数，不能以其他函数作为参数。</p>
-
-<p><br/></p>
-
-<h3><strong>泛代数</strong></h3>
-
-<p>泛代数（universal algebra）也称为等式逻辑（equational logic），</p>
-
-<p>是用于研究代数数据类型的一个数学框架。</p>
+<p>其一，域论模型。其二，递归函数论模型。</p>
 
 <p><br/></p>
 
-<p>在泛代数中，代数数据类型的语法由代数项（algebraic term）描述，公理语义用项之间的等式集（a set of equations）描述，</p>
+<p>在众多域论模型中，</p>
 
-<p>而指称语义对应于一个<span data-katex="\Sigma"></span>代数，操作语义通过给等式设定方向来表示。</p>
+<p>主要关心的是一种具有完全偏序（complete partial order）结构的域，简称CPO。</p>
 
-<hr />
+<p>研究它的主要原因是，它是带有不动点算子的模型，</p>
 
-<h2><strong>代数数据类型的语法</strong></h2>
+<p>而且它还提供了一种解释递归类型表达式的方法。</p>
 
-<h3><strong>代数项和签名</strong></h3>
-
-<p>一个代数项（algebraic term）由符号和类型来定义，</p>
-
-<p>这些信息放在一起称为代数项的签名（signature）。</p>
+<p>域论方法是递归函数论模型的基础。</p>
 
 <p><br/></p>
 
-<p>构成代数项的基本类型称为sort。</p>
+<h2><strong>递归</strong></h2>
+
+<p>加入递归之后，对表达式进行归约就可能会无限的进行下去，</p>
+
+<p>因此将出现没有范式（normal form）的表达式。</p>
+
+<p>于是，把每个表达式指称为一个数值，这种想法就可能有问题了。</p>
+
+<p>下面我们引入不动点算子（fixed-point operator），用来它定义递归。</p>
 
 <p><br/></p>
 
-<p>一个签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>，由以下几个部分构成，</p>
+<p><span data-katex="letrec~f:\sigma=M~in~N"></span></p>
 
-<p>（1）以sort为元素构成的集合</p>
+<p>它表示<span data-katex="N"></span>，但是<span data-katex="N"></span>中f的值，是等式<span data-katex="f=M"></span>的解。</p>
 
-<p>（2）sort上函数符号的集合<span data-katex="F=\left \{ f:s_1\times \cdots \times s_k\rightarrow s \right \}"></span></p>
+<p>而<span data-katex="M"></span>中可能会包含<span data-katex="f"></span>。</p>
 
-<p>其中，<span data-katex="s_1,\cdots ,s_k,s\in S"></span>，<span data-katex="f"></span>称为类型化的函数符号，</p>
-
-<p>每个函数符号的类型是唯一的。</p>
+<p><span data-katex="M"></span>的类型根据等式<span data-katex="f=M"></span>也是<span data-katex="\sigma"></span>。</p>
 
 <p><br/></p>
 
-<p>例如，自然数表达式的签名是<span data-katex="\Sigma_N=\left \langle S,F \right \rangle"></span>，</p>
+<p>我们将看到，<span data-katex="letrec"></span>是<span data-katex="let"></span>与不动点算子的语法糖（syntactic sugar）。</p>
 
-<p>其中<span data-katex="S=\left \{ nat \right \}"></span>，只包含一个sort，</p>
+<p>首先，我们先用<span data-katex="letrec"></span>定义阶乘函数，来计算<span data-katex="5!"></span>。</p>
 
-<p><span data-katex="F"></span>给出以下几个函数符号，</p>
-
-<p><span data-katex="0:nat"></span>，<span data-katex="1:nat"></span>，<span data-katex="+:nat\times nat\rightarrow nat"></span>，<span data-katex="*:nat\times nat\rightarrow nat"></span>。</p>
-
-<p>习惯上为了节省空间，通常把签名写成一个表格形式，</p>
-
-<p><span data-katex="sorts:nat"></span></p>
-
-<p><span data-katex="fctns:0,1:nat"></span></p>
-
-<p><span data-katex="+,*:nat\times nat\rightarrow nat"></span></p>
+<p><span data-katex="letrec~f:nat\rightarrow nat=\lambda y:nat.~(if~Eq?~y~0~then~1~else~y*f(y-1))~in~f~5"></span></p>
 
 <p><br/></p>
 
-<h3><strong>变量的指派</strong></h3>
+<p>其中<span data-katex="f"></span>是下列等式的解。</p>
 
-<p>一个指派（sort assignment），是如下一个有限集合，用来指定变量的类型，</p>
-
-<p><span data-katex="\Gamma=\left \{ x_1:s_1,\cdots ,x_k:s_k \right \}"></span></p>
-
-<p>不能为同一个变量指派不同的sort。</p>
+<p><span data-katex="f=\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
 
 <p><br/></p>
 
-<h3><strong>合法代数项的集合</strong></h3>
+<h2><strong>不动点算子</strong></h2>
 
-<p>基于签名<span data-katex="\Sigma"></span>和指派<span data-katex="\Gamma"></span>，可以定义一个sort为<span data-katex="s"></span>的代数项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>，</p>
+<p>从数学的角度来看，并不是所有形如<span data-katex="f:\sigma =M"></span>的等式都有解，</p>
 
-<p>它满足以下几个条件，</p>
+<p>如果有多个解，也不知道选择哪个解。</p>
 
-<p>（1）如果<span data-katex="x:s\in \Gamma"></span>则<span data-katex="x\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
-
-<p>（2）如果<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>且<span data-katex="M_i\in Terms^{s_i}\left ( \Sigma,\Gamma \right )"></span>，</p>
-
-<p><span data-katex="i=1,\cdots ,n"></span>，则<span data-katex="fM_1\cdots M_k\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
-
-<hr />
-
-<h2><strong>代数数据类型的指称语义</strong></h2>
-
-<h3><strong><span data-katex="\Sigma"></span>代数</strong></h3>
-
-<p><span data-katex="\Sigma"></span>代数是一种数学结构，它为代数项提供了含义或指称语义。</p>
+<p>我们先假设每个这样的等式都有解，为此我们增加一个不动点算子来得到这个解。</p>
 
 <p><br/></p>
 
-<p>一个<span data-katex="\Sigma"></span>代数，包含了一个或多个集合，称为载体（carrier），</p>
+<p>一般的，如果<span data-katex="F:\sigma \rightarrow \sigma"></span>是某一类型到自身的函数。</p>
 
-<p>以及一些特征元素，和载体上的一些一阶函数，</p>
-
-<p><span data-katex="f:A_1\times \cdots \times A_k \rightarrow A"></span></p>
+<p>那么<span data-katex="F"></span>的一个不动点，是使得<span data-katex="x=F(x)"></span>的值<span data-katex="x:\sigma"></span>。</p>
 
 <p><br/></p>
 
-<p>例如，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,* \right \rangle"></span></p>
+<p>经过观察我们发现，阶乘函数<span data-katex="f"></span>是以下函数的<span data-katex="F"></span>的不动点，即满足<span data-katex="f=F(f)"></span>。</p>
 
-<p>具有载体<span data-katex="N"></span>，它是自然数集，</p>
+<p><span data-katex="F=_{def}\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
 
-<p>具有特征元素，<span data-katex="0,1\in N"></span>，</p>
-
-<p>以及函数，<span data-katex="+,*:N \times N \rightarrow N"></span>。</p>
-
-<p>其中，特征元素可以看成零元函数。</p>
+<p>其中，<span data-katex="f:nat\rightarrow nat"></span>，<span data-katex="F:(nat\rightarrow nat)\rightarrow (nat\rightarrow nat)"></span></p>
 
 <p><br/></p>
 
-<p>带有多个载体的例子是<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}_{pcf}=\left \langle N,B,0,1,\cdots ,+,true,false,Eq?,\cdots ,\right \rangle"></span></p>
+<p>我们定义，<span data-katex="fix_\sigma :(\sigma \rightarrow \sigma )\rightarrow \sigma"></span>，是对应于每个类型<span data-katex="\sigma"></span>的不动点算子。</p>
 
-<p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
+<p>满足的如下等式公理，</p>
 
-<p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
-
-<p><br/></p>
-
-<h3><strong>代数项的解释</strong></h3>
-
-<p>我们说<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>是与所有合法代数项<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>对应的<span data-katex="\Sigma"></span>代数，</p>
-
-<p>指的是如下对应关系成立，</p>
-
-<p>（1）每一个sort，<span data-katex="s\in S"></span>，恰好对应一个载体<span data-katex="A^s"></span></p>
-
-<p>（2）每一个函数符号<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>，恰好对应一个函数<span data-katex="\mathscr{I}(f):A^{s_1}\times \cdots \times A^{s_k}\rightarrow A^s"></span></p>
-
-<p>习惯上把<span data-katex="\mathscr{I}(f)"></span>写成<span data-katex="f^{\mathscr{A}}"></span>。</p>
+<p><span data-katex="fix_\sigma =\lambda f:\sigma \rightarrow \sigma .~f(fix_\sigma f)"></span></p>
 
 <p><br/></p>
 
-<h3><strong>含变量代数项的解释</strong></h3>
+<p>可知，对任意的<span data-katex="F:\sigma \rightarrow \sigma"></span>，<span data-katex="fix_\sigma F"></span>是<span data-katex="F"></span>的不动点，即，</p>
 
-<p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射。</p>
-
-<p><span data-katex="\eta :\mathscr{V} \rightarrow\cup _sA^s"></span></p>
-
-<p>需要环境的原因是，对于含变量<span data-katex="x"></span>的项<span data-katex="M"></span>，叙述<span data-katex="M"></span>的含义必须先给<span data-katex="x"></span>指定一个确定的值。</p>
-
-<p>如果对于每个<span data-katex="x:s\in \Gamma"></span>，都有<span data-katex="\eta (x)\in A^s"></span>，就说环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>。</p>
+<p><span data-katex="fix_\sigma F=F(fix_\sigma F)"></span></p>
 
 <p><br/></p>
 
-<p>假定<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的一个环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，</p>
+<p>我们就可以用<span data-katex="let"></span>和<span data-katex="fix_\sigma"></span>表示<span data-katex="letrec"></span>了。</p>
 
-<p>则可以把环境<span data-katex="\eta"></span>下的任何项<span data-katex="M\in Terms\left ( \Sigma ,\Gamma \right )"></span>的含义<span data-katex="\mathscr{A}[[M]]\eta"></span>定义如下，</p>
-
-<p>（1）<span data-katex="\mathscr{A}[[M]]\eta =\eta (x)"></span></p>
-
-<p>（2）<span data-katex="\mathscr{A}[[fM_1\cdots M_k]]\eta =f^{\mathscr{A}}(\mathscr{A}[[M_1]]\eta ,\cdots ,\mathscr{A}[[M_k]]\eta )"></span></p>
+<p><span data-katex="letrec~f:\sigma =M~in~N=_{def}let~f:\sigma =(fix_\sigma \lambda f:\sigma .~M)~in~N"></span></p>
 
 <p><br/></p>
 
-<p>若<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在上下文中是明确的，通常省略<span data-katex="\mathscr{A}"></span>而直接写<span data-katex="[[M]]\eta"></span>，</p>
+<h2><strong>归约</strong></h2>
 
-<p>若<span data-katex="M"></span>中没有变量，则<span data-katex="\mathscr{A}[[M]]\eta"></span>不依赖于<span data-katex="\eta"></span>，可以写为<span data-katex="\mathscr{A}[[M]]"></span>。</p>
+<p>我们以阶乘函数为例，来说明带有不动点算子的表达式是如何归约的。</p>
 
-<hr />
+<p>为了行文方便，我们省略<span data-katex="fix_{nat\rightarrow nat}"></span>的下标，直接记为<span data-katex="fix"></span>。</p>
 
-<h2><strong>语法和语义的关系</strong></h2>
+<p>定义阶乘函数<span data-katex="fact=_{def}fix~F"></span>，其中，</p>
 
-<h3><strong>可靠性与完备性</strong></h3>
-
-<p>代数数据类型的公理语义是由代数项之间的等式集给出的，签名和等式集合称代数规范（algebraic specification）。</p>
-
-<p>一个代数规范，或者可以使用等式证明系统推导出代数项之间的其他等式，或者可以检验代数项对应的<span data-katex="\Sigma"></span>代数是否满足这些等式的要求。</p>
+<p><span data-katex="F=_{def}\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
 
 <p><br/></p>
 
-<p>代数项对应的<span data-katex="\Sigma"></span>代数并不是唯一的。</p>
+<p>我们来计算<span data-katex="fact~n"></span>。</p>
 
-<p>从一个代数规范推导得到的等式，在该规范对应的任何<span data-katex="\Sigma"></span>代数中都成立，就称该代数证明系统是可靠的（sound）。</p>
+<p><span data-katex="fact~n=(fix~F)~n"></span></p>
 
-<p>一个代数规范对应的任何<span data-katex="\Sigma"></span>代数中都成立的等式，在该规范中都可证，就称该代数证明系统是完备的（complete）。</p>
+<p><span data-katex="=((\lambda f:nat\rightarrow nat.~f(fix~f))~F)~n"></span></p>
 
-<p><br/></p>
+<p><span data-katex="=(F~(fix~F))~n"></span></p>
 
-<h3><strong>等式的可满足性</strong></h3>
+<p><span data-katex="=((\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1))~(fix~F))~n"></span></p>
 
-<p>等式（equation）是一个公式<span data-katex="M=N[\Gamma ]"></span>，其中<span data-katex="M,N\in Terms^s\left ( \Sigma ,\Gamma \right )"></span>，<span data-katex="s\in S"></span>。</p>
-
-<p>如果环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，且<span data-katex="[[M]]\eta =[[N]]\eta"></span>，</p>
-
-<p>就说<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在环境<span data-katex="\eta"></span>下满足<span data-katex="M=N[\Gamma ]"></span>，记为</p>
-
-<p><span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span></p>
+<p><span data-katex="=(if~Eq?~n~0~then~1~else~n*(fix~F))~(n-1)"></span></p>
 
 <p><br/></p>
 
-<p>对于含变量的项，我们更感兴趣的是一个等式是否在变量所有可能的取值情况下都成立，</p>
+<h2><strong>无法终止的运算</strong></h2>
 
-<p>而不是在一个特别的环境中成立。</p>
+<p>由于递归允许我们写出没有范式的表达式，</p>
 
-<p>如果对于满足<span data-katex="\Gamma"></span>的任何一个环境<span data-katex="\eta"></span>都有<span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span>，</p>
-
-<p>就可以说，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>满足等式<span data-katex="M=N[\Gamma ]"></span>，记为</p>
-
-<p><span data-katex="\mathscr{A} \models M=N[\Gamma]"></span></p>
+<p>所以我们相应的必须给这样的表达式赋予含义。</p>
 
 <p><br/></p>
 
-<p>可满足性也可以扩展到等式集和代数集，</p>
+<p>例如，</p>
 
-<p>设<span data-katex="E"></span>是一个等式集，如果<span data-katex="\mathscr{A}"></span>满足所有等式，就说<span data-katex="\mathscr{A}"></span>满足<span data-katex="E"></span>。</p>
+<p><span data-katex="letrec~f:nat\rightarrow nat=\lambda x:nat.~f(x+1)~in~f~3"></span></p>
 
-<p>类似的，若<span data-katex="C"></span>是一类<span data-katex="\Sigma"></span>代数，且对每个<span data-katex="\mathscr{A}\in C"></span>都有<span data-katex="\mathscr{A}\models M=N[\Gamma ]"></span>，则<span data-katex="C\models M=N[\Gamma ]"></span></p>
+<p>尽管该表达式的类型是<span data-katex="nat"></span>，但是我们无法把它简化为一个数值。</p>
 
-<p><br/></p>
-
-<p>若任何一个<span data-katex="\Sigma"></span>代数都满足代数项之间的等式<span data-katex="M=N[\Gamma ]"></span>，就说该等式是永真的（valid），写为<span data-katex="\models M=N[\Gamma ]"></span>。</p>
-
-<p>例如，<span data-katex="x=x[x:s]"></span>就是永真的。</p>
+<p>所以该表达式的含义就不是一个自然数了。</p>
 
 <p><br/></p>
 
-<p>若<span data-katex="\mathscr{A}"></span>满足签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>上的所有等式，就说<span data-katex="\Sigma"></span>代数是平凡的（trivial）。</p>
+<p>一方面，认为该表达式的类型是<span data-katex="nat"></span>是合理的，它是类型规则的推导结论。</p>
+
+<p>另一方面，如果我们说该表达式的值是『未定义的』，</p>
+
+<p>那么<span data-katex="f"></span>的语义就变成了部分函数（partial function）。</p>
 
 <p><br/></p>
 
-<h3><strong>语义蕴含（semantic implication）</strong></h3>
+<p>我们不如给自然数集附加一个值<span data-katex="\perp _{nat}"></span>，</p>
 
-<p>若满足等式集<span data-katex="E"></span>的每一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>都满足等式<span data-katex="M=N[\Gamma ]"></span>，</p>
+<p>用来表示类型<span data-katex="nat"></span>上无法终止的运算（nonterminating computation）。</p>
 
-<p>则称签名<span data-katex="\Sigma"></span>上的等式集<span data-katex="E"></span>在语义上蕴含等式<span data-katex="M=N[\Gamma ]"></span>，记为，</p>
-
-<p><span data-katex="E\models M=N[\Gamma ]"></span></p>
+<p>这给了我们一个把部分函数看成完全函数（total function）的方法。</p>
 
 <p><br/></p>
 
-<p>有了签名<span data-katex="\Sigma"></span>和等式集<span data-katex="E"></span>，我们定义代数规范<span data-katex="Spec=\left \langle \Sigma,E \right \rangle"></span>，</p>
+<h2><strong>CPO</strong></h2>
 
-<p>则满足代数规范的，在所有<span data-katex="\Sigma"></span>代数中都成立的等式，就是那些由等式集<span data-katex="E"></span>语义蕴含的等式。</p>
+<p><strong>偏序</strong></p>
 
-<p><br/></p>
+<p>一个偏序（partial order）<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个集合<span data-katex="D"></span>，以及集合上的一个关系（relation）<span data-katex="\leqslant"></span>，</p>
 
-<h3><strong>语义理论</strong></h3>
-
-<p>如果等式集<span data-katex="E"></span>在语义蕴含下封闭（closed），则把它称为一个理论（theory）。</p>
-
-<p>更准确的说，如果<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语义理论（semantic theory）。</p>
-
-<p>一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的理论<span data-katex="Th(\mathscr{A})"></span>，就是在<span data-katex="\mathscr{A}"></span>中成立的所有等式的集合。</p>
-
-<p>可以证明一个<span data-katex="\Sigma"></span>代数的理论是一个语义理论。</p>
+<p>这个关系具有自反性，反对称性，和传递性。</p>
 
 <p><br/></p>
 
-<h3><strong>形式证明</strong></h3>
+<p>若对于任意<span data-katex="d\in D"></span>有<span data-katex="d\leqslant d"></span>，则称<span data-katex="\leqslant"></span>具有自反性（reflexive）。</p>
 
-<p>一个证明系统的推导规则如下，<span data-katex="\frac{antecedent}{consequent}"></span>，</p>
+<p>若<span data-katex="a\leqslant b"></span>且<span data-katex="b\leqslant a"></span>有<span data-katex="a=b"></span>，则称<span data-katex="\leqslant"></span>具有反对称性（anti-symmetric）。</p>
 
-<p>使得从前件（antecedent）的任何实例出发，通过使用该证明系统的公理和其他规则，</p>
-
-<p>可以推导出后件（consequent）的相应实例。</p>
+<p>若<span data-katex="a\leqslant b"></span>且<span data-katex="b\leqslant c"></span>有<span data-katex="a\leqslant c"></span>，则称<span data-katex="\leqslant"></span>具有传递性（transitive）。</p>
 
 <p><br/></p>
 
-<p>例如：<span data-katex="\frac{M=N[\Gamma ],N=P[\Gamma ],P=Q[\Gamma ]}{M=Q[\Gamma ]}"></span></p>
+<p><strong>上界与最小上界</strong></p>
+
+<p>如果<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个偏序，则子集<span data-katex="S\subseteq D"></span>的上界（upper bound），</p>
+
+<p>是<span data-katex="D"></span>中的一个元素<span data-katex="x\in D"></span>，使得对于任意的<span data-katex="y\in S"></span>有<span data-katex="y\leqslant x"></span>。</p>
+
+<p>最小上界（least upper bound）是那个<span data-katex="\leqslant"></span>任何其它上界的元素。</p>
 
 <p><br/></p>
 
-<p>若证明了一条规则是可推导的，则能够把它当做系统的一条证明规则来使用。</p>
+<p><strong>有向集</strong></p>
 
-<p>如果某条规则没有前件，则称它是证明系统的一条公理（axiom）。</p>
+<p>如果<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个偏序，称子集<span data-katex="S\subseteq D"></span>是有向的（directed），</p>
 
-<p><br/></p>
+<p>如果<span data-katex="S"></span>的每一个有限子集<span data-katex="S_0\subseteq S"></span>在<span data-katex="S"></span>中都有上界。</p>
 
-<p>我们说等式<span data-katex="M=N[\Gamma ]"></span>是可证的（provable），记为<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
-
-<p>如果从<span data-katex="E"></span>到<span data-katex="M=N[\Gamma ]"></span>存在一个等式序列，</p>
-
-<p>使得每个等式或者是公理（axiom），或者是<span data-katex="E"></span>中的等式，</p>
-
-<p>或者是从序列中之前出现的一个或多个等式经一步推导得到的结果。</p>
+<p>有向集（directed set）的一个性质是，所有有向集都非空。</p>
 
 <p><br/></p>
 
-<h3><strong>语法理论</strong></h3>
+<p><strong>完全偏序</strong></p>
 
-<p>若在可证性下等式集<span data-katex="E"></span>是封闭的，则称<span data-katex="E"></span>是一个语法理论（syntactic theory）。</p>
+<p>完全偏序（complete partial order）简称CPO，它是一个偏序<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>，</p>
 
-<p>换句话说，如果<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语法理论。</p>
+<p>且每一个有向子集<span data-katex="S\subseteq D"></span>都有最小上界，我们把这个最小上界记为<span data-katex="\bigvee S"></span>。</p>
 
-<p><span data-katex="E"></span>的语法理论<span data-katex="Th(E)"></span>就是从<span data-katex="E"></span>可证的所有等式的集合。</p>
+<p>可证，任何一个有限的偏序，都是完全偏序。</p>
 
 <p><br/></p>
 
-<h3><strong>等式证明系统的性质</strong></h3>
+<p>一个不是CPO的例子是自然数集，自然数集<span data-katex="N"></span>本身是有向的，但没有最小上界。</p>
 
-<p>可靠性（soundness）：若<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="E\models M=N[\Gamma ]"></span></p>
+<p>如果我们加入一个比其他自然数都大的元素<span data-katex="\infty"></span>，我们就得到了一个CPO。</p>
 
-<p>演绎完备性（deductive completeness）：若<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
+<p><br/></p>
 
-<hr />
+<h2><strong>CPO的提升</strong></h2>
+
+<p><strong>有奇点的CPO</strong></p>
+
+<p>如果<span data-katex="\mathscr{D}=\left \langle D,\leqslant  \right \rangle"></span>是一个有最小元（least element）的偏序，</p>
+
+<p>则称为<span data-katex="\mathscr{D}"></span>是有奇点（pointed）的，我们用<span data-katex="\perp _D"></span>表示<span data-katex="D"></span>的最小元。</p>
+
+<p><br/></p>
+
+<p><strong>提升集</strong></p>
+
+<p>对于任意的集合<span data-katex="A"></span>，我们构建一个CPO，<span data-katex="A_\perp =\left \langle A\cup \{\perp \} ,\leqslant  \right \rangle"></span>，</p>
+
+<p>其中，<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=\perp"></span>或<span data-katex="x=y"></span>。</p>
+
+<p>我们称<span data-katex="A_\perp"></span>为<span data-katex="A"></span>的提升集（lifted set）。</p>
+
+<p><br/></p>
+
+<p>用这个方法，我们可以提升任何一个CPO，<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D  \right \rangle"></span>，</p>
+
+<p>得到<span data-katex="\mathscr{D}_\perp =\left \langle D\cup \{\perp \},\leqslant \right \rangle"></span>，</p>
+
+<p>其中<span data-katex="\perp"></span>与<span data-katex="D"></span>中的任何元素都不等，新的序关系<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=\perp"></span>或<span data-katex="x\leqslant _D y"></span>。</p>
+
+<p><br/></p>
+
+<p>可证，如果<span data-katex="\mathscr{D}"></span>是一个CPO，则<span data-katex="\mathscr{D}_\perp"></span>是一个有奇点的CPO。</p>
+
+<p><br/></p>
+
+<h2><strong>连续函数</strong></h2>
+
+<p><strong>单调函数</strong></p>
+
+<p>设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>和<span data-katex="\mathscr{E}=\left \langle E,\leqslant _E \right \rangle"></span>是CPO，</p>
+
+<p><span data-katex="f:D\rightarrow E"></span>是集合<span data-katex="D"></span>到<span data-katex="E"></span>的一个函数，我们说<span data-katex="f"></span>是单调的（monotonic），</p>
+
+<p>如果<span data-katex="a\leqslant b"></span>就有<span data-katex="f(a)\leqslant f(b)"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>连续函数</strong></p>
+
+<p>一个单调函数<span data-katex="f"></span>是连续的（continuous），如果对于任意有向子集<span data-katex="S\subseteq D"></span>，有<span data-katex="f(\bigvee S)=\bigvee f(S)"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>提升函数</strong></p>
+
+<p>我们定义<span data-katex="f:D\rightarrow E"></span>对应的提升函数（lifted function）为<span data-katex="f_\perp =(D\cup\{ \perp \})\rightarrow (E\cup\{ \perp \})"></span>。</p>
+
+<p>其中，如果<span data-katex="a\in D"></span>，则<span data-katex="f_\perp (a)=f(a)"></span>，否则<span data-katex="f_\perp (a)=\perp"></span>。</p>
+
+<p><br/></p>
+
+<p><strong>函数集构成CPO</strong></p>
+
+<p>假设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>和<span data-katex="\mathscr{E}=\left \langle E,\leqslant _E \right \rangle"></span>是CPO，</p>
+
+<p>对于连续函数<span data-katex="f,g:D\rightarrow E"></span>，我们称<span data-katex="f\leqslant_{D\rightarrow E} g"></span>，如果对于任意<span data-katex="d\in D"></span>，都有<span data-katex="f(d)\leqslant _E g(d)"></span>。</p>
+
+<p>于是，所有这些连续函数构成了一个CPO，记为<span data-katex="\mathscr{D}\rightarrow \mathscr{E}=\left \langle D\rightarrow E,\leqslant _{D\rightarrow E} \right \rangle"></span>。</p>
+
+<p><br/></p>
+
+<h2><strong>最小不动点</strong></h2>
+
+<p>我们称<span data-katex="a"></span>是<span data-katex="f"></span>的最小不动点（least fixed point），</p>
+
+<p>如果<span data-katex="a=f(a)"></span>且对于任意的<span data-katex="b=f(b)"></span>，我们有<span data-katex="a\leqslant b"></span>。</p>
+
+<p><br/></p>
+
+<p>如果<span data-katex="\mathscr{D}"></span>是一个有奇点的CPO，且<span data-katex="f:D\rightarrow D"></span>是连续的，则<span data-katex="f"></span>有最小不动点，</p>
+
+<p><span data-katex="fix_D f=\bigvee \{ f^n(\perp )~|~n\geqslant 0 \}"></span>，</p>
+
+<p>且<span data-katex="fix_D"></span>是连续的。</p>
+
+<p><br/></p>
+
+<p>例如，设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>是有奇点的CPO，则恒等函数<span data-katex="id:D\rightarrow D"></span>的最小不动点是<span data-katex="\perp _D"></span>。</p>
+
+<p><span data-katex="fix_D~id=\bigvee \{ id^n(\perp _D)~|~n\geqslant 0 \}=\bigvee \{ \perp _D \}=\perp _D"></span></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>《<a href="https://book.douban.com/subject/1761918/">Foundations for Programming Languages</a>》是一本好书，</p>
+<p>初等数学中，某些函数是没有不动点的。</p>
 
-<p>可是中文的翻译《<a href="https://book.douban.com/subject/1944729/">程序设计语言理论基础</a>》简直是晦涩难懂，</p>
+<p>那么在什么情况下，形如<span data-katex="f:\sigma =M"></span>的表达式有解呢？</p>
 
-<p>把sort翻译为『类子』，把signature翻译为『基调』，容易让人误以为和同调代数有什么联系。</p>
+<p>定义了递归之后，对类型化lambda演算的模型产生了什么影响呢？</p>
 
-<p>原版书拿到后，看起来轻松了不少，这里只是对第三章部分内容做了个小结，以便卸下包袱轻装上阵。</p>
+<p><br/></p>
+
+<p>这是一直以来我心中是一个问题。</p>
+
+<p>诚然，类型化lambda演算有不同的解释方式，但以上域论模型通俗易懂，</p>
+
+<p>也算是告一段落吧，以后的路还长着呢。</p>
 </div>
   
   
@@ -441,7 +445,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
 <li class='category'><a href='/blog/categories/math/'>math (5)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (36)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (37)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -449,6 +453,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/09/07/the-bias-of-the-author/">为什么作者无法不持有偏见</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/09/03/weakness/">性格的弱点</a>
@@ -484,10 +492,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/07/01/the-way-to-express/">重在表达</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/06/25/complete-partial-order/">不动点算子与完全偏序</a>
       </li>
     
   </ul>
