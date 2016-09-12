@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="我在学写scheme语言的过程中，发现有3个难点， lexical scope，continuation和macro。 这些概念其实是和编程语言无关的， 认识它们对于我们理解计算的本质有很大的帮助。 continuation实现了类似goto语句的功能， &hellip;">
+  <meta name="description" content="本文借助阶乘函数，在javascript中推导了Y combinator。 原始的阶乘函数定义 var fact=function(n){ &nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*fact(n-1); }; console.assert(fact(5)== &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/01/18/continuation/">Continuation入门指南</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/01/27/y-combinator-in-javascript/">Y Combinator in Javascript</a></h1>
     
     
       <p class="meta">
@@ -83,276 +83,212 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-01-18T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-01-27T00:00:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>我在学写scheme语言的过程中，发现有3个难点，</p>
-
-<p>lexical scope，continuation和macro。</p>
-
-<p>这些概念其实是和编程语言无关的，</p>
-
-<p>认识它们对于我们理解计算的本质有很大的帮助。</p>
+  <div class="entry-content"><p>本文借助阶乘函数，在javascript中推导了Y combinator。</p>
 
 <p><br/></p>
 
-<p>continuation实现了类似goto语句的功能，</p>
+<h2><strong>原始的阶乘函数定义</strong></h2>
 
-<p>只是goto可以跳转到任何的代码标签处开始执行，</p>
+<p>var fact=function(n){</p>
 
-<p>而continuation只能跳转到执行过的工作状态。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*fact(n-1);</p>
 
-<p>好的编程实践指导我们尽量不要使用goto，因为它会影响求值环境，</p>
-
-<p>然而，continuation不会，它更函数式，没有副作用（side effect）。</p>
+<p>};</p>
 
 <p><br/></p>
 
-<p>本文只是简单的介绍一下continuation的概念，</p>
-
-<p>以及它在scheme语言中的应用（call/cc），</p>
-
-<p>本文并不追求严谨，只能算是抛砖引玉吧。</p>
+<p>console.assert(fact(5)==120);</p>
 
 <p><br/></p>
 
-<p>《The Scheme Programming Language 4th》第3.3节介绍了continuation的概念，</p>
+<h2><strong>把递归函数作为参数传递</strong></h2>
 
-<p>为了说明call/cc，作者举了一个小例子。</p>
+<p>var highFact=function(f){</p>
 
-<p>(let ([x (call/cc (lambda (k) k))])</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
 
-<p>&nbsp;&nbsp;(x (lambda (ignore) &ldquo;hi&rdquo;)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*f(f)(n-1);</p>
 
-<p>=> &ldquo;hi&rdquo;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
 
-<p>如果你像我一样，感到很困惑，那么希望本文对你有所帮助。</p>
-
-<p><br/></p>
-
-<h3><strong>continuation的概念</strong></h3>
-
-<p>scheme是一门简洁的语言，</p>
-
-<p>scheme程序不包含语句，它只由表达式构成，</p>
-
-<p>程序的执行，就是表达式的求值过程。</p>
+<p>};</p>
 
 <p><br/></p>
 
-<p>另外，除了关心表达式的值是怎样得出来的，</p>
-
-<p>我们还会关心这个值是怎样被使用的。</p>
+<p>console.assert(highFact(highFact)(5)==120);</p>
 
 <p><br/></p>
 
-<p>我们可以把整个程序看做一个链条，而每个表达式看做各个环节，</p>
+<h2><strong>借助辅助函数消除对自身的调用</strong></h2>
 
-<p>执行程序相当于沿着链条从头走到尾。</p>
+<p>var fact=(function(g){</p>
 
-<p>如果把注意力集中到当前求值的表达式上。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
 
-<p>我们会发现，前面的环节中，所有表达式都已经求值了。</p>
+<p>}(function(f){</p>
 
-<p>后面的链条，正期待当前表达式的值，继续执行。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
 
-<p><br/></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return n==0?1:n*f(f)(n-1);</p>
 
-<p>这样的话，我们就可以把“期待当前表达式的值，继续执行”，看做一个单参函数了。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
 
-<p>这个单参函数就相当于continuation。</p>
-
-<p>于是，我们在每个局部都拥有了全局观点，</p>
-
-<p>整个程序相当于，求值当前表达式，然后再调用这个表达式的continuation。</p>
+<p>}));</p>
 
 <p><br/></p>
 
-<p>continuation相当于一个单参函数，并且在scheme中它是first class的，</p>
-
-<p>因此，和其他函数一样，它不仅可以被调用，还可以作为其他函数的参数。</p>
-
-<p>和函数不同的是，调用它不会返回一个值，</p>
-
-<p>而会跳转到这个表达式刚刚求值完的工作状态，</p>
-
-<p>以调用值作为表达式的值，程序继续向下执行。</p>
+<p>console.assert(fact(5)==120);</p>
 
 <p><br/></p>
 
-<p>不同表达式的continuation是不同的，代表了不同的工作状态。</p>
+<h2><strong>构造递归原型</strong></h2>
 
-<p>甚至，同一个表达式在程序执行过程的不同时期，continuation也是不同的。</p>
+<p>var fact=(function(g){</p>
 
-<p><br/></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
 
-<h3><strong>call/cc</strong></h3>
+<p>}(function(f){</p>
 
-<p>scheme语言内置提供了call/cc函数，用来获得当前的continuation。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
 
-<p>例如：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var factProto=function(h){</p>
 
-<p>(+ 0 (call/cc</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(x){</p>
 
-<p>&nbsp;&nbsp;(lambda (k)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return x==0?1:x*h(x-1);</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(k 1))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
 
-<p>=> 1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
 
-<p>call/cc获得的是如下expression的continuation。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return factProto(f(f))(n);</p>
 
-<p>(+ 0 expression)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
 
-<p><br/></p>
-
-<p>由于expression的后续程序，期望使用expression的值进行加0操作。</p>
-
-<p>所以，这个continuation就相当于</p>
-
-<p>(lambda (x)</p>
-
-<p>&nbsp;&nbsp;(+ 0 x))</p>
+<p>}));</p>
 
 <p><br/></p>
 
-<p>下面我们对call/cc的求值规则进行详细说明，</p>
-
-<p>（1）call/cc接受一个单参函数fn作为参数</p>
-
-<p>（2）求值call/cc表达式，会使用当前的continuation调用fn，即(fn continuation)。因此，fn的形参k就是call/cc表达式的continuation</p>
-
-<p>（3）另外，我们规定，fn的continuation就是call/cc的continuation</p>
+<p>console.assert(fact(5)==120);</p>
 
 <p><br/></p>
 
-<p>再看一下上面的例子。</p>
+<h2><strong>将递归原型提取出来</strong></h2>
 
-<p>(+ 0 (call/cc</p>
+<p>var factProto=function(h){</p>
 
-<p>&nbsp;&nbsp;(lambda (k)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(x){</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(k 1))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return x==0?1:x*h(x-1);</p>
 
-<p>call/cc的参数fn，是一个函数(lambda (k) (k 1))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
 
-<p>为了求值(+ 0 (call/cc fn))我们会先求值(call/cc fn)，</p>
-
-<p>根据call/cc的求值规则（2），fn的形参k，就是call/cc的continuation。</p>
-
-<p>而根据函数的求值规则，(fn continuation)相当于(k 1)，即，使用1作为参数调用call/cc的continuation，</p>
-
-<p>根据continuation的定义，程序会跳转到call/cc的工作状态，使用1作为call/cc表达式的值，继续向下执行。</p>
-
-<p>即，(+ 0 1) => 1</p>
+<p>};</p>
 
 <p><br/></p>
 
-<p>第二种情况，如果continuation没有被调用呢？</p>
+<p>var fact=(function(g){</p>
 
-<p>(+ 0 (call/cc</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
 
-<p>&nbsp;&nbsp;(lambda (k)</p>
+<p>}(function(f){</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;2)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
 
-<p>根据call/cc的求值规则（2），(fn continuation) => 2</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return factProto(f(f))(n);</p>
 
-<p>根据call/cc的求值规则（3），fn的continuation就是call/cc的continuation，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
 
-<p>再根据continuation的定义，程序会跳转到call/cc的工作状态，使用2作为call/cc表达式的值，继续向下执行。</p>
-
-<p>即，(+ 0 2) => 2</p>
+<p>}));</p>
 
 <p><br/></p>
 
-<p>最后，我们来分析本文开头那个例子，</p>
-
-<p>(let ([x (call/cc (lambda (k) k))])</p>
-
-<p>&nbsp;&nbsp;(x (lambda (ignore) &ldquo;hi&rdquo;)))</p>
-
-<p>=> &ldquo;hi&rdquo;</p>
-
-<p>call/cc的continuation是什么呢？</p>
-
-<p>(lambda (z)</p>
-
-<p>&nbsp;&nbsp;(let [(x z)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(x (lambda (ignore) &ldquo;hi&rdquo;))))</p>
-
-<p>即，首先将call/cc表达式的值z绑定到x，然后使用(lambda (ignore) &ldquo;hi&rdquo;)作为参数调用x。</p>
-
-<p>请注意区分，continuation中的let表达式和原来要求值的let表达式是不同的。</p>
+<p>console.assert(fact(5)==120);</p>
 
 <p><br/></p>
 
-<p>整个程序是这样执行的，</p>
+<h2><strong>把递归原型变成形参</strong></h2>
 
-<p>为了求值let表达式，我们要先将call/cc表达式的值绑定到x，然后用(lambda (ignore) &ldquo;hi&rdquo;)作为参数调用x，</p>
+<p>var fact=(function(k){</p>
 
-<p>这使得我们必须先求值call/cc。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return (function(g){</p>
 
-<p>根据上面分析的call/cc求值过程，k就是continuation，而(fn continuation)就是((lambda (k) k) continuation) &lt;=> k，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
 
-<p>k是fn的返回值，并没有被调用，属于上面的第二种情况，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}(function(f){</p>
 
-<p>程序会跳转到call/cc的工作状态，使用k作为call/cc表达式的值，继续向下执行。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
 
-<p>于是，程序变成了，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return k(f(f))(n);</p>
 
-<p>(let ([x k])</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
 
-<p>&nbsp;&nbsp;(x (lambda (ignore) &ldquo;hi&rdquo;)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}));</p>
 
-<p>然后，x会绑定为k，用(lambda (ignore) &ldquo;hi&rdquo;)作为参数调用x。</p>
-
-<p><br/></p>
-
-<p>可是，x是continuation，用(lambda (ignore) &ldquo;hi&rdquo;)作为参数调用x，</p>
-
-<p>类似上面的第一种情况，根据continuation的定义，程序会跳转到call/cc的工作状态，使用(lambda (ignore) &ldquo;hi&rdquo;)作为call/cc表达式的值，继续向下执行。</p>
-
-<p>(let ([x (lambda (ignore) &ldquo;hi&rdquo;)])</p>
-
-<p>&nbsp;&nbsp;(x (lambda (ignore) &ldquo;hi&rdquo;)))</p>
-
-<p>=> &ldquo;hi&rdquo;</p>
-
-<p>所以，整个let表达式的值就是"hi"了。</p>
+<p>}(factProto));</p>
 
 <p><br/></p>
 
-<h3><strong>总结</strong></h3>
-
-<p>以上的例子比较简单，执行过程中只求值了一次call/cc，即continuation就一个。</p>
-
-<p>如果执行过程中，多次调用了call/cc，会产生多个continuation，这时continuation的跳转就需要进行区分了。</p>
-
-<p>例如，下面著名的“阴阳谜题”，你可以试试看，</p>
-
-<p>(let* [(yin ((lambda (foo) (newline) foo)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (bar) bar))))</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(yang ((lambda (foo) (write-char #/*) foo)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (bar) bar))))]</p>
-
-<p>&nbsp;&nbsp;(yin yang))</p>
+<p>console.assert(fact(5)==120);</p>
 
 <p><br/></p>
 
-<p>起初，我以为continuation是scheme的语言特性，但其实很多语言都实现了它，只不过可能不是first class的，</p>
+<h2><strong>得到Y combinator</strong></h2>
 
-<p>因此，这是和语言无关的概念，值得我们深入学习。</p>
+<p>var yCombinator=function(k){</p>
 
-<p>例如，C语言的setjmp和longjmp就能实现类似的跳转功能。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return (function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(n){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return k(f(f))(n);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}));</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>console.assert(yCombinator(factProto)(5)==120);</p>
+
+<p><br/></p>
+
+<h2><strong>扩展为多参数形式</strong></h2>
+
+<p>var yCombinator=function(k){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return (function(g){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return g(g);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}(function(f){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return function(){</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return k(f(f)).apply(null,arguments);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}));</p>
+
+<p>};</p>
+
+<p><br/></p>
+
+<p>console.assert(yCombinator(factProto)(5)==120);</p>
 </div>
   
   
@@ -375,7 +311,7 @@ var _hmt = _hmt || [];
     <section>
 	<h1>Categories</h1>
 	<ul id="categories">
-		<li class='category'><a href='/blog/categories/design/'>design (13)</a></li>
+		<li class='category'><a href='/blog/categories/design/'>design (14)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
@@ -388,6 +324,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/09/12/the%20secrets-of-decision-making/">决策的秘密</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/09/07/the-bias-of-the-author/">为什么作者无法不持有偏见</a>
@@ -423,10 +363,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/07/01/the-way-to-express/">重在表达</a>
       </li>
     
   </ul>
