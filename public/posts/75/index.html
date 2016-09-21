@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="作用域 作用域，是自由变量的查找规则。 如果变量具有词法作用域， 语言实现会相继到更外层的词法范围内查找绑定值。 如果变量具有动态作用域， 语言实现会回溯到更早的嵌套调用中查找绑定值。 词法作用域 (define test-lexical-binding &nbsp;&nbsp;&nbsp;& &hellip;">
+  <meta name="description" content="代码写的好，主要原因并不在于文字的输入水平。 而在于编写者在进行什么样的思考。 软件就是这样一点一滴逐步构建起来的。 微小的改变累积起来，它的影响就是可观的。 是编写者无时无刻进行的选择，造就了软件的演变。 编写者的作用，经常被低估。 好的设计，才能产生好的产品。 而不同于其他行业的是， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/19/closures-are-objects/">闭包就是对象</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/03/20/design/">设计的连续性</a></h1>
     
     
       <p class="meta">
@@ -83,390 +83,352 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-03-19T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-03-20T00:00:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2><strong>作用域</strong></h2>
+  <div class="entry-content"><p>代码写的好，主要原因并不在于文字的输入水平。</p>
 
-<p>作用域，是自由变量的<strong>查找</strong>规则。</p>
+<p>而在于编写者在进行什么样的思考。</p>
 
-<p><br/></p>
-
-<p>如果变量具有词法作用域，</p>
-
-<p>语言实现会相继到<strong>更外层的词法范围</strong>内查找绑定值。</p>
+<p>软件就是这样一点一滴逐步构建起来的。</p>
 
 <p><br/></p>
 
-<p>如果变量具有动态作用域，</p>
+<p>微小的改变累积起来，它的影响就是可观的。</p>
 
-<p>语言实现会回溯到<strong>更早的嵌套调用</strong>中查找绑定值。</p>
+<p>是编写者无时无刻进行的选择，造就了软件的演变。</p>
 
-<p><br/></p>
-
-<h2><strong>词法作用域</strong></h2>
-
-<p>(define test-lexical-binding</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>let</strong> [(x 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (+ x y))))</p>
+<p>编写者的作用，经常被低估。</p>
 
 <p><br/></p>
 
-<p>(test-lexical-binding 2)</p>
+<p>好的设计，才能产生好的产品。</p>
 
-<p>=> 3</p>
+<p>而不同于其他行业的是，</p>
 
-<p><br/></p>
-
-<p>其中，<strong>let</strong>表达式返回了一个函数，作为test-lexical-binding的值。</p>
-
-<p>根据函数调用规则，我们知道，</p>
-
-<p>(test-lexical-binding 2)</p>
-
-<p>-> ((lambda (y) (+ x y)) 2)</p>
-
-<p>-> (+ x 2)</p>
-
-<p>变量x是自由变量。</p>
+<p>软件设计在设计之初是无法具体化的。</p>
 
 <p><br/></p>
 
-<p>如果x具有词法作用域，</p>
+<p>只有设计者才能实现他的设计。</p>
 
-<p>则x的值，就是x所在函数，在定义时，外层作用域的值。</p>
+<p>在遇到意外情况时，</p>
 
-<p>(lambda (y) (+ x y))的外层是let表达式，</p>
-
-<p>(let [(x 1)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&hellip;)</p>
+<p>也只有设计者知道怎样调整，才能保持一致。</p>
 
 <p><br/></p>
 
-<p>因此，x => 1，(+ x 2) => 3</p>
+<p>像行云和流水一样，</p>
+
+<p>优美的设计体现在它遇到困难时的应变选择上，</p>
+
+<p>而不体现在于它现阶段的实现方式上。</p>
 
 <p><br/></p>
 
-<h2><strong>动态作用域</strong></h2>
+<p>好的设计，也会遇到问题，</p>
 
-<p>(define parameter-object</p>
+<p>但只有设计者才知道，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>make-parameter</strong> 1))</p>
-
-<p><br/></p>
-
-<p>(define (test-dynamic-binding)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(parameter-object))</p>
+<p>怎样用准备好的方式来解决它。</p>
 
 <p><br/></p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<h2><strong>设计和实现</strong></h2>
 
-<p>(<strong>parameterize</strong> [(parameter-object 2)]</p>
+<p>水平较高的程序员，通常会被安排做设计。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(test-dynamic-binding))</p>
-
-<p>=> 2</p>
+<p>而普通程序员，则要求去实现他们的设计。</p>
 
 <p><br/></p>
 
-<p>(test-dynamic-binding)</p>
-
-<p>=> 1</p>
+<p>这其实是非常危险的。</p>
 
 <p><br/></p>
 
-<p>其中，(make-parameter 1)返回一个包含值1的参数对象<strong>#&lt;parameter object&gt;</strong>。</p>
+<p>一方面，</p>
 
-<p>参数对象是一个<strong>无参函数</strong>，调用后会得到它当前状态的包含值。</p>
+<p>设计的好坏，主要在面对具体问题时的选择上，</p>
 
-<p>(parameter-object)的值取决于参数对象所处的动态作用域环境。</p>
+<p>而这些选择，其实是由普通程序员来完成的。</p>
 
-<p><br/></p>
-
-<p>我们可以使用parameterize来更改参数对象的包含值，</p>
-
-<p>并且parameterize表达式内部会在新的动态作用域环境中求值。</p>
+<p>设计者的水平虽高，却没有起到任何作用。</p>
 
 <p><br/></p>
 
-<p>(<strong>parameterize</strong> [(parameter-object 2)]</p>
+<p>另一方面，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(test-dynamic-binding))</p>
+<p>设计者，如果不设身处地的遭遇问题，</p>
 
-<p>-> (test-dynamic-binding)</p>
+<p>就不能提供合适的解决方案。</p>
 
-<p>-> (parameter-object)</p>
-
-<p><br/></p>
-
-<p>(parameter-object)要查找调用过程中最近的绑定值，</p>
-
-<p>为了查找调用过程中最近的绑定，我们沿着刚才的推导向上找，</p>
-
-<p>找到了parameterize对它的更改，值为2。</p>
-
-<p>所以，</p>
-
-<p>(<strong>parameterize</strong> [(parameter-object 2)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(test-dynamic-binding))</p>
-
-<p>=> 2</p>
+<p>因此，他的设计很可能是偏离实际的。</p>
 
 <p><br/></p>
 
-<p>而最后的直接调用(test-dynamic-binding) ，</p>
+<p>最后，</p>
 
-<p>调用过程中最近的绑定是对参数对象parameter-object的定义，</p>
+<p>高明的想法，是不容易被理解的。</p>
 
-<p>(define parameter-object</p>
+<p>普通程序员按着自己的理解，来编写代码。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>make-parameter</strong> 1))</p>
-
-<p>所以，(test-dynamic-binding) => 1</p>
+<p>会导致设计者遇到本来不会出现的问题。</p>
 
 <p><br/></p>
 
-<h2><strong>词法闭包</strong></h2>
+<p>因此，不同的人，可以负责不同的功能模块，</p>
 
-<p>如果变量具有动态作用域，我们就要一直<strong>记着函数的调用过程</strong>。</p>
-
-<p>这在复杂的程序中，是很困难又容易出错的事情。</p>
-
-<p>因此，Scheme中的变量，默认具有词法作用域。</p>
+<p>但是，对问题的思考和解决，必须由一个人来完成。</p>
 
 <p><br/></p>
 
-<p>词法作用域，保存了变量定义时的<strong>环境</strong>。</p>
+<p>“我是这么想的，你来做吧。”</p>
 
-<p>起到了<strong>封闭和隔离</strong>的作用。</p>
+<p>在软件行业中，通常是行不通的。</p>
+
+<p><br/></p>
+
+<p>高水平的程序员，可以被安排去做复杂的模块。</p>
+
+<p>普通程序员，可以去做简单的模块。</p>
+
+<p>让他们互相隔离，尽量少的产生影响。</p>
+
+<p><br/></p>
+
+<h2><strong>模块的自我保护——输入保护</strong></h2>
+
+<p>软件提供的功能是分层次的，</p>
+
+<p>虽然整个软件是交由目标用户来使用的，</p>
+
+<p>但是，也可能软件的一部分是另一个部分的用户。</p>
+
+<p><br/></p>
+
+<p>处理好层次之间的依赖性，</p>
+
+<p>才能保证软件稳定。</p>
+
+<p><br/></p>
+
+<p>作为功能的使用者来说，</p>
+
+<p>最担心的就是，我们所依赖的模块发生变化了。</p>
+
+<p><br/></p>
+
+<p>这种变化其实是不可避免的。</p>
+
+<p>因为，不断演变，是软件的本质特征，</p>
+
+<p>就算不变坏，变好也是变化的一种。</p>
+
+<p><br/></p>
+
+<p>那该怎么办呢？</p>
+
+<p><br/></p>
+
+<p>事实上，我们需要知道自己想要什么，</p>
+
+<p>并且，用可替换的方式实现自己的想要的功能。</p>
+
+<p><br/></p>
+
+<p>也就是说，我们并不依赖任何模块，</p>
+
+<p>只依赖于我们的需要。</p>
+
+<p>至于如何实现我们的需要，是灵活的，经得起变化的。</p>
 
 <p><br/></p>
 
 <p>例如：</p>
 
-<p>(define-values (get-value set-value!)</p>
+<p>在web应用中，我们需要一个对话框。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>let</strong> [(field 0)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(values (<strong>lambda</strong> () field)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lambda</strong> (new-value) (set! field new-value)))))</p>
+<p>并不关心它是如何实现的。</p>
 
 <p><br/></p>
 
-<p>(get-value)</p>
+<p>为了避免产生依赖，</p>
 
-<p>=> 0</p>
+<p>我们首先封装自己的需要。</p>
 
-<p><br/></p>
-
-<p>(set-value! 1)</p>
+<p>我们需要一个dialog，它可以弹出消息，dialog.pop(message)。</p>
 
 <p><br/></p>
 
-<p>(get-value)</p>
+<p>然后，我们可以寻找任何已有的组件来实现需要。</p>
 
-<p>=> 1</p>
+<p>var dialog={</p>
 
-<p><br/></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pop:function(message){</p>
 
-<p>其中，<strong>values</strong>表达式用来同时返回多值，而<strong>define-values</strong>用来定义多值。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//调用已有组件，实现弹出消息功能</p>
 
-<p><br/></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 
-<p>get-value和set-value!函数分别用来读取和修改词法作用域中的变量field。</p>
-
-<p>field对于get-value和set-value!来说是<strong>共享的</strong>，</p>
-
-<p>而其它任何函数都无法修改和访问它。</p>
+<p>};</p>
 
 <p><br/></p>
 
-<p>正因为有这样的封闭性，我们将函数连同定义时的环境一起，称为<strong>闭包</strong>。</p>
+<p>这样的话，如果我们用来实现功能的组件发生了变化，</p>
+
+<p>我们的需要并没有改变。</p>
+
+<p>只需要用另一个组件来实现dialog.pop(message)即可。</p>
 
 <p><br/></p>
 
-<h2><strong>对象</strong></h2>
+<p>可以这样做的原因就是，</p>
 
-<p>熟悉面向对象编程的人们，可能会清晰的认识到。</p>
+<p>需要通常是稳定的，</p>
 
-<p>对象同样也是封闭和隔离了它包含的字段。</p>
-
-<p>因此，<strong>在这种封装意义上来说，闭包就是对象</strong>。</p>
+<p>而实现方式，通常是不稳定的。</p>
 
 <p><br/></p>
 
-<p>那么面向对象语言中的其它概念，是否也有相似的对应关系呢？</p>
+<p>我们清楚的知道自己需要什么，</p>
 
-<p>有的。</p>
+<p>而别人提供的功能，我们并不清楚。</p>
+
+<p><br/></p>
+
+<h2><strong>模块的自我保护——输出保护</strong></h2>
+
+<p>好的模块，内部也是层次良好的。</p>
+
+<p>它们不是为同一目的而服务的。</p>
+
+<p>也像整个软件那样，模块的一部分为另一部分提供服务。</p>
+
+<p><br/></p>
+
+<p>整个模块是变化中的，</p>
+
+<p>其主要推动力在于，别人对模块的需求在不断变化。</p>
+
+<p><br/></p>
+
+<p>任何外在表现的更改，总是会影响到内部结构。</p>
+
+<p>但是影响的方式，却与模块内部层次的划分有关。</p>
+
+<p><br/></p>
+
+<p>怎样保证在需求变更时，影响最小呢？</p>
+
+<p><br/></p>
+
+<p>这一次，我们就不能再使用封装的办法了。</p>
+
+<p>因为我们无法封装变动的需求。</p>
+
+<p>这也是面向对象思想，经常误用的地方。</p>
+
+<p><br/></p>
+
+<p>应该避免跟随别人的需要进行编程。</p>
+
+<p>我们要有自己的功能集，</p>
+
+<p>就像一个车厂要随时准备好零件一样。</p>
+
+<p><br/></p>
+
+<p>我们打算用零件来拼装需求。</p>
+
+<p>当需求变更后，我们只需要添加或更换零件即可。</p>
+
+<p>中国的“活字印刷术”就是这种思想的应用。</p>
 
 <p><br/></p>
 
 <p>例如：</p>
 
-<p>(define create-object</p>
+<p>在web应用中，我们需要提供一个对话框。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lambda</strong> (init)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>let</strong> [(field init)]</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(values (<strong>lambda</strong> () field)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lambda</strong> (new-value) (set! field new-value))))))</p>
+<p>通常使用者会告诉我们，他们需要，dialog.pop(message)。</p>
 
 <p><br/></p>
 
-<p>(define-values (get-value set-value!)</p>
+<p>为了避免需求的变化过度影响我们，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(create-object 1))</p>
-
-<p><br/></p>
-
-<p>(get-value)</p>
-
-<p>=> 1</p>
+<p>我们将需要的功能划分为可拼装的零件。</p>
 
 <p><br/></p>
 
-<p>(set-value! 2)</p>
+<p>myDialog.create(html);</p>
+
+<p>myDialog.addClass(style);</p>
+
+<p>myDialog.bindEvent(event);</p>
+
+<p>myDialog.setMessage(message);</p>
 
 <p><br/></p>
 
-<p>(get-value)</p>
+<p>这些足够了，我们并不想创建多余的功能。</p>
 
-<p>=> 2</p>
-
-<p><br/></p>
-
-<p>我们定义了个函数create-object，它可以用来生成对象。</p>
-
-<p>相当于一个<strong>对象工厂</strong>，面向对象编程中与之对应的概念就是<strong>“类”</strong>。</p>
+<p>然后，我们拼装产品。</p>
 
 <p><br/></p>
 
-<p>例如：</p>
+<p>var dialog={</p>
 
-<p>(define-values create-object</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pop:function(message){</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>let</strong> [(static 1)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.create(html);</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lambda</strong> (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.addClass(style);</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>let</strong> [(field x)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.bindEvent(event);</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(values (<strong>lambda</strong> () (+ static field))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.setMessage(message);</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lambda</strong> (new-value) (set! field new-value)))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 
-<p><br/></p>
-
-<p>最外层的let表达式返回了一个函数create-object，</p>
-
-<p>我们来使用create-object创建两个对象。</p>
+<p>};</p>
 
 <p><br/></p>
 
-<p>(define-values (get-value1 set-value1!)</p>
+<p>这样的话，当需求发生变化时，myDialog不会整体受到影响，</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(create-object 2))</p>
-
-<p><br/></p>
-
-<p>(get-value1)</p>
-
-<p>=> 3</p>
-
-<p><br/></p>
-
-<p>(set-value1 3)</p>
-
-<p><br/></p>
-
-<p>(get-value1)</p>
-
-<p>=> 4</p>
-
-<p><br/></p>
-
-<p>(define-values (get-value2 set-value2!)</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(create-object 3))</p>
-
-<p><br/></p>
-
-<p>(get-value2)</p>
-
-<p>=> 4</p>
-
-<p><br/></p>
-
-<p>(set-value1 4)</p>
-
-<p><br/></p>
-
-<p>(get-value1)</p>
-
-<p>=> 5</p>
-
-<p><br/></p>
-
-<p>结果，最外层let表达式中的变量static，可以同时被两个对象访问。</p>
-
-<p>在面向对象编程中，与之对应的概念就是<strong>“类的静态变量”</strong>。</p>
-
-<p><br/></p>
-
-<h2><strong>思想比手段更重要</strong></h2>
-
-<p>我们看到[let返回lambda]，就是一个“对象”，</p>
-
-<p>[lambda返回[let返回lambda]]，就是一个“类”，</p>
-
-<p>[let返回[lambda返回[let返回lambda]]]，就为类增加了“静态变量”。</p>
-
-<p><br/></p>
-
-<p>这是多么简洁而有力的结论呀。</p>
-
-<p>出自——《Let Over Lambda》2008年</p>
-
-<p><br/></p>
-
-<p>我们想到，</p>
-
-<p><strong>闭包和对象，只是用不同的方法实现了封装</strong>。</p>
-
-<p>而这种封装思想，才是更值得关注的。</p>
-
-<p><br/></p>
-
-<p>编程范型之争愈演愈烈，</p>
-
-<p>函数式和面向对象之间似乎水火不容，</p>
-
-<p>我们可不要在讨论手段的同时，偏废了思想。</p>
+<p>增加或者更改部分功能以后，就可以制造新的产品了。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
+<p>对模块的保护，在输入端和输出端，是不同的。</p>
+
+<p>不进行保护，或者不区分的进行保护，</p>
+
+<p>都是危险的。</p>
+
 <p><br/></p>
 
-<p>封装，具有深刻的内涵，</p>
+<p>模块的设计和实现，必须由一个人来完成。</p>
 
-<p>它有几层含义，表达了很多与编程范型无关的思想，</p>
+<p>因为，模块是可替换的，</p>
 
-<p>“<a href="https://thzt.github.io/blog/2015/01/29/encapsulation/">封装的内涵</a>”和大家一起详细探讨了这些内容。</p>
+<p>而设计和实现是相联系的。</p>
+
+<p><br/></p>
+
+<p>本文提到的方法，只是一种解决方案。</p>
+
+<p>其中包含的思想才是重要的。</p>
+
+<p>可惜的是，它们包含的思想，也可能是过时的。</p>
+
+<p>而发现这些思想的方法，是永不落伍的。</p>
 </div>
   
   
@@ -489,7 +451,7 @@ var _hmt = _hmt || [];
     <section>
 	<h1>Categories</h1>
 	<ul id="categories">
-		<li class='category'><a href='/blog/categories/design/'>design (14)</a></li>
+		<li class='category'><a href='/blog/categories/design/'>design (15)</a></li>
 <li class='category'><a href='/blog/categories/haskell/'>haskell (6)</a></li>
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
@@ -502,6 +464,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/09/21/abstraction/">抽象与现实</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/09/12/the-secrets-of-decision-making/">决策的秘密</a>
@@ -537,10 +503,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/07/18/overcome-the-limitation/">挑战极限</a>
       </li>
     
   </ul>
