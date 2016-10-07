@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="在对待数学问题时， 我们知道， 要在相同的前提下考虑问题。 否则， 所得到的结论之间没有可比性。 但是，在处理其他问题的时候， 我们容易忽略这一点， 烦恼和迷惑就随之而来了。 换位思考 某位高管收了多少贿赂，你骂他贪官， 某个明星聚众吸毒，你骂他可笑， 某某富二代超速飙车，你骂他废柴。 诚然， &hellip;">
+  <meta name="description" content="场景： 两级弹框，第一级是bootstrap的modal，里面有一个jqgrid，第二级是jqgrid添加记录的弹框 第二级弹框中的textarea在IE9中不能换行，而在chrome中可以 Day 1 bootstrap的modal和jqgrid全部在实验室环境中搭建起来，比较麻烦， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/10/12/different-premise/">不同的前提</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/10/15/web-front-end-bug/">愉快的三天</a></h1>
     
     
       <p class="meta">
@@ -83,230 +83,180 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-10-12T00:00:00+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-10-15T00:00:00+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>在对待数学问题时，</p>
+  <div class="entry-content"><p><strong>场景：</strong></p>
 
-<p>我们知道，</p>
+<p>两级弹框，第一级是bootstrap的modal，里面有一个jqgrid，第二级是jqgrid添加记录的弹框</p>
 
-<p>要在相同的前提下考虑问题。</p>
-
-<p><br/></p>
-
-<p>否则，</p>
-
-<p>所得到的结论之间没有可比性。</p>
+<p>第二级弹框中的textarea在IE9中不能换行，而在chrome中可以</p>
 
 <p><br/></p>
 
-<p>但是，在处理其他问题的时候，</p>
+<h2><strong>Day 1</strong></h2>
 
-<p>我们容易忽略这一点，</p>
+<p>bootstrap的modal和jqgrid全部在实验室环境中搭建起来，比较麻烦，先考虑别的办法</p>
 
-<p>烦恼和迷惑就随之而来了。</p>
+<p>因为IE9调试工具太弱了，看看firefox有没有同样的问题</p>
 
-<p><br/></p>
+<p>发现firefox中的问题是textarea不能聚焦</p>
 
-<h2><strong>换位思考</strong></h2>
+<p>以前遇到过不能获得焦点的问题，跟tabindex有关，把tabindex删掉，没作用</p>
 
-<p>某位高管收了多少贿赂，你骂他贪官，</p>
+<p>发现一级弹框中加了元素级别的textarea样式，删掉，没作用</p>
 
-<p>某个明星聚众吸毒，你骂他可笑，</p>
+<p>因为这个框是jqgrid弹出来的，查看jqgrid源码，有没有劫持回车事件，没有</p>
 
-<p>某某富二代超速飙车，你骂他废柴。</p>
+<p>firefox中逐个删除页面元素，发现可以让textarea获得焦点，可能是元素的问题</p>
 
-<p><br/></p>
+<p>把一级对话框内中的jqgrid删掉，再用控制台命令添加纯html二级弹框，还是有问题，说明不是jqgrid的问题</p>
 
-<p>诚然，</p>
+<p>考虑到删除元素会改变子元素的样式，可能是样式问题</p>
 
-<p>这是不对的。</p>
+<p>firefox中删除所有样式，发现可以获得焦点了，是样式问题</p>
 
-<p><br/></p>
+<p>逐步缩小范围，发现是一级弹框有一个行内样式所致，删掉后，可以获得焦点了</p>
 
-<p><strong>但是，换作我们，</strong></p>
+<p>但是在IE9中仍然不可换行</p>
 
-<p><strong>在他们的位置，也不一定能洁身自好。</strong></p>
-
-<p><br/></p>
-
-<p>因为，普通人并没有遭遇同等级别的诱惑。</p>
+<p><strong>解决了firefox不能聚焦的问题</strong></p>
 
 <p><br/></p>
 
-<p>每个人都有爱好，</p>
+<h2><strong>Day 2</strong></h2>
 
-<p>你喜好什么，别人就利用什么，</p>
+<p>现在Chrome和Firefox都没问题了，只好硬着头皮用IE9调试了，鉴于昨天的结论，先从样式角度考虑</p>
 
-<p>要想全身而退，非常困难。</p>
+<p>发现一级弹框去掉所有样式，就可以换行了</p>
 
-<p><br/></p>
+<p>但是聚焦不到特定的某一条样式上，怀疑是脏乱的样式加成结果导致CSS解析器出错了</p>
 
-<p>某位领导在台上吹嘘拍马，你说他忽悠，</p>
+<p>发现在错误的样式下，只要隐藏对话框也是可换行的，可能是浏览器计算位置时出错了</p>
 
-<p>某个产品经理的需求几经调整，你说他不专业，</p>
+<p>因为bootstrap样式层叠的太多了，既然不知道哪个样式是错的，那就用正确的样式手写生成原来的样子，也是个办法</p>
 
-<p>某个程序员写的代码Bug不少，你说他技术不行。</p>
+<p>生成过程中发现其他样式都去掉，display:block;position:fixed;z-index:1030;就能复现问题，可能是浏览器计算z-index错了</p>
 
-<p><br/></p>
+<p>用IE9调试工具修改页面源码，就没问题了。因为页面重绘，重新计算了位置，也可能是事件都删掉了</p>
 
-<p>诚然，</p>
+<p>页面太乱了，清理一下，把页面杂乱的标签都删掉，尤其是script片段，没作用</p>
 
-<p>他们应该可以做的更好。</p>
+<p>把link标签都删掉，没问题了。应该是某个样式表的问题，定位到是bootstrap.css或ui.jqgrid.css的问题，这两个删一个问题就复现</p>
 
-<p><br/></p>
+<p>把一级弹框的所有父元素保留，删除页面中所有其他的html，问题还存在。但是IE9调试工具中点Refresh就没问题了，IE9调试工具不可靠</p>
 
-<p><strong>但是，换做我们，</strong></p>
+<p>不能过度依赖调试工具了，得想办法把本地服务器端运行起来，不然剩下的办法只能是实验室环境中把网页重新静态构建起来了</p>
 
-<p><strong>在他们的位置，未必能达到他们现在的水平。</strong></p>
-
-<p><br/></p>
-
-<p>因为，外行人并没有看到专业人士遇到的困难。</p>
+<p><strong>找到一个可行的解决方案，弹出第二级对话框时，把第一级隐藏掉</strong></p>
 
 <p><br/></p>
 
-<p>在专业领域有很多限制条件，</p>
+<h2><strong>Day 3</strong></h2>
 
-<p>这大大缩小了决策范围，</p>
+<p>搭建本机环境，把服务器端运行起来</p>
 
-<p>外行的建议，往往不能兼顾这些限制条件。</p>
+<p>删掉一级弹框中的所有代码，控制台命令弹出二级纯html弹框，没作用</p>
 
-<p><br/></p>
+<p>先用控制台命令弹出二级纯html弹框，再在页面点击弹出一级弹框，没作用</p>
 
-<h2><strong>严于律己</strong></h2>
+<p>控制台命令弹出二级纯html弹框，再控制台命令弹出一级纯html弹框，好了，应该是一级弹框弹出的过程中做了什么</p>
 
-<p>不要为自己找借口，</p>
+<p>发现是bootstrap的modal(&lsquo;show&rsquo;)这条语句弹出的框有问题</p>
 
-<p>前提并不是影响结果的唯一因素，</p>
+<p>因为IE9不容易跟源码，所以先不看源码，在实验室环境中，造一个一模一样modal，然后二级弹框果然出问题了，并且firefox和chrome都无法获得焦点</p>
 
-<p><strong>同样的前提，别人可以做的更好。</strong></p>
+<p>实验室环境中复现了问题，问题快解决了</p>
 
-<p><br/></p>
+<p>找到bootstrap的modal插件的官方例子，弹出二级弹框，没问题</p>
 
-<p>在电视剧《GOLD》中，</p>
+<p>对比有问题的代码，发现只要modal-body中包含&lt;button&gt;就能复现问题，定位为bootstrap的问题</p>
 
-<p>早乙女悠里在监狱中的演讲，</p>
+<p>考虑解决方案，把服务器中的所有button都换成div，还是有问题，而实验室没问题，说明IE9不太稳定</p>
 
-<p>说明了这一点。</p>
+<p>控制台删掉所有的button，结果好了</p>
 
-<p><br/></p>
+<p>看看是哪个button影响的，发现总是最后一个button影响的</p>
 
-<p>很多被害者的遗属，带着几近绝望的愤怒抗诉，</p>
+<p>用补丁方式，先造一个隐藏的button，然后载入时模拟控制台删掉它，没作用。但是控制台删掉它，就有作用，不稳定</p>
 
-<p>要求给犯罪者更重的刑罚，要求处以极刑。</p>
+<p>不看modal的源码不行了</p>
 
-<p><br/></p>
+<p>为了能调试进源码中，换Chrome跟进bootstrap源码，再到IE9看效果</p>
 
-<p>要说为什么他们的愤怒会如此强烈，</p>
+<p>先把modal函数中代码全删了，果然问题没了，然后逐个功能还原，寻找复现问题的临界点</p>
 
-<p>那是因为这些犯人中，</p>
+<p>发现enforceFocus这样的方法，是为了强制让对话框获得焦点，感觉就是这个了</p>
 
-<p>很多人都不为自己犯下的罪行感到悔恨，</p>
+<p>把这个方法注掉，没作用，看看实现，就是先解绑一个自定义聚焦事件再绑定这个自定义聚焦事件</p>
 
-<p>唯一悔恨的只是自己被逮住。</p>
+<p>在事件中写log，果然点击textarea，就触发这个自定义事件</p>
 
-<p><br/></p>
+<p>把事件中把强制获得焦点的代码删掉，好了，这应该就是问题所在了</p>
 
-<p>为了让审判对自己有利，</p>
+<p>考虑解决方案，enforceFocus只是进行解绑和绑定事件，而事件是点击textarea时触发的，那就让它只解绑不绑定</p>
 
-<p>他们会演一些令人作呕的小把戏，</p>
+<p>分析源码，enforceFocus引用是Modal.prototype中的方法，而Modal是$.fn.modal.constructor，因此是在源码外改的</p>
 
-<p>这样的小把戏，被害人家属一眼就能看穿。</p>
+<p>尽量不动源码，在源码之外加补丁</p>
 
-<p><br/></p>
+<p>chrome和firefox在实验室环境中，textarea是不能获得焦点的，但是网站中可以，原因未知</p>
 
-<p>他们说自己的成长经历，</p>
-
-<p>说自己不被父母爱护，说社会对自己不理不睬，</p>
-
-<p>尽说这些让人腻烦的狡辩和自欺的废话。</p>
+<p><strong>通过覆盖自动聚焦事件，解决了问题</strong></p>
 
 <p><br/></p>
 
-<p><strong>我告诉你们，即便是被塞进同样的环境，</strong></p>
+<h2><strong>困难</strong></h2>
 
-<p><strong>不，即便是遭遇更残酷的命运，</strong></p>
+<p>IE9的调试工具太差，Chrome调试工具虽好，但是Chrome没有问题</p>
 
-<p><strong>很多人也绝不会犯罪。</strong></p>
+<p>bootstrap大量的样式名污染的全局空间，每一个元素有大量冗余的层叠样式</p>
 
-<p><br/></p>
+<p>很多事件可能是跟样式名相关联的，删了样式名会影响事件</p>
 
-<p>绝不会去伤害，欺骗，抢劫，杀害他人，</p>
+<p>前两天本机环境没有搭建好，只能通过浏览器调试</p>
 
-<p>沾染毒品，欺诈老年人，汇款欺诈，</p>
+<p>第三方库用了什么黑魔法，不知道</p>
 
-<p>抢劫，强奸，杀人。</p>
+<p>页面太杂乱，script片段遍布各处，到处是动态加载但不清理的内容</p>
 
-<p><br/></p>
+<p>setTimeout乱用，至少二十处setTimeout，js执行过程紊乱</p>
 
-<p>会那么轻易的剥夺他人的尊严的人，</p>
+<p>两层弹框，第一级弹框中还能进行内容tab切换，影响因素比较多</p>
 
-<p>它心琴的弦早就一根不剩了，一根不剩。</p>
+<p>项目代码的问题写的太差，互相依赖，很难对功能进行隔离，不能以功能模块为单位进行测试</p>
 
-<p><br/></p>
-
-<h2><strong>宽以待人</strong></h2>
-
-<p>我们眼中，自己才是最好的，</p>
-
-<p>不幸的是，每个人都是这样认为的。</p>
+<p>二级弹框并不是一级弹框的子元素，而是body的子元素，与一级弹框的位置相距很远，从直觉上很难发现有关联</p>
 
 <p><br/></p>
 
-<p>别人是否失误，</p>
+<h2><strong>优势</strong></h2>
 
-<p>是站在自己的前提考虑的，</p>
+<p>电脑配置不错，两个显示器，16G内存装了虚拟机可以模拟IE8-11,Edge</p>
 
-<p><strong>我们能看到别人看不到的盲区。</strong></p>
+<p>没有时间压力，没人催我，没有别的项目或会议打断我</p>
 
-<p><br/></p>
+<p>服务器端同事配合，没有怀疑我的能力</p>
 
-<p>常见的一句话是，</p>
+<p>bootstrap和jqgrid源码不是太烂</p>
 
-<p>你不知道怎么不问呢？</p>
-
-<p>然而，他既然不知道，怎么会意识到要问？</p>
+<p>这不是一个偶现的bug，没次都能出现，难度降低了不少</p>
 
 <p><br/></p>
 
-<p>曹植说，</p>
+<h2><strong>误区</strong></h2>
 
-<p>东海广且深，由卑下百川；</p>
+<p>其实IE的问题并不是那么多，更多的是可见代码的问题</p>
 
-<p>五岳虽高大，不逆垢与尘。</p>
+<p>黑盒试错，不如静下心来跟进源码看看原理</p>
 
-<p><br/></p>
+<p>不能过度依赖调试工具的结论</p>
 
-<p>循循善诱，克制好自己的愤怒和嘲讽，</p>
-
-<p><strong>实力相差悬殊的对手之间，没有仇恨。</strong></p>
-
-<p><br/></p>
-
-<p>这世界很奇怪，</p>
-
-<p>高人常常以隐瞒自己的实力为乐，</p>
-
-<p>不能韬光养晦，也成不了高人。</p>
-
-<p><br/></p>
-
-<p><strong>所以，你觉得别人很差，</strong></p>
-
-<p><strong>他也有可能在逗你。</strong></p>
-
-<p><br/></p>
-
-<h2><strong>结语</strong></h2>
-
-<p>事了拂衣去，深藏身与名。</p>
-
-<p>——《李白》</p>
+<p>可以通过改动来试错的代码越多，排除假设的机会就越大</p>
 </div>
   
   
@@ -334,7 +284,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
 <li class='category'><a href='/blog/categories/math/'>math (5)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (37)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (38)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -342,6 +292,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/07/ourselves/">我们眼中的自己</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/09/21/abstraction/">抽象与现实</a>
@@ -377,10 +331,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/08/02/cohomology-group/">懵逼的上同调群</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/07/23/computability/">可计算性理论名词释义</a>
       </li>
     
   </ul>
