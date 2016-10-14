@@ -232,7 +232,7 @@ description:
 
 称函数<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>为程序<span data-katex="\mathscr{P}"></span>计算的<span data-katex="n"></span>元部分函数，
 
-如果，s_1"></span>是初始快相，其中输入变量为<span data-katex="X_1=x_1,X_2=x_2,\cdots ,X_n=x_n"></span>，输出变量为<span data-katex="Y"></span>，
+如果，<span data-katex="s_1"></span>是初始快相，其中输入变量为<span data-katex="X_1=x_1,X_2=x_2,\cdots ,X_n=x_n"></span>，输出变量为<span data-katex="Y"></span>，
 
 （1）从<span data-katex="s_1"></span>开始的计算是有穷序列<span data-katex="s_1,s_2,\cdots ,s_k"></span>，则<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>等于<span data-katex="Y"></span>在<span data-katex="s_k"></span>中的值
 
@@ -426,7 +426,7 @@ description:
 
 <br/>
 
-如果特征函数<span data-katex="\chi _B"></span>是可计算的，则成集合<span data-katex="B"></span>是递归的。
+如果特征函数<span data-katex="\chi _B"></span>是可计算的，则称集合<span data-katex="B"></span>是递归的。
 
 如果存在部分可计算函数<span data-katex="g"></span>使得<span data-katex="B=\{x\in N|g(x)\downarrow \}"></span>，
 
