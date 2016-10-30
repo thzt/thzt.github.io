@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="在漫长的编程学习过程中， 你可能会不经意间的， 知道了Y组合子。 它的内部结构极其诡异， 但是它又如此的让你魂牵梦萦， 让你茶饭不思， 为伊消得人憔悴。 这时候，数学基础是很重要的， 概念的差距，产生了无法逾越的鸿沟。 我们还是认真的从头开始吧。 lambda calculus lambda &hellip;">
+  <meta name="description" content="做工程的时候， 我们经常遇到难以解决的问题。 变化的需求， 无法界定的范围， 艰难的估算， 高昂的成本， 等等。 这是软件项目的困难， 看来与我们无关。 然而，仔细反思一下，就会发现， 这些恶魔其实是我们自己引来的。 退一步海阔天空。 需求通常是不变的 我们经常听到有人抱怨， 客户的需求又变了。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/06/10/fixed-point/">不动点组合子与匿名递归函数</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/06/15/the-real-issue/">真正的难题</a></h1>
     
     
       <p class="meta">
@@ -83,616 +83,302 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-06-10T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-06-15T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>在漫长的编程学习过程中，</p>
+  <div class="entry-content"><p>做工程的时候，</p>
 
-<p>你可能会不经意间的，</p>
+<p>我们经常遇到难以解决的问题。</p>
 
-<p>知道了<strong>Y组合子</strong>。</p>
-
-<p><br/></p>
-
-<p>它的内部结构极其诡异，</p>
-
-<p>但是它又如此的让你魂牵梦萦，</p>
-
-<p>让你茶饭不思，</p>
-
-<p>为伊消得人憔悴。</p>
-
-<p><br/></p>
-
-<p>这时候，<strong>数学基础</strong>是很重要的，</p>
-
-<p>概念的差距，产生了无法逾越的鸿沟。</p>
-
-<p>我们还是认真的从头开始吧。</p>
-
-<p><br/></p>
-
-<h2><strong>lambda calculus</strong></h2>
-
-<p>lambda calculus简称LC，</p>
-
-<p>它是一个形式系统，</p>
-
-<p>用来研究函数的组合和应用。</p>
-
-<p><br/></p>
-
-<p>LC的研究对象称为<strong>λ项</strong>，</p>
-
-<p>它是这样定义的，</p>
-
-<p>λ项 = 变量</p>
-
-<p>λ项 = λ项 λ项</p>
-
-<p>λ项 = λ变量.λ项</p>
-
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>((λy.y)(λx.(xy)))</p>
-
-<p>(x(λx.(λx.x)))</p>
-
-<p>都是合法的λ项。</p>
-
-<p><br/></p>
-
-<p>我们用小写字母x，y，z表示变量，</p>
-
-<p>大写字母M，N，P，Q表示λ项。</p>
-
-<p><br/></p>
-
-<p>λ项是左结合的，</p>
-
-<p>MNPQ ≡ (((MN)P)Q)，</p>
-
-<p><br/></p>
-
-<p>λx.PQ ≡ (λx.(PQ))</p>
-
-<p>λx尽可能多的向右结合。</p>
-
-<p><br/></p>
-
-<p>其中，“≡”表示语法上相等。</p>
-
-<p><br/></p>
-
-<h2><strong>替换规则</strong></h2>
-
-<p>[N/x]M</p>
-
-<p>表示把M中所有的x替换成N。</p>
-
-<p><br/></p>
-
-<h2><strong>α转换</strong></h2>
-
-<p>α转换说的是，</p>
-
-<p>可以将λx.PQ中的x改为其他变量y，</p>
-
-<p>只需要同时将PQ中的自由变量x改为y即可。</p>
-
-<p><br/></p>
-
-<p>α转换定义了一个等价关系，</p>
-
-<p>称为α等价。</p>
-
-<p><br/></p>
-
-<p>注：</p>
-
-<p>这里y不能和PQ中的同名变量y冲突。</p>
-
-<p><br/></p>
-
-<p>α转换相当于<strong>变量更名</strong>。</p>
-
-<p><br/></p>
-
-<h2><strong>β归约</strong></h2>
-
-<p>β归约相当于<strong>函数调用</strong>。</p>
-
-<p><br/></p>
-
-<p>(λx.M)N -> [N/x]M</p>
-
-<p>即，对(λx.M)N进行β归约，</p>
-
-<p>相当于把M中的变量x替换成N。</p>
-
-<p><br/></p>
-
-<p>一个<strong>β范式</strong>（weak normal form），</p>
-
-<p>是不能再进行β归约的λ项。</p>
-
-<p><br/></p>
-
-<h2><strong>Church–Rosser定理</strong></h2>
-
-<p>如果λ项P能β归约为M，即P->M，</p>
-
-<p>也能β归约为N，P->N，</p>
-
-<p>则存在λ项T，满足，</p>
-
-<p>M->T且N->T。</p>
-
-<p><br/></p>
-
-<p>它表示了λ项β归约的<strong>汇聚性</strong>。</p>
-
-<p>而且，λ项在α等价的条件下，至多存在一个β范式。</p>
-
-<p><br/></p>
-
-<h2><strong>Combinator logic</strong></h2>
-
-<p>Combinator logic简称为CL，</p>
-
-<p>它是一个形式系统，</p>
-
-<p>与lambda calculus具有同样的计算能力。</p>
-
-<p><br/></p>
-
-<p>CL研究了<strong>CL项</strong>的演算规则，</p>
-
-<p>一个合法的CL项，由以下条件递归定义，</p>
-
-<p>CL项 = 变量 | 基本组合子</p>
-
-<p>CL项 = CL项 CL项</p>
-
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>((S(KS))K)</p>
-
-<p>((S(Kx))((SY)K))</p>
-
-<p>都是合法的CL项。</p>
-
-<p><br/></p>
-
-<p>我们用小写字母x，y，z表示变量，</p>
-
-<p>大写字母X，Y，Z表示CL项。</p>
-
-<p><br/></p>
-
-<p>CL项是左结合的，</p>
-
-<p>UVWX ≡ (((UV)W)X)，</p>
-
-<p>其中，“≡”表示语法上相等。</p>
-
-<p><br/></p>
-
-<h2><strong>替换规则</strong></h2>
-
-<p>[U/x]Y</p>
-
-<p>表示把Y中所有的x替换成U。</p>
-
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>[(SK)/x](yxx) ≡ y(SK)(SK)</p>
-
-<p><br/></p>
-
-<h2><strong>弱归约（Weak reduction）</strong></h2>
-
-<p>以下形式的CL项可以进行弱归约，</p>
-
-<p>IX -> X</p>
-
-<p>KXY -> X</p>
-
-<p>SXYZ -> XZ(YZ)</p>
-
 <p><br/></p>
 
-<p>如果进行这些变换可以使U变成U'，</p>
+<p>变化的需求，</p>
 
-<p>就称CL项U可以弱归约为U'。</p>
+<p>无法界定的范围，</p>
 
-<p><br/></p>
-
-<p>一个<strong>弱范式</strong>（weak normal form），</p>
-
-<p>是不能再进行弱归约的CL项。</p>
-
-<p><br/></p>
-
-<h2><strong>Church–Rosser定理</strong></h2>
-
-<p>与lambda calculus一样，</p>
-
-<p>对于CL，也有类似的定理，</p>
-
-<p><br/></p>
-
-<p>如果CL项U可以弱归约为X，即U->X，</p>
-
-<p>也可以弱归约为Y，即U->Y，</p>
-
-<p>则存在CL项T，满足，</p>
-
-<p>X->T且Y->T。</p>
-
-<p><br/></p>
-
-<p>这表示了CL项弱归约的<strong>汇聚性</strong>。</p>
-
-<p>而且，CL项至多存在一个弱范式。</p>
-
-<p><br/></p>
-
-<h2><strong>CL项的抽象</strong></h2>
-
-<p>为了和lambda演算进行对比，</p>
-
-<p>我们定义CL项的抽象，</p>
-
-<p>(a) [x].M ≡ KM，如果x不是M中的自由变量</p>
-
-<p>(b) [x].x ≡ I</p>
-
-<p>&copy; [x].Ux ≡ U，如果x不是U中的自由变量</p>
-
-<p>(d) [x].UV ≡ S([x].U)([x].V)，如果不满足(a)或&copy;</p>
-
-<p><br/></p>
-
-<p>可以证明，</p>
-
-<p>([x].M)N可以弱归约为[N/x]M。</p>
-
-<p><br/></p>
-
-<p>这里，我们只是用原始的CL项来定义了CL项的抽象，</p>
-
-<p>[x]并不是CL语法的一部分，</p>
-
-<p>而对于lambda calculus中的λ项λx.xy，</p>
-
-<p>λx是λ项的一部分。</p>
-
-<p><br/></p>
-
-<h2><strong>LC和CL的相似性</strong></h2>
-
-<p>经过以上学习，</p>
-
-<p>我们发现，</p>
-
-<p>LC中的<strong>α等价</strong>，对应着CL中的<strong>语法等价</strong>，</p>
-
-<p>LC中的<strong>β归约</strong>，对应着CL中的<strong>弱归约</strong>，</p>
-
-<p>LC中的<strong>λx</strong>，对应着CL中的<strong>[x]</strong>。</p>
-
-<p><br/></p>
-
-<p>我们就可以统一的，</p>
-
-<p>用LC中的符号来说明问题了。</p>
-
-<p><br/></p>
-
-<h2><strong>组合子</strong></h2>
-
-<p>LC中的<strong>组合子</strong>，</p>
-
-<p>表示一个闭项（closed pure term），</p>
-
-<p>它不是一个原子，也不包含自由变量。</p>
-
-<p><br/></p>
-
-<p>例如：</p>
-
-<p>λxyz.x(yz)</p>
-
-<p>λxy.x</p>
-
-<p><br/></p>
-
-<p>CL中的<strong>组合子</strong>，</p>
-
-<p>只有3个，I，K，S。</p>
-
-<p><br/></p>
-
-<p>在LC中，可以这样表示，</p>
+<p>艰难的估算，</p>
 
-<p>I ≡ λx.x</p>
+<p>高昂的成本，</p>
 
-<p>K ≡ λxy.x</p>
+<p>等等。</p>
 
-<p>S ≡ λxyz.xz(yz)</p>
-
-<p><br/></p>
-
-<h2><strong>不动点定理</strong></h2>
-
-<p>在LC和CL中，</p>
-
-<p><strong>对于任意x，存在它的不动点Yx，满足，</strong></p>
-
-<p><strong>Yx -> x(Yx)</strong></p>
-
-<p><br/></p>
-
-<p>其中，</p>
-
-<p>“->”表示LC中的β归约，</p>
-
-<p>或CL中的弱归约。</p>
-
-<p><br/></p>
-
-<p><strong>证明：</strong></p>
-
-<p>取Y ≡ UU</p>
-
-<p>U ≡ λux.x(uux)</p>
-
-<p><br/></p>
-
-<p>Yx -></p>
-
-<p>UUx -></p>
-
-<p>(λux.x(uux))Ux -></p>
-
-<p>(λx.x(UUx))x -></p>
-
-<p>x(UUx) -></p>
-
-<p>x(Yx)</p>
-
-<p><br/></p>
-
-<h2><strong>不动点组合子</strong></h2>
-
-<p>不动点组合子并不是唯一的，</p>
-
-<p><br/></p>
-
-<p>存在不止一个Y，</p>
-
-<p>使得对于任意x，Yx -> x(Yx)。</p>
-
-<p><br/></p>
-
-<p>例如：</p>
-
-<p><strong>Turing组合子</strong></p>
-
-<p>Y ≡ UU，U ≡ λux.x(uux)</p>
-
 <p><br/></p>
 
-<p><strong>Curry-Ros组合子</strong></p>
+<p>这是软件项目的困难，</p>
 
-<p>Y ≡ λx.VV，V ≡ λy.x(yy)</p>
+<p>看来与我们无关。</p>
 
 <p><br/></p>
 
-<h2><strong>不动点定理的用法</strong></h2>
+<p>然而，仔细反思一下，就会发现，</p>
 
-<p>根据不动点定理，</p>
+<p><strong>这些恶魔其实是我们自己引来的</strong>。</p>
 
-<p>我们能得到任意LC项或CL项的不动点，</p>
-
-<p>所以，<strong>不动点方程总是有解的</strong>。</p>
-
 <p><br/></p>
-
-<p>例如：</p>
-
-<p>给定方程，x = M，M中可能包含x，</p>
 
-<p>我们可以将它转换成不动点方程，</p>
+<p>退一步海阔天空。</p>
 
-<p>x = (λx.M)x，</p>
-
-<p>解为：x = Y(λx.M) = Y(λt.[t/x]M)</p>
-
-<p>它<strong>消除了M中的x</strong>。</p>
-
 <p><br/></p>
 
-<p>例如：M ≡ yxz</p>
+<h2><strong>需求通常是不变的</strong></h2>
 
-<p>x = Y(λx.M) = Y(λx.yxz) = Y(λt.ytz)，</p>
+<p>我们经常听到有人抱怨，</p>
 
-<p>等式右边就不包含自由变量x了。</p>
+<p>客户的需求<strong>又变了</strong>。</p>
 
 <p><br/></p>
 
-<p>所以，形如x = M的方程，</p>
+<p>然而，是否问过自己，</p>
 
-<p>我们可以使用Y来消除M中的x。</p>
+<p>需求<strong>真的</strong>变了吗？</p>
 
 <p><br/></p>
 
-<p>这也表明可以不依赖于副作用，</p>
+<p>客户今天想要这个，明天想要那个，</p>
 
-<p>用Y来定义<strong>匿名递归函数</strong>。</p>
+<p>归根结底，他们只是需要一个<strong>能解决问题的软件</strong>。</p>
 
 <p><br/></p>
-
-<h2><strong>用Y组合子解递归方程</strong></h2>
 
-<p>Haskell中的Turing Y组合子定义如下：</p>
+<p>不能解决问题的软件毫无价值。</p>
 
-<p><strong>import Unsafe.Coerce</strong></p>
+<p>正如，不能吃的东西无法充饥一样。</p>
 
-<p>u = \u x -> x $ u <strong>(unsafeCoerce</strong> u<strong>)</strong> x</p>
-
-<p>y = u u</p>
-
 <p><br/></p>
 
-<p>斐波那契函数fib的递归定义，</p>
+<p>找到他们的核心需要，</p>
 
-<p>fib = \n -> if n&lt;2 then 1 else (n*) $ fib $ n-1</p>
+<p>才能有的放矢。</p>
 
 <p><br/></p>
-
-<p>为了<strong>消除等式右边fib</strong>，</p>
-
-<p>我们把它转换成不动点方程，</p>
-
-<p>fib = (\f -> \n -> if n&lt;2 then 1 else (n*) $ f $ n-1) fib</p>
 
-<p>用Y组合子求解，得到了一个匿名的递归函数，</p>
+<p>以性价比最高的<strong>方式</strong>，</p>
 
-<p>fib = y $ <strong>\f -></strong> \n -> if n&lt;2 then 1 else (n*) $ <strong>f</strong> $ n-1</p>
+<p>填饱他们的“肚子”。</p>
 
 <p><br/></p>
 
-<p>验证一下运行结果，</p>
+<h2><strong>软件是解决问题的辅助工具</strong></h2>
 
-<p>fib 5</p>
+<p>每一次和客户沟通，</p>
 
-<p>=> 120</p>
+<p>他们想要的东西都不一样。</p>
 
-<p><br/></p>
-
-<h2><strong>不动点存在性的疑问</strong></h2>
-
-<p>方程解的性质是由方程决定的，</p>
-
-<p><strong>解法无法改变解的性质</strong>。</p>
+<p>于是，我们就<strong>认为</strong>这是需求变更了。</p>
 
 <p><br/></p>
 
-<p>例如：</p>
+<p>可是，我们可曾想过，</p>
 
-<p>a = undefined = (\a -> undefined) a</p>
+<p>客户说的是<strong>准确的需求</strong>吗？</p>
 
-<p>解为：a = y $ \a -> undefined <strong>= undefined</strong></p>
+<p>或者只是对解决方案的<strong>描述</strong>。</p>
 
 <p><br/></p>
 
-<p>add = \n -> add n+1</p>
+<p>对于一个确定的想法，</p>
 
-<p>这个一个无限递归函数。</p>
+<p>人们尚且有不同的阐述方式。</p>
 
-<p>转换为不动点方程的形式，</p>
+<p>更何况，软件是帮助客户构建一个<strong>新的方案</strong>。</p>
 
-<p>add = (\f -> \n -> f n+1) add</p>
-
-<p>解为：add = y $ (\f -> \n -> f n+1)</p>
-
-<p>这个add<strong>仍然是</strong>一个无限递归函数。</p>
-
 <p><br/></p>
-
-<h2><strong>初等函数的不动点</strong></h2>
 
-<p>另外，对于初等函数的不动点方程，</p>
+<p>所以，</p>
 
-<p>x = f(x)</p>
+<p>我们要协助客户，共同努力，</p>
 
-<p>程序中直接写成x = f(x)会<strong>导致无限递归</strong>，</p>
+<p>软件只是帮助我们解决问题的工具。</p>
 
-<p>因为初等函数方程给出来的是<strong>约束</strong>，</p>
-
-<p>而不是<strong>计算过程</strong>。</p>
-
 <p><br/></p>
 
-<p>例如：</p>
+<h2><strong>预算决定了产品</strong></h2>
 
-<p>求解f(x) = 2x的不动点，</p>
+<p>如果无偿获取，</p>
 
-<p><strong>直接写x = 2*x是一个无限的递归</strong>，并不能解出x = 0来，</p>
+<p>那么当然是越多越好。</p>
 
-<p>因此，x = 2*x实际表示的是一个无限递归的计算过程。</p>
-
 <p><br/></p>
-
-<p>然而，<strong>仍然</strong>会存在满足这个方程的解。</p>
 
-<p>不动点方程形式如下，</p>
+<p>生活会有目标，</p>
 
-<p>x = (\x -> 2*x) x</p>
+<p>正是因为我们要考虑成本。</p>
 
-<p>解为：x = y $ \x -> 2*x</p>
-
-<p>确实可以使等式成立，</p>
-
-<p>但它<strong>同样表示</strong>的是一个无限递归的计算过程。</p>
-
 <p><br/></p>
-
-<p>f(x) = 2x的不动点方程，对应的“计算过程”<strong>应该是</strong>，</p>
-
-<p>x = 0</p>
 
-<p>不动点方程的形式如下，</p>
+<p>在同样的时间内，</p>
 
-<p>x = (\x -> 0) x</p>
+<p>功能点的数量和质量是不能同时满足的，</p>
 
-<p>解为：x = y $ \x -> 0 <strong>= 0</strong></p>
+<p>天下没有免费的午餐。</p>
 
 <p><br/></p>
 
 <p>因此，</p>
 
-<p>初等函数的不动点，</p>
+<p>讨论之前如果不弄清楚代价，</p>
 
-<p>与LC或CL的不动点是两个不同的场景，</p>
+<p>需求范围就只能无限的扩大。</p>
 
-<p>初等函数方程是一种<strong>约束规则</strong>，</p>
+<p><br/></p>
 
-<p>LC或CL的等式是一种<strong>推导规则</strong>。</p>
+<p>不要怪别人需要太多，</p>
+
+<p>只怪让别人以为我们代价很小。</p>
+
+<p><br/></p>
+
+<h2><strong>乘积悖论与交付时间</strong></h2>
+
+<p>一个人在10个月能完成的事情，</p>
+
+<p>10个人未必在一个月就能完成。</p>
+
+<p><br/></p>
+
+<p>人们经常拿建筑来类比软件，</p>
+
+<p>是进入误区的一种原因，</p>
+
+<p>因为<strong>盖房子很难体现出问题组成部分之间的依赖性</strong>。</p>
+
+<p><br/></p>
+
+<p>一个人在10个月能砌好的围墙，</p>
+
+<p>25920000(=10*30*24*3600)个人一秒钟也做不完。</p>
+
+<p><br/></p>
+
+<p>因为，</p>
+
+<p>砌墙问题无法拆分成25920000个<strong>独立的组成部分</strong>。</p>
+
+<p><br/></p>
+
+<p>能否切分成独立的部分，</p>
+
+<p>让多个人<strong>并行工作</strong>，</p>
+
+<p>这是问题本身的<strong>内在</strong>属性。</p>
+
+<p><br/></p>
+
+<p>不是所有的事情，</p>
+
+<p>都可以让人们协同完成。</p>
+
+<p><br/></p>
+
+<p>因此，到达一个界限之后，再多的人，</p>
+
+<p>也无法将软件交付时间缩短。</p>
+
+<p><br/></p>
+
+<h2><strong>软件开发的主要内容</strong></h2>
+
+<p>我们经常要求评估，</p>
+
+<p>一项工作需要多久可以做完。</p>
+
+<p>这是没有办法计算的。</p>
+
+<p><br/></p>
+
+<p>因为，只有<strong>重复性质</strong>的工作，</p>
+
+<p>才可以准确评估。</p>
+
+<p><br/></p>
+
+<p>而软件必然是全新的，</p>
+
+<p>软件的本质就是处理重复。</p>
+
+<p><br/></p>
+
+<p>怎样把实际问题，<strong>转换</strong>为一个已经解决的问题，</p>
+
+<p>这是程序员日常的工作内容，</p>
+
+<p>这个<strong>转换时间</strong>，就是<strong>开发时间</strong>。</p>
+
+<p><br/></p>
+
+<p>已经处理过的问题，</p>
+
+<p>好的程序员已经把它做成了<strong>自动化方案</strong>，</p>
+
+<p><strong>占比最大的还是那些未知的问题</strong>。</p>
+
+<p><br/></p>
+
+<p>对未知的事物进行评估，</p>
+
+<p>这只能算是<strong>预言</strong>。</p>
+
+<p><br/></p>
+
+<h2><strong>不要浪费资源</strong></h2>
+
+<p>事实上，<strong>产品的功能不是全部</strong>，</p>
+
+<p>它可能只占了很小一部分。</p>
+
+<p><br/></p>
+
+<p>软件更多的是，</p>
+
+<p>沟通，文档，学习，</p>
+
+<p>工具，项目管理，培训，</p>
+
+<p>售后支持，维护，推广，等等。</p>
+
+<p><br/></p>
+
+<p>做好它们，也是需要时间的，</p>
+
+<p>甚至，有些问题<strong>同样需要编程解决</strong>。</p>
+
+<p><br/></p>
+
+<p>如果只让程序员做产品功能，</p>
+
+<p>这其实是很大的一种浪费。</p>
+
+<p><br/></p>
+
+<p>应该用他们的能力，</p>
+
+<p>为整个团队<strong>加速</strong>。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>不动点问题，</p>
+<p>软件工程的问题，</p>
 
-<p>一直是我的心结。</p>
-
-<p>只可惜功力不够，总是想不明白。</p>
+<p>更多是因为我们自己的错误产生的。</p>
 
 <p><br/></p>
 
-<p>本文只是对最近学习的总结，</p>
+<p>项目的参与者，</p>
 
-<p>肯定有<strong>不严谨</strong>的地方，</p>
+<p>只有<strong>加深对软件的理解</strong>，</p>
 
-<p>只当做以后继续学习的起点吧。</p>
+<p>才能解决问题。</p>
 
 <p><br/></p>
 
-<p>参考：《Lambda-Calculus and Combinators》</p>
+<p>客户是需要培训的，</p>
+
+<p>那么何不先<strong>培训自己</strong>。</p>
 </div>
   
   
@@ -720,7 +406,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
 <li class='category'><a href='/blog/categories/math/'>math (5)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (38)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (39)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -728,6 +414,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/30/plan-for-the-future/">截断未来</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/10/07/ourselves/">我们眼中的自己</a>
@@ -763,10 +453,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/08/05/professional-programmer/">专业程序猿的修炼指南</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/08/02/cohomology-group/">懵逼的上同调群</a>
       </li>
     
   </ul>
