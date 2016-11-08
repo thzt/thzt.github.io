@@ -9,7 +9,7 @@
   <meta name="author" content="thzt">
 
   
-  <meta name="description" content="我经常问自己， 独特的想法是怎样产生的。 也经常问自己， 爱思考的人是怎样培养出来的。 错综复杂的因素非常多， 造就了形形色色的人。 而有些人爱思考， 有创造性， 思维活跃。 这是为什么？ 他们和别人有什么不同？ 其实， 他们只是获得了自省能力而已。 元编程 程序语言是对计算过程的一种描述性编码 &hellip;">
+  <meta name="description" content="在漫长的编程学习过程中， 你可能会不经意间的， 知道了Y组合子。 它的内部结构极其诡异， 但是它又如此的让你魂牵梦萦， 让你茶饭不思， 为伊消得人憔悴。 这时候，数学基础是很重要的， 概念的差距，产生了无法逾越的鸿沟。 我们还是认真的从头开始吧。 lambda calculus lambda &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@ var _hmt = _hmt || [];
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/06/05/intrapersonal-intelligence/">自省能力</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/06/10/fixed-point/">不动点组合子与匿名递归函数</a></h1>
     
     
       <p class="meta">
@@ -83,320 +83,616 @@ var _hmt = _hmt || [];
 
 
 
-<time class='entry-date' datetime='2015-06-05T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-06-10T00:00:00+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>我经常问自己，</p>
+  <div class="entry-content"><p>在漫长的编程学习过程中，</p>
 
-<p>独特的想法是怎样产生的。</p>
+<p>你可能会不经意间的，</p>
 
-<p><br/></p>
-
-<p>也经常问自己，</p>
-
-<p>爱思考的人是怎样培养出来的。</p>
+<p>知道了<strong>Y组合子</strong>。</p>
 
 <p><br/></p>
 
-<p>错综复杂的因素非常多，</p>
+<p>它的内部结构极其诡异，</p>
 
-<p>造就了形形色色的人。</p>
+<p>但是它又如此的让你魂牵梦萦，</p>
 
-<p><br/></p>
+<p>让你茶饭不思，</p>
 
-<p>而<strong>有些人</strong>爱思考，</p>
-
-<p>有创造性，</p>
-
-<p>思维活跃。</p>
+<p>为伊消得人憔悴。</p>
 
 <p><br/></p>
 
-<p>这是为什么？</p>
+<p>这时候，<strong>数学基础</strong>是很重要的，</p>
 
-<p>他们和别人有什么不同？</p>
+<p>概念的差距，产生了无法逾越的鸿沟。</p>
 
-<p><br/></p>
-
-<p>其实，</p>
-
-<p>他们只是获得了<strong>自省能力</strong>而已。</p>
+<p>我们还是认真的从头开始吧。</p>
 
 <p><br/></p>
 
-<h2><strong>元编程</strong></h2>
+<h2><strong>lambda calculus</strong></h2>
 
-<p>程序语言是对计算过程的一种描述性编码，</p>
+<p>lambda calculus简称LC，</p>
 
-<p>因此，具体编程，</p>
+<p>它是一个形式系统，</p>
 
-<p>就是用代码来描述一个问题的解法。</p>
-
-<p><br/></p>
-
-<p>简称，用<strong>代码</strong>解决一个问题。</p>
+<p>用来研究函数的组合和应用。</p>
 
 <p><br/></p>
 
-<p>元编程，可以站在更高的角度，</p>
+<p>LC的研究对象称为<strong>λ项</strong>，</p>
 
-<p>用代码解决<strong>代码的问题</strong>。</p>
+<p>它是这样定义的，</p>
 
-<p><br/></p>
+<p>λ项 = 变量</p>
 
-<p>元编程大大拓宽了我们的思路，</p>
+<p>λ项 = λ项 λ项</p>
 
-<p>使程序员获得了自省能力。</p>
-
-<p><br/></p>
-
-<p>究其根本，</p>
-
-<p>编程语言是一种符号化的<strong>计算模型</strong>，</p>
-
-<p>代码<strong>指称</strong>了进行计算的实体。</p>
+<p>λ项 = λ变量.λ项</p>
 
 <p><br/></p>
 
-<p>程序员像念着咒语操作精灵的巫师一样，</p>
+<p>例如：</p>
 
-<p>居然还可以念着咒语操作咒语本身。</p>
+<p>((λy.y)(λx.(xy)))</p>
 
-<p><br/></p>
+<p>(x(λx.(λx.x)))</p>
 
-<h2><strong>在自己之上</strong></h2>
-
-<p>指导别人总是更容易，</p>
-
-<p>给别人的建议，</p>
-
-<p>自己却很难执行。</p>
+<p>都是合法的λ项。</p>
 
 <p><br/></p>
 
-<p>很多时候，我们需要，</p>
+<p>我们用小写字母x，y，z表示变量，</p>
 
-<p><strong>站在别人的角度观察自己</strong>。</p>
-
-<p><br/></p>
-
-<p>然而，这通常是不可能的。</p>
-
-<p>我们永远不能指着一个人说，</p>
-
-<p>这就是自己。</p>
+<p>大写字母M，N，P，Q表示λ项。</p>
 
 <p><br/></p>
 
-<p>就没有办法了吗？</p>
+<p>λ项是左结合的，</p>
+
+<p>MNPQ ≡ (((MN)P)Q)，</p>
 
 <p><br/></p>
 
-<p>其实，解决这个问题的方法，</p>
+<p>λx.PQ ≡ (λx.(PQ))</p>
 
-<p>还是元编程教给我们的。</p>
-
-<p><br/></p>
-
-<p>那就是，</p>
-
-<p><strong>编码自己的思想</strong>。</p>
-
-<p><strong>记录自己的体会</strong>。</p>
+<p>λx尽可能多的向右结合。</p>
 
 <p><br/></p>
 
-<p>这些记录提供了丰富的原材料，</p>
-
-<p>今后都可以<strong>指着记录说</strong>，</p>
-
-<p>这就是当时的自己了。</p>
+<p>其中，“≡”表示语法上相等。</p>
 
 <p><br/></p>
 
-<h2><strong>从哪里开始记录</strong></h2>
+<h2><strong>替换规则</strong></h2>
 
-<p>万事开头难，</p>
+<p>[N/x]M</p>
 
-<p>因为似乎没有什么可以记录的东西。</p>
-
-<p><br/></p>
-
-<p>这是因为思想处于<strong>饱和状态</strong>，</p>
-
-<p>没有让人耳目一新的体会。</p>
+<p>表示把M中所有的x替换成N。</p>
 
 <p><br/></p>
 
-<p>那么，就<strong>从阅读开始</strong>吧。</p>
+<h2><strong>α转换</strong></h2>
+
+<p>α转换说的是，</p>
+
+<p>可以将λx.PQ中的x改为其他变量y，</p>
+
+<p>只需要同时将PQ中的自由变量x改为y即可。</p>
 
 <p><br/></p>
 
-<p>翻开一本感兴趣的书，</p>
+<p>α转换定义了一个等价关系，</p>
 
-<p>捕捉任何你<strong>没有想过的想法</strong>，</p>
-
-<p>哪怕只是一段名言警句。</p>
+<p>称为α等价。</p>
 
 <p><br/></p>
 
-<p>不要怕麻烦，</p>
+<p>注：</p>
 
-<p>用自己的理解记录下来，</p>
-
-<p>也不要去抄书，</p>
-
-<p><strong>用自己的语言来表达</strong>。</p>
+<p>这里y不能和PQ中的同名变量y冲突。</p>
 
 <p><br/></p>
 
-<p>这样的话，</p>
-
-<p>至少今天有了几条新的体会，</p>
-
-<p>并且已经记录下来了。</p>
+<p>α转换相当于<strong>变量更名</strong>。</p>
 
 <p><br/></p>
 
-<p>以后的每一天，</p>
+<h2><strong>β归约</strong></h2>
 
-<p>都要强迫自己至少记录一条。</p>
-
-<p><br/></p>
-
-<p>然而，我们<strong>神奇</strong>的发现，</p>
-
-<p>从第二天开始，事情似乎就已经不一样了。</p>
+<p>β归约相当于<strong>函数调用</strong>。</p>
 
 <p><br/></p>
 
-<p>我们既可以从<strong>新的书籍</strong>捕捉想法，</p>
+<p>(λx.M)N -> [N/x]M</p>
 
-<p>还可以从<strong>以前的记录</strong>中发现想法。</p>
+<p>即，对(λx.M)N进行β归约，</p>
 
-<p><br/></p>
-
-<p>历史记录越多，</p>
-
-<p>我们的材料就越丰富，</p>
-
-<p>指数级的增长。</p>
+<p>相当于把M中的变量x替换成N。</p>
 
 <p><br/></p>
 
-<h2><strong>版本控制</strong></h2>
+<p>一个<strong>β范式</strong>（weak normal form），</p>
 
-<p>程序员应该有程序员的办法。</p>
-
-<p><br/></p>
-
-<p>面对日益增多的心得记录，</p>
-
-<p>没有<strong>版本控制</strong>怎么行。</p>
+<p>是不能再进行β归约的λ项。</p>
 
 <p><br/></p>
 
-<p>写博客是一个好主意，</p>
+<h2><strong>Church–Rosser定理</strong></h2>
 
-<p>私有的个人日志，也不错。</p>
+<p>如果λ项P能β归约为M，即P->M，</p>
 
-<p><br/></p>
+<p>也能β归约为N，P->N，</p>
 
-<p>总之，</p>
+<p>则存在λ项T，满足，</p>
 
-<p>要控制记录的版本，</p>
-
-<p>因为元编程告诉我们可以<strong>研究记录本身</strong>。</p>
+<p>M->T且N->T。</p>
 
 <p><br/></p>
 
-<p>我们可以统计，</p>
+<p>它表示了λ项β归约的<strong>汇聚性</strong>。</p>
 
-<p>这一周写了多少记录，</p>
-
-<p>这个月偏向于哪个领域。</p>
+<p>而且，λ项在α等价的条件下，至多存在一个β范式。</p>
 
 <p><br/></p>
 
-<p>它可以指导我们，</p>
+<h2><strong>Combinator logic</strong></h2>
 
-<p>修正自己的路线，</p>
+<p>Combinator logic简称为CL，</p>
 
-<p>弥补自己的缺点。</p>
+<p>它是一个形式系统，</p>
 
-<p><br/></p>
-
-<p>并且，还可以<strong>主动改进记录本身</strong>，</p>
-
-<p>我有必要再制作一个摘录记录吗？</p>
-
-<p>可以的，专门摘录别人的观点，方便以后反思。</p>
+<p>与lambda calculus具有同样的计算能力。</p>
 
 <p><br/></p>
 
-<p>没有什么不可以。</p>
+<p>CL研究了<strong>CL项</strong>的演算规则，</p>
+
+<p>一个合法的CL项，由以下条件递归定义，</p>
+
+<p>CL项 = 变量 | 基本组合子</p>
+
+<p>CL项 = CL项 CL项</p>
 
 <p><br/></p>
 
-<p>拥有强大的<strong>自省能力</strong>，</p>
+<p>例如：</p>
 
-<p>真好。</p>
+<p>((S(KS))K)</p>
+
+<p>((S(Kx))((SY)K))</p>
+
+<p>都是合法的CL项。</p>
+
+<p><br/></p>
+
+<p>我们用小写字母x，y，z表示变量，</p>
+
+<p>大写字母X，Y，Z表示CL项。</p>
+
+<p><br/></p>
+
+<p>CL项是左结合的，</p>
+
+<p>UVWX ≡ (((UV)W)X)，</p>
+
+<p>其中，“≡”表示语法上相等。</p>
+
+<p><br/></p>
+
+<h2><strong>替换规则</strong></h2>
+
+<p>[U/x]Y</p>
+
+<p>表示把Y中所有的x替换成U。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>[(SK)/x](yxx) ≡ y(SK)(SK)</p>
+
+<p><br/></p>
+
+<h2><strong>弱归约（Weak reduction）</strong></h2>
+
+<p>以下形式的CL项可以进行弱归约，</p>
+
+<p>IX -> X</p>
+
+<p>KXY -> X</p>
+
+<p>SXYZ -> XZ(YZ)</p>
+
+<p><br/></p>
+
+<p>如果进行这些变换可以使U变成U'，</p>
+
+<p>就称CL项U可以弱归约为U'。</p>
+
+<p><br/></p>
+
+<p>一个<strong>弱范式</strong>（weak normal form），</p>
+
+<p>是不能再进行弱归约的CL项。</p>
+
+<p><br/></p>
+
+<h2><strong>Church–Rosser定理</strong></h2>
+
+<p>与lambda calculus一样，</p>
+
+<p>对于CL，也有类似的定理，</p>
+
+<p><br/></p>
+
+<p>如果CL项U可以弱归约为X，即U->X，</p>
+
+<p>也可以弱归约为Y，即U->Y，</p>
+
+<p>则存在CL项T，满足，</p>
+
+<p>X->T且Y->T。</p>
+
+<p><br/></p>
+
+<p>这表示了CL项弱归约的<strong>汇聚性</strong>。</p>
+
+<p>而且，CL项至多存在一个弱范式。</p>
+
+<p><br/></p>
+
+<h2><strong>CL项的抽象</strong></h2>
+
+<p>为了和lambda演算进行对比，</p>
+
+<p>我们定义CL项的抽象，</p>
+
+<p>(a) [x].M ≡ KM，如果x不是M中的自由变量</p>
+
+<p>(b) [x].x ≡ I</p>
+
+<p>&copy; [x].Ux ≡ U，如果x不是U中的自由变量</p>
+
+<p>(d) [x].UV ≡ S([x].U)([x].V)，如果不满足(a)或&copy;</p>
+
+<p><br/></p>
+
+<p>可以证明，</p>
+
+<p>([x].M)N可以弱归约为[N/x]M。</p>
+
+<p><br/></p>
+
+<p>这里，我们只是用原始的CL项来定义了CL项的抽象，</p>
+
+<p>[x]并不是CL语法的一部分，</p>
+
+<p>而对于lambda calculus中的λ项λx.xy，</p>
+
+<p>λx是λ项的一部分。</p>
+
+<p><br/></p>
+
+<h2><strong>LC和CL的相似性</strong></h2>
+
+<p>经过以上学习，</p>
+
+<p>我们发现，</p>
+
+<p>LC中的<strong>α等价</strong>，对应着CL中的<strong>语法等价</strong>，</p>
+
+<p>LC中的<strong>β归约</strong>，对应着CL中的<strong>弱归约</strong>，</p>
+
+<p>LC中的<strong>λx</strong>，对应着CL中的<strong>[x]</strong>。</p>
+
+<p><br/></p>
+
+<p>我们就可以统一的，</p>
+
+<p>用LC中的符号来说明问题了。</p>
+
+<p><br/></p>
+
+<h2><strong>组合子</strong></h2>
+
+<p>LC中的<strong>组合子</strong>，</p>
+
+<p>表示一个闭项（closed pure term），</p>
+
+<p>它不是一个原子，也不包含自由变量。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>λxyz.x(yz)</p>
+
+<p>λxy.x</p>
+
+<p><br/></p>
+
+<p>CL中的<strong>组合子</strong>，</p>
+
+<p>只有3个，I，K，S。</p>
+
+<p><br/></p>
+
+<p>在LC中，可以这样表示，</p>
+
+<p>I ≡ λx.x</p>
+
+<p>K ≡ λxy.x</p>
+
+<p>S ≡ λxyz.xz(yz)</p>
+
+<p><br/></p>
+
+<h2><strong>不动点定理</strong></h2>
+
+<p>在LC和CL中，</p>
+
+<p><strong>对于任意x，存在它的不动点Yx，满足，</strong></p>
+
+<p><strong>Yx -> x(Yx)</strong></p>
+
+<p><br/></p>
+
+<p>其中，</p>
+
+<p>“->”表示LC中的β归约，</p>
+
+<p>或CL中的弱归约。</p>
+
+<p><br/></p>
+
+<p><strong>证明：</strong></p>
+
+<p>取Y ≡ UU</p>
+
+<p>U ≡ λux.x(uux)</p>
+
+<p><br/></p>
+
+<p>Yx -></p>
+
+<p>UUx -></p>
+
+<p>(λux.x(uux))Ux -></p>
+
+<p>(λx.x(UUx))x -></p>
+
+<p>x(UUx) -></p>
+
+<p>x(Yx)</p>
+
+<p><br/></p>
+
+<h2><strong>不动点组合子</strong></h2>
+
+<p>不动点组合子并不是唯一的，</p>
+
+<p><br/></p>
+
+<p>存在不止一个Y，</p>
+
+<p>使得对于任意x，Yx -> x(Yx)。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p><strong>Turing组合子</strong></p>
+
+<p>Y ≡ UU，U ≡ λux.x(uux)</p>
+
+<p><br/></p>
+
+<p><strong>Curry-Ros组合子</strong></p>
+
+<p>Y ≡ λx.VV，V ≡ λy.x(yy)</p>
+
+<p><br/></p>
+
+<h2><strong>不动点定理的用法</strong></h2>
+
+<p>根据不动点定理，</p>
+
+<p>我们能得到任意LC项或CL项的不动点，</p>
+
+<p>所以，<strong>不动点方程总是有解的</strong>。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>给定方程，x = M，M中可能包含x，</p>
+
+<p>我们可以将它转换成不动点方程，</p>
+
+<p>x = (λx.M)x，</p>
+
+<p>解为：x = Y(λx.M) = Y(λt.[t/x]M)</p>
+
+<p>它<strong>消除了M中的x</strong>。</p>
+
+<p><br/></p>
+
+<p>例如：M ≡ yxz</p>
+
+<p>x = Y(λx.M) = Y(λx.yxz) = Y(λt.ytz)，</p>
+
+<p>等式右边就不包含自由变量x了。</p>
+
+<p><br/></p>
+
+<p>所以，形如x = M的方程，</p>
+
+<p>我们可以使用Y来消除M中的x。</p>
+
+<p><br/></p>
+
+<p>这也表明可以不依赖于副作用，</p>
+
+<p>用Y来定义<strong>匿名递归函数</strong>。</p>
+
+<p><br/></p>
+
+<h2><strong>用Y组合子解递归方程</strong></h2>
+
+<p>Haskell中的Turing Y组合子定义如下：</p>
+
+<p><strong>import Unsafe.Coerce</strong></p>
+
+<p>u = \u x -> x $ u <strong>(unsafeCoerce</strong> u<strong>)</strong> x</p>
+
+<p>y = u u</p>
+
+<p><br/></p>
+
+<p>斐波那契函数fib的递归定义，</p>
+
+<p>fib = \n -> if n&lt;2 then 1 else (n*) $ fib $ n-1</p>
+
+<p><br/></p>
+
+<p>为了<strong>消除等式右边fib</strong>，</p>
+
+<p>我们把它转换成不动点方程，</p>
+
+<p>fib = (\f -> \n -> if n&lt;2 then 1 else (n*) $ f $ n-1) fib</p>
+
+<p>用Y组合子求解，得到了一个匿名的递归函数，</p>
+
+<p>fib = y $ <strong>\f -></strong> \n -> if n&lt;2 then 1 else (n*) $ <strong>f</strong> $ n-1</p>
+
+<p><br/></p>
+
+<p>验证一下运行结果，</p>
+
+<p>fib 5</p>
+
+<p>=> 120</p>
+
+<p><br/></p>
+
+<h2><strong>不动点存在性的疑问</strong></h2>
+
+<p>方程解的性质是由方程决定的，</p>
+
+<p><strong>解法无法改变解的性质</strong>。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>a = undefined = (\a -> undefined) a</p>
+
+<p>解为：a = y $ \a -> undefined <strong>= undefined</strong></p>
+
+<p><br/></p>
+
+<p>add = \n -> add n+1</p>
+
+<p>这个一个无限递归函数。</p>
+
+<p>转换为不动点方程的形式，</p>
+
+<p>add = (\f -> \n -> f n+1) add</p>
+
+<p>解为：add = y $ (\f -> \n -> f n+1)</p>
+
+<p>这个add<strong>仍然是</strong>一个无限递归函数。</p>
+
+<p><br/></p>
+
+<h2><strong>初等函数的不动点</strong></h2>
+
+<p>另外，对于初等函数的不动点方程，</p>
+
+<p>x = f(x)</p>
+
+<p>程序中直接写成x = f(x)会<strong>导致无限递归</strong>，</p>
+
+<p>因为初等函数方程给出来的是<strong>约束</strong>，</p>
+
+<p>而不是<strong>计算过程</strong>。</p>
+
+<p><br/></p>
+
+<p>例如：</p>
+
+<p>求解f(x) = 2x的不动点，</p>
+
+<p><strong>直接写x = 2*x是一个无限的递归</strong>，并不能解出x = 0来，</p>
+
+<p>因此，x = 2*x实际表示的是一个无限递归的计算过程。</p>
+
+<p><br/></p>
+
+<p>然而，<strong>仍然</strong>会存在满足这个方程的解。</p>
+
+<p>不动点方程形式如下，</p>
+
+<p>x = (\x -> 2*x) x</p>
+
+<p>解为：x = y $ \x -> 2*x</p>
+
+<p>确实可以使等式成立，</p>
+
+<p>但它<strong>同样表示</strong>的是一个无限递归的计算过程。</p>
+
+<p><br/></p>
+
+<p>f(x) = 2x的不动点方程，对应的“计算过程”<strong>应该是</strong>，</p>
+
+<p>x = 0</p>
+
+<p>不动点方程的形式如下，</p>
+
+<p>x = (\x -> 0) x</p>
+
+<p>解为：x = y $ \x -> 0 <strong>= 0</strong></p>
+
+<p><br/></p>
+
+<p>因此，</p>
+
+<p>初等函数的不动点，</p>
+
+<p>与LC或CL的不动点是两个不同的场景，</p>
+
+<p>初等函数方程是一种<strong>约束规则</strong>，</p>
+
+<p>LC或CL的等式是一种<strong>推导规则</strong>。</p>
 
 <p><br/></p>
 
 <h2><strong>结语</strong></h2>
 
-<p>当老鸟遇到新手的时候，</p>
+<p>不动点问题，</p>
 
-<p>似乎有很多经验要讲。</p>
+<p>一直是我的心结。</p>
 
-<p><br/></p>
-
-<p>比如，</p>
-
-<p>没有银弹，</p>
-
-<p>只有最适合的工具。</p>
+<p>只可惜功力不够，总是想不明白。</p>
 
 <p><br/></p>
 
-<p>再比如，</p>
+<p>本文只是对最近学习的总结，</p>
 
-<p>要想解决问题，</p>
+<p>肯定有<strong>不严谨</strong>的地方，</p>
 
-<p>先明确问题本身。</p>
-
-<p><br/></p>
-
-<p>这些都是很好的经验，</p>
-
-<p>但是，<strong>没有什么比让新手自己会飞更好了</strong>。</p>
+<p>只当做以后继续学习的起点吧。</p>
 
 <p><br/></p>
 
-<p>他们当然可以发现你说的这些，</p>
-
-<p>他们又不笨，</p>
-
-<p>只是<strong>时间问题</strong>。</p>
-
-<p><br/></p>
-
-<p>他们唯一不知道的是，</p>
-
-<p>机器一开始怎样运转起来。</p>
-
-<p><br/></p>
-
-<p>那就帮他们一把，</p>
-
-<p>相信他们，</p>
-
-<p>肯定能创造令所有人惊叹的奇迹。</p>
+<p>参考：《Lambda-Calculus and Combinators》</p>
 </div>
   
   
@@ -424,7 +720,7 @@ var _hmt = _hmt || [];
 <li class='category'><a href='/blog/categories/lisp/'>lisp (17)</a></li>
 <li class='category'><a href='/blog/categories/logic/'>logic (4)</a></li>
 <li class='category'><a href='/blog/categories/math/'>math (5)</a></li>
-<li class='category'><a href='/blog/categories/mind/'>mind (38)</a></li>
+<li class='category'><a href='/blog/categories/mind/'>mind (39)</a></li>
 <li class='category'><a href='/blog/categories/software/'>software (12)</a></li>
 
 	</ul>
@@ -432,6 +728,10 @@ var _hmt = _hmt || [];
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/11/08/features-of-individuals/">遥远的侧面</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/10/07/ourselves/">我们眼中的自己</a>
@@ -467,10 +767,6 @@ var _hmt = _hmt || [];
     
       <li class="post">
         <a href="/blog/2016/08/05/professional-programmer/">专业程序猿的修炼指南</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/08/02/cohomology-group/">懵逼的上同调群</a>
       </li>
     
   </ul>
