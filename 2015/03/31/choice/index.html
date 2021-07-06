@@ -4,10 +4,10 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
@@ -17,8 +17,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -36,7 +36,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -70,11 +70,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
-
-
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
 
@@ -82,24 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
 
 
 
-<meta name="description" content="人生就像一棵决策树， 每一次选择，走向了不同的子节点。 我们不能后退，也没办法消除历史的影响。  因为时间是单向的， 没有办法更改历史， 只能以今天为基础继续向前。  对于软件，我们也倾向于持有相同的观点。 认为软件的维护成本在后期是不可能缩减的， 不得不背负以前失误的包袱。  然而，幸运的是， 软件其实并非如此。  软件问题，大多数都是设计的问题。  抽象和具体和人生不同， 软件功能的实现， 限">
+<meta name="description" content="人生就像一棵决策树， 每一次选择，走向了不同的子节点。 我们不能后退，也没办法消除历史的影响。  因为时间是单向的， 没有办法更改历史， 只能以今天为基础继续向前。  对于软件，我们也倾向于持有相同的观点。 认为软件的维护成本在后期是不可能缩减的， 不得不背负以前失误的包袱。  然而，幸运的是， 软件其实并非如此。  软件问题，大多数都是设计的问题。  抽象和具体 和人生不同， 软件功能的实现，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="可替换的设计策略">
 <meta property="og:url" content="https://thzt.github.io/2015/03/31/choice/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="人生就像一棵决策树， 每一次选择，走向了不同的子节点。 我们不能后退，也没办法消除历史的影响。  因为时间是单向的， 没有办法更改历史， 只能以今天为基础继续向前。  对于软件，我们也倾向于持有相同的观点。 认为软件的维护成本在后期是不可能缩减的， 不得不背负以前失误的包袱。  然而，幸运的是， 软件其实并非如此。  软件问题，大多数都是设计的问题。  抽象和具体和人生不同， 软件功能的实现， 限">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-12T12:16:52.469Z">
+<meta property="og:description" content="人生就像一棵决策树， 每一次选择，走向了不同的子节点。 我们不能后退，也没办法消除历史的影响。  因为时间是单向的， 没有办法更改历史， 只能以今天为基础继续向前。  对于软件，我们也倾向于持有相同的观点。 认为软件的维护成本在后期是不可能缩减的， 不得不背负以前失误的包袱。  然而，幸运的是， 软件其实并非如此。  软件问题，大多数都是设计的问题。  抽象和具体 和人生不同， 软件功能的实现，">
+<meta property="article:published_time" content="2015-03-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-12T12:16:52.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="可替换的设计策略">
-<meta name="twitter:description" content="人生就像一棵决策树， 每一次选择，走向了不同的子节点。 我们不能后退，也没办法消除历史的影响。  因为时间是单向的， 没有办法更改历史， 只能以今天为基础继续向前。  对于软件，我们也倾向于持有相同的观点。 认为软件的维护成本在后期是不可能缩减的， 不得不背负以前失误的包袱。  然而，幸运的是， 软件其实并非如此。  软件问题，大多数都是设计的问题。  抽象和具体和人生不同， 软件功能的实现， 限">
 
 
 
@@ -127,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://thzt.github.io/2015/03/31/choice/">
+  <link rel="canonical" href="https://thzt.github.io/2015/03/31/choice/"/>
 
 
 
@@ -159,7 +157,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -177,14 +175,14 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">何幻</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">Programming is about ideas, <br>languages are just a way to express them.</p>
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
       
   </div>
 
@@ -207,7 +205,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -217,7 +215,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -227,7 +225,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -264,8 +262,8 @@
     <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/31/choice/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -301,7 +299,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -350,111 +348,116 @@
         <p>人生就像一棵决策树，</p>
 <p>每一次选择，走向了不同的子节点。</p>
 <p>我们不能后退，也没办法消除历史的影响。</p>
-<p><br></p>
+<p><br/></p>
 <p>因为时间是单向的，</p>
 <p>没有办法更改历史，</p>
 <p>只能以今天为基础继续向前。</p>
-<p><br></p>
+<p><br/></p>
 <p>对于软件，我们也倾向于持有相同的观点。</p>
 <p>认为软件的维护成本在后期是不可能缩减的，</p>
 <p>不得不背负以前失误的包袱。</p>
-<p><br></p>
+<p><br/></p>
 <p>然而，幸运的是，</p>
 <p>软件其实并非如此。</p>
-<p><br></p>
+<p><br/></p>
 <p>软件问题，大多数都是设计的问题。</p>
-<p><br></p>
-<h2 id="抽象和具体"><a href="#抽象和具体" class="headerlink" title="抽象和具体"></a><strong>抽象和具体</strong></h2><p>和人生不同，</p>
+<p><br/></p>
+<h2 id="抽象和具体"><strong>抽象和具体</strong></h2>
+<p>和人生不同，</p>
 <p>软件功能的实现，</p>
 <p>限制条件相对宽松。</p>
-<p><br></p>
+<p><br/></p>
 <p>毕业生，决定考研还是就业,</p>
 <p>只能选一个。</p>
 <p>但是，软件可以选择DoWork。</p>
-<p><br></p>
+<p><br/></p>
 <p>越抽象，适用范围就越广。</p>
 <p>越具体，就越容易被证明是个错误。</p>
-<p><br></p>
+<p><br/></p>
 <p>好的设计实践，</p>
 <p>是把抽象和具体分开，</p>
 <p>抽象的每一种实现都是可替换的。</p>
-<p><br></p>
+<p><br/></p>
 <p>随着软件的发展，</p>
 <p>后期的维护成本才可能是常量复杂度的，</p>
 <p>因为每一个历史性的错误实现，都是可更改的。</p>
-<p><br></p>
-<h2 id="平凡的模块"><a href="#平凡的模块" class="headerlink" title="平凡的模块"></a><strong>平凡的模块</strong></h2><p>武功高强的人们，</p>
+<p><br/></p>
+<h2 id="平凡的模块"><strong>平凡的模块</strong></h2>
+<p>武功高强的人们，</p>
 <p>不会频出诡异的绝招，</p>
 <p>招数越平凡，内耗就越小。</p>
-<p><br></p>
+<p><br/></p>
 <p>向外提供抽象接口的人，是在玩小伎俩，</p>
 <p>不要将具体的实现方法托付给别人，</p>
 <p>当问题出现时，让别人更改实现方案，是不可能的。</p>
-<p><br></p>
+<p><br/></p>
 <p>我们应该提供具体的功能，</p>
 <p>功能内部，封装了我们自己的抽象和实现。</p>
-<p><br></p>
+<p><br/></p>
 <p>其中，抽象是对需求的提取，用来规范模块的外在表现，</p>
 <p>实现是当前采用的解决方案。</p>
-<p><br></p>
+<p><br/></p>
 <p>随着时间的发展，当模块不再适用时，</p>
 <p>我们就能在外在表现不变的前提下，</p>
 <p>更改解决方案了。</p>
-<p><br></p>
+<p><br/></p>
 <p>不是只提供抽象接口，</p>
 <p>而是把具体功能封装在抽象的接口下，</p>
 <p>一起提供。</p>
-<p><br></p>
-<h2 id="层次与后路"><a href="#层次与后路" class="headerlink" title="层次与后路"></a><strong>层次与后路</strong></h2><p>代码量增加，软件会越来越复杂，</p>
+<p><br/></p>
+<h2 id="层次与后路"><strong>层次与后路</strong></h2>
+<p>代码量增加，软件会越来越复杂，</p>
 <p>难以定位问题，增加功能，</p>
 <p>这其实是没有建立合理的代码层次。</p>
-<p><br></p>
+<p><br/></p>
 <p>在不同深度的层次上切换。</p>
 <p>可以让我们总是面对简单可控的问题。</p>
-<p><br></p>
+<p><br/></p>
 <p>一千行的函数太复杂了，</p>
 <p>那是因为代码本来不该写在一个函数中。</p>
-<p><br></p>
+<p><br/></p>
 <p>一万行代码太复杂了，</p>
 <p>那是因为它本来不该写到一个文件中。</p>
-<p><br></p>
+<p><br/></p>
 <p>一百个文件太复杂了，</p>
 <p>那是因为它们本来不该在一个文件夹下。</p>
-<p><br></p>
+<p><br/></p>
 <p>划分层次，才能留有后路。</p>
 <p>每天关闭电脑前，检查自己的后路，是个好习惯。</p>
 <p>可以让我们再打开电脑时，问题还是像今天这样简单。</p>
-<p><br></p>
-<h2 id="唯一性和可选性"><a href="#唯一性和可选性" class="headerlink" title="唯一性和可选性"></a><strong>唯一性和可选性</strong></h2><p>当我们遇到紧急问题时，</p>
+<p><br/></p>
+<h2 id="唯一性和可选性"><strong>唯一性和可选性</strong></h2>
+<p>当我们遇到紧急问题时，</p>
 <p>通常首先会想到一个权宜之计。</p>
-<p><br></p>
+<p><br/></p>
 <p>但是，从长久来看，</p>
 <p>不得不做的事情总是会带来麻烦，</p>
 <p>身不由己的决定，也是错误的根源。</p>
-<p><br></p>
+<p><br/></p>
 <p>我们应该想尽办法，推迟决定。</p>
 <p>直到我们有两个方案，可以从中选择。</p>
 <p>可选性意味着可控的未来。</p>
-<p><br></p>
+<p><br/></p>
 <p>软件的发展，像棋局一样，</p>
 <p>必须仔细斟酌局势的变化，</p>
 <p>才能避免因小失大。</p>
-<p><br></p>
+<p><br/></p>
 <p>在客观条件限制的范围内，</p>
 <p>有经验的人做出选择，</p>
 <p>新手慌张决定，</p>
 <p>在尽可能多的选择中，才能酝酿出好的设计。</p>
-<p><br></p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>软件不同于人生之处在于，</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>软件不同于人生之处在于，</p>
 <p>软件可以设计，还可以更改，</p>
 <p>只是成本有别。</p>
-<p><br></p>
+<p><br/></p>
 <p>好的功能模块，在于内部的良好设计。</p>
 <p>虽然外在表现没有什么不同。</p>
-<p><br></p>
+<p><br/></p>
 <p>好的设计和代码组织方式，</p>
 <p>威力连绵不绝。</p>
-<p><br></p>
+<p><br/></p>
 <p>多一种选择，多一种可能。</p>
 
       
@@ -553,7 +556,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -564,7 +567,9 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
           <p class="site-author-name" itemprop="name"></p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -575,7 +580,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">263</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -663,7 +668,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -675,12 +680,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 </div>
@@ -827,7 +832,7 @@
   
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
 <script src="/js/katex.js"></script>
 </body>

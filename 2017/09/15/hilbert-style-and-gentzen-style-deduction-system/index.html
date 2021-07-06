@@ -4,10 +4,10 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
@@ -17,8 +17,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -36,7 +36,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -70,11 +70,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
-
-
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
 
@@ -82,24 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
 
 
 
-<meta name="description" content="1. Proof calculus在数理逻辑（mathematical logic）中， 证明演算（proof calculus）界定了形式系统（formal system）的不同风格（style）。 最主流的两种风格（style）为， 希尔伯特风格（Hilbert style）和甘岑风格（Gentzen style）。  1.1 Hilbert style希尔伯特风格（Hilbert style">
+<meta name="description" content="1. Proof calculus 在数理逻辑（mathematical logic）中， 证明演算（proof calculus）界定了形式系统（formal system）的不同风格（style）。 最主流的两种风格（style）为， 希尔伯特风格（Hilbert style）和甘岑风格（Gentzen style）。  1.1 Hilbert style 希尔伯特风格（Hilbert sty">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hilbert-style和Gentzen-style演绎系统">
 <meta property="og:url" content="https://thzt.github.io/2017/09/15/hilbert-style-and-gentzen-style-deduction-system/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="1. Proof calculus在数理逻辑（mathematical logic）中， 证明演算（proof calculus）界定了形式系统（formal system）的不同风格（style）。 最主流的两种风格（style）为， 希尔伯特风格（Hilbert style）和甘岑风格（Gentzen style）。  1.1 Hilbert style希尔伯特风格（Hilbert style">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-12T12:16:52.497Z">
+<meta property="og:description" content="1. Proof calculus 在数理逻辑（mathematical logic）中， 证明演算（proof calculus）界定了形式系统（formal system）的不同风格（style）。 最主流的两种风格（style）为， 希尔伯特风格（Hilbert style）和甘岑风格（Gentzen style）。  1.1 Hilbert style 希尔伯特风格（Hilbert sty">
+<meta property="article:published_time" content="2017-09-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-12T12:16:52.497Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hilbert-style和Gentzen-style演绎系统">
-<meta name="twitter:description" content="1. Proof calculus在数理逻辑（mathematical logic）中， 证明演算（proof calculus）界定了形式系统（formal system）的不同风格（style）。 最主流的两种风格（style）为， 希尔伯特风格（Hilbert style）和甘岑风格（Gentzen style）。  1.1 Hilbert style希尔伯特风格（Hilbert style">
 
 
 
@@ -127,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://thzt.github.io/2017/09/15/hilbert-style-and-gentzen-style-deduction-system/">
+  <link rel="canonical" href="https://thzt.github.io/2017/09/15/hilbert-style-and-gentzen-style-deduction-system/"/>
 
 
 
@@ -159,7 +157,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -177,14 +175,14 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">何幻</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">Programming is about ideas, <br>languages are just a way to express them.</p>
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
       
   </div>
 
@@ -207,7 +205,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -217,7 +215,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -227,7 +225,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -264,8 +262,8 @@
     <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/15/hilbert-style-and-gentzen-style-deduction-system/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -301,7 +299,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -347,73 +345,80 @@
       
 
       
-        <h3 id="1-Proof-calculus"><a href="#1-Proof-calculus" class="headerlink" title="1. Proof calculus"></a>1. Proof calculus</h3><p>在数理逻辑（mathematical logic）中，</p>
+        <h3 id="proof-calculus">1. Proof calculus</h3>
+<p>在数理逻辑（mathematical logic）中，</p>
 <p>证明演算（proof calculus）界定了形式系统（formal system）的不同风格（style）。</p>
 <p>最主流的两种风格（style）为，</p>
 <p>希尔伯特风格（Hilbert style）和甘岑风格（Gentzen style）。</p>
-<p><br></p>
-<h4 id="1-1-Hilbert-style"><a href="#1-1-Hilbert-style" class="headerlink" title="1.1 Hilbert style"></a>1.1 Hilbert style</h4><p>希尔伯特风格（Hilbert style）的证明演算（proof calculus），</p>
+<p><br/></p>
+<h4 id="hilbert-style">1.1 Hilbert style</h4>
+<p>希尔伯特风格（Hilbert style）的证明演算（proof calculus），</p>
 <p>其断言（judgement）由不包含条件的（unconditional）重言式（tautology）构成，</p>
 <p>称为，希尔伯特系统（Hilbert system）。</p>
-<p><br></p>
-<h4 id="1-2-Gentzen-style"><a href="#1-2-Gentzen-style" class="headerlink" title="1.2 Gentzen style"></a>1.2 Gentzen style</h4><p>甘岑风格（Gentzen style）的证明演算（proof calculus），</p>
+<p><br/></p>
+<h4 id="gentzen-style">1.2 Gentzen style</h4>
+<p>甘岑风格（Gentzen style）的证明演算（proof calculus），</p>
 <p>其断言（judgement）由包含条件的（unconditional）重言式（tautology）构成。</p>
 <p>包括，自然演绎（Natural deduction）和相继式演算（Sequent calculus）。</p>
-<p><br></p>
+<p><br/></p>
 <p>（1）自然演绎（Natural deduction）系统，</p>
 <p>断言（judgement）的结论（conclusion）中，</p>
 <p>只包含一个命题（propostion）。</p>
-<p><br></p>
+<p><br/></p>
 <p>（2）相继式演算（Sequent calculus）系统，</p>
 <p>断言（judgement）的结论（conclusion）中，</p>
 <p>可以包含零个或多个命题（propostion）。</p>
-<p><br></p>
-<h3 id="2-Hilbert-system"><a href="#2-Hilbert-system" class="headerlink" title="2. Hilbert system"></a>2. Hilbert system</h3><p>观察系统中断言（judgement）的形式，</p>
+<p><br/></p>
+<h3 id="hilbert-system">2. Hilbert system</h3>
+<p>观察系统中断言（judgement）的形式，</p>
 <p>是区分演绎系统（deduction system）风格（style）的一种常用方法。</p>
-<p><br></p>
+<p><br/></p>
 <p>希尔伯特系统（Hilbert system）中的断言（judgement）是最简单的，其形式为，</p>
 <p><span data-katex="B"></span></p>
 <p>用以表示任何逻辑系统（logic）中的公式（formula）。</p>
-<p><br></p>
+<p><br/></p>
 <p>例如，一阶逻辑（first-order logic），命题逻辑（propositional logic），</p>
 <p>高阶逻辑（higher-order logic），或者模态逻辑（modal logic）。</p>
-<p><br></p>
+<p><br/></p>
 <p>希尔伯特系统（Hilbert system）中的定理（theorem），</p>
 <p>指的是一段有效证明（valid proof）的最终结论（concluding judgement）。</p>
-<p><br></p>
-<h3 id="3-Natural-deduction"><a href="#3-Natural-deduction" class="headerlink" title="3. Natural deduction"></a>3. Natural deduction</h3><p>自然演绎（Natural deduction）系统中，其断言（judgement）形式如下，</p>
+<p><br/></p>
+<h3 id="natural-deduction">3. Natural deduction</h3>
+<p>自然演绎（Natural deduction）系统中，其断言（judgement）形式如下，</p>
 <p><span data-katex="A_1,A_2,\cdots,A_n\vdash B"></span></p>
-<p><br></p>
+<p><br/></p>
 <p>其中，<span data-katex="A_1,A_2,\cdots,A_n"></span>和<span data-katex="B"></span>都是公式（formula），<span data-katex="n\geqslant 0"></span>，</p>
 <p><span data-katex="A_1,A_2,\cdots,A_n"></span>的顺序是无关紧要的。</p>
-<p><br></p>
+<p><br/></p>
 <p>自然演绎（Natural deduction）系统中的定理（theorem），</p>
 <p>指的是这样的公式（formula）<span data-katex="B"></span>，</p>
 <p>其中，<span data-katex="\vdash B"></span>是一段有效证明（valid proof）的最终结论（concluding judgement）。</p>
-<p><br></p>
+<p><br/></p>
 <p>公式（formula）<span data-katex="A_1,A_2,\cdots,A_n\vdash B"></span>的语义（semantics）如下，</p>
 <p>如果每一个<span data-katex="A_1,A_2,\cdots,A_n"></span>成立，那么<span data-katex="B"></span>也成立。</p>
-<p><br></p>
-<h3 id="4-Sequent-calculus"><a href="#4-Sequent-calculus" class="headerlink" title="4.Sequent calculus"></a>4.Sequent calculus</h3><p>相继式演算（Sequent calculus）系统，将自然演绎（Natural deduction）一般化了，</p>
+<p><br/></p>
+<h3 id="sequent-calculus">4.Sequent calculus</h3>
+<p>相继式演算（Sequent calculus）系统，将自然演绎（Natural deduction）一般化了，</p>
 <p>其断言（judgement）的形式如下，</p>
 <p><span data-katex="A_1,A_2,\cdots,A_n\vdash B_1,B_2,\cdots,B_k"></span></p>
-<p><br></p>
+<p><br/></p>
 <p>其中，<span data-katex="A_1,A_2,\cdots,A_n"></span>称为前项（antecedent），</p>
 <p><span data-katex="B_1,B_2,\cdots,B_k"></span>称为后项（succedent/consequent），</p>
 <p>它们合起来称为一个序列（sequent）。</p>
-<p><br></p>
+<p><br/></p>
 <p>和自然演绎（Natural deduction）系统相似，</p>
 <p><span data-katex="A_1,A_2,\cdots,A_n"></span>和<span data-katex="B_1,B_2,\cdots,B_k"></span>都是公式（formula），</p>
 <p><span data-katex="n"></span>和<span data-katex="k"></span>都是非负整数，即断言（judgement）的左右两边都可以为空。</p>
-<p><br></p>
+<p><br/></p>
 <p>相继式演算（Sequent calculus）系统中的定理（theorem），</p>
 <p>指的是这样的公式（formula）<span data-katex="B"></span>，</p>
 <p>其中，<span data-katex="\vdash B"></span>是一段有效证明（valid proof）的最终结论（concluding judgement）。</p>
-<p><br></p>
+<p><br/></p>
 <p>公式（formula）<span data-katex="A_1,A_2,\cdots,A_n\vdash B_1,B_2,\cdots,B_k"></span>的语义（semantics）如下，</p>
 <p>如果每一个<span data-katex="A_1,A_2,\cdots,A_n"></span>成立，那么<span data-katex="B_1,B_2,\cdots,B_k"></span>中至少有一个成立。</p>
-<p><br></p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://en.wikipedia.org/wiki/Proof_calculus" target="_blank" rel="noopener">Proof calculus</a></p>
+<p><br/></p>
+<h3 id="reference">Reference</h3>
+<p><a href="https://en.wikipedia.org/wiki/Proof_calculus" target="_blank" rel="noopener">Proof calculus</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Hilbert_system" target="_blank" rel="noopener">Hilbert system</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Natural_deduction" target="_blank" rel="noopener">Natural deduction</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Sequent_calculus" target="_blank" rel="noopener">Sequent calculus</a></p>
@@ -514,7 +519,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -525,7 +530,9 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
           <p class="site-author-name" itemprop="name"></p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -536,7 +543,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">263</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -604,7 +611,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Proof-calculus"><span class="nav-number">1.</span> <span class="nav-text">1. Proof calculus</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-Hilbert-style"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 Hilbert style</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-Gentzen-style"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Gentzen style</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Hilbert-system"><span class="nav-number">2.</span> <span class="nav-text">2. Hilbert system</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Natural-deduction"><span class="nav-number">3.</span> <span class="nav-text">3. Natural deduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Sequent-calculus"><span class="nav-number">4.</span> <span class="nav-text">4.Sequent calculus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#proof-calculus"><span class="nav-number">1.</span> <span class="nav-text">1. Proof calculus</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#hilbert-style"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 Hilbert style</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gentzen-style"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Gentzen style</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hilbert-system"><span class="nav-number">2.</span> <span class="nav-text">2. Hilbert system</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#natural-deduction"><span class="nav-number">3.</span> <span class="nav-text">3. Natural deduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sequent-calculus"><span class="nav-number">4.</span> <span class="nav-text">4.Sequent calculus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
@@ -624,7 +631,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -636,12 +643,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 </div>
@@ -788,7 +795,7 @@
   
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
 <script src="/js/katex.js"></script>
 </body>

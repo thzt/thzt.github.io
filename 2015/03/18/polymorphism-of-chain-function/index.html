@@ -4,10 +4,10 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
@@ -17,8 +17,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -36,7 +36,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -70,11 +70,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
-
-
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
 
@@ -82,24 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
 
 
 
-<meta name="description" content="Haskell中一些函数可以作用在多种类型上。 例如： ghci&amp;gt; length [1, 2] 2 length :: [Int] -&amp;gt; Int  ghci&amp;gt; length [“a”, “b”, “c”] 3 length :: [String] -&amp;gt; Int  我们看length的类型， length :: [a] -&amp;gt; Int 它类型签名中，包含类型变量，类型变量">
+<meta name="description" content="Haskell中一些函数可以作用在多种类型上。 例如： ghci&gt; length [1, 2] 2 length :: [Int] -&gt; Int  ghci&gt; length [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;] 3 length :: [String] -&gt; Int  我们看length的类型， length :: [a] -&gt; Int 它类型签名中，包含类型变量，类型变量">
 <meta property="og:type" content="article">
-<meta property="og:title" content="函数&gt;&gt;=的多态性">
+<meta property="og:title" content="函数&gt;&gt;&#x3D;的多态性">
 <meta property="og:url" content="https://thzt.github.io/2015/03/18/polymorphism-of-chain-function/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="Haskell中一些函数可以作用在多种类型上。 例如： ghci&amp;gt; length [1, 2] 2 length :: [Int] -&amp;gt; Int  ghci&amp;gt; length [“a”, “b”, “c”] 3 length :: [String] -&amp;gt; Int  我们看length的类型， length :: [a] -&amp;gt; Int 它类型签名中，包含类型变量，类型变量">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-12T12:16:52.468Z">
+<meta property="og:description" content="Haskell中一些函数可以作用在多种类型上。 例如： ghci&gt; length [1, 2] 2 length :: [Int] -&gt; Int  ghci&gt; length [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;] 3 length :: [String] -&gt; Int  我们看length的类型， length :: [a] -&gt; Int 它类型签名中，包含类型变量，类型变量">
+<meta property="article:published_time" content="2015-03-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-12T12:16:52.468Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="函数&gt;&gt;=的多态性">
-<meta name="twitter:description" content="Haskell中一些函数可以作用在多种类型上。 例如： ghci&amp;gt; length [1, 2] 2 length :: [Int] -&amp;gt; Int  ghci&amp;gt; length [“a”, “b”, “c”] 3 length :: [String] -&amp;gt; Int  我们看length的类型， length :: [a] -&amp;gt; Int 它类型签名中，包含类型变量，类型变量">
 
 
 
@@ -127,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://thzt.github.io/2015/03/18/polymorphism-of-chain-function/">
+  <link rel="canonical" href="https://thzt.github.io/2015/03/18/polymorphism-of-chain-function/"/>
 
 
 
@@ -159,7 +157,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -177,14 +175,14 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">何幻</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">Programming is about ideas, <br>languages are just a way to express them.</p>
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
       
   </div>
 
@@ -207,7 +205,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -217,7 +215,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -227,7 +225,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -264,8 +262,8 @@
     <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/18/polymorphism-of-chain-function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -301,7 +299,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -352,81 +350,85 @@
 <p>ghci&gt; length [1, 2]</p>
 <p>2</p>
 <p>length :: [Int] -&gt; Int</p>
-<p><br></p>
-<p>ghci&gt; length [“a”, “b”, “c”]</p>
+<p><br/></p>
+<p>ghci&gt; length ["a", "b", "c"]</p>
 <p>3</p>
 <p>length :: [String] -&gt; Int</p>
-<p><br></p>
+<p><br/></p>
 <p>我们看length的类型，</p>
 <p>length :: [a] -&gt; Int</p>
 <p>它类型签名中，包含类型变量，类型变量可以具体化为任意类型。</p>
-<p><br></p>
+<p><br/></p>
 <p>像这样的函数，称为多态函数。</p>
-<p><br></p>
-<h2 id="函数-gt-gt"><a href="#函数-gt-gt" class="headerlink" title="函数&gt;&gt;="></a><strong>函数&gt;&gt;=</strong></h2><p>函数&gt;&gt;=定义在Monad类型类中，</p>
+<p><br/></p>
+<h2 id="函数"><strong>函数&gt;&gt;=</strong></h2>
+<p>函数&gt;&gt;=定义在Monad类型类中，</p>
 <p>class Monad m where</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
-<p><br></p>
-<p>其中，m是Monad类型类的实例类型，它的kind是<em> -&gt; </em>，</p>
-<p>:k m = <em> -&gt; </em></p>
+<p>    (&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
+<p><br/></p>
+<p>其中，m是Monad类型类的实例类型，它的kind是* -&gt; *，</p>
+<p>:k m = * -&gt; *</p>
 <p>类型m a是一个具体类型，该类型的值称为monad value。</p>
-<p><br></p>
+<p><br/></p>
 <p>我们看到，在m确定的情况下，&gt;&gt;=的类型签名中仍然包含类型变量。</p>
 <p>因此，对Monad类型类的某个实例来说，</p>
-<p>>&gt;=可以操作相同m类型但是不同a类型的monad value :: m a。</p>
-<p><br></p>
-<h2 id="IO-monad"><a href="#IO-monad" class="headerlink" title="IO monad"></a><strong>IO monad</strong></h2><p>以Monad类型类的实例IO为例，对于IO来说，IO monad value称为IO action。</p>
+<p>&gt;&gt;=可以操作相同m类型但是不同a类型的monad value :: m a。</p>
+<p><br/></p>
+<h2 id="io-monad"><strong>IO monad</strong></h2>
+<p>以Monad类型类的实例IO为例，对于IO来说，IO monad value称为IO action。</p>
 <p>main = do</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn “Please input: “</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;inpStr &lt;- getLine</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn $ “Hello “ ++ inpStr</p>
-<p><br></p>
+<p>    putStrLn "Please input: "</p>
+<p>    inpStr &lt;- getLine</p>
+<p>    putStrLn $ "Hello " ++ inpStr</p>
+<p><br/></p>
 <p>其中，</p>
 <p>putStrLn :: String -&gt; IO ( )</p>
 <p>getLine :: IO String</p>
-<p><br></p>
+<p><br/></p>
 <p>我们来分析一下这3个IO action的类型，</p>
-<p>putStrLn “Please input: “ :: IO ( )</p>
+<p>putStrLn "Please input: " :: IO ( )</p>
 <p>getLine :: IO String</p>
-<p>putStrLn $ “Hello “ ++ inpStr :: IO ( )</p>
-<p><br></p>
+<p>putStrLn $ "Hello " ++ inpStr :: IO ( )</p>
+<p><br/></p>
 <p>它们的具体类型都是m a，</p>
 <p>m相同，m = IO。而a不同，分别是( )，String，( )。</p>
-<p><br></p>
+<p><br/></p>
 <p>在do notation中，如果某一行我们没有使用&lt;-为monad value绑定值，</p>
 <p>就相当于使用了函数&gt;&gt;，表示不需要这个绑定值。</p>
 <p>(&gt;&gt;) :: x &gt;&gt; y = x &gt;&gt;= \ _ -&gt; y</p>
-<p><br></p>
+<p><br/></p>
 <p>这样的话，我们就可以将main函数还原成&gt;&gt;和&gt;&gt;=的串联形式了，</p>
-<p>putStrLn “Please input: “ &gt;&gt; getLine &gt;&gt;= \inpStr -&gt; putStrLn $ “Hello “ ++ inpStr</p>
-<p>= putStrLn “Please input: “ &gt;&gt;= \ _ -&gt; getLine &gt;&gt;= \inpStr -&gt; putStrLn $ “Hello “ ++ inpStr</p>
-<p>= putStrLn “Please input: “ &gt;&gt;= ( \ _ -&gt; getLine &gt;&gt;= ( \inpStr -&gt; putStrLn $ “Hello “ ++ inpStr ) )</p>
-<p><br></p>
-<h2 id="类型不同的-gt-gt-同时出现"><a href="#类型不同的-gt-gt-同时出现" class="headerlink" title="类型不同的&gt;&gt;=同时出现"></a><strong>类型不同的&gt;&gt;=同时出现</strong></h2><p>对于第一个&gt;&gt;=，我们能推断出它的大概类型，</p>
-<p>>&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ?) -&gt; IO ?</p>
+<p>putStrLn "Please input: " &gt;&gt; getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
+<p>= putStrLn "Please input: " &gt;&gt;= \ _ -&gt; getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
+<p>= putStrLn "Please input: " &gt;&gt;= ( \ _ -&gt; getLine &gt;&gt;= ( -&gt; putStrLn $ "Hello " ++ inpStr ) )</p>
+<p><br/></p>
+<h2 id="类型不同的同时出现"><strong>类型不同的&gt;&gt;=同时出现</strong></h2>
+<p>对于第一个&gt;&gt;=，我们能推断出它的大概类型，</p>
+<p>&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ?) -&gt; IO ?</p>
 <p>其中“?”表示尚未确定的类型。</p>
-<p><br></p>
+<p><br/></p>
 <p>而第二个&gt;&gt;=的类型，可以完全确定下来。</p>
-<p>getLine &gt;&gt;= \inpStr -&gt; putStrLn $ “Hello “ ++ inpStr</p>
-<p>>&gt;= :: IO String -&gt; (String -&gt; IO ( )) -&gt; IO ( )</p>
-<p><br></p>
+<p>getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
+<p>&gt;&gt;= :: IO String -&gt; (String -&gt; IO ( )) -&gt; IO ( )</p>
+<p><br/></p>
 <p>那么，第一个&gt;&gt;=的类型也就可以完全确定下来了，</p>
-<p>>&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ( )) -&gt; IO ( )</p>
-<p><br></p>
+<p>&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ( )) -&gt; IO ( )</p>
+<p><br/></p>
 <p>由此可见，</p>
 <p>第一个&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ( )) -&gt; IO ( )</p>
 <p>第二个&gt;&gt;= :: IO String -&gt; (String -&gt; IO ( )) -&gt; IO ( )</p>
 <p>两个&gt;&gt;=的类型不同，它们同时出现了。</p>
-<p><br></p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>do notation是&gt;&gt;和&gt;&gt;=串联形式的语法糖，IO action是 IO monad value，因此可以使用它。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>do notation是&gt;&gt;和&gt;&gt;=串联形式的语法糖，IO action是 IO monad value，因此可以使用它。</p>
 <p>认为do notation中每行的monad value类型必须相同，是不正确的。</p>
 <p>事实上，他们的类型是m a，m是相同的，而a可以不同。</p>
-<p><br></p>
+<p><br/></p>
 <p>相似的，Functor和Applicative类型类也定义了一些多态函数。</p>
-<p><br></p>
+<p><br/></p>
 <p>此外，对于IO类型，《Programming in Haskell》P88说的最清楚</p>
 <p>type IO a = World -&gt; (a, World)</p>
-<p><br></p>
+<p><br/></p>
 <p>World类型的值表示环境的当前状态。</p>
 <p>World -&gt; (a, World)类型的值是一个函数，</p>
 <p>它接受环境状态作为参数，返回一个a类型的值，并影响了环境状态。</p>
@@ -527,7 +529,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -538,7 +540,9 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
           <p class="site-author-name" itemprop="name"></p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -549,7 +553,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">263</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -617,7 +621,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数-gt-gt"><span class="nav-number">1.</span> <span class="nav-text">函数&gt;&gt;=</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO-monad"><span class="nav-number">2.</span> <span class="nav-text">IO monad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型不同的-gt-gt-同时出现"><span class="nav-number">3.</span> <span class="nav-text">类型不同的&gt;&gt;=同时出现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.</span> <span class="nav-text">函数&gt;&gt;&#x3D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#io-monad"><span class="nav-number">2.</span> <span class="nav-text">IO monad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型不同的同时出现"><span class="nav-number">3.</span> <span class="nav-text">类型不同的&gt;&gt;&#x3D;同时出现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>
@@ -637,7 +641,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -649,12 +653,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 </div>
@@ -801,7 +805,7 @@
   
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
 <script src="/js/katex.js"></script>
 </body>

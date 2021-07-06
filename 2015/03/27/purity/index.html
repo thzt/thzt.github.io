@@ -4,10 +4,10 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
@@ -17,8 +17,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -36,7 +36,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -70,11 +70,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
-
-
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
 
@@ -82,7 +80,9 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -95,11 +95,9 @@
 <meta property="og:url" content="https://thzt.github.io/2015/03/27/purity/index.html">
 <meta property="og:site_name" content="何幻">
 <meta property="og:description" content="表达式是在环境中求值的。 如果允许表达式改变环境， 那么，其他表达式的求值结果，就是不可预料的。  环境，是专业术语，也可称为执行环境， 里面保存的是，变量和值的绑定关系。  Haskell是一门纯函数式语言， 并不是说，函数的每次求值结果都相同。 而是说，任何函数都不会修改它的执行环境。  例如，对于从屏幕上读取字符的函数， 每次调用，并不一定会返回相同的值。 但是，执行后，它确实不会影响环境中">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-12T12:16:52.469Z">
+<meta property="article:published_time" content="2015-03-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-12T12:16:52.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Haskell的纯函数性">
-<meta name="twitter:description" content="表达式是在环境中求值的。 如果允许表达式改变环境， 那么，其他表达式的求值结果，就是不可预料的。  环境，是专业术语，也可称为执行环境， 里面保存的是，变量和值的绑定关系。  Haskell是一门纯函数式语言， 并不是说，函数的每次求值结果都相同。 而是说，任何函数都不会修改它的执行环境。  例如，对于从屏幕上读取字符的函数， 每次调用，并不一定会返回相同的值。 但是，执行后，它确实不会影响环境中">
 
 
 
@@ -127,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://thzt.github.io/2015/03/27/purity/">
+  <link rel="canonical" href="https://thzt.github.io/2015/03/27/purity/"/>
 
 
 
@@ -159,7 +157,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -177,14 +175,14 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">何幻</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">Programming is about ideas, <br>languages are just a way to express them.</p>
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
       
   </div>
 
@@ -207,7 +205,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -217,7 +215,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -227,7 +225,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -264,8 +262,8 @@
     <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/27/purity/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -301,7 +299,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -350,98 +348,101 @@
         <p>表达式是在环境中求值的。</p>
 <p>如果允许表达式改变环境，</p>
 <p>那么，其他表达式的求值结果，就是不可预料的。</p>
-<p><br></p>
+<p><br/></p>
 <p>环境，是专业术语，也可称为执行环境，</p>
 <p>里面保存的是，变量和值的绑定关系。</p>
-<p><br></p>
+<p><br/></p>
 <p>Haskell是一门纯函数式语言，</p>
 <p>并不是说，函数的每次求值结果都相同。</p>
 <p>而是说，<strong>任何函数都不会修改它的执行环境</strong>。</p>
-<p><br></p>
+<p><br/></p>
 <p>例如，对于从屏幕上读取字符的函数，</p>
 <p>每次调用，并不一定会返回相同的值。</p>
 <p>但是，执行后，它确实不会影响环境中的绑定关系。</p>
-<p><br></p>
+<p><br/></p>
 <p>因此，输入输出操作，也是纯函数，</p>
 <p>理解执行环境和现实世界的区别，是关键。</p>
-<p><br></p>
-<h2 id="IO"><a href="#IO" class="headerlink" title="IO"></a><strong>IO</strong></h2><p>Haskell是一门静态强类型的语言。</p>
+<p><br/></p>
+<h2 id="io"><strong>IO</strong></h2>
+<p>Haskell是一门静态强类型的语言。</p>
 <p>任何表达式在编译前类型都是确定的。</p>
-<p><br></p>
+<p><br/></p>
 <p>输入输出与IO a类型有关。</p>
-<p>其中，IO是类型构造器，:k IO = <em> -&gt; </em></p>
+<p>其中，IO是类型构造器，:k IO = * -&gt; *</p>
 <p>因此，IO a才是一个具体类型。</p>
-<p><br></p>
+<p><br/></p>
 <p>IO是如何定义的呢？</p>
 <p>type IO a = World -&gt; (a, World)</p>
 <p>World类型的值表示现实世界的状态。</p>
-<p><br></p>
+<p><br/></p>
 <p>IO a类型的值是一个函数，它接受现实世界的当前状态作为参数，</p>
 <p>返回一个元组，这个元组由类型a的值和对现实世界改变后的状态构成。</p>
-<p><br></p>
+<p><br/></p>
 <p>由于，我们并不需要手动传递World类型的值作为参数来调用，</p>
 <p>所以，应该<strong>把IO a类型的值理解为一个惰性求值的表达式</strong>，</p>
 <p>对该表达式按需求值，得到一个a类型的值。</p>
-<p><br></p>
+<p><br/></p>
 <p>IO a类型的表达式，称为<strong>action</strong>。</p>
 <p>IO a类型的action中，惰性包含了一个a类型的值。</p>
-<p><br></p>
+<p><br/></p>
 <p>例如：</p>
 <p>getChar :: IO Char</p>
 <p>求值getChar表达式，就会得到一个Char类型的值。</p>
-<p><br></p>
+<p><br/></p>
 <p>例如：</p>
 <p>IO ( )</p>
 <p>其中，( )表示空元组类型，该类型只有一个值，空元组( )。</p>
 <p>“( )”既可以表示类型，又可以表示值，取决于它出现的上下文。</p>
 <p>另外，Haskell中习惯将空元组看做无用数据。</p>
-<p><br></p>
+<p><br/></p>
 <p>在IO ( )中，( )是作为IO类型构造器的参数出现的，表示空元组类型，</p>
 <p>所以说，IO ( )类型的action中，惰性包含了一个空元组值。</p>
-<p><br></p>
+<p><br/></p>
 <p>例如：</p>
 <p>putStrLn :: String -&gt; IO ( )</p>
 <p>putStrLn是一个函数，</p>
 <p>它接受String类型的值作为参数，</p>
 <p>返回一个IO ( )类型的action。</p>
-<p><br></p>
-<h2 id="do"><a href="#do" class="headerlink" title="do"></a><strong>do</strong></h2><p>main :: IO ( )</p>
+<p><br/></p>
+<h2 id="do"><strong>do</strong></h2>
+<p>main :: IO ( )</p>
 <p>main = do</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn “Please input: “</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;inpStr &lt;- getLine</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn $ “Hello “ ++ inpStr</p>
-<p><br></p>
+<p>    putStrLn "Please input: "</p>
+<p>    inpStr &lt;- getLine</p>
+<p>    putStrLn $ "Hello " ++ inpStr</p>
+<p><br/></p>
 <p>以上程序定义了main函数，是一个IO ( )类型的action。</p>
-<p><br></p>
+<p><br/></p>
 <p>do关键字，是Haskell中的一种写法，</p>
 <p>用来表示顺序执行。</p>
-<p><br></p>
+<p><br/></p>
 <p>其中，</p>
 <p>putStrLn :: String -&gt; IO ( )</p>
 <p>getLine :: IO String</p>
-<p><br></p>
-<p>putStrLn $ “Hello “ ++ inpStr</p>
-<p>= putStrLn ( “Hello “ ++ inpStr )</p>
-<p><br></p>
+<p><br/></p>
+<p>putStrLn $ "Hello " ++ inpStr</p>
+<p>= putStrLn ( "Hello " ++ inpStr )</p>
+<p><br/></p>
 <p>因此，</p>
-<p>putStrLn “Please input: “ :: IO ( )，在屏幕上输出字符串“Please input: ”，</p>
+<p>putStrLn "Please input: " :: IO ( )，在屏幕上输出字符串“Please input: ”，</p>
 <p>inpStr &lt;- getLine，求值惰性表达式getLine，<strong>把action里面包含的值拿出来</strong>，绑定到inpStr上。</p>
-<p>putStrLn $ “Hello “ ++ inpStr，在屏幕上输出字符串”Hello “与变量inpStr连接后的结果。</p>
-<p><br></p>
+<p>putStrLn $ "Hello " ++ inpStr，在屏幕上输出字符串"Hello "与变量inpStr连接后的结果。</p>
+<p><br/></p>
 <p>IO操作，每次执行的效果并不相同，</p>
 <p>但<strong>仍然都是纯函数</strong>，</p>
 <p>在于它们不会修改执行环境中的变量绑定关系。</p>
-<p><br></p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，</p>
 <p>这种说法，其实是为了解释给不熟悉的人看的。</p>
 <p>事实上，<strong>Haskell中的任何函数都是纯函数</strong>。</p>
-<p><br></p>
+<p><br/></p>
 <p>类似的，</p>
 <p>Haskell语言中Bug的数量可以控制到非常少，</p>
 <p>并不是因为通过Monad将IO和其他函数分离开，</p>
 <p>而是因为任何函数都不能改变环境中变量的绑定关系，</p>
 <p>即，函数的纯粹性。</p>
-<p><br></p>
+<p><br/></p>
 <p>此外，Monad，Applicative和Functor这些类型类，</p>
 <p>提高了语言的抽象程度，让复杂度更可控，</p>
 <p>我想，这才是Bug数量少的真正原因吧。</p>
@@ -542,7 +543,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -553,7 +554,9 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
           <p class="site-author-name" itemprop="name"></p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -564,7 +567,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">263</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -632,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IO"><span class="nav-number">1.</span> <span class="nav-text">IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#do"><span class="nav-number">2.</span> <span class="nav-text">do</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">3.</span> <span class="nav-text">结语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#io"><span class="nav-number">1.</span> <span class="nav-text">IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#do"><span class="nav-number">2.</span> <span class="nav-text">do</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">3.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>
@@ -652,7 +655,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -664,12 +667,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 </div>
@@ -816,7 +819,7 @@
   
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
 <script src="/js/katex.js"></script>
 </body>

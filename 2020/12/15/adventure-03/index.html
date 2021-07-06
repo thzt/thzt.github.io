@@ -4,10 +4,10 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
@@ -17,8 +17,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -36,7 +36,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -70,11 +70,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
-
-
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
 
@@ -82,24 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
 
 
 
-<meta name="description" content="前两篇文章中，我们介绍了软件开发的时间线索，和软件系统的空间关系， 这使得我们可以将自己的工作，看成为历史长河中的一瞬， 或者看成庞大软件体系中的一个部分。  然而，如果考察软件设计的话，只考虑软件自身是还不够的， 还要考虑人的因素，因为软件终究还是要由人来做出来的。  所以本文就来探讨一下，语言、模式、工程 和 领域分层。 看看这些方面的内容，在软件设计过程中起到了什么作用。 语言在我看来，自然">
+<meta name="description" content="前两篇文章中，我们介绍了软件开发的时间线索，和软件系统的空间关系， 这使得我们可以将自己的工作，看成为历史长河中的一瞬， 或者看成庞大软件体系中的一个部分。  然而，如果考察软件设计的话，只考虑软件自身是还不够的， 还要考虑人的因素，因为软件终究还是要由人来做出来的。  所以本文就来探讨一下，语言、模式、工程 和 领域分层。 看看这些方面的内容，在软件设计过程中起到了什么作用。 语言 在我看来，自">
 <meta property="og:type" content="article">
 <meta property="og:title" content="软件设计奇遇记（三）：人本主义">
 <meta property="og:url" content="https://thzt.github.io/2020/12/15/adventure-03/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="前两篇文章中，我们介绍了软件开发的时间线索，和软件系统的空间关系， 这使得我们可以将自己的工作，看成为历史长河中的一瞬， 或者看成庞大软件体系中的一个部分。  然而，如果考察软件设计的话，只考虑软件自身是还不够的， 还要考虑人的因素，因为软件终究还是要由人来做出来的。  所以本文就来探讨一下，语言、模式、工程 和 领域分层。 看看这些方面的内容，在软件设计过程中起到了什么作用。 语言在我看来，自然">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-12T12:16:52.532Z">
+<meta property="og:description" content="前两篇文章中，我们介绍了软件开发的时间线索，和软件系统的空间关系， 这使得我们可以将自己的工作，看成为历史长河中的一瞬， 或者看成庞大软件体系中的一个部分。  然而，如果考察软件设计的话，只考虑软件自身是还不够的， 还要考虑人的因素，因为软件终究还是要由人来做出来的。  所以本文就来探讨一下，语言、模式、工程 和 领域分层。 看看这些方面的内容，在软件设计过程中起到了什么作用。 语言 在我看来，自">
+<meta property="article:published_time" content="2020-12-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-12T12:16:52.532Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="软件设计奇遇记（三）：人本主义">
-<meta name="twitter:description" content="前两篇文章中，我们介绍了软件开发的时间线索，和软件系统的空间关系， 这使得我们可以将自己的工作，看成为历史长河中的一瞬， 或者看成庞大软件体系中的一个部分。  然而，如果考察软件设计的话，只考虑软件自身是还不够的， 还要考虑人的因素，因为软件终究还是要由人来做出来的。  所以本文就来探讨一下，语言、模式、工程 和 领域分层。 看看这些方面的内容，在软件设计过程中起到了什么作用。 语言在我看来，自然">
 
 
 
@@ -127,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://thzt.github.io/2020/12/15/adventure-03/">
+  <link rel="canonical" href="https://thzt.github.io/2020/12/15/adventure-03/"/>
 
 
 
@@ -159,7 +157,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -177,14 +175,14 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">何幻</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">Programming is about ideas, <br>languages are just a way to express them.</p>
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
       
   </div>
 
@@ -207,7 +205,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -217,7 +215,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -227,7 +225,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -264,8 +262,8 @@
     <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/12/15/adventure-03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -301,7 +299,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -350,96 +348,101 @@
         <p>前两篇文章中，我们介绍了软件开发的时间线索，和软件系统的空间关系，</p>
 <p>这使得我们可以将自己的工作，看成为历史长河中的一瞬，</p>
 <p>或者看成庞大软件体系中的一个部分。</p>
-<p><br></p>
+<p><br/></p>
 <p>然而，如果考察软件设计的话，只考虑软件自身是还不够的，</p>
 <p>还要考虑人的因素，因为软件终究还是要由人来做出来的。</p>
-<p><br></p>
+<p><br/></p>
 <p>所以本文就来探讨一下，语言、模式、工程 和 领域分层。</p>
 <p>看看这些方面的内容，在软件设计过程中起到了什么作用。</p>
-<h3 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h3><p>在我看来，自然语言是用来传递信息用的，编程语言也是如此，</p>
+<h3 id="语言">语言</h3>
+<p>在我看来，自然语言是用来传递信息用的，编程语言也是如此，</p>
 <p>编程语言在将开发者大脑中的想法，转换为机器实现的这个过程中，起到了桥梁作用。</p>
 <p>因此，应该着眼于合理的信息转换方式，而不是特定的编程语言。</p>
-<p><br></p>
+<p><br/></p>
 <p>编程语言也不是孤立存在的，</p>
 <p>选用不同编程语言，等于选择了一个社区，一套软件生态，</p>
 <p>会认识不同的人，跟现有的不同系统进行对接。</p>
-<p><br></p>
+<p><br/></p>
 <p>但不论怎样说，有能力使用多语种编程语言进行编程，是至关重要的，</p>
 <p>这会让我们思考问题的方式从一开始就能摆脱宗教迷信，</p>
 <p>没有哪一种解决方案是最好的，只有最适合于当下的。</p>
-<p><br></p>
+<p><br/></p>
 <p>最后，在职业生涯的某个阶段，我们很有必要去学习编程语言本身相关的知识。</p>
 <p>一方面，能帮助我们了解编程语言到底是如何工作的，</p>
 <p>另一方面，在必要的时候，能够发明自己的语言，让信息转换变得更加直接。</p>
-<h3 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h3><p>有一些设计模式相关的资料，容易给人一种错觉，</p>
+<h3 id="模式">模式</h3>
+<p>有一些设计模式相关的资料，容易给人一种错觉，</p>
 <p>认为设计模式只是有关于软件内部结构的，</p>
 <p>毕竟工厂模式和适配器模式，它们最容易看到的区别是实现方式不同。</p>
-<p><br></p>
+<p><br/></p>
 <p>我不这么认为，我更倾向于把模式实现当做现象，</p>
 <p>而把模式要解决的问题，以及模式所固化下来的解题套路，看成本质。</p>
-<p><br></p>
+<p><br/></p>
 <p>有什么样的问题，就有什么样的解决方案，而不是反之。</p>
 <p>人为之物，之所以是这样而不是那样，是因为有不同的动机。</p>
-<p><br></p>
+<p><br/></p>
 <p>所以从人的角度来设计模式，只考虑模式的内部表现则只看到了三分之一，</p>
 <p>剩下的三分之二是，特定模式所暴露出来的接口，</p>
 <p>以及人们选用这个模式背后的用意。</p>
-<p><br></p>
+<p><br/></p>
 <p>因此，设计模式是一种人们使用特定方式解决特定问题的套路。</p>
 <p>特定方式：接口设计，</p>
 <p>特定问题：用意，动机，问题，</p>
 <p>套路：实现方式，代码结构。</p>
-<p><br></p>
+<p><br/></p>
 <p>我更关心接口层，因为接口是系统的界面，告知我们如何与现有功能进行交互。</p>
-<h3 id="工程"><a href="#工程" class="headerlink" title="工程"></a>工程</h3><p>广义上来讲，工程是一群人为达到某种目的，</p>
+<h3 id="工程">工程</h3>
+<p>广义上来讲，工程是一群人为达到某种目的，</p>
 <p>在一个较长时间周期内，进行协作活动的过程。</p>
 <p>所以，工程必然会涉及到的要素有：人，目标，时间，协作。</p>
-<p><br></p>
+<p><br/></p>
 <p>现实中的工程，所能利用的资源也都是有限的。</p>
 <p>所以，工程化应考虑这样一个问题，</p>
 <p>哪些人以怎样的协作方式，在资源有限的情况下，达成什么目标。</p>
-<p><br></p>
+<p><br/></p>
 <p>不同领域的工作，体力劳动与知识劳动的占比会有不同。</p>
 <p>体力劳动的成果容易量化，而知识劳动则不然，</p>
 <p>体力劳动经常能直接创造成果，而知识劳动的成果不能直接被看到。</p>
-<p><br></p>
+<p><br/></p>
 <p>软件开发是一项知识密集型工作，开发活动是知识的创造过程。</p>
-<p><br></p>
+<p><br/></p>
 <p>知识工作具有不确定性，没有人能预先评估一项知识工作需要多久才能做完。</p>
 <p>所以，软件工程中的各种方法论，都是在用不同的方法回答，</p>
 <p>如何对不确定性进行管控。</p>
-<p><br></p>
+<p><br/></p>
 <p>不论是敏捷开发，精益看板，极限编程，都能看到不确定性被管控的影子。</p>
-<h3 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h3><p>首先，分层是架构模式的一种，它将软件分成若干个水平层，</p>
+<h3 id="分层">分层</h3>
+<p>首先，分层是架构模式的一种，它将软件分成若干个水平层，</p>
 <p>每一层都有清晰的角色和分工，不需要知道其他层的细节，</p>
 <p>层与层之间通过接口通信。</p>
-<p><br></p>
+<p><br/></p>
 <p>其次，开发者之间的合作，也可以用分层的方式来划分，我称之为领域分层，</p>
 <p>人们常说的 “上层开发”、“底层开发”，就是这个含义，</p>
 <p>指的是软件生产的上下游关系。</p>
-<p><br></p>
+<p><br/></p>
 <p>每一层的开发者，都会用到下一层次开发者提供的 “软件材料”，</p>
 <p>经过加工处理，添加业务逻辑，向更上层提供新的服务。</p>
-<p><br></p>
+<p><br/></p>
 <p>开发者的价值并不在于自己的工作处于哪个层次中，</p>
 <p>而在于如何更好的完成本层次的 “加工” 工作。</p>
 <p>对下层资源是否熟悉，加工过程是否可控，以及向上提供的服务好不好用。</p>
-<p><br></p>
+<p><br/></p>
 <p>因此，“底层开发” 并没有什么神秘感可言，</p>
 <p>也不是非要每个人亲自动手才行，</p>
 <p>须知底层开发，也不是从零开始，他们同样是站在了巨人的肩膀之上。</p>
-<p><br></p>
+<p><br/></p>
 <p>所以，对自己所在层次的工具或库熟练掌握，并对当前领域有深入思考，</p>
 <p>这才是一个工程师的核心竞争力，才是专业的人做专业的事。</p>
-<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>软件开发是一项由人参与的知识生产活动，所以千万不能只看软件不看人。</p>
+<h3 id="结语">结语</h3>
+<p>软件开发是一项由人参与的知识生产活动，所以千万不能只看软件不看人。</p>
 <p>人，才是决定软件研发活动的核心要素。</p>
-<p><br></p>
+<p><br/></p>
 <p>本文从编程语言，设计模式，软件工程，领域分层，四个角度来进行探讨，</p>
 <p>从新的视角进行观察，着重看它们是如何与人产生关联的。</p>
-<p><br></p>
+<p><br/></p>
 <p>以人为本，则知识的创造和传递过程，才会更加顺畅，</p>
 <p>才能避免过分依赖技术武器而走弯路。</p>
-<p><br></p>
+<p><br/></p>
 <p>这可能是一件有趣的事情吧。</p>
 
       
@@ -538,7 +541,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -549,7 +552,9 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
           <p class="site-author-name" itemprop="name"></p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -560,7 +565,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">263</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -648,7 +653,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -660,12 +665,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 </div>
@@ -812,7 +817,7 @@
   
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
 <script src="/js/katex.js"></script>
 </body>

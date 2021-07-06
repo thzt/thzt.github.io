@@ -4,10 +4,10 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
@@ -17,8 +17,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -36,7 +36,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -70,11 +70,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
-
-
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
 
@@ -82,24 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
 
 
 
-<meta name="description" content="本文借助阶乘函数，在lisp中推导了Y combinator。  原始的fact定义(define fact &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(lambda (n) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(if (= n 0) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;">
+<meta name="description" content="本文借助阶乘函数，在lisp中推导了Y combinator。  原始的fact定义 (define fact     (lambda (n)         (if (&#x3D; n 0)             1             (* n (fact (- n 1))))))  定义下文中用到的两个函数high-fact与fact-proto (define high-fact     (l">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Y combinator in lisp">
 <meta property="og:url" content="https://thzt.github.io/2015/01/27/y-combinator-in-lisp/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="本文借助阶乘函数，在lisp中推导了Y combinator。  原始的fact定义(define fact &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(lambda (n) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(if (= n 0) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-12T12:16:52.466Z">
+<meta property="og:description" content="本文借助阶乘函数，在lisp中推导了Y combinator。  原始的fact定义 (define fact     (lambda (n)         (if (&#x3D; n 0)             1             (* n (fact (- n 1))))))  定义下文中用到的两个函数high-fact与fact-proto (define high-fact     (l">
+<meta property="article:published_time" content="2015-01-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-12T12:16:52.466Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Y combinator in lisp">
-<meta name="twitter:description" content="本文借助阶乘函数，在lisp中推导了Y combinator。  原始的fact定义(define fact &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(lambda (n) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(if (= n 0) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;">
 
 
 
@@ -127,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://thzt.github.io/2015/01/27/y-combinator-in-lisp/">
+  <link rel="canonical" href="https://thzt.github.io/2015/01/27/y-combinator-in-lisp/"/>
 
 
 
@@ -159,7 +157,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -177,14 +175,14 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">何幻</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">Programming is about ideas, <br>languages are just a way to express them.</p>
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
       
   </div>
 
@@ -207,7 +205,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -217,7 +215,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -227,7 +225,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -264,8 +262,8 @@
     <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/01/27/y-combinator-in-lisp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -301,7 +299,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -348,128 +346,137 @@
 
       
         <p>本文借助阶乘函数，在lisp中推导了Y combinator。</p>
-<p><br></p>
-<h2 id="原始的fact定义"><a href="#原始的fact定义" class="headerlink" title="原始的fact定义"></a><strong>原始的fact定义</strong></h2><p>(define fact</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 0)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n (fact (- n 1))))))</p>
-<p><br></p>
-<h2 id="定义下文中用到的两个函数high-fact与fact-proto"><a href="#定义下文中用到的两个函数high-fact与fact-proto" class="headerlink" title="定义下文中用到的两个函数high-fact与fact-proto"></a><strong>定义下文中用到的两个函数high-fact与fact-proto</strong></h2><p>(define high-fact</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 0)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n ((f f) (- n 1)))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
+<p><br/></p>
+<h2 id="原始的fact定义"><strong>原始的fact定义</strong></h2>
+<p>(define fact</p>
+<p>    (lambda (n)</p>
+<p>        (if (= n 0)</p>
+<p>            1</p>
+<p>            (* n (fact (- n 1))))))</p>
+<p><br/></p>
+<h2 id="定义下文中用到的两个函数high-fact与fact-proto"><strong>定义下文中用到的两个函数high-fact与fact-proto</strong></h2>
+<p>(define high-fact</p>
+<p>    (lambda (f)</p>
+<p>        (lambda (n)</p>
+<p>            (if (= n 0)</p>
+<p>                1</p>
+<p>                (* n ((f f) (- n 1)))</p>
+<p>            )</p>
+<p>        )</p>
+<p>    )</p>
 <p>)</p>
-<p><br></p>
+<p><br/></p>
 <p>(define fact-proto</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (h)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 0)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* x (h (- x 1)))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
+<p>    (lambda (h)</p>
+<p>        (lambda (x)</p>
+<p>            (if (= x 0)</p>
+<p>                1</p>
+<p>                (* x (h (- x 1)))</p>
+<p>            )</p>
+<p>        )</p>
+<p>    )</p>
 <p>)</p>
-<p><br></p>
-<h2 id="fact就是high-fact对自身的调用"><a href="#fact就是high-fact对自身的调用" class="headerlink" title="fact就是high-fact对自身的调用"></a><strong>fact就是high-fact对自身的调用</strong></h2><p>fact&lt;=&gt;</p>
+<p><br/></p>
+<h2 id="fact就是high-fact对自身的调用"><strong>fact就是high-fact对自身的调用</strong></h2>
+<p>fact&lt;=&gt;</p>
 <p>(high-fact high-fact)</p>
-<p><br></p>
-<h2 id="使用一个辅助函数消除重复出现的两个high-fact"><a href="#使用一个辅助函数消除重复出现的两个high-fact" class="headerlink" title="使用一个辅助函数消除重复出现的两个high-fact"></a><strong>使用一个辅助函数消除重复出现的两个high-fact</strong></h2><p>fact&lt;=&gt;</p>
+<p><br/></p>
+<h2 id="使用一个辅助函数消除重复出现的两个high-fact"><strong>使用一个辅助函数消除重复出现的两个high-fact</strong></h2>
+<p>fact&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (g) (g g))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;high-fact</p>
+<p>    (lambda (g) (g g))</p>
+<p>    high-fact</p>
 <p>)</p>
-<p><br></p>
-<h2 id="代入high-fact的定义"><a href="#代入high-fact的定义" class="headerlink" title="代入high-fact的定义"></a><strong>代入high-fact的定义</strong></h2><p>fact&lt;=&gt;</p>
+<p><br/></p>
+<h2 id="代入high-fact的定义"><strong>代入high-fact的定义</strong></h2>
+<p>fact&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (g) (g g))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;;; 变换前</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 0)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((f f) (- n 1)))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
+<p>    (lambda (g) (g g))</p>
+<p>    (lambda (f)</p>
+<p>        (lambda (n)</p>
+<p>            ;;;; 变换前</p>
+<p>            (if (= n 0)</p>
+<p>                1</p>
+<p>                (* n</p>
+<p>                    ((f f) (- n 1)))</p>
+<p>            )</p>
+<p>        )</p>
+<p>    )</p>
 <p>)</p>
-<p><br></p>
-<h2 id="将局部表达式变换为对fact-proto的调用"><a href="#将局部表达式变换为对fact-proto的调用" class="headerlink" title="将局部表达式变换为对fact-proto的调用"></a><strong>将局部表达式变换为对fact-proto的调用</strong></h2><p>fact&lt;=&gt;</p>
+<p><br/></p>
+<h2 id="将局部表达式变换为对fact-proto的调用"><strong>将局部表达式变换为对fact-proto的调用</strong></h2>
+<p>fact&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (g) (g g))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;;; 变换后</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-proto (f f))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>)    </p>
-<p><br></p>
-<h2 id="将fact-proto变成形参"><a href="#将fact-proto变成形参" class="headerlink" title="将fact-proto变成形参"></a><strong>将fact-proto变成形参</strong></h2><p>fact&lt;=&gt;</p>
-<p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (k)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (g) (g g))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (f f))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;fact-proto</p>
+<p>    (lambda (g) (g g))</p>
+<p>    (lambda (f)</p>
+<p>        (lambda (n)</p>
+<p>            ;;;; 变换后</p>
+<p>            (</p>
+<p>                (fact-proto (f f))</p>
+<p>                n</p>
+<p>            )</p>
+<p>        )</p>
+<p>    )</p>
 <p>)</p>
-<p><br></p>
-<h2 id="得到Y-combinator"><a href="#得到Y-combinator" class="headerlink" title="得到Y combinator"></a><strong>得到Y combinator</strong></h2><p>fact&lt;=&gt;</p>
+<p><br/></p>
+<h2 id="将fact-proto变成形参"><strong>将fact-proto变成形参</strong></h2>
+<p>fact&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;y-combinator</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;fact-proto</p>
+<p>    (lambda (k)</p>
+<p>        (</p>
+<p>            (lambda (g) (g g))</p>
+<p>            (lambda (f)</p>
+<p>                (lambda (n)</p>
+<p>                    (</p>
+<p>                        (k (f f))</p>
+<p>                        n</p>
+<p>                    )</p>
+<p>                )</p>
+<p>            )</p>
+<p>        )</p>
+<p>    )</p>
+<p>    fact-proto</p>
 <p>)</p>
-<p><br></p>
+<p><br/></p>
+<h2 id="得到y-combinator"><strong>得到Y combinator</strong></h2>
+<p>fact&lt;=&gt;</p>
+<p>(</p>
+<p>    y-combinator</p>
+<p>    fact-proto</p>
+<p>)</p>
+<p><br/></p>
 <p>(define y-combinator</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (k)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (g) (g g))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (f f))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)</p>
+<p>    (lambda (k)</p>
+<p>        (</p>
+<p>            (lambda (g) (g g))</p>
+<p>            (lambda (f)</p>
+<p>                (lambda (n)</p>
+<p>                    (</p>
+<p>                        (k (f f))</p>
+<p>                        n</p>
+<p>                    )</p>
+<p>                )</p>
+<p>            )</p>
+<p>        )</p>
+<p>    )</p>
 <p>)</p>
-<p><br></p>
+<p><br/></p>
 <p>紧凑一点</p>
 <p>(define y-combinator</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (k)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((lambda (g) (g g))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((k (f f)) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n))))))</p>
-<p><br></p>
-<h2 id="扩展为多参数形式"><a href="#扩展为多参数形式" class="headerlink" title="扩展为多参数形式"></a><strong>扩展为多参数形式</strong></h2><p>(define y-combinator</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (k)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((lambda (g) (g g))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda ns</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(apply (k (f f)) ns))))))</p>
+<p>    (lambda (k)</p>
+<p>        ((lambda (g) (g g))</p>
+<p>        (lambda (f)</p>
+<p>            (lambda (n)</p>
+<p>                ((k (f f))</p>
+<p>                n))))))</p>
+<p><br/></p>
+<h2 id="扩展为多参数形式"><strong>扩展为多参数形式</strong></h2>
+<p>(define y-combinator</p>
+<p>    (lambda (k)</p>
+<p>        ((lambda (g) (g g))</p>
+<p>        (lambda (f)</p>
+<p>            (lambda ns</p>
+<p>                (apply (k (f f)) ns))))))</p>
 
       
     </div>
@@ -567,7 +574,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -578,7 +585,9 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
           <p class="site-author-name" itemprop="name"></p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -589,7 +598,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">263</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -657,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原始的fact定义"><span class="nav-number">1.</span> <span class="nav-text">原始的fact定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义下文中用到的两个函数high-fact与fact-proto"><span class="nav-number">2.</span> <span class="nav-text">定义下文中用到的两个函数high-fact与fact-proto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fact就是high-fact对自身的调用"><span class="nav-number">3.</span> <span class="nav-text">fact就是high-fact对自身的调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用一个辅助函数消除重复出现的两个high-fact"><span class="nav-number">4.</span> <span class="nav-text">使用一个辅助函数消除重复出现的两个high-fact</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代入high-fact的定义"><span class="nav-number">5.</span> <span class="nav-text">代入high-fact的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将局部表达式变换为对fact-proto的调用"><span class="nav-number">6.</span> <span class="nav-text">将局部表达式变换为对fact-proto的调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将fact-proto变成形参"><span class="nav-number">7.</span> <span class="nav-text">将fact-proto变成形参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#得到Y-combinator"><span class="nav-number">8.</span> <span class="nav-text">得到Y combinator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展为多参数形式"><span class="nav-number">9.</span> <span class="nav-text">扩展为多参数形式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原始的fact定义"><span class="nav-number">1.</span> <span class="nav-text">原始的fact定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义下文中用到的两个函数high-fact与fact-proto"><span class="nav-number">2.</span> <span class="nav-text">定义下文中用到的两个函数high-fact与fact-proto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fact就是high-fact对自身的调用"><span class="nav-number">3.</span> <span class="nav-text">fact就是high-fact对自身的调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用一个辅助函数消除重复出现的两个high-fact"><span class="nav-number">4.</span> <span class="nav-text">使用一个辅助函数消除重复出现的两个high-fact</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代入high-fact的定义"><span class="nav-number">5.</span> <span class="nav-text">代入high-fact的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将局部表达式变换为对fact-proto的调用"><span class="nav-number">6.</span> <span class="nav-text">将局部表达式变换为对fact-proto的调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将fact-proto变成形参"><span class="nav-number">7.</span> <span class="nav-text">将fact-proto变成形参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#得到y-combinator"><span class="nav-number">8.</span> <span class="nav-text">得到Y combinator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展为多参数形式"><span class="nav-number">9.</span> <span class="nav-text">扩展为多参数形式</span></a></li></ol></div>
             
 
           </div>
@@ -677,7 +686,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -689,12 +698,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 </div>
@@ -841,7 +850,7 @@
   
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
 <script src="/js/katex.js"></script>
 </body>

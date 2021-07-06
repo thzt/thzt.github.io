@@ -4,10 +4,10 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
@@ -17,8 +17,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -36,7 +36,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -70,11 +70,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
-
-
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
 
@@ -82,24 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
 
 
 
-<meta name="description" content="fact的尾递归化 非尾递归的fact定义 (define fact &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(lambda (x) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(if (= x 1) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
+<meta name="description" content="fact的尾递归化  非尾递归的fact定义 (define fact     (lambda (x)         (if (&#x3D; x 1)             1             (* x (fact (- x 1))))))  尾递归的fact-tail定义 (define fact-tail     (lambda (x k)         (if (&#x3D; x 1)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用CPS将fact和fib改为tail recursion">
 <meta property="og:url" content="https://thzt.github.io/2015/01/30/cps-and-tail-recursion/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="fact的尾递归化 非尾递归的fact定义 (define fact &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(lambda (x) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(if (= x 1) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-12T12:16:52.467Z">
+<meta property="og:description" content="fact的尾递归化  非尾递归的fact定义 (define fact     (lambda (x)         (if (&#x3D; x 1)             1             (* x (fact (- x 1))))))  尾递归的fact-tail定义 (define fact-tail     (lambda (x k)         (if (&#x3D; x 1)">
+<meta property="article:published_time" content="2015-01-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-12T12:16:52.467Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用CPS将fact和fib改为tail recursion">
-<meta name="twitter:description" content="fact的尾递归化 非尾递归的fact定义 (define fact &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(lambda (x) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(if (= x 1) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
 
 
 
@@ -127,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://thzt.github.io/2015/01/30/cps-and-tail-recursion/">
+  <link rel="canonical" href="https://thzt.github.io/2015/01/30/cps-and-tail-recursion/"/>
 
 
 
@@ -159,7 +157,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -177,14 +175,14 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">何幻</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">Programming is about ideas, <br>languages are just a way to express them.</p>
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
       
   </div>
 
@@ -207,7 +205,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -217,7 +215,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -227,7 +225,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -264,8 +262,8 @@
     <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/01/30/cps-and-tail-recursion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -301,7 +299,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -347,129 +345,131 @@
       
 
       
-        <h2 id="fact的尾递归化"><a href="#fact的尾递归化" class="headerlink" title="fact的尾递归化"></a><strong>fact的尾递归化</strong></h2><p><br></p>
+        <h2 id="fact的尾递归化"><strong>fact的尾递归化</strong></h2>
+<p><br/></p>
 <p>非尾递归的fact定义</p>
 <p>(define fact</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 1)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* x (fact (- x 1))))))</p>
-<p><br></p>
+<p>    (lambda (x)</p>
+<p>        (if (= x 1)</p>
+<p>            1</p>
+<p>            (* x (fact (- x 1))))))</p>
+<p><br/></p>
 <p>尾递归的fact-tail定义</p>
 <p>(define fact-tail</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x k)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 1)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k 1)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail (- x 1) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (y) (k (* y x)))</strong>))))</p>
-<p><br></p>
+<p>    (lambda (x k)</p>
+<p>        (if (= x 1)</p>
+<p>            <strong>(k 1)</strong></p>
+<p>            (fact-tail (- x 1)</p>
+<p>                <strong>(lambda (y) (k (* y x)))</strong>))))</p>
+<p><br/></p>
 <p>分析调用过程</p>
-<p>(fact-tail 3 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n))</p>
+<p>(fact-tail 3</p>
+<p>    (lambda(n) n))</p>
 <p>&lt;=&gt;</p>
-<p>(fact-tail 2 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 3)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
+<p>(fact-tail 2</p>
+<p>    (lambda (y) (</p>
+<p>        (lambda(n) n)</p>
+<p>        (* y 3)</p>
+<p>    )))</p>
 <p>&lt;=&gt;</p>
 <p>(fact-tail 1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 2)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
+<p>    (lambda (y) (</p>
+<p>        (lambda (z) (</p>
+<p>            (lambda(n) n)</p>
+<p>            (* z 3)</p>
+<p>        ))</p>
+<p>        (* y 2)</p>
+<p>    )))</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 2)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>    (lambda (y) (</p>
+<p>        (lambda (z) (</p>
+<p>            (lambda(n) n)</p>
+<p>            (* z 3)</p>
+<p>        ))</p>
+<p>        (* y 2)</p>
+<p>    ))</p>
+<p>    1</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(* 1 2)</p>
+<p>    (lambda (z) (</p>
+<p>        (lambda(n) n)</p>
+<p>        (* z 3)</p>
+<p>    ))</p>
+<p>    (* 1 2)</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(<em> (</em> 1 2) 3)</p>
+<p>    (lambda(n) n)</p>
+<p>    (* (* 1 2) 3)</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
-<p>(<em> (</em> 1 2) 3)</p>
-<p><br></p>
-<h2 id="fib的尾递归化"><a href="#fib的尾递归化" class="headerlink" title="fib的尾递归化"></a><strong>fib的尾递归化</strong></h2><p>非尾递归的fib定义</p>
+<p>(* (* 1 2) 3)</p>
+<p><br/></p>
+<h2 id="fib的尾递归化"><strong>fib的尾递归化</strong></h2>
+<p>非尾递归的fib定义</p>
 <p>(define fib</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (fib (- n 1))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2))))))</p>
-<p><br></p>
+<p>    (lambda (n)</p>
+<p>        (if (&lt;= n 2)</p>
+<p>            1</p>
+<p>            (+ (fib (- n 1))</p>
+<p>                (fib (- n 2))))))</p>
+<p><br/></p>
 <p>尾递归的fib-tail定义</p>
 <p>(define fib-tail</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n k)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k 1)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fib-tail (- n 1)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (x)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fact-tail (- n 2)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (y)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (+ x y))))))</strong>)))</p>
-<p><br></p>
+<p>    (lambda (n k)</p>
+<p>        (if (&lt;= n 2)</p>
+<p>            <strong>(k 1)</strong></p>
+<p>            <strong>(fib-tail (- n 1)</strong></p>
+<p>                <strong>(lambda (x)</strong></p>
+<p>                    <strong>(fact-tail (- n 2)</strong></p>
+<p>                        <strong>(lambda (y)</strong></p>
+<p>                            <strong>(k (+ x y))))))</strong>)))</p>
+<p><br/></p>
 <p>分析调用过程</p>
 <p>(fib-tail 3</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z))</p>
+<p>    (lambda (z) z))</p>
 <p>&lt;=&gt;</p>
 <p>(fib-tail 2</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail 1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)))))</p>
+<p>    (lambda (x)</p>
+<p>        (fact-tail 1</p>
+<p>            (lambda (y)</p>
+<p>                (</p>
+<p>                    (lambda (z) z)</p>
+<p>                    (+ x y)</p>
+<p>                )))))</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail 1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>    (lambda (x)</p>
+<p>        (fact-tail 1</p>
+<p>            (lambda (y)</p>
+<p>                (</p>
+<p>                    (lambda (z) z)</p>
+<p>                    (+ x y)</p>
+<p>                ))))</p>
+<p>    1</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
 <p>(fact-tail 1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
+<p>    (lambda (y)</p>
+<p>        (</p>
+<p>            (lambda (z) z)</p>
+<p>            (+ 1 y)</p>
+<p>        )))</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>    (lambda (y)</p>
+<p>        (</p>
+<p>            (lambda (z) z)</p>
+<p>            (+ 1 y)</p>
+<p>        ))</p>
+<p>    1</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 1)</p>
+<p>    (lambda (z) z)</p>
+<p>    (+ 1 1)</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
 <p>(+ 1 1)</p>
@@ -570,7 +570,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -581,7 +581,9 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
           <p class="site-author-name" itemprop="name"></p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -592,7 +594,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">263</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -680,7 +682,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -692,12 +694,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 </div>
@@ -844,7 +846,7 @@
   
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
 <script src="/js/katex.js"></script>
 </body>

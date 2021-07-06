@@ -4,10 +4,10 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
@@ -17,8 +17,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -36,7 +36,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -70,11 +70,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
-
-
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
 
@@ -82,24 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
 
 
 
-<meta name="description" content="极小元与最小元设是偏序集，，，  如果，， 则称为的极小元。  如果，， 则称为的最小元。  注意极小元与最小元的区别， 最小元是集合中最小的元素，它与集合中其他元素都可比， 而极小元不一定与集合中其他元素都可比， 只要没有比它小的元素，它就是极小元。  对于有穷集合，极小元一定存在，但最小元不一定存在， 最小元如果存在一定是唯一的，但极小元可能有多个。  良基关系设是集合上的二元关系， 如果不存">
+<meta name="description" content="极小元与最小元 设是偏序集，，，  如果，， 则称为的极小元。  如果，， 则称为的最小元。  注意极小元与最小元的区别， 最小元是集合中最小的元素，它与集合中其他元素都可比， 而极小元不一定与集合中其他元素都可比， 只要没有比它小的元素，它就是极小元。  对于有穷集合，极小元一定存在，但最小元不一定存在， 最小元如果存在一定是唯一的，但极小元可能有多个。  良基关系 设是集合上的二元关系， 如果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="良基归纳法">
 <meta property="og:url" content="https://thzt.github.io/2017/07/30/well-founded-induction/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="极小元与最小元设是偏序集，，，  如果，， 则称为的极小元。  如果，， 则称为的最小元。  注意极小元与最小元的区别， 最小元是集合中最小的元素，它与集合中其他元素都可比， 而极小元不一定与集合中其他元素都可比， 只要没有比它小的元素，它就是极小元。  对于有穷集合，极小元一定存在，但最小元不一定存在， 最小元如果存在一定是唯一的，但极小元可能有多个。  良基关系设是集合上的二元关系， 如果不存">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-12T12:16:52.493Z">
+<meta property="og:description" content="极小元与最小元 设是偏序集，，，  如果，， 则称为的极小元。  如果，， 则称为的最小元。  注意极小元与最小元的区别， 最小元是集合中最小的元素，它与集合中其他元素都可比， 而极小元不一定与集合中其他元素都可比， 只要没有比它小的元素，它就是极小元。  对于有穷集合，极小元一定存在，但最小元不一定存在， 最小元如果存在一定是唯一的，但极小元可能有多个。  良基关系 设是集合上的二元关系， 如果">
+<meta property="article:published_time" content="2017-07-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-12T12:16:52.493Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="良基归纳法">
-<meta name="twitter:description" content="极小元与最小元设是偏序集，，，  如果，， 则称为的极小元。  如果，， 则称为的最小元。  注意极小元与最小元的区别， 最小元是集合中最小的元素，它与集合中其他元素都可比， 而极小元不一定与集合中其他元素都可比， 只要没有比它小的元素，它就是极小元。  对于有穷集合，极小元一定存在，但最小元不一定存在， 最小元如果存在一定是唯一的，但极小元可能有多个。  良基关系设是集合上的二元关系， 如果不存">
 
 
 
@@ -127,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://thzt.github.io/2017/07/30/well-founded-induction/">
+  <link rel="canonical" href="https://thzt.github.io/2017/07/30/well-founded-induction/"/>
 
 
 
@@ -159,7 +157,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -177,14 +175,14 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">何幻</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">Programming is about ideas, <br>languages are just a way to express them.</p>
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
       
   </div>
 
@@ -207,7 +205,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -217,7 +215,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -227,7 +225,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -264,8 +262,8 @@
     <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/07/30/well-founded-induction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -301,7 +299,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -347,91 +345,96 @@
       
 
       
-        <h3 id="极小元与最小元"><a href="#极小元与最小元" class="headerlink" title="极小元与最小元"></a>极小元与最小元</h3><p>设<span data-katex="(A,\leqslant)"></span>是偏序集，<span data-katex="Q\subseteq A"></span>，<span data-katex="y\in Q"></span>，</p>
-<p><br></p>
+        <h3 id="极小元与最小元">极小元与最小元</h3>
+<p>设<span data-katex="(A,\leqslant)"></span>是偏序集，<span data-katex="Q\subseteq A"></span>，<span data-katex="y\in Q"></span>，</p>
+<p><br/></p>
 <p>如果<span data-katex="\forall x\in Q"></span>，<span data-katex="x\leqslant y\Rightarrow x=y"></span>，</p>
 <p>则称<span data-katex="y"></span>为<span data-katex="Q"></span>的<strong>极小元</strong>。</p>
-<p><br></p>
+<p><br/></p>
 <p>如果<span data-katex="\forall x\in Q"></span>，<span data-katex="y\leqslant x"></span>，</p>
 <p>则称<span data-katex="y"></span>为<span data-katex="Q"></span>的<strong>最小元</strong>。</p>
-<p><br></p>
+<p><br/></p>
 <p>注意极小元与最小元的区别，</p>
 <p>最小元是集合中最小的元素，它与集合中其他元素都可比，</p>
 <p>而极小元不一定与集合中其他元素都可比，</p>
 <p>只要没有比它小的元素，它就是极小元。</p>
-<p><br></p>
+<p><br/></p>
 <p>对于有穷集合，极小元一定存在，但最小元不一定存在，</p>
 <p>最小元如果存在一定是唯一的，但极小元可能有多个。</p>
-<p><br></p>
-<h3 id="良基关系"><a href="#良基关系" class="headerlink" title="良基关系"></a>良基关系</h3><p>设<span data-katex="\prec"></span>是集合<span data-katex="A"></span>上的二元关系，</p>
+<p><br/></p>
+<h3 id="良基关系">良基关系</h3>
+<p>设<span data-katex="\prec"></span>是集合<span data-katex="A"></span>上的二元关系，</p>
 <p>如果不存在由<span data-katex="A"></span>中的元素构成的<strong>无穷下降链</strong>，</p>
 <p><span data-katex="\cdots\prec a_i\prec\cdots\prec a_1\prec a_0"></span>，</p>
 <p>则称<span data-katex="\prec"></span>为良基关系（well-founded relation）。</p>
-<p><br></p>
+<p><br/></p>
 <p>若<span data-katex="a\prec b"></span>，则称<span data-katex="a"></span>是<span data-katex="b"></span>的<strong>前趋</strong>。</p>
-<p><br></p>
+<p><br/></p>
 <p>良基关系一定是<strong>非自反的</strong>，也就是说<span data-katex="a\prec a"></span>不成立，</p>
 <p>否则就会有一条无穷下降链，<span data-katex="\cdots\prec a\prec\cdots\prec a\prec a"></span>。</p>
-<p><br></p>
+<p><br/></p>
 <p>一般我们用<span data-katex="\preceq"></span>来表示关系<span data-katex="\prec"></span>的自反闭包，即，</p>
 <p><span data-katex="a\preceq b"></span>，当且仅当，<span data-katex="a=b"></span>或<span data-katex="a\prec b"></span>。</p>
-<p><br></p>
+<p><br/></p>
 <p>良基关系<span data-katex="\prec"></span>的传递闭包<span data-katex="\prec^+"></span>是一个良基关系。</p>
 <p>它的自反传递闭包<span data-katex="\prec^*"></span>是一个偏序关系。</p>
-<p><br></p>
-<h3 id="良基性质"><a href="#良基性质" class="headerlink" title="良基性质"></a>良基性质</h3><p>有时还可以用极小元的概念来定义良基关系。</p>
-<p><br></p>
+<p><br/></p>
+<h3 id="良基性质">良基性质</h3>
+<p>有时还可以用极小元的概念来定义良基关系。</p>
+<p><br/></p>
 <p>设<span data-katex="\prec"></span>是集合<span data-katex="A"></span>上的二元关系，称关系<span data-katex="\prec"></span>是<strong>良基的</strong>，</p>
 <p>当且仅当，<span data-katex="A"></span>的所有非空子集<span data-katex="Q"></span>都含有一个极小元<span data-katex="m\in Q"></span>，</p>
 <p>即，<span data-katex="\forall b\prec m"></span>，<span data-katex="b\notin Q"></span>。</p>
-<p><br></p>
+<p><br/></p>
 <p><strong>（1）充分性</strong></p>
 <p>如果<span data-katex="\prec"></span>是集合<span data-katex="A"></span>上的良基关系，</p>
 <p>则我们可以通过以下方法找出集合<span data-katex="A"></span>的任一子集<span data-katex="Q"></span>中的极小元。</p>
-<p><br></p>
+<p><br/></p>
 <p>取<span data-katex="a_0"></span>为<span data-katex="Q"></span>中的任一元素，</p>
 <p>假设<span data-katex="Q"></span>中已经构造了一条链<span data-katex="a_n\prec\cdots\prec a_0"></span>，</p>
 <p>则在<span data-katex="Q"></span>中，或者存在<span data-katex="b\prec a_n"></span>，或者不存在这样的<span data-katex="b"></span>。</p>
-<p><br></p>
+<p><br/></p>
 <p>如果<span data-katex="Q"></span>中不存在这样的<span data-katex="b"></span>，则停止链的构造，<span data-katex="a_n"></span>就是<span data-katex="Q"></span>的极小元，</p>
 <p>否则，取<span data-katex="a_{n+1}=b"></span>，由于<span data-katex="\prec"></span>是良基的，</p>
 <p>所以，链<span data-katex="\cdots\prec a_i\prec\cdots\prec a_1\prec a_0"></span>的长度是有限的，</p>
 <p>最左边的元素，就是<span data-katex="Q"></span>的极小元。</p>
-<p><br></p>
+<p><br/></p>
 <p><strong>（2）必要性</strong></p>
 <p>如果集合<span data-katex="A"></span>的所有非空子集都有极小元，</p>
 <p>那么必定不存在一条无穷下降链，<span data-katex="\cdots\prec a_i\prec\cdots\prec a_1\prec a_0"></span>，</p>
 <p>否则<span data-katex="Q=\{a_i|i=0,1,\cdots\}"></span>，就是集合<span data-katex="A"></span>的一个不含极小元的非空子集，与前提矛盾。</p>
-<p><br></p>
-<h3 id="良基归纳法"><a href="#良基归纳法" class="headerlink" title="良基归纳法"></a>良基归纳法</h3><p>设<span data-katex="\prec"></span>是集合<span data-katex="A"></span>上的良基关系，<span data-katex="P"></span>是某一性质，</p>
+<p><br/></p>
+<h3 id="良基归纳法">良基归纳法</h3>
+<p>设<span data-katex="\prec"></span>是集合<span data-katex="A"></span>上的良基关系，<span data-katex="P"></span>是某一性质，</p>
 <p>则<span data-katex="\forall a\in A.\ P(a)"></span>，当且仅当，</p>
 <p><span data-katex="\forall x\in A.\ ([\forall y\prec x.\ P(y)]\Rightarrow P(x))"></span>。</p>
-<p><br></p>
+<p><br/></p>
 <p>良基归纳法说的是，</p>
 <p>要证明集合上的所有元素都满足某一性质，只要证明，</p>
 <p>对于任意元素<span data-katex="x"></span>，如果它的所有前趋该性质都成立，必有对<span data-katex="x"></span>来说该性质也成立。</p>
-<p><br></p>
+<p><br/></p>
 <p><strong>（1）充分性</strong></p>
 <p>如果<span data-katex="\forall a\in A.\ P(a)"></span>，</p>
 <p>则<span data-katex="\forall x\in A.\ (\forall y\prec x.\ P(y))"></span>，且<span data-katex="\forall x\in A.\ P(x)"></span>，</p>
 <p>因此，<span data-katex="\forall x\in A.\ ([\forall y\prec x.\ P(y)]\Rightarrow P(x))"></span>。</p>
-<p><br></p>
+<p><br/></p>
 <p><strong>（2）必要性</strong></p>
 <p>假设<span data-katex="\forall x\in A.\ ([\forall y\prec x.\ P(y)]\Rightarrow P(x))"></span>，</p>
 <p>但是<span data-katex="\exists z\in A"></span>，使得<span data-katex="\neg P(z)"></span>。</p>
-<p><br></p>
+<p><br/></p>
 <p>那么，我们就可以构造出一个集合<span data-katex="Q=\{z\in A|\neg P(z)\}"></span>，满足<span data-katex="Q\subseteq A"></span>，<span data-katex="Q\neq\varnothing"></span>，</p>
 <p>因此，根据良基关系的性质，<span data-katex="Q"></span>必有极小元<span data-katex="m"></span>，<span data-katex="\neg P(m)"></span>为真。</p>
-<p><br></p>
+<p><br/></p>
 <p>但是根据前提，<span data-katex="\forall x\in A.\ ([\forall y\prec x.\ P(y)]\Rightarrow P(x))"></span>，</p>
 <p>我们有，<span data-katex="(\forall y\prec m.\ P(y))\Rightarrow P(m)"></span>，</p>
 <p>由于<span data-katex="\neg P(m)"></span>为真，所以一定<span data-katex="\exists y\prec m.\ \neg P(y)"></span>，<span data-katex="y\in A"></span>，</p>
 <p>所以，<span data-katex="y\in Q"></span>，且<span data-katex="y\prec m"></span>，这与<span data-katex="m"></span>为<span data-katex="Q"></span>的极小元矛盾。</p>
-<p><br></p>
+<p><br/></p>
 <p>因此，不存在<span data-katex="z\in A"></span>，使得<span data-katex="\neg P(z)"></span>，</p>
 <p>即，<span data-katex="\forall a\in A.\ P(a)"></span>。</p>
-<p><br></p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">二元关系</a></p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">二元关系</a></p>
 <p><a href="https://zh.wikipedia.org/zh-cn/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">偏序关系</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E8%89%AF%E5%9F%BA%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">良基关系</a></p>
 <p><a href="https://zh.wikipedia.org/zh-hans/%E6%9E%81%E5%B0%8F%E5%85%83" target="_blank" rel="noopener">极小元</a></p>
@@ -535,7 +538,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -546,7 +549,9 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
           <p class="site-author-name" itemprop="name"></p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -557,7 +562,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">263</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -645,7 +650,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -657,12 +662,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 </div>
@@ -809,7 +814,7 @@
   
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
 <script src="/js/katex.js"></script>
 </body>
