@@ -1,0 +1,851 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="像做工程一样量产软件，是人们的一种愿望， 但实际执行起来，却异常困难。  这些年我参与过的项目中， 几乎每个项目都有这样或者那样的工程问题， 阻碍着效率的进一步提高。  要么需求有问题，要么工期有问题，要么代码有问题， 要么文档有问题，等等等等。  不同的团队会遇到不同的问题。  而且，同一个团队，只要不进行较大规模的人员调整， 再多的反思，也不会从本质上解决这些问题。  因此，我们有理由相信，工">
+<meta property="og:type" content="article">
+<meta property="og:title" content="敢于为改变付出代价">
+<meta property="og:url" content="https://thzt.github.io/2017/12/12/change-is-hard/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="像做工程一样量产软件，是人们的一种愿望， 但实际执行起来，却异常困难。  这些年我参与过的项目中， 几乎每个项目都有这样或者那样的工程问题， 阻碍着效率的进一步提高。  要么需求有问题，要么工期有问题，要么代码有问题， 要么文档有问题，等等等等。  不同的团队会遇到不同的问题。  而且，同一个团队，只要不进行较大规模的人员调整， 再多的反思，也不会从本质上解决这些问题。  因此，我们有理由相信，工">
+<meta property="article:published_time" content="2017-12-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.940Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/12/12/change-is-hard/"/>
+
+
+
+
+
+  <title>敢于为改变付出代价 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/12/12/change-is-hard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">敢于为改变付出代价</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T00:00:00+08:00">
+                2017-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>像做工程一样量产软件，是人们的一种愿望，</p>
+<p>但实际执行起来，却异常困难。</p>
+<p><br/></p>
+<p>这些年我参与过的项目中，</p>
+<p>几乎每个项目都有这样或者那样的工程问题，</p>
+<p>阻碍着效率的进一步提高。</p>
+<p><br/></p>
+<p>要么需求有问题，要么工期有问题，要么代码有问题，</p>
+<p>要么文档有问题，等等等等。</p>
+<p><br/></p>
+<p>不同的团队会遇到不同的问题。</p>
+<p><br/></p>
+<p>而且，同一个团队，只要不进行较大规模的人员调整，</p>
+<p>再多的反思，也不会从本质上解决这些问题。</p>
+<p><br/></p>
+<p>因此，我们有理由相信，<strong>工程问题是团队相关的。</strong></p>
+<p><br/></p>
+<p><strong>团队文化看起来会对任何变化造成一种阻力，</strong></p>
+<p><strong>导致某些改变永远无法完成。</strong></p>
+<p><br/></p>
+<h3 id="要做出改变">要做出改变</h3>
+<p>在讨论为什么无法改变之前，</p>
+<p>让我们先谈论一下为什么要进行改变吧。</p>
+<p><br/></p>
+<p><a href="https://en.wikipedia.org/wiki/Eliyahu_M._Goldratt" target="_blank" rel="noopener">Eliyahu M. Goldratt</a>提出了一套企业管理方法，称为约束理论（theory of constraints）。</p>
+<p>他认为，<strong>非瓶颈资源的利用程度，并不是由其生产潜力来决定，</strong></p>
+<p><strong>而是由系统中的其他制约因素来决定。</strong></p>
+<p><br/></p>
+<blockquote>
+<p>他指着NCX-IO机器说：</p>
+</blockquote>
+<blockquote>
+<p>你们系统的主要制约因素就在于这部机器。</p>
+</blockquote>
+<blockquote>
+<p>当你们给非瓶颈的工作量超越了这部机器的工作量时，</p>
+</blockquote>
+<blockquote>
+<p>你们不但没有提高生产力，反而制造出过多的存货。</p>
+</blockquote>
+<blockquote>
+<p>因此，也就和目标背道而驰。</p>
+</blockquote>
+<blockquote>
+<p>—— 《目标：简单而有效的常识管理》</p>
+</blockquote>
+<p><br/></p>
+<p>在企业管理中，要想系统性的提高效能，</p>
+<p>就要识别并设法减少瓶颈因素，直到瓶颈因素不再对效能产生约束。</p>
+<p>消除一个瓶颈之后，又会涌现出另外一个新的瓶颈，如此循环不已。</p>
+<p><br/></p>
+<p>该理论在实际应用中是很有效果的，</p>
+<p>类似木桶原理，只有桶壁上的所有木板都足够高，才能盛满水。</p>
+<p><br/></p>
+<h3 id="假如可以改变">假如可以改变</h3>
+<p>不幸的是，像很多方法论一样，约束理论也忽略了一个事实，</p>
+<p>那就是，<strong>现状实际上是无法立即改变的，甚至是无法改变的。</strong></p>
+<p><br/></p>
+<p>就像一列冲向悬崖的火车一样，我们甚至没有办法让它停下来。</p>
+<p>有些看起来有效的方法论，其实很难执行成功。</p>
+<p><br/></p>
+<p>我们来看一个常见的例子，例如，</p>
+<p>我们都知道敏捷开发的好处，敏捷开发也有很多成功的案例，</p>
+<p>但是我们经历的项目中，有几个改造成了敏捷形式呢？</p>
+<p><br/></p>
+<p>另一个例子，</p>
+<p>开发者们都厌恶脏乱的代码，人们也知道代码评审以及设计评审的重要性，</p>
+<p>但是又有几个团队，能坚持做这样的事情呢？</p>
+<p><br/></p>
+<p>所以，<strong>并不是人们意识不到改变，</strong></p>
+<p><strong>也并不是人们从主观意愿上不接受这些改变，</strong></p>
+<p><strong>而是从经济学角度来讲，人们并不会为改变买单。</strong></p>
+<p><br/></p>
+<h3 id="改变对一个系统的影响">改变对一个系统的影响</h3>
+<p>我看过《大明王朝》这个电视剧，所述年代里国库亏空严重，</p>
+<p>于是内阁想出了一个办法，那就是将浙江的稻田改成桑田，</p>
+<p>桑田产的蚕丝织成绸缎，会比原来的种稻利润更高。</p>
+<p><br/></p>
+<p>这看起来是利国利民的好事情，</p>
+<p>而且站在改稻为桑已经落实的基础上，有百利而无一害。</p>
+<p>可是，<strong>到实际执行时，却又不容易了。</strong></p>
+<p><br/></p>
+<p>因为，将稻田改成桑田，当地的农民就没粮食了，</p>
+<p>于是，必须去别的地方买粮。</p>
+<p>而粮食需求旺盛，也会导致粮价上涨。</p>
+<p><br/></p>
+<p>粮价上涨了，当地农民就买不起了，必须把土地卖了才行。</p>
+<p>农民担心自己的土地，所以改稻为桑的国策就无法推行下去了。</p>
+<p><br/></p>
+<p>所以，要想推行国策，就得先解决粮食问题。</p>
+<p>可是哪有多余的粮食呢？谁肯借出这些粮食呢？</p>
+<p><br/></p>
+<p>这就形成了一个死局。</p>
+<p><strong>不是方法出现了问题，而是方法无法推行的问题。</strong></p>
+<p><br/></p>
+<p>就好像囚徒困境中的两个囚犯一样，</p>
+<p>每个人都有自己的小算盘，谁都不肯损害自己的利益，</p>
+<p>当然也就无法达到全局最优了。</p>
+<p><br/></p>
+<h3 id="为何无法改变">为何无法改变</h3>
+<p>我们看到，将改变的决策落地执行，才是最困难的地方。</p>
+<p><strong>任何改变都需要消耗资源，</strong></p>
+<p><strong>而这些消耗，都必须从当前系统中的其他地方“借”出来。</strong></p>
+<p><br/></p>
+<p>想要做出改变的团队，也是如此。</p>
+<p><br/></p>
+<p>一个好的工程实践看起来行之有效，</p>
+<p>但是<strong>人们一旦意识到，要想改变就必须先付出代价时，</strong></p>
+<p><strong>就推行不下去了。</strong></p>
+<p><br/></p>
+<p>人们都知道问题在哪里，可是仍然无法扭转局面。</p>
+<p><br/></p>
+<h3 id="结语">结语</h3>
+<p>我们一线开发者，很容易会将工程问题归结为项目经理的失职，</p>
+<p>这是很不专业的行为。</p>
+<p>因为从人们意识到改变，到真实的做出改变，还有很多的路要走。</p>
+<p><br/></p>
+<p>会遇到团队文化所带来的无形阻力，</p>
+<p>会遇到资源分配方面的种种问题。</p>
+<p><br/></p>
+<p>驱使自己做出有挑战的事情，已经很不容易了，</p>
+<p>何况驱使别人，驱使一个团队，</p>
+<p>我们只能根据团队成员的<strong>心理诉求</strong>以及<strong>利益得失</strong>，制定出可以执行得下去的方案。</p>
+<p><br/></p>
+<p>所以，不要怪项目经理了，</p>
+<p><strong>毕竟谁也不想加班。</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/28/bisection-method/" rel="next" title="使用二分法排查问题">
+                <i class="fa fa-chevron-left"></i> 使用二分法排查问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/22/reading/" rel="prev" title="如何在阅读的过程中开启上帝视角">
+                如何在阅读的过程中开启上帝视角 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#要做出改变"><span class="nav-number">1.</span> <span class="nav-text">要做出改变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#假如可以改变"><span class="nav-number">2.</span> <span class="nav-text">假如可以改变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变对一个系统的影响"><span class="nav-number">3.</span> <span class="nav-text">改变对一个系统的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为何无法改变"><span class="nav-number">4.</span> <span class="nav-text">为何无法改变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

@@ -1,0 +1,847 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="外测度 设，如果是中的可数个开矩体， 且有， 则称为的一个-覆盖。  显然这样的覆盖有很多，且每一个-覆盖确定了一个非负广义实值， （可以是，表示的体积）， 我们称，， 为点集的Lebesgue外测度。  中点集的外测度具有以下性质： （1）非负性：， （2）单调性：如果，那么 （3）次可加性：  现在我们把外测度的概念，从扩展到任意非空集合上， 设是一个非空集合，是定义在幂集上的一个取广义实值的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概率论的数学基础">
+<meta property="og:url" content="https://thzt.github.io/2017/06/28/probability-theory/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="外测度 设，如果是中的可数个开矩体， 且有， 则称为的一个-覆盖。  显然这样的覆盖有很多，且每一个-覆盖确定了一个非负广义实值， （可以是，表示的体积）， 我们称，， 为点集的Lebesgue外测度。  中点集的外测度具有以下性质： （1）非负性：， （2）单调性：如果，那么 （3）次可加性：  现在我们把外测度的概念，从扩展到任意非空集合上， 设是一个非空集合，是定义在幂集上的一个取广义实值的">
+<meta property="article:published_time" content="2017-06-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.934Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/06/28/probability-theory/"/>
+
+
+
+
+
+  <title>概率论的数学基础 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/06/28/probability-theory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">概率论的数学基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-28T00:00:00+08:00">
+                2017-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="外测度">外测度</h3>
+<p>设<span data-katex="E\subseteq R^n"></span>，如果<span data-katex="\{I_k\}"></span>是<span data-katex="R^n"></span>中的可数个开矩体，</p>
+<p>且有<span data-katex="E\subseteq\;{\tiny\begin{matrix}\\ \normalsize \cup \\ ^{\scriptsize k\geqslant 1}\end{matrix}}\;I_k"></span>，</p>
+<p>则称<span data-katex="\{I_k\}"></span>为<span data-katex="E"></span>的一个<strong><span data-katex="L"></span>-覆盖</strong>。</p>
+<p><br/></p>
+<p>显然这样的覆盖有很多，且每一个<span data-katex="L"></span>-覆盖<span data-katex="\{I_k\}"></span>确定了一个非负广义实值<span data-katex="\;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\tiny k\geqslant 1}\end{matrix}}\; |I_k|"></span>，</p>
+<p>（可以是<span data-katex="+\infty"></span>，<span data-katex="|I_k|"></span>表示<span data-katex="I_k"></span>的体积），</p>
+<p>我们称，<span data-katex="m^*(E)=inf\{ \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\tiny k\geqslant 1}\end{matrix}}\; |I_k| \}"></span>，</p>
+<p>为点集<span data-katex="E"></span>的<strong>Lebesgue外测度</strong>。</p>
+<p><br/></p>
+<p><span data-katex="R^n"></span>中点集的外测度具有以下性质：</p>
+<p>（1）非负性：<span data-katex="m^*(E)\geqslant 0"></span>，<span data-katex="m^*(\varnothing)=0"></span></p>
+<p>（2）单调性：如果<span data-katex="E_1\subseteq E_2"></span>，那么<span data-katex="m^*(E_1)\leqslant m^*(E_2)"></span></p>
+<p>（3）次可加性：<span data-katex="m^*( \;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize k=1}\end{matrix}}\;E_k )\leqslant \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\scriptsize k=1}\end{matrix}}\; m^*(E_k)"></span></p>
+<p><br/></p>
+<p>现在我们把外测度的概念，从<span data-katex="R^n"></span>扩展到任意非空集合<span data-katex="X"></span>上，</p>
+<p>设<span data-katex="X"></span>是一个非空集合，<span data-katex="\mu^*"></span>是定义在幂集<span data-katex="\mathscr{P}(X)"></span>上的一个取广义实值的集合函数，且满足，</p>
+<p>（1）<span data-katex="\mu^*(\varnothing)=0"></span>，<span data-katex="\mu^*(E)\geqslant 0,\ E\subseteq X"></span></p>
+<p>（2）如果<span data-katex="E_1,E_2\subseteq X"></span>，<span data-katex="E_1\subseteq E_2"></span>，那么<span data-katex="\mu^*(E_1)\leqslant\mu^*(E_2)"></span></p>
+<p>（3）如果<span data-katex="\{E_n\}"></span>是<span data-katex="X"></span>的子集列，则有<span data-katex="\mu^*( \;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize n=1}\end{matrix}}\;E_n )\leqslant \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\scriptsize n=1}\end{matrix}}\; \mu^*(E_n)"></span></p>
+<p>那么我们就称<span data-katex="\mu^*"></span>是<span data-katex="X"></span>上的一个<strong>外测度</strong>。</p>
+<p><br/></p>
+<h3 id="可测集">可测集</h3>
+<p>设<span data-katex="E\subseteq R^n"></span>，如果对于任意的点集<span data-katex="T\subseteq R^n"></span>，有</p>
+<p><span data-katex="m^*(T)=m^*(T\cap E)+m^*(T\cap \overline{E})"></span>，</p>
+<p>则称<span data-katex="E"></span>为Lebesgue可测集，简称<strong>可测集</strong>，</p>
+<p>可测集的全体称为可测集类<span data-katex="\mathscr{M}"></span>。</p>
+<p><br/></p>
+<p>可测集具有以下性质：</p>
+<p>（1）<span data-katex="\varnothing\in\mathscr{M}"></span></p>
+<p>（2）如果<span data-katex="E\in\mathscr{M}"></span>，则<span data-katex="\overline{E}\in\mathscr{M}"></span></p>
+<p>（3）如果<span data-katex="E_1\in\mathscr{M}"></span>，<span data-katex="E_2\in\mathscr{M}"></span>，则<span data-katex="E_1\cup E_2"></span>，<span data-katex="E_1\cap E_2"></span>，以及<span data-katex="E_1 \backslash E_2"></span>都属于<span data-katex="\mathscr{M}"></span></p>
+<p>（4）如果<span data-katex="E_i\in\mathscr{M},i=1,2,\cdots"></span>，则其并集也属于<span data-katex="\mathscr{M}"></span></p>
+<p>如果进一步有<span data-katex="E_i\cap E_j=\varnothing,i\neq j"></span>，则</p>
+<p><span data-katex="m^*( \;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize i=1}\end{matrix}}\;E_i )= \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\scriptsize i=1}\end{matrix}}\; m^*(E_i)"></span>，</p>
+<p>即<span data-katex="m^*"></span>在<span data-katex="\mathscr{M}"></span>上满足<strong>可数可加性</strong>（或称<strong><span data-katex="\sigma"></span>-可加性</strong>）。</p>
+<p><br/></p>
+<p><span data-katex="R^n"></span>中的可测集类<span data-katex="\mathscr{M}"></span>构成了一个<span data-katex="\sigma"></span>-代数，</p>
+<p>对于可测集<span data-katex="E"></span>，其外测度称为<strong>测度</strong>，记为<span data-katex="m(E)"></span>，</p>
+<p>这就是通常所说的<span data-katex="R^n"></span>上的<strong>Lebesgue测度</strong>。</p>
+<p><br/></p>
+<h3 id="代数"><span data-katex="\sigma"></span>代数</h3>
+<p>设<span data-katex="\mathscr{F}"></span>是由集合<span data-katex="\Omega"></span>中的一些子集所构成的集合族，</p>
+<p>且满足下述条件：</p>
+<p>（1）<span data-katex="\varnothing\in\mathscr{F}"></span></p>
+<p>（2）如果<span data-katex="A\in\mathscr{F}"></span>，则<span data-katex="\overline{A}\in\mathscr{F}"></span></p>
+<p>（3）如果<span data-katex="A_n\in\mathscr{F},n=1,2,\cdots"></span>，则<span data-katex="\;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize n=1}\end{matrix}}\;A_n\in\mathscr{F}"></span></p>
+<p>这时我们称<span data-katex="\mathscr{F}"></span>是一个<strong><span data-katex="\sigma"></span>-代数</strong>。</p>
+<p><br/></p>
+<p>设<span data-katex="\mathscr{M}"></span>是集合<span data-katex="\Omega"></span>中一些子集所构成的集合族，</p>
+<p>我们称<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F}"></span><strong>包含</strong><span data-katex="\mathscr{M}"></span>，</p>
+<p>如果对于任意的<span data-katex="A\in\mathscr{M}"></span>，都有<span data-katex="A\in\mathscr{F}"></span>。</p>
+<p><br/></p>
+<p>我们称<span data-katex="\mathscr{F}"></span>为包含<span data-katex="\mathscr{M}"></span>的<strong>最小<span data-katex="\sigma"></span>-代数</strong>，</p>
+<p>如果对于任意的包含<span data-katex="\mathscr{M}"></span>的<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F&#39;}"></span>，</p>
+<p>如果<span data-katex="A\in\mathscr{F}"></span>，那么<span data-katex="A\in\mathscr{F&#39;}"></span>。</p>
+<p><br/></p>
+<p>包含<span data-katex="\mathscr{M}"></span>的最小<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F}"></span>，记为<span data-katex="\sigma(\mathscr{M})"></span>，</p>
+<p>称为<strong>由<span data-katex="\mathscr{M}"></span>生成的<span data-katex="\sigma"></span>-代数</strong>。</p>
+<p><br/></p>
+<h3 id="可测空间">可测空间</h3>
+<p>集合<span data-katex="\Omega"></span>连同其子集的<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F}"></span>一起，称为<strong>可测空间</strong>，记为<span data-katex="(\Omega,\mathscr{F})"></span>。</p>
+<p>三元组<span data-katex="(\Omega,\mathscr{F},\mu)"></span>称为<strong>测度空间</strong>，其中，<span data-katex="\mu"></span>为定义在<span data-katex="(\Omega,\mathscr{F})"></span>上的测度。</p>
+<p>如果<span data-katex="N\in\mathscr{F}"></span>，且<span data-katex="\mu(N)=0"></span>，则称<span data-katex="N"></span>为<span data-katex="\mu"></span>的<strong>零测集</strong>。</p>
+<p><br/></p>
+<p>如果测度空间<span data-katex="(X,\mathscr{F},\mathbf{P})"></span>满足<span data-katex="\mathbf{P}(X)=1"></span>，</p>
+<p>则称它为<strong>概率空间</strong>，对应的<span data-katex="\mathbf{P}"></span>称为<strong>概率测度</strong>。</p>
+<p>在概率空间<span data-katex="(X,\mathscr{F},\mathbf{P})"></span>中，<span data-katex="\mathscr{F}"></span>中的集合<span data-katex="A"></span>称为<strong>事件</strong>，</p>
+<p><span data-katex="\mathbf{P}(A)"></span>称为<strong>事件<span data-katex="A"></span>发生的概率</strong>。</p>
+<p><br/></p>
+<h3 id="borel集">Borel集</h3>
+<p>由<span data-katex="R^n"></span>中一切开集构成的开集族所生成的<span data-katex="\sigma"></span>-代数，</p>
+<p>称为<strong>Borel <span data-katex="\sigma"></span>-代数</strong>，记为<span data-katex="\mathscr{B}=\mathscr{B}(R^n)"></span>，</p>
+<p><span data-katex="\mathscr{B}"></span>中的元素称为<strong>Borel集</strong>。</p>
+<p><br/></p>
+<p>我们可以将Borel集的概念扩展到拓扑空间，</p>
+<p>拓扑空间<span data-katex="(X,\mathscr{O})"></span>，其中<span data-katex="\mathscr{O}"></span>是拓扑空间的开集族，</p>
+<p>我们称<span data-katex="\mathscr{B}=\sigma(\mathscr{O})"></span>为<span data-katex="X"></span>上的<strong>Borel集合族</strong>，</p>
+<p>其中的集合称为<span data-katex="X"></span>中的<strong>Borel集</strong>，而<span data-katex="(X,\mathscr{B})"></span>称为<strong>拓扑可测空间</strong>。</p>
+<p><br/></p>
+<p>可以证明，任一Borel集都是可测集。</p>
+<p><br/></p>
+<h3 id="随机变量">随机变量</h3>
+<p>设<span data-katex="(\Omega,\mathscr{F})"></span>和<span data-katex="(S,\mathscr{B})"></span>是可测空间，</p>
+<p>如果映射<span data-katex="X:\Omega\rightarrow S"></span>满足，<span data-katex="X^{-1}(\mathscr{B})\subseteq\mathscr{F}"></span>，</p>
+<p>就称它是<strong><span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测的</strong>，记为<span data-katex="X\in\mathscr{F}|\mathscr{B}"></span>。</p>
+<p>即，对于任意的<span data-katex="B\in\mathscr{B}"></span>，由<span data-katex="X^{-1}(B):=\{\omega:X(\omega)\in B\}\in\mathscr{F}"></span>。</p>
+<p><br/></p>
+<p>在概率论中，<span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测映射，通常称为<strong>随机元</strong>，或取值于<span data-katex="S"></span>的<strong>随机变量</strong>。</p>
+<p>当<span data-katex="S=R^k"></span>（具有欧氏距离），<span data-katex="\mathscr{B}=\mathscr{B}(R^k),k&gt;1"></span>，（Borel集）</p>
+<p>随机元<span data-katex="X"></span>（<span data-katex="X"></span>是<span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测的）称为<strong>随机向量</strong>。</p>
+<p><br/></p>
+<p>可测映射可以将测度由已知的空间导向另一个空间，</p>
+<p>设<span data-katex="(\Omega,\mathscr{F})"></span>和<span data-katex="(S,\mathscr{B})"></span>是可测空间，</p>
+<p>并且在<span data-katex="(\Omega,\mathscr{F})"></span>上给定某个概率测度<span data-katex="\mathbf{P}"></span>，</p>
+<p>设<span data-katex="X:\Omega\rightarrow S"></span>是<span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测映射。</p>
+<p>在<span data-katex="\mathscr{B}"></span>上的测度称作随机元<span data-katex="X"></span>的<strong>概率分布</strong>或分布，用<span data-katex="\mathbf{P}_X"></span>表示，</p>
+<p>如果<span data-katex="\mathbf{P}_X"></span>满足以下条件，<span data-katex="\mathbf{P}_X(B):=\mathbf{P}(X^{-1}(B)),\ B\in\mathscr{B}"></span>。</p>
+<p>测度<span data-katex="\mathbf{P}_X"></span>称为在可测映射<span data-katex="X"></span>下，测度<span data-katex="\mathbf{P}"></span>的<strong>像</strong>。</p>
+<p><br/></p>
+<p>可证，在<span data-katex="(S,\mathscr{B})"></span>上的任意概率测度<span data-katex="\mathbf{Q}"></span>都可以看做某个随机元<span data-katex="X"></span>的分布。</p>
+<p><br/></p>
+<h3 id="随机过程">随机过程</h3>
+<p>在某个可测空间<span data-katex="(\Omega,\mathscr{F})"></span>上，对每个<span data-katex="t\in T"></span>给定随机元<span data-katex="X(t)"></span>，</p>
+<p>则随机元族<span data-katex="X=\{X(t),t\in T\}"></span>，称为<strong>随机函数</strong>。</p>
+<p><br/></p>
+<p>这里需要解释一下，在上述定义中，</p>
+<p>所有的随机元<span data-katex="X(t),t\in T"></span>都是定义在同一个可测空间<span data-katex="(\Omega,\mathscr{F})"></span>上，</p>
+<p>但是，为了有利于研究，经常认为随机元<span data-katex="X(t),t\in T"></span>的值域可以是不同的。</p>
+<p>准确的说，给定一个可测空间族<span data-katex="(S_t,\mathscr{B}_t),t\in T"></span>，这时，引进的随机元族<span data-katex="X=\{X(t),t\in T\}"></span>，</p>
+<p>可以看做是定义在<span data-katex="T\times\Omega"></span>上的函数<span data-katex="X=X(t,\omega)"></span>，</p>
+<p>并且对每个<span data-katex="t\in T"></span>取值于<span data-katex="S_t"></span>，同时是<span data-katex="\mathscr{F}|\mathscr{B}_t"></span>-可测映射（<span data-katex="X(t,\cdot):\Omega\rightarrow S_t"></span>）。</p>
+<p><br/></p>
+<p>对固定的<span data-katex="\omega"></span>，函数<span data-katex="X(\cdot,\omega)"></span>或<span data-katex="X(t,\omega),t\in T"></span>，称作<strong>轨道</strong>，<strong>实现</strong>或<strong>样本函数</strong>。</p>
+<p><br/></p>
+<p>在随机函数的符号中，一般来说要省略自变量<span data-katex="\omega"></span>，简写为<span data-katex="X(t)"></span>，或<span data-katex="X_t"></span>，</p>
+<p>这两种简写的利用要根据具体情况而定。</p>
+<p>如果<span data-katex="T\subseteq R=(-\infty,+\infty)"></span>，则参数<span data-katex="t\in T"></span>可以解释为时间，而随机函数称作<strong>随机过程</strong>。</p>
+<p><br/></p>
+<p>当集合<span data-katex="T"></span>为直线，半直线，线段，区间或半区间，则说是<strong>连续时间的随机过程</strong>，</p>
+<p>而当<span data-katex="T\subseteq Z=\{\cdots,-1,0,1,\cdots\}"></span>，则说是<strong>离散时间随机过程</strong>或<strong>随机序列</strong>，</p>
+<p>如果<span data-katex="T\subseteq R^d,d&gt;1"></span>，则<span data-katex="X"></span>称为<strong>随机场</strong>。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/23/code-management/" rel="next" title="代码的组织和管理方式">
+                <i class="fa fa-chevron-left"></i> 代码的组织和管理方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/04/free-algebra/" rel="prev" title="Free Algebra">
+                Free Algebra <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#外测度"><span class="nav-number">1.</span> <span class="nav-text">外测度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可测集"><span class="nav-number">2.</span> <span class="nav-text">可测集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代数"><span class="nav-number">3.</span> <span class="nav-text">代数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可测空间"><span class="nav-number">4.</span> <span class="nav-text">可测空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#borel集"><span class="nav-number">5.</span> <span class="nav-text">Borel集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机变量"><span class="nav-number">6.</span> <span class="nav-text">随机变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机过程"><span class="nav-number">7.</span> <span class="nav-text">随机过程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

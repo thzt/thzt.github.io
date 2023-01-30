@@ -1,0 +1,878 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="可扩展性（extensibility）是软件的一种非功能性特征， 维基百科上是这样解释的，  Extensibility is a software engineering and systems design principle where the implementation takes future growth into consideration.  可扩展性，是将软件未来的发展过程也考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可扩展性到底有多重要">
+<meta property="og:url" content="https://thzt.github.io/2018/05/11/extensibility/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="可扩展性（extensibility）是软件的一种非功能性特征， 维基百科上是这样解释的，  Extensibility is a software engineering and systems design principle where the implementation takes future growth into consideration.  可扩展性，是将软件未来的发展过程也考">
+<meta property="article:published_time" content="2018-05-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.945Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2018/05/11/extensibility/"/>
+
+
+
+
+
+  <title>可扩展性到底有多重要 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/05/11/extensibility/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">可扩展性到底有多重要</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T00:00:00+08:00">
+                2018-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://en.wikipedia.org/wiki/Extensibility" target="_blank" rel="noopener">可扩展性</a>（extensibility）是软件的一种<a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能性</a>特征，</p>
+<p>维基百科上是这样解释的，</p>
+<blockquote>
+<p>Extensibility is a software engineering and systems design principle where the implementation takes future growth into consideration.</p>
+</blockquote>
+<p>可扩展性，是将软件未来的发展过程也考虑在内，而进行的一种设计选择。</p>
+<p><br/></p>
+<h3 id="高可扩展性系统">1. 高可扩展性系统</h3>
+<p>我们遇到过很多具有高度可扩展的软件系统。</p>
+<p><br/></p>
+<p>例如，以往著名的前端库<a href="https://jquery.com/" target="_blank" rel="noopener">jQuery</a>，它采用了微内核架构，</p>
+<blockquote>
+<p>微内核架构模式可以通过插件的形式添加额外的特性到核⼼系统中，这提供了很好的扩展性，也使得新特性与核⼼系统隔离开来。</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="https://book.douban.com/subject/26797547/" target="_blank" rel="noopener">软件架构模式</a>》</p>
+</blockquote>
+<p>使用微内核架构，用户代码就可以通过插件的形式，集成到已有的核心系统中。</p>
+<p><br/></p>
+<p>jQuery依照它强大的扩展性，以用户自定义jQuery插件的方式，</p>
+<p>让前端开发工作重新繁荣了起来。</p>
+<p><br/></p>
+<p>另一个对我印象深刻极具扩展性的例子是Scheme语言，</p>
+<p>它是一门力求简洁的Lisp方言，</p>
+<blockquote>
+<p>Programming languages should be designed not by piling feature on top of feature, but by removing the weaknesses and restrictions that make additional features appear necessary.</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="http://community.schemewiki.org/?RnRS" target="_blank" rel="noopener">RnRS</a>》</p>
+</blockquote>
+<p><br/></p>
+<p>为了实现可扩展性，Lisp宏的作用功不可没，</p>
+<p>和通常的编程语言不同的是，</p>
+<p>它除了可以自定义函数，还可以自定义语言的控制结构。</p>
+<p><br/></p>
+<p>实际上，Lisp的用户代码可以对读取器和编译器进行扩展，</p>
+<p>影响它们处理代码的方式，因此具备了强大的元编程能力。</p>
+<p><br/></p>
+<p>类似这样，具有高度可扩展性的系统还有很多，</p>
+<p>例如，Scala语言，微服务架构，<a href="https://koajs.com/" target="_blank" rel="noopener">koa</a>框架中的middleware，等等。</p>
+<p><br/></p>
+<p>但是在实际设计软件的时候，应该如何权衡系统的可扩展性呢？</p>
+<p>真的是可扩展性越高越好吗？</p>
+<p><br/></p>
+<h3 id="弊端">2. 弊端</h3>
+<p>具有高度可扩展性的系统，我们用起来确实很好，</p>
+<p>但是，却不见得我们也要有这样的设计。</p>
+<p><br/></p>
+<h4 id="过度设计">2.1 过度设计</h4>
+<p>这有两方面的因素，</p>
+<p>其一，我们未必有能力设计出，对未来考虑足够周全的系统。</p>
+<p>实际项目中，通常是引入了不恰当的抽象概念，导致过度设计。</p>
+<p><br/></p>
+<p>这通常是由于开发者过分自信导致的，</p>
+<blockquote>
+<p>60% 的程序员认为自己是属于天才和良好类，只有 30% 左右的人认为他们是一般的程序员。</p>
+</blockquote>
+<blockquote>
+<p>但实际上，只有不到 1% 的程序员属于天才程序员，有 10% 的良好程序员，其余大量的程序员是一般程序员。</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="https://www.oschina.net/news/79166/apache-foundation-ceo-decades-views" target="_blank" rel="noopener">屋中的大象</a>》</p>
+</blockquote>
+<p><br/></p>
+<p>我们能欣赏漂亮设计的优雅之处，不代表我们也能做出这样的设计。</p>
+<p><br/></p>
+<h4 id="成本和适用性">2.2 成本和适用性</h4>
+<p>其二，我们不确定现实项目是否需要这样的设计。</p>
+<p>采取任何决策，都不是免费的，总会有各方成本的权衡。</p>
+<p>况且，可扩展性设计，在不恰当的场景中，还会有自己的弊端。</p>
+<p><br/></p>
+<p>例如，前文介绍的插件式微内核架构，当各个插件需要互相通信时，</p>
+<p>就会遇到严重的系统集成性问题，</p>
+<p>即，单独使用不会出现问题，当集成到一起，就容易出现各种冲突。</p>
+<p><br/></p>
+<p>这是我们不愿意见到的。</p>
+<p><br/></p>
+<p>又例如，Lisp语言虽然具有高可扩展性，但是却对它的用户提出了很高要求，</p>
+<p>Lisp引入了一件麻烦事，称之为“<a href="http://www.yinwang.org/blog-cn/2017/05/25/dsl" target="_blank" rel="noopener">新语言问题</a>”。</p>
+<p>如果对Lisp宏使用不当，会极大的提高代码库的使用和维护成本。</p>
+<p><br/></p>
+<p>因此，在讨论是否需要可扩展性设计的时候，我们应当摒弃心中的执念，</p>
+<p>以实际项目环境，以及人员构成为出发点，客观的考虑。</p>
+<p><br/></p>
+<h4 id="以柔性设计为名">2.3 以柔性设计为名</h4>
+<p>最后，可扩展性设计，可看作是一种面向未来的柔性设计（supple design），</p>
+<blockquote>
+<p>为了使项目能够随着开发工作的进行加速前进，而不会由于它自己的老化停滞不前，设计必须要让人们乐于使用，而且易于做出修改，这就是柔性设计。然而，很多过度设计借着柔性设计的名义而自以为是正当的，结果过多的抽象层和间接设计常常成为项目的绊脚石。</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="https://book.douban.com/subject/5344973/" target="_blank" rel="noopener">领域驱动设计</a>》</p>
+</blockquote>
+<p><br/></p>
+<p>因此，在考虑可扩展性时，不妨问一问自己，</p>
+<p>我们真的对未来考虑清楚了么，还是暂时以可扩展性为由搪塞自己？</p>
+<p>我们真的考虑好可扩展性的代价和弊端了么，还是只看到了它所带来的好处？</p>
+<p><br/></p>
+<h3 id="技术本身的局限性">3. 技术本身的局限性</h3>
+<h4 id="兼容性问题">3.1 兼容性问题</h4>
+<p>软件一旦发布，对于后续升级来说，就容易产生令人头痛的兼容性问题，</p>
+<p><br/></p>
+<p>DLL地狱（DLL Hell）指在Microsoft Windows系统中，</p>
+<p>因为动态链接库（DLL）的版本或兼容性的问题而造成程序无法正常运行。</p>
+<p><br/></p>
+<p>Windows早期并没有很严谨的DLL版本管理机制，</p>
+<p>以致经常发生安装了某软件后，因为其覆盖了系统上原有的同一个DLL档，</p>
+<p>而导致原有可运行的程序无法运行，</p>
+<p>可是，还原回原有的DLL档之后，新安装的软件就无法运行。</p>
+<p><br/></p>
+<p>这经常被人们称之为 DLL地狱（DLL Hell）。</p>
+<p><br/></p>
+<p>Linux 系统中也遇到共享库（Shared Library）的兼容问题，</p>
+<p>共享库的开发者不停的更改共享库的版本，以修正原有的Bug，增加新的功能或改进性能等。</p>
+<p><br/></p>
+<p>由于动态链接的灵活性，使得程序本身和程序所依赖的共享库可以分别独立开发和更新，</p>
+<p>但是共享库版本的更新可能会导致接口的更改或删除，这可能导致依赖于该共享库的程序无法正常运行。</p>
+<p><br/></p>
+<p>由于发布后的软件，并不清楚自己被哪些其他系统所依赖，</p>
+<p>所以，一旦进行了不兼容性的修改，难免有潜在的问题发生。</p>
+<p><br/></p>
+<h4 id="依赖管理">3.2 依赖管理</h4>
+<p>这个问题，以前和朋友们讨论过，但是第一次在公开场合看到有人提及是这篇文章，</p>
+<p><a href="https://zhuanlan.zhihu.com/p/35929167" target="_blank" rel="noopener">[译] 超大型 JavaScript 应用的设计哲学</a>（<a href="https://www.youtube.com/watch?v=ZZmUwXEiPm4" target="_blank" rel="noopener">Youtube</a>），</p>
+<p>作者提到了一个“enhance”的概念，把依赖关系倒置了，</p>
+<p>把“我依赖xxx”倒置为，“我决定被xxx依赖”。</p>
+<p><br/></p>
+<p>这样对于自己的任何修改都将是安全的了，虽然也会带来其他的问题，这里就不谈了。</p>
+<p>毕竟这也是除了进行版本控制之外的另一种依赖管理办法。</p>
+<p><br/></p>
+<h4 id="工程">3.3 工程</h4>
+<p>有了对兼容性的理解之后，本文想引出一个观点，</p>
+<p>那就是，虽然从技术手段上可以削减软件变更带来的外部影响，</p>
+<p>但是我认为，究其根本，软件变更的影响范围管理，却是一个软件工程问题。</p>
+<p><br/></p>
+<p>高可扩展性诚然重要，但是工程上有一套合适的接口变更方案更重要。</p>
+<p>如果变更是无法避免的话，那么与其避免发生，倒不如对它进行疏导和管控。</p>
+<p><br/></p>
+<p>历史上大禹治水的典故，也有类似想法的写照，</p>
+<blockquote>
+<p>禹从鲧治水的失败中汲取教训，改变了"堵"的办法，对洪水进行疏导。</p>
+</blockquote>
+<p><br/></p>
+<h3 id="结语">结语</h3>
+<p>我们都期望当前维护的系统具有高度可扩展性，以减少眼前的工作负担，</p>
+<p>但是，一方面这类系统实际上需要很强的预见性才能设计出来，难免出现偏差。</p>
+<p>另一方面，高可扩展性也未必没有弊端，是否具有优势也与当前的项目场景有关。</p>
+<p><br/></p>
+<p>此外，除了从技术角度考虑软件本身的设计和实现之外，</p>
+<p>我们还可以跳出来，从工程角度来重新看待这个问题。</p>
+<p>有时候，维护一个高可扩展性的软件系统，可能反而不如简单系统外加合适的变更方案更有效。</p>
+<p><br/></p>
+<p>毕竟，目前软件都是由人来参与的，</p>
+<p>并用来解决人的问题。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/26/criticism/" rel="next" title="为什么喷人者恒被喷之">
+                <i class="fa fa-chevron-left"></i> 为什么喷人者恒被喷之
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/30/software-solution/" rel="prev" title="软件方案的能力范围">
+                软件方案的能力范围 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#高可扩展性系统"><span class="nav-number">1.</span> <span class="nav-text">1. 高可扩展性系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弊端"><span class="nav-number">2.</span> <span class="nav-text">2. 弊端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#过度设计"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 过度设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成本和适用性"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 成本和适用性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以柔性设计为名"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 以柔性设计为名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技术本身的局限性"><span class="nav-number">3.</span> <span class="nav-text">3. 技术本身的局限性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#兼容性问题"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 兼容性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖管理"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 依赖管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工程"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 工程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

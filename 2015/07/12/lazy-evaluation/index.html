@@ -1,0 +1,932 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="据说Haskell是一种惰性求值的语言， 表达式的求值策略是按需求值，即call-by-need。  但是到底什么才是按需的， 求值到什么程度。 刚开始学习的时候，总是很模糊。  随着学习的深入，才慢慢了解， Haskell规范中，并没有涉及惰性求值， 只说它是一种non-strict language， 求值策略取决于具体的实现。  这是怎么回事呢？ 又要从头开始了。  non-strictne">
+<meta property="og:type" content="article">
+<meta property="og:title" content="惰性求值">
+<meta property="og:url" content="https://thzt.github.io/2015/07/12/lazy-evaluation/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="据说Haskell是一种惰性求值的语言， 表达式的求值策略是按需求值，即call-by-need。  但是到底什么才是按需的， 求值到什么程度。 刚开始学习的时候，总是很模糊。  随着学习的深入，才慢慢了解， Haskell规范中，并没有涉及惰性求值， 只说它是一种non-strict language， 求值策略取决于具体的实现。  这是怎么回事呢？ 又要从头开始了。  non-strictne">
+<meta property="article:published_time" content="2015-07-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.915Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2015/07/12/lazy-evaluation/"/>
+
+
+
+
+
+  <title>惰性求值 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/07/12/lazy-evaluation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">惰性求值</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-12T00:00:00+08:00">
+                2015-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Haskell/" itemprop="url" rel="index">
+                    <span itemprop="name">Haskell</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>据说</strong>Haskell是一种惰性求值的语言，</p>
+<p>表达式的求值策略是按需求值，即call-by-need。</p>
+<p><br/></p>
+<p>但是到底什么才是按需的，</p>
+<p>求值到什么程度。</p>
+<p>刚开始学习的时候，总是很模糊。</p>
+<p><br/></p>
+<p>随着学习的深入，才慢慢了解，</p>
+<p>Haskell规范中，并没有涉及惰性求值，</p>
+<p>只说它是一种<strong>non-strict language</strong>，</p>
+<p>求值策略取决于具体的实现。</p>
+<p><br/></p>
+<p>这是怎么回事呢？</p>
+<p>又要从头开始了。</p>
+<p><br/></p>
+<h2 id="non-strictness"><strong>non-strictness</strong></h2>
+<p>non-strict function，是<strong>指称语义</strong>中的概念，</p>
+<p>指称语义将每一段代码，与一个数学对象相对应，</p>
+<p>借此来研究程序的语义。</p>
+<p><br/></p>
+<p>一开始我们认为，程序中的函数，</p>
+<p>会有直接的数学函数与之对应。</p>
+<p><br/></p>
+<p>其实不然，</p>
+<p>因为，程序中的很多函数，在处理某些参数的时候，</p>
+<p>行为是“未定义的”，得不到有用的信息，</p>
+<p>这样的数学函数称为<strong>部分函数</strong>（partial function）。</p>
+<p><br/></p>
+<p>这里尽量<a href="http://www.vex.net/~trebla/haskell/lazy.xhtml" target="_blank" rel="noopener">不要提及“不能终止的”</a>，</p>
+<p>因为指称语义并不考虑求值过程。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>partialFn :: Integer -&gt; Integer</p>
+<p>partialFn 0 = 0</p>
+<p>partialFn n = test $ n + 1</p>
+<p><br/></p>
+<p>可以看到partial只在参数为0的时候是有意义的。</p>
+<p>所以，与程序中的函数对应的，</p>
+<p>就不是普通意义上的数学函数了，</p>
+<p>还需要<strong>扩充定义域和值域</strong>。</p>
+<p><br/></p>
+<p>我们为每个集合增加一个新的值“<strong>⊥</strong>”，称为bottom，</p>
+<p>用来表示“未定义”。</p>
+<p>函数f(n)={0,n=0;⊥,n≠0}，就能表示partialFn了。</p>
+<p><br/></p>
+<p>Haskell用undefined来表示⊥，</p>
+<p>undefined也确实包含在所有类型中，</p>
+<p>&gt; :t undefined</p>
+<p>&gt; undefined :: a</p>
+<p><br/></p>
+<p>通常情况下，</p>
+<p>如果一个数学函数的参数是⊥，则结果就是⊥。</p>
+<p>这样的函数称为<strong>strict function</strong>。</p>
+<p><br/></p>
+<p>而Haskell中函数则不同。</p>
+<p>例如：</p>
+<p>nonStrictFn :: Integer -&gt; Integer</p>
+<p>nonStrictFn 0 _ = 0</p>
+<p><br/></p>
+<p>nonStrictFn 0 undefined &gt; 0</p>
+<p><br/></p>
+<p>函数nonStrictFn在参数包含undefined的时候，</p>
+<p>并没有得到undefined，而是得到了一个明确的值0，</p>
+<p>它对应的数学函数是<strong>non-strict function</strong>。</p>
+<p><br/></p>
+<p>函数的指称语义是non-strict function，</p>
+<p>这样的语言，称为non-strict language。</p>
+<p><br/></p>
+<h2 id="lazy-evaluation"><strong>lazy evaluation</strong></h2>
+<p>求值，是<strong>操作语义</strong>中的概念。</p>
+<p><strong>能实现non-strict指称语义的求值策略并不是唯一的</strong>。</p>
+<p><br/></p>
+<p>GHC是Haskell目前最流行的编译器，</p>
+<p>它使用了<strong>惰性求值</strong>（lazy evaluation）。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>x = 1</p>
+<p>y = 2</p>
+<p>z = (x, y)</p>
+<p><br/></p>
+<p>&gt; :sprint x</p>
+<p>&gt; x = _</p>
+<p>&gt; :sprint y</p>
+<p>&gt; y = _</p>
+<p>&gt; :sprint z</p>
+<p>&gt; y = _</p>
+<p><br/></p>
+<p>这里“:sprint”只是打印表达式，而不会求值它。</p>
+<p>“_”用来表示“未求值的”，或称为一个“<strong>thunk</strong>”。</p>
+<p><br/></p>
+<p>thunk在使用的时候，<strong>并不一定被完全求值</strong>。</p>
+<p>&gt; let first = (u, _) = u</p>
+<p>&gt; first z</p>
+<p>&gt; 1</p>
+<p><br/></p>
+<p>&gt; :sprint x</p>
+<p>&gt; x = 1</p>
+<p>&gt; :sprint y</p>
+<p>&gt; y = _</p>
+<p>&gt; :sprint z</p>
+<p>&gt; y = (1, _)</p>
+<p><br/></p>
+<p>first函数，只求值了第一个参数，</p>
+<p>第二个参数，仍然是未求值的。</p>
+<p><br/></p>
+<p>实际上，<strong>thunk的求值是分层次的</strong>，</p>
+<p>为了尽量少的求值，每一次只将表达式求值为<strong>WHNF</strong>（weak head normal form），</p>
+<p>其中的子表达式，仍然是未求值的thunk。</p>
+<p><br/></p>
+<p>如果不能满足需要，</p>
+<p>就会继续将对应的sub-thunk，再求值为WHNF。</p>
+<p><br/></p>
+<h2 id="weak-head-normal-form"><strong>Weak head normal form</strong></h2>
+<p>一个WHNF（weak head normal form），</p>
+<p>是表达式求值的一种结果形式。</p>
+<p><br/></p>
+<p>WHNF，只将表达式求值到，</p>
+<p>最外层的<strong>值构造器</strong>或者<strong>lambda抽象</strong>为止。</p>
+<p><br/></p>
+<p>例如：以下表达式是WHNF，</p>
+<p>(1 + 1, 2 + 2)，最外层是一个值构造器，(,)</p>
+<p>-&gt; 2 + 2，最外层是一个lambda抽象，</p>
+<p>'h' : ("e" ++ "llo")，最外层是一个值构造器，(:)</p>
+<p><br/></p>
+<p>以下表达式不是WHNF：</p>
+<p>1 + 2，最外层是加法函数调用，(+)</p>
+<p>(-&gt; x + 1) 2，最外层是一个匿名函数调用</p>
+<p>"he" ++ "llo"，最外层是列表的连接函数调用，(++)</p>
+<p><br/></p>
+<p>因此，</p>
+<p>表达式(1 + 1, 2 + 2)会按需首先求值为(thunk1,thunk2),</p>
+<p>如果还需要thunk1的值，thunk1会求值为2。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>testFn1 _ = 1</p>
+<p>testFn2 (<em>, </em>) = 2</p>
+<p>tettFn3 (u, _) = 3</p>
+<p>这3个函数会导致表达式(1 + 1, 2 + 2)进行<strong>不同层次</strong>的求值。</p>
+<p><br/></p>
+<h2 id="seq"><strong>seq</strong></h2>
+<p>为了控制求值程度，</p>
+<p>GHC内置了seq函数。</p>
+<p><br/></p>
+<p>&gt; :t seq</p>
+<p>&gt; seq :: a -&gt; b -&gt; b</p>
+<p><br/></p>
+<p>它表示，<strong>在结果求值为WHNF之前</strong>，</p>
+<p><strong>会先将seq的第一个参数求值为WHNF</strong>。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>u = 1</p>
+<p>v = (u, u)</p>
+<p><br/></p>
+<p>x = 1</p>
+<p>y = seq x (x, x)</p>
+<p><br/></p>
+<p>&gt; :sprint u</p>
+<p>&gt; u = _</p>
+<p>&gt; :sprint v</p>
+<p>&gt; v = _</p>
+<p><br/></p>
+<p>&gt; :sprint x</p>
+<p>&gt; x = _</p>
+<p>&gt; :sprint y</p>
+<p>&gt; y = _</p>
+<p><br/></p>
+<p>我们定义一个函数，用来把参数求值WHNF，</p>
+<p>&gt; let whnf (<em>, </em>) = ()</p>
+<p><br/></p>
+<p>则，</p>
+<p>&gt; whnf v</p>
+<p>&gt; ()</p>
+<p>&gt; whnf y</p>
+<p>&gt; ()</p>
+<p><br/></p>
+<p>&gt; :sprint u</p>
+<p>&gt; u = _</p>
+<p>&gt; :sprint v</p>
+<p>&gt; v = (<em>, </em>)</p>
+<p><br/></p>
+<p>&gt; :sprint x</p>
+<p>&gt; x = 1</p>
+<p>&gt; :sprint y</p>
+<p>&gt; y = (1, 1)</p>
+<p><br/></p>
+<p>使用seq控制求值深度，</p>
+<p>可以防止创建过多的thunk。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>当我们在REPL中输入一个表达式时，</p>
+<p>实际上调用了print函数，</p>
+<p>它会对表达式完全求值。</p>
+<p><br/></p>
+<p>因此，表达式求值的层次问题，</p>
+<p><strong>是很难从REPL中看出来的</strong>。</p>
+<p><br/></p>
+<p>另一方面，WHNF将求值过程分成了一系列节点，</p>
+<p>能清晰的刻画求值程度，</p>
+<p>这可能是我们学习Haskell入门的起点吧。</p>
+<p><br/></p>
+<p>参考：</p>
+<p><a href="https://en.wikibooks.org/wiki/Haskell/Denotational_semantics" target="_blank" rel="noopener">Haskell/Denotational semantics</a></p>
+<p><a href="https://en.wikibooks.org/wiki/Haskell/Laziness" target="_blank" rel="noopener">Haskell/Laziness</a></p>
+<p><a href="http://stackoverflow.com/questions/6872898/haskell-what-is-weak-head-normal-form" target="_blank" rel="noopener">Haskell: What is Weak Head Normal Form?</a></p>
+<p><a href="http://book.douban.com/subject/24294415/" target="_blank" rel="noopener">Parallel and Concurrent Programming in Haskell</a></p>
+<p><a href="https://hackhands.com/lazy-evaluation-works-haskell/" target="_blank" rel="noopener">How Lazy Evaluation Works in Haskell</a></p>
+<p><a href="http://www.vex.net/~trebla/haskell/lazy.xhtml" target="_blank" rel="noopener">Lazy Evaluation of Haskell</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/04/valley/" rel="next" title="吸星大法">
+                <i class="fa fa-chevron-left"></i> 吸星大法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/18/ability-of-regular-expression/" rel="prev" title="正则表达式的能力范围">
+                正则表达式的能力范围 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#non-strictness"><span class="nav-number">1.</span> <span class="nav-text">non-strictness</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lazy-evaluation"><span class="nav-number">2.</span> <span class="nav-text">lazy evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#weak-head-normal-form"><span class="nav-number">3.</span> <span class="nav-text">Weak head normal form</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#seq"><span class="nav-number">4.</span> <span class="nav-text">seq</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

@@ -1,0 +1,845 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="电车难题（The Trolley Problem），最早由英国哲学家菲利帕·福特（Philippa Foot）提出的。   一个疯子把 五个 无辜的人绑在电车轨道上。一辆失控的电车朝他们驶来，马上就要碾压到他们。   你可以拉一个拉杆，让电车开到另一条只有绑了 一个 人的轨道上，你该如何做呢?   这个思想实验，使我们的决策处在了一个两难境地，是 功利主义 和 道德主义 之间的冲突。 功利主义 主">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电车难题">
+<meta property="og:url" content="https://thzt.github.io/2021/11/29/trolley-problem/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="电车难题（The Trolley Problem），最早由英国哲学家菲利帕·福特（Philippa Foot）提出的。   一个疯子把 五个 无辜的人绑在电车轨道上。一辆失控的电车朝他们驶来，马上就要碾压到他们。   你可以拉一个拉杆，让电车开到另一条只有绑了 一个 人的轨道上，你该如何做呢?   这个思想实验，使我们的决策处在了一个两难境地，是 功利主义 和 道德主义 之间的冲突。 功利主义 主">
+<meta property="article:published_time" content="2021-11-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.971Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2021/11/29/trolley-problem/"/>
+
+
+
+
+
+  <title>电车难题 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/11/29/trolley-problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">电车难题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-29T00:00:00+08:00">
+                2021-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>电车难题（The Trolley Problem），最早由英国哲学家菲利帕·福特（Philippa Foot）提出的。</p>
+<p><br/></p>
+<blockquote>
+<p>一个疯子把 <strong>五个</strong> 无辜的人绑在电车轨道上。一辆失控的电车朝他们驶来，马上就要碾压到他们。</p>
+</blockquote>
+<blockquote>
+<p>你可以拉一个拉杆，让电车开到另一条只有绑了 <strong>一个</strong> 人的轨道上，你该如何做呢?</p>
+</blockquote>
+<p><br/></p>
+<p>这个思想实验，使我们的决策处在了一个两难境地，是 <strong>功利主义</strong> 和 <strong>道德主义</strong> 之间的冲突。</p>
+<p>功利主义 主张 利益最大化，不 “拉杆” 可以救更多的人，</p>
+<p>而 道德主义 则认为，“拉杆” 会让决策者成为不道德行为的同谋。</p>
+<p><br/></p>
+<p>以前听到这个 电车难题 的时候，总是觉得不以为然，因为它仿佛离我们太过遥远。</p>
+<p>然后最近却越发感觉，它是现实中很多问题的<strong>缩影</strong>。</p>
+<p><br/></p>
+<p>最近看了一个日剧，是豆瓣评分 9.7 分的《<a href="https://movie.douban.com/subject/2150220/" target="_blank" rel="noopener">白色巨塔</a>》。</p>
+<p>两个主角 #财前五郎、#里见修二 用医生之间的名利纠葛，演绎了功利和道德之间的现实悖论。</p>
+<p><br/></p>
+<p>于是打算写一篇文章来记录一下自己的所见所感。</p>
+<h3 id="利益驱动">利益驱动</h3>
+<p>个体利益在集体利益面前，会变得异常渺小，仿佛不值得一提，</p>
+<p>这也是为什么 “利己主义者” 经常用<strong>集体利益</strong>做挡箭牌，来追求自身利益更大化的。</p>
+<p><br/></p>
+<p>所以在一个组织中，只要想清楚自己的目的，并<strong>照顾好</strong>每个人的利益，</p>
+<p>那么就很可能扫清一切障碍，促成这个目的的达成。</p>
+<p>在商业竞争中，这是一种非常好用的手段。</p>
+<p><br/></p>
+<p>为了达成目的，我们需要搞定所有利益相关的参与者，因为事情终究还是要<strong>靠人</strong>来完成。</p>
+<p><br/></p>
+<p>这让我想起了《铁齿铜牙纪晓岚》剧中，#纪晓岚 与 #和珅 的对话。</p>
+<p>#和珅 的主张是，去办事的官员，必须要给到他们一定的<strong>好处</strong>，才能把事办成。</p>
+<p>而 #纪晓岚 则更加理想化，认为官员们本就应该约束自己，不做贪污受贿的事情。</p>
+<p><br/></p>
+<p>这就是理想与现实之间的差距，在理想中每个人都会有良知，</p>
+<p>但大多数人都不得不被迫卷入现实的漩涡中。</p>
+<p><br/></p>
+<p>在现实中，这个 “好处” 也许并不一定是 “金钱”，可能是所有我们<strong>想要追逐</strong>的东西。</p>
+<p>所以功利主义到底好还是不好呢？</p>
+<p>这个很难评判，但至少它是务实的，它有办法将事情摆平。</p>
+<h3 id="道德冲突">道德冲突</h3>
+<p>当一个组织里面出现不以利益为导向的 “道德主义” 者时，虽然他们也有自己看重的东西，</p>
+<p>但<strong>道德</strong>层面的<strong>不舒服</strong>，会让他们在做决策时举棋不定，甚至一些决定，</p>
+<p>还会影响到多数利益相关者的<strong>反对</strong>，这看起来更像是违背了集体的意志。</p>
+<p><br/></p>
+<p>就好像 “电车难题” 那样，为了少数人的利益，选择牺牲多数人，这样做是<strong>合理</strong>的吗？</p>
+<p>而为了多数人的利益，牺牲少数人，就合理了吗？</p>
+<p>所以用道德来衡量功利，更像是组织中 <strong>局部与整体</strong> 之间的利益冲突。</p>
+<p><br/></p>
+<p>双方之间的矛盾是不可调和的，关注少数人和关注多数人的主张是不同的。</p>
+<p><br/></p>
+<p>在《白色巨塔》的剧情中，#财前五郎 斥责 #里见修二，如果 #里见 为了医患纠纷把他告倒了，</p>
+<p>会导致<strong>更多的病人无人可以医治</strong>，所以到底该不该打这场官司呢？</p>
+<p>对于一所医院来说，是治疗更多的病人更重要呢，还是解决某一两个有纠纷的医患更重要呢？</p>
+<p><br/></p>
+<p>对于一个团队而言，是扩大团队规模，提高<strong>业绩</strong>更重要呢，还是解决当前的用户问题更重要呢？</p>
+<p>团队规模扩大、业绩提升，就会挣得更多的资源来解决用户的问题。</p>
+<p>团队做不出业绩，甚至还会面临解散的风险。</p>
+<p><br/></p>
+<p>我们为何无法绕过道德关卡，追求全局利益的最大化呢？</p>
+<h3 id="敬业精神">敬业精神</h3>
+<p>我们有没有想过自己当前这个岗位，存在的意义上是什么？工作的意义又在于何处？</p>
+<p><br/></p>
+<blockquote>
+<p>患者才是医生存在的理由，就像没了植物，技术再高超的园丁也等于个零。</p>
+</blockquote>
+<blockquote>
+<p>看病并不是对患者的恩施，而是一种自我身份的肯定。</p>
+</blockquote>
+<p><br/></p>
+<p>这个社会中的<strong>供需关系</strong>总是一环套一环的，几乎每个节点都有自己的供给方和需求方。</p>
+<p>我们工作的意义恰恰在于成为这些环节中的一份子。</p>
+<p>所以，很多岗位讲究用户第一，团队的管理者也要讲究以人为本。</p>
+<p><br/></p>
+<p>那么尊重用户与自我提升到底哪个更重要呢？这两个可以互为<strong>目的</strong>和<strong>手段</strong>。</p>
+<p>有些人可能会为了自我提升的<strong>长期利好</strong>，而放弃<strong>短期的</strong>用户利益。</p>
+<p><br/></p>
+<p>《白色巨塔》中的 #财前五郎 为了当上教授，使用了各种各样的手段，但无疑能成为教授对整个医院也是利好的。</p>
+<p>这种行为就一定是可耻的么？</p>
+<p>其他人为了保持一身的廉正，不去耍手段竞争，这样就一定是清白的吗？</p>
+<h3 id="用户权利">用户权利</h3>
+<p>《白色巨塔》中 #财前五郎 由于个人疏忽，导致了患者死亡，这件事情是否医疗事故，其实是非常难以反驳的。</p>
+<p>除非有更权威的三方机构给出证明，但是不论如何证明都不能否认医生是在<strong>不确定结果</strong>的场景中工作的。</p>
+<p><br/></p>
+<p>这就好比软件项目中技术架构的选型，架构师很难因为系统架构的问题而<strong>担责任</strong>。</p>
+<p>这也是因为软件系统的架构，也是在解决不确定的问题。</p>
+<p><br/></p>
+<p>再看一下软件工程师们的做法，</p>
+<ul>
+<li><p>通过划分子问题，缩小问题的规模：更小规模的问题容易得到确定的结果</p></li>
+<li><p>通过阶段性成果，使得问题可以逐步解决：先完成容易拿到结果的部分</p></li>
+<li><p>做好不确定性工作的<strong>进展披露</strong>工作：让所有参与者对工作的进展，有更清晰的了解</p></li>
+</ul>
+<p><br/></p>
+<p>这最后一条解决不确定问题的做法，比较容易被人忽视。</p>
+<p>它将项目的 “方向盘” 又部分的交回给了用户，使得决策过程更加透明了。</p>
+<p><br/></p>
+<p>《白色巨塔》中 #财前五郎 败诉的关键点在于对用户权利的<strong>忽视</strong>。</p>
+<p>律师 #关口仁 就拿住这一点，问 #财前五郎 在有多项医疗方案可供选择的时候，有没有尊重患者的<strong>选择权</strong>。</p>
+<p>这可能是专业人士最容易出问题的一个点吧，在专家的岗位上待久了，就容易<strong>私自</strong>做决定。</p>
+<p><br/></p>
+<p>再想一想，那些软件专家们是否也<strong>擅自</strong>做过类似的决定呢？</p>
+<p>很显然，没有比患者更懂他自己的人。</p>
+<p><br/></p>
+<blockquote>
+<p>Good architects design the policy so that decisions about the details can be delayed and deferred for as long as possible.</p>
+</blockquote>
+<h3 id="结语">结语</h3>
+<p>网评《<a href="https://movie.douban.com/subject/2150220/" target="_blank" rel="noopener">白色巨塔</a>》堪比神作，我认为正是因为它的哲学高度，</p>
+<p>职场中生活中，没有绝对的 “恶”。</p>
+<p><br/></p>
+<p>每个人都有自己要<strong>追逐</strong>的东西，每个人都有自己内心<strong>不能违背</strong>的东西。</p>
+<p>这就有了形形色色的不同的人，评判标准也会因人而异，所以失去了统一的准绳。</p>
+<p><br/></p>
+<p>那我们究竟要做出何种选择呢，大多数人选择了一种跟过往的自身相<strong>自洽</strong>的做法，</p>
+<p>为了让自己的行为方式，不会跟自身的做事原则相冲突。</p>
+<p><br/></p>
+<p>这个世界需要每一种人的作用，每个人都并非不可或缺的，共同形成了一个和谐并存的社会。</p>
+<p>身为单个人，要想清楚自己的目的，用自己可以接受的方式工作。</p>
+<p>身为管理者，要尊重每个人的不同，用大家可以接收的方式，为团队的整体目标负责。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/22/common/" rel="next" title="团队的分分合合">
+                <i class="fa fa-chevron-left"></i> 团队的分分合合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/12/01/external/" rel="prev" title="从向外管理到自组织">
+                从向外管理到自组织 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#利益驱动"><span class="nav-number">1.</span> <span class="nav-text">利益驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#道德冲突"><span class="nav-number">2.</span> <span class="nav-text">道德冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#敬业精神"><span class="nav-number">3.</span> <span class="nav-text">敬业精神</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户权利"><span class="nav-number">4.</span> <span class="nav-text">用户权利</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

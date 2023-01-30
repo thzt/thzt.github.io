@@ -1,0 +1,827 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="命题逻辑和一阶谓词逻辑属于古典逻辑范围， 而直觉主义逻辑是一种非经典逻辑， 它不承认排中律，强调命题的证实性而不是真理性。  古典逻辑认为，一个实体的存在可以通过否定它的不存在来证明。 对直觉主义逻辑来说，这是不正确的， 不存在性的否定不表示可能找到存在性的构造证明。  整合思维 商业思想家罗杰·马丁，曾采访过50多位成功的领导者， 最终发现，他们大都具有一个非同寻常的特征。  他们愿意而且能够同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="思路和想象力">
+<meta property="og:url" content="https://thzt.github.io/2016/08/18/imagination/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="命题逻辑和一阶谓词逻辑属于古典逻辑范围， 而直觉主义逻辑是一种非经典逻辑， 它不承认排中律，强调命题的证实性而不是真理性。  古典逻辑认为，一个实体的存在可以通过否定它的不存在来证明。 对直觉主义逻辑来说，这是不正确的， 不存在性的否定不表示可能找到存在性的构造证明。  整合思维 商业思想家罗杰·马丁，曾采访过50多位成功的领导者， 最终发现，他们大都具有一个非同寻常的特征。  他们愿意而且能够同">
+<meta property="article:published_time" content="2016-08-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.928Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2016/08/18/imagination/"/>
+
+
+
+
+
+  <title>思路和想象力 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/08/18/imagination/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">思路和想象力</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-18T00:00:00+08:00">
+                2016-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>命题逻辑和一阶谓词逻辑属于古典逻辑范围，</p>
+<p>而直觉主义逻辑是一种非经典逻辑，</p>
+<p>它不承认排中律，强调命题的证实性而不是真理性。</p>
+<p><br/></p>
+<p>古典逻辑认为，一个实体的存在可以通过否定它的不存在来证明。</p>
+<p>对直觉主义逻辑来说，这是不正确的，</p>
+<p>不存在性的否定不表示可能找到存在性的构造证明。</p>
+<p><br/></p>
+<h3 id="整合思维"><strong>整合思维</strong></h3>
+<p>商业思想家罗杰·马丁，曾采访过50多位成功的领导者，</p>
+<p>最终发现，他们大都具有一个非同寻常的特征。</p>
+<p><br/></p>
+<p>他们愿意而且能够同时接纳两种互相冲突的观点，</p>
+<p>在碰到意见冲突时，他们既不慌张，也不是简单的进行非此即彼的取舍，</p>
+<p>而是另辟蹊径，提出一个新思路，</p>
+<p>既包含了原先两种观点的内容，又比原先两种观点胜出一筹。</p>
+<p>罗杰·马丁把这种思考和综合的过程，称为整合性思维。</p>
+<p><br/></p>
+<h3 id="智者"><strong>智者</strong></h3>
+<p>70多年前，美国小说家斯科特·菲茨杰拉德也指出过，</p>
+<p>真正智者的特点之一，就是，</p>
+<p>能同时容下两个相对立的想法，但仍然保持行动能力。</p>
+<p><br/></p>
+<h3 id="应变"><strong>应变</strong></h3>
+<p>我国古代，三国时期魏国大臣，政治家，军事家司马懿，</p>
+<p>在教育孩子时，也曾说过，</p>
+<p>夫处世之道，亦即应变之术，岂可偏执一端；</p>
+<p>用兵之道亦然如此，皆贵在随机应变。</p>
+<p><br/></p>
+<h3 id="趋向的危害"><strong>趋向的危害</strong></h3>
+<p>以上例子我们可以发现，同时遇到两种矛盾的想法是正常的，</p>
+<p>非此即彼的断言，反而是片面的。</p>
+<p>因此，当我们在生活中发现自己的某种趋向时，就得开始惶恐了，</p>
+<p>它的相反面所具有的种种好处，我们得到的将越来越少。</p>
+<p><br/></p>
+<p>思路和想象力，就是这样对立的两种思维。</p>
+<p><br/></p>
+<h3 id="逻辑思维"><strong>逻辑思维</strong></h3>
+<p>思路，可以理解为思维的路径。</p>
+<p>大前研一在《思考的技术》一书中提到，</p>
+<p>由于绝大多数人都没有养成逻辑思考的习惯，所以就缺少了能够解决问题的思路。</p>
+<p>所以人们应该重视导出结论的思维路径，而不是有没有知识。</p>
+<p><br/></p>
+<p>可见，思路对于解决一个问题，</p>
+<p>甚至判断这个问题是否真的构成问题来说，</p>
+<p>都是非常重要的。</p>
+<p><br/></p>
+<p>没有这些思路，我们将很容易迷失。</p>
+<p>方案做出来之后，才发现根本没有达到目的，因为我们没有考虑方向，</p>
+<p>计划落地后，才发现得不偿失，因为我们没有考虑成本和收益，</p>
+<p>项目经常性的延期，小伙伴们苦于加班，因为我们在过程中没有考虑过风险。</p>
+<p><br/></p>
+<p>这些都是经验教训，可以总结为思维的套路，</p>
+<p>按着套路思考的话，我们会避免进入很多误区。</p>
+<p><br/></p>
+<h3 id="想象力"><strong>想象力</strong></h3>
+<p>我们感受到了我们的趋向，</p>
+<p>我们钟爱思路，那么就会出现问题。</p>
+<p><br/></p>
+<p>要判断一件事情是否有价值，判断它的影响范围，</p>
+<p>常用的思路当然可以帮助我们。</p>
+<p>可是，思路会逐渐变成人们的舒适区，</p>
+<p>人们更容易相信符合逻辑判断的结论。</p>
+<p><br/></p>
+<p>从短时间来看，逻辑推理是有用的，</p>
+<p>会帮助我们排除那些显然可以被证明为错误的方案，</p>
+<p>但是从长时间来看，就不尽然了。</p>
+<p><br/></p>
+<p>一个长远目标，或者一个战略举措，</p>
+<p>根本就无法通过逻辑来推理出来，因为我们所知所感都是朦胧的，</p>
+<p>在有创新性的工作中，这一点非常明显。</p>
+<p><br/></p>
+<p>爱因斯坦这样说，想象力比知识更重要。</p>
+<p>是的，科学研究更需要想象力来决定方向，</p>
+<p>而逻辑证明只是用来排除那些不正确想法罢了。</p>
+<p><br/></p>
+<p>想象力，让我们更有远见，</p>
+<p>而严谨的思维和卓越的执行能力，让我们可以实现它。</p>
+<p><br/></p>
+<h3 id="结语"><strong>结语</strong></h3>
+<p>那么如何锻炼现象力呢？</p>
+<p><br/></p>
+<p>我们可以想象一下未来，大胆预测，</p>
+<p>我们应该总是尝试做一些意料之外的事情。</p>
+<p><br/></p>
+<p>我们也可以把不太相关的事物放在一起类比，找出关联，</p>
+<p>这两件事情根本毫无关系，那我们让他们相关，</p>
+<p>会发生什么好玩的事情？</p>
+<p><br/></p>
+<p>我们还可以符合逻辑的事情取反，并假设它成立，</p>
+<p>想象中我们的世界是颠倒的，因为我们想看到以前看不到的东西。</p>
+<p><br/></p>
+<p>总之，我们要保持中立，警惕偏执，这样才会同时拥有它们的种种好处。</p>
+<p><br/></p>
+<p>我们不但要把思维路径记录下来，让人人都能得出相同的决策，降低风险。</p>
+<p>我们还要发挥前瞻性和想象力，让我们的工作不可被替代，有远见。</p>
+<p><br/></p>
+<h3 id="参考"><strong>参考</strong></h3>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%9B%B4%E8%A7%89%E4%B8%BB%E4%B9%89%E9%80%BB%E8%BE%91" target="_blank" rel="noopener">直觉主义逻辑</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E7%9B%B4%E8%A7%89%E4%B8%BB%E4%B9%89" target="_blank" rel="noopener">数学直觉主义</a></p>
+<p><a href="http://wenku.baidu.com/view/1d94574dfe4733687e21aa8b.html" target="_blank" rel="noopener">整合性思维：成功领导人的思考方式</a></p>
+<p><a href="https://book.douban.com/subject/3138847/" target="_blank" rel="noopener">思考的技术</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/13/about-topology/" rel="next" title="拓扑学拾趣">
+                <i class="fa fa-chevron-left"></i> 拓扑学拾趣
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/24/believed-in-the-absence-of-evidence/" rel="prev" title="相信不证自明">
+                相信不证自明 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#整合思维"><span class="nav-number">1.</span> <span class="nav-text">整合思维</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#智者"><span class="nav-number">2.</span> <span class="nav-text">智者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应变"><span class="nav-number">3.</span> <span class="nav-text">应变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#趋向的危害"><span class="nav-number">4.</span> <span class="nav-text">趋向的危害</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑思维"><span class="nav-number">5.</span> <span class="nav-text">逻辑思维</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#想象力"><span class="nav-number">6.</span> <span class="nav-text">想象力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">7.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

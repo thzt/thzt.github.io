@@ -1,0 +1,874 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="当今软件生态已经越来越复杂了，一个简单的产品， 可能动辄涉及到十个，甚至数十个子系统， 把所有这些子系统当做一个整体来看的话，写好它是一件很难的事情。  本文就来探讨一下，一个勉强能跑的系统，跟一个生态优良的系统， 到底有什么区别，以及需要额外付出多少努力。 异常 一个勉强能跑的系统，不会覆盖所有的异常流程， 每个函数只有一个返回值，它们被看做永远不会抛异常。  然而，这肯定是一种不合理的假设，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="写好一个系统需要额外付出多少努力">
+<meta property="og:url" content="https://thzt.github.io/2019/12/02/extra/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="当今软件生态已经越来越复杂了，一个简单的产品， 可能动辄涉及到十个，甚至数十个子系统， 把所有这些子系统当做一个整体来看的话，写好它是一件很难的事情。  本文就来探讨一下，一个勉强能跑的系统，跟一个生态优良的系统， 到底有什么区别，以及需要额外付出多少努力。 异常 一个勉强能跑的系统，不会覆盖所有的异常流程， 每个函数只有一个返回值，它们被看做永远不会抛异常。  然而，这肯定是一种不合理的假设，">
+<meta property="article:published_time" content="2019-12-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.960Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2019/12/02/extra/"/>
+
+
+
+
+
+  <title>写好一个系统需要额外付出多少努力 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/12/02/extra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">写好一个系统需要额外付出多少努力</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-02T00:00:00+08:00">
+                2019-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>当今软件<strong>生态</strong>已经越来越复杂了，一个简单的产品，</p>
+<p>可能动辄涉及到十个，甚至数十个子系统，</p>
+<p>把所有这些子系统当做一个整体来看的话，写好它是一件很难的事情。</p>
+<p><br/></p>
+<p>本文就来探讨一下，一个<strong>勉强能跑</strong>的系统，跟一个<strong>生态优良</strong>的系统，</p>
+<p>到底有什么区别，以及需要额外付出多少努力。</p>
+<h3 id="异常">异常</h3>
+<p>一个勉强能跑的系统，不会覆盖所有的异常流程，</p>
+<p>每个函数只有一个返回值，它们被看做<strong>永远不会抛异常</strong>。</p>
+<p><br/></p>
+<p>然而，这肯定是一种不合理的假设，</p>
+<p>当有一个函数可能会抛出异常时，事情就变得复杂了。</p>
+<p>这个函数的调用方到底该怎样“<strong>消化</strong>”这个异常呢？</p>
+<p><br/></p>
+<p>除此之外，甚至在<strong>业务层面</strong>，也会包含一些“非正常”的业务逻辑，</p>
+<p>比如一个没有注册的用户访问授权页面，应该怎么处理？</p>
+<p>或者是，一个接口被传入了跟预期不符的参数时，应该怎样反应？</p>
+<p><br/></p>
+<p>把所有功能看做一个整体，那么正常流程应该只有一种，</p>
+<p>出错的可能，会有很多种。</p>
+<p><br/></p>
+<p>如果每一种出错，都经过了<strong>深思熟虑</strong>的处理，而不是默认结果，</p>
+<p>那么，加上异常流程的系统，会比勉强能跑的系统，<strong>复杂数倍</strong>。</p>
+<p>一个可靠的接口，会由一个正常结果，与 N 个异常组成。</p>
+<h3 id="日志">日志</h3>
+<p>对一个没有日志的系统排查问题，是非常困难的，</p>
+<p>很难还原出当时的运行现场。</p>
+<p><br/></p>
+<p>一个常见的方法是在业务逻辑的<strong>字里行间</strong>写下日志，</p>
+<p>这种侵入性的日志编写方法，会降低代码的可读性，</p>
+<p>让逻辑变得晦涩难懂。</p>
+<p><br/></p>
+<p>而非侵入的日志编写方法，可能无法覆盖到所有细节，</p>
+<p>一般是通过<strong>异常切面</strong>来做。</p>
+<p><br/></p>
+<p>不论用哪种方法，增加了日志功能的系统，会比勉强能跑的系统复杂了一些。</p>
+<p>这是毋庸置疑的。</p>
+<p>因为日志功能已经算是原系统的一种<strong>非功能需求</strong>了。</p>
+<h3 id="单测">单测</h3>
+<p>专业程序员喜欢用日志和单测来检查问题，遇到问题跑一下单测，</p>
+<p>能省掉很多构造数据的成本。</p>
+<p><br/></p>
+<p>然而，有单测覆盖的系统，也一定会增加不少代码量，</p>
+<p>对于那些<strong>功能频繁变动</strong>的系统，甚至每改一些代码，就得相应的改改单测。</p>
+<p><br/></p>
+<p>单测虽然一定程度上增加了代码的可靠性，</p>
+<p>但同时，也增加了代码的<strong>编写成本</strong>。</p>
+<p><br/></p>
+<p>除此之外，软件的每一次<strong>持续集成</strong>都会跑一遍单测，</p>
+<p>花在修补单测上面的时间，可能会出乎意料的多。</p>
+<p><br/></p>
+<p>因此，编写成本和软件质量是不可兼得的。</p>
+<p>没有一劳永逸的办法。</p>
+<p><br/></p>
+<p>有单测的系统，在维护者看来，确实更加复杂，</p>
+<p>单测可以看做是给代码加了“有测试覆盖”这条<strong>额外的属性</strong>。</p>
+<h3 id="环境">环境</h3>
+<p>有些系统是要分本地环境和线上环境的，</p>
+<p>本地开发时，跟线上运行时，系统的表现可能会不同。</p>
+<p>简而言之，某些行为可能会跑到不同的<strong>分支</strong>里面。</p>
+<p><br/></p>
+<p>最起码，他们也可能会从不同数据库中读取信息。</p>
+<p>这样做也会增加系统的复杂性。</p>
+<p><br/></p>
+<p>要发布一个系统，我们必须保证它在<strong>好几个环境</strong>都表现良好，</p>
+<p>而不是仅仅线上表现良好就够了。</p>
+<p><br/></p>
+<p>一旦有多个子系统，都区分了不同环境，问题就更麻烦了，</p>
+<p>在调用某个接口的时候，我们必须严格区分调用的是<strong>哪个环境</strong>中的接口。</p>
+<p>这比只有线上一套环境的系统，又复杂了好多。</p>
+<h3 id="调试">调试</h3>
+<p>有些系统的设计之初，只是为了满足功能，</p>
+<p>可一旦跟其他系统打交道时，就会涉及调试和排查问题。</p>
+<p><br/></p>
+<p>一个不能调试的系统，在排错时是特别麻烦的，</p>
+<p>我们只能一行行的读代码，在大脑中记录程序状态，人肉调试。</p>
+<p><br/></p>
+<p>这种情况在遇到<strong>多态</strong>函数时，会变得超级烧脑。</p>
+<p>很多运行时数据的丢失，导致我们不知道程序到底该执行哪段代码。</p>
+<p><br/></p>
+<p>因此，一个设计优良的系统，一定会在必要时考虑它自身的调试问题，</p>
+<p>怎样对开发者友好，如何通过<strong>程序断点</strong>，调试进去。</p>
+<p><br/></p>
+<p>系统具备<strong>可调试性</strong>，也相当于给系统增加了额外要求。</p>
+<h3 id="文档">文档</h3>
+<p>一个接口，并不是仅提供功能就完事了，</p>
+<p>接口以及<strong>如何使用</strong>这个接口，本来应该是一体的。</p>
+<p>没有使用文档的接口，相当于只完成了一部分功能。</p>
+<p><br/></p>
+<p>除此之外，系统的架构文档，也一样重要，</p>
+<p>它被划分为了几个子系统，每个子系统是如何交互的？</p>
+<p>否则，子系统之间类似“元胞自动机”一样的<strong>诡异交互方式</strong>，就没办法理解了。</p>
+<p><br/></p>
+<p>注释应该也算是一种说明性的文档，只不过它是写到代码中的，</p>
+<p>有丰富注释的代码，确实会省去每个人的阅读成本，这些成本累积起来是很可观的，</p>
+<p>但对代码编写者来说，也会<strong>花费</strong>不少精力。</p>
+<p><br/></p>
+<p>有详细文档和注释的系统，会比勉强能跑的系统，更好维护，</p>
+<p>从可维护角度来讲，这是对系统提出了更高的要求。</p>
+<h3 id="监控">监控</h3>
+<p>现在有很多系统是 7*24 小时运行的，一旦出错每一秒都会有损失，</p>
+<p>因此，有监控是对这种系统提出的另一种要求。</p>
+<p>当出现错误的时候，我们希望能<strong>检测</strong>到，通过报警机制，自动通知相关的责任人。</p>
+<p><br/></p>
+<p>增加了监控机制的系统，会比正常的系统略微复杂一些，</p>
+<p>如果把监控系统也看成原系统一部分的话。</p>
+<p><br/></p>
+<p>如果没有额外的通用监控系统，为每个系统单独配一个监控，是一件麻烦的事情。</p>
+<p>还得保证这些<strong>监控系统自身</strong>不会对现有功能产生影响。</p>
+<p><br/></p>
+<p>不可监控的系统，相当于扔出去的炸弹，不知道什么时候它会爆炸，</p>
+<p>但是使得系统可监控，也在一定程度上增加了复杂度，</p>
+<p>需要额外的努力才能做到。</p>
+<h3 id="回滚">回滚</h3>
+<p>可回滚是系统的一种较为苛刻的属性，要想能回滚，需要系统先具有这种属性才行。</p>
+<p>一个系统是否<strong>可回滚</strong>，在设计阶段就得考虑清楚。</p>
+<p>并且它的每一次发布，都得指定详细的发布和回滚计划。</p>
+<p><br/></p>
+<p>一个能回滚的系统，得做到它每一次发布所做的修改<strong>可撤销</strong>，</p>
+<p>包括对数据库的修改，以及接口的兼容性，还有依赖方其他系统的影响。</p>
+<p><br/></p>
+<p>这件事看起来简单，<strong>实则很难</strong>做到，</p>
+<p>比如，对数据库结构进行了变更，而老接口又不可兼容的时候，</p>
+<p>很多系统其实是不可回滚的。</p>
+<p><br/></p>
+<p>又比如一些工具类库，版本号只能往上加，不能撤销，</p>
+<p>那么一旦发布了某个<strong>不兼容</strong>的版本，就只能硬着头皮往下走了。</p>
+<h3 id="结语">结语</h3>
+<p>为系统提出的每一个<strong>要求</strong>，都是要付出成本的。</p>
+<p>一个勉强能跑的系统，人们对它的要求更低。</p>
+<p><br/></p>
+<p>如果要求它更可靠，覆盖所有的异常流程，有日志可跟踪，</p>
+<p>有单测覆盖，支持多套环境，可调式，有详细的文档，</p>
+<p>支持监控，可回滚，它就会变得越来越复杂。</p>
+<p><br/></p>
+<p>除此之外，肯定还有对系统的其他要求，例如自动扩缩容，</p>
+<p>自动降级，安全方面的防护，等等。</p>
+<p><br/></p>
+<p>因此，写好一个系统，并不是仅仅让它能跑就完事了，</p>
+<p>额外还要做出很多事情。</p>
+<p><br/></p>
+<p>这些功能加起来，足以让一个简简单单的应用，变得超级复杂，</p>
+<p>很多<strong>侵入式</strong>的写法，会让代码变得几乎不可维护。</p>
+<p><br/></p>
+<p>最后，一个系统到底要不要做得这么复杂，其实是设计者该考虑的事情，</p>
+<p>系统要不要具备这样的隐性功能，要不要投入这么多人力去实现，</p>
+<p>都是<strong>值得商榷</strong>的，并不是额外的功能越多越好。</p>
+<p><br/></p>
+<p>没有好的系统，只看是否达到预期罢了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/01/fee/" rel="next" title="像企业一样考虑问题">
+                <i class="fa fa-chevron-left"></i> 像企业一样考虑问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/11/infrastructure/" rel="prev" title="站在巨人的肩膀上">
+                站在巨人的肩膀上 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-number">1.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志"><span class="nav-number">2.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单测"><span class="nav-number">3.</span> <span class="nav-text">单测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境"><span class="nav-number">4.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试"><span class="nav-number">5.</span> <span class="nav-text">调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档"><span class="nav-number">6.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监控"><span class="nav-number">7.</span> <span class="nav-text">监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回滚"><span class="nav-number">8.</span> <span class="nav-text">回滚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">9.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

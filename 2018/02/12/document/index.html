@@ -1,0 +1,826 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="背景  所有软件活动包括根本任务——打造由抽象软件实体构成的复杂概念结构，   次要任务——使用编程语言表达这些抽象实体，在空间和时间限制内将它们映射成机器语言。   编程人员所处理的工作内容，具有抽象性和不可见性，很难直观的将它表现给别人看。 而且，在编写软件的过程中，人们还会创造一个接一个的抽象概念。 相比使用编程语言将某一个概念实现而言，理解和传递这些抽象的概念才是根本难题。  我想开发者们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何写好一篇文档">
+<meta property="og:url" content="https://thzt.github.io/2018/02/12/document/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="背景  所有软件活动包括根本任务——打造由抽象软件实体构成的复杂概念结构，   次要任务——使用编程语言表达这些抽象实体，在空间和时间限制内将它们映射成机器语言。   编程人员所处理的工作内容，具有抽象性和不可见性，很难直观的将它表现给别人看。 而且，在编写软件的过程中，人们还会创造一个接一个的抽象概念。 相比使用编程语言将某一个概念实现而言，理解和传递这些抽象的概念才是根本难题。  我想开发者们">
+<meta property="article:published_time" content="2018-02-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.943Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2018/02/12/document/"/>
+
+
+
+
+
+  <title>如何写好一篇文档 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/12/document/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何写好一篇文档</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T00:00:00+08:00">
+                2018-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="背景">背景</h3>
+<blockquote>
+<p>所有软件活动包括<strong>根本任务</strong>——打造由抽象软件实体构成的复杂概念结构，</p>
+</blockquote>
+<blockquote>
+<p><strong>次要任务</strong>——使用编程语言表达这些抽象实体，在空间和时间限制内将它们映射成机器语言。</p>
+</blockquote>
+<p><br/></p>
+<p>编程人员所处理的工作内容，具有抽象性和不可见性，很难直观的将它表现给别人看。</p>
+<p>而且，在编写软件的过程中，人们还会创造一个接一个的抽象概念。</p>
+<p>相比使用编程语言将某一个概念实现而言，<strong>理解和传递这些抽象的概念才是根本难题。</strong></p>
+<p><br/></p>
+<p>我想开发者们都有这样的认识吧，实现一个给定的功能总是简单的，</p>
+<p>而恰如其分的实现一个表述不清的功能，才是困难的。</p>
+<p><strong>开发人员的主要工作量，并不在编码环节，而是与外界交互。</strong></p>
+<p><br/></p>
+<p>从这个角度来看，在软件项目中，我并不认为具有自解释性的代码就足够了。</p>
+<p>还得有必要的解释性文档。</p>
+<p><br/></p>
+<h3 id="传递知识">传递知识</h3>
+<p>文档是一种知识传递的形式，它可以存档，可以重复利用。</p>
+<p>如果编写者和阅读者决定使用文档的形式来传递知识，</p>
+<p>那么我认为首先应该注意的是，“<strong><a href="https://zh.wikipedia.org/wiki/%E7%9F%A5%E8%AD%98%E7%9A%84%E8%A9%9B%E5%92%92" target="_blank" rel="noopener">知识的诅咒</a></strong>”这种认知偏差。</p>
+<p><br/></p>
+<blockquote>
+<p>知道某知识的人，下意识的是不了解不知道该知识的人的处境的。</p>
+</blockquote>
+<p><br/></p>
+<p>代码的编写者，下意识的会认为，别人知道自己所做的种种假设，</p>
+<p>接口的提供者，下意识的会认为，别人知道该如何调用它。</p>
+<p>这就是最容易出现问题的环节，也是最消耗人力的环节。</p>
+<p><br/></p>
+<p><strong>编写文档，如果寄希望于阅读者来主动咨询自己，就写不出好文档，</strong></p>
+<p><strong>而是应该把写文档看做提供服务，向阅读者传递必要的知识。</strong></p>
+<p><br/></p>
+<p>如果能把自己决策的动机写下来，就是一篇好的设计文档，</p>
+<p>如果能把期望别人如何使用写下来，就是一份好的接口文档。</p>
+<p>当然，有计划的人会先写文档。</p>
+<p><br/></p>
+<h3 id="必要的">必要的</h3>
+<p>有一些知识如果不出现在文档中，就会对阅读者造成困扰。</p>
+<p><br/></p>
+<p>例如，<strong>好的文档应该首先交代背景知识，</strong></p>
+<p>如果文档一上来就开始写自己关心的内容，</p>
+<p>读者就不会那么容易切换到合适的上下文中，</p>
+<p>如果不交代背景，阅读者就不知道这篇文档到底想做什么。</p>
+<p><br/></p>
+<p>还有，<strong>好的文档不应该把疑问抛给读者，</strong></p>
+<p>如果文档会引发疑问，那么这个疑问就很有可能不会被提出来，</p>
+<p>而是由阅读者自主选择一个结论，显然这个结论很难与编写者的预期相符。</p>
+<p><br/></p>
+<p><strong>懂得站在对方角度考虑问题的编写者，迟早会摸索出这样的文档编写方式。</strong></p>
+<p>为了尽快的达到这一点，我们还需要一些技巧。</p>
+<p><br/></p>
+<p>一个典型的技巧就是，如果觉得某些内容没什么必要，那也写出来。</p>
+<p>因为阅读者可以忽略任何他想忽略的内容。</p>
+<p>因此，对于专属名词，甚至上文已经提到过的概念，</p>
+<p>也要不厌其烦的进行介绍，因为读者可能会略过它们。</p>
+<p><br/></p>
+<p>还是那句话，</p>
+<p><strong>要以文档提供服务，而不是寄希望于读者主动咨询。</strong></p>
+<p>提高文档的可读性，并不影响读者在主动性方面对自身的严格要求。</p>
+<p><br/></p>
+<h3 id="不必要的">不必要的</h3>
+<p>上文我们提到了，即使编写者认为没有什么必要的内容，也可以写到文档中。</p>
+<p>因为读者可以忽略它们，而被忽略总比没有表述清楚要好。</p>
+<p><br/></p>
+<p>可是，也并不是所有的内容都应该出现在文档中，</p>
+<p>这可能会影响读者的整体思路，</p>
+<p>对的，<strong>删除内容也一定是出自对读者的关心。</strong></p>
+<p><br/></p>
+<p>我想熟知面向对象编程的开发者们，一定知道信息隐藏这一技巧吧，</p>
+<p>所谓信息隐藏，指的是对不必要的细节进行封装，对外表现出具有整体一致性的概念。</p>
+<p><strong>也只有对不必要的细节进行隐藏，才有办法表达更复杂的概念。</strong></p>
+<p><br/></p>
+<p><strong>诚然，实现的细节是需要隐藏的，</strong></p>
+<p><strong>但这也要建立在，对概念的外在解释足够好的基础上。</strong></p>
+<p>例如，如果你没有写明如何使用一份代码，哪怕写了很多私有函数，</p>
+<p>也不算做好了信息隐藏，因为读者不得不去了解它的实现细节。</p>
+<p><br/></p>
+<p>因此，代码不能算是文档，</p>
+<p>它并不能说明我们为什么要这样解决问题，</p>
+<p>它只是编码了实现给定功能的计算细节。</p>
+<p><br/></p>
+<p>最后，如果我们已经做好了信息隐藏，那么被隐藏的细节，就不该暴露给读者，</p>
+<p>这样有利于我们在更高的抽象层次上讨论问题。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文主要介绍了写好文档的思路和原则，</p>
+<p>主要思路是，<strong>把编写文档看做提供主动的服务，而不是被动的咨询。</strong></p>
+<p><br/></p>
+<p>有一些知识需要广播出来，人们才可以有效的接收到，</p>
+<p>这就是<strong>分享精神</strong>。</p>
+<p><br/></p>
+<p>如果期望别人主动，这就另当别论了，</p>
+<p>我写了一篇文档给你看，目的是为了锻炼你的主动性，</p>
+<p>我会觉得这一定是哪里有问题。</p>
+<p><br/></p>
+<p>具有相关知识的开发者，有义务将这些知识传承下去，</p>
+<p><strong>如果别人因为信息缺失，浪费了时间，我会感到愧疚。</strong></p>
+<p>你呢？</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/11/semantics-8/" rel="next" title="语言背后的代数学（八）：范畴">
+                <i class="fa fa-chevron-left"></i> 语言背后的代数学（八）：范畴
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/19/semantics-9/" rel="prev" title="语言背后的代数学（九）：笛卡尔闭范畴">
+                语言背后的代数学（九）：笛卡尔闭范畴 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传递知识"><span class="nav-number">2.</span> <span class="nav-text">传递知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必要的"><span class="nav-number">3.</span> <span class="nav-text">必要的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不必要的"><span class="nav-number">4.</span> <span class="nav-text">不必要的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

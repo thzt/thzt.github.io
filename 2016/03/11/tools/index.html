@@ -1,0 +1,882 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="中学的历史课本上曾经讲过， 学会制作工具，是人类进步的标志。  我深以为然。 可是现实生活中，存在着对工具很多的误解。  有的人，认为制作工具浪费时间和精力，做了不必要的事情， 有的人，认为既然有现成的工具可用，为什么还要自己造轮子。 有的人，认为应该专门区分开制作工具的人和使用工具的人。  这些看法，在各自的角度来讲，都说的通， 可以没有对工具有个全面的认识。  下面，我们仔细分析一下， 看能不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论工具">
+<meta property="og:url" content="https://thzt.github.io/2016/03/11/tools/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="中学的历史课本上曾经讲过， 学会制作工具，是人类进步的标志。  我深以为然。 可是现实生活中，存在着对工具很多的误解。  有的人，认为制作工具浪费时间和精力，做了不必要的事情， 有的人，认为既然有现成的工具可用，为什么还要自己造轮子。 有的人，认为应该专门区分开制作工具的人和使用工具的人。  这些看法，在各自的角度来讲，都说的通， 可以没有对工具有个全面的认识。  下面，我们仔细分析一下， 看能不">
+<meta property="article:published_time" content="2016-03-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.924Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2016/03/11/tools/"/>
+
+
+
+
+
+  <title>论工具 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/03/11/tools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">论工具</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-11T00:00:00+08:00">
+                2016-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>中学的历史课本上曾经讲过，</p>
+<p>学会制作工具，是人类进步的标志。</p>
+<p><br/></p>
+<p>我深以为然。</p>
+<p>可是现实生活中，<strong>存在着对工具很多的误解</strong>。</p>
+<p><br/></p>
+<p>有的人，认为制作工具浪费时间和精力，做了不必要的事情，</p>
+<p>有的人，认为既然有现成的工具可用，为什么还要自己造轮子。</p>
+<p>有的人，认为应该专门区分开制作工具的人和使用工具的人。</p>
+<p><br/></p>
+<p>这些看法，在各自的角度来讲，都说的通，</p>
+<p>可以没有对工具有个<strong>全面的</strong>认识。</p>
+<p><br/></p>
+<p>下面，我们仔细分析一下，</p>
+<p>看能不能从更高的角度来看待它，</p>
+<p>做好工具，用好工具。</p>
+<p><br/></p>
+<h2 id="工具就是解决方案"><strong>工具就是解决方案</strong></h2>
+<p>无论是日常生活中，还是在软件开发中，</p>
+<p>我们经常有直接解决问题的场景，</p>
+<p>貌似并没有使用工具。</p>
+<p><br/></p>
+<p>这就给了人们一种<strong>假象</strong>，</p>
+<p>那种特意找来的才叫工具，</p>
+<p>用了别人的东西，才叫用了工具。</p>
+<p><br/></p>
+<p>其实不然。</p>
+<p>一个<strong>解决方案</strong>，实际上就是一个具体的工具了，</p>
+<p>只不过它只能用来解决那个问题罢了。</p>
+<p><br/></p>
+<p>好的解决方案，就好比适用的工具，</p>
+<p>用最直接的办法解决了问题，</p>
+<p>不拖泥带水，不带来附加的问题。</p>
+<p><br/></p>
+<h2 id="不得已而造轮子"><strong>不得已而造轮子</strong></h2>
+<p>着手实施的过程，</p>
+<p>实际上就是将目前的项目问题<strong>还原</strong>成历史上已经解决过问题的过程。</p>
+<p><br/></p>
+<p>这个阶段，我们在进行问题求解。</p>
+<p>为了尽可能的少耗费精力，我们总会优先选择已经成型的工具，</p>
+<p>在软件开发中，相当于找到各种类库，框架来用。</p>
+<p><br/></p>
+<p>可是，市面上广为流传的那些通用工具，</p>
+<p>并不一定非常切题，我们必须做出调整，甚至废弃一部分功能，</p>
+<p>这个时候，就有点造轮子的萌芽了。</p>
+<p><br/></p>
+<p>随着业务的发展，业务模型逐渐清晰起来了，</p>
+<p>没有趁手的工具，也无法跟得上业务的发展需要了，</p>
+<p><strong>只能从基础开始，借用各种工具的设计思想，让工具和业务共同发展。</strong></p>
+<p><br/></p>
+<p>此之所谓，重新造轮子。</p>
+<p><br/></p>
+<p>这样不好吗？</p>
+<p>在项目初期，诚然不太合适，</p>
+<p>但是，全程中我们的目的都是为了找到合适的工具解决问题呀，</p>
+<p>并没有偏离主题，并没有为了造而造。</p>
+<p><br/></p>
+<p>这也是<strong>不得已而为之</strong>的事情。</p>
+<p><br/></p>
+<h2 id="工具的创造者和使用者"><strong>工具的创造者和使用者</strong></h2>
+<p>在大多数人眼中，</p>
+<p>工具都是一些人造出来，给另外一些不同的人来使用的，</p>
+<p>这里就又有误区了。</p>
+<p><br/></p>
+<p>其实不必强制如此，</p>
+<p>一个能工巧匠，必然有<strong>自己的</strong>一套工具箱，</p>
+<p>这些工具箱中都是他趁手的工具。</p>
+<p><br/></p>
+<p>这些工具，全是跟别人一样的吗？</p>
+<p>未必啊。</p>
+<p>有雷同的，有调整过的，更有自创的。</p>
+<p><br/></p>
+<p>工具完全可以自己造给自己用，是<strong>为了给自己的工作助力</strong>，</p>
+<p>在软件行业，这有一个名词叫『dog fooding』，</p>
+<p>很多软件公司都深谙此道。</p>
+<p><br/></p>
+<p>比如，Visual Studio本来只是Microsoft内部使用的一个编辑器，</p>
+<p>随着不断完善，它完全可以作为一个产品来卖了，</p>
+<p>那么就可以拿出来了，面向普通大众开放了。</p>
+<p><br/></p>
+<p>再比如，Facebook很多项目都主张尽量开源，</p>
+<p>首先解决本公司自己的问题，</p>
+<p>再通过解决社区的问题逐渐完善，同时也降低了维护成本。</p>
+<p><br/></p>
+<p>此外，如果不事先限定工具的未来使用者的话，</p>
+<p>还会促进人们对工具进行更好的设计。</p>
+<p><br/></p>
+<p>另一方面，有些人喜欢写工具给别人用，</p>
+<p>但是，<strong>眼高手低，只是解决一些假想的问题</strong>，过于理想主义。</p>
+<p><br/></p>
+<p>不能解决问题的工具，还不如没有，</p>
+<p>它会造成解决方案的混乱，加大原始问题的难度。</p>
+<p><br/></p>
+<p>因此，工具的创造者和使用者，必须紧密合作。</p>
+<p>工具才能发挥它最大的作用。</p>
+<p><br/></p>
+<h2 id="业务逻辑并不啰嗦"><strong>业务逻辑并不啰嗦</strong></h2>
+<p>有些人不喜欢写业务逻辑，说是因为它繁琐。</p>
+<p>我觉得这是对编程认识的<strong>偏见</strong>。</p>
+<p><br/></p>
+<p>因为编程就是用代码解决问题的，</p>
+<p>业务逻辑繁琐，本身就是一个问题。</p>
+<p><br/></p>
+<p>我们完全可以写一个业务逻辑的管理器，</p>
+<p>把这些复杂业务逻辑分离开，然后用这个管理器统筹规划，</p>
+<p>非常干净清爽了，不是吗？</p>
+<p><br/></p>
+<p>因此，这种情况下，代码要做的事情不是关键，</p>
+<p><strong>关键在于，怎样写，用什么样的策略来写，</strong></p>
+<p><strong>没有注定繁琐的代码，只有不合理的繁琐表述。</strong></p>
+<p><br/></p>
+<h2 id="工具还可以用来制造工具"><strong>工具还可以用来制造工具</strong></h2>
+<p>只要存在问题，我们就可以想到借助工具来解决它，</p>
+<p>那么假设这里有好多人需要斧子这种工具，</p>
+<p>就要造出那么多斧子来吗，好累啊。</p>
+<p><br/></p>
+<p>其实，这引出了另外一个问题，</p>
+<p>那就是如何制造多个斧子的问题。</p>
+<p><br/></p>
+<p>我们可以造一个机器，它用来生产斧子，</p>
+<p>这个机器，就是<strong>用来制造工具的工具</strong>，</p>
+<p>而制作这个机器所用的道具，同样也是工具。</p>
+<p><br/></p>
+<p>原来，世界这么奇妙，</p>
+<p>工具可以组合，还可以互相影响。</p>
+<p><br/></p>
+<h2 id="学会别人的设计思想"><strong>学会别人的设计思想</strong></h2>
+<p>当我们定位问题后，怎样将适用工具制造出来呢？</p>
+<p>现存的解决方案是怎样想出来的呢？</p>
+<p><br/></p>
+<p>这就得求助历史了，求助于同行们前辈们的经验教训。</p>
+<p><br/></p>
+<p>我们要先找到类似的工具，</p>
+<p><strong>看它是如何解决问题的，用了什么办法，它的作者是怎么想的。</strong></p>
+<p><br/></p>
+<p>学会了这些，抓住思考问题的方式，</p>
+<p>我们就能<strong>随机应变，灵活处理</strong>，做出趁手适用的工具来。</p>
+<p><br/></p>
+<p>其他工具中任何有用的部分，都可以借来，只要能达到目的。</p>
+<p>即，目的明确后，方法可以灵活多变。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>过分的依赖工具和过度的排斥工具，都是盲目的。</p>
+<p><strong>做到正视一个事物，是非常困难的。</strong></p>
+<p><br/></p>
+<p>jQuery的作者在《Secrets of the JavaScript Ninja》中所言，</p>
+<p>很多人都被教导说，不要使用eval，这是不对的，</p>
+<p>相反，<strong>我们应该学会它，从而才有能力善用它。</strong></p>
+<p><br/></p>
+<p>对于其他事物也是如此啊，</p>
+<p>全盘接受和全盘否定，都会丢掉半壁江山，</p>
+<p>我们要深入理解，目的是把它用到可以用的地方，发挥它的作用。</p>
+<p><br/></p>
+<p>不理解它，怎么做到在需要的时候使用呢？</p>
+<p><br/></p>
+<p>君子生非异也，善假于物也。</p>
+<p>——荀子《劝学》</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/08/forward-looking-engineer/" rel="next" title="软件工程师的前瞻性">
+                <i class="fa fa-chevron-left"></i> 软件工程师的前瞻性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/14/alphago/" rel="prev" title="观看AlphaGo与李世石比赛有感">
+                观看AlphaGo与李世石比赛有感 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#工具就是解决方案"><span class="nav-number">1.</span> <span class="nav-text">工具就是解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不得已而造轮子"><span class="nav-number">2.</span> <span class="nav-text">不得已而造轮子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具的创造者和使用者"><span class="nav-number">3.</span> <span class="nav-text">工具的创造者和使用者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#业务逻辑并不啰嗦"><span class="nav-number">4.</span> <span class="nav-text">业务逻辑并不啰嗦</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具还可以用来制造工具"><span class="nav-number">5.</span> <span class="nav-text">工具还可以用来制造工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学会别人的设计思想"><span class="nav-number">6.</span> <span class="nav-text">学会别人的设计思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">7.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

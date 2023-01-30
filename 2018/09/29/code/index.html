@@ -1,0 +1,824 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="这几年，编程的门槛变得越来越低了， 相关的软件开发知识也变得越来越普及， 似乎人人都可以写那么几段代码，这并不是什么难事。  然而，作为一门技巧， 编程初学者和经验丰富的匠人，还是有所不同的， 这不仅体现在最终结果上，还体现在对代码本身的看待方式上。  我们都知道，代码主要的作用是实现功能， 与他人合作的时候，代码还能起到沟通想法的作用。  因此，功能目标是重要的，实现方式是其次， 沟通的结果是重">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码形式">
+<meta property="og:url" content="https://thzt.github.io/2018/09/29/code/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="这几年，编程的门槛变得越来越低了， 相关的软件开发知识也变得越来越普及， 似乎人人都可以写那么几段代码，这并不是什么难事。  然而，作为一门技巧， 编程初学者和经验丰富的匠人，还是有所不同的， 这不仅体现在最终结果上，还体现在对代码本身的看待方式上。  我们都知道，代码主要的作用是实现功能， 与他人合作的时候，代码还能起到沟通想法的作用。  因此，功能目标是重要的，实现方式是其次， 沟通的结果是重">
+<meta property="article:published_time" content="2018-09-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.949Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2018/09/29/code/"/>
+
+
+
+
+
+  <title>代码形式 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/09/29/code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">代码形式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-29T00:00:00+08:00">
+                2018-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这几年，编程的<strong>门槛</strong>变得越来越低了，</p>
+<p>相关的软件开发知识也变得越来越普及，</p>
+<p>似乎人人都可以写那么几段代码，这并不是什么难事。</p>
+<p><br/></p>
+<p>然而，作为一门<strong>技巧</strong>，</p>
+<p>编程初学者和经验丰富的<strong>匠人</strong>，还是有所不同的，</p>
+<p>这不仅体现在最终<strong>结果</strong>上，还体现在对<strong>代码本身</strong>的看待方式上。</p>
+<p><br/></p>
+<p>我们都知道，代码主要的作用是<strong>实现功能</strong>，</p>
+<p>与他人合作的时候，代码还能起到<strong>沟通想法</strong>的作用。</p>
+<p><br/></p>
+<p>因此，<strong>功能目标</strong>是重要的，<strong>实现方式</strong>是其次，</p>
+<p><strong>沟通的结果</strong>是重要的，<strong>沟通形式</strong>是其次。</p>
+<p><br/></p>
+<p>本文打算对，代码如何实现功能的<strong>表现形式</strong>，进行探讨。</p>
+<p><br/></p>
+<h3 id="喜好">喜好</h3>
+<p>通常实现一段功能，我们可以用不止一种方式进行编程，</p>
+<p>那么为什么最后我们选择了其中一种呢？</p>
+<p>这是我们觉得代码有<strong>好坏之分</strong>。</p>
+<p><br/></p>
+<p>代码能体现开发者的<strong>品味</strong>。</p>
+<p><br/></p>
+<p>努力编写出一段看起来<strong>漂亮</strong>的代码，是一件好事，</p>
+<p>但是这件事很容易做得<strong>适得其反</strong>，</p>
+<p>因为好坏的评判标准是模糊的，某些方面也是因人而异的。</p>
+<p><br/></p>
+<p>简而言之，我们认为好的，别人不一定认为好。</p>
+<p>别人认为好的，我们也许不这么认为。</p>
+<p><br/></p>
+<p>所以，虽然追求把代码写好是一种好<strong>习惯</strong>，</p>
+<p>但是如果<strong>过于追求</strong>代码形式，就会浪费很多时间，</p>
+<p>而且还不能达到预期的效果。</p>
+<p><br/></p>
+<h3 id="返工">返工</h3>
+<p>很多人在写代码的时候，会<strong>持续不断</strong>的对它进行改动，</p>
+<p>以便让代码在每时每刻都保持<strong>“优雅”</strong>。</p>
+<p><br/></p>
+<p>我认为这是不必要的。</p>
+<p>因为这在无形中<strong>增加</strong>了很多工作量。</p>
+<p>而且我们这次的改动，未必不会在以后再被<strong>改回去</strong>。</p>
+<p><br/></p>
+<p>我们应当认识到这是一种<strong>返工</strong>现象。</p>
+<p><br/></p>
+<p>那么，如何才能避免最终代码<strong>脏乱差</strong>呢？</p>
+<p>一个推荐的办法就是“<strong>写两遍</strong>”。</p>
+<p><br/></p>
+<p>在个人开发过程中，我们可以随意发挥，<strong>先把功能做完</strong>，</p>
+<p>然后在代码提交之前，<strong>重新阅读</strong>一下自己的代码，</p>
+<p>最后一口气把它改好。</p>
+<p><br/></p>
+<p>这样会减少大量的返工，还能保证最终的代码质量。</p>
+<p><br/></p>
+<p>如果一次修改的代码量太大呢？</p>
+<p>这说明我们<strong>一次提交的东西</strong>太多了，需要分多次提交，</p>
+<p>每次提交“写两遍”。</p>
+<p><br/></p>
+<h3 id="重写">重写</h3>
+<p>看到自己写的代码就非常喜欢，看到别人写的，就觉得很不舒服，</p>
+<p>这是<strong>正常</strong>现象。</p>
+<p>但是忍不住修改别人的代码，使他变成自己喜欢的方式，</p>
+<p>这就<strong>不正常</strong>了。</p>
+<p><br/></p>
+<p>这有几方面值得考虑，</p>
+<p>首先，单纯修改代码的表现形式，价值并不明显，</p>
+<p>也没有明显的<strong>证据</strong>表明，新代码比旧代码更好维护。</p>
+<p><br/></p>
+<p>此外，代码一方面是<strong>实现功能</strong>，另一方面是<strong>沟通实现意图</strong>，</p>
+<p>既然这两方面的目的都达成了，</p>
+<p>就没有必要再修改其<strong>表现形式</strong>。</p>
+<p><br/></p>
+<p>值得一提的是，不对现有代码进行<strong>充分了解</strong>就去修改，这种行为非常危险。</p>
+<p>很容易出现故障，也不见得能比现有代码写的更好，</p>
+<p>觉得脏乱差，很可能是现有代码<strong>需要照顾到的细节</strong>太多了，</p>
+<p>我们脑海中的优雅代码，可能是<strong>暂时没考虑</strong>这些细节怎么处理。</p>
+<p><br/></p>
+<p>最后，一个旧系统的现有<strong>代码量</strong>其实是很大的，</p>
+<p>短时间内我们不可能将它完全改掉，这需要我们<strong>重写</strong>所有的业务逻辑，</p>
+<p>因此，学会如何在现有代码的基础上工作，是开发者<strong>必备</strong>的一项技能。</p>
+<p><br/></p>
+<p>所以，对现有代码，我们应该保持敬畏态度，</p>
+<p>除非从业务上来看，有了巨大的修改，现有代码必须删掉重写，</p>
+<p>否则，不要轻易<strong>重写</strong>它。</p>
+<p><br/></p>
+<h3 id="结语">结语</h3>
+<p>希望本文能帮助对代码有洁癖的强迫症患者们，尽早摆脱纠结，</p>
+<p>跳出代码形式的<strong>狭小</strong>领域范围，</p>
+<p>早日避开写法问题。</p>
+<p><br/></p>
+<p>况且，如果真要追求可读性和可维护性的话，</p>
+<p>没有什么比<strong>当面讲解</strong>和丰富的<strong>文档</strong>更直接有效了，</p>
+<p>从代码反推逻辑的话，再好的代码也<strong>无法还原</strong>当初的设计意图。</p>
+<p><br/></p>
+<p>不要过于注重<strong>形式</strong>，要看<strong>意图</strong>，</p>
+<p>需要达成什么目的，达到了没有，</p>
+<p>还有哪些需要改进的，当前改进是否有<strong>成效</strong>。</p>
+<p><br/></p>
+<p>我们已经在<strong>成效甚微</strong>的事情上浪费了太多时间，</p>
+<p>是该放下包袱<strong>轻身</strong>前进了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/25/developer/" rel="next" title="考察开发者的九个经验法则">
+                <i class="fa fa-chevron-left"></i> 考察开发者的九个经验法则
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/18/respect/" rel="prev" title="尊重别人的创造力">
+                尊重别人的创造力 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#喜好"><span class="nav-number">1.</span> <span class="nav-text">喜好</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返工"><span class="nav-number">2.</span> <span class="nav-text">返工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重写"><span class="nav-number">3.</span> <span class="nav-text">重写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

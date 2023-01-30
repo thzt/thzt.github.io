@@ -1,0 +1,850 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="我们经常会遇到针对一件事，出现多种不同观点的时候。 每个观点看起来都是对的，我们应该信哪个呢？  比如，当我们要挑选一个电子产品的时候，网上有好多同类产品的介绍或评测， 到底哪些介绍是虚假宣传，哪些评测又是业界良心呢？ 又比如，发生了某件热点新闻的时候，有好多人评论，我们应该相信哪家所言呢？ 或者这条新闻本身是否背后也有人在炒作呢？  有些人从小就很有主见、很有自信，自身观点很难受他人影响，除非有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何判断哪个观点是对的">
+<meta property="og:url" content="https://thzt.github.io/2021/09/14/viewpoint/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="我们经常会遇到针对一件事，出现多种不同观点的时候。 每个观点看起来都是对的，我们应该信哪个呢？  比如，当我们要挑选一个电子产品的时候，网上有好多同类产品的介绍或评测， 到底哪些介绍是虚假宣传，哪些评测又是业界良心呢？ 又比如，发生了某件热点新闻的时候，有好多人评论，我们应该相信哪家所言呢？ 或者这条新闻本身是否背后也有人在炒作呢？  有些人从小就很有主见、很有自信，自身观点很难受他人影响，除非有">
+<meta property="article:published_time" content="2021-09-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.970Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2021/09/14/viewpoint/"/>
+
+
+
+
+
+  <title>如何判断哪个观点是对的 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/09/14/viewpoint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何判断哪个观点是对的</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-14T00:00:00+08:00">
+                2021-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们经常会遇到针对一件事，出现多种不同观点的时候。</p>
+<p>每个观点看起来都是对的，我们应该信哪个呢？</p>
+<p><br/></p>
+<p>比如，当我们要挑选一个电子产品的时候，网上有好多同类产品的介绍或评测，</p>
+<p>到底哪些介绍是虚假宣传，哪些评测又是业界良心呢？</p>
+<p>又比如，发生了某件热点新闻的时候，有好多人评论，我们应该相信哪家所言呢？</p>
+<p>或者这条新闻本身是否背后也有人在炒作呢？</p>
+<p><br/></p>
+<p>有些人从小就很有主见、很有自信，自身观点很难受他人影响，除非有人能<strong>说服</strong>他们。</p>
+<p>而我不是这样，我很喜欢琢磨 “对方为什么会有这样的想法”，所以很乐意<strong>信任</strong>别人的观点，</p>
+<p>所以，当各种不同的观点汇聚到一起时，就会经常性的发生 “反噬”，它们会打起来。</p>
+<p><br/></p>
+<p>每天都在进行的这些 “观点碰撞” 曾一度让我非常痛苦，我不知道到底自己的想法到底应该安放在哪里。</p>
+<p>于是，我在多年的 “斗争” 中总结下来的一套 “组合拳”，这些 “组合拳” 让我看清自己是 “<strong>如何判断哪个观点是对的</strong>”。</p>
+<p><br/></p>
+<ul>
+<li><p>开放式思维：把观点看做有用信息来存储，而不是只挑选正确的；什么都有用，就算现在看来是错的</p></li>
+<li><p>论点与论据的关系：论证的目的是为了证明；论据是为论点服务的</p></li>
+<li><p>观点与事实分离：事实是与个人无关的，观点是人的主观判断；同一事实会产生不同的观点</p></li>
+<li><p>前提式思维：有什么样的前提条件，就有什么样的结论；不看结论看前提</p></li>
+<li><p>科学方法：调研、提出假设、落地应用、验证假设；循环往复</p></li>
+<li><p>样本偏差：样本缺乏代表性，会影响我们的判断；我们看到的是别人想让我们看到的</p></li>
+<li><p>问题与方案：我们是为了解决问题，还是为了推行方案；方案并不唯一，总是可替换的</p></li>
+</ul>
+<h3 id="相信别人的方式">相信别人的方式</h3>
+<p>思维要不要开放，这是一个问题，我们是可以选择的。</p>
+<ul>
+<li><p>封闭式：我不相信任何人的观点，除非他证明这是对的</p></li>
+<li><p>开放式：我相信任何人观点，除非有人证明它是错的</p></li>
+</ul>
+<p>以上 “封闭”、“开放” 是我随意标的，指的是新观点进入我们脑海中的难易程度，<strong>并无褒贬之意</strong>。</p>
+<p><br/></p>
+<p>采用 “封闭式思维” 会错过一些有用的讯息，因为持有 “<strong>有用观点</strong>” 的人，未必有时间、有精力证明给我们看。</p>
+<p>我们会很难相信那些没有经过证明的结论，如果它们出现在我们的认知盲区，我们就永远突破不了自己。</p>
+<p><br/></p>
+<p>采用 “开放式思维” 大脑内会汇聚很多未经证明的想法，这些想法很多都是别人 “主观臆想” 出来的，</p>
+<p>轻信这些观点，就容易活在精神的世界中，很多 “民间科学家” 就是饱受其害。</p>
+<p><br/></p>
+<p>我选择了<strong>后者</strong>（开放式），因为好奇心驱使，我不想错过好玩的讯息。</p>
+<p>值得一提，人们喜闻乐见的好品质，有时候是相斥的。我们不可能既 “坚持己见” 又 “灵活变通”。</p>
+<h3 id="用科学方法不断修正">用科学方法不断修正</h3>
+<p>自然科学用来研究世界的 “科学方法”，我认为是一项伟大的发明。</p>
+<p>它提出了一套可执行的方法，不断的修正我们对世界的认识。</p>
+<ul>
+<li><p>调研、提出<strong>假设</strong>、落地应用、验证假设</p></li>
+<li><p>循环往复</p></li>
+</ul>
+<p><br/></p>
+<p>任何存在我们脑子里的认识，都只是 “假设”，等待新的事实来检验。</p>
+<p>“科学方法” 特别适用于 “开放式思维”，这两者相辅相成，不断涌入的<strong>新想法</strong>让自己的认识越来越<strong>成熟</strong>。</p>
+<p><br/></p>
+<p>在软件产品的设计和开发过程中，加入数据统计，正是 “科学方法” 的一个应用，</p>
+<p>我们通过数据埋点，通过分析用户行为数据，来验证产品经理的<strong>决策</strong>是否<strong>合理</strong>。</p>
+<p>而不仅仅是通过行业经验。</p>
+<p><br/></p>
+<p>有一种常见的思维陷阱是，“观点” 与 “事实” 不分，</p>
+<p>在任何时候都应该保持警惕，“我这个说法只是一个观点”、“他这个说法也只是一个观点”。</p>
+<p>既然是 “观点”，那么就没有对错，需要不断的<strong>修正</strong>和完善。</p>
+<h3 id="有前提才有结论">有前提才有结论</h3>
+<p>一个完整的 “观点”，应该包含两个部分：<strong>前提条件</strong> + <strong>结论</strong>。</p>
+<p>然而大部分日常情景下，每次都介绍 “前提条件” 又会显得太啰嗦，因此，人们会<strong>省略</strong> “前提条件”。</p>
+<p>但是在思考问题的时候，这些前提条件却不能省。尤其是对同一件事实产生了两种相悖观点的时候。</p>
+<p><br/></p>
+<p>在软件开发过程中，进行技术交流的时候，我们经常会讨论是 A 方案好，还是 B 方案好。</p>
+<p>一开始大家对于前提是非常明确的，只限于当前项目当前时间段。</p>
+<p>但讨论一段时间之后，问题就发散了，变成了 A、B 方案本身的对比。</p>
+<p><br/></p>
+<p>这时候应该这样消除悖论，在 X 前提条件下 A 方案好；在 Y 前提条件下 B 方案好。</p>
+<p>继而将问题收敛成，我们当前项目是符合 X 前提还是 Y 前提呢？</p>
+<p>所以你问我倾向于用哪个方案呢？答：你问的是我哪个项目？</p>
+<h3 id="警惕样本偏差">警惕样本偏差</h3>
+<p>样本偏差，又称为 “幸存者偏差”，以下是人们常听说的一个版本。</p>
+<p><br/></p>
+<blockquote>
+<p>1941年, 第二次世界大战中，美国哥伦比亚大学统计学沃德教授(Abraham Wald)应军方要求，利用其在统计方面的专业知识来提供关于《飞机应该如何加强防护，才能降低被炮火击落的几率》的相关建议。沃德教授针对联军的轰炸机遭受攻击后返回营地的轰炸机数据，进行研究后发现：机翼是最容易被击中的位置,机尾则是最少被击中的位置。沃德教授的结论是“我们应该强化机尾的防护”，而军方指挥官认为“应该加强机翼的防护，因为这是最容易被击中的位置”。</p>
+</blockquote>
+<p><br/></p>
+<p>沃德教授坚持认为：</p>
+<ul>
+<li><p>(1)统计的样本，只涵盖平安返回的轰炸机；</p></li>
+<li><p>(2)被多次击中机翼的轰炸机，似乎还是能够安全返航；</p></li>
+<li><p>(3)并非是机尾不易被击中，而是因为机尾被击中的飞机早已无法返航，寥寥几架返航的飞机都依赖相同的救命稻草——引擎尚好。</p></li>
+</ul>
+<p>军方采用了教授的建议，并且后来证实该决策是正确的，<strong>看不见的弹痕</strong>却最致命。</p>
+<p><br/></p>
+<p>在验证自己 “观点” 在当前 “前提” 下是否正确的时候，也要谨防 “样本偏差”。</p>
+<p>我们周边的人、事，都是跟自己紧密相关的，甚至很多讯息都是 AI 自动推送给我们的，</p>
+<p>那些支持自己论点的 “证据” 全都<strong>聚集</strong>在我们身边，让我们没法不相信自己。</p>
+<p><br/></p>
+<p>所以在做验证的时候，一定要大胆的走出自己的 “舒适圈”，做用户调研的时候，找到真实的用户，不要找熟人。</p>
+<p>在做开发者工具产品的时候，少问开发工具的人，多问使用工具的人。</p>
+<h3 id="论证的严密性不重要">论证的严密性不重要</h3>
+<p>鲁迅先生说过：人类的悲欢并不相通，我只是觉得他们吵闹。</p>
+<p><br/></p>
+<p>人们都有一种寻找共鸣的冲动，所以论点和论据通常结伴而生。</p>
+<p>具体的说，当我们听到一个 “观点” 的时候，通常支撑它的 “论据” 也被找全了。</p>
+<p><br/></p>
+<p>但显然只有支撑论据是不完整的，那些反例去哪里了呢？</p>
+<p>答案是，反例被想要传递 “观点” 的述说者有意无意的<strong>隐藏</strong>掉了。</p>
+<p>为了说服别人，强调某个 “观点”，有时候也只能如此。饭店不会在广告词中强调，某两道菜一起吃会很难吃。</p>
+<p><br/></p>
+<p>所以在审视别人 “观点” 的时候，考察论证的严密性的时机就不太对，</p>
+<p>或者说，坚持 “开放式思维” 的人们，就算论证不严密，也不会影响自己接受新 “观点”。</p>
+<p>杠精们反而容易陷入 “论据不够充分” 的迷局中。其实作者只是想阐述 “观点” 而已，论据是临时凑的。</p>
+<h3 id="结语">结语</h3>
+<p>上文总结了我在解决大脑中 “观点碰撞” 时的一些常用方法，这些方法本身目前还在不断的修正中。</p>
+<p>它们能让我在保持 “开放式思维” 的同时，不至于在大脑中产生 “悖论”。</p>
+<p><br/></p>
+<p>此外我认为产生任何 “疑惑” 时，不去想它并不是一个好办法，</p>
+<p>更好的办法是，想办法让自己的思维升级，从而找到<strong>正向的</strong>认识，兼容这些疑惑。</p>
+<p><br/></p>
+<p>比如，你可能疑惑研究 “技术难题” 到底有什么不对的，</p>
+<p>那么可以研究一下经济学、团队管理、商业模式 等等，了解一下团队/部门/公司 是如何运转的。</p>
+<p>自然就会明白，在什么时间段、投入多大精力 来研究哪些技术才是要考虑的问题。</p>
+<p><br/></p>
+<p>这就是思维升级了，把一个 “窄问题” 升级到了一个 “宽泛问题” 下的特殊场景。</p>
+<p><br/></p>
+<p>又比如，你很厌恶 “办公室政治”，不明白为什么人们非得搞这些，</p>
+<p>那么不妨研究一下心理学、企业管理、中外政治 等等，了解一下 “政治行为” 的起因和解决的问题。</p>
+<p>就会明白，我们发现的问题，其实恰恰是更高维度问题的解决方案。</p>
+<p><br/></p>
+<p>这也是思维升级了，让我们看到了一个更复杂的世界，原始问题远比我们看到的更难解决。</p>
+<p><br/></p>
+<p>总之，太阳底下无新事，</p>
+<p>我们在不断成长，不断学习，不断修正，没有人会比别人更特殊。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/09/13/source-code/" rel="next" title="“源码” 应该怎么读">
+                <i class="fa fa-chevron-left"></i> “源码” 应该怎么读
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/18/team/" rel="prev" title="团队管理的关注点">
+                团队管理的关注点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#相信别人的方式"><span class="nav-number">1.</span> <span class="nav-text">相信别人的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用科学方法不断修正"><span class="nav-number">2.</span> <span class="nav-text">用科学方法不断修正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有前提才有结论"><span class="nav-number">3.</span> <span class="nav-text">有前提才有结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#警惕样本偏差"><span class="nav-number">4.</span> <span class="nav-text">警惕样本偏差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#论证的严密性不重要"><span class="nav-number">5.</span> <span class="nav-text">论证的严密性不重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

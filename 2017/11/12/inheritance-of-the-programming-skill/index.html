@@ -1,0 +1,911 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="随着科技的发展，计算机的普及，编程越来越流行起来了， 它的门槛越来越低，像Scratch这样的编程语言已经向青少年普及开了。 软件行业每年也都会有大量的新人加入，还会有很多人转行来做程序员， 编程这个行当，日趋火热，全民“健身”已是大势所趋。  然而，高速发展带来的不仅仅是光鲜的外表， 还带来了很多隐患。 软件工具迭代的速度越来越快，已经没有人能够跟上它的更新速度了， 从事一线编程工作的程序员们，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程经验浅谈">
+<meta property="og:url" content="https://thzt.github.io/2017/11/12/inheritance-of-the-programming-skill/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="随着科技的发展，计算机的普及，编程越来越流行起来了， 它的门槛越来越低，像Scratch这样的编程语言已经向青少年普及开了。 软件行业每年也都会有大量的新人加入，还会有很多人转行来做程序员， 编程这个行当，日趋火热，全民“健身”已是大势所趋。  然而，高速发展带来的不仅仅是光鲜的外表， 还带来了很多隐患。 软件工具迭代的速度越来越快，已经没有人能够跟上它的更新速度了， 从事一线编程工作的程序员们，">
+<meta property="article:published_time" content="2017-11-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.940Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/11/12/inheritance-of-the-programming-skill/"/>
+
+
+
+
+
+  <title>编程经验浅谈 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/11/12/inheritance-of-the-programming-skill/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">编程经验浅谈</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T00:00:00+08:00">
+                2017-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>随着科技的发展，计算机的普及，编程越来越流行起来了，</p>
+<p>它的门槛越来越低，像Scratch这样的编程语言已经向青少年普及开了。</p>
+<p>软件行业每年也都会有大量的新人加入，还会有很多人转行来做程序员，</p>
+<p>编程这个行当，日趋火热，全民“健身”已是大势所趋。</p>
+<p><br/></p>
+<p>然而，高速发展带来的不仅仅是光鲜的外表，</p>
+<p>还带来了很多隐患。</p>
+<p>软件工具迭代的速度越来越快，已经没有人能够跟上它的更新速度了，</p>
+<p>从事一线编程工作的程序员们，最能体会这种苦楚。</p>
+<p><br/></p>
+<p>此外，虽然友好的学习曲线和更低的门槛，可以通过更多的教程来填补。</p>
+<p>但是，编程技能的传承却还在起步阶段。</p>
+<p>在某一领域深耕五年的工程师是凤毛麟角，</p>
+<p>还有不少人，虽然工作了很久，可以应付工作需要，但仍然难窥编程的精髓。</p>
+<p><br/></p>
+<p>本文尝试找出那些该被传承的技能，</p>
+<p>我将结合自己的经验，列举出编程知识的关键点，</p>
+<p>这些关键点，直接影响了我考虑问题的方式。</p>
+<p><br/></p>
+<h3 id="总纲">总纲</h3>
+<p>我将编程技能划分到了以下几个类别中，包括，</p>
+<p>（1）代码组织能力</p>
+<p>（2）信息隐藏能力</p>
+<p>（3）程序语言原理</p>
+<p>（4）测试能力</p>
+<p>（5）问题分析能力</p>
+<p>（6）项目管理能力</p>
+<p><br/></p>
+<p>下面我们逐一展开讨论。</p>
+<p><br/></p>
+<h3 id="代码组织能力">代码组织能力</h3>
+<p>如果已经确定了实现方案，甚至代码已经写过一遍了，</p>
+<p>再让我们重新编写，我们能写到什么程度。</p>
+<p><br/></p>
+<p>我们应该怎样组织这些代码，如何分层，如何分块？</p>
+<p>哪些的抽象的，哪些是具体的。</p>
+<p>如何复用，其中包含了哪些模式，采用了什么架构。</p>
+<p><br/></p>
+<p>这些都取决于程序员的<strong>代码组织能力</strong>。</p>
+<p>我是这样组织代码的。</p>
+<p><br/></p>
+<p><strong>（1）先编写主流程</strong></p>
+<p>这会让我们先从全局开始把握问题，</p>
+<p>用分治思想，把问题切分成子问题。</p>
+<p><br/></p>
+<p><strong>（2）提取出跨项目可用的工具集</strong></p>
+<p>如果能够识别出某些工具是跨项目可用的，那么就提取出来，再应用于本项目中，</p>
+<p>这样会极大的减少当前问题的复杂度，</p>
+<p>即使最终并没有被其他项目使用。</p>
+<p><br/></p>
+<p><strong>（3）构建辅助对象</strong></p>
+<p>当事情比较复杂时，就不要直接实现它，</p>
+<p>而是构建一些辅助对象/工具，让它们处理。</p>
+<p>还要管理好这些对象的层次，不要让他们之间随意调用。</p>
+<p><br/></p>
+<p>以上三种办法，我经常使用，每个人的办法可能会有不同，</p>
+<p>但最重要的不是方法本身，</p>
+<p>而是要理解，<strong>有办法更有效的组织代码</strong>。</p>
+<p><br/></p>
+<h3 id="信息隐藏能力">信息隐藏能力</h3>
+<p>提到信息隐藏，其实人们最先想到的是面向对象编程，</p>
+<p>一个类中可以包含私有字段和方法，</p>
+<p>外部是无法访问的。</p>
+<p><br/></p>
+<p>这只是冰山之一角。</p>
+<p><br/></p>
+<p>实际上，信息隐藏和信息暴露是对立的，</p>
+<p><strong>我们并不是要一味的隐藏信息，而是要有所选择。</strong></p>
+<p>这一切要先从，我们要设计让用户知道什么开始。</p>
+<p>我一般采取以下办法。</p>
+<p><br/></p>
+<p><strong>（1）先设计文档和用例</strong></p>
+<p>在编写工具和框架的时候尤其重要，包括编写自用的辅助对象时，</p>
+<p>我都会先设计用户该怎样使用它们，然后再去实现，</p>
+<p>我会在API上多花费一些时间。</p>
+<p><br/></p>
+<p>这有两方面的好处，</p>
+<p>一方面，文档和用例会帮我理清思路，</p>
+<p>即，如果事情已经做好了，那么它如何与外界衔接起来。</p>
+<p>另一方面，<strong>在没有实现之前编写API，会避免“知识的诅咒”，</strong></p>
+<p>实现者经常会误以为别人知道怎么用它。</p>
+<p><br/></p>
+<p><strong>（2）信息隐藏不是为了可替换</strong></p>
+<p>在实际项目中，很少有提供某一个功能的组件，被无缝的替换成其他组件的时候，</p>
+<p>这需要事先进行非常精密的设计，人们一般都做不到，也没有必要这样做。</p>
+<p><br/></p>
+<p>所以，信息隐藏，并不是为了可替换。</p>
+<p><strong>而应该仅仅是，为了避免用户在使用时查看源码。</strong></p>
+<p>即使最终不可替换，也实现了它的价值。</p>
+<p><br/></p>
+<p><strong>（3）文档比代码有用</strong></p>
+<p>代码体现了功能是如何实现的，但是用户根本不关心这个，</p>
+<p>文档体现了如何使用这些功能，这才是用户最关心的。</p>
+<p><br/></p>
+<p>比起“代码如文档”这种“可望而不及”的境界，</p>
+<p>我更喜欢，给代码添加足够的注释以及文档。</p>
+<p>道理其实很简单，<strong>描述如何实现的文字，不太容易表达清楚为什么这样实现。</strong></p>
+<p>菜谱中，也不会告诉你为什么要这样烹饪，为什么不用别的办法。</p>
+<p><br/></p>
+<p>因此，<strong>代码编写者的动机</strong>必须以注释和文档形式写明，</p>
+<p>最重要的是，<strong>功能期望如何被使用</strong>，也必须写到文档最显然的地方，</p>
+<p>不然没人知道怎么用更好。</p>
+<p><br/></p>
+<h3 id="程序语言原理">程序语言原理</h3>
+<p>和编程相关的理论很多，我唯独挑选了语言理论，</p>
+<p>因为，我们必须知道编程语言是怎么工作的。</p>
+<p><br/></p>
+<p>必须知道什么是语法（编码），什么是语义（解码），</p>
+<p><strong>我们看到的符号“1”，它不是自然数本身，只是它的一种编码。</strong></p>
+<p>知道了这些之后，我们就会不畏惧生成代码的代码，</p>
+<p>以及把数据当做代码执行的“引擎”了。</p>
+<p><br/></p>
+<p>此外，不了解或者盲目相信领域特定语言，都是有害的。</p>
+<p>在某些情况下“解释器模式”的确是合适的，</p>
+<p>但是也会很大程度上增加用户的学习成本。</p>
+<p><br/></p>
+<p>不了解编译本质的程序员，更容易迷信特定编程语言，</p>
+<p>跨语言进行编程，就会受到种种限制。</p>
+<p><br/></p>
+<h3 id="测试能力">测试能力</h3>
+<p>在为什么需要测试这件事上，很多人都知其然不知其所以然，</p>
+<p>其实是因为对代码进行静态分析，无法捕捉所有的运行时错误。</p>
+<p><br/></p>
+<p>因为有“停机问题”的缘故，</p>
+<p><strong>我们不得不将代码运行一遍，才能知道它结果是否正确。</strong></p>
+<p>因此，对代码各分支进行自测，是程序员职业素养的一种体现。</p>
+<p><br/></p>
+<p>除了手动运行一遍，我们还可以有很多其他手段，</p>
+<p>包括让代码经过类型检查，排除一部分“显而易见”的错误，</p>
+<p>或者编写单元测试，自动化计算测试覆盖率。</p>
+<p><br/></p>
+<p>代码质量和编写方式诚然有关，</p>
+<p>但是最重要的一点还是，是否测试完全。</p>
+<p><br/></p>
+<h3 id="问题分析能力">问题分析能力</h3>
+<p>程序员新手接到一个任务，就会马上考虑如何实现它，</p>
+<p>并不会过多考虑<strong>这个问题是怎么来的</strong>。</p>
+<p>而老手就会谨慎很多。</p>
+<p><br/></p>
+<p>他们会询问来龙去脉，查看问题的背景，</p>
+<p>查看<strong>是什么痛点引发了这个问题</strong>。</p>
+<p>据我的经验，几乎一切问题这样考虑后，都会和一开始理解的不同。</p>
+<p><br/></p>
+<p>在自发的做任何一件事情之前，考虑问题的来源和事情的价值，会很有帮助。</p>
+<p>例如，某一天我觉得某个功能“应该”被复用一下，因为有两处出现了相似的代码。</p>
+<p>但我并不会立即动手。</p>
+<p><br/></p>
+<p>因为，它并不是那么“疼痛”。</p>
+<p>这个问题，可能就是一个凭个人感觉的，无中生有的“洁癖”问题。</p>
+<p><br/></p>
+<p><strong>抛开目的看策略，往往就找不到正确的答案。</strong></p>
+<p>例如，追求复用并不是百利而无一害的事情，复用会建立更多的依赖。</p>
+<p>而依赖一旦更新就会有版本问题。</p>
+<p><br/></p>
+<h3 id="项目管理能力">项目管理能力</h3>
+<p>项目管理能力，并一定是项目经理的必备要求，</p>
+<p>普通开发者同样也需要对个人负责。</p>
+<p><br/></p>
+<p>我们要评估自己开发内容的工期，</p>
+<p>当项目出现进度风险时，还要及时反馈。</p>
+<p><br/></p>
+<p>项目组总共涉及到了哪些人，他们都是做什么的，</p>
+<p>他们之间是怎么协同的，</p>
+<p>这对理解项目全貌帮助也很大。</p>
+<p><br/></p>
+<p>整个项目在解决什么业务问题，要达成什么样的目标，</p>
+<p>如何发布，回滚计划是什么，怎样部署。</p>
+<p><br/></p>
+<p><strong>理解它们，决定了以后我们能否单独被托付一个项目。</strong></p>
+<p><br/></p>
+<h3 id="结语">结语</h3>
+<p>有哪些编程经验是最值得分享的，本文就是我的答案。</p>
+<p>这些想法来源于书籍，项目经验，以及我自己的反思。</p>
+<p><br/></p>
+<p>和我当时走的弯路一样，</p>
+<p>在看任何资料的时候，都应该相信<strong>作者对他的观点是带有强调意愿的</strong>，</p>
+<p>因此，会稍微有所偏见，也会误导读者错过某些有用的信息。</p>
+<p><br/></p>
+<p>例如，介绍“重构”技法的书籍，并不会过多告诉你它有什么坏处，</p>
+<p>以避免你直接把书扔掉。</p>
+<p>告诉你人生经验的长辈，也不会告诉你他对你的指导心里也没底，</p>
+<p>以避免你听不进他的建议。</p>
+<p><br/></p>
+<p>所以，到底什么是对的，什么是错的，</p>
+<p>就无所谓了，我们只当为大自然增加了一种多样性吧。</p>
+<p>也为了在“身临其境”的时候，做到“心灵相通”。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/07/over-skilled/" rel="next" title="警惕过分熟练">
+                <i class="fa fa-chevron-left"></i> 警惕过分熟练
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/28/bisection-method/" rel="prev" title="使用二分法排查问题">
+                使用二分法排查问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#总纲"><span class="nav-number">1.</span> <span class="nav-text">总纲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码组织能力"><span class="nav-number">2.</span> <span class="nav-text">代码组织能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息隐藏能力"><span class="nav-number">3.</span> <span class="nav-text">信息隐藏能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序语言原理"><span class="nav-number">4.</span> <span class="nav-text">程序语言原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试能力"><span class="nav-number">5.</span> <span class="nav-text">测试能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题分析能力"><span class="nav-number">6.</span> <span class="nav-text">问题分析能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目管理能力"><span class="nav-number">7.</span> <span class="nav-text">项目管理能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">8.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

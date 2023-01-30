@@ -1,0 +1,883 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="软件工程师们每天都会遇到各种各样的问题， 我们中的绝大多数人，日常的工作内容就是把这些问题解决掉。 不论是修复一个代码缺陷，还是开发个新的功能，又或者是启动一个新的项目。  回顾多年的学校教育，无形中让我们养成了以下这样的思维习惯， 那就是，针对一个给定的问题，快速的找到答案， 这使得我们容易在考试中获得高分，以致于让我们有机会接受更好的教育。  适应环境，从而沉淀出一套最有效的思维模式， 这确实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件方案的能力范围">
+<meta property="og:url" content="https://thzt.github.io/2018/05/30/software-solution/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="软件工程师们每天都会遇到各种各样的问题， 我们中的绝大多数人，日常的工作内容就是把这些问题解决掉。 不论是修复一个代码缺陷，还是开发个新的功能，又或者是启动一个新的项目。  回顾多年的学校教育，无形中让我们养成了以下这样的思维习惯， 那就是，针对一个给定的问题，快速的找到答案， 这使得我们容易在考试中获得高分，以致于让我们有机会接受更好的教育。  适应环境，从而沉淀出一套最有效的思维模式， 这确实">
+<meta property="article:published_time" content="2018-05-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.945Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2018/05/30/software-solution/"/>
+
+
+
+
+
+  <title>软件方案的能力范围 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/05/30/software-solution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件方案的能力范围</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T00:00:00+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>软件工程师们每天都会遇到各种各样的问题，</p>
+<p>我们中的绝大多数人，日常的工作内容就是把这些问题解决掉。</p>
+<p>不论是修复一个代码缺陷，还是开发个新的功能，又或者是启动一个新的项目。</p>
+<p><br/></p>
+<p>回顾多年的学校教育，无形中让我们养成了以下这样的思维习惯，</p>
+<p>那就是，<strong>针对一个给定的问题，快速的找到答案，</strong></p>
+<p>这使得我们容易在考试中获得高分，以致于让我们有机会接受更好的教育。</p>
+<p><br/></p>
+<p>适应环境，从而沉淀出一套最有效的思维模式，</p>
+<p>这确实可以算是优秀人士的一种衡量标准。</p>
+<p><br/></p>
+<p>然而，这种思维模式一旦被不小心用到了其他环境中，</p>
+<p>那么带来的恶果将是惨重的，</p>
+<p>甚至还是难以觉察的。</p>
+<p><br/></p>
+<h3 id="发现问题">1. 发现问题</h3>
+<p>急着去解决问题，而不去分析<strong>问题本身</strong>，是一个最常见的思维惯性，</p>
+<p>因为在校期间，我们遇到的问题都是严格定义的，</p>
+<p>不太会出现问题本身出现差错的情况。</p>
+<p><br/></p>
+<p>但是现实中，却远不是这样，</p>
+<p>现实中的问题，更多是<strong>不确定的</strong>。</p>
+<p><br/></p>
+<p>例如，一个想要实现工作流引擎的团队，</p>
+<p>他们的业务场景可能并不需要让工作流可配置。</p>
+<p><br/></p>
+<p>那么它们到底为什么要解决这个问题呢？</p>
+<p><br/></p>
+<p>这就是典型的问题本身不明确的一个情形。</p>
+<p>在这时候，我们就需要给“问题”下个合理的定义了，</p>
+<p>到底什么是“问题”？</p>
+<p><br/></p>
+<p>斋藤嘉则在《<a href="https://book.douban.com/subject/3604068/" target="_blank" rel="noopener">发现问题的思考术</a>》中提到，</p>
+<p>所谓“<strong>问题</strong>”，就是“应有的景象”与“现状”之间的“落差”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">问题 &#x3D; 应有的景象 - 现状</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>而解决方案是否有效，完全取决于问题的定义方式。</p>
+<p><br/></p>
+<p>如果团队仅仅是为了应付经常变动的业务流程，</p>
+<p>那么首先应该考虑的是，为什么业务流程会经常变动，</p>
+<p>而不是考虑如何用技术手段使得它可以任意变动。</p>
+<p><br/></p>
+<p>此外，换一个角度，如果团队的目标根本就不是为了解决业务流程问题，</p>
+<p>而是为了做出一个技术产品，来提高团队的影响力，</p>
+<p>那么开发工作流引擎，也未尝不是一个可行的办法。</p>
+<p><br/></p>
+<p>所以，对问题本身，我们应该有更多的考虑，</p>
+<p>究竟是谁的预期，和现状之间产生了怎样的落差？</p>
+<p><br/></p>
+<h3 id="让方案自动化">2. 让方案自动化</h3>
+<p>软件才出现了不到100年，但是人类社会却繁衍生息了上万年，甚至上十万年，</p>
+<p>从这个角度来看，软件形式的解决方案可能只算是历史上的一瞬间了。</p>
+<p><br/></p>
+<p>软件系统也从人类社会现存的解决方案中学到了很多，</p>
+<p>Smalltalk的设计者之一<a href="https://en.wikipedia.org/wiki/Alan_Kay" target="_blank" rel="noopener">Alan Kay</a>，</p>
+<p>在答复<a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en" target="_blank" rel="noopener">Meaning of "Object-Oriented Programming"</a>的邮件中提到了，</p>
+<blockquote>
+<p>I thought of objects being like biological cells and/or individual computers on a network, only able to communicate with messages.</p>
+</blockquote>
+<p><br/></p>
+<p>可以看出，Smalltalk中“对象”的概念，其设计<strong>动机</strong>最初来源于生物学，</p>
+<p>这得益于<a href="https://en.wikipedia.org/wiki/Alan_Kay" target="_blank" rel="noopener">Alan Kay</a>同时具有生物学和数学的知识背景。</p>
+<p><br/></p>
+<p>我这样写是为了阐述一种现状，</p>
+<p>人们总是寄希望于用软件解决<strong>所有的未解难题</strong>，这是一个常见的思维陷阱。</p>
+<p>因为某些问题的症结点，可能并不在软件层面，</p>
+<p>即使该问题是人们在从事软件开发活动中暴露出来的。</p>
+<p><br/></p>
+<p>例如，想要提高代码的交付质量，而编写一个自动化的测试系统，</p>
+<p>这显然就并没有分析清楚问题的症结所在，</p>
+<p>尤其是应用于那些难以进行自动化测试的领域中。</p>
+<p><br/></p>
+<p>因为，如果将代码质量归结为测试的不够充分，</p>
+<p>那么首先提高<strong>人工测试</strong>的投入量，才是验证“增加测试是否是有效”这一假设的最好办法，</p>
+<p>这也是投入产出比最高的方案。</p>
+<p><br/></p>
+<p>等到人工测试投入到工作中之后，</p>
+<p>等到那些具有<strong>重复的，可被自动化执行的</strong>部分出现时，</p>
+<p>再将这部分用软件系统来解决，</p>
+<p>我想这才是一个软件系统被考虑用于解决问题的正规途径吧。</p>
+<p><br/></p>
+<p>而不是反之，</p>
+<p>当可重复性的工作，可被自动化操作的工作，被识别出来之前，</p>
+<p>就先尝试开发一个软件系统，以期望它可以奇迹般的解决问题，</p>
+<p>这样经常会得不偿失。</p>
+<p><br/></p>
+<p>《<a href="https://book.douban.com/subject/1148282/" target="_blank" rel="noopener">计算机程序的构造与解释</a>》中写到，</p>
+<blockquote>
+<p>计算过程是存在于计算机里的一类抽象事物，在其演化进程中，这些过程会去操作一些被称为数据的抽象事物。</p>
+</blockquote>
+<blockquote>
+<p>我们用于指挥这种过程的程序就像是巫师的咒语，它们是用一些诡秘而深奥的程序设计语言，通过符号表达式的形式精心编排而成，它们描述了我们希望相应的计算过程去完成的工作。</p>
+</blockquote>
+<p><br/></p>
+<p>从程序语言的角度来看，</p>
+<p>是先有计算过程，再有了这些计算过程的描述（程序）。</p>
+<p><br/></p>
+<p>当我们对现实问题还没有想要一个有效的“过程”解决它时，</p>
+<p>就冒然从事编码（程序）活动，</p>
+<p>这显然是低效的，甚至是无意义的。</p>
+<p><br/></p>
+<h3 id="信息管理">3. 信息管理</h3>
+<p>软件开发行业的从业者们，可能会抱有这样的<strong>幻想</strong>，</p>
+<p>是我们现在这个团队，现在这个项目有问题，</p>
+<p>必定存在一个足够优秀的团队，在那里进行开发，是顺畅的高效的，</p>
+<p>没有各种令人分神的事情。</p>
+<p><br/></p>
+<p>其实，这种幻想可能根本就无法实现。</p>
+<p>因为<strong>每个团队每个项目都不可避免的存在自己的问题，</strong></p>
+<p>有其难以克服或正在想办法克服的瓶颈。</p>
+<p><br/></p>
+<p>快速进行软件开发是一个不稳定的理想状况，</p>
+<p>有任何一项不论是需求因素，工期因素，人员因素等等条件，不能符合理想标准，</p>
+<p>都会导致开发活动慢下来。</p>
+<p><br/></p>
+<p>虽然软件开发是有关编程技术的，但它的参与者终究还是人，</p>
+<p>有人就会有目标不统一，或者沟通合作等方面的社会学和心理学问题。</p>
+<p><br/></p>
+<p>关键是当其他人在兜售一个软件工程方面的解决方案时，</p>
+<p>如果不强调它会让现状变得像童话般美妙，就没有人愿意去尝试它。</p>
+<p>这就给我们带来了理想情况确实可以达到的错觉。</p>
+<p><br/></p>
+<p>这应该是不可能的，因为在软件工程方面“<a href="https://zh.wikipedia.org/wiki/%E6%B2%A1%E6%9C%89%E9%93%B6%E5%BC%B9" target="_blank" rel="noopener">没有银弹</a>”。</p>
+<p><strong>软件开发的真正困难不在于如何表示一个抽象概念，</strong></p>
+<p><strong>而在于如何将这个抽象概念传递给其他人。</strong></p>
+<p><br/></p>
+<p>因此，在《<a href="https://book.douban.com/subject/1102259/" target="_blank" rel="noopener">人月神话</a>》提到了<a href="https://en.wikipedia.org/wiki/Brooks%27s_law" target="_blank" rel="noopener">Brooks's law</a>，</p>
+<blockquote>
+<p>Adding human resources to a late software project makes it later.</p>
+</blockquote>
+<p>即，向进度落后的项目中增加人手，只会使项目更加落后。</p>
+<p><br/></p>
+<p>因为，新增加的人手会加剧组织沟通不畅的状况，</p>
+<p>而沟通问题或许是造成项目延期的主要原因。</p>
+<p><br/></p>
+<p>在软件开发过程中，如果出现了问题，</p>
+<p>先从沟通和信息不对称的角度进行反思，</p>
+<p>比直接寻求用一个辅助软件系统旁敲侧击，将会更加有效。</p>
+<p><br/></p>
+<h3 id="结语">结语</h3>
+<p>既然从事了软件开发这个行当，对软件系统的威力和价值，当然是有足够的自信，</p>
+<p>但这并不能让我们更加专业化。</p>
+<p><br/></p>
+<p>所谓专业化，我认为并不仅仅是从专业领域（软件）给出任何可行的方案，</p>
+<p>更重要一点是，<strong>从问题领域出发，指出客户方案中的不合理之处。</strong></p>
+<p>这样才能让方案总是直指问题的核心，确实有助于解决问题。</p>
+<p><br/></p>
+<p>然而，很多情况下，都不是我们可以控制的，</p>
+<p>在对解决方案提出质疑的时候，</p>
+<p>他人的任何不悦，最终才会让我们意识到什么是别人想去解决的问题。</p>
+<p><br/></p>
+<p>事实上，<strong>最难达成一致的是对问题本身的认知和大家的目标。</strong></p>
+<p><br/></p>
+<p>从“问题 = 应有的景象 - 现状”公式中我们也可以看到，</p>
+<p>在大家都能理性正视现状的基础上，不同的人因为拥有对“应有景象”的不同预期，</p>
+<p>最终会导致人们在心目中实际想要解决不同的问题。</p>
+<p><br/></p>
+<p>我们想达到的预期，在别人眼里真的是个问题么？</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/11/extensibility/" rel="next" title="可扩展性到底有多重要">
+                <i class="fa fa-chevron-left"></i> 可扩展性到底有多重要
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/31/gradual-typing/" rel="prev" title="Gradual Typing">
+                Gradual Typing <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#发现问题"><span class="nav-number">1.</span> <span class="nav-text">1. 发现问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让方案自动化"><span class="nav-number">2.</span> <span class="nav-text">2. 让方案自动化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息管理"><span class="nav-number">3.</span> <span class="nav-text">3. 信息管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

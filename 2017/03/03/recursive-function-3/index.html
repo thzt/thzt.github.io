@@ -1,0 +1,903 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="自然数归纳法    自然数归纳法，是一种数学证明方法，通常被用于证明某个给定命题在整个（或者局部）自然数范围内成立。 它可以用一个有限的方式写出一个无限的证明。 后续文章中我们会看到，这种用有限表示无限的方法，其实是有局限性的，并不能用来解决所有的问题， 它能处理的只是无限中的一个子集罢了。  自然数归纳法，我们可以描述如下： 为证明对每一个自然数，命题为真，只需要证明两件事， （1）对于自然数，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归函数（三）：归纳原理">
+<meta property="og:url" content="https://thzt.github.io/2017/03/03/recursive-function-3/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="自然数归纳法    自然数归纳法，是一种数学证明方法，通常被用于证明某个给定命题在整个（或者局部）自然数范围内成立。 它可以用一个有限的方式写出一个无限的证明。 后续文章中我们会看到，这种用有限表示无限的方法，其实是有局限性的，并不能用来解决所有的问题， 它能处理的只是无限中的一个子集罢了。  自然数归纳法，我们可以描述如下： 为证明对每一个自然数，命题为真，只需要证明两件事， （1）对于自然数，">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-b5630d6350cb8d0f.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-a8ad53859d33e161.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-eec07e9f1d1ccdb2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-cde531c9f6d2cab2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-b14783f3b0cddba1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-7e329a3fec9f7a22.png">
+<meta property="article:published_time" content="2017-03-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.930Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-b5630d6350cb8d0f.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/03/03/recursive-function-3/"/>
+
+
+
+
+
+  <title>递归函数（三）：归纳原理 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/03/recursive-function-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">递归函数（三）：归纳原理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-03T00:00:00+08:00">
+                2017-03-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="自然数归纳法">自然数归纳法</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-b5630d6350cb8d0f.png" /></p>
+<p><br/></p>
+<p>自然数归纳法，是一种数学证明方法，通常被用于证明某个给定命题在整个（或者局部）自然数范围内成立。</p>
+<p>它可以用一个有限的方式写出一个无限的证明。</p>
+<p>后续文章中我们会看到，这种用有限表示无限的方法，其实是有局限性的，并不能用来解决所有的问题，</p>
+<p>它能处理的只是无限中的一个子集罢了。</p>
+<p><br/></p>
+<p>自然数归纳法，我们可以描述如下：</p>
+<p>为证明对每一个自然数<span data-katex="n"></span>，命题<span data-katex="P(n)"></span>为真，只需要证明两件事，</p>
+<p>（1）对于自然数<span data-katex="1"></span>，命题<span data-katex="P(1)"></span>为真</p>
+<p>（2）如果对于自然数<span data-katex="m"></span>，命题<span data-katex="P(m)"></span>为真，那么对于自然数<span data-katex="m+1"></span>，命题<span data-katex="P(m+1)"></span>也为真</p>
+<p><br/></p>
+<p>其中，第(1)条称为起始条件，第(2)条称为递推条件，或者称为归纳步骤。</p>
+<p>第(2)条中，为了证明<span data-katex="P(m+1)"></span>而假设的<span data-katex="P(m)"></span>，称为归纳假设。</p>
+<p><br/></p>
+<p>这似乎是很显然的事情，我们可以在一张无限长的纸带开头写上初始条件<span data-katex="P(1)"></span>，</p>
+<p>接着根据递推条件，由<span data-katex="P(1)"></span>我们可以证明<span data-katex="P(2)"></span>成立，</p>
+<p>重复这种思想，我们可以由<span data-katex="P(2)"></span>证明<span data-katex="P(3)"></span>成立，如此不断的进行下去，</p>
+<p>最终，对于每个自然数<span data-katex="n"></span>，我们都能证明<span data-katex="P(n)"></span>成立。</p>
+<p><br/></p>
+<p>但是，这样并不算是一个有效的证明。</p>
+<p>要证明自然数归纳法的正确性，我们还需要补充一些集合论方面的知识。</p>
+<p>然而，在此之前，我们还是先来看自然数归纳法的一个例子吧。</p>
+<p><br/></p>
+<h3 id="例子">例子</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-a8ad53859d33e161.png" /></p>
+<p><br/></p>
+<p>在上一篇，我们在定义递归函数<code>fact</code>的时候，</p>
+<p>先找到了“递推式”，再找到了“终止条件”，然后写出了<code>fact</code>的定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int</span><br><span class="line">fact 1 &#x3D; 1</span><br><span class="line">fact n &#x3D; n * fact (n-1)</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>我们还提到，有一个步骤是必不可少的，</p>
+<p>那就是证明<code>fact</code>的正确性，即证明这样定义的<code>fact</code>就是阶乘函数<span data-katex="f(n)=n!"></span>。</p>
+<p><br/></p>
+<p>现在，我们正好可以用自然数归纳法来证明它。</p>
+<p>我们假设命题<span data-katex="P(n)"></span>为：<code>fact n</code>的值为<span data-katex="n!"></span></p>
+<p><br/></p>
+<p>（1）对于自然数<span data-katex="1"></span>，命题<span data-katex="P(1)"></span>：<code>fact 1</code>的值为<span data-katex="1!=1"></span>，成立</p>
+<p>（2）假设对于自然数<span data-katex="m"></span>，命题<span data-katex="P(m)"></span>：<code>fact m</code>的值为<span data-katex="m!"></span>，成立；</p>
+<p>那么，我们可以得到<code>fact (m+1) = (m+1) * fact m</code>，值为<span data-katex="(m+1)*m!=(m+1)!"></span>，也成立。</p>
+<p><br/></p>
+<p>所以，对于任意自然数（<span data-katex="n\geqslant 1"></span>），<code>fact n</code>的值就是<span data-katex="n!"></span>。</p>
+<p>于是，我们证明了<code>fact</code>就是阶乘函数<span data-katex="f(n)=n!"></span>。</p>
+<p><br/></p>
+<p>自然数归纳法还有另外一种等价形式，</p>
+<p>如果要证明<span data-katex="P(n)"></span>对每一个自然数<span data-katex="n"></span>为真，</p>
+<p>只要证明对于任意自然数<span data-katex="m"></span>，如果<span data-katex="P(i)"></span>当<span data-katex="i&lt;m"></span>为真，那么<span data-katex="P(m)"></span>也为真。</p>
+<p><br/></p>
+<h3 id="集合上的关系">集合上的关系</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-eec07e9f1d1ccdb2.png" /></p>
+<p><br/></p>
+<p>关系是一个日常生活用语，例如，“同学关系”，“我们的关系很好”之类的。</p>
+<p>然而，它也是一个集合论中的概念，这给我们带来了很多困扰。</p>
+<p>为了避免歧义，本文中从这里开始，我们开始谈论数学，我们要对集合上的“关系”进行定义。</p>
+<p><br/></p>
+<p>直观的说，集合<span data-katex="A"></span>的元素和集合<span data-katex="B"></span>的元素之间的关系是一个二元性质<span data-katex="R"></span>，</p>
+<p>使得对于每个<span data-katex="a\in A"></span>和<span data-katex="b\in B"></span>而言，<span data-katex="R(a,b)"></span>要么为真，要么为假。</p>
+<p><br/></p>
+<p>关系通常表示为一个集合，它是笛卡尔积的子集，即，</p>
+<p>集合<span data-katex="A"></span>和集合<span data-katex="B"></span>之间的关系<span data-katex="R"></span>是它们笛卡尔积的一个子集<span data-katex="R\subseteq A\times B"></span>。</p>
+<p>如果序对<span data-katex="(a,b)"></span>属于子集<span data-katex="R"></span>，则认为<span data-katex="a"></span>与<span data-katex="b"></span>之间的关系为真，否则认为<span data-katex="a"></span>与<span data-katex="b"></span>之间的关系为假。</p>
+<p>通常关系直接描述为<span data-katex="R(a,b)"></span>，或者<span data-katex="aRb"></span>，而不用<span data-katex="(a,b)\in R"></span>。</p>
+<p><br/></p>
+<p>除了二元关系之外，对任何正整数<span data-katex="k"></span>，还可以定义<span data-katex="k"></span>元关系。</p>
+<p>如果<span data-katex="A_1,\cdots,A_k"></span>为集合，则在<span data-katex="A_1,\cdots,A_k"></span>上的<span data-katex="k"></span>元关系是笛卡尔积<span data-katex="A_1\times \cdots \times A_k"></span>的一个子集。</p>
+<p><br/></p>
+<p>某个集合上的二元关系有很多性质，例如自反性，对称性，反对称性，传递性。</p>
+<p>一个关系<span data-katex="R\subseteq A\times A"></span>是自反的，如果<span data-katex="R(a,a)"></span>对于所有的<span data-katex="a\in A"></span>成立；</p>
+<p>是对称的，如果<span data-katex="R(a,b)"></span>就有<span data-katex="R(b,a)"></span>，对于所有的<span data-katex="a,b\in A"></span>都成立；</p>
+<p>是反对称的，如果<span data-katex="R(a,b)"></span>且<span data-katex="R(b,a)"></span>，则<span data-katex="a,b"></span>是同一个元素，对于所有的<span data-katex="a,b\in A"></span>都成立；</p>
+<p>是传递的，如果<span data-katex="R(a,b)"></span>和<span data-katex="R(b,c)"></span>能推出<span data-katex="R(a,c)"></span>，对于所有的<span data-katex="a,b,c\in A"></span>都成立。</p>
+<p>（注意，反对称性不是对称性的否定。</p>
+<p><br/></p>
+<p>等价关系是同时具有自反性，对称性和传递性的关系。</p>
+<p>偏序关系是具有自反性，反对称性和传递性的关系。</p>
+<p>等价关系的一个例子就是相等性，相等性关系<span data-katex="R(a,b)"></span>当且仅当<span data-katex="a,b"></span>是同一个元素。</p>
+<p>偏序关系，例如通常的序关系<span data-katex="R\subseteq N\times N"></span>，<span data-katex="R(a,b)"></span>当且仅当<span data-katex="a\leqslant b"></span>。</p>
+<p><br/></p>
+<h3 id="良基关系">良基关系</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-cde531c9f6d2cab2.png" /></p>
+<p><br/></p>
+<p>归纳法有各种各样的形式，自然数归纳法只是其中的一种应用，</p>
+<p>在数理逻辑和形式语言理论中，用的最多的是结构归纳法，在树形结构上进行归纳，后续文章中我们会提到。</p>
+<p><br/></p>
+<p>人们总结了各种归纳法的共性，提出了良基关系的概念，</p>
+<p>于是，自然数归纳法和结构归纳法都变成了在良基关系上通用归纳法的具体应用了。</p>
+<p><br/></p>
+<p>集合<span data-katex="A"></span>上的良基关系（well-founded relation），是<span data-katex="A"></span>上的一个二元关系<span data-katex="\prec "></span>，</p>
+<p>如果不存在无限下降序列（infinite descending sequence）<span data-katex="a_0\succ a_1\succ a_2\cdots"></span>。</p>
+<p>例如，自然数上的关系<span data-katex="&lt;"></span>，就是一个良基关系。</p>
+<p>但是<span data-katex="\leqslant "></span>却不是，因为存在一个无限下降序列<span data-katex="a_0\geqslant a_1\geqslant a_2\cdots"></span>。</p>
+<p><br/></p>
+<p>根据良基关系，我们可以定义集合中的最小元，</p>
+<p><span data-katex="a\in A"></span>为最小元，如果不存在<span data-katex="a&#39;\in A"></span>，使得<span data-katex="a&#39;\prec a"></span>。</p>
+<p><br/></p>
+<p>对于良基关系，有一个等价的定义，</p>
+<p><span data-katex="A"></span>上的二元关系<span data-katex="\prec "></span>是良基的，当且仅当<span data-katex="A"></span>的每一个非空子集<span data-katex="B"></span>有最小元。</p>
+<p><br/></p>
+<p>我们可以证明一下这两种说法等价性。</p>
+<p>要证当且仅当，我们需要证明充分性和必要性，</p>
+<p>（1）充分性：</p>
+<p>要证：<span data-katex="A"></span>上的二元关系<span data-katex="\prec "></span>是良基的，则<span data-katex="A"></span>的每一个非空子集<span data-katex="B"></span>有最小元。</p>
+<p>使用反证法，如果<span data-katex="B"></span>没有最小元，则对于每个<span data-katex="a\in B"></span>，总可以找到<span data-katex="a&#39;\in B"></span>，使得<span data-katex="a&#39;\prec a"></span>。</p>
+<p>但是，如果这样的话，我们就可以对任何<span data-katex="a_0\in B"></span>，以<span data-katex="a_0"></span>开始构造一个无限下降序列<span data-katex="a_0\succ a_1\succ a_2\cdots"></span>，</p>
+<p>这与<span data-katex="\prec "></span>是一个良基关系矛盾。充分性证毕。</p>
+<p><br/></p>
+<p>（2） 必要性：</p>
+<p>要证：如果<span data-katex="A"></span>的每一个非空子集<span data-katex="B"></span>都有最小元，则<span data-katex="A"></span>上用于比较的二元关系<span data-katex="\prec "></span>是良基的。</p>
+<p>由于<span data-katex="A"></span>的每一个非空子集<span data-katex="B"></span>都有最小元，则不可能存在无限下降序列<span data-katex="a_0\succ a_1\succ a_2\cdots"></span>，</p>
+<p>因此，<span data-katex="\prec "></span>是良基的。必要性证毕。</p>
+<p><br/></p>
+<p>因此，<span data-katex="A"></span>上的二元关系<span data-katex="\prec "></span>是良基的，当且仅当<span data-katex="A"></span>的每一个非空子集<span data-katex="B"></span>有最小元。</p>
+<p><br/></p>
+<h3 id="良基归纳法">良基归纳法</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-b14783f3b0cddba1.png" /></p>
+<p><br/></p>
+<p>设<span data-katex="\prec "></span>为集合<span data-katex="A"></span>上的良基二元关系，并且设<span data-katex="P"></span>为关于<span data-katex="A"></span>中元素的某个命题，</p>
+<p>如果<span data-katex="P(b)"></span>对于所有的<span data-katex="b\prec a"></span>成立，就必然有<span data-katex="P(a)"></span>成立，</p>
+<p>那么<span data-katex="P(a)"></span>就对所有的<span data-katex="a\in A"></span>成立。</p>
+<p><br/></p>
+<p>我们看到<span data-katex="&lt;"></span>确实是自然数集上的良基关系，因此自然数归纳法只是良基归纳法的一种特例。</p>
+<p><br/></p>
+<p>现在我们有了足够的能力来证明自然数归纳法的正确性了，</p>
+<p>只要我们证明了良基归纳法是正确的。</p>
+<p><br/></p>
+<p>还是用反证法：</p>
+<p>我们期望证明，</p>
+<p>前提：如果<span data-katex="P(b)"></span>对于所有的<span data-katex="b\prec a"></span>成立，必然有<span data-katex="P(a)"></span>成立，</p>
+<p>结论：那么对于所有的<span data-katex="a\in A"></span>，<span data-katex="P(a)"></span>都成立。</p>
+<p><br/></p>
+<p>如若不然，假设存在<span data-katex="x\in A"></span>，使得<span data-katex="P(x)"></span>不成立，</p>
+<p>则集合<span data-katex="B=\{a\in A\ |\ \neg P(a)\}"></span>非空，</p>
+<p>因此根据良基关系的等价定义，集合<span data-katex="B"></span>必有最小元<span data-katex="m\prec B\subseteq A"></span>，</p>
+<p>而且，<span data-katex="\neg P(m)"></span>成立。</p>
+<p><br/></p>
+<p>则根据前提的逆否命题，一定存在<span data-katex="b\prec m"></span>，使得<span data-katex="\neg P(b)"></span>成立，</p>
+<p>所以，我们有<span data-katex="b\in B"></span>，且<span data-katex="b \prec m"></span>，与<span data-katex="m"></span>是<span data-katex="B"></span>的最小元矛盾。</p>
+<p><br/></p>
+<p>证毕。</p>
+<p><br/></p>
+<p>由此，我们证明了良基归纳法的正确性。</p>
+<p>理解良基关系和偏序关系，是理解递归和不动点算子的第一步。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-03-recursive-function-3/1023733-7e329a3fec9f7a22.png" /></p>
+<p><br/></p>
+<p>本文从自然数归纳法出发，补充了一些集合论方面的知识，</p>
+<p>让我们熟悉了集合上的几种常用关系，例如，等价关系，偏序关系和良基关系，</p>
+<p>这些关系在以后的文章中还会被再次提到。</p>
+<p><br/></p>
+<p>最后，我们证明了良基归纳法，从而证明了自然数归纳法的正确性。</p>
+<p>不知道是否很明显了，递归的步骤和归纳的步骤，简直是太像了，</p>
+<p>这一定不是偶然。</p>
+<p><br/></p>
+<p>在<a href="https://book.douban.com/subject/26429992/" target="_blank" rel="noopener">The Little Prover</a>一书中，为了证明递归函数是否全函数（total function），</p>
+<p>作者使用了测度（measure）的概念，这实际上定义了参数集上的一个良基关系。</p>
+<p>全函数是可计算理论中一个很重要的概念，</p>
+<p>到底什么是全函数，什么是测度？下文我们再详细讨论。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://zh.wikipedia.org/zh-hans/%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95" target="_blank" rel="noopener">维基百科 - 数学归纳法</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">维基百科 - 二元关系</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E8%89%AF%E5%9F%BA%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">维基百科 - 良基关系</a></p>
+<p><a href="https://book.douban.com/subject/1144542/" target="_blank" rel="noopener">程序设计语言的形式语义</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/25/recursive-function-2/" rel="next" title="递归函数（二）：编写递归函数的思路和技巧">
+                <i class="fa fa-chevron-left"></i> 递归函数（二）：编写递归函数的思路和技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/06/recursive-function-4/" rel="prev" title="递归函数（四）：全函数与计算的可终止性">
+                递归函数（四）：全函数与计算的可终止性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#自然数归纳法"><span class="nav-number">1.</span> <span class="nav-text">自然数归纳法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合上的关系"><span class="nav-number">3.</span> <span class="nav-text">集合上的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#良基关系"><span class="nav-number">4.</span> <span class="nav-text">良基关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#良基归纳法"><span class="nav-number">5.</span> <span class="nav-text">良基归纳法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

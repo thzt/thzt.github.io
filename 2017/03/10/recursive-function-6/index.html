@@ -1,0 +1,884 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="回顾 上一篇中，我们通过引入极小化算子定义了递归函数， 使用递归函数，我们又定义了递归集与递归可枚举集， 本文我们要讨论，为什么递归可枚举集是“可枚举”的，以及什么是可计算函数。  可计算性    我们听说过，现代计算机在计算能力上是与图灵机等价的， 什么叫做计算能力呢？ 它指的是图灵机可计算的函数集，与现代计算机可计算的函数集是相等的。  为了简单起见，我们不去讨论图灵机，而是从现代计算机直接说">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归函数（六）：最多有多少个程序">
+<meta property="og:url" content="https://thzt.github.io/2017/03/10/recursive-function-6/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="回顾 上一篇中，我们通过引入极小化算子定义了递归函数， 使用递归函数，我们又定义了递归集与递归可枚举集， 本文我们要讨论，为什么递归可枚举集是“可枚举”的，以及什么是可计算函数。  可计算性    我们听说过，现代计算机在计算能力上是与图灵机等价的， 什么叫做计算能力呢？ 它指的是图灵机可计算的函数集，与现代计算机可计算的函数集是相等的。  为了简单起见，我们不去讨论图灵机，而是从现代计算机直接说">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3315ef8756b21619.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3c5dd1454fcd0559.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-a6e30544d2c6c7c3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-1fb62dcb731ff72f.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-5e01504f5037d0e0.png">
+<meta property="article:published_time" content="2017-03-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.931Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3315ef8756b21619.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/03/10/recursive-function-6/"/>
+
+
+
+
+
+  <title>递归函数（六）：最多有多少个程序 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/10/recursive-function-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">递归函数（六）：最多有多少个程序</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T00:00:00+08:00">
+                2017-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="回顾">回顾</h3>
+<p>上一篇中，我们通过引入极小化算子定义了递归函数，</p>
+<p>使用递归函数，我们又定义了递归集与递归可枚举集，</p>
+<p>本文我们要讨论，为什么递归可枚举集是“可枚举”的，以及什么是可计算函数。</p>
+<p><br/></p>
+<h3 id="可计算性">可计算性</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3315ef8756b21619.png" /></p>
+<p><br/></p>
+<p>我们听说过，现代计算机在计算能力上是与图灵机等价的，</p>
+<p>什么叫做计算能力呢？</p>
+<p>它指的是图灵机可计算的函数集，与现代计算机可计算的函数集是相等的。</p>
+<p><br/></p>
+<p>为了简单起见，我们不去讨论图灵机，而是从现代计算机直接说起，</p>
+<p>设<span data-katex="\mathscr{P}"></span>是一段程序，<span data-katex="n"></span>是一个正整数，</p>
+<p>我们称数论函数<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>为程序<span data-katex="\mathscr{P}"></span>所计算的<span data-katex="n"></span>元部分函数，</p>
+<p>如果对于相同的输入，</p>
+<p>要么：（1）程序<span data-katex="\mathscr{P}"></span>的计算可以终止，此时计算结果等于<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>的相应函数值；</p>
+<p>要么：（2）程序<span data-katex="\mathscr{P}"></span>的计算不能终止，此时<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>无定义。</p>
+<p><br/></p>
+<p>设<span data-katex="f(x_1,x_2,\cdots ,x_n)"></span>是一个部分函数，如果存在程序<span data-katex="\mathscr{P}"></span>可计算<span data-katex="f"></span>，则称<span data-katex="f"></span>是部分可计算的。</p>
+<p>如果一个函数，既是部分可计算的，又是全函数，则称这个函数是可计算的。</p>
+<p><br/></p>
+<p>可以证明，所有的原始递归函数和递归函数都是部分可计算的。</p>
+<p><br/></p>
+<h3 id="通用程序">通用程序</h3>
+<p>我们使用现代计算机进行编程的时候，并不是直接把程序的输入传给程序，</p>
+<p>而是将程序本身以及它的输入，传给计算机，最后由计算机得到计算结果，</p>
+<p>像这种接受任何程序和它的输入作为自己的输入，返回程序执行结果的程序，称为通用程序。</p>
+<p>为此，通用程序需要把输入的程序进行编码。</p>
+<p><br/></p>
+<p>常用的编码方法，涉及<a href="https://zh.wikipedia.org/wiki/%E9%85%8D%E5%AF%B9%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">配对函数</a>和<a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E6%95%B0" target="_blank" rel="noopener">哥德尔编码</a>。</p>
+<p>为了不引入太多的复杂性，我们可以将程序的编码理解为存储程序的二进制数据，</p>
+<p>不同的程序会有不同的二进制表示，每一个二进制表示可以对应一段程序（虽然可能不合法）。</p>
+<p>哥德尔编码做的事情就是将程序和自然数集一一对应起来。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3c5dd1454fcd0559.png" /></p>
+<p><br/></p>
+<p>因此，所有程序的个数是可数的，而这些程序可计算的函数个数也一定是可数的，</p>
+<p>它们可能是全函数，也可能是部分函数。</p>
+<p>（其中，“可数”指的是可数集，可数集是与自然数集之间存在一一映射的集合。</p>
+<p><br/></p>
+<p>然而，自然数集上的函数全体并不可数，（证略</p>
+<p>所以肯定存在程序不可计算的函数。</p>
+<p><br/></p>
+<h3 id="集合个数的可枚举性">集合个数的可枚举性</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-a6e30544d2c6c7c3.png" /></p>
+<p><br/></p>
+<p>程序<span data-katex="\mathscr{P}"></span>所计算的函数，我们可以记为<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>，</p>
+<p>由此，我们可以定义通用程序<span data-katex="\Phi "></span>，则有，</p>
+<p><span data-katex="\Phi (x_1,x_2,\cdots ,x_n,y)=\psi (x_1,x_2,\cdots ,x_n)"></span></p>
+<p>其中，<span data-katex="y"></span>是程序<span data-katex="\mathscr{P}"></span>的编码。</p>
+<p><br/></p>
+<p>因为，所有的程序与自然数集一一对应，</p>
+<p>所以，<span data-katex="\Phi (x_1,x_2,\cdots ,x_n,0),\Phi (x_1,x_2,\cdots ,x_n,1),\cdots"></span></p>
+<p>枚举了所有的<span data-katex="n"></span>元可计算函数。</p>
+<p><br/></p>
+<p>我们定义<span data-katex="W_y=\lbrace x\in N|\Phi(x,y)\downarrow \rbrace "></span>，</p>
+<p>根据递归可枚举集的定义，每一个<span data-katex="W_y"></span>是一个递归可枚举集。</p>
+<p><br/></p>
+<p>又因为<span data-katex="\Phi(x,0),\Phi(x,1),\cdots "></span>枚举了所有的可计算函数，</p>
+<p>而上一篇中我们看到，递归可枚举集是由部分递归函数（即，可计算函数）定义的，</p>
+<p>一个部分递归函数确定出一个递归可枚举集，</p>
+<p>所以，<span data-katex="W_0,W_1,\cdots "></span>枚举了所有的递归可枚举集。</p>
+<p><br/></p>
+<p>因此，集合<span data-katex="B"></span>是递归可枚举的，当且仅当存在<span data-katex="y\in N"></span>，使得<span data-katex="B=W_y"></span>，</p>
+<p>称为枚举定理，这就是“枚举”的含义。</p>
+<p><br/></p>
+<p>令<span data-katex="K=\lbrace n\in N|n\in W_n\rbrace "></span>，</p>
+<p>则<span data-katex="K"></span>是递归可枚举的，但不是递归的，（证略</p>
+<p>因此，<span data-katex="\bar{K}"></span>不是递归可枚举的，否则<span data-katex="K"></span>就是递归集了。</p>
+<p>（根据，集合<span data-katex="B"></span>是递归的当且仅当<span data-katex="B"></span>和<span data-katex="\bar{B}"></span>是递归可枚举的，见上一篇</p>
+<p><br/></p>
+<p>因此，我们找到了一个非递归的递归可枚举集<span data-katex="K"></span>，</p>
+<p>以及一个非递归可枚举集<span data-katex="\bar{K}"></span>。</p>
+<p><br/></p>
+<h3 id="停机问题">停机问题</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-1fb62dcb731ff72f.png" /></p>
+<p><br/></p>
+<p>任给一个程序和一个自然数，问该程序对这个自然数输入的计算是否停止，</p>
+<p>这个问题称为停机问题。</p>
+<p><br/></p>
+<p>我们可以用谓词<span data-katex="H(x,y)"></span>描述这个问题，</p>
+<p><span data-katex="H(x,y)"></span>，表示以<span data-katex="y"></span>为代码的程序对输入<span data-katex="x"></span>的计算最终停止。</p>
+<p>那么，<span data-katex="H(x,y)"></span>是不可计算的，即，不存在一个程序来计算<span data-katex="H(x,y)"></span>。</p>
+<p><br/></p>
+<p>我们来证明一下，假设有一个程序可以计算<span data-katex="H(x,y)"></span>，</p>
+<p>那么我们就能用它来构造一个新程序<span data-katex="\mathscr{P}"></span>，它的输入是<span data-katex="x"></span>，</p>
+<p>这段程序当<span data-katex="H(x,x)"></span>为真时，计算不停止，而当<span data-katex="H(x,x)"></span>为假时，计算停止。</p>
+<p><br/></p>
+<p>程序<span data-katex="\mathscr{P}"></span>也可以进行编码，假设为<span data-katex="y_0"></span>，现在我们来判断<span data-katex="H(y_0,y_0)"></span>。</p>
+<p><br/></p>
+<p>如果<span data-katex="H(y_0,y_0)"></span>为真，意味着编码为<span data-katex="y_0"></span>的程序以<span data-katex="y_0"></span>作为输入最终停止，</p>
+<p>即程序<span data-katex="\mathscr{P}"></span>，输入为<span data-katex="y_0"></span>时，最终停止，</p>
+<p>可是根据<span data-katex="\mathscr{P}"></span>的定义，此时<span data-katex="H(x,x)=H(y_0,y_0)"></span>为假才会停止，矛盾。</p>
+<p><br/></p>
+<p>如果<span data-katex="H(y_0,y_0)"></span>为假，意味着编码为<span data-katex="y_0"></span>的程序以<span data-katex="y_0"></span>作为参数最终不会停止，</p>
+<p>即程序<span data-katex="\mathscr{P}"></span>，输入为<span data-katex="y_0"></span>时，最终不停止，</p>
+<p>可是根据<span data-katex="\mathscr{P}"></span>的定义，此时<span data-katex="H(x,x)=H(y_0,y_0)"></span>为真才不会停止，矛盾。</p>
+<p><br/></p>
+<p><span data-katex="H(y_0,y_0)"></span>不能为真也不能为假，矛盾，</p>
+<p>因此，计算<span data-katex="H(x,y)"></span>的程序不存在，我们也无法用它来构造程序<span data-katex="\mathscr{P}"></span>。</p>
+<p><br/></p>
+<h3 id="可判定性">可判定性</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-5e01504f5037d0e0.png" /></p>
+<p><br/></p>
+<p>可判定性问题，指的是一个询问真或者假的问题是否可以被回答。</p>
+<p>如果我们总能回答出这个问题是真或者是假，就称该问题是可判定的，</p>
+<p>如果我们只能当问题为真的时候确定为真，为假的时候所进行的计算可能不会终止，那么就称该问题是半可判定的。</p>
+<p><br/></p>
+<p>某元素是否属于一个递归集，是可判定的，</p>
+<p>某元素是否属于一个递归可枚举集，是半可判定的。</p>
+<p><br/></p>
+<p>因为，递归集是使用一个递归的全函数定义的，</p>
+<p>而递归可枚举集是使用第一个部分递归函数定义的，</p>
+<p>我们无法判断某个部分递归函数，在接受某参数时，是没有定义，还是计算尚未停止。</p>
+<p>即，判断元素是否属于某递归可枚举集的程序可能永不停机。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文介绍了函数的可计算性，通用程序，以及最多有多少个程序，</p>
+<p>还了解了停机问题和可判定性问题。</p>
+<p><br/></p>
+<p>这些都是可计算性理论的基础，我们清晰的看到了人类的计算能力，</p>
+<p>以及用递归所能计算的函数范围，后文中我们开始讨论不动点理论，</p>
+<p>这同样是一个有趣的话题。</p>
+<hr />
+<h3 id="附">附</h3>
+<p>配对函数和哥德尔数，是对数偶和有穷数列的一种编码方式。</p>
+<p><br/></p>
+<p>（1）配对函数</p>
+<p>令<span data-katex="\langle x,y\rangle=2^x(2y+1)-1"></span>，称<span data-katex="\langle x,y\rangle "></span>为配对函数，它是一个原始递归函数。</p>
+<p>任给一个数<span data-katex="z"></span>，存在唯一的一对数<span data-katex="x"></span>和<span data-katex="y"></span>，使得<span data-katex="\langle x,y\rangle =z"></span>。</p>
+<p><span data-katex="x"></span>是<span data-katex="z+1"></span>含有因子<span data-katex="2"></span>的个数，即使得<span data-katex="2^t|(z+1)"></span>的<span data-katex="t"></span>的最大值。</p>
+<p><span data-katex="(z+1)/2^x"></span>必为奇数，<span data-katex="y"></span>是<span data-katex="2y+1=(z+1)/2^x"></span>的唯一解。</p>
+<p>一般的，记<span data-katex="l(z)=x"></span>，<span data-katex="r(z)=y"></span>，则<span data-katex="l(z)"></span>和<span data-katex="r(z)"></span>也是原始递归函数。</p>
+<p><br/></p>
+<p>（2）哥德尔数</p>
+<p>记<span data-katex="[a_1,a_2,\cdots ,a_n]=\prod_{i=1}^{n}p_i^{a_i}"></span>，</p>
+<p><span data-katex="[a_1,a_2,\cdots ,a_n]"></span>称为有穷数列<span data-katex="(a_1,a_2,\cdots ,a_n)"></span>的哥德尔数。</p>
+<p>其中，<span data-katex="p_i"></span>是第<span data-katex="i"></span>个素数。</p>
+<p><br/></p>
+<p>例如，<span data-katex="[2,0,1,3]=2^2\cdot 3^0\cdot 5^1\cdot 7^3=6860"></span>。</p>
+<p>对于每一个固定的<span data-katex="n"></span>，<span data-katex="[a_1,a_2,\cdots ,a_n]"></span>是原始递归函数，并且这种编码具有唯一性。</p>
+<hr />
+<h3 id="参考">参考</h3>
+<p><a href="https://zh.wikipedia.org/wiki/%E9%85%8D%E5%AF%B9%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">配对函数</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E6%95%B0" target="_blank" rel="noopener">哥德尔数</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E6%95%B8%E9%9B%86" target="_blank" rel="noopener">可数集</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E5%88%A4%E5%AE%9A%E6%80%A7" target="_blank" rel="noopener">可判定性</a></p>
+<p><a href="https://zh.wikipedia.org/zh-hans/%E5%BA%B7%E6%89%98%E5%B0%94%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">康托尔定理</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/09/recursive-function-5/" rel="next" title="递归函数（五）：递归集与递归可枚举集">
+                <i class="fa fa-chevron-left"></i> 递归函数（五）：递归集与递归可枚举集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/12/dont-make-the-change/" rel="prev" title="不要做出改变">
+                不要做出改变 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可计算性"><span class="nav-number">2.</span> <span class="nav-text">可计算性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通用程序"><span class="nav-number">3.</span> <span class="nav-text">通用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合个数的可枚举性"><span class="nav-number">4.</span> <span class="nav-text">集合个数的可枚举性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#停机问题"><span class="nav-number">5.</span> <span class="nav-text">停机问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可判定性"><span class="nav-number">6.</span> <span class="nav-text">可判定性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附"><span class="nav-number">8.</span> <span class="nav-text">附</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

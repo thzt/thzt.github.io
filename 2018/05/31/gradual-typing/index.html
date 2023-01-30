@@ -1,0 +1,928 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="最近看了一篇文章，TypeScript: Static or Dynamic? The war is over.， 它提到了TypeScript是具有gradual typing的编程语言。  所谓gradual typing，维基百科上是这么解释的，  Gradual typing is a type system in which some variables and expressions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gradual Typing">
+<meta property="og:url" content="https://thzt.github.io/2018/05/31/gradual-typing/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="最近看了一篇文章，TypeScript: Static or Dynamic? The war is over.， 它提到了TypeScript是具有gradual typing的编程语言。  所谓gradual typing，维基百科上是这么解释的，  Gradual typing is a type system in which some variables and expressions">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-76516c26c946e26f.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-b2524f862bce05ff.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0a872566e08756d9.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-f10a451ba1ab1180.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0facb126c43e9845.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-bcd68eea45cdf560.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-a369f8de52cff04e.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-112b868d0efd3ecb.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-5ecbbb7286459ea4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-42bb48f24773362c.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-274721e24c279f6d.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0bb8c9fad3b39efe.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-f9e834d474d2a247.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-1ed071b445e2e78c.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0b6351d4fadbff13.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-dd13ebebc2bd66ad.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-66cd2c00ccd7eb68.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-47e6c1dc31ee881c.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-a42aa87a1c3239b0.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-3ac3c225c1ebf153.png">
+<meta property="article:published_time" content="2018-05-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.946Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-76516c26c946e26f.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2018/05/31/gradual-typing/"/>
+
+
+
+
+
+  <title>Gradual Typing | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/05/31/gradual-typing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Gradual Typing</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T00:00:00+08:00">
+                2018-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近看了一篇文章，<a href="https://medium.com/@gaperton/typescript-static-or-dynamic-64bceb50b93e" target="_blank" rel="noopener">TypeScript: Static or Dynamic? The war is over.</a>，</p>
+<p>它提到了TypeScript是具有<a href="https://en.wikipedia.org/wiki/Gradual_typing" target="_blank" rel="noopener">gradual typing</a>的编程语言。</p>
+<p><br/></p>
+<p>所谓gradual typing，维基百科上是这么解释的，</p>
+<blockquote>
+<p>Gradual typing is a type system in which some variables and expressions may be given types and the correctness of the typing is checked at compile-time (which is static typing) and some expressions may be left untyped and eventual type errors are reported at run-time (which is dynamic typing).</p>
+</blockquote>
+<p><br/></p>
+<p>编程语言如果具有gradual typing，</p>
+<p>它就融合了static typing和dynamic typing双方的特点，</p>
+<p>具有gradual typing的语言，也称其类型系统是<a href="http://movep.lif.univ-mrs.fr/documents/lopes-slides.pdf" target="_blank" rel="noopener">hybrid</a>的。</p>
+<p><br/></p>
+<p>看到这里，我发现自己对dynamic typing的理解还不清晰，</p>
+<p>于是就翻开了<a href="https://www.cs.cmu.edu/~rwh/pfpl/2nded.pdf" target="_blank" rel="noopener">PFPL</a>，</p>
+<p>想把相关的概念重新梳理一下。</p>
+<p><br/></p>
+<hr />
+<h4 id="静态阶段和动态阶段">1. 静态阶段和动态阶段</h4>
+<p>大部分程序被编写完之后，直到被运行完，一般会经历如下两个<strong>阶段</strong>（phase），</p>
+<p><strong>static阶段</strong>，和<strong>dynamic阶段</strong>。</p>
+<p><br/></p>
+<p>在static阶段中，我们会对程序进行语法解析，</p>
+<p>然后经过类型检查（type checking），以确保程序是良类型的（良构的 well-formed）。</p>
+<p>最后在dynamic phase中，执行这些良类型的程序。</p>
+<p><br/></p>
+<p>—— P35</p>
+<hr />
+<h4 id="静态特性">2. 静态特性</h4>
+<p>对程序进行的类型检查，由一些断言（typing judgments）组成，</p>
+<p>每一条断言，断定特定规则组成的程序，将具有相应的类型，</p>
+<p>这通常被称为<strong>语言的静态特性</strong>（statics）。</p>
+<p><br/></p>
+<p>—— P35</p>
+<hr />
+<h4 id="动态特性">3. 动态特性</h4>
+<p><strong>语言的动态特性</strong>（dynamics），描述了程序在执行过程中应该符合的限制条件，</p>
+<p>有多种方式描述语言的动态特性。</p>
+<p><br/></p>
+<p>（1）structural dynamics方法</p>
+<p>它定义了一个转换系统（transition system），归纳的定义了程序的逐步执行方式。</p>
+<p><br/></p>
+<p>（2）contextual dynamics方法</p>
+<p>和转换系统类似，只不过转换规则的描述方式有些不同。</p>
+<p><br/></p>
+<p>（3）equational dynamics方法</p>
+<p>它由一些定义了程序等价性（deﬁnitionally equivalent）的规则组成。</p>
+<p><br/></p>
+<p>—— P41</p>
+<hr />
+<h4 id="pcf的静态特性和动态特性">4. PCF的静态特性和动态特性</h4>
+<p>我们以PCF为例，了解一下语言静态特性和动态特性的描述方式，</p>
+<p><br/></p>
+<p>（1）静态特性</p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-76516c26c946e26f.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-b2524f862bce05ff.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
+</figure>
+<p><br/></p>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0a872566e08756d9.png" /></p>
+<p>上图定义了闭值（closed value）<span data-katex="e val"></span>应当满足的推导规则。</p>
+<p>第二个推导规则的前提中，中括号<span data-katex="[e val]"></span>表明<span data-katex="s(e)"></span>对它的参数<span data-katex="e"></span>是立即求值（eager）的，</p>
+<p>如果省略中括号，则表示是惰性求值（lazy）。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-f10a451ba1ab1180.png" /></p>
+<p>上图定义了转化（transition）<span data-katex="e\mapsto e&#39;"></span>应该满足的推导规则。</p>
+<p><br/></p>
+<p>—— P167-P168</p>
+<hr />
+<h4 id="untyped-calculus的静态特性和动态特性">5. untyped <span data-katex="\lambda"></span> calculus的静态特性和动态特性</h4>
+<p>再看看untyped <span data-katex="\lambda"></span> calculus，</p>
+<p><br/></p>
+<p>（1）静态特性</p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0facb126c43e9845.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-bcd68eea45cdf560.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
+</figure>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-a369f8de52cff04e.png" /></p>
+<p>与PCF不同的是，这里用了equational dynamics方法进行描述。</p>
+<p><br/></p>
+<p>—— P185-P186</p>
+<hr />
+<h4 id="untyped-means-uni-typed">6. untyped means uni-typed</h4>
+<p>如果支持递归类型，那么untyped <span data-katex="\lambda"></span> calculus可以看成是，</p>
+<p>具有<strong>统一类型</strong>（uni-typed）<span data-katex="\lambda"></span> calculus的类型化版本。</p>
+<p><br/></p>
+<p>我们可以定义一个这样的递归类型，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-112b868d0efd3ecb.png" /></p>
+<p>因此，函数的参数和函数本身将具有统一的类型（uni-typed）<span data-katex="D"></span>。</p>
+<p><br/></p>
+<p>—— P190</p>
+<hr />
+<h4 id="dynamic-typing">7. dynamic typing</h4>
+<p>下面开始介绍dynamic typing了。</p>
+<p><br/></p>
+<p>将具有dynamic typed的语言，与static typed的语言对立起来看待，是有问题的。</p>
+<p>我们可以换一个角度来看，我们说具有dynamic typed的语言，</p>
+<p>是static typed的语言的一种特殊情况（special case）——它只有一个递归类型。</p>
+<p><br/></p>
+<p>—— P193</p>
+<hr />
+<h4 id="dpcf的静态特性和动态特性">8. DPCF的静态特性和动态特性</h4>
+<p>我们来看DPCF（dynamically Typed PCF）的静态特性和动态特性，</p>
+<p><br/></p>
+<p>（1）静态特性</p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-5ecbbb7286459ea4.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
+</figure>
+<p>我们看到，DPCF的值被划分成了两个<strong>类别</strong>（classes），一个是<span data-katex="number"></span>，另一个是<span data-katex="fun"></span>。</p>
+<p><br/></p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-42bb48f24773362c.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
+</figure>
+<p>它表明，如果<span data-katex="d"></span>包含自由变量，<span data-katex="x_1,\cdots,x_n"></span>，</p>
+<p>则若这些自由变量是良类型的，<span data-katex="d"></span>就是良类型的。</p>
+<p><br/></p>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-274721e24c279f6d.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0bb8c9fad3b39efe.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-f9e834d474d2a247.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-1ed071b445e2e78c.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0b6351d4fadbff13.png" /></p>
+<p><br/></p>
+<p>其中涉及到的符号解释如下，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-dd13ebebc2bd66ad.png" /></p>
+<p><br/></p>
+<p>—— P194-196</p>
+<hr />
+<h4 id="hybrid">9. hybrid</h4>
+<p>一个hybrid的语言，指的是它在类型系统中混合了static typing和dynamic typing，</p>
+<p>它为static typing语言增加了一个<span data-katex="dyn"></span>类型，该类型的值需要满足语言动态特性的要求。</p>
+<p><br/></p>
+<p>DPCF可以嵌入到一个static typed的语言中，被视为一个hybrid的语言。</p>
+<p>只需要在static typed的语言中增加一个类型<span data-katex="dyn"></span>，</p>
+<p>可以说，dynamic typing只是static typing的一种特定用法（a mode of use）。</p>
+<p><br/></p>
+<p>因此，static typing和dynamic typing并不是对立的，</p>
+<p>他们可以和谐共存（coexist harmoniously）。</p>
+<p><br/></p>
+<p>—— P203</p>
+<hr />
+<h4 id="hpcf的静态特性和动态特性">10. HPCF的静态特性和动态特性</h4>
+<p>我们来看HPCF（hybrid PCF）的静态特性和动态特性，</p>
+<p><br/></p>
+<p>（1）静态特性 <img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-66cd2c00ccd7eb68.png" alt="syntax" /></p>
+<p>其中，类型<span data-katex="dyn"></span>中包含了所有具有动态类型的值。</p>
+<p><span data-katex="new"></span>构造器（constructor），会在值上附加一个类别描述符（classifer），以表明它所属的动态类别（class）。</p>
+<p><br/></p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-47e6c1dc31ee881c.png" alt="statics - 1" /><figcaption aria-hidden="true">statics - 1</figcaption>
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-a42aa87a1c3239b0.png" alt="statics - 2" /><figcaption aria-hidden="true">statics - 2</figcaption>
+</figure>
+<p>以上类型断言，保证了表达式具有正确的类型。</p>
+<p><br/></p>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-3ac3c225c1ebf153.png" /></p>
+<p>不同类别的值之间进行转换<span data-katex="cast"></span>，会产生运行时错误。</p>
+<p><br/></p>
+<p>—— P203-P204</p>
+<hr />
+<h4 id="动态类型与静态类型">11. 动态类型与静态类型</h4>
+<p>dynamic语言和static语言的一些异同点。</p>
+<p><br/></p>
+<p>（1）dynamic语言将类别（class）关联到值（value）上，</p>
+<p>而static语言将类型（type）关联到变量（variable）/表达式上。</p>
+<p><br/></p>
+<p>与dynamic语言相关的概念是类别（class），而不是类型（type），</p>
+<p>例如<span data-katex="num"></span>，<span data-katex="fun"></span>，它们可以视为值的标签（tag）。</p>
+<p><br/></p>
+<p>（2）dynamic语言在运行时（run-time）进行类别检查（class checking），</p>
+<p>而static语言在编译时（compile time）进行类型检查（type checking）。</p>
+<p><br/></p>
+<p>dynamic语言可以看做一类特殊的static语言——该语言中只有一个递归类型。</p>
+<p><br/></p>
+<p>—— P208</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/30/software-solution/" rel="next" title="软件方案的能力范围">
+                <i class="fa fa-chevron-left"></i> 软件方案的能力范围
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/13/teacher/" rel="prev" title="教学之法">
+                教学之法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态阶段和动态阶段"><span class="nav-number">1.</span> <span class="nav-text">1. 静态阶段和动态阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#静态特性"><span class="nav-number">2.</span> <span class="nav-text">2. 静态特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态特性"><span class="nav-number">3.</span> <span class="nav-text">3. 动态特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pcf的静态特性和动态特性"><span class="nav-number">4.</span> <span class="nav-text">4. PCF的静态特性和动态特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#untyped-calculus的静态特性和动态特性"><span class="nav-number">5.</span> <span class="nav-text">5. untyped  calculus的静态特性和动态特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#untyped-means-uni-typed"><span class="nav-number">6.</span> <span class="nav-text">6. untyped means uni-typed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dynamic-typing"><span class="nav-number">7.</span> <span class="nav-text">7. dynamic typing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dpcf的静态特性和动态特性"><span class="nav-number">8.</span> <span class="nav-text">8. DPCF的静态特性和动态特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hybrid"><span class="nav-number">9.</span> <span class="nav-text">9. hybrid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hpcf的静态特性和动态特性"><span class="nav-number">10.</span> <span class="nav-text">10. HPCF的静态特性和动态特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态类型与静态类型"><span class="nav-number">11.</span> <span class="nav-text">11. 动态类型与静态类型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

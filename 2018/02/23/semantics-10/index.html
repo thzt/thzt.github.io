@@ -1,0 +1,850 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="回顾 上文我们介绍了笛卡尔闭范畴，它给出了简单类型化演算系统的语义， 我们还看到了笛卡尔闭范畴与柯里化之间的关系。  结合《你好，类型》系列文章， 到目前为止我们已经有了，类型理论，逻辑学和范畴论的知识基础了。 现在我们介绍Curry-Howard-Lambek correspondence，将三者联系起来。  1. 类型方面    参考《你好，类型（二）：Lambda calculus》，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="语言背后的代数学（十）：Curry-Howard-Lambek correspondance">
+<meta property="og:url" content="https://thzt.github.io/2018/02/23/semantics-10/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="回顾 上文我们介绍了笛卡尔闭范畴，它给出了简单类型化演算系统的语义， 我们还看到了笛卡尔闭范畴与柯里化之间的关系。  结合《你好，类型》系列文章， 到目前为止我们已经有了，类型理论，逻辑学和范畴论的知识基础了。 现在我们介绍Curry-Howard-Lambek correspondence，将三者联系起来。  1. 类型方面    参考《你好，类型（二）：Lambda calculus》，">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-f3c4e7374c59c264.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-09a5fa1690d11143.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-1a02678c20564afc.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-ef752d2a808eaf01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-cfb15d029385cd31.png">
+<meta property="article:published_time" content="2018-02-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.944Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-f3c4e7374c59c264.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2018/02/23/semantics-10/"/>
+
+
+
+
+
+  <title>语言背后的代数学（十）：Curry-Howard-Lambek correspondance | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/23/semantics-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">语言背后的代数学（十）：Curry-Howard-Lambek correspondance</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T00:00:00+08:00">
+                2018-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-f3c4e7374c59c264.png" /></p>
+<p><br/></p>
+<h3 id="回顾">回顾</h3>
+<p>上文我们介绍了笛卡尔闭范畴，它给出了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^{unit,\times,\to}"></span>的语义，</p>
+<p>我们还看到了笛卡尔闭范畴与柯里化之间的关系。</p>
+<p><br/></p>
+<p>结合《<a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型</a>》系列文章，</p>
+<p>到目前为止我们已经有了，类型理论，逻辑学和范畴论的知识基础了。</p>
+<p>现在我们介绍Curry-Howard-Lambek correspondence，将三者联系起来。</p>
+<p><br/></p>
+<h3 id="类型方面">1. 类型方面</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-09a5fa1690d11143.png" /></p>
+<p><br/></p>
+<p>参考《<a href="https://thzt.github.io/2017/09/06/type-2/">你好，类型（二）：Lambda calculus</a>》，</p>
+<p>我们来回顾一下简单类型化<span data-katex="\lambda"></span>演算系统。</p>
+<h4 id="语法">1.1 语法</h4>
+<p><span data-katex="t::=x|tu|\lambda x.t"></span></p>
+<p><br/></p>
+<p>例子：</p>
+<p><span data-katex="\lambda x.x+1"></span></p>
+<p><span data-katex="\lambda f.\lambda x.fx"></span></p>
+<h4 id="类型">1.2 类型</h4>
+<p>基本类型（basic types），<span data-katex="B::=\iota|\cdots"></span></p>
+<p>一般类型（general types），<span data-katex="T::=B|T\to T|T\times T"></span></p>
+<p><br/></p>
+<p>例子：</p>
+<p><span data-katex="\iota\to\iota\to\iota"></span>，</p>
+<p><span data-katex="(\iota\to\iota)\to\iota"></span></p>
+<h4 id="类型推导规则">1.3 类型推导规则</h4>
+<p>（1）<span data-katex="\frac{~}{\Gamma,x:t\vdash x:T}"></span></p>
+<p><br/></p>
+<p>（2）<span data-katex="\frac{\Gamma\vdash t:T~~~~\Gamma\vdash u:U}{\Gamma\vdash\left\langle t,u\right\rangle:T\times U}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_1v:T}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_2v:U}"></span></p>
+<p><br/></p>
+<p>（3）<span data-katex="\frac{\Gamma,x:U\vdash t:T}{\Gamma\vdash\lambda x.t:U\to T}"></span>，<span data-katex="\frac{\Gamma\vdash t:U\to T~~~~\Gamma\vdash u:U}{\Gamma\vdash tu:T}"></span></p>
+<p><br/></p>
+<p>其中，<span data-katex="\pi_1\left\langle v_1,v_2 \right\rangle=v_1"></span>，<span data-katex="\pi_2\left\langle v_1,v_2 \right\rangle=v_2"></span>。</p>
+<p><br/></p>
+<h3 id="逻辑方面">2. 逻辑方面</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-1a02678c20564afc.png" /></p>
+<p><br/></p>
+<p>参考《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a>》，</p>
+<p>我们构建一个只包含逻辑联接词<span data-katex="\wedge"></span>和<span data-katex="\to"></span>的命题逻辑系统。</p>
+<h4 id="逻辑推导规则">2.1 逻辑推导规则</h4>
+<p>（1）<span data-katex="\frac{~}{\Gamma,A\vdash A}"></span></p>
+<p><br/></p>
+<p>（2）<span data-katex="\frac{\Gamma\vdash A~~~~\Gamma\vdash B}{\Gamma\vdash A\wedge B}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}"></span></p>
+<p><br/></p>
+<p>（3）<span data-katex="\frac{\Gamma,A\vdash B}{\Gamma\vdash A\to B}"></span>，<span data-katex="\frac{\Gamma\vdash A\to B~~~~\Gamma\vdash A}{\Gamma\vdash B}"></span></p>
+<h4 id="curry-howard-correspondence">2.2 Curry-Howard correspondence</h4>
+<p>我们看到，只要将逻辑系统中的<span data-katex="\wedge"></span>和<span data-katex="\to"></span>，替换成简单类型化<span data-katex="\lambda"></span>演算中的<span data-katex="\times"></span>和<span data-katex="\to"></span>，</p>
+<p>那么这两个系统从推导规则上来看是一致的。</p>
+<p><br/></p>
+<p>逻辑中的命题，对应了简单类型化<span data-katex="\lambda"></span>演算中的类型，</p>
+<p>逻辑中命题的证明，对应了简单类型化<span data-katex="\lambda"></span>演算中的项（的类型断言）。</p>
+<p><br/></p>
+<p>命题<span data-katex="A\to B"></span>，可以这样理解，</p>
+<p>如果该命题可证，则存在将<span data-katex="A"></span>的证明转换为<span data-katex="B"></span>的证明的构建过程（construction）。</p>
+<p>命题<span data-katex="A\wedge B"></span>，可以这样理解，它是<span data-katex="A"></span>和<span data-katex="B"></span>的证明序对（pair）。</p>
+<p><br/></p>
+<p>考虑到以上命题逻辑与类型之间的对应关系，</p>
+<p>我们可以说，<a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">proofs as programs</a>。</p>
+<p><br/></p>
+<h3 id="范畴论方面">3. 范畴论方面</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-ef752d2a808eaf01.png" /></p>
+<p><br/></p>
+<p>结合《<a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a>》，</p>
+<p>我们给出了简单类型化<span data-katex="\lambda"></span>演算的范畴论解释。</p>
+<h4 id="对象">3.1 对象</h4>
+<p>将简单类型化<span data-katex="\lambda"></span>演算系统的类型，解释为笛卡尔闭范畴<span data-katex="C"></span>中的对象。</p>
+<p><span data-katex="\mathscr{C}[\![\sigma\times\tau]\!]=\mathscr{C}[\![\sigma]\!]\times\mathscr{C}[\![\tau]\!]"></span></p>
+<p><span data-katex="\mathscr{C}[\![\sigma\to\tau]\!]=\mathscr{C}[\![\sigma]\!]\to\mathscr{C}[\![\tau]\!]"></span></p>
+<h4 id="箭头">3.2 箭头</h4>
+<p>将带有自变量项，解释为从自变量类型到项类型的箭头。</p>
+<p><span data-katex="\mathscr{C}[\![\Gamma\vdash M:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\to\mathscr{C}[\![\sigma]\!]"></span></p>
+<h4 id="curry-howard-lambek-correspondance">3.3 Curry-Howard-Lambek correspondance</h4>
+<p>根据简单类型化<span data-katex="\lambda"></span>演算系统中的推导规则，</p>
+<p>我们可以为范畴<span data-katex="C"></span>添加对象和箭头之间的约束条件，</p>
+<p><br/></p>
+<p>（1）<span data-katex="\frac{~}{\pi_2:\Gamma\times A\to A}"></span></p>
+<p><br/></p>
+<p>（2）<span data-katex="\frac{f:\Gamma\to A~~~~g:\Gamma\to B}{\left\langle f,g\right\rangle:\Gamma\to A\times B}"></span>，<span data-katex="\frac{f:\Gamma\to A\times B}{\pi_1\circ f:\Gamma\to A}"></span>，<span data-katex="\frac{f:\Gamma\to A\times B}{\pi_2\circ f:\Gamma\to B}"></span></p>
+<p><br/></p>
+<p>（3）<span data-katex="\frac{f:\Gamma\times A\to B}{g_f:\Gamma\to B^A}"></span>，<span data-katex="\frac{f_1:\Gamma\to B^A~~~~f_2:\Gamma\to A}{e\circ\left\langle f_1,f_2\right\rangle:\Gamma\to B}"></span></p>
+<p><br/></p>
+<p><span data-katex="g_f=\Gamma\to B^A"></span>是一个箭头，和<span data-katex="e:B^A\times A\to B"></span>的定义，</p>
+<p>可以参考<a href="http://thzt.github.io/2018/02/19/semantics-9/">前一篇</a>文章中关于笛卡尔闭范畴的定义。</p>
+<p><br/></p>
+<p>笛卡尔闭范畴作为简单类型化<span data-katex="\lambda"></span>演算系统的语义模型，</p>
+<p>范畴中箭头之间约束关系，与类型推导规则是一致的，</p>
+<p>而根据Curry-Howard correspondence，类型推导规则与命题逻辑又是一致的。</p>
+<p><br/></p>
+<p>因此，类型理论，逻辑学和范畴论产生了关联，</p>
+<p>这种三者的对应关系，称为<strong>Curry-Howard-Lambek correspondance</strong>。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-cfb15d029385cd31.png" /></p>
+<p><br/></p>
+<p>本文介绍了Curry-Howard-Lambek correspondance，</p>
+<p>它将本来毫无关系的三个学科联系在了一起，</p>
+<p>类型理论与程序和计算相关，逻辑学与证明（论）相关，</p>
+<p>范畴论与模型（论）和代数学相关。</p>
+<p><br/></p>
+<p>本系列文章到此结束了，与代数学和范畴论相关的内容其实还有很多，</p>
+<p>例如，quotient algebra，comonad，adjoint functor，free monoid，等等概念，</p>
+<p><strong>书山有路勤为径，学海无涯苦作舟</strong>，让我们一起努力吧。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
+<p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a></p>
+<p><a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">Curry–Howard correspondence</a></p>
+<p><a href="https://wiki.haskell.org/Curry-Howard-Lambek_correspondence" target="_blank" rel="noopener">Curry-Howard-Lambek correspondence</a></p>
+<p><a href="http://www.cs.ox.ac.uk/samson.abramsky/gsem/chll.pdf" target="_blank" rel="noopener">The Curry-Howard Correspondence, and beyond</a></p>
+<p><a href="http://disi.unitn.it/~bernardi/RSISE11/Papers/curry-howard.pdf" target="_blank" rel="noopener">Lectures on the curry-howard Isomorphism</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Intuitionistic_logic" target="_blank" rel="noopener">Intuitionistic logic</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/19/semantics-9/" rel="next" title="语言背后的代数学（九）：笛卡尔闭范畴">
+                <i class="fa fa-chevron-left"></i> 语言背后的代数学（九）：笛卡尔闭范畴
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/28/information-flow/" rel="prev" title="项目中的信息流动">
+                项目中的信息流动 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型方面"><span class="nav-number">2.</span> <span class="nav-text">1. 类型方面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型推导规则"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 类型推导规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑方面"><span class="nav-number">3.</span> <span class="nav-text">2. 逻辑方面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑推导规则"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 逻辑推导规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#curry-howard-correspondence"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Curry-Howard correspondence</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范畴论方面"><span class="nav-number">4.</span> <span class="nav-text">3. 范畴论方面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#箭头"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 箭头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#curry-howard-lambek-correspondance"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 Curry-Howard-Lambek correspondance</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

@@ -1,0 +1,856 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="风险管理（Risk Management）， 是指通过对风险的认识、衡量和分析， 选择最有效的方式，主动地、有目的地、有计划地处理风险， 以最小成本争取获得最大安全保证的管理方法。  因此，管理风险不仅仅是一个安全生产问题， 还包括识别风险、评估风险和处理风险， 涉及财务、安全、生产、设备、物流、技术等多个方面， 是一套完整的方案，也是一个系统工程。  软件项目也需要进行风险管理。 要辩识风险，评">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件开发过程中风险管理">
+<meta property="og:url" content="https://thzt.github.io/2019/06/13/risk-management/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="风险管理（Risk Management）， 是指通过对风险的认识、衡量和分析， 选择最有效的方式，主动地、有目的地、有计划地处理风险， 以最小成本争取获得最大安全保证的管理方法。  因此，管理风险不仅仅是一个安全生产问题， 还包括识别风险、评估风险和处理风险， 涉及财务、安全、生产、设备、物流、技术等多个方面， 是一套完整的方案，也是一个系统工程。  软件项目也需要进行风险管理。 要辩识风险，评">
+<meta property="article:published_time" content="2019-06-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.956Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2019/06/13/risk-management/"/>
+
+
+
+
+
+  <title>软件开发过程中风险管理 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/06/13/risk-management/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件开发过程中风险管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-13T00:00:00+08:00">
+                2019-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://wiki.mbalib.com/wiki/%E9%A3%8E%E9%99%A9%E7%AE%A1%E7%90%86" target="_blank" rel="noopener">风险管理</a>（Risk Management），</p>
+<p>是指通过对风险的认识、衡量和分析，</p>
+<p>选择最有效的方式，主动地、有目的地、有计划地处理风险，</p>
+<p>以<strong>最小成本</strong>争取获得<strong>最大安全保证</strong>的<strong>管理方法</strong>。</p>
+<p><br/></p>
+<p>因此，管理风险不仅仅是一个<strong>安全生产</strong>问题，</p>
+<p>还包括识别风险、评估风险和处理风险，</p>
+<p>涉及财务、安全、生产、设备、物流、技术等多个方面，</p>
+<p>是一套完整的方案，也是一个<strong>系统工程</strong>。</p>
+<p><br/></p>
+<p><strong>软件项目</strong>也需要进行风险管理。</p>
+<p>要辩识风险，评估它们出现的概率及产生的影响，</p>
+<p>然后建立一个<strong>规划</strong>来管理风险。</p>
+<p><br/></p>
+<p>软件项目的风险主要体现在以下几个方面，</p>
+<p>需求，技术，成本，进度。</p>
+<p><br/></p>
+<p>需求不清，需求范围不明，技术细节的不确定性，</p>
+<p>项目投入远超预算，以及不能按时交付，等等，</p>
+<p>都是软件项目中常见的<strong>风险</strong>。</p>
+<p><br/></p>
+<p>软件开发者如果仅从<strong>编码角度</strong>来看，很难有效的规避这些风险，</p>
+<p>甚至对这些风险是无能为力的。</p>
+<p>这就要求开发者们具备项目的<strong>全局观</strong>，从整个项目的角度看待问题。</p>
+<p><br/></p>
+<p>下文我们介绍一些常见的<strong>控制点</strong>，</p>
+<p>在这些控制点上多费些心思，可能会产生立竿见影的效果。</p>
+<h3 id="需求">需求</h3>
+<p>在进行开发之前，首先要明确的是，需求是<strong>不可能不变的</strong>，</p>
+<p>只是<strong>变化的形式</strong>不是我们通常想象的那样。</p>
+<p><br/></p>
+<p>“现在让我们做这个，后来让我们做那个”，这其实是一种<strong>错觉</strong>。</p>
+<p>产生这种错觉的原因是，我们一开始就没有理解清楚“为什么要做”。</p>
+<p>一旦理解了<strong>需求的动机</strong>，就会发现需求从不会以<strong>截然不同</strong>的方式进行变更。</p>
+<p><br/></p>
+<p>需求发生变更的方式是，更加<strong>细化</strong>，以及包含<strong>更多的场景</strong>（功能爆炸）。</p>
+<p>开发者之所以能明显感受到需求不同是因为，</p>
+<p>需求的<strong>细化</strong>和<strong>功能爆炸</strong>，是随着开发活动的执行而<strong>不断进展</strong>的。</p>
+<p><br/></p>
+<p>因此，为了尽可能的避免这类风险，</p>
+<p>应该在开发活动早期，尽可能的把<strong>需求细节</strong>考虑清楚，</p>
+<p>多找几个人进行需求评审，也不要因为偷懒或者假敏捷，漏掉重要的<strong>详细设计</strong>。</p>
+<p><br/></p>
+<p>这对防止需求在开发过程中发生变化，帮助非常大。</p>
+<p>做好这一步，软件项目才能有一个良好的开端。</p>
+<p>没有确定需求细节，就急于进行开发，那么结果必然是<strong>无法预期</strong>的。</p>
+<h3 id="估算">估算</h3>
+<p>有很多软件项目工期是<strong>倒排</strong>的，指的是管理者已经事先向别人<strong>承诺</strong>了发布时间，</p>
+<p>然后按照开发节奏，倒推某件事应该在什么时候做完。</p>
+<p>这样显然是有问题的，但是有时候也<strong>无法避免</strong>。</p>
+<p><br/></p>
+<p>人们可能会认为，在工期倒排的项目中，让开发者<strong>评估完成时间</strong>是没有意义的，</p>
+<p>其实不然，因为就算不被要求，开发者也应该对<strong>工作量</strong>有所感知。</p>
+<p>最起码对自己需要<strong>加多少班</strong>心知肚明。</p>
+<p><br/></p>
+<p>另一方面，如果意识到不论怎么加班都无法完成时，一定要<strong>有所表现</strong>，不能默默接受。</p>
+<p>至少应该<strong>反馈</strong>给技术负责人，这是一件无法完成的任务，</p>
+<p>请求增加开发资源，或者删减需求。</p>
+<p><br/></p>
+<p>当然<strong>发起请求</strong>跟<strong>请求被答应</strong>是两码事。</p>
+<p>所以，重要的是向上汇报，<strong>让别人知道</strong>。</p>
+<p><br/></p>
+<p>有些项目只是<strong>人为营造</strong>了紧迫感而已，目的是缩减开发成本，</p>
+<p>那些真正紧急的项目，负责人是不会看着肯定无法完成而不管的。</p>
+<h3 id="自测">自测</h3>
+<p>对自己开发的功能进行<strong>完整自测</strong>，是<strong>专业性</strong>的体现。</p>
+<p>自测可以帮助我们更好的做好以下两件事。</p>
+<p><br/></p>
+<p><strong>（1）更好的理清需求</strong></p>
+<p>一个<strong>场景</strong>只有自己测过，才能有<strong>信心</strong>在用户遇到它的时候不出问题。</p>
+<p>因此，测试的过程，就是不断的具体化<strong>用户使用场景</strong>的过程。</p>
+<p>通过测试，我们能对需求进行最彻底的<strong>理解</strong>和<strong>补充</strong>。</p>
+<p><br/></p>
+<p><strong>（2）对进度了若指掌</strong></p>
+<p>通过自测，我们可以对功能点的<strong>完成程度</strong>更有把握，</p>
+<p>要知道，一个充满<strong>功能缺陷</strong>的软件，其实在用户看来就是<strong>尚未完成</strong>的。</p>
+<p>所以，把功能写完而期望其他人帮自己发现缺陷，这种做法本身就是<strong>高估了</strong>完成情况。</p>
+<p><br/></p>
+<p>此外，<strong>自测</strong>和<strong>自动化测试</strong>其实是不同的，</p>
+<p>自测不一定是自动化的，自动化测试也可以在非自测时由别人来做。</p>
+<p>自测时可以灵活采用各种测试方法。</p>
+<h3 id="变更">变更</h3>
+<p>软件开发项目后期，经常会遇到一些新的情况，</p>
+<p>这些新情况，简称<strong>变更</strong>，可能会产生一系列的影响。</p>
+<p>包括后期对需求的补充，包括发生了某些<strong>计划之外</strong>的事情，等等。</p>
+<p><br/></p>
+<p>这时候及时将<strong>变更的影响范围</strong>，通知项目的所有<strong>参与者</strong>是很重要的，</p>
+<p>软件开发不是考试，完全没有<strong>缓和余地</strong>的项目非常少见，</p>
+<p>大部分项目都能做出一些让步，</p>
+<p>项目本来也就是用<strong>尽可能少的资源</strong>尽可能<strong>有效</strong>的完成任务的一种实践活动罢了。</p>
+<p><br/></p>
+<p>所以，我们不要默默接受某些变更，而是要让加班<strong>事出有因</strong>。</p>
+<p><br/></p>
+<p>有很多新人，在遇到<strong>变更</strong>时，会选择<strong>沉默</strong>，</p>
+<p>生怕别人认为是自己<strong>技术问题</strong>导致的延期，</p>
+<p>这是一种<strong>归因错误</strong>。</p>
+<p><br/></p>
+<p>个人的技术虽然很重要，但是要想按计划完成项目，</p>
+<p>就得<strong>尊重</strong>当前项目中所有参与者的技术水平。</p>
+<p>如何利用资源，显然比如何<strong>迫使</strong>人们完成<strong>能力之外</strong>的事情更重要。</p>
+<p><br/></p>
+<p>积极的向上沟通，能更早的<strong>得到管理者的帮助</strong>，</p>
+<p>及时调整时间，增加人手，</p>
+<p>完不成项目管理者也有责任，不要把<strong>责任</strong>都揽到自己身上。</p>
+<h3 id="发布">发布</h3>
+<p>在项目收尾阶段，要么已经离<strong>截止日期</strong>非常近了，要么项目已经<strong>延期</strong>，</p>
+<p>如果上文提到的中控制方法，进展足够顺利的话，</p>
+<p>可能这时候能稍微好过一些。</p>
+<p><br/></p>
+<p>但即使控制的再好，收尾阶段的<strong>开发节奏</strong>也容易被打乱，</p>
+<p>这是因为大部分项目直到收尾阶段才开始考虑<strong>取舍</strong>问题。</p>
+<p>实际上，取舍问题应及早考虑，事情总有<strong>轻重缓急</strong>，尽早列出任务的<strong>优先级</strong>。</p>
+<p><br/></p>
+<p>此外，在发布阶段还容易做出<strong>明显不符合软件规律</strong>的荒唐事，</p>
+<p>比如为了按时发布软件，有人可能会建议先把软件发布，然后再修复缺陷。</p>
+<p>我承认，在某些<strong>极端</strong>情况下，这也不失为一个<strong>行之有效</strong>的办法。</p>
+<p><br/></p>
+<p>但是，要谨防给出这个建议的同事，他能否<strong>承担</strong>缺陷造成的<strong>损失</strong>，</p>
+<p>有些人只是说说而已，结果最后的损失还是由开发者团队承担。</p>
+<p>那么，这种情况下，我们应当学会<strong>为自己的行为负责，对不合理的建议说不</strong>。</p>
+<h3 id="结语">结语</h3>
+<p>软件项目的风险管理是一个很宽的话题，也是一门很深的学问，</p>
+<p>本文只是粗浅的进行了一些探讨，</p>
+<p>主要包含了自己在软件开发过程中的<strong>体会</strong>和<strong>感触</strong>。</p>
+<p><br/></p>
+<p>在<strong>风险控制点</strong>上的一些建议，是我多年<strong>踩坑经验</strong>的总结，</p>
+<p>在执行过程中，也发现确实能有效的避免<strong>典型问题</strong>。</p>
+<p><br/></p>
+<p>当然我知道只做这些还是远远不够的，</p>
+<p>不妨存疑于来日方长，</p>
+<p>不断积累和学习，一起成为更成熟更专业的软件开发者吧。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/02/kpi/" rel="next" title="软件开发者的绩效管理">
+                <i class="fa fa-chevron-left"></i> 软件开发者的绩效管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/28/loss-of-information/" rel="prev" title="编程语言的表述习惯与信息损失">
+                编程语言的表述习惯与信息损失 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#估算"><span class="nav-number">2.</span> <span class="nav-text">估算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自测"><span class="nav-number">3.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变更"><span class="nav-number">4.</span> <span class="nav-text">变更</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布"><span class="nav-number">5.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

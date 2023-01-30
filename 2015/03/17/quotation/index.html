@@ -1,0 +1,885 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在lisp语言中，引用（quotation）是一个很独特的概念。 这与按引用传参（call by reference）完全是两码事。  至于引用（quote）的含义是什么， 为什么要有这个概念， 刚开始学lisp时，很容易感到迷惑。  既然如此， 我们不妨一起探险吧。  程序执行就是一系列表达式的求值过程 lisp程序中没有语句，只有表达式。 程序执行过程，就是一系列表达式的求值过程。  这句话再">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lisp语言中的引用">
+<meta property="og:url" content="https://thzt.github.io/2015/03/17/quotation/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="在lisp语言中，引用（quotation）是一个很独特的概念。 这与按引用传参（call by reference）完全是两码事。  至于引用（quote）的含义是什么， 为什么要有这个概念， 刚开始学lisp时，很容易感到迷惑。  既然如此， 我们不妨一起探险吧。  程序执行就是一系列表达式的求值过程 lisp程序中没有语句，只有表达式。 程序执行过程，就是一系列表达式的求值过程。  这句话再">
+<meta property="article:published_time" content="2015-03-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.910Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2015/03/17/quotation/"/>
+
+
+
+
+
+  <title>Lisp语言中的引用 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/17/quotation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lisp语言中的引用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-17T00:00:00+08:00">
+                2015-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lisp/" itemprop="url" rel="index">
+                    <span itemprop="name">Lisp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在lisp语言中，引用（quotation）是一个很独特的概念。</p>
+<p>这与按引用传参（call by reference）完全是两码事。</p>
+<p><br/></p>
+<p>至于引用（quote）的含义是什么，</p>
+<p>为什么要有这个概念，</p>
+<p>刚开始学lisp时，很容易感到迷惑。</p>
+<p><br/></p>
+<p>既然如此，</p>
+<p>我们不妨一起探险吧。</p>
+<p><br/></p>
+<h2 id="程序执行就是一系列表达式的求值过程"><strong>程序执行就是一系列表达式的求值过程</strong></h2>
+<p>lisp程序中没有语句，只有表达式。</p>
+<p>程序执行过程，就是一系列表达式的求值过程。</p>
+<p><br/></p>
+<p>这句话再强调几次都不为过，是初学者最容易忽视的一句话。</p>
+<p>它指出了理解程序执行的必要条件。</p>
+<p>每当我们不知道下一步该如何进行时，都可以问自己，表达式的值是什么。</p>
+<p><br/></p>
+<p>我们用x =&gt; 1来表示，表达式x的值是1，或者说（表达式）x求值为1。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>(define add1</p>
+<p>    (lambda (x)</p>
+<p>        (+ x 1)))</p>
+<p><br/></p>
+<p>(add1 2)</p>
+<p><br/></p>
+<p>我们仔细考虑一下(add1 2)。这段程序怎么执行呢？</p>
+<p>我们问自己，(add1 2)的值是什么呢？</p>
+<p><br/></p>
+<p>这是一个函数调用表达式，求值规则如下：</p>
+<p>函数调用表达式的值等于函数体的值。</p>
+<p>而函数体中形参的值等于实参的值。</p>
+<p><br/></p>
+<p>所以，求(add1 2)的值就转换成了求add1的函数体(+ x 1)的值，x是形参。</p>
+<p><br/></p>
+<p>从一开始，我们就将实参和实参的值进行区分，是很重要的。</p>
+<p>对于(add1 2)来说，实参是2，实参的值是2的值。</p>
+<p>而2是一个数字，数字是自求值对象，所以2的值还是2。</p>
+<p>（多此一举是必要的）</p>
+<p><br/></p>
+<p>因此，形参x的值就是2了。x =&gt; 2</p>
+<p><br/></p>
+<p>我们来求值函数体，(+ x 1)</p>
+<p>(+ x 1)又是一个函数调用表达式，</p>
+<p>只不过+是一个内置函数，我们看不到它的函数体。</p>
+<p>我们只知道加法的结果是两个加数之和。</p>
+<p><br/></p>
+<p>于是，x的值是2，2+1=3。</p>
+<p>对吗？</p>
+<p><br/></p>
+<p>结果对了，但是执行过程不对，缺少对1这个实参的求值过程。</p>
+<p><br/></p>
+<p>根据函数调用表达式的求值规则，(+ x 1)的值是x的值与1的值相加的结果。</p>
+<p>x =&gt; 2，1 =&gt; 1</p>
+<p>所以，结果为2+1=3</p>
+<p><br/></p>
+<p>这样繁琐有什么用呢？</p>
+<p>那不妨分析一下(= 1 '1) =&gt; #t</p>
+<p><br/></p>
+<p>引用出现了，其中'1是(quote 1)的简写。</p>
+<p>1和(quote 1)为什么相等的呢？</p>
+<p>其实是，它们两个不相等，它们的值相等。</p>
+<p><br/></p>
+<p>在函数=调用之前，实参1和(quote 1)都要先求值。</p>
+<p>1 =&gt; 1，(quote 1) =&gt; 1</p>
+<p>因此，(= 1 (quote 1)) =&gt; #t</p>
+<p><br/></p>
+<h2 id="从求值的角度理解quote"><strong>从求值的角度理解quote</strong></h2>
+<p>怎样理解(quote 1) =&gt; 1呢？</p>
+<p><br/></p>
+<p>其实，我们只是遵循了quote表达式的求值规则而已，</p>
+<p>(quote a) =&gt; a</p>
+<p><br/></p>
+<p>那么a是什么呢？</p>
+<p><br/></p>
+<p>其实这个问题提的不合理。</p>
+<p>因为，在lisp程序执行过程中，我们不关心“xxx是什么”，我们只关心“xxx的值是什么”。</p>
+<p><br/></p>
+<p>那么a的值是什么呢？</p>
+<p><br/></p>
+<p>这个问题在这种情况下提的也不合理。</p>
+<p>因为，我们需要求值的是(quote a)，我们已经知道了它的值是a，就不必再求a的值了。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>(define a 1)</p>
+<p>(list a 'a) =&gt; (1 a)</p>
+<p><br/></p>
+<p>我们来分析一下，程序的执行过程。</p>
+<p>问程序怎么执行，就是问(list a 'a)的值是什么，</p>
+<p>而(list a 'a)是函数调用，list是内置函数，结果值是用实参值拼成的一个列表。</p>
+<p><br/></p>
+<p>根据函数调用规则，首先我们要求实参的值。</p>
+<p>a =&gt; 1，因为(define a 1)就是定义a的值为1</p>
+<p>'a =&gt; a，根据quote表达式的求值规则(quote a) =&gt; a</p>
+<p><br/></p>
+<p>所以(list a 'a) =&gt; (1 a)</p>
+<p>这里我们看到了实参与实参值的区别。</p>
+<p>我们也看到了，在调用函数之前，要先求值实参。</p>
+<p><br/></p>
+<p>回顾一下，这其实是拿着一堆符号在玩而已。</p>
+<p>求值，就是进行符号替换罢了。</p>
+<p><br/></p>
+<p>对的，</p>
+<p>lisp语言的计算模型是建立在lambda演算基础上的。</p>
+<p>而lambda演算就是一个使用符号进行计算的形式系统。</p>
+<p>函数调用在lambda演算中称为beta归约。</p>
+<p><br/></p>
+<h2 id="编码一致性"><strong>编码一致性</strong></h2>
+<p>我们已经知道了quote表达式的求值规则了。</p>
+<p>相信判断程序的执行过程，已经难不倒我们了。</p>
+<p><br/></p>
+<p>可是，为什么要有引用这个概念呢？</p>
+<p><br/></p>
+<p>这其实是为了将数据和程序进行统一编码。</p>
+<p>lisp程序中，我们知道(+ 1 2)是一个加法调用，</p>
+<p>但是它也可以表示由3个符号+，1和2构成的列表</p>
+<p><br/></p>
+<p>列表是数据，加法调用是程序，</p>
+<p>它们采用了相同的编码。</p>
+<p>我们没有办法区分。</p>
+<p><br/></p>
+<p>首先想到的，就是让它们采用不同的编码。</p>
+<p>例如：</p>
+<p>我们把函数调用编码为+[1;2]，而列表编码为(+ 1 2)</p>
+<p><br/></p>
+<p>看起来不错，</p>
+<p>人们一开始也是这么做的，</p>
+<p>+[1;2]称为M表达式。</p>
+<p>(+ 1 2)称为S表达式。</p>
+<p><br/></p>
+<p>可是，后来人们发现，如果用lisp语言来处理lisp程序文本时，</p>
+<p>不同的编码，会增加难度。</p>
+<p><br/></p>
+<p>又因为，程序主要是由函数调用组成的。</p>
+<p>所以，人们进行了以下编码，</p>
+<p>函数调用编码为(+ 1 2)</p>
+<p>而列表编码为(quote (+ 1 2))</p>
+<p><br/></p>
+<p>即，(+ 1 2)求值，会导致函数调用。</p>
+<p>(quote (+ 1 2))求值，会得到一个列表。</p>
+<p>于是，我们就统一的用S表达式，完成了对程序和数据的相同编码。</p>
+<p><br/></p>
+<p>也正因为有这样的一致性。</p>
+<p>在进行元编程时，相比其他语言，lisp宏的威力才更强大。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>lisp语言中的引用，是一个很深刻的概念。</p>
+<p>远不是通常想像的那么简单。</p>
+<p><br/></p>
+<p>比如，我们如何判断两个引用相等呢？</p>
+<p>从符号的角度来看，似乎很简单，</p>
+<p>但是从实现的角度来看，我们就需要在程序执行之前，让引用指向相同的位置。</p>
+<p><br/></p>
+<p>然而，这样对于引用的列表来说，就是个问题。</p>
+<p>如果程序执行过程中，修改了列表元素，其他引用也会受到影响。</p>
+<p><br/></p>
+<p>类似的问题还有很多。</p>
+<p>因此，Scheme和Common Lisp规范都建议不要修改引用返回的值。</p>
+<p>应该只把它当做一个常量来使用。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/14/difficulty/" rel="next" title="难易程度">
+                <i class="fa fa-chevron-left"></i> 难易程度
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/18/polymorphism-of-chain-function/" rel="prev" title="函数>>=的多态性">
+                函数>>=的多态性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#程序执行就是一系列表达式的求值过程"><span class="nav-number">1.</span> <span class="nav-text">程序执行就是一系列表达式的求值过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从求值的角度理解quote"><span class="nav-number">2.</span> <span class="nav-text">从求值的角度理解quote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编码一致性"><span class="nav-number">3.</span> <span class="nav-text">编码一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

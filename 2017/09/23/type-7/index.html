@@ -1,0 +1,850 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="上文我们介绍了简单类型化演算系统，并给它扩充了单位类型， 本文继续为它添加新的特性。  我们将提到let和letrec表达式，函数的不动点， 代数数据类型，以及递归类型。  最后我们发现，无类型系统实际上是具有，唯一递归类型的一种情形。  let绑定 当写一个复杂表达式的时候，为了避免重复和增加可读性， 通常我们会给某些子表达式命名， 其中一个常用办法是，使用let表达式。  为此，我们要对简">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你好，类型（七）：Recursive type">
+<meta property="og:url" content="https://thzt.github.io/2017/09/23/type-7/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="上文我们介绍了简单类型化演算系统，并给它扩充了单位类型， 本文继续为它添加新的特性。  我们将提到let和letrec表达式，函数的不动点， 代数数据类型，以及递归类型。  最后我们发现，无类型系统实际上是具有，唯一递归类型的一种情形。  let绑定 当写一个复杂表达式的时候，为了避免重复和增加可读性， 通常我们会给某些子表达式命名， 其中一个常用办法是，使用let表达式。  为此，我们要对简">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d2143e00a8cc56ad.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d43b3ce324057f79.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b810f4430ac7c159.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b7bb889f262aaa84.png">
+<meta property="article:published_time" content="2017-09-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.938Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d2143e00a8cc56ad.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/09/23/type-7/"/>
+
+
+
+
+
+  <title>你好，类型（七）：Recursive type | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/23/type-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">你好，类型（七）：Recursive type</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T00:00:00+08:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d2143e00a8cc56ad.png" /></p>
+<p><br/></p>
+<p>上文我们介绍了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^\to"></span>，并给它扩充了单位类型，</p>
+<p>本文继续为它添加新的特性。</p>
+<p><br/></p>
+<p>我们将提到<code>let</code>和<code>letrec</code>表达式，函数的不动点，</p>
+<p>代数数据类型，以及递归类型。</p>
+<p><br/></p>
+<p>最后我们发现，无类型系统实际上是具有，唯一递归类型的一种情形。</p>
+<p><br/></p>
+<h3 id="let绑定">let绑定</h3>
+<p>当写一个复杂表达式的时候，为了避免重复和增加可读性，</p>
+<p>通常我们会给某些子表达式命名，</p>
+<p>其中一个常用办法是，使用<code>let</code>表达式。</p>
+<p><br/></p>
+<p>为此，我们要对简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^\to"></span>进行扩展，</p>
+<p>添加<code>let</code>表达式的语法项，求值规则以及类型规则。</p>
+<p><br/></p>
+<p>新的语法：</p>
+<p><span data-katex="t::=...|let~x:T=t~in~t"></span></p>
+<p><br/></p>
+<p>新的求值规则：</p>
+<p><span data-katex="let~x:T=v~in~t\to [x\mapsto v]t"></span></p>
+<p><span data-katex="\frac{t_1\to t&#39;_1}{let~x:T_1=t_1~in~t_2\to let~x:T_1=t&#39;_1~in~t_2}"></span></p>
+<p><br/></p>
+<p>新的类型规则：</p>
+<p><span data-katex="\frac{\Gamma\vdash t_1:T_1~~~~\Gamma,x:T_1\vdash t_2:T_2}{\Gamma\vdash let~x:T_1=t_1~in~t_2:T_2}"></span></p>
+<p><br/></p>
+<p>这样我们就可以写出<code>let</code>表达式了，</p>
+<p><span data-katex="let~x:T_1=t_1~in~t_2"></span>，</p>
+<p>它表示，求值表达式<span data-katex="t_1"></span>，然后将其绑定到<span data-katex="t_2"></span>中自由出现的<span data-katex="x"></span>上面，</p>
+<p>即在当前这种情况下（顾及<a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system#Let-polymorphism" target="_blank" rel="noopener">let polymorphism</a>），<code>let</code>可以表示为，<span data-katex="(\lambda x:T_1.t_2)t_1"></span>。</p>
+<p><br/></p>
+<h3 id="不动点">不动点</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d43b3ce324057f79.png" /></p>
+<p><br/></p>
+<p>以上<code>let</code>表达式，<span data-katex="let~x:T_1=t_1~in~t_2"></span>，</p>
+<p>对<span data-katex="t_1"></span>求值的时候有一个限制，那就是<span data-katex="t_1"></span>中不能出现<span data-katex="x"></span>，</p>
+<p>否则就像方程一样，<span data-katex="x"></span>出现在了等式的两边，<span data-katex="x=t_1(x)"></span>，</p>
+<p>此时，<span data-katex="t_2"></span>中自由出现的<span data-katex="x"></span>，将是这个方程的解。</p>
+<p><br/></p>
+<p>不过，通常而言，<span data-katex="t_1"></span>中是可以出现<span data-katex="x"></span>的，</p>
+<p>这时候我们就需要使用<code>letrec</code>进行绑定了。</p>
+<p><br/></p>
+<p>为了看清<code>letrec</code>的真面目，我们用一个求阶乘的例子来说明问题，</p>
+<p><span data-katex="letrec~f:nat\to nat=\lambda y:nat.(if~Eq?~y~0~then~1~else~y*f(y-1))~in~f~5"></span></p>
+<p>其中，<span data-katex="nat"></span>表示整数类型。</p>
+<p><br/></p>
+<p>为了求解<span data-katex="f=\lambda y:nat.(if~Eq?~y~0~then~1~else~y*f(y-1))"></span>，</p>
+<p>我们定义一个新函数<span data-katex="F"></span>，使得，</p>
+<p><span data-katex="F=\lambda f:nat\to nat.\lambda y:nat.(if~Eq?~y~0~then~1~else~y*f(y-1))"></span>，</p>
+<p>注意到<span data-katex="f=F(f)"></span>，所以<span data-katex="f"></span>是<span data-katex="F"></span>的不动点。</p>
+<p><br/></p>
+<p>这里我们暂且不讨论不动点的存在性和唯一性问题，</p>
+<p>只是引入一个不动点算子，<span data-katex="fix_\sigma:(\sigma\to\sigma)\to\sigma"></span>，</p>
+<p>它可以用来计算任意函数<span data-katex="F:\sigma\to\sigma"></span>的不动点。</p>
+<p><br/></p>
+<p>为了达到这个目的，<span data-katex="fix_\sigma"></span>必须满足以下约束条件，</p>
+<p><span data-katex="fix_\sigma=\lambda f:\sigma\to\sigma.f(fix_\sigma f)"></span>。</p>
+<p><br/></p>
+<p>引入了<span data-katex="fix_\sigma"></span>之后，<code>letrec</code>就可以用<code>let</code>表示出来了，</p>
+<p><span data-katex="letrec~f:\sigma=t_1~in~t_2\Leftrightarrow let~f:\sigma=(fix_\sigma\lambda f:\sigma.t_1)~in~t_2"></span></p>
+<p><br/></p>
+<h3 id="代数数据类型">代数数据类型</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b810f4430ac7c159.png" /></p>
+<p><br/></p>
+<p>在某些编程语言中，可以自定义递归类型，例如在Haskell中，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data List a &#x3D; Nil | Cons a (List a)</span><br><span class="line"></span><br><span class="line">lst :: List Int </span><br><span class="line">lst &#x3D; Cons 1 $ Cons 2 $ Nil</span><br></pre></td></tr></table></figure>
+<p>以上定义采用了递归的方式，定义了一个<a href="https://wiki.haskell.org/Algebraic_data_type" target="_blank" rel="noopener">代数数据类型</a><code>List</code>，</p>
+<p>所谓代数数据类型，是由基本类型经过复合运算，得来的类型。</p>
+<p><br/></p>
+<p>Haskell中，使用<code>|</code>表示和类型（sum type），</p>
+<p>而带参数值构造器（value constructor）<code>Cons</code>，用于表示各参数（<code>a</code>，<code>List a</code>）类型的积类型（product type），</p>
+<p>无参构造器<code>Nil</code>，用来表示单位乘积类型（empty product）。</p>
+<p>（关于函数类型与指数的关系，以后有机会再介绍。）</p>
+<p><br/></p>
+<p>和<code>letrec</code>中的场景相似的是，<code>List</code>也出现在了等式的两边，</p>
+<p>于是，我们定义<span data-katex="\mu t.\sigma"></span>，表示满足等式<span data-katex="t=\sigma"></span>的最小类型，</p>
+<p>其中，<span data-katex="t"></span>和<span data-katex="\sigma"></span>是类型，且<span data-katex="t"></span>通常会在<span data-katex="\sigma"></span>中出现。</p>
+<p><br/></p>
+<p>因此，以上递归定义的<code>List</code>类型可以表示为，</p>
+<p><span data-katex="\mu\phi.\lambda\alpha.(1+\alpha\times(\phi~\alpha))"></span></p>
+<p><br/></p>
+<p>其中，<span data-katex="\alpha"></span>表示类型参数<code>a</code>，</p>
+<p><span data-katex="\phi"></span>是一个函数，用于表示类型构造器（data constructor）<code>List</code>，</p>
+<p><span data-katex="\mu"></span>算子用来计算类型的不动点。</p>
+<p><br/></p>
+<h3 id="无类型演算">无类型<span data-katex="\lambda"></span>演算</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b7bb889f262aaa84.png" /></p>
+<p><br/></p>
+<p>在无类型<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda_\beta"></span>中，</p>
+<p>定义递归类型，<span data-katex="\mu t.t\to t"></span>，它满足类型等式<span data-katex="t=t\to t"></span>。</p>
+<p><br/></p>
+<p>这样的话，无类型<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda_\beta"></span>，</p>
+<p>就可以无缝的嵌入到一个类型化的系统中去了，</p>
+<p>该系统只存在一个类型，即递归类型<span data-katex="\mu t.t\to t"></span>，</p>
+<p>所有的项，都具有这个类型。</p>
+<p><br/></p>
+<p>因此，对于支持递归类型的系统而言，</p>
+<p>无类型相当于具有唯一类型（Untyped means uni-typed）。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文介绍了递归类型，引入了两个算子<span data-katex="fix_\sigma"></span>和<span data-katex="\mu"></span>，分别用来求解函数和类型的不动点。</p>
+<p>但是，待求的不动点是否存在，是否唯一，我们仍不能确定。</p>
+<p>要想证明这件事情并不简单，需要补充很多额外的数学知识，例如，良基归纳法和最小不动点定理，</p>
+<p>此外，不动点的存在性，和递归的终止性也有关系。</p>
+<p><br/></p>
+<p>好在我们所遇到的大多数场景，都是满足这些要求的，</p>
+<p>因为，我们总是先确信这个解是存在的，然后再去编程，例如，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int </span><br><span class="line">fact 1 &#x3D; 1</span><br><span class="line">fact n &#x3D; n * fact (n - 1)</span><br></pre></td></tr></table></figure>
+<p>将<code>fact</code>写到等式两边，能让我们更方便对<code>fact</code>进行定义。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://en.wikipedia.org/wiki/Algebraic_data_type" target="_blank" rel="noopener">Algebraic data type</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Empty_product" target="_blank" rel="noopener">Empty product</a></p>
+<p><a href="https://book.douban.com/subject/1761918/" target="_blank" rel="noopener">Foundations for programmming languages</a></p>
+<p><a href="https://book.douban.com/subject/26782198/" target="_blank" rel="noopener">Practical Foundations for Programming Languages</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/19/type-6/" rel="next" title="你好，类型（六）：Simply typed lambda calculus">
+                <i class="fa fa-chevron-left"></i> 你好，类型（六）：Simply typed lambda calculus
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/13/type-8/" rel="prev" title="你好，类型（八）：Subtype">
+                你好，类型（八）：Subtype <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#let绑定"><span class="nav-number">1.</span> <span class="nav-text">let绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不动点"><span class="nav-number">2.</span> <span class="nav-text">不动点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代数数据类型"><span class="nav-number">3.</span> <span class="nav-text">代数数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无类型演算"><span class="nav-number">4.</span> <span class="nav-text">无类型演算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

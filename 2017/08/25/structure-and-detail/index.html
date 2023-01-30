@@ -1,0 +1,826 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="架构 “架构”一词与建筑行业有着不可分割的关系， 在最初引入到软件行业中时， 是为了表达在编写计算机程序之前进行规划和设计的重要性。  IEEE给出了软件架构的标准定义。  Architecture:   The fundamental organization of a system embodied in its components, their relationships to each">
+<meta property="og:type" content="article">
+<meta property="og:title" content="结构与细节">
+<meta property="og:url" content="https://thzt.github.io/2017/08/25/structure-and-detail/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="架构 “架构”一词与建筑行业有着不可分割的关系， 在最初引入到软件行业中时， 是为了表达在编写计算机程序之前进行规划和设计的重要性。  IEEE给出了软件架构的标准定义。  Architecture:   The fundamental organization of a system embodied in its components, their relationships to each">
+<meta property="article:published_time" content="2017-08-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.936Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/08/25/structure-and-detail/"/>
+
+
+
+
+
+  <title>结构与细节 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/08/25/structure-and-detail/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">结构与细节</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T00:00:00+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="架构">架构</h3>
+<p>“架构”一词与建筑行业有着不可分割的关系，</p>
+<p>在最初引入到软件行业中时，</p>
+<p>是为了表达在编写计算机程序之前进行规划和设计的重要性。</p>
+<p><br/></p>
+<p><a href="http://cabibbo.dia.uniroma3.it/ids/altrui/ieee1471.pdf" target="_blank" rel="noopener">IEEE</a>给出了软件架构的标准定义。</p>
+<blockquote>
+<p>Architecture:</p>
+</blockquote>
+<blockquote>
+<p>The fundamental <strong>organization</strong> of a system embodied in its components, their relationships to each other, and to the environment, and the principles guiding its design and <strong>evolution</strong>.</p>
+</blockquote>
+<p><br/></p>
+<p>维基百科中的描述也值得借鉴，</p>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Software_architecture" target="_blank" rel="noopener">Software architecture</a> refers to the high level <strong>structures</strong> of a software system, the discipline of creating such <strong>structures</strong>, and the documentation of these <strong>structures</strong>.</p>
+</blockquote>
+<p><br/></p>
+<p>“架构”定义了软件系统中，各构成要素之间的<strong>关系</strong>与<strong>组织方式</strong>，</p>
+<p>从而体现出系统的一种<strong>结构性</strong>特征。</p>
+<p><br/></p>
+<h3 id="细节">细节</h3>
+<p>一个具体的软件，总是由各种细节组成，软件工程师也需要考虑细节问题。</p>
+<p>因为实现一个具体功能的方式总是灵活的，</p>
+<p>所以，在细节层面上会存在有多种多样的选择。</p>
+<p><br/></p>
+<p>经常局限在细节上考虑问题，容易使人忽视全局性质。</p>
+<p>我们致力于在局部上消除冗余，却未必会看到子系统之间的重复，</p>
+<p>追求代码片段的可维护性，也未必会有利于系统整体的清晰易懂。</p>
+<p><br/></p>
+<p>因此，为了保持良好的全局性质，在细节上就必定会有所<strong>损失</strong>。</p>
+<p>结构性质对细节来说，与其说是指导方针，倒不如说是一种<strong>人为限制</strong>。</p>
+<p><br/></p>
+<p>例如，在分层架构中，每一层必须是封闭和单向的，不允许跨层请求，</p>
+<p>层次之间也必须隔离的，层内的变化不能影响到其它层。</p>
+<p>这在某些场景下，可能会造成不便，但是如果随意的开放某个层次的访问权限，</p>
+<p>整个项目就是紧耦合的，变得一团糟。</p>
+<p><br/></p>
+<h3 id="物理结构和逻辑结构">物理结构和逻辑结构</h3>
+<p>从数据结构的角度来看，</p>
+<p>物理结构，是指数据的逻辑结构在计算机中的存储形式。</p>
+<p>逻辑结构，是指数据对象中数据元素之间的相互关系。</p>
+<p><br/></p>
+<p>考虑到软件项目，工程的物理结构，可以指相关<strong>文件</strong>的组织方式，</p>
+<p>工程的逻辑结构，可以指相关<strong>概念</strong>之间的关系。</p>
+<p><br/></p>
+<p>物理结构是重要的，它决定工程是如何存储和部署的，</p>
+<p>逻辑结构也是重要的，它决定了项目的参与者们如何理解它。</p>
+<p><br/></p>
+<p>从细节上来看，<a href="https://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E5%BC%82%E5%91%B3" target="_blank" rel="noopener">代码坏味</a>是结构性欠佳的一种表现，</p>
+<p>它们通常是更深层次灾难的根源。</p>
+<p><br/></p>
+<h3 id="数学结构">数学结构</h3>
+<p>数学结构，是与概念相对应的<strong>数学模型</strong>。</p>
+<p><br/></p>
+<p>例如，我们使用链表，栈和队列，来表示数据对象之间的线性关系，</p>
+<p>我们使用<a href="https://en.wikipedia.org/wiki/Monad_(functional_programming)" target="_blank" rel="noopener">monad</a>来表示执行流程中所反映出来的一种自相似性，</p>
+<p>使用<a href="https://en.wikipedia.org/wiki/Process_calculus" target="_blank" rel="noopener">进程代数</a>作为并发系统的形式模型。</p>
+<p><br/></p>
+<p>这些数学模型，有广泛的应用范围，但是也更加抽象，</p>
+<p>增加了在工程中直接使用的难度。</p>
+<p><br/></p>
+<p>因为软件需求通常是定制化的，所以即使两个系统有相同的数学结构，</p>
+<p>在细节上，具体表现形式之间的<strong>差异</strong>，也可能是巨大的。</p>
+<p><br/></p>
+<p>因此，洞悉数学结构，虽然可以帮助我们看到事物本质，</p>
+<p>但是另一方面，也要谨防忽视产品之间差异性带来的危害。</p>
+<p><br/></p>
+<h3 id="复杂性">复杂性</h3>
+<p>软件工程的目的在于控制复杂性，而不是增加复杂性。——<a href="https://en.wikipedia.org/wiki/Pamela_Zave" target="_blank" rel="noopener">Pamela Zave</a></p>
+<p><br/></p>
+<p>对于不同利益相关者而言，他们眼中的软件系统必须是直观且容易理解的。</p>
+<p>例如，<a href="https://en.wikipedia.org/wiki/4%2B1_architectural_view_model" target="_blank" rel="noopener">4+1 architectural view model</a>提供了一种软件架构的描述模型，</p>
+<p>它从不同的视角，对系统进行专门的描述。</p>
+<p><br/></p>
+<p>易知，开发者看来简单的事情，最终用户未必认可，反之亦然。</p>
+<p>因此，复杂性是相对于人而言的，而不是系统本身。</p>
+<p><br/></p>
+<p>复杂的细节，经过封装和<strong>信息隐藏</strong>，可能会表达一个直观的概念，</p>
+<p>对细节的暴露程度不加管控，才是复杂的根源。</p>
+<p><br/></p>
+<h3 id="沟通与说明">沟通与说明</h3>
+<p>知识是需要讲解的，信息的传递也需要沟通，</p>
+<p>良好的设计，并不会自然而然的被人理解。</p>
+<p><br/></p>
+<p>因此，设立流程和规范，不如促进人们加强<strong>沟通</strong>，</p>
+<p>工程师们对前景和蓝图缺乏<strong>共识</strong>，才导致了系统整体结构的紊乱。</p>
+<p><br/></p>
+<p>只有保持相同的愿景，在局部上才能有所折中，</p>
+<p>让步总是出现在未来可以得到更多利益的时候。</p>
+<p><br/></p>
+<p>此外，在说明怎样做的时候，很多人都忘记说明自己的<strong>意图</strong>和动机，</p>
+<p>像法律条文一样教条性的陈述，只会使人敬而远之。</p>
+<p><br/></p>
+<h3 id="结语">结语</h3>
+<p>软件作为一个整体，需要考虑的问题还有很多，</p>
+<p>除了功能性需求之外，还有<a href="https://zh.wikipedia.org/zh/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能性需求</a>，</p>
+<p>只有站在整体考虑问题，才能跳出程序员的范围，从商业角度看待软件项目。</p>
+<p><br/></p>
+<p>反观日常工作中，我们坚持的种种<strong>原则</strong>，</p>
+<p>可能都只是为了缓解强迫症的<strong>不安</strong>和<strong>焦虑</strong>罢了。（自嘲</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/17/source-code/" rel="next" title="源码的误区">
+                <i class="fa fa-chevron-left"></i> 源码的误区
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/05/type-1/" rel="prev" title="你好，类型（一）：开篇">
+                你好，类型（一）：开篇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#架构"><span class="nav-number">1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细节"><span class="nav-number">2.</span> <span class="nav-text">细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理结构和逻辑结构"><span class="nav-number">3.</span> <span class="nav-text">物理结构和逻辑结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数学结构"><span class="nav-number">4.</span> <span class="nav-text">数学结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂性"><span class="nav-number">5.</span> <span class="nav-text">复杂性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#沟通与说明"><span class="nav-number">6.</span> <span class="nav-text">沟通与说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">7.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

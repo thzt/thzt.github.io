@@ -1,0 +1,902 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="类型变量 到目前为止，我们遇到的每一个项都有唯一确定的类型， 因为，项的类型都被显式的注释在了它的后面。 例如，我们可以定义一个恒等函数， 则的类型就是固定的，，而就不是良类型的。  为每一个类型的恒等函数都定义各自的版本，是非常繁琐的， 因此，一个自然的想法是，我们能否让的类型参数化， 让它在不同的上下文中，实例化为不同的具体类型。 例如，，其中是类型参量。  类型代换 类型代换，指的是一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你好，类型（九）：Let polymorphism">
+<meta property="og:url" content="https://thzt.github.io/2017/10/14/type-9/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="类型变量 到目前为止，我们遇到的每一个项都有唯一确定的类型， 因为，项的类型都被显式的注释在了它的后面。 例如，我们可以定义一个恒等函数， 则的类型就是固定的，，而就不是良类型的。  为每一个类型的恒等函数都定义各自的版本，是非常繁琐的， 因此，一个自然的想法是，我们能否让的类型参数化， 让它在不同的上下文中，实例化为不同的具体类型。 例如，，其中是类型参量。  类型代换 类型代换，指的是一">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-de568f58ab090c54.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-030a50394cdb2096.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-0936c05365786fa4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-6e7e4c43cf611904.png">
+<meta property="article:published_time" content="2017-10-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.939Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-de568f58ab090c54.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/10/14/type-9/"/>
+
+
+
+
+
+  <title>你好，类型（九）：Let polymorphism | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/10/14/type-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">你好，类型（九）：Let polymorphism</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T00:00:00+08:00">
+                2017-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-de568f58ab090c54.png" /></p>
+<p><br/></p>
+<h3 id="类型变量">类型变量</h3>
+<p>到目前为止，我们遇到的每一个<span data-katex="\lambda"></span>项都有唯一确定的类型，</p>
+<p>因为，项的类型都被显式的注释在了它的后面。</p>
+<p>例如，我们可以定义一个恒等函数<span data-katex="id=\lambda x:Nat.~x:Nat\to Nat"></span>，</p>
+<p>则<span data-katex="id"></span>的类型就是固定的，<span data-katex="Nat\to Nat"></span>，而<span data-katex="id~true"></span>就不是良类型的。</p>
+<p><br/></p>
+<p>为每一个类型的恒等函数都定义各自的版本，是非常繁琐的，</p>
+<p>因此，一个自然的想法是，我们能否让<span data-katex="id"></span>的类型参数化，</p>
+<p>让它在不同的上下文中，实例化为不同的具体类型。</p>
+<p>例如，<span data-katex="id=\lambda x:X.~x:X\to X"></span>，其中<span data-katex="X"></span>是类型参量。</p>
+<p><br/></p>
+<h3 id="类型代换">类型代换</h3>
+<p>类型代换<span data-katex="\sigma"></span>，指的是一个从类型变量到类型的有限映射。</p>
+<p>例如，<span data-katex="\sigma=[X\mapsto T,Y\mapsto U]"></span>，会将类型变量<span data-katex="X,Y"></span>分别代换为<span data-katex="T,U"></span>。</p>
+<p>其中，<span data-katex="X,Y"></span>称为代换<span data-katex="\sigma"></span>的定义域，记为<span data-katex="dom(\sigma)"></span>，</p>
+<p>而<span data-katex="T,U"></span>称为代换<span data-katex="\sigma"></span>的值域，记为<span data-katex="range(\sigma)"></span>。</p>
+<p><br/></p>
+<p>值得一提的是，所有的代换都是同时进行的，<span data-katex="\sigma=[X\mapsto Bool,Y\mapsto X\to X]"></span>，</p>
+<p>是将<span data-katex="X"></span>映射成<span data-katex="Bool"></span>，将<span data-katex="Y"></span>映射成<span data-katex="X\to X"></span>，而不是<span data-katex="Bool\to Bool"></span>。</p>
+<p><br/></p>
+<p>代换可以用下面的方式来定义，</p>
+<p>（1）<span data-katex="\sigma(X)=X"></span>，如果<span data-katex="X\notin dom(\sigma)"></span></p>
+<p>（2）<span data-katex="\sigma(X)=T"></span>，如果<span data-katex="(X\mapsto T)\in\sigma"></span></p>
+<p>（3）<span data-katex="\sigma(Nat)=Nat"></span>，<span data-katex="\sigma(Bool)=Bool"></span></p>
+<p>（4）<span data-katex="\sigma(T_1\to T_2)=\sigma T_1\to\sigma T_2"></span></p>
+<p><br/></p>
+<p>对于类型上下文<span data-katex="\Gamma=\{x_1:T_1,\cdots,x_n:T_n\}"></span>来说，</p>
+<p><span data-katex="\sigma\Gamma=\{x_1:\sigma T_1,\cdots,x_n:\sigma T_n\}"></span></p>
+<p><br/></p>
+<p>类型代换的一个重要特性是它保留了类型声明的有效性，</p>
+<p>如果包含类型变量的项是良类型的，那么它的所有代换实例也都是良类型的。</p>
+<p><br/></p>
+<h3 id="类型推断">类型推断</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-030a50394cdb2096.png" /></p>
+<p><br/></p>
+<p>在类型上下文<span data-katex="\Gamma"></span>中，对于包含类型变量的项<span data-katex="t"></span>，我们通常会提出两个问题，</p>
+<p><br/></p>
+<p>（1）它的所有代换实例，是否都是良类型的？</p>
+<p>即，是否<span data-katex="\forall\sigma\exists T,\sigma\Gamma\vdash\sigma t:T"></span>。</p>
+<p><br/></p>
+<p>（2）是否存在良类型的代换实例？</p>
+<p>即，是否<span data-katex="\exists\sigma\exists T,\sigma\Gamma\vdash\sigma t:T"></span>。</p>
+<p><br/></p>
+<p>对于第一个问题，将引出参数化多态（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism" target="_blank" rel="noopener">parametric polymorphism</a>），</p>
+<p>例如，<span data-katex="\lambda f:X\to X.\lambda a:X.f(f(a))"></span>，它的类型为<span data-katex="(X\to X)\to X\to X"></span>，</p>
+<p>无论用什么具体类型<span data-katex="T"></span>来代换<span data-katex="X"></span>，代换实例都是良类型的。</p>
+<p><br/></p>
+<p>对于第二个问题，原始的项可能不是良类型的，</p>
+<p>但是可以选择合适的类型代换使之实例化为良类型的项。</p>
+<p><br/></p>
+<p>例如，<span data-katex="\lambda f:Y.\lambda a:X.f(f(a))"></span>，是不可类型化的，</p>
+<p>但是如果用<span data-katex="Nat\to Nat"></span>代换<span data-katex="Y"></span>，用<span data-katex="Nat"></span>代换<span data-katex="X"></span>，</p>
+<p><span data-katex="\sigma=[X\mapsto Nat,Y\mapsto Nat\to Nat]"></span>，</p>
+<p>就可以得到，<span data-katex="\lambda f:Nat\to Nat.\lambda a:Nat.f(f(a))"></span>，</p>
+<p>可类型化为<span data-katex="(Nat\to Nat)\to Nat\to Nat"></span>。</p>
+<p><br/></p>
+<p>或者，取<span data-katex="\sigma&#39;=[Y\mapsto X\to X]"></span>，结果也能得到一个良类型的项，尽管仍包含变量。</p>
+<p><br/></p>
+<p>在寻找类型变量有效实例的过程中，出现了类型推断（<a href="https://en.wikipedia.org/wiki/Type_inference" target="_blank" rel="noopener">type inference</a>）的概念。</p>
+<p>意味着由编译器来帮助推断<span data-katex="\lambda"></span>项的具体类型，</p>
+<p>在<a href="https://en.wikipedia.org/wiki/ML_(programming_language)" target="_blank" rel="noopener">ML</a>语言中，程序员可以忽略所有的类型注释——隐式类型（<a href="http://wiki.c2.com/?ImplicitTyping" target="_blank" rel="noopener">implicit typing</a>）。</p>
+<p><br/></p>
+<p>在进行推断的时候，对每一个原始的<span data-katex="\lambda"></span>抽象<span data-katex="\lambda x.t"></span>，</p>
+<p>都用新的类型变量进行注释，写成<span data-katex="\lambda x:X.t"></span>，</p>
+<p>然后采取特定的类型推导算法，找到使项通过类型检查的一个最一般化的解。</p>
+<p><br/></p>
+<p>设<span data-katex="\Gamma"></span>为类型上下文，<span data-katex="t"></span>为项，</p>
+<p><span data-katex="(\Gamma,t)"></span>的解，是指这样的一个序对<span data-katex="(\sigma,T)"></span>，使得<span data-katex="\sigma\Gamma\vdash\sigma t:T"></span>成立。</p>
+<p><br/></p>
+<p>例如，设<span data-katex="\Gamma=f:X,a:Y"></span>，<span data-katex="t=f~a"></span>，则</p>
+<p><span data-katex="(\sigma=[X\mapsto Y\to Nat],Nat)"></span>，<span data-katex="(\sigma=[X\mapsto Y\to Z],Z)"></span>，</p>
+<p>都是<span data-katex="(\Gamma,t)"></span>的解。</p>
+<p><br/></p>
+<h3 id="基于约束的类型化">基于约束的类型化</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-0936c05365786fa4.png" /></p>
+<p><br/></p>
+<h4 id="约束集">（1）约束集</h4>
+<p>在实际情况中，<span data-katex="(\Gamma,t)"></span>的解，并不一定满足其他类型表达式的约束条件，</p>
+<p>所以，我们寻找的是满足这些约束条件的特解。</p>
+<p><br/></p>
+<p>所谓约束条件，实际上指的是约束集<span data-katex="C"></span>，</p>
+<p>它由一些包含类型参量的项的等式构成，<span data-katex="\{S_i=T_i|i\in l..n\}"></span>。</p>
+<p><br/></p>
+<p>如果一个代换<span data-katex="\sigma"></span>的代换实例，<span data-katex="\sigma S"></span>和<span data-katex="\sigma T"></span>相同，则称该代换合一（unify）了等式<span data-katex="S=T"></span>。</p>
+<p>如果<span data-katex="\sigma"></span>能合一<span data-katex="C"></span>中的所有等式，则称<span data-katex="\sigma"></span>能合一（unify）或满足（satisfy）<span data-katex="C"></span>。</p>
+<p><br/></p>
+<p>我们用<span data-katex="\Gamma\vdash t:T|_\chi C"></span>，来表示约束集<span data-katex="C"></span>满足时，项<span data-katex="t"></span>在<span data-katex="\Gamma"></span>下的类型为<span data-katex="T"></span>，</p>
+<p>其中<span data-katex="\chi"></span>为约束集中，所有类型变量的集合，有时为了讨论方便可以省略它。</p>
+<p><br/></p>
+<p>例如，对于项<span data-katex="t=\lambda x:X\to Y.x~0"></span>，</p>
+<p>约束集可以写为<span data-katex="\{Nat\to Z=X\to Y\}"></span>，则<span data-katex="t"></span>类型为<span data-katex="(X\to Y)\to Z"></span>。（算法略）</p>
+<p>而代换<span data-katex="\sigma=[X\mapsto Nat,Z\mapsto Bool,Y\mapsto Bool]"></span>，</p>
+<p>使得等式<span data-katex="Nat\to Z=X\to Y"></span>成立，</p>
+<p>所以，我们推断出了<span data-katex="(Nat\to Bool)\to Bool"></span>是项<span data-katex="t"></span>的一个可能类型。</p>
+<p><br/></p>
+<h4 id="约束集的解">（2）约束集的解</h4>
+<p>约束集的解一般不是唯一的，所以一个关键问题是如何确定一个“最好”的解。</p>
+<p><br/></p>
+<p>我们称代换<span data-katex="\sigma"></span>比<span data-katex="\sigma&#39;"></span>更具一般性（more general），如果<span data-katex="\sigma&#39;=\gamma\circ\sigma"></span>，记为<span data-katex="\sigma\sqsubseteq\sigma&#39;"></span>，</p>
+<p>其中，<span data-katex="\gamma"></span>为一个代换，<span data-katex="\gamma\circ\sigma"></span>表示代换的复合，<span data-katex="(\gamma\circ\sigma)S=\gamma(\sigma S)"></span>。</p>
+<p><br/></p>
+<p>约束集<span data-katex="C"></span>的主合一子（principal unifier）指的是代换<span data-katex="\sigma"></span>，</p>
+<p>它能满足<span data-katex="C"></span>，且对于所有满足<span data-katex="C"></span>的代换<span data-katex="\sigma&#39;"></span>，都有<span data-katex="\sigma\sqsubseteq\sigma&#39;"></span>。</p>
+<p><br/></p>
+<p>如果<span data-katex="(\Gamma,t,S,C)"></span>的解<span data-katex="(\sigma,T)"></span>，对于任何其他解<span data-katex="(\sigma&#39;,T&#39;)"></span>，都有<span data-katex="\sigma\sqsubseteq\sigma&#39;"></span>，</p>
+<p>则称<span data-katex="(\sigma,T)"></span>是一个主解（principal solution），称<span data-katex="T"></span>为<span data-katex="t"></span>的主类型（principal type）。</p>
+<p>可以证明，如果<span data-katex="(\Gamma,t,S,C)"></span>有解，则它必有一个主解。</p>
+<p><br/></p>
+<h3 id="let多态">let多态</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-6e7e4c43cf611904.png" /></p>
+<p><br/></p>
+<p>多态（polymorphism）指的是单独一段程序能在不同的上下文中实例化为不同的类型。</p>
+<p>其中let多态，是由let表达式引入的多态性。</p>
+<p><br/></p>
+<h4 id="单态性">（1）单态性</h4>
+<p>假设我们定义了一个<span data-katex="double"></span>函数，它能将一个函数对参数应用两次，</p>
+<p><span data-katex="let~double=\lambda f:Nat\to Nat.\lambda a:Nat.f(f(a))~in"></span></p>
+<p><span data-katex="~~~~double~(\lambda x:Nat.succ~x)~1"></span></p>
+<p>此时，<span data-katex="double"></span>的类型为<span data-katex="(Nat\to Nat)\to Nat\to Nat"></span>。</p>
+<p><br/></p>
+<p>如果我们想将<span data-katex="double"></span>应用于其他类型，就必须重写一个新的<span data-katex="double&#39;"></span>，</p>
+<p><span data-katex="let~double&#39;=\lambda f:Bool\to Bool.\lambda a:Bool.f(f(a))~in"></span></p>
+<p><span data-katex="~~~~double&#39;~(\lambda x:Bool.x)~true"></span></p>
+<p>此时<span data-katex="double&#39;"></span>的类型为<span data-katex="(Bool\to Bool)\to Bool\to Bool"></span>。</p>
+<p><br/></p>
+<p>我们不能让一个<span data-katex="double"></span>函数，既能用于<span data-katex="Nat"></span>类型，又能用于<span data-katex="Bool"></span>类型。</p>
+<p>即使在<span data-katex="double"></span>中用类型变量也没有用，</p>
+<p><span data-katex="let~double=\lambda f:X\to X.\lambda a:X.f(f(a))~in~\cdots"></span></p>
+<p><br/></p>
+<p>例如，如果写，</p>
+<p><span data-katex="let~double=\lambda f:X\to X.\lambda a:X.f(f(a))~in"></span></p>
+<p><span data-katex="~~~~let~a=double~(\lambda x:Nat.succ~x)~1~in"></span></p>
+<p><span data-katex="~~~~~~~~let~b=double~(\lambda x:Bool.x)~true~in~\cdots"></span></p>
+<p>则在<span data-katex="a"></span>定义中使用<span data-katex="double"></span>，会产生一个约束<span data-katex="X\to X=Nat\to Nat"></span>，</p>
+<p>而在<span data-katex="b"></span>定义中使用<span data-katex="double"></span>，则会产生约束<span data-katex="X\to X=Bool\to Bool"></span>，</p>
+<p>这样会使类型变量<span data-katex="X"></span>的求解发生矛盾，导致整个程序不可类型化。</p>
+<p><br/></p>
+<h4 id="多态性">（2）多态性</h4>
+<p>let多态所做的事情，就是打破这个限制，</p>
+<p>让类型参量<span data-katex="X"></span>在上述不同的上下文中，可以分别实例化为<span data-katex="Nat"></span>和<span data-katex="Bool"></span>。</p>
+<p><br/></p>
+<p>这需要改变与let表达式相关的类型推导规则，在第七篇中，我们提到过，</p>
+<p><span data-katex="\frac{\Gamma\vdash t_1:T_1~~~~\Gamma,x:T_1\vdash t_2:T_2}{\Gamma\vdash let~x:T_1=t_1~in~t_2:T_2}"></span></p>
+<p>它会首先计算<span data-katex="T_1"></span>作为<span data-katex="x"></span>的类型，然后再用<span data-katex="x"></span>来确定<span data-katex="T_2"></span>的类型。</p>
+<p>此时，let表达式<span data-katex="let~x=t_1:T_1~in~t_2"></span>，可以看做<span data-katex="(\lambda x:T_1.t_2)t_1"></span>的简写。</p>
+<p><br/></p>
+<p>为了引入多态性，我们需要对上述类型推导规则进行修改，</p>
+<p><span data-katex="\frac{\Gamma\vdash[x\mapsto t_1]t_2:T_2}{\Gamma\vdash let~x=t_1~in~t_2:T_2}"></span></p>
+<p>它表示，先将<span data-katex="t_2"></span>中的<span data-katex="x"></span>用<span data-katex="t_1"></span>代换掉，然后再确定<span data-katex="t_2"></span>的类型。</p>
+<p><br/></p>
+<p>这样的话，</p>
+<p><span data-katex="let~double=\lambda f:X\to X.\lambda a:X.f(f(a))~in"></span></p>
+<p><span data-katex="~~~~let~a=double~(\lambda x:Nat.succ~x)~1~in"></span></p>
+<p><span data-katex="~~~~~~~~let~b=double~(\lambda x:Bool.x)~true~in~\cdots"></span></p>
+<p><br/></p>
+<p>就相当于，</p>
+<p><span data-katex="let~a=\lambda f:X\to X.\lambda a:X.f(f(a))~(\lambda x:Nat.succ~x)~1~in"></span></p>
+<p><span data-katex="~~~~let~b=\lambda f:Y\to Y.\lambda a:Y.f(f(a))~(\lambda x:Bool.x)~true~in~\cdots"></span></p>
+<p>通过let多态，产生了<span data-katex="double"></span>的两个副本，并为之分配了不同的类型参量。</p>
+<p><br/></p>
+<p>此时，let表达式<span data-katex="let~x=t_1~in~t_2"></span>，可以看做<span data-katex="[x\mapsto t_1]t_2"></span>的简写。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system#Let-polymorphism" target="_blank" rel="noopener">Hindley–Milner type system</a></p>
+<p><a href="https://book.douban.com/subject/1761910/" target="_blank" rel="noopener">Types and programming languages</a></p>
+<p><a href="https://www.haskell.org/definition/haskell2010.pdf" target="_blank" rel="noopener">Haskell 2010 Language Report</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/13/type-8/" rel="next" title="你好，类型（八）：Subtype">
+                <i class="fa fa-chevron-left"></i> 你好，类型（八）：Subtype
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/21/type-10/" rel="prev" title="你好，类型（十）：Parametric polymorphism">
+                你好，类型（十）：Parametric polymorphism <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#类型变量"><span class="nav-number">1.</span> <span class="nav-text">类型变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型代换"><span class="nav-number">2.</span> <span class="nav-text">类型代换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型推断"><span class="nav-number">3.</span> <span class="nav-text">类型推断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于约束的类型化"><span class="nav-number">4.</span> <span class="nav-text">基于约束的类型化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#约束集"><span class="nav-number">4.1.</span> <span class="nav-text">（1）约束集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#约束集的解"><span class="nav-number">4.2.</span> <span class="nav-text">（2）约束集的解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#let多态"><span class="nav-number">5.</span> <span class="nav-text">let多态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单态性"><span class="nav-number">5.1.</span> <span class="nav-text">（1）单态性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多态性"><span class="nav-number">5.2.</span> <span class="nav-text">（2）多态性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

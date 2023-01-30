@@ -1,0 +1,912 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="20世纪40年代后期，丰田公司的一群工程师， 发现了在连续流动中进行少量生产的方法。  这种方法，可以像传统的大批量生产者，一批生产大量产品的方法， 一样有效率。  丰台的业务体系就是从这样的创新中发展起来的， 对美国和欧洲现存的汽车生产者提出了挑战。  精益思想背后的理论基础是，利特尔法则， 限制在制品（work-in-progress）数量，可以有效的缩短平均等待时间， 从而提高产能。  通过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从敏捷看板到精益看板">
+<meta property="og:url" content="https://thzt.github.io/2018/08/22/kanban/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="20世纪40年代后期，丰田公司的一群工程师， 发现了在连续流动中进行少量生产的方法。  这种方法，可以像传统的大批量生产者，一批生产大量产品的方法， 一样有效率。  丰台的业务体系就是从这样的创新中发展起来的， 对美国和欧洲现存的汽车生产者提出了挑战。  精益思想背后的理论基础是，利特尔法则， 限制在制品（work-in-progress）数量，可以有效的缩短平均等待时间， 从而提高产能。  通过">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-af3970852ef2553d.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-4a606b6bd048bf7c.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-9e904c65ff11b4c0.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-bc2177a4cfb3cc22.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-c379b186cea16dc2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-c6983b6fe28e5c37.png">
+<meta property="article:published_time" content="2018-08-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.947Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-af3970852ef2553d.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2018/08/22/kanban/"/>
+
+
+
+
+
+  <title>从敏捷看板到精益看板 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/08/22/kanban/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从敏捷看板到精益看板</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T00:00:00+08:00">
+                2018-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>20世纪40年代后期，丰田公司的一群工程师，</p>
+<p>发现了在连续流动中进行少量生产的方法。</p>
+<p><br/></p>
+<p>这种方法，可以像传统的大批量生产者，一批生产大量产品的方法，</p>
+<p>一样有效率。</p>
+<p><br/></p>
+<p>丰台的业务体系就是从这样的创新中发展起来的，</p>
+<p>对美国和欧洲现存的汽车生产者提出了挑战。</p>
+<p><br/></p>
+<p>精益思想背后的理论基础是，<a href="http://wiki.mbalib.com/wiki/%E5%88%A9%E7%89%B9%E5%B0%94%E6%B3%95%E5%88%99" target="_blank" rel="noopener">利特尔法则</a>，</p>
+<p>限制<strong>在制品</strong>（work-in-progress）数量，可以有效的缩短<strong>平均等待时间</strong>，</p>
+<p>从而提高产能。</p>
+<p><br/></p>
+<p>通过把大批量生产改造成<strong>流动性</strong>生产，</p>
+<p>不但可以节省库存成本，而且还可以减少<strong>总的供货时间</strong>。</p>
+<p><br/></p>
+<h3 id="敏捷看板">1. 敏捷看板</h3>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%9C%8B%E6%9D%BF_(%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91)" target="_blank" rel="noopener">看板</a>也是丰田公司发明的，</p>
+<p>它是一种可视化的管理系统，</p>
+<p>目的是对生产过程做出持续，渐进的改善。</p>
+<p><br/></p>
+<p>当可视化的表达方式，遇到了敏捷开发，</p>
+<p>就衍生出了一种称为“敏捷看板”的概念。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-af3970852ef2553d.png" /></p>
+<p><br/></p>
+<p>敏捷看板一般由3列构成，</p>
+<p>从左到右依次是，<strong>TODO</strong>，<strong>DOING</strong>和<strong>DONE</strong>。</p>
+<p>在敏捷团队中，可以清楚的看到每个工作事项所处的状态。</p>
+<p><br/></p>
+<p>但这样的敏捷看板，其实是不能很好的反映精益思想的。</p>
+<p>这是为什么呢？</p>
+<p><br/></p>
+<h3 id="误解">2. 误解</h3>
+<h4 id="对在制品的误解">2.1 对在制品的误解</h4>
+<blockquote>
+<p><a href="http://wiki.mbalib.com/wiki/%E5%9C%A8%E5%88%B6%E5%93%81" target="_blank" rel="noopener">在制品</a>指的是正在加工，尚未完成的产品。</p>
+</blockquote>
+<p><br/></p>
+<p>那么，在敏捷看板上，应该指的是DOING的部分吧，</p>
+<p>其实不然。</p>
+<p><br/></p>
+<p>事实上，所谓在制品，是针对整个产品的所有<strong>生产环节</strong>而言的，</p>
+<p>如果某个产品，需要先A后B，两个具有<strong>依赖关系</strong>的环节，才能制造出成品。</p>
+<p>那么，A<strong>做完的</strong>那些制品，对B来说才叫做在制品。</p>
+<p><br/></p>
+<p>这样具有依赖关系的环节，通常称为<a href="http://wiki.mbalib.com/wiki/%E5%B7%A5%E5%BA%8F" target="_blank" rel="noopener">工序</a>。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-4a606b6bd048bf7c.png" /></p>
+<p><br/></p>
+<p>好，现在我们明白了，</p>
+<p>精益思想说减少在制品，并不是说要减少DOING的那部分内容，</p>
+<p>而是减少<strong>已经完成的制品</strong>在各个工序间的<strong>积压</strong>。</p>
+<p><br/></p>
+<p>减少了积压，前面工序就不用<strong>成批送货</strong>，</p>
+<p>后面工序，也就才能减少<strong>等待时间</strong>。</p>
+<p><br/></p>
+<p>从这种意义上来讲，一个只包含TODO，DOING和DONE的敏捷看板是不够的，</p>
+<p>它只能反映当前一个工序上，各<strong>流水线</strong>的状态。</p>
+<p>不能反映出工序之间在制品的<strong>积压</strong>情况。</p>
+<p><br/></p>
+<h4 id="对流动性的误解">2.2 对流动性的误解</h4>
+<p>精益思想认为，加快<strong>流动性</strong>，比提高<strong>批量生产效率</strong>更重要。</p>
+<p>这其实是一种全局观点。</p>
+<p><br/></p>
+<blockquote>
+<p>要么不做，要么快速做完。</p>
+</blockquote>
+<p><br/></p>
+<p>这样解读是没有问题的。</p>
+<p><br/></p>
+<p>但是如果没有站在全局观点，</p>
+<p>而只站在某道工序的角度理解这句话，</p>
+<p>就产生误解了。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-9e904c65ff11b4c0.png" /></p>
+<p><br/></p>
+<p>人们会误以为，加快流动性，是想办法加快从TODO到DONE的过程，</p>
+<p>其实并不是这样。</p>
+<p>而是指，<strong>加快一个产品，从原材料经历所有工序到成品的过程。</strong></p>
+<p><br/></p>
+<p>一个产品的制造过程，不应该受批量生产限制而停顿。</p>
+<p><br/></p>
+<p>因此，所谓加速流动性，</p>
+<p>并不会要求对各道工序的原生产率进行改善，</p>
+<p>而是改善，在制品<strong>在各工序之间的流转速度</strong>。</p>
+<p><br/></p>
+<h4 id="对瓶颈的误解">2.3 对瓶颈的误解</h4>
+<p>习惯敏捷看板的开发团队，由于看板的<strong>可见性</strong>特点，</p>
+<p>很容易识别出，当前的工作事项出现了哪些问题。</p>
+<p><br/></p>
+<p>很简单，出现了问题，就不能DONE。</p>
+<p>人们也会认为，这就是所谓开发过程中的瓶颈了。</p>
+<p><br/></p>
+<p>其实也不然。</p>
+<p>事实上，精益思想中提到的瓶颈，是一种<strong>资源瓶颈</strong>。</p>
+<p>指的是改成流动性生产之后，即使开启所有的流水线，</p>
+<p>某道工序仍然无法提供下一道工序所需要的原材料。</p>
+<p><br/></p>
+<p>资源指的是流水线。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-bc2177a4cfb3cc22.png" /></p>
+<p><br/></p>
+<p>解决问题的办法，就是提高瓶颈处工序的生产率，或者增加流水线，</p>
+<p>显然，提高其他工序的生产率是没有作用的。</p>
+<p><br/></p>
+<p>提高瓶颈之前工序的生产率，会造成瓶颈处TODO的进一步积压，</p>
+<p>而提高瓶颈之后工序的生产率，则会使它闲置的时间更长。</p>
+<p><br/></p>
+<p>这也是<a href="http://wiki.mbalib.com/wiki/%E7%BA%A6%E6%9D%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">约束理论</a>和核心内容，</p>
+<blockquote>
+<p>任何非瓶颈资源究竟能使系统赚多少钱，不是由它自己的潜能所决定，</p>
+</blockquote>
+<blockquote>
+<p>而是由系统中的其他制约因素所决定。</p>
+</blockquote>
+<p><br/></p>
+<p>所以，落实到敏捷看板上来，</p>
+<p>如果敏捷团队不是整个软件开发过程的瓶颈，</p>
+<p>那么可能提高开发效率，对软件的最终交付是没有作用的。</p>
+<p><br/></p>
+<p>不是整个系统的瓶颈所在。</p>
+<p><br/></p>
+<h3 id="精益看板">3. 精益看板</h3>
+<p>软件开发团队中使用的看板系统，很容易受到以上两种误解的影响。</p>
+<p>结果，软件在制品数量并没有减少，</p>
+<p>虽然整体开发效率，由于看板增强了项目可见性，有所改善。</p>
+<p><br/></p>
+<p>为了将精益思想应用到看板之上，我认为需要按照以下几个步骤来进行梳理。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-c379b186cea16dc2.png" /></p>
+<p><br/></p>
+<h4 id="识别工序">3.1 识别工序</h4>
+<p>首先我们要识别出哪些任务是具有<strong>依赖关系</strong>的，</p>
+<p>哪件事情必须要前一件事情做完后，才能开始处理。</p>
+<p><br/></p>
+<p>这些事情，构成了整个软件开发过程的不同<strong>环节</strong>——工序。</p>
+<p><br/></p>
+<h4 id="识别在制品">3.2 识别在制品</h4>
+<p>有了工序，才能看到在制品的积压情况。</p>
+<p><br/></p>
+<p>例如，软件功能必须开发完成后才能进行测试，</p>
+<p>软件功能开发的结果，是测试的原材料，</p>
+<p>因此，功能开发，测试，构成了两个有依赖关系的工序。</p>
+<p><br/></p>
+<p>如果一次开发完全部功能，再交给别人测试，这就是批量生产方式。</p>
+<p>精益开发思想，指的是<strong>避免积压</strong>，</p>
+<p>开发完一个独立的小功能点，就立即交给别人测试。</p>
+<p><br/></p>
+<h4 id="识别瓶颈">3.3 识别瓶颈</h4>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-c6983b6fe28e5c37.png" alt="潘季驯“束水攻沙”治河之策" /><figcaption aria-hidden="true">潘季驯“束水攻沙”治河之策</figcaption>
+</figure>
+<p>建立了流动性之后，扩大<strong>价值流</strong>就成了第一要务。</p>
+<p>从成品一端开始，不断的扩大需求，就会给前面一连串工序提高<strong>流量要求</strong>。</p>
+<p><br/></p>
+<p>当某道工序开启了所有流水线之后，</p>
+<p>仍然无法提供后面工序所需的原材料之时，</p>
+<p>这道工序就成了系统的瓶颈。</p>
+<p><br/></p>
+<p>这时候，提高瓶颈处TODO到DONE的效率，</p>
+<p>才是对最终产品的交付有帮助。</p>
+<p><br/></p>
+<p>消除了这个瓶颈之后，其他工序随着流动性增强，流量增大，</p>
+<p>会产生另外一个瓶颈，不断解决，持续优化。</p>
+<p><br/></p>
+<h3 id="结语">结语</h3>
+<p>本文阐述了敏捷看板，TODO，DOING和DONE，三列布局给我们带来的误解，</p>
+<p>并与精益思想进行了对比，</p>
+<p>从而对工序，在制品，瓶颈，有了新的认识。</p>
+<p><br/></p>
+<p>与精益思想相符的是，只有站在产品整个生命周期的角度看待生产过程，</p>
+<p>才能有效的<strong>减少浪费</strong>，发现系统级的瓶颈点。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://book.douban.com/subject/26704157/" target="_blank" rel="noopener">精益思想</a></p>
+<p><a href="https://book.douban.com/subject/26764497/" target="_blank" rel="noopener">精益开发与看板方法</a></p>
+<p><a href="https://book.douban.com/subject/24528138/" target="_blank" rel="noopener">Kanban in Action</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%B2%BE%E7%9B%8A%E7%94%9F%E7%94%A2" target="_blank" rel="noopener">精益生产</a></p>
+<p><a href="http://www.sohu.com/a/244696418_249530" target="_blank" rel="noopener">精益看板方法实施的三个层次</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/18/how-to-master-a-programming-skill-quickly/" rel="next" title="怎样快速的掌握一项编程技能">
+                <i class="fa fa-chevron-left"></i> 怎样快速的掌握一项编程技能
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/29/create-value-for-the-user/" rel="prev" title="创造用户价值">
+                创造用户价值 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#敏捷看板"><span class="nav-number">1.</span> <span class="nav-text">1. 敏捷看板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#误解"><span class="nav-number">2.</span> <span class="nav-text">2. 误解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对在制品的误解"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 对在制品的误解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对流动性的误解"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 对流动性的误解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对瓶颈的误解"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 对瓶颈的误解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精益看板"><span class="nav-number">3.</span> <span class="nav-text">3. 精益看板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#识别工序"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 识别工序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#识别在制品"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 识别在制品</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#识别瓶颈"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 识别瓶颈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

@@ -1,0 +1,861 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="一个软件系统，只是可以提供相应的功能，还不能算是完成了预期的目标， 它还要满足一些非功能方面的限制条件。  健壮性就是一个典型的例子， 它反映了系统对于规范要求以外输入情况的处理能力。  为了实现健壮性，我们不仅需要考虑所有可能的输入， 更重要的是要考虑异常流，即系统在遭遇异常时究竟如何表现。  这里有一个常见的误区，那就是，人们为了防止系统崩溃， 不论是否出现错误，总是让它看起来是正常， 这其实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异常先行">
+<meta property="og:url" content="https://thzt.github.io/2018/04/15/exception-first/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="一个软件系统，只是可以提供相应的功能，还不能算是完成了预期的目标， 它还要满足一些非功能方面的限制条件。  健壮性就是一个典型的例子， 它反映了系统对于规范要求以外输入情况的处理能力。  为了实现健壮性，我们不仅需要考虑所有可能的输入， 更重要的是要考虑异常流，即系统在遭遇异常时究竟如何表现。  这里有一个常见的误区，那就是，人们为了防止系统崩溃， 不论是否出现错误，总是让它看起来是正常， 这其实">
+<meta property="article:published_time" content="2018-04-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.945Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2018/04/15/exception-first/"/>
+
+
+
+
+
+  <title>异常先行 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/04/15/exception-first/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">异常先行</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T00:00:00+08:00">
+                2018-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一个软件系统，只是可以提供相应的<a href="https://zh.wikipedia.org/wiki/%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">功能</a>，还不能算是完成了预期的目标，</p>
+<p>它还要满足一些<a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能</a>方面的限制条件。</p>
+<p><br/></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%81%A5%E5%A3%AE%E6%80%A7_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)" target="_blank" rel="noopener">健壮性</a>就是一个典型的例子，</p>
+<p>它反映了系统对于规范要求以外输入情况的处理能力。</p>
+<p><br/></p>
+<p>为了实现健壮性，我们不仅需要考虑所有可能的输入，</p>
+<p>更重要的是要考虑<strong>异常流</strong>，即系统在遭遇异常时究竟如何表现。</p>
+<p><br/></p>
+<p>这里有一个常见的误区，那就是，人们为了防止系统崩溃，</p>
+<p>不论是否出现错误，总是让它看起来是正常，</p>
+<p>这其实是一种<strong>自欺欺人</strong>的做法。</p>
+<p><br/></p>
+<p>这种做法不仅不能够提高系统的健壮性，</p>
+<p>反而人为的向定位问题增添了很多障碍，提高了沟通成本，</p>
+<p>出错的场景被隐藏掉了，只有接口的提供者才知道原因。</p>
+<p><br/></p>
+<p>那么如何设计一个健壮的系统呢？</p>
+<p>本文提供了一些思路。</p>
+<p><br/></p>
+<h3 id="fail-fast-哲学">1. Fail Fast 哲学</h3>
+<p><a href="http://wiki.c2.com/?FailFast" target="_blank" rel="noopener">Fail Fast</a>是<a href="https://www.erlang.org/" target="_blank" rel="noopener">Erlang</a>语言的编程哲学之一，</p>
+<p>说的是一个子系统在遇到问题的时候，应该尽早崩溃。</p>
+<p><br/></p>
+<p>常见的<code>if-return</code>模式（或者<code>if-throw</code>），就是Fail Fast思想的一种应用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function failSlow() &#123;</span><br><span class="line">    if (x !&#x3D; null) &#123;</span><br><span class="line">        &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function failFast(x) &#123;</span><br><span class="line">    if (x &#x3D;&#x3D; null) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上两个JavaScript函数，表现了不同的处理问题风格。</p>
+<p>如果代码后文要用到<code>x</code>，且当前没有<code>x</code>，那不如<strong>尽早返回</strong>。</p>
+<p><br/></p>
+<p>还有一种写法，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function assertPrecondition(x) &#123;</span><br><span class="line">    assert(x &#x3D;&#x3D; null);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码，通过<code>assert</code>对函数的<strong>前置条件</strong>进行了<strong>断言</strong>。</p>
+<p><br/></p>
+<p>使用<code>if-return</code>或者<code>assert</code>，会在很大程度上避免嵌套<code>if</code>的出现，</p>
+<p>否则，我们就不得不在很多<code>if</code>条件中编写业务逻辑。</p>
+<p><br/></p>
+<p>例如，以下展示了嵌套<code>if</code>的某个场景，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (x !&#x3D; null) &#123;</span><br><span class="line">    if (y &gt; 0) &#123;</span><br><span class="line">        if (z) &#123;</span><br><span class="line">            &#x2F;&#x2F; 业务逻辑</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>改成<code>assert</code>后，将前置条件与正常的业务逻辑解耦了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">assert(x !&#x3D; null);</span><br><span class="line">assert(y &gt; 0);</span><br><span class="line">assert(z);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 业务逻辑</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<h3 id="不要吃掉异常">2. 不要吃掉异常</h3>
+<p><strong>如果子系统无法处理某个错误，那就把它抛出来，而不是吃掉它。</strong></p>
+<p><br/></p>
+<p>下面我们来看一个例子，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function service() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        &#x2F;&#x2F; 什么也不做</span><br><span class="line">        &#x2F;&#x2F; 或者即使是写日志</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>以上代码，我们在<code>application</code>函数中调用了<code>service</code>，</p>
+<p>但是<code>service</code>吃掉了异常。</p>
+<p><br/></p>
+<p>那么一旦<code>application</code>的用户指出了错误，定位问题就是一件麻烦事，</p>
+<p><code>application</code>的编写者，要去询问每一个<code>service</code>的提供者，到底出现了什么状况。</p>
+<p><br/></p>
+<p>我们再来看下，如果不吃掉异常会怎样，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function service() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        &#x2F;&#x2F; 写日志</span><br><span class="line">        throw e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>以上代码，我们修改了<code>service</code>函数，</p>
+<p>它确实捕获了异常，但是如果这个异常<code>service</code>无法处理，那就向上抛出去。</p>
+<p><br/></p>
+<p>这样的话，甚至根本轮不到<code>application</code>的用户指出错误了，</p>
+<p><code>application</code>自己都能拿到异常的调用栈信息，</p>
+<p>并且，即使由用户指出了，也能不依赖于<code>service</code>来定位问题的原因。</p>
+<p><br/></p>
+<p>可能有人会说，如果异常都被抛出了，没有人处理怎么办？</p>
+<p>是的，吃掉异常不也是没人处理它吗？</p>
+<p>所以，抛出异常就相当于<strong>显式的</strong>向调用者提问，这个异常到底应该如何处理。</p>
+<p><br/></p>
+<p>换句话说，</p>
+<p><strong>异常被静默处理，应该是大家协商后的决定。</strong></p>
+<p><br/></p>
+<h3 id="让异常成为一种约定">3. 让异常成为一种约定</h3>
+<p>异常和异常的处理应该是一体的，它们应该被<strong>统一的</strong>设计和使用。</p>
+<p>各个系统的边界处，应该如何反馈异常，以及这些异常应该如何被处理，应该事先被约定好。</p>
+<p>这样才会减少冗余的个性化的异常处理逻辑。</p>
+<p><br/></p>
+<p>例如，使用<a href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E4%BE%A7%E9%9D%A2%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1" target="_blank" rel="noopener">面向切面编程</a>，</p>
+<p>我们可以在系统的边界上定义一个<strong>异常切面</strong>，统一处理错误。</p>
+<p><br/></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    MyService.service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 装饰器是一个高阶函数</span><br><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const service &#x3D; Class.service;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            &#x2F;&#x2F; 写日志</span><br><span class="line">            throw e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class MyService &#123;</span><br><span class="line">    @exceptionAOP</span><br><span class="line">    static service() &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>以上代码，为了简洁起见，我们用<a href="https://tc39.github.io/proposal-decorators/" target="_blank" rel="noopener">装饰器</a>实现了一个异常切面，</p>
+<p>目前，装饰器是<a href="https://github.com/tc39/proposals" target="_blank" rel="noopener">ECMAScript TC39</a> Stage2的特性。</p>
+<p><br/></p>
+<p>在这个切面中，我们统一的将异常写入了日志中，</p>
+<p>再将异常抛出。</p>
+<p><br/></p>
+<h3 id="主动抛出异常">4. 主动抛出异常</h3>
+<p>有了异常切面，我们就不用担心未被捕获的异常了，</p>
+<p>向系统中添加一种异常，总是伴随着修改异常切面来完成。</p>
+<p>有了这种异常处理机制，我们就可以<strong>主动抛出一些业务异常</strong>了。</p>
+<p><br/></p>
+<p>例如，上文中提到的<code>assert</code>，如果不满足前置条件断言，</p>
+<p>我们可以主动抛异常。</p>
+<p><br/></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1. 新增异常</span><br><span class="line">class PreconditionException extends Error &#123; &#125;;</span><br><span class="line"></span><br><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const &#123; service &#125; &#x3D; Class;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 2. 新增处理方式</span><br><span class="line">            if (e instanceof PreconditionException) &#123;</span><br><span class="line">                &#x2F;&#x2F; 写日志，前置条件断言失败</span><br><span class="line">                throw e;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 写日志</span><br><span class="line">            throw e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const assert &#x3D; condition &#x3D;&gt; &#123;</span><br><span class="line">    if (!condition) &#123;</span><br><span class="line">        throw new PreconditionException;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyService &#123;</span><br><span class="line">    @exceptionAOP</span><br><span class="line">    static service(x) &#123;</span><br><span class="line">        assert(x);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p><strong>注：</strong></p>
+<p>如果认为每次都修改<code>exceptionAOP</code>是一件麻烦事，我们可以这样做，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1. 新增异常</span><br><span class="line">class PreconditionException extends Error &#123; &#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 2. 新增处理方式</span><br><span class="line">exceptionHandler.add(&#123;</span><br><span class="line">    exception: PreconditionException,</span><br><span class="line">    handler: e &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; 写日志，前置条件断言失败</span><br><span class="line">        throw e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>其中<code>exceptionHandler</code>是我们编写的辅助对象，具体实现方式可以灵活选择，</p>
+<p>在切面上的用法如下，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const service &#x3D; Class.service;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            &#x2F;&#x2F; 使用exceptionHandler处理异常</span><br><span class="line">            exceptionHandler.handle(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<h3 id="先考虑异常处理">5. 先考虑异常处理</h3>
+<p>在设计系统的时候，异常以及异常处理方式应该事先考虑，</p>
+<p>否则人们就会按照各自的便利来编写逻辑，</p>
+<p>这样很容易产生<strong>兼容性问题</strong>。</p>
+<p><br/></p>
+<p>例如，有些接口可能会通过<strong>返回异常值</strong>来反馈异常，</p>
+<p>而有的接口会通过<strong>上抛异常</strong>来反馈，</p>
+<p>这样在处理方式上就很难统一处理，业务逻辑写起来会比较繁琐。</p>
+<p><br/></p>
+<p>即使已经确定为返回异常值的方式，也容易出现以下问题，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 接口1</span><br><span class="line">&#123;</span><br><span class="line">    isSuccess: boolean,</span><br><span class="line">    message: string,</span><br><span class="line">    data: object</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 接口2</span><br><span class="line">&#123;</span><br><span class="line">    succeed: boolean,</span><br><span class="line">    msg: string,</span><br><span class="line">    data: object</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上两个接口的数据类型是不同的，</p>
+<p>第一个接口用<code>isSuccess</code>来标志异常，第二个用<code>succeed</code>，</p>
+<p>那么这两个接口的调用者，就不得不<strong>分别处理</strong>它们。</p>
+<p><br/></p>
+<p>因此，这是下层服务返回了两种异常，但是期望它们用相同的方式处理，</p>
+<p>这很显然是<strong>系统设计</strong>的不恰当。</p>
+<p><br/></p>
+<p>并且，当我们意识到这个问题的时候，再进行修改就难了，</p>
+<p>抛出异常和处理异常的代码要同时修改，是一种<strong>接口变更</strong>，</p>
+<p>会涉及兼容性问题。</p>
+<p><br/></p>
+<h3 id="结语">结语</h3>
+<p>我们可能都体会过，知道错误但是不知道原因的那种<strong>憋闷感</strong>，</p>
+<p>在整个调用链路上，一环一环的排查，结果发现是某个服务吃掉了异常。</p>
+<p><br/></p>
+<p>如果有日志可循，这还不是难事，最多是花费一些时间，</p>
+<p>但如果日志都不健全，定位一个问题简直是难于登天，甚至要手动debug才行。</p>
+<p>究其原因可能是，<strong>人们想要隐藏错误，以使得系统看似健壮。</strong></p>
+<p><br/></p>
+<p>所以，哪有不出错的系统，我们只能<strong>及时修正</strong>。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/05/abstraction/" rel="next" title="抽象层的稳定性">
+                <i class="fa fa-chevron-left"></i> 抽象层的稳定性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/23/craftsman/" rel="prev" title="也谈工匠精神">
+                也谈工匠精神 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#fail-fast-哲学"><span class="nav-number">1.</span> <span class="nav-text">1. Fail Fast 哲学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要吃掉异常"><span class="nav-number">2.</span> <span class="nav-text">2. 不要吃掉异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让异常成为一种约定"><span class="nav-number">3.</span> <span class="nav-text">3. 让异常成为一种约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主动抛出异常"><span class="nav-number">4.</span> <span class="nav-text">4. 主动抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#先考虑异常处理"><span class="nav-number">5.</span> <span class="nav-text">5. 先考虑异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

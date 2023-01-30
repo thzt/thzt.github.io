@@ -1,0 +1,875 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="回顾 上文我们介绍了let多态， 将let表达式，看做了的简写， 即，把中出现的所有，都用替换掉，因此这些副本可以具有不同的类型。  本文将介绍另外一种多态形式，称为参数化多态（parametric polymorphism），例如， 1data Maybe a &#x3D; Nothing | Just a 以上Haskell代码，定义了一个Maybe a类型， 其中Maybe称为类型构造">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你好，类型（十）：Parametric polymorphism">
+<meta property="og:url" content="https://thzt.github.io/2017/10/21/type-10/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="回顾 上文我们介绍了let多态， 将let表达式，看做了的简写， 即，把中出现的所有，都用替换掉，因此这些副本可以具有不同的类型。  本文将介绍另外一种多态形式，称为参数化多态（parametric polymorphism），例如， 1data Maybe a &#x3D; Nothing | Just a 以上Haskell代码，定义了一个Maybe a类型， 其中Maybe称为类型构造">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-60e9a5a9b2cc6fbd.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-2c1c907d268a3169.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-bbff0b1e749dff2f.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-630de5020f6c4e74.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-01d0844dfc8cb281.png">
+<meta property="article:published_time" content="2017-10-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.939Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-60e9a5a9b2cc6fbd.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/10/21/type-10/"/>
+
+
+
+
+
+  <title>你好，类型（十）：Parametric polymorphism | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/10/21/type-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">你好，类型（十）：Parametric polymorphism</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-21T00:00:00+08:00">
+                2017-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-60e9a5a9b2cc6fbd.png" /></p>
+<p><br/></p>
+<h3 id="回顾">回顾</h3>
+<p>上文我们介绍了let多态，</p>
+<p>将let表达式<span data-katex="let~x=t_1~in~t_2"></span>，看做了<span data-katex="[x\mapsto t_1]t_2"></span>的简写，</p>
+<p>即，把<span data-katex="t_2"></span>中出现的所有<span data-katex="x"></span>，都用<span data-katex="t_1"></span>替换掉，因此这些副本可以具有不同的类型。</p>
+<p><br/></p>
+<p>本文将介绍另外一种多态形式，称为参数化多态（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism" target="_blank" rel="noopener">parametric polymorphism</a>），例如，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data Maybe a &#x3D; Nothing | Just a</span><br></pre></td></tr></table></figure>
+<p>以上Haskell代码，定义了一个<code>Maybe a</code>类型，</p>
+<p>其中<code>Maybe</code>称为类型构造器（type constructor），<code>a</code>是它的参数。</p>
+<p><br/></p>
+<p><code>Maybe</code>不是一个合法的类型，它只有和某个具体的<code>a</code>放在一起，才是一个合法的类型，</p>
+<p>例如，<code>Maybe Int</code>，<code>Maybe Char</code>。</p>
+<p><br/></p>
+<h3 id="system-f">System F</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-2c1c907d268a3169.png" /></p>
+<p><br/></p>
+<p>为了实现参数化多态，我们需要对简单类型化<span data-katex="\lambda"></span>演算（<span data-katex="\lambda^\to"></span>系统）进行扩展，</p>
+<p>在<span data-katex="\lambda^\to"></span>中，我们用<span data-katex="\lambda x.t"></span>来表示<span data-katex="\lambda"></span>抽象（lambda abstraction），</p>
+<p>而使用<span data-katex="t_1~t_2"></span>来表示<span data-katex="\lambda"></span>应用（lambda application）。</p>
+<p><br/></p>
+<p>现在我们引入一种新的抽象形式，<span data-katex="\lambda X.t"></span>，它的参数<span data-katex="X"></span>是一个类型，称为类型抽象，</p>
+<p>再引入一种新的应用形式，<span data-katex="t[T]"></span>，称为类型实例化，其中<span data-katex="T"></span>是一个类型表达式。</p>
+<p><br/></p>
+<p>求值规则如下，</p>
+<p><span data-katex="(\lambda X.t)[T]\to[X\mapsto T]t"></span></p>
+<p><br/></p>
+<p>例如，我们可以这样定义一个多态函数，<span data-katex="id=\lambda X.\lambda x:X.x"></span></p>
+<p>当把它应用于类型<span data-katex="Nat"></span>时，</p>
+<p><span data-katex="id[Nat]\to[X\mapsto Nat](\lambda x:X.x)=\lambda x:Nat.x"></span>，它为<span data-katex="Nat"></span>类型上的恒等函数。</p>
+<p>而把它应用于类型<span data-katex="Bool"></span>时，</p>
+<p><span data-katex="id[Bool]\to[X\mapsto Bool](\lambda x:X.x)=\lambda x:Bool.x"></span>，它为<span data-katex="Bool"></span>类型上的恒等函数，</p>
+<p><br/></p>
+<p>可见，<span data-katex="id"></span>的具体类型，依赖于它的类型参数。</p>
+<p>它应用于任意一个类型<span data-katex="T"></span>，<span data-katex="id[T]"></span>都会得到一个类型为<span data-katex="T\to T"></span>的函数，</p>
+<p>因此，人们通常将<span data-katex="id"></span>的类型记为<span data-katex="\forall X.X\to X"></span>。</p>
+<p><br/></p>
+<p>类型规则如下，</p>
+<p>（1）<span data-katex="\frac{\Gamma,X\vdash t:T}{\Gamma\vdash\lambda X.t:\forall X.T}"></span></p>
+<p>（2）<span data-katex="\frac{\Gamma\vdash t_1:\forall X.T_1}{\Gamma\vdash t[T_2]:[X\mapsto T_2]T_1}"></span></p>
+<p>其中，类型<span data-katex="\forall X.T"></span>，叫做全称类型（universal type），</p>
+<p><span data-katex="\forall"></span>称为全称量词（universal quantifier），</p>
+<p>引入了全称类型之后得到的系统，称为System F。</p>
+<p><br/></p>
+<h3 id="rank-n-types">Rank-N Types</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-bbff0b1e749dff2f.png" /></p>
+<p><br/></p>
+<p>有了全称类型之后，函数的参数类型和返回值类型，都有可能具有全称类型。</p>
+<p>不难看出，函数返回值类型的全称量词，总是可以提取出来，放到最外面，</p>
+<p>但是参数类型的全称量词，不能提取出来。</p>
+<p><br/></p>
+<p>例如，<span data-katex="\forall X.X\to (\forall Y.Y\to X)"></span>，相当于<span data-katex="\forall X.\forall Y.X\to Y\to X"></span>，</p>
+<p>而<span data-katex="(\forall X.X\to X)\to Nat"></span>，与<span data-katex="\forall X.(X\to X)\to Nat"></span>则不同。</p>
+<p><br/></p>
+<p>不包含全称量词的类型表达式，具有rank-0类型，也称为单态类型（monotype），</p>
+<p>全称量词都可以提取出来类型表达式，具有rank-1类型（rank-1 type），</p>
+<p>一个函数类型，它的入参具有rank-n类型，那么该函数就具有rank-(n+1)类型。</p>
+<p><br/></p>
+<p>例如，</p>
+<p><span data-katex="((\forall X.X\to X)\to Nat)\to Bool\to Bool"></span>，具有rank-3类型，</p>
+<p><span data-katex="Nat\to (\forall X.X\to X)"></span>，具有rank-1类型。</p>
+<p><br/></p>
+<p>System F的功能是很强大的，但是<a href="https://en.wikipedia.org/wiki/System_F#Use_in_programming_languages" target="_blank" rel="noopener">不幸的是</a>，</p>
+<p>人们发现，该系统中的类型推导算法是<a href="https://en.wikipedia.org/wiki/Undecidable_problem" target="_blank" rel="noopener">不可判定的</a>。</p>
+<p>例如，一般而言，一个rank-3及其以上rank-N类型的表达式，其类型是不可确定的，</p>
+<p>为了确定它的类型，人们不得不手工加上必要的类型信息。</p>
+<p><br/></p>
+<p>Haskell采用了<a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system" target="_blank" rel="noopener">Hindley–Milner类型系统</a>，</p>
+<p>它是System F的一个子集，其中包含了可判定的类型推导算法。</p>
+<p>在Haskell中，类型参量（type variable）默认具有全称类型（universally quantified），</p>
+<p>例如，<code>a -&gt; a</code>，实际上表示类型<span data-katex="\forall a.a\to a"></span>，</p>
+<p><code>a -&gt; a</code>可看做<code>(-&gt;) a a</code>类型，其中<code>-&gt;</code>为函数类型构造器。</p>
+<p><br/></p>
+<h3 id="非直谓性">非直谓性</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-630de5020f6c4e74.png" /></p>
+<p><br/></p>
+<p>在数学和逻辑学中，一个定义称为非直谓的（<a href="https://en.wikipedia.org/wiki/Impredicativity" target="_blank" rel="noopener">impredicative</a>），</p>
+<p>指的是它包含了自引用（self-reference）。</p>
+<p>例如，在定义一个集合的时候，用到了正在定义的这个集合。</p>
+<p><br/></p>
+<p><a href="https://en.wikipedia.org/wiki/Russell%27s_paradox" target="_blank" rel="noopener">罗素悖论</a>就是用非直谓的方式构造出来的，</p>
+<p>如果我们定义<span data-katex="R=\{x|x\notin x\}"></span>，那么<span data-katex="R\in R\Leftrightarrow R\notin R"></span>。</p>
+<p>非直谓定义并不一定导致矛盾，有些情况下还是有用的，</p>
+<p>例如，我们可以非直谓的定义，集合中的最小元素为，<span data-katex="A_{min}=x"></span>，<span data-katex="\forall y.x\leqslant y"></span>。</p>
+<p><br/></p>
+<p>具有参数化多态的类型表达式，</p>
+<p>也有直谓（predicative）和非直谓（impredicative）之分。</p>
+<p><br/></p>
+<p>如果它可以用一个多态类型实例化，例如用它自己来实例化，</p>
+<p>就称为非直谓多态类型（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism#Impredicative_polymorphism" target="_blank" rel="noopener">impredicative polymorphism</a>）。</p>
+<p><br/></p>
+<p>反之，如果一个多态类型表达式，只能用单态类型实例化，</p>
+<p>就称它具有直谓多态类型（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism#Predicative_polymorphism" target="_blank" rel="noopener">predicative_polymorphism</a>）。</p>
+<p><br/></p>
+<h3 id="单态限制">单态限制</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-01d0844dfc8cb281.png" /></p>
+<p><br/></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f x &#x3D; let g y z &#x3D; ([x,y], z) </span><br><span class="line">      in ...</span><br></pre></td></tr></table></figure>
+<p>假设<code>x</code>的类型为<code>a</code>，那么<code>g</code>的类型只能为<code>a -&gt; b -&gt; ([a], b)</code>，</p>
+<p>其中，由于列表类型的限制，<code>x</code>和<code>y</code>必须具有相同的类型。</p>
+<p><br/></p>
+<p>此时，只有<code>b</code>可以具有全称量词，即<span data-katex="\forall b.a\to b\to ([a],b)"></span>，</p>
+<p>因为<code>a</code>在类型上下文中，已经出现了，不能再被实例化为其他的类型了。</p>
+<p>我们称，<code>g</code>的第一个参数<code>a</code>具有单态性（monomorphism）。</p>
+<p><br/></p>
+<p>例如，<code>(g True, g 'c')</code>不是良类型的，</p>
+<p>而<code>(g True, g False)</code>是良类型的。</p>
+<p><br/></p>
+<p>值得一提的是，显式的给<code>g</code>注明类型，也不能阻止<code>a</code>的单态行为，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f x &#x3D; let </span><br><span class="line">         g :: a -&gt; b -&gt; ([a],b) </span><br><span class="line">         g y z &#x3D; ([x,y], z) </span><br><span class="line">      in ...</span><br></pre></td></tr></table></figure>
+<p>此时，<code>a</code>仍然是单态的。</p>
+<p><br/></p>
+<p>在<a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system" target="_blank" rel="noopener">Hindley–Milner类型系统</a>中，</p>
+<p>如果一个类型变量，不在类型上下文中出现，它就可以被全称化（generalize）。</p>
+<p>但是Haskell考虑到性能和模块间的类型推导，</p>
+<p>还增加了特殊的单态限制（monomorphism restriction）避免全称化。</p>
+<p><br/></p>
+<h4 id="rule-1">Rule 1</h4>
+<p>在一组相互依赖的声明中，满足以下两个条件，其中的类型变量才会被全称化，</p>
+<p>（1）每一个变量，都被函数或模式匹配所绑定，</p>
+<p>（2）被模式匹配绑定的变量，都有显式的类型签名。</p>
+<h4 id="rule-2">Rule 2</h4>
+<p>导入到其他模块（module）的单态类型变量，被认为是有歧义的（ambiguous），</p>
+<p>类型通过其来源模块内的<code>default</code>声明来决定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module M1(len1) where </span><br><span class="line">  default( Int, Double ) </span><br><span class="line">  len1 &#x3D; genericLength &quot;Hello&quot;</span><br><span class="line"></span><br><span class="line">module M2 where </span><br><span class="line">  import M1(len1) </span><br><span class="line">  len2 &#x3D; (2 * len1) :: Rational</span><br></pre></td></tr></table></figure>
+<p>当模块<code>M1</code>的类型推导结束后，根据Rule 1，<code>len1</code>具有单态类型，<code>len1 :: Num a =&gt; a</code>，</p>
+<p>Rule 2表明，类型变量<code>a</code>具有歧义性，必须使用<code>default</code>声明来解决歧义。</p>
+<p>因此，根据<code>default( Int, Double )</code>，<code>len1</code>得到了类型<code>Int</code>，</p>
+<p>不过，<code>M2</code>中对<code>len1 :: Int</code>的使用导致了类型错误。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://book.douban.com/subject/1761910/" target="_blank" rel="noopener">Types and programming languages</a></p>
+<p><a href="https://www.haskell.org/definition/haskell2010.pdf" target="_blank" rel="noopener">Haskell 2010 Language Report</a></p>
+<p><a href="https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#arbitrary-rank-polymorphism" target="_blank" rel="noopener">Glasgow Haskell Compiler User's Guide</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Parametric_polymorphism" target="_blank" rel="noopener">Parametric polymorphism</a></p>
+<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/putting.pdf" target="_blank" rel="noopener">Practical type inference for arbitrary-rank types</a></p>
+<p><a href="https://en.wikipedia.org/wiki/System_F" target="_blank" rel="noopener">System F</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system" target="_blank" rel="noopener">Hindley–Milner type system</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/14/type-9/" rel="next" title="你好，类型（九）：Let polymorphism">
+                <i class="fa fa-chevron-left"></i> 你好，类型（九）：Let polymorphism
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/25/rational-solver/" rel="prev" title="理智的问题求解者">
+                理智的问题求解者 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#system-f"><span class="nav-number">2.</span> <span class="nav-text">System F</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rank-n-types"><span class="nav-number">3.</span> <span class="nav-text">Rank-N Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非直谓性"><span class="nav-number">4.</span> <span class="nav-text">非直谓性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单态限制"><span class="nav-number">5.</span> <span class="nav-text">单态限制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rule-1"><span class="nav-number">5.1.</span> <span class="nav-text">Rule 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rule-2"><span class="nav-number">5.2.</span> <span class="nav-text">Rule 2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

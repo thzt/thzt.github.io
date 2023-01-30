@@ -1,0 +1,853 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在逻辑学中，矛盾是指一个命题的和它的否定同时成立。 该想法来源于亚里士多德的无矛盾律，  你不能同时声称某事物在同一方面既是又不是。   无矛盾看起来是显然的，但其实不然， 因为我们完全可以自定义一个允许矛盾的逻辑系统， 次协调逻辑就是这样的一个例子。  所以，尝试容忍矛盾即使是从逻辑学角度来看也是合理的， 那么我们就值得重新反思自己的思维模式了， 我们的大脑，能否同时认可两件看起来矛盾的观点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端开发心理学（八）：容忍矛盾">
+<meta property="og:url" content="https://thzt.github.io/2019/01/25/psychology-08/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="在逻辑学中，矛盾是指一个命题的和它的否定同时成立。 该想法来源于亚里士多德的无矛盾律，  你不能同时声称某事物在同一方面既是又不是。   无矛盾看起来是显然的，但其实不然， 因为我们完全可以自定义一个允许矛盾的逻辑系统， 次协调逻辑就是这样的一个例子。  所以，尝试容忍矛盾即使是从逻辑学角度来看也是合理的， 那么我们就值得重新反思自己的思维模式了， 我们的大脑，能否同时认可两件看起来矛盾的观点">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-25-psychology-08/1023733-31358685cdf58a47.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-25-psychology-08/1023733-7c3f66c662b60260.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-25-psychology-08/1023733-cc7d65d33ccaab5b.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-25-psychology-08/1023733-bf9d7fbb50208bb3.png">
+<meta property="article:published_time" content="2019-01-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-25-psychology-08/1023733-31358685cdf58a47.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2019/01/25/psychology-08/"/>
+
+
+
+
+
+  <title>前端开发心理学（八）：容忍矛盾 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/01/25/psychology-08/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端开发心理学（八）：容忍矛盾</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T00:00:00+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-25-psychology-08/1023733-31358685cdf58a47.png" /></p>
+<p><br/></p>
+<p>在逻辑学中，<a href="https://zh.wikipedia.org/wiki/%E7%9F%9B%E7%9B%BE" target="_blank" rel="noopener">矛盾</a>是指一个<strong>命题</strong>的和它的<strong>否定</strong>同时成立。</p>
+<p>该想法来源于亚里士多德的<a href="https://zh.wikipedia.org/wiki/%E6%97%A0%E7%9F%9B%E7%9B%BE%E5%BE%8B" target="_blank" rel="noopener">无矛盾律</a>，</p>
+<blockquote>
+<p>你不能同时声称某事物在同一方面既是又不是。</p>
+</blockquote>
+<p><br/></p>
+<p>无矛盾看起来是<strong>显然的</strong>，但其实不然，</p>
+<p>因为我们完全可以自定义一个<strong>允许矛盾</strong>的逻辑系统，</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E6%AC%A1%E5%8D%8F%E8%B0%83%E9%80%BB%E8%BE%91" target="_blank" rel="noopener">次协调逻辑</a>就是这样的一个例子。</p>
+<p><br/></p>
+<p>所以，尝试<strong>容忍矛盾</strong>即使是从逻辑学角度来看也是合理的，</p>
+<p>那么我们就值得重新反思自己的思维模式了，</p>
+<p>我们的大脑，能否同时认可两件<strong>看起来矛盾</strong>的观点呢？</p>
+<h3 id="整合性思维">整合性思维</h3>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-25-psychology-08/1023733-7c3f66c662b60260.png" /></p>
+<p><br/></p>
+<p>70多年前，美国小说家<a href="https://zh.wikipedia.org/wiki/%E5%BC%97%E6%9C%97%E8%A5%BF%E6%96%AF%C2%B7%E6%96%AF%E7%A7%91%E7%89%B9%C2%B7%E8%8F%B2%E8%8C%A8%E6%9D%B0%E6%8B%89%E5%BE%B7" target="_blank" rel="noopener">斯科特·菲茨杰拉德</a>认为，</p>
+<p>真正智者的特点之一，就是，</p>
+<blockquote>
+<p>能<a href="https://wenku.baidu.com/view/1d94574dfe4733687e21aa8b.html" target="_blank" rel="noopener">同时容下</a>两个相对立的想法，但仍然保持行动能力。</p>
+</blockquote>
+<p><br/></p>
+<p>我国古代，三国时期魏国大臣、政治家、军事家<a href="https://zh.wikipedia.org/zh-hans/%E5%8F%B8%E9%A9%AC%E6%87%BF" target="_blank" rel="noopener">司马懿</a>，</p>
+<p>在教育后辈时，也曾说过，</p>
+<blockquote>
+<p>夫处世之道，亦即应变之术，岂可偏执一端；</p>
+</blockquote>
+<blockquote>
+<p>用兵之道亦然如此，皆贵在随机应变。</p>
+</blockquote>
+<p><br/></p>
+<p>此外，商业思想家<a href="https://book.douban.com/subject/5311619/" target="_blank" rel="noopener">罗杰·马丁</a>，也曾采访了50多位成功的领导者，</p>
+<p>最终发现，他们大都具有一个非同寻常的特征。</p>
+<p><br/></p>
+<p>成功的领导者更<strong>愿意</strong>而且<strong>能够</strong>同时接纳两种互相冲突的观点，</p>
+<p>在碰到意见冲突时，他们既不慌张，也不是简单的进行非此即彼的取舍，</p>
+<p>而是另辟蹊径，提出一个新思路，既包含了原先两种观点的内容，又比原先两种观点胜出一筹。</p>
+<p><br/></p>
+<p>罗杰·马丁把这种思考和综合的过程，称为<a href="https://book.douban.com/subject/5311619/" target="_blank" rel="noopener">整合性思维</a>。</p>
+<h3 id="有前提才有结论">有前提才有结论</h3>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-25-psychology-08/1023733-cc7d65d33ccaab5b.png" /></p>
+<p><br/></p>
+<p>可是，让自己认可看起来矛盾的观点，却并不是一件容易的事情，</p>
+<p>因为这显然不是说，矛盾的观点没必要去分辨，</p>
+<p>而是说，我们要努力找寻，使它们达成一致的<strong>办法</strong>。</p>
+<p><br/></p>
+<p>为了能说服自己的大脑，我们得使用一些小手段，</p>
+<p>修改自己的思维框架，让大脑认可<strong>有什么样的前提，才有什么样的结论</strong>，</p>
+<p>换了一个前提，结论也会发生变化。</p>
+<p><br/></p>
+<p>具有这种“有前提才有结论”思维习惯的人，</p>
+<p>在思路上<strong>更不容易</strong>陷入僵局。</p>
+<p><br/></p>
+<p>假如，公司突然派我们出差，我们会带什么？</p>
+<p>不少人是想法是，电脑，面包，水...</p>
+<p><br/></p>
+<p>然而，思路灵活回答者，会这样做出答复，</p>
+<blockquote>
+<p>我并不知道去哪里出差，为期多久，</p>
+</blockquote>
+<blockquote>
+<p>如果比较近的话，时间又比较短，我会带...</p>
+</blockquote>
+<blockquote>
+<p>如果比较远，时间长，我会带...</p>
+</blockquote>
+<p>能够这样考虑问题的人，任何时候都不会陷入恐慌。</p>
+<p><br/></p>
+<p>一旦我们看清了结论与前提之间的<strong>强相关性</strong>，</p>
+<p>就<strong>很难</strong>与别人因观点不同而发生争论了，</p>
+<p>因为，如果按他们那样想，<strong>其实也没错</strong>。</p>
+<p><br/></p>
+<p>于是问题就被转换了，</p>
+<p>从“为什么不认可我的观点”，转换成“你我思考的<strong>前提</strong>有什么不同”，</p>
+<p>以及，“谁的出发点更符合<strong>事实</strong>”。</p>
+<p><br/></p>
+<p>所以，<a href="https://book.douban.com/subject/3138847/" target="_blank" rel="noopener">大前研一</a>这样说，</p>
+<blockquote>
+<p>解决问题的能力，就是为印证假设不辞劳苦的行动力。</p>
+</blockquote>
+<h3 id="集众家之长">集众家之长</h3>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-25-psychology-08/1023733-bf9d7fbb50208bb3.png" /></p>
+<p><br/></p>
+<p>除此之外，有时候我们还得考虑，区分对错是否<strong>值得</strong>。</p>
+<p>或者说，我们能否从矛盾的两种说法中，<strong>分别听取</strong>对自己有益的部分？</p>
+<p><br/></p>
+<p>例如，“珍惜时间”与“不要急于求成”，哪个是对的？</p>
+<p>“有自己的主见”与“擅于听取别人的意见”，怎样才能兼容？</p>
+<p>如何才能既“乐观自信”，又“谦虚谨慎”？</p>
+<p><br/></p>
+<p>很多状态看起来是<strong>无法并存</strong>的。</p>
+<p>其实完全没有问题。</p>
+<p><br/></p>
+<p>因为这些<strong>劝诫</strong>都是在不同的前提下给出的，</p>
+<p>对于不珍惜时间的人，人们会提醒他，使之意识到时间的宝贵。</p>
+<p>这并不意味着就得“急于求成”。</p>
+<p><br/></p>
+<p>另一方面，“不要急于求成”是对于那些过于急躁的朋友而言的，建议他们稳下来，</p>
+<p>同样，这也并不意味着该虚度时光。</p>
+<p><br/></p>
+<p>因此，我们在听取一段话的时候，应当<strong>分清</strong>它是在什么背景下说出来的，</p>
+<p>这将有助于避免<strong>盲目的</strong>相信一家之言。</p>
+<h3 id="结语">结语</h3>
+<p>本文讨论了在前端开发过程中，出现<strong>争论时</strong>的心理活动，</p>
+<p>当然争论是不可避免的，但<strong>无意义的争论</strong>却可以改善。</p>
+<p><br/></p>
+<p>因为在我们“有前提才有结论”的思维框架中，</p>
+<p>即使是矛盾着的观点，我们一样可以<strong>完全接受</strong>，</p>
+<p>剩下的事情只是<strong>验证前提</strong>罢了。</p>
+<p><br/></p>
+<p>人们总是更愿意相信自己，难于接受别人的观点，即使是事实，</p>
+<p>所以，把自己认可的前提条件看成是<strong>假设</strong>，是非常有意义的。</p>
+<p>这将更有助于纠正我们<strong>成见</strong>，让我们看到不一样的世界。</p>
+<p><br/></p>
+<p>正是，</p>
+<blockquote>
+<p>横看成岭侧成峰，远近高低各不同，</p>
+</blockquote>
+<blockquote>
+<p>不识庐山真面目，只缘身在此山中。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/22/psychology-07/" rel="next" title="前端开发心理学（七）：同理心">
+                <i class="fa fa-chevron-left"></i> 前端开发心理学（七）：同理心
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/29/psychology-09/" rel="prev" title="前端开发心理学（九）：顺应自然">
+                前端开发心理学（九）：顺应自然 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#整合性思维"><span class="nav-number">1.</span> <span class="nav-text">整合性思维</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有前提才有结论"><span class="nav-number">2.</span> <span class="nav-text">有前提才有结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集众家之长"><span class="nav-number">3.</span> <span class="nav-text">集众家之长</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

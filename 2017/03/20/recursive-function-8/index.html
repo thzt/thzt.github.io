@@ -1,0 +1,891 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="回顾 上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式， 这一篇我们根据不动点算子的性质来证明fact函数就是g函数的不动点。 随后，我们回归到了数学中，讨论集合上的一种偏序结构， 这为下文完全偏序集，以及完全偏序集上连续函数的不动点定理做好准备。  不动点算子的性质    上文我们介绍了不动点算子fix， 它可以用来求取任意函数的不动点。  12fix :: (a -&gt; a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归函数（八）：偏序结构">
+<meta property="og:url" content="https://thzt.github.io/2017/03/20/recursive-function-8/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="回顾 上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式， 这一篇我们根据不动点算子的性质来证明fact函数就是g函数的不动点。 随后，我们回归到了数学中，讨论集合上的一种偏序结构， 这为下文完全偏序集，以及完全偏序集上连续函数的不动点定理做好准备。  不动点算子的性质    上文我们介绍了不动点算子fix， 它可以用来求取任意函数的不动点。  12fix :: (a -&gt; a">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-a8ca5067e631ea34.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-0a009ed0d24a4df6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-548b287983ed9034.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-3619f4e73479ac87.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-69bf19c128135d6a.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-848d5a4650be6c32.png">
+<meta property="article:published_time" content="2017-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-a8ca5067e631ea34.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/03/20/recursive-function-8/"/>
+
+
+
+
+
+  <title>递归函数（八）：偏序结构 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/20/recursive-function-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">递归函数（八）：偏序结构</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T00:00:00+08:00">
+                2017-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="回顾">回顾</h3>
+<p>上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式，</p>
+<p>这一篇我们根据不动点算子的性质来证明<code>fact</code>函数就是<code>g</code>函数的不动点。</p>
+<p>随后，我们回归到了数学中，讨论集合上的一种偏序结构，</p>
+<p>这为下文完全偏序集，以及完全偏序集上连续函数的不动点定理做好准备。</p>
+<p><br/></p>
+<h3 id="不动点算子的性质">不动点算子的性质</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-a8ca5067e631ea34.png" /></p>
+<p><br/></p>
+<p>上文我们介绍了不动点算子<code>fix</code>，</p>
+<p>它可以用来求取任意函数的不动点。</p>
+<p><br/></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fix :: (a -&gt; a) -&gt; a</span><br><span class="line">fix f &#x3D; let x &#x3D; f x in x</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>并且我们说以下函数的不动点为<code>fact = fix g</code>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g :: (Int -&gt; Int) -&gt; Int -&gt; Int</span><br><span class="line">g f n &#x3D; case n of</span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  _ -&gt; n * f (n-1)</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>但是上文中，我们只是对它们的计算结果进行比对，</p>
+<p>并没有对它进行证明。</p>
+<p><br/></p>
+<p>考虑到<code>fix</code>的性质，<code>fix g = g (fix g)</code>，</p>
+<p>（因为<code>fix g</code>是<code>g</code>的不动点，令<code>h = fix g</code>，上式为<code>h = g h</code></p>
+<p>我们可以使用数学归纳法，证明对于任意的自然数<span data-katex="n"></span>，<code>fact n = fix g n</code>。</p>
+<p><br/></p>
+<p>我们先证初始条件，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fix g 1 </span><br><span class="line">&#x3D; g (fix g) 1 </span><br><span class="line">&#x3D; case 1 of </span><br><span class="line">    1 -&gt; 1</span><br><span class="line">    _ -&gt; ...</span><br><span class="line">&#x3D; 1</span><br><span class="line">&#x3D; fact 1</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>然后再证递推条件，假设<code>fact k = fix g k</code>，</p>
+<p>我们要推出<code>fact (k+1) = fix g (k+1)</code>，其中，<span data-katex="k &gt; 0"></span>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fix g (k+1)</span><br><span class="line">&#x3D; g (fix g) (k+1)</span><br><span class="line">&#x3D; case (k+1) of </span><br><span class="line">    1 -&gt; 1</span><br><span class="line">    _ -&gt; (k+1) * (fix g) k</span><br><span class="line">&#x3D; (k+1) * (fix g) k</span><br><span class="line">&#x3D; (k+1) * fact k</span><br><span class="line">&#x3D; fact (k+1)</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>因此，对于任意的自然数<span data-katex="n"></span>，<code>fact n = fix g n</code>。</p>
+<p>即，<code>fact = fix g</code>。</p>
+<p><br/></p>
+<h3 id="不动点算子的有限展开">不动点算子的有限展开</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-0a009ed0d24a4df6.png" /></p>
+<p><br/></p>
+<p>根据上一节<code>fact = fix g</code>的证明，我们看到，</p>
+<p>每一步递推，我们都使用了不动点算子<code>fix</code>的性质<code>fix g = g (fix g)</code>，</p>
+<p>但是对于一个具有有限存储空间的机器来说，递推的步骤不可能是无限的，</p>
+<p>为了界定最多使用多少次递推，我们定义，<span data-katex="fix^{[n+1]}\ g = g\ (fix^{[n]} g)"></span>。</p>
+<p>并且认为<span data-katex="fix^{[0]}\ g"></span>对于任意的<span data-katex="n"></span>无定义。</p>
+<p><span data-katex="fix^{[1]}\ g\ 1 = 1"></span>，而<span data-katex="fix^{[1]}\ g\ n"></span>在<span data-katex="n &gt; 1"></span>时没有定义，</p>
+<p><span data-katex="fix^{[2]}\ g\ 1 = 1"></span>，<span data-katex="fix^{[2]}\ g\ 2 = 2"></span>，而<span data-katex="fix^{[2]}\ g\ n"></span>在<span data-katex="n &gt; 2"></span>时没有定义。</p>
+<p><br/></p>
+<p>因此，<span data-katex="fix^{[n]}\ g"></span>是一个部分函数，且，</p>
+<p><span data-katex="fix^{[n+1]}\ g"></span>所表示的函数，总是比<span data-katex="fix^{[n]}\ g"></span>的计算能力更强一些，离<code>fact</code>更近一些。</p>
+<p>当<span data-katex="n\rightarrow \infty "></span>时，<span data-katex="fix^{[\infty ]}\ g"></span>就是阶乘函数<code>fact</code>。</p>
+<p><br/></p>
+<p>即，<span data-katex="\lbrace fix^{[n]} g|\ n\geqslant 0 \rbrace"></span>的最小上界，就是<code>g</code>的不动点。</p>
+<p>那么，什么样的<code>g</code>才能保证这个集合具有最小上界呢？</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%8F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">序理论</a>指出，完全偏序集上的序保持自映射具有最小不动点。</p>
+<p><br/></p>
+<p>为此，我们需要先认识什么是偏序集，什么是连续函数。</p>
+<p>使用完全偏序集上的连续函数解释程序中函数的方式，称为<a href="https://zh.wikipedia.org/wiki/%E5%9F%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">域论模型</a>。</p>
+<p><br/></p>
+<h3 id="偏序集与哈斯图">偏序集与哈斯图</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-548b287983ed9034.png" /></p>
+<p><br/></p>
+<p>在第三篇中，我们讨论过<a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">偏序关系</a>，</p>
+<p>一个偏序集<span data-katex="(D,\leqslant )"></span>是一个集合<span data-katex="D"></span>，</p>
+<p>并且在这个集合上定义了一个偏序关系<span data-katex="\leqslant "></span>。</p>
+<p><br/></p>
+<p>设<span data-katex="A"></span>为实数集的一个非空子集，我们定义<span data-katex="A"></span>上的偏序关系为<span data-katex="\leqslant "></span>，</p>
+<p><span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x"></span>是小或等于<span data-katex="y"></span>的实数。</p>
+<p>则，<span data-katex="(A,\leqslant )"></span>是一个偏序集。</p>
+<p><br/></p>
+<p>偏序集反映了集合上的一种偏序结构，它比我们想象中的更为常见，</p>
+<p>例如，一个集合<span data-katex="A"></span>，对于任意两个元素<span data-katex="x,y\in A"></span>，我们定义<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=y"></span>。</p>
+<p>那么<span data-katex="(A,\leqslant )"></span>是一个偏序集。</p>
+<p>因此，如果某个集合构成了一个偏序集，这完全取决于我们怎样定义偏序关系。</p>
+<p><br/></p>
+<p>设<span data-katex="(D,\leqslant )"></span>是一个偏序集，</p>
+<p>对于任意的<span data-katex="x,y\in D"></span>，如果总是有<span data-katex="x\leqslant y"></span>或者<span data-katex="y\leqslant x"></span>成立，</p>
+<p>则称<span data-katex="x"></span>和<span data-katex="y"></span>是可比的。</p>
+<p><br/></p>
+<p><span data-katex="x\leqslant y"></span>，且<span data-katex="x\neq y"></span>，则记为<span data-katex="x&lt;y"></span>。</p>
+<p>如果<span data-katex="x"></span>和<span data-katex="y"></span>是可比的，且<span data-katex="x&lt;y"></span>，如果不存在<span data-katex="z\in D"></span>，使得<span data-katex="x&lt;z&lt;y"></span>，则称<span data-katex="y"></span>覆盖<span data-katex="x"></span>。</p>
+<p><br/></p>
+<p>根据可比性和覆盖性，我们就可以将偏序关系用无向图表示出来了，</p>
+<p>其中，顶点表示元素，边表示覆盖关系，并且省去图中每个顶点处的环，</p>
+<p><span data-katex="y"></span>覆盖<span data-katex="x"></span>就将代表<span data-katex="y"></span>的顶点放在代表<span data-katex="x"></span>的顶点之上，并在<span data-katex="x"></span>和<span data-katex="y"></span>之间连线，</p>
+<p>如果<span data-katex="x&lt;y"></span>，但是<span data-katex="y"></span>不覆盖<span data-katex="x"></span>，就省掉<span data-katex="x"></span>与<span data-katex="y"></span>之间的连线。</p>
+<p><br/></p>
+<p>这样用来表示有限偏序集的无向图，称为<a href="https://zh.wikipedia.org/wiki/%E5%93%88%E6%96%AF%E5%9C%96" target="_blank" rel="noopener">哈斯图</a>。</p>
+<p><br/></p>
+<p>例如，易证整除关系是整数集上的一种偏序关系，</p>
+<p>我们可以画出偏序集<span data-katex="\lbrace 1,2,3,4,5,6,9,10,15 \rbrace"></span>对应的哈斯图，如下，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-3619f4e73479ac87.png" /></p>
+<p><br/></p>
+<h3 id="全序集与拟序集">全序集与拟序集</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-69bf19c128135d6a.png" /></p>
+<p><br/></p>
+<p>设<span data-katex="(D,\leqslant )"></span>是一个偏序集，如果对于任意<span data-katex="x,y\in D"></span>，<span data-katex="x"></span>和<span data-katex="y"></span>都可比，</p>
+<p>则称<span data-katex="\leqslant "></span>为<span data-katex="D"></span>上的全序关系，此时称<span data-katex="(D,\leqslant )"></span>为全序集。</p>
+<p><br/></p>
+<p>可见，实数集以及实数集上的小于等于关系<span data-katex="\leqslant "></span>，构成了一个全序集。</p>
+<p>哈斯图为从下至上的“一条线”，是全序集的充要条件。</p>
+<p><br/></p>
+<p>设<span data-katex="R"></span>是非空集合<span data-katex="A"></span>上的，反自反的和传递的二元关系，</p>
+<p>则称<span data-katex="R"></span>为<span data-katex="A"></span>上的拟序关系，常将拟序关系记为<span data-katex="&lt;"></span>，并称<span data-katex="(A,&lt;)"></span>为拟序集。</p>
+<p>拟序关系自然具有反对称性。</p>
+<p>（其中，反自反关系，指的是不存在<span data-katex="x\in A"></span>，使得<span data-katex="x&lt;x"></span>。</p>
+<p><br/></p>
+<p>拟序关系与偏序关系的哈斯图在画法上完全相同，只是拟序关系的哈斯图的各顶点都没有环。</p>
+<p><br/></p>
+<p>设<span data-katex="(A,&lt;)"></span>是一个拟序集，如果对于任意的<span data-katex="x,y\in A"></span>，</p>
+<p><span data-katex="x&lt;y"></span>，<span data-katex="x=y"></span>，<span data-katex="y&lt;x"></span>三式有且仅有一式成立，则称<span data-katex="&lt;"></span>具有三歧性，</p>
+<p>这样的拟序关系<span data-katex="&lt;"></span>，称为拟全序关系，这样的拟序集<span data-katex="(A,&lt;)"></span>，称为拟全序集。</p>
+<p>拟全序集的哈斯图也是“一条线”。</p>
+<p><br/></p>
+<h3 id="最小元与上确界">最小元与上确界</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-848d5a4650be6c32.png" /></p>
+<p><br/></p>
+<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
+<p>如果存在<span data-katex="y\in S"></span>，且对于任意的<span data-katex="x\in S"></span>，有<span data-katex="y\leqslant x"></span>，</p>
+<p>则称<span data-katex="y"></span>为<span data-katex="S"></span>的最小元。（相似的我们可以定义最大元</p>
+<p><br/></p>
+<p>如果存在<span data-katex="y\in S"></span>，对于任意的<span data-katex="x\in S"></span>，</p>
+<p>如果<span data-katex="x\leqslant y"></span>那么就有<span data-katex="x=y"></span>，</p>
+<p>则称<span data-katex="y"></span>为<span data-katex="S"></span>的极小元。（相似的我们可以定义极大元</p>
+<p><br/></p>
+<p>如果<span data-katex="S"></span>是有穷集，则<span data-katex="S"></span>的极小元一定存在，并且可能有多个，</p>
+<p>但是最小元却不一定存在。</p>
+<p><br/></p>
+<p>上文中，我们画出了偏序集<span data-katex="A=\lbrace 1,2,3,4,5,6,9,10,15 \rbrace"></span>对应的哈斯图，</p>
+<p>我们取<span data-katex="B_1=\lbrace 1,2,3 \rbrace"></span>，<span data-katex="B_2=\lbrace 3,5,15 \rbrace"></span>，<span data-katex="B_3=A"></span>，</p>
+<p>则<span data-katex="1"></span>是<span data-katex="B_1"></span>的最小元，也是极小元，<span data-katex="2,3"></span>是<span data-katex="B_1"></span>的极大元，但<span data-katex="B_1"></span>没有最大元。</p>
+<p><span data-katex="3,5"></span>是<span data-katex="B_2"></span>的极小元，但<span data-katex="B_2"></span>没有最小元，<span data-katex="15"></span>是<span data-katex="B_2"></span>的最大元，也是极大元。</p>
+<p><span data-katex="1"></span>是<span data-katex="B_3"></span>的最小元，也是极小元，<span data-katex="4,6,9,10,15"></span>是<span data-katex="B_3"></span>的极大元，但是<span data-katex="B_3"></span>没有最大元。</p>
+<p><br/></p>
+<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
+<p>如果存在<span data-katex="y\in D"></span>，（注意，不一定是<span data-katex="y\in S"></span></p>
+<p>使得对于任意的<span data-katex="x\in S"></span>，<span data-katex="x\leqslant y"></span>，则称<span data-katex="y"></span>为<span data-katex="S"></span>的上界，</p>
+<p>如果<span data-katex="S"></span>的所有上界存在最小元，则称它为<span data-katex="S"></span>最小上界，或上确界。</p>
+<p>（相似的可以定义下确界</p>
+<p><br/></p>
+<p><span data-katex="S"></span>的上界和下界不一定存在，即使存在，上确界和下确界也不一定存在。</p>
+<p><br/></p>
+<p>设<span data-katex="(A,&lt;)"></span>是一个拟全序集，如果对于<span data-katex="A"></span>中的任何非空子集<span data-katex="S"></span>都有最小元，</p>
+<p>则称<span data-katex="&lt;"></span>是一个良序关系，<span data-katex="(A,&lt;)"></span>是一个良序集。</p>
+<p>例如，自然数集以及自然数集上的小于关系，构成了一个良序集<span data-katex="(N,&lt;)"></span>，</p>
+<p>但是，整数集以及整数集上的小于关系，并不构成良序集，而仅仅是一个拟全序集。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文从一个证明出发，我们了解了不动点算子的工作原理，</p>
+<p>然后引出了一些数学概念，序关系在不动点算子理论中占有很重要的地位，</p>
+<p>所以，这里给出了详细的介绍，下文我们开始讨论最小不动点定理。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%8F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">序理论</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%9F%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">域论模型</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">偏序关系</a></p>
+<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/16/good-code/" rel="next" title="什么样的代码才算是好代码">
+                <i class="fa fa-chevron-left"></i> 什么样的代码才算是好代码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/21/recursive-function-9/" rel="prev" title="递归函数（九）：最小不动点定理">
+                递归函数（九）：最小不动点定理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不动点算子的性质"><span class="nav-number">2.</span> <span class="nav-text">不动点算子的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不动点算子的有限展开"><span class="nav-number">3.</span> <span class="nav-text">不动点算子的有限展开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#偏序集与哈斯图"><span class="nav-number">4.</span> <span class="nav-text">偏序集与哈斯图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全序集与拟序集"><span class="nav-number">5.</span> <span class="nav-text">全序集与拟序集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最小元与上确界"><span class="nav-number">6.</span> <span class="nav-text">最小元与上确界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

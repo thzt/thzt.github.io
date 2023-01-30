@@ -1,0 +1,872 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="程序员们都讨厌重复， 因为他们知道， 这是可以避免的冗余工作量。 ——代码坏味  如果本来就不可避免， 那只好认了， 就好像需求不可能不变的事实一样。  但是，盲目的消除重复， 并不是正确的姿势， 反而会把简单的事情搞复杂。  为什么程序员们甘心写那么多“public class XXX {}”， 甘心写那么多“END”，“;”或者“)”， 而不设法避免呢？  为什么不把所有的“this”都提取出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="消除重复与可复用相距多远">
+<meta property="og:url" content="https://thzt.github.io/2015/09/11/reuse-oriented-programming/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="程序员们都讨厌重复， 因为他们知道， 这是可以避免的冗余工作量。 ——代码坏味  如果本来就不可避免， 那只好认了， 就好像需求不可能不变的事实一样。  但是，盲目的消除重复， 并不是正确的姿势， 反而会把简单的事情搞复杂。  为什么程序员们甘心写那么多“public class XXX {}”， 甘心写那么多“END”，“;”或者“)”， 而不设法避免呢？  为什么不把所有的“this”都提取出">
+<meta property="article:published_time" content="2015-09-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.918Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2015/09/11/reuse-oriented-programming/"/>
+
+
+
+
+
+  <title>消除重复与可复用相距多远 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/09/11/reuse-oriented-programming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">消除重复与可复用相距多远</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-11T00:00:00+08:00">
+                2015-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>程序员们都讨厌重复，</p>
+<p>因为他们知道，</p>
+<p>这是可以避免的冗余工作量。</p>
+<p>——代码坏味</p>
+<p><br/></p>
+<p>如果本来就不可避免，</p>
+<p>那只好认了，</p>
+<p>就好像需求不可能不变的事实一样。</p>
+<p><br/></p>
+<p>但是，<strong>盲目的消除重复</strong>，</p>
+<p>并不是正确的姿势，</p>
+<p>反而会把简单的事情搞复杂。</p>
+<p><br/></p>
+<p>为什么程序员们甘心写那么多“public class XXX {}”，</p>
+<p>甘心写那么多“END”，“;”或者“)”，</p>
+<p>而不设法避免呢？</p>
+<p><br/></p>
+<p>为什么不把所有的“this”都提取出来，</p>
+<p>放在一个地方，</p>
+<p>在编译前，再把他们塞入代码中呢。</p>
+<p><br/></p>
+<p>诚然，通过macro，</p>
+<p>可以做一些代码生成之类的事情，</p>
+<p>但是直觉告诉我们，不能乱来。</p>
+<p><br/></p>
+<p>原因是什么？</p>
+<p>消除重复与面向复用其实还相距太远。</p>
+<p><br/></p>
+<h2 id="什么是面向复用的编程">什么是面向复用的编程</h2>
+<p>“面向”，指的是目的，目标。</p>
+<p><br/></p>
+<p>方法论告诉我们，</p>
+<p>要完成一件事需要3个步骤，</p>
+<p>（1）确定目标</p>
+<p>（2）分析差距</p>
+<p>（3）缩小差距</p>
+<p><br/></p>
+<p>确定目标是第一步。</p>
+<p><br/></p>
+<p>要想让我们的程序被复用，</p>
+<p>首先他要设计成<strong>可以</strong>被复用的，</p>
+<p>不是哪天要用了，忽然就行了。</p>
+<p><br/></p>
+<p>而且，在一套软件中，</p>
+<p>并不是所有的代码都是可复用的，</p>
+<p>有些根本无法复用。</p>
+<p><br/></p>
+<p>承认了这两个事实以后，</p>
+<p>任务一下子简单了很多。</p>
+<p><br/></p>
+<h2 id="提取并不意味着抽象"><strong>提取并不意味着抽象</strong></h2>
+<p>一段代码，在很多地方都出现了，</p>
+<p>我们马上就能想到，</p>
+<p>把它<strong>提取</strong>到了一个函数中。</p>
+<p><br/></p>
+<p>然而这对可复用并没有任何作用，</p>
+<p>我们只是凑巧成功了几次。</p>
+<p><br/></p>
+<p>假如某个调用处的<strong>业务逻辑</strong>发生了变化，</p>
+<p>我们就遇到麻烦了，</p>
+<p>不能修改提取出去的代码，因为别人也在用，</p>
+<p>还要把代码再复制回去，只调整这一块。</p>
+<p><br/></p>
+<p>自讨苦吃啊。</p>
+<p>那可如何是好？</p>
+<p><br/></p>
+<p>这是因为，提取和抽象是不同的，</p>
+<p>提取是文本层次的观察，</p>
+<p>而抽象是逻辑层次的考察。</p>
+<p><br/></p>
+<p>这段代码虽然在很多地方出现了，</p>
+<p>可是它却由不同的<strong>逻辑单元</strong>组成，</p>
+<p>这就隐藏了很多引起它改变的因素。</p>
+<p>——单一职责原则</p>
+<p><br/></p>
+<p>我们应该先把这些逻辑单元封装好，</p>
+<p>然后<strong>拼装</strong>出统一的抽象接口，</p>
+<p>各处对接口进行调用。</p>
+<p>——依赖倒置原则</p>
+<p>——合成/聚合复用原则</p>
+<p><br/></p>
+<p>一旦某个逻辑单元需要调整了，</p>
+<p>那么只需要单独为某处调用，</p>
+<p>再<strong>实现</strong>一个新的接口函数就行了。</p>
+<p>——开-闭原则</p>
+<p><br/></p>
+<h2 id="外表要简单内心不要太简单"><strong>外表要简单，内心不要太简单</strong></h2>
+<p>有人觉得有个<strong>拼装层</strong>太麻烦了，</p>
+<p>还不如直接提取函数好呢，</p>
+<p>这其实是混淆了抽象与实现。</p>
+<p><br/></p>
+<p>接口的使用者是看不到实现方式的，</p>
+<p>实现很复杂是为了有更高的灵活性。</p>
+<p>——迪米特法则</p>
+<p><br/></p>
+<p><strong>语言的魅力不就是，把复杂藏于只言片语之后吗？</strong></p>
+<p>编程的目的不就是，为多变的业务逻辑提供简洁的描述语言吗？</p>
+<p>——领域特定语言</p>
+<p><br/></p>
+<p>一切都应该尽可能地简单,但不要太简单。</p>
+<p>——爱因斯坦</p>
+<p><br/></p>
+<h2 id="业务与功能"><strong>业务与功能</strong></h2>
+<p>经常变动的是业务逻辑，</p>
+<p>而可复用的是功能模块。</p>
+<p><br/></p>
+<p>对逻辑我们要抽象，</p>
+<p>而对功能我们要封装。</p>
+<p><br/></p>
+<p><strong>很多新手认为，</strong></p>
+<p><strong>把相关的代码组织在一起就是封装了，</strong></p>
+<p><strong>这与认为把代码提取出来了就是抽象了一样失败。</strong></p>
+<p><br/></p>
+<p>要封装，是因为它们“能够封装”，</p>
+<p>而不是代码恰好出现在了一起。</p>
+<p><br/></p>
+<p>只有<strong>与要描述的业务无关</strong>的功能，</p>
+<p>才是可复用的单元。</p>
+<p><br/></p>
+<p>每个页面都发送AJAX请求，</p>
+<p>然后更新一个id="message"的标签，</p>
+<p>这是不可封装的。</p>
+<p><br/></p>
+<p>而发送AJAX模块，</p>
+<p>更新任一标签内容的模块，</p>
+<p>才是可封装的。</p>
+<p><br/></p>
+<p>一致的业务流程，也是可以封装的。</p>
+<p>例如，如果有定时任务，</p>
+<p>可以封装一个定时任务管理器，</p>
+<p>只需要挂载任务的配置信息就可以自动执行。</p>
+<p><br/></p>
+<p>对了，别人有写好了的，</p>
+<p>不用自己做，</p>
+<p>但我们要这么想。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>能闻到坏味是好事，</p>
+<p>但是不正确的打扫方法，</p>
+<p>反而会使代码更难维护。</p>
+<p><br/></p>
+<p>消除重复是表象，</p>
+<p>而面向复用才是目的。</p>
+<p><br/></p>
+<p><strong>和别人读同样的书，</strong></p>
+<p><strong>不一定考上一样的大学，</strong></p>
+<p><strong>更不一定有相同的人生。</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/02/impractical-illusion/" rel="next" title="无法扭转的颓势">
+                <i class="fa fa-chevron-left"></i> 无法扭转的颓势
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/21/define-syntax/" rel="prev" title="Scheme元编程">
+                Scheme元编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是面向复用的编程"><span class="nav-number">1.</span> <span class="nav-text">什么是面向复用的编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提取并不意味着抽象"><span class="nav-number">2.</span> <span class="nav-text">提取并不意味着抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外表要简单内心不要太简单"><span class="nav-number">3.</span> <span class="nav-text">外表要简单，内心不要太简单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#业务与功能"><span class="nav-number">4.</span> <span class="nav-text">业务与功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

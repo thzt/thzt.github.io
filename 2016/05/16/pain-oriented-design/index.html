@@ -1,0 +1,793 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="上学写论文时，流传着这么一句话， 『大家虽然不知道鬼的样子，却都在画鬼。』 当时，觉得好有道理啊，我们提出了各种理论模型，却不知道世界到底是什么样子。  没想到后来进入了软件行业，也会遇到同样的问题。  我们很多项目，发起人其实并不知道要做成什么， 只是想做这个，想做那个， 似乎把想做的功能都做完，项目就成了。  我们假想存在某个问题，甚至都没有去调查， 我们觉得别人一定会来用，甚至都没想着去接受">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向痛点的应变之道">
+<meta property="og:url" content="https://thzt.github.io/2016/05/16/pain-oriented-design/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="上学写论文时，流传着这么一句话， 『大家虽然不知道鬼的样子，却都在画鬼。』 当时，觉得好有道理啊，我们提出了各种理论模型，却不知道世界到底是什么样子。  没想到后来进入了软件行业，也会遇到同样的问题。  我们很多项目，发起人其实并不知道要做成什么， 只是想做这个，想做那个， 似乎把想做的功能都做完，项目就成了。  我们假想存在某个问题，甚至都没有去调查， 我们觉得别人一定会来用，甚至都没想着去接受">
+<meta property="article:published_time" content="2016-05-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.925Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2016/05/16/pain-oriented-design/"/>
+
+
+
+
+
+  <title>面向痛点的应变之道 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/05/16/pain-oriented-design/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面向痛点的应变之道</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-16T00:00:00+08:00">
+                2016-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上学写论文时，流传着这么一句话，</p>
+<p>『大家虽然不知道鬼的样子，却都在画鬼。』</p>
+<p>当时，觉得好有道理啊，我们提出了各种理论模型，却不知道世界到底是什么样子。</p>
+<p><br/></p>
+<p>没想到后来进入了软件行业，也会遇到同样的问题。</p>
+<p><br/></p>
+<p>我们很多项目，发起人其实并不知道要做成什么，</p>
+<p>只是想做这个，想做那个，</p>
+<p>似乎把想做的功能都做完，项目就成了。</p>
+<p><br/></p>
+<p>我们假想存在某个问题，甚至都没有去调查，</p>
+<p>我们觉得别人一定会来用，甚至都没想着去接受反馈，</p>
+<p>我们自以为现存方案的问题很多，甚至都没用过它。</p>
+<p><br/></p>
+<p>这就是在『<strong>画鬼</strong>』，</p>
+<p>是一群人憋着实在想做些什么的时候的宏观表现。</p>
+<p><br/></p>
+<p>那么，我们积极向上的心态，不对吗，</p>
+<p>我们想造福社会，推动进步，不好吗？</p>
+<p><br/></p>
+<p>当然好，只不过要坚持一些设计原则。</p>
+<p><br/></p>
+<h2 id="痛点"><strong>痛点</strong></h2>
+<p>学过软件工程之后，我们知道，进行需求分析时，我们得先确定需求的背景和目的。</p>
+<p>为什么要做这件事，是什么引起的，<strong>动机</strong>是什么。</p>
+<p>只有确定了问题，才能有的放矢。</p>
+<p>这是对新项目而言。</p>
+<p><br/></p>
+<p>而对于实际的项目，几乎都是以现有的解决方案为起点的，</p>
+<p>我们还要问，当前方案的<strong>痛点</strong>是什么，哪里做的不够好，</p>
+<p>这些问题的优先级怎么安排，怎样逐步解决它。</p>
+<p><br/></p>
+<p>通过分析痛点，我们才能找到<strong>立项的原因</strong>。</p>
+<p>不是我们想做什么，而是我们不得不解决它。</p>
+<p>没有迫不得已的形势，事情就不会往前发展。</p>
+<p><br/></p>
+<p>我们不要急着去解决问题，</p>
+<p>而是先要确定，<strong>到底要解决什么问题</strong>。</p>
+<p><br/></p>
+<h2 id="应变之道"><strong>应变之道</strong></h2>
+<p>应变，是可以锻炼的。</p>
+<p><br/></p>
+<p>看到每一个方案时，不妨考虑下，它们是<strong>怎样被设计出来的</strong>。</p>
+<p>这样才能积累经验，在遇到困难的时候，找到切实可用的办法。</p>
+<p><br/></p>
+<p>每一个解决方案，都是为它的目的服务的，</p>
+<p>人们做了哪些折衷和让步，又是以何种程度达到目的的。</p>
+<p><br/></p>
+<p>我们要学的，不是会用哪些招数，</p>
+<p>而是，<strong>学会这些招数的创造方法</strong>。</p>
+<p><br/></p>
+<p>由此，繁杂的方案就不会迷惑我们了，</p>
+<p>像工匠能看到工具的问题一样，我们会看到<strong>方案的缺陷</strong>，和它们引起的新问题。</p>
+<p><br/></p>
+<p>无招胜有招。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>不能确定待解决的问题。</p>
+<p>给定一个问题，想不出适用的解决方案。</p>
+<p><br/></p>
+<p>这是两个难点。</p>
+<p>我们会假想一个问题，结果做完了以后才发现白费心思。</p>
+<p>我们会用流行的解决方案，结果发现越走越远。</p>
+<p><br/></p>
+<p>经验多了，熟练掌握各种框架类库之后，这两个能力并不会相应提高。</p>
+<p>我们需要刻意的训练，才能学会『面向痛点的应变之道』。</p>
+<p><br/></p>
+<p>Love of bustle is not industry. ——Seneca</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/12/break-through-the-bottleneck/" rel="next" title="如何突破瓶颈">
+                <i class="fa fa-chevron-left"></i> 如何突破瓶颈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/18/do-not-rely-on-the-hearsay/" rel="prev" title="不要依赖『道听途说』">
+                不要依赖『道听途说』 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#痛点"><span class="nav-number">1.</span> <span class="nav-text">痛点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应变之道"><span class="nav-number">2.</span> <span class="nav-text">应变之道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">3.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

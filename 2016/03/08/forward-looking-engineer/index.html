@@ -1,0 +1,830 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="受过多年学校教育的我们，容易产生一个误区。 我们学会了很多知识，学会了怎样解决问题， 但是却不知道这些问题是怎么来的， 以后将要如何发展。  我们要解决的问题都是静态的， 只要我们给出方案， 那它就永远是这个问题的解。  然而，现实生活中的问题，却复杂得多。  我们不仅需要考虑问题的解法， 而且更重要的还要考虑问题本身。 我们当前是否在把精力用于解决一个正确的问题，还说不定， 我们的方案是否在一段">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件工程师的前瞻性">
+<meta property="og:url" content="https://thzt.github.io/2016/03/08/forward-looking-engineer/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="受过多年学校教育的我们，容易产生一个误区。 我们学会了很多知识，学会了怎样解决问题， 但是却不知道这些问题是怎么来的， 以后将要如何发展。  我们要解决的问题都是静态的， 只要我们给出方案， 那它就永远是这个问题的解。  然而，现实生活中的问题，却复杂得多。  我们不仅需要考虑问题的解法， 而且更重要的还要考虑问题本身。 我们当前是否在把精力用于解决一个正确的问题，还说不定， 我们的方案是否在一段">
+<meta property="article:published_time" content="2016-03-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.924Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2016/03/08/forward-looking-engineer/"/>
+
+
+
+
+
+  <title>软件工程师的前瞻性 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/03/08/forward-looking-engineer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件工程师的前瞻性</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-08T00:00:00+08:00">
+                2016-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>受过多年学校教育的我们，容易产生一个误区。</p>
+<p>我们学会了很多知识，学会了怎样解决问题，</p>
+<p>但是却不知道这些问题是怎么来的，</p>
+<p>以后将要如何发展。</p>
+<p><br/></p>
+<p>我们要解决的问题都是静态的，</p>
+<p>只要我们给出方案，</p>
+<p>那它就永远是这个问题的解。</p>
+<p><br/></p>
+<p>然而，现实生活中的问题，却复杂得多。</p>
+<p><br/></p>
+<p>我们不仅需要考虑问题的解法，</p>
+<p>而且更重要的还要考虑问题本身。</p>
+<p>我们当前是否在把精力用于解决一个正确的问题，还说不定，</p>
+<p>我们的方案是否在一段时间内仍然有效，也未可知。</p>
+<p><br/></p>
+<p>这也是软件行业的主要特点。</p>
+<p><br/></p>
+<h2 id="困难的软件工程"><strong>困难的软件工程</strong></h2>
+<p>人们常把软件工程比作建筑，我认为这极不合理。</p>
+<p>完全忽视了软件的本质特点。</p>
+<p><br/></p>
+<p>与建筑行业不同的是，软件所解决的问题都是动态的，</p>
+<p>楼还没有盖完，我们的图纸就变了，</p>
+<p>怎样在这种情况下把楼盖起来，才是软件工程所面临的问题。</p>
+<p><br/></p>
+<p>诚然，用户的需求是不稳定的，今天说这个，明天说那个，</p>
+<p>但这并不是一个主要方面。</p>
+<p>短期内，需求的稳定性取决于我们的挖掘和控制。</p>
+<p><br/></p>
+<p>然而，从长远来看，市场在变，业务在变，</p>
+<p>用户使用软件的目的就会改变，</p>
+<p>软件岂能不变？</p>
+<p><br/></p>
+<p>采取什么样的方案，应对这些发展中的业务需要，</p>
+<p>才是软件要解决的本质问题。</p>
+<p><br/></p>
+<p>这是困难的。</p>
+<p><br/></p>
+<p>且不谈增加新功能了，</p>
+<p>甚至对于有缺陷的地方进行修改，也得慎重考虑。</p>
+<p>所有依赖这个错误的特性而表现良好的程序，都是有问题的。</p>
+<p><br/></p>
+<p>每改一处都可能意味着全盘重写。</p>
+<p><br/></p>
+<h2 id="编程层面的技术修炼"><strong>编程层面的技术修炼</strong></h2>
+<p>好的软件工程师，可以隔离变化，简化依赖关系。</p>
+<p>他们通过抽象搭建框架，通过组装分离影响，</p>
+<p>让每一个功能点都是可拆卸的。</p>
+<p><br/></p>
+<p>为了抽象，就得理解问题背后的数学结构，</p>
+<p>为了封装，就得理解子问题之间的逻辑关联。</p>
+<p><br/></p>
+<p>好的代码，行云流水，层次分明，逻辑清晰，赏心悦目，</p>
+<p>更重要的是，解决了当前问题，并留有余地。</p>
+<p><br/></p>
+<p>到了这一步，才可以谈论软件是如何进行设计的了，</p>
+<p>的确，编程是一门设计手法，</p>
+<p>更多的是考虑如何描述，如何组织，如何扩展等等问题。</p>
+<p><br/></p>
+<p>不但如此，一个架构师，还要考虑如何量产，</p>
+<p>如何并行开发，如何降低抽象层次，</p>
+<p>如何交流，如何推广。</p>
+<p><br/></p>
+<p>这绝对是一门手艺。</p>
+<p><br/></p>
+<h2 id="工程师需要前瞻性"><strong>工程师需要前瞻性</strong></h2>
+<p>要想给出一个灵活可扩展的方案，</p>
+<p>只是知道用动态的观点看待问题，作用是微小的。</p>
+<p>我们还需要明白业务场景，分析它的趋势，看到它的未来。</p>
+<p><br/></p>
+<p>随着业务规模扩大，软件越来越复杂，</p>
+<p>前瞻性将是衡量一个软件工程师的首要标准了，</p>
+<p>这也是工程与编程的重要区别。</p>
+<p><br/></p>
+<p>可是，要想获得前瞻性是很难的，</p>
+<p>我们必须先认识当前，明白现状，</p>
+<p>必须跳出当前的生活，从更高的角度俯视它。</p>
+<p><br/></p>
+<p>我们得看到，现行方案已经帮助问题解决到了什么程度，</p>
+<p>当前的痛点在哪，客观约束条件有哪些，</p>
+<p>只有看清这些，才能确定目的地和实现路线。</p>
+<p><br/></p>
+<p>没有前瞻性的工程师是可怕的，</p>
+<p>因为他自己都不知道要去哪，以及正在做什么，</p>
+<p>那么他当前选择的路线就可能是盲目的，有风险的。</p>
+<p><br/></p>
+<p>只有确定目标，并逐步实现，</p>
+<p>才有达到目标的可能。</p>
+<p><br/></p>
+<p>世界上，可没有那么多的巧合出现。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>知道自己在哪里，有计划要去哪里，</p>
+<p>并努力付诸实践，才能达成目标。</p>
+<p><br/></p>
+<p>人们在计划出行时，总是这么考虑，</p>
+<p>然而在其他问题上却容易迷茫</p>
+<p><br/></p>
+<p>其实，当不知道自己要去哪里的时候，</p>
+<p>往往是对现在做的事情，不求甚解。</p>
+<p><br/></p>
+<p>还是从认识自己开始吧，</p>
+<p>锻炼有前瞻性的思维习惯，</p>
+<p>才能越走越稳，看尽沿途的风光美景。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/06/game-theory-in-team-building/" rel="next" title="团队建设中的博弈论">
+                <i class="fa fa-chevron-left"></i> 团队建设中的博弈论
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/11/tools/" rel="prev" title="论工具">
+                论工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#困难的软件工程"><span class="nav-number">1.</span> <span class="nav-text">困难的软件工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程层面的技术修炼"><span class="nav-number">2.</span> <span class="nav-text">编程层面的技术修炼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工程师需要前瞻性"><span class="nav-number">3.</span> <span class="nav-text">工程师需要前瞻性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

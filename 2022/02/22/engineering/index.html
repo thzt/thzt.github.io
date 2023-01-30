@@ -1,0 +1,796 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="工程 在 20 世纪 七八十年代 出现了一系列的 “软件危机”， 不少软件项目的结局都很悲惨， 要么远远超出了规划的时间表，要么软件的质量难以控制。  人们意识到软件领域中遇到的这些问题，其实可以用 工程方法 得以改善和解决。 工程师最关键和独特的特点是，发现、理解并结合实际的局限，来达到满意的结果。 后来又经过几代人的研究和实践，不断丰富形成了软件工程这一学科。  所以，软件工程师这个职业自诞生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工程化的反思">
+<meta property="og:url" content="https://thzt.github.io/2022/02/22/engineering/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="工程 在 20 世纪 七八十年代 出现了一系列的 “软件危机”， 不少软件项目的结局都很悲惨， 要么远远超出了规划的时间表，要么软件的质量难以控制。  人们意识到软件领域中遇到的这些问题，其实可以用 工程方法 得以改善和解决。 工程师最关键和独特的特点是，发现、理解并结合实际的局限，来达到满意的结果。 后来又经过几代人的研究和实践，不断丰富形成了软件工程这一学科。  所以，软件工程师这个职业自诞生">
+<meta property="article:published_time" content="2022-02-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.972Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2022/02/22/engineering/"/>
+
+
+
+
+
+  <title>工程化的反思 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2022/02/22/engineering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">工程化的反思</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-22T00:00:00+08:00">
+                2022-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="工程">工程</h3>
+<p>在 20 世纪 七八十年代 出现了一系列的 “<a href="https://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6%E5%8D%B1%E6%9C%BA" target="_blank" rel="noopener">软件危机</a>”，</p>
+<p>不少软件项目的结局都很悲惨，</p>
+<p>要么远远超出了规划的时间表，要么软件的质量难以控制。</p>
+<p><br/></p>
+<p>人们意识到软件领域中遇到的这些问题，其实可以用 <a href="https://zh.wikipedia.org/wiki/%E5%B7%A5%E7%A8%8B%E5%AD%A6#.E5.B7.A5.E7.A8.8B.E5.AD.A6.E6.96.B9.E6.B3.95" target="_blank" rel="noopener">工程方法</a> 得以改善和解决。</p>
+<p>工程师最关键和独特的特点是，发现、理解并结合实际的局限，来达到满意的结果。</p>
+<p>后来又经过几代人的研究和实践，不断丰富形成了<a href="https://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B" target="_blank" rel="noopener">软件工程</a>这一学科。</p>
+<p><br/></p>
+<p>所以，<a href="https://zh.wikipedia.org/zh-hans/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88" target="_blank" rel="noopener">软件工程师</a>这个职业自诞生一来，</p>
+<p>就是为了解决上述软件问题的，包括但并不限于软件功能的实现。</p>
+<p><br/></p>
+<p>这是因为要实现一块功能往往是比较容易的，但对整个软件开发活动进行管控却很难。</p>
+<p>我们需要关注项目、产品、质量、人员 等一系列因素，</p>
+<p>才能结合实际情况达成满意的结果。</p>
+<p><br/></p>
+<p>那么现在为什么会有专门的 “工程化” 这个说法出现呢？</p>
+<p><br/></p>
+<p>这是因为软件工程师出现后，软件行业经历了飞跃发展，人才涌入促进了社会化分工。</p>
+<p>大家会考虑如何进行资源重组，能够实现更高的产能。</p>
+<p>此外软件领域内部的知识量也越来越大，分治才能解耦进一步提高生产力。</p>
+<p><br/></p>
+<p>在这种趋势之下，软件工程师被划分成了很多不同的角色，</p>
+<p>现在前端、后端、数据库、算法 不同角色的划分只是社会化分工阶段的一次快照，</p>
+<p>以后这些角色还会不断的调整。</p>
+<h3 id="群体">群体</h3>
+<p>以上是前些年的事情，最近市场环境又出现了新的变化，</p>
+<p>软件工程师的人数进一步扩增，甚至已经变成了不小的一个社会性的群体。</p>
+<p>这一群体的出现，会带来如下这些影响，</p>
+<ul>
+<li><p>软件工程师人数增多，逐渐会产生一些社会学效应。比如 996、内卷 很大程度都是被这一群体带动起来的</p></li>
+<li><p>这一群体具有一定的相似性，会有专门的为软件工程师提供服务的产品出现，不论是生活上还是工作上</p></li>
+<li><p>一个公司有成百上千名软件工程师的情况已不再罕见，如何解决大规模软件工程师团队的合作和效率问题，关注的人会越来越多</p></li>
+</ul>
+<p><br/></p>
+<p>软件危机引发了软件工程，软件工程师的扩增又会引发了新一轮的软件革命。</p>
+<p><br/></p>
+<p>很多软件工程师或组织，对软件项目的理解还很原始，</p>
+<p>或者说 “工程化” 问题还远远没有被解决。</p>
+<p>有多少人仍深陷于延期、需求变更的泥沼中，</p>
+<p>还有多少组织深陷于技术债务、基建不稳的困境中。</p>
+<p><br/></p>
+<p>这其实是因为大家一开始就没有用工程方法来执行，</p>
+<p>组织内部又缺少对工程理解比较深入的人员。</p>
+<h3 id="工程化">工程化</h3>
+<p>有人可能想说，不是有《软件工程》这门课程么？</p>
+<p>为什么说大家对工程的理解还不够深入呢？</p>
+<p><br/></p>
+<p>这是因为课程 和 实际项目 相距甚远，</p>
+<p>课程不会说 软件项目的开发过程是按交付日期倒排的，</p>
+<p>也不会说 在截止日期之前变更需求应该如何拒绝，</p>
+<p>更不会说 软件项目中遇到的大部分风险点其实出现在团队对外沟通的边界上。</p>
+<p><br/></p>
+<p>这时候就会需要有一些人，既了解软件开发的整个过程，以便从中识别效率瓶颈；</p>
+<p>又能洞悉人性，在各种利益纠纷中找到共赢点；</p>
+<p>还要对产品定位、项目节奏有牢固的把控。</p>
+<p><br/></p>
+<p>只有这样才能安全的摆脱 “软件危机”，实现整个组织的 “工程化”。</p>
+<h3 id="小结">小结</h3>
+<p>“工程化” 其实并不仅限于技术这么简单，更多则是 “如何做好一个项目” 的推广和总结。</p>
+<p>软件工程师利用各种手段解除 “软件危机”，过程中所形成的方法才是 “工程化” 方法。</p>
+<p><br/></p>
+<p>做一个脚手架、搭建 CI/CD 系统、做组件库，我认为这些说法不够完整，</p>
+<p>它们只是软件项目中的某一些关注点罢了，更核心的要解决的问题可能要复杂得多。</p>
+<p><br/></p>
+<blockquote>
+<p>松下问童子，言师采药去。</p>
+</blockquote>
+<blockquote>
+<p>只在此山中，云深不知处。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/02/09/log/" rel="next" title="日志·工作模式">
+                <i class="fa fa-chevron-left"></i> 日志·工作模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/03/04/systematic-thinking/" rel="prev" title="系统化思维过程">
+                系统化思维过程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#工程"><span class="nav-number">1.</span> <span class="nav-text">工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#群体"><span class="nav-number">2.</span> <span class="nav-text">群体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工程化"><span class="nav-number">3.</span> <span class="nav-text">工程化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

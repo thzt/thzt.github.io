@@ -1,0 +1,871 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="做软件，除了编程还有什么呀？  请不要紧张，这并不是一个数学问题。 但是却很值得深思。  我们犯下了很多错误，就是因为没有想明白这个问题。 我们自以为是，结果总是捉襟见肘，也是因为小看了这个问题。 我们效率低下，沟通困难，还是因为忽略了这个问题。  真的这么重要吗？ 是的，且听我慢慢道来。  不能有效解决问题的软件不是好软件 你可能遇到过这种情况。 你想下载一个编辑器，结果广告太多，居然下载了一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件 - 编程 &#x3D; ？">
+<meta property="og:url" content="https://thzt.github.io/2014/12/07/project/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="做软件，除了编程还有什么呀？  请不要紧张，这并不是一个数学问题。 但是却很值得深思。  我们犯下了很多错误，就是因为没有想明白这个问题。 我们自以为是，结果总是捉襟见肘，也是因为小看了这个问题。 我们效率低下，沟通困难，还是因为忽略了这个问题。  真的这么重要吗？ 是的，且听我慢慢道来。  不能有效解决问题的软件不是好软件 你可能遇到过这种情况。 你想下载一个编辑器，结果广告太多，居然下载了一个">
+<meta property="article:published_time" content="2014-12-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.905Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2014/12/07/project/"/>
+
+
+
+
+
+  <title>软件 - 编程 = ？ | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2014/12/07/project/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件 - 编程 = ？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-07T00:00:00+08:00">
+                2014-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Software/" itemprop="url" rel="index">
+                    <span itemprop="name">Software</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>做软件，除了编程还有什么呀？</p>
+<p><br/></p>
+<p>请不要紧张，这并不是一个数学问题。</p>
+<p>但是却很值得深思。</p>
+<p><br/></p>
+<p>我们犯下了很多错误，就是因为没有想明白这个问题。</p>
+<p>我们自以为是，结果总是捉襟见肘，也是因为小看了这个问题。</p>
+<p>我们效率低下，沟通困难，还是因为忽略了这个问题。</p>
+<p><br/></p>
+<p>真的这么重要吗？</p>
+<p>是的，且听我慢慢道来。</p>
+<p><br/></p>
+<h2 id="不能有效解决问题的软件不是好软件"><strong>不能有效解决问题的软件不是好软件</strong></h2>
+<p>你可能遇到过这种情况。</p>
+<p>你想下载一个编辑器，结果广告太多，居然下载了一个播放器。</p>
+<p>那么，你是凑合用呢，还是继续找编辑器呢？</p>
+<p><br/></p>
+<p>很显然，播放器是不能做编辑的。你需要的是一个可用的编辑器。</p>
+<p>那么是因为播放器的代码写的不好吗？</p>
+<p>谁还管这个呀。</p>
+<p><br/></p>
+<p>这道理大家都明白。</p>
+<p>所以，你在给客户的说软件功能的时候，敷衍是没有任何作用的。</p>
+<p>客户需要一个编辑器，你说你的软件能解码各种格式的视频也是没有用的。</p>
+<p><br/></p>
+<p>因此，解决客户的问题，才是软件得以存在的原因，软件才能实现价值。</p>
+<p><br/></p>
+<p>确定客户想解决什么问题，是编码之外的事情。</p>
+<p>而且弄错了就会导致整个软件项目南辕北辙。</p>
+<p><br/></p>
+<p>确定客户问题的过程叫做<a href="http://zh.wikipedia.org/wiki/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90" target="_blank" rel="noopener">需求分析</a>。</p>
+<p>客户是想要一匹更快的马，还是想行动更快捷。决定了你是去找千里马，还是要发明汽车。</p>
+<p><br/></p>
+<p>不重视需求的项目团队，会遭遇无休止的返工。</p>
+<p>直到某一天撞大运，碰巧满足了客户的需求为止。</p>
+<p><br/></p>
+<h2 id="需求在变化软件在演化"><strong>需求在变化，软件在演化</strong></h2>
+<p>软件，就像一只小动物一样，它是活的。</p>
+<p>只要软件还在被人使用，它就在不断的演化。</p>
+<p>因此，我们不要对一切相关的事物的意外变化感到惊讶。</p>
+<p><br/></p>
+<p>甚至，我们会主动促进这种演化。</p>
+<p>我们要<a href="http://baike.baidu.com/view/6818418.htm" target="_blank" rel="noopener">持续交付</a>，加速运转。</p>
+<p>反馈是进化的源泉。</p>
+<p><br/></p>
+<p>最近刮来一阵很酷的龙卷风，叫做<a href="http://zh.wikipedia.org/wiki/%E6%95%8F%E6%8D%B7%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91" target="_blank" rel="noopener">敏捷开发</a>。</p>
+<p>其中就有这种思想。</p>
+<p><br/></p>
+<h2 id="如果说软件是一个产品那么编码只是产品的生产环节"><strong>如果说软件是一个产品，那么编码只是产品的生产环节</strong></h2>
+<p>正如生产在工厂中的地位一样。</p>
+<p>与生产相关的产品设计，产线控制，质量管理，甚至产品说明书，都是不可缺少的。</p>
+<p><br/></p>
+<p>产品设计相当于架构设计和程序设计。</p>
+<p>好的设计产生好的产品。</p>
+<p>不幸的是，软件在演化过程中，这些设计难以保持不变。</p>
+<p>而幸运的是，我们提前知道了这些。</p>
+<p><br/></p>
+<p>所以，一开始就要面向变化进行设计。</p>
+<p><br/></p>
+<p>软件不是组装起来的，而是逐渐丰富起来的。</p>
+<p>因此，产线控制就是要控制软件每时每刻的发展情况。</p>
+<p><br/></p>
+<p>这叫做<a href="http://zh.wikipedia.org/wiki/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6" target="_blank" rel="noopener">版本控制</a>。</p>
+<p>你能拿到任何时刻的软件版本，降低了调整和修复的成本。</p>
+<p><br/></p>
+<p>代码质量这是一个很大的话题，后面再说吧。</p>
+<p><br/></p>
+<p>再就是产品说明书了，简称文档。</p>
+<p>这是最容易被人忽略的。</p>
+<p>我们看到字典也没有说明书，但并不会感到奇怪。</p>
+<p>可能是因为字典是文字，说明书也是文字吧。</p>
+<p><br/></p>
+<p>代码是文字，就很难想到给它写文字的说明书了。</p>
+<p>我们会想，需要看说明的话，读源代码不行吗？</p>
+<p><br/></p>
+<p>然而，软件的使用者是不会去读源代码的。</p>
+<p>或者说，读源代码并不会实现软件的价值。</p>
+<p>因此，没有说明书的产品是不友好的，甚至可以说是功能不全的。</p>
+<p>并且，没准哪天，你还可能<a href="http://blog.sciencenet.cn/blog-455307-346584.html" target="_blank" rel="noopener">吃自己的狗粮</a>呀。</p>
+<p><br/></p>
+<h2 id="不直接用二进制进行编码而是用编程语言就是要促使你写出人能读懂的代码"><strong>不直接用二进制进行编码，而是用编程语言，就是要促使你写出人能读懂的代码</strong></h2>
+<p>对于发展中的事物，就要用发展的眼光看待。</p>
+<p>如果你没办法预测未来，那就尽量避免假设。</p>
+<p><br/></p>
+<p>例如，不要假设你的代码只有你自己阅读。</p>
+<p>想象下一个读你代码的人，脾气暴躁，体壮如牛。</p>
+<p><br/></p>
+<p>例如，不要假设只有人会去读你的代码。</p>
+<p>想象各种分析工具在你的代码上踱来踱去。</p>
+<p><br/></p>
+<p>发展中的东西控制质量和品质很困难，一不小心，就越来越烂。</p>
+<p>因为孤立系统的<a href="http://baike.baidu.com/subview/936/14415075.htm" target="_blank" rel="noopener">熵</a>是<a href="http://baike.baidu.com/view/354435.htm" target="_blank" rel="noopener">不减少</a>的。</p>
+<p><br/></p>
+<p>怎样才能控制熵增呢？</p>
+<p>或者说，怎样才能保持代码的优雅呢？</p>
+<p>那就要及时调整，持续<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84" target="_blank" rel="noopener">重构</a>。</p>
+<p><br/></p>
+<p>为了保持干净，要经常打扫房间。</p>
+<p>不要总是让别人替你打扫。</p>
+<p><br/></p>
+<p>另一方面，同时让更多的人保持安静，是很困难的。</p>
+<p>软件项目也是一样，让更多的人代码风格一致，也是很困难的。</p>
+<p><br/></p>
+<p>所以，要想改善代码质量，就要限制团队的规模。</p>
+<p>给编码设置权限，划分功能，每个功能只让部分人参与编码。</p>
+<p>参与的人越少，就越有希望减小噪音。</p>
+<p><br/></p>
+<p>如果有人不文明，随地大小便。</p>
+<p>那就别留情面，把它赶出去。</p>
+<p>就如同它在你家卧室方便一样。</p>
+<p><br/></p>
+<h2 id="你容易低估软件的成本因为你觉得软件无非就是编程而已"><strong>你容易低估软件的成本，因为你觉得软件无非就是编程而已</strong></h2>
+<p>通过上面的分析，编程相对于软件，真是小巫见大巫了。</p>
+<p>这就要求我们计算软件成本时，不要只考虑到编码的成本。</p>
+<p><br/></p>
+<p>否则，你就是在执行一项不可能完成的任务。</p>
+<p><br/></p>
+<p>如果人们一直在埋头编码，无暇顾及其他时，那就有问题了。</p>
+<p>将要大祸临头了。</p>
+<p>因为很多该做的重要事情一定没有人在做。</p>
+<p><br/></p>
+<p>程序员的价值，体现在他能做出多好的软件，而不是他能写多少坨代码。</p>
+<p>更多的代码意味着阅读和维护成本更高。</p>
+<p>代码产量少的程序员，不一定是能力差的程序员。</p>
+<p><br/></p>
+<p>沟通也是需要成本的，不是免费的午餐。</p>
+<p>多一个人，他就要和其余每个人进行沟通。</p>
+<p><a href="http://zh.wikipedia.org/wiki/%E4%BA%BA%E6%9C%88%E7%A5%9E%E8%AF%9D" target="_blank" rel="noopener">向一个进度落后的项目中添加人手，只会使项目更落后</a>，就是这个道理。</p>
+<p><br/></p>
+<p>控制软件项目成本就像摆放多米诺骨牌一样不稳定。</p>
+<p>任何一个环节出错，都会毁掉它。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>以上这些讨论，也并不全面。</p>
+<p>把所有这些提到的和未提到的汇总起来，就构成了<a href="http://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B" target="_blank" rel="noopener">软件工程</a>。</p>
+<p><br/></p>
+<p>即使你会写代码，也不一定懂得写软件。</p>
+<p>软件项目之所以步履维艰，就是总有一些人自以为是。</p>
+<p>害人害己。</p>
+<p><br/></p>
+<p>不过，也没事。</p>
+<p>孔子云，<a href="http://baike.baidu.com/view/1695989.htm" target="_blank" rel="noopener">人不知而不愠，不亦君子乎</a>。</p>
+<p><br/></p>
+<p>如果说软件项目有<a href="http://zh.wikipedia.org/wiki/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5" target="_blank" rel="noopener">最佳实践</a>的话。</p>
+<p>那就是尊重那些具有工程思想的人吧。</p>
+<p>因为说到底，产品的竞争，最终还是人的竞争。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/12/06/lisper/" rel="next" title="在Lisp的光环之下">
+                <i class="fa fa-chevron-left"></i> 在Lisp的光环之下
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/12/14/improvement/" rel="prev" title="怎样学习">
+                怎样学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#不能有效解决问题的软件不是好软件"><span class="nav-number">1.</span> <span class="nav-text">不能有效解决问题的软件不是好软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需求在变化软件在演化"><span class="nav-number">2.</span> <span class="nav-text">需求在变化，软件在演化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果说软件是一个产品那么编码只是产品的生产环节"><span class="nav-number">3.</span> <span class="nav-text">如果说软件是一个产品，那么编码只是产品的生产环节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不直接用二进制进行编码而是用编程语言就是要促使你写出人能读懂的代码"><span class="nav-number">4.</span> <span class="nav-text">不直接用二进制进行编码，而是用编程语言，就是要促使你写出人能读懂的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你容易低估软件的成本因为你觉得软件无非就是编程而已"><span class="nav-number">5.</span> <span class="nav-text">你容易低估软件的成本，因为你觉得软件无非就是编程而已</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

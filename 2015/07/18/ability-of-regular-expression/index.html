@@ -1,0 +1,953 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="实际项目中， 有很多需要处理字符串的场景， 判断用户输入的文本是否合法， 从一段文本中提取一些信息， 等等。  正则表达式， 简直是神兵利器， 一般的问题，都可以轻易解决。  然而， 它也不是万能的， 有着自身的能力范围。  例如， 我们无法用正则表达式处理JSON， 无法用正则表达式分析HTML， 甚至无法从一段代码中把嵌套注释提取出来。  是不是我们写的不好， 有没有精巧的写法， 来达到上述目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式的能力范围">
+<meta property="og:url" content="https://thzt.github.io/2015/07/18/ability-of-regular-expression/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="实际项目中， 有很多需要处理字符串的场景， 判断用户输入的文本是否合法， 从一段文本中提取一些信息， 等等。  正则表达式， 简直是神兵利器， 一般的问题，都可以轻易解决。  然而， 它也不是万能的， 有着自身的能力范围。  例如， 我们无法用正则表达式处理JSON， 无法用正则表达式分析HTML， 甚至无法从一段代码中把嵌套注释提取出来。  是不是我们写的不好， 有没有精巧的写法， 来达到上述目">
+<meta property="article:published_time" content="2015-07-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.916Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2015/07/18/ability-of-regular-expression/"/>
+
+
+
+
+
+  <title>正则表达式的能力范围 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/07/18/ability-of-regular-expression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">正则表达式的能力范围</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-18T00:00:00+08:00">
+                2015-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Software/" itemprop="url" rel="index">
+                    <span itemprop="name">Software</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>实际项目中，</p>
+<p>有很多需要<strong>处理字符串</strong>的场景，</p>
+<p>判断用户输入的文本是否合法，</p>
+<p>从一段文本中提取一些信息，</p>
+<p>等等。</p>
+<p><br/></p>
+<p>正则表达式，</p>
+<p>简直是神兵利器，</p>
+<p>一般的问题，都可以轻易解决。</p>
+<p><br/></p>
+<p>然而，</p>
+<p><strong>它也不是万能的</strong>，</p>
+<p>有着自身的能力范围。</p>
+<p><br/></p>
+<p>例如，</p>
+<p>我们无法用正则表达式处理JSON，</p>
+<p>无法用正则表达式分析HTML，</p>
+<p>甚至无法从一段代码中把嵌套注释提取出来。</p>
+<p><br/></p>
+<p>是不是我们写的不好，</p>
+<p>有没有精巧的写法，</p>
+<p>来达到上述目的呢？</p>
+<p><br/></p>
+<p>一般而言，</p>
+<p>要证明可以，只需要一个例子就行，</p>
+<p><strong>而要证明不可以，就很难了</strong>。</p>
+<p><br/></p>
+<p>所以，</p>
+<p>我们要好好学习一下<strong>理论基础</strong>，</p>
+<p>看一下正则表达式的真面目。</p>
+<p><br/></p>
+<h2 id="形式语言"><strong>形式语言</strong></h2>
+<p>日常生活中，</p>
+<p>也有这样的认识，</p>
+<p>我们所了解的汉字是<strong>有限的</strong>，</p>
+<p>但是我们能说的话，却是<strong>无限的</strong>。</p>
+<p><br/></p>
+<p>因为，至少我们可以说出任意长度的汉字序列。</p>
+<p><br/></p>
+<p>程序语言也是如此。</p>
+<p><br/></p>
+<p>有人说编程，不就是输入A到Z吗，</p>
+<p>指的就是这个编程语言的“字母表”，</p>
+<p>字母表所包含的字母，是有限的，</p>
+<p>但是可以写出无限多个“句子”。</p>
+<p><br/></p>
+<p>“语言”，正是这些“句子”的集合。</p>
+<p><br/></p>
+<p>事实上，</p>
+<p>以上简短的描述中，</p>
+<p>包含了很深刻的思想。</p>
+<p><br/></p>
+<p>当初，为了研究语言的性质，</p>
+<p>人们从两个角度出发，</p>
+<p>一个是从语言的识别角度来看，</p>
+<p>有一套<strong>自动机理论</strong>。</p>
+<p><br/></p>
+<p>另一个是从语言的生成角度来看，</p>
+<p>有乔姆斯基开创的<strong>形式语言理论</strong>。</p>
+<p><br/></p>
+<p>而这两个理论之间，</p>
+<p>又是互相关联的。</p>
+<p><br/></p>
+<p>在形式语言理论中，</p>
+<p>一个形式语言，</p>
+<p>是一个字母表上的某些有限长字符串的集合。</p>
+<p><br/></p>
+<p><strong>这给了我们用有限来描述无限的能力</strong>。</p>
+<p><br/></p>
+<h2 id="文法"><strong>文法</strong></h2>
+<p>为了描述语言的结构，</p>
+<p>John Backus和Peter Naur创造了一种<strong>语言的描述方法</strong>，</p>
+<p>称为BNF（Backus-Naur Form）。</p>
+<p><br/></p>
+<p>expr ::= term {"+" term | "-" term}.</p>
+<p>term ::= factor {"*" factor | "/" factor}.</p>
+<p>factor ::= "(" expr ")".</p>
+<p><br/></p>
+<p>BNF表示中的每一行，称为一个“产生式”，</p>
+<p>::=表示左边的项可以由右边的项来产生。</p>
+<p>其中，用引号括起来的项，称为“终结符”，相当于字面量。</p>
+<p>不用引号括起来的项，称为“非终结符”，它们可以由其他项组成。</p>
+<p><br/></p>
+<p>{...}是约定好了的符号，</p>
+<p>用来表示它包含的项可以出现0次或更多次。</p>
+<p><br/></p>
+<p>常用的还有[...]，</p>
+<p>用来表示，可以出现也可以不出现。</p>
+<p><br/></p>
+<p>以上BNF描述了算术表达式的语法。</p>
+<p>例如：1*(2+3)，可以从exp开始生成出来，</p>
+<p>expr</p>
+<p>=&gt; factor "*" factor</p>
+<p>=&gt; factor "*" "(" expr ")"</p>
+<p>=&gt; factor "*" "(" term "+" term ")"</p>
+<p>=&gt; 1 "*" "(" 2 "+" 3 ")"</p>
+<p><br/></p>
+<p>expr称为“开始符号”。</p>
+<p><br/></p>
+<p>综上，</p>
+<p>一个语言的所有终结符，非终结符，产生式，开始符号，</p>
+<p>构成了这个<strong>语言的文法</strong>。</p>
+<p><br/></p>
+<h2 id="语言的分类"><strong>语言的分类</strong></h2>
+<p>乔姆斯基，根据语言文法产生式的特点，</p>
+<p>把语言分为了4类。</p>
+<p><br/></p>
+<p>不同的文法，能描述不能范围的语言集合。</p>
+<p>虽然它们都是无限集。</p>
+<p><br/></p>
+<p>0型文法，能力最强，可以产生递归可枚举语言。</p>
+<p>1型文法，能力稍弱，可以产生上下文有关语言。</p>
+<p>2型文法，能力次之，可以产生上下文无关语言。</p>
+<p>3型文法，能力最弱，可以产生正则语言。</p>
+<p><br/></p>
+<p>这些文法，</p>
+<p>建立了一个从大到小，互相包含的，</p>
+<p>语言集合的层次关系。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>正则语言，一定是上下文无关语言，</p>
+<p>反之，则不成立。</p>
+<p><br/></p>
+<p>其中，</p>
+<p>2型和3型文法用的最多，有特殊的名字，</p>
+<p>称为，<strong>上下文无关文法</strong>，<strong>正则文法</strong>。</p>
+<p><br/></p>
+<p>我们似乎发现了，</p>
+<p>这里也出现了“正则”两个字，</p>
+<p>难道与正则表达式有关？</p>
+<p><br/></p>
+<p>确实，</p>
+<p>正则表达式，是正则文法的便利写法。</p>
+<p><strong>正则表达式所描述的语言，是正则语言</strong>。</p>
+<p><br/></p>
+<p>而JSON，HTML，包含嵌套注释文本，</p>
+<p>它们都属于<strong>上下文无关语言</strong>，</p>
+<p>正则表达式是无能为力的。</p>
+<p><br/></p>
+<p>那么如何判断语言不是正则语言呢？</p>
+<p>这还需要用到<a href="http://baike.baidu.com/link?url=QF5rQxOWA6OA8NpOrQv3ThcPGZ2FF0Wzu7BWjwnLOtJE4AFgX2IN9pf6FWDVuOxV98GdMGWoHNMal5b61j7h__" target="_blank" rel="noopener">泵引理</a>这个重要工具。</p>
+<p>水深危险。</p>
+<p><br/></p>
+<h2 id="自动机"><strong>自动机</strong></h2>
+<p>自动机，是一种假想的机器，</p>
+<p>常被人提及的是“图灵机”。</p>
+<p>它是各种自动机中运算能力最强的机器。</p>
+<p><br/></p>
+<p>当初为了准确定义什么是“算法”，</p>
+<p>图灵发明了它。</p>
+<p><br/></p>
+<p>图灵机有一条无限长的纸带，</p>
+<p>纸带分成了一个个小方格，每个方格有不同的颜色。</p>
+<p>有一个具有内部状态的机器头在纸带上移来移去。</p>
+<p><br/></p>
+<p>机器头根据自身状态和当前方格的颜色，</p>
+<p>来决定下一步的位置。</p>
+<p><br/></p>
+<p>这么简易的装置，</p>
+<p>居然具有和现代计算机同等的计算能力。</p>
+<p>实际上，现代计算机就是从这个思想逐渐演化而来的。</p>
+<p><br/></p>
+<p>自动机，也可以用来识别语言。</p>
+<p>而且，与形式语言还有着<strong>优美的对应关系</strong>。</p>
+<p><br/></p>
+<p>图灵机，能识别0型文法所生成的语言。</p>
+<p>为图灵机加上限制，<strong>下推自动机</strong>，识别上下文无关语言，</p>
+<p><strong>有穷自动机</strong>，识别正则语言。</p>
+<p><br/></p>
+<p>在程序语言的编译器设计中，</p>
+<p>这些理论是非常重要的。</p>
+<p><br/></p>
+<p>我们通过正则文法，构建有穷自动机，</p>
+<p>对字符流进行<strong>分词</strong>（tokenize）。</p>
+<p>通过上下文无关文法，构建下推自动机，</p>
+<p>对词汇流进行<strong>解析</strong>（parse）。</p>
+<p><br/></p>
+<h2 id="计算模型"><strong>计算模型</strong></h2>
+<p><strong>形式语言</strong>和<strong>自动机</strong>，</p>
+<p>可以看做是两种<strong>计算模型</strong>，</p>
+<p>它们从不同的角度描述了同一个问题。</p>
+<p><br/></p>
+<p>其他的计算模型，还有很多。</p>
+<p><br/></p>
+<p><strong>lambda演算</strong>就是一个，</p>
+<p>它是一个符号化的形式系统，</p>
+<p>用来研究函数及其函数的调用。</p>
+<p><br/></p>
+<p><strong>递归函数论</strong>，又是一个，</p>
+<p>它从递归的角度，</p>
+<p>为可计算性划分了界限。</p>
+<p><br/></p>
+<p><strong>命题逻辑</strong>，也是，</p>
+<p>它是逻辑系统的演算规则，</p>
+<p>用来研究推理过程。</p>
+<p><br/></p>
+<p>然而，这些计算模型的计算能力，</p>
+<p>都等价于图灵机。</p>
+<p><br/></p>
+<p>这一结论称为，Church-Turing论题。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>各种计算模型，虽然在能力上是相同的，</p>
+<p>但是它们<strong>各有所长</strong>，</p>
+<p>于是被用到了形形色色的地方。</p>
+<p><br/></p>
+<p>例如，</p>
+<p>形式语言，可以用来研究语言的结构，</p>
+<p>自动机，可以用来识别语言。</p>
+<p>lambda演算，可以用来研究语言的操作语义。</p>
+<p>递归函数论，可以用来研究语言的指称语义。</p>
+<p>命题逻辑，可以用来研究语言的类型系统。</p>
+<p><br/></p>
+<p>编程世界，</p>
+<p>原来这么好玩。</p>
+<p><br/></p>
+<p>其实编程，不就是输入A到Z吗？</p>
+<p><br/></p>
+<p>参考：</p>
+<p><a href="http://book.douban.com/subject/1709302/" target="_blank" rel="noopener">数学.计算.逻辑</a></p>
+<p><a href="http://book.douban.com/subject/2179488/" target="_blank" rel="noopener">形式语言与自动机理论</a></p>
+<p><a href="http://book.douban.com/subject/1729578/" target="_blank" rel="noopener">A Mathematical Introduction to Logic</a></p>
+<p><a href="http://book.douban.com/subject/10482195/" target="_blank" rel="noopener">Language Implementation Patterns</a></p>
+<p><a href="http://book.douban.com/subject/20436488/" target="_blank" rel="noopener">编译器设计</a></p>
+<p><a href="http://book.douban.com/subject/10779604/" target="_blank" rel="noopener">图灵的秘密</a></p>
+<p><a href="http://book.douban.com/subject/4323391/" target="_blank" rel="noopener">Lambda-Calculus and Combinators</a></p>
+<p><a href="http://book.douban.com/subject/1318672/" target="_blank" rel="noopener">Types and programming languages</a></p>
+<p><a href="http://book.douban.com/subject/1291204/" target="_blank" rel="noopener">哥德尔.艾舍尔.巴赫_集异璧之大成</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/12/lazy-evaluation/" rel="next" title="惰性求值">
+                <i class="fa fa-chevron-left"></i> 惰性求值
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/25/proper-tail-recursion/" rel="prev" title="尾递归优化">
+                尾递归优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#形式语言"><span class="nav-number">1.</span> <span class="nav-text">形式语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文法"><span class="nav-number">2.</span> <span class="nav-text">文法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语言的分类"><span class="nav-number">3.</span> <span class="nav-text">语言的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动机"><span class="nav-number">4.</span> <span class="nav-text">自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算模型"><span class="nav-number">5.</span> <span class="nav-text">计算模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

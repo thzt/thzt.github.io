@@ -1,0 +1,881 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="回顾 为了解释简单类型化演算中项， 我们介绍了代数， 用代数中的载体来解释基本类型， 用载体上的函数集来解释类型为的所有函数。  但只是做这些对应关系，还是不够的， 我们还得证明，这样的解释是“足够多的”， 以保证每一个合法项的解释，都在这个代数中。  尤其是使用集合上的函数，来解释具有不动点的项时， 的条件应当适当放宽一些，它不一定恰好是函数集。 为此我们需要更抽象的，从语义角度定义函数是如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="语言背后的代数学（六）：Henkin模型">
+<meta property="og:url" content="https://thzt.github.io/2018/02/04/semantics-6/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="回顾 为了解释简单类型化演算中项， 我们介绍了代数， 用代数中的载体来解释基本类型， 用载体上的函数集来解释类型为的所有函数。  但只是做这些对应关系，还是不够的， 我们还得证明，这样的解释是“足够多的”， 以保证每一个合法项的解释，都在这个代数中。  尤其是使用集合上的函数，来解释具有不动点的项时， 的条件应当适当放宽一些，它不一定恰好是函数集。 为此我们需要更抽象的，从语义角度定义函数是如">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-5f7af604e7dc18d6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-506b2f2655924ecf.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-c8757c95811cbd2d.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-edbc7c129e5a928d.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-00c5200af9d0405a.png">
+<meta property="article:published_time" content="2018-02-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.943Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-5f7af604e7dc18d6.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2018/02/04/semantics-6/"/>
+
+
+
+
+
+  <title>语言背后的代数学（六）：Henkin模型 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/04/semantics-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">语言背后的代数学（六）：Henkin模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T00:00:00+08:00">
+                2018-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-5f7af604e7dc18d6.png" /></p>
+<p><br/></p>
+<h3 id="回顾">回顾</h3>
+<p>为了解释简单类型化演算<span data-katex="\lambda^\to"></span>中项，</p>
+<p>我们介绍了<span data-katex="\Sigma"></span>代数，</p>
+<p>用<span data-katex="\Sigma"></span>代数中的载体<span data-katex="A^\sigma"></span>来解释基本类型<span data-katex="\sigma"></span>，</p>
+<p>用载体上的函数集<span data-katex="A^{\sigma\to\tau}=\{f|f:A^\sigma\to A^\tau\}"></span>来解释类型为<span data-katex="\sigma\to\tau"></span>的所有函数。</p>
+<p><br/></p>
+<p>但只是做这些对应关系，还是不够的，</p>
+<p>我们还得证明，这样的解释是“足够多的”，</p>
+<p>以保证每一个合法<span data-katex="\lambda^\to"></span>项的解释，都在这个<span data-katex="\Sigma"></span>代数中。</p>
+<p><br/></p>
+<p>尤其是使用集合上的函数，来解释具有不动点的<span data-katex="\lambda"></span>项时，</p>
+<p><span data-katex="A^{\sigma\to\tau}"></span>的条件应当适当放宽一些，它不一定恰好是函数集<span data-katex="\{f|f:A^\sigma\to A^\tau\}"></span>。</p>
+<p>为此我们需要更抽象的，从语义角度定义函数是如何作用到它的参数上的。</p>
+<p><br/></p>
+<h3 id="作用结构">1. 作用结构</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-506b2f2655924ecf.png" /></p>
+<p><br/></p>
+<p>从形式系统的角度来看，<span data-katex="\lambda"></span>项的“应用”，是推导规则的一部分，</p>
+<p>包括类型推导规则，<span data-katex="\frac{\Gamma\vdash t_1:T_1\to T_2~~~~\Gamma\vdash t_2:T_1}{\Gamma\vdash t_1~t_2:T_2}"></span>，</p>
+<p>还包括求值规则，<span data-katex="(\lambda x:T.t)~v\to [x\mapsto v]t"></span>。</p>
+<p><br/></p>
+<p>项的“应用”，我们可以定义为<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong>（applicative structure）。</p>
+<p><br/></p>
+<p>假设<span data-katex="\lambda x:\sigma.t"></span>是一个类型为<span data-katex="\sigma\to\tau"></span>的<span data-katex="\lambda"></span>项，</p>
+<p>我们可以把它“应用于”类型为<span data-katex="\sigma"></span>的项<span data-katex="v:\sigma"></span>，</p>
+<p>我们有，<span data-katex="(\lambda x:\sigma.t)~v=([x\mapsto v]t):\tau"></span>。</p>
+<p><br/></p>
+<p>因此，<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong><span data-katex="App^{\sigma,\tau}"></span>，</p>
+<p>指的是这样的一个映射，<span data-katex="App^{\sigma,\tau}:A^{\sigma\to\tau}\to A^\sigma \to A^\tau"></span>，</p>
+<p>它将集合<span data-katex="A^{\sigma\to\tau}"></span>中的一个函数，以及集合<span data-katex="A^\sigma"></span>中的一个元素，</p>
+<p>映射成集合<span data-katex="A^\tau"></span>中的一个元素。</p>
+<p><br/></p>
+<p>一个有效的作用结构，必须具有<strong>外延性条件</strong>（extensional），</p>
+<p>即，<span data-katex="\forall f,g\in A^\sigma\to\tau"></span>，</p>
+<p>如果对于任意的<span data-katex="d\in A^\sigma"></span>，都有<span data-katex="App~f~d=App~g~d"></span>，则必有<span data-katex="f=g"></span>。</p>
+<p><br/></p>
+<p>它指出集合<span data-katex="A^\sigma\to\tau"></span>的两个函数，如果在<span data-katex="App^{\sigma,\tau}"></span>下的作用效果相同，</p>
+<p>那么它们必须是同一个函数。</p>
+<p><br/></p>
+<h3 id="项的唯一解释">2. 项的唯一解释</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-c8757c95811cbd2d.png" /></p>
+<p><br/></p>
+<p>有了满足外延性条件的作用结构之后，</p>
+<p>我们就可以归纳的定义出<strong>含义函数</strong>（meaning function）<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>了，</p>
+<p><br/></p>
+<p>（1）<span data-katex="\mathscr{A}[\![\varnothing\vdash c:\sigma]\!]\eta=Const(c)"></span></p>
+<p>（2）<span data-katex="\mathscr{A}[\![x:\sigma\vdash x:\sigma]\!]\eta=\eta(x)"></span></p>
+<p>（3）<span data-katex="\mathscr{A}[\![\Gamma,x:\sigma\vdash M:\tau]\!]\eta=\mathscr{A}[\![\Gamma\vdash M:\tau]\!]\eta"></span></p>
+<p>（4）<span data-katex="\mathscr{A}[\![\Gamma\vdash MN:\tau]\!]\eta=App^{\sigma,\tau}~\mathscr{A}[\![\Gamma\vdash M:\sigma\to\tau]\!]\eta~\mathscr{A}[\![\Gamma\vdash N:\sigma]\!]\eta"></span></p>
+<p>（5）<span data-katex="\mathscr{A}[\![\Gamma\vdash\lambda x:\sigma.M:\sigma\to\tau]\!]\eta="></span>，存在唯一的<span data-katex="f\in A^{\sigma\to\tau}"></span>，使得，</p>
+<p><span data-katex="\forall d\in A^\sigma"></span>，<span data-katex="App~f~d=\mathscr{A}[\![\Gamma,x:\sigma\vdash M:\tau]\!]\eta[x\mapsto d]"></span></p>
+<p><br/></p>
+<p>其中，<span data-katex="\eta"></span>是满足指派<span data-katex="\Gamma"></span>的环境，</p>
+<p><span data-katex="Const"></span>是一个映射，将项常量映射到所有<span data-katex="A^\sigma"></span>并集的元素上，</p>
+<p>使得，如果<span data-katex="c:\sigma"></span>，则<span data-katex="Const(c)\in A^\sigma"></span>。</p>
+<p><br/></p>
+<p>由于以上几个等式覆盖了所有的<span data-katex="\lambda"></span>项，因此这样定义的含义函数是完全的。</p>
+<p>并且由于它为每一个<span data-katex="\lambda"></span>项都指定了确定的语义，因此它给出的解释方式也是唯一的。</p>
+<p>它称为<strong>Henkin模型</strong>。</p>
+<p><br/></p>
+<p>Henkin模型是可靠的，</p>
+<p>设<span data-katex="\mathscr{A}"></span>是<span data-katex="\lambda^\to"></span>的任意Henkin模型，</p>
+<p><span data-katex="\Gamma\vdash M:\sigma"></span>是可证的，<span data-katex="\eta"></span>是一个满足指派<span data-katex="\Gamma"></span>的环境，</p>
+<p>则<span data-katex="\mathscr{A}[\![\Gamma\vdash M:\sigma]\!]\eta\in A^\sigma"></span>。</p>
+<p><br/></p>
+<p>即，如果一个类型断言是可证的，则它在语义上也成立。</p>
+<p>（关于完全性的讨论，略）</p>
+<p><br/></p>
+<h3 id="例子">3. 例子</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-edbc7c129e5a928d.png" /></p>
+<p><br/></p>
+<p>我们可以对具有单一类型<span data-katex="nat"></span>的<span data-katex="\lambda"></span>演算，定义它的Henkin模型，</p>
+<p>令<span data-katex="A^{nat}"></span>为自然数集，<span data-katex="A^{\sigma\to\tau}"></span>为所有从<span data-katex="A^\sigma"></span>到<span data-katex="A^\tau"></span>的函数集合，</p>
+<p>这称为<strong>自然数上的完全集合论函数体系</strong>，</p>
+<p>（full set-theoretic function hierarchy over the natural number）。</p>
+<p><br/></p>
+<p>我们通过<span data-katex="App~f~x=f(x)"></span>，把函数<span data-katex="f\in A^{\sigma\to\tau}"></span>，作用到参数<span data-katex="x\in A^\sigma"></span>上。</p>
+<p>下面我们得出<span data-katex="\lambda x:nat\to nat.\lambda y:nat.xy"></span>的语义。</p>
+<p><br/></p>
+<p>由于该项是封闭项，选择什么样的环境<span data-katex="\eta"></span>都是无关紧要的。</p>
+<p>根据上文“含义函数”<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>的归纳定义，我们有，</p>
+<p><span data-katex="\mathscr{A}[\![\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy]\!]\eta="></span></p>
+<p>唯一的<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>，使得，</p>
+<p><span data-katex="\forall h\in A^{nat\to nat}"></span>，<span data-katex="App~f~h=\mathscr{A}[\![x:nat\to nat\vdash\lambda y:nat.xy]\!]\eta[x\mapsto h]"></span></p>
+<p><br/></p>
+<p>然后我们再来看下，<span data-katex="\mathscr{A}[\![x:nat\to nat\vdash\lambda y:nat.xy]\!]\eta[x\mapsto h]="></span>，</p>
+<p>唯一的<span data-katex="g\in A^{nat\to nat}"></span>，使得，</p>
+<p><span data-katex="\forall n\in A^{nat}"></span>，<span data-katex="App~g~n=[\![x:nat\to nat,y:nat\vdash xy]\!]\eta[x\mapsto h][y\mapsto n]"></span></p>
+<p>即，唯一的<span data-katex="g\in A^{nat\to nat}"></span>，使得，<span data-katex="\forall n\in A^{nat}"></span>，<span data-katex="App~g~n=App~h~n"></span>。</p>
+<p>那么这个唯一的<span data-katex="g\in A^{nat\to nat}"></span>，实际上就是<span data-katex="h"></span>了。</p>
+<p><br/></p>
+<p>其中，<span data-katex="App~g~n=App~h~n"></span>是因为，</p>
+<p><span data-katex="App~g~n=[\![x:nat\to nat,y:nat\vdash xy]\!]\eta[x\mapsto h][y\mapsto n]"></span></p>
+<p><span data-katex="=[\![h:nat\to nat,n:nat\vdash hn]\!]\eta"></span></p>
+<p><span data-katex="=App~h~n"></span></p>
+<p><br/></p>
+<p>综合以上两个步骤，<span data-katex="\mathscr{A}[\![\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy]\!]\eta="></span>，</p>
+<p>唯一的<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>，使得，</p>
+<p><span data-katex="\forall h\in A^{nat\to nat}"></span>，<span data-katex="App~f~h=h"></span>。</p>
+<p>因此，<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>的语义是一个恒等函数。</p>
+<p><br/></p>
+<p>我们从语义上证明了以下等式，</p>
+<p><span data-katex="\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy=\lambda x:nat\to nat.x"></span>。</p>
+<p><br/></p>
+<h3 id="环境模型条件和组合模型条件">4. 环境模型条件和组合模型条件</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-00c5200af9d0405a.png" /></p>
+<p><br/></p>
+<p>以上定义的作用结构<span data-katex="App^{\sigma,\tau}"></span>称为满足<strong>环境模型条件</strong>（enviroment model condition），</p>
+<p>依赖了环境<span data-katex="\eta"></span>这一附加概念。</p>
+<p>它使得每一个合法的<span data-katex="\lambda"></span>项，都有模型中一个唯一确定的数学对象与之对应。</p>
+<p><br/></p>
+<p>由于<span data-katex="\lambda"></span>项有<span data-katex="\lambda"></span>“抽象”和<span data-katex="\lambda"></span>“应用”双重复杂性，</p>
+<p>所以，建立一个合理的解释也比较麻烦。</p>
+<p>在《<a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型</a>》系列文章中，</p>
+<p>我们介绍过组合子逻辑，我们知道可以将任意的<span data-katex="\lambda"></span>项转换成对应的<span data-katex="CL"></span>项，反之亦然。</p>
+<p><br/></p>
+<p>因此，如果存在模型可以解释所有的<span data-katex="CL"></span>项，那么使用它也就可以解释所有<span data-katex="\lambda"></span>项了。</p>
+<p><span data-katex="CL"></span>项比<span data-katex="\lambda"></span>项更为简洁，它不包含<span data-katex="\lambda"></span>“抽象”，只包含<span data-katex="K"></span>和<span data-katex="S"></span>这两个组合子。</p>
+<p><br/></p>
+<p>类似于<span data-katex="\lambda"></span>项的“应用”，</p>
+<p>对于<span data-katex="K"></span>和<span data-katex="S"></span>的“组合”，我们同样可以定义<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong>。</p>
+<p><br/></p>
+<p>给定<span data-katex="\Sigma"></span>代数，对任意类型<span data-katex="\rho,\sigma,\tau"></span>，如果存在元素<span data-katex="K_{\sigma,\tau}\in A^{\sigma\to(\tau\to\sigma)}"></span>，</p>
+<p><span data-katex="S_{\rho,\sigma,\tau}\in A^{(\rho\to\sigma\to\tau)\to(\rho\to\sigma)\to\rho\tau}"></span>，</p>
+<p>满足下列对合适类型<span data-katex="x,y,z"></span>的等式条件，</p>
+<p><span data-katex="K_{\sigma,\tau}xy=x"></span>，<span data-katex="S_{\rho,\sigma,\tau}xyz=(xz)(yz)"></span>，</p>
+<p>我们就称，该作用结构满足<strong>组合模型条件</strong>（combinatory model condition）。</p>
+<p><br/></p>
+<p>由于所有<span data-katex="CL"></span>项都可以表示成<span data-katex="K"></span>和<span data-katex="S"></span>的“组合”，</p>
+<p>因此，满足组合模型条件的作用结构，可以唯一解释所有<span data-katex="CL"></span>项。</p>
+<p><br/></p>
+<p>可以证明，一个满足外延性条件的作用结构，</p>
+<p>如果它满足环境模型条件，当且仅当它也同样满足组合模型条件。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文介绍了Henkin模型作用结构所满足的条件，环境模型条件和组合模型条件，</p>
+<p>它们是等价的，有了它们我们才能给出<span data-katex="\lambda"></span>项的可靠解释，</p>
+<p>即，任何合法的<span data-katex="\lambda"></span>项都有唯一解释，且在语法上可证的<span data-katex="\lambda"></span>项，在语义上也成立。</p>
+<p><br/></p>
+<p>下文我们开始学习范畴论，为理解笛卡尔闭范畴打好基础。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型（三）：Combinatory logic</a></p>
+<p><a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/03/semantics-5/" rel="next" title="语言背后的代数学（五）：<span data-katex="\Sigma"></span>代数">
+                <i class="fa fa-chevron-left"></i> 语言背后的代数学（五）：<span data-katex="\Sigma"></span>代数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/09/semantics-7/" rel="prev" title="语言背后的代数学（七）：数学结构">
+                语言背后的代数学（七）：数学结构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用结构"><span class="nav-number">2.</span> <span class="nav-text">1. 作用结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项的唯一解释"><span class="nav-number">3.</span> <span class="nav-text">2. 项的唯一解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">4.</span> <span class="nav-text">3. 例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境模型条件和组合模型条件"><span class="nav-number">5.</span> <span class="nav-text">4. 环境模型条件和组合模型条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

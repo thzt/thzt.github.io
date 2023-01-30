@@ -1,0 +1,857 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="自嘲，有时也称为“自黑”， 是指通过轻视、贬损或嘲笑自己，来惩罚自己或自谦的行为。 可以用于释放压力和营造幽默。  自嘲本来并不是一件坏事，必要时可缓解气氛， 也是降低对方期望值的常用方法。  然而，不知道是否巧合，程序猿这个群体与“自嘲”似乎是强相关的， 当受到别人夸赞的时候，他们总是表现得过分自谦。 导致人们真的就相信了他们的说法。  程序猿不擅交际，每天都穿格子衬衫，双肩背包， 秃顶，没有女">
+<meta property="og:type" content="article">
+<meta property="og:title" content="程序猿群体的自嘲之风">
+<meta property="og:url" content="https://thzt.github.io/2019/11/25/self-mocking/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="自嘲，有时也称为“自黑”， 是指通过轻视、贬损或嘲笑自己，来惩罚自己或自谦的行为。 可以用于释放压力和营造幽默。  自嘲本来并不是一件坏事，必要时可缓解气氛， 也是降低对方期望值的常用方法。  然而，不知道是否巧合，程序猿这个群体与“自嘲”似乎是强相关的， 当受到别人夸赞的时候，他们总是表现得过分自谦。 导致人们真的就相信了他们的说法。  程序猿不擅交际，每天都穿格子衬衫，双肩背包， 秃顶，没有女">
+<meta property="article:published_time" content="2019-11-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.959Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2019/11/25/self-mocking/"/>
+
+
+
+
+
+  <title>程序猿群体的自嘲之风 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/11/25/self-mocking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">程序猿群体的自嘲之风</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-25T00:00:00+08:00">
+                2019-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E5%98%B2" target="_blank" rel="noopener">自嘲</a>，有时也称为“自黑”，</p>
+<p>是指通过轻视、贬损或嘲笑自己，来惩罚自己或自谦的行为。</p>
+<p>可以用于释放压力和营造<strong>幽默</strong>。</p>
+<p><br/></p>
+<p>自嘲本来并不是一件坏事，必要时可缓解气氛，</p>
+<p>也是<strong>降低对方期望值</strong>的常用方法。</p>
+<p><br/></p>
+<p>然而，不知道是否巧合，程序猿这个群体与“自嘲”似乎是强相关的，</p>
+<p>当受到别人夸赞的时候，他们总是表现得<strong>过分自谦</strong>。</p>
+<p>导致人们<strong>真的就相信</strong>了他们的说法。</p>
+<p><br/></p>
+<p>程序猿不擅交际，每天都穿格子衬衫，双肩背包，</p>
+<p>秃顶，没有女朋友，情商低，</p>
+<p>天天争论的话题是，什么才是最好的编程语言。</p>
+<p><br/></p>
+<p>程序猿的工作就像搬砖，纯体力活，</p>
+<p>上班就是在拼命码更多的代码，过了35岁就干不动了。</p>
+<p><br/></p>
+<p>以上这些的误解现已<strong>蔚然成风</strong>，甚至影响了某些公司的招聘标准。</p>
+<p>这真是一件<strong>不幸</strong>的事情，挖坑埋自己。</p>
+<h3 id="专业性">专业性</h3>
+<p>有一些工作，看起来<strong>门槛</strong>极低，很容易让人产生“我也行”的<strong>错觉</strong>，</p>
+<p>例如，运动员，教师，厨师，作家，小卖部老板，等等。</p>
+<p>人们并不会觉得跑步，讲课，做饭，写书，卖个东西有多难。</p>
+<p><br/></p>
+<p>其实仔细想想却并非如此，</p>
+<p>大家都能做的，要做到<strong>出类拔萃</strong>会更加困难。</p>
+<p><br/></p>
+<p>就拿<a href="http://www.sport.gov.cn/n16/n300161/n1401202/n1773613/4982068.html" target="_blank" rel="noopener">田径项目</a>来说，</p>
+<p>经常跑步的人，百米成绩大概是 12s，</p>
+<p>一级运动员为 10.93s，国家级运动健将为 10.25s。</p>
+<p><br/></p>
+<p>这三个级别差距有多大呢？</p>
+<p>我们可以<strong>粗略的</strong>计算一下，到达终点时他们三个相距多远。</p>
+<p><br/></p>
+<p>假设人们奔跑的速度都是匀速的，那么，当国家级运动健将跑完百米时，</p>
+<p>一级运动员离终点还有6.22米，普通人离终点还有14.58米！</p>
+<p>而博尔特（世界冠军 9.58s）跑完全程时，普通人距离终点还有 20.17米！！</p>
+<p><br/></p>
+<p>似乎只有这样看，人们才能意识到<strong>差距</strong>。</p>
+<p>不同人做同一件事情，真的会有很大的不同。</p>
+<p><br/></p>
+<p>程序猿（软件工程师）就是在做这样的一份工作。</p>
+<p>看起来人人都会编程，但结果却大相径庭。</p>
+<h3 id="工作内容">工作内容</h3>
+<p>有很多人问过，程序猿每天的工作内容到底是什么？</p>
+<p>每天对着电脑，产出的是代码，难道不是在比<strong>看谁写的多</strong>吗？</p>
+<p><br/></p>
+<p>我想过很多比喻，平时也不太喜欢用类比，</p>
+<p>曾经也向父母解释过自己的工作，</p>
+<p>目前为止我觉得对“做软件”最好的解释是“<strong>多人一起写同一本书</strong>”。</p>
+<p><br/></p>
+<p>“书”就是“软件”，书的“读者”就是软件的“用户”。</p>
+<p>“写书”的过程就是在“编写代码”。</p>
+<p><br/></p>
+<p>有人可能马上会问了，“怎样顺着别人的思路往下写呢？”</p>
+<p>问的非常好，这就是编程工作最大的<strong>难点</strong>了。</p>
+<p><br/></p>
+<p>所以，一个专业程序猿，日常工作的大部分时间都在与人<strong>沟通</strong>，</p>
+<p>确保做的事情能<strong>合起来</strong>，</p>
+<p>还要与人<strong>讨论</strong>，确保不会产生不良影响，或者造成其他的<strong>麻烦</strong>。</p>
+<p><br/></p>
+<p>为什么要关心这些呢？</p>
+<p>这是因为“麻烦”等于“金钱”，所以代码写的多，并不见得是好事。</p>
+<p>程序猿考虑的是，怎么用最小的<strong>成本</strong>，解决<strong>最有价值</strong>的问题。</p>
+<h3 id="个人喜恶">个人喜恶</h3>
+<p>不知道从什么时候开始，“格子衬衫”和“双肩背包”成了程序猿的必备特征，</p>
+<p>甚至有人说，程序猿喜欢在路边的垃圾桶上工作。</p>
+<p>造成这些明显“反智”认识的原因，我想也只能是程序猿群体的<strong>自嘲</strong>了吧。</p>
+<p><br/></p>
+<p>印象中我只有一次类似的“狼狈”经历，</p>
+<p>某天下班坐地铁回家，接到了一个电话，同事要求我“必须当场”把问题解决掉。</p>
+<p>我说我在地铁上，同事说“我不管”。</p>
+<p><br/></p>
+<p>所以，真的是程序猿自己乐意在路边工作么？</p>
+<p>他们真的就喜欢加班到深夜吗？很显然这是<strong>迫不得已</strong>。</p>
+<p>被认为是个人“爱好”真是一件不幸的事情。</p>
+<p><br/></p>
+<p>工作压力在互联网公司更为严重，因为很多系统都是<strong>实时运行</strong>的，</p>
+<p>每分甚至每秒都在有人使用，不能出问题。</p>
+<p>一旦出问题，必须想办法<strong>花最短的时间</strong>解决掉。</p>
+<p><br/></p>
+<p>上下班途中被叫住，晚上睡觉被电话叫起来，是常有的事情。</p>
+<p>并不是程序猿喜欢这样做，是<strong>工作性质</strong>使然。</p>
+<h3 id="经验教训">经验教训</h3>
+<p>首先不得不澄清的是，这里并不是在想为老程序猿撑腰，</p>
+<p>而是为了强调<strong>经验的重要性</strong>。</p>
+<p><br/></p>
+<p>虽然有能力的程序猿从不担心年龄问题，</p>
+<p>但是总要为别人解释“年龄不是问题”也很麻烦。</p>
+<p>所以，不如一次性解释清楚，到底<strong>老程序猿</strong>的能力有没有问题。</p>
+<p><br/></p>
+<p>这个问题其实不是那么好回答，</p>
+<p>因为它混淆了两个概念，“年龄”和“经验”。</p>
+<p>“经验”虽可能与“年龄”是正相关的，但也有例外。</p>
+<p><br/></p>
+<p>从上文程序猿的工作内容来看，其实“年龄”这个因素，对程序猿的工作影响很小，</p>
+<p>因为大部分时间不是在“写”代码，而是在考虑“怎样写”。</p>
+<p>所以，对于程序猿来说“老不老”其实<strong>区别不大</strong>。</p>
+<p><br/></p>
+<p>但如果考虑“经验”，就不一样了，</p>
+<p>“经验”越丰富，就能越早的意识到<strong>风险</strong>，少制造些<strong>不必要</strong>的麻烦。</p>
+<p>因此我一向不喜欢问别人“工作多少年”，而是问“有几年编程经验”。</p>
+<p><br/></p>
+<p>有很多年轻人，刚毕业已经有5年以上编程经验了，</p>
+<p>踩过了大多数<strong>程序设计时</strong>可能会遇到的坑。</p>
+<p>这样<strong>扎实的</strong>编程基础，其实要比那些工作一两年就转管理的程序猿更懂编程。</p>
+<p><br/></p>
+<p>团队中留一些有“经验”的程序猿十分必要，大家会少加一些班，</p>
+<p>少一些不必要的困难。</p>
+<h3 id="结语">结语</h3>
+<p>程序猿似乎是一群喜欢自嘲，不想别人对自己期待过高的人们，</p>
+<p>原因可能在于，他们的工作需要<strong>严谨的</strong>做事风格。</p>
+<blockquote>
+<p>做最好的准备，做最坏的打算。</p>
+</blockquote>
+<p><br/></p>
+<p>编程工作的特点，使得程序猿们很难“保持乐观”，</p>
+<p>只有做到<strong>万无一失</strong>，才能放心的交付软件。</p>
+<p><br/></p>
+<p>可如果整个群体都在自嘲，就难免其他人对编程本身造成误解，</p>
+<p>结果给程序猿自己带来麻烦。</p>
+<p><br/></p>
+<p>所以，有些时候，说真话也需要一种勇气，</p>
+<blockquote>
+<p>别人笑我太疯癫，我笑他人看不穿。</p>
+</blockquote>
+<blockquote>
+<p>不见五陵豪杰墓，无花无酒锄作田。</p>
+</blockquote>
+<p><br/></p>
+<p>当人们常把谦虚挂在嘴边时，自信就变成一种罕见性格了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/21/doing/" rel="next" title="最近学会的做事方式">
+                <i class="fa fa-chevron-left"></i> 最近学会的做事方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/01/fee/" rel="prev" title="像企业一样考虑问题">
+                像企业一样考虑问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#专业性"><span class="nav-number">1.</span> <span class="nav-text">专业性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作内容"><span class="nav-number">2.</span> <span class="nav-text">工作内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#个人喜恶"><span class="nav-number">3.</span> <span class="nav-text">个人喜恶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经验教训"><span class="nav-number">4.</span> <span class="nav-text">经验教训</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

@@ -1,0 +1,885 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 匿名函数    现在很多种编程语言都支持匿名函数了， 例如，C# 3.0，C++ 11和Java 8中的lambda表达式， 又例如，Python 2.2.2中的lambda，ECMAScript 3的匿名函数， ECMAScript 2015的箭头函数（arrow function）等等。  更不论，Haskell，Lisp，Standard ML，这些函数式编程语言了。  越来越多的语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你好，类型（二）：Lambda calculus">
+<meta property="og:url" content="https://thzt.github.io/2017/09/06/type-2/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="1. 匿名函数    现在很多种编程语言都支持匿名函数了， 例如，C# 3.0，C++ 11和Java 8中的lambda表达式， 又例如，Python 2.2.2中的lambda，ECMAScript 3的匿名函数， ECMAScript 2015的箭头函数（arrow function）等等。  更不论，Haskell，Lisp，Standard ML，这些函数式编程语言了。  越来越多的语言">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-669ce252032eecd2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-cb4665264c58e9e1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-93f8d59a3b3b1bcb.png">
+<meta property="article:published_time" content="2017-09-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.936Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-669ce252032eecd2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2017/09/06/type-2/"/>
+
+
+
+
+
+  <title>你好，类型（二）：Lambda calculus | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/06/type-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">你好，类型（二）：Lambda calculus</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-06T00:00:00+08:00">
+                2017-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="匿名函数">1. 匿名函数</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-669ce252032eecd2.png" /></p>
+<p><br/></p>
+<p>现在很多种编程语言都支持匿名函数了，</p>
+<p>例如，<a href="https://msdn.microsoft.com/zh-sg/library/bb397687" target="_blank" rel="noopener">C# 3.0</a>，<a href="https://zh.wikipedia.org/wiki/C%2B%2B11" target="_blank" rel="noopener">C++ 11</a>和<a href="https://en.wikipedia.org/wiki/Java_version_history#Java_SE_8" target="_blank" rel="noopener">Java 8</a>中的lambda表达式，</p>
+<p>又例如，<a href="https://docs.python.org/release/2.2.2/ref/ref.html" target="_blank" rel="noopener">Python 2.2.2</a>中的lambda，<a href="http://www-archive.mozilla.org/js/language/E262-3.pdf" target="_blank" rel="noopener">ECMAScript 3</a>的匿名函数，</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">ECMAScript 2015</a>的箭头函数（arrow function）等等。</p>
+<p><br/></p>
+<p>更不论，<a href="https://www.haskell.org/" target="_blank" rel="noopener">Haskell</a>，<a href="https://en.wikipedia.org/wiki/Lisp" target="_blank" rel="noopener">Lisp</a>，<a href="https://en.wikipedia.org/wiki/Standard_ML" target="_blank" rel="noopener">Standard ML</a>，这些函数式编程语言了。</p>
+<p><br/></p>
+<p>越来越多的语言拥抱匿名函数，是因为在很多场景中，我们无需给函数事先指定一个名字，</p>
+<p>并且结合<a href="https://zh.wikipedia.org/zh-hans/%E4%BD%9C%E7%94%A8%E5%9F%9F" target="_blank" rel="noopener">词法作用域</a>和高阶函数，会使某些问题用更直观的方式得以解决。</p>
+<p><br/></p>
+<p>从理论上来讲，匿名函数具有和一般函数同样的计算能力，</p>
+<p>使用某些技术手段，可以让匿名函数支持递归运算，从而完成任何<a href="https://zh.wikipedia.org/zh-hans/%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">图灵可计算</a>的任务。</p>
+<p><br/></p>
+<p>然而，要想理解这一切，我们首先还得静下心来，从基础的<span data-katex="\lambda"></span>演算开始吧。</p>
+<p><br/></p>
+<h3 id="自然数">2. 自然数</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-cb4665264c58e9e1.png" /></p>
+<p><br/></p>
+<p><span data-katex="\lambda"></span>演算听起来是一个高大上的概念，实际上它只是一套“符号推导系统”，</p>
+<p>人们首先定义某些合法的符号，然后再定义一些符号推导规则，</p>
+<p>最后，就可以计算了，从一堆合法的符号得到另一堆，这种推导过程称之为“演算”。</p>
+<p><br/></p>
+<p>为了让<span data-katex="\lambda"></span>演算更容易被接受，我们暂时先岔开话题，看看自然数是怎么定义的。</p>
+<p><br/></p>
+<h4 id="peano系统">2.1 Peano系统</h4>
+<p>1889年，皮亚诺（<a href="https://zh.wikipedia.org/wiki/%E6%9C%B1%E5%A1%9E%E4%BD%A9%C2%B7%E7%9A%AE%E4%BA%9E%E8%AB%BE" target="_blank" rel="noopener">Peano</a>）为了给出自然数的集合论定义，</p>
+<p>他建立了一个包含5条公设的公理系统，后人称之为Peano系统。</p>
+<p><br/></p>
+<p>Peano系统是满足以下公设的有序三元组<span data-katex="(M,F,e)"></span>，</p>
+<p>其中<span data-katex="M"></span>为一个集合，<span data-katex="F"></span>是<span data-katex="M"></span>到<span data-katex="M"></span>的函数，<span data-katex="e"></span>为首元素，</p>
+<p>（1）<span data-katex="e\in M"></span></p>
+<p>（2）<span data-katex="M"></span>在<span data-katex="F"></span>下是封闭的</p>
+<p>（3）<span data-katex="e"></span>不在<span data-katex="F"></span>的值域中</p>
+<p>（4）<span data-katex="F"></span>是单射</p>
+<p>（5）如果<span data-katex="M"></span>的子集<span data-katex="A"></span>满足，<span data-katex="e\in A"></span>，且<span data-katex="A"></span>在<span data-katex="F"></span>下封闭，则<span data-katex="A=M"></span>。</p>
+<p><br/></p>
+<h4 id="后继">2.2 后继</h4>
+<p>设<span data-katex="A"></span>为一个集合，我们称<span data-katex="A\cup\{A\}"></span>为<span data-katex="A"></span>的后继，记作<span data-katex="A^+"></span>，</p>
+<p>求集合后继的操作，称为后继运算。</p>
+<p><br/></p>
+<p>例如，<span data-katex="\varnothing^+=\varnothing\cup\{\varnothing\}=\{\varnothing\}"></span></p>
+<p><span data-katex="\varnothing^{++}=\varnothing^+\cup\{\varnothing^+\}=\{\varnothing\}\cup\{\{\varnothing\}\}=\{\varnothing,\{\varnothing\}\}"></span></p>
+<p><span data-katex="\varnothing^{+++}=\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}\}"></span>。</p>
+<p><br/></p>
+<h4 id="归纳集">2.3 归纳集</h4>
+<p>设<span data-katex="A"></span>为一个集合，若<span data-katex="A"></span>满足，</p>
+<p>（1）<span data-katex="\varnothing\in A"></span></p>
+<p>（2）<span data-katex="\forall a\in A"></span>，<span data-katex="a^+\in A"></span></p>
+<p>则称<span data-katex="A"></span>是归纳集。</p>
+<p><br/></p>
+<p>例如，<span data-katex="\{\varnothing,\varnothing^+,\varnothing^{++},\cdots\}"></span>是一个归纳集。</p>
+<p>从归纳集的定义可知，<span data-katex="\varnothing,\varnothing^+,\varnothing^{++},\cdots"></span>是所有归纳集的元素，</p>
+<p>于是，可以将它们定义为自然数，自然数集记为<span data-katex="N"></span>。</p>
+<p><br/></p>
+<p>设<span data-katex="\sigma:N\rightarrow N"></span>，满足<span data-katex="\sigma(n)=n^+"></span>，则称<span data-katex="\sigma"></span>为后继函数，</p>
+<p>则可以证明<span data-katex="(N,\sigma,\varnothing)"></span>是一个Peano系统。</p>
+<p><br/></p>
+<h3 id="演算">3. <span data-katex="\lambda"></span>演算</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-93f8d59a3b3b1bcb.png" /></p>
+<p><br/></p>
+<p><a href="https://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97" target="_blank" rel="noopener"><span data-katex="\lambda"></span>演算</a>，是1930年由邱奇（<a href="https://zh.wikipedia.org/zh-hans/%E9%98%BF%E9%9A%86%E4%BD%90%C2%B7%E9%82%B1%E5%A5%87" target="_blank" rel="noopener">Alonzo Church</a>）发明的一套<a href="https://zh.wikipedia.org/zh/%E5%BD%A2%E5%BC%8F%E7%B3%BB%E7%B5%B1" target="_blank" rel="noopener">形式系统</a>，</p>
+<p>它是从具体的函数定义，函数调用和函数复合中，抽象出来的数学概念。</p>
+<p><br/></p>
+<h4 id="语法">3.1 语法</h4>
+<p>形式上，<span data-katex="\lambda"></span>演算由3种语法项（term）组成，</p>
+<p>（1）一个变量<span data-katex="x"></span>本身，是一个合法的<span data-katex="\lambda"></span>项，</p>
+<p>（2）<span data-katex="\lambda x.t_1"></span>，是一个合法的<span data-katex="\lambda"></span>项，称为从项<span data-katex="t_1"></span>中抽象出<span data-katex="x"></span>，</p>
+<p>（3）<span data-katex="t_1 t_2"></span>，是一个合法的<span data-katex="\lambda"></span>项，称为将<span data-katex="t_1"></span>应用于<span data-katex="t_2"></span>。</p>
+<p><br/></p>
+<p>例如，<span data-katex="(\lambda x.(xy))"></span>，<span data-katex="(x (\lambda x.(\lambda x.x)))"></span>，<span data-katex="((\lambda y.y)(\lambda x.(xy)))"></span>，都是合法的<span data-katex="\lambda"></span>项。</p>
+<p>为了简化描述，我们通常会省略一些括号，以上三个<span data-katex="\lambda"></span>项可以写成，</p>
+<p><span data-katex="\lambda x.xy"></span>，<span data-katex="x (\lambda x.\lambda x.x)"></span>，<span data-katex="(\lambda y.y)(\lambda x.xy)"></span>，</p>
+<p>对于形如<span data-katex="\lambda x.t_1"></span>的<span data-katex="\lambda"></span>项来说，“<span data-katex="."></span>”后面会向右包含尽量多的内容。</p>
+<p><br/></p>
+<p>现在我们有了一堆合法的字符串了。</p>
+<p>可是，在给定推导规则之前，这些字符串之间都是没有关联的。</p>
+<p>而且，我们也还没有为这些符号指定语义，它们到底代表什么也是不清楚的。</p>
+<p><br/></p>
+<p>很显然给这些符号指定不同的推导规则，会得到不同的公理系统，</p>
+<p>在众多<span data-katex="\lambda"></span>演算系统中，最简单的是<span data-katex="\lambda_\beta"></span>系统，它指定了<span data-katex="\alpha"></span>和<span data-katex="\beta"></span>两种变换。</p>
+<p><br/></p>
+<h4 id="变换">3.2 <span data-katex="\alpha"></span>变换</h4>
+<p>设<span data-katex="\lambda"></span>项<span data-katex="P"></span>中包含了<span data-katex="\lambda x.M"></span>，</p>
+<p>则我们可以把<span data-katex="M"></span>中所有自由出现的<span data-katex="x"></span>，全都换成y，即<span data-katex="\lambda y.[y/x]M"></span>，</p>
+<p>这种更名变换，称为<span data-katex="\alpha"></span>变换。</p>
+<p><br/></p>
+<p>其中，“自由出现”指的是<span data-katex="x"></span>不被其他<span data-katex="\lambda"></span>抽象所绑定，</p>
+<p>例如，<span data-katex="\lambda x.xy"></span>中，<span data-katex="y"></span>是自由的，</p>
+<p>而<span data-katex="x"></span>就不是自由的，因为它被<span data-katex="\lambda x."></span>绑定了。</p>
+<p><br/></p>
+<p>如果<span data-katex="P"></span>可以经过有限步<span data-katex="\alpha"></span>变换转换为<span data-katex="Q"></span>，就写为<span data-katex="P\equiv_\alpha Q"></span>。</p>
+<p><br/></p>
+<p>例如，</p>
+<p><span data-katex="\lambda xy.x(xy)=\lambda x.(\lambda y.x(xy))"></span></p>
+<p><span data-katex="\equiv_\alpha\lambda x.(\lambda v.x(xv))"></span></p>
+<p><span data-katex="\equiv_\alpha\lambda u.(\lambda v.u(uv))"></span></p>
+<p><span data-katex="=\lambda uv.u(uv)"></span></p>
+<p><br/></p>
+<h4 id="变换-1">3.3 <span data-katex="\beta"></span>变换</h4>
+<p>形如<span data-katex="(\lambda x.M)N"></span>的<span data-katex="\lambda"></span>项，可以经由<span data-katex="\beta"></span>变换转换为<span data-katex="[N/x]M"></span>，</p>
+<p>指的是，把<span data-katex="M"></span>中所有自由出现的<span data-katex="x"></span>都换成<span data-katex="N"></span>。</p>
+<p><br/></p>
+<p>如果<span data-katex="P"></span>可以经过有限步<span data-katex="\beta"></span>变换转换为<span data-katex="Q"></span>，就写为<span data-katex="P\triangleright_\beta Q"></span>。</p>
+<p><br/></p>
+<p>例如，</p>
+<p><span data-katex="(\lambda x.x(xy))N\triangleright_\beta N(Ny)"></span></p>
+<p><span data-katex="(\lambda x.xx)(\lambda x.xx)\triangleright_\beta [(\lambda x.xx)/x](xx)=(\lambda x.xx)(\lambda x.xx)\triangleright_\beta\cdots"></span></p>
+<p><br/></p>
+<p>我们发现，某些<span data-katex="\lambda"></span>项，可以无限进行<span data-katex="\beta"></span>变换。</p>
+<p>而那些最终会终止的<span data-katex="\beta"></span>变换的结果，称为<span data-katex="\beta"></span>范式（<span data-katex="\beta"></span> normal form）。</p>
+<p><br/></p>
+<h4 id="邱奇编码">3.4 邱奇编码</h4>
+<p>现在我们有<span data-katex="\lambda_\beta"></span>公理系统了，就可以依照<span data-katex="\alpha"></span>或<span data-katex="\beta"></span>变换，对任意合法的<span data-katex="\lambda"></span>项进行变换。</p>
+<p><br/></p>
+<p>假设我们有一个<span data-katex="\lambda"></span>项，<span data-katex="\lambda f.\lambda x.x"></span>，</p>
+<p>还有另外一个<span data-katex="\lambda"></span>项，<span data-katex="\lambda n.\lambda f.\lambda x.f(nfx)"></span>，记为<span data-katex="succ"></span>，</p>
+<p>我们来计算，<span data-katex="succ(\lambda f.\lambda x.x)"></span>，</p>
+<p>可得，<span data-katex="(\lambda n.\lambda f.\lambda x.f(nfx))(\lambda f.\lambda x.x)\triangleright_\beta\lambda f.\lambda x.fx"></span>，</p>
+<p>我们再运用一次<span data-katex="succ"></span>，<span data-katex="succ(\lambda f.\lambda x.fx)\triangleright_\beta\lambda f.\lambda x.f(fx)"></span>。</p>
+<p><br/></p>
+<p>我们发现每次应用<span data-katex="succ"></span>，都会给<span data-katex="\lambda f.\lambda x.x"></span>中加一个<span data-katex="f"></span>，</p>
+<p>最终我们可以得到以下这些<span data-katex="\lambda"></span>项，</p>
+<p><span data-katex="\lambda f.\lambda x.x"></span></p>
+<p><span data-katex="\lambda f.\lambda x.fx"></span></p>
+<p><span data-katex="\lambda f.\lambda x.f(fx)"></span></p>
+<p><span data-katex="\lambda f.\lambda x.f(f(fx))"></span></p>
+<p><span data-katex="\cdots"></span></p>
+<p><span data-katex="\lambda f.\lambda x.f^nx"></span></p>
+<p><br/></p>
+<p>如果我们记<span data-katex="\lambda f.\lambda x.x\equiv 0"></span>，<span data-katex="\lambda f.\lambda x.fx\equiv 1"></span>，<span data-katex="\cdots"></span>，</p>
+<p><span data-katex="\lambda f.\lambda x.f^nx\equiv n"></span>，</p>
+<p>我们就得到了自然数的另一种表示方式，称之为<a href="https://zh.wikipedia.org/wiki/%E9%82%B1%E5%A5%87%E6%95%B0" target="_blank" rel="noopener">邱奇编码</a>。</p>
+<p><br/></p>
+<p>可以看到邱奇编码与归纳集之间有异曲同工之妙。</p>
+<p><br/></p>
+<h4 id="语义">3.5 语义</h4>
+<p>到目前为止，我们并未谈及<span data-katex="\lambda"></span>项到底表示什么含义，</p>
+<p>虽然<span data-katex="\lambda x.M"></span>看起来像是函数定义，<span data-katex="(\lambda x.M)N"></span>看起来像是函数调用。</p>
+<p><br/></p>
+<p>我们谨慎的使用公理化方法，从什么是合法的<span data-katex="\lambda"></span>项出发，</p>
+<p>定义<span data-katex="\lambda_\beta"></span>系统中的公理——合法的<span data-katex="\lambda"></span>项，</p>
+<p>然后又指定了该系统中的推导规则——<span data-katex="\alpha"></span>和<span data-katex="\beta"></span>变换，</p>
+<p>最终得到了一个形式化的公理系统（公理+推导规则）。</p>
+<p><br/></p>
+<p>后文中，我们将谈及<span data-katex="\lambda"></span>项的语义，然后再逐渐给它加上类型。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
+<p><a href="https://book.douban.com/subject/4323391/" target="_blank" rel="noopener">Lambda-Calculus and Combinators，an Introduction</a></p>
+<p><a href="https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/Selinger-Lambda-Calculus-Notes.pdf" target="_blank" rel="noopener">Lecture Notes on the Lambda Calculus</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/05/type-1/" rel="next" title="你好，类型（一）：开篇">
+                <i class="fa fa-chevron-left"></i> 你好，类型（一）：开篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/07/type-3/" rel="prev" title="你好，类型（三）：Combinatory logic">
+                你好，类型（三）：Combinatory logic <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名函数"><span class="nav-number">1.</span> <span class="nav-text">1. 匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自然数"><span class="nav-number">2.</span> <span class="nav-text">2. 自然数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#peano系统"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Peano系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后继"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 后继</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归纳集"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 归纳集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#演算"><span class="nav-number">3.</span> <span class="nav-text">3. 演算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变换"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 变换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变换-1"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 变换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#邱奇编码"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 邱奇编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语义"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 语义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

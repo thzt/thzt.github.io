@@ -1,0 +1,888 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="清代 陈澹然 在 《寤言二·迁都建藩议》 中这样说，  不谋万世者，不足谋一时；不谋全局者，不足谋一域。   当我们考察一个细分领域的时候， 最好的办法，就是从时间和全局角度，自上而下的进行了解， 前几篇文章中的分析思路，也正有此意。  从本文开始，就开始介绍 web 前端开发领域了， 包含了我在开发过程中，对前端领域本身的一些体会和理解。 分工 首先我们得了解 web 前端这个岗位是怎么来的，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件设计奇遇记（四）：领域杂谈">
+<meta property="og:url" content="https://thzt.github.io/2020/12/18/adventure-04/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="清代 陈澹然 在 《寤言二·迁都建藩议》 中这样说，  不谋万世者，不足谋一时；不谋全局者，不足谋一域。   当我们考察一个细分领域的时候， 最好的办法，就是从时间和全局角度，自上而下的进行了解， 前几篇文章中的分析思路，也正有此意。  从本文开始，就开始介绍 web 前端开发领域了， 包含了我在开发过程中，对前端领域本身的一些体会和理解。 分工 首先我们得了解 web 前端这个岗位是怎么来的，">
+<meta property="article:published_time" content="2020-12-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.967Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2020/12/18/adventure-04/"/>
+
+
+
+
+
+  <title>软件设计奇遇记（四）：领域杂谈 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/12/18/adventure-04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件设计奇遇记（四）：领域杂谈</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-18T00:00:00+08:00">
+                2020-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Software/" itemprop="url" rel="index">
+                    <span itemprop="name">Software</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>清代 陈澹然 在 《寤言二·迁都建藩议》 中这样说，</p>
+<blockquote>
+<p>不谋万世者，不足谋一时；不谋全局者，不足谋一域。</p>
+</blockquote>
+<p><br/></p>
+<p>当我们考察一个细分领域的时候，</p>
+<p>最好的办法，就是从时间和全局角度，自上而下的进行了解，</p>
+<p>前几篇文章中的分析思路，也正有此意。</p>
+<p><br/></p>
+<p>从本文开始，就开始介绍 web 前端开发领域了，</p>
+<p>包含了我在开发过程中，对前端领域本身的一些体会和理解。</p>
+<h3 id="分工">分工</h3>
+<p>首先我们得了解 web 前端这个岗位是怎么来的，</p>
+<p>这个问题，有助于我们理解软件行业的社会化分工。</p>
+<p><br/></p>
+<p>在进行大规模工业化生产的时候，有两种常用的模式来提升产能，</p>
+<p>一个是提高单位人工的生产力，另一个则是扩大规模。</p>
+<p>这两种方式，在软件工业化时代，都曾发生过。</p>
+<h4 id="黑魔法">黑魔法</h4>
+<p>那么如何提高生产力呢？以前看到过这样一句话，现在想想深以为然，</p>
+<blockquote>
+<p>Any sufficiently advanced technology is indistinguishable from magic.</p>
+</blockquote>
+<p>翻译过来是：任何真正的高科技，看起来都像是黑魔法。</p>
+<p><br/></p>
+<p>在软件行业就是这样，“黑魔法” 特征是由其 “知识生产” 的属性造成的，</p>
+<p>一些软件工具、框架、系统、平台，</p>
+<p>看起来越匪夷所思，它的科技含量也就越高。</p>
+<p><br/></p>
+<p>又让我想起入行之前看过的一篇文章了，《<a href="https://bideyuanli.com/p/608" target="_blank" rel="noopener">论“炫技”的四个层次</a>》，</p>
+<p>作者将每个领域的 “玩家” 分成了 4 个层次，</p>
+<ul>
+<li><p>不炫技、扎实的基本功派</p></li>
+<li><p>炫技派</p></li>
+<li><p>不炫技但不畏技的王者</p></li>
+<li><p>炫技狂魔</p></li>
+</ul>
+<p><br/></p>
+<p>我认为真正的 “黑魔法” 应来自于第三和第四段位，</p>
+<p>要么有扎实到逆天的基本功，要么就是技能已超出了普通人的理解范围。</p>
+<p><br/></p>
+<p>“炫技狂魔” 往往是引领时代的那个人，</p>
+<blockquote>
+<p>普通人根本不懂这 “神技” 是如何弄出来的，甚至没有意识到他们在 “炫技”，</p>
+</blockquote>
+<blockquote>
+<p>或者说根本不知道他们炫了什么技。</p>
+</blockquote>
+<p><br/></p>
+<p>回想一下软件行业，个人计算机、编译技术、互联网、云计算、区块链，</p>
+<p>我认为都是所属时代中，难以企及的巅峰。</p>
+<p>web 前端也有这样的关键节点：jQuery，React，Node.js、webpack、TypeScript 等等。</p>
+<h4 id="规模效应">规模效应</h4>
+<p>不能小看规模效应，能让更多的人参与到生产活动中，</p>
+<p>跟提升科学技术生产力一样，可以大幅度的提升产能。</p>
+<p><br/></p>
+<p>一个简单的公式就能说明问题，产能 = 效能 * 人数。</p>
+<p>科学技术的发展，能提升效能；工业化生产增涨了人数，可以扩大规模。</p>
+<p><br/></p>
+<p>软件行业的先驱们，也很明白这个道理，</p>
+<p>所以一直以来，都在不遗余力的降低软件的研发门槛。</p>
+<p>从穿孔纸带，到现在强大的 IDE 加持、或 lowcode 的编码平台，</p>
+<p>人们无时不刻不在做的事情就是，让普通人更容易的创造应用程序。</p>
+<p><br/></p>
+<p>这也是为什么有很多公司采用了 “工程师 + 外包” 的组织阵型，</p>
+<p>工程师们做一些上游的基础设施层面的研发工作，</p>
+<p>外包做一些下游的应用层的研发工作。</p>
+<p><br/></p>
+<p>值得一提的是，这样区分并不是在褒贬任何一方，</p>
+<p>而只是让专业的人做专业的事情，</p>
+<p>协同开发过程中，区分上下游是不可避免的。</p>
+<p><br/></p>
+<p>同时这也是领域足够复杂所导致的，</p>
+<p>不同的软件开发者之间必须划分界线，降低沟通成本。</p>
+<p>界线意味着，组织架构分层，以及软件架构分层。</p>
+<h3 id="前端岗位">前端岗位</h3>
+<p>正是有了科学技术的发展，门槛降到了足够低的水平，</p>
+<p>所以，才有更多的人参与进来。</p>
+<p><br/></p>
+<p>参与的人多了之后，领域也会变得繁荣起来，变得越来越复杂。</p>
+<p>复杂又会导致划分界线。</p>
+<p><br/></p>
+<p>web 前端这个岗位就在互联网时代应运而生了。</p>
+<h4 id="界面技术">界面技术</h4>
+<p>从软件测试的角度来讲，界面和逻辑具有不同的性质，</p>
+<p>为了提高测试覆盖率，将界面从逻辑中分离出来是一个常用的办法。</p>
+<p><br/></p>
+<p>对于界面，不容易进行自动化测试，而业务逻辑则更容易。</p>
+<p>所以一个足够复杂的系统，界面层肯定是要跟逻辑层进行分离的。</p>
+<p>这不论从设计角度、维护角度、架构角度，都是合情合理的。</p>
+<p><br/></p>
+<p>因此，前端是负责界面技术的一群人。</p>
+<p>我没有将前端的职责范围，限制在浏览器端的网页技术中。</p>
+<p><br/></p>
+<p>一个软件系统总是要跟外部产生交互，才能产生价值，</p>
+<p>也就是说，不论这个系统是简单还是复杂，总要考虑 “如何与外部交互” 这个问题。</p>
+<p><br/></p>
+<p>前端正是天然要解决这一问题的一类人。</p>
+<p>他们的技术，起源于浏览器端的人机交互界面，</p>
+<p>繁荣于各种端技术，例如移动端，物理网/车联网，甚至小程序。</p>
+<p><br/></p>
+<p>所以前端主要是在处理 “界面” 的，考虑外部参与者如何与给定系统进行交互，</p>
+<p>这个界面指的是系统的界面（交互层），而并不仅限于肉眼可见的图形界面。</p>
+<p>例如常见的界面还有，命令行界面，Open API，等等。</p>
+<h4 id="内忧外患">内忧外患</h4>
+<p>自从 web 前端正式作为一个软件参与者的角色出现之后，</p>
+<p>他们自身的发展，也是由内忧外患所驱动的。</p>
+<p><br/></p>
+<p>上文我们提到了分工，以及新行业的产生，之所以能吸引一大批人来参与生产，</p>
+<p>这是因为前端存在之初，门槛已经变得非常低了。</p>
+<p>所以，当时就存在这样的一个红利期，各行各业的人都可以转行做前端。</p>
+<p><br/></p>
+<p>这是一件好事，也是一件坏事。</p>
+<p>好的部分是表明前端是一个年轻的行业，年轻人更有机会，且人才缺口很大，</p>
+<p>不好的部分在于，行业发展太快，导致从业者的经验迅速过时。</p>
+<p><br/></p>
+<p>所以老一辈的前端开发者们，能明显的感觉到自己基础能力的不足，以及学不过来，</p>
+<p>甚至有时候还会处于 “不知道自己不知道” 的危险状态之中。</p>
+<p>所表现出来的现象是，前端开发者们几乎把前辈工程师们趟过的坑都重新踩了一遍。</p>
+<p><br/></p>
+<p>除此之外，基本功不扎实的附加效应是，更容易被技术营销所带偏，</p>
+<p>换汤不换药的技术术语，在前端群体之中更容易滋生发酵，</p>
+<p>导致一次又一次的集体狂热事件。</p>
+<p><br/></p>
+<p>幸运的是，最近一两年已经有所好转了，得益于国内外行业领先公司的标杆作用，</p>
+<p>给整个浮躁的前端圈子奠定了稳扎稳打的基调，</p>
+<p>让人们可以冷静下来，重新从多方案跨技术领域的角度考虑问题了。</p>
+<h3 id="研发生态">研发生态</h3>
+<p>除了岗位本身的产生和内忧外患之外，前端开发者生态也越来越齐全了，</p>
+<p>记得一开始写前端代码，我用的是 windows 自带的 notepad，</p>
+<p>后来辗转用过 notepad++，emacs，直到现在用着 VSCode。</p>
+<p>但比起 Java 开发者早就在用的 Eclipse，IntelliJ IDEA 仍然有天壤之别。</p>
+<p><br/></p>
+<p>从几年前连一个基本的工具库都没有，到现在 npm 成了最大的包管理平台，</p>
+<p>前端的底层设施、社区环境，也变得越来越稳定和繁荣了。</p>
+<p>从 JavaScript ES3 到 ES6，TC39 Proposals，到 TypeScript，</p>
+<p>前端也有了自己可控的编程语言了。</p>
+<p><br/></p>
+<p>研发流程方面，脚手架、编译构建、打包部署、发布，都已经自成体系了，</p>
+<p>并不像以前那样依托在其他的技术栈之下作为附属产物，</p>
+<p>前端有了自己的交付产物，有了自己部署方式。</p>
+<p><br/></p>
+<p>除此之外，前端借着 Node.js 的机会，进行了一次能力的横向扩展，</p>
+<p>当前桌面端、移动端、甚至网络层，也都有了前端的身影。</p>
+<p><br/></p>
+<p>所以 阿特伍德 才这样说，</p>
+<blockquote>
+<p>Any application that can be written in JavaScript, will eventually be written in JavaScript.</p>
+</blockquote>
+<p>任何可以用 JavaScript 来写的应用，最终都将用 JavaScript 来写。</p>
+<p><br/></p>
+<p>这表现了前端领域的强大生命力。</p>
+<h3 id="结语">结语</h3>
+<p>本文从社会分工和发展趋势的角度，介绍了我在前端领域的见闻，</p>
+<p>主要讨论了科学技术对提高生产力的作用，以及规划化生产的重要意义。</p>
+<p><br/></p>
+<p>前端从最初的 “被分工”，到现在的泱泱大军，经历了很多故事，</p>
+<p>内忧外患之中，浏览器人机交互切图仔，也已逐渐成长为负责系统界面的专业人员了。</p>
+<p>这会导致，前端工作者更加的擅长与不同角色进行沟通，</p>
+<p>更能体会到信息、文档、API、需求等，能产生外部效应产物的重要性。</p>
+<p><br/></p>
+<p>以后前端工作者会参与到更多领域的开发工作之中，</p>
+<p>这可能是一件有趣的事情吧。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/15/adventure-03/" rel="next" title="软件设计奇遇记（三）：人本主义">
+                <i class="fa fa-chevron-left"></i> 软件设计奇遇记（三）：人本主义
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/22/adventure-05/" rel="prev" title="软件设计奇遇记（五）：发展阶段">
+                软件设计奇遇记（五）：发展阶段 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#分工"><span class="nav-number">1.</span> <span class="nav-text">分工</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#黑魔法"><span class="nav-number">1.1.</span> <span class="nav-text">黑魔法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#规模效应"><span class="nav-number">1.2.</span> <span class="nav-text">规模效应</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端岗位"><span class="nav-number">2.</span> <span class="nav-text">前端岗位</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#界面技术"><span class="nav-number">2.1.</span> <span class="nav-text">界面技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内忧外患"><span class="nav-number">2.2.</span> <span class="nav-text">内忧外患</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#研发生态"><span class="nav-number">3.</span> <span class="nav-text">研发生态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

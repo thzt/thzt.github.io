@@ -1,0 +1,906 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="回顾 上文中，我们用群，拓扑空间，CPO作为例子， 来说明什么是数学结构，以及数学结构是如何通过映射来保持的。 群同态保持了群结构，连续映射保持了拓扑结构， 连续函数保持了完全偏序结构。  那么群结构与拓扑结构之间是否有联系呢？ 我们能否建立拓扑空间与群之间的对应关系呢？  在代数拓扑中，就存在这样的例子， 人们找到了和拓扑空间相关的群论概念，例如基本群和同调群， 拓扑空间的连续映射可以导出这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="语言背后的代数学（八）：范畴">
+<meta property="og:url" content="https://thzt.github.io/2018/02/11/semantics-8/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="回顾 上文中，我们用群，拓扑空间，CPO作为例子， 来说明什么是数学结构，以及数学结构是如何通过映射来保持的。 群同态保持了群结构，连续映射保持了拓扑结构， 连续函数保持了完全偏序结构。  那么群结构与拓扑结构之间是否有联系呢？ 我们能否建立拓扑空间与群之间的对应关系呢？  在代数拓扑中，就存在这样的例子， 人们找到了和拓扑空间相关的群论概念，例如基本群和同调群， 拓扑空间的连续映射可以导出这">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-cf6fe04651d9f2d5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-83faca1582ad5a4b.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-485a513f584ec085.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-d19a23f4b1b256b2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f50234610ae6c94e.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-7a6b0cbdb0347ac2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f24983986f2eab9d.png">
+<meta property="article:published_time" content="2018-02-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.943Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-cf6fe04651d9f2d5.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2018/02/11/semantics-8/"/>
+
+
+
+
+
+  <title>语言背后的代数学（八）：范畴 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/11/semantics-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">语言背后的代数学（八）：范畴</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-11T00:00:00+08:00">
+                2018-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-cf6fe04651d9f2d5.png" /></p>
+<p><br/></p>
+<h3 id="回顾">回顾</h3>
+<p>上文中，我们用群，拓扑空间，CPO作为例子，</p>
+<p>来说明什么是数学结构，以及数学结构是如何通过映射来保持的。</p>
+<p>群同态保持了群结构，连续映射保持了拓扑结构，</p>
+<p>连续函数保持了完全偏序结构。</p>
+<p><br/></p>
+<p>那么群结构与拓扑结构之间是否有联系呢？</p>
+<p>我们能否建立拓扑空间与群之间的对应关系呢？</p>
+<p><br/></p>
+<p>在代数拓扑中，就存在这样的例子，</p>
+<p>人们找到了和拓扑空间相关的群论概念，例如基本群和同调群，</p>
+<p>拓扑空间的连续映射可以导出这些群的群同态。</p>
+<p><br/></p>
+<p>这就为了人们使用代数学方法研究其他数学分支，奠定了基础，</p>
+<p>实际上，最原始的范畴论想法也是起源于此。</p>
+<p><br/></p>
+<h3 id="图示法">1. 图示法</h3>
+<p>在前一篇中我们学过了幺半群，</p>
+<p>它指的是一个集合<span data-katex="M"></span>，以及<span data-katex="M"></span>上的二元运算<span data-katex="\cdot"></span>，满足以下两个条件，</p>
+<p>（1）<span data-katex="\forall x,y,z\in M"></span>，<span data-katex="(x\cdot y)\cdot z=x\cdot (y\cdot z)"></span>，</p>
+<p>（2）<span data-katex="\exists e\in M"></span>，<span data-katex="\forall x\in M"></span>，<span data-katex="x\cdot e=e\cdot x=x"></span>。</p>
+<p><br/></p>
+<p>这两个条件除了可以用等式来表示，还可以用<strong>图</strong>（diagram）来表示，</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-83faca1582ad5a4b.png" /></p>
+<p><br/></p>
+<p>我们称以上两张图都是<strong>可交换的</strong>（commutative），</p>
+<p>即，沿着不同的路径进行运算，只要起点和终点相同，则运算的结果就相同。</p>
+<p><br/></p>
+<p>例如，<span data-katex="&lt;x,y,z&gt;\mapsto &lt;x,yz&gt;\mapsto x(yz)"></span>，</p>
+<p>总是等于<span data-katex="&lt;x,y,z&gt;\mapsto &lt;xy,z&gt;\mapsto (xy)z"></span>，</p>
+<p>即，<span data-katex="x(yz)=(xy)z"></span>，表明<span data-katex="M"></span>中元素的运算满足结合律。</p>
+<p><br/></p>
+<p>又例，<span data-katex="&lt;0,x&gt;\mapsto &lt;e,x&gt;\mapsto ex"></span>，总是等于<span data-katex="&lt;0,x&gt;\mapsto x"></span>，即<span data-katex="ex=x"></span>，</p>
+<p><span data-katex="&lt;x,0&gt;\mapsto &lt;x,e&gt;\mapsto xe"></span>，总是等于<span data-katex="&lt;x,0&gt;\mapsto x"></span>，即<span data-katex="xe=x"></span>。</p>
+<p>因此，<span data-katex="ex=x=xe"></span>，表明<span data-katex="M"></span>中存在幺元<span data-katex="e"></span>。</p>
+<p><br/></p>
+<p>所以，我们可以用以上两个图表，作为幺半群的定义，称为<strong>图示法</strong>。</p>
+<p><br/></p>
+<p>另一方面，考虑在集合论中讨论映射的时候，一般都不写具体元素，还可以表示为，</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-485a513f584ec085.png" /></p>
+<p><br/></p>
+<p>其中，<span data-katex="\mu:M\times M\to M"></span>，<span data-katex="\eta:1\to M"></span>，是两个函数，</p>
+<p><span data-katex="1=\{0\}"></span>是只有一个元素的集合。</p>
+<p><br/></p>
+<p>用图示法来表示幺半群，更具一般性。</p>
+<p><br/></p>
+<h3 id="范畴">2. 范畴</h3>
+<p>范畴是一个数学概念，也可以用图示法来表示。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-d19a23f4b1b256b2.png" /></p>
+<p><br/></p>
+<p>一个<strong>范畴</strong><span data-katex="Cat"></span>由一系列<strong>对象</strong>（object）和<strong>箭头</strong>（arrow）组成。</p>
+<p>对于每一个箭头<span data-katex="f"></span>，有两个对象与之关联，</p>
+<p>称为箭头<span data-katex="f"></span>的定义域（domain）和值域（codomain）。</p>
+<p><br/></p>
+<p>并且，还要满足以下几条规则，</p>
+<p>（1）对于每一个对象<span data-katex="a"></span>，存在恒等箭头（identity arrow），<span data-katex="i:a\to a"></span></p>
+<p>（2）箭头满足结合律，对于任意的箭头<span data-katex="f,g,h"></span>，有<span data-katex="(f\cdot g)\cdot h=f\cdot (g\cdot h)"></span></p>
+<p>（3）箭头的集合在箭头组合运算下是封闭的</p>
+<p><br/></p>
+<p>其中，<span data-katex="f\cdot g"></span>表示<span data-katex="g"></span>和<span data-katex="f"></span>的组合运算，</p>
+<p>它也是一个箭头，其中<span data-katex="g"></span>的值域是<span data-katex="f"></span>的定义域。</p>
+<p><br/></p>
+<p>例子：</p>
+<p>所有的集合，以集合为对象，集合之间的映射作为箭头，构成了一个范畴，</p>
+<p>所有的群，以群作为对象，群同态作为箭头，构成了一个范畴，</p>
+<p>所有的拓扑空间，以拓扑空间作为对象，拓扑空间之间的连续映射为箭头，构成了一个范畴。</p>
+<p><br/></p>
+<p>以上三个例子中，</p>
+<p>范畴中的对象都是集合，箭头都是映射，这就很容易造成误解。</p>
+<p>因为，<strong>范畴中的对象可以不是集合，箭头也可以不是映射，</strong></p>
+<p>理解这一点至关重要。</p>
+<p><br/></p>
+<p>例如，完全偏序<span data-katex="(D,\leqslant)"></span>，</p>
+<p>以<span data-katex="D"></span>中的元素作为对象，以<span data-katex="x\leqslant y"></span>作为<span data-katex="x,y"></span>之间的箭头，同样构成了一个范畴。</p>
+<p><br/></p>
+<h3 id="函子">3. 函子</h3>
+<p>函子就是两个范畴之间的箭头。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f50234610ae6c94e.png" /></p>
+<p><br/></p>
+<p>一个<strong>函子</strong><span data-katex="F"></span>是范畴<span data-katex="C"></span>到范畴<span data-katex="D"></span>的箭头，<span data-katex="F:C\to D"></span>，它满足以下条件，</p>
+<p><span data-katex="F"></span>把<span data-katex="C"></span>中的对象<span data-katex="c"></span>映射为<span data-katex="D"></span>中的对象<span data-katex="F~c"></span>，把<span data-katex="C"></span>中的箭头<span data-katex="f"></span>映射为<span data-katex="D"></span>中的箭头<span data-katex="F~f"></span>。</p>
+<p>并且，<span data-katex="F~(f\cdot g)=(F~f)\cdot (F~g)"></span>。</p>
+<p><br/></p>
+<p>值得注意的是，</p>
+<p>等式左边的<span data-katex="\cdot"></span>，表示<span data-katex="C"></span>中的箭头组合运算，</p>
+<p>等式右边的<span data-katex="\cdot"></span>，表示<span data-katex="D"></span>中的箭头组合运算。</p>
+<p><br/></p>
+<h3 id="自然变换">4. 自然变换</h3>
+<p>自然变换（natural transformation）是一族箭头，</p>
+<p>将范畴<span data-katex="A"></span>在一个函子中的像（picture），变换成了另一个函子的像。</p>
+<p><br/></p>
+<p>给定两个函子<span data-katex="S,T:A\to B"></span>，其中<span data-katex="A"></span>和<span data-katex="B"></span>是范畴。</p>
+<p>自然变换的每个分量（components）使下图可交换。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-7a6b0cbdb0347ac2.png" /></p>
+<p><br/></p>
+<p>其中，<span data-katex="\tau_a"></span>是<span data-katex="B"></span>中的箭头，<span data-katex="\tau_a:Sa\to Ta"></span>。</p>
+<p><br/></p>
+<h3 id="monad">5. Monad</h3>
+<p>范畴到自身的函子，称为<strong>自函子</strong>（endofunctor）。</p>
+<p>设<span data-katex="T:X\to X"></span>是任意范畴<span data-katex="X"></span>上的自函子，自函子复合之后仍为自函子，</p>
+<p><span data-katex="T^2=T\circ T:X\to X"></span>，<span data-katex="T^3=T^2\circ T:X\to X"></span>。</p>
+<p><br/></p>
+<p>令<span data-katex="\mu:T^2\to T"></span>是一个自然变换，其分量为<span data-katex="\mu_x:T^2x\to Tx"></span>，<span data-katex="\forall x\in X"></span>，</p>
+<p>则使用<span data-katex="\mu"></span>可以定义另外两个自然变换，</p>
+<p><span data-katex="T\mu:T^3\to T^2"></span>，它的分量为<span data-katex="(T\mu)_x=T(\mu_x):T^3x\to T^2x"></span>，</p>
+<p><span data-katex="\mu T:T^3\to T^2"></span>，它的分量为<span data-katex="(\mu T)_x=\mu_{Tx}"></span>。</p>
+<p><br/></p>
+<p>范畴<span data-katex="X"></span>上的一个<strong>Monad</strong>，指的是三元组<span data-katex="\left \langle T,\eta,\mu \right \rangle"></span>，</p>
+<p>它们使下图可交换，</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f24983986f2eab9d.png" /></p>
+<p><br/></p>
+<p>其中，<span data-katex="T:X\to X"></span>是范畴<span data-katex="X"></span>上的自函子，</p>
+<p><span data-katex="\eta:I_X\to T"></span>，<span data-katex="\mu:T^2\to T"></span>是两个自然变换。</p>
+<p><br/></p>
+<p>值得注意的是，Monad与幺半群的图示法是相似的，</p>
+<p>只需要将幺半群定义中的<span data-katex="\times"></span>，改写成自函子的复合运算，</p>
+<p>把单位集合<span data-katex="1"></span>，改写成单位自函子即可。</p>
+<p><br/></p>
+<p>因此，我们说Monad是自函子范畴上的一个幺半群。</p>
+<blockquote>
+<p>All told, a monad in X is just a monoid in the category of endofunctors of X, with product x replaced by composition of endofunctors and unit set by the identity endofunctor.</p>
+</blockquote>
+<p><br/></p>
+<h3 id="hask范畴上的monad">6. Hask范畴上的Monad</h3>
+<p>如果把Haskell语言中的类型作为对象，把类型之间的函数看做箭头，</p>
+<p>则在函数复合运算下，构成了一个范畴，称为<strong>Hask范畴</strong>。</p>
+<p><br/></p>
+<p><strong>函子</strong></p>
+<p>Haskell中类型类（type class）<code>Functor</code>的每一个实例，</p>
+<p>定义了Hask范畴中的一个函子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Functor (f :: * -&gt; *) where</span><br><span class="line">    fmap :: (a -&gt; b) -&gt; f a -&gt; f b</span><br></pre></td></tr></table></figure>
+<p><code>fmap</code>表示了函子作用在箭头上的结果。</p>
+<p>作用在对象上，可以使用<code>pure :: a -&gt; f a</code>来表示。</p>
+<p><br/></p>
+<p>在Haskell中，一个类型要成为<code>Functor</code>的实例，</p>
+<p>还要满足相应的“<a href="https://wiki.haskell.org/Functor#Functor_Laws" target="_blank" rel="noopener">Functor Law</a>”，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fmap id &#x3D; id</span><br><span class="line">fmap (f . g) &#x3D; fmap f . fmap g</span><br></pre></td></tr></table></figure>
+<p>可以<a href="https://en.wikibooks.org/wiki/Haskell/Category_theory#Functors" target="_blank" rel="noopener">证明</a>，</p>
+<p>这些“Functor Law”刚好使<code>f</code>，<code>fmap</code>和<code>pure</code>构成了范畴论意义上的函子。</p>
+<p><br/></p>
+<p><strong>Monad</strong></p>
+<p>Haskell中类型类<code>Monad</code>的每一个实例，</p>
+<p>定义了Hask范畴中的一个Monad。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Functor m &#x3D;&gt; Monad m where</span><br><span class="line">    return :: a -&gt; m a</span><br><span class="line">    (&gt;&gt;&#x3D;)  :: m a -&gt; (a -&gt; m b) -&gt; m b</span><br></pre></td></tr></table></figure>
+<p>在Haskell中，一个类型要成为<code>Monad</code>的实例，</p>
+<p>还要满足相应的“<a href="https://wiki.haskell.org/Monad#Monad_class" target="_blank" rel="noopener">Monad Law</a>”，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return a &gt;&gt;&#x3D; k                  &#x3D;  k a</span><br><span class="line">m        &gt;&gt;&#x3D; return             &#x3D;  m</span><br><span class="line">m        &gt;&gt;&#x3D; (\x -&gt; k x &gt;&gt;&#x3D; h)  &#x3D;  (m &gt;&gt;&#x3D; k) &gt;&gt;&#x3D; h</span><br></pre></td></tr></table></figure>
+<p>可以<a href="https://en.wikibooks.org/wiki/Haskell/Category_theory#Monads" target="_blank" rel="noopener">证明</a>，</p>
+<p>这些“Monad Law”刚好使<code>m</code>，<code>&gt;&gt;=</code>和<code>return</code>构成了范畴论意义上的Monad。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文介绍了范畴论相关的一些内容，</p>
+<p>介绍了什么是范畴，什么是函子，什么是自然变换，</p>
+<p>这些都是理解笛卡尔闭范畴所必须的。</p>
+<p><br/></p>
+<p>为了理解什么是范畴，我们列举了前一篇提到的群，拓扑空间，CPO作为例子，</p>
+<p>还借用了Haskell中的Functor和Monad学习了Hask范畴。</p>
+<p><br/></p>
+<p>下文我们将继续学习范畴论，</p>
+<p>理解什么是笛卡尔闭范畴，以及如何用它解释简单类型<span data-katex="\lambda"></span>演算的语义。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://en.wikipedia.org/wiki/Category_(mathematics)" target="_blank" rel="noopener">Category (mathematics)</a></p>
+<p><a href="https://en.wikibooks.org/wiki/Haskell/Category_theory" target="_blank" rel="noopener">Haskell/Category theory</a></p>
+<p><a href="https://book.douban.com/subject/1823110/" target="_blank" rel="noopener">Categories for the Working Mathematician</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/09/semantics-7/" rel="next" title="语言背后的代数学（七）：数学结构">
+                <i class="fa fa-chevron-left"></i> 语言背后的代数学（七）：数学结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/12/document/" rel="prev" title="如何写好一篇文档">
+                如何写好一篇文档 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图示法"><span class="nav-number">2.</span> <span class="nav-text">1. 图示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范畴"><span class="nav-number">3.</span> <span class="nav-text">2. 范畴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函子"><span class="nav-number">4.</span> <span class="nav-text">3. 函子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自然变换"><span class="nav-number">5.</span> <span class="nav-text">4. 自然变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#monad"><span class="nav-number">6.</span> <span class="nav-text">5. Monad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hask范畴上的monad"><span class="nav-number">7.</span> <span class="nav-text">6. Hask范畴上的Monad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

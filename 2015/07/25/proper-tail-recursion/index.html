@@ -1,0 +1,977 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Scheme是一门支持Proper tail recursion的语言， 实际上这是对语言本身的约束， 任何实现都必须满足， 我们可以依赖它写出可移植的程序。  那么，到底什么是尾递归呢？ 什么样的才是Proper呢？ 它给我们带来了什么好处呢？  这还要从函数的尾调用说起。 我们发现， Proper tail recursion和continuation有很深的关联。  下文为了叙述方便， 我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="尾递归优化">
+<meta property="og:url" content="https://thzt.github.io/2015/07/25/proper-tail-recursion/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="Scheme是一门支持Proper tail recursion的语言， 实际上这是对语言本身的约束， 任何实现都必须满足， 我们可以依赖它写出可移植的程序。  那么，到底什么是尾递归呢？ 什么样的才是Proper呢？ 它给我们带来了什么好处呢？  这还要从函数的尾调用说起。 我们发现， Proper tail recursion和continuation有很深的关联。  下文为了叙述方便， 我们">
+<meta property="article:published_time" content="2015-07-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.916Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2015/07/25/proper-tail-recursion/"/>
+
+
+
+
+
+  <title>尾递归优化 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/07/25/proper-tail-recursion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">尾递归优化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-25T00:00:00+08:00">
+                2015-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lisp/" itemprop="url" rel="index">
+                    <span itemprop="name">Lisp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Scheme是一门支持Proper tail recursion的语言，</p>
+<p>实际上这是对语言本身的约束，</p>
+<p>任何实现都必须满足，</p>
+<p>我们可以依赖它写出可移植的程序。</p>
+<p><br/></p>
+<p>那么，到底什么是尾递归呢？</p>
+<p>什么样的才是Proper呢？</p>
+<p>它给我们带来了什么好处呢？</p>
+<p><br/></p>
+<p>这还要从函数的尾调用说起。</p>
+<p>我们发现，</p>
+<p>Proper tail recursion和continuation有很深的关联。</p>
+<p><br/></p>
+<p>下文为了叙述方便，</p>
+<p>我们用术语尾递归优化（tail recursion optimization）,</p>
+<p>来介绍Proper tail recursion的技术细节。</p>
+<p><br/></p>
+<h2 id="尾调用"><strong>尾调用</strong></h2>
+<p>这是一个很常见的概念，</p>
+<p>但是为了完整性，这里还是要说一说。</p>
+<p><br/></p>
+<p>我们看两个函数，f和g，他们的定义如下，</p>
+<p><br/></p>
+<p>(define (f a)</p>
+<p>    (g 2)</p>
+<p>    (display a))</p>
+<p><br/></p>
+<p>(define (g b)</p>
+<p>    (display b))</p>
+<p><br/></p>
+<p>(f 1)</p>
+<p><br/></p>
+<p>结果：</p>
+<p>21</p>
+<p><br/></p>
+<p>我们分析一下实际的调用过程，</p>
+<p>求值(f 1)，会导致f的函数体被求值，</p>
+<p>于是，先求值(g 2)，导致g的函数体被求值，输出2，</p>
+<p>然后<strong>函数g返回</strong>了，返回到f的函数体中，</p>
+<p>再接着执行下一条语句，输出1。</p>
+<p><br/></p>
+<p>我们看到，对g的调用，不是f的最后一个调用。</p>
+<p>称为<strong>g不是f的尾调用</strong>。</p>
+<p><br/></p>
+<p>我们改一下例子，</p>
+<p><br/></p>
+<p>(define (f a)</p>
+<p>    (display a)</p>
+<p>    (g 2))</p>
+<p><br/></p>
+<p>(define (g b)</p>
+<p>    (display b))</p>
+<p><br/></p>
+<p>(f 1)</p>
+<p><br/></p>
+<p>结果：</p>
+<p>12</p>
+<p><br/></p>
+<p>现在g是f的尾调用了。</p>
+<p><br/></p>
+<p>为什么要强调尾调用呢？</p>
+<p>因为，如果g是f的尾调用，</p>
+<p><strong>g就可以不返回到f中</strong>，</p>
+<p><strong>而直接返回到f该返回的地方</strong>。</p>
+<p><br/></p>
+<p>调用g的时候，就不会增长调用栈，</p>
+<p>而是废弃原来f的调用环境即可。</p>
+<p><br/></p>
+<p>不必要的调用栈不会增加，</p>
+<p>使得尾递归可以在常量的调用栈空间中执行，</p>
+<p>我们就可以放心的使用尾递归来替代循环了。</p>
+<p><br/></p>
+<h2 id="调用栈和调用图"><strong>调用栈和调用图</strong></h2>
+<p>从语言的实现角度来看，</p>
+<p>每一次函数调用会初始化一个新的frame，</p>
+<p>frame中保存着形参与实参的绑定。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>(f 1)会产生一个frame，[(a 1)]</p>
+<p><br/></p>
+<p>而环境，是一个frame的<strong>链表</strong>，</p>
+<p>top-level环境中只有一个frame，表示了变量f和g的绑定，</p>
+<p>[(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]</p>
+<p><br/></p>
+<p>所以，进入f的函数体后，</p>
+<p>新创建的frame会添加到<strong>f定义时的环境</strong>头部，</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
+<p>环境中有两个frame了。</p>
+<p><br/></p>
+<p>f的函数体是在这个新环境中求值的。</p>
+<p>f函数体的执行环境是对定义时环境的扩展，</p>
+<p>这是<strong>词法作用域</strong>规则的简单实现。</p>
+<p><br/></p>
+<p>我们再调用g，看看环境会怎样变化，</p>
+<p>调用g会创建一个新的frame，[(b 2)]</p>
+<p>这个frame会添加到<strong>g定义时的环境</strong>头部，</p>
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
+<p><br/></p>
+<p>注意，环境并没有变成，</p>
+<p>([(b 2)] <strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
+<p>新的frame并不会添加到<strong>调用g时的环境</strong>中去。</p>
+<p><br/></p>
+<p>当g返回时，</p>
+<p>环境又变成了f的执行环境，</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])</p>
+<p><br/></p>
+<p>跟踪运行环境的变化，我们发现，</p>
+<p>在实现词法作用域之后，环境并不是一个栈结构的。</p>
+<p><br/></p>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;top-level： frame0</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入f： frame1 &lt;- frame0</p>
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入g： frame2 &lt;- frame0</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;回到f： frame1 &lt;- frame0</p>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;回到top-level： frame0</p>
+<p><br/></p>
+<p>我们可以把frame0看成树根，</p>
+<p>frame1，frame2看成子节点，</p>
+<p>于是，<strong>环境构成了一棵树</strong>，</p>
+<p>这就是为什么我们之前说环境是frame的<strong>链表</strong>，而不是<strong>列表</strong>的原因了。</p>
+<p><br/></p>
+<p>既然这样，</p>
+<p>那么尾调用也就不必服从弹栈规则了，</p>
+<p>g返回，可以让执行环境返回到f该返回的状态。</p>
+<p><br/></p>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]) ;top-level： frame0</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]) ;进入f： frame1 &lt;- frame0</p>
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]) ;进入g： frame2 &lt;- frame0</p>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])) ;<strong>直接返回到top-level</strong>： frame0</p>
+<p><br/></p>
+<p>这种技术，称为<strong>尾调用优化</strong>。</p>
+<p><br/></p>
+<h2 id="尾递归的执行环境"><strong>尾递归的执行环境</strong></h2>
+<p>我们来分析一下尾递归的执行环境，</p>
+<p>请看阶乘函数的尾递归版本，</p>
+<p><br/></p>
+<p>(define (fact n <strong>result</strong>)</p>
+<p>    (if (= n 1)</p>
+<p>        <strong>result</strong></p>
+<p>        (fact (- n 1) (* result n))))</p>
+<p><br/></p>
+<p>(+ 4 (fact 3 1))</p>
+<p><br/></p>
+<p>结果：</p>
+<p>10</p>
+<p><br/></p>
+<p>top-level环境：([(fact #&lt;procedure&gt;)])</p>
+<p>要计算(+ 4 (fact 3 1))，先要求值(fact 3 1)，</p>
+<p>调用(fact 3 1)，进入函数体：(<strong>[(n 3) (result 1)]</strong> [(fact #&lt;procedure&gt;)])</p>
+<p>再次调用(fact 2 3)：(<strong>[(n 2) (result 3)]</strong> [(fact #&lt;procedure&gt;)])，</p>
+<p>词法作用域规则，扩展定义环境，</p>
+<p>然后调用(fact 1 6)：(<strong>[(n 1) (result 6)]</strong> [(fact #&lt;procedure&gt;)])，</p>
+<p>这里要返回result了，值为6。</p>
+<p><br/></p>
+<p>可是要返回到哪里呢？</p>
+<p>我们看到以上的一系列调用都是<strong>尾调用</strong>，</p>
+<p>所以，直接返回到了最开始调用(fact 3 1)的地方，</p>
+执行环境变成了，([(fact #
+<procedure>
+<p>)])，</p>
+<p>于是，在这环境中求值(+ 4 6) -&gt; 10</p>
+<p><br/></p>
+<h2 id="与continuation的关联"><strong>与continuation的关联</strong></h2>
+<p>我们看到，要想实现这样的调用结构，</p>
+<p>需要把环境中的绑定关系分配在<strong>内存堆</strong>中，</p>
+<p>这样就可以让函数的调用者，显式控制返回环境了。</p>
+<p><br/></p>
+<p>实现了尾调用优化后，</p>
+<p>函数的调用者多了一种选择，</p>
+<p>或者让函数执行后，<strong>返回到调用前的执行环境</strong>，</p>
+<p>或者<strong>返回到调用者该返回的执行环境</strong>。</p>
+<p><br/></p>
+<p>这其实是一种continuation的操作。</p>
+<p>即，f调用g，g的continuation，</p>
+<p>或者是f调用g后的continuation，</p>
+<p>或者是f的continuation。</p>
+<p><br/></p>
+<p>我们用CPS改写一下上面的例子，</p>
+<p><br/></p>
+<p><strong>非尾调用</strong>的情况，</p>
+<p>(define *cont*</p>
+<p>    (lambda (x) x))</p>
+<p><br/></p>
+<p>(define (f a cont)</p>
+<p>    (g 2</p>
+<p>        <strong>(lambda (v)</strong></p>
+<p>            <strong>(cont (display a)))</strong>))</p>
+<p><br/></p>
+<p>(define (g b cont)</p>
+<p>    (cont (display b)))</p>
+<p><br/></p>
+<p>(f 1 *cont*)</p>
+<p><br/></p>
+<p>结果：</p>
+<p>21</p>
+<p><br/></p>
+<p>我们看到非尾调用的g的continuation，</p>
+<p>是执行display，再执行f的continuation。即，</p>
+<p>(lambda (v)</p>
+<p>    (cont (display a)))</p>
+<p><br/></p>
+<p>我们再看<strong>尾调用</strong>情况，</p>
+<p>(define *cont*</p>
+<p>    (lambda (x) x))</p>
+<p><br/></p>
+<p>(define (f a cont)</p>
+<p>    (display a)</p>
+<p>    (g 2 <strong>cont</strong>))</p>
+<p><br/></p>
+<p>(define (g b cont)</p>
+<p>    (cont (display b)))</p>
+<p><br/></p>
+<p>(f 1 *cont*)</p>
+<p><br/></p>
+<p>结果：</p>
+<p>12</p>
+<p><br/></p>
+<p>尾调用g的continuation，</p>
+<p>是f的continuation。</p>
+<p><br/></p>
+<p>这给了我们一种方案，在写解释器的时候，</p>
+<p>可以使用CPS来进行尾调用优化。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>为了进行尾调用优化，</p>
+<p>语言实现必须对调用图进行控制，</p>
+<p>或者说，显式的控制continuation。</p>
+<p><br/></p>
+<p>与其把这种显式的控制隐藏在语言的实现里面，</p>
+<p><strong>不如开放给语言的使用者</strong>，</p>
+<p>因为开放出来并不是特别困难。</p>
+<p><br/></p>
+<p>这种非弹栈形式的跳转，</p>
+<p>称为<strong>非局部跳转</strong>（non-local jump），</p>
+<p>类似C语言的setjmp和longjmp。</p>
+<p><br/></p>
+<p>call/cc就是这样产生的，</p>
+<p>并不是为了追求另类，</p>
+<p><strong>而是实现尾调用优化的直接后果</strong>。</p>
+<p><br/></p>
+<p>而且，call/cc捕获的continuation是<strong>first-class</strong>的，</p>
+<p>可以当做参数传递，或者返回，</p>
+<p>这极大的丰富的Scheme语言的表现力，</p>
+<p>让程序员可以最大限度的控制跳转范围。</p>
+<p><br/></p>
+<p>参考：</p>
+<p><a href="http://www.cs.rpi.edu/academics/courses/fall00/ai/scheme/reference/schintro-v14/schintro_toc.html" target="_blank" rel="noopener">An Introduction to Scheme and its Implementation</a></p>
+<p><a href="http://book.douban.com/subject/4030015/" target="_blank" rel="noopener">Essentials of Programming Languages</a></p>
+<p><a href="http://book.douban.com/subject/1456904/" target="_blank" rel="noopener">Lisp in small pieces</a></p>
+<p><a href="http://book.douban.com/subject/2587705/" target="_blank" rel="noopener">Concepts in Programming Languages</a></p>
+<p><a href="http://book.douban.com/subject/1762126/" target="_blank" rel="noopener">Compiling with continuations</a></p>
+<p><a href="http://www.scheme.com/tspl4/" target="_blank" rel="noopener">The Scheme Programming Language</a></p>
+<p><a href="http://scheme-reports.org/" target="_blank" rel="noopener">RnRS</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/18/ability-of-regular-expression/" rel="next" title="正则表达式的能力范围">
+                <i class="fa fa-chevron-left"></i> 正则表达式的能力范围
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/02/fullstack/" rel="prev" title="高手为何剑不出鞘">
+                高手为何剑不出鞘 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#尾调用"><span class="nav-number">1.</span> <span class="nav-text">尾调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用栈和调用图"><span class="nav-number">2.</span> <span class="nav-text">调用栈和调用图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尾递归的执行环境"><span class="nav-number">3.</span> <span class="nav-text">尾递归的执行环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与continuation的关联"><span class="nav-number">4.</span> <span class="nav-text">与continuation的关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

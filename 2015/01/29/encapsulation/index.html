@@ -1,0 +1,811 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="函数式编程越来越流行了。 号称使用它可以大幅度的提高工作效率。 人们也开始厌恶面向对象编程了。  面向对象的思想该淘汰了吗？ 函数式真的有这么先进吗？  其实不然。  因为，程序员具有哪些思维才是重要的。 通过学习不同范型的编程语言，积累的是有用的编程思想。 然后，在实际工作中灵活运用。  没有人规定剑客不可以用刀法御敌。 未来属于那些活学活用的人。  本文，以面向对象的封装思想为例。 我们要挖掘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="封装的内涵">
+<meta property="og:url" content="https://thzt.github.io/2015/01/29/encapsulation/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="函数式编程越来越流行了。 号称使用它可以大幅度的提高工作效率。 人们也开始厌恶面向对象编程了。  面向对象的思想该淘汰了吗？ 函数式真的有这么先进吗？  其实不然。  因为，程序员具有哪些思维才是重要的。 通过学习不同范型的编程语言，积累的是有用的编程思想。 然后，在实际工作中灵活运用。  没有人规定剑客不可以用刀法御敌。 未来属于那些活学活用的人。  本文，以面向对象的封装思想为例。 我们要挖掘">
+<meta property="article:published_time" content="2015-01-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.907Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2015/01/29/encapsulation/"/>
+
+
+
+
+
+  <title>封装的内涵 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/01/29/encapsulation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">封装的内涵</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-01-29T00:00:00+08:00">
+                2015-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>函数式编程越来越流行了。</p>
+<p>号称使用它可以大幅度的提高工作效率。</p>
+<p>人们也开始厌恶面向对象编程了。</p>
+<p><br/></p>
+<p>面向对象的思想该淘汰了吗？</p>
+<p>函数式真的有这么先进吗？</p>
+<p><br/></p>
+<p>其实不然。</p>
+<p><br/></p>
+<p>因为，程序员具有哪些思维才是重要的。</p>
+<p>通过学习不同范型的编程语言，积累的是有用的编程思想。</p>
+<p>然后，在实际工作中灵活运用。</p>
+<p><br/></p>
+<p>没有人规定剑客不可以用刀法御敌。</p>
+<p>未来属于那些活学活用的人。</p>
+<p><br/></p>
+<p>本文，以面向对象的封装思想为例。</p>
+<p>我们要挖掘一下，隐藏在封装思想中的深刻内涵。</p>
+<p><br/></p>
+<h2 id="将独立的部分隔离起来"><strong>将独立的部分隔离起来</strong></h2>
+<p>很多人对封装的认识，来自于“将数据和对它的操作放在一起”这种说法中。</p>
+<p>其实，这只是对封装思想的一种应用而已。</p>
+<p><br/></p>
+<p>初学者，可能会写出一个巨类。</p>
+<p>很多函数和它们操作的数据都在这一个类中。</p>
+<p><br/></p>
+<p>而事实上，隔离才是这么做的原因。</p>
+<p>将不需要访问的数据隔离出去，将不需要使用的函数也隔离出去。</p>
+<p><br/></p>
+<p>这样，一个巨类就可以拆分成几个小类。</p>
+<p>他们之间的函数和数据，互相独立，互不影响。</p>
+<p><br/></p>
+<p>函数式是怎样处理的呢？</p>
+<p>函数式中使用了闭包的概念，将数据存储在具有词法作用域的变量中。</p>
+<p><br/></p>
+<h2 id="将功能的提供者和使用者分层"><strong>将功能的提供者和使用者分层</strong></h2>
+<p>有些人，学会了写很多小类。</p>
+<p>但是这些小类之间互相使用，看起来十分混乱。</p>
+<p>其实，这是因为没有分层所致。</p>
+<p><br/></p>
+<p>分层也是封装思想的一种应用。</p>
+<p>当多个独立的小部分，共同提供一个功能时，就构成了一个层次。</p>
+<p><br/></p>
+<p>将功能的提供者和使用者分层，有三个好处。</p>
+<p>首先，依赖关系图就退化成了依赖关系树。</p>
+<p>其次，我们可以有效的避免跨层调用和逆向调用。</p>
+<p>最后，同一层次的重新组合，就可以调整上层所需的功能，而对下层不会产生影响。</p>
+<p><br/></p>
+<p>函数式是怎样处理的呢？</p>
+<p>函数式中的高阶函数是实现分层的方式之一。</p>
+<p>一般的函数提供功能集，高阶函数使用它们。</p>
+<p><br/></p>
+<h2 id="将语言的描述和实现分开"><strong>将语言的描述和实现分开</strong></h2>
+<p>不知道为什么，有些人很鄙视设计模式。</p>
+<p>这些人通常没有从丰富自身的角度考虑问题。</p>
+<p><br/></p>
+<p>对自己有用的东西，往往并不是整块出现的。</p>
+<p>我们必须有能力把它们挑选出来。</p>
+<p><br/></p>
+<p>取其精华，去其糟粕。</p>
+<p><br/></p>
+<p>我认为，设计模式提供了很多素材（内部结构和外部场景）。</p>
+<p>让我们有能力设计出更富表现力的用户接口。</p>
+<p><br/></p>
+<p>站在每个功能层次上，我们都需要考虑上层如何使用。</p>
+<p>学习设计模式，会丰富我们的语言，灵活的设计上层接口。</p>
+<p><br/></p>
+<p>这也是封装吗？</p>
+<p>是的，实现细节封装在用户接口的描述中了。</p>
+<p>其实，编程语言本身，就是封装的一种应用。</p>
+<p><br/></p>
+<h2 id="封装业务领域"><strong>封装业务领域</strong></h2>
+<p>什么是好的程序员？</p>
+<p>好的程序员应该在代码与功能之间建立了一个抽象的隔离层，</p>
+<p>让外行人可以在讨论功能的时候不用关心代码的细节，</p>
+<p>这是面向对象的封装思想在项目上的应用。</p>
+<p><br/></p>
+<p>既然别人不强求程序员理解他们，程序员也无需强求他们理解代码。</p>
+<p>不是吗？</p>
+<p><br/></p>
+<p>好的合作，就是尽量隐藏属于自己业务范围内的事情，因为别人并不关心。</p>
+<p>和好的程序员合作，你不用关心他代码的问题，你看不到他在调整。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>正所谓，长视者把目的当作手段，短视者把手段当作目的。</p>
+<p>让我们正确看待编程思想的演变吧，以丰富自身的眼光。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/01/27/y-combinator-in-javascript/" rel="next" title="Y combinator in javascript">
+                <i class="fa fa-chevron-left"></i> Y combinator in javascript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/30/cps-and-tail-recursion/" rel="prev" title="使用CPS将fact和fib改为tail recursion">
+                使用CPS将fact和fib改为tail recursion <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#将独立的部分隔离起来"><span class="nav-number">1.</span> <span class="nav-text">将独立的部分隔离起来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将功能的提供者和使用者分层"><span class="nav-number">2.</span> <span class="nav-text">将功能的提供者和使用者分层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将语言的描述和实现分开"><span class="nav-number">3.</span> <span class="nav-text">将语言的描述和实现分开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装业务领域"><span class="nav-number">4.</span> <span class="nav-text">封装业务领域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

@@ -1,0 +1,809 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="场景： 两级弹框，第一级是bootstrap的modal，里面有一个jqgrid，第二级是jqgrid添加记录的弹框 第二级弹框中的textarea在IE9中不能换行，而在chrome中可以  Day 1 bootstrap的modal和jqgrid全部在实验室环境中搭建起来，比较麻烦，先考虑别的办法 因为IE9调试工具太弱了，看看firefox有没有同样的问题 发现firefox中的问题是tex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="愉快的三天">
+<meta property="og:url" content="https://thzt.github.io/2015/10/15/web-front-end-bug/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="场景： 两级弹框，第一级是bootstrap的modal，里面有一个jqgrid，第二级是jqgrid添加记录的弹框 第二级弹框中的textarea在IE9中不能换行，而在chrome中可以  Day 1 bootstrap的modal和jqgrid全部在实验室环境中搭建起来，比较麻烦，先考虑别的办法 因为IE9调试工具太弱了，看看firefox有没有同样的问题 发现firefox中的问题是tex">
+<meta property="article:published_time" content="2015-10-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-30T12:16:31.919Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2015/10/15/web-front-end-bug/"/>
+
+
+
+
+
+  <title>愉快的三天 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/10/15/web-front-end-bug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">愉快的三天</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-15T00:00:00+08:00">
+                2015-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Software/" itemprop="url" rel="index">
+                    <span itemprop="name">Software</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>场景：</strong></p>
+<p>两级弹框，第一级是bootstrap的modal，里面有一个jqgrid，第二级是jqgrid添加记录的弹框</p>
+<p>第二级弹框中的textarea在IE9中不能换行，而在chrome中可以</p>
+<p><br/></p>
+<h2 id="day-1"><strong>Day 1</strong></h2>
+<p>bootstrap的modal和jqgrid全部在实验室环境中搭建起来，比较麻烦，先考虑别的办法</p>
+<p>因为IE9调试工具太弱了，看看firefox有没有同样的问题</p>
+<p>发现firefox中的问题是textarea不能聚焦</p>
+<p>以前遇到过不能获得焦点的问题，跟tabindex有关，把tabindex删掉，没作用</p>
+<p>发现一级弹框中加了元素级别的textarea样式，删掉，没作用</p>
+<p>因为这个框是jqgrid弹出来的，查看jqgrid源码，有没有劫持回车事件，没有</p>
+<p>firefox中逐个删除页面元素，发现可以让textarea获得焦点，可能是元素的问题</p>
+<p>把一级对话框内中的jqgrid删掉，再用控制台命令添加纯html二级弹框，还是有问题，说明不是jqgrid的问题</p>
+<p>考虑到删除元素会改变子元素的样式，可能是样式问题</p>
+<p>firefox中删除所有样式，发现可以获得焦点了，是样式问题</p>
+<p>逐步缩小范围，发现是一级弹框有一个行内样式所致，删掉后，可以获得焦点了</p>
+<p>但是在IE9中仍然不可换行</p>
+<p><strong>解决了firefox不能聚焦的问题</strong></p>
+<p><br/></p>
+<h2 id="day-2"><strong>Day 2</strong></h2>
+<p>现在Chrome和Firefox都没问题了，只好硬着头皮用IE9调试了，鉴于昨天的结论，先从样式角度考虑</p>
+<p>发现一级弹框去掉所有样式，就可以换行了</p>
+<p>但是聚焦不到特定的某一条样式上，怀疑是脏乱的样式加成结果导致CSS解析器出错了</p>
+<p>发现在错误的样式下，只要隐藏对话框也是可换行的，可能是浏览器计算位置时出错了</p>
+<p>因为bootstrap样式层叠的太多了，既然不知道哪个样式是错的，那就用正确的样式手写生成原来的样子，也是个办法</p>
+<p>生成过程中发现其他样式都去掉，display:block;position:fixed;z-index:1030;就能复现问题，可能是浏览器计算z-index错了</p>
+<p>用IE9调试工具修改页面源码，就没问题了。因为页面重绘，重新计算了位置，也可能是事件都删掉了</p>
+<p>页面太乱了，清理一下，把页面杂乱的标签都删掉，尤其是script片段，没作用</p>
+<p>把link标签都删掉，没问题了。应该是某个样式表的问题，定位到是bootstrap.css或ui.jqgrid.css的问题，这两个删一个问题就复现</p>
+<p>把一级弹框的所有父元素保留，删除页面中所有其他的html，问题还存在。但是IE9调试工具中点Refresh就没问题了，IE9调试工具不可靠</p>
+<p>不能过度依赖调试工具了，得想办法把本地服务器端运行起来，不然剩下的办法只能是实验室环境中把网页重新静态构建起来了</p>
+<p><strong>找到一个可行的解决方案，弹出第二级对话框时，把第一级隐藏掉</strong></p>
+<p><br/></p>
+<h2 id="day-3"><strong>Day 3</strong></h2>
+<p>搭建本机环境，把服务器端运行起来</p>
+<p>删掉一级弹框中的所有代码，控制台命令弹出二级纯html弹框，没作用</p>
+<p>先用控制台命令弹出二级纯html弹框，再在页面点击弹出一级弹框，没作用</p>
+<p>控制台命令弹出二级纯html弹框，再控制台命令弹出一级纯html弹框，好了，应该是一级弹框弹出的过程中做了什么</p>
+<p>发现是bootstrap的modal('show')这条语句弹出的框有问题</p>
+<p>因为IE9不容易跟源码，所以先不看源码，在实验室环境中，造一个一模一样modal，然后二级弹框果然出问题了，并且firefox和chrome都无法获得焦点</p>
+<p>实验室环境中复现了问题，问题快解决了</p>
+<p>找到bootstrap的modal插件的官方例子，弹出二级弹框，没问题</p>
+<p>对比有问题的代码，发现只要modal-body中包含&lt;button&gt;就能复现问题，定位为bootstrap的问题</p>
+<p>考虑解决方案，把服务器中的所有button都换成div，还是有问题，而实验室没问题，说明IE9不太稳定</p>
+<p>控制台删掉所有的button，结果好了</p>
+<p>看看是哪个button影响的，发现总是最后一个button影响的</p>
+<p>用补丁方式，先造一个隐藏的button，然后载入时模拟控制台删掉它，没作用。但是控制台删掉它，就有作用，不稳定</p>
+<p>不看modal的源码不行了</p>
+<p>为了能调试进源码中，换Chrome跟进bootstrap源码，再到IE9看效果</p>
+<p>先把modal函数中代码全删了，果然问题没了，然后逐个功能还原，寻找复现问题的临界点</p>
+<p>发现enforceFocus这样的方法，是为了强制让对话框获得焦点，感觉就是这个了</p>
+<p>把这个方法注掉，没作用，看看实现，就是先解绑一个自定义聚焦事件再绑定这个自定义聚焦事件</p>
+<p>在事件中写log，果然点击textarea，就触发这个自定义事件</p>
+<p>把事件中把强制获得焦点的代码删掉，好了，这应该就是问题所在了</p>
+<p>考虑解决方案，enforceFocus只是进行解绑和绑定事件，而事件是点击textarea时触发的，那就让它只解绑不绑定</p>
+<p>分析源码，enforceFocus引用是Modal.prototype中的方法，而Modal是$.fn.modal.constructor，因此是在源码外改的</p>
+<p>尽量不动源码，在源码之外加补丁</p>
+<p>chrome和firefox在实验室环境中，textarea是不能获得焦点的，但是网站中可以，原因未知</p>
+<p><strong>通过覆盖自动聚焦事件，解决了问题</strong></p>
+<p><br/></p>
+<h2 id="困难"><strong>困难</strong></h2>
+<p>IE9的调试工具太差，Chrome调试工具虽好，但是Chrome没有问题</p>
+<p>bootstrap大量的样式名污染的全局空间，每一个元素有大量冗余的层叠样式</p>
+<p>很多事件可能是跟样式名相关联的，删了样式名会影响事件</p>
+<p>前两天本机环境没有搭建好，只能通过浏览器调试</p>
+<p>第三方库用了什么黑魔法，不知道</p>
+<p>页面太杂乱，script片段遍布各处，到处是动态加载但不清理的内容</p>
+<p>setTimeout乱用，至少二十处setTimeout，js执行过程紊乱</p>
+<p>两层弹框，第一级弹框中还能进行内容tab切换，影响因素比较多</p>
+<p>项目代码的问题写的太差，互相依赖，很难对功能进行隔离，不能以功能模块为单位进行测试</p>
+<p>二级弹框并不是一级弹框的子元素，而是body的子元素，与一级弹框的位置相距很远，从直觉上很难发现有关联</p>
+<p><br/></p>
+<h2 id="优势"><strong>优势</strong></h2>
+<p>电脑配置不错，两个显示器，16G内存装了虚拟机可以模拟IE8-11,Edge</p>
+<p>没有时间压力，没人催我，没有别的项目或会议打断我</p>
+<p>服务器端同事配合，没有怀疑我的能力</p>
+<p>bootstrap和jqgrid源码不是太烂</p>
+<p>这不是一个偶现的bug，没次都能出现，难度降低了不少</p>
+<p><br/></p>
+<h2 id="误区"><strong>误区</strong></h2>
+<p>其实IE的问题并不是那么多，更多的是可见代码的问题</p>
+<p>黑盒试错，不如静下心来跟进源码看看原理</p>
+<p>不能过度依赖调试工具的结论</p>
+<p>可以通过改动来试错的代码越多，排除假设的机会就越大</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/12/different-premise/" rel="next" title="不同的前提">
+                <i class="fa fa-chevron-left"></i> 不同的前提
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/30/preparation/" rel="prev" title="先后之分">
+                先后之分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#day-1"><span class="nav-number">1.</span> <span class="nav-text">Day 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#day-2"><span class="nav-number">2.</span> <span class="nav-text">Day 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#day-3"><span class="nav-number">3.</span> <span class="nav-text">Day 3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#困难"><span class="nav-number">4.</span> <span class="nav-text">困难</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优势"><span class="nav-number">5.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#误区"><span class="nav-number">6.</span> <span class="nav-text">误区</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>
