@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/27/purity/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/06/22/hero-paradox/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/27/purity/" itemprop="url">Haskell的纯函数性</a></h1>
+                <a class="post-title-link" href="/2015/06/22/hero-paradox/" itemprop="url">英雄悖论</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-27T00:00:00+08:00">
-                2015-03-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-22T00:00:00+08:00">
+                2015-06-22
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Haskell/" itemprop="url" rel="index">
-                    <span itemprop="name">Haskell</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,107 +347,102 @@
       
         
           
-            <p>表达式是在环境中求值的。</p>
-<p>如果允许表达式改变环境，</p>
-<p>那么，其他表达式的求值结果，就是不可预料的。</p>
+            <p>国难出英雄。</p>
 <p><br/></p>
-<p>环境，是专业术语，也可称为执行环境，</p>
-<p>里面保存的是，变量和值的绑定关系。</p>
+<p>祸乱中，才能凸显英雄。</p>
+<p>他们力挽狂澜，建立了丰功伟绩。</p>
 <p><br/></p>
-<p>Haskell是一门纯函数式语言，</p>
-<p>并不是说，函数的每次求值结果都相同。</p>
-<p>而是说，<strong>任何函数都不会修改它的执行环境</strong>。</p>
+<p>然而，</p>
+<p>这似乎<strong>并不是英雄的最高境界</strong>。</p>
 <p><br/></p>
-<p>例如，对于从屏幕上读取字符的函数，</p>
-<p>每次调用，并不一定会返回相同的值。</p>
-<p>但是，执行后，它确实不会影响环境中的绑定关系。</p>
+<p>有些普通人，防微杜渐，</p>
+<p>做着一些不起眼的小事，</p>
+<p><strong>让灾祸根本就不可能发生</strong>。</p>
 <p><br/></p>
-<p>因此，输入输出操作，也是纯函数，</p>
-<p>理解执行环境和现实世界的区别，是关键。</p>
+<p>可是他们，却不能称之为英雄，</p>
+<p>因为他们并没有救人于水火。</p>
 <p><br/></p>
-<h2 id="io"><strong>IO</strong></h2>
-<p>Haskell是一门静态强类型的语言。</p>
-<p>任何表达式在编译前类型都是确定的。</p>
+<p>这真是一个值得深思的悖论。</p>
 <p><br/></p>
-<p>输入输出与IO a类型有关。</p>
-<p>其中，IO是类型构造器，:k IO = * -&gt; *</p>
-<p>因此，IO a才是一个具体类型。</p>
+<h2 id="里阳县令寇准"><strong>里阳县令寇准</strong></h2>
+<p>《杨家将》中有一段，</p>
+<p>为了避嫌，包拯推荐寇准追查一个案件。</p>
 <p><br/></p>
-<p>IO是如何定义的呢？</p>
-<p>type IO a = World -&gt; (a, World)</p>
-<p>World类型的值表示现实世界的状态。</p>
+<p>可是钦差到了里阳县后，</p>
+<p>却发现，<strong>县衙已经荒废很久了</strong>，</p>
+<p>人们都在门口摆摊做买卖。</p>
 <p><br/></p>
-<p>IO a类型的值是一个函数，它接受现实世界的当前状态作为参数，</p>
-<p>返回一个元组，这个元组由类型a的值和对现实世界改变后的状态构成。</p>
+<p>好不容易在后堂，</p>
+<p>找到了在和衙役下棋的寇准。</p>
 <p><br/></p>
-<p>由于，我们并不需要手动传递World类型的值作为参数来调用，</p>
-<p>所以，应该<strong>把IO a类型的值理解为一个惰性求值的表达式</strong>，</p>
-<p>对该表达式按需求值，得到一个a类型的值。</p>
+<p>钦差对寇准说：</p>
+<p>你身为县令，</p>
+<p>不但官帽不戴，官服不穿，</p>
+<p>而且还<strong>荒废职守</strong>。</p>
+<p>外面是衙门，根本就<strong>不像衙门</strong>。</p>
 <p><br/></p>
-<p>IO a类型的表达式，称为<strong>action</strong>。</p>
-<p>IO a类型的action中，惰性包含了一个a类型的值。</p>
+<p>寇准说：</p>
+<p>没关系的。</p>
 <p><br/></p>
-<p>例如：</p>
-<p>getChar :: IO Char</p>
-<p>求值getChar表达式，就会得到一个Char类型的值。</p>
+<p>我们这儿，最近这几年，</p>
+<p>真是路不拾遗，夜不闭户，</p>
+<p><strong>根本就没有人犯案的</strong>。</p>
 <p><br/></p>
-<p>例如：</p>
-<p>IO ( )</p>
-<p>其中，( )表示空元组类型，该类型只有一个值，空元组( )。</p>
-<p>“( )”既可以表示类型，又可以表示值，取决于它出现的上下文。</p>
-<p>另外，Haskell中习惯将空元组看做无用数据。</p>
+<p>用不着升堂这么麻烦了，</p>
+<p>很清闲的。</p>
 <p><br/></p>
-<p>在IO ( )中，( )是作为IO类型构造器的参数出现的，表示空元组类型，</p>
-<p>所以说，IO ( )类型的action中，惰性包含了一个空元组值。</p>
+<h2 id="用武之地"><strong>用武之地</strong></h2>
+<p>不做历史研究，</p>
+<p>仅限于故事之中。</p>
 <p><br/></p>
-<p>例如：</p>
-<p>putStrLn :: String -&gt; IO ( )</p>
-<p>putStrLn是一个函数，</p>
-<p>它接受String类型的值作为参数，</p>
-<p>返回一个IO ( )类型的action。</p>
+<p>能让人们安居乐业，</p>
+<p>并不是一件容易的事情。</p>
 <p><br/></p>
-<h2 id="do"><strong>do</strong></h2>
-<p>main :: IO ( )</p>
-<p>main = do</p>
-<p>    putStrLn "Please input: "</p>
-<p>    inpStr &lt;- getLine</p>
-<p>    putStrLn $ "Hello " ++ inpStr</p>
+<p>然而，</p>
+<p><strong>县令却没有以解决过离奇的案件</strong>，</p>
+<p><strong>而为人所知</strong>。</p>
 <p><br/></p>
-<p>以上程序定义了main函数，是一个IO ( )类型的action。</p>
+<p>一个人在事情发展过程中，</p>
+<p>起着什么作用，</p>
+<p>外人通常是无法了解的。</p>
 <p><br/></p>
-<p>do关键字，是Haskell中的一种写法，</p>
-<p>用来表示顺序执行。</p>
+<p><strong>没有让事情恶化到急需补救之时</strong>，</p>
+<p><strong>才是最强大的处理方式</strong>。</p>
 <p><br/></p>
-<p>其中，</p>
-<p>putStrLn :: String -&gt; IO ( )</p>
-<p>getLine :: IO String</p>
+<h2 id="渴而掘井"><strong>渴而掘井</strong></h2>
+<p>夫病已成而后药之，乱已成而后治之，譬犹渴而穿井，斗而铸锥，不亦晚乎！</p>
+<p>——《素问·四气调神大论》</p>
 <p><br/></p>
-<p>putStrLn $ "Hello " ++ inpStr</p>
-<p>= putStrLn ( "Hello " ++ inpStr )</p>
+<p>已经病重了才用药防治，</p>
+<p>已经有人造反了才治理天下，</p>
+<p>就好比渴极了才挖井、</p>
+<p>要对阵了才去打造铁椎一样。</p>
 <p><br/></p>
-<p>因此，</p>
-<p>putStrLn "Please input: " :: IO ( )，在屏幕上输出字符串“Please input: ”，</p>
-<p>inpStr &lt;- getLine，求值惰性表达式getLine，<strong>把action里面包含的值拿出来</strong>，绑定到inpStr上。</p>
-<p>putStrLn $ "Hello " ++ inpStr，在屏幕上输出字符串"Hello "与变量inpStr连接后的结果。</p>
+<p>这告诉我们，</p>
+<p><strong>要把努力放在点滴的小事上</strong>，</p>
+<p>绵绵不绝的为将来做准备。</p>
 <p><br/></p>
-<p>IO操作，每次执行的效果并不相同，</p>
-<p>但<strong>仍然都是纯函数</strong>，</p>
-<p>在于它们不会修改执行环境中的变量绑定关系。</p>
+<p>一个团队，</p>
+<p>等到人心涣散了，才去挽救，</p>
+<p>为时已晚。</p>
+<p><br/></p>
+<p>个人的知识储备，</p>
+<p>应该每时每刻都注意积累，</p>
+<p>用的时候才能游刃有余。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，</p>
-<p>这种说法，其实是为了解释给不熟悉的人看的。</p>
-<p>事实上，<strong>Haskell中的任何函数都是纯函数</strong>。</p>
+<p>软件项目中，</p>
+<p>有很多问题，本来是可以避免的。</p>
 <p><br/></p>
-<p>类似的，</p>
-<p>Haskell语言中Bug的数量可以控制到非常少，</p>
-<p>并不是因为通过Monad将IO和其他函数分离开，</p>
-<p>而是因为任何函数都不能改变环境中变量的绑定关系，</p>
-<p>即，函数的纯粹性。</p>
+<p>遇到的问题多，</p>
+<p>并把它们解决了，</p>
+<p>也不代表能力超群。</p>
 <p><br/></p>
-<p>此外，Monad，Applicative和Functor这些类型类，</p>
-<p>提高了语言的抽象程度，让复杂度更可控，</p>
-<p>我想，这才是Bug数量少的真正原因吧。</p>
+<p>项目管理，</p>
+<p><strong>亡羊补牢，不如防患于未然</strong>。</p>
+<p><br/></p>
+<p>而团队建设，</p>
+<p><strong>求贤若渴，不如退而创造良好的环境</strong>。</p>
 
           
         
@@ -486,7 +481,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/266/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/266/">266</a><span class="page-number current">267</span><a class="page-number" href="/page/268/">268</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/268/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/266/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/266/">266</a><span class="page-number current">267</span><a class="page-number" href="/page/268/">268</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/268/">&gt;</a>
   </nav>
 
 
@@ -532,7 +527,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -607,7 +602,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

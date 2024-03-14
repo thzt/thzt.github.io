@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/03/01/proof-and-deduction/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/06/08/algebraic-data-type/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/03/01/proof-and-deduction/" itemprop="url">形式证明与逻辑推理</a></h1>
+                <a class="post-title-link" href="/2016/06/08/algebraic-data-type/" itemprop="url">代数数据类型的语法和语义</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-01T00:00:00+08:00">
-                2016-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-08T00:00:00+08:00">
+                2016-06-08
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logic/" itemprop="url" rel="index">
-                    <span itemprop="name">Logic</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,194 +347,163 @@
       
         
           
-            <p>小时候，我就对侦探非常着迷，</p>
-<p>买了很多介绍破案的漫画书，故事书，小说。</p>
+            <h3 id="代数数据类型"><strong>代数数据类型</strong></h3>
+<p>一个代数数据类型，由值的一些集合，以及这些集合之间的一些函数构成。</p>
+<p>这些函数都是一阶函数，不能以其他函数作为参数。</p>
 <p><br/></p>
-<p>什么《大宇神秘惊奇系列》啊，</p>
-<p>《名侦探柯南》啊，</p>
-<p>《福尔摩斯探案全集》啊，等等。</p>
+<h3 id="泛代数"><strong>泛代数</strong></h3>
+<p>泛代数（universal algebra）也称为等式逻辑（equational logic），</p>
+<p>是用于研究代数数据类型的一个数学框架。</p>
 <p><br/></p>
-<p>可是，对于<strong>什么是推理</strong>，</p>
-<p>以及怎样进行推理，</p>
-<p>并没有清晰系统的认识。</p>
+<p>在泛代数中，代数数据类型的语法由代数项（algebraic term）描述，公理语义用项之间的等式集（a set of equations）描述，</p>
+<p>而指称语义对应于一个<span data-katex="\Sigma"></span>代数，操作语义通过给等式设定方向来表示。</p>
+<hr />
+<h2 id="代数数据类型的语法"><strong>代数数据类型的语法</strong></h2>
+<h3 id="代数项和签名"><strong>代数项和签名</strong></h3>
+<p>一个代数项（algebraic term）由符号和类型来定义，</p>
+<p>这些信息放在一起称为代数项的签名（signature）。</p>
 <p><br/></p>
-<p>学生时代，从平面几何开始，</p>
-<p>我们就知道了证明题。</p>
-<p>经过一步一步的推导，</p>
-<p>最后证明结论成立。</p>
+<p>构成代数项的基本类型称为sort。</p>
 <p><br/></p>
-<p>可是，对于<strong>什么是证明</strong>，</p>
-<p>并没有人能说出精确的定义。</p>
+<p>一个签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>，由以下几个部分构成，</p>
+<p>（1）以sort为元素构成的集合</p>
+<p>（2）sort上函数符号的集合<span data-katex="F=\left \{ f:s_1\times \cdots \times s_k\rightarrow s \right \}"></span></p>
+<p>其中，<span data-katex="s_1,\cdots ,s_k,s\in S"></span>，<span data-katex="f"></span>称为类型化的函数符号，</p>
+<p>每个函数符号的类型是唯一的。</p>
 <p><br/></p>
-<p>这一切，难道真是只是个谜吗？</p>
-<p>是人类的未知领域吗？</p>
+<p>例如，自然数表达式的签名是<span data-katex="\Sigma_N=\left \langle S,F \right \rangle"></span>，</p>
+<p>其中<span data-katex="S=\left \{ nat \right \}"></span>，只包含一个sort，</p>
+<p><span data-katex="F"></span>给出以下几个函数符号，</p>
+<p><span data-katex="0:nat"></span>，<span data-katex="1:nat"></span>，<span data-katex="+:nat\times nat\rightarrow nat"></span>，<span data-katex="*:nat\times nat\rightarrow nat"></span>。</p>
+<p>习惯上为了节省空间，通常把签名写成一个表格形式，</p>
+<p><span data-katex="sorts:nat"></span></p>
+<p><span data-katex="fctns:0,1:nat"></span></p>
+<p><span data-katex="+,*:nat\times nat\rightarrow nat"></span></p>
 <p><br/></p>
-<p>其实不然。</p>
-<p><strong>逻辑学</strong>就是研究推理和证明的学科，</p>
-<p>研究思维的形式，规律和方法。</p>
+<h3 id="变量的指派"><strong>变量的指派</strong></h3>
+<p>一个指派（sort assignment），是如下一个有限集合，用来指定变量的类型，</p>
+<p><span data-katex="\Gamma=\left \{ x_1:s_1,\cdots ,x_k:s_k \right \}"></span></p>
+<p>不能为同一个变量指派不同的sort。</p>
 <p><br/></p>
-<p>其中，数理逻辑是逻辑学与数学的交叉学科，</p>
-<p>用数学的方法研究逻辑，</p>
-<p>我想，答案应该在这里吧。</p>
+<h3 id="合法代数项的集合"><strong>合法代数项的集合</strong></h3>
+<p>基于签名<span data-katex="\Sigma"></span>和指派<span data-katex="\Gamma"></span>，可以定义一个sort为<span data-katex="s"></span>的代数项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>，</p>
+<p>它满足以下几个条件，</p>
+<p>（1）如果<span data-katex="x:s\in \Gamma"></span>则<span data-katex="x\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
+<p>（2）如果<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>且<span data-katex="M_i\in Terms^{s_i}\left ( \Sigma,\Gamma \right )"></span>，</p>
+<p><span data-katex="i=1,\cdots ,n"></span>，则<span data-katex="fM_1\cdots M_k\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
+<hr />
+<h2 id="代数数据类型的指称语义"><strong>代数数据类型的指称语义</strong></h2>
+<h3 id="代数"><strong><span data-katex="\Sigma"></span>代数</strong></h3>
+<p><span data-katex="\Sigma"></span>代数是一种数学结构，它为代数项提供了含义或指称语义。</p>
 <p><br/></p>
-<h2 id="大局观"><strong>大局观</strong></h2>
-<p>数理逻辑虽然博大精深，</p>
-<p>但是研究方法却非常简洁优美。</p>
+<p>一个<span data-katex="\Sigma"></span>代数，包含了一个或多个集合，称为载体（carrier），</p>
+<p>以及一些特征元素，和载体上的一些一阶函数，</p>
+<p><span data-katex="f:A_1\times \cdots \times A_k \rightarrow A"></span></p>
 <p><br/></p>
-<p>给定一套逻辑系统，</p>
-<p>分别从两个侧面来描述这个系统的性质。</p>
-<p>语法层面，语义层面。</p>
+<p>例如，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,* \right \rangle"></span></p>
+<p>具有载体<span data-katex="N"></span>，它是自然数集，</p>
+<p>具有特征元素，<span data-katex="0,1\in N"></span>，</p>
+<p>以及函数，<span data-katex="+,*:N \times N \rightarrow N"></span>。</p>
+<p>其中，特征元素可以看成零元函数。</p>
 <p><br/></p>
-<p><strong>语法</strong>，指的是构成这个逻辑系统的符号规则，</p>
-<p>由公理和定理的推导规则组成，</p>
-<p>让我们可以从一串合法的符号得到另一串合法符号，</p>
-<p>称之为<strong>形式证明</strong>。</p>
+<p>带有多个载体的例子是<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}_{pcf}=\left \langle N,B,0,1,\cdots ,+,true,false,Eq?,\cdots ,\right \rangle"></span></p>
+<p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
+<p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
 <p><br/></p>
-<p><strong>语义</strong>，指的是用什么样的数学对象可以解释这些符号，</p>
-<p>由论域和解释函数组成，我们得到的是一些代数结构，</p>
-<p>而且，从已知符号串的语义性质得到了其他符号串的性质，</p>
-<p>称之为<strong>逻辑推理</strong>。</p>
+<h3 id="代数项的解释"><strong>代数项的解释</strong></h3>
+<p>我们说<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>是与所有合法代数项<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>对应的<span data-katex="\Sigma"></span>代数，</p>
+<p>指的是如下对应关系成立，</p>
+<p>（1）每一个sort，<span data-katex="s\in S"></span>，恰好对应一个载体<span data-katex="A^s"></span></p>
+<p>（2）每一个函数符号<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>，恰好对应一个函数<span data-katex="\mathscr{I}(f):A^{s_1}\times \cdots \times A^{s_k}\rightarrow A^s"></span></p>
+<p>习惯上把<span data-katex="\mathscr{I}(f)"></span>写成<span data-katex="f^{\mathscr{A}}"></span>。</p>
 <p><br/></p>
-<p>学校中的数理逻辑教科书，介绍了<strong>命题演算</strong>和<strong>一阶谓词演算</strong>这两个典型的逻辑系统。</p>
-<p>它们各自的语义解释，恰好描述了日常生活中推理问题。</p>
+<h3 id="含变量代数项的解释"><strong>含变量代数项的解释</strong></h3>
+<p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射。</p>
+<p><span data-katex="\eta :\mathscr{V} \rightarrow\cup _sA^s"></span></p>
+<p>需要环境的原因是，对于含变量<span data-katex="x"></span>的项<span data-katex="M"></span>，叙述<span data-katex="M"></span>的含义必须先给<span data-katex="x"></span>指定一个确定的值。</p>
+<p>如果对于每个<span data-katex="x:s\in \Gamma"></span>，都有<span data-katex="\eta (x)\in A^s"></span>，就说环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>。</p>
 <p><br/></p>
-<p>总之，数理逻辑，用一套符号，对生活中常见的逻辑问题，进行了数学建模，</p>
-<p>研究它，希望得到与证明和推理相关的更多性质和结论。</p>
+<p>假定<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的一个环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，</p>
+<p>则可以把环境<span data-katex="\eta"></span>下的任何项<span data-katex="M\in Terms\left ( \Sigma ,\Gamma \right )"></span>的含义<span data-katex="\mathscr{A}[[M]]\eta"></span>定义如下，</p>
+<p>（1）<span data-katex="\mathscr{A}[[x]]\eta =\eta (x)"></span></p>
+<p>（2）<span data-katex="\mathscr{A}[[fM_1\cdots M_k]]\eta =f^{\mathscr{A}}(\mathscr{A}[[M_1]]\eta ,\cdots ,\mathscr{A}[[M_k]]\eta )"></span></p>
 <p><br/></p>
-<h2 id="形式证明"><strong>形式证明</strong></h2>
-<p>为了说明问题，而又不引入过多的逻辑学概念，</p>
-<p>我们从命题逻辑开始。</p>
+<p>若<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在上下文中是明确的，通常省略<span data-katex="\mathscr{A}"></span>而直接写<span data-katex="[[M]]\eta"></span>，</p>
+<p>若<span data-katex="M"></span>中没有变量，则<span data-katex="\mathscr{A}[[M]]\eta"></span>不依赖于<span data-katex="\eta"></span>，可以写为<span data-katex="\mathscr{A}[[M]]"></span>。</p>
+<hr />
+<h2 id="语法和语义的关系"><strong>语法和语义的关系</strong></h2>
+<h3 id="可靠性与完备性"><strong>可靠性与完备性</strong></h3>
+<p>代数数据类型的公理语义是由代数项之间的等式集给出的，签名和等式集合称代数规范（algebraic specification）。</p>
+<p>一个代数规范，或者可以使用等式证明系统推导出代数项之间的其他等式，或者可以检验代数项对应的<span data-katex="\Sigma"></span>代数是否满足这些等式的要求。</p>
 <p><br/></p>
-<p>命题逻辑的形式化演算系统大体上可分为两种类型，</p>
-<p>一是<strong>希尔伯特式</strong>的公理化演算系统，</p>
-<p>二是<strong>甘岑(Gentzen)式</strong>的自然推理系统。</p>
+<p>代数项对应的<span data-katex="\Sigma"></span>代数并不是唯一的。</p>
+<p>从一个代数规范推导得到的等式，在该规范对应的任何<span data-katex="\Sigma"></span>代数中都成立，就称该代数证明系统是可靠的（sound）。</p>
+<p>一个代数规范对应的任何<span data-katex="\Sigma"></span>代数中都成立的等式，在该规范中都可证，就称该代数证明系统是完备的（complete）。</p>
 <p><br/></p>
-<p>这两个系统各有所长，</p>
-<p>前者更能体现公理化的思想，但其推理过程比较繁琐，</p>
-<p>后者形式推理比较自然，但是规则较多。</p>
+<h3 id="等式的可满足性"><strong>等式的可满足性</strong></h3>
+<p>等式（equation）是一个公式<span data-katex="M=N[\Gamma ]"></span>，其中<span data-katex="M,N\in Terms^s\left ( \Sigma ,\Gamma \right )"></span>，<span data-katex="s\in S"></span>。</p>
+<p>如果环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，且<span data-katex="[[M]]\eta =[[N]]\eta"></span>，</p>
+<p>就说<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在环境<span data-katex="\eta"></span>下满足<span data-katex="M=N[\Gamma ]"></span>，记为</p>
+<p><span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span></p>
 <p><br/></p>
-<p>下面只说<strong>命题演算的自然推理系统</strong>。</p>
+<p>对于含变量的项，我们更感兴趣的是一个等式是否在变量所有可能的取值情况下都成立，</p>
+<p>而不是在一个特别的环境中成立。</p>
+<p>如果对于满足<span data-katex="\Gamma"></span>的任何一个环境<span data-katex="\eta"></span>都有<span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span>，</p>
+<p>就可以说，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>满足等式<span data-katex="M=N[\Gamma ]"></span>，记为</p>
+<p><span data-katex="\mathscr{A} \models M=N[\Gamma]"></span></p>
 <p><br/></p>
-<p><strong>语法：</strong></p>
-<p>（1）可数个命题符号：<span data-katex="p_1,p_2,\cdots"></span></p>
-<p>（2）5个联接词符号：<span data-katex="\neg,\lor,\land,\to,\leftrightarrow"></span></p>
-<p>（3）2个辅助符号：<span data-katex="),("></span></p>
+<p>可满足性也可以扩展到等式集和代数集，</p>
+<p>设<span data-katex="E"></span>是一个等式集，如果<span data-katex="\mathscr{A}"></span>满足所有等式，就说<span data-katex="\mathscr{A}"></span>满足<span data-katex="E"></span>。</p>
+<p>类似的，若<span data-katex="C"></span>是一类<span data-katex="\Sigma"></span>代数，且对每个<span data-katex="\mathscr{A}\in C"></span>都有<span data-katex="\mathscr{A}\models M=N[\Gamma ]"></span>，则<span data-katex="C\models M=N[\Gamma ]"></span></p>
 <p><br/></p>
-<p><strong>公式：（BNF）</strong></p>
-<p><span data-katex="\alpha::=p|(\neg\alpha)|(\alpha_1\lor\alpha_2)|(\alpha_1\land\alpha_2)|(\alpha_1\to\alpha_2)|(\alpha_1\leftrightarrow\alpha_2)"></span></p>
+<p>若任何一个<span data-katex="\Sigma"></span>代数都满足代数项之间的等式<span data-katex="M=N[\Gamma ]"></span>，就说该等式是永真的（valid），写为<span data-katex="\models M=N[\Gamma ]"></span>。</p>
+<p>例如，<span data-katex="x=x[x:s]"></span>就是永真的。</p>
 <p><br/></p>
-<p><strong>推导规则：</strong></p>
-<p>（1）<span data-katex=""></span>包含律：<span data-katex="\frac{\alpha\in\Gamma}{\Gamma\vdash\alpha}"></span></p>
-<p>（2）<span data-katex="\neg"></span>消去律：<span data-katex="\frac{\Gamma,\neg\alpha\vdash\beta;\Gamma,\neg\alpha\vdash\neg\beta}{\Gamma\vdash\alpha}"></span></p>
-<p>（3）<span data-katex="\to"></span>消去律：<span data-katex="\frac{\Gamma\vdash(\alpha\to\beta);\Gamma\to\alpha}{\Gamma\vdash\beta}"></span></p>
-<p>（4）<span data-katex="\to"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta}{\Gamma\vdash\alpha\to\beta}"></span></p>
-<p>（5）<span data-katex="\lor"></span>消去律：<span data-katex="\frac{\Gamma,\alpha\vdash\gamma;\Gamma,\beta\vdash\gamma}{\Gamma,\alpha\lor\beta\vdash\gamma}"></span></p>
-<p>（6）<span data-katex="\lor"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha}{\Gamma\vdash\alpha\lor\beta;\Gamma\vdash\beta\lor\alpha}"></span></p>
-<p>（7）<span data-katex="\land"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\land\beta}{\Gamma\vdash\alpha;\Gamma\vdash\beta}"></span></p>
-<p>（8）<span data-katex="\land"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha;\Gamma\vdash\beta}{\Gamma\vdash\alpha\land\beta}"></span></p>
-<p>（9）<span data-katex="\leftrightarrow"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\alpha}{\Gamma\vdash\beta}"></span>，<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\beta}{\Gamma\vdash\alpha}"></span></p>
-<p>（10）<span data-katex="\leftrightarrow"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta;\Gamma,\beta\vdash\alpha}{\Gamma\vdash\alpha\leftrightarrow\beta}"></span></p>
+<p>若<span data-katex="\mathscr{A}"></span>满足签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>上的所有等式，就说<span data-katex="\Sigma"></span>代数是平凡的（trivial）。</p>
 <p><br/></p>
-<p><strong>例子：</strong></p>
-<p>使用这些推理规则，我们就可以从一些合法的符号串，</p>
-<p>推导出另一些合法的符号串了。</p>
+<h3 id="语义蕴含semantic-implication"><strong>语义蕴含（semantic implication）</strong></h3>
+<p>若满足等式集<span data-katex="E"></span>的每一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>都满足等式<span data-katex="M=N[\Gamma ]"></span>，</p>
+<p>则称签名<span data-katex="\Sigma"></span>上的等式集<span data-katex="E"></span>在语义上蕴含等式<span data-katex="M=N[\Gamma ]"></span>，记为，</p>
+<p><span data-katex="E\models M=N[\Gamma ]"></span></p>
 <p><br/></p>
-<p>（1）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha\to\beta"></span>：<span data-katex=""></span>包含律</p>
-<p>（2）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha"></span>：<span data-katex=""></span>包含律</p>
-<p>（3）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\beta"></span>：<span data-katex="\to"></span>消去律，式（1），式（2）</p>
-<p>（4）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\beta\to\alpha"></span>：<span data-katex=""></span>包含律</p>
-<p>（5）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\gamma"></span>：<span data-katex="\to"></span>消去律，式（3），式（4）</p>
-<p>（6）<span data-katex="\alpha\to\beta,\beta\to\gamma,\alpha\vdash\alpha\to\gamma"></span>：<span data-katex="\to"></span>引入律，式（5）</p>
+<p>有了签名<span data-katex="\Sigma"></span>和等式集<span data-katex="E"></span>，我们定义代数规范<span data-katex="Spec=\left \langle \Sigma,E \right \rangle"></span>，</p>
+<p>则满足代数规范的，在所有<span data-katex="\Sigma"></span>代数中都成立的等式，就是那些由等式集<span data-katex="E"></span>语义蕴含的等式。</p>
 <p><br/></p>
-<p>有了这些以后，我们就可以定义什么是一个<strong>证明</strong>了。</p>
-<p><strong>证明序列：</strong></p>
-<p>若有限序列，<span data-katex="\Gamma_1\vdash\alpha_1,\Gamma_2\vdash\alpha_2,\cdots ,\Gamma_n\vdash\alpha_n"></span>满足，</p>
-<p>（1）<span data-katex="\Gamma_1,\Gamma_2,\cdots ,\Gamma_n"></span>为有限公式集</p>
-<p>（2）<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>为公式</p>
-<p>（3）每个<span data-katex="\Gamma_i\vdash\alpha_i(1\leq i\leq n)"></span>都是它之前若干个<span data-katex="\Gamma_j\vdash\alpha_j(1\leq j&lt;i\leq n)"></span>应用某条推导规则得到的</p>
+<h3 id="语义理论"><strong>语义理论</strong></h3>
+<p>如果等式集<span data-katex="E"></span>在语义蕴含下封闭（closed），则把它称为一个理论（theory）。</p>
+<p>更准确的说，如果<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语义理论（semantic theory）。</p>
+<p>一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的理论<span data-katex="Th(\mathscr{A})"></span>，就是在<span data-katex="\mathscr{A}"></span>中成立的所有等式的集合。</p>
+<p>可以证明一个<span data-katex="\Sigma"></span>代数的理论是一个语义理论。</p>
 <p><br/></p>
-<p>则称这个有限序列为<span data-katex="\Gamma_n\vdash\alpha_n"></span>的一个<strong>（形式）证明序列</strong>。</p>
-<p>此时，也称<span data-katex="\alpha_n"></span>可由<span data-katex="\Gamma_n"></span><strong>（形式）证明</strong>，</p>
-<p>记为<span data-katex="\Gamma_n\vdash_N\alpha_n"></span>，其中<span data-katex="N"></span>表示自然推理系统。</p>
+<h3 id="形式证明"><strong>形式证明</strong></h3>
+<p>一个证明系统的推导规则如下，<span data-katex="\frac{antecedent}{consequent}"></span>，</p>
+<p>使得从前件（antecedent）的任何实例出发，通过使用该证明系统的公理和其他规则，</p>
+<p>可以推导出后件（consequent）的相应实例。</p>
 <p><br/></p>
-<h2 id="逻辑推理"><strong>逻辑推理</strong></h2>
-<p>上文提到的是命题演算的自然推理系统，</p>
-<p>这是一个形式系统，我们介绍了它的语法和推导规则，</p>
-<p>根据这些推导规则，可以从一些合法的符号串推导出另一些，</p>
-<p>在这个基础上，我们定义了什么叫做（形式）证明。</p>
+<p>例如：<span data-katex="\frac{M=N[\Gamma ],N=P[\Gamma ],P=Q[\Gamma ]}{M=Q[\Gamma ]}"></span></p>
 <p><br/></p>
-<p>如何<strong>解释</strong>这些符号呢？</p>
-<p>它们有什么含义呢？</p>
+<p>若证明了一条规则是可推导的，则能够把它当做系统的一条证明规则来使用。</p>
+<p>如果某条规则没有前件，则称它是证明系统的一条公理（axiom）。</p>
 <p><br/></p>
-<p>我们给每一个合法的<strong>公式</strong>指定一个<strong>逻辑命题</strong>，作为这个公式的解释。</p>
-<p>为每一个<strong>联接词符号</strong>指定一个<strong>真值函数</strong>，作为这个联接词符号的解释。</p>
+<p>我们说等式<span data-katex="M=N[\Gamma ]"></span>是可证的（provable），记为<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
+<p>如果从<span data-katex="E"></span>到<span data-katex="M=N[\Gamma ]"></span>存在一个等式序列，</p>
+<p>使得每个等式或者是公理（axiom），或者是<span data-katex="E"></span>中的等式，</p>
+<p>或者是从序列中之前出现的一个或多个等式经一步推导得到的结果。</p>
 <p><br/></p>
-<p><strong>命题：</strong></p>
-<p>命题是可以判断真假值的句子。</p>
+<h3 id="语法理论"><strong>语法理论</strong></h3>
+<p>若在可证性下等式集<span data-katex="E"></span>是封闭的，则称<span data-katex="E"></span>是一个语法理论（syntactic theory）。</p>
+<p>换句话说，如果<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语法理论。</p>
+<p><span data-katex="E"></span>的语法理论<span data-katex="Th(E)"></span>就是从<span data-katex="E"></span>可证的所有等式的集合。</p>
 <p><br/></p>
-<p><strong>真值函数：</strong></p>
-<p><span data-katex="\{0,1\}"></span>上的<span data-katex="n"></span>元函数，<span data-katex="f:\{0,1\}^n\to\{0,1\}"></span></p>
-<p>称为一个<span data-katex="n"></span>元真值函数。</p>
-<p><br/></p>
-<p>我们将每个联接词与一个真值函数一一对应起来，</p>
-<p>那么，复合命题的真假值就可以通过子命题的真假值计算出来了。</p>
-<p><br/></p>
-<p><strong>指派：</strong></p>
-<p>设<span data-katex="\alpha"></span>为一个命题，<span data-katex="\alpha"></span>中出现的所有命题变元构成了一个序列<span data-katex="p_1,p_2,\cdots ,p_n"></span>，</p>
-<p>对该序列指定的任一真假值序列<span data-katex="t_1,t_2,\cdots ,t_n"></span>称为<span data-katex="\alpha"></span>关于<span data-katex="p_1,p_2,\cdots ,p_n"></span>的一个<strong>指派</strong>，</p>
-<p>其中<span data-katex="t_i=0,1"></span>。</p>
-<p><br/></p>
-<p><strong>真值表：</strong></p>
-<p>命题在所有可能的指派下，所取值列成的表，称为真值表。</p>
-<p><br/></p>
-<p><strong>永真式：</strong></p>
-<p>如果命题关于其中出现命题变元的所有指派均为真，则称该命题是一个永真式。</p>
-<p><br/></p>
-<p>有了这些以后，我们就可以定义<strong>推理</strong>了。</p>
-<p>设<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n,\beta"></span>都是命题，</p>
-<p>称<strong>推理『<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>推出<span data-katex="\beta"></span>』是有效的</strong>，</p>
-<p>如果对<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n,\beta"></span>中出现的命题变元的任一指派，</p>
-<p>若<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>都为真，则<span data-katex="\beta"></span>也为真，</p>
-<p>记为<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n\models\beta"></span></p>
-<p>否则，称推理『<span data-katex="\alpha_1,\alpha_2,\cdots ,\alpha_n"></span>推出<span data-katex="\beta"></span>』是无效的。</p>
-<p><br/></p>
-<p><strong>例子：</strong></p>
-<p><span data-katex="\alpha\to\beta,\alpha\models\beta"></span></p>
-<p><span data-katex="\alpha\lor\beta,\neg\alpha\models\beta"></span></p>
-<p><br/></p>
-<h2 id="证明与推理之间的关系"><strong>证明与推理之间的关系</strong></h2>
-<p>命题演算的自然推理系统，有很多性质，其中，</p>
-<p><br/></p>
-<p><strong>可靠性</strong></p>
-<p><span data-katex="\Gamma\vdash\alpha\Rightarrow\Gamma\models\alpha"></span></p>
-<p><br/></p>
-<p><strong>完备性</strong></p>
-<p><span data-katex="\Gamma\models\alpha\Rightarrow\Gamma\vdash\alpha"></span></p>
-<p><br/></p>
-<p>它们表明，如果一个公式可以被证明，那么它所对应命题的推理就是有效的，</p>
-<p>如果某些命题的推理是有效的，那么它就可以被证明。</p>
-<p><br/></p>
-<p>然而，形式化系统这种研究方法，并不是完美无缺的。</p>
-<p><strong>哥德尔不完全性定理</strong></p>
-<p>如果<span data-katex="\Gamma"></span>是一个有穷并包含初等算术<span data-katex="\Pi"></span>的形式理论，那么<span data-katex="\Gamma"></span>是一个不完全的形式理论。</p>
-<p><br/></p>
-<p><strong>哥德尔协调性定理</strong></p>
-<p>如果形式理论<span data-katex="\Gamma"></span>包含初等算术<span data-katex="\Pi"></span>，那么<span data-katex="\Pi"></span>的协调性不能在<span data-katex="\Gamma"></span>中被证明。</p>
-<p><br/></p>
+<h3 id="等式证明系统的性质"><strong>等式证明系统的性质</strong></h3>
+<p>可靠性（soundness）：若<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="E\models M=N[\Gamma ]"></span></p>
+<p>演绎完备性（deductive completeness）：若<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
+<hr />
 <h2 id="结语"><strong>结语</strong></h2>
-<p>证明和推理也是可以研究的，</p>
-<p>并且，一直以来都是人们的感兴趣的研究对象。</p>
-<p><br/></p>
-<p>逻辑学对自动定理证明，程序设计语言中的类型系统，</p>
-<p>协议验证，软硬件的安全等领域，</p>
-<p>有很重要的理论价值。</p>
-<p><br/></p>
-<p>以命题逻辑和一阶谓词逻辑为基础，</p>
-<p>人们构造出了各式各样种类繁多的逻辑系统，</p>
-<p>包括模态逻辑，直觉主义逻辑，时序逻辑，动态逻辑，</p>
-<p>多值逻辑，模糊逻辑，非单调逻辑，λ演算，组合逻辑等等。</p>
-<p><br/></p>
-<p>现代逻辑学已经应用到了越来越多的学科之中。</p>
+<p>《<a href="https://book.douban.com/subject/1761918/" target="_blank" rel="noopener">Foundations for Programming Languages</a>》是一本好书，</p>
+<p>可是中文的翻译《<a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a>》简直是晦涩难懂，</p>
+<p>把sort翻译为『类子』，把signature翻译为『基调』，容易让人误以为和同调代数有什么联系。</p>
+<p>原版书拿到后，看起来轻松了不少，这里只是对第三章部分内容做了个小结，以便卸下包袱轻装上阵。</p>
 
           
         
@@ -573,7 +542,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/222/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/222/">222</a><span class="page-number current">223</span><a class="page-number" href="/page/224/">224</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/224/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/222/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/222/">222</a><span class="page-number current">223</span><a class="page-number" href="/page/224/">224</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/224/">&gt;</a>
   </nav>
 
 
@@ -619,7 +588,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -694,7 +663,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

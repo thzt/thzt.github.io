@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/12/12/change-is-hard/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/23/semantics-10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/12/change-is-hard/" itemprop="url">敢于为改变付出代价</a></h1>
+                <a class="post-title-link" href="/2018/02/23/semantics-10/" itemprop="url">语言背后的代数学（十）：Curry-Howard-Lambek correspondance</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T00:00:00+08:00">
-                2017-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T00:00:00+08:00">
+                2018-02-23
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,132 +347,125 @@
       
         
           
-            <p>像做工程一样量产软件，是人们的一种愿望，</p>
-<p>但实际执行起来，却异常困难。</p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-f3c4e7374c59c264.png" /></p>
 <p><br/></p>
-<p>这些年我参与过的项目中，</p>
-<p>几乎每个项目都有这样或者那样的工程问题，</p>
-<p>阻碍着效率的进一步提高。</p>
+<h3 id="回顾">回顾</h3>
+<p>上文我们介绍了笛卡尔闭范畴，它给出了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^{unit,\times,\to}"></span>的语义，</p>
+<p>我们还看到了笛卡尔闭范畴与柯里化之间的关系。</p>
 <p><br/></p>
-<p>要么需求有问题，要么工期有问题，要么代码有问题，</p>
-<p>要么文档有问题，等等等等。</p>
+<p>结合《<a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型</a>》系列文章，</p>
+<p>到目前为止我们已经有了，类型理论，逻辑学和范畴论的知识基础了。</p>
+<p>现在我们介绍Curry-Howard-Lambek correspondence，将三者联系起来。</p>
 <p><br/></p>
-<p>不同的团队会遇到不同的问题。</p>
+<h3 id="类型方面">1. 类型方面</h3>
 <p><br/></p>
-<p>而且，同一个团队，只要不进行较大规模的人员调整，</p>
-<p>再多的反思，也不会从本质上解决这些问题。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-09a5fa1690d11143.png" /></p>
 <p><br/></p>
-<p>因此，我们有理由相信，<strong>工程问题是团队相关的。</strong></p>
+<p>参考《<a href="https://thzt.github.io/2017/09/06/type-2/">你好，类型（二）：Lambda calculus</a>》，</p>
+<p>我们来回顾一下简单类型化<span data-katex="\lambda"></span>演算系统。</p>
+<h4 id="语法">1.1 语法</h4>
+<p><span data-katex="t::=x|tu|\lambda x.t"></span></p>
 <p><br/></p>
-<p><strong>团队文化看起来会对任何变化造成一种阻力，</strong></p>
-<p><strong>导致某些改变永远无法完成。</strong></p>
+<p>例子：</p>
+<p><span data-katex="\lambda x.x+1"></span></p>
+<p><span data-katex="\lambda f.\lambda x.fx"></span></p>
+<h4 id="类型">1.2 类型</h4>
+<p>基本类型（basic types），<span data-katex="B::=\iota|\cdots"></span></p>
+<p>一般类型（general types），<span data-katex="T::=B|T\to T|T\times T"></span></p>
 <p><br/></p>
-<h3 id="要做出改变">要做出改变</h3>
-<p>在讨论为什么无法改变之前，</p>
-<p>让我们先谈论一下为什么要进行改变吧。</p>
+<p>例子：</p>
+<p><span data-katex="\iota\to\iota\to\iota"></span>，</p>
+<p><span data-katex="(\iota\to\iota)\to\iota"></span></p>
+<h4 id="类型推导规则">1.3 类型推导规则</h4>
+<p>（1）<span data-katex="\frac{~}{\Gamma,x:t\vdash x:T}"></span></p>
 <p><br/></p>
-<p><a href="https://en.wikipedia.org/wiki/Eliyahu_M._Goldratt" target="_blank" rel="noopener">Eliyahu M. Goldratt</a>提出了一套企业管理方法，称为约束理论（theory of constraints）。</p>
-<p>他认为，<strong>非瓶颈资源的利用程度，并不是由其生产潜力来决定，</strong></p>
-<p><strong>而是由系统中的其他制约因素来决定。</strong></p>
+<p>（2）<span data-katex="\frac{\Gamma\vdash t:T~~~~\Gamma\vdash u:U}{\Gamma\vdash\left\langle t,u\right\rangle:T\times U}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_1v:T}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_2v:U}"></span></p>
 <p><br/></p>
-<blockquote>
-<p>他指着NCX-IO机器说：</p>
-</blockquote>
-<blockquote>
-<p>你们系统的主要制约因素就在于这部机器。</p>
-</blockquote>
-<blockquote>
-<p>当你们给非瓶颈的工作量超越了这部机器的工作量时，</p>
-</blockquote>
-<blockquote>
-<p>你们不但没有提高生产力，反而制造出过多的存货。</p>
-</blockquote>
-<blockquote>
-<p>因此，也就和目标背道而驰。</p>
-</blockquote>
-<blockquote>
-<p>—— 《目标：简单而有效的常识管理》</p>
-</blockquote>
+<p>（3）<span data-katex="\frac{\Gamma,x:U\vdash t:T}{\Gamma\vdash\lambda x.t:U\to T}"></span>，<span data-katex="\frac{\Gamma\vdash t:U\to T~~~~\Gamma\vdash u:U}{\Gamma\vdash tu:T}"></span></p>
 <p><br/></p>
-<p>在企业管理中，要想系统性的提高效能，</p>
-<p>就要识别并设法减少瓶颈因素，直到瓶颈因素不再对效能产生约束。</p>
-<p>消除一个瓶颈之后，又会涌现出另外一个新的瓶颈，如此循环不已。</p>
+<p>其中，<span data-katex="\pi_1\left\langle v_1,v_2 \right\rangle=v_1"></span>，<span data-katex="\pi_2\left\langle v_1,v_2 \right\rangle=v_2"></span>。</p>
 <p><br/></p>
-<p>该理论在实际应用中是很有效果的，</p>
-<p>类似木桶原理，只有桶壁上的所有木板都足够高，才能盛满水。</p>
+<h3 id="逻辑方面">2. 逻辑方面</h3>
 <p><br/></p>
-<h3 id="假如可以改变">假如可以改变</h3>
-<p>不幸的是，像很多方法论一样，约束理论也忽略了一个事实，</p>
-<p>那就是，<strong>现状实际上是无法立即改变的，甚至是无法改变的。</strong></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-1a02678c20564afc.png" /></p>
 <p><br/></p>
-<p>就像一列冲向悬崖的火车一样，我们甚至没有办法让它停下来。</p>
-<p>有些看起来有效的方法论，其实很难执行成功。</p>
+<p>参考《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a>》，</p>
+<p>我们构建一个只包含逻辑联接词<span data-katex="\wedge"></span>和<span data-katex="\to"></span>的命题逻辑系统。</p>
+<h4 id="逻辑推导规则">2.1 逻辑推导规则</h4>
+<p>（1）<span data-katex="\frac{~}{\Gamma,A\vdash A}"></span></p>
 <p><br/></p>
-<p>我们来看一个常见的例子，例如，</p>
-<p>我们都知道敏捷开发的好处，敏捷开发也有很多成功的案例，</p>
-<p>但是我们经历的项目中，有几个改造成了敏捷形式呢？</p>
+<p>（2）<span data-katex="\frac{\Gamma\vdash A~~~~\Gamma\vdash B}{\Gamma\vdash A\wedge B}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}"></span></p>
 <p><br/></p>
-<p>另一个例子，</p>
-<p>开发者们都厌恶脏乱的代码，人们也知道代码评审以及设计评审的重要性，</p>
-<p>但是又有几个团队，能坚持做这样的事情呢？</p>
+<p>（3）<span data-katex="\frac{\Gamma,A\vdash B}{\Gamma\vdash A\to B}"></span>，<span data-katex="\frac{\Gamma\vdash A\to B~~~~\Gamma\vdash A}{\Gamma\vdash B}"></span></p>
+<h4 id="curry-howard-correspondence">2.2 Curry-Howard correspondence</h4>
+<p>我们看到，只要将逻辑系统中的<span data-katex="\wedge"></span>和<span data-katex="\to"></span>，替换成简单类型化<span data-katex="\lambda"></span>演算中的<span data-katex="\times"></span>和<span data-katex="\to"></span>，</p>
+<p>那么这两个系统从推导规则上来看是一致的。</p>
 <p><br/></p>
-<p>所以，<strong>并不是人们意识不到改变，</strong></p>
-<p><strong>也并不是人们从主观意愿上不接受这些改变，</strong></p>
-<p><strong>而是从经济学角度来讲，人们并不会为改变买单。</strong></p>
+<p>逻辑中的命题，对应了简单类型化<span data-katex="\lambda"></span>演算中的类型，</p>
+<p>逻辑中命题的证明，对应了简单类型化<span data-katex="\lambda"></span>演算中的项（的类型断言）。</p>
 <p><br/></p>
-<h3 id="改变对一个系统的影响">改变对一个系统的影响</h3>
-<p>我看过《大明王朝》这个电视剧，所述年代里国库亏空严重，</p>
-<p>于是内阁想出了一个办法，那就是将浙江的稻田改成桑田，</p>
-<p>桑田产的蚕丝织成绸缎，会比原来的种稻利润更高。</p>
+<p>命题<span data-katex="A\to B"></span>，可以这样理解，</p>
+<p>如果该命题可证，则存在将<span data-katex="A"></span>的证明转换为<span data-katex="B"></span>的证明的构建过程（construction）。</p>
+<p>命题<span data-katex="A\wedge B"></span>，可以这样理解，它是<span data-katex="A"></span>和<span data-katex="B"></span>的证明序对（pair）。</p>
 <p><br/></p>
-<p>这看起来是利国利民的好事情，</p>
-<p>而且站在改稻为桑已经落实的基础上，有百利而无一害。</p>
-<p>可是，<strong>到实际执行时，却又不容易了。</strong></p>
+<p>考虑到以上命题逻辑与类型之间的对应关系，</p>
+<p>我们可以说，<a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">proofs as programs</a>。</p>
 <p><br/></p>
-<p>因为，将稻田改成桑田，当地的农民就没粮食了，</p>
-<p>于是，必须去别的地方买粮。</p>
-<p>而粮食需求旺盛，也会导致粮价上涨。</p>
+<h3 id="范畴论方面">3. 范畴论方面</h3>
 <p><br/></p>
-<p>粮价上涨了，当地农民就买不起了，必须把土地卖了才行。</p>
-<p>农民担心自己的土地，所以改稻为桑的国策就无法推行下去了。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-ef752d2a808eaf01.png" /></p>
 <p><br/></p>
-<p>所以，要想推行国策，就得先解决粮食问题。</p>
-<p>可是哪有多余的粮食呢？谁肯借出这些粮食呢？</p>
+<p>结合《<a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a>》，</p>
+<p>我们给出了简单类型化<span data-katex="\lambda"></span>演算的范畴论解释。</p>
+<h4 id="对象">3.1 对象</h4>
+<p>将简单类型化<span data-katex="\lambda"></span>演算系统的类型，解释为笛卡尔闭范畴<span data-katex="C"></span>中的对象。</p>
+<p><span data-katex="\mathscr{C}[\![\sigma\times\tau]\!]=\mathscr{C}[\![\sigma]\!]\times\mathscr{C}[\![\tau]\!]"></span></p>
+<p><span data-katex="\mathscr{C}[\![\sigma\to\tau]\!]=\mathscr{C}[\![\sigma]\!]\to\mathscr{C}[\![\tau]\!]"></span></p>
+<h4 id="箭头">3.2 箭头</h4>
+<p>将带有自变量项，解释为从自变量类型到项类型的箭头。</p>
+<p><span data-katex="\mathscr{C}[\![\Gamma\vdash M:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\to\mathscr{C}[\![\sigma]\!]"></span></p>
+<h4 id="curry-howard-lambek-correspondance">3.3 Curry-Howard-Lambek correspondance</h4>
+<p>根据简单类型化<span data-katex="\lambda"></span>演算系统中的推导规则，</p>
+<p>我们可以为范畴<span data-katex="C"></span>添加对象和箭头之间的约束条件，</p>
 <p><br/></p>
-<p>这就形成了一个死局。</p>
-<p><strong>不是方法出现了问题，而是方法无法推行的问题。</strong></p>
+<p>（1）<span data-katex="\frac{~}{\pi_2:\Gamma\times A\to A}"></span></p>
 <p><br/></p>
-<p>就好像囚徒困境中的两个囚犯一样，</p>
-<p>每个人都有自己的小算盘，谁都不肯损害自己的利益，</p>
-<p>当然也就无法达到全局最优了。</p>
+<p>（2）<span data-katex="\frac{f:\Gamma\to A~~~~g:\Gamma\to B}{\left\langle f,g\right\rangle:\Gamma\to A\times B}"></span>，<span data-katex="\frac{f:\Gamma\to A\times B}{\pi_1\circ f:\Gamma\to A}"></span>，<span data-katex="\frac{f:\Gamma\to A\times B}{\pi_2\circ f:\Gamma\to B}"></span></p>
 <p><br/></p>
-<h3 id="为何无法改变">为何无法改变</h3>
-<p>我们看到，将改变的决策落地执行，才是最困难的地方。</p>
-<p><strong>任何改变都需要消耗资源，</strong></p>
-<p><strong>而这些消耗，都必须从当前系统中的其他地方“借”出来。</strong></p>
+<p>（3）<span data-katex="\frac{f:\Gamma\times A\to B}{g_f:\Gamma\to B^A}"></span>，<span data-katex="\frac{f_1:\Gamma\to B^A~~~~f_2:\Gamma\to A}{e\circ\left\langle f_1,f_2\right\rangle:\Gamma\to B}"></span></p>
 <p><br/></p>
-<p>想要做出改变的团队，也是如此。</p>
+<p><span data-katex="g_f=\Gamma\to B^A"></span>是一个箭头，和<span data-katex="e:B^A\times A\to B"></span>的定义，</p>
+<p>可以参考<a href="http://thzt.github.io/2018/02/19/semantics-9/">前一篇</a>文章中关于笛卡尔闭范畴的定义。</p>
 <p><br/></p>
-<p>一个好的工程实践看起来行之有效，</p>
-<p>但是<strong>人们一旦意识到，要想改变就必须先付出代价时，</strong></p>
-<p><strong>就推行不下去了。</strong></p>
+<p>笛卡尔闭范畴作为简单类型化<span data-katex="\lambda"></span>演算系统的语义模型，</p>
+<p>范畴中箭头之间约束关系，与类型推导规则是一致的，</p>
+<p>而根据Curry-Howard correspondence，类型推导规则与命题逻辑又是一致的。</p>
 <p><br/></p>
-<p>人们都知道问题在哪里，可是仍然无法扭转局面。</p>
+<p>因此，类型理论，逻辑学和范畴论产生了关联，</p>
+<p>这种三者的对应关系，称为<strong>Curry-Howard-Lambek correspondance</strong>。</p>
 <p><br/></p>
-<h3 id="结语">结语</h3>
-<p>我们一线开发者，很容易会将工程问题归结为项目经理的失职，</p>
-<p>这是很不专业的行为。</p>
-<p>因为从人们意识到改变，到真实的做出改变，还有很多的路要走。</p>
+<h3 id="总结">总结</h3>
 <p><br/></p>
-<p>会遇到团队文化所带来的无形阻力，</p>
-<p>会遇到资源分配方面的种种问题。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-cfb15d029385cd31.png" /></p>
 <p><br/></p>
-<p>驱使自己做出有挑战的事情，已经很不容易了，</p>
-<p>何况驱使别人，驱使一个团队，</p>
-<p>我们只能根据团队成员的<strong>心理诉求</strong>以及<strong>利益得失</strong>，制定出可以执行得下去的方案。</p>
+<p>本文介绍了Curry-Howard-Lambek correspondance，</p>
+<p>它将本来毫无关系的三个学科联系在了一起，</p>
+<p>类型理论与程序和计算相关，逻辑学与证明（论）相关，</p>
+<p>范畴论与模型（论）和代数学相关。</p>
 <p><br/></p>
-<p>所以，不要怪项目经理了，</p>
-<p><strong>毕竟谁也不想加班。</strong></p>
+<p>本系列文章到此结束了，与代数学和范畴论相关的内容其实还有很多，</p>
+<p>例如，quotient algebra，comonad，adjoint functor，free monoid，等等概念，</p>
+<p><strong>书山有路勤为径，学海无涯苦作舟</strong>，让我们一起努力吧。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
+<p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a></p>
+<p><a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">Curry–Howard correspondence</a></p>
+<p><a href="https://wiki.haskell.org/Curry-Howard-Lambek_correspondence" target="_blank" rel="noopener">Curry-Howard-Lambek correspondence</a></p>
+<p><a href="http://www.cs.ox.ac.uk/samson.abramsky/gsem/chll.pdf" target="_blank" rel="noopener">The Curry-Howard Correspondence, and beyond</a></p>
+<p><a href="http://disi.unitn.it/~bernardi/RSISE11/Papers/curry-howard.pdf" target="_blank" rel="noopener">Lectures on the curry-howard Isomorphism</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Intuitionistic_logic" target="_blank" rel="noopener">Intuitionistic logic</a></p>
 
           
         
@@ -511,7 +504,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/153/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/153/">153</a><span class="page-number current">154</span><a class="page-number" href="/page/155/">155</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/155/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/153/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/153/">153</a><span class="page-number current">154</span><a class="page-number" href="/page/155/">155</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/155/">&gt;</a>
   </nav>
 
 
@@ -557,7 +550,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -632,7 +625,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

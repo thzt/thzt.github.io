@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/05/11/extensibility/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/09/14/skilled/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/11/extensibility/" itemprop="url">可扩展性到底有多重要</a></h1>
+                <a class="post-title-link" href="/2018/09/14/skilled/" itemprop="url">生疏的技能</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T00:00:00+08:00">
-                2018-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T00:00:00+08:00">
+                2018-09-14
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,159 +347,159 @@
       
         
           
-            <p><a href="https://en.wikipedia.org/wiki/Extensibility" target="_blank" rel="noopener">可扩展性</a>（extensibility）是软件的一种<a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能性</a>特征，</p>
-<p>维基百科上是这样解释的，</p>
-<blockquote>
-<p>Extensibility is a software engineering and systems design principle where the implementation takes future growth into consideration.</p>
-</blockquote>
-<p>可扩展性，是将软件未来的发展过程也考虑在内，而进行的一种设计选择。</p>
-<p><br/></p>
-<h3 id="高可扩展性系统">1. 高可扩展性系统</h3>
-<p>我们遇到过很多具有高度可扩展的软件系统。</p>
-<p><br/></p>
-<p>例如，以往著名的前端库<a href="https://jquery.com/" target="_blank" rel="noopener">jQuery</a>，它采用了微内核架构，</p>
-<blockquote>
-<p>微内核架构模式可以通过插件的形式添加额外的特性到核⼼系统中，这提供了很好的扩展性，也使得新特性与核⼼系统隔离开来。</p>
-</blockquote>
-<blockquote>
-<p>—— 《<a href="https://book.douban.com/subject/26797547/" target="_blank" rel="noopener">软件架构模式</a>》</p>
-</blockquote>
-<p>使用微内核架构，用户代码就可以通过插件的形式，集成到已有的核心系统中。</p>
-<p><br/></p>
-<p>jQuery依照它强大的扩展性，以用户自定义jQuery插件的方式，</p>
-<p>让前端开发工作重新繁荣了起来。</p>
-<p><br/></p>
-<p>另一个对我印象深刻极具扩展性的例子是Scheme语言，</p>
-<p>它是一门力求简洁的Lisp方言，</p>
-<blockquote>
-<p>Programming languages should be designed not by piling feature on top of feature, but by removing the weaknesses and restrictions that make additional features appear necessary.</p>
-</blockquote>
-<blockquote>
-<p>—— 《<a href="http://community.schemewiki.org/?RnRS" target="_blank" rel="noopener">RnRS</a>》</p>
+            <blockquote>
+<p>学习如逆水行舟，不进则退。</p>
 </blockquote>
 <p><br/></p>
-<p>为了实现可扩展性，Lisp宏的作用功不可没，</p>
-<p>和通常的编程语言不同的是，</p>
-<p>它除了可以自定义函数，还可以自定义语言的控制结构。</p>
+<h3 id="信息污染">信息污染</h3>
+<p>最近几年来，我们每天接收到的<strong>信息量</strong>，真是变得越来越大了，</p>
+<p>晚上睡觉之前，都能回想到当天才接触到的大量内容，</p>
+<p>另外，我们认为很久之前看到的东西，其实只是发生在几天前。</p>
 <p><br/></p>
-<p>实际上，Lisp的用户代码可以对读取器和编译器进行扩展，</p>
-<p>影响它们处理代码的方式，因此具备了强大的元编程能力。</p>
+<p>很不幸，我们正身处于一个<strong>信息爆炸</strong>的时代。</p>
 <p><br/></p>
-<p>类似这样，具有高度可扩展性的系统还有很多，</p>
-<p>例如，Scala语言，微服务架构，<a href="https://koajs.com/" target="_blank" rel="noopener">koa</a>框架中的middleware，等等。</p>
+<p>如果不采取措施，任由信息自由流动，我们的生活就会变得越来越<strong>沉重</strong>，</p>
+<p>我们看到的信息未必对自己<strong>有用</strong>，而是对信息的发布者有用，</p>
+<p>我们并不想看到那些内容，只是别人想让我们看到而已。</p>
 <p><br/></p>
-<p>但是在实际设计软件的时候，应该如何权衡系统的可扩展性呢？</p>
-<p>真的是可扩展性越高越好吗？</p>
+<p>这简直是一种全新类型的<strong>环境污染</strong>。</p>
 <p><br/></p>
-<h3 id="弊端">2. 弊端</h3>
-<p>具有高度可扩展性的系统，我们用起来确实很好，</p>
-<p>但是，却不见得我们也要有这样的设计。</p>
+<p>另一方面，不良信息还会影响到我们的<strong>计划</strong>和判断，</p>
+<p>看到别人做了什么，看到现在流行着什么，</p>
+<p>我们就会不自觉的从众，生怕自己落后，生怕自己<strong>错过</strong>什么。</p>
 <p><br/></p>
-<h4 id="过度设计">2.1 过度设计</h4>
-<p>这有两方面的因素，</p>
-<p>其一，我们未必有能力设计出，对未来考虑足够周全的系统。</p>
-<p>实际项目中，通常是引入了不恰当的抽象概念，导致过度设计。</p>
+<p>信息污染，影响到了每一个人的生活轨迹和<strong>社会定位</strong>。</p>
 <p><br/></p>
-<p>这通常是由于开发者过分自信导致的，</p>
-<blockquote>
-<p>60% 的程序员认为自己是属于天才和良好类，只有 30% 左右的人认为他们是一般的程序员。</p>
-</blockquote>
-<blockquote>
-<p>但实际上，只有不到 1% 的程序员属于天才程序员，有 10% 的良好程序员，其余大量的程序员是一般程序员。</p>
-</blockquote>
-<blockquote>
-<p>—— 《<a href="https://www.oschina.net/news/79166/apache-foundation-ceo-decades-views" target="_blank" rel="noopener">屋中的大象</a>》</p>
-</blockquote>
+<h3 id="知识沉淀">知识沉淀</h3>
+<p>在软件行业，信息污染现象，只增不减，</p>
+<p>从这一点上来看，我认为人们经常把计算机科学和信息科学放在一起，是非常有道理的。</p>
+<p>信息传递和<strong>知识传承</strong>，在软件活动中的作用也变得越来越大。</p>
 <p><br/></p>
-<p>我们能欣赏漂亮设计的优雅之处，不代表我们也能做出这样的设计。</p>
+<p>软件是一个年轻的行业，从第一台计算机被发明出来到现在也不超过100年，</p>
+<p>于是编程技能，软件相关的工程实践，还远没有像其他学科或行业那样做好积累和<strong>沉淀</strong>，</p>
+<p>从业者的感受是，就像自己永远处于暴风雨中，不由自主。</p>
 <p><br/></p>
-<h4 id="成本和适用性">2.2 成本和适用性</h4>
-<p>其二，我们不确定现实项目是否需要这样的设计。</p>
-<p>采取任何决策，都不是免费的，总会有各方成本的权衡。</p>
-<p>况且，可扩展性设计，在不恰当的场景中，还会有自己的弊端。</p>
+<p>所谓沉淀，其实是一套可重复使用的<strong>知识体系</strong>，</p>
+<p>如果没有沉淀，大量的<strong>一次性知识</strong>就会占据我们的大脑，</p>
+<p>它们只能使用一次，只出现一次，只能被一个人使用，只能创造一次价值。</p>
 <p><br/></p>
-<p>例如，前文介绍的插件式微内核架构，当各个插件需要互相通信时，</p>
-<p>就会遇到严重的系统集成性问题，</p>
-<p>即，单独使用不会出现问题，当集成到一起，就容易出现各种冲突。</p>
+<p>这些一次性知识，<strong>消磨</strong>掉了我们的生命。</p>
+<p>可悲的是，有时候明知如此也无法拒绝，因为我们总会遇到<strong>不能回避</strong>的问题，</p>
+<p>只有解决掉，才能往下走。</p>
 <p><br/></p>
-<p>这是我们不愿意见到的。</p>
+<h3 id="营销攻击">营销攻击</h3>
+<p>除了在解决问题的过程中，我们踩过坑之外，</p>
+<p>我们还会遭受到同行们<strong>技术营销</strong>的攻击，</p>
+<p>这体现在两个方面。</p>
 <p><br/></p>
-<p>又例如，Lisp语言虽然具有高可扩展性，但是却对它的用户提出了很高要求，</p>
-<p>Lisp引入了一件麻烦事，称之为“<a href="http://www.yinwang.org/blog-cn/2017/05/25/dsl" target="_blank" rel="noopener">新语言问题</a>”。</p>
-<p>如果对Lisp宏使用不当，会极大的提高代码库的使用和维护成本。</p>
+<p>首先，技术营销污染了我们的视线，让我们无法看到其他<strong>更有用</strong>的信息，</p>
+<p>我们每个人的精力是有限的，关注了这些，就不得不<strong>错过</strong>其他的。</p>
+<p>所以，现代营销理论认为，广告是*抢占**用户心智的斗争。</p>
 <p><br/></p>
-<p>因此，在讨论是否需要可扩展性设计的时候，我们应当摒弃心中的执念，</p>
-<p>以实际项目环境，以及人员构成为出发点，客观的考虑。</p>
+<p>其次，如果和周围人群没有得到等量的信息，就容易产生<strong>挫败感</strong>，</p>
+<p>当别人知道了我们不知道的信息时，</p>
+<p>我们会认为容易错过那些本来可以抓住的<strong>机会</strong>。</p>
 <p><br/></p>
-<h4 id="以柔性设计为名">2.3 以柔性设计为名</h4>
-<p>最后，可扩展性设计，可看作是一种面向未来的柔性设计（supple design），</p>
-<blockquote>
-<p>为了使项目能够随着开发工作的进行加速前进，而不会由于它自己的老化停滞不前，设计必须要让人们乐于使用，而且易于做出修改，这就是柔性设计。然而，很多过度设计借着柔性设计的名义而自以为是正当的，结果过多的抽象层和间接设计常常成为项目的绊脚石。</p>
-</blockquote>
-<blockquote>
-<p>—— 《<a href="https://book.douban.com/subject/5344973/" target="_blank" rel="noopener">领域驱动设计</a>》</p>
-</blockquote>
+<h3 id="别人的评价">别人的评价</h3>
+<p>在个人成长方面，信息攻击也容易歪曲我们对自身的理解，</p>
+<p>我们是不是应当成为别人期望我们成为的样子？</p>
+<p>还是说<strong>保持愚蠢</strong>，让大部分不那么满意。</p>
 <p><br/></p>
-<p>因此，在考虑可扩展性时，不妨问一问自己，</p>
-<p>我们真的对未来考虑清楚了么，还是暂时以可扩展性为由搪塞自己？</p>
-<p>我们真的考虑好可扩展性的代价和弊端了么，还是只看到了它所带来的好处？</p>
+<p>为了赢得别人的赞许，我们会强行向自己的大脑中<strong>塞入</strong>一些根本用不到的知识，</p>
+<p>这些知识可能以后永远都用不到，</p>
+<p>为了学习这些知识所耗费的时间，看起来就像是生命被<strong>缩减</strong>了一般。</p>
 <p><br/></p>
-<h3 id="技术本身的局限性">3. 技术本身的局限性</h3>
-<h4 id="兼容性问题">3.1 兼容性问题</h4>
-<p>软件一旦发布，对于后续升级来说，就容易产生令人头痛的兼容性问题，</p>
+<p>我们无法让<strong>任何人</strong>足够满意，不可能学会所有的知识，</p>
+<p>任何人处心积虑的提问，总是可以让我们看起来像<strong>智障</strong>一样哑口无言。</p>
 <p><br/></p>
-<p>DLL地狱（DLL Hell）指在Microsoft Windows系统中，</p>
-<p>因为动态链接库（DLL）的版本或兼容性的问题而造成程序无法正常运行。</p>
+<p>这真让人无语。</p>
 <p><br/></p>
-<p>Windows早期并没有很严谨的DLL版本管理机制，</p>
-<p>以致经常发生安装了某软件后，因为其覆盖了系统上原有的同一个DLL档，</p>
-<p>而导致原有可运行的程序无法运行，</p>
-<p>可是，还原回原有的DLL档之后，新安装的软件就无法运行。</p>
+<h3 id="有用的技能">有用的技能</h3>
+<p>再看看我们掌握的那些技能吧，</p>
+<p>有多少是<strong>熟练掌握</strong>的，又有多少只是看过而已。</p>
 <p><br/></p>
-<p>这经常被人们称之为 DLL地狱（DLL Hell）。</p>
+<p>那些看过而已的技能，其实都是<strong>伪技能</strong>，</p>
+<p>它们曾浪费过我们的时间，</p>
+<p>但是到实际要用的时候，却发挥不了一点威力。</p>
 <p><br/></p>
-<p>Linux 系统中也遇到共享库（Shared Library）的兼容问题，</p>
-<p>共享库的开发者不停的更改共享库的版本，以修正原有的Bug，增加新的功能或改进性能等。</p>
+<p>那么怎样才能真正掌握那些技能呢？</p>
+<p>我认为要想达到熟练掌握，就目前而言不得不尝试<strong>解决</strong>大量相关的问题，</p>
+<p>因为它们发展的太快，没有任何记载，即使有记载，也不如亲身体会。</p>
 <p><br/></p>
-<p>由于动态链接的灵活性，使得程序本身和程序所依赖的共享库可以分别独立开发和更新，</p>
-<p>但是共享库版本的更新可能会导致接口的更改或删除，这可能导致依赖于该共享库的程序无法正常运行。</p>
+<p>谁有机会去解决问题，谁就有机会<strong>熟练掌握</strong>这方面的技能。</p>
 <p><br/></p>
-<p>由于发布后的软件，并不清楚自己被哪些其他系统所依赖，</p>
-<p>所以，一旦进行了不兼容性的修改，难免有潜在的问题发生。</p>
+<h3 id="防御">防御</h3>
+<p>反观那些我们认为熟练掌握的技能呢，</p>
+<p>它们也会随着时间流逝变得<strong>生疏</strong>起来，随着更新换代变得不再那么有用了。</p>
 <p><br/></p>
-<h4 id="依赖管理">3.2 依赖管理</h4>
-<p>这个问题，以前和朋友们讨论过，但是第一次在公开场合看到有人提及是这篇文章，</p>
-<p><a href="https://zhuanlan.zhihu.com/p/35929167" target="_blank" rel="noopener">[译] 超大型 JavaScript 应用的设计哲学</a>（<a href="https://www.youtube.com/watch?v=ZZmUwXEiPm4" target="_blank" rel="noopener">Youtube</a>），</p>
-<p>作者提到了一个“enhance”的概念，把依赖关系倒置了，</p>
-<p>把“我依赖xxx”倒置为，“我决定被xxx依赖”。</p>
+<p>我们不得不训练自己，必须不断的练习再练习。</p>
 <p><br/></p>
-<p>这样对于自己的任何修改都将是安全的了，虽然也会带来其他的问题，这里就不谈了。</p>
-<p>毕竟这也是除了进行版本控制之外的另一种依赖管理办法。</p>
+<p>冷门的专有知识也是有用的，我认为冷门的知识会提高自己的技术壁垒，</p>
+<p>让别人更不容易<strong>攻破</strong>自己，</p>
+<p>总有一些知识是别人不会的，也是难以超越的。</p>
 <p><br/></p>
-<h4 id="工程">3.3 工程</h4>
-<p>有了对兼容性的理解之后，本文想引出一个观点，</p>
-<p>那就是，虽然从技术手段上可以削减软件变更带来的外部影响，</p>
-<p>但是我认为，究其根本，软件变更的影响范围管理，却是一个软件工程问题。</p>
+<p>自己容易获取到的知识，别人也容易获取，</p>
+<p>因此，越容易获取到的知识，<strong>参考资料</strong>越多的信息，</p>
+<p>其价值也变得越低。</p>
 <p><br/></p>
-<p>高可扩展性诚然重要，但是工程上有一套合适的接口变更方案更重要。</p>
-<p>如果变更是无法避免的话，那么与其避免发生，倒不如对它进行疏导和管控。</p>
+<p>虽然学习它们自己也会有成就感，也会有成长，</p>
+<p>但是这些优势会随着时间发展快速的变得过时。</p>
 <p><br/></p>
-<p>历史上大禹治水的典故，也有类似想法的写照，</p>
-<blockquote>
-<p>禹从鲧治水的失败中汲取教训，改变了"堵"的办法，对洪水进行疏导。</p>
-</blockquote>
+<h3 id="边界之外的探索">边界之外的探索</h3>
+<p>当某项技能钻研到一定程度，我们就会<strong>看到</strong>业界领先水平的边界，</p>
+<p>这并不困难，我们可以看到边界，并不意味着我们就身处边界，</p>
+<p>但是如果再向往前一步，扩充自己的视野，就不得不自己努力做出创新。</p>
+<p><br/></p>
+<p>因为边界大家都能容易看到，在边界之外有所<strong>探索</strong>，才是核心竞争力。</p>
+<p><br/></p>
+<p>换句话说，如果我们不能发表论文，</p>
+<p>那么<strong>迟早</strong>是可被替代的，</p>
+<p>唯一不同的是，被哪些人替代，替代的早晚问题。</p>
+<p><br/></p>
+<p>有人可能会说，就算是发表了多篇论文，还是可能会被别人超越，</p>
+<p>这当然也有可能，但已经不可同日而语了。</p>
+<p><br/></p>
+<h3 id="赢得自己">赢得自己</h3>
+<p>我们跳出技能层面，如果不追求技能，而是转而追求金钱和权力，</p>
+<p>这未必是一件坏事。</p>
+<p><br/></p>
+<p>虽然无数教科书上教育我们说，不该这么世俗，</p>
+<p>但是仅从创造更大的价值角度来看，</p>
+<p>没有金钱和权力，我们甚至身不由己。</p>
+<p><br/></p>
+<p>我们的开发时间<strong>不是</strong>自己的，因为我们不能拒绝实现一个功能，</p>
+<p>只有实现了，客户才会满意，老板才会给我们发薪水。</p>
+<p>所以，如果没有金钱和权力，我们就只是一个<strong>资源</strong>，用来达成别人目标的手段。</p>
+<p><br/></p>
+<p>我们不能做自己认为重要的事情，</p>
+<p>我们的时间不属于<strong>自己</strong>。</p>
+<p><br/></p>
+<h3 id="如何共事">如何共事</h3>
+<p>此外，即使是软件公司，技术手段也只是第二位的，</p>
+<p>上班，是与别人共同做事情的<strong>行为艺术</strong>。</p>
+<p><br/></p>
+<p>我们讲的每一句话，都会产生影响，改变事情的走向，</p>
+<p>技术问题虽然需要被解决，</p>
+<p>但是用什么样的<strong>方式</strong>解决，可能会更重要。</p>
+<p><br/></p>
+<p>我们能预见什么样的未来，我们有多大能力影响别人的看法，</p>
+<p>我们的执行力，综合分析能力，</p>
+<p>我们的人际关系，我们的情绪控制能力，都是重要的。</p>
+<p><br/></p>
+<p>所以，不同的人，才会有不同的人生。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>我们都期望当前维护的系统具有高度可扩展性，以减少眼前的工作负担，</p>
-<p>但是，一方面这类系统实际上需要很强的预见性才能设计出来，难免出现偏差。</p>
-<p>另一方面，高可扩展性也未必没有弊端，是否具有优势也与当前的项目场景有关。</p>
+<p>本文对信息爆炸，知识沉淀，技能学习，技术营销，个人竞争力，</p>
+<p>自己的时间，如何与别人共事，写了一些自己的看法。</p>
 <p><br/></p>
-<p>此外，除了从技术角度考虑软件本身的设计和实现之外，</p>
-<p>我们还可以跳出来，从工程角度来重新看待这个问题。</p>
-<p>有时候，维护一个高可扩展性的软件系统，可能反而不如简单系统外加合适的变更方案更有效。</p>
+<p>身处于一个略显浮躁的时代，我们的很多做事方式，其未来结果都是不可预期的，</p>
+<p>到底怎样做才是正确的呢？</p>
 <p><br/></p>
-<p>毕竟，目前软件都是由人来参与的，</p>
-<p>并用来解决人的问题。</p>
+<p>谁知道呢？</p>
+<p><br/></p>
+<blockquote>
+<p>我不能随波浮沉，为了我致爱的亲人。</p>
+</blockquote>
 
           
         
@@ -538,7 +538,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/132/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/132/">132</a><span class="page-number current">133</span><a class="page-number" href="/page/134/">134</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/134/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/132/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/132/">132</a><span class="page-number current">133</span><a class="page-number" href="/page/134/">134</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/134/">&gt;</a>
   </nav>
 
 
@@ -584,7 +584,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -659,7 +659,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

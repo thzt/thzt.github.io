@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/17/quotation/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/05/23/role-of-cps/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/17/quotation/" itemprop="url">Lisp语言中的引用</a></h1>
+                <a class="post-title-link" href="/2015/05/23/role-of-cps/" itemprop="url">CPS的地位</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-17T00:00:00+08:00">
-                2015-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-23T00:00:00+08:00">
+                2015-05-23
               </time>
             
 
@@ -347,166 +347,355 @@
       
         
           
-            <p>在lisp语言中，引用（quotation）是一个很独特的概念。</p>
-<p>这与按引用传参（call by reference）完全是两码事。</p>
-<p><br/></p>
-<p>至于引用（quote）的含义是什么，</p>
-<p>为什么要有这个概念，</p>
-<p>刚开始学lisp时，很容易感到迷惑。</p>
-<p><br/></p>
-<p>既然如此，</p>
-<p>我们不妨一起探险吧。</p>
-<p><br/></p>
-<h2 id="程序执行就是一系列表达式的求值过程"><strong>程序执行就是一系列表达式的求值过程</strong></h2>
-<p>lisp程序中没有语句，只有表达式。</p>
-<p>程序执行过程，就是一系列表达式的求值过程。</p>
-<p><br/></p>
-<p>这句话再强调几次都不为过，是初学者最容易忽视的一句话。</p>
-<p>它指出了理解程序执行的必要条件。</p>
-<p>每当我们不知道下一步该如何进行时，都可以问自己，表达式的值是什么。</p>
-<p><br/></p>
-<p>我们用x =&gt; 1来表示，表达式x的值是1，或者说（表达式）x求值为1。</p>
+            <p>Scheme语言中，可以使用call/cc，</p>
+<p>得到当前表达式的Continuation。</p>
 <p><br/></p>
 <p>例如：</p>
-<p>(define add1</p>
-<p>    (lambda (x)</p>
-<p>        (+ x 1)))</p>
+<p>(+ 1 (call/cc (lambda (k)</p>
+<p>    (* 2 (k 3)))))</p>
+<p>=&gt; 4</p>
 <p><br/></p>
-<p>(add1 2)</p>
+<p>CPS，是Continuation Passing Style的缩写，</p>
+<p>它是一种编码风格，</p>
+<p>函数执行完以后，并不通过返回值，</p>
+<p>而是调用它自己的Continuation来完成计算。</p>
 <p><br/></p>
-<p>我们仔细考虑一下(add1 2)。这段程序怎么执行呢？</p>
-<p>我们问自己，(add1 2)的值是什么呢？</p>
+<p>例如，</p>
+<p>函数通过返回值的方式，通常这样写，</p>
+<p>(define (add x y)</p>
+<p>    (+ x y))</p>
 <p><br/></p>
-<p>这是一个函数调用表达式，求值规则如下：</p>
-<p>函数调用表达式的值等于函数体的值。</p>
-<p>而函数体中形参的值等于实参的值。</p>
+<p>(display (add 1 2))</p>
+<p>=&gt; 3</p>
 <p><br/></p>
-<p>所以，求(add1 2)的值就转换成了求add1的函数体(+ x 1)的值，x是形参。</p>
+<p>改写成CPS方式，</p>
+<p>(define (add x y <strong>k</strong>)</p>
+<p>        <strong>(k</strong> (+ x y)<strong>)</strong>)</p>
 <p><br/></p>
-<p>从一开始，我们就将实参和实参的值进行区分，是很重要的。</p>
-<p>对于(add1 2)来说，实参是2，实参的值是2的值。</p>
-<p>而2是一个数字，数字是自求值对象，所以2的值还是2。</p>
-<p>（多此一举是必要的）</p>
+<p>(add 1 2 <strong>display</strong>)</p>
+<p>=&gt; 3</p>
 <p><br/></p>
-<p>因此，形参x的值就是2了。x =&gt; 2</p>
+<p>其中display这个单参函数是表达式add的Continuation，</p>
+<p>在调用add函数的时候，我们把它的Continuation当做附加参数传递过去了，</p>
+<p>等add函数体的计算(+ x y)执行完后，</p>
+<p>并没有通过返回值，而是直接调用了它的Continuation——k。</p>
 <p><br/></p>
-<p>我们来求值函数体，(+ x 1)</p>
-<p>(+ x 1)又是一个函数调用表达式，</p>
-<p>只不过+是一个内置函数，我们看不到它的函数体。</p>
-<p>我们只知道加法的结果是两个加数之和。</p>
+<h2 id="cps的误区"><strong>CPS的误区</strong></h2>
+<p>CPS是一种代码风格，</p>
+<p>它可以用来做任何适当的事情，</p>
+<p>并不是为了call/cc而出现的。</p>
 <p><br/></p>
-<p>于是，x的值是2，2+1=3。</p>
-<p>对吗？</p>
+<p>CPS可以<strong>显式的指明程序的计算过程</strong>，</p>
+<p>在函数式语言的编译器中，常用来作为代码的<strong>中间表示</strong>（IR）。</p>
 <p><br/></p>
-<p>结果对了，但是执行过程不对，缺少对1这个实参的求值过程。</p>
+<p>例如：Standard ML of New Jersey编译器，大致有以下几个处理过程。</p>
+<p>（1）词法分析，语法分析，类型检查，建立抽象语法树</p>
+<p>（2）转换成lambda演算的某种表示</p>
+<p>（3）对用lambda演算表示的程序进行优化</p>
+<p>（4）转换成CPS的某种表示</p>
+<p>（5）优化CPS</p>
+<p>（6）闭包变换（closure conversion），消除函数的自由变量</p>
+<p>（7）去除嵌套作用域，得到一系列无嵌套的相互递归函数</p>
+<p>（8）处理寄存器溢出，每个函数至多含有n个变量，n是目标机器寄存器数</p>
+<p>（9）生成目标机器指令</p>
 <p><br/></p>
-<p>根据函数调用表达式的求值规则，(+ x 1)的值是x的值与1的值相加的结果。</p>
-<p>x =&gt; 2，1 =&gt; 1</p>
-<p>所以，结果为2+1=3</p>
+<p>CPS与尾递归，也没有必然的联系。</p>
+<p>虽然很多地方都喜欢通过把函数转换成尾递归化来介绍CPS。</p>
 <p><br/></p>
-<p>这样繁琐有什么用呢？</p>
-<p>那不妨分析一下(= 1 '1) =&gt; #t</p>
+<h2 id="转换成cps"><strong>转换成CPS</strong></h2>
+<p>有关CPS的研究很多，</p>
+<p>将任意函数转换成CPS，</p>
+<p>已经不是困难的事情了。</p>
 <p><br/></p>
-<p>引用出现了，其中'1是(quote 1)的简写。</p>
-<p>1和(quote 1)为什么相等的呢？</p>
-<p>其实是，它们两个不相等，它们的值相等。</p>
+<p>我们不做形式化的探讨，</p>
+<p>只手动处理，借几个例子来体会一下。</p>
 <p><br/></p>
-<p>在函数=调用之前，实参1和(quote 1)都要先求值。</p>
-<p>1 =&gt; 1，(quote 1) =&gt; 1</p>
-<p>因此，(= 1 (quote 1)) =&gt; #t</p>
+<p><strong>例一：</strong>含有自由变量的函数</p>
+<p>(define y 1)</p>
 <p><br/></p>
-<h2 id="从求值的角度理解quote"><strong>从求值的角度理解quote</strong></h2>
-<p>怎样理解(quote 1) =&gt; 1呢？</p>
+<p>(define (f x)</p>
+<p>    (+ x <strong>y</strong>))</p>
 <p><br/></p>
-<p>其实，我们只是遵循了quote表达式的求值规则而已，</p>
-<p>(quote a) =&gt; a</p>
+<p>(display (f 2))</p>
+<p>=&gt; 3</p>
 <p><br/></p>
-<p>那么a是什么呢？</p>
+<p>我们看到f的函数体中(+ x y)，y是自由的，</p>
+<p>它没有在函数体中定义。</p>
 <p><br/></p>
-<p>其实这个问题提的不合理。</p>
-<p>因为，在lisp程序执行过程中，我们不关心“xxx是什么”，我们只关心“xxx的值是什么”。</p>
+<p>根据词法作用域规则，</p>
+<p>y，应该去<strong>定义f的环境中</strong>查找。</p>
+<p>得到y =&gt; 1。</p>
 <p><br/></p>
-<p>那么a的值是什么呢？</p>
+<p>我们通过<strong>为f增加附加参数k</strong>的方法， 将具有返回值的函数转换成CPS。</p>
+<p>(define y 1)</p>
 <p><br/></p>
-<p>这个问题在这种情况下提的也不合理。</p>
-<p>因为，我们需要求值的是(quote a)，我们已经知道了它的值是a，就不必再求a的值了。</p>
+<p>(define (f x <strong>k</strong>)</p>
+<p>    <strong>(k</strong> (+ x y)<strong>)</strong>)</p>
 <p><br/></p>
-<p>例如：</p>
-<p>(define a 1)</p>
-<p>(list a 'a) =&gt; (1 a)</p>
+<p>(f 2 display)</p>
+<p>=&gt; 3</p>
 <p><br/></p>
-<p>我们来分析一下，程序的执行过程。</p>
-<p>问程序怎么执行，就是问(list a 'a)的值是什么，</p>
-<p>而(list a 'a)是函数调用，list是内置函数，结果值是用实参值拼成的一个列表。</p>
+<p><strong>例二：</strong>阶乘函数</p>
 <p><br/></p>
-<p>根据函数调用规则，首先我们要求实参的值。</p>
-<p>a =&gt; 1，因为(define a 1)就是定义a的值为1</p>
-<p>'a =&gt; a，根据quote表达式的求值规则(quote a) =&gt; a</p>
+<p>(define (fact n)</p>
+<p>    (if (&lt;= n 2)</p>
+<p>        n</p>
+<p>        (* (fact (- n 1)) n)))</p>
 <p><br/></p>
-<p>所以(list a 'a) =&gt; (1 a)</p>
-<p>这里我们看到了实参与实参值的区别。</p>
-<p>我们也看到了，在调用函数之前，要先求值实参。</p>
+<p>(display (fact 5))</p>
+<p>=&gt; 120</p>
 <p><br/></p>
-<p>回顾一下，这其实是拿着一堆符号在玩而已。</p>
-<p>求值，就是进行符号替换罢了。</p>
+<p>fact函数是递归的，为了转换成CPS，在增加附加参数k时候，</p>
+<p>所有fact调用的地方都要修改，(define (fact n k)</p>
+<p>难以修改的地方，可以思考一下实际的计算顺序，作为方向。</p>
 <p><br/></p>
-<p>对的，</p>
-<p>lisp语言的计算模型是建立在lambda演算基础上的。</p>
-<p>而lambda演算就是一个使用符号进行计算的形式系统。</p>
-<p>函数调用在lambda演算中称为beta归约。</p>
+<p>(if (&lt;= n 2)</p>
+<p>    n</p>
+<p>这里，返回n后要执行k所示的剩余计算，</p>
+<p>相当于(k n)。</p>
 <p><br/></p>
-<h2 id="编码一致性"><strong>编码一致性</strong></h2>
-<p>我们已经知道了quote表达式的求值规则了。</p>
-<p>相信判断程序的执行过程，已经难不倒我们了。</p>
+<p>(* (fact (- n 1)) n)</p>
+<p>考虑运算顺序，先执行(fact (- n 1))，</p>
+<p>增加附加参数以后，变成了(fact (- n 1) ?)，</p>
+<p>其中“?”表示该表达式后续的剩余计算，是什么呢，</p>
+<p>考虑计算顺序，如果计算完成，则要先乘以n，在执行k所示的剩余计算。</p>
 <p><br/></p>
-<p>可是，为什么要有引用这个概念呢？</p>
+<p>所以，</p>
+<p>? =&gt;</p>
+<p>(lambda (v)</p>
+<p>    (k (* v n)))</p>
 <p><br/></p>
-<p>这其实是为了将数据和程序进行统一编码。</p>
-<p>lisp程序中，我们知道(+ 1 2)是一个加法调用，</p>
-<p>但是它也可以表示由3个符号+，1和2构成的列表</p>
+<p>整理得，</p>
+<p>(define (fact n <strong>k</strong>)</p>
+<p>    (if (&lt;= n 2)</p>
+<p>        <strong>(k</strong> n<strong>)</strong></p>
+<p>        (fact (- n 1)</p>
+<p>            <strong>(lambda (v)</strong></p>
+<p>                <strong>(k (* v n)))</strong>)))</p>
 <p><br/></p>
-<p>列表是数据，加法调用是程序，</p>
-<p>它们采用了相同的编码。</p>
-<p>我们没有办法区分。</p>
+<p>(fact 5 display)</p>
+<p>=&gt; 120</p>
 <p><br/></p>
-<p>首先想到的，就是让它们采用不同的编码。</p>
-<p>例如：</p>
-<p>我们把函数调用编码为+[1;2]，而列表编码为(+ 1 2)</p>
+<p><strong>例三：</strong>斐波那契函数</p>
 <p><br/></p>
-<p>看起来不错，</p>
-<p>人们一开始也是这么做的，</p>
-<p>+[1;2]称为M表达式。</p>
-<p>(+ 1 2)称为S表达式。</p>
+<p>(define (fib n)</p>
+<p>    (if (&lt;= n 2)</p>
+<p>        1</p>
+<p>        (+ (fib (- n 1)) (fib (- n 2)))))</p>
 <p><br/></p>
-<p>可是，后来人们发现，如果用lisp语言来处理lisp程序文本时，</p>
-<p>不同的编码，会增加难度。</p>
+<p>(display (fib 5))</p>
+<p>=&gt; 5</p>
 <p><br/></p>
-<p>又因为，程序主要是由函数调用组成的。</p>
-<p>所以，人们进行了以下编码，</p>
-<p>函数调用编码为(+ 1 2)</p>
-<p>而列表编码为(quote (+ 1 2))</p>
+<p>先为函数增加附加参数k，</p>
+<p>(define (fib n k)</p>
 <p><br/></p>
-<p>即，(+ 1 2)求值，会导致函数调用。</p>
-<p>(quote (+ 1 2))求值，会得到一个列表。</p>
-<p>于是，我们就统一的用S表达式，完成了对程序和数据的相同编码。</p>
+<p>再改变非递归情况的返回值方式，</p>
+<p>(if (&lt;= n 2)</p>
+<p>    1</p>
 <p><br/></p>
-<p>也正因为有这样的一致性。</p>
-<p>在进行元编程时，相比其他语言，lisp宏的威力才更强大。</p>
+<p>(if (&lt;= n 2)</p>
+<p>    (k 1)</p>
+<p><br/></p>
+<p>然后考虑(+ (fib (- n 1)) (fib (- n 2)))的运算顺序，</p>
+<p>是从计算(fib (- n 1))开始的，</p>
+<p>增加附加参数后，改写为，(fib (- n 1) ?)</p>
+<p><br/></p>
+<p>“?”是什么呢，它表示(fib (- n 1))表达式后续的计算：</p>
+<p>先计算(fib (- n 2))，再把结果值相加，最后执行k所示的计算。</p>
+<p><br/></p>
+<p>? =&gt;</p>
+<p>(lambda (v1)</p>
+<p>    <strong>(fib (- n 2) ??)</strong>)</p>
+<p>=&gt;</p>
+<p>(lambda (v1)</p>
+<p>    (fib (- n 2)</p>
+<p>        <strong>(lambda (v2)</strong></p>
+<p>            <strong>(k (+ v1 v2)))</strong>))</p>
+<p><br/></p>
+<p>整理得，</p>
+<p>(define (fib n k)</p>
+<p>    (if (&lt;= n 2)</p>
+<p>        <strong>(k</strong> 1<strong>)</strong></p>
+<p>        (fib (- n 1)</p>
+<p>            <strong>(lambda (v1)</strong></p>
+<p>                (fib (- n 2)</p>
+<p>                    <strong>(lambda (v2)</strong></p>
+<p>                        <strong>(k (+ v1 v2)))))</strong>)))</p>
+<p><br/></p>
+<p>(fib 5 display)</p>
+<p>=&gt; 5</p>
+<p><br/></p>
+<p>总结一下，</p>
+<p><strong>函数调用的返回值变成了，Continuation的参数</strong>，</p>
+<p>然后<strong>在Continuation中处理后续的计算</strong>。</p>
+<p><br/></p>
+<p>(fn x)</p>
+<p>=&gt; (fn x (lambda (v) ...))</p>
+<p>其中v是原来(fn x)的返回值，</p>
+<p>(fn x)的后续计算，写在“...”处。</p>
+<p><br/></p>
+<h2 id="闭包变换"><strong>闭包变换</strong></h2>
+<p>限于目前大多数计算机的体系结构，</p>
+<p>函数求值时，并不直接支持对词法变量的查找规则。</p>
+<p><br/></p>
+<p>我们可以继续改变CPS，</p>
+<p>使得每个函数都不包含自由变量。</p>
+<p>这种改变方式，称为<strong>闭包变换</strong>，</p>
+<p>这种代码风格，称为Closure Passing Style。</p>
+<p><br/></p>
+<p>对于任意含有自由变量的函数，我们都可以进行闭包变换，</p>
+<p><strong>并不一定是已经表示成CPS风格的程序</strong>，</p>
+<p>只是CPS变换与闭包变换有些相似之处。</p>
+<p><br/></p>
+<p>我们知道，</p>
+<p>词法作用域规则，是当我们查找函数中自由变量的时候，</p>
+<p>到定义该函数的环境中去查找。</p>
+<p><br/></p>
+<p>为了在运行时得到函数定义时的环境，</p>
+<p>我们需要再增加一个或几个参数，来表示函数定义时的环境。</p>
+<p><br/></p>
+<p>为了连贯性，我们直接使用上文CPS转换后的结果，作为下一步闭包变换的起点。</p>
+<p><br/></p>
+<p><strong>例一：</strong>含有自由变量的函数</p>
+<p>(define y 1)</p>
+<p><br/></p>
+<p>(define (f x k)</p>
+<p>    (k (+ x y)))</p>
+<p><br/></p>
+<p>(f 2 display)</p>
+<p>=&gt; 3</p>
+<p><br/></p>
+<p>我们再增加一个参数e，来表示函数定义时的环境。</p>
+<p>(define y 1)</p>
+<p>(define (f x k <strong>e</strong>)</p>
+<p>    <strong>(define y (vector-ref e 0))</strong></p>
+<p>    (k (+ x y)))</p>
+<p><br/></p>
+<p><strong>(define e0 (vector y f))</strong></p>
+<p>(f 2 display <strong>e0</strong>)</p>
+<p>=&gt; 3</p>
+<p><br/></p>
+<p>注：</p>
+<p>(vector y f))，用vector表示环境，y是第0个元素，f是第1个元素。</p>
+<p>(vector-ref e 0))，取环境中第0个元素，y</p>
+<p><br/></p>
+<p><strong>例二：</strong>阶乘函数</p>
+<p>(define (fact n k)</p>
+<p>    (if (&lt;= n 2)</p>
+<p>        (k n)</p>
+<p>        (fact (- n 1)</p>
+<p>            (lambda (v)</p>
+<p>                (k (* v n))))))</p>
+<p><br/></p>
+<p>(fact 5 display)</p>
+<p>=&gt; 120</p>
+<p><br/></p>
+<p>我们先将Continuation中的lambda表达式写成定义式，便于理解，</p>
+<p>(define (fact n k)</p>
+<p>    <strong>(define (k1 v)</strong></p>
+<p>        <strong>(k (* v n)))</strong></p>
+<p><br/></p>
+<p>    (if (&lt;= n 2)</p>
+<p>        (k n)</p>
+<p>        (fact (- n 1) <strong>k1</strong>)))</p>
+<p><br/></p>
+<p>我们看到，在Continuation函数中也包含了自由变量，</p>
+<p>所以，情况比较复杂，</p>
+<p>我们需要再传递一个参数，来表示Continuation定义时的环境，</p>
+<p>用来区分fact函数定义时的环境。</p>
+<p><br/></p>
+<p>(define (k0 v <strong>e</strong>)</p>
+<p>    (display v))</p>
+<p><br/></p>
+<p>(define (fact n k <strong>fact-e k-e</strong>)</p>
+<p>    (define (k1 v <strong>e</strong>)</p>
+<p>        <strong>(define n (vector-ref e 0))</strong></p>
+<p>        <strong>(define k (vector-ref e 1))</strong></p>
+<p>        <strong>(define k-e (vector-ref e 3))</strong></p>
+<p>        (k (* v n) <strong>k-e</strong>))</p>
+<p><br/></p>
+<p>    <strong>(define fact (vector-ref fact-e 1))</strong></p>
+<p>    <strong>(define k1-e (vector n k fact-e k-e k1 fact))</strong></p>
+<p><br/></p>
+<p>    (if (&lt;= n 2)</p>
+<p>        (k n <strong>k-e</strong>)</p>
+<p>        (fact (- n 1) k1 <strong>fact-e k1-e</strong>)))</p>
+<p><br/></p>
+<p><strong>(define fact-e0 (vector k0 fact))</strong></p>
+<p><strong>(define k-e0 fact-e0)</strong></p>
+<p><br/></p>
+<p>(fact 5 k0 <strong>fact-e0 k-e0</strong>)</p>
+<p>=&gt; 120</p>
+<p><br/></p>
+<p>关键点在于，从定义时的环境中得到词法变量。</p>
+<p><br/></p>
+<p><strong>例三：</strong>斐波那契函数</p>
+<p>(define (fib n k)</p>
+<p>    (if (&lt;= n 2)</p>
+<p>        (k 1)</p>
+<p>        (fib (- n 1)</p>
+<p>            (lambda (v1)</p>
+<p>                (fib (- n 2)</p>
+<p>                    (lambda (v2)</p>
+<p>                        (k (+ v1 v2))))))))</p>
+<p><br/></p>
+<p>(fib 5 display)</p>
+<p>=&gt; 5</p>
+<p><br/></p>
+<p>先将Continuation中的lambda表达式写成定义式</p>
+<p>(define (fib n k)</p>
+<p>    <strong>(define (k1 v1)</strong></p>
+<p>        <strong>(define (k2 v2)</strong></p>
+<p>            <strong>(k (+ v1 v2)))</strong></p>
+<p>        <strong>(fib (- n 2) k2))</strong></p>
+<p><br/></p>
+<p>    (if (&lt;= n 2)</p>
+<p>        (k 1)</p>
+<p>        (fib (- n 1) <strong>k1</strong>)))</p>
+<p><br/></p>
+<p>将函数定义时的环境，当做附加参数传递，</p>
+<p><br/></p>
+<p>(define (k0 v <strong>fib-e k-e</strong>)</p>
+<p>    (display v))</p>
+<p><br/></p>
+<p>(define (fib n k <strong>fib-e k-e</strong>)</p>
+<p>    (define (k1 v1 <strong>fib-e k-e</strong>)</p>
+<p>        (define (k2 v2 <strong>fib-e k-e</strong>)</p>
+<p>            <strong>(define k (vector-ref (vector-ref k-e 2) 1))</strong></p>
+<p>            <strong>(define v1 (vector-ref k-e 0))</strong></p>
+<p>            <strong>(define k-k-e (vector-ref (vector-ref k-e 2) 3))</strong></p>
+<p>            (k (+ v1 v2) <strong>fib-e k-k-e</strong>))</p>
+<p><br/></p>
+<p>        <strong>(define fib (vector-ref fib-e 1))</strong></p>
+<p>        <strong>(define n (vector-ref k-e 0))</strong></p>
+<p>        <strong>(define k2-e (vector v1 fib-e k-e k2 fib n))</strong></p>
+<p><br/></p>
+<p>        (fib (- n 2) k2 <strong>fib-e k2-e</strong>))</p>
+<p><br/></p>
+<p>    <strong>(define fib (vector-ref fib-e 1))</strong></p>
+<p>    <strong>(define k1-e (vector n k fib-e k-e k1 fib))</strong></p>
+<p><br/></p>
+<p>    (if (&lt;= n 2)</p>
+<p>        (k 1 <strong>fib-e k-e</strong>)</p>
+<p>        (fib (- n 1) k1 <strong>fib-e k1-e</strong>)))</p>
+<p><br/></p>
+<p><strong>(define fib-e0 (vector k0 fib))</strong></p>
+<p><strong>(define k-e0 fib-e0)</strong></p>
+<p><br/></p>
+<p>(fib 5 k0 <strong>fib-e0 k-e0</strong>)</p>
+<p>=&gt; 5</p>
+<p><br/></p>
+<p>至此，三个例子中，所有的函数都没有自由变量了。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>lisp语言中的引用，是一个很深刻的概念。</p>
-<p>远不是通常想像的那么简单。</p>
+<p>本文只是手动处理了CPS变换和闭包变换。</p>
+<p>CPS的用处还不止于此。</p>
+<p>然而，我认为，<strong>重要的是这种附加参数的思想</strong>。</p>
 <p><br/></p>
-<p>比如，我们如何判断两个引用相等呢？</p>
-<p>从符号的角度来看，似乎很简单，</p>
-<p>但是从实现的角度来看，我们就需要在程序执行之前，让引用指向相同的位置。</p>
+<p>学会了思想，我们才能灵活运用它。</p>
+<p>发现更神奇的计算本质。</p>
 <p><br/></p>
-<p>然而，这样对于引用的列表来说，就是个问题。</p>
-<p>如果程序执行过程中，修改了列表元素，其他引用也会受到影响。</p>
-<p><br/></p>
-<p>类似的问题还有很多。</p>
-<p>因此，Scheme和Common Lisp规范都建议不要修改引用返回的值。</p>
-<p>应该只把它当做一个常量来使用。</p>
+<p>本文参考：《Compiling with Continuations》</p>
 
           
         
@@ -545,7 +734,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/273/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/273/">273</a><span class="page-number current">274</span><a class="page-number" href="/page/275/">275</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/275/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/273/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/273/">273</a><span class="page-number current">274</span><a class="page-number" href="/page/275/">275</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/275/">&gt;</a>
   </nav>
 
 
@@ -591,7 +780,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -666,7 +855,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

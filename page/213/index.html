@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/05/19/type-theory-in-my-eye/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/09/03/weakness/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/05/19/type-theory-in-my-eye/" itemprop="url">类型理论之拙见</a></h1>
+                <a class="post-title-link" href="/2016/09/03/weakness/" itemprop="url">性格的弱点</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-19T00:00:00+08:00">
-                2016-05-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-03T00:00:00+08:00">
+                2016-09-03
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logic/" itemprop="url" rel="index">
-                    <span itemprop="name">Logic</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,67 +347,93 @@
       
         
           
-            <p>类型系统，是指一种根据所计算出值的种类，对词语进行分类，</p>
-<p>从而证明某程序行为不会发生的，</p>
-<p>可行语法手段。——《TAPL》</p>
+            <p>人们常说，性格决定命运。</p>
+<p>一直以来，我总觉得这是一句空话，一个『大』道理，</p>
+<p>并没有什么真正的用处。</p>
 <p><br/></p>
-<p>可见类型系统是形式方法的一种，</p>
-<p>也是一种证明方法。</p>
+<p>但是随着生活阅历的不断丰富，</p>
+<p>却越发察觉到限制自身发展的，正是性格本身。</p>
+<p>大义凛然的形象，容易让人拍手称赞，</p>
+<p>但是引人注目的传奇经历，也隐藏了性格的弱点。</p>
 <p><br/></p>
-<p>当我们把自己写好的程序提交给别人时，</p>
-<p>如果别人质疑『你怎么证明它是对的』，</p>
-<p>是不好回答的。</p>
+<h2 id="道德观"><strong>道德观</strong></h2>
+<p>古龙小说小李飞刀的主角李寻欢，</p>
+<p>为了向龙啸天报恩，居然将表妹让给他，断送了美好姻缘。</p>
+<p>李寻欢有性格缺陷，他做不到有恩不报的事情，</p>
+<p>这是他一直可以被人利用的原因。</p>
 <p><br/></p>
-<p>因为通过测试用例来检测程序行为，</p>
-<p>本身就是在进行不完全归纳，</p>
-<p>我们只能断定验证过的事情是正确，</p>
-<p>却不能断定一般性质。</p>
+<p>金庸小说射雕英雄传中，</p>
+<p>郭靖曾三番四次搭救欧阳锋，原因只是坚持自己不能见死不救。</p>
+<p>这种性格缺陷，导致了后面一系列的灾难，</p>
+<p>洪七公和黄蓉差点死在欧阳锋手上，而江南七怪，几乎全军覆没。</p>
 <p><br/></p>
-<p>类型理论与数学，逻辑学，计算机科学相关，</p>
-<p>甚至渗透到了其他学科之中。</p>
+<p>除此之外，</p>
+<p>各种反派角色总是过的更轻松，因为他们没有道德观的束缚，</p>
+<p>他们游刃有余，总能有机会兴风作浪。</p>
+<p>而以正派标榜自身的侠客，总是束手束脚，悲剧连连。</p>
 <p><br/></p>
-<p>类型系统是程序语言之上的一套逻辑系统，</p>
-<p>可以对程序进行推理，来断定某些性质。</p>
-<p>不同的逻辑系统，『诱导』出了不同的类型系统。</p>
+<p>同样是没有证据，反派人物就可以声称自己是忍辱负重，</p>
+<p>而指认主角是卖国求荣。</p>
+<p>而主角的性格缺陷，让他们相信清者自清，错过了解释的机会。</p>
 <p><br/></p>
-<p>形式系统有个特点，那就是稍微改变一点约束条件，</p>
-<p>就会得到一系列好玩的附加特性，</p>
-<p>有大量丰富的逻辑系统可以玩。</p>
-<p>例如，直觉主义逻辑，模态逻辑，时态逻辑，等等。</p>
+<h2 id="我不能"><strong>我不能</strong></h2>
+<p>诚然，虐心的情节才能有更多的读者，</p>
+<p>可是生活中的我们未必不会明知故犯。</p>
 <p><br/></p>
-<p>可是，仅从代码进行静态分析，来断定程序运行时的所有行为，是不可判定的。</p>
-<p>因此只能保证well typed的程序没有某类错误，</p>
-<p>每个类型系统有各自要阻止的行为。</p>
+<p>所以说，以上的例子虽然不是直接源于生活，但是有生活中的影子，</p>
+<p>当我们对自己说『我可做不出这种事』的时候，是因为我们有性格缺陷，</p>
+<p>对自己说『不能』的时候，实际上已经错过了大部分的『可能』。</p>
 <p><br/></p>
-<p>类型系统种类繁多，支持各种好玩的特性，</p>
-<p>例如，支持Polymorphism的类型系统，某类型可以由其他类型参数化，</p>
-<p>支持Dependent type的系统，类型可以由值来决定，</p>
-<p>子类型允许我们适当放宽类型要求，</p>
-<p>递归类型，存在类型，全称类型。</p>
+<p>看到这里，肯定有人会说，即使这样，我也做不出有违良心的事情。</p>
+<p>是的，性格反映了一个人的特征，</p>
+<p>有什么样的性格，就决定了他是一个什么样的人。</p>
 <p><br/></p>
-<p>1934年，Curry意识到简单类型化lambda演算中的类型，与直觉主义逻辑之间的关系，</p>
-<p>后面的研究发现，人们把这种对应关系推广为了Curry-Howard-Lambek Correspondance，</p>
-<p>它将程序语言的类型，逻辑系统中的命题，和指称语义笛卡尔闭范畴，联系起来了。</p>
-<p>一个合法项的存在，就证明了对应它类型的一个命题为真，程序即构造出来的证明。</p>
+<p>因此，改变性格是很难的，也是危险的，会导致一系列的连锁反应，</p>
+<p>物以类聚人以群分，性格还会决定我们的身边会聚集什么样的人。</p>
+<p>改变性格会扭转局势，改变命运。</p>
 <p><br/></p>
-<p>类型理论的实用内容还有很多，</p>
-<p>Gradual typing的动静结合，例如flow，</p>
-<p>以及Rust和Linear typeing的应用，</p>
-<p>另外还有，Hindley–Milner类型推导算法。</p>
+<h2 id="看到自己的私心"><strong>看到自己的私心</strong></h2>
+<p>我写出这些，并不是希望做出改变，</p>
+<p>而是想，当我们遭遇难题时，或者有过不去的门槛之时，</p>
+<p>能提醒自己，这是性格缺陷在作怪，不要总是找客观原因。</p>
 <p><br/></p>
-<p>类型系统有一些性质可以衡量，</p>
-<p>例如，type soundness，type safety，</p>
-<p>以及检查类型的方式，static check，dynamic check，</p>
-<p>包括某些语言是explicitly typed，而某些是implicitly typed，</p>
-<p>某些语言是被stronger checked，有些则是weaker checked。</p>
+<p>另一方面，在绝境中，不同的人也会做出不同的选择，</p>
+<p>在金庸小说倚天屠龙记中，同样是迫于长辈的压力，</p>
+<p>周芷若会立下毒誓，抢夺屠龙刀，陷害别人，</p>
+<p>而赵敏却以死相逼，救得张无忌，替父顶罪。</p>
 <p><br/></p>
-<p>现在是学习时间了。</p>
+<p>这也说明，那些总是找客观原因说自己境遇悲惨的人们，</p>
+<p>并没有认识到选择才是鉴别一个人的标准，</p>
+<p>当前的处境并不是做出糟糕决定的直接原因，私心才是。</p>
 <p><br/></p>
-<p>参考：</p>
-<p><a href="https://wiki.haskell.org/Curry-Howard-Lambek_correspondence" target="_blank" rel="noopener">Curry-Howard-Lambek correspondence</a></p>
-<p><a href="https://book.douban.com/subject/1318672/" target="_blank" rel="noopener">类型和程序设计语言</a></p>
-<p><a href="http://lucacardelli.name/papers/typesystems.pdf" target="_blank" rel="noopener">Type System - Luca Cardelli</a></p>
-<p><a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a></p>
+<h2 id="多样性"><strong>多样性</strong></h2>
+<p>这个世界本来就是由形形色色的生命构成的，物种具有多样性，</p>
+<p>人类社会也是如此，社会中有不同性格的人，</p>
+<p>于是社会的发展才有了不同的可能。</p>
+<p><br/></p>
+<p>有过必改，和坚持己见，都是优秀的品质，</p>
+<p>但是，我们却不可能同时具有这两种性格，只能做到其中一个。</p>
+<p>优秀和低劣并没有明显的区别。</p>
+<p><br/></p>
+<p>哈佛大学的麦克.桑德尔在讲授《公正》这门课时，提出了这样一个问题：</p>
+<p>假设你是一名电车司机正在驾驶着高速行驶的电车，</p>
+<p>此时前方轨道上有五个工人，而一旁的另一条轨道上只有一个工人，</p>
+<p>想要停下电车已经不可能，但只要拉动操纵杆就可以转入另一条轨道，</p>
+<p>是转道，还是不转道？</p>
+<p><br/></p>
+<p>无论从结果还是行为本身来评判，都无法知晓哪个选择是更好的，</p>
+<p>因此，纠结于是否道德，这个问题本身可能都是有问题的。</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>中国有句古话，谋事在人成事在天，说的非常好，</p>
+<p>人力所能及的事情毕竟是少数，我们只能做出尝试，然后等待，</p>
+<p>却无法操纵一件事情的最终结果。</p>
+<p><br/></p>
+<p>因此，各安天命，同时意识到自身的性格缺陷，我想这才是好的，</p>
+<p>保持一定的灵活性，不至于总是难堪到把自己逼疯，</p>
+<p>也不至于自信到能改变命运。</p>
+<p><br/></p>
+<p>道法自然。</p>
 
           
         
@@ -446,7 +472,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/212/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/212/">212</a><span class="page-number current">213</span><a class="page-number" href="/page/214/">214</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/214/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/212/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/212/">212</a><span class="page-number current">213</span><a class="page-number" href="/page/214/">214</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/214/">&gt;</a>
   </nav>
 
 
@@ -492,7 +518,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -567,7 +593,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/12/26/persona/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/07/23/code-04/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/12/26/persona/" itemprop="url">用画像法认识自己的期望</a></h1>
+                <a class="post-title-link" href="/2020/07/23/code-04/" itemprop="url">编码技巧（四）：零缺陷</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-26T00:00:00+08:00">
-                2019-12-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-23T00:00:00+08:00">
+                2020-07-23
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Software/" itemprop="url" rel="index">
+                    <span itemprop="name">Software</span>
                   </a>
                 </span>
 
@@ -347,112 +347,103 @@
       
         
           
-            <p>用户画像（user persona）有时也被称为是<a href="https://wiki.mbalib.com/wiki/%E8%A7%92%E8%89%B2%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener">角色模型</a>，</p>
-<p>指的是一种被创建出来的虚拟角色，</p>
-<p>在市场营销，或以用户为中心的设计中，可被用来代表各种不同类型的目标用户。</p>
+            <h3 id="背景">背景</h3>
+<p>除了编码之外，开发者平时最常遇到的麻烦就是<strong>软件缺陷</strong>了，</p>
+<p>指的是，软件在某些情况下，表现出了与<strong>预期</strong>不符的行为。</p>
 <p><br/></p>
-<blockquote>
-<p><a href="https://en.wikipedia.org/wiki/Persona_(user_experience)" target="_blank" rel="noopener">A persona</a>, (also user persona, customer persona, buyer persona) in user-centered design and marketing is a fictional character created to represent a user type that might use a site, brand, or product in a similar way.</p>
-</blockquote>
+<p>确保软件没有缺陷，是一件很难的事情，</p>
+<p>因为一方面，预期是会<strong>变</strong>的，</p>
+<p>另一方面，修改软件的一部分也许会不小心<strong>影响</strong>到其他部分。</p>
 <p><br/></p>
-<p>采用画像（模型）法来进行研究，其实并不罕见，</p>
-<p>在很多其他的领域，也在用这样的方法。</p>
+<p>那么就这样听天由命了么？</p>
+<p>很显然这是不行的。</p>
 <p><br/></p>
-<p>在自然科学中，我们所认识的世界，其实不是世界本身，</p>
-<p>而是人们为真实世界所建立的一种画像（模型），</p>
-<p>我们普通人经常不加区分。</p>
+<p>写出高缺陷率的代码，是<strong>不专业</strong>的表现。</p>
+<p>只有运行起来没问题的代码，再追求清晰易懂才是有意义的。</p>
 <p><br/></p>
-<p>自然科学家的工作，就是不断的修正画像（模型），</p>
-<p>使之更有用，或适用范围更广，</p>
-<p>不断的逼近真实世界，解释更多的现象。</p>
+<p>文本就来探讨，如何写出低缺陷代码的编码技巧。</p>
+<h3 id="亲手测试">亲手测试</h3>
+<p>在讨论技巧之前，我们不妨先反思一下，</p>
+<p>是哪些事实，让我们坚信自己写的代码<strong>肯定</strong>没有问题？</p>
 <p><br/></p>
-<p>在这里，画像（模型）其实提供了两种能力，</p>
-<p>第一，它用渐进方式刻画了真实世界，</p>
-<p>第二，它具象化的人们的认识。</p>
+<p>我认为只有一条，那就是我们<strong>自己测试</strong>过了。</p>
+<p>不论是通过自动化的测试，还是手工测试，</p>
+<p>不论是通过肉眼亲见，还是通过逻辑证明。</p>
 <p><br/></p>
-<p>本文就从它的第二个能力说起。</p>
-<h3 id="具象化的好处">具象化的好处</h3>
-<p>为什么需要把人们的认识具象化呢？</p>
-<p>这是因为人和人的理解，很容易出现偏差，</p>
-<p>甚至，同一个人在不同的时间段，也可能有所不同。</p>
+<p>我们应该只相信<strong>自己</strong>测试过的代码。</p>
+<p>不能将 ”确保代码没有问题“ 这件事委托给他人。</p>
 <p><br/></p>
-<p>将想法“具象化”，就是尽可能的统一了大家要讨论的内容。</p>
+<p>所以，一个<strong>负责任</strong>的开发者，绝不会交付没有经过自测的代码。</p>
+<p>让别人找出问题再修复，肯定会耗费更多的时间。</p>
 <p><br/></p>
-<p>另一方面，尚未被“具象化”的认识，很有可能存在矛盾，</p>
-<p>因为大脑能一并处理的信息量是有限的，</p>
-<p>想法只放在大脑中，就很难识别出，想法的各个部分之间是否有冲突。</p>
+<p>这就是为什么有时候改一行代码，也需要很久的原因了，</p>
+<p>因为这一行代码，可能会影响到很多其他模块，</p>
+<p>这些受影响到的模块，都应<strong>完整的</strong>进行测试。</p>
 <p><br/></p>
-<p>将想法“具象化”，可以减少矛盾。</p>
+<p><strong>假设</strong>自己的写的代码没有问题，正是产生问题的根本原因。</p>
+<h3 id="直面需求">直面需求</h3>
+<p>有的人可能要说了，某些缺陷可能并不是编码引起的，</p>
+<p>而是因为<strong>需求变更</strong>所致。</p>
 <p><br/></p>
-<p>最后，只存在大脑中的想法，很多会是不切实际的，</p>
-<p>要么期望过高，要么是没有准确的表达期望，</p>
-<p>这种情况下的沟通成本是非常高的，别人不知道我们想要什么。</p>
+<p>其实不然。</p>
+<p>真实的需求就在那里，绝大多数情况下，变更的都不是需求，</p>
+<p>而是对需求的<strong>理解</strong>。</p>
 <p><br/></p>
-<p>将想法“具象化”，有助于清晰表达出自己的诉求。</p>
-<h3 id="将期望具象化">将期望具象化</h3>
-<p>在日常工作和生活中，在达成目的之前，我们通常会先产生期望，</p>
-<p>对于比较复杂比较困难的目标，通常还得伴随较长期的目标达成过程。</p>
-<p>不是立即就能实现的。</p>
+<p>产品经理说这样做，就这样实现，说那样做，就那样实现，</p>
+<p>这正是<strong>误解需求</strong>的主要原因。</p>
 <p><br/></p>
-<p>此时，为了能明确目标，让后面的努力不跑偏，</p>
-<p>事先将自己的期望“具象化”，是一种很好的实践方法。</p>
+<p>为了能够真正的理解需求，开发者应该走在产品经理的前面，</p>
+<p>不然代码写完了，发现不满足需求，不是还要修改么？</p>
 <p><br/></p>
-<p>我们能想象出目标已经达成的状态吗？</p>
-<p>将会是怎样的？</p>
-<p>越具体越好。</p>
+<p>为了能让自己少<strong>改</strong>几次代码，一定得做到比任何人<strong>更懂</strong>需求才行。</p>
+<h3 id="完整日志">完整日志</h3>
+<p>代码未写完之前，日志先行。</p>
+<p>大部分的软件缺陷，是由<strong>输入</strong>跟预期不符造成的。</p>
 <p><br/></p>
-<p>假如某学生正在寻找一份工作，那么他理想中的岗位是怎样的呢？</p>
-<p>他脑海中的“团队画像”是什么样子的？</p>
-<p>“团队画像”与自身的条件相符吗？</p>
+<p>意料之外的输入参数，会导致<strong>不确定</strong>的执行结果。</p>
+<p>所以，代码逻辑的执行<strong>日志</strong>，</p>
+<p>不论对排查问题，还是对编写低缺陷率的代码而言，都是非常重要的。</p>
 <p><br/></p>
-<p>如果不按画像法进行分析，很有可能，他的期望是不现实的，</p>
-<p>与现实相距太远，太理想化。</p>
+<p>在出现问题的时候，我们必须能<strong>一目了然</strong>的知道问题出在哪里。</p>
+<p>经验表明，“问题排查的简易程度” 与 “代码的低缺陷率” 是正相关的。</p>
+<p>越容易排错的代码，缺陷率越低。</p>
 <p><br/></p>
-<p>企业也是如此，加入企业想要招聘一些人才，</p>
-<p>那么它理想中的“候选人画像”是怎样的呢？</p>
-<p>他们当前在哪里工作？经常活跃的圈子在哪里？</p>
+<p>因此，在写代码之前，就得先考虑清楚，</p>
+<p>如果我写的代码得到了<strong>奇怪的</strong>结果，要怎么定位问题？</p>
+<p><strong>日志</strong>是行之有效的一种手段。</p>
 <p><br/></p>
-<p>企业想清楚了这些问题，也就更能理解自身的特点，</p>
-<p>也更容易找到适合的人才。</p>
+<p>易于定位问题的代码，能有效避免事后很大一堆麻烦事。</p>
+<h3 id="也谈单测">也谈单测</h3>
+<p>单测，通常指的是自动化的单元测试，</p>
+<p>它是实现单元测试的一种自动化的<strong>手段</strong>，一般是运行一个脚本来执行程序，</p>
+<p>再检测执行结果是否跟预期相符。</p>
 <p><br/></p>
-<p>总之，将期望“具象化”，为的是更准确的认识自己。</p>
-<h3 id="将猜测具象化">将猜测具象化</h3>
-<p>往往看似不合逻辑的事，其实是最合乎逻辑的。</p>
+<p>与流行说法不同，我认为写单测其实并<strong>不是</strong>那么重要。</p>
+<p>尤其是每次写完代码都要费力<strong>改</strong>好多单测的话，</p>
+<p>那还不如不写。</p>
 <p><br/></p>
-<p>看过一个电视剧《<a href="https://baike.baidu.com/item/%E9%95%BF%E5%AE%89%E4%B8%89%E6%80%AA%E6%8E%A2" target="_blank" rel="noopener">长安三怪探</a>》，</p>
-<p>主角独孤仲平，经常把自己想象成犯罪凶手，来印证推断的合理性。</p>
-<p>把猜测“具象化”，经常有意想不到的收获。</p>
+<p>上文提到过，确保代码没有缺陷的办法是自己进行完整的<strong>测试</strong>。</p>
+<p>至于用什么办法确保，要灵活应对。</p>
 <p><br/></p>
-<p>工程师排查问题，也可以看做是不断印证猜测的过程，</p>
-<p>他们经常在程序的关键节点处，打下日志，</p>
-<p>来找出与猜测不符的位置。</p>
+<p>如果担心别人写的代码，影响了自己负责的功能，是可以写一点单测，</p>
+<p>如果需要频繁的构造数据来测试某一块代码，也可以写一点单测，</p>
+<p>除此之外，单测真的非常鸡肋。</p>
 <p><br/></p>
-<p>有经验的工程师，往往是先有预判，有的放矢，</p>
-<p>再想办法构造问题，并收集日志。</p>
+<p>最后，追求单测<strong>覆盖率</strong>，没有太大意义，</p>
+<p>“覆盖率” 这个指标，只能检测是否所有代码都<strong>有用</strong>，有没有代码执行不到。</p>
+<p>至于执行到的代码有没有错误，覆盖率不关心这些。</p>
 <p><br/></p>
-<p>这样做比“撞大运”似的寻找原因，要快得多。</p>
+<p>所以，我们完全可以写出覆盖率 100% 的问题代码。</p>
 <h3 id="结语">结语</h3>
-<p>爱因斯坦说：想象力比知识更重要。</p>
+<p>本文讨论了编写高质量（低缺陷率）代码的几个方法：</p>
+<p>（1）亲手测试：凡需交付的代码，必完整的亲手测试过</p>
+<p>（2）直面需求：做到比任何人更懂需求，才能确保代码跟预期相符</p>
+<p>（3）完整日志：代码未写，日志先行，让输入输出一目了然，易于排错</p>
 <p><br/></p>
-<p>历史上有很多伟大的成就，都起源于一个疯狂的想法，</p>
-<p>而这个想法被描述的越准确，就越有可能被实现。</p>
+<p>还讨论了个人对 “单元测试” 以及 “单测覆盖率” 的看法。</p>
+<p>盲目追求漂亮的数字，最终就会自缚手脚。</p>
 <p><br/></p>
-<p>画像（模型）法，可视为一种思维工具，</p>
-<p>有助于我们找出理想与现实之间的可行路径。</p>
-<p>如果连画像（模型）都没办法自洽，就根本不可能达成了。</p>
-<p><br/></p>
-<blockquote>
-<p>见说蚕丛路，崎岖不易行。</p>
-</blockquote>
-<blockquote>
-<p>山从人面起，云傍马头生。</p>
-</blockquote>
-<blockquote>
-<p>芳树笼秦栈，春流绕蜀城。</p>
-</blockquote>
-<blockquote>
-<p>升沉应已定，不必问君平。</p>
-</blockquote>
+<p>低缺陷率的代码，来源于专业精神，妥协于外力，最后还得自己收拾烂摊子。</p>
 
           
         
@@ -491,7 +482,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/64/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><span class="page-number current">65</span><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/66/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/64/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><span class="page-number current">65</span><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/66/">&gt;</a>
   </nav>
 
 
@@ -537,7 +528,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -612,7 +603,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

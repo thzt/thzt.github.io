@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/10/21/type-10/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/04/semantics-6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/21/type-10/" itemprop="url">你好，类型（十）：Parametric polymorphism</a></h1>
+                <a class="post-title-link" href="/2018/02/04/semantics-6/" itemprop="url">语言背后的代数学（六）：Henkin模型</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-21T00:00:00+08:00">
-                2017-10-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T00:00:00+08:00">
+                2018-02-04
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logic/" itemprop="url" rel="index">
-                    <span itemprop="name">Logic</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,150 +347,156 @@
       
         
           
-            <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-60e9a5a9b2cc6fbd.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-5f7af604e7dc18d6.png" /></p>
 <p><br/></p>
 <h3 id="回顾">回顾</h3>
-<p>上文我们介绍了let多态，</p>
-<p>将let表达式<span data-katex="let~x=t_1~in~t_2"></span>，看做了<span data-katex="[x\mapsto t_1]t_2"></span>的简写，</p>
-<p>即，把<span data-katex="t_2"></span>中出现的所有<span data-katex="x"></span>，都用<span data-katex="t_1"></span>替换掉，因此这些副本可以具有不同的类型。</p>
+<p>为了解释简单类型化演算<span data-katex="\lambda^\to"></span>中项，</p>
+<p>我们介绍了<span data-katex="\Sigma"></span>代数，</p>
+<p>用<span data-katex="\Sigma"></span>代数中的载体<span data-katex="A^\sigma"></span>来解释基本类型<span data-katex="\sigma"></span>，</p>
+<p>用载体上的函数集<span data-katex="A^{\sigma\to\tau}=\{f|f:A^\sigma\to A^\tau\}"></span>来解释类型为<span data-katex="\sigma\to\tau"></span>的所有函数。</p>
 <p><br/></p>
-<p>本文将介绍另外一种多态形式，称为参数化多态（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism" target="_blank" rel="noopener">parametric polymorphism</a>），例如，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data Maybe a &#x3D; Nothing | Just a</span><br></pre></td></tr></table></figure>
-<p>以上Haskell代码，定义了一个<code>Maybe a</code>类型，</p>
-<p>其中<code>Maybe</code>称为类型构造器（type constructor），<code>a</code>是它的参数。</p>
+<p>但只是做这些对应关系，还是不够的，</p>
+<p>我们还得证明，这样的解释是“足够多的”，</p>
+<p>以保证每一个合法<span data-katex="\lambda^\to"></span>项的解释，都在这个<span data-katex="\Sigma"></span>代数中。</p>
 <p><br/></p>
-<p><code>Maybe</code>不是一个合法的类型，它只有和某个具体的<code>a</code>放在一起，才是一个合法的类型，</p>
-<p>例如，<code>Maybe Int</code>，<code>Maybe Char</code>。</p>
+<p>尤其是使用集合上的函数，来解释具有不动点的<span data-katex="\lambda"></span>项时，</p>
+<p><span data-katex="A^{\sigma\to\tau}"></span>的条件应当适当放宽一些，它不一定恰好是函数集<span data-katex="\{f|f:A^\sigma\to A^\tau\}"></span>。</p>
+<p>为此我们需要更抽象的，从语义角度定义函数是如何作用到它的参数上的。</p>
 <p><br/></p>
-<h3 id="system-f">System F</h3>
+<h3 id="作用结构">1. 作用结构</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-2c1c907d268a3169.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-506b2f2655924ecf.png" /></p>
 <p><br/></p>
-<p>为了实现参数化多态，我们需要对简单类型化<span data-katex="\lambda"></span>演算（<span data-katex="\lambda^\to"></span>系统）进行扩展，</p>
-<p>在<span data-katex="\lambda^\to"></span>中，我们用<span data-katex="\lambda x.t"></span>来表示<span data-katex="\lambda"></span>抽象（lambda abstraction），</p>
-<p>而使用<span data-katex="t_1~t_2"></span>来表示<span data-katex="\lambda"></span>应用（lambda application）。</p>
+<p>从形式系统的角度来看，<span data-katex="\lambda"></span>项的“应用”，是推导规则的一部分，</p>
+<p>包括类型推导规则，<span data-katex="\frac{\Gamma\vdash t_1:T_1\to T_2~~~~\Gamma\vdash t_2:T_1}{\Gamma\vdash t_1~t_2:T_2}"></span>，</p>
+<p>还包括求值规则，<span data-katex="(\lambda x:T.t)~v\to [x\mapsto v]t"></span>。</p>
 <p><br/></p>
-<p>现在我们引入一种新的抽象形式，<span data-katex="\lambda X.t"></span>，它的参数<span data-katex="X"></span>是一个类型，称为类型抽象，</p>
-<p>再引入一种新的应用形式，<span data-katex="t[T]"></span>，称为类型实例化，其中<span data-katex="T"></span>是一个类型表达式。</p>
+<p>项的“应用”，我们可以定义为<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong>（applicative structure）。</p>
 <p><br/></p>
-<p>求值规则如下，</p>
-<p><span data-katex="(\lambda X.t)[T]\to[X\mapsto T]t"></span></p>
+<p>假设<span data-katex="\lambda x:\sigma.t"></span>是一个类型为<span data-katex="\sigma\to\tau"></span>的<span data-katex="\lambda"></span>项，</p>
+<p>我们可以把它“应用于”类型为<span data-katex="\sigma"></span>的项<span data-katex="v:\sigma"></span>，</p>
+<p>我们有，<span data-katex="(\lambda x:\sigma.t)~v=([x\mapsto v]t):\tau"></span>。</p>
 <p><br/></p>
-<p>例如，我们可以这样定义一个多态函数，<span data-katex="id=\lambda X.\lambda x:X.x"></span></p>
-<p>当把它应用于类型<span data-katex="Nat"></span>时，</p>
-<p><span data-katex="id[Nat]\to[X\mapsto Nat](\lambda x:X.x)=\lambda x:Nat.x"></span>，它为<span data-katex="Nat"></span>类型上的恒等函数。</p>
-<p>而把它应用于类型<span data-katex="Bool"></span>时，</p>
-<p><span data-katex="id[Bool]\to[X\mapsto Bool](\lambda x:X.x)=\lambda x:Bool.x"></span>，它为<span data-katex="Bool"></span>类型上的恒等函数，</p>
+<p>因此，<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong><span data-katex="App^{\sigma,\tau}"></span>，</p>
+<p>指的是这样的一个映射，<span data-katex="App^{\sigma,\tau}:A^{\sigma\to\tau}\to A^\sigma \to A^\tau"></span>，</p>
+<p>它将集合<span data-katex="A^{\sigma\to\tau}"></span>中的一个函数，以及集合<span data-katex="A^\sigma"></span>中的一个元素，</p>
+<p>映射成集合<span data-katex="A^\tau"></span>中的一个元素。</p>
 <p><br/></p>
-<p>可见，<span data-katex="id"></span>的具体类型，依赖于它的类型参数。</p>
-<p>它应用于任意一个类型<span data-katex="T"></span>，<span data-katex="id[T]"></span>都会得到一个类型为<span data-katex="T\to T"></span>的函数，</p>
-<p>因此，人们通常将<span data-katex="id"></span>的类型记为<span data-katex="\forall X.X\to X"></span>。</p>
+<p>一个有效的作用结构，必须具有<strong>外延性条件</strong>（extensional），</p>
+<p>即，<span data-katex="\forall f,g\in A^\sigma\to\tau"></span>，</p>
+<p>如果对于任意的<span data-katex="d\in A^\sigma"></span>，都有<span data-katex="App~f~d=App~g~d"></span>，则必有<span data-katex="f=g"></span>。</p>
 <p><br/></p>
-<p>类型规则如下，</p>
-<p>（1）<span data-katex="\frac{\Gamma,X\vdash t:T}{\Gamma\vdash\lambda X.t:\forall X.T}"></span></p>
-<p>（2）<span data-katex="\frac{\Gamma\vdash t_1:\forall X.T_1}{\Gamma\vdash t[T_2]:[X\mapsto T_2]T_1}"></span></p>
-<p>其中，类型<span data-katex="\forall X.T"></span>，叫做全称类型（universal type），</p>
-<p><span data-katex="\forall"></span>称为全称量词（universal quantifier），</p>
-<p>引入了全称类型之后得到的系统，称为System F。</p>
+<p>它指出集合<span data-katex="A^\sigma\to\tau"></span>的两个函数，如果在<span data-katex="App^{\sigma,\tau}"></span>下的作用效果相同，</p>
+<p>那么它们必须是同一个函数。</p>
 <p><br/></p>
-<h3 id="rank-n-types">Rank-N Types</h3>
+<h3 id="项的唯一解释">2. 项的唯一解释</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-bbff0b1e749dff2f.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-c8757c95811cbd2d.png" /></p>
 <p><br/></p>
-<p>有了全称类型之后，函数的参数类型和返回值类型，都有可能具有全称类型。</p>
-<p>不难看出，函数返回值类型的全称量词，总是可以提取出来，放到最外面，</p>
-<p>但是参数类型的全称量词，不能提取出来。</p>
+<p>有了满足外延性条件的作用结构之后，</p>
+<p>我们就可以归纳的定义出<strong>含义函数</strong>（meaning function）<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>了，</p>
 <p><br/></p>
-<p>例如，<span data-katex="\forall X.X\to (\forall Y.Y\to X)"></span>，相当于<span data-katex="\forall X.\forall Y.X\to Y\to X"></span>，</p>
-<p>而<span data-katex="(\forall X.X\to X)\to Nat"></span>，与<span data-katex="\forall X.(X\to X)\to Nat"></span>则不同。</p>
+<p>（1）<span data-katex="\mathscr{A}[\![\varnothing\vdash c:\sigma]\!]\eta=Const(c)"></span></p>
+<p>（2）<span data-katex="\mathscr{A}[\![x:\sigma\vdash x:\sigma]\!]\eta=\eta(x)"></span></p>
+<p>（3）<span data-katex="\mathscr{A}[\![\Gamma,x:\sigma\vdash M:\tau]\!]\eta=\mathscr{A}[\![\Gamma\vdash M:\tau]\!]\eta"></span></p>
+<p>（4）<span data-katex="\mathscr{A}[\![\Gamma\vdash MN:\tau]\!]\eta=App^{\sigma,\tau}~\mathscr{A}[\![\Gamma\vdash M:\sigma\to\tau]\!]\eta~\mathscr{A}[\![\Gamma\vdash N:\sigma]\!]\eta"></span></p>
+<p>（5）<span data-katex="\mathscr{A}[\![\Gamma\vdash\lambda x:\sigma.M:\sigma\to\tau]\!]\eta="></span>，存在唯一的<span data-katex="f\in A^{\sigma\to\tau}"></span>，使得，</p>
+<p><span data-katex="\forall d\in A^\sigma"></span>，<span data-katex="App~f~d=\mathscr{A}[\![\Gamma,x:\sigma\vdash M:\tau]\!]\eta[x\mapsto d]"></span></p>
 <p><br/></p>
-<p>不包含全称量词的类型表达式，具有rank-0类型，也称为单态类型（monotype），</p>
-<p>全称量词都可以提取出来类型表达式，具有rank-1类型（rank-1 type），</p>
-<p>一个函数类型，它的入参具有rank-n类型，那么该函数就具有rank-(n+1)类型。</p>
+<p>其中，<span data-katex="\eta"></span>是满足指派<span data-katex="\Gamma"></span>的环境，</p>
+<p><span data-katex="Const"></span>是一个映射，将项常量映射到所有<span data-katex="A^\sigma"></span>并集的元素上，</p>
+<p>使得，如果<span data-katex="c:\sigma"></span>，则<span data-katex="Const(c)\in A^\sigma"></span>。</p>
 <p><br/></p>
-<p>例如，</p>
-<p><span data-katex="((\forall X.X\to X)\to Nat)\to Bool\to Bool"></span>，具有rank-3类型，</p>
-<p><span data-katex="Nat\to (\forall X.X\to X)"></span>，具有rank-1类型。</p>
+<p>由于以上几个等式覆盖了所有的<span data-katex="\lambda"></span>项，因此这样定义的含义函数是完全的。</p>
+<p>并且由于它为每一个<span data-katex="\lambda"></span>项都指定了确定的语义，因此它给出的解释方式也是唯一的。</p>
+<p>它称为<strong>Henkin模型</strong>。</p>
 <p><br/></p>
-<p>System F的功能是很强大的，但是<a href="https://en.wikipedia.org/wiki/System_F#Use_in_programming_languages" target="_blank" rel="noopener">不幸的是</a>，</p>
-<p>人们发现，该系统中的类型推导算法是<a href="https://en.wikipedia.org/wiki/Undecidable_problem" target="_blank" rel="noopener">不可判定的</a>。</p>
-<p>例如，一般而言，一个rank-3及其以上rank-N类型的表达式，其类型是不可确定的，</p>
-<p>为了确定它的类型，人们不得不手工加上必要的类型信息。</p>
+<p>Henkin模型是可靠的，</p>
+<p>设<span data-katex="\mathscr{A}"></span>是<span data-katex="\lambda^\to"></span>的任意Henkin模型，</p>
+<p><span data-katex="\Gamma\vdash M:\sigma"></span>是可证的，<span data-katex="\eta"></span>是一个满足指派<span data-katex="\Gamma"></span>的环境，</p>
+<p>则<span data-katex="\mathscr{A}[\![\Gamma\vdash M:\sigma]\!]\eta\in A^\sigma"></span>。</p>
 <p><br/></p>
-<p>Haskell采用了<a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system" target="_blank" rel="noopener">Hindley–Milner类型系统</a>，</p>
-<p>它是System F的一个子集，其中包含了可判定的类型推导算法。</p>
-<p>在Haskell中，类型参量（type variable）默认具有全称类型（universally quantified），</p>
-<p>例如，<code>a -&gt; a</code>，实际上表示类型<span data-katex="\forall a.a\to a"></span>，</p>
-<p><code>a -&gt; a</code>可看做<code>(-&gt;) a a</code>类型，其中<code>-&gt;</code>为函数类型构造器。</p>
+<p>即，如果一个类型断言是可证的，则它在语义上也成立。</p>
+<p>（关于完全性的讨论，略）</p>
 <p><br/></p>
-<h3 id="非直谓性">非直谓性</h3>
+<h3 id="例子">3. 例子</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-630de5020f6c4e74.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-edbc7c129e5a928d.png" /></p>
 <p><br/></p>
-<p>在数学和逻辑学中，一个定义称为非直谓的（<a href="https://en.wikipedia.org/wiki/Impredicativity" target="_blank" rel="noopener">impredicative</a>），</p>
-<p>指的是它包含了自引用（self-reference）。</p>
-<p>例如，在定义一个集合的时候，用到了正在定义的这个集合。</p>
+<p>我们可以对具有单一类型<span data-katex="nat"></span>的<span data-katex="\lambda"></span>演算，定义它的Henkin模型，</p>
+<p>令<span data-katex="A^{nat}"></span>为自然数集，<span data-katex="A^{\sigma\to\tau}"></span>为所有从<span data-katex="A^\sigma"></span>到<span data-katex="A^\tau"></span>的函数集合，</p>
+<p>这称为<strong>自然数上的完全集合论函数体系</strong>，</p>
+<p>（full set-theoretic function hierarchy over the natural number）。</p>
 <p><br/></p>
-<p><a href="https://en.wikipedia.org/wiki/Russell%27s_paradox" target="_blank" rel="noopener">罗素悖论</a>就是用非直谓的方式构造出来的，</p>
-<p>如果我们定义<span data-katex="R=\{x|x\notin x\}"></span>，那么<span data-katex="R\in R\Leftrightarrow R\notin R"></span>。</p>
-<p>非直谓定义并不一定导致矛盾，有些情况下还是有用的，</p>
-<p>例如，我们可以非直谓的定义，集合中的最小元素为，<span data-katex="A_{min}=x"></span>，<span data-katex="\forall y.x\leqslant y"></span>。</p>
+<p>我们通过<span data-katex="App~f~x=f(x)"></span>，把函数<span data-katex="f\in A^{\sigma\to\tau}"></span>，作用到参数<span data-katex="x\in A^\sigma"></span>上。</p>
+<p>下面我们得出<span data-katex="\lambda x:nat\to nat.\lambda y:nat.xy"></span>的语义。</p>
 <p><br/></p>
-<p>具有参数化多态的类型表达式，</p>
-<p>也有直谓（predicative）和非直谓（impredicative）之分。</p>
+<p>由于该项是封闭项，选择什么样的环境<span data-katex="\eta"></span>都是无关紧要的。</p>
+<p>根据上文“含义函数”<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>的归纳定义，我们有，</p>
+<p><span data-katex="\mathscr{A}[\![\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy]\!]\eta="></span></p>
+<p>唯一的<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>，使得，</p>
+<p><span data-katex="\forall h\in A^{nat\to nat}"></span>，<span data-katex="App~f~h=\mathscr{A}[\![x:nat\to nat\vdash\lambda y:nat.xy]\!]\eta[x\mapsto h]"></span></p>
 <p><br/></p>
-<p>如果它可以用一个多态类型实例化，例如用它自己来实例化，</p>
-<p>就称为非直谓多态类型（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism#Impredicative_polymorphism" target="_blank" rel="noopener">impredicative polymorphism</a>）。</p>
+<p>然后我们再来看下，<span data-katex="\mathscr{A}[\![x:nat\to nat\vdash\lambda y:nat.xy]\!]\eta[x\mapsto h]="></span>，</p>
+<p>唯一的<span data-katex="g\in A^{nat\to nat}"></span>，使得，</p>
+<p><span data-katex="\forall n\in A^{nat}"></span>，<span data-katex="App~g~n=[\![x:nat\to nat,y:nat\vdash xy]\!]\eta[x\mapsto h][y\mapsto n]"></span></p>
+<p>即，唯一的<span data-katex="g\in A^{nat\to nat}"></span>，使得，<span data-katex="\forall n\in A^{nat}"></span>，<span data-katex="App~g~n=App~h~n"></span>。</p>
+<p>那么这个唯一的<span data-katex="g\in A^{nat\to nat}"></span>，实际上就是<span data-katex="h"></span>了。</p>
 <p><br/></p>
-<p>反之，如果一个多态类型表达式，只能用单态类型实例化，</p>
-<p>就称它具有直谓多态类型（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism#Predicative_polymorphism" target="_blank" rel="noopener">predicative_polymorphism</a>）。</p>
+<p>其中，<span data-katex="App~g~n=App~h~n"></span>是因为，</p>
+<p><span data-katex="App~g~n=[\![x:nat\to nat,y:nat\vdash xy]\!]\eta[x\mapsto h][y\mapsto n]"></span></p>
+<p><span data-katex="=[\![h:nat\to nat,n:nat\vdash hn]\!]\eta"></span></p>
+<p><span data-katex="=App~h~n"></span></p>
 <p><br/></p>
-<h3 id="单态限制">单态限制</h3>
+<p>综合以上两个步骤，<span data-katex="\mathscr{A}[\![\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy]\!]\eta="></span>，</p>
+<p>唯一的<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>，使得，</p>
+<p><span data-katex="\forall h\in A^{nat\to nat}"></span>，<span data-katex="App~f~h=h"></span>。</p>
+<p>因此，<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>的语义是一个恒等函数。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-01d0844dfc8cb281.png" /></p>
+<p>我们从语义上证明了以下等式，</p>
+<p><span data-katex="\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy=\lambda x:nat\to nat.x"></span>。</p>
 <p><br/></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f x &#x3D; let g y z &#x3D; ([x,y], z) </span><br><span class="line">      in ...</span><br></pre></td></tr></table></figure>
-<p>假设<code>x</code>的类型为<code>a</code>，那么<code>g</code>的类型只能为<code>a -&gt; b -&gt; ([a], b)</code>，</p>
-<p>其中，由于列表类型的限制，<code>x</code>和<code>y</code>必须具有相同的类型。</p>
+<h3 id="环境模型条件和组合模型条件">4. 环境模型条件和组合模型条件</h3>
 <p><br/></p>
-<p>此时，只有<code>b</code>可以具有全称量词，即<span data-katex="\forall b.a\to b\to ([a],b)"></span>，</p>
-<p>因为<code>a</code>在类型上下文中，已经出现了，不能再被实例化为其他的类型了。</p>
-<p>我们称，<code>g</code>的第一个参数<code>a</code>具有单态性（monomorphism）。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-00c5200af9d0405a.png" /></p>
 <p><br/></p>
-<p>例如，<code>(g True, g 'c')</code>不是良类型的，</p>
-<p>而<code>(g True, g False)</code>是良类型的。</p>
+<p>以上定义的作用结构<span data-katex="App^{\sigma,\tau}"></span>称为满足<strong>环境模型条件</strong>（enviroment model condition），</p>
+<p>依赖了环境<span data-katex="\eta"></span>这一附加概念。</p>
+<p>它使得每一个合法的<span data-katex="\lambda"></span>项，都有模型中一个唯一确定的数学对象与之对应。</p>
 <p><br/></p>
-<p>值得一提的是，显式的给<code>g</code>注明类型，也不能阻止<code>a</code>的单态行为，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f x &#x3D; let </span><br><span class="line">         g :: a -&gt; b -&gt; ([a],b) </span><br><span class="line">         g y z &#x3D; ([x,y], z) </span><br><span class="line">      in ...</span><br></pre></td></tr></table></figure>
-<p>此时，<code>a</code>仍然是单态的。</p>
+<p>由于<span data-katex="\lambda"></span>项有<span data-katex="\lambda"></span>“抽象”和<span data-katex="\lambda"></span>“应用”双重复杂性，</p>
+<p>所以，建立一个合理的解释也比较麻烦。</p>
+<p>在《<a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型</a>》系列文章中，</p>
+<p>我们介绍过组合子逻辑，我们知道可以将任意的<span data-katex="\lambda"></span>项转换成对应的<span data-katex="CL"></span>项，反之亦然。</p>
 <p><br/></p>
-<p>在<a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system" target="_blank" rel="noopener">Hindley–Milner类型系统</a>中，</p>
-<p>如果一个类型变量，不在类型上下文中出现，它就可以被全称化（generalize）。</p>
-<p>但是Haskell考虑到性能和模块间的类型推导，</p>
-<p>还增加了特殊的单态限制（monomorphism restriction）避免全称化。</p>
+<p>因此，如果存在模型可以解释所有的<span data-katex="CL"></span>项，那么使用它也就可以解释所有<span data-katex="\lambda"></span>项了。</p>
+<p><span data-katex="CL"></span>项比<span data-katex="\lambda"></span>项更为简洁，它不包含<span data-katex="\lambda"></span>“抽象”，只包含<span data-katex="K"></span>和<span data-katex="S"></span>这两个组合子。</p>
 <p><br/></p>
-<h4 id="rule-1">Rule 1</h4>
-<p>在一组相互依赖的声明中，满足以下两个条件，其中的类型变量才会被全称化，</p>
-<p>（1）每一个变量，都被函数或模式匹配所绑定，</p>
-<p>（2）被模式匹配绑定的变量，都有显式的类型签名。</p>
-<h4 id="rule-2">Rule 2</h4>
-<p>导入到其他模块（module）的单态类型变量，被认为是有歧义的（ambiguous），</p>
-<p>类型通过其来源模块内的<code>default</code>声明来决定。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module M1(len1) where </span><br><span class="line">  default( Int, Double ) </span><br><span class="line">  len1 &#x3D; genericLength &quot;Hello&quot;</span><br><span class="line"></span><br><span class="line">module M2 where </span><br><span class="line">  import M1(len1) </span><br><span class="line">  len2 &#x3D; (2 * len1) :: Rational</span><br></pre></td></tr></table></figure>
-<p>当模块<code>M1</code>的类型推导结束后，根据Rule 1，<code>len1</code>具有单态类型，<code>len1 :: Num a =&gt; a</code>，</p>
-<p>Rule 2表明，类型变量<code>a</code>具有歧义性，必须使用<code>default</code>声明来解决歧义。</p>
-<p>因此，根据<code>default( Int, Double )</code>，<code>len1</code>得到了类型<code>Int</code>，</p>
-<p>不过，<code>M2</code>中对<code>len1 :: Int</code>的使用导致了类型错误。</p>
+<p>类似于<span data-katex="\lambda"></span>项的“应用”，</p>
+<p>对于<span data-katex="K"></span>和<span data-katex="S"></span>的“组合”，我们同样可以定义<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong>。</p>
+<p><br/></p>
+<p>给定<span data-katex="\Sigma"></span>代数，对任意类型<span data-katex="\rho,\sigma,\tau"></span>，如果存在元素<span data-katex="K_{\sigma,\tau}\in A^{\sigma\to(\tau\to\sigma)}"></span>，</p>
+<p><span data-katex="S_{\rho,\sigma,\tau}\in A^{(\rho\to\sigma\to\tau)\to(\rho\to\sigma)\to\rho\tau}"></span>，</p>
+<p>满足下列对合适类型<span data-katex="x,y,z"></span>的等式条件，</p>
+<p><span data-katex="K_{\sigma,\tau}xy=x"></span>，<span data-katex="S_{\rho,\sigma,\tau}xyz=(xz)(yz)"></span>，</p>
+<p>我们就称，该作用结构满足<strong>组合模型条件</strong>（combinatory model condition）。</p>
+<p><br/></p>
+<p>由于所有<span data-katex="CL"></span>项都可以表示成<span data-katex="K"></span>和<span data-katex="S"></span>的“组合”，</p>
+<p>因此，满足组合模型条件的作用结构，可以唯一解释所有<span data-katex="CL"></span>项。</p>
+<p><br/></p>
+<p>可以证明，一个满足外延性条件的作用结构，</p>
+<p>如果它满足环境模型条件，当且仅当它也同样满足组合模型条件。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文介绍了Henkin模型作用结构所满足的条件，环境模型条件和组合模型条件，</p>
+<p>它们是等价的，有了它们我们才能给出<span data-katex="\lambda"></span>项的可靠解释，</p>
+<p>即，任何合法的<span data-katex="\lambda"></span>项都有唯一解释，且在语法上可证的<span data-katex="\lambda"></span>项，在语义上也成立。</p>
+<p><br/></p>
+<p>下文我们开始学习范畴论，为理解笛卡尔闭范畴打好基础。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/1761910/" target="_blank" rel="noopener">Types and programming languages</a></p>
-<p><a href="https://www.haskell.org/definition/haskell2010.pdf" target="_blank" rel="noopener">Haskell 2010 Language Report</a></p>
-<p><a href="https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#arbitrary-rank-polymorphism" target="_blank" rel="noopener">Glasgow Haskell Compiler User's Guide</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Parametric_polymorphism" target="_blank" rel="noopener">Parametric polymorphism</a></p>
-<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/putting.pdf" target="_blank" rel="noopener">Practical type inference for arbitrary-rank types</a></p>
-<p><a href="https://en.wikipedia.org/wiki/System_F" target="_blank" rel="noopener">System F</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system" target="_blank" rel="noopener">Hindley–Milner type system</a></p>
+<p><a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型（三）：Combinatory logic</a></p>
+<p><a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a></p>
 
           
         
@@ -529,7 +535,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/158/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/158/">158</a><span class="page-number current">159</span><a class="page-number" href="/page/160/">160</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/160/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/158/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/158/">158</a><span class="page-number current">159</span><a class="page-number" href="/page/160/">160</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/160/">&gt;</a>
   </nav>
 
 
@@ -575,7 +581,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -650,7 +656,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

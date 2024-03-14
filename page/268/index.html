@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/26/great/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/06/19/generator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/26/great/" itemprop="url">巨人与泥足</a></h1>
+                <a class="post-title-link" href="/2015/06/19/generator/" itemprop="url">EcmaScript 2015引入的generator</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-26T00:00:00+08:00">
-                2015-03-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-19T00:00:00+08:00">
+                2015-06-19
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Lisp/" itemprop="url" rel="index">
+                    <span itemprop="name">Lisp</span>
                   </a>
                 </span>
 
@@ -347,95 +347,133 @@
       
         
           
-            <p>术业有专攻。</p>
-<p>每个人都有自己擅长的技能。</p>
-<p>完成擅长的任务，是一件愉快的事情。</p>
+            <p>Ecmascript 2015刚刚发布了，</p>
+<p>新增了很多<strong>特性</strong>，</p>
+<p>例如，let，promise，iterator，generator，</p>
+<p>proxy，class，module等等。</p>
 <p><br/></p>
-<p>在一个团队中，最默契的配合，</p>
-<p>就是大家都在各自擅长的领域中工作。</p>
-<p>互相之间都是不可替代的。</p>
+<p>其中<strong>generator</strong>更是引人注目，</p>
+<p>可以便捷的产生一个iterator。</p>
 <p><br/></p>
-<p>这样的生活，</p>
-<p>每天都有幸福感。</p>
-<p>因为我们得到了尊重。</p>
+<p>function* gen() {</p>
+<p>        <strong>yield</strong> 1;</p>
+<p>        <strong>yield</strong> 2;</p>
 <p><br/></p>
-<p>然而，有些人的生活却并非如此。</p>
+<p>        return 3;</p>
+<p>}</p>
 <p><br/></p>
-<p>他们做着自己不想做的事情，</p>
-<p>但是又无力改变。</p>
+<p>var i = gen();</p>
 <p><br/></p>
-<p>为什么不能让他们去做自己喜欢的工作呢？</p>
+<p>console.log(i.next().value);        //1</p>
+<p>console.log(i.next().value);        //2</p>
+<p>console.log(i.next().value);        //3</p>
+<p>console.log(i.next().value);        //undefined</p>
 <p><br/></p>
-<p>其实，原因很简单，</p>
-<p>他们并不擅长自己向往的工作。</p>
+<p>可见，每次调用i.next，</p>
+<p>gen都会从上一次的<strong>yield</strong>后继续执行。</p>
 <p><br/></p>
-<p>因此，擅长什么，</p>
-<p>就会被要求做什么，</p>
-<p>不论我们是否愿意。</p>
+<p>这在Ecmascript之前版本看来，</p>
+<p>是不可思议的。</p>
 <p><br/></p>
-<h2 id="额外的努力"><strong>额外的努力</strong></h2>
-<p>重复，在软件行业中，是一个敏感的话题。</p>
-<p>因为，重复是可以用软件办法解决的，</p>
-<p>大量重复，可能意味着没有使用软件思维来考虑问题。</p>
+<h2 id="用callcc实现"><strong>用call/cc实现</strong></h2>
+<p>从Scheme的角度来看，</p>
+<p>从断点处继续执行，</p>
+<p>其实就是，<strong>调用yield断点处的continuation</strong>。</p>
 <p><br/></p>
-<p>现如今，几乎所有的软件问题，</p>
-<p>都能找到大量的类库和框架。</p>
+<p>所以，yield并不是一个新概念，</p>
+<p>我们用call/cc实现一下。</p>
 <p><br/></p>
-<p>高级程序员，经常叮嘱新人，</p>
-<p>绝不要重新造车轮。</p>
-<p>如果有能用的，一定要用现成的。</p>
+<p>(define (gen x)</p>
+<p>        (define <strong>k-body</strong> #f)</p>
+<p>        (define <strong>k-yield</strong> #f)</p>
 <p><br/></p>
-<p>站在巨人的肩膀上，</p>
-<p>我们的软件开发效率才会越来越高。</p>
+<p>        (define (yield x)</p>
+<p>                (call/cc (lambda (k2)</p>
+<p>                        (set! <strong>k-yield</strong> k2)</p>
+<p>                        (<strong>k-body</strong> x))))</p>
 <p><br/></p>
-<p>但有时候，现存的工具，并不是很完美。</p>
-<p>甚至，瑕疵多的令人难以忍受。</p>
+<p>        (lambda ()</p>
+<p>                (call/cc (lambda (k1)</p>
+<p>                        (if (eq? <strong>k-body</strong> #f)</p>
+<p>                                (begin</p>
+<p>                                        (set! <strong>k-body</strong> k1)</p>
 <p><br/></p>
-<p>我们该怎么办呢？</p>
-<p>忍痛修补，还是重新创造？</p>
+<p>                                        (yield x)</p>
+<p>                                        (yield (+ x 1))</p>
 <p><br/></p>
-<p>答案就是。</p>
-<p>我们需要<strong>用额外的努力做自己选择的事情</strong>。</p>
+<p>                                        (+ x 2))</p>
+<p>                                (<strong>k-yield</strong>))))))</p>
 <p><br/></p>
-<p>重新制造的车轮，</p>
-<p>如果拿来用，就是浪费时间。</p>
-<p>但是，如果拿来思考，那就是积累经验。</p>
+<p>(define i (gen 1))</p>
+<p>(i)        ;1</p>
+<p>(i)        ;2</p>
+<p>(i)        ;3</p>
+<p>(i)        ;3</p>
 <p><br/></p>
-<p>当我们用额外的努力，做任何事情的时候，</p>
-<p>没有人会批评我们。</p>
+<p>仅最后一次调用与Ecmascript不同。</p>
+<p>无伤大雅。</p>
 <p><br/></p>
-<p>这才是走自己路的正确方式。</p>
+<h2 id="用macro进行抽象"><strong>用macro进行抽象</strong></h2>
+<p>像上面那样为每一个generator写call/cc，</p>
+<p>太繁琐了，</p>
+<p>Scheme程序员是不能容忍的。</p>
 <p><br/></p>
-<h2 id="根基"><strong>根基</strong></h2>
-<p>像冰山一样，我们的基本功隐藏在微末的表象之下，</p>
-<p>而我们进行的这些积累，其实很少来源于相关的工作，</p>
-<p>主要在于自己额外的努力。</p>
+<p>先看看我们<strong>希望</strong>怎样调用，</p>
+<p>(<strong>make-generator</strong> (gen x y)</p>
+<p>        (yield x)</p>
+<p>        (yield y)</p>
 <p><br/></p>
-<p>努力，会改变我们擅长的事情，</p>
-<p>改变我们的想法，</p>
-<p>从而影响今后的工作内容。</p>
+<p>        (+ x y))</p>
 <p><br/></p>
-<p>如果想成为一个巨人，</p>
-<p>没有额外的努力，就好像把根基建立在泥足之上。</p>
+<p>(define i (gen 1 2))</p>
+<p>(i)        ;1</p>
+<p>(i)        ;2</p>
+<p>(i)        ;3</p>
+<p>(i)        ;3</p>
 <p><br/></p>
-<p>人们只看到巨人很高，</p>
-<p>却没看到他的基础更牢。</p>
+<p>这样就清爽多了，</p>
+<p>还把generator改成了可接收<strong>多参数</strong>的形式。</p>
+<p>make-generator是一个<strong>宏</strong>，它可以<strong>用来定义</strong>generator。</p>
 <p><br/></p>
-<p>努力，并不限于技术，</p>
-<p>就好像武功不只是招式一样，</p>
-<p>还有心法，以及个人的修养和认识。</p>
+<p>具体实现如下，</p>
+<p>(define-syntax make-generator</p>
+<p>        (lambda (form)</p>
+<p>                (syntax-case form ()</p>
+<p>                        [(keyword (name ...) . body)</p>
+<p>                        (syntax-case (<strong>datum-&gt;syntax</strong> #'keyword 'yield) ()</p>
+<p>                                [yield</p>
+<p>                                        #'(define (name ...)</p>
+<p>                                                (define k-body #f)</p>
+<p>                                                (define k-yield #f)</p>
 <p><br/></p>
-<p>这些见解，</p>
-<p>只有真正的思考，和认真的活着，</p>
-<p>才能得到。</p>
+<p>                                                (define (yield . args)</p>
+<p>                                                        (call/cc (lambda (k2)</p>
+<p>                                                                (set! k-yield k2)</p>
+<p>                                                                (apply k-body args))))</p>
+<p><br/></p>
+<p>                                                (lambda ()</p>
+<p>                                                        (call/cc (lambda (k1)</p>
+<p>                                                                (if (eq? k-body #f)</p>
+<p>                                                                        (begin</p>
+<p>                                                                                (set! k-body k1) . body)</p>
+<p>                                                                        (k-yield))))))])])))</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>在《边城浪子》中，阿飞说：</p>
-<p>我知道，你们这一辈的年轻人，不止是聪明，用功。</p>
-<p>比我们当年还要高出很多倍。</p>
-<p>但是，我仍然希望，你们明白一点。</p>
-<p>就是，真正伟大的武功，并不是单靠聪明和用功，就能够练的出来的。</p>
-<p>是<strong>先要有一颗伟大的心，才能够真正的练到伟大的武功</strong>。</p>
+<p>Ecmascript 2015加入了很多特性，</p>
+<p>把自己搞的更加复杂了，</p>
+<p>这在走一些臃肿语言的老路。</p>
+<p><br/></p>
+<p>Scheme也不例外，</p>
+<p>R6RS就是膨胀的版本，</p>
+<p>不过还好，从那之后，</p>
+<p>语言分为了两个分支，R7RS力求简洁，</p>
+<p>另一个分支正在进行中，为了工业应用。</p>
+<p><br/></p>
+<p>追求完美，并不是要增加特性，</p>
+<p>而是要尽量减少特性。</p>
+<p><br/></p>
+<p>简洁有效，</p>
+<p>包含了太深刻的内涵。</p>
 
           
         
@@ -474,7 +512,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/267/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/267/">267</a><span class="page-number current">268</span><a class="page-number" href="/page/269/">269</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/269/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/267/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/267/">267</a><span class="page-number current">268</span><a class="page-number" href="/page/269/">269</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/269/">&gt;</a>
   </nav>
 
 
@@ -520,7 +558,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -595,7 +633,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

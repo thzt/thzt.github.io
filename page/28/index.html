@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/05/26/task/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/12/05/code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/05/26/task/" itemprop="url">为什么要避免自己的任务发生堆积</a></h1>
+                <a class="post-title-link" href="/2021/12/05/code/" itemprop="url">从语言角度看低代码平台</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-26T00:00:00+08:00">
-                2021-05-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-05T00:00:00+08:00">
+                2021-12-05
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,95 +347,110 @@
       
         
           
-            <p>在我们开发软件的时候，经常会看到任务发生<strong>堆积</strong>的状况出现。</p>
-<p>开发团队中的每个人都有做不完的的工作，且都不停的在多个任务之间切换。</p>
-<p>虽然每个人都很<strong>忙碌</strong>，但这其实并不是一种高效的工作方式。</p>
+            <p>最近一两年 <strong>lowcode（低代码）平台</strong>，如雨后春笋一样爆发出来。</p>
+<p>每个公司都有几个、甚至几十个方案涌现出来，大家一起 “<strong>拖/拉/拽</strong>”，</p>
+<p>有些人甚至戏谑说，这是时代的<strong>倒退</strong>，frontpage/dreamweaver 又回来了。</p>
 <p><br/></p>
+<p>其实，<strong>拖拽</strong> 和 <strong>代码生成</strong> 方案，并不是最近才出现的，甚至成熟的方案十几年前也都有，</p>
+<p>比如微软的 .NET webform，entity framework。</p>
+<p><br/></p>
+<p>刚入行时我用过一段时间 webform，后来切换到了 .NET MVC。</p>
+<p>webform 沿袭了 winform/vc++ 等系统软件开发的套路，</p>
+<p>先用拖拽方式把视图做出来，然后再编写相应的逻辑代码，跟自家的 wpf 挺像。</p>
+<p><br/></p>
+<p>entity framework 是一个 orm 框架，可以通过几种途径自动生成数据访问层代码，</p>
+<p>用户不直接操作数据库了，而是操作一些领域对象，</p>
+<p>从领域对象到数据库的所有样板代码，通过 entity framework 自动生成。</p>
+<p><br/></p>
+<p>虽是如此，我仍觉得 lowcode 平台不是历史的倒退，而是<strong>螺旋上升</strong>。</p>
+<h3 id="着眼于整个研发过程">着眼于整个研发过程</h3>
+<p>讨论事物的一个办法是，把它放到所处的<strong>环境</strong>中，看看它在哪个位置。</p>
+<p>如果只看 lowcode 平台 的话，我们会认为它自成一派，可以独当一面。</p>
+<p>但如果把看成是整个<strong>研发活动中一环</strong>的话，它的<strong>优势</strong>和<strong>局限性</strong>也就付出水面了。</p>
+<p><br/></p>
+<p>研发流程通常以分析市场确定产品定位开始，然后制定产品规划，得到产品需求，</p>
+<p>接着，工程师与产品经理合作，用语言/工具/框架 把需求实现出来，得到功能代码，</p>
+<p>然后，通过一系列自动化的手段，进行依赖分析、编译、打包、部署、发布。</p>
+<p><br/></p>
+<p>它分成了几个阶段：产品阶段 -&gt; 开发阶段（编码） -&gt; CI/CD 阶段 -&gt; 用户使用阶段。</p>
+<p>经常会涉及到这样一些平台，</p>
 <ul>
-<li><p>人们之前互相牵制和等待，会造成极大的资源浪费，项目交付是等不起的。</p></li>
-<li><p>一件工作拖的时间越长，发生的变数也就越大，还要花费更大的成本进行调整和修改。</p></li>
-<li><p>软件一天不交付到用户手中，那些开发中的半成品就没有意义。</p></li>
+<li><p>研发平台：应用的生命周期</p></li>
+<li><p>项目管理平台：快速交付价值</p></li>
+<li><p>内容平台：知识沉淀、学习</p></li>
+<li><p><strong>编码辅助工具/平台：便捷的产出代码</strong></p></li>
 </ul>
 <p><br/></p>
-<p>所以，如何让自己的开发任务不产生堆积，如何快速的完工，提高团队整体研发效能，</p>
-<p>成为了软件开发过程管理的重中之重。</p>
-<h3 id="产能">产能</h3>
-<p>在刚入行进行软件开发的前几年，我总是在想 —— <strong>如何才能把代码写好</strong>。</p>
-<p>不惜一切代价，仔细的打磨自己的 “作品”，正是当时工作状态的真实写照。</p>
-<p><br/></p>
-<p>这从当时的个人发展和工作状态来看，并不能说是一件坏事，</p>
-<p>因为新人恰好需要这样的一种钻研精神，才能不断的提升自己满足岗位的需要。</p>
-<p><br/></p>
-<p>但随着工作时间越来越长，负责的事项也越来越多之后，想法就发生了转变。</p>
-<p>就会思考另外一个问题了 —— <strong>如何在单位时间内创造更多的价值</strong>。</p>
-<p><br/></p>
-<p>代码写的好固然重要，但也许在把精力用在了现阶段不是最重要的事情上。</p>
-<p>正确的做事，不如做正确的事情。</p>
-<p><br/></p>
-<p>考虑做正确的事情，就得把自己的视角从个人调整到团队、部门、公司甚至行业。</p>
-<p>把软件开发活动理解为一种<strong>商业竞争</strong>。</p>
-<p>商业竞争要考虑行业趋势、商业模式、产品定位、以及<strong>产能</strong>。</p>
-<h3 id="堆积">堆积</h3>
-<p>任务之间天生是容易产生堆积的，所以堆积是<strong>缺乏管理</strong>的一种体现。</p>
-<p>换句话说，我们应该对任务进行管理，以避免发生堆积。</p>
-<p><br/></p>
+<p>而 <strong>编码辅助</strong> 方案则是多种多样的，比如说，</p>
 <ul>
-<li>将堆积状态明示出来，将决策权往上抛</li>
-</ul>
-<p>任务发生的堆积的主要原因之一是，添加任务的人，不知道任务产生了堆积。</p>
-<p>甚至还对完成的任务者抱有不切实际的期待。</p>
-<p><br/></p>
-<ul>
-<li>将任务进行拆分，让每件任务尽可能快的结束</li>
-</ul>
-<p>任务拆分成更小的粒度之后，跟其他任务之间的次序调整就变得更加容易了。</p>
-<p>小任务更容易管理，让每一个小任务在 1~2 天之内结束。</p>
-<p><br/></p>
-<ul>
-<li>不要迟迟无进展，应迅速拿到阶段性成果</li>
-</ul>
-<p>以成果角度，而不是完成度角度看待任务。</p>
-<p>我们应该尽一切可能向外交付可见的工作成果，加速与用户、需求方之间的反馈。</p>
-<h3 id="链路">链路</h3>
-<p>任务发生堆积，其实并不全是个人原因造成的，我们还应从<strong>任务链路</strong>角度进行审查。</p>
-<p>因为一件任务其实很少是孤立存在的，与其他任务、其他人处理的任务之间有千丝万缕的联系。</p>
-<p>至少我们应看到任务的上游和下游，即问题的来龙去脉。</p>
-<p><br/></p>
-<ul>
-<li><p>这个任务是怎么来的，是谁的任务完成后导致了我这件任务发生？</p></li>
-<li><p>我这个人任务完成后会怎样，会导致谁产生了新的任务？</p></li>
+<li><p>IDE：一个集成开发环境，提高代码编写效率</p></li>
+<li><p><strong>拖拽</strong>：图形化的方案，“写” 代码</p></li>
+<li><p>脚手架/代码生成：使用编译方式生成样板代码</p></li>
 </ul>
 <p><br/></p>
-<p>因此，任务产生堆积的另一个原因可能是，任务上游完成的太快，下游消费的太慢。</p>
-<p>我们应该看清这一切，把整个任务链路理顺，把任务看成一条 “河流”。</p>
+<p>所以 “拖拽生成页面” 其实是属于 “编码辅助” 这一块（虽然它可以应用于其他领域）。</p>
+<p>而 lowcode 显然比拖拽的意义更广泛，它是立足于 “<strong>编码</strong>” 的。</p>
+<p>人们期望通过一种体系化的方式，减少编码量，降低编码门槛，来提高整个<strong>研发过程</strong>的<strong>产能</strong>。</p>
+<h3 id="为什么是螺旋上升">为什么是螺旋上升</h3>
+<p>软件行业的发展有两方面是相辅相成的，一个是规模化效应，软件到了量产时代。</p>
+<p>另一方面，则是<strong>基础设施</strong>的日趋完善，以前一些困难的工作变得越来越简单了。</p>
 <p><br/></p>
-<p>明朝治河专家 潘季驯，在一生四次治河经验过程中提出了 “束水攻沙” 的治河方略。</p>
-<blockquote>
-<p>水分则势缓，势缓则沙停，沙停则河饱，尺寸之水皆有沙面，止见其高。</p>
-</blockquote>
-<blockquote>
-<p>水合则势猛，势猛则沙刷，沙刷则河深，寻丈之水皆有河底，止见其卑。</p>
-</blockquote>
-<blockquote>
-<p>筑堤束水，以水攻沙，水不奔溢于两旁，则必直刷乎河底。</p>
-</blockquote>
+<p>关于基础设施，我拿<strong>编译领域</strong>来举个例子，</p>
+<p>虽然在学校里有编译方面的课，但实际工作中，能写 parser 并对结果进行分析的人却很少。</p>
+<p>这是因为有很多脏活累活，任何一个还算有用的语言的 parser 都很麻烦。</p>
 <p><br/></p>
-<p>是说河水如果比较分散，流速就慢，流速慢了就容易沉积泥沙，河道就会变浅，水就容易溢出来。</p>
-<p>而把水 “束” 住之后，流速就会变得迅猛，迅猛的河水会带走泥沙，使得河道变深，反而不容易溢出来。</p>
+<p>所以理论与现实之间有很大的<strong>差距</strong>，我们知道怎么做，但是做起来很<strong>困难</strong>。</p>
+<p>如今时代发展了。比如，微软已推出了 <strong>.NET Compiler Platform</strong> 这是一个编译平台，</p>
+<p>可能是受到 llvm 的影响，工程师们可以通过 compiler api 来进行编译方面的业务开发了。</p>
 <p><br/></p>
-<p>任务管理也是如此，任务之间<strong>流转的速度</strong>变快了，就更不容易产生堆积。</p>
+<p>前端领域，以前我们想获取 javascript 代码的符号信息，这是很难的，</p>
+<p>因为不仅 js 解析起来麻烦（好多个版本），<strong>语义分析</strong>这一块也没有成熟的工具来做。</p>
+<p>现在，typescript 采用了新的 compiler 架构，有很多 api 可进行上层开发。</p>
+<p><br/></p>
+<p>所以，这一切正在悄无声息的发生变革，以前用 ReSharper 重构 C# 代码觉得很神奇，</p>
+<p>现在可以用基于 compiler platform 写自己的重构工具了。</p>
+<p><br/></p>
+<p>回到 lowcode 这边来，由于编译技术的开放和发展，</p>
+<p>任何一家公司、团队 都有能力处理常用的编程语言了（例如 typescript），</p>
+<p>所以事情就简单多了，<strong>语言的应用</strong> 跟 <strong>语言的基础设施</strong> 解耦了。</p>
+<p><br/></p>
+<p>我们知道很多老牌<strong>语言</strong>的 <strong>IDE</strong> 是一体的，IDE 绑定了编译器，</p>
+<p>比如 borland c++、delphi、vs studio，更早的比如说 smalltalk。</p>
+<p>现在随着 lsp/dap 概念的提出，语言供应商 与 编辑器供应商 也开始<strong>独立发展</strong>了。</p>
+<p><br/></p>
+<p>这就萌生出很多 语言基础 之上的其他类型的业务，比如说 web ide，比如 lowcode。</p>
+<h3 id="难点和考虑">难点和考虑</h3>
+<p>语言方面的门槛越来越低了，可为什么我还要说 lowcode 依然<strong>难搞</strong>呢？</p>
+<p>这是因为前端开发者们 涉足 code 领域的时间还太短，积累不足，</p>
+<p>此外，很难同时站在 工程、编程语言、产品几块的<strong>宏观视角</strong>下看待问题。</p>
+<p><br/></p>
+<p>比如说，lowcode 平台的产品<strong>定位</strong>是什么？服务哪些人群，哪些人<strong>不是</strong>我们的用户？</p>
+<p>产品的<strong>范围</strong>定位不清，就会导致走很多弯路，不同的用户左右不讨好。</p>
+<p><br/></p>
+<p>工程方面，lowcode 在整个研发过程中属于什么<strong>位置</strong>？</p>
+<p>产物怎么与工程中的其他部分<strong>结合</strong>？</p>
+<p>lowcode 平台中的 “代码” 如何测试？如何复用？如何跟 “手工编码” 做衔接？</p>
+<p>很多 lowcode 平台用的人很少，在于没法把它放到现有<strong>生态</strong>中去。</p>
+<p><br/></p>
+<p>语言方面，人们<strong>低估</strong>了创建一套 <strong>DSL 生态</strong>的成本。</p>
+<p>之前我们说一些常用语言的 基础设施 完备起来了，但是<strong>还没到</strong>支持 DSL 这个阶段。</p>
+<p>市面上<strong>罕有</strong> 语法设计器、DSL 的调试方案、DSL 语言服务、DSL 的编辑器。</p>
+<p><br/></p>
+<p>所以我们虽然踏上了 lowcode 时代的风口，也要谨慎看待自家产品的<strong>选型</strong>。</p>
+<p>能用简单的办法，不用复杂的办法。以能解决<strong>高杠杆率的问题</strong>为第一要义。</p>
 <h3 id="结语">结语</h3>
-<p>开发者自身的任务产生堆积之后，个人产能只是被任务切换成本所影响，看起来影响并不大。</p>
-<p>但从团队角度来看，堆积之间的任务相互牵制，会无形中增加很多等待成本。</p>
-<p>造成了极大的资源浪费。</p>
+<p>lowcode 这个领域已经蓬勃的发展起来了，我还在学习中，</p>
+<p>以上只是写了一下自己的看法。</p>
 <p><br/></p>
-<p>所以要想让团队的产能提升，就得做好每个团队成员的任务管理。</p>
-<p>避免多个长时间的任务堆积在每个人身上。</p>
-<p>持续不断的切分任务，调整优先级，并优化任务流转速度，才能将<strong>团队产能</strong>带到新高度。</p>
+<p>最近几年 编译领域 也一直在尝试向<strong>应用层</strong>发展，</p>
+<p>比如 jetbrains 的 mps。data-flow analysis 也逐渐走出了编译器，向安全等领域进发。</p>
+<p>国内的几家 小程序，发展非常快，逐渐形成了一个行业。</p>
 <p><br/></p>
-<p>潘季驯 治河所用的 “束水攻沙” 方略，有很多值得借鉴的地方，</p>
-<p>这也是能印证丰田公司 “精益生产” 的想法。</p>
-<p>增强 “流动性” 确实是破解 “不确定性” 的一个好办法。</p>
+<p>lowcode 的潜在<strong>强交互性</strong>，刚好是前端工程师们所擅长的，</p>
+<p>前端工程师天生离<strong>产品</strong>比较近，lowcode 也因此有了更多的业务场景，</p>
+<p>这也就看出来为什么 lowcode 能成为最近几年的<strong>热点</strong>了。</p>
+<p><br/></p>
+<p>山重水复疑无路，柳暗花明又一村。</p>
 
           
         
@@ -474,7 +489,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/27/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/29/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/27/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/29/">&gt;</a>
   </nav>
 
 
@@ -520,7 +535,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -595,7 +610,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

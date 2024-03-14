@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/12/27/the-art-of-software-tools/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/24/about-service/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/12/27/the-art-of-software-tools/" itemprop="url">软件工具的设计艺术</a></h1>
+                <a class="post-title-link" href="/2017/03/24/about-service/" itemprop="url">也谈服务化</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-27T00:00:00+08:00">
-                2016-12-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T00:00:00+08:00">
+                2017-03-24
               </time>
             
 
@@ -347,56 +347,65 @@
       
         
           
-            <h3 id="getdefaultprops">getDefaultProps</h3>
-<p>在确定软件方案之前，除了要先确定问题之外，还要确定人们到底想不想解决它。</p>
-<p>解决某些问题，通常以损失另外的东西为代价，人们是否愿意买单。</p>
-<p>此外，为了增加合作的可能性，双方会特意隐瞒需求的细节和实现难度，使之容易达成合作关系。</p>
+            <p>我们知道，软件是一种解决方案，但不是唯一的方案，</p>
+<p>在大多数情况下，传统的非软件的解决方案古已有之，</p>
+<p>软件只是改变了这个方案的形态。</p>
 <p><br/></p>
-<p>代码不一定要实现产品的所有功能，产品也不一定满足用户的所有的需要。</p>
-<p>我们既可以通过设计，满足用户的所有潜在功能，也可以通过限制用户的场景，减少设计复杂度。</p>
+<p>在现实生活中，我们经常谈论帮助别人，</p>
+<p>可能仅仅是为了出于道德责任感，</p>
+<p>并不会给自己带来多大效益。</p>
 <p><br/></p>
-<h3 id="getinitialstate">getInitialState</h3>
-<p>编程的艺术在于引入间接性，是否可以把直接的实现，看做是先实现一个工具，再由这个工具来实现原来的目的。</p>
-<p>而且，在实现一个工具的过程中，仍然可以再引入间接性。</p>
-<p>而艺术本身在于我们引入的间接性在什么程度上是适度的。</p>
+<p>然而，我发现将帮助别人的方法论用于软件开发中，是非常有益的，</p>
+<p>在进行软件开发的时候，我们能多大程度上帮助别人进行同样的开发任务，</p>
+<p>就能在多大程度上帮助自己提高效率。</p>
 <p><br/></p>
-<p>当用户只需要工具中的部分功能，但又不得不整个工具一起拿过来用时，我们就说这个工具比较重，绑架了用户的选择。</p>
-<p>工具的作用，不该是教用户怎么做，而是辅助用户来完成工作，简化已有工作，给用户提供方便。</p>
-<p>不要帮用户做所有事情，但也不要所有事情都要用户来做。</p>
+<h3 id="软件服务">软件服务</h3>
+<p>有人说，工程师出售的不是软件，而是软件服务，我非常赞同。</p>
+<p>我们可以将软件服务理解为，以软件的形态提供的解决方案。</p>
+<p>它总是寻找那些可以被自动化的部分，用软件方法解决它，</p>
+<p>使得其他不能被自动化的部分，工作成本最小，门槛最低。</p>
 <p><br/></p>
-<p>有的工具是给其它的软件系统用的，而有的工具是给人用的。</p>
-<p>我们的工具在什么场景中被使用，是需要事先考虑清楚的，这决定了我们到底提供一个什么样的工具。</p>
+<p>而单独谈论软件则不然，更强调提供服务给那些不开发软件的人。</p>
+<p>可是，我认为帮助别人的最好方式，不是替他完成任务，而是让他有能力自己完成。</p>
+<p>因此，软件服务比软件更有价值。</p>
 <p><br/></p>
-<p>优秀的开发者，会区分工具提供的功能和自己需要的功能。</p>
-<p>如果工具不好用，但是功能完备，那么用的人就会想办法对它包装，让所有其它场景都使用这层包装。</p>
+<h3 id="简化主流程">简化主流程</h3>
+<p>我们在写业务代码的时候，</p>
+<p>经常以简化主流程为动机，将尽可能多的代码提取出去，</p>
+<p>这并不是以代码洁癖和消除重复为出发点的，</p>
+<p>而是为了降低主流程的开发和维护成本。</p>
 <p><br/></p>
-<h3 id="componentwillmount">componentWillMount</h3>
-<p>在考虑该不该的时候，先问目的，该不该做某件事情，还要看解决它是为了达成什么目的。</p>
-<p>不考虑目的，讨论任何方法的好坏，都是空想。</p>
+<p>这样考虑的话，其实我们是在帮助自己，</p>
+<p>也同时让别人有能力完成我们现在做的事情，即业务流程的开发工作，</p>
+<p>我们提取出去的功能集，让编写主流程的工作会变得简单了。</p>
 <p><br/></p>
-<p>对软件附加上任何诸如可维护性，可扩展性，可伸缩性，都是需要成本的，我们需要考虑的是这些成本是否值得投入。</p>
-<p>没有绝对的错误，只有不够好的选择。</p>
+<p>在这种意义上来看，我们提取功能集的做法，就是在为别人提供服务，</p>
+<p>我们帮助了别人，同时也帮助了自己。</p>
 <p><br/></p>
-<p>只要描述现在的系统没有什么功能，造成了什么不适，就能马上看到需求。</p>
-<p>而如果别人直接指出他们需要什么，这很可能只是一种方案。</p>
+<h3 id="让自己可被替代">让自己可被替代</h3>
+<p>同理，我们当前做的业务项目，可以反思，</p>
+<p>有哪些基础设施可以提取出去，</p>
+<p>使得其他人可以以更低的成本从事我们现在做的事情。</p>
 <p><br/></p>
-<h3 id="render">render</h3>
-<p>过度设计指的是，软件在被重写之前，我们所担心的事情一次都没有发生。</p>
-<p>然而，合理的抽象是必需的，所以关键问题不在于是否进行抽象，而是在于如何进行恰如其分的抽象。</p>
+<p>这样的话，我们就可以将这些基础设施提供给他们，让他们轻易的完成我们的工作。</p>
+<p>这并不是短期内可以做到的，</p>
+<p>但是以这样帮助别人的心态做准备，会大幅度提高当前的工作效率。</p>
 <p><br/></p>
-<p>不要预测未来，而是想办法让代码具有良好的特征，这些特征让现在的代码更适应变更。</p>
-<p>工程师的职责，就是想办法让软件健康成长，是人响应了变更，而不是工具本身。</p>
+<p>我们成功抓住了哪些是自动化的部分，应该提供软件服务，</p>
+<p>而哪些是不得不需要人工成本解决的，</p>
+<p>我们应该把精力聚焦在那些可以被自动化的部分，用软件解决它。</p>
 <p><br/></p>
-<h3 id="componentdidmount">componentDidMount</h3>
-<p>能让别人在不看源码的情况下会用，才叫封装。</p>
+<h3 id="结语">结语</h3>
+<p>提供一个软件给别人用，并不是最大限度的提供软件服务，</p>
+<p>我们还可以提供软件服务给其他的开发者，</p>
+<p>让他们有能力完成开发工作。</p>
 <p><br/></p>
-<p>在使用的时候找不到文档，但是在学会之后又不想写下文档。</p>
-<p>知识就是这样，缺乏之时如饥似渴，掌握之后就觉得可有可无了。</p>
-<p>掌握知识的人，从来都觉得没有分享的必要，而需要这些知识的人们，却觉得走投无路。</p>
+<p>这个使用软件服务的人，一开始是我们自己，</p>
+<p>随后就可能是其他的开发者了，</p>
+<p>我们想要帮助别人的越多，剩下的需要人工工作的部分就越少。</p>
 <p><br/></p>
-<h3 id="componentwillunmount">componentWillUnmount</h3>
-<p>软件说白了，无非就是考虑生活中什么可以自动化，以及如何自动化。</p>
-<p>编程说白了，无非就是考虑用哪些符号，以及如何用这些符号来解决问题。</p>
+<p>让别人具有和我们一样的使用软件解决问题的能力，</p>
+<p>才是提供软件服务的更好方式。</p>
 
           
         
@@ -435,7 +444,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/193/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/193/">193</a><span class="page-number current">194</span><a class="page-number" href="/page/195/">195</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/195/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/193/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/193/">193</a><span class="page-number current">194</span><a class="page-number" href="/page/195/">195</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/195/">&gt;</a>
   </nav>
 
 
@@ -481,7 +490,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -556,7 +565,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

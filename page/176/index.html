@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/07/04/free-algebra/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/19/type-6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/04/free-algebra/" itemprop="url">Free Algebra</a></h1>
+                <a class="post-title-link" href="/2017/09/19/type-6/" itemprop="url">你好，类型（六）：Simply typed lambda calculus</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-04T00:00:00+08:00">
-                2017-07-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-19T00:00:00+08:00">
+                2017-09-19
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
                   </a>
                 </span>
 
@@ -347,209 +347,140 @@
       
         
           
-            <h3 id="functor">functor</h3>
-<p>函子（functor）就是范畴（category）间的态射（morphism）。</p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-19-type-6/1023733-b561d8b10bfe0e7f.png" /></p>
 <p><br/></p>
-<p>设有范畴<span data-katex="D"></span>和<span data-katex="C"></span>，一个<strong>函子</strong>（functor）<span data-katex="U:D\rightarrow C"></span>由两部分组成，</p>
-<p>（1）作用在对象上的函数，它将<span data-katex="D"></span>中的每一个对象<span data-katex="d"></span>，映射为<span data-katex="C"></span>中的一个对象<span data-katex="Ud"></span></p>
-<p>（2）作用在箭头上的函数，它将<span data-katex="D"></span>中的每一个箭头<span data-katex="g:d\rightarrow d&#39;"></span>，映射为<span data-katex="C"></span>中的一个箭头<span data-katex="Ug:Ud\rightarrow Ud&#39;"></span></p>
-<p>并且，这两个函数使得以下等式成立，</p>
-<p><span data-katex="U(1_d)=1_{Ud}"></span></p>
-<p><span data-katex="U(h\circ g)=Uh\circ Ug"></span></p>
+<p>简单类型化<span data-katex="\lambda"></span>演算（simply typed lambda calculus）<span data-katex="\lambda^\to"></span>，</p>
+<p>是无类型<span data-katex="\lambda"></span>演算的类型化版本，</p>
+<p>它是众多类型化<span data-katex="\lambda"></span>演算中最简单的一个。</p>
 <p><br/></p>
-<h3 id="forgetful-functor">forgetful functor</h3>
-<p>一个函子可能会“遗忘”范畴中的部分（或全部）结构，这样的函子称为<strong>遗忘函子</strong>（forgetful functor）。</p>
-<p>例如，遗忘函子<span data-katex="U:Grp\rightarrow Set"></span>，将范畴<span data-katex="Grp"></span>中的每一个群<span data-katex="g"></span>，映射为一个由群<span data-katex="g"></span>的所有元素组成的集合<span data-katex="Ug"></span>，</p>
-<p>（“遗忘”了建立在群乘法之上的群结构，）</p>
-<p>并且将范畴<span data-katex="Grp"></span>中的任意两个群之间的群同态<span data-katex="\varphi:g\rightarrow g&#39;"></span>，映射为两个集合之间的函数<span data-katex="\phi"></span>。</p>
+<p>它只包含一个类型构造器（type constructor）<span data-katex="\to"></span>，</p>
+<p>即，接受两个类型<span data-katex="T_1,T_2"></span>作为参数，返回一个函数类型<span data-katex="T_1\to T_2"></span>。</p>
 <p><br/></p>
-<p>一个函子<span data-katex="U:D\rightarrow C"></span>称为<strong>完全的</strong>（full），</p>
-<p>如果对于<span data-katex="D"></span>中的任意两个对象<span data-katex="d,d&#39;"></span>，以及对应<span data-katex="C"></span>中的箭头<span data-katex="f:Ud\rightarrow Ud&#39;"></span>，</p>
-<p>存在<span data-katex="B"></span>的箭头<span data-katex="g:d\rightarrow d&#39;"></span>，使得<span data-katex="f=Ug"></span>。</p>
+<p>下文中，我们首先从最基础的概念说起，</p>
+<p>详细的区分项（term）和值（value）的概念，</p>
+<p>然后介绍简单类型化<span data-katex="\lambda"></span>演算系统的求值规则和类型规则。</p>
 <p><br/></p>
-<p>一个函子<span data-katex="U:D\rightarrow C"></span>称为<strong>忠实的</strong>（faithful），</p>
-<p>如果对于<span data-katex="D"></span>中的任意两个对象<span data-katex="d,d&#39;"></span>，以及<span data-katex="D"></span>中的任意两个箭头<span data-katex="g_1,g_2:d\rightarrow d&#39;"></span>，</p>
-<p>如果<span data-katex="Ug_1=Ug_2"></span>，就有<span data-katex="g_1=g_2"></span>。</p>
+<h3 id="项和值">1. 项和值</h3>
 <p><br/></p>
-<h3 id="hom-set">hom-set</h3>
-<p>以上两个概念（完全的，忠实的），可以使用hom-set术语重新描述，</p>
-<p>设<span data-katex="D"></span>中有两个对象<span data-katex="d,d&#39;"></span>，函子<span data-katex="U:D\rightarrow C"></span>，</p>
-<p>将<span data-katex="D"></span>中每一个箭头<span data-katex="g:d\rightarrow d&#39;"></span>映射为<span data-katex="C"></span>中的一个箭头<span data-katex="Ug:Ud\rightarrow Ud&#39;"></span>，</p>
-<p>这样就定义了一个函数<span data-katex="U_{d,d&#39;}"></span>，<span data-katex="U_{d,d&#39;}:hom(d,d&#39;)\rightarrow hom(Ud,Ud&#39;)"></span>，</p>
-<p>我们说函子<span data-katex="U"></span>是完全的，如果<span data-katex="U_{d,d&#39;}"></span>是一个满射（surjective），</p>
-<p>我们说函子<span data-katex="U"></span>是忠实的，如果<span data-katex="U_{d,d&#39;}"></span>是一个单射（injective）。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-19-type-6/1023733-1f335eebf1ae892a.png" /></p>
 <p><br/></p>
-<p>其中，<span data-katex="hom(d,d&#39;)"></span>表示所有从对象<span data-katex="d"></span>到对象<span data-katex="d&#39;"></span>的箭头所构成的集合，</p>
-<p><span data-katex="hom(d,d&#39;)=\{g|g\ in\ D,\ dom\ g=c,\ cod g=c&#39;\}"></span></p>
-<p><span data-katex="dom"></span>表示箭头<span data-katex="g"></span>的始端，<span data-katex="cod"></span>表示箭头<span data-katex="g"></span>的终端。</p>
+<h4 id="项">1.1 项</h4>
+<p>项（term）是一个语法概念，一个合法的项，指的是一段符合语法的字符串。例如，</p>
+<p>在<span data-katex="\lambda_\beta"></span>系统中，项的定义如下，</p>
+<p><span data-katex="t::=x|\lambda x.t|t~t"></span></p>
 <p><br/></p>
-<p>如果一个函子既是完全的，又是忠实的，我们就说它是完全忠实的，这时<span data-katex="U_{d,d&#39;}"></span>是一个双射（bijection）。</p>
+<p>它表明，一个合法的<span data-katex="\lambda_\beta"></span>项，要么是一个变量<span data-katex="x"></span>，</p>
+<p>要么是一个<span data-katex="\lambda"></span>抽象（abstraction）<span data-katex="\lambda x.t"></span>，</p>
+<p>要么是一个<span data-katex="\lambda"></span>应用（application）<span data-katex="t~t"></span>。</p>
 <p><br/></p>
-<h3 id="comma-category">comma category</h3>
-<p>给定范畴<span data-katex="E,C,D"></span>和函子<span data-katex="T,S"></span>，<span data-katex="E\;{\tiny\begin{matrix}^{\normalsize T}\\ \normalsize \rightarrow \\ ^{\scriptsize}\end{matrix} }\;C\;{\tiny\begin{matrix}^{\normalsize S}\\ \normalsize \leftarrow \\ ^{\scriptsize}\end{matrix} }\;D"></span>，</p>
-<p><strong>逗号范畴</strong>（comma category）<span data-katex="(T\downarrow S)"></span>，由以下对象和箭头组成，</p>
-<p>它的对象为三元组<span data-katex="\left\langle e,d,f\right\rangle"></span>，</p>
-<p>其中，<span data-katex="e"></span>是<span data-katex="E"></span>中的对象，<span data-katex="d"></span>是<span data-katex="D"></span>中的对象，<span data-katex="f:Te\rightarrow Sd"></span>是<span data-katex="C"></span>中的箭头，</p>
-<p>它的箭头为二元组<span data-katex="\left\langle k,h\right\rangle:\left\langle e,d,f\right\rangle\rightarrow\left\langle e&#39;,d&#39;,f&#39;\right\rangle"></span>，</p>
-<p>其中，<span data-katex="k:e\rightarrow e&#39;"></span>，<span data-katex="h:d\rightarrow d&#39;"></span>，并且满足，<span data-katex="f&#39;\circ Tk=Sh\circ f"></span>。</p>
+<h4 id="值">1.2 值</h4>
+<p>值（value）是一个和语义相关的概念，有三种常用的方法为项指定语义。</p>
+<p>（1）操作语义，通过定义一个简单的抽象机器，来说明一个程序语言的行为。</p>
+<p>（2）指称语义，一个项的语义是一个数学对象。</p>
+<p>（3）公理语义，不是首先定义程序的行为，而是用项所满足的规则限定它的语义。</p>
 <p><br/></p>
-<h3 id="coslice-category">coslice category</h3>
-<p>取<span data-katex="C"></span>中的某个元素<span data-katex="c_0"></span>，它唯一对应一个函子<span data-katex="T:1\rightarrow C"></span>，</p>
-<p>在这种情况下逗号范畴<span data-katex="(T\downarrow S)"></span>，记为<span data-katex="(c_0\downarrow S)"></span>，称为<strong>余切片范畴</strong>（coslice category）。</p>
+<p>下面我们采用操作语义的方法，来定义求值的概念。</p>
+<p>首先，我们人为指定项的一个子集，将其中的元素称为值。</p>
 <p><br/></p>
-<p>它的对象是，<span data-katex="\left\langle d,f\right\rangle"></span>，</p>
-<p>其中，<span data-katex="d"></span>是<span data-katex="D"></span>中的对象，<span data-katex="f:c_0\rightarrow Sd"></span>是<span data-katex="C"></span>中的箭头。</p>
-<p>它的箭头是，<span data-katex="h:\left\langle d,f\right\rangle\rightarrow\left\langle d&#39;,f&#39;\right\rangle"></span>，</p>
-<p>其中，<span data-katex="h:d\rightarrow d&#39;"></span>，并且满足，<span data-katex="f&#39;=Sh\circ f"></span>。</p>
+<p>假如项的定义如下，<span data-katex="t::=true|false|if~t~then~t~else~t"></span>，</p>
+<p>我们可以定义值，<span data-katex="v::=true|false"></span>。</p>
+<p>值可能是项被求值的最终结果，但也不全是，因为对某些项的求值过程可能不会终止。</p>
 <p><br/></p>
-<p>如果<span data-katex="S:D\rightarrow C"></span>是一个单位函子（identity functor），</p>
-<p>那么<span data-katex="(c_0\downarrow S)"></span>，还可以写为<span data-katex="(c_0\downarrow C)"></span>。</p>
+<h4 id="求值规则">1.3 求值规则</h4>
+<p>求值规则，是定义在项上的推导规则，例如，</p>
+<p>（1）<span data-katex="if~true~then~t_1~else~t_2\to t_1"></span>，</p>
+<p>（2）<span data-katex="if~false~then~t_1~else~t_2\to t_2"></span>，</p>
+<p>（3）<span data-katex="\frac{t_1\to t&#39;_1}{if~t_1~then~t_2~else~t_3\to if~t&#39;_1~then~t_2~else~t_3}"></span></p>
+<p>其中，<span data-katex="x\to y"></span>表示，项<span data-katex="x"></span>可以一步求值为项<span data-katex="y"></span>。</p>
 <p><br/></p>
-<h3 id="slice-category">slice category</h3>
-<p>同理，我们可以定义<strong>切片范畴</strong>（slice category）<span data-katex="(C\downarrow c_0)"></span>，</p>
-<p>只需要取<span data-katex="T"></span>为单位函子，<span data-katex="S"></span>为函子<span data-katex="S:1\rightarrow C"></span>即可。</p>
+<h4 id="范式">1.4 范式</h4>
+<p>一个不含自由变量的项，称为封闭项，封闭项也称为组合子。</p>
+<p>例如，恒等函数<span data-katex="id=\lambda x.x"></span>就是一个封闭项。</p>
 <p><br/></p>
-<h3 id="initial-object-terminal-object">initial object &amp; terminal object</h3>
-<p>设<span data-katex="C"></span>是一个范畴，<span data-katex="c"></span>是它的一个对象，如果对于<span data-katex="C"></span>中的任意对象<span data-katex="x"></span>，存在唯一的箭头<span data-katex="c\rightarrow x"></span>，</p>
-<p>就称<span data-katex="c"></span>是范畴<span data-katex="C"></span>的<strong>始对象</strong>（initial object）。</p>
+<p>如果没有求值规则可用于项<span data-katex="t"></span>，就称该项是一个范式。</p>
+<p>范式可能是一个值，也可能不是，但每一个值都应该是范式。</p>
 <p><br/></p>
-<p>同理，如果对于<span data-katex="C"></span>中的任意对象<span data-katex="x"></span>，存在唯一的箭头<span data-katex="x\rightarrow c"></span>，</p>
-<p>则称<span data-katex="c"></span>是范畴<span data-katex="C"></span>的<strong>终对象</strong>（terminal object）。</p>
+<p>如果一个封闭项是一个范式，但不是一个值，就称该项受阻。</p>
+<p>不是值的范式，在运行时间错误分析中起着极其重要的作用。</p>
 <p><br/></p>
-<h3 id="initial-morphism-terminal-morphism">initial morphism &amp; terminal morphism</h3>
-<p>设<span data-katex="D,C"></span>是范畴，<span data-katex="U:D\rightarrow C"></span>是函子，<span data-katex="c"></span>是范畴<span data-katex="C"></span>中的一个对象，</p>
-<p>根据始对象的定义，余切片范畴<span data-katex="(c\downarrow U)"></span>的始对象<span data-katex="\left\langle d,f\right\rangle"></span>，满足以下条件，</p>
-<p>对于范畴中的任意对象，<span data-katex="\left\langle d&#39;,f&#39;\right\rangle"></span>，</p>
-<p>存在唯一的箭头，<span data-katex="h:d\rightarrow d&#39;"></span>，使得<span data-katex="f&#39;=Uh\circ f"></span>。</p>
+<h3 id="类型">2. 类型</h3>
 <p><br/></p>
-<p>该条件称为，<strong>初始性质</strong>（initial property），</p>
-<p>始对象<span data-katex="\left\langle d,f\right\rangle"></span>，称为从对象<span data-katex="c"></span>到函子<span data-katex="U"></span>的<strong>始态射</strong>（initial morphism）。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-19-type-6/1023733-f8ef18f167c5e4c1.png" /></p>
 <p><br/></p>
-<p>同理，我们把切片范畴<span data-katex="(U\downarrow c)"></span>的终对象，</p>
-<p>定义为从函子<span data-katex="U"></span>到对象<span data-katex="c"></span>的<strong>终态射</strong>（terminal morphism），</p>
-<p>终对象所满足的性质，称为<strong>终止性质</strong>（terminal property）。</p>
+<h4 id="类型上下文">2.1 类型上下文</h4>
+<p>一个类型上下文（也称类型环境）<span data-katex="\Gamma"></span>，是一个变量和类型之间绑定关系的集合。</p>
+<p>空上下文，可以记为<span data-katex="\varnothing"></span>，但是我们经常省略它。</p>
 <p><br/></p>
-<p>在不引起歧义的情况下，</p>
-<p>我们将始态射和终态射统称为<strong>泛态射</strong>（universal morphism）。</p>
+<p>用逗号可以在<span data-katex="\Gamma"></span>右边加入一个新的绑定，例如，<span data-katex="\Gamma,x:T"></span>。</p>
+<p><span data-katex="\vdash t:T"></span>，表示项<span data-katex="t"></span>在空的类型上下文中，有类型<span data-katex="T"></span>。</p>
 <p><br/></p>
-<h3 id="adjoint-functor">adjoint functor</h3>
-<p>设<span data-katex="D,C"></span>是范畴，<span data-katex="U:D\rightarrow C"></span>是函子，<span data-katex="c_1,c_2"></span>是范畴<span data-katex="C"></span>中的对象，</p>
-<p><span data-katex="\left\langle d_1,f_1\right\rangle"></span>是从对象<span data-katex="c_1"></span>到函子<span data-katex="U"></span>的始态射，<span data-katex="f_1:c_1\rightarrow U(d_1)"></span>，</p>
-<p><span data-katex="\left\langle d_2,f_2\right\rangle"></span>是从对象<span data-katex="c_2"></span>到函子<span data-katex="U"></span>的始态射，<span data-katex="f_2:c_2\rightarrow U(d_2)"></span>，</p>
-<p>根据初始性质（initial property），</p>
-<p>对于<span data-katex="C"></span>中的箭头<span data-katex="h:c_1\rightarrow c_2"></span>，存在<span data-katex="D"></span>中唯一的箭头<span data-katex="g:d_1\rightarrow d_2"></span>，</p>
-<p>使得，<span data-katex="f_2\circ h=Ug\circ f_1"></span>。</p>
+<h4 id="类型规则">2.1 类型规则</h4>
+<p><span data-katex="\lambda^\to"></span>是一个新的系统，比起<span data-katex="\lambda_\beta"></span>而言，</p>
+<p>增加了一些基于类型的推导规则。</p>
 <p><br/></p>
-<p>以上定义了一个从范畴<span data-katex="C"></span>到<span data-katex="D"></span>的一个对应关系，</p>
-<p>我们把范畴<span data-katex="C"></span>中的对象<span data-katex="c_1,c_2"></span>，分别对应到了范畴<span data-katex="D"></span>的对象<span data-katex="d_1,d_2"></span>上，</p>
-<p>把范畴<span data-katex="C"></span>中的箭头<span data-katex="h:c_1\rightarrow c_2"></span>，对应到了范畴<span data-katex="D"></span>的箭头<span data-katex="g:d_1\rightarrow d_2"></span>上。</p>
+<p>其中，<span data-katex="\lambda^\to"></span>中<span data-katex="\lambda"></span>项的语法如下：</p>
+<p>（1）<span data-katex="t::=x|\lambda x:T.t|t~t"></span></p>
+<p>（2）<span data-katex="T::=T\to T"></span></p>
+<p>（3）<span data-katex="\Gamma::=\varnothing|\Gamma,x:T"></span></p>
 <p><br/></p>
-<p>如果范畴<span data-katex="C"></span>中的任意对象都满足这个条件（初始性质），</p>
-<p>我们就找到了一个从范畴<span data-katex="C"></span>到范畴<span data-katex="D"></span>的函子，<span data-katex="F:C\rightarrow D"></span>，</p>
-<p><span data-katex="F"></span>称为<span data-katex="U"></span>的<strong>左伴随函子</strong>（left adjoint），<span data-katex="U"></span>称为<span data-katex="F"></span>的<strong>右伴随函子</strong>（right adjoint），记为<span data-katex="F\dashv U"></span>。</p>
+<p>推导规则：</p>
+<p>（1）<span data-katex="\frac{x:T\in\Gamma}{\Gamma\vdash x:T}"></span></p>
+<p>（2）<span data-katex="\frac{\Gamma,x:T_1\vdash t:T_2}{\Gamma\vdash\lambda x:T_1.t:T_1\to T_2}"></span></p>
+<p>（3）<span data-katex="\frac{\Gamma\vdash t_1:T_1\to T_2~~~~\Gamma\vdash t_2:T_1}{\Gamma\vdash t_1~t_2:T_2}"></span></p>
 <p><br/></p>
-<p>范畴<span data-katex="C"></span>中的一族箭头<span data-katex="f_1,f_2,\cdots"></span>，构成了一个自然变换，<span data-katex="N:id_C\rightarrow U\circ F"></span>，其中<span data-katex="id_C"></span>是范畴<span data-katex="C"></span>的单位自函子。</p>
+<p>根据以上的推导规则，我们可以证明，</p>
+<p><span data-katex="\vdash(\lambda x:Bool.x)~true:Bool"></span></p>
 <p><br/></p>
-<p>伴随函子的概念还可以用hom-set来描述，</p>
-<p>设<span data-katex="D"></span>和<span data-katex="C"></span>都是范畴，<span data-katex="U:D\rightarrow C"></span>，<span data-katex="F:C\rightarrow D"></span>是函子，如果<span data-katex="F\dashv U"></span>，</p>
-<p>那么，对于<span data-katex="D"></span>中的任意对象<span data-katex="d"></span>，<span data-katex="C"></span>中的任意对象<span data-katex="c"></span>，<span data-katex="\varphi:hom_D(Fc,d)\rightarrow hom_C(c,Ud)"></span>是一个双射，</p>
-<p>且对于任意的<span data-katex="k,f\in hom_D(Fc,d),h\in hom_C(c,Ud)"></span>，有<span data-katex="\varphi(k\circ f)=Uk\circ\varphi f"></span>，<span data-katex="\varphi(f\circ Fh)=\varphi f\circ h"></span>。</p>
+<h4 id="求值规则-1">2.3 求值规则</h4>
+<p><span data-katex="\lambda^\to"></span>系统中，值的定义如下：</p>
+<p>（1）<span data-katex="v::=\lambda x:T.t"></span></p>
 <p><br/></p>
-<h3 id="algebra">algebra</h3>
-<p>在泛代数（universal algebra）中，一个<strong>代数</strong>（algebra）或者说一个代数结构（algebra structure），</p>
-<p>由一个集合<span data-katex="A"></span>以及集合<span data-katex="A"></span>上是一系列运算构成。</p>
-<p>集合<span data-katex="A"></span>上的<span data-katex="n"></span>元运算是一个函数，它将<span data-katex="A"></span>中的<span data-katex="n"></span>个元素，映射为一个，</p>
-<p>代数中所有运算的集合记为<span data-katex="\Omega"></span>，我们称该代数是一个<strong><span data-katex="\Omega"></span>类型的代数</strong>。</p>
+<p>求值规则，定义如下：</p>
+<p>（1）<span data-katex="\frac{t_1\to t&#39;_1}{t_1~t_2\to t&#39;_1~t_2}"></span></p>
+<p>（2）<span data-katex="\frac{t_2\to t&#39;_2}{t_1~t_2\to t_1~t&#39;_2}"></span></p>
+<p>（3）<span data-katex="(\lambda x:T.t)~v\to [x\mapsto v]t"></span></p>
 <p><br/></p>
-<p>在泛代数和伴随函子之间有紧密的联系，</p>
-<p>假设范畴<span data-katex="Alg_\tau"></span>，由所有<span data-katex="\tau"></span>类型的代数构成，</p>
-<p>遗忘函子<span data-katex="G:Alg_\tau\rightarrow Set"></span>，具有左伴随函子<span data-katex="F"></span>，</p>
-<p>则对于范畴<span data-katex="Set"></span>中的任意集合<span data-katex="S"></span>，<span data-katex="FS"></span>给出了由<span data-katex="S"></span>生成的，类型为<span data-katex="\tau"></span>的<strong>自由代数</strong>（free algebra），</p>
-<p>自由代数中的对象，称为<strong>自由对象</strong>（free object）。</p>
+<p>其中（2），相当于<span data-katex="\beta"></span>变换，</p>
+<p><span data-katex="[x\mapsto v]t"></span>，表示将<span data-katex="t"></span>中所有自由出现的<span data-katex="x"></span>换为<span data-katex="v"></span>。</p>
 <p><br/></p>
-<h3 id="kleene-closure">Kleene closure</h3>
-<p>集合<span data-katex="V"></span>的<strong>克林闭包</strong>（Kleene closure）由下式定义，</p>
-<p><span data-katex="V^*=\;{\tiny\begin{matrix}^{\scriptsize}\\ \normalsize \cup \\ ^{\scriptsize i\in N}\end{matrix} }\;V_i=V_0\cup V_1\cup V_2\cup\cdots"></span></p>
-<p>其中，<span data-katex="V_0=\{\epsilon\}"></span>，<span data-katex="V_1=V"></span>，<span data-katex="V_{i+1}=\{uv:u\in V_i,v\in V\}"></span>。</p>
+<h4 id="curry-style-and-church-style">2.4 Curry-style and Church-style</h4>
+<p>对于<span data-katex="\lambda^\to"></span>系统来说，通常有两种不同风格的解释方式，</p>
+<p>如果我们首先定义项，然后定义项的求值规则——语义，</p>
+<p>最后再定义一个类型系统，用以排除掉我们不需要的项，</p>
+<p>这种语义先于类型的定义方式，称为Curry-style。</p>
 <p><br/></p>
-<p><span data-katex="V^*"></span>中的元素称为<strong>字符串</strong>（string），<span data-katex="V_{i+1}"></span>定义中的<span data-katex="uv"></span>称为字符串的<strong>连接</strong>操作。</p>
+<p>另一方面，如果我们定义项，然后再给出良类型的定义，</p>
+<p>最后再给出这些良类型项的语义，就称为Church-style，类型先于语义，</p>
+<p>在Church-style的系统中，我们不关心不良类型项的语义。</p>
 <p><br/></p>
-<h3 id="free-monoid">free monoid</h3>
-<p><span data-katex="V^*"></span>中所有的字符串，以空串<span data-katex="\{\epsilon\}"></span>作为单位元，以连接操作作为群乘法，构成了一个幺半群（monoid），</p>
-<p>称为由<span data-katex="V"></span>生成的<strong>自由幺半群</strong>（free monoid）。</p>
+<p>历史上，隐式类型的<span data-katex="\lambda"></span>演算系统，通常是Curry-style的，</p>
+<p>而显式类型的<span data-katex="\lambda"></span>演算系统，通常是Church-style的。</p>
 <p><br/></p>
-<p>设范畴<span data-katex="Mon"></span>为所有的幺半群构成的范畴，它的对象为具体的某个幺半群，它的箭头为幺半群之间的群同态。</p>
-<p>设范畴<span data-katex="Set"></span>为所有的集合构成的范畴，它的对象为具体的某个集合，它的箭头由集合之间的映射。</p>
+<h3 id="关于单位类型">3. 关于单位类型</h3>
+<p>简单类型化<span data-katex="\lambda"></span>演算，直接用起来可能并不好用，</p>
+<p>人们会再为它扩充一些类型，例如，添加一些基本类型<span data-katex="Bool"></span>，<span data-katex="Nat"></span>或者<span data-katex="String"></span>，</p>
+<p>定义单位类型，列表类型，元组类型，和类型，等等。</p>
 <p><br/></p>
-<p>设<span data-katex="U:Mon\rightarrow Set"></span>为范畴<span data-katex="Mon"></span>到<span data-katex="Set"></span>之间的遗忘函子，我们定义，</p>
-<p>它将范畴<span data-katex="Mon"></span>中的幺半群，映射为其元素集合，</p>
-<p>它将范畴<span data-katex="Mon"></span>中的群同态，映射为群元素集合之间的映射。</p>
-<p>则<span data-katex="Set"></span>中某集合<span data-katex="\Sigma"></span>上的自由幺半群<span data-katex="\Sigma^*"></span>，就是由该集合生成的自由代数。</p>
+<p>下面我们选择单位类型进行介绍。</p>
 <p><br/></p>
-<h3 id="proof">proof</h3>
-<p>要证<span data-katex="\Sigma^*"></span>是一个由<span data-katex="\Sigma"></span>生成的自由代数，</p>
-<p>只需证明<span data-katex="\left\langle\Sigma^*,f\right\rangle"></span>是对象<span data-katex="\Sigma"></span>到函子<span data-katex="U"></span>的始态射，</p>
-<p>其中，<span data-katex="f"></span>是范畴<span data-katex="Set"></span>中的箭头（集合间的映射）<span data-katex="f:\Sigma\rightarrow\Sigma^*"></span>。</p>
+<p>满足单位类型的项只有一个，为此我们新增一个项的定义，</p>
+<p><span data-katex="t::=...|unit"></span></p>
 <p><br/></p>
-<p>始态射<span data-katex="\left\langle\Sigma^*,f\right\rangle"></span>是余切片范畴<span data-katex="(\Sigma\downarrow Mon)"></span>的始对象，且满足初始性质，</p>
-<p>对于范畴<span data-katex="Mon"></span>中的任意幺半群<span data-katex="(M,*)"></span>，给定范畴<span data-katex="Set"></span>中的任意箭头（集合间的映射）<span data-katex="h:\Sigma\rightarrow M"></span>，</p>
-<p>存在唯一的<span data-katex="Mon"></span>中的箭头（群同态）<span data-katex="g:\Sigma^*\rightarrow M"></span>，使得，<span data-katex="h=Ug\circ f"></span>，</p>
-<p>因为，群同态<span data-katex="g:\Sigma^*\rightarrow M"></span>已经表示成集合的映射了，所以，<span data-katex="Ug"></span>可以表示为<span data-katex="g"></span>。</p>
+<p>再新增一个类型的定义，</p>
+<p><span data-katex="T::=Unit"></span></p>
 <p><br/></p>
-<p>即，需要证明集合<span data-katex="\Sigma"></span>到<span data-katex="M"></span>函数<span data-katex="h:\Sigma\rightarrow M"></span>，决定了一个唯一群同态<span data-katex="g:\Sigma^*\rightarrow M"></span>。</p>
+<p>以及一个推导规则，</p>
+<p><span data-katex="\Gamma\vdash unit:Unit"></span></p>
 <p><br/></p>
-<p>我们使用数学归纳法进行证明，</p>
-<p>因为<span data-katex="\Sigma^*"></span>由多个不相交的子集<span data-katex="\Sigma_i"></span>构成，</p>
-<p><span data-katex="g"></span>可以看做从由多个分量组成，<span data-katex="g_i:\Sigma_i\rightarrow M"></span>。</p>
+<p><span data-katex="Unit"></span>的作用类似于C和Java中的<span data-katex="void"></span>类型，主要用于表示副作用，</p>
+<p>在这样的语言中，我们往往并不关心表达式的结果，而只关心它的副作用，</p>
+<p>因此，用<span data-katex="Unit"></span>来表示结果的类型，是一个合适的选择。</p>
 <p><br/></p>
-<p>根据<span data-katex="\Sigma_1"></span>的定义，<span data-katex="\Sigma_1=\Sigma"></span>，所以<span data-katex="g_1:\Sigma\rightarrow M"></span>是唯一确定的，只能是<span data-katex="h"></span>，</p>
-<p>又<span data-katex="\Sigma_0=\{\epsilon\}"></span>，所以<span data-katex="g_0:\{\epsilon\}\rightarrow M"></span>，如果<span data-katex="g_0"></span>是群同态，则必须<span data-katex="g_0(\epsilon)=e"></span>，其中<span data-katex="e"></span>为<span data-katex="M"></span>的单位元，所以<span data-katex="g_0"></span>也是唯一确定的。</p>
-<p>此外，要想<span data-katex="g_{i+1}"></span>是群同态，必须有<span data-katex="g_{i+1}(uv)=g_i(u)g(v)"></span>，其中<span data-katex="uv\in\Sigma_{i+1},u\in\Sigma_i,v\in\Sigma"></span>，所以<span data-katex="g_{i+1}:\Sigma_{i+1}\rightarrow M"></span>也是唯一确定的。</p>
+<p>这里提到单位类型，是为以后Top类型和Bot类型做铺垫。</p>
 <p><br/></p>
-<p>因此，<span data-katex="g"></span>如果是一个群同态，就可以由<span data-katex="h"></span>唯一确定。</p>
-<p><br/></p>
-<p>总之，函数<span data-katex="h:\Sigma\rightarrow M"></span>确定了唯一的群同态<span data-katex="g:\Sigma^*\rightarrow M"></span>，</p>
-<p>使得<span data-katex="h=g\circ f"></span>，其中<span data-katex="f:\Sigma\rightarrow M"></span>，</p>
-<p>因此，<span data-katex="\Sigma^*"></span>就是由<span data-katex="\Sigma"></span>生成的自由代数。</p>
-<p><br/></p>
-<h3 id="note">note</h3>
-<p><span data-katex="\Sigma^*"></span>实际上是一个集合，它连同字符串的连接操作构成了一个自由幺半群，</p>
-<p>这个自由幺半群在遗忘函子<span data-katex="U:Mon\rightarrow Set"></span>中的像是集合<span data-katex="\Sigma^*"></span>，</p>
-<p><span data-katex="\Sigma"></span>也在范畴<span data-katex="Set"></span>中，但不是自由幺半群在<span data-katex="Set"></span>中的像，它们之间的箭头是<span data-katex="f:\Sigma\rightarrow\Sigma^*"></span>。</p>
-<p><br/></p>
-<p>自由幺半群是一个自由代数，它的生成集是<span data-katex="\Sigma"></span>，而不是它在<span data-katex="Set"></span>中的像<span data-katex="\Sigma^*"></span>。</p>
-<p>指的是，对于任意的从生成集<span data-katex="\Sigma"></span>到其他集合<span data-katex="M"></span>的映射<span data-katex="h:\Sigma\rightarrow M"></span>，</p>
-<p>存在唯一的群同态<span data-katex="g:\Sigma^*\rightarrow M"></span>（这里用映射表示了群同态），使得初始性质（initial property）成立。</p>
-<p><br/></p>
-<p>此外，与自由幺半群类似的，</p>
-<p><strong>自由单子</strong>（free monad）是由自函子生成的幺半群（单子），</p>
-<p><span data-katex="F:Functor\to Monad"></span>，</p>
-<p>自函子范畴<span data-katex="Functor"></span>，对象是自函子，箭头是自函子之间的自然变换，</p>
-<p>单子范畴<span data-katex="Monad"></span>，对象是单子（由自函子构成的幺半群），箭头是幺半群同态。</p>
-<p><br/></p>
-<p>遗忘函子<span data-katex="U:Monad\to Functor"></span>，</p>
-<p>将单子范畴<span data-katex="Monad"></span>中的单子，映射成自函子范畴<span data-katex="Functor"></span>中的函子，</p>
-<p>将单子范畴<span data-katex="Monad"></span>中的幺半群同态，映射为自函子范畴<span data-katex="Functor"></span>中的自然变换，</p>
-<p>其中，<span data-katex="F"></span>为<span data-katex="U"></span>的左伴随函子，<span data-katex="F\dashv U"></span>。</p>
-<p><br/></p>
-<h3 id="reference">reference</h3>
-<p><a href="https://book.douban.com/subject/1823110/" target="_blank" rel="noopener">Categories for the Working Mathematician 2nd</a></p>
-<p><a href="http://www.math.mcgill.ca/triples/Barr-Wells-ctcs.pdf" target="_blank" rel="noopener">Category theory for computer science</a></p>
-<p><a href="https://book.douban.com/subject/1823106/" target="_blank" rel="noopener">A Course in Universal Algebra</a></p>
-<p><br/></p>
-<p><a href="https://en.wikipedia.org/wiki/Universal_algebra" target="_blank" rel="noopener">Wikipedia: Universal Algebra</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Forgetful_functor" target="_blank" rel="noopener">Wikipedia: Forgetful functor</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Initial_and_terminal_objects" target="_blank" rel="noopener">Wikipedia: Initial and terminal objects</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Comma_category" target="_blank" rel="noopener">Wikipedia: Comma Category</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Universal_property" target="_blank" rel="noopener">Wikipedia: Universal Property</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Adjoint_functors" target="_blank" rel="noopener">Wikipedia: Adjoint Functor</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Free_object" target="_blank" rel="noopener">Wikipedia: Free Object</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Free_algebra" target="_blank" rel="noopener">Wikipedia: Free Algebra</a></p>
-<p><br/></p>
-<p><a href="https://en.wikipedia.org/wiki/Free_monoid" target="_blank" rel="noopener">Wikipedia: Free Monoid</a></p>
-<p><a href="https://math.stackexchange.com/questions/58553/why-is-the-free-monoid-free" target="_blank" rel="noopener">Stack Exchange: Why is the free monoid free?</a></p>
-<p><br/></p>
-<p><a href="https://en.wikipedia.org/wiki/Monad_(functional_programming)#Free_monads" target="_blank" rel="noopener">Wikipedia: Free Monad</a></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus" target="_blank" rel="noopener">Wikipedia: Simply typed lambda calculus</a></p>
+<p><a href="https://book.douban.com/subject/1318672/" target="_blank" rel="noopener">类型和程序设计语言</a></p>
 
           
         
@@ -588,7 +519,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/175/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/175/">175</a><span class="page-number current">176</span><a class="page-number" href="/page/177/">177</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/177/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/175/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/175/">175</a><span class="page-number current">176</span><a class="page-number" href="/page/177/">177</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/177/">&gt;</a>
   </nav>
 
 
@@ -634,7 +565,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -709,7 +640,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

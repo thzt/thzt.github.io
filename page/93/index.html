@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/04/16/about-information/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/09/11/thinking-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/16/about-information/" itemprop="url">信息的隐藏、暴露和传递</a></h1>
+                <a class="post-title-link" href="/2019/09/11/thinking-02/" itemprop="url">思辨方法（二）：问题定义</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-16T00:00:00+08:00">
-                2019-04-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-11T00:00:00+08:00">
+                2019-09-11
               </time>
             
 
@@ -347,134 +347,182 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-04-16-about-information/1023733-16f88d518fb63c18.png" /></p>
-<p><br/></p>
-<p>信息是一个很复杂的概念，信息论影响了很多学科，</p>
-<p>包括电子工程，计算机科学，物理学，数学，科学哲学，经济学，等等。</p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-09-11-thinking-02/v2-b8dfb1029aa6c0a4664aa369f4e2c4bd_b.png" /></p>
 <p><br/></p>
 <blockquote>
-<p>Information theory studies the transmission, processing, extraction, and utilization of information.</p>
+<p>人类的悲欢并不相通，我只觉得他们吵闹。—— 鲁迅</p>
+</blockquote>
+<p><br/></p>
+<p>人是一种复杂的动物，每个人都有独立的思维和情感，</p>
+<p>对于别人的<strong>痛苦</strong>，我们会产生同情，但实际上却<strong>不能亲身感受</strong>。</p>
+<p>因为痛苦真切的发生在别人那里，而不是自己身上。</p>
+<p><br/></p>
+<p>《<a href="https://v.youku.com/v_show/id_XNDk3NzA4MDU2.html" target="_blank" rel="noopener">赌博默示录</a>》第一季第15集中，兵藤和尊 对主角 开司 说，</p>
+<blockquote>
+<p>这个世界上充斥着痛苦不堪的怨恨声，十人乃至百人的呻吟，</p>
 </blockquote>
 <blockquote>
-<p>Abstractly, information can be thought of as the resolution of uncertainty.</p>
+<p>支撑着一个人的富裕生活，这就是这个世界的构造。</p>
+</blockquote>
+<p><br/></p>
+<blockquote>
+<p>已经断掉的腿被人乱戳，他会觉得很痛，</p>
 </blockquote>
 <blockquote>
-<p>—— <a href="https://en.wikipedia.org/wiki/Information_theory" target="_blank" rel="noopener">wikipedia: Information theory</a></p>
-</blockquote>
-<p><br/></p>
-<p>信息可以用来消除不确定性，这个说法来源于 <a href="https://en.wikipedia.org/wiki/Claude_Shannon" target="_blank" rel="noopener">Shannon</a>，</p>
-<p>1948年他发表了 <a href="https://en.wikipedia.org/wiki/A_Mathematical_Theory_of_Communication" target="_blank" rel="noopener">A Mathematical Theory of Communication</a>，</p>
-<p>提出了<a href="https://zh.wikipedia.org/wiki/%E7%86%B5_(%E4%BF%A1%E6%81%AF%E8%AE%BA)" target="_blank" rel="noopener">信息熵</a>的概念。</p>
-<p><br/></p>
-<p>信息熵是随机变量不确定度的度量，</p>
-<p>设<span data-katex="X"></span>是一个随机变量，其字母表（即概率论中的取值空间）为<span data-katex="\mathcal{X}"></span>，</p>
-<p>概率密度函数<span data-katex="p(x)=Pr(X=x),~x\in\mathcal{X}"></span>。</p>
-<p><br/></p>
-<p>则，离散型随机变量<span data-katex="X"></span>的<strong>熵</strong><span data-katex="H(X)"></span>定义为，</p>
-<p><span data-katex="H(X)=-\sum_{x\in\mathcal{X}}p(x)log_2p(x)"></span></p>
-<p><br/></p>
-<p>熵的单位用比特表示，例如抛掷均匀硬币这一事件的熵为，</p>
-<p><span data-katex="H(X)=-\left [ \frac{1}{2}log_2\left ( \frac{1}{2} \right ) + \frac{1}{2}log_2\left ( \frac{1}{2} \right ) \right ] = 1"></span> 比特。</p>
-<h3 id="信息隐藏">信息隐藏</h3>
-<p>既然信息可以用来消除不确定性，那么是不是信息量越大越好呢？</p>
-<p>其实不然，因为能够<strong>传递信息</strong>的<a href="https://zh.wikipedia.org/wiki/%E5%B8%A6%E5%AE%BD" target="_blank" rel="noopener">带宽</a>是有限的。</p>
-<p>并且，对于接受信息的一方而言，单位时间内能够<strong>接受</strong>的信息量也是有限的。</p>
-<p><br/></p>
-<p>因此，在涉及信息传递的时候，</p>
-<p>我们一方面要考虑如何提高带宽，如何提高接受方的信息处理效率，</p>
-<p>另一方面，还要考虑如何减少<strong>无效信息量</strong>。</p>
-<p><br/></p>
-<p>现如今，如何处理信息，如何加速有效信息的传递，</p>
-<p>已逐渐成为了<strong>知识密集型</strong>工作的新瓶颈点。</p>
-<p><br/></p>
-<p>从这个意义上来看，面向对象编程范式提倡的<strong>封装</strong>思想，</p>
-<p>确实有利于工作效率的进一步提高。</p>
-<p><br/></p>
-<p>不过，封装也本不应该与任何编程范式进行强绑定，</p>
-<p>这可能是面向对象所起到的反作用之一吧。</p>
-<p><br/></p>
-<p>封装隐藏了具体的细节，只暴露出必要的信息，</p>
-<p>有效的降低了信息处理的负荷。</p>
-<h3 id="信息暴露">信息暴露</h3>
-<p>之前在知乎上看到了一个回答，<a href="https://www.zhihu.com/question/39947219/answer/214338328" target="_blank" rel="noopener">VR 电影目前最大的瓶颈是什么？</a>，</p>
-<blockquote>
-<p>电影的本质，是有<strong>框视觉</strong>。「框」是导演给到观众的信息感受区。</p>
+<p>我却不会痛，开司你也不痛吧。</p>
 </blockquote>
 <blockquote>
-<p>框内框外都是导演出于自己的艺术创造，为观众重新打造的空间。</p>
+<p>别人有多痛苦又有什么关系，唯一需要关心的只是自己的幸福。</p>
+</blockquote>
+<p><br/></p>
+<p>这种说法，可能会跟我们以前受过的教育理念相悖，</p>
+<p>其实，我们之所以会产生同情别人的想法，是<strong>社会责任感</strong>使然，</p>
+<p>并不是自己真的很痛，因此，事不关己，高高挂起。</p>
+<p><br/></p>
+<p>为什么一上来就说痛苦呢？</p>
+<p>那是因为，不同的痛苦反映了不同人看到的不同<strong>问题</strong>。</p>
+<h3 id="矛盾-冲突">矛盾 &amp; 冲突</h3>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-09-11-thinking-02/v2-903a88ea5f18e8ea4947ca7e1f52afea_b.png" /></p>
+<p><br/></p>
+<p>在日常生活中，我们经常会遇到这样或者那样的问题，</p>
+<p>也经常聚在一起讨论，或者独立思考问题的解决方案，</p>
+<p>但是，又有多少人想过<strong>问题本身</strong>呢？</p>
+<p><br/></p>
+<p>我们到底要达成什么目的？为什么一定要做？</p>
+<p>不做会怎样？</p>
+<p>达成什么条件，问题才算被解决了？</p>
+<p><br/></p>
+<p>很显然，这些反问句没有想清楚之前，盲目的考虑解决方案是不妥的。</p>
+<p>有一种无形的力量，迫使我们搞清楚“什么是问题？”</p>
+<p><br/></p>
+<p>1981年，中国共产党第十一届六中全会指出，</p>
+<blockquote>
+<p>在社会主义初级阶段，我国社会的主要矛盾是<strong>人民</strong>日益增长的<strong>物质文化需要</strong>同<strong>落后的社会生产</strong>之间的矛盾。</p>
+</blockquote>
+<p><br/></p>
+<p>我一直认为，这才是<strong>定义问题</strong>的最佳方式，</p>
+<p>描述中总共涉及了与问题相关的三个关键点：</p>
+<p>（1）问题的主体：人民</p>
+<p>（2）主体的预期：日益增长的物质文化需要</p>
+<p>（3）现状：落后的社会生产</p>
+<p><br/></p>
+<p>从这三个角度再来回答之前的反问句，思路就清晰多了。</p>
+<p><br/></p>
+<p>我们到底要达成什么目的？</p>
+<p>答：达成问题主体的预期，即满足人民日益增长的物质文化需要。</p>
+<p><br/></p>
+<p>为什么一定要做？不做会怎样？</p>
+<p>答：因为主体的预期和现状不符，会有矛盾，有矛盾就有痛苦。</p>
+<p><br/></p>
+<p>达成什么条件，问题才算被解决了？</p>
+<p>答：改善现状，提高落后的社会生产，满足人民的预期，就消除了矛盾解决了问题。</p>
+<p><br/></p>
+<p>什么是问题呢？</p>
+<p>问题就是预期与现状之间的<strong>矛盾</strong>，就是<strong>冲突</strong>。</p>
+<p><br/></p>
+<p>叶茂中在《<a href="https://book.douban.com/subject/25783682/" target="_blank" rel="noopener">营销的16个关键词</a>》中提到过“<strong>冲突理论</strong>”，</p>
+<blockquote>
+<p>营销首先要洞察需求，而洞察需求的目的是帮助消费者解决问题，解决了问题才能获得利益。</p>
 </blockquote>
 <blockquote>
-<p>而景别，就是决定这个框里框外边界的根本。</p>
+<p>可是问题从哪来呢？问题就是<strong>冲突</strong>。</p>
 </blockquote>
 <blockquote>
-<p>真正电影创作者非常看重画外空间。</p>
+<p>三流营销寻找冲突，二流营销解决冲突，一流营销制造冲突。</p>
 </blockquote>
+<h3 id="给问题下定义">给问题下定义</h3>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-09-11-thinking-02/v2-8b070e92e5a45f31f4b771feb3deb818_b.png" /></p>
 <p><br/></p>
-<p>可见电影的好坏，很大程度上取决于创作者特意给观众营造的<strong>视听效果</strong>。</p>
-<p>电影如此，软件设计也是如此。</p>
+<p>篇首提到了，我们其实无法<strong>真实</strong>体会到别人的痛苦，</p>
+<p>因此，在现实生活中，我们有时真的<strong>无法理解</strong>别人说的问题在哪里。</p>
 <p><br/></p>
-<p>我们应该对哪些细节进行隐藏，哪些信息进行暴露，</p>
-<p>对于软件，尤其是框架/工具的设计而言，起着至关重要的作用。</p>
-<p>它会极大的改变用户的使用成本和<strong>学习曲线</strong>。</p>
+<p>这时就需要有一个关于问题本身的<strong>思维框架</strong>了，来帮我们梳理概念，</p>
+<p>（1）谁是问题的主体？即问题解决后，谁会受益。</p>
+<p>（2）问题主体的预期是什么？</p>
+<p>（3）现状又是什么？</p>
 <p><br/></p>
-<p>让别人能更好的理解，是一件很有学问的事情。</p>
-<p>陡峭的学习曲线会使人望而却步，会浪费很多不必要的人力成本。</p>
+<p>斋藤嘉则在《<a href="https://book.douban.com/subject/3604068/" target="_blank" rel="noopener">发现问题的思考术</a>》中写道，</p>
+<p>所谓“<strong>问题</strong>”，就是“应有的景象”与“现状”之间的“落差”。</p>
 <p><br/></p>
-<p>人们总是很难站在缺少信息的一方考虑问题的，</p>
-<p>这称为<a href="https://zh.wikipedia.org/zh-hans/%E7%9F%A5%E8%AD%98%E7%9A%84%E8%A9%9B%E5%92%92" target="_blank" rel="noopener">知识的诅咒</a>，是一种<a href="https://zh.wikipedia.org/wiki/%E8%AA%8D%E7%9F%A5%E5%81%8F%E8%AA%A4" target="_blank" rel="noopener">认知偏差</a>，</p>
-<p>知识的诅咒是影响沟通的重大阻碍之一。</p>
-<h3 id="信息传递">信息传递</h3>
-<p>对于软件开发而言，代码与其说是开发者对功能的具体实现，</p>
-<p>倒不如说是他们对<strong>领域知识</strong>的理解和描述。</p>
+<p>值得一提，所谓“应有的景象”是跟问题主体相关的，</p>
+<p><strong>不同的人会有不同的预期</strong>，“人类的悲欢并不相通”。</p>
 <p><br/></p>
-<p>不幸的是，由于代码只要能运行就完成了基本功能，</p>
-<p>所以，很大一部分信息量都没有被包含在代码中。</p>
-<p>它们存在于开发者的大脑中，存在于代码之外的地方。</p>
+<p>我们举一个常见的例子。</p>
+<p>大家可能都听过“强行扶老太太过马路”的“英雄事迹”，很多人都一笑而过了。</p>
+<p>现在，我们不妨仔细考虑下，不同人的“悲欢”各是什么。</p>
 <p><br/></p>
-<p>在有众多开发者的企业中，每天产出的新信息是无法估量的，</p>
-<p>如果这些信息没有被很好的隐藏和暴露，</p>
-<p>就会造成信息污染，严重的影响整体的开发效率。</p>
+<p>其一，问题的主体是老太太吗？她期望过马路吗？</p>
+<p>如果老太太并不期望过马路，对于老太太而言，就没有需要解决的问题。</p>
+<p><strong>对别人期望理解有误</strong>，是严重的灾区。</p>
 <p><br/></p>
-<p>不仅如此，软件质量也会受到波及。</p>
-<p>在一个不确定的系统中，发生<strong>莫名其妙的故障</strong>概率大大增加。</p>
-<p>中医讲究“<strong>不通则痛</strong>”，是有道理的。</p>
+<p>其二，问题的主体是扶老太太过马路的<strong>同学</strong>吗？</p>
+<p>他期望自己达成“扶老人过马路”的成就吗？</p>
+<p>如果是，那么原来老太太帮同学解决了问题。</p>
 <p><br/></p>
-<p>因此，仅从代码的可复用角度来解决问题，是不可取的，</p>
-<p>应该对组织的<strong>沟通结构</strong>和软件<strong>系统架构</strong>，更为关心。</p>
+<p>其三，其四，……</p>
+<p>灵活考虑<strong>问题的主体</strong>，会让我们看到<strong>不同的问题</strong>。</p>
 <p><br/></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%B0%94%E6%96%87%C2%B7%E5%BA%B7%E5%A8%81" target="_blank" rel="noopener">康威</a>在1967年提出，</p>
+<p><a href="https://book.douban.com/subject/3138847/" target="_blank" rel="noopener">大前研一</a>这样说，</p>
 <blockquote>
-<p>设计系统的架构受制于产生这些设计的组织的沟通结构。</p>
+<p>解决问题的能力，就是为印证假设不辞劳苦的行动力。</p>
+</blockquote>
+<p><br/></p>
+<p>因此，所谓解决问题，大部分的努力其实都用在了<strong>对问题本身达成共识</strong>，</p>
+<p>我认为你期望如此这般如此这般，是这样吗？</p>
+<p>如果不是，那你期望的结果是什么？</p>
+<h3 id="问题的合理性">问题的合理性</h3>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-09-11-thinking-02/v2-cbadb201f736af755b0852635aace4ad_b.png" /></p>
+<p><br/></p>
+<p>绝大多数情况下，解决问题是需要成本的，</p>
+<p>而问题的主体需要直接或间接的，<strong>支付</strong>这些成本。</p>
+<p><br/></p>
+<p>因此，帮人解决问题时，需要权衡自己的<strong>投入产出比</strong>，</p>
+<p>而和别人一起解决问题时，需要考虑其他人的<strong>利益</strong>。</p>
+<p><br/></p>
+<blockquote>
+<p>Stakeholders are the people for whom we build systems.</p>
 </blockquote>
 <blockquote>
-<p>—— <a href="https://zh.wikipedia.org/zh-hans/%E5%BA%B7%E5%A8%81%E5%AE%9A%E5%BE%8B" target="_blank" rel="noopener">康威定律</a></p>
+<p>A key part of your role as an architect is knowing how to work with stakeholders in order to create an architecture that meets their complex, overlapping, and often conflicting needs.</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="https://book.douban.com/subject/24530471/" target="_blank" rel="noopener">Software Systems Architecture</a>》</p>
 </blockquote>
 <p><br/></p>
-<p>所以，沟通结构不合理的组织，所产出的软件系统，</p>
-<p>对于解决业务问题而言是力不从心的。</p>
+<p>所以，要想问题被解决，空有解决方案是不够的，</p>
+<p>还得<strong>让别人同意</strong>我们<strong>可以</strong>这样解决问题。</p>
 <p><br/></p>
-<p>也就是组织文化决定了人们做事的方式。</p>
-<p>团队是领导本人处事态度的缩影。</p>
+<p>不同的方案，对他人利益的损害程度是不同的。</p>
+<p>这样来看，<strong>问题</strong>和<strong>方案</strong>其实更像是天平的两端，</p>
+<p>为了避免付出巨大的代价，有些人宁可<strong>改变问题的定义</strong>。</p>
+<p><br/></p>
+<p>总之，定义一个无法解决的问题，是没有意义的。</p>
+<p>因此，我们不但要定义问题，还得<strong>让这个定义行得通</strong>。</p>
 <h3 id="结语">结语</h3>
-<p>软件开发工作中，与信息相关的内容，还远不止如此，</p>
-<p>比如，组内成员的做事方式，是否纵容了<a href="https://wiki.mbalib.com/wiki/%E4%BF%A1%E6%81%AF%E5%AD%A4%E5%B2%9B" target="_blank" rel="noopener">信息孤岛</a>的形成，</p>
-<p>又比如，管理者是否关心由于信息沟通不畅所产生的问题排查成本。</p>
+<p>本文介绍了关于问题本身的<strong>思维诀窍</strong>，</p>
+<p>即，时刻考虑问题的三要素：<strong>主体</strong>、<strong>预期</strong>和<strong>现状</strong>。</p>
 <p><br/></p>
-<p>这既是软件本身的特点问题，也是软件团队的管理方式问题，</p>
-<p>违反软件规律的做法，就会受到惩罚。</p>
+<p>同时，我们还要关注问题的定义是否<strong>合理</strong>，</p>
+<p>人们是否<strong>认同</strong>，所需的<strong>代价</strong>能否被接受。</p>
+<p><br/></p>
+<p>这样的话，针对大部分的“问题场景”，我们就有套路可循了，</p>
+<p>不会在一开始讨论问题，后来变成了相互<strong>指责</strong>，</p>
+<p>也不会经常失去讨论的<strong>重心</strong>，严重跑题。</p>
+<p><br/></p>
+<p>工作更轻松了，生活更美好了。</p>
 <p><br/></p>
 <blockquote>
-<p>你一个人要干三天，我给你三个人，你给我干一天。</p>
+<p>夜饮东坡醒复醉，归来仿佛三更。</p>
 </blockquote>
 <blockquote>
-<p>五个人不够，我给你加十个人、加二十个人。</p>
+<p>家童鼻息已雷鸣。敲门都不应，倚杖听江声。</p>
 </blockquote>
-<hr />
-<h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Information_theory" target="_blank" rel="noopener">wikipedia: Information theory</a></p>
-<p><a href="https://book.douban.com/subject/2305237/" target="_blank" rel="noopener">信息论基础</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E7%86%B5_(%E4%BF%A1%E6%81%AF%E8%AE%BA)" target="_blank" rel="noopener">信息熵</a></p>
-<p><a href="https://zh.wikipedia.org/zh-hans/%E5%BA%B7%E5%A8%81%E5%AE%9A%E5%BE%8B" target="_blank" rel="noopener">康威定律</a></p>
+<blockquote>
+<p>长恨此身非我有，何时忘却营营？</p>
+</blockquote>
+<blockquote>
+<p>夜阑风静縠纹平。小舟从此逝，江海寄余生。</p>
+</blockquote>
 
           
         
@@ -513,7 +561,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/92/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><span class="page-number current">93</span><a class="page-number" href="/page/94/">94</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/94/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/92/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><span class="page-number current">93</span><a class="page-number" href="/page/94/">94</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/94/">&gt;</a>
   </nav>
 
 
@@ -559,7 +607,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -634,7 +682,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

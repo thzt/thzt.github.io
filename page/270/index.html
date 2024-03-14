@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/22/hygienic-macro/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/06/10/fixed-point/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/22/hygienic-macro/" itemprop="url">简介卫生宏</a></h1>
+                <a class="post-title-link" href="/2015/06/10/fixed-point/" itemprop="url">不动点组合子与匿名递归函数</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-22T00:00:00+08:00">
-                2015-03-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-10T00:00:00+08:00">
+                2015-06-10
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lisp/" itemprop="url" rel="index">
-                    <span itemprop="name">Lisp</span>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index">
+                    <span itemprop="name">Haskell</span>
                   </a>
                 </span>
 
@@ -347,236 +347,310 @@
       
         
           
-            <p>宏（macro）是Lisp语言进行元编程的手段，</p>
-<p>它分为两种，读取宏（read macro）和编译宏（compilation macro）。</p>
-<p>可以用来编写读取期和编译期运行的代码。</p>
+            <p>在漫长的编程学习过程中，</p>
+<p>你可能会不经意间的，</p>
+<p>知道了<strong>Y组合子</strong>。</p>
 <p><br/></p>
-<p>宏，事实上进行了代码的转换。</p>
-<p>每一个宏都与一个转换器（transformer）相关联。</p>
-<p>代码转换后，会替换到原来的位置。</p>
-<p>这个过程，称为宏展开（expansion）。</p>
+<p>它的内部结构极其诡异，</p>
+<p>但是它又如此的让你魂牵梦萦，</p>
+<p>让你茶饭不思，</p>
+<p>为伊消得人憔悴。</p>
 <p><br/></p>
-<p>区分读取期，编译期和运行期，是很重要的。</p>
-<p>这是3个独立的阶段，</p>
-<p>尤其在运行期，不存在任何未展开的宏。</p>
+<p>这时候，<strong>数学基础</strong>是很重要的，</p>
+<p>概念的差距，产生了无法逾越的鸿沟。</p>
+<p>我们还是认真的从头开始吧。</p>
 <p><br/></p>
-<p>我们使用“a -&gt; b”来表示，表达式a展开为b。</p>
-<p>而使用“a =&gt; b”表示，表达式a的值为b。</p>
+<h2 id="lambda-calculus"><strong>lambda calculus</strong></h2>
+<p>lambda calculus简称LC，</p>
+<p>它是一个形式系统，</p>
+<p>用来研究函数的组合和应用。</p>
 <p><br/></p>
-<p>例子：</p>
-<p>'a -&gt; (quote a)，其中“'”是一个读取宏。</p>
-<p>读取宏可以将任意表达式转换为S表达式。</p>
+<p>LC的研究对象称为<strong>λ项</strong>，</p>
+<p>它是这样定义的，</p>
+<p>λ项 = 变量</p>
+<p>λ项 = λ项 λ项</p>
+<p>λ项 = λ变量.λ项</p>
 <p><br/></p>
-<p>很多常见的表达式调用，其实是编译宏。</p>
-<p>(and test1 test2) -&gt; (if test1 test2 #f)</p>
-<p>编译宏可以将一个S表达式转换为另一个S表达式。</p>
+<p>例如：</p>
+<p>((λy.y)(λx.(xy)))</p>
+<p>(x(λx.(λx.x)))</p>
+<p>都是合法的λ项。</p>
 <p><br/></p>
-<p>我们通常说的宏，指的是编译宏。</p>
-<p>Scheme语言暂时不支持自定义的读取宏。</p>
+<p>我们用小写字母x，y，z表示变量，</p>
+<p>大写字母M，N，P，Q表示λ项。</p>
 <p><br/></p>
-<h2 id="定义一个宏"><strong>定义一个宏</strong></h2>
-<p>Scheme语言中使用define-syntax来定义宏，</p>
-<p>定义一个宏，有时也称为绑定一个关键字（keyword binding）。</p>
-<p>宏展开的结果，最终都转换成了一些Scheme语言内置的表达式。</p>
+<p>λ项是左结合的，</p>
+<p>MNPQ ≡ (((MN)P)Q)，</p>
 <p><br/></p>
-<p>例如：宏and是这样的定义的，</p>
-<p>(define-syntax and</p>
-<p>    (syntax-rules ()</p>
-<p>        [(and) #t]</p>
-<p>        [(and test) test]</p>
-<p>        [(and test1 test2 ...)</p>
-<p>            (if test1</p>
-<p>                (and test2 ...)</p>
-<p>                #f)]))</p>
+<p>λx.PQ ≡ (λx.(PQ))</p>
+<p>λx尽可能多的向右结合。</p>
 <p><br/></p>
-<p>其中，(syntax-rules ...)的值是一个转换器。</p>
-<p>define-syntax将关键字and和这个转换器相关联。</p>
+<p>其中，“≡”表示语法上相等。</p>
 <p><br/></p>
-<p>Scheme语言中有很多表达式可以返回转换器，</p>
-<p>而syntax-rules是最常用的一个。</p>
-<p>它内置了一个模板语言（pattern language）</p>
+<h2 id="替换规则"><strong>替换规则</strong></h2>
+<p>[N/x]M</p>
+<p>表示把M中所有的x替换成N。</p>
 <p><br/></p>
-<p>syntax-rules后面紧跟的一个括号，里面可以设置辅助关键字。</p>
-<p>至于辅助关键字，可以参考Scheme语言手册了解使用情况。</p>
+<h2 id="α转换"><strong>α转换</strong></h2>
+<p>α转换说的是，</p>
+<p>可以将λx.PQ中的x改为其他变量y，</p>
+<p>只需要同时将PQ中的自由变量x改为y即可。</p>
 <p><br/></p>
-<p>后续的每一个表达式，都具有“[模式，模板]”这样的结构。</p>
-<p>对于[(and) #t]来说，</p>
-<p>模式 = (and)</p>
-<p>模板 = #t</p>
+<p>α转换定义了一个等价关系，</p>
+<p>称为α等价。</p>
 <p><br/></p>
-<p>模式和模板中的“...”是syntax-rules模板语言的一部分。</p>
-<p>具体用法，也可以参考Scheme语言手册。</p>
+<p>注：</p>
+<p>这里y不能和PQ中的同名变量y冲突。</p>
 <p><br/></p>
-<p>如果宏调用匹配了某个模式，就会按照相应模板展开。</p>
-<p>下面3个宏调用，展开结果如下：</p>
-<p>(and) -&gt; #t</p>
-<p>(and x) -&gt; x</p>
-<p>(and x y) -&gt; (if x (and y) #f) -&gt; (if x y #f)</p>
+<p>α转换相当于<strong>变量更名</strong>。</p>
 <p><br/></p>
-<p>宏是可以递归展开的，一直到结果表达式中不再含有宏为止。</p>
+<h2 id="β归约"><strong>β归约</strong></h2>
+<p>β归约相当于<strong>函数调用</strong>。</p>
 <p><br/></p>
-<p>模式中的第一个元素，因为肯定是宏的名字，</p>
-<p>所以也可以替换成通配符“_”，</p>
-<p>[(_) #t]</p>
-<p>[(_ test) test]</p>
+<p>(λx.M)N -&gt; [N/x]M</p>
+<p>即，对(λx.M)N进行β归约，</p>
+<p>相当于把M中的变量x替换成N。</p>
 <p><br/></p>
-<h2 id="卫生宏"><strong>卫生宏</strong></h2>
-<p>Scheme是第一个支持卫生宏（hygienic macro）的Lisp方言。</p>
-<p>也是第一个支持卫生宏的编程语言。</p>
+<p>一个<strong>β范式</strong>（weak normal form），</p>
+<p>是不能再进行β归约的λ项。</p>
 <p><br/></p>
-<p>“卫生”这个词表示，宏展开后，不会污染原来的词法作用域。</p>
-<p>我们还是举例来说明吧，最后，我们再总结规律。</p>
+<h2 id="churchrosser定理"><strong>Church–Rosser定理</strong></h2>
+<p>如果λ项P能β归约为M，即P-&gt;M，</p>
+<p>也能β归约为N，P-&gt;N，</p>
+<p>则存在λ项T，满足，</p>
+<p>M-&gt;T且N-&gt;T。</p>
 <p><br/></p>
-<p>例1：宏展开后，原表达式处于新的词法环境中。</p>
-<p>(let-syntax [(insert-binding (syntax-rules ()</p>
-<p>    [(_ x) (let [(a 1)]</p>
-<p>        (+ x a))]))]</p>
-<p>    </p>
-<p>    (let [(a 2)]</p>
-<p>        (insert-binding (+ a 3))))</p>
-<p>=&gt; 6</p>
+<p>它表示了λ项β归约的<strong>汇聚性</strong>。</p>
+<p>而且，λ项在α等价的条件下，至多存在一个β范式。</p>
 <p><br/></p>
-<p>其中，let-syntax用来绑定局部关键字。</p>
-<p>就像let可用来绑定局部变量一样。</p>
+<h2 id="combinator-logic"><strong>Combinator logic</strong></h2>
+<p>Combinator logic简称为CL，</p>
+<p>它是一个形式系统，</p>
+<p>与lambda calculus具有同样的计算能力。</p>
 <p><br/></p>
-<p>在let-syntax表达式内部，我们定义了宏insert-binding。</p>
-<p>它绑定到syntax-rules求值后得到的转换器上。</p>
+<p>CL研究了<strong>CL项</strong>的演算规则，</p>
+<p>一个合法的CL项，由以下条件递归定义，</p>
+<p>CL项 = 变量 | 基本组合子</p>
+<p>CL项 = CL项 CL项</p>
 <p><br/></p>
-<p>根据定义，我们知道(insert-binding x) -&gt; (let [(a 1)] (+ x a))</p>
-<p>原表达式x，处于含有新的绑定a =&gt; 1的词法环境中。</p>
+<p>例如：</p>
+<p>((S(KS))K)</p>
+<p>((S(Kx))((SY)K))</p>
+<p>都是合法的CL项。</p>
 <p><br/></p>
-<p>如果原表达式x中含有a，就出现问题了。</p>
-<p>我们的例子就是这种情况。</p>
+<p>我们用小写字母x，y，z表示变量，</p>
+<p>大写字母X，Y，Z表示CL项。</p>
 <p><br/></p>
-<p>(let [(a 2)]</p>
-<p>    (insert-binding (+ a 3)))</p>
-<p>-&gt;</p>
-<p>(let [(a 2)]</p>
-<p>    (let [(a 1)]</p>
-<p>        (+ (+ a 3) a)))</p>
-<p>=&gt; 5</p>
+<p>CL项是左结合的，</p>
+<p>UVWX ≡ (((UV)W)X)，</p>
+<p>其中，“≡”表示语法上相等。</p>
 <p><br/></p>
-<p>结果出错了。</p>
-<p>从(+ a 3)所在的原始词法环境来看，</p>
-<p>(let [(a 2)]</p>
-<p>    (insert-binding (+ a 3)))</p>
-<p>(+ a 3)中a的值，应该是2才对。</p>
-<p>宏展开污染了原始的词法环境。</p>
+<h2 id="替换规则-1"><strong>替换规则</strong></h2>
+<p>[U/x]Y</p>
+<p>表示把Y中所有的x替换成U。</p>
 <p><br/></p>
-<p>这是不“卫生”的。</p>
-<p>Scheme通过给绑定的值改名字来实现卫生宏。</p>
+<p>例如：</p>
+<p>[(SK)/x](yxx) ≡ y(SK)(SK)</p>
 <p><br/></p>
-<p>宏展开(insert-binding x) -&gt; (let [(a 1)] (+ x a))</p>
-<p>改成了(insert-binding x) -&gt; (let [(:g0001 1)] (+ x :g0001))</p>
-<p>其中，:g0001是语言实现生成的唯一名字，不会与任何已有的名字冲突。</p>
+<h2 id="弱归约weak-reduction"><strong>弱归约（Weak reduction）</strong></h2>
+<p>以下形式的CL项可以进行弱归约，</p>
+<p>IX -&gt; X</p>
+<p>KXY -&gt; X</p>
+<p>SXYZ -&gt; XZ(YZ)</p>
 <p><br/></p>
-<p>(let [(a 2)]</p>
-<p>    (insert-binding (+ a 3)))</p>
-<p>-&gt;</p>
-<p>(let [(a 2)]</p>
-<p>    (let [(:g0001 1)]</p>
-<p>        (+ (+ a 3) :g0001)))</p>
-<p>=&gt; 6</p>
+<p>如果进行这些变换可以使U变成U'，</p>
+<p>就称CL项U可以弱归约为U'。</p>
 <p><br/></p>
-<p>这样就得到了正确的结果。</p>
+<p>一个<strong>弱范式</strong>（weak normal form），</p>
+<p>是不能再进行弱归约的CL项。</p>
 <p><br/></p>
-<p>例2：宏展开后，引入了不在原来词法作用域中的标识符。</p>
-<p>(let [(a 1)]</p>
-<p>    (let-syntax [(insert-free (syntax-rules ()</p>
-<p>        [(_ x) (+ x a)]))]</p>
-<p>        </p>
-<p>        (let [(a 2)]</p>
-<p>            (insert-free (+ a 3)))))</p>
-<p>=&gt; 6</p>
+<h2 id="churchrosser定理-1"><strong>Church–Rosser定理</strong></h2>
+<p>与lambda calculus一样，</p>
+<p>对于CL，也有类似的定理，</p>
 <p><br/></p>
-<p>同样根据定义，我们知道(insert-free x) -&gt; (+ x a)</p>
+<p>如果CL项U可以弱归约为X，即U-&gt;X，</p>
+<p>也可以弱归约为Y，即U-&gt;Y，</p>
+<p>则存在CL项T，满足，</p>
+<p>X-&gt;T且Y-&gt;T。</p>
 <p><br/></p>
-<p>所以，</p>
-<p>(let [(a 2)]</p>
-<p>    (insert-free (+ a 3)))</p>
-<p>-&gt;</p>
-<p>(let [(a 2)]</p>
-<p>    (+ (+ a 3) a))</p>
-<p>=&gt; 7</p>
+<p>这表示了CL项弱归约的<strong>汇聚性</strong>。</p>
+<p>而且，CL项至多存在一个弱范式。</p>
 <p><br/></p>
-<p>结果又出错了。</p>
-<p>哪里出现问题了？</p>
+<h2 id="cl项的抽象"><strong>CL项的抽象</strong></h2>
+<p>为了和lambda演算进行对比，</p>
+<p>我们定义CL项的抽象，</p>
+<ol type="a">
+<li><p>[x].M ≡ KM，如果x不是M中的自由变量</p></li>
+<li><p>[x].x ≡ I</p></li>
+<li><p>[x].Ux ≡ U，如果x不是U中的自由变量</p></li>
+<li><p>[x].UV ≡ S([x].U)([x].V)，如果不满足(a)或(c)</p></li>
+</ol>
 <p><br/></p>
-<p>宏定义的模式/模板[(_ x) (+ x a)]))]中的a，应该是第一行的绑定，(let [(a 1)]</p>
-<p>而展开式(let [(a 2)] (+ (+ a 3) a))覆盖了外层对a的绑定。</p>
+<p>可以证明，</p>
+<p>([x].M)N可以弱归约为[N/x]M。</p>
 <p><br/></p>
-<p>因此，宏展开式的行为，将取决于展开后的环境，</p>
-<p>展开到不同的环境中，行为是不同的。</p>
-<p>失去了宏调用的“引用透明性”。</p>
+<p>这里，我们只是用原始的CL项来定义了CL项的抽象，</p>
+<p>[x]并不是CL语法的一部分，</p>
+<p>而对于lambda calculus中的λ项λx.xy，</p>
+<p>λx是λ项的一部分。</p>
 <p><br/></p>
-<p>Scheme是怎么解决的呢？</p>
-<p>语言规范指出，宏展开式中的自由标识符，处于宏定义时的词法作用域中。</p>
-<p>即，宏展开式(+ x a)中，a具有宏定义环境中的值a =&gt; 1，(insert-free x) -&gt; (+ x 1)</p>
+<h2 id="lc和cl的相似性"><strong>LC和CL的相似性</strong></h2>
+<p>经过以上学习，</p>
+<p>我们发现，</p>
+<p>LC中的<strong>α等价</strong>，对应着CL中的<strong>语法等价</strong>，</p>
+<p>LC中的<strong>β归约</strong>，对应着CL中的<strong>弱归约</strong>，</p>
+<p>LC中的<strong>λx</strong>，对应着CL中的<strong>[x]</strong>。</p>
 <p><br/></p>
-<p>(let [(a 2)]</p>
-<p>    (insert-free (+ a 3)))</p>
-<p>-&gt;</p>
-<p>(let [(a 2)]</p>
-<p>    (+ (+ a 3) 1))</p>
-<p>=&gt; 6</p>
+<p>我们就可以统一的，</p>
+<p>用LC中的符号来说明问题了。</p>
 <p><br/></p>
-<h2 id="规律总结"><strong>规律总结</strong></h2>
-<p>我们遇到了一个问题。</p>
-<p>我们知道，“+”在Scheme中表示加法函数，</p>
-<p>它和a地位相同，也是一个变量，只不过它的值是一个函数。</p>
+<h2 id="组合子"><strong>组合子</strong></h2>
+<p>LC中的<strong>组合子</strong>，</p>
+<p>表示一个闭项（closed pure term），</p>
+<p>它不是一个原子，也不包含自由变量。</p>
 <p><br/></p>
-<p>那么，以上两个例子中，变量+的值分别来自哪个词法作用域呢？</p>
+<p>例如：</p>
+<p>λxyz.x(yz)</p>
+<p>λxy.x</p>
 <p><br/></p>
-<p>例1中，</p>
-<p>(let [(a 2)]</p>
-<p>    (insert-binding (+ a 3)))</p>
-<p>-&gt;</p>
-<p>(let [(a 2)]</p>
-<p>    (let [(:g0001 1)]</p>
-<p>        (+ (+ a 3) :g0001)))</p>
+<p>CL中的<strong>组合子</strong>，</p>
+<p>只有3个，I，K，S。</p>
 <p><br/></p>
-<p>经过分析，我们知道了，</p>
-<p>(+ (+ a 3) :g0001)))中第一个+来自宏定义处的词法作用域，</p>
-<p>第二个+来自宏替换处的词法作用域。</p>
+<p>在LC中，可以这样表示，</p>
+<p>I ≡ λx.x</p>
+<p>K ≡ λxy.x</p>
+<p>S ≡ λxyz.xz(yz)</p>
 <p><br/></p>
-<p>例2中，</p>
-<p>(let [(a 2)]</p>
-<p>    (insert-free (+ a 3)))</p>
-<p>-&gt;</p>
-<p>(let [(a 2)]</p>
-<p>    (+ (+ a 3) 1))</p>
+<h2 id="不动点定理"><strong>不动点定理</strong></h2>
+<p>在LC和CL中，</p>
+<p><strong>对于任意x，存在它的不动点Yx，满足，</strong></p>
+<p><strong>Yx -&gt; x(Yx)</strong></p>
 <p><br/></p>
-<p>同样经过分析，我们知道了，</p>
-<p>(+ (+ a 3) 1))中第一个+来自宏定义处的词法作用域，</p>
-<p>第二个+来自宏替换处的词法作用域。</p>
+<p>其中，</p>
+<p>“-&gt;”表示LC中的β归约，</p>
+<p>或CL中的弱归约。</p>
+<p><br/></p>
+<p><strong>证明：</strong></p>
+<p>取Y ≡ UU</p>
+<p>U ≡ λux.x(uux)</p>
+<p><br/></p>
+<p>Yx -&gt;</p>
+<p>UUx -&gt;</p>
+<p>(λux.x(uux))Ux -&gt;</p>
+<p>(λx.x(UUx))x -&gt;</p>
+<p>x(UUx) -&gt;</p>
+<p>x(Yx)</p>
+<p><br/></p>
+<h2 id="不动点组合子"><strong>不动点组合子</strong></h2>
+<p>不动点组合子并不是唯一的，</p>
+<p><br/></p>
+<p>存在不止一个Y，</p>
+<p>使得对于任意x，Yx -&gt; x(Yx)。</p>
+<p><br/></p>
+<p>例如：</p>
+<p><strong>Turing组合子</strong></p>
+<p>Y ≡ UU，U ≡ λux.x(uux)</p>
+<p><br/></p>
+<p><strong>Curry-Ros组合子</strong></p>
+<p>Y ≡ λx.VV，V ≡ λy.x(yy)</p>
+<p><br/></p>
+<h2 id="不动点定理的用法"><strong>不动点定理的用法</strong></h2>
+<p>根据不动点定理，</p>
+<p>我们能得到任意LC项或CL项的不动点，</p>
+<p>所以，<strong>不动点方程总是有解的</strong>。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>给定方程，x = M，M中可能包含x，</p>
+<p>我们可以将它转换成不动点方程，</p>
+<p>x = (λx.M)x，</p>
+<p>解为：x = Y(λx.M) = Y(λt.[t/x]M)</p>
+<p>它<strong>消除了M中的x</strong>。</p>
+<p><br/></p>
+<p>例如：M ≡ yxz</p>
+<p>x = Y(λx.M) = Y(λx.yxz) = Y(λt.ytz)，</p>
+<p>等式右边就不包含自由变量x了。</p>
+<p><br/></p>
+<p>所以，形如x = M的方程，</p>
+<p>我们可以使用Y来消除M中的x。</p>
+<p><br/></p>
+<p>这也表明可以不依赖于副作用，</p>
+<p>用Y来定义<strong>匿名递归函数</strong>。</p>
+<p><br/></p>
+<h2 id="用y组合子解递归方程"><strong>用Y组合子解递归方程</strong></h2>
+<p>Haskell中的Turing Y组合子定义如下：</p>
+<p><strong>import Unsafe.Coerce</strong></p>
+<p>u =  -&gt; x $ u <strong>(unsafeCoerce</strong> u<strong>)</strong> x</p>
+<p>y = u u</p>
+<p><br/></p>
+<p>斐波那契函数fib的递归定义，</p>
+<p>fib = -&gt; if n&lt;2 then 1 else (n*) $ fib $ n-1</p>
+<p><br/></p>
+<p>为了<strong>消除等式右边fib</strong>，</p>
+<p>我们把它转换成不动点方程，</p>
+<p>fib = (&gt; -&gt; if n&lt;2 then 1 else (n*) $ f $ n-1) fib</p>
+<p>用Y组合子求解，得到了一个匿名的递归函数，</p>
+<p>fib = y $ <strong>&gt;</strong> -&gt; if n&lt;2 then 1 else (n*) $ <strong>f</strong> $ n-1</p>
+<p><br/></p>
+<p>验证一下运行结果，</p>
+<p>fib 5</p>
+<p>=&gt; 120</p>
+<p><br/></p>
+<h2 id="不动点存在性的疑问"><strong>不动点存在性的疑问</strong></h2>
+<p>方程解的性质是由方程决定的，</p>
+<p><strong>解法无法改变解的性质</strong>。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>a = undefined = (-&gt; undefined) a</p>
+<p>解为：a = y $ -&gt; undefined <strong>= undefined</strong></p>
+<p><br/></p>
+<p>add = -&gt; add n+1</p>
+<p>这个一个无限递归函数。</p>
+<p>转换为不动点方程的形式，</p>
+<p>add = (&gt; -&gt; f n+1) add</p>
+<p>解为：add = y $ (&gt; -&gt; f n+1)</p>
+<p>这个add<strong>仍然是</strong>一个无限递归函数。</p>
+<p><br/></p>
+<h2 id="初等函数的不动点"><strong>初等函数的不动点</strong></h2>
+<p>另外，对于初等函数的不动点方程，</p>
+<p>x = f(x)</p>
+<p>程序中直接写成x = f(x)会<strong>导致无限递归</strong>，</p>
+<p>因为初等函数方程给出来的是<strong>约束</strong>，</p>
+<p>而不是<strong>计算过程</strong>。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>求解f(x) = 2x的不动点，</p>
+<p>**直接写x = 2*x是一个无限的递归**，并不能解出x = 0来，</p>
+<p>因此，x = 2*x实际表示的是一个无限递归的计算过程。</p>
+<p><br/></p>
+<p>然而，<strong>仍然</strong>会存在满足这个方程的解。</p>
+<p>不动点方程形式如下，</p>
+<p>x = (-&gt; 2*x) x</p>
+<p>解为：x = y $ -&gt; 2*x</p>
+<p>确实可以使等式成立，</p>
+<p>但它<strong>同样表示</strong>的是一个无限递归的计算过程。</p>
+<p><br/></p>
+<p>f(x) = 2x的不动点方程，对应的“计算过程”<strong>应该是</strong>，</p>
+<p>x = 0</p>
+<p>不动点方程的形式如下，</p>
+<p>x = (-&gt; 0) x</p>
+<p>解为：x = y $ -&gt; 0 <strong>= 0</strong></p>
 <p><br/></p>
 <p>因此，</p>
-<p>我们找到了一个规律，这也是卫生宏的目的所在。即，</p>
-<p><strong>宏展开式中的所有标识符，仍处于其来源处的词法作用域中。</strong></p>
-<p><br/></p>
-<p>我们试着分析一下这两个例子。</p>
-<p>例1展开式，</p>
-<p>(let [(a 2)]</p>
-<p>    <strong>(let [(:g0001 1)]</strong></p>
-<p>        <strong>(+</strong> (+ a 3) <strong>:g0001))</strong>)</p>
-<p>粗体来源于宏定义处，普通字体来源于宏替换处。</p>
-<p>展开后，它们仍然处于各自来源处的词法作用域中。</p>
-<p><br/></p>
-<p>例2展开式，</p>
-<p>(let [(a 2)]</p>
-<p>    <strong>(+</strong> (+ a 3) <strong>1)</strong>)</p>
-<p>上述规则同样满足。</p>
-<p><br/></p>
-<p>宏展开式中的标识符，虽然来源不同，但互不污染。</p>
-<p>这就达到卫生宏的目的了。</p>
+<p>初等函数的不动点，</p>
+<p>与LC或CL的不动点是两个不同的场景，</p>
+<p>初等函数方程是一种<strong>约束规则</strong>，</p>
+<p>LC或CL的等式是一种<strong>推导规则</strong>。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>在Lisp编程中，宏展开后造成了非预期的污染，是经常出现问题的地方。</p>
-<p>Common Lisp目前并不支持卫生宏，</p>
-<p>但是可以实现自己的宏定义，用自己的宏来定义宏，达到简洁可控的目的。</p>
+<p>不动点问题，</p>
+<p>一直是我的心结。</p>
+<p>只可惜功力不够，总是想不明白。</p>
 <p><br/></p>
-<p>当然，卫生宏也造成了表达能力的损失，</p>
-<p>在特殊情况下，可以使用syntax-case以及datum-&gt;syntax来弥补。</p>
+<p>本文只是对最近学习的总结，</p>
+<p>肯定有<strong>不严谨</strong>的地方，</p>
+<p>只当做以后继续学习的起点吧。</p>
+<p><br/></p>
+<p>参考：《Lambda-Calculus and Combinators》</p>
 
           
         
@@ -615,7 +689,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/269/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/269/">269</a><span class="page-number current">270</span><a class="page-number" href="/page/271/">271</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/271/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/269/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/269/">269</a><span class="page-number current">270</span><a class="page-number" href="/page/271/">271</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/271/">&gt;</a>
   </nav>
 
 
@@ -661,7 +735,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -736,7 +810,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

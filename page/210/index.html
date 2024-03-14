@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/06/08/algebraic-data-type/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/09/21/abstraction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/06/08/algebraic-data-type/" itemprop="url">代数数据类型的语法和语义</a></h1>
+                <a class="post-title-link" href="/2016/09/21/abstraction/" itemprop="url">抽象与现实</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-08T00:00:00+08:00">
-                2016-06-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-21T00:00:00+08:00">
+                2016-09-21
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,163 +347,96 @@
       
         
           
-            <h3 id="代数数据类型"><strong>代数数据类型</strong></h3>
-<p>一个代数数据类型，由值的一些集合，以及这些集合之间的一些函数构成。</p>
-<p>这些函数都是一阶函数，不能以其他函数作为参数。</p>
+            <p>抽象化，是数学的一种研究方法。</p>
+<p>使用得当，则能扩大我们的视野，有助于看清问题的本质，</p>
+<p>可是，有时候我们也会被抽象所累，使解决方案变得更复杂。</p>
 <p><br/></p>
-<h3 id="泛代数"><strong>泛代数</strong></h3>
-<p>泛代数（universal algebra）也称为等式逻辑（equational logic），</p>
-<p>是用于研究代数数据类型的一个数学框架。</p>
+<p>在数学中，站在更高的角度看问题，是司空见惯的事情。</p>
+<p>而且从每个层级来看，都可以再次抽象，站得更高。</p>
 <p><br/></p>
-<p>在泛代数中，代数数据类型的语法由代数项（algebraic term）描述，公理语义用项之间的等式集（a set of equations）描述，</p>
-<p>而指称语义对应于一个<span data-katex="\Sigma"></span>代数，操作语义通过给等式设定方向来表示。</p>
-<hr />
-<h2 id="代数数据类型的语法"><strong>代数数据类型的语法</strong></h2>
-<h3 id="代数项和签名"><strong>代数项和签名</strong></h3>
-<p>一个代数项（algebraic term）由符号和类型来定义，</p>
-<p>这些信息放在一起称为代数项的签名（signature）。</p>
+<p>例如，从实际问题到线性方程组，从线性方程组到矩阵运算，</p>
+<p>从矩阵运算到抽象代数，从群环域再到范畴论；</p>
+<p>从实际问题到计算过程，从计算过程到它的描述方式，</p>
+<p>从描述方式到形式语言，从语法和语义再到形式逻辑。</p>
 <p><br/></p>
-<p>构成代数项的基本类型称为sort。</p>
+<h2 id="两个极端"><strong>两个极端</strong></h2>
+<p>虽然数学有其自身的研究目的，</p>
+<p>但是，在现实生活或者应用工程中，都把数学当做工具来看。</p>
+<p>人们大多数的时间，都在解决具体问题，</p>
+<p>看清问题背后的数学结构似乎毫无意义。</p>
 <p><br/></p>
-<p>一个签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>，由以下几个部分构成，</p>
-<p>（1）以sort为元素构成的集合</p>
-<p>（2）sort上函数符号的集合<span data-katex="F=\left \{ f:s_1\times \cdots \times s_k\rightarrow s \right \}"></span></p>
-<p>其中，<span data-katex="s_1,\cdots ,s_k,s\in S"></span>，<span data-katex="f"></span>称为类型化的函数符号，</p>
-<p>每个函数符号的类型是唯一的。</p>
+<p>其实不然，这是其中的一个极端，</p>
+<p>忽略了全局性思考和洞见所起的作用。</p>
 <p><br/></p>
-<p>例如，自然数表达式的签名是<span data-katex="\Sigma_N=\left \langle S,F \right \rangle"></span>，</p>
-<p>其中<span data-katex="S=\left \{ nat \right \}"></span>，只包含一个sort，</p>
-<p><span data-katex="F"></span>给出以下几个函数符号，</p>
-<p><span data-katex="0:nat"></span>，<span data-katex="1:nat"></span>，<span data-katex="+:nat\times nat\rightarrow nat"></span>，<span data-katex="*:nat\times nat\rightarrow nat"></span>。</p>
-<p>习惯上为了节省空间，通常把签名写成一个表格形式，</p>
-<p><span data-katex="sorts:nat"></span></p>
-<p><span data-katex="fctns:0,1:nat"></span></p>
-<p><span data-katex="+,*:nat\times nat\rightarrow nat"></span></p>
+<p>另一个极端，是试图总将问题抽丝剥茧，</p>
+<p>也会引入不必要的层次性，使解决方案不够切题，</p>
+<p>毕竟具体情况的特殊性和复杂性，才是主要特征。</p>
 <p><br/></p>
-<h3 id="变量的指派"><strong>变量的指派</strong></h3>
-<p>一个指派（sort assignment），是如下一个有限集合，用来指定变量的类型，</p>
-<p><span data-katex="\Gamma=\left \{ x_1:s_1,\cdots ,x_k:s_k \right \}"></span></p>
-<p>不能为同一个变量指派不同的sort。</p>
+<p>编程就是考虑了这两个极端之后权衡的结果，</p>
+<p>我们既要为现实问题建立模型，简化它的描述方式，</p>
+<p>又要适度的建模减少逻辑层次。</p>
 <p><br/></p>
-<h3 id="合法代数项的集合"><strong>合法代数项的集合</strong></h3>
-<p>基于签名<span data-katex="\Sigma"></span>和指派<span data-katex="\Gamma"></span>，可以定义一个sort为<span data-katex="s"></span>的代数项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>，</p>
-<p>它满足以下几个条件，</p>
-<p>（1）如果<span data-katex="x:s\in \Gamma"></span>则<span data-katex="x\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
-<p>（2）如果<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>且<span data-katex="M_i\in Terms^{s_i}\left ( \Sigma,\Gamma \right )"></span>，</p>
-<p><span data-katex="i=1,\cdots ,n"></span>，则<span data-katex="fM_1\cdots M_k\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
-<hr />
-<h2 id="代数数据类型的指称语义"><strong>代数数据类型的指称语义</strong></h2>
-<h3 id="代数"><strong><span data-katex="\Sigma"></span>代数</strong></h3>
-<p><span data-katex="\Sigma"></span>代数是一种数学结构，它为代数项提供了含义或指称语义。</p>
+<p>不进行抽象是不行的，过度抽象也是不行的，</p>
+<p>我们应该怎样做呢？</p>
 <p><br/></p>
-<p>一个<span data-katex="\Sigma"></span>代数，包含了一个或多个集合，称为载体（carrier），</p>
-<p>以及一些特征元素，和载体上的一些一阶函数，</p>
-<p><span data-katex="f:A_1\times \cdots \times A_k \rightarrow A"></span></p>
+<h2 id="封装"><strong>封装</strong></h2>
+<p>软件领域，有一个概念称为“封装”，</p>
+<p>可以让我们把复杂性隐藏在某个“界面”之下，</p>
+<p>使用这个“界面”的人，可以不关心内部的实现细节。</p>
 <p><br/></p>
-<p>例如，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,* \right \rangle"></span></p>
-<p>具有载体<span data-katex="N"></span>，它是自然数集，</p>
-<p>具有特征元素，<span data-katex="0,1\in N"></span>，</p>
-<p>以及函数，<span data-katex="+,*:N \times N \rightarrow N"></span>。</p>
-<p>其中，特征元素可以看成零元函数。</p>
+<p>这给我们提供了一种思路，</p>
+<p>让我们可以在保持内部层次性的同时，</p>
+<p>给最终用户提供朴素的“界面”，把锋芒藏起来。</p>
 <p><br/></p>
-<p>带有多个载体的例子是<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}_{pcf}=\left \langle N,B,0,1,\cdots ,+,true,false,Eq?,\cdots ,\right \rangle"></span></p>
-<p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
-<p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
+<p>此外，“使用者”和“提供者”只是相对的概念，</p>
+<p>内部的各个层次分别扮演着这些角色，</p>
+<p>上层提供普适性的功能，下层作为使用者来具体化应用，</p>
+<p>层层具体化，抵达最终“界面”。</p>
 <p><br/></p>
-<h3 id="代数项的解释"><strong>代数项的解释</strong></h3>
-<p>我们说<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>是与所有合法代数项<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>对应的<span data-katex="\Sigma"></span>代数，</p>
-<p>指的是如下对应关系成立，</p>
-<p>（1）每一个sort，<span data-katex="s\in S"></span>，恰好对应一个载体<span data-katex="A^s"></span></p>
-<p>（2）每一个函数符号<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>，恰好对应一个函数<span data-katex="\mathscr{I}(f):A^{s_1}\times \cdots \times A^{s_k}\rightarrow A^s"></span></p>
-<p>习惯上把<span data-katex="\mathscr{I}(f)"></span>写成<span data-katex="f^{\mathscr{A}}"></span>。</p>
+<p>这种方式确实能让软件变得灵活，提高扩展性，</p>
+<p>在需求不断变更的驱动下，最高层的适用范围会越来越广，</p>
+<p>新出现的场景，都将成为某一层次不同具体化的结果。</p>
 <p><br/></p>
-<h3 id="含变量代数项的解释"><strong>含变量代数项的解释</strong></h3>
-<p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射。</p>
-<p><span data-katex="\eta :\mathscr{V} \rightarrow\cup _sA^s"></span></p>
-<p>需要环境的原因是，对于含变量<span data-katex="x"></span>的项<span data-katex="M"></span>，叙述<span data-katex="M"></span>的含义必须先给<span data-katex="x"></span>指定一个确定的值。</p>
-<p>如果对于每个<span data-katex="x:s\in \Gamma"></span>，都有<span data-katex="\eta (x)\in A^s"></span>，就说环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>。</p>
+<p>不幸的是，随着层次的增加，逻辑深度也会增加，</p>
+<p>理解整套方案会变得越来越困难。</p>
 <p><br/></p>
-<p>假定<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的一个环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，</p>
-<p>则可以把环境<span data-katex="\eta"></span>下的任何项<span data-katex="M\in Terms\left ( \Sigma ,\Gamma \right )"></span>的含义<span data-katex="\mathscr{A}[[M]]\eta"></span>定义如下，</p>
-<p>（1）<span data-katex="\mathscr{A}[[x]]\eta =\eta (x)"></span></p>
-<p>（2）<span data-katex="\mathscr{A}[[fM_1\cdots M_k]]\eta =f^{\mathscr{A}}(\mathscr{A}[[M_1]]\eta ,\cdots ,\mathscr{A}[[M_k]]\eta )"></span></p>
+<p>我们提取出抽象，本来想让它具有普适性，</p>
+<p>能用于更多类似的场景，</p>
+<p>可悲的是，通常也是只适用于当前场景罢了。</p>
 <p><br/></p>
-<p>若<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在上下文中是明确的，通常省略<span data-katex="\mathscr{A}"></span>而直接写<span data-katex="[[M]]\eta"></span>，</p>
-<p>若<span data-katex="M"></span>中没有变量，则<span data-katex="\mathscr{A}[[M]]\eta"></span>不依赖于<span data-katex="\eta"></span>，可以写为<span data-katex="\mathscr{A}[[M]]"></span>。</p>
-<hr />
-<h2 id="语法和语义的关系"><strong>语法和语义的关系</strong></h2>
-<h3 id="可靠性与完备性"><strong>可靠性与完备性</strong></h3>
-<p>代数数据类型的公理语义是由代数项之间的等式集给出的，签名和等式集合称代数规范（algebraic specification）。</p>
-<p>一个代数规范，或者可以使用等式证明系统推导出代数项之间的其他等式，或者可以检验代数项对应的<span data-katex="\Sigma"></span>代数是否满足这些等式的要求。</p>
+<h2 id="选择不做"><strong>选择不做</strong></h2>
+<p>经验告诉我们，我们如果不做一件事情，</p>
+<p>往往不应该是我们没有看到它，</p>
+<p>而是应该在会做的同时，选择不做它。</p>
 <p><br/></p>
-<p>代数项对应的<span data-katex="\Sigma"></span>代数并不是唯一的。</p>
-<p>从一个代数规范推导得到的等式，在该规范对应的任何<span data-katex="\Sigma"></span>代数中都成立，就称该代数证明系统是可靠的（sound）。</p>
-<p>一个代数规范对应的任何<span data-katex="\Sigma"></span>代数中都成立的等式，在该规范中都可证，就称该代数证明系统是完备的（complete）。</p>
+<p>因此，与其说选择影响了结果，</p>
+<p>不如说，眼界影响了选择。</p>
 <p><br/></p>
-<h3 id="等式的可满足性"><strong>等式的可满足性</strong></h3>
-<p>等式（equation）是一个公式<span data-katex="M=N[\Gamma ]"></span>，其中<span data-katex="M,N\in Terms^s\left ( \Sigma ,\Gamma \right )"></span>，<span data-katex="s\in S"></span>。</p>
-<p>如果环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，且<span data-katex="[[M]]\eta =[[N]]\eta"></span>，</p>
-<p>就说<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在环境<span data-katex="\eta"></span>下满足<span data-katex="M=N[\Gamma ]"></span>，记为</p>
-<p><span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span></p>
+<p>上文提到，那些貌似普适性的抽象层给我们带来了麻烦，</p>
+<p>如果不带来任何价值，我们就应该去掉它，</p>
+<p>容忍它以普适性的身份混杂在具体应用中。</p>
 <p><br/></p>
-<p>对于含变量的项，我们更感兴趣的是一个等式是否在变量所有可能的取值情况下都成立，</p>
-<p>而不是在一个特别的环境中成立。</p>
-<p>如果对于满足<span data-katex="\Gamma"></span>的任何一个环境<span data-katex="\eta"></span>都有<span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span>，</p>
-<p>就可以说，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>满足等式<span data-katex="M=N[\Gamma ]"></span>，记为</p>
-<p><span data-katex="\mathscr{A} \models M=N[\Gamma]"></span></p>
+<p>能看到选择，却选择保持原样，</p>
+<p>不仅需要卓越的眼光，还需要不凡的魄力，</p>
+<p>心中追求完美，但是眼中要能容忍不完美，这才是关键。</p>
 <p><br/></p>
-<p>可满足性也可以扩展到等式集和代数集，</p>
-<p>设<span data-katex="E"></span>是一个等式集，如果<span data-katex="\mathscr{A}"></span>满足所有等式，就说<span data-katex="\mathscr{A}"></span>满足<span data-katex="E"></span>。</p>
-<p>类似的，若<span data-katex="C"></span>是一类<span data-katex="\Sigma"></span>代数，且对每个<span data-katex="\mathscr{A}\in C"></span>都有<span data-katex="\mathscr{A}\models M=N[\Gamma ]"></span>，则<span data-katex="C\models M=N[\Gamma ]"></span></p>
-<p><br/></p>
-<p>若任何一个<span data-katex="\Sigma"></span>代数都满足代数项之间的等式<span data-katex="M=N[\Gamma ]"></span>，就说该等式是永真的（valid），写为<span data-katex="\models M=N[\Gamma ]"></span>。</p>
-<p>例如，<span data-katex="x=x[x:s]"></span>就是永真的。</p>
-<p><br/></p>
-<p>若<span data-katex="\mathscr{A}"></span>满足签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>上的所有等式，就说<span data-katex="\Sigma"></span>代数是平凡的（trivial）。</p>
-<p><br/></p>
-<h3 id="语义蕴含semantic-implication"><strong>语义蕴含（semantic implication）</strong></h3>
-<p>若满足等式集<span data-katex="E"></span>的每一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>都满足等式<span data-katex="M=N[\Gamma ]"></span>，</p>
-<p>则称签名<span data-katex="\Sigma"></span>上的等式集<span data-katex="E"></span>在语义上蕴含等式<span data-katex="M=N[\Gamma ]"></span>，记为，</p>
-<p><span data-katex="E\models M=N[\Gamma ]"></span></p>
-<p><br/></p>
-<p>有了签名<span data-katex="\Sigma"></span>和等式集<span data-katex="E"></span>，我们定义代数规范<span data-katex="Spec=\left \langle \Sigma,E \right \rangle"></span>，</p>
-<p>则满足代数规范的，在所有<span data-katex="\Sigma"></span>代数中都成立的等式，就是那些由等式集<span data-katex="E"></span>语义蕴含的等式。</p>
-<p><br/></p>
-<h3 id="语义理论"><strong>语义理论</strong></h3>
-<p>如果等式集<span data-katex="E"></span>在语义蕴含下封闭（closed），则把它称为一个理论（theory）。</p>
-<p>更准确的说，如果<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语义理论（semantic theory）。</p>
-<p>一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的理论<span data-katex="Th(\mathscr{A})"></span>，就是在<span data-katex="\mathscr{A}"></span>中成立的所有等式的集合。</p>
-<p>可以证明一个<span data-katex="\Sigma"></span>代数的理论是一个语义理论。</p>
-<p><br/></p>
-<h3 id="形式证明"><strong>形式证明</strong></h3>
-<p>一个证明系统的推导规则如下，<span data-katex="\frac{antecedent}{consequent}"></span>，</p>
-<p>使得从前件（antecedent）的任何实例出发，通过使用该证明系统的公理和其他规则，</p>
-<p>可以推导出后件（consequent）的相应实例。</p>
-<p><br/></p>
-<p>例如：<span data-katex="\frac{M=N[\Gamma ],N=P[\Gamma ],P=Q[\Gamma ]}{M=Q[\Gamma ]}"></span></p>
-<p><br/></p>
-<p>若证明了一条规则是可推导的，则能够把它当做系统的一条证明规则来使用。</p>
-<p>如果某条规则没有前件，则称它是证明系统的一条公理（axiom）。</p>
-<p><br/></p>
-<p>我们说等式<span data-katex="M=N[\Gamma ]"></span>是可证的（provable），记为<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
-<p>如果从<span data-katex="E"></span>到<span data-katex="M=N[\Gamma ]"></span>存在一个等式序列，</p>
-<p>使得每个等式或者是公理（axiom），或者是<span data-katex="E"></span>中的等式，</p>
-<p>或者是从序列中之前出现的一个或多个等式经一步推导得到的结果。</p>
-<p><br/></p>
-<h3 id="语法理论"><strong>语法理论</strong></h3>
-<p>若在可证性下等式集<span data-katex="E"></span>是封闭的，则称<span data-katex="E"></span>是一个语法理论（syntactic theory）。</p>
-<p>换句话说，如果<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语法理论。</p>
-<p><span data-katex="E"></span>的语法理论<span data-katex="Th(E)"></span>就是从<span data-katex="E"></span>可证的所有等式的集合。</p>
-<p><br/></p>
-<h3 id="等式证明系统的性质"><strong>等式证明系统的性质</strong></h3>
-<p>可靠性（soundness）：若<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="E\models M=N[\Gamma ]"></span></p>
-<p>演绎完备性（deductive completeness）：若<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
-<hr />
 <h2 id="结语"><strong>结语</strong></h2>
-<p>《<a href="https://book.douban.com/subject/1761918/" target="_blank" rel="noopener">Foundations for Programming Languages</a>》是一本好书，</p>
-<p>可是中文的翻译《<a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a>》简直是晦涩难懂，</p>
-<p>把sort翻译为『类子』，把signature翻译为『基调』，容易让人误以为和同调代数有什么联系。</p>
-<p>原版书拿到后，看起来轻松了不少，这里只是对第三章部分内容做了个小结，以便卸下包袱轻装上阵。</p>
+<p>我们都学过设计模式，想过优化自己的设计，</p>
+<p>于是就容易走入极端，</p>
+<p>我们变得无法容忍拙劣的设计了。</p>
+<p><br/></p>
+<p>我们总想去调整它，去完善它，</p>
+<p>可是却无意中增加了设计的精密程度。</p>
+<p>为了不暴露这些复杂度，于是我们学会了掩饰它，隐藏它。</p>
+<p><br/></p>
+<p>可是，仅仅这样并不够，</p>
+<p>我们细心的打磨零件，想让它在任何一台机器上都能被使用，</p>
+<p>最终也只能用在这里。</p>
+<p><br/></p>
+<p>因此，好的办法是，我们看到这样的零件存在，</p>
+<p>但是却不总是想着孤立它，战胜强迫症。</p>
+<p>我们看到了背后优雅的数学，却不总是提及它，</p>
+<p>大智若愚不如虚怀若谷。</p>
 
           
         
@@ -542,7 +475,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/209/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/209/">209</a><span class="page-number current">210</span><a class="page-number" href="/page/211/">211</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/211/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/209/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/209/">209</a><span class="page-number current">210</span><a class="page-number" href="/page/211/">211</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/211/">&gt;</a>
   </nav>
 
 
@@ -588,7 +521,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -663,7 +596,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

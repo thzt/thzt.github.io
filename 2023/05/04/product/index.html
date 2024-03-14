@@ -1,0 +1,812 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="最近恰好读过两本与营销和产品相关的书：《解决：营销就是解决竞争》《做对产品》。  前者从营销视角讲授，企业应当如何定位 才能以弱胜强 后者从产品视角讲授，如何将一个创意 推向市场   这两本书综合起来，可以帮我们形成更加系统化的思维框架。 我始终认为，工作和生活不应当充满低头和无奈，而是应当一次又一次的思维升级，兼容并包。 ToD 业务的特点 当前我们正在做的业务类型是 ToD（面向开发者提供服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从技术运营到产品体系">
+<meta property="og:url" content="https://thzt.github.io/2023/05/04/product/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="最近恰好读过两本与营销和产品相关的书：《解决：营销就是解决竞争》《做对产品》。  前者从营销视角讲授，企业应当如何定位 才能以弱胜强 后者从产品视角讲授，如何将一个创意 推向市场   这两本书综合起来，可以帮我们形成更加系统化的思维框架。 我始终认为，工作和生活不应当充满低头和无奈，而是应当一次又一次的思维升级，兼容并包。 ToD 业务的特点 当前我们正在做的业务类型是 ToD（面向开发者提供服务">
+<meta property="article:published_time" content="2023-05-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-14T00:39:21.744Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2023/05/04/product/"/>
+
+
+
+
+
+  <title>从技术运营到产品体系 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2023/05/04/product/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从技术运营到产品体系</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-05-04T00:00:00+08:00">
+                2023-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近恰好读过两本与<strong>营销</strong>和<strong>产品</strong>相关的书：《<a href="https://book.douban.com/subject/1061064/" target="_blank" rel="noopener">解决：营销就是解决竞争</a>》《<a href="https://book.douban.com/subject/35607961/" target="_blank" rel="noopener">做对产品</a>》。</p>
+<ul>
+<li><p>前者从营销视角讲授，<strong>企业应当如何定位 才能以弱胜强</strong></p></li>
+<li><p>后者从产品视角讲授，<strong>如何将一个创意 推向市场</strong></p></li>
+</ul>
+<p><br/></p>
+<p>这两本书综合起来，可以帮我们形成更加系统化的思维框架。</p>
+<p>我始终认为，工作和生活不应当充满低头和无奈，而是应当一次又一次的思维升级，兼容并包。</p>
+<h3 id="tod-业务的特点">ToD 业务的特点</h3>
+<p>当前我们正在做的业务类型是 ToD（面向开发者提供服务），它虽然跟 ToB/ToC 有很大的不同，但仍然有很多可以借鉴的地方。</p>
+<ul>
+<li><p><strong>关键的不同</strong>：服务的提供方跟用户<strong>平权</strong>（因为用户是开发者，也会编程）</p></li>
+<li><p><strong>相似之处</strong>：不论做什么类型的业务，都是通过<strong>产品力</strong>来吸引用户，赢得<strong>市场竞争</strong></p></li>
+</ul>
+<p><br/></p>
+<p>很多 ToD 团队是没有产品经理的，这可能是因为大家都是开发者，自认为是理解用户的，但其实不然。</p>
+<p>缺少产品经理（或产品体系、产品思维），导致的一个头号问题是：<strong>我们开发出来的软件，卖不出去</strong>。</p>
+<p>由于又缺乏产品相关的思维体系，大家很容易将 “卖不出去” 归结为 “<strong>没有卖好</strong>”。</p>
+<p><br/></p>
+<p>但其实除了 “没有卖好” 之外，还有另外一个（可能是更重要的）原因是 “<strong>没有人需要它</strong>”（或 “没有市场”）。 因此，本文想阐述一下这个观点，<strong>在没有完整的产品体系之前，我们应该以产品优先，其次再考虑技术运营</strong>。</p>
+<p><br/></p>
+<blockquote>
+<p>企业中每个部门所做的事情，都只是公司整体<strong>商业形态</strong>中的一环。 比起做好一个产品，提高产品的品质 等 “细枝末节” 的事情而言，从整体上系统的分析问题，无疑是更重要的。</p>
+</blockquote>
+<h3 id="产品体系">产品体系</h3>
+<p>那么我们应当如何搭建产品体系呢？可以想一想 “有产品经理” 团队的研发流程是怎样的。</p>
+<ul>
+<li><p><strong>先以最低的成本验证市场，再投入更多的资源进行研发</strong></p></li>
+<li><p><strong>数据胜过意见，用数字说话</strong></p></li>
+<li><p><strong>有完整的、科学的 产品研发流程</strong>：市场调研、原型设计、需求评审 等</p></li>
+</ul>
+<p><br/></p>
+<blockquote>
+<p>针对这些失败的产品所做的所谓的市场调研，大多数都不是在真正的市场中进行的，而是在我称之为 “空想之地” 的一种虚构环境中进行的。 如果一个创意在空想之地逗留时间太长，就会陷入由未经证实的恣意判断、信念、偏好 和 预测 组成的谜团之中。</p>
+</blockquote>
+<p><br/></p>
+<p>缺少产品体系的团队，“专家意见” 就会冒出来，但又由于产品成败与这些专家的切身利益无关，其实这些意见的参考意义并不大，专家往往不会比普通人知道得更多。</p>
+<p>此外，对什么样的 数据/指标 才能用于衡量产品成败 难以达成共识，甚至压根没有这样的指标。</p>
+<p>这就会导致很多 “想法”（或项目），<strong>无法证明是失败的</strong>，最后都会落到 “<strong>推进难</strong>” 的死循环中。</p>
+<p><br/></p>
+<p>那么如何才能确定 我们在做市场需要的 产品呢？</p>
+<ul>
+<li><p>创意有很多，我们需要的是<strong>筛选力</strong>，而不是执行力</p></li>
+<li><p>我们要离<strong>用户</strong>更近，离<strong>竞争对手</strong>更近</p></li>
+<li><p>在产品迭代前期，对技术可行性/方案的分析要减少争论，对于到底<strong>有没有人来用</strong>要加强验证</p></li>
+</ul>
+<p><br/></p>
+<p>搭建产品体系的目标是，赋予团队中每个研发<strong>独立开发技术产品</strong>的能力。</p>
+<h3 id="再谈技术运营">再谈技术运营</h3>
+<p>那是否 我们只需要搭建产品体系就够了呢？并不是，我反而认为，<strong>技术运营</strong>也应当视为产品体系中<strong>重要的一环</strong>。</p>
+<p>只是它必须依托于产品体系之上，不能独立存在。</p>
+<p><br/></p>
+<p>即使是软件架构相关的资料中，也有类似的观点，《<a href="https://book.douban.com/subject/4745287/" target="_blank" rel="noopener">软件架构师应该知道的 97 件事</a>》</p>
+<blockquote>
+<p>有这样一种观点，认为设计优良的框架，细致考虑并精巧实现的架构自然会被人们重复利用。</p>
+</blockquote>
+<blockquote>
+<p>事实上，即便是最精美，最优雅的框架，可复用性最高的系统，也必须满足下面的条件才可能被复用。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>大家知道它们存在</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>大家知道如何使用它们</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>大家认识到利用已有资源好过自己动手</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>如果大家找不到可复用的资源，或者不知道如何使用这些资源，人的天性就会发挥作用。他们会自己动手实现，到头来吃亏的还是架构师。</p>
+</blockquote>
+<p><br/></p>
+<p>宣贯在产品推向市场的过程中，起着无比关键的作用（前提是这个产品确实有市场）。</p>
+<p>当人们都不知道这个产品存在的时候，即使这个产品再好，也没有人来用。</p>
+<p>所以在整个产品体系中，<strong>在扩大市场的阶段中</strong>，我们需要更好的进行宣贯。</p>
+<h3 id="结语">结语</h3>
+<ul>
+<li><p>搭建产品体系，优于 单点考虑的 加大技术运营力度</p></li>
+<li><p>ToD 业务仍然需要通过产品力来吸引用户，赢得市场竞争，所以懂得如何做好一款产品很重要</p></li>
+<li><p>技术运营在市场扩大阶段，仍然非常重要，但前提是做出来的产品要有市场</p></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/03/30/discussion/" rel="next" title="如何友好的讨论问题">
+                <i class="fa fa-chevron-left"></i> 如何友好的讨论问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/07/06/discussion/" rel="prev" title="技术讨论中的问题迁移术">
+                技术讨论中的问题迁移术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">305</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#tod-业务的特点"><span class="nav-number">1.</span> <span class="nav-text">ToD 业务的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产品体系"><span class="nav-number">2.</span> <span class="nav-text">产品体系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再谈技术运营"><span class="nav-number">3.</span> <span class="nav-text">再谈技术运营</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

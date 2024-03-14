@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/12/15/adventure-03/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/07/16/user/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/15/adventure-03/" itemprop="url">软件设计奇遇记（三）：人本主义</a></h1>
+                <a class="post-title-link" href="/2021/07/16/user/" itemprop="url">“用户视角” 的三重境界</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-15T00:00:00+08:00">
-                2020-12-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-16T00:00:00+08:00">
+                2021-07-16
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Software/" itemprop="url" rel="index">
-                    <span itemprop="name">Software</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,105 +347,90 @@
       
         
           
-            <p>前两篇文章中，我们介绍了软件开发的时间线索，和软件系统的空间关系，</p>
-<p>这使得我们可以将自己的工作，看成为历史长河中的一瞬，</p>
-<p>或者看成庞大软件体系中的一个部分。</p>
+            <p>前几天看到了一个短视频，有一句话印象很深刻，</p>
+<blockquote>
+<p>做生意是，卖人们想要的，而不是卖我们认为正确的。</p>
+</blockquote>
 <p><br/></p>
-<p>然而，如果考察软件设计的话，只考虑软件自身是还不够的，</p>
-<p>还要考虑人的因素，因为软件终究还是要由人来做出来的。</p>
+<p>我觉得这句话很有启发性，让我得到了以下一个小小的体会，</p>
+<p>做产品时 “用户视角” 的三重境界。</p>
+<ul>
+<li><p>不具备用户视角：无法站在用户角度考虑问题</p></li>
+<li><p>我是为了用户好：售卖自己认为正确的想法</p></li>
+<li><p>尊重用户的想法：坚持以真实的用户作参考</p></li>
+</ul>
 <p><br/></p>
-<p>所以本文就来探讨一下，语言、模式、工程 和 领域分层。</p>
-<p>看看这些方面的内容，在软件设计过程中起到了什么作用。</p>
-<h3 id="语言">语言</h3>
-<p>在我看来，自然语言是用来传递信息用的，编程语言也是如此，</p>
-<p>编程语言在将开发者大脑中的想法，转换为机器实现的这个过程中，起到了桥梁作用。</p>
-<p>因此，应该着眼于合理的信息转换方式，而不是特定的编程语言。</p>
+<p>下文我们就讨论一下我所经历的这几个阶段，止增笑耳。</p>
+<h3 id="不具备用户视角">不具备用户视角</h3>
+<p>我认为不进行专业训练的话，其实是很难天生就能具备产品思维的。</p>
+<p>要么做出来的产品<strong>不好用</strong>，要么根本就<strong>没有考虑过</strong>好不好用的问题。</p>
 <p><br/></p>
-<p>编程语言也不是孤立存在的，</p>
-<p>选用不同编程语言，等于选择了一个社区，一套软件生态，</p>
-<p>会认识不同的人，跟现有的不同系统进行对接。</p>
+<p>假如我们将自己看做一个精心打磨多年的 “产品” 的话，</p>
+<p>又有多少人考虑过 “自己这个产品” 是不是真的被用户所喜欢呢？</p>
 <p><br/></p>
-<p>但不论怎样说，有能力使用多语种编程语言进行编程，是至关重要的，</p>
-<p>这会让我们思考问题的方式从一开始就能摆脱宗教迷信，</p>
-<p>没有哪一种解决方案是最好的，只有最适合于当下的。</p>
+<p>这需要我们从个人视角，切换成双方视角看待问题。</p>
+<p>从 “我认为” “我的感受” 逐渐转变成 “用户认为” “用户的感受”。</p>
+<p>在这个过程中，我们需要识别 “<strong>谁是用户</strong>”，以及 “<strong>用户的预期</strong>” 到底是什么。</p>
 <p><br/></p>
-<p>最后，在职业生涯的某个阶段，我们很有必要去学习编程语言本身相关的知识。</p>
-<p>一方面，能帮助我们了解编程语言到底是如何工作的，</p>
-<p>另一方面，在必要的时候，能够发明自己的语言，让信息转换变得更加直接。</p>
-<h3 id="模式">模式</h3>
-<p>有一些设计模式相关的资料，容易给人一种错觉，</p>
-<p>认为设计模式只是有关于软件内部结构的，</p>
-<p>毕竟工厂模式和适配器模式，它们最容易看到的区别是实现方式不同。</p>
+<p>不具备用户视角的人，给人一种 “极客” 感，</p>
+<p>他们的作品不是 “推送” 给用户的，而是等着用户去 “发现”。</p>
+<p>用户感受对他们来说是无所谓的，“不是我做的不好，而是你不会用”。</p>
+<h3 id="我是为了用户好">我是为了用户好</h3>
+<p>我发现 “同理心” 有可能是某些人天生就有的。</p>
+<p>以前读过一本书《<a href="https://book.douban.com/subject/27125070/" target="_blank" rel="noopener">高敏感是种天赋</a>》，很多人天生具备 “高敏感型” 人格。</p>
 <p><br/></p>
-<p>我不这么认为，我更倾向于把模式实现当做现象，</p>
-<p>而把模式要解决的问题，以及模式所固化下来的解题套路，看成本质。</p>
+<blockquote>
+<p>在我们身边，每 5 人就有 1 人高度敏感。</p>
+</blockquote>
+<blockquote>
+<p>高度敏感型人总是努力避免给他人带来不便或痛苦，他们也花更多精力去维持与他人的关系。而那些相对神经大条的人，似乎更少去考虑将要说的话或者做的事。</p>
+</blockquote>
+<blockquote>
+<p>高敏感行的人能进行高度共情，并给予共情式的倾听。</p>
+</blockquote>
 <p><br/></p>
-<p>有什么样的问题，就有什么样的解决方案，而不是反之。</p>
-<p>人为之物，之所以是这样而不是那样，是因为有不同的动机。</p>
+<p>所以有很多人天生就倾向于 “站在对方角度考虑问题”，更容易获得 “用户视角”。</p>
+<p>但是，仅仅具备这种 “盲目” 的 “用户视角” 也是有问题的。</p>
 <p><br/></p>
-<p>所以从人的角度来设计模式，只考虑模式的内部表现则只看到了三分之一，</p>
-<p>剩下的三分之二是，特定模式所暴露出来的接口，</p>
-<p>以及人们选用这个模式背后的用意。</p>
+<p>记得在《<a href="https://book.douban.com/subject/25884108/" target="_blank" rel="noopener">程序员的呐喊</a>》中，作者吐槽 “Google 平台” 时，提到过这样一句话，</p>
+<blockquote>
+<p>平台的金科玉律就是要吃自己的狗粮。</p>
+</blockquote>
+<blockquote>
+<p>你不能自己吃人吃的东西，却让开发者吃狗吃的东西。</p>
+</blockquote>
 <p><br/></p>
-<p>因此，设计模式是一种人们使用特定方式解决特定问题的套路。</p>
-<p>特定方式：接口设计，</p>
-<p>特定问题：用意，动机，问题，</p>
-<p>套路：实现方式，代码结构。</p>
+<p>在很长一段时间内，我都将 “吃自己的狗粮” 视为 “金科玉律”。</p>
+<p>直到最近才发现<strong>这样做也不全是对的</strong>。</p>
+<p>我们是真的想对用户好一点，但别忘了毕竟<strong>自己不是用户</strong>。</p>
+<h3 id="尊重用户的想法">尊重用户的想法</h3>
+<p>为了做出一款用户满意的产品，首先我们要识别出<strong>谁才是真正的用户</strong>。</p>
+<p>对于软件行业来说，尤其是<strong>开发</strong>一款面向<strong>开发者</strong>的产品，这一点至关重要。</p>
 <p><br/></p>
-<p>我更关心接口层，因为接口是系统的界面，告知我们如何与现有功能进行交互。</p>
-<h3 id="工程">工程</h3>
-<p>广义上来讲，工程是一群人为达到某种目的，</p>
-<p>在一个较长时间周期内，进行协作活动的过程。</p>
-<p>所以，工程必然会涉及到的要素有：人，目标，时间，协作。</p>
+<p>我们自己是开发，产品的用户也是开发。</p>
+<p><strong>但，我们不是用户。</strong></p>
+<p>除非这款产品只是为了解决我们自己的问题而存在的。</p>
 <p><br/></p>
-<p>现实中的工程，所能利用的资源也都是有限的。</p>
-<p>所以，工程化应考虑这样一个问题，</p>
-<p>哪些人以怎样的协作方式，在资源有限的情况下，达成什么目标。</p>
+<p>所以在这种情况下，我得经常提醒自己，</p>
+<blockquote>
+<p>用户是用户，团队内的开发是开发，不能代表用户</p>
+</blockquote>
 <p><br/></p>
-<p>不同领域的工作，体力劳动与知识劳动的占比会有不同。</p>
-<p>体力劳动的成果容易量化，而知识劳动则不然，</p>
-<p>体力劳动经常能直接创造成果，而知识劳动的成果不能直接被看到。</p>
-<p><br/></p>
-<p>软件开发是一项知识密集型工作，开发活动是知识的创造过程。</p>
-<p><br/></p>
-<p>知识工作具有不确定性，没有人能预先评估一项知识工作需要多久才能做完。</p>
-<p>所以，软件工程中的各种方法论，都是在用不同的方法回答，</p>
-<p>如何对不确定性进行管控。</p>
-<p><br/></p>
-<p>不论是敏捷开发，精益看板，极限编程，都能看到不确定性被管控的影子。</p>
-<h3 id="分层">分层</h3>
-<p>首先，分层是架构模式的一种，它将软件分成若干个水平层，</p>
-<p>每一层都有清晰的角色和分工，不需要知道其他层的细节，</p>
-<p>层与层之间通过接口通信。</p>
-<p><br/></p>
-<p>其次，开发者之间的合作，也可以用分层的方式来划分，我称之为领域分层，</p>
-<p>人们常说的 “上层开发”、“底层开发”，就是这个含义，</p>
-<p>指的是软件生产的上下游关系。</p>
-<p><br/></p>
-<p>每一层的开发者，都会用到下一层次开发者提供的 “软件材料”，</p>
-<p>经过加工处理，添加业务逻辑，向更上层提供新的服务。</p>
-<p><br/></p>
-<p>开发者的价值并不在于自己的工作处于哪个层次中，</p>
-<p>而在于如何更好的完成本层次的 “加工” 工作。</p>
-<p>对下层资源是否熟悉，加工过程是否可控，以及向上提供的服务好不好用。</p>
-<p><br/></p>
-<p>因此，“底层开发” 并没有什么神秘感可言，</p>
-<p>也不是非要每个人亲自动手才行，</p>
-<p>须知底层开发，也不是从零开始，他们同样是站在了巨人的肩膀之上。</p>
-<p><br/></p>
-<p>所以，对自己所在层次的工具或库熟练掌握，并对当前领域有深入思考，</p>
-<p>这才是一个工程师的核心竞争力，才是专业的人做专业的事。</p>
+<p>想通这点之后，就有了一种返璞归真的 “通透感”。</p>
+<p><strong>做产品应当一切以事实或数据说话，听取真实用户的声音</strong>，而不是假设。</p>
+<p>这才叫<strong>真正的</strong>尊重用户的想法。</p>
 <h3 id="结语">结语</h3>
-<p>软件开发是一项由人参与的知识生产活动，所以千万不能只看软件不看人。</p>
-<p>人，才是决定软件研发活动的核心要素。</p>
+<p>上文记录了一下自己关于 “用户视角” 的一些思考，</p>
+<p>让我意识到在 “为用户着想” 方面，自己确实走过一段很长的弯路。</p>
 <p><br/></p>
-<p>本文从编程语言，设计模式，软件工程，领域分层，四个角度来进行探讨，</p>
-<p>从新的视角进行观察，着重看它们是如何与人产生关联的。</p>
+<p>我没有倾听<strong>真实用户</strong>的声音，而是用自己<strong>认为好</strong>的方式提供产品功能。</p>
+<p>这种思维习惯，对于打造一款 “受用户喜欢” 的产品来说，是非常有害的。</p>
+<p>现在还需经常提醒自己，担心自己会忘记。</p>
 <p><br/></p>
-<p>以人为本，则知识的创造和传递过程，才会更加顺畅，</p>
-<p>才能避免过分依赖技术武器而走弯路。</p>
-<p><br/></p>
-<p>这可能是一件有趣的事情吧。</p>
+<p>这真是，</p>
+<blockquote>
+<p>昨日入城市，屋上无片瓦。遍身罗绮者，鳞鳞居大厦。</p>
+</blockquote>
 
           
         
@@ -484,7 +469,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/37/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><span class="page-number current">38</span><a class="page-number" href="/page/39/">39</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/39/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/37/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><span class="page-number current">38</span><a class="page-number" href="/page/39/">39</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/39/">&gt;</a>
   </nav>
 
 
@@ -530,7 +515,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -605,7 +590,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

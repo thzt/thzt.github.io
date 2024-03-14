@@ -1,0 +1,841 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言 时间过的太快，转眼已经工作十多年了。 刚入行时，听到业界有一句话说「用十年学会编程」。 回顾这十年，我发现真正深入研究「如何编程」的机会其实很少，顶多也就 5~6 年。  更多时间都消耗在「如何跟别人讨论问题」，已经「如何推进项目落地」上面。 我也隐约体会到了，有人的地方就有江湖，这一层含义。  在讨论问题的时候，尤其是有多人在场时， 将话题带偏是非常容易发生的事情，这需要会议的主持人有极强">
+<meta property="og:type" content="article">
+<meta property="og:title" content="技术讨论中的问题迁移术">
+<meta property="og:url" content="https://thzt.github.io/2023/07/06/discussion/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="前言 时间过的太快，转眼已经工作十多年了。 刚入行时，听到业界有一句话说「用十年学会编程」。 回顾这十年，我发现真正深入研究「如何编程」的机会其实很少，顶多也就 5~6 年。  更多时间都消耗在「如何跟别人讨论问题」，已经「如何推进项目落地」上面。 我也隐约体会到了，有人的地方就有江湖，这一层含义。  在讨论问题的时候，尤其是有多人在场时， 将话题带偏是非常容易发生的事情，这需要会议的主持人有极强">
+<meta property="article:published_time" content="2023-07-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-14T00:39:21.745Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2023/07/06/discussion/"/>
+
+
+
+
+
+  <title>技术讨论中的问题迁移术 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2023/07/06/discussion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">技术讨论中的问题迁移术</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-06T00:00:00+08:00">
+                2023-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言">前言</h3>
+<p>时间过的太快，转眼已经工作十多年了。</p>
+<p>刚入行时，听到业界有一句话说「用十年学会编程」。</p>
+<p>回顾这十年，我发现真正深入研究「如何编程」的机会其实很少，顶多也就 5~6 年。</p>
+<p><br/></p>
+<p>更多时间都消耗在「如何跟别人讨论问题」，已经「如何推进项目落地」上面。</p>
+<p>我也隐约体会到了，有人的地方就有江湖，这一层含义。</p>
+<p><br/></p>
+<p>在讨论问题的时候，尤其是有多人在场时，</p>
+<p>将话题带偏是非常容易发生的事情，这需要会议的主持人有极强的控场能力 和 目标感。</p>
+<p>不让人发言是不行的，发言之后，还能跳回主线，对共识的达成非常重要。</p>
+<p>大大小小的 “技术辩论赛” 我也参加过不少，以下介绍的内容不论对主张方还是辩方都是很有帮助的。</p>
+<h3 id="利益相关性">利益相关性</h3>
+<p>主张方发起一个问题时，经常会受到各方的挑战和阻力，这是正常的。阻力通常有两类：</p>
+<ul>
+<li><p>利益相关：我发起的事项，影响到了别人的利益（减少收益 或 增加损失）</p></li>
+<li><p>专业建议：在处理问题的专业程度上，受到了别人的指导</p></li>
+</ul>
+<p><br/></p>
+<p>要想能保持议题不跑偏的第一步，就是暂时性的忽略「专业建议」，只关注「利益相关」的言论。</p>
+<p>因为专业建议大家都会说，也可能是随口一说，事情做成 做不成其实跟 提建议的人关系不是太大。</p>
+<p>有时候，人们只是觉得应该讲句话而已，不必太当真。</p>
+<h3 id="讨论的目的">讨论的目的</h3>
+<p>识别到了利益相关性之后，我们还得想清楚讨论的目的。</p>
+<p>有人说「开会的本质是用时间换共识」，我觉得是有道理的。</p>
+<p>所以，要想高效的开会，就得想办法如何用更少的时间达成共识。</p>
+<p><br/></p>
+<p>虽然说达成共识并不需要所有人都认同，但是争取到更多的人认同仍然是必要的，论证方法有如下几类：</p>
+<ul>
+<li><p>逻辑论证：通过推演事情的来龙去脉，因果关系 等，让别人信服（有前提，就必然有结果）</p></li>
+<li><p>类比论证：通过讲解其他成功的案例，来印证相似的事情也可能成功</p></li>
+<li><p>事实论证：通过具体的事件、数据 等，从统计结论出发，让别人难以反驳</p></li>
+</ul>
+<p><br/></p>
+<p>虽然有以上多样性的论证方式，且论证本身也是必要的（主张方为力求结果更可靠，做出了必要的努力），</p>
+<p>但我的观点是，论证无非是让别人更加信服而已，</p>
+<p>而具备「假设思维」的人们，可以做到「主动欺骗」自己的大脑，让自己避免陷入论证过程中去（只看结果是否可靠，以及结果是否符合预期）。</p>
+<h3 id="带偏套路">带偏套路</h3>
+<p>在主张方进行论证的过程中，其实思路是很容易被人带偏的，我总结了一些套路：</p>
+<ul>
+<li>问题范围
+<ul>
+<li>扩大范围：添加一些主观的预期和理解在里面，是原来主张方没有想去解决的，把问题搞复杂</li>
+<li>缩窄问题：只看要解决的具体问题，并不想考虑长远计划，由此推导出方案太复杂</li>
+<li>问题定义：提出问题的定义不清楚，需要主张方明确定义</li>
+</ul></li>
+<li>方案设计
+<ul>
+<li>现有方案：转移到讨论现有方案为什么不能满足需要，讨论主张方对现有方案的理解程度</li>
+<li>不够具体：讨论细节，并需要主张方跑通一个复杂案例，来证明方案可行</li>
+</ul></li>
+<li>增加假设
+<ul>
+<li>极端场景：想出一个比较少见的极端场景，以表明主张方的方案还不够完整</li>
+<li>输入误导：给一些错误的输入 或者 前提（或来自 更上层的预期），让自己以为事情很复杂</li>
+<li>阶段目标：不同意阶段目标，认为长远看来有风险</li>
+</ul></li>
+</ul>
+<p><br/></p>
+<p>以上这些提问，确实是对分析问题有帮助的，也是值得提前思考的。</p>
+<p>但这里想说的观点是，这些提问容易把问题带偏，在讨论完这些问题之后，需要有「跳回主线」的强烈意识。</p>
+<p>如果主张方经常性的陷入以上问题的讨论细节，参会者是思路就会被搅的一团糟，不知道会议的主题是什么。</p>
+<h3 id="回归主线">回归主线</h3>
+<p>最好的回顾主线方式是，在会议开始之前由主持人说清楚会议的目标或主题，</p>
+<p>并在任何跑题事件发生时，讨论完成后（避免二阶跑题发生）立即叫停，跳回并重新阐释主题。</p>
+<p><br/></p>
+<p>其次，深入的技术讨论，其实对参会人的逻辑素养要求极高，需要每个人都持有「假设思维」才能顺利讨论下去。</p>
+<p>什么是假设思维呢？指的是可以站在任何一种假设之上，接着讨论问题，而不是揪着假设的对错不放。</p>
+<p><br/></p>
+<p>举个例子，比如当我们在讨论 技术债治理 这个主题时，有时候会假设某些项目已经长时间无人治理了。</p>
+<p>但有些人会揪着这个假设不放，质疑这些项目的数量占比。</p>
+<p>任何才能完整的讨论问题，并顺利进展下去呢？假设思维可以让我们这样思考：</p>
+<ul>
+<li><p>假设无人治理的项目占比较高，那么 ……</p></li>
+<li><p>否则（如果占比较少），那么 ……</p></li>
+</ul>
+<p><br/></p>
+<blockquote>
+<p>具备 “有前提就有结论” 的思考模式的人，任何时候都不会陷入恐慌。</p>
+</blockquote>
+<blockquote>
+<p>因为就算前提有变，还是能导出不一样的结论。解决问题的能力，就是为印证假设不辞劳苦的行动力。—— 《思考的技术》</p>
+</blockquote>
+<h3 id="友好度">友好度</h3>
+<p>当利益受损时，很多人不会直言自己的利益，而是找别的接口来反驳他人的主张，</p>
+<p>这种情况下也容易把话题带偏，识别的办法是「总是思考别人的动机」。</p>
+<p>即，不要听别人说的内容，而是考虑他为什么要这样说。每个人的说辞，都是为自己的目的服务的。</p>
+<p><br/></p>
+<p>当然妄加揣测是不对的，很容易对揣测到一个错误的动机。这里我总结两点经验：</p>
+<ul>
+<li><p>自信：别人给我什么印象，他就是那个印象，不要怀疑自己的判断</p></li>
+<li><p>试探：不断用自己的理解反过来试探，来验证自己的理解是否准确</p></li>
+<li><p>不确定性：确定只是暂时的，易变才是永恒的，我们时时刻刻处在不确定性之中，要及时订正自己的理解</p></li>
+</ul>
+<p><br/></p>
+<p>我们应当总是秉持友好的态度去讨论问题，</p>
+<p>也就是说，讨论问题时要 以利益扩大为主要目标（不论是为了自己，还是为了集体），</p>
+<p>而不是为了压制别人 或者 故意搞砸一件事（以凸显自己）。</p>
+<h3 id="小结">小结</h3>
+<p>要做到 友好/高效 的技术讨论，是非常难的，可能要同时关注以下几点才行：</p>
+<ul>
+<li><p>有人的地方就有江湖，手段多样，众口难调</p></li>
+<li><p>讨论问题时，需要先明确主题，支持人要及时控场避免跑题</p></li>
+<li><p>关注利益相关者的言论，忽略建议</p></li>
+<li><p>论证只是为了让人们更加信服</p></li>
+<li><p>有前提才有结论，能够站在任何前提考虑问题的人，思路会更完整</p></li>
+<li><p>别人不会直言利益，只会找借口，识别借口的办法是思考动机</p></li>
+</ul>
+<p><br/></p>
+<p>有趣的是，如果你想搞砸一个技术讨论，可能会非常简单。只需要做到以下几点：</p>
+<ul>
+<li><p>事情跟自己利益无关，但仍然给出多项专业建议，让主张方认为这是必须要考虑的事情</p></li>
+<li><p>不了解会议的主题，用自己想象中可能有问题的点去挑战主张方</p></li>
+<li><p>让主张方花费精力去准备更多论证材料，但其实自己并不关心结果</p></li>
+<li><p>二阶跑题，在跑题的过程中，对把问题带偏的人，再次应用跑题术</p></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/05/04/product/" rel="next" title="从技术运营到产品体系">
+                <i class="fa fa-chevron-left"></i> 从技术运营到产品体系
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/08/23/project/" rel="prev" title="项目成败要素的反思">
+                项目成败要素的反思 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">305</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利益相关性"><span class="nav-number">2.</span> <span class="nav-text">利益相关性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论的目的"><span class="nav-number">3.</span> <span class="nav-text">讨论的目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带偏套路"><span class="nav-number">4.</span> <span class="nav-text">带偏套路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回归主线"><span class="nav-number">5.</span> <span class="nav-text">回归主线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#友好度"><span class="nav-number">6.</span> <span class="nav-text">友好度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">7.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

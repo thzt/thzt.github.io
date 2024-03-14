@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/06/13/teacher/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/09/21/beyond-source-code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/13/teacher/" itemprop="url">教学之法</a></h1>
+                <a class="post-title-link" href="/2018/09/21/beyond-source-code/" itemprop="url">从源代码到领域知识</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T00:00:00+08:00">
-                2018-06-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T00:00:00+08:00">
+                2018-09-21
               </time>
             
 
@@ -347,114 +347,122 @@
       
         
           
-            <blockquote>
-<p>对于有些事情，似乎每个人都是专家。</p>
+            <p>在软件开发过程中，编译器起到了一个很关键的作用，</p>
+<p>它将一堆人类能读懂的<strong>符号</strong>进行转换，其结果让计算机可以执行。</p>
+<p><br/></p>
+<p>正因为如此，我想也不会有人认为<strong>编译产物</strong>是公司的一种财富，</p>
+<p>丢失了<strong>源代码</strong>，我们几乎一无所有。</p>
+<p><br/></p>
+<p>有了源代码，我们就可以对它进行<strong>重新编译</strong>，</p>
+<p>得到计算机可以执行的编译结果。</p>
+<p>除此之外，我们还可以在现有源代码的基础上<strong>继续</strong>开发。</p>
+<p><br/></p>
+<p>然而，我认为这可能是技术人员的<strong>一厢情愿</strong>罢了。</p>
+<p>且不论在不理解现有代码的情况下进行开发，可能引发的质量问题，</p>
+<p>就只谈论新加入的功能，能否与现有系统良好的并存，也可能会成为问题。</p>
+<p><br/></p>
+<p>所以，<strong>源代码也只是一种<a href="https://zh.wikipedia.org/zh/%E4%B8%AD%E9%96%93%E8%AA%9E%E8%A8%80" target="_blank" rel="noopener">中间语言</a>。</strong></p>
+<p><br/></p>
+<h3 id="自然语言">1. 自然语言</h3>
+<p>为什么编译器不直接对人类的<strong>自然语言</strong>进行转换呢？</p>
+<p>我想可能是自然语言的歧义性，和计算资源的取舍问题，</p>
+<p>我们将花费更多计算资源，来理解<strong>更有歧义</strong>的自然语言。</p>
+<p><br/></p>
+<p>而程序设计语言在识别<strong>歧义性</strong>方面，投入产出比则更高。</p>
+<p>况且，即使是用自然语言，也没办法完整传达我们要表达的<strong>含义</strong>，</p>
+<p>为了表达清楚，就必须不断的沟通和交流。</p>
+<p><br/></p>
+<p>从这种意义上来讲，是我们<strong>事先</strong>在头脑中有了一个想法，</p>
+<p>然后进行了一些<strong>简化</strong>，</p>
+<p>再将简化后的想法，用自然语言（或程序语言）表述出来。</p>
+<p><br/></p>
+<p>因此，是产生想法的那个<strong>人</strong>，拥有要被表达的想法，</p>
+<p>而不是语言本身。</p>
+<p><br/></p>
+<h3 id="领域知识">2. 领域知识</h3>
+<p>进行软件开发工作的朋友们，可能会对“业务逻辑”这个术语比较熟悉，</p>
+<p>所谓<strong>业务逻辑</strong>，指的是现实世界<strong>业务规则</strong>的程序编码。</p>
+<p><br/></p>
+<blockquote>
+<p>In computer software, business logic or domain logic is the part of the program that encodes the real-world business rules that determine how data can be created, stored, and changed.</p>
 </blockquote>
 <blockquote>
-<p>教学就是一个好例子。</p>
+<p>—— <a href="https://en.wikipedia.org/wiki/Business_logic" target="_blank" rel="noopener">Business logic</a></p>
 </blockquote>
+<p><br/></p>
+<p>业务逻辑又称为<strong>领域逻辑</strong>（domain logic），</p>
+<p>它反映了现实世界<strong>业务领域</strong>中约定俗成的一些规则和<strong>知识</strong>。</p>
+<p><br/></p>
+<p>因此，只看源代码却不顾<strong>领域知识</strong>，</p>
+<p>就相当于，保存着编译产物，却不关心源代码。</p>
+<p><br/></p>
+<p>失去了领域知识，源代码就失去了<strong>思想</strong>。</p>
+<p><br/></p>
+<h3 id="信息不完整">3. 信息不完整</h3>
+<h4 id="接口文档">3.1 接口文档</h4>
+<p>当我们阅读自己代码的时候，会觉得很多代码逻辑的显而易见的，</p>
+<p>但是实际上，代码并没有留下足够多的<strong>信息</strong>。</p>
+<p><br/></p>
+<p>例如，JavaScript中数组的<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort" target="_blank" rel="noopener">sort</a>函数，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; [1, 2, 3, 11, 12, 13].sort();</span><br><span class="line">[1, 11, 12, 13, 2, 3]</span><br></pre></td></tr></table></figure>
+<p>得到这个结果，多多少少会让不了解内情的人感到意外，因为，事实上，</p>
 <blockquote>
-<p>任何人，只要智商超过 80，又懂得一点什么东西，似乎都可以当老师。</p>
-</blockquote>
-<blockquote>
-<p>—— 《<a href="https://book.douban.com/subject/1866824/" target="_blank" rel="noopener">理解专业程序员</a>》</p>
+<p>The default sort order is according to string Unicode code points.</p>
 </blockquote>
 <p><br/></p>
-<p>回忆一下我们在学校中遇到的那些<strong>优秀教师</strong>，</p>
-<p>他们和蔼可亲，关爱学生，</p>
-<p>讲授着现在看来我们早就学会了的知识。</p>
+<p>默认排序是按字符串的<a href="https://en.wikipedia.org/wiki/Code_point" target="_blank" rel="noopener">unicode码位</a>排序的，</p>
+<p>这些数字首先会被转换为字符串，再按unicode码位排序。</p>
 <p><br/></p>
-<p>因此，这就很容易就给人们造成一种假象，</p>
-<p>那就是，只要态度好，足够敬业，</p>
-<p>成为一名特级教师<strong>似乎</strong>只是时间问题。</p>
+<p>这只是一个接口相关的例子而已。</p>
+<p>我们通过把接口文档补充完整，就能大幅度的改善这个问题。</p>
 <p><br/></p>
-<p>这显然是不可能的。</p>
+<p>然而，还有一些关于<strong>灵活实现</strong>的问题，却没有这样简洁的办法避免它。</p>
 <p><br/></p>
-<p>我们能清晰的理解教师的讲解，</p>
-<p>并不代表着我们也能讲授的这么清晰。</p>
+<h4 id="未定义的实现方式">3.2 未定义的实现方式</h4>
+<p>例如大部分表单页面，都会实现一个避免重复提交的功能。</p>
+<p>这个功能的实现方式非常<strong>灵活</strong>。</p>
 <p><br/></p>
-<p>教学方法是一个很艰深的话题。</p>
+<p>我们可以点击按钮之后，在页面中弹出一个遮罩层，避免用户再次点击。</p>
+<p>也可以把按钮置灰，让用户无法点击。</p>
 <p><br/></p>
-<h3 id="兴趣">兴趣</h3>
-<p>爱因斯坦说，“兴趣是最好的老师”，</p>
-<p>如何让知识的接受者，对相关知识产生兴趣，是传递知识的前提。</p>
+<p>现在就有一个问题，如果服务器端异常了，</p>
+<p>这时候页面会如何展示，</p>
+<p>不刷新页面我就不能提交了吗？</p>
 <p><br/></p>
-<p>我们无法在一个抗拒的大脑中，塞下任何东西。</p>
+<p>显然这件事除了看代码，或者去问代码的编写者之外，</p>
+<p>没有更好的办法去确定它。</p>
 <p><br/></p>
-<p>温伯格 在《<a href="https://book.douban.com/subject/26282714/" target="_blank" rel="noopener">咨询的奥秘</a>》中提到，</p>
-<blockquote>
-<p>如果他们没有雇用你，就不要为他们解决问题。</p>
-</blockquote>
+<h3 id="代码即文档">4. 代码即文档？</h3>
+<p>像上文提到的那样，代码只是实现了开发者头脑中的一部分<strong>想法</strong>，</p>
+<p>另外一部分<strong>想法</strong>，如果开发者不写在别的地方，我们永远都不知道。</p>
 <p><br/></p>
-<p>同理，在打算讲授知识之前，必须事先明确，</p>
-<p><strong>如果别人不需要这些知识，或者说不肯为这些知识付出代价，</strong></p>
-<p><strong>就不要讲授给他们听。</strong></p>
+<p>因此我们应该鼓励对这些专有知识进行<strong>广播</strong>，继而沉淀下来。</p>
+<p>通过代码来反推业务逻辑，</p>
+<p>则无异于对编译产物进行<strong>逆向工程</strong>得到源代码。</p>
 <p><br/></p>
-<p>真经必须由玄奘法师，亲自<strong>求取</strong>。</p>
+<p>一个代码库，如果只有通过阅读代码这一种手段来理解它，</p>
+<p>那么它关于领域知识的<strong>留存度</strong>，将是十分缺失的。</p>
 <p><br/></p>
-<p>因此，一个好的知识传递者，</p>
-<p>必定首先吸引受众的兴趣，让他们对知识<a href="https://book.douban.com/subject/27030507/" target="_blank" rel="noopener">上瘾</a>，</p>
-<p>曾记否，“人之患，在好为人师”。</p>
-<p><br/></p>
-<h3 id="经验">经验</h3>
-<p>教学是一项需要<strong>充分准备</strong>的过程。</p>
-<p>教学是一项需要<strong>充分准备</strong>的过程。</p>
-<p><br/></p>
-<p>临时的经验总结，并不会给知识接纳者带来任何好处，</p>
-<p>混乱的信息反而会给人们带来更多的心智负担。</p>
-<p><br/></p>
-<p>为此，我们需要仔细考虑，将哪些知识传递给别人。</p>
-<p><strong>事后总结的规律，并不等同于做好这件事的有效办法。</strong></p>
-<p><br/></p>
-<p>例如，我们知道掌握平衡的办法，但这并不能教会婴儿学会走路。</p>
-<p>我们知道骑自行车的诀窍，也不能用来教会别人怎样骑车。</p>
-<p><br/></p>
-<p>事后总结和事前的学习方法，是两码事。</p>
-<p><br/></p>
-<p>因此，作为一个好的知识传递者，就得首先忘掉自身所学，</p>
-<p>站在初学者角度，<strong>想出教会自己的办法。</strong></p>
-<p><br/></p>
-<p>所以，技能熟练的人，并不一定擅于教学，</p>
-<p>也可能只是他当时，遇到了一个好老师罢了。</p>
-<p><br/></p>
-<p>忘掉自身所掌握的信息，通常是一件困难的事情，</p>
-<p>因为人们经常不小心就中了“<a href="https://zh.wikipedia.org/wiki/%E7%9F%A5%E8%AD%98%E7%9A%84%E8%A9%9B%E5%92%92" target="_blank" rel="noopener">知识的诅咒</a>”，无法理解别人的处境。</p>
-<p>需要勤加<strong>练习</strong>。</p>
+<p>所以，代码即文档，强调的应当是努力提高代码的<strong>可读性</strong>，</p>
+<p>而不是说出了代码之外，就不应该有文档了。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>编程也是一个不缺乏专家的领域。</p>
+<p>对软件行业不理解的人们，可能会觉得，</p>
+<p>工程师们聚在一起，一定是在互相切磋编码技能，</p>
+<p>其实不是如此。</p>
+<p><br/></p>
+<p>他们在尝试理解对方，也尝试让对方理解自己。</p>
+<p>尝试把专有知识<strong>公有化</strong>，</p>
+<p>也尝试把更多<strong>无损的</strong>想法放入代码和文档中。</p>
+<p><br/></p>
+<p>源代码也只是一种<strong>中间语言</strong>，写代码的那个人，才是关键。</p>
 <p><br/></p>
 <blockquote>
-<p>如果你看到一条广告招收“有经验的”程序员，那意思往往就是一年或者两年经验。</p>
+<p>Reuse is about people and education, not just architect.</p>
 </blockquote>
 <blockquote>
-<p>实际上，如果谁有 15 年的编程经验，人们倒会觉得这人简直是个智障。</p>
+<p>—— 《<a href="https://link.zhihu.com/?target=https%3A//book.douban.com/subject/4745287/">软件架构师应该知道的97件事</a>》</p>
 </blockquote>
-<p><br/></p>
-<p>在编程行业中传递知识，变得极为困难，</p>
-<p>因为首先大多数人，<strong>不认为自己需要被传授。</strong></p>
-<p><br/></p>
-<p>其次，学会某项技能的专业人士，也很难正视自己的学习经历，</p>
-<p>通常人们会将已掌握的知识，归结为自身的“聪明”，</p>
-<p>而避免谈论当时的<strong>外部环境</strong>。</p>
-<p><br/></p>
-<p>实际上，如果不投身于特定的环境中，仅凭聪明才智，</p>
-<p>是很难学会任何技能的。</p>
-<p><br/></p>
-<p>另一方面，布鲁克斯 在《<a href="https://book.douban.com/subject/26358448/" target="_blank" rel="noopener">人月神话</a>》中提到，</p>
-<blockquote>
-<p>所有软件活动包括根本任务——打造由抽象软件实体构成的复杂<strong>概念结构</strong>，</p>
-</blockquote>
-<blockquote>
-<p>次要任务——使用编程语言表达这些抽象实体，在空间和时间限制内将它们映射成机器语言。</p>
-</blockquote>
-<p><br/></p>
-<p>软件活动是围绕那些人为创造的<strong>抽象概念</strong>展开的，</p>
-<p>所以，如何传递这些由<strong>抽象概念</strong>构成的知识，是软件活动中最困难的部分。</p>
-<p><br/></p>
-<p>这就进入了一个两难困境。</p>
-<p>我们需要传递知识，可知识又不容易被传递，</p>
-<p>教学之法，值得慎重考虑。</p>
 
           
         
@@ -493,7 +501,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/129/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/129/">129</a><span class="page-number current">130</span><a class="page-number" href="/page/131/">131</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/131/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/129/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/129/">129</a><span class="page-number current">130</span><a class="page-number" href="/page/131/">131</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/131/">&gt;</a>
   </nav>
 
 
@@ -539,7 +547,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -614,7 +622,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

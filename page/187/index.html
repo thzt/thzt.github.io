@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/10/recursive-function-6/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/08/06/scientists-and-engineers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/10/recursive-function-6/" itemprop="url">递归函数（六）：最多有多少个程序</a></h1>
+                <a class="post-title-link" href="/2017/08/06/scientists-and-engineers/" itemprop="url">工程师的两难困境</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T00:00:00+08:00">
-                2017-03-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-06T00:00:00+08:00">
+                2017-08-06
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,159 +347,118 @@
       
         
           
-            <h3 id="回顾">回顾</h3>
-<p>上一篇中，我们通过引入极小化算子定义了递归函数，</p>
-<p>使用递归函数，我们又定义了递归集与递归可枚举集，</p>
-<p>本文我们要讨论，为什么递归可枚举集是“可枚举”的，以及什么是可计算函数。</p>
+            <h3 id="科学家与科学方法">科学家与科学方法</h3>
+<p>科学家是一个泛称，广义上指使用系统化的活动来发现新知识的人。</p>
 <p><br/></p>
-<h3 id="可计算性">可计算性</h3>
+<p>这种系统化的活动，通常被称之为<strong>科学方法</strong>，它涉及以下几个步骤：</p>
+<p>（1）细致的观察真实世界的特点，通常还要有精确的测量</p>
+<p>（2）根据观察结果提出假设模型</p>
+<p>（3）根据模型预测未来的事件</p>
+<p>（4）继续观察并核实预测的准确性</p>
+<p>（5）如此反复直到确认预测和观察一致</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3315ef8756b21619.png" /></p>
+<p>科学方法中一条关键的原则就是，<strong>实验必须是可重现的</strong>，否则别人无法自行验证，</p>
+<p>此外，<strong>所有的假设也必须是可证伪的</strong>，否则我们就无法排除哪些假设是错误的。</p>
 <p><br/></p>
-<p>我们听说过，现代计算机在计算能力上是与图灵机等价的，</p>
-<p>什么叫做计算能力呢？</p>
-<p>它指的是图灵机可计算的函数集，与现代计算机可计算的函数集是相等的。</p>
+<p>爱因斯坦说：</p>
+<p>“再多的实验也不一定能够证明我是对的，但只需要一个实验就能证明我是错的。”</p>
+<p>因此，科学理论只是暂时性的假设，我们只能验证它与当前观测的一致性。</p>
 <p><br/></p>
-<p>为了简单起见，我们不去讨论图灵机，而是从现代计算机直接说起，</p>
-<p>设<span data-katex="\mathscr{P}"></span>是一段程序，<span data-katex="n"></span>是一个正整数，</p>
-<p>我们称数论函数<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>为程序<span data-katex="\mathscr{P}"></span>所计算的<span data-katex="n"></span>元部分函数，</p>
-<p>如果对于相同的输入，</p>
-<p>要么：（1）程序<span data-katex="\mathscr{P}"></span>的计算可以终止，此时计算结果等于<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>的相应函数值；</p>
-<p>要么：（2）程序<span data-katex="\mathscr{P}"></span>的计算不能终止，此时<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>无定义。</p>
+<h3 id="工程师不是科学家">工程师不是科学家</h3>
+<p>工程师，是指那些在工程专业领域的人，</p>
+<p>他们使用科学知识来驾驭技术以解决实际问题，并以此为职业。</p>
 <p><br/></p>
-<p>设<span data-katex="f(x_1,x_2,\cdots ,x_n)"></span>是一个部分函数，如果存在程序<span data-katex="\mathscr{P}"></span>可计算<span data-katex="f"></span>，则称<span data-katex="f"></span>是部分可计算的。</p>
-<p>如果一个函数，既是部分可计算的，又是全函数，则称这个函数是可计算的。</p>
+<p>工程师和科学家往往容易混淆，</p>
+<p>科学家努力探索大自然，以便发现一般性法则（general principles），</p>
+<p>工程师则遵照此既定原则，从而在数学和科学上，解决了一些技术问题。</p>
 <p><br/></p>
-<p>可以证明，所有的原始递归函数和递归函数都是部分可计算的。</p>
+<p>科学家探索世界以<strong>发现普遍法则</strong>，但工程师<strong>使用普遍法则</strong>以设计实际物品。</p>
 <p><br/></p>
-<h3 id="通用程序">通用程序</h3>
-<p>我们使用现代计算机进行编程的时候，并不是直接把程序的输入传给程序，</p>
-<p>而是将程序本身以及它的输入，传给计算机，最后由计算机得到计算结果，</p>
-<p>像这种接受任何程序和它的输入作为自己的输入，返回程序执行结果的程序，称为通用程序。</p>
-<p>为此，通用程序需要把输入的程序进行编码。</p>
+<p>科学家<strong>研究</strong>东西，工程师<strong>建立</strong>东西，</p>
+<blockquote>
+<p>Scientists ask why, engineers ask why not?</p>
+</blockquote>
 <p><br/></p>
-<p>常用的编码方法，涉及<a href="https://zh.wikipedia.org/wiki/%E9%85%8D%E5%AF%B9%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">配对函数</a>和<a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E6%95%B0" target="_blank" rel="noopener">哥德尔编码</a>。</p>
-<p>为了不引入太多的复杂性，我们可以将程序的编码理解为存储程序的二进制数据，</p>
-<p>不同的程序会有不同的二进制表示，每一个二进制表示可以对应一段程序（虽然可能不合法）。</p>
-<p>哥德尔编码做的事情就是将程序和自然数集一一对应起来。</p>
+<h3 id="工程师追求多样性">工程师追求多样性</h3>
+<p>科学家喜欢<strong>把不同的东西统一看待</strong>，工程师则更喜欢<strong>构建多样化的产品</strong>。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3c5dd1454fcd0559.png" /></p>
+<p>普适性与多样性，各有所长，拥有不同的喜好完全和人们的目的紧密相关。</p>
 <p><br/></p>
-<p>因此，所有程序的个数是可数的，而这些程序可计算的函数个数也一定是可数的，</p>
-<p>它们可能是全函数，也可能是部分函数。</p>
-<p>（其中，“可数”指的是可数集，可数集是与自然数集之间存在一一映射的集合。</p>
+<p>越普遍规律性就越强，容易分析且应用面会更广，科学研究的价值就更大，</p>
+<p>越具体的事物，使用起来就越方便，应用成本降低，产品的价值更大。</p>
 <p><br/></p>
-<p>然而，自然数集上的函数全体并不可数，（证略</p>
-<p>所以肯定存在程序不可计算的函数。</p>
+<h3 id="软件必须是适用的">软件必须是适用的</h3>
+<p>工程师应该着眼于具体的场景和外界约束，构建出完全<strong>适用</strong>的定制化产品，</p>
+<p>现实世界千变万化，因此，保持多样性是不得已的选择。</p>
 <p><br/></p>
-<h3 id="集合个数的可枚举性">集合个数的可枚举性</h3>
+<p>当我们提供的产品不能解决用户问题时，</p>
+<p>并不是定制化方法出了问题，因为普适的产品是不存在的。</p>
+<p>我们应该调整产品的适用范围，对用户需求重新调研。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-a6e30544d2c6c7c3.png" /></p>
+<p>一个合格的软件，可以不是通用的，但至少应该是适用的。</p>
 <p><br/></p>
-<p>程序<span data-katex="\mathscr{P}"></span>所计算的函数，我们可以记为<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>，</p>
-<p>由此，我们可以定义通用程序<span data-katex="\Phi "></span>，则有，</p>
-<p><span data-katex="\Phi (x_1,x_2,\cdots ,x_n,y)=\psi (x_1,x_2,\cdots ,x_n)"></span></p>
-<p>其中，<span data-katex="y"></span>是程序<span data-katex="\mathscr{P}"></span>的编码。</p>
+<h3 id="代码的通用性如何保证">代码的通用性如何保证</h3>
+<p>编写软件是一件复杂的事情，因为必须同时考虑通用性与适用性。</p>
 <p><br/></p>
-<p>因为，所有的程序与自然数集一一对应，</p>
-<p>所以，<span data-katex="\Phi (x_1,x_2,\cdots ,x_n,0),\Phi (x_1,x_2,\cdots ,x_n,1),\cdots"></span></p>
-<p>枚举了所有的<span data-katex="n"></span>元可计算函数。</p>
+<p>软件工程师的一个任务是，<strong>通过程序来避免重复劳动</strong>，</p>
+<p>因此，程序必须具有一定通用性。</p>
 <p><br/></p>
-<p>我们定义<span data-katex="W_y=\lbrace x\in N|\Phi(x,y)\downarrow \rbrace "></span>，</p>
-<p>根据递归可枚举集的定义，每一个<span data-katex="W_y"></span>是一个递归可枚举集。</p>
+<p>软件工程师的另一个任务是，<strong>在具体的场景中，解决用户多方面的需求</strong>，</p>
+<p>因此，程序必须具有一定的适用性。</p>
 <p><br/></p>
-<p>又因为<span data-katex="\Phi(x,0),\Phi(x,1),\cdots "></span>枚举了所有的可计算函数，</p>
-<p>而上一篇中我们看到，递归可枚举集是由部分递归函数（即，可计算函数）定义的，</p>
-<p>一个部分递归函数确定出一个递归可枚举集，</p>
-<p>所以，<span data-katex="W_0,W_1,\cdots "></span>枚举了所有的递归可枚举集。</p>
+<p>所以，对于程序本身而言，它既应该是通用的，还应该是适用的。</p>
+<p>软件工程师们不得不左右权衡。</p>
 <p><br/></p>
-<p>因此，集合<span data-katex="B"></span>是递归可枚举的，当且仅当存在<span data-katex="y\in N"></span>，使得<span data-katex="B=W_y"></span>，</p>
-<p>称为枚举定理，这就是“枚举”的含义。</p>
+<p>一个好的策略是，不要一开始就建立抽象，也不要一开始就期望软件具有通用性，</p>
+<p>而是先定制化的解决多个场景中遇到的问题，并让解决方案足够具体，</p>
+<p>最后，<strong>在保持方案多样性的同时，考虑代码的通用性</strong>。</p>
 <p><br/></p>
-<p>令<span data-katex="K=\lbrace n\in N|n\in W_n\rbrace "></span>，</p>
-<p>则<span data-katex="K"></span>是递归可枚举的，但不是递归的，（证略</p>
-<p>因此，<span data-katex="\bar{K}"></span>不是递归可枚举的，否则<span data-katex="K"></span>就是递归集了。</p>
-<p>（根据，集合<span data-katex="B"></span>是递归的当且仅当<span data-katex="B"></span>和<span data-katex="\bar{B}"></span>是递归可枚举的，见上一篇</p>
+<h3 id="重造轮子的真实含义">重造轮子的真实含义</h3>
+<p>在软件开发或其他工程领域，</p>
+<p>重造轮子是指重新发明一个已有的事物，或是重新创造一个早已被优化过的基本方法。</p>
 <p><br/></p>
-<p>因此，我们找到了一个非递归的递归可枚举集<span data-katex="K"></span>，</p>
-<p>以及一个非递归可枚举集<span data-katex="\bar{K}"></span>。</p>
+<p>“重造轮子”一词的由来，是因为轮子自从被发明后，</p>
+<p>在使用上没有太大的缺陷，足以应付多数需求，</p>
+<p>原则上后人只需要直接应用即可，重新再发明一次轮子不但没有意义，</p>
+<p>浪费时间，还会分散研究者的资源，使其无法投入更有意义及价值的目标。</p>
 <p><br/></p>
-<h3 id="停机问题">停机问题</h3>
+<p>在软件行业中，重造轮子的情况很常见，大量相似的事物俯拾即是，</p>
+<p>这是一个不好的现象。</p>
+<p>然而，<strong>一个更不好的现象是，人们担心可能会重造轮子，而不去创造。</strong></p>
+<p>不能解决问题的产品到处都是，适用的产品却几乎没有。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-1fb62dcb731ff72f.png" /></p>
+<p>所以，重造轮子有了两重含义，</p>
+<p>重复发明一个已有的事物，且<strong>不能解决现有的问题</strong>。</p>
 <p><br/></p>
-<p>任给一个程序和一个自然数，问该程序对这个自然数输入的计算是否停止，</p>
-<p>这个问题称为停机问题。</p>
+<p>无疑，能不能解决问题才是人们最关心的。</p>
 <p><br/></p>
-<p>我们可以用谓词<span data-katex="H(x,y)"></span>描述这个问题，</p>
-<p><span data-katex="H(x,y)"></span>，表示以<span data-katex="y"></span>为代码的程序对输入<span data-katex="x"></span>的计算最终停止。</p>
-<p>那么，<span data-katex="H(x,y)"></span>是不可计算的，即，不存在一个程序来计算<span data-katex="H(x,y)"></span>。</p>
+<h3 id="总是努力改进不够好的地方">总是努力改进不够好的地方</h3>
+<p>用户需求未必是全新的，它往往体现在现存方案中<strong>不够好</strong>的地方，</p>
+<p>事实上，寻求软件解决方案的用户，在之前也有一套非软件的解决方案。</p>
+<p>因此，软件工程师的任务总是在<strong>改进</strong>而不是在发明，这才是编程的良好驱动力。</p>
 <p><br/></p>
-<p>我们来证明一下，假设有一个程序可以计算<span data-katex="H(x,y)"></span>，</p>
-<p>那么我们就能用它来构造一个新程序<span data-katex="\mathscr{P}"></span>，它的输入是<span data-katex="x"></span>，</p>
-<p>这段程序当<span data-katex="H(x,x)"></span>为真时，计算不停止，而当<span data-katex="H(x,x)"></span>为假时，计算停止。</p>
+<p>发现问题是最难的，</p>
+<p>我们可能发现了一个事实上不存在的问题，</p>
+<p>也可能发现了一个没有价值的问题，</p>
+<p>更有可能发现了一个已经被充分解决的问题。</p>
 <p><br/></p>
-<p>程序<span data-katex="\mathscr{P}"></span>也可以进行编码，假设为<span data-katex="y_0"></span>，现在我们来判断<span data-katex="H(y_0,y_0)"></span>。</p>
+<p>找到问题之后，选择解决方案也是困难的，</p>
+<p>是使用一个通用方案，进行具体化的应用编码，</p>
+<p>还是重新构建一个定制化的专有方案，</p>
+<p>都是值得商榷的。</p>
 <p><br/></p>
-<p>如果<span data-katex="H(y_0,y_0)"></span>为真，意味着编码为<span data-katex="y_0"></span>的程序以<span data-katex="y_0"></span>作为输入最终停止，</p>
-<p>即程序<span data-katex="\mathscr{P}"></span>，输入为<span data-katex="y_0"></span>时，最终停止，</p>
-<p>可是根据<span data-katex="\mathscr{P}"></span>的定义，此时<span data-katex="H(x,x)=H(y_0,y_0)"></span>为假才会停止，矛盾。</p>
+<h3 id="结语">结语</h3>
+<p>编写软件需要考虑的事情很多，</p>
+<p>而且十分不幸，它们都是难以衡量的。</p>
 <p><br/></p>
-<p>如果<span data-katex="H(y_0,y_0)"></span>为假，意味着编码为<span data-katex="y_0"></span>的程序以<span data-katex="y_0"></span>作为参数最终不会停止，</p>
-<p>即程序<span data-katex="\mathscr{P}"></span>，输入为<span data-katex="y_0"></span>时，最终不停止，</p>
-<p>可是根据<span data-katex="\mathscr{P}"></span>的定义，此时<span data-katex="H(x,x)=H(y_0,y_0)"></span>为真才不会停止，矛盾。</p>
+<p>深思熟虑，可能会避免灾难发生，但是从结果来看，人们未必知道，</p>
+<p>善战无功，善医无名，</p>
+<p>坚持做正确的事情，才是真英雄。</p>
 <p><br/></p>
-<p><span data-katex="H(y_0,y_0)"></span>不能为真也不能为假，矛盾，</p>
-<p>因此，计算<span data-katex="H(x,y)"></span>的程序不存在，我们也无法用它来构造程序<span data-katex="\mathscr{P}"></span>。</p>
-<p><br/></p>
-<h3 id="可判定性">可判定性</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-5e01504f5037d0e0.png" /></p>
-<p><br/></p>
-<p>可判定性问题，指的是一个询问真或者假的问题是否可以被回答。</p>
-<p>如果我们总能回答出这个问题是真或者是假，就称该问题是可判定的，</p>
-<p>如果我们只能当问题为真的时候确定为真，为假的时候所进行的计算可能不会终止，那么就称该问题是半可判定的。</p>
-<p><br/></p>
-<p>某元素是否属于一个递归集，是可判定的，</p>
-<p>某元素是否属于一个递归可枚举集，是半可判定的。</p>
-<p><br/></p>
-<p>因为，递归集是使用一个递归的全函数定义的，</p>
-<p>而递归可枚举集是使用第一个部分递归函数定义的，</p>
-<p>我们无法判断某个部分递归函数，在接受某参数时，是没有定义，还是计算尚未停止。</p>
-<p>即，判断元素是否属于某递归可枚举集的程序可能永不停机。</p>
-<p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了函数的可计算性，通用程序，以及最多有多少个程序，</p>
-<p>还了解了停机问题和可判定性问题。</p>
-<p><br/></p>
-<p>这些都是可计算性理论的基础，我们清晰的看到了人类的计算能力，</p>
-<p>以及用递归所能计算的函数范围，后文中我们开始讨论不动点理论，</p>
-<p>这同样是一个有趣的话题。</p>
-<hr />
-<h3 id="附">附</h3>
-<p>配对函数和哥德尔数，是对数偶和有穷数列的一种编码方式。</p>
-<p><br/></p>
-<p>（1）配对函数</p>
-<p>令<span data-katex="\langle x,y\rangle=2^x(2y+1)-1"></span>，称<span data-katex="\langle x,y\rangle "></span>为配对函数，它是一个原始递归函数。</p>
-<p>任给一个数<span data-katex="z"></span>，存在唯一的一对数<span data-katex="x"></span>和<span data-katex="y"></span>，使得<span data-katex="\langle x,y\rangle =z"></span>。</p>
-<p><span data-katex="x"></span>是<span data-katex="z+1"></span>含有因子<span data-katex="2"></span>的个数，即使得<span data-katex="2^t|(z+1)"></span>的<span data-katex="t"></span>的最大值。</p>
-<p><span data-katex="(z+1)/2^x"></span>必为奇数，<span data-katex="y"></span>是<span data-katex="2y+1=(z+1)/2^x"></span>的唯一解。</p>
-<p>一般的，记<span data-katex="l(z)=x"></span>，<span data-katex="r(z)=y"></span>，则<span data-katex="l(z)"></span>和<span data-katex="r(z)"></span>也是原始递归函数。</p>
-<p><br/></p>
-<p>（2）哥德尔数</p>
-<p>记<span data-katex="[a_1,a_2,\cdots ,a_n]=\prod_{i=1}^{n}p_i^{a_i}"></span>，</p>
-<p><span data-katex="[a_1,a_2,\cdots ,a_n]"></span>称为有穷数列<span data-katex="(a_1,a_2,\cdots ,a_n)"></span>的哥德尔数。</p>
-<p>其中，<span data-katex="p_i"></span>是第<span data-katex="i"></span>个素数。</p>
-<p><br/></p>
-<p>例如，<span data-katex="[2,0,1,3]=2^2\cdot 3^0\cdot 5^1\cdot 7^3=6860"></span>。</p>
-<p>对于每一个固定的<span data-katex="n"></span>，<span data-katex="[a_1,a_2,\cdots ,a_n]"></span>是原始递归函数，并且这种编码具有唯一性。</p>
-<hr />
 <h3 id="参考">参考</h3>
-<p><a href="https://zh.wikipedia.org/wiki/%E9%85%8D%E5%AF%B9%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">配对函数</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E6%95%B0" target="_blank" rel="noopener">哥德尔数</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E6%95%B8%E9%9B%86" target="_blank" rel="noopener">可数集</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E5%88%A4%E5%AE%9A%E6%80%A7" target="_blank" rel="noopener">可判定性</a></p>
-<p><a href="https://zh.wikipedia.org/zh-hans/%E5%BA%B7%E6%89%98%E5%B0%94%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">康托尔定理</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%A7%91%E5%AD%A6%E5%AE%B6" target="_blank" rel="noopener">维基百科 - 科学家</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%B7%A5%E7%A8%8B%E5%B8%88" target="_blank" rel="noopener">维基百科 - 工程师</a></p>
+<p><a href="https://zh.wikipedia.org/zh/%E9%87%8D%E9%80%A0%E8%BD%AE%E5%AD%90" target="_blank" rel="noopener">维基百科 - 重造轮子</a></p>
 
           
         
@@ -538,7 +497,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/186/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/186/">186</a><span class="page-number current">187</span><a class="page-number" href="/page/188/">188</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/188/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/186/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/186/">186</a><span class="page-number current">187</span><a class="page-number" href="/page/188/">188</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/188/">&gt;</a>
   </nav>
 
 
@@ -584,7 +543,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -659,7 +618,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

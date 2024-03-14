@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/16/good-code/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/08/17/source-code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/16/good-code/" itemprop="url">什么样的代码才算是好代码</a></h1>
+                <a class="post-title-link" href="/2017/08/17/source-code/" itemprop="url">源码的误区</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-16T00:00:00+08:00">
-                2017-03-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T00:00:00+08:00">
+                2017-08-17
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,140 +347,139 @@
       
         
           
-            <p>我们经常指责别人写的代码，</p>
-<p>例如，他们使用了过多的嵌套循环，或者使用了过多的if-else，</p>
-<p>或者异常处理方式跟“业界”认可的方式不同，</p>
-<p>他们写的代码维护成本很高，是技术债务。</p>
+            <p>当我们还是小孩子的时候，就有了强烈的好奇心，</p>
+<p>我们经常摆弄一些精致的小玩具，</p>
+<p>总想拆开它们，看清里面的巧妙构造。</p>
 <p><br/></p>
-<p>却不知，他们一定也在指责我们，</p>
-<p>我们引入了过多不必要的抽象，我们写的通用代码结果只在一个地方被用到，</p>
-<p>我们进行了过度设计，拥有代码洁癖，</p>
-<p>他们指出，我们担心的事情永远都没有发生过。</p>
+<p>这种探究内部运行机制的好奇心，是人们研究大自然的源动力，</p>
+<p>物理学家观测分析自然现象，</p>
+<p>总结规律，然后进行预测指导实践。</p>
 <p><br/></p>
-<p>那么，到底什么才是好代码呢？</p>
-<p><strong>我们凭什么指出某种写法是技术债务，而另外一种不是。</strong></p>
-<p>除去心理因素，“平铺直叙”的代码真的就那么难以维护吗？</p>
+<p>软件工程师也是这样的，</p>
+<p>当他们使用了一个设计精巧的类库的时候，</p>
+<p>就总是禁不住这种诱惑，去熟读源码，想搞清楚到底别人是怎么实现的。</p>
 <p><br/></p>
-<p>在这个问题上，经验似乎说明不了什么问题，</p>
-<p>我们深信某种写法较好，仅仅是我们那么认为而已。</p>
-<p>如果其他人不这么认为，也没有办法。</p>
+<p>无疑，这是一件值得赞赏的事情。</p>
+<p>然而，却包含了一个不容易觉察的误区。</p>
 <p><br/></p>
-<p>我们可能会在白板上跟别人争执，</p>
-<p>讨论代码的演化路径，大谈设计模式，考虑各种开发原则，</p>
-<p>这些似乎都没有什么用，</p>
-<p>关于什么样的写法更好，谁也说服不了谁。</p>
+<p>那就是，</p>
+<p><strong>好用的东西，其实主要并不在于内部结构的精巧，</strong></p>
+<p><strong>而在于用户界面设计的友好。</strong></p>
 <p><br/></p>
-<p>对于未来的发展状况，你说会发生，</p>
-<p>别人说不会发生，你还能怎样。</p>
+<p>实际上，大部分类库在源码级别，会屏蔽一些脏乱细节，</p>
+<p>源码看起来并不是那么优美，</p>
+<p>可是，最终会给用户提供优雅一致的接口（界面）。</p>
 <p><br/></p>
-<h3 id="恰如其分的使用语言特性">恰如其分的使用语言特性</h3>
-<p>编程语言特性，是一种语言级别的抽象机制，</p>
-<p>它可以使人们摆脱细节，用更大的颗粒度描述问题，</p>
-<p>这是一种减轻开发人员心智负担的有效办法。</p>
+<h3 id="不要让用户关心细节">不要让用户关心细节</h3>
+<p>我们在编码的时候，如果只是为了<strong>功能性</strong>的目的来实现它，</p>
+<p>那么，用户在使用的时候，就会感到非常难受。</p>
+<p>他们不得不转换思维，将已有知识用我们提供的接口（界面）来表示，</p>
+<p>甚至不得不搞清楚我们到底做了什么，才能猜到它的用法。</p>
 <p><br/></p>
-<p>从这个角度来看，<strong>任何语言特性，</strong></p>
-<p><strong>都是在某个场景中，为了让事情更容易被理解而服务的。</strong></p>
+<p>我们先暂时岔开话题，</p>
+<p>我们知道，汇编语言具备与现代高级语言一样的图灵完备性，</p>
+<p>是编译器或解释器提高了语言的易用性，减小了<a href="https://en.wikipedia.org/wiki/Semantic_gap" target="_blank" rel="noopener">Semantic Gap</a>。</p>
 <p><br/></p>
-<p>在现实项目中，有时我们对特性的使用是<strong>不够充分</strong>的，</p>
-<p>我们用更细节的概念，表述了一个宏观问题，就会显得很繁琐。</p>
-<p>也有时，我们还会<strong>滥用</strong>特性，</p>
-<p>用一个更抽象的概念，来刻画一个更为具体的问题。</p>
+<p>用户使用高级语言，或者DSL，来描述领域知识，</p>
+<p>然后计算机将它们翻译成可执行的过程。</p>
 <p><br/></p>
-<p>这两种情形都是不恰当的，而恰当的使用则对我们提出了更高的要求。</p>
-<p>我们需要<strong>更深刻理解这些特性所产生的背景和动机，</strong></p>
-<p>多了解但不限于面向对象，函数式，逻辑式编程语言中的一些编程范式。</p>
+<p>因此，程序语言的设计目的之一，</p>
+<p>是为了对知识进行更直接的表述，而不需要过多的转换。</p>
 <p><br/></p>
-<p>有效的使用语言特性，才能控制代码的复杂度，让它更清晰易懂。</p>
-<p>诚然，再好的自解释性的代码，都不如一行有效的注释。</p>
+<p>当我们编写软件时，是处于用户与已有系统的中间位置，</p>
+<p>一方面，我们为用户屏蔽了实现细节，</p>
+<p>另一方面，在实现这些功能的时候，我们也不用考虑更底层的细节。</p>
 <p><br/></p>
-<h3 id="让代码更容易被分析">让代码更容易被分析</h3>
-<p>代码一旦被写出来，并不一定只有人来阅读它，</p>
-<p>可能会由于种种原因，事后要用程序对它们进行分析。</p>
+<p>一个软件系统，</p>
+<p>如果必须通过阅读源码，才可以被正确使用，</p>
+<p>那就是非常危险的，很容易被误用。</p>
 <p><br/></p>
-<p>这时候<strong>风格统一的代码，逻辑层次更少的代码，将更有利于被分析。</strong></p>
+<p>因此，我们应该将注意力聚焦在接口（界面）上，</p>
+<p>关注用户应该<strong>怎样使用</strong>这些功能。</p>
+<p>至于实现手段，却是灵活多样的，也是用户不必关心的。</p>
 <p><br/></p>
-<p>因此，在编写时一味的减少冗余，建立抽象，不但会对阅读者提出更高的要求，</p>
-<p>还会对代码分析工具提出了更高的要求。</p>
+<h3 id="源码并不是那么重要">源码并不是那么重要</h3>
+<p>软件业是一个年轻的行业，也是一个高速发展的行业，</p>
+<p>这使得软件行业的从业者们，普遍缺乏经验，</p>
+<p>浮躁和唯利是图，让好的编程方式，难以传承。</p>
 <p><br/></p>
-<p>一个稳重的开发者，会避免过度设计，会更有远见，</p>
-<p>所以，<strong>不会编写出高度抽象的代码。</strong></p>
-<p>这会让他的代码更容易被别人维护，集成和自动重构。</p>
+<p>如果说阅读源码，可以学习功能的实现方式，我觉得这并不为过。</p>
+<p>但是，软件设计的精髓，我认为并不在实现细节上，</p>
+<p>而在于<strong>用户接口（界面）的设计</strong>上。</p>
 <p><br/></p>
-<p>从不同的角度来看，好代码会变差，评价标准可能因人而异，因具体场景而异，</p>
-<p>因此，<strong>给别人提出代码方面的建议时，还需谨慎。</strong></p>
+<p>过多的关注源码，往往会忽视重点。</p>
+<p>我们会看到，作者实现的太巧妙了，内部结构太优雅了，</p>
+<p>却没有看到，同样的功能，作者居然可以提供这种方式让用户使用。</p>
 <p><br/></p>
-<h3 id="将评判标准量化">将评判标准量化</h3>
-<p>可读性，可维护性，是人们讨论最多的话题，</p>
-<p>可是，为什么没有人对性能存有争议，</p>
-<p>为什么没有人对哪段代码效率更高各执一词？</p>
+<p>例如：这个前端日志库，<a href="https://github.com/adamschwartz/log" target="_blank" rel="noopener">log</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log(&#39;this is *italic*&#39;)</span><br><span class="line">log(&#39;this word _bold_&#39;)</span><br><span class="line">log(&#39;this word &#96;code&#96;&#39;)</span><br></pre></td></tr></table></figure>
+<p>将会在控制台上，分别打印斜体，粗体和代码片段。</p>
+<p>还提供了这样的语法，让用户编写自定义样式，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log(&#39;this is [c&#x3D;&quot;color: red&quot;]red[c]&#39;)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>这是因为，性能指标是可以<strong>量化</strong>的，</p>
-<p>我们可以很简单的<strong>通过数据</strong>来证明自己的假设。</p>
-<p>但是，我们证明可读性与可维护性的时候，却没有这样。</p>
+<p>提供一套类似<a href="https://en.wikipedia.org/wiki/Markdown" target="_blank" rel="noopener">markdown</a>的语法，是非常漂亮直接的，</p>
+<p>而原生的<code>console.log</code>写法就比较麻烦。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&#39;%c error &#39;,&#39;color:#fff;background:red;&#39;)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>我们仅仅是强调它们确实这样，以及如果不这样会有什么后果。</p>
-<p>可是强调起不到任何作用，预测也很容易被反驳，</p>
-<p>因此，<strong>我们应该想办法用数据去证明它</strong>。</p>
+<p>所以，一个简单的类库，稍有经验的开发者，都可以实现出来，</p>
+<p>但是，并不是每个人都能想出好的办法，让用户易于使用。</p>
 <p><br/></p>
-<p>很多无法达成共识的想法，也是如此，</p>
-<p>如果与其他人产生了冲突，那一定是两个人对问题有了不同的认识，</p>
-<p>然而，这些认识都只是假设，谈不上谁对谁错，</p>
-<p>因为<strong>缺乏事实论据</strong>。</p>
+<h3 id="用户接口界面的设计之道">用户接口（界面）的设计之道</h3>
+<p>现在我们知道用户接口（界面）的重要性了。</p>
+<p>那么，到底应该如何设计一个好用的用户接口（界面）呢？</p>
 <p><br/></p>
-<p>使用事实论据，其实来源于科学方法。</p>
-<p>科学家们会通过逻辑推理得到一些结论，</p>
-<p>同时，必然也会用实验结果去检验这些结论，</p>
-<p>不然大家谁都无法说服对方。</p>
+<p>这需要我们先理解“<strong>知识的诅咒</strong>”，这一<a href="https://zh.wikipedia.org/wiki/%E8%AA%8D%E7%9F%A5%E5%81%8F%E8%AA%A4" target="_blank" rel="noopener">认知偏误</a>，</p>
+<p>它指的是，懂得多的人，通常难以从懂得少的人的角度思考问题。</p>
 <p><br/></p>
-<p>追求逻辑的严密性和正确性的理论学家，是重要的，</p>
-<p>而<strong>构造巧妙的实验，给出事实论据</strong>的实验学家，无疑更重要。</p>
+<p>例如，专家常用术语交谈，却丧失了与非专业人士的沟通能力，</p>
+<p>又例如，程序员们写的代码和文档，自己明白，但是别人读起来却很困难，</p>
+<p>或者，我们设计的用户接口（界面），自己会用，但是别人却不知道如何下手。</p>
 <p><br/></p>
-<h3 id="从关心客户的需求开始">从关心客户的需求开始</h3>
-<p>从项目角度来看，编码是一个必备环节，</p>
-<p>它承载了软件生命周期中，其他各项事宜的开展工作。</p>
-<p>没有代码，软件产品就无从谈起。</p>
+<p>这些都是“知识的诅咒”。</p>
+<p>为了避免这个问题，我们必须想办法让自己站在初学者的角度，重新考虑问题。</p>
 <p><br/></p>
-<p>然而即使是这样，<strong>编程在商业活动中，也只是一种手段，</strong></p>
-<p>其主要目的，都是为了<strong>解决客户的问题。</strong></p>
+<p>下面我们介绍三个常用的办法，<strong>（1）不要假设别人知道</strong>。</p>
 <p><br/></p>
-<p>从客户角度而言，优秀的代码和脏乱的代码并没有什么太大差别，</p>
-<p>维护成本升级成本，看起来会让客户买单，</p>
-<p>但实际压力还是会算到开发者这边来，因为做不出合格的产品就没人买它。</p>
+<p>对于引入的每一个概念，我们必须小心谨慎，</p>
+<p>从背景和动机开始，像讲故事一样的说清楚。</p>
 <p><br/></p>
-<p>所以，<strong>代码写的好不好，是程序员自己的事情。</strong></p>
-<p><strong>而代码能否对外提供出好用的功能，才是更重要的。</strong></p>
+<p>经常性的写文章，是一种很好的锻炼方式，</p>
+<p>写代码和写文章是一脉相承的。</p>
 <p><br/></p>
-<p>为了看清这一点，不妨假设我们是项目的负责人，</p>
-<p>我们将怎样向客户解释，我们在为了写出好代码而竭尽全力呢？</p>
-<p>根本无法解释，也解释不通，甚至客户也会感到莫名其妙。</p>
+<p>另一个办法是，为我们设计的接口（界面）<strong>（2）编写丰富的文档</strong>，</p>
+<p>因为不介绍如何使用，就没有人知道如何正确使用它，通读源码也不行。</p>
+<p>没有文档，就不能判定使用方式是否作者预期的。</p>
 <p><br/></p>
-<p>客户关心的是，我们的产品什么时候发布，能不能有效的解决他们的问题，</p>
-<p>稳定性如何产品质量如何，</p>
-<p>代码的好与坏，客户为什么要关心。</p>
+<p>最后，要<strong>（3）多向别人分享和介绍</strong>自己学会的知识，</p>
+<p>通过不断的磨炼，揣摩听众的反应，会掌握一些技巧，</p>
+<p>学会如何吸引别人的注意力，以及学会如何简洁清晰的表达一个论点。</p>
 <p><br/></p>
-<p>因此，<strong>好的代码一定是以创造客户价值为准则的，</strong></p>
-<p>偏离了客户第一，代码写的再漂亮也是于事无补的。</p>
+<p>能把事情讲明白，是一件不容易的事情。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>对代码好坏进行争论，是开发者团队中频繁出现的事情，</p>
-<p>由于每个人的代码风格都是不同的，</p>
-<p>因此，都会认为是自己在维护别人的烂摊子。</p>
+<p>以上提到的三点，看起来和代码没有什么关系，</p>
+<p>是因为，设计接口（界面）并不是一个编码过程，</p>
+<p>而是一个<strong>知识传递</strong>过程。</p>
 <p><br/></p>
-<p>可是，无论从语言特性，可维护性，甚至代码分析角度，</p>
-<p>我们都无法得到一个好代码的有效判断标准，</p>
-<p><strong>反而考虑的事情越多，我们就越不敢评价别人写的好坏。</strong></p>
+<p>我们必须为用户筛选出期望他们了解的知识，</p>
+<p>像电影一样，调动观众情绪的一个重要手段，就是信息配比（<a href="https://www.zhihu.com/question/39947219/answer/214338328" target="_blank" rel="noopener">框视觉</a>），</p>
+<p>即，导演对“信息露出”和“信息隐藏”的控制。</p>
 <p><br/></p>
-<p>此外，如果无法用数据说话，我们的判断就会永远停留在个人喜好上，</p>
-<p>在缺乏事实论据的情况下，每个人有不同的品味是正常的表现。</p>
-<p>实际上，构造这样的实验是非常困难的，</p>
-<p>所以<strong>衡量代码的好坏也就不是一件简单的事情。</strong></p>
+<p>在阅读源码时，聚焦到每一段的代码中，人们很容易忽视整体性，</p>
+<p>会重点考虑功能的<strong>实现方式</strong>，而非<strong>提供方式</strong>，</p>
+<p>这正是阅读源码的常见误区所在。</p>
 <p><br/></p>
-<p>最后，秉持客户第一的准则，</p>
-<p>我们实际上最需要关心的是客户想要什么，而不是我们给自己带来的负担。</p>
-<p>不够优雅的代码，经过充分的测试和调试，也会得到优秀的产品。</p>
+<p>所以，除了看别人如何<strong>达成目标</strong>之外，还要看别人是如何<strong>确定目标</strong>的，</p>
+<p>阅读源码是很重要，会让我们学会很多技巧，</p>
+<p>但是它却对确定一个更好的目标毫无帮助。</p>
 <p><br/></p>
-<p>所以，至于别人写的代码为什么那么烂，我们大可不必介意，</p>
-<p><strong>因为我们也写不出好代码。</strong></p>
+<p>虽然，可维护性和可扩展性也是重要的，关系到我们对代码的维护成本，</p>
+<p>但这是我们自己的问题，不是用户的问题。</p>
+<p>用户不会关心他们是怎么实现的，何况又是我们故意隐藏起来的。</p>
+<p><br/></p>
+<p>用户只关心我们有没有解决他们的问题，</p>
+<p>有没有<strong>给他们提供</strong>一种低成本的方式来解决，</p>
+<p>至于要降低我们自己成本的诉求，只好会心一笑了。</p>
 
           
         
@@ -519,7 +518,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/183/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/183/">183</a><span class="page-number current">184</span><a class="page-number" href="/page/185/">185</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/185/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/183/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/183/">183</a><span class="page-number current">184</span><a class="page-number" href="/page/185/">185</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/185/">&gt;</a>
   </nav>
 
 
@@ -565,7 +564,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -640,7 +639,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

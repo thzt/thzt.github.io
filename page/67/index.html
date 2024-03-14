@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/12/11/infrastructure/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/07/16/code-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/12/11/infrastructure/" itemprop="url">站在巨人的肩膀上</a></h1>
+                <a class="post-title-link" href="/2020/07/16/code-02/" itemprop="url">编码技巧（二）：提取工具</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-11T00:00:00+08:00">
-                2019-12-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-16T00:00:00+08:00">
+                2020-07-16
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Software/" itemprop="url" rel="index">
+                    <span itemprop="name">Software</span>
                   </a>
                 </span>
 
@@ -347,138 +347,107 @@
       
         
           
-            <p>1676年 <a href="https://zh.wikipedia.org/zh-hans/%E8%89%BE%E8%90%A8%E5%85%8B%C2%B7%E7%89%9B%E9%A1%BF" target="_blank" rel="noopener">牛顿</a> 给 <a href="https://zh.wikipedia.org/zh-hans/%E7%BD%97%E4%BC%AF%E7%89%B9%C2%B7%E8%83%A1%E5%85%8B" target="_blank" rel="noopener">胡克</a> 的信中说，</p>
-<blockquote>
-<p>If I have seen further it is by standing on the shoulders of Giants.</p>
-</blockquote>
-<blockquote>
-<p>如果说我比别人看的更远一点，那是因为我站在了巨人的肩膀上。</p>
-</blockquote>
+            <h3 id="背景">背景</h3>
+<p>开篇中我们引出了贯穿全局的编码原则：“<strong>有着一颗为食用者着想的心</strong>”。</p>
+<p>那么站在阅读者角度考虑代码本身，就成了自然而然的事情了。</p>
 <p><br/></p>
-<p><a href="https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants" target="_blank" rel="noopener">站在巨人的肩膀上</a>，并不是牛顿发明的，却因为牛顿而广为流传，</p>
-<p>甚至 <a href="https://scholar.google.com/?hl=en" target="_blank" rel="noopener">Google Scholar</a> 都把这句话放到了首页。</p>
-<p>它表示，在前辈的工作基础上进行新发现。</p>
+<p>为此，为了让阅读者更容易读懂代码，</p>
+<p>上一篇中介绍了一个我常用的编程技巧：<strong>让主流程清晰</strong>。</p>
 <p><br/></p>
-<p>这像极了当今的软件生态。</p>
-<p>甚至可以说任何软件，都<strong>很难不在</strong>别人的<strong>基础</strong>之上进行开发。</p>
-<p>这个基础，说的就是基础设施，或者软件生态。</p>
+<p>采用这种技巧后，代码阅读者就会<strong>尽可能少</strong>的被 “无用” 信息所干扰。</p>
+<p>使代码写的更有层次感，避免一次向读者展出所有的细节。</p>
 <p><br/></p>
-<p>很显然要想把软件做的可靠，基础也得可靠才行，</p>
-<p>否则就像是巨人站在了<a href="https://baike.baidu.com/item/%E6%B3%A5%E8%B6%B3%E5%B7%A8%E4%BA%BA/4353652" target="_blank" rel="noopener">泥足</a>之上。</p>
+<p>本文我们将顺着这个思路往前走，</p>
+<p>如何才能更高效的做到 “主流程清晰” 呢？有没有常用的技巧可言？</p>
 <p><br/></p>
-<p>然而，现实生活中，很多软件系统的基础设施都是不可靠的，</p>
-<p>被依赖方经常会出现各种各样的问题，导致软件不可用，或者不好编写。</p>
-<p>这里提到了两种不同的概念，<strong>运行</strong>可靠性，以及<strong>研发</strong>可靠性。</p>
+<p>其实是有的，这就引出了本文的主题了：</p>
+<p>通过把更多的 “工具” 从 “主流程” 中提取出来，来让我们能<strong>表达</strong>更复杂的信息。</p>
+<h3 id="信息块">信息块</h3>
+<p>说到工具，平时生活中也常见到，留意一下的话，它们简直是到处都在，</p>
+<p>手机、键盘、电饭锅、空调、鞋子、衣物、等等等等，</p>
+<p>它们的存在大大<strong>缩短</strong>了我们解决问题的<strong>路径</strong>。</p>
 <p><br/></p>
-<p>运行时不稳，会导致很多用户可见的问题，损害企业的利益，</p>
-<p>而研发时出现各种各样的问题，却大多由开发者自己扛了。</p>
-<p>这是因为，<strong>研发困难</strong>并不是企业直接关心的事情。</p>
+<p>想要打个电话，我们不用自己<strong>直接</strong>跟空气中的蜂窝网络进行交互了，</p>
+<p>而是只要输入号码，由电话机帮我们处理就行。</p>
 <p><br/></p>
-<p>下面我们来分析一下其中的取舍和原因。</p>
-<h3 id="可靠性理论">可靠性理论</h3>
-<p>说起稳定性或者可靠性，其实已经有相关的理论研究了，</p>
-<p>在《<a href="https://book.douban.com/subject/10544842/" target="_blank" rel="noopener">可靠性数学引论</a>》中，作者是这样写的，</p>
+<p>每次都从底层处理问题，是很低效的。</p>
+<p>我们应当提高当前所处理的最小信息之 “<strong>粒度</strong>”。</p>
 <p><br/></p>
-<blockquote>
-<p>可靠性问题是在第二次世界大战前后，才真正开始受到重视。</p>
-</blockquote>
-<blockquote>
-<p>其基本原因之一是军事技术装备越来越<strong>复杂</strong>。</p>
-</blockquote>
-<blockquote>
-<p>复杂化的目的在于使技术装备具有更高的性能。</p>
-</blockquote>
+<p>打个比方，如果让我们带领十万步兵打仗的话，</p>
+<p>肯定不能 “直接” 去跟着十万个人进行沟通，而是要划分层次 —— “军师旅团营”，</p>
+<p>每一层级的长官，只跟自己的直接下属沟通，这样总司令才能管好更多的人。</p>
 <p><br/></p>
-<blockquote>
-<p>但是装备越<strong>复杂</strong>，往往就越容易发生<strong>故障</strong>，</p>
-</blockquote>
-<blockquote>
-<p>到了复杂化的程度严重影响设备可靠性时，设备复杂化也就失去了意义。</p>
-</blockquote>
-<blockquote>
-<p>因此，复杂化和可靠性之间存在着尖锐的矛盾。</p>
-</blockquote>
+<p>写代码也是如此，为了让 “主流程” 少包含一些无用的细节信息，</p>
+<p>最自然的办法就是，把某些细节信息组装成 “<strong>信息块</strong>”，</p>
+<p>上层只负责处理这些 “块” 就行了，暂时不必关心 “块” 里面是什么。</p>
 <p><br/></p>
-<blockquote>
-<p>另一个基本原因，新的军事技术装备的研制过程，是一种争时间争速度的竞赛。</p>
-</blockquote>
-<blockquote>
-<p>但是研制周期又很长，经不起研制过程的重大<strong>重复</strong>。</p>
-</blockquote>
+<p>按照这样的思路进行下去，大信息块中，还可以包含更小的信息块，</p>
+<p>如此我们就可以分层<strong>管控</strong>更多的信息了。</p>
+<h3 id="工具箱">工具箱</h3>
+<p>那么，哪些代码才适合组装成 “信息块” 呢？</p>
+<p>—— 工具</p>
 <p><br/></p>
-<blockquote>
-<p>这就需要有一整套科学的方法，将可靠性的考虑贯穿于，</p>
-</blockquote>
-<blockquote>
-<p>研制、生产和使用维修的<strong>全过程</strong>。</p>
-</blockquote>
-<blockquote>
-<p>因此复杂设备的可靠性成了相当严重，而又迫切需要解决的问题。</p>
-</blockquote>
+<p>所谓工具 或 “代码工具” 指的是那些可以完整的从 “主流程” 中拿出来的代码，</p>
+<p>这些代码还潜在的有<strong>更广泛</strong>的应用场景。</p>
+<p>也就是说，拿出来后，它还可能<strong>应用</strong>于别的地方。</p>
 <p><br/></p>
-<p>这样看来，软件的可靠性并<strong>不是</strong>人们<strong>第一次</strong>遇到的可靠性问题，</p>
-<p>也不是拍脑袋就能轻易解决的问题。</p>
-<p>有适当的<strong>理论知识</strong>作为铺垫，才不会重蹈覆辙，而是能把精力用到该用的地方。</p>
-<h3 id="串联系统">串联系统</h3>
-<p>串联系统是由 n 个部件串联而成的，任一部件失效都能引起系统失效。</p>
-<p>串联系统的可靠度，为单个部件可靠度的<strong>乘积</strong>。</p>
+<p>当然，这里有一个误区是值得说明的，</p>
+<p>提取工具的目的，并<strong>不是</strong>为了<strong>复用</strong>，而只是为了组装信息块，提高信息的 “粒度”。</p>
 <p><br/></p>
-<p>一个复杂的软件系统，考虑各子系统之间的<strong>依赖关系</strong>，即可简略看成是一种串联系统。</p>
-<p>这条链路越长，各子系统越不可靠，整个系统就越容易出问题。</p>
-<p>所以，<strong>软件分层</strong>虽有助于职责分离，但对可靠性来说犹如雪上加霜。</p>
+<p>事实上，要想编写可复用的代码，是一件需要花费很高成本的事情，</p>
+<p>因为，代码并不是放在那里就可以复用了，我们还得告诉用户<strong>怎么复用</strong>它。</p>
 <p><br/></p>
-<p>考虑我们现实中的研发场景，研发过程中所产生的<strong>依赖</strong>，实则是一层一层的。</p>
-<p>最浅的一层是<strong>团队</strong>内维护的一些公共代码库，</p>
-<p>继而下层是部门或<strong>公司级别</strong>的一些软件设施，或者框架。</p>
+<p>并且复用的同时，也会建立<strong>依赖</strong>，会产生两个恶果，</p>
+<p>其一，被依赖的代码，更难做出变更，因为有人在用着它，必须全面的考虑到位才行，</p>
+<p>其二，有过多依赖的代码，会变得更脆弱，每一个依赖出问题，自己都有可能出问题。</p>
+<p>所以人们通常会对依赖进行管控，比如版本控制，安全审核，等等。</p>
 <p><br/></p>
-<p>就到这里为止了么？其实还远远不够。</p>
-<p>更下层是一些<strong>开源的</strong>类库框架，或者其他知名公司的软件产品，</p>
-<p>更下层还有，是<strong>全球范围</strong>内适用的一些规范，以及基础建设。</p>
+<p>总而言之，一旦我们准备要写出 “可复用” 代码的话，</p>
+<p>那就要<strong>小心</strong>了，因为这意味着，这些代码需要有充足的文档，有严格的测试，</p>
+<p>还得有心理准备：为代码缺陷负责，为用户的咨询负责。</p>
 <p><br/></p>
-<p>工程师不是站在<strong>一层</strong>之上进行开发的，而是有<strong>很多层</strong>，</p>
-<p>每一层都有“暗坑”，每一层都有可能导致最终的软件出现问题。</p>
-<p>可悲的是，专业工程师必须对<strong>最上层</strong>软件的可靠性负责。</p>
+<p>因此，提取工具我们的出发点并<strong>不是</strong>为了 “复用”，</p>
+<p>而是仅仅为了更好的管理它。</p>
+<h3 id="组织方式">组织方式</h3>
+<p>好了，通过 “提取工具” 我们的 “主流程” 已经非常简洁了，</p>
+<p>还剩下最后一个问题，</p>
+<p>那就是，这些被提取出来的 “工具” 将如何<strong>组织</strong>？</p>
 <p><br/></p>
-<p>所以，有人说工程师是站在一座“垃圾堆”上干活的，也是可以理解的。</p>
-<p>只是这个“垃圾堆”的范围和深度，远超大多数人的认知之外而已。</p>
-<h3 id="孰轻孰重">孰轻孰重</h3>
-<p>现实中有些系统的可靠性，已经差到<strong>令人发指</strong>的地步了，</p>
-<p>工程师们每天都得花费很多<strong>额外的时间</strong>去解决问题。</p>
+<p>我常用的办法，就是充分的利用所用编程语言的 “装配” 手段。</p>
 <p><br/></p>
-<p>为什么就没人考虑把它修好呢？</p>
+<p>装配粒度从小到大一般可以这么划分：</p>
+<p>（1）空行：把做了不同事情的代码，用空行隔开，构成段落。</p>
+<p>（2）函数：如果很多行代码，共用了一些信息，那就放到一个函数中。</p>
+<p>（3）类 / 闭包：如果多个函数共用了一些信息，那就把它们放到一个 类 / 闭包 中。</p>
+<p>（4）模块：如果多个类，共用了一些信息，那么就放到一个模块中。</p>
+<p>（5）文件 / 文件夹：如果多个模块，共用了一些信息，那么就把它们放到同一个 文件 / 文件夹 中。</p>
 <p><br/></p>
-<p>这是因为，<strong>保持原样</strong>比修好它，对企业而言可能会<strong>更省钱</strong>。</p>
-<p>提高系统的可靠性，不是免费的午餐，</p>
-<p>企业需要投入更多的<strong>成本</strong>才能做到，包括招聘更好的工程师。</p>
+<p>往上继续看的话，其实还有，</p>
+<p>多个 文件 / 文件夹，构成了一个 “工程”，</p>
+<p>多个 “工程” 构成了一个 “系统”，</p>
+<p>多个 “系统” 构成了一个 ...</p>
 <p><br/></p>
-<p>因此，软件基础设施，是总难足够可靠的，</p>
-<p>一旦到了<strong>勉强够用</strong>的地步，就不会再优化下去了。</p>
+<p>在这里我有两个体会，值得分享一下。</p>
+<p>其一，系统架构受制于开发这些系统之人员的组织架构（康威定律）。</p>
+<p>其二，软件架构的艺术在于划分边界，使得边界处的信息流更小。</p>
 <p><br/></p>
-<p>相较而言，对最终产品有害的可靠性问题，会优先解决，</p>
-<p>而<strong>研发困难问题</strong>，很少有企业会舍得花钱。</p>
+<p>总之，以上工具的组织方式，谈到实质还是在管理 “信息”。</p>
+<p>每块信息都有<strong>人</strong>负责，并且让这些人能尽量避免频繁<strong>沟通</strong>。</p>
 <p><br/></p>
-<p>很明显，工程师需花费更多的时间开发软件，</p>
-<p>可以让他们<strong>加班</strong>，</p>
-<p>好过花钱找人解决研发问题，让工程师们早点回家。</p>
-<p><br/></p>
-<p>无偿加班，掩盖了问题实质。</p>
-<p>能用省钱的方式解决，为什么要花钱呢？</p>
-<p>这样就把“<strong>该不该去</strong>”解决的“道德问题”，转变成“<strong>值不值得</strong>”解决的“商业问题”了。</p>
+<p>从一开始我们关心 “食用者”，就意味着编码技巧，不得不考虑<strong>人员因素</strong>。</p>
 <h3 id="结语">结语</h3>
-<p>刚开始工作时，总容易把<strong>没有被解决的问题</strong>，</p>
-<p>当成是<strong>别人没看到</strong>，其实并不尽然。</p>
+<p>思路是有延续性的，为了做到 “为食用者着想”，我们想到让 “主流程” 清晰，</p>
+<p>以减少阅读者的一次看到的信息量，</p>
+<p>为了让 “主流程” 清晰，我们想到将 “工具” 提取出去。</p>
 <p><br/></p>
-<p>有很多问题是，大家都看到了，但认为<strong>不值得</strong>去解决它。</p>
-<p>从商业角度来看每一件事，可能会有意想不到的收获。</p>
+<p>这些 “代码工具” 构成了粒度更大的 “信息块”，</p>
+<p>大大提高了我们掌控全局的能力。</p>
 <p><br/></p>
-<p>只是有很多团体和个人，并不会把<strong>赚钱</strong>当做唯一目标，</p>
-<p>凡事都从能不能赚的更多作为出发点，</p>
-<p>长此以往，会忽略很多<strong>重要但是不赚钱</strong>的事情，成为今后发展的<strong>障碍</strong>。</p>
+<p>最后我们还提到了 “代码工具” 如何管理、如何组织的问题，</p>
+<p>不同的人会有不同的信息组织方式，</p>
+<p>但指导原则是不变的，那就是让负责维护这些代码的人，避免频繁沟通。</p>
 <p><br/></p>
-<p>因此，大至企业小至团队，一个有<strong>远见</strong>的领导者是很重要的。</p>
-<blockquote>
-<p>水能载舟，亦能覆舟。</p>
-</blockquote>
+<p>信息构成的层次性，跟人员组织的层次性，应当是等价的。</p>
 
           
         
@@ -517,7 +486,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/66/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/66/">66</a><span class="page-number current">67</span><a class="page-number" href="/page/68/">68</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/68/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/66/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/66/">66</a><span class="page-number current">67</span><a class="page-number" href="/page/68/">68</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/68/">&gt;</a>
   </nav>
 
 
@@ -563,7 +532,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -638,7 +607,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

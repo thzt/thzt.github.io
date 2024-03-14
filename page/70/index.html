@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/11/25/self-mocking/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/05/15/paradox/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/25/self-mocking/" itemprop="url">程序猿群体的自嘲之风</a></h1>
+                <a class="post-title-link" href="/2020/05/15/paradox/" itemprop="url">迭代无法解决的架构问题</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-25T00:00:00+08:00">
-                2019-11-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-15T00:00:00+08:00">
+                2020-05-15
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,138 +347,125 @@
       
         
           
-            <p><a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E5%98%B2" target="_blank" rel="noopener">自嘲</a>，有时也称为“自黑”，</p>
-<p>是指通过轻视、贬损或嘲笑自己，来惩罚自己或自谦的行为。</p>
-<p>可以用于释放压力和营造<strong>幽默</strong>。</p>
+            <p>当一个问题无解、或左右为难的时候，</p>
+<p>就不能只从<strong>当前状态</strong>出发解决问题了，</p>
+<p>而是得跳出当前状态，思考导致这种困境的原因。</p>
 <p><br/></p>
-<p>自嘲本来并不是一件坏事，必要时可缓解气氛，</p>
-<p>也是<strong>降低对方期望值</strong>的常用方法。</p>
+<p>就像走迷宫一样，遇到死胡同之后，要退回来。</p>
 <p><br/></p>
-<p>然而，不知道是否巧合，程序猿这个群体与“自嘲”似乎是强相关的，</p>
-<p>当受到别人夸赞的时候，他们总是表现得<strong>过分自谦</strong>。</p>
-<p>导致人们<strong>真的就相信</strong>了他们的说法。</p>
+<p>有些软件问题，其实也是类似的，</p>
+<p>怎么看都无解，就得好好想想了，这种状态是如何<strong>造成</strong>的？</p>
 <p><br/></p>
-<p>程序猿不擅交际，每天都穿格子衬衫，双肩背包，</p>
-<p>秃顶，没有女朋友，情商低，</p>
-<p>天天争论的话题是，什么才是最好的编程语言。</p>
+<p>比如，我们依赖了一个不稳定的外部系统，它频繁失败，</p>
+<p>用户感知到的都是我们系统的问题，怎么办？</p>
+<p>我们又没办法避免这个外部系统失败。</p>
 <p><br/></p>
-<p>程序猿的工作就像搬砖，纯体力活，</p>
-<p>上班就是在拼命码更多的代码，过了35岁就干不动了。</p>
+<p>又比如，一个复杂的系统，里面包含很多业务逻辑，</p>
+<p>用户经常需要确认具体逻辑后才能放心使用，</p>
+<p>怎样减少咨询量？总不能让用户自己看代码吧。</p>
 <p><br/></p>
-<p>以上这些的误解现已<strong>蔚然成风</strong>，甚至影响了某些公司的招聘标准。</p>
-<p>这真是一件<strong>不幸</strong>的事情，挖坑埋自己。</p>
-<h3 id="专业性">专业性</h3>
-<p>有一些工作，看起来<strong>门槛</strong>极低，很容易让人产生“我也行”的<strong>错觉</strong>，</p>
-<p>例如，运动员，教师，厨师，作家，小卖部老板，等等。</p>
-<p>人们并不会觉得跑步，讲课，做饭，写书，卖个东西有多难。</p>
+<p>这些都是很棘手的问题。</p>
+<p>难解之处在于，几乎所有解决方案都<strong>堵死</strong>了。</p>
+<p>似乎保持现状才是最好的办法。</p>
 <p><br/></p>
-<p>其实仔细想想却并非如此，</p>
-<p>大家都能做的，要做到<strong>出类拔萃</strong>会更加困难。</p>
+<p>下面我们就来分析一下这两个问题，看看怎样退一步海阔天空。</p>
+<h3 id="功利主义">功利主义</h3>
+<p>在分析问题之前，需要明确的是，退回来及时止损需要<strong>头脑清晰</strong>，</p>
+<p>并不是每个必须支付的成本，都得有回报。</p>
 <p><br/></p>
-<p>就拿<a href="http://www.sport.gov.cn/n16/n300161/n1401202/n1773613/4982068.html" target="_blank" rel="noopener">田径项目</a>来说，</p>
-<p>经常跑步的人，百米成绩大概是 12s，</p>
-<p>一级运动员为 10.93s，国家级运动健将为 10.25s。</p>
+<p>我认为仅仅通过 “投入产出比” 来制定所有决策，是不恰当的，</p>
+<p>有些事情，并不是那么好<strong>衡量</strong>的，</p>
+<p>也有一些事情，很长<strong>时间</strong>之后才能看到价值。</p>
 <p><br/></p>
-<p>这三个级别差距有多大呢？</p>
-<p>我们可以<strong>粗略的</strong>计算一下，到达终点时他们三个相距多远。</p>
+<p>所以，如果总是抱着 “功利” 的心态去做软件，</p>
+<p>那其实就<strong>不应该</strong>做软件，</p>
+<p>因为肯定还有比做软件 “投入产出比” 更高的事情嘛。</p>
 <p><br/></p>
-<p>假设人们奔跑的速度都是匀速的，那么，当国家级运动健将跑完百米时，</p>
-<p>一级运动员离终点还有6.22米，普通人离终点还有14.58米！</p>
-<p>而博尔特（世界冠军 9.58s）跑完全程时，普通人距离终点还有 20.17米！！</p>
+<p>走错了路，就得有勇气退回来，</p>
+<p>还想着只往高处走，这就是出现悖论的原因。</p>
+<h3 id="依赖的脆弱性">依赖的脆弱性</h3>
+<blockquote>
+<p>我们依赖了一个不稳定的外部系统，它频繁失败，</p>
+</blockquote>
+<blockquote>
+<p>用户感知到的都是我们系统的问题，怎么办？</p>
+</blockquote>
 <p><br/></p>
-<p>似乎只有这样看，人们才能意识到<strong>差距</strong>。</p>
-<p>不同人做同一件事情，真的会有很大的不同。</p>
+<p>依赖链路越长，整个系统的稳定性就越差，</p>
+<p>这是因为每个环节的失败，都会导致整条链路不可用。</p>
 <p><br/></p>
-<p>程序猿（软件工程师）就是在做这样的一份工作。</p>
-<p>看起来人人都会编程，但结果却大相径庭。</p>
-<h3 id="工作内容">工作内容</h3>
-<p>有很多人问过，程序猿每天的工作内容到底是什么？</p>
-<p>每天对着电脑，产出的是代码，难道不是在比<strong>看谁写的多</strong>吗？</p>
+<p>所以，总是把系统按调用链路进行拆分，并不是一个好主意。</p>
+<p>职责分离的同时，也增加了系统出现问题的可能性。</p>
 <p><br/></p>
-<p>我想过很多比喻，平时也不太喜欢用类比，</p>
-<p>曾经也向父母解释过自己的工作，</p>
-<p>目前为止我觉得对“做软件”最好的解释是“<strong>多人一起写同一本书</strong>”。</p>
+<p>此外，对于链式系统中的每个环节来说，上下游管理都是一笔不小的开销，</p>
+<p>依赖一个脆弱的系统，却还得提供可靠的功能，</p>
+<p>产生这个悖论的原因就出在这里。</p>
 <p><br/></p>
-<p>“书”就是“软件”，书的“读者”就是软件的“用户”。</p>
-<p>“写书”的过程就是在“编写代码”。</p>
+<p>链式结构的系统，整体可用性不可能高于每个环节的可用性。</p>
 <p><br/></p>
-<p>有人可能马上会问了，“怎样顺着别人的思路往下写呢？”</p>
-<p>问的非常好，这就是编程工作最大的<strong>难点</strong>了。</p>
+<p>因此，要么提高每个<strong>环节</strong>的稳定性，</p>
+<p>要么别对外声称整个系统是可靠的，及时向上抛出异常。</p>
 <p><br/></p>
-<p>所以，一个专业程序猿，日常工作的大部分时间都在与人<strong>沟通</strong>，</p>
-<p>确保做的事情能<strong>合起来</strong>，</p>
-<p>还要与人<strong>讨论</strong>，确保不会产生不良影响，或者造成其他的<strong>麻烦</strong>。</p>
+<p>用户操作一个貌似可靠的系统，最后得到一个*<strong>常失败</strong>的结果，</p>
+<p>这才是导致心态崩溃的根本原因。</p>
 <p><br/></p>
-<p>为什么要关心这些呢？</p>
-<p>这是因为“麻烦”等于“金钱”，所以代码写的多，并不见得是好事。</p>
-<p>程序猿考虑的是，怎么用最小的<strong>成本</strong>，解决<strong>最有价值</strong>的问题。</p>
-<h3 id="个人喜恶">个人喜恶</h3>
-<p>不知道从什么时候开始，“格子衬衫”和“双肩背包”成了程序猿的必备特征，</p>
-<p>甚至有人说，程序猿喜欢在路边的垃圾桶上工作。</p>
-<p>造成这些明显“反智”认识的原因，我想也只能是程序猿群体的<strong>自嘲</strong>了吧。</p>
+<p>最后，在调用外部服务的时候，不应当只关注正常的返回结果，</p>
+<p>而是应当把每个外部服务，理解为<strong>多返回值</strong>（一个正常 + N种失败）接口。</p>
+<p>对于每种可能的失败，都应该专门处理。</p>
+<h3 id="延迟决定">延迟决定</h3>
+<blockquote>
+<p>一个复杂的系统，里面包含很多业务逻辑，</p>
+</blockquote>
+<blockquote>
+<p>用户经常需要确认具体逻辑后才能放心使用，</p>
+</blockquote>
+<blockquote>
+<p>怎样减少咨询量？</p>
+</blockquote>
 <p><br/></p>
-<p>印象中我只有一次类似的“狼狈”经历，</p>
-<p>某天下班坐地铁回家，接到了一个电话，同事要求我“必须当场”把问题解决掉。</p>
-<p>我说我在地铁上，同事说“我不管”。</p>
+<p>《<a href="https://book.douban.com/subject/26915970/" target="_blank" rel="noopener">Clean Architecture</a>》中有过这样一段话，</p>
+<blockquote>
+<p>Good architects design the policy so that decisions about the details can be delayed and deferred for as long as possible.</p>
+</blockquote>
 <p><br/></p>
-<p>所以，真的是程序猿自己乐意在路边工作么？</p>
-<p>他们真的就喜欢加班到深夜吗？很显然这是<strong>迫不得已</strong>。</p>
-<p>被认为是个人“爱好”真是一件不幸的事情。</p>
+<p>好的软件架构总想办法<strong>延迟决定</strong>。</p>
+<p>这是因为，越早做出的决定，就会包含越多的假设。</p>
+<p>软件设计是很惧怕假设的，假设意味着，未来它可能是正确的，也可能是<strong>不正确</strong>的。</p>
 <p><br/></p>
-<p>工作压力在互联网公司更为严重，因为很多系统都是<strong>实时运行</strong>的，</p>
-<p>每分甚至每秒都在有人使用，不能出问题。</p>
-<p>一旦出问题，必须想办法<strong>花最短的时间</strong>解决掉。</p>
+<p>过度设计的原因之一就是，<strong>假想敌</strong>太强大。</p>
 <p><br/></p>
-<p>上下班途中被叫住，晚上睡觉被电话叫起来，是常有的事情。</p>
-<p>并不是程序猿喜欢这样做，是<strong>工作性质</strong>使然。</p>
-<h3 id="经验教训">经验教训</h3>
-<p>首先不得不澄清的是，这里并不是在想为老程序猿撑腰，</p>
-<p>而是为了强调<strong>经验的重要性</strong>。</p>
+<p>回到减少咨询量的问题上来，用户之所以不放心使用，</p>
+<p>是因为我们提前帮用户做了很多不必要的事情。</p>
+<p>更合理的方法是，延迟决定，<strong>让用户来决定</strong>需要做哪些事情。</p>
 <p><br/></p>
-<p>虽然有能力的程序猿从不担心年龄问题，</p>
-<p>但是总要为别人解释“年龄不是问题”也很麻烦。</p>
-<p>所以，不如一次性解释清楚，到底<strong>老程序猿</strong>的能力有没有问题。</p>
+<p>用户想做一些事情，反而跑过来问我们给他做了没有，</p>
+<p>这种 “保姆式” 的软件系统帮了倒忙。</p>
 <p><br/></p>
-<p>这个问题其实不是那么好回答，</p>
-<p>因为它混淆了两个概念，“年龄”和“经验”。</p>
-<p>“经验”虽可能与“年龄”是正相关的，但也有例外。</p>
+<p>业务逻辑本来应当是当前系统该隐藏的那部分知识，这正是软件边界如此划分的原因之一，</p>
+<p>如果边界两侧，总是会有不可避免的信息沟通，</p>
+<p>这只能说明是边界的<strong>划分</strong>不合理。</p>
 <p><br/></p>
-<p>从上文程序猿的工作内容来看，其实“年龄”这个因素，对程序猿的工作影响很小，</p>
-<p>因为大部分时间不是在“写”代码，而是在考虑“怎样写”。</p>
-<p>所以，对于程序猿来说“老不老”其实<strong>区别不大</strong>。</p>
-<p><br/></p>
-<p>但如果考虑“经验”，就不一样了，</p>
-<p>“经验”越丰富，就能越早的意识到<strong>风险</strong>，少制造些<strong>不必要</strong>的麻烦。</p>
-<p>因此我一向不喜欢问别人“工作多少年”，而是问“有几年编程经验”。</p>
-<p><br/></p>
-<p>有很多年轻人，刚毕业已经有5年以上编程经验了，</p>
-<p>踩过了大多数<strong>程序设计时</strong>可能会遇到的坑。</p>
-<p>这样<strong>扎实的</strong>编程基础，其实要比那些工作一两年就转管理的程序猿更懂编程。</p>
-<p><br/></p>
-<p>团队中留一些有“经验”的程序猿十分必要，大家会少加一些班，</p>
-<p>少一些不必要的困难。</p>
+<p>我们应该退回来解决边界划分问题，而不是信息沟通问题。</p>
 <h3 id="结语">结语</h3>
-<p>程序猿似乎是一群喜欢自嘲，不想别人对自己期待过高的人们，</p>
-<p>原因可能在于，他们的工作需要<strong>严谨的</strong>做事风格。</p>
-<blockquote>
-<p>做最好的准备，做最坏的打算。</p>
-</blockquote>
+<p>以上我们分析了软件系统中的两个典型问题，</p>
+<p>（1）依赖了一个频繁失败的外部系统，怎么服务好上游用户？</p>
+<p>（2）怎样避免用户咨询复杂系统的业务逻辑？</p>
 <p><br/></p>
-<p>编程工作的特点，使得程序猿们很难“保持乐观”，</p>
-<p>只有做到<strong>万无一失</strong>，才能放心的交付软件。</p>
+<p>可以看到这两个问题，都跟<strong>软件架构</strong>有关。</p>
+<p>这并不是一个巧合。</p>
 <p><br/></p>
-<p>可如果整个群体都在自嘲，就难免其他人对编程本身造成误解，</p>
-<p>结果给程序猿自己带来麻烦。</p>
+<p>软件开发过程中的很多 “死胡同” 其实正是<strong>架构问题</strong>的外在表现。</p>
+<p>由于架构不合理，所以怎么做都不对。</p>
 <p><br/></p>
-<p>所以，有些时候，说真话也需要一种勇气，</p>
-<blockquote>
-<p>别人笑我太疯癫，我笑他人看不穿。</p>
-</blockquote>
-<blockquote>
-<p>不见五陵豪杰墓，无花无酒锄作田。</p>
-</blockquote>
+<p>近些年来在国内疯狂流行的 “敏捷” 开发，是重迭代轻架构的，</p>
+<p>给人一种假象，任何问题都可以通过迭代抹平，</p>
+<p>其实不然。</p>
 <p><br/></p>
-<p>当人们常把谦虚挂在嘴边时，自信就变成一种罕见性格了。</p>
+<p>迭代到 “死胡同”，还不肯及时止损的开发团队，非常的痛苦。</p>
+<p>一方面背着业绩压力，不得不往高处走，</p>
+<p>另一方面是，实在走不上去，又不能往回退。</p>
+<p><br/></p>
+<p>不知道这样的局面，什么时候才能有所改善。</p>
 
           
         
@@ -517,7 +504,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/69/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/71/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/69/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/71/">&gt;</a>
   </nav>
 
 
@@ -563,7 +550,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -638,7 +625,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

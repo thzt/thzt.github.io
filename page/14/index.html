@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/12/17/development-experience/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2023/01/30/overtime/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/17/development-experience/" itemprop="url">如何提升 “开发体验”</a></h1>
+                <a class="post-title-link" href="/2023/01/30/overtime/" itemprop="url">管理项目风险从识别加班开始</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-17T00:00:00+08:00">
-                2021-12-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-01-30T00:00:00+08:00">
+                2023-01-30
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,95 +347,132 @@
       
         
           
-            <p>很多 web 前端开发者们 把自己定位成了 “用户体验工程师”，</p>
-<p>这是因为前后端岗位的划分，使得软件架构分成了两个部分：界面 和 逻辑。</p>
+            <p>如今国内互联网行业的风气是，加班之势越来越盛，</p>
+<p>加班虽然能够延长工作时长，但并不一定能有效的创造更多价值。</p>
 <p><br/></p>
-<p>逻辑 关注的是，软件系统如何提供功能。</p>
-<p>界面 关注的是，“人” 如何使用 “软件系统” 提供的功能。</p>
+<p>因为开发软件是一项知识生产活动，</p>
+<p>我们可以让员工加班工作，但除非他们自愿，</p>
+<p>却没有办法让他们加班思考。</p>
 <p><br/></p>
-<p>前端开发的工作，大部分都是跟 “界面” 相关的，但并仅不限于 图形用户界面（GUI）。</p>
-<p>命令行（CLI） 和 应用程序接口（API），等等，也是界面。</p>
+<p>想让一个员工坚持思考，需要达成以下几个条件：</p>
+<ul>
+<li><p>热爱自己的工作，且团队氛围轻松愉悦</p></li>
+<li><p>时间不能被占满，留有一定的空余</p></li>
+<li><p>思考能得到的奖励，从思考到成果之链路畅通</p></li>
+</ul>
 <p><br/></p>
-<p>GUI 对于普通老百姓而言，使用成本更低，以后没准还会出现 AR/VR 界面。</p>
-<p>但如果用户是 开发者 的话，CLI/API 也许是更好的选择。</p>
+<p>加班还会带来另外的一个问题，可能会更加严重，</p>
+<p>那就是，掩盖了项目预算超标的事实。</p>
 <p><br/></p>
-<p>本文就分析一下，面向开发者提供的软件服务，有哪些容易遗漏的体验优化点。</p>
-<h3 id="cliapi">CLI/API</h3>
-<p>开发者 跟 普通老百姓 的 用户画像 是不一样的，</p>
-<p>开发者会写代码，而老百姓则不一定。</p>
-<p>所以，图形界面（GUI）的方式 也许 不是最优解。</p>
+<p>如果项目开始时，设定的就是只能通过加班才会完成，</p>
+<p>那么就得考虑，我们是否值得付出这么多的资源，</p>
+<p>能否少付出一些，只得到原计划交付的最重要的那一部分产物。</p>
 <p><br/></p>
-<p>开发者可以敲几行代码 调用 某个功能，而不必在界面上用鼠标操作。</p>
-<p>这种 “调用” 天生具有可组合性，并且管理 “代码” 正是开发者们所擅长的。</p>
+<p>如果项目开始时，没有想到会加班，</p>
+<p>那么就说明，我们用了比预算更多的资源，却勉强达成预期。</p>
+<p>那是否就说明，这件事情就不是料想中的那么划算了。</p>
 <p><br/></p>
-<p>很多优秀的开源 web 系统，除了 GUI 之外，还包含了不少 CLI，</p>
-<p>比如，gitlab/gerrit/jenkins 等等。</p>
+<p>所以，不论当初是否设想了会加班，</p>
+<p>总之都是项目管理者，没有考虑清楚这件事情。</p>
+<p>下文我们来调正思维方式。</p>
+<h3 id="总有更重要的部分">总有更重要的部分</h3>
+<p>遇到资源吃紧时，不要延期，而是要做到交付更重要的部分。</p>
+<p>这是软件开发，比起其他工程项目而言，非常独特的一点。</p>
 <p><br/></p>
-<p>我们在做一个软件系统的时候，优先从 CLI 入手，我觉得是一个好办法，</p>
-<p>它可以避免我们把精力过早的聚焦在 图形界面 上。</p>
+<p>因为整个交付过程不是一蹴而就的，也永远做不到完美，</p>
+<p>我们只能通过不断迭代来修正自己，逐渐逼近最优解。</p>
 <p><br/></p>
-<blockquote>
-<p>A good system can't have a weak command language.</p>
-</blockquote>
-<blockquote>
-<p>—— <a href="http://www.cs.yale.edu/homes/perlis-alan/quotes.html" target="_blank" rel="noopener">EPIGRAMS IN PROGRAMMING</a></p>
-</blockquote>
-<h3 id="ide-plugin">IDE plugin</h3>
-<p>开发者们 日常打交道最多的工具就是 IDE 了，</p>
-<p>要想提升 开发体验，应该抓住 IDE 这一常用的 “用户端”。</p>
+<p>所以，当我们拿到一个复杂软件需求的时候，</p>
+<p>不应该考虑的是，怎样加班才能在最短的时间内做完，</p>
+<p>而是应该考虑，如果做不完，我们应该优先交付它的哪些部分。</p>
 <p><br/></p>
-<p>很多 IDE/编辑器 都具备扩展功能（plugin），</p>
-<p>然而，编写常用编辑器的 扩展，却仍然不是主流的软件功能的提供方式。</p>
-<p>常规的做法只是给软件系统包装一个 GUI 界面。</p>
+<p>不提倡加班做完的原因有两个：</p>
+<ul>
+<li><p>仓促完工，可能会导致质量下降</p></li>
+<li><p>原始需求中，不重要的那些部分可能价值并不高</p></li>
+</ul>
 <p><br/></p>
-<p>开发者们 要想使用软件功能，需要打开这个 GUI 界面才可以。</p>
-<p>这就有了一种割裂感，</p>
-<p>尤其是完成不同功能的时候，只能去各个系统 GUI 中跳来跳去。</p>
+<p>综上，我们应当学会，用排优先级的视角来考虑需求，</p>
+<p>用尽量少的人力，高质量的完成最有价值的那一部分需求。</p>
+<p>从而快速的收集反馈，进入下一轮迭代。</p>
+<h3 id="控制预算">控制预算</h3>
+<p>如果计算资源是无限的，那么算法优化就失去了意义，</p>
+<p>因为如果不需要考虑时间和空间复杂度的话，什么算法都无所谓了。</p>
+<p>也正是因为我们需要在限定资源的情况下，要达成尽量好的效果。</p>
+<p>所以才需要寻求更好的算法。</p>
 <p><br/></p>
-<p>IDE 插件可以很好的串联起这些功能，但前提是各个系统已具备了 CLI 调用方式。</p>
+<p>项目管理也是如此。如果人力投入是无限的，工期也是无限的，</p>
+<p>那么，管理项目风险和进度，也就毫无意义。</p>
+<p>正是因为我们只有这些人，只有这么少的时间，却需要完成那么多的功能，</p>
+<p>才需要对项目进行管理。</p>
 <p><br/></p>
-<blockquote>
-<p>GNU Emacs is a LISP operating system disguised as a text editor.</p>
-</blockquote>
-<blockquote>
-<p>—— <a href="https://wiki.c2.com/?EmacsStandsFor" target="_blank" rel="noopener">Emacs Stands For</a></p>
-</blockquote>
-<h3 id="浏览器插件">浏览器插件</h3>
-<p>几年前我们做网络编程时候，经常区分 C/S 和 B/S 两种开发模式，</p>
-<p>浏览器端开发 属于后者（B/S），但现在不怎么提及了。</p>
+<p>所以要想成为一名合格的项目管理者，首先要明确限制条件，</p>
+<p>不要任由预算上涨。</p>
+<ul>
+<li><p>设定必须要交付的截止日期（DDL）</p></li>
+<li><p>对于加班现象，要警惕、敏感</p></li>
+</ul>
 <p><br/></p>
-<p>大部分前端开发的工作，都受限于浏览器环境中，不会考虑对浏览器本身做点什么。</p>
+<p>设定 DDL 就是限定工时（在人数确定的情况下，就是限定人日）。</p>
+<p>到 DDL 必须要交付，强迫大家识别出什么是最重要最该交付的内容。</p>
 <p><br/></p>
-<p>今年九月份，<a href="https://gs.statcounter.com/browser-market-share" target="_blank" rel="noopener">Browser Market Share Worldwide</a> 有份报告指出，</p>
-<p>Chrome 市场占有率已经达到了 64%。</p>
+<p>此外，加班就说明工时超出预算，那么就该警惕了，</p>
+<p>我们是否将时间，花费在了不重要的事情上，或者优先做了不重要的事情。</p>
+<p>还是说我们对待交付的结果，预期太高了，应该降低预期。</p>
 <p><br/></p>
-<p>不像 C 端浏览器那样发散，开发环境中的浏览器，是更可控的。</p>
-<p>所以，我们可以假设 开发者们 使用了一致的 Chrome 与系统进行交互。</p>
-<p>这样一来 Chrome 插件能起到的作用，就不容忽视了。</p>
+<p>往往问题都是出在这两点上，于是进入了如下的加班死循环，</p>
+<p>加班，领导高兴，证明员工很努力，</p>
+<p>延期，领导不高兴，是不是加班太少了。</p>
 <p><br/></p>
-<p>不像浏览器环境那样，Chrome 插件完全是 C/S 模式下对 Client 进行扩展。</p>
-<p>它有多种多样的办法与本地进程通信，这就大大扩充了站点的能力范围。</p>
-<h3 id="结语">结语</h3>
-<p>以上我们的分析思路 是挖掘所有针对 开发者 友好的 “端” 上场景。</p>
-<p>开发者们日常接触到的 “端” 是与老百姓不同的，</p>
-<p>甚至跟普通公司内部的 其他用户 也是不同的。</p>
+<p>而事实上，加班正是预算出问题的第一声哨响。</p>
+<h3 id="我要工作我不想加班">我要工作我不想加班</h3>
+<p>上文说的加班，是从项目管理者角度来看的，</p>
+<p>但从实际工作角度来看，加班还会分为不同的类型。</p>
+<ul>
+<li><p>内卷：因为别人没走，所以我没办法走</p></li>
+<li><p>事情没做完：白天各种被打断，晚上终于可以安静工作一会了</p></li>
+<li><p>我想做的更好：有自己的愿景，想快一些实现</p></li>
+</ul>
 <p><br/></p>
-<p>GUI（常规的图形界面端），CLI/API（terminal 端），</p>
-<p>IDE plugin（开发工具端），浏览器插件（Chrome 端），</p>
-<p>这些端共同形成了一个整体 —— 开发者界面。</p>
+<p>我们应当摒弃第一种「内卷」，警惕第二种「事情没做完」，</p>
+<p>鼓励第三种「我想做的更好」。</p>
+<p>上文项目视角所说的加班，更倾向于是第二种。</p>
 <p><br/></p>
-<p>因此，不同的 “端” 上应用，只是 “开发者界面” 的具体形态罢了。</p>
-<p>合理的打通各端，可以极大的加强软件系统的可交互性。</p>
+<p>现在我们来说一下「内卷」和「我想做的更好」。</p>
 <p><br/></p>
-<p>未来 移动办公/物联网 也会兴起，这就意味着新 “端” 出现。</p>
-<p>比如我们完全可以在 移动端 处理审批，用 手环/手表 接到系统的反馈。</p>
+<p>内卷不会创造价值，只会消耗自己的生命，会使人对工作产生反感。</p>
+<p>一旦对工作产生抵触心理，员工的创造力和主动性就会大幅度下降。</p>
 <p><br/></p>
-<p>随着开发者人数越来越多，开发体验 能带来的价值会越来越大。</p>
-<p>按十小时工作制来算，每人每天节省一小时，就能省出 10% 的人力成本。</p>
+<p>想要做的更好，是由自己内心的使命和愿景来驱动的，</p>
+<p>这就是平时我们所说的事业心。</p>
 <p><br/></p>
-<blockquote>
-<p>技亦灵怪矣哉。</p>
-</blockquote>
+<p>如何才能达成从「内卷」到「我想做的更好」的转变呢？</p>
+<p>那就是控制在公司工作的时间。</p>
+<p>到时间就得离开公司，想要工作可以选择远程上班。</p>
+<p><br/></p>
+<p>这样别人不会因为你在公司，而不敢走，</p>
+<p>如果你真的有内驱力，哪怕回家后也会工作。</p>
+<p><br/></p>
+<p>另外一个办法是，早上早点去公司上班，</p>
+<p>因为别人不知道你几点去的，所以拼命早去 别人看不到也没意义。</p>
+<p>如果你真的有内驱力，早上会被梦想叫醒。</p>
+<h3 id="小结">小结</h3>
+<p>本文从项目管理角度介绍了加班带来的问题，</p>
+<p>管理项目风险从识别加班开始。</p>
+<p><br/></p>
+<p>往往经常加班的团队，项目交付也容易延期，</p>
+<p>因为平时上班也已经习惯了拖延。</p>
+<p>这是，优先级识别紊乱综合征，总是把时间用错地方。</p>
+<p>也是，价值识别混乱综合征，总是优先交付不太重要的功能。</p>
+<p><br/></p>
+<p>我知道在某些公司某些团队，上述言论太过匪夷所思。</p>
+<p>加班不加班，一线开发也无法自己做主。</p>
+<p><br/></p>
+<p>如果影响不了别人，那么先改变自己，</p>
+<p>频繁的跟别人对齐预期，努力识别功能的优先级和价值，</p>
+<p>才能当你自己成为项目管理者时，不让团队遭殃。</p>
+<p><br/></p>
+<p>这正是：渡人如同渡己，渡己亦是渡人。</p>
 
           
         
@@ -474,7 +511,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/15/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/13/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/15/">&gt;</a>
   </nav>
 
 
@@ -520,7 +557,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -595,7 +632,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

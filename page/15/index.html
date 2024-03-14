@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/12/05/code/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2022/10/12/cutthroat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/05/code/" itemprop="url">从语言角度看低代码平台</a></h1>
+                <a class="post-title-link" href="/2022/10/12/cutthroat/" itemprop="url">解决内卷的思路和办法</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-05T00:00:00+08:00">
-                2021-12-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-12T00:00:00+08:00">
+                2022-10-12
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,110 +347,119 @@
       
         
           
-            <p>最近一两年 <strong>lowcode（低代码）平台</strong>，如雨后春笋一样爆发出来。</p>
-<p>每个公司都有几个、甚至几十个方案涌现出来，大家一起 “<strong>拖/拉/拽</strong>”，</p>
-<p>有些人甚至戏谑说，这是时代的<strong>倒退</strong>，frontpage/dreamweaver 又回来了。</p>
+            <p><a href="https://zh.m.wikipedia.org/zh-hans/%E5%86%85%E5%8D%B7%E5%8C%96" target="_blank" rel="noopener">内卷化</a> 是一个社会学概念，用以形容社会文化重复劳作、发展迟缓。</p>
+<p>在中国网络文化中，“内卷” 这一词却出现了语义偏移，</p>
+<p>用来指代<strong>内部恶性竞争、过度竞争</strong>等现象。</p>
 <p><br/></p>
-<p>其实，<strong>拖拽</strong> 和 <strong>代码生成</strong> 方案，并不是最近才出现的，甚至成熟的方案十几年前也都有，</p>
-<p>比如微软的 .NET webform，entity framework。</p>
+<blockquote>
+<p>如一家公司，原本实行八小时工作制，但有些人自愿加班，并得到管理层的赏识。此时，原先按时上下班的人开始担心自己成为劣势者，也自愿加班，久而久之，加班便成为常态，最后变成如果不自愿加班，就会影响自己在职场的生存，降低谈判力。</p>
+</blockquote>
 <p><br/></p>
-<p>刚入行时我用过一段时间 webform，后来切换到了 .NET MVC。</p>
-<p>webform 沿袭了 winform/vc++ 等系统软件开发的套路，</p>
-<p>先用拖拽方式把视图做出来，然后再编写相应的逻辑代码，跟自家的 wpf 挺像。</p>
+<p>大家都很讨厌 “内卷”，但又无法避免自己被 “<strong>卷入其中</strong>”。</p>
+<p>这有点像 “囚徒困境” 中的囚犯，当每个人都选择对自己最有利的决策时，</p>
+<p>结果大家都损失惨重。</p>
 <p><br/></p>
-<p>entity framework 是一个 orm 框架，可以通过几种途径自动生成数据访问层代码，</p>
-<p>用户不直接操作数据库了，而是操作一些领域对象，</p>
-<p>从领域对象到数据库的所有样板代码，通过 entity framework 自动生成。</p>
+<p><a href="https://baike.baidu.com/item/%E5%9B%9A%E5%BE%92%E5%9B%B0%E5%A2%83/5739141" target="_blank" rel="noopener">囚徒困境</a> 是指两个被捕的囚徒之间的一种特殊博弈，</p>
+<p>说明即使合作对双方都有利时，<strong>保持合作</strong>也是困难的。</p>
 <p><br/></p>
-<p>虽是如此，我仍觉得 lowcode 平台不是历史的倒退，而是<strong>螺旋上升</strong>。</p>
-<h3 id="着眼于整个研发过程">着眼于整个研发过程</h3>
-<p>讨论事物的一个办法是，把它放到所处的<strong>环境</strong>中，看看它在哪个位置。</p>
-<p>如果只看 lowcode 平台 的话，我们会认为它自成一派，可以独当一面。</p>
-<p>但如果把看成是整个<strong>研发活动中一环</strong>的话，它的<strong>优势</strong>和<strong>局限性</strong>也就付出水面了。</p>
+<blockquote>
+<p>两个共谋犯罪的人被关入监狱，不能互相沟通情况。如果两个人都不揭发对方，则由于证据不确定，每个人都坐牢一年；若一人揭发，而另一人沉默，则揭发者因为立功而立即获释，沉默者因不合作而入狱十年；若互相揭发，则因证据确凿，二者都判刑八年。由于囚徒无法信任对方，因此倾向于互相揭发，而不是同守沉默。</p>
+</blockquote>
 <p><br/></p>
-<p>研发流程通常以分析市场确定产品定位开始，然后制定产品规划，得到产品需求，</p>
-<p>接着，工程师与产品经理合作，用语言/工具/框架 把需求实现出来，得到功能代码，</p>
-<p>然后，通过一系列自动化的手段，进行依赖分析、编译、打包、部署、发布。</p>
+<p>然而，从 “内卷” 的视角来看，其实在 “囚徒困境” 中，并非只有囚犯因互相揭发受损，</p>
+<p>还有 “狱警” 因囚犯的 “恶性竞争” 而得利。</p>
+<p>从更广的视角来看，<strong>“内卷” 是能让 “游戏规则” 的创造者得利</strong>。</p>
 <p><br/></p>
-<p>它分成了几个阶段：产品阶段 -&gt; 开发阶段（编码） -&gt; CI/CD 阶段 -&gt; 用户使用阶段。</p>
-<p>经常会涉及到这样一些平台，</p>
-<ul>
-<li><p>研发平台：应用的生命周期</p></li>
-<li><p>项目管理平台：快速交付价值</p></li>
-<li><p>内容平台：知识沉淀、学习</p></li>
-<li><p><strong>编码辅助工具/平台：便捷的产出代码</strong></p></li>
-</ul>
+<p>因此，为了解决内卷问题，我们必须知道 “内卷” 是怎么产生的，</p>
+<p>学会制造出一套 <strong>可内卷的 “游戏规则”</strong>。</p>
+<h3 id="内卷规则">内卷规则</h3>
+<p>从零开始制造出一套 “游戏规则” 是很难的，让人感觉无从下手。</p>
+<p>但<strong>学习现有的规则</strong>，却更简单一些。</p>
+<p>我们可以回顾一下自己玩过的<strong>网络游戏</strong>，想想这些游戏的运营商是如何赚钱的。</p>
 <p><br/></p>
-<p>而 <strong>编码辅助</strong> 方案则是多种多样的，比如说，</p>
-<ul>
-<li><p>IDE：一个集成开发环境，提高代码编写效率</p></li>
-<li><p><strong>拖拽</strong>：图形化的方案，“写” 代码</p></li>
-<li><p>脚手架/代码生成：使用编译方式生成样板代码</p></li>
-</ul>
+<p>可以说每一套畅销、经久不衰的网络游戏背后，都有一套强大的<strong>内卷规则</strong>。</p>
+<p>让你想要比其他玩家花更多时间和金钱，沉浸在游戏中。</p>
+<p>如果不加管控的话，游戏规则会对这些玩家进行更多的奖励，让他们无法脱身。</p>
 <p><br/></p>
-<p>所以 “拖拽生成页面” 其实是属于 “编码辅助” 这一块（虽然它可以应用于其他领域）。</p>
-<p>而 lowcode 显然比拖拽的意义更广泛，它是立足于 “<strong>编码</strong>” 的。</p>
-<p>人们期望通过一种体系化的方式，减少编码量，降低编码门槛，来提高整个<strong>研发过程</strong>的<strong>产能</strong>。</p>
-<h3 id="为什么是螺旋上升">为什么是螺旋上升</h3>
-<p>软件行业的发展有两方面是相辅相成的，一个是规模化效应，软件到了量产时代。</p>
-<p>另一方面，则是<strong>基础设施</strong>的日趋完善，以前一些困难的工作变得越来越简单了。</p>
+<p>除了网络游戏之外，<strong>经济</strong>有时也是 “游戏规则” 的一种体现。</p>
+<p>如果不加管控的话，投机会成为大家喜闻乐见的事情，并且没有人能够逃离出去。</p>
+<p>包括 17 世纪 “<a href="https://zh.wikipedia.org/zh-cn/%E9%AC%B1%E9%87%91%E9%A6%99%E7%8B%82%E7%86%B1" target="_blank" rel="noopener">郁金香狂热</a>” 事件；以及多个国家所遭遇 楼市、股市 带来的经济泡沫。</p>
 <p><br/></p>
-<p>关于基础设施，我拿<strong>编译领域</strong>来举个例子，</p>
-<p>虽然在学校里有编译方面的课，但实际工作中，能写 parser 并对结果进行分析的人却很少。</p>
-<p>这是因为有很多脏活累活，任何一个还算有用的语言的 parser 都很麻烦。</p>
+<blockquote>
+<p>郁金香狂热，1637 年发生在荷兰，是世界上最早的泡沫经济事件。当时由奥斯曼土耳其引进的郁金香球根异常地吸引大众抢购，导致价格疯狂飙高，然而在泡沫化过后，价格仅剩下高峰时的百分之一，让荷兰各大都市陷入混乱。</p>
+</blockquote>
 <p><br/></p>
-<p>所以理论与现实之间有很大的<strong>差距</strong>，我们知道怎么做，但是做起来很<strong>困难</strong>。</p>
-<p>如今时代发展了。比如，微软已推出了 <strong>.NET Compiler Platform</strong> 这是一个编译平台，</p>
-<p>可能是受到 llvm 的影响，工程师们可以通过 compiler api 来进行编译方面的业务开发了。</p>
+<p>不论是网络游戏还是经济，我们可以看到造成内卷蔓延的原因在于，</p>
+<p><strong>内卷 可以让 “恶性竞争者” 和 “游戏规则的制定者” 同时受益</strong>，</p>
+<p>从而进一步加剧了内卷的程度。</p>
 <p><br/></p>
-<p>前端领域，以前我们想获取 javascript 代码的符号信息，这是很难的，</p>
-<p>因为不仅 js 解析起来麻烦（好多个版本），<strong>语义分析</strong>这一块也没有成熟的工具来做。</p>
-<p>现在，typescript 采用了新的 compiler 架构，有很多 api 可进行上层开发。</p>
+<p>为了解除内卷，我们必须从外界进行干预，修订 “游戏规则” 的漏洞，</p>
+<p>限制 “规则的制定者” 的受益水平，才能消除 “恶性竞争者” 的 “内卷” 狂热。</p>
+<h3 id="奖惩条件">奖惩条件</h3>
+<p>值得一提的是，我们应该鼓励竞争，但是不应该鼓励恶性竞争。</p>
 <p><br/></p>
-<p>所以，这一切正在悄无声息的发生变革，以前用 ReSharper 重构 C# 代码觉得很神奇，</p>
-<p>现在可以用基于 compiler platform 写自己的重构工具了。</p>
+<blockquote>
+<p>比如老师布置了一个 1500 字的论文，你认真对待，查资料，图文并茂，写了 1500 字，完成了作业，这是认真。你写 一万五千字，哐哐 50 页交上去，全班同学吓死了，老师一看，嚯，以后都按这个要求来，这叫内卷。久而久之，大家都会去应付差事，强行补齐字数，这就是恶性竞争的后果。</p>
+</blockquote>
 <p><br/></p>
-<p>回到 lowcode 这边来，由于编译技术的开放和发展，</p>
-<p>任何一家公司、团队 都有能力处理常用的编程语言了（例如 typescript），</p>
-<p>所以事情就简单多了，<strong>语言的应用</strong> 跟 <strong>语言的基础设施</strong> 解耦了。</p>
+<p>产生恶性竞争的原因是，规则有漏洞，并且规则的制定者没有提防 “内卷”，</p>
+<p><strong>对可能产生恶性后果的行为，进行了奖励，对已经产生的恶性后果，没有及时惩罚。</strong></p>
 <p><br/></p>
-<p>我们知道很多老牌<strong>语言</strong>的 <strong>IDE</strong> 是一体的，IDE 绑定了编译器，</p>
-<p>比如 borland c++、delphi、vs studio，更早的比如说 smalltalk。</p>
-<p>现在随着 lsp/dap 概念的提出，语言供应商 与 编辑器供应商 也开始<strong>独立发展</strong>了。</p>
+<p>上文提到的公司加班也是如此，如果对加班行为进行奖励，</p>
+<p>那么大家都会朝着延长工时的方式去做。</p>
+<p>从而导致战斗力和产能下降，团队凝聚力涣散。</p>
 <p><br/></p>
-<p>这就萌生出很多 语言基础 之上的其他类型的业务，比如说 web ide，比如 lowcode。</p>
-<h3 id="难点和考虑">难点和考虑</h3>
-<p>语言方面的门槛越来越低了，可为什么我还要说 lowcode 依然<strong>难搞</strong>呢？</p>
-<p>这是因为前端开发者们 涉足 code 领域的时间还太短，积累不足，</p>
-<p>此外，很难同时站在 工程、编程语言、产品几块的<strong>宏观视角</strong>下看待问题。</p>
+<p>那么我们应该如何修订 “游戏规则” 呢？</p>
+<p><strong>我们不应该奖励「行为」，而应该奖励「结果」，奖励用「创新方式」得到更好结果的人。</strong></p>
 <p><br/></p>
-<p>比如说，lowcode 平台的产品<strong>定位</strong>是什么？服务哪些人群，哪些人<strong>不是</strong>我们的用户？</p>
-<p>产品的<strong>范围</strong>定位不清，就会导致走很多弯路，不同的用户左右不讨好。</p>
+<p>同样是论文，如果有人能用 1500 字达到 一万五千字 同样的效果，就应该奖励它。</p>
+<p>而不是对 一万五千字 这种<strong>表现形式</strong>进行奖励。</p>
+<p>同样是工作，如果有人能用 8 个小时达成 12 个小时的工作成果，就应该奖励它。</p>
+<p>而不是对 延长工时的加班<strong>行为</strong>进行奖励。</p>
 <p><br/></p>
-<p>工程方面，lowcode 在整个研发过程中属于什么<strong>位置</strong>？</p>
-<p>产物怎么与工程中的其他部分<strong>结合</strong>？</p>
-<p>lowcode 平台中的 “代码” 如何测试？如何复用？如何跟 “手工编码” 做衔接？</p>
-<p>很多 lowcode 平台用的人很少，在于没法把它放到现有<strong>生态</strong>中去。</p>
+<p>这就需要 “游戏规则” 的制定者，头脑足够清醒，明确的说清楚 “我要什么”，</p>
+<p>更重要的是，告诉大家 “<strong>我不要什么</strong>”。</p>
+<h3 id="边界难题">边界难题</h3>
+<p>有时候很多局部的 “游戏规则” 是存在于更广泛的规则体系中的，</p>
+<p>我们无法影响规则制定者，或者无法修订奖惩规则，这要怎么办呢？</p>
 <p><br/></p>
-<p>语言方面，人们<strong>低估</strong>了创建一套 <strong>DSL 生态</strong>的成本。</p>
-<p>之前我们说一些常用语言的 基础设施 完备起来了，但是<strong>还没到</strong>支持 DSL 这个阶段。</p>
-<p>市面上<strong>罕有</strong> 语法设计器、DSL 的调试方案、DSL 语言服务、DSL 的编辑器。</p>
+<blockquote>
+<p>比如，很多学生家长，生怕自己孩子输在起跑线上，给孩子报名了各种各样的学习班。影响其他家长是不可能的，因为大家都是 “内卷规则” 中的一枚狂热的棋子。我们也无法影响教育界，没办法让教育部出面取缔所有的学习班。</p>
+</blockquote>
 <p><br/></p>
-<p>所以我们虽然踏上了 lowcode 时代的风口，也要谨慎看待自家产品的<strong>选型</strong>。</p>
-<p>能用简单的办法，不用复杂的办法。以能解决<strong>高杠杆率的问题</strong>为第一要义。</p>
+<p>如何在不改变全局的情况下，从局部摆脱内卷呢？</p>
+<p><strong>从局部摆脱内卷的办法，就是另设赛道，避免同质化竞争。</strong></p>
+<p><br/></p>
+<p>我们要将学生报名学习班的诉求，理智的分为两类，</p>
+<p>一类是<strong>自身学习的需要</strong>，另一类则是，<strong>要比别人强</strong>。</p>
+<p>首先，我们要能区分出哪些是 “自身需要”，哪些是 “因别人内卷导致我不得不要”。</p>
+<p><br/></p>
+<p>对于 “因别人内卷导致我不得不要” 的学习班，我们要避开同质化。</p>
+<p>大家都学跳绳，你可以学街舞；大家都学钢琴，你可以学竖笛；</p>
+<p>甚至，还要敢于独立开辟出新的领域，大家都学奥数，你可以报考无人机驾驶证。</p>
+<p><br/></p>
+<p>要记得，<strong>当大家都向东走时，你向北走一米，都能处于绝对的领先位置</strong>。</p>
+<p>重要的是要结合自己的兴趣和规划，持之以恒的坚持下去。</p>
 <h3 id="结语">结语</h3>
-<p>lowcode 这个领域已经蓬勃的发展起来了，我还在学习中，</p>
-<p>以上只是写了一下自己的看法。</p>
+<p>“内卷” 这个词最近很流行，因为大家逐渐意识到，很多事情都<strong>身不由己</strong>，</p>
+<p>自己被 “内卷” 了。</p>
+<p>我们无法识别哪些是<strong>自己真正的需求</strong>，哪些是别人强加给我们的。</p>
 <p><br/></p>
-<p>最近几年 编译领域 也一直在尝试向<strong>应用层</strong>发展，</p>
-<p>比如 jetbrains 的 mps。data-flow analysis 也逐渐走出了编译器，向安全等领域进发。</p>
-<p>国内的几家 小程序，发展非常快，逐渐形成了一个行业。</p>
+<p>内卷源于 “游戏规则” 的漏洞，以及奖惩不当。</p>
+<p>如果你是规则的制定者，需要小心提防自己是否内卷的元凶。</p>
+<ul>
+<li><p>持续不断的<strong>明示自己的要求</strong>，要什么和不要什么。</p></li>
+<li><p><strong>奖励结果不奖励行为</strong>，并对影响结果的低效行为进行惩罚。</p></li>
+</ul>
 <p><br/></p>
-<p>lowcode 的潜在<strong>强交互性</strong>，刚好是前端工程师们所擅长的，</p>
-<p>前端工程师天生离<strong>产品</strong>比较近，lowcode 也因此有了更多的业务场景，</p>
-<p>这也就看出来为什么 lowcode 能成为最近几年的<strong>热点</strong>了。</p>
+<p>如果你不能影响自身所处的环境，那么可以通过<strong>另设赛道</strong>的方式避开内卷，</p>
+<p>减少同质化的恶性竞争，结合自己的特点，跟别人做不一样的事情。</p>
 <p><br/></p>
-<p>山重水复疑无路，柳暗花明又一村。</p>
+<p>要知道，即使是从企业招聘的角度来看，招人并不是因为你能干，</p>
+<p>因为能干的人多了，</p>
+<p>招人是因为<strong>你能做别人不能做的事情</strong>，即更有竞争力。</p>
+<p><br/></p>
+<p>未来社会，最稀缺的并不是「能力」，而是「竞争力」。</p>
 
           
         
@@ -489,7 +498,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/16/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/14/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/16/">&gt;</a>
   </nav>
 
 
@@ -535,7 +544,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -610,7 +619,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

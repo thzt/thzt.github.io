@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/09/semantics-7/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/05/30/software-solution/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/09/semantics-7/" itemprop="url">语言背后的代数学（七）：数学结构</a></h1>
+                <a class="post-title-link" href="/2018/05/30/software-solution/" itemprop="url">软件方案的能力范围</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T00:00:00+08:00">
-                2018-02-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T00:00:00+08:00">
+                2018-05-30
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,263 +347,164 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-e24e6ddb6c6118a2.png" /></p>
+            <p>软件工程师们每天都会遇到各种各样的问题，</p>
+<p>我们中的绝大多数人，日常的工作内容就是把这些问题解决掉。</p>
+<p>不论是修复一个代码缺陷，还是开发个新的功能，又或者是启动一个新的项目。</p>
+<p><br/></p>
+<p>回顾多年的学校教育，无形中让我们养成了以下这样的思维习惯，</p>
+<p>那就是，<strong>针对一个给定的问题，快速的找到答案，</strong></p>
+<p>这使得我们容易在考试中获得高分，以致于让我们有机会接受更好的教育。</p>
+<p><br/></p>
+<p>适应环境，从而沉淀出一套最有效的思维模式，</p>
+<p>这确实可以算是优秀人士的一种衡量标准。</p>
+<p><br/></p>
+<p>然而，这种思维模式一旦被不小心用到了其他环境中，</p>
+<p>那么带来的恶果将是惨重的，</p>
+<p>甚至还是难以觉察的。</p>
+<p><br/></p>
+<h3 id="发现问题">1. 发现问题</h3>
+<p>急着去解决问题，而不去分析<strong>问题本身</strong>，是一个最常见的思维惯性，</p>
+<p>因为在校期间，我们遇到的问题都是严格定义的，</p>
+<p>不太会出现问题本身出现差错的情况。</p>
+<p><br/></p>
+<p>但是现实中，却远不是这样，</p>
+<p>现实中的问题，更多是<strong>不确定的</strong>。</p>
+<p><br/></p>
+<p>例如，一个想要实现工作流引擎的团队，</p>
+<p>他们的业务场景可能并不需要让工作流可配置。</p>
+<p><br/></p>
+<p>那么它们到底为什么要解决这个问题呢？</p>
+<p><br/></p>
+<p>这就是典型的问题本身不明确的一个情形。</p>
+<p>在这时候，我们就需要给“问题”下个合理的定义了，</p>
+<p>到底什么是“问题”？</p>
+<p><br/></p>
+<p>斋藤嘉则在《<a href="https://book.douban.com/subject/3604068/" target="_blank" rel="noopener">发现问题的思考术</a>》中提到，</p>
+<p>所谓“<strong>问题</strong>”，就是“应有的景象”与“现状”之间的“落差”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">问题 &#x3D; 应有的景象 - 现状</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>而解决方案是否有效，完全取决于问题的定义方式。</p>
+<p><br/></p>
+<p>如果团队仅仅是为了应付经常变动的业务流程，</p>
+<p>那么首先应该考虑的是，为什么业务流程会经常变动，</p>
+<p>而不是考虑如何用技术手段使得它可以任意变动。</p>
+<p><br/></p>
+<p>此外，换一个角度，如果团队的目标根本就不是为了解决业务流程问题，</p>
+<p>而是为了做出一个技术产品，来提高团队的影响力，</p>
+<p>那么开发工作流引擎，也未尝不是一个可行的办法。</p>
+<p><br/></p>
+<p>所以，对问题本身，我们应该有更多的考虑，</p>
+<p>究竟是谁的预期，和现状之间产生了怎样的落差？</p>
+<p><br/></p>
+<h3 id="让方案自动化">2. 让方案自动化</h3>
+<p>软件才出现了不到100年，但是人类社会却繁衍生息了上万年，甚至上十万年，</p>
+<p>从这个角度来看，软件形式的解决方案可能只算是历史上的一瞬间了。</p>
+<p><br/></p>
+<p>软件系统也从人类社会现存的解决方案中学到了很多，</p>
+<p>Smalltalk的设计者之一<a href="https://en.wikipedia.org/wiki/Alan_Kay" target="_blank" rel="noopener">Alan Kay</a>，</p>
+<p>在答复<a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en" target="_blank" rel="noopener">Meaning of "Object-Oriented Programming"</a>的邮件中提到了，</p>
+<blockquote>
+<p>I thought of objects being like biological cells and/or individual computers on a network, only able to communicate with messages.</p>
+</blockquote>
+<p><br/></p>
+<p>可以看出，Smalltalk中“对象”的概念，其设计<strong>动机</strong>最初来源于生物学，</p>
+<p>这得益于<a href="https://en.wikipedia.org/wiki/Alan_Kay" target="_blank" rel="noopener">Alan Kay</a>同时具有生物学和数学的知识背景。</p>
+<p><br/></p>
+<p>我这样写是为了阐述一种现状，</p>
+<p>人们总是寄希望于用软件解决<strong>所有的未解难题</strong>，这是一个常见的思维陷阱。</p>
+<p>因为某些问题的症结点，可能并不在软件层面，</p>
+<p>即使该问题是人们在从事软件开发活动中暴露出来的。</p>
+<p><br/></p>
+<p>例如，想要提高代码的交付质量，而编写一个自动化的测试系统，</p>
+<p>这显然就并没有分析清楚问题的症结所在，</p>
+<p>尤其是应用于那些难以进行自动化测试的领域中。</p>
+<p><br/></p>
+<p>因为，如果将代码质量归结为测试的不够充分，</p>
+<p>那么首先提高<strong>人工测试</strong>的投入量，才是验证“增加测试是否是有效”这一假设的最好办法，</p>
+<p>这也是投入产出比最高的方案。</p>
+<p><br/></p>
+<p>等到人工测试投入到工作中之后，</p>
+<p>等到那些具有<strong>重复的，可被自动化执行的</strong>部分出现时，</p>
+<p>再将这部分用软件系统来解决，</p>
+<p>我想这才是一个软件系统被考虑用于解决问题的正规途径吧。</p>
+<p><br/></p>
+<p>而不是反之，</p>
+<p>当可重复性的工作，可被自动化操作的工作，被识别出来之前，</p>
+<p>就先尝试开发一个软件系统，以期望它可以奇迹般的解决问题，</p>
+<p>这样经常会得不偿失。</p>
+<p><br/></p>
+<p>《<a href="https://book.douban.com/subject/1148282/" target="_blank" rel="noopener">计算机程序的构造与解释</a>》中写到，</p>
+<blockquote>
+<p>计算过程是存在于计算机里的一类抽象事物，在其演化进程中，这些过程会去操作一些被称为数据的抽象事物。</p>
+</blockquote>
+<blockquote>
+<p>我们用于指挥这种过程的程序就像是巫师的咒语，它们是用一些诡秘而深奥的程序设计语言，通过符号表达式的形式精心编排而成，它们描述了我们希望相应的计算过程去完成的工作。</p>
+</blockquote>
+<p><br/></p>
+<p>从程序语言的角度来看，</p>
+<p>是先有计算过程，再有了这些计算过程的描述（程序）。</p>
+<p><br/></p>
+<p>当我们对现实问题还没有想要一个有效的“过程”解决它时，</p>
+<p>就冒然从事编码（程序）活动，</p>
+<p>这显然是低效的，甚至是无意义的。</p>
+<p><br/></p>
+<h3 id="信息管理">3. 信息管理</h3>
+<p>软件开发行业的从业者们，可能会抱有这样的<strong>幻想</strong>，</p>
+<p>是我们现在这个团队，现在这个项目有问题，</p>
+<p>必定存在一个足够优秀的团队，在那里进行开发，是顺畅的高效的，</p>
+<p>没有各种令人分神的事情。</p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文我们介绍了Henkin模型，以及它的环境模型条件和组合模型条件，</p>
-<p>它们分别为合法的<span data-katex="\lambda"></span>项和<span data-katex="CL"></span>项，找到了对应的语义解释。</p>
-<p>然而这只是简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>的其中一种解释。</p>
+<p>其实，这种幻想可能根本就无法实现。</p>
+<p>因为<strong>每个团队每个项目都不可避免的存在自己的问题，</strong></p>
+<p>有其难以克服或正在想办法克服的瓶颈。</p>
 <p><br/></p>
-<p>另一种常用的解释方式，建立在范畴论基础之上，称为<strong>笛卡尔闭范畴</strong>。</p>
-<p>为了理解这个概念，我们需要补充一些简单的范畴论方面的内容。</p>
+<p>快速进行软件开发是一个不稳定的理想状况，</p>
+<p>有任何一项不论是需求因素，工期因素，人员因素等等条件，不能符合理想标准，</p>
+<p>都会导致开发活动慢下来。</p>
 <p><br/></p>
-<h3 id="数学结构">1. 数学结构</h3>
+<p>虽然软件开发是有关编程技术的，但它的参与者终究还是人，</p>
+<p>有人就会有目标不统一，或者沟通合作等方面的社会学和心理学问题。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-ce31cbd5a6af6c3a.png" /></p>
+<p>关键是当其他人在兜售一个软件工程方面的解决方案时，</p>
+<p>如果不强调它会让现状变得像童话般美妙，就没有人愿意去尝试它。</p>
+<p>这就给我们带来了理想情况确实可以达到的错觉。</p>
 <p><br/></p>
-<p>范畴论的研究数学结构的形式化方法，</p>
-<p>它不考虑具体的数学对象，而是考虑数学对象以及它们之间的联系。</p>
+<p>这应该是不可能的，因为在软件工程方面“<a href="https://zh.wikipedia.org/wiki/%E6%B2%A1%E6%9C%89%E9%93%B6%E5%BC%B9" target="_blank" rel="noopener">没有银弹</a>”。</p>
+<p><strong>软件开发的真正困难不在于如何表示一个抽象概念，</strong></p>
+<p><strong>而在于如何将这个抽象概念传递给其他人。</strong></p>
 <p><br/></p>
-<p>学习范畴论最好的办法，我认为不宜马上从抽象的概念开始，</p>
-<p>而是先回到具体的例子上面，找到相似性，<strong>理解概念被发明的动机</strong>。</p>
+<p>因此，在《<a href="https://book.douban.com/subject/1102259/" target="_blank" rel="noopener">人月神话</a>》提到了<a href="https://en.wikipedia.org/wiki/Brooks%27s_law" target="_blank" rel="noopener">Brooks's law</a>，</p>
+<blockquote>
+<p>Adding human resources to a late software project makes it later.</p>
+</blockquote>
+<p>即，向进度落后的项目中增加人手，只会使项目更加落后。</p>
 <p><br/></p>
-<p>因此，我们要先理解什么是<strong>数学结构</strong>。</p>
-<p>后文中，我们会首先介绍最常被提及的群结构，然后再介绍拓扑空间和CPO（完全偏序）。</p>
-<p>有了这些例子之后，对抽象概念的理解是事半功倍的。</p>
+<p>因为，新增加的人手会加剧组织沟通不畅的状况，</p>
+<p>而沟通问题或许是造成项目延期的主要原因。</p>
 <p><br/></p>
-<h3 id="群结构">2. 群结构</h3>
+<p>在软件开发过程中，如果出现了问题，</p>
+<p>先从沟通和信息不对称的角度进行反思，</p>
+<p>比直接寻求用一个辅助软件系统旁敲侧击，将会更加有效。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-3f960ea2439e2f98.png" /></p>
+<h3 id="结语">结语</h3>
+<p>既然从事了软件开发这个行当，对软件系统的威力和价值，当然是有足够的自信，</p>
+<p>但这并不能让我们更加专业化。</p>
 <p><br/></p>
-<p>群是一种满足结合律的乘法结构，</p>
-<p>但是它的运算对象，却并不局限于整数，有理数甚至实数上。</p>
-<p>因此，群论对概念采用了不同的定义方式，和初等代数有明显的不同。</p>
+<p>所谓专业化，我认为并不仅仅是从专业领域（软件）给出任何可行的方案，</p>
+<p>更重要一点是，<strong>从问题领域出发，指出客户方案中的不合理之处。</strong></p>
+<p>这样才能让方案总是直指问题的核心，确实有助于解决问题。</p>
 <p><br/></p>
-<p>在初等代数中，我们研究的是具体的运算系统，</p>
-<p>例如，我们会先介绍什么是自然数，然后再介绍自然数上的四则运算。</p>
-<p>群论则不然。</p>
+<p>然而，很多情况下，都不是我们可以控制的，</p>
+<p>在对解决方案提出质疑的时候，</p>
+<p>他人的任何不悦，最终才会让我们意识到什么是别人想去解决的问题。</p>
 <p><br/></p>
-<p>它会先抽象的定义满足哪些条件的运算系统是<strong>群</strong>，</p>
-<p>然后再去寻找（或证明）具体的运算系统满足这些条件。</p>
+<p>事实上，<strong>最难达成一致的是对问题本身的认知和大家的目标。</strong></p>
 <p><br/></p>
-<p>为此，我们先从条件最弱的<strong>半群</strong>开始，</p>
-<p>逐渐增加约束条件，最终认识群结构是怎么建立起来的。</p>
+<p>从“问题 = 应有的景象 - 现状”公式中我们也可以看到，</p>
+<p>在大家都能理性正视现状的基础上，不同的人因为拥有对“应有景象”的不同预期，</p>
+<p>最终会导致人们在心目中实际想要解决不同的问题。</p>
 <p><br/></p>
-<p><strong>半群</strong></p>
-<p>集合<span data-katex="G"></span>和<span data-katex="G"></span>上满足结合律的二元运算<span data-katex="\cdot"></span>，</p>
-<p>所形成的代数结构，叫做<strong>半群</strong>，记为<span data-katex="(G,\cdot)"></span>，</p>
-<p>半群运算<span data-katex="x\cdot y"></span>，也常简记为<span data-katex="xy"></span>。</p>
-<p><br/></p>
-<p>好在我们<a href="https://thzt.github.io/2018/01/20/semantics-2/">第二篇</a>中，对“什么是代数”进行了严谨的定义，</p>
-<p>因此，对这里提到的“代数结构”应该并不陌生，很显然半群是一个代数。</p>
-<p><br/></p>
-<p>满足半群条件的例子是非常多的，</p>
-<p>例如，自然数集以及自然数上的乘法运算，构成了一个半群。</p>
-<p><br/></p>
-<p>值得注意的是，集合和运算要放在一起考虑才行，</p>
-<p>集合包含了运算对象，运算表明了运算对象之间的关系。</p>
-<p><br/></p>
-<p><strong>幺半群</strong></p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-3fa823cd8d83854d.png" /></p>
-<p><br/></p>
-<p>设<span data-katex="G"></span>是半群，元素<span data-katex="e\in G"></span>，称为半群<span data-katex="G"></span>的幺元，</p>
-<p>如果<span data-katex="\forall x\in G"></span>，<span data-katex="ex=xe=x"></span>。</p>
-<p>可以证明，如果半群存在幺元，则必定是唯一的。</p>
-<p><br/></p>
-<p>幺元常被记为<span data-katex="1_S"></span>，或者直接写成<span data-katex="1"></span>。</p>
-<p>具有幺元的半群，称为<strong>幺半群</strong>，记为<span data-katex="(G,\cdot,e)"></span>。</p>
-<p><br/></p>
-<p>幺半群的例子，我们可以考虑字符串及其连接运算，</p>
-<p>在连接运算下，空串是幺元。</p>
-<p><br/></p>
-<p><strong>群</strong></p>
-<p>设<span data-katex="G"></span>是幺半群，如果它的每个元素都可逆，我们就称它为<strong>群</strong>。</p>
-<p><br/></p>
-<p>所谓可逆指的是，<span data-katex="\forall g\in G"></span>，<span data-katex="\exists g^{-1}\in G"></span>，</p>
-<p>使得<span data-katex="gg^{-1}=g^{-1}g=e"></span>，</p>
-<p>其中<span data-katex="e\in G"></span>为<span data-katex="G"></span>的幺元。</p>
-<p><br/></p>
-<p>自然数集以及自然数上的乘法运算组成的代数结构，是半群，</p>
-<p>如果把自然数<span data-katex="1"></span>看做幺元，则构成了一个幺半群，但是它不是群。</p>
-<p>因为，除了<span data-katex="1"></span>之外，任何自然数都没有逆元。</p>
-<p><br/></p>
-<p>字符串及其连接运算，构成了一个幺半群，但也不是群，</p>
-<p>因为，没有任何两个非空字符串连接在一起会得到空串。</p>
-<p><br/></p>
-<p>下面我们来看一个群的例子。</p>
-<p><br/></p>
-<p>如果我们把整数集（包含正负整数）看做运算对象的集合，</p>
-<p>把整数集上的加法运算看做群定义中的二元运算，</p>
-<p>整数<span data-katex="0"></span>看做加法运算的幺元，则这样的运算系统构成了一个群。</p>
-<p>因为，每一个整数的相反数，都是它的逆元。</p>
-<p><br/></p>
-<p><strong>群同态</strong></p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-346888ad855e2420.png" /></p>
-<p><br/></p>
-<p>有了群之后，很自然的一步我们会考虑两个群是否足够相似，</p>
-<p>这就需要我们找到两个群之间的对应关系。</p>
-<p><br/></p>
-<p>设<span data-katex="(G,\cdot)"></span>和<span data-katex="(G&#39;,\circ)"></span>是两个群，</p>
-<p>我们把映射<span data-katex="f:G\to G&#39;"></span>称为<strong>群同态</strong>，如果<span data-katex="\forall a,b\in G"></span>，</p>
-<p>都有<span data-katex="f(a\cdot b)=f(a)\circ f(b)"></span>。</p>
-<p><br/></p>
-<p>如果<span data-katex="f"></span>是单射，则称<span data-katex="f"></span>为单同态，</p>
-<p>如果<span data-katex="f"></span>是满射，则称<span data-katex="f"></span>为满同态。</p>
-<p><br/></p>
-<p>如果<span data-katex="f"></span>是双射，则称<span data-katex="f"></span>为<strong>群同构</strong>。</p>
-<p>同构的两个群，记为<span data-katex="G\cong G&#39;"></span>。</p>
-<p><br/></p>
-<p><strong>小结</strong></p>
-<p>现在我们理解了半群，幺半群，群，群同态，</p>
-<p>这些概念放在一起，就是所谓的群结构。</p>
-<p>结构一般所指的是一些运算规则，或者约束条件。</p>
-<p><br/></p>
-<p>为了更好的理解数学结构，</p>
-<p>下面我们来介绍另一个概念，它来自拓扑学，称为拓扑空间。</p>
-<p><br/></p>
-<h3 id="拓扑结构">3. 拓扑结构</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-e87418f9539b42b7.png" /></p>
-<p><br/></p>
-<p>拓扑学，被人们戏称橡皮膜上的几何学，</p>
-<p>它主要研究在连续变换下保持不变的几何性质，</p>
-<p>例如，连通性和紧致性。</p>
-<p><br/></p>
-<p>这里我们先不展开，</p>
-<p>主要看一下在拓扑学中是怎么建立数学结构的。</p>
-<p><br/></p>
-<p><strong>子集族</strong></p>
-<p>设<span data-katex="X"></span>是一个非空集合，<span data-katex="2^X"></span>是<span data-katex="X"></span>的幂集（所有子集构成的集合），</p>
-<p>把<span data-katex="2^X"></span>的子集（即以<span data-katex="X"></span>的一部分子集为成员的集合）称为<span data-katex="X"></span>的<strong>子集族</strong>。</p>
-<p><br/></p>
-<p><strong>拓扑空间</strong></p>
-<p>设<span data-katex="X"></span>是一个非空集合，<span data-katex="X"></span>的一个子集族<span data-katex="\tau"></span>称为<span data-katex="X"></span>的一个<strong>拓扑</strong>，</p>
-<p>如果它满足</p>
-<p>（1）<span data-katex="X"></span>和<span data-katex="\varnothing"></span>都包含在<span data-katex="\tau"></span>中</p>
-<p>（2）<span data-katex="\tau"></span>中任意多个成员的并集仍在<span data-katex="\tau"></span>中</p>
-<p>（3）<span data-katex="\tau"></span>中有限多个成员的交集仍在<span data-katex="\tau"></span>中</p>
-<p><br/></p>
-<p>集合<span data-katex="X"></span>和它的一个拓扑<span data-katex="\tau"></span>一起称为一个<strong>拓扑空间</strong>，记作<span data-katex="(X,\tau)"></span>。</p>
-<p>称<span data-katex="\tau"></span>中的成员为这个拓扑空间的<strong>开集</strong>。</p>
-<p><br/></p>
-<p>从定义看出，给出集合的一个拓扑就是规定它的哪些子集是开集。</p>
-<p><br/></p>
-<p><strong>连续映射</strong></p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-0926fa9e83c0403c.png" /></p>
-<p><br/></p>
-<p>设<span data-katex="X"></span>和<span data-katex="Y"></span>都是拓扑空间，<span data-katex="f:X\rightarrow Y"></span>是一个映射，</p>
-<p><span data-katex="x\in X"></span>，如果对于包含<span data-katex="f(x)\in Y"></span>的每一个开集<span data-katex="V"></span>，必存在包含<span data-katex="x"></span>的开集<span data-katex="U"></span>，</p>
-<p>使得，<span data-katex="f(U)\subseteq V"></span>，则我们就说，<span data-katex="f"></span>在<span data-katex="x"></span>处<strong>连续</strong>。</p>
-<p><br/></p>
-<p>如果映射<span data-katex="f:X\rightarrow Y"></span>在任一点<span data-katex="x\in X"></span>都连续，</p>
-<p>则说<span data-katex="f"></span>是<strong>连续映射</strong>。</p>
-<p><br/></p>
-<p><strong>同胚映射</strong></p>
-<p>如果<span data-katex="f:X\rightarrow Y"></span>是双射，</p>
-<p>并且<span data-katex="f"></span>及其逆<span data-katex="f^{-1}:Y\rightarrow X"></span>都是连续的，</p>
-<p>则称<span data-katex="f"></span>是一个<strong>同胚映射</strong>，简称同胚。</p>
-<p><br/></p>
-<p>当存在<span data-katex="X"></span>到<span data-katex="Y"></span>的同胚映射时，就称<span data-katex="X"></span>与<span data-katex="Y"></span>同胚，</p>
-<p>记作<span data-katex="X \cong Y"></span>。</p>
-<p><br/></p>
-<p>值得注意的是，同胚映射中条件<span data-katex="f^{-1}"></span>连续不可忽视，</p>
-<p>它不能从双射和<span data-katex="f"></span>的连续性推出来。</p>
-<p><br/></p>
-<p><strong>小结</strong></p>
-<p>以上我们介绍了拓扑空间，以及两个拓扑空间之间的连续映射，</p>
-<p>这和群以及两个群之间的群同态是很相似的。</p>
-<p><br/></p>
-<p>它们表现出了一种结构上的相似性，</p>
-<p>范畴论正是看到这种相似性，于是跳出具体的运算系统，</p>
-<p>例如，它可以考虑群结构与拓扑结构之间的关系。</p>
-<p><br/></p>
-<p>接下来我们来介绍CPO（完全偏序）。</p>
-<p>它在范畴论中，对于摆脱集合论的观念束缚，帮助是很大的。</p>
-<p><br/></p>
-<h3 id="完全偏序">4. 完全偏序</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-da911483f36bc6fa.png" /></p>
-<p><br/></p>
-<p>在《<a href="https://thzt.github.io/2017/03/21/recursive-function-9/">递归函数</a>》系列文章中，</p>
-<p>我们已经介绍过CPO（<a href="https://zh.wikipedia.org/zh-hans/%E5%AE%8C%E5%85%A8%E5%81%8F%E5%BA%8F" target="_blank" rel="noopener">完全偏序</a>）的概念了。</p>
-<p>为了方便与本文中其他概念进行对比，我们再简单的梳理一下。</p>
-<p><br/></p>
-<p><strong>二元关系</strong></p>
-<p>集合<span data-katex="S"></span>和<span data-katex="T"></span>上的<strong>二元关系</strong><span data-katex="R"></span>，</p>
-<p>指的是它们笛卡尔积<span data-katex="S\times T"></span>的子集，<span data-katex="R\subseteq S\times T"></span>。</p>
-<p><br/></p>
-<p><strong>自反性，对称性，反对称性，传递性</strong></p>
-<p>一个二元关系<span data-katex="R\subseteq A\times A"></span>是<strong>自反的</strong>，如果<span data-katex="R(a,a)"></span>对于所有的<span data-katex="a\in A"></span>成立；</p>
-<p>是<strong>对称的</strong>，如果<span data-katex="R(a,b)"></span>就有<span data-katex="R(b,a)"></span>，对于所有的<span data-katex="a,b\in A"></span>都成立；</p>
-<p>是<strong>反对称的</strong>，如果<span data-katex="R(a,b)"></span>且<span data-katex="R(b,a)"></span>，则<span data-katex="a,b"></span>是同一个元素，对于所有的<span data-katex="a,b\in A"></span>都成立；</p>
-<p>是<strong>传递的</strong>，如果<span data-katex="R(a,b)"></span>和<span data-katex="R(b,c)"></span>能推出<span data-katex="R(a,c)"></span>，对于所有的<span data-katex="a,b,c\in A"></span>都成立。</p>
-<p><br/></p>
-<p><strong>偏序关系</strong></p>
-<p>等价关系是同时具有自反性，对称性和传递性的关系。</p>
-<p><strong>偏序关系</strong>是具有自反性，反对称性和传递性的关系。</p>
-<p><br/></p>
-<p>等价关系的一个例子就是相等性，</p>
-<p>相等性关系<span data-katex="R(a,b)"></span>当且仅当<span data-katex="a,b"></span>是同一个元素。</p>
-<p><br/></p>
-<p>偏序关系，例如通常的序关系<span data-katex="R\subseteq N\times N"></span>，</p>
-<p><span data-katex="R(a,b)"></span>当且仅当<span data-katex="a\leqslant b"></span>。</p>
-<p><br/></p>
-<p><strong>最小元与上确界</strong></p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-47acd03f6e8d8a00.png" /></p>
-<p><br/></p>
-<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
-<p>如果存在<span data-katex="y\in S"></span>，且对于任意的<span data-katex="x\in S"></span>，有<span data-katex="y\leqslant x"></span>，</p>
-<p>则称<span data-katex="y"></span>为<span data-katex="S"></span>的<strong>最小元</strong>。</p>
-<p><br/></p>
-<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
-<p>如果存在<span data-katex="y\in D"></span>，（注意，<span data-katex="y"></span>不一定在子集<span data-katex="S"></span>中）</p>
-<p>使得对于任意的<span data-katex="x\in S"></span>，<span data-katex="x\leqslant y"></span>，则称<span data-katex="y"></span>为<span data-katex="S"></span>的<strong>上界</strong>，</p>
-<p>如果<span data-katex="S"></span>的所有上界存在最小元，则称它为<span data-katex="S"></span>最小上界，或<strong>上确界</strong>。</p>
-<p><br/></p>
-<p><strong>完全偏序集</strong></p>
-<p>偏序集<span data-katex="(D,\leqslant )"></span>的非空子集<span data-katex="S\subseteq D"></span>叫做<strong>有向子集</strong>，</p>
-<p>当且仅当，对于<span data-katex="S"></span>中的任意元素<span data-katex="a,b\in S"></span>，</p>
-<p>存在<span data-katex="S"></span>中的一个元素<span data-katex="c"></span>，有<span data-katex="a\leqslant c"></span>且<span data-katex="b\leqslant c"></span>。</p>
-<p><br/></p>
-<p>如果一个偏序集<span data-katex="(D,\leqslant )"></span>的每个有向子集<span data-katex="S\subseteq D"></span>都有上确界（记为<span data-katex="\bigvee S"></span>）</p>
-<p>就称它是一个有向完全偏序集，</p>
-<p>此外，如果它还有最小元，就称它是一个<strong>完全偏序集</strong>。</p>
-<p><br/></p>
-<p>注意，完全偏序集并不是每一个子集都有上确界，</p>
-<p>而是它的每一个有向子集都有上确界。</p>
-<p><br/></p>
-<p><strong>连续函数</strong></p>
-<p>假设<span data-katex="(D,\leqslant )"></span>与<span data-katex="(E,\leqslant )"></span>是完全偏序集，<span data-katex="f:D\rightarrow E"></span>是集合上定义的一个函数，</p>
-<p>对于任意的<span data-katex="d,d&#39;\in D"></span>，如果<span data-katex="d\leqslant d&#39;"></span>就有<span data-katex="f(d)\leqslant f(d&#39;)"></span>，</p>
-<p>我们就说<span data-katex="f"></span>是<strong>单调的</strong>。</p>
-<p><br/></p>
-<p>如果<span data-katex="f"></span>是单调的，且对于任意有向子集<span data-katex="S\subseteq D"></span>，</p>
-<p>有<span data-katex="f(\bigvee S)=\bigvee f(S)"></span>，就称<span data-katex="f"></span>是<strong>连续的</strong>。</p>
-<p><br/></p>
-<p><strong>小结</strong></p>
-<p>我们又重新回顾了完全偏序这一概念，</p>
-<p>实际上，任意一个CPO（完全偏序），都构成了一个范畴，</p>
-<p>而所有的群，也构成了一个范畴。</p>
-<p><br/></p>
-<p>群范畴的对象是集合，而CPO（完全偏序）范畴的对象不一定是集合。</p>
-<p>这对摆脱集合论来理解范畴是很关键的。</p>
-<p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了三种数学结构，群结构，拓扑结构，以及CPO（完全偏序）。</p>
-<p>作为例子，可以为后面学习范畴论打下扎实的基础。</p>
-<p><br/></p>
-<p>我们看到了这些数学结构之间的相似性，</p>
-<p>从下一篇开始，我们要开始范畴论的学习之旅了。</p>
-<p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Category_theory" target="_blank" rel="noopener">Category theory</a></p>
-<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
-<p><a href="https://book.douban.com/subject/4201293/" target="_blank" rel="noopener">近世代数引论</a></p>
-<p><a href="https://book.douban.com/subject/1230382/" target="_blank" rel="noopener">基础拓扑学讲义</a></p>
+<p>我们想达到的预期，在别人眼里真的是个问题么？</p>
 
           
         
@@ -642,7 +543,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/144/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/144/">144</a><span class="page-number current">145</span><a class="page-number" href="/page/146/">146</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/146/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/144/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/144/">144</a><span class="page-number current">145</span><a class="page-number" href="/page/146/">146</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/146/">&gt;</a>
   </nav>
 
 
@@ -688,7 +589,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -763,7 +664,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

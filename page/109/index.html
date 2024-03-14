@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/12/15/beyond-generality/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/03/06/utility/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/15/beyond-generality/" itemprop="url">一般性之外的考虑</a></h1>
+                <a class="post-title-link" href="/2019/03/06/utility/" itemprop="url">功利心与目标感</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-15T00:00:00+08:00">
-                2018-12-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">
+                2019-03-06
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,105 +347,102 @@
       
         
           
-            <p>软件工程师们对社会的价值，</p>
-<p>得益于人们认识到<strong>机器可以大幅度的减少重复劳动时间</strong>。</p>
+            <p>人们常常是缺少什么，才会<strong>羡慕</strong>什么，</p>
+<p>而这种羡慕，又很容易会转换成今后努力的<strong>目标</strong>，</p>
+<p>让自己开启一段新的人生旅程。</p>
 <p><br/></p>
-<p>于是，程序员们经常通过探索多个不同场景中的<strong>相似之处</strong>，</p>
-<p>用软件手段<strong>一次性的</strong>解决多个问题。</p>
+<p>我想，这种<strong>缺乏感</strong>可能才是兴趣的来源吧，</p>
+<p>而反观那些年轻有成的少年天才们，却更容易失去对<strong>专业</strong>的热爱。</p>
 <p><br/></p>
-<p>但是好景不长。</p>
-<p>因为随着<strong>待覆盖</strong>的问题场景增多，</p>
-<p>它们就变得<strong>不那么相似了</strong>，而是各有各的不同。</p>
+<p>软件行业中也不乏有这样的例子，</p>
+<p>对技术无比痴迷精益求精的勤恳程序员们，往往出身<strong>平凡</strong>，</p>
+<p>而那些天之骄子科班专家，又通常厌倦了这些<strong>伎俩</strong>，早早的走向了心中更高的境界。</p>
 <p><br/></p>
-<p>于是问题就来了，</p>
-<p>我们是应该<strong>简化</strong>需求，以发挥软件的最大作用，</p>
-<p>还是应该处理好所有<strong>细节</strong>，以满足用户的多样性需求。</p>
+<p><strong>外行</strong>往往比<strong>内行</strong>还要热忱。</p>
+<p>这不能说是社会的<strong>悲哀</strong>，应该只能说是社会的一种<strong>现象</strong>。</p>
 <p><br/></p>
-<p>这是一件值得深思的事情。</p>
+<p>人们更乐于朝着对自己<strong>收益最大</strong>的方向努力，</p>
+<p>而不是原地打磨，享受打磨的<strong>过程</strong>。</p>
 <p><br/></p>
-<h3 id="相似之处的不稳定性">相似之处的不稳定性</h3>
-<p>提取不同事情之间的相似之处，通常有两种方式。</p>
+<p>然而，这件事如果发生在曾经的“外行”身上，可能会有所不同，</p>
+<p>因为，外行要想入门，往往不得不经历惨绝人寰的<strong>痛苦</strong>和<strong>辛酸</strong>，</p>
+<p>而当他们终于可以登堂入室之时，努力的过程可能早就形成<strong>习惯</strong>了。</p>
 <p><br/></p>
-<p>其一，是从具体细节上来看，它们都要做一部分<strong>相同的事情</strong>。</p>
-<p>例如，两个页面要展示同一块内容。</p>
-<p><br/></p>
-<p>其二，是从抽象层次上来看，它们要做的事情可以<strong>一概而言</strong>，</p>
-<p>例如，两个页面都要向服务端发起请求，但具体的请求内容是不同的。</p>
-<p><br/></p>
-<p>这两种提取相似性的方式，都很有效，但不完美。</p>
-<p>我们很容易找出反例，破坏它们的<strong>稳定性</strong>，</p>
-<p>尤其是当需要考虑的事情增多时。</p>
-<p><br/></p>
-<p>这里有个常见的<strong>误区</strong>，</p>
-<p>人们通常会认为，抽象意味着稳定，其实不是这么回事，</p>
-<p>事实上，<strong>我们很难判断当前的抽象是否合理。</strong></p>
-<p><br/></p>
-<p>而大多数软件灾难的发生，均在于，</p>
-<p>对可能发生的场景了解得不够深入，而过早的建立了<strong>不正确的抽象</strong>。</p>
-<p><br/></p>
-<h3 id="软件的目标用户和现有用户">软件的目标用户和现有用户</h3>
-<p>值得一提的是，软件的<strong>目标用户</strong>可以和<strong>现有用户</strong>不同，</p>
-<p>我们打算提供什么样的特性，</p>
-<p>与现有用户期望得到什么样的特性，应该有所<strong>区分</strong>。</p>
-<p><br/></p>
-<p>否则，我们永远也无法满足当前用户的所有需求，</p>
-<p>或者即使满足了一部分用户的需求，</p>
-<p>也难免<strong>损害</strong>另一部分用户。</p>
-<p><br/></p>
-<p>因此，<strong>考虑好放弃什么，比考虑要提供什么，更重要</strong>。</p>
-<p>软件可以不令它现有的用户全部满意，</p>
-<p>但不可以没有自己的<strong>发展目标</strong>。</p>
-<p><br/></p>
-<p>实际上，为人处世也当如此，</p>
-<p>不论我们怎样做，都改变不了一部分人的<strong>评价</strong>。</p>
-<p>所以，我们不能以得到更多的好评为目标。</p>
-<p><br/></p>
-<p>软件也当有自身的独立<strong>品格</strong>。</p>
-<p><br/></p>
-<h3 id="软件方案的不确定性">软件方案的不确定性</h3>
-<p>如果从产品维度考虑问题的话，软件功能将是<strong>可取舍的</strong>，</p>
-<p>而一旦确定了功能列表，本来我认为具体实现将是不可妥协的。</p>
-<p><br/></p>
-<p>其实仍有商量的余地。</p>
-<p>如果将自己跳出功能的实现者这个角色，</p>
-<p>具体的实现方式，也是可以影响到<strong>上层决策</strong>的。</p>
-<p><br/></p>
-<p>我在实现层面的种种考量，以及面向未来的<strong>远见</strong>和<strong>铺垫</strong>，</p>
-<p>其实都来源于我们对软件产品的<strong>预期</strong>和<strong>判断</strong>。</p>
-<p><br/></p>
-<p>因此在开发阶段早期进行<strong>不必要的优化</strong>，是危险的，</p>
-<p>我们对问题的理解还不够深入，</p>
-<p>很容易沉溺于自己的<strong>想象</strong>中。</p>
-<p><br/></p>
-<p>其实，人们很难区分<strong>什么是自己的假设</strong>，什么是事实，</p>
-<p>这可以认为是一个人性的弱点。</p>
-<p><br/></p>
-<p>例如，拥有代码洁癖的程序员，</p>
-<p>其实并不能<strong>证明</strong>特定的代码对别人来说也是干净的，</p>
-<p>因此，干净的代码更好，就是一种人为假设。</p>
-<p><br/></p>
-<p>我们只能说，有时候是这样，有时候又不是。</p>
-<p>软件设计便是如此，我们根据经验所得到的一些判断，只是一种假设，而不是事实。</p>
-<p><strong>越笃定，往往越容易出问题。</strong></p>
+<p>他们可能早已忘记了功利性的<strong>目的</strong>，只顾着想尽办法让自己<strong>更强</strong>。</p>
+<p>所以，<strong>有的人练剑是为了杀敌，而有的人杀敌只是为了练剑。</strong></p>
+<p>这真是一件奇妙的事情。</p>
+<h3 id="功利心">功利心</h3>
+<p>在上学时，每当学到古人淡泊名利的桥段，都会觉得<strong>没什么</strong>，</p>
+<p>而直到步入社会，才真实的发现，<strong>摒弃功利心</strong>确实是一件不容易的事情。</p>
 <p><br/></p>
 <blockquote>
-<p>解决问题的能力，就是为印证假设不辞劳苦的行动力。</p>
-</blockquote>
-<blockquote>
-<p>——《<a href="https://book.douban.com/subject/26633567/" target="_blank" rel="noopener">思考的技术</a>》</p>
+<p>车尘马足富者趣，酒盏花枝贫者缘。</p>
 </blockquote>
 <p><br/></p>
+<p>能够不以别人的，或者说是社会的<strong>价值观</strong>来衡量自己的行为，</p>
+<p>是一件困难的事情。</p>
+<p><br/></p>
+<p>“你做这个有什么用？”</p>
+<p>这个问题经常会在我们打算做一件事情之前，或在做一件事情的时候被别人<strong>莫名关心</strong>。</p>
+<p>所以，除了回答这个问题之外，我们还要考虑的是，<strong>他们为什么会有这样的疑问</strong>。</p>
+<p><br/></p>
+<p>我认为这是因为提问的人想要让我们做<strong>对他而言</strong>有用的事情。</p>
+<p>而并非关心我们做的事情到底有什么用。</p>
+<p><br/></p>
+<p>所以功利心可分两个层次，</p>
+<p>自己淡泊名利，</p>
+<p>能够在别人的<strong>关心</strong>之下，依然淡泊名利。</p>
+<p><br/></p>
+<p>更重要的是，淡泊名利会让我们<strong>失去</strong>很多东西。</p>
+<p>有所失才能有所得。</p>
+<h3 id="目标感">目标感</h3>
+<p>摒弃功利心，并不意味着<strong>消极处世</strong>，</p>
+<p>能够<strong>不以成败为目的</strong>，依然保持专注，也不失为一种积极的处世态度。</p>
+<p>这说的是我们不能丧失目标感。</p>
+<p><br/></p>
+<p>即使不关心事情的最终价值，也要关心目标的达成过程。</p>
+<p>目标达成是一种能够<strong>明确目标</strong>，并不断<strong>缩小差距</strong>的艺术。</p>
+<p><br/></p>
+<p>回过头来，这也更加印证了上面的观点，</p>
+<p><strong>别人关心的是他自己，而不是我们做的事情。</strong></p>
+<p><br/></p>
+<p>因此，在明确目标时，如果能<strong>同时满足</strong>别人的功利需求，</p>
+<p>那才是极好的，这样不但不会得到他人的反对，甚至还能得到<strong>帮助</strong>。</p>
+<p>这就是让事情可以顺利进展下去的法则了。</p>
+<p><br/></p>
+<p>我们必须照顾好多方<strong>利益</strong>，才能兵来将挡水来土掩。</p>
+<p><br/></p>
+<p>伊尔斯‧桑德在《<a href="https://book.douban.com/subject/27125070/" target="_blank" rel="noopener">高敏感是种天赋</a>》中提到，</p>
+<blockquote>
+<p>允许自己偶尔做一个自由而无用的灵魂。</p>
+</blockquote>
+<p>作者的原意是为了帮助高敏感人群缓解焦虑，但是复旦大学也流传着“自由而无用”说法，</p>
+<p>做事情为什么一定要有用，这才是最大的<strong>自由</strong>。</p>
+<p><br/></p>
+<blockquote>
+<p>Time you enjoy wasting, was not wasted.</p>
+</blockquote>
+<p>当今浮躁的社会，太缺乏这种<strong>怡然自得</strong>的做事方式了，</p>
+<p>人人都很急，急着产出更大的价值。</p>
+<p><br/></p>
+<p>这并没有错，但也要意识到<strong>急切</strong>中从众的一面，</p>
+<p>不妨停下来回想下，年轻时那些急于求成的事情，现在<strong>有了时间</strong>还在坚持做着么？</p>
 <h3 id="结语">结语</h3>
-<p>越有经验的开发者，就越容易相信自己的经验，</p>
-<p>软件工程师们也经常认为自己工作在<strong>确定的</strong>问题背景之中。</p>
+<p>我们不追求什么，好事往往不会自然而然的发生，</p>
+<p>因此摒弃功利心，我们也将<strong>籍籍无名，一贫如洗</strong>。</p>
+<p>但同时，我们却未必没有<strong>其他收获</strong>。</p>
 <p><br/></p>
-<p>其实实际项目中的很多问题都是<strong>不能确定的</strong>，</p>
-<p>各个参与者，影响了软件的最终形态，</p>
-<p>并非是由<strong>市场</strong>这个单一因素所驱动的。</p>
+<p>有一些快乐，是当<strong>过于关心</strong>结果的时候，永远无法体会的。</p>
 <p><br/></p>
-<p>当我们意识到自己处于混沌之中的时候，</p>
-<p>才能看清软件的真实目标，</p>
-<p>它就像迷雾中的探险船一样，<strong>即使暂时找不到方向，也要先找一个方向前行。</strong></p>
+<blockquote>
+<p>不羡黄金罍，不羡白玉杯。</p>
+</blockquote>
+<blockquote>
+<p>不羡朝入省，不羡暮入台。</p>
+</blockquote>
+<blockquote>
+<p>千羡万羡西江水，曾向竟陵城下来。</p>
+</blockquote>
 
           
         
@@ -484,7 +481,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/108/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/108/">108</a><span class="page-number current">109</span><a class="page-number" href="/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/110/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/108/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/108/">108</a><span class="page-number current">109</span><a class="page-number" href="/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/110/">&gt;</a>
   </nav>
 
 
@@ -530,7 +527,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -605,7 +602,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/06/19/generator/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/08/23/tendency/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/06/19/generator/" itemprop="url">EcmaScript 2015引入的generator</a></h1>
+                <a class="post-title-link" href="/2015/08/23/tendency/" itemprop="url">潮流的推手</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-19T00:00:00+08:00">
-                2015-06-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-23T00:00:00+08:00">
+                2015-08-23
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lisp/" itemprop="url" rel="index">
-                    <span itemprop="name">Lisp</span>
+                  <a href="/categories/Software/" itemprop="url" rel="index">
+                    <span itemprop="name">Software</span>
                   </a>
                 </span>
 
@@ -347,133 +347,76 @@
       
         
           
-            <p>Ecmascript 2015刚刚发布了，</p>
-<p>新增了很多<strong>特性</strong>，</p>
-<p>例如，let，promise，iterator，generator，</p>
-<p>proxy，class，module等等。</p>
+            <p>如果我们紧跟技术潮流的话，</p>
+<p>就会发现，</p>
+<p>日新月异的并不是技术本身，</p>
+<p>而是人们对技术的宣传。</p>
 <p><br/></p>
-<p>其中<strong>generator</strong>更是引人注目，</p>
-<p>可以便捷的产生一个iterator。</p>
+<p>大小的商业集团，</p>
+<p>为了争夺市场，</p>
+<p>吹捧着他们的最佳实践，</p>
+<p>掠夺着劳动力。</p>
 <p><br/></p>
-<p>function* gen() {</p>
-<p>        <strong>yield</strong> 1;</p>
-<p>        <strong>yield</strong> 2;</p>
+<p>我们做着量产的事情，</p>
+<p>拿着微薄的收入，</p>
+<p>赚钱的事情怎么会让给我们呢，</p>
+<p>推手们获得丰厚的利润。</p>
 <p><br/></p>
-<p>        return 3;</p>
-<p>}</p>
+<p>在过去的任何年代，</p>
+<p>历史都不是一脉相承的，</p>
+<p>各个流派百家争鸣，</p>
+<p>共同影响着那个时代的人。</p>
 <p><br/></p>
-<p>var i = gen();</p>
+<p>培根说，</p>
+<p>读史使人明智。</p>
 <p><br/></p>
-<p>console.log(i.next().value);        //1</p>
-<p>console.log(i.next().value);        //2</p>
-<p>console.log(i.next().value);        //3</p>
-<p>console.log(i.next().value);        //undefined</p>
+<p>只有梳理好过去，</p>
+<p>才能看清舞台上的小丑，</p>
+<p>方法其实是多样的，</p>
+<p>言语代表了各自的立场。</p>
 <p><br/></p>
-<p>可见，每次调用i.next，</p>
-<p>gen都会从上一次的<strong>yield</strong>后继续执行。</p>
+<p>Fortran,Lisp,Basic,Pascal,</p>
+<p>C,Prolog,ML,SmallTalk,</p>
+<p>Scheme,C++,Common Lisp,Matlab,</p>
+<p>Objective-C,Erlang,Perl,Haskell,</p>
+<p>Python,Visual Basic,Ruby,</p>
+<p>Lua,Java,Delphi,JavaScript,</p>
+<p>PHP,D,C#,Go,Rust...</p>
 <p><br/></p>
-<p>这在Ecmascript之前版本看来，</p>
-<p>是不可思议的。</p>
+<p>就只拿编程语言来说，</p>
+<p>他们的发展也不是线性的，</p>
+<p>而是构成了一个图，</p>
+<p>互相作用互相影响着。</p>
 <p><br/></p>
-<h2 id="用callcc实现"><strong>用call/cc实现</strong></h2>
-<p>从Scheme的角度来看，</p>
-<p>从断点处继续执行，</p>
-<p>其实就是，<strong>调用yield断点处的continuation</strong>。</p>
+<p>以前火爆的技术，</p>
+<p>现在去了哪里，</p>
+<p>立于不败之地，</p>
+<p>不是技术最终的归宿。</p>
 <p><br/></p>
-<p>所以，yield并不是一个新概念，</p>
-<p>我们用call/cc实现一下。</p>
+<p>HTML,Java Applet,JavaScript,CSS,</p>
+<p>QuickTime,ActiveX,Flash,CGI,</p>
+<p>PHP,.NET,J2EE,AJAX,</p>
+<p>Rails,jQuery,Node,Backbone,</p>
+<p>Angular,BootStrap,RESTful,React,nw.js...</p>
 <p><br/></p>
-<p>(define (gen x)</p>
-<p>        (define <strong>k-body</strong> #f)</p>
-<p>        (define <strong>k-yield</strong> #f)</p>
+<p>转眼几年间，</p>
+<p>Web技术产生了翻天覆地的变化，</p>
+<p>那些过去的辉煌，</p>
+<p>现在怎么样了。</p>
 <p><br/></p>
-<p>        (define (yield x)</p>
-<p>                (call/cc (lambda (k2)</p>
-<p>                        (set! <strong>k-yield</strong> k2)</p>
-<p>                        (<strong>k-body</strong> x))))</p>
+<p>虽然我们没有机会改变世界，</p>
+<p>但是可以见证它的发展，</p>
+<p>同时代的新同学们，</p>
+<p>可能没有这么幸运。</p>
 <p><br/></p>
-<p>        (lambda ()</p>
-<p>                (call/cc (lambda (k1)</p>
-<p>                        (if (eq? <strong>k-body</strong> #f)</p>
-<p>                                (begin</p>
-<p>                                        (set! <strong>k-body</strong> k1)</p>
+<p>浪潮的一个短暂扰动，</p>
+<p>就可能让我们以为发现了真理，</p>
+<p>紧握手中的冰刃，</p>
+<p>看不到更尖端的科技。</p>
 <p><br/></p>
-<p>                                        (yield x)</p>
-<p>                                        (yield (+ x 1))</p>
-<p><br/></p>
-<p>                                        (+ x 2))</p>
-<p>                                (<strong>k-yield</strong>))))))</p>
-<p><br/></p>
-<p>(define i (gen 1))</p>
-<p>(i)        ;1</p>
-<p>(i)        ;2</p>
-<p>(i)        ;3</p>
-<p>(i)        ;3</p>
-<p><br/></p>
-<p>仅最后一次调用与Ecmascript不同。</p>
-<p>无伤大雅。</p>
-<p><br/></p>
-<h2 id="用macro进行抽象"><strong>用macro进行抽象</strong></h2>
-<p>像上面那样为每一个generator写call/cc，</p>
-<p>太繁琐了，</p>
-<p>Scheme程序员是不能容忍的。</p>
-<p><br/></p>
-<p>先看看我们<strong>希望</strong>怎样调用，</p>
-<p>(<strong>make-generator</strong> (gen x y)</p>
-<p>        (yield x)</p>
-<p>        (yield y)</p>
-<p><br/></p>
-<p>        (+ x y))</p>
-<p><br/></p>
-<p>(define i (gen 1 2))</p>
-<p>(i)        ;1</p>
-<p>(i)        ;2</p>
-<p>(i)        ;3</p>
-<p>(i)        ;3</p>
-<p><br/></p>
-<p>这样就清爽多了，</p>
-<p>还把generator改成了可接收<strong>多参数</strong>的形式。</p>
-<p>make-generator是一个<strong>宏</strong>，它可以<strong>用来定义</strong>generator。</p>
-<p><br/></p>
-<p>具体实现如下，</p>
-<p>(define-syntax make-generator</p>
-<p>        (lambda (form)</p>
-<p>                (syntax-case form ()</p>
-<p>                        [(keyword (name ...) . body)</p>
-<p>                        (syntax-case (<strong>datum-&gt;syntax</strong> #'keyword 'yield) ()</p>
-<p>                                [yield</p>
-<p>                                        #'(define (name ...)</p>
-<p>                                                (define k-body #f)</p>
-<p>                                                (define k-yield #f)</p>
-<p><br/></p>
-<p>                                                (define (yield . args)</p>
-<p>                                                        (call/cc (lambda (k2)</p>
-<p>                                                                (set! k-yield k2)</p>
-<p>                                                                (apply k-body args))))</p>
-<p><br/></p>
-<p>                                                (lambda ()</p>
-<p>                                                        (call/cc (lambda (k1)</p>
-<p>                                                                (if (eq? k-body #f)</p>
-<p>                                                                        (begin</p>
-<p>                                                                                (set! k-body k1) . body)</p>
-<p>                                                                        (k-yield))))))])])))</p>
-<p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>Ecmascript 2015加入了很多特性，</p>
-<p>把自己搞的更加复杂了，</p>
-<p>这在走一些臃肿语言的老路。</p>
-<p><br/></p>
-<p>Scheme也不例外，</p>
-<p>R6RS就是膨胀的版本，</p>
-<p>不过还好，从那之后，</p>
-<p>语言分为了两个分支，R7RS力求简洁，</p>
-<p>另一个分支正在进行中，为了工业应用。</p>
-<p><br/></p>
-<p>追求完美，并不是要增加特性，</p>
-<p>而是要尽量减少特性。</p>
-<p><br/></p>
-<p>简洁有效，</p>
-<p>包含了太深刻的内涵。</p>
+<p>无所谓了，</p>
+<p>世界以前就是这样的，</p>
+<p>今后还是会如此。</p>
 
           
         
@@ -512,7 +455,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/254/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/254/">254</a><span class="page-number current">255</span><a class="page-number" href="/page/256/">256</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/256/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/254/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/254/">254</a><span class="page-number current">255</span><a class="page-number" href="/page/256/">256</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/256/">&gt;</a>
   </nav>
 
 
@@ -558,7 +501,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -633,7 +576,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/06/23/code-management/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/15/hilbert-style-and-gentzen-style-deduction-system/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/23/code-management/" itemprop="url">代码的组织和管理方式</a></h1>
+                <a class="post-title-link" href="/2017/09/15/hilbert-style-and-gentzen-style-deduction-system/" itemprop="url">Hilbert-style和Gentzen-style演绎系统</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-23T00:00:00+08:00">
-                2017-06-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-15T00:00:00+08:00">
+                2017-09-15
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
                   </a>
                 </span>
 
@@ -347,139 +347,83 @@
       
         
           
-            <p>我们先从一个简单的问题开始。</p>
-<p><br/ ></p>
-<p>为什么我们要把代码提取到一个函数中呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const f &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>有的人说是为了<strong>避免重复</strong>。</p>
-<p>代码有重复，就意味着代码中有些部分是相同一致的，</p>
-<p>我们就不得不手工维护这种一致性，重复的代码必须被同时修改或者删除。</p>
-<p>如果写到一个函数中，那么只需修改一处即可。</p>
-<p><br/ ></p>
-<p>有的人说是为了<strong>可复用</strong>。</p>
-<p>当前开发工作中的某些功能，未来可能还会被用到，</p>
-<p>所以，为了避免重复劳动，将这些功能提取出来，为了以后可以直接使用。</p>
-<p><br/ ></p>
-<p>然而，将重复代码提取到一个地方进行引用，会建立更多的<strong>依赖</strong>，</p>
-<p>我们也不能简单的修改一个被多处使用的函数，函数的某些调用者可能并不需要这种变更。</p>
-<p><br/ ></p>
-<p>此外，代码复用也未必会按照我们的计划发生，</p>
-<p>为了满足新项目的需要，我们常常不得不对它再进行调整，</p>
-<p>接着，老项目也得进行相应的修改，</p>
-<p>过度设计得不偿失。</p>
-<p><br/ ></p>
-<p>因此，只考虑消除重复和可复用性，并不能让代码更好。</p>
-<p>我们还要进行其他几个方面的考虑。</p>
-<p><br/ ></p>
-<h3 id="理解复杂性">理解复杂性</h3>
-<p>可能我们已经意识到了，</p>
-<p><strong>写代码最难的地方，并不是要实现功能，</strong></p>
-<p><strong>而是要思考如何组织代码，如何管理它们。</strong></p>
-<p><br/ ></p>
-<p>代码具有双重作用，不但要实现软件所提供的功能，还要承载软件的复杂性。</p>
-<p>如果不对这些复杂性进行管控，就没有人能理解软件，也无法维护它。</p>
-<p><br/ ></p>
-<p>所以，写代码和阅读代码，实际上是一个知识的表述和理解过程。</p>
-<p>提取功能模块的目的，并不仅仅是为了消除重复，或者让它可复用，</p>
-<p><strong>而是为了让软件系统更容易被理解。</strong></p>
-<p><br/ ></p>
-<h3 id="区分表述方式和外部接口">区分表述方式和外部接口</h3>
-<p>一块逻辑完整的功能，当做一个整体来看待，</p>
-<p>会提高了表述单元的粒度，简化主流程，降低构建大型软件时的心智负担。</p>
-<p><br/ ></p>
-<p>只被调用一次的函数仍然被提取出来，实际上是为了表述问题方便，</p>
-<p>它能提高我们看待问题的层次。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const main &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    task1();</span><br><span class="line">    task2();</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>然而，如果因此意外的建立了依赖，就是危险的，</p>
-<p>逻辑上互相依赖的功能，和逻辑上是一个整体但是为了表述方便而拆分成多个部分的功能，是截然不同的。</p>
-<p><strong>一旦建立了依赖，就得时刻考虑修改所产生的外在影响。</strong></p>
-<p>我们无法轻易修改一个被多处引用的函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const main &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    task1();    &#x2F;&#x2F;危险</span><br><span class="line">    task2();</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const other &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    task1();    &#x2F;&#x2F;危险</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>封装是一个避免产生过多依赖的办法，它可以很好的区分表述和依赖，</strong></p>
-<p>我们将某些函数设置为私有函数，是为了表述方便，</p>
-<p>而将另外一些函数设置为功能接口，是为了建立依赖。</p>
-<p><br/ ></p>
-<p>当私有函数进行调整的时候，我们是换了一种表述方式，</p>
-<p>而当功能接口进行调整的时候，我们就得考虑对外影响了。</p>
-<p><br/ ></p>
-<p>需要注意的是，封装是和面向对象无关的，</p>
-<p>一个模块可以不具有内部状态，但是仍然可以最小化它的功能接口。</p>
-<p>封装思想会指导我们，先从系统各模块之间的依赖角度考虑问题，而后再考虑具体实现。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const f1 &#x3D; () &#x3D;&gt; &#123; &#125;;    &#x2F;&#x2F;为了表述问题方便</span><br><span class="line">const f2 &#x3D; () &#x3D;&gt; &#123; &#125;;    &#x2F;&#x2F;被依赖</span><br><span class="line"></span><br><span class="line">export default f2;</span><br></pre></td></tr></table></figure>
-<h3 id="用抽象指导具体">用抽象指导具体</h3>
-<p>抽象是一种为了消除个体差异从而将不同的事物统一看待的方法。</p>
-<p>因此，抽象不可避免的会丢失一些细节信息。</p>
-<p><br/ ></p>
-<p>然而，<strong>抽象是一种分析问题的方式，不是一种解决方案。</strong></p>
-<p>随着软件的演变，人们通常会采取不同的归类方式重新看待问题，</p>
-<p>这样所得的抽象概念往往是易变的，且与原来不同。</p>
-<p><br/ ></p>
-<p>比如，前端轮询发送Ajax请求，和用js实现一个倒计时，是相似的，</p>
-<p>它们都是以固定的时长执行一个任务，无论是同步的还是异步的。</p>
-<p>这时候，建立一个任务执行者，用它来执行这些任务是合理的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">taskExecutor(&#123;</span><br><span class="line">    interval: 500,</span><br><span class="line">    execute: next &#x3D;&gt; &#123;</span><br><span class="line">        ...</span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>如果增加了新场景，那么任务执行者可能就不适用了，</p>
-<p>例如，在node中异步读取一个文件夹下的所有文件。</p>
-<p><br/ ></p>
-<p>通过建立新的抽象，我们可以将它们三个统一看待，</p>
-<p>即，它们三个都是在考虑，如何递归的执行一个任务，无论是同步的或者异步的。</p>
-<p><br/ ></p>
-<p>于是我们可以建立一个递归执行者，</p>
-<p>上述任务执行者只是当前递归执行者的一个具体应用，任务执行者可以用递归执行者实现出来。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">recursion(init, (current, next) &#x3D;&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">    next(value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">const taskExecutor &#x3D; (&#123; interval, execute &#125;) &#x3D;&gt; &#123;</span><br><span class="line">    recursion(null, (_, next) &#x3D;&gt; &#123;</span><br><span class="line">        execute(() &#x3D;&gt; &#123;</span><br><span class="line">            setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">                next();</span><br><span class="line">            &#125;, interval);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在具体工作中，<strong>不同的抽象给出了不同适用范围的解决方案，</strong></p>
-<p>上述递归执行者的适用范围更广，但却不一定总是最好的，</p>
-<p><strong>抽象思维指导了我们如何解决问题，但并不意味着我们必须这样解决。</strong></p>
-<p><br/ ></p>
-<p>例如，以上三个问题都可以看做执行一个任务，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const execute &#x3D; fn &#x3D;&gt; fn();</span><br><span class="line"></span><br><span class="line">execute(task);</span><br></pre></td></tr></table></figure>
-<p>如此这样的抽象，对于解决问题来说，意义就不明显了，</p>
-<p>并没有给我们带来任何便利和额外的价值。</p>
-<p><br/ ></p>
-<h3 id="抓住数学模型和语言结构">抓住数学模型和语言结构</h3>
-<p><strong>程序员自己发明的抽象通常是不稳定的，</strong></p>
-<p>这种抽象完全取决于当前项目中我们具体处理的问题，</p>
-<p>一旦问题场景发生了变化，抽象概念也会发生变化。</p>
-<p>因此，有经验的程序员极少发明新的概念，而是使用已有的成熟概念。</p>
-<p><br/ ></p>
-<p>有两种成熟的抽象概念值得借鉴，</p>
-<p>其一是问题背后的数学模型，其二是代码本身所具有的语言结构。</p>
-<p><br/ ></p>
-<p>所谓数学模型，就是使用数学概念和语言对问题进行分析和描述。</p>
-<p>这些数学概念一般而言都是通用的，不存在理解上的歧义性，</p>
-<p>我们只需要把问题向它们靠拢即可，不用自己来发明。</p>
-<p><br/ ></p>
-<p>所谓语言结构，指的是当前所使用的编程语言所提供的那些抽象方式，</p>
-<p>例如，函数，类，模块，数据类型，高阶函数，泛型，多态性，等等。</p>
-<p>使用这些内置的语言结构来书写代码，会避免代码晦涩难懂。</p>
-<p><br/ ></p>
-<p>因此，<strong>好的代码，总是能清晰的看到背后的数学，并且使用了足够丰富的语言结构。</strong></p>
-<p><br/ ></p>
-<p>将数据结构从代码中分离，就是这样的一个例子，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const graph &#x3D; new Graph;</span><br><span class="line"></span><br><span class="line">graph.addEdges(vertex, vertices);</span><br><span class="line">graph.findSuccessors(vertex);</span><br><span class="line">graph.findPredecessors(vertex);</span><br></pre></td></tr></table></figure>
-<p>以上代码，使用了一个称之为图的数据结构，并且，使用了类来表示它。</p>
-<p><br/ ></p>
-<p>数据结构是稳定的，对图进行的所有操作都是固定的，很少发生变化，大家都能理解发生了什么，</p>
-<p>此外，使用类进行表示，有助于把所有操作图状态的函数放在一起，并且可以避免对外建立无谓的依赖。</p>
-<p>值得一提的是，数学不只是数据结构，编程语言也不只有类这么一个概念。</p>
-<p><br/ ></p>
-<p>例如，字符串经过词法分析，会得到一系列token，</p>
-<p>在数学上，token可以视为与之相应的有穷自动机所接受的子串，</p>
-<p>在语言结构上，返回token的过程可以用generator来表示。</p>
-<p><br/ ></p>
-<p>不考虑数学，或者从不使用高级语言结构，就不得不自创一些难懂的概念，</p>
-<p>这和平铺直叙的书写代码一样难以维护。</p>
-<p><br/ ></p>
-<h3 id="结语">结语</h3>
-<p>写代码除了是一个实现功能的过程，还是一个管理复杂性的过程，</p>
-<p>管理复杂性，涉及到代码的组织和管理。</p>
-<p><br/ ></p>
-<p>涉及到我们如何向别人把软件系统表述清楚，</p>
-<p>涉及到我们如何管理模块之间的依赖关系，</p>
-<p>涉及到我们如何抽象的看待事物。</p>
-<p><br/ ></p>
-<p>仔细的斟酌和考量才会写出好代码，不假思索一定会带来灾难，</p>
-<p>我想这应该是一名专业的程序员与门外汉的根本区别吧。</p>
+            <h3 id="proof-calculus">1. Proof calculus</h3>
+<p>在数理逻辑（mathematical logic）中，</p>
+<p>证明演算（proof calculus）界定了形式系统（formal system）的不同风格（style）。</p>
+<p>最主流的两种风格（style）为，</p>
+<p>希尔伯特风格（Hilbert style）和甘岑风格（Gentzen style）。</p>
+<p><br/></p>
+<h4 id="hilbert-style">1.1 Hilbert style</h4>
+<p>希尔伯特风格（Hilbert style）的证明演算（proof calculus），</p>
+<p>其断言（judgement）由不包含条件的（unconditional）重言式（tautology）构成，</p>
+<p>称为，希尔伯特系统（Hilbert system）。</p>
+<p><br/></p>
+<h4 id="gentzen-style">1.2 Gentzen style</h4>
+<p>甘岑风格（Gentzen style）的证明演算（proof calculus），</p>
+<p>其断言（judgement）由包含条件的（unconditional）重言式（tautology）构成。</p>
+<p>包括，自然演绎（Natural deduction）和相继式演算（Sequent calculus）。</p>
+<p><br/></p>
+<p>（1）自然演绎（Natural deduction）系统，</p>
+<p>断言（judgement）的结论（conclusion）中，</p>
+<p>只包含一个命题（propostion）。</p>
+<p><br/></p>
+<p>（2）相继式演算（Sequent calculus）系统，</p>
+<p>断言（judgement）的结论（conclusion）中，</p>
+<p>可以包含零个或多个命题（propostion）。</p>
+<p><br/></p>
+<h3 id="hilbert-system">2. Hilbert system</h3>
+<p>观察系统中断言（judgement）的形式，</p>
+<p>是区分演绎系统（deduction system）风格（style）的一种常用方法。</p>
+<p><br/></p>
+<p>希尔伯特系统（Hilbert system）中的断言（judgement）是最简单的，其形式为，</p>
+<p><span data-katex="B"></span></p>
+<p>用以表示任何逻辑系统（logic）中的公式（formula）。</p>
+<p><br/></p>
+<p>例如，一阶逻辑（first-order logic），命题逻辑（propositional logic），</p>
+<p>高阶逻辑（higher-order logic），或者模态逻辑（modal logic）。</p>
+<p><br/></p>
+<p>希尔伯特系统（Hilbert system）中的定理（theorem），</p>
+<p>指的是一段有效证明（valid proof）的最终结论（concluding judgement）。</p>
+<p><br/></p>
+<h3 id="natural-deduction">3. Natural deduction</h3>
+<p>自然演绎（Natural deduction）系统中，其断言（judgement）形式如下，</p>
+<p><span data-katex="A_1,A_2,\cdots,A_n\vdash B"></span></p>
+<p><br/></p>
+<p>其中，<span data-katex="A_1,A_2,\cdots,A_n"></span>和<span data-katex="B"></span>都是公式（formula），<span data-katex="n\geqslant 0"></span>，</p>
+<p><span data-katex="A_1,A_2,\cdots,A_n"></span>的顺序是无关紧要的。</p>
+<p><br/></p>
+<p>自然演绎（Natural deduction）系统中的定理（theorem），</p>
+<p>指的是这样的公式（formula）<span data-katex="B"></span>，</p>
+<p>其中，<span data-katex="\vdash B"></span>是一段有效证明（valid proof）的最终结论（concluding judgement）。</p>
+<p><br/></p>
+<p>公式（formula）<span data-katex="A_1,A_2,\cdots,A_n\vdash B"></span>的语义（semantics）如下，</p>
+<p>如果每一个<span data-katex="A_1,A_2,\cdots,A_n"></span>成立，那么<span data-katex="B"></span>也成立。</p>
+<p><br/></p>
+<h3 id="sequent-calculus">4.Sequent calculus</h3>
+<p>相继式演算（Sequent calculus）系统，将自然演绎（Natural deduction）一般化了，</p>
+<p>其断言（judgement）的形式如下，</p>
+<p><span data-katex="A_1,A_2,\cdots,A_n\vdash B_1,B_2,\cdots,B_k"></span></p>
+<p><br/></p>
+<p>其中，<span data-katex="A_1,A_2,\cdots,A_n"></span>称为前项（antecedent），</p>
+<p><span data-katex="B_1,B_2,\cdots,B_k"></span>称为后项（succedent/consequent），</p>
+<p>它们合起来称为一个序列（sequent）。</p>
+<p><br/></p>
+<p>和自然演绎（Natural deduction）系统相似，</p>
+<p><span data-katex="A_1,A_2,\cdots,A_n"></span>和<span data-katex="B_1,B_2,\cdots,B_k"></span>都是公式（formula），</p>
+<p><span data-katex="n"></span>和<span data-katex="k"></span>都是非负整数，即断言（judgement）的左右两边都可以为空。</p>
+<p><br/></p>
+<p>相继式演算（Sequent calculus）系统中的定理（theorem），</p>
+<p>指的是这样的公式（formula）<span data-katex="B"></span>，</p>
+<p>其中，<span data-katex="\vdash B"></span>是一段有效证明（valid proof）的最终结论（concluding judgement）。</p>
+<p><br/></p>
+<p>公式（formula）<span data-katex="A_1,A_2,\cdots,A_n\vdash B_1,B_2,\cdots,B_k"></span>的语义（semantics）如下，</p>
+<p>如果每一个<span data-katex="A_1,A_2,\cdots,A_n"></span>成立，那么<span data-katex="B_1,B_2,\cdots,B_k"></span>中至少有一个成立。</p>
+<p><br/></p>
+<h3 id="reference">Reference</h3>
+<p><a href="https://en.wikipedia.org/wiki/Proof_calculus" target="_blank" rel="noopener">Proof calculus</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Hilbert_system" target="_blank" rel="noopener">Hilbert system</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Natural_deduction" target="_blank" rel="noopener">Natural deduction</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Sequent_calculus" target="_blank" rel="noopener">Sequent calculus</a></p>
 
           
         
@@ -518,7 +462,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/177/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/177/">177</a><span class="page-number current">178</span><a class="page-number" href="/page/179/">179</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/179/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/177/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/177/">177</a><span class="page-number current">178</span><a class="page-number" href="/page/179/">179</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/179/">&gt;</a>
   </nav>
 
 
@@ -564,7 +508,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -639,7 +583,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

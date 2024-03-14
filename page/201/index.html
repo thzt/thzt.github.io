@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/08/24/believed-in-the-absence-of-evidence/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/09/recursive-function-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/08/24/believed-in-the-absence-of-evidence/" itemprop="url">相信不证自明</a></h1>
+                <a class="post-title-link" href="/2017/03/09/recursive-function-5/" itemprop="url">递归函数（五）：递归集与递归可枚举集</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T00:00:00+08:00">
-                2016-08-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-09T00:00:00+08:00">
+                2017-03-09
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,91 +347,112 @@
       
         
           
-            <p>当我们得出某个结论的时候，最容易忽视的一点是，</p>
-<p>结论实际上是在某个前提之下才成立的，</p>
-<p>如果前提有漏洞，那么结论就不可靠了。</p>
+            <h3 id="回顾">回顾</h3>
+<p>上文中我们讨论了全函数和部分函数，以及计算的可终止性。</p>
+<p>本文我们从数论函数开始，给原始递归函数集增加一种新的运算，得到了一个更大的集合。</p>
+<p>然后根据递归函数，我们可以定义递归集和递归可枚举集，</p>
+<p>为以后讨论可计算性与可判定性打好基础。</p>
 <p><br/></p>
-<p>这件事经常会对我们起到警示作用。</p>
-<p>让我们有意识的去鉴别前提的真实性，</p>
-<p>这可以称之为科学方法，小心的去求证某些假设。</p>
+<h3 id="数论函数">数论函数</h3>
 <p><br/></p>
-<p>然而，在另一方面，</p>
-<p>有能力暂时接受某个尚未判断为真的假设，也是一种能力。</p>
-<p>先相信别人，相信不证自明，存疑于来日方长，而不纠结某个断言，</p>
-<p>会让我们更容易站在别人的立场看待问题，视野更广。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-567ebbb9d0fa7c88.png" /></p>
 <p><br/></p>
-<p>因此，聪明人的思路总是有很多分支，各个分支都有条件。</p>
-<p>那些已经相信的事实，可能只是一个假设，</p>
-<p>那些极力怀疑的论点，也有可能为真。</p>
+<p>自然数集一般记为<span data-katex="N=\lbrace 0,1,2,\cdots \rbrace "></span>，那么<span data-katex="n"></span>个自然数集的笛卡尔积记为<span data-katex="N^n"></span>，</p>
+<p>于是，我们称集合<span data-katex="N^n"></span>到<span data-katex="N"></span>的部分函数为<span data-katex="n"></span>元部分数论函数。</p>
+<p>作为数论函数，<span data-katex="2x"></span>是一个全函数，而<span data-katex="x/2"></span>，<span data-katex="x-y"></span>，<span data-katex="\sqrt{x}"></span>只是部分函数，</p>
+<p>它们的计算结果，<span data-katex="3/2"></span>，<span data-katex="4-6"></span>，<span data-katex="\sqrt{5}"></span>都不在<span data-katex="N"></span>中，于是相应定义域中的点可视为没有定义。</p>
 <p><br/></p>
-<p><a href="https://book.douban.com/subject/3138847/" target="_blank" rel="noopener">大前研一</a>这样说，</p>
-<p>解决问题的能力，就是为印证假设不辞劳苦的行动力。</p>
+<p>为什么讨论数论函数呢，其一是因为它是一个典型数学的问题，</p>
+<p>另外一点，则是因为我们经常把其他数学问题转换成数论问题，例如，<a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E6%95%B0" target="_blank" rel="noopener">哥德尔编码</a>。</p>
+<p>本文中，使用数论函数，可以简化我们的描述方式。</p>
 <p><br/></p>
-<h3 id="先让人把事情说完"><strong>先让人把事情说完</strong></h3>
-<p>当别人表述某个论点的时候，很难同时携带着该论点的证明，</p>
-<p>所以，转而让他去证明这个论点，就会打断他的思路，证明完之后还要再跳回来。</p>
-<p>不幸的是，现场的不充分的思考，根本不具备清晰证明某个论点的条件，</p>
-<p>这也是为什么会议容易被无限延长的原因，</p>
-<p>现场很难让别人相信你，可是不相信你的论点，他们就做不到继续往下听。</p>
+<p>一个谓词，指的是返回布尔值的函数，</p>
+<p>我们还可以将谓词看做值域为<span data-katex="\lbrace 0,1\rbrace "></span>的一个数论函数。</p>
+<p><span data-katex="0"></span>代表<code>True</code>，<span data-katex="1"></span>代表<code>False</code>。</p>
 <p><br/></p>
-<p>一个好的权衡之计就是，先让分享者把事情讲完，</p>
-<p>哪怕其中包含了很多值得怀疑的论点，</p>
-<p>我们先记录下来，最后大家一起，逐个用行动去检验它。</p>
+<h3 id="极小化算子">极小化算子</h3>
 <p><br/></p>
-<p>将表述和证明隔开，是有好处的，</p>
-<p>夹杂着提到的所有定理之证明过程的教科书是多么的晦涩难懂，</p>
-<p>它影响了整本书的知识脉络，也影响了读者的思路，</p>
-<p>尽管这些证明是有用的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-b1d4c18df4caf3bc.png" /></p>
 <p><br/></p>
-<h3 id="先相信才有必要防止尽信"><strong>先相信才有必要防止尽信</strong></h3>
-<p>上学时，我们学过一篇文章提到，</p>
-<p>尽信书，则不如无书，</p>
-<p>我觉得这句话坑害了很多人。</p>
+<p>在前一篇中，我们从三个初始函数出发，</p>
+<p>通过合成运算和原始递归运算，得到了原始递归函数集，</p>
+<p>递归函数集是相对于这两种运算封闭的。</p>
 <p><br/></p>
-<p>它让人们更加容易怀疑某些已被证明的结论，</p>
-<p>而不是建立起“承认在某种假设下该结论为真”的科学观，</p>
-<p>这大大减缓了我们接受新知识的速度。</p>
+<p>然而，这样定义的原始递归函数，并不能包括所有的数论函数，</p>
+<p>一个典型的例子就是，<a href="https://zh.wikipedia.org/zh/%E9%98%BF%E5%85%8B%E6%9B%BC%E5%87%BD%E6%95%B8" target="_blank" rel="noopener">阿克曼函数</a>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ackermann :: Int -&gt; Int -&gt; Int </span><br><span class="line">ackermann 0 x &#x3D; x+1</span><br><span class="line">ackermann k 0 &#x3D; ackermann (k-1) 1</span><br><span class="line">ackermann k x &#x3D; ackermann (k-1) $ ackermann k x-1</span><br></pre></td></tr></table></figure>
+<p>它并不是一个原始递归函数，（证略</p>
+<p>因此原始递归函数集并不足以表示计算机程序中的所有函数。</p>
 <p><br/></p>
-<p>人们容易去寻找“到底什么是真的”，这种荒谬问题的结论，</p>
-<p>而不是认识到“真理是条件性为真”，这种科学方法的本质。</p>
+<p>为此，我们需要对原始递归函数集进行扩充，我们定义一个新的运算，称为极小化运算，</p>
+<p>设<span data-katex="P(x_1,\cdots ,x_n,t)"></span>是一个谓词，令</p>
+<p><span data-katex="f(x_1,\cdots ,x_n)=min\ P(x_1,\cdots ,x_n,t)"></span></p>
 <p><br/></p>
-<p>实际上，首先我们先要做到“信书”，</p>
-<p>然后才有必要提醒自己不要“尽信书”。</p>
+<p><span data-katex="f(x_1,\cdots ,x_n)"></span>的值，或者是使<span data-katex="P(x_1,\cdots ,x_n,t)"></span>为真的最小<span data-katex="t"></span>值，</p>
+<p>或者无定义，此时不存在<span data-katex="t"></span>使得<span data-katex="P(x_1,\cdots ,x_n,t)"></span>为真。</p>
+<p>这样通过<span data-katex="min"></span>得到<span data-katex="f(x_1,\cdots ,x_n)"></span>的过程称为极小化运算，</p>
+<p>也称部分函数<span data-katex="f(x_1,\cdots ,x_n)"></span>是由谓词经过极小化运算得到的。</p>
 <p><br/></p>
-<h3 id="证明不是为了让自己更信"><strong>证明不是为了让自己更信</strong></h3>
-<p>不以发现隐含前提的为动机的证明，只是让自己更相信结论而已。</p>
+<p>以上我们给谓词定义了极小化运算，现在我们将极小化运算推广到一般的函数上面，</p>
+<p>设<span data-katex="g(x_1,\cdots ,x_n,t)"></span>是一个<span data-katex="n+1"></span>元函数，令</p>
+<p><span data-katex="f(x_1,\cdots ,x_n)=min\lbrace g(x_1,\cdots ,x_n,t)=0\rbrace "></span></p>
+<p>则称部分函数<span data-katex="f(x_1,\cdots ,x_n)"></span>是由函数<span data-katex="g(x_1,\cdots ,x_n,t)"></span>经过极小化运算得到的。</p>
 <p><br/></p>
-<p>对每个论点都尝试检验，可以磨炼我们论证的技巧，</p>
-<p>但是却并不会加强我们“找到什么才是假设”的能力。</p>
+<h3 id="递归函数集">递归函数集</h3>
+<p>和定义原始递归函数集一样，我们从以下三个初始函数出发，</p>
+<p>（1）零函数<span data-katex="n(x)=0"></span></p>
+<p>（2）后继函数<span data-katex="s(x)=x+1"></span></p>
+<p>（3）投影函数<span data-katex="u^n_i(x_1,\cdots ,x_n)=x_i"></span>，<span data-katex="1\leqslant i\leqslant n"></span></p>
+<p>由初始函数，经过有限次合成运算，原始递归运算，以及极小化运算，得到的函数称为递归函数。</p>
 <p><br/></p>
-<p>有多少人怀疑狭义相对论，可是，它已经是在光速不变性的这个前提下被证明为真的结论了，</p>
-<p>大多数人怀疑论证的过程，而不是怀疑论证的前提，也没有想过去挖掘隐含的前提，</p>
-<p>发现和检验前提才是最困难的一步，通过论证结论肯定是可重现的，</p>
-<p>多证明一次，只是让自己更相信罢了。</p>
+<p>递归函数并不一定是全函数，因为极小化运算可能会导致结果函数在某些点无定义，</p>
+<p>递归的部分函数称为部分递归函数。</p>
 <p><br/></p>
-<p>哪怕是在科学研究中，很多结论也是建立在假设之上的，</p>
-<p>这些假设在现代条件下可能无法检验，但只要是最终能被检验的就行，</p>
-<p>那么我们就能说这个结论不可靠吗？我们宁可相信它是条件性可靠的。</p>
+<p>可以证明阿克曼函数是递归函数，但不是原始递归函数，</p>
+<p>因此，原始递归函数集是递归函数集的真子集。</p>
 <p><br/></p>
-<h3 id="结语"><strong>结语</strong></h3>
-<p>相信不证自明，一开始很难办到，因为我们习惯了用证明去说服自己，</p>
-<p>实际上，我们脑海中有很多假设是却是未经证明的。</p>
+<h3 id="递归可枚举集">递归可枚举集</h3>
 <p><br/></p>
-<p>比如，你怎么证明你看到的就是那个事物，你看到的只是它反射的光罢了。</p>
-<p>我们确定某人出现了两次，而不是两个同样的人，</p>
-<p>是建立在不同的人一定会反射不同的光这种假设上的。</p>
-<p>万一，以后科技发达后，可以改变这个假设呢？</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-6f7383f96e58c74e.png" /></p>
 <p><br/></p>
-<p>因此，到底什么才是真的，这个问题是找不到答案的，</p>
-<p>我们只能知道在某个前提下的结论。</p>
+<p>在具体实践中，我们经常会遇到这样的问题，</p>
+<p>给定一个元素，我们需要判断这个元素是否属于某个集合。</p>
+<p>这种问题，称为集合的成员资格问题。</p>
 <p><br/></p>
-<p>此外，我们之所以倚仗证明，</p>
-<p>还不是因为我们相信证明可以让经验更可靠吗？</p>
-<p>然而这件事本身也是一个前提，但又是不可被证明的，</p>
-<p>我们只能说大部分情况确实如此，仅此而已。</p>
+<p>沿用这一思路，我们可以使用一个谓词<span data-katex="\chi _B"></span>来定义相应的集合<span data-katex="B\subseteq N"></span>，</p>
+<p><span data-katex="B=\lbrace x\in N|\chi _B(x)\rbrace "></span></p>
+<p>谓词<span data-katex="\chi _B(x)"></span>为真，则<span data-katex="x\in B"></span>。</p>
+<p>这个谓词<span data-katex="\chi _B(x)"></span>，通常称为集合<span data-katex="B"></span>的特征函数。</p>
 <p><br/></p>
-<p>那么，这篇文章的结论，你相信吗？</p>
-<p>请相信不证自明。</p>
+<p>如果特征函数<span data-katex="\chi _B"></span>是一个递归的全函数，</p>
+<p>则我们总是可以判断<span data-katex="\chi _B(x)"></span>等于<span data-katex="0"></span>还是<span data-katex="1"></span>，</p>
+<p>这样的集合<span data-katex="B"></span>称为递归集。</p>
+<p><br/></p>
+<p>如果存在部分递归函数<span data-katex="g"></span>，使得<span data-katex="B=\lbrace x\in N|g(x)\downarrow \rbrace"></span>，</p>
+<p>即，<span data-katex="x\in B"></span>当且仅当<span data-katex="g"></span>在<span data-katex="x"></span>处有定义，</p>
+<p>则称集合<span data-katex="B"></span>是一个递归可枚举集。</p>
+<p>每一个部分递归函数，都确定出一个递归可枚举集。</p>
+<p><br/></p>
+<p>因此，对于每一个自然数<span data-katex="x\in N"></span>，</p>
+<p>我们总是可以通过递归集<span data-katex="B"></span>的特征函数<span data-katex="\chi _B"></span>，来判断<span data-katex="x"></span>是否<span data-katex="B"></span>的成员。</p>
+<p>而对于递归可枚举集，就不容乐观了，</p>
+<p>如果某个自然数<span data-katex="x\in N"></span>是<span data-katex="B"></span>的成员，那么我们可以断定这件事，因为<span data-katex="g(x)"></span>有定义，</p>
+<p>但是如果某个自然数<span data-katex="y\in N"></span>不是<span data-katex="B"></span>的成员，我们就不能确定，因为这时候<span data-katex="g(x)"></span>无定义。</p>
+<p>（<span data-katex="g(x)"></span>无定义，则它对应的图灵机不停机，后文我们详细讨论</p>
+<p><br/></p>
+<p>因此，集合<span data-katex="B"></span>是递归的当且仅当<span data-katex="B"></span>和<span data-katex="\bar{B}"></span>是递归可枚举的，</p>
+<p>其中<span data-katex="\bar{B}"></span>为<span data-katex="B"></span>的补集。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文介绍了数论函数，递归函数集，然后用递归函数分别定义了递归集和递归可枚举集，</p>
+<p>可是为什么递归可枚举集是“可枚举”的呢？</p>
+<p><br/></p>
+<p>是因为每一个递归可枚举集可以一一对应一个自然数，这是怎样做到的呢？</p>
+<p>这需要我们理解总共有多少个可能的程序，以及什么是通用程序。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92%E9%9B%86%E5%90%88" target="_blank" rel="noopener">递归集</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92%E5%8F%AF%E6%9E%9A%E4%B8%BE%E9%9B%86%E5%90%88" target="_blank" rel="noopener">递归可枚举集</a></p>
 
           
         
@@ -470,7 +491,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/200/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/200/">200</a><span class="page-number current">201</span><a class="page-number" href="/page/202/">202</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/202/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/200/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/200/">200</a><span class="page-number current">201</span><a class="page-number" href="/page/202/">202</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/202/">&gt;</a>
   </nav>
 
 
@@ -516,7 +537,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -591,7 +612,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

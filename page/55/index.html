@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/07/08/code-01/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/11/15/programmable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/07/08/code-01/" itemprop="url">编码技巧（一）：让主流程清晰</a></h1>
+                <a class="post-title-link" href="/2020/11/15/programmable/" itemprop="url">可编程的软件服务</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-08T00:00:00+08:00">
-                2020-07-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-15T00:00:00+08:00">
+                2020-11-15
               </time>
             
 
@@ -347,91 +347,73 @@
       
         
           
-            <h3 id="背景">背景</h3>
-<p>上文介绍了我所看来的 “编码总诀” —— 要有一颗 “为食用者着想的心”。</p>
-<p>可具体要怎样 “着想” 呢，还没有详细说明。</p>
-<p>本文就以此作为出发点，介绍我常用的第一个<strong>编码技巧</strong>。</p>
+            <p>这些年，软件工程师的数量激增猛涨，越来越多的人，具备了用代码解决问题的能力了。这样的发展趋势，对软件行业本身也产生了一定的影响。下面我来列举三个例子：</p>
 <p><br/></p>
-<p>不过在这之前，我们需对编程本身，进行一些讨论。</p>
-<h3 id="编码活动">编码活动</h3>
-<p><strong>首先</strong>，以编程作为工作的话，那么写代码的<strong>目的</strong>就不应该是为了好玩，</p>
-<p>而是应该是为了解决问题，</p>
-<p>这就好比汽车公司造车一样，并不是因为制造汽车很有趣，而是因为它能赚钱。</p>
+<p>其一，<a href="http://homes.sice.indiana.edu/samth/new-web/" target="_blank" rel="noopener">Racket</a> 支持 “面向语言进行编程”（<a href="https://cs.brown.edu/~sk/Publications/Papers/Published/fffkbmt-programmable-prog-lang/paper.pdf" target="_blank" rel="noopener">LOP</a>），是一门 “可编程” 的编程语言。旨在解决使用特定语言编程的时候，<a href="https://wiki.c2.com/?EmbeddedDomainSpecificLanguage" target="_blank" rel="noopener">eDSL</a> 难集成的问题。语言，本来就是编程用的，语言本身也变成了可编程的，这是一件有趣的事情。</p>
 <p><br/></p>
-<p>所以代码至少要能解决问题，</p>
-<p>之后才有余地来讨论够不够<strong>好</strong>。</p>
+<p>其二，<a href="https://medium.com/microsoft-open-source-stories/how-microsoft-rewrote-its-c-compiler-in-c-and-made-it-open-source-4ebed5646f98" target="_blank" rel="noopener">Roslyn</a> 不再是一个编译工具了，而是一个 “编译平台”（<a href="https://github.com/dotnet/roslyn" target="_blank" rel="noopener">Compiler Platform</a>）。因为它共享了编译器内部的工作机制，让世界以编程的方式消费。编译器，不再作为单独的一个工具提供服务了，而是变得更加开放了。</p>
 <p><br/></p>
-<p><strong>其次</strong>，虽然解决正确的问题，要比正确的解决问题重要得多，</p>
-<p>但本系列文章，却不打算讨论前者，</p>
-<p>讨论后者也有价值，我们需要有一些侧重点。</p>
+<p>其三，“基础设施即代码”（<a href="https://en.wikipedia.org/wiki/Infrastructure_as_code" target="_blank" rel="noopener">IaC</a>），它本来是随着 2006 年第二代 web 框架的潮流而出现的，当时人们正在考虑底层的计算资源，能否以<a href="https://en.wikipedia.org/wiki/Utility_computing" target="_blank" rel="noopener">按需计费</a>的方式提供服务。基础设施不再使用人工配置的方式提供支持了，而是使用高级的编程语言进行<a href="https://book.douban.com/subject/26589406/" target="_blank" rel="noopener">控制</a>。</p>
 <p><br/></p>
-<p>我们将仅限于考虑给定问题，应如何更好的去解决它。</p>
-<p>通常人们将问题视为 “<strong>业务</strong>”，将解决方案视为 “<strong>技术</strong>”。</p>
-<p>业务也有可能是纯技术性质的，技术也可能会用到非编码手段。</p>
+<p>这三个例子，共同反映了一种新的潮流，现有软件行业内部的一些概念，正在朝着更加有利于编程的方式在发展了。这是全民编程能力提高之后，必然会发生的事情。下文我们就讨论一下，现阶段或者未来，我们应该如何转换想法，如何提供可编程的软件服务。</p>
+<h3 id="api-治理">API 治理</h3>
+<p>对于一个成型的软件系统而言，人们看到的更多是它提供了哪些功能，而不是它的软件架构。但其实它内部的组成方式，以及怎样与外界进行交互，才是最容易被忽视的一点。软件架构是与组织架构密不可分的，<a href="https://zh.wikipedia.org/zh-sg/%E5%BA%B7%E5%A8%81%E5%AE%9A%E5%BE%8B" target="_blank" rel="noopener">康威定律</a> 指出，</p>
+<blockquote>
+<p>设计系统的架构受制于产生这些设计的组织的沟通结构。</p>
+</blockquote>
 <p><br/></p>
-<p><strong>最后</strong>，编码可看做是一件<strong>知识生产活动</strong>，我们总是处在中间层，</p>
-<p>底层是我们可利用的各种 “技术” 工具，上层是我们需解决的 “业务” 问题，</p>
-<p>我们将连接上下两层的逻辑过程，固化成代码，交给计算机运行。</p>
+<p>不同形式的组织架构，就会衍生出不同的软件架构。合理架构的目的，正是为了降低研发成本，用最恰当的方式尽可能多的满足<a href="https://book.douban.com/subject/24530471/" target="_blank" rel="noopener">各方利益</a>。《<a href="https://book.douban.com/subject/30333919/" target="_blank" rel="noopener">Clean Architecture</a>》也指出了软件架构对于确定边界的重要性，</p>
+<blockquote>
+<p>Software architecture is the art of drawing lines that I call boundaries.</p>
+</blockquote>
+<blockquote>
+<p>Those boundaries separate software elements from one another, and restrict those on one side from knowing about those on the other.</p>
+</blockquote>
 <p><br/></p>
-<p>同时这些代码，还得好理解，不然别人就没法更新它了，</p>
-<p>所以，代码中必须包含足够多的<strong>信息</strong>，这些信息还得被清晰的<strong>表达</strong>出来才行。</p>
+<p>所以，软件架构是真实世界的各方利益，投射到软件系统中的写照。好的架构形式，可以促进多方协作，避免不必要的争论。它将不太相关的部分，内聚到独立的子系统中，人们只需要关注系统间是如何交互的即可。</p>
 <p><br/></p>
-<p>总结一下，</p>
-<p>（1）代码首先要能解决问题，才能谈论写的好不好</p>
-<p>（2）有所侧重，并不代表不懂其他方面的重要性</p>
-<p>（3）编码是将知识固化下来的过程</p>
-<h3 id="信息表达">信息表达</h3>
-<p>接上文，我们说 “编码是将知识固化下来的过程”，代码中的确包含了很大的信息量。</p>
-<p>于是问题就来了，怎样将这么大的信息量合理的<strong>表达</strong>出来？</p>
+<p>让依赖可追踪，是我对系统间依赖如何处理的个人体会。我曾参与过很多遗留系统的迁移工作，也曾亲身体会到了这样的迁移会带来的各种问题，称之为 “给飞机换引擎” 也不为过。一个遗留系统有哪些 api 被外部系统所使用是很难确定的，直接导致了我们对这些遗留系统的无能为力。所以让系统的所有依赖可被追踪，是一个美好的愿景。</p>
 <p><br/></p>
-<p>是一股脑的都放到一起么？不行，这就像流水账一样，读起来很费劲。</p>
-<p>所以，更好的写法，应该得有层次性，有主次之分。</p>
-<p>让阅读者容易找到它<strong>感兴趣</strong>的那部分内容。</p>
+<p>有很多人已经这样做了，开放的 api 接口并不是直接暴露给用户，而是对这些 api 进行治理。当要依赖某一个 api 的时候，要先到某个管理系统中进行授权。这样做会有很多好处，一方面不会暴露出难以收回的接口，另一方面，这些接口的使用情况，也都一目了然了。</p>
+<h3 id="命令行接口">命令行接口</h3>
+<p>编程设计领域流传着一些 “警句”，称为《<a href="https://cpsc.yale.edu/epigrams-programming" target="_blank" rel="noopener">Epigrams in Programming</a>》。其中，有一句是这样说的：一个优秀的系统，不能没有命令行接口，</p>
+<blockquote>
+<p>A good system can’t have a weak command language.</p>
+</blockquote>
 <p><br/></p>
-<p>现代很多书籍的内容编排，都采用了这种方式。</p>
-<p>一本书的开头，往往不是第一章的第一句话，而是要先有一个<strong>目录</strong>，</p>
-<p>目录使人方便查找，降低了学习成本。</p>
+<p>命令行接口是<strong>面向程序</strong>的，而常见的图形界面是面向人的。一个系统如果只提供图形界面，那么就难以用程序的方式跟它进行交互，这会使得它自己变得<strong>封闭</strong>，无法纳入到一个更大的<strong>软件生态圈</strong>中。《<a href="https://book.douban.com/subject/7564417/" target="_blank" rel="noopener">Linux/Unix设计思想</a>》也有这样的说法，</p>
+<blockquote>
+<p>良好的程序员编写优秀代码，优秀的程序员借用优秀代码</p>
+</blockquote>
 <p><br/></p>
-<p>在写代码时，我们也可以这么干。</p>
-<p>这就得出了我常用的第一个编程技巧：<strong>让主流程清晰</strong>。</p>
+<p>能将其他软件模块、程序或配置文件，集成到自己的应用程序中，会成倍的<strong>放大</strong>前辈程序员们的工作成果，这就是软件的 “杠杆效应”。命令行接口，使得系统可以被当做软件杠杆来使用。</p>
 <p><br/></p>
-<p>代码中的信息量虽然大，但大多数阅读者肯定并不想全部了解它，</p>
-<p>所以有些信息就得<strong>隐藏</strong>起来，暂时先不告诉他。</p>
-<p>这样阅读起来就轻松多了，我们只提供给他最言简意赅的 “主流程”。</p>
+<p>有很多系统是没有命令行接口的，或者反而是优先提供一种图形界面，与用户进行交互。这样做虽然能够降低用户（人）的使用成本，但也使得其他的程序无法与之对接。并且用户在图形界面上的操作很难聚拢和量化，也为后文的一切从数据出发的研发方式埋下了隐患。</p>
 <p><br/></p>
-<p>跟 “主流程” 无关的事情，尽量隐藏起来，放到别的地方去。</p>
-<h3 id="主流程">主流程</h3>
-<p>那么什么是主流程呢？</p>
-<p>或者，到底应该把哪些事情作为主流程呢？</p>
+<p>但也并不是所有的系统都得这么做的，这是由不同的业务类型来决定的，即不同系统的用户群体是不同的。提供软件服务的系统，通常它的用户也是开发者，他们更喜欢用程序的方式，自动化的解决一些问题。这个时候早于图形界面，优先提供一种对程序友好的方式来提供功能，未尝不是一个更省时省力的性价比更高的做法。</p>
+<h3 id="一切从数据出发">一切从数据出发</h3>
+<p>重视数据是近几年才开始流行的趋势，在以前，人们的关键决策，更多的是依靠行业经验和敏锐的直觉所做出来的，这其实是有挺大风险的。数据导向的研发方式，起源于人们多年来在自然科学领域中的反复实践，这是一套称为<a href="https://zh.wikipedia.org/zh/%E7%A7%91%E5%AD%A6%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">科学方法</a> 的寻求知识的过程，总共分为三个阶段，</p>
+<ul>
+<li><p>问题的认知与表述</p></li>
+<li><p>实验数据的收集</p></li>
+<li><p>假说的构成与测试</p></li>
+</ul>
+<p>数据成了衡量一个系统的成效，以及后期做出优化的关键法宝了。所以，一切从数据出发，从一开始就打好基础，也就顺理成章的成了新系统的研发标准了。它可能转变了我们的研发方式，所追求的不仅仅是提供哪些功能，而是要把功能、效果的验证，当做一个整体来考虑了。</p>
 <p><br/></p>
-<p>这就是需要记起我们的 “编码总诀” 了 —— “为食用者着想”。</p>
-<p>一个对当前工作并不了解的新人，最可能关注什么？</p>
-<p>以后我们自己来改代码时，怎样才能以最快的速度想起来当时做了什么。</p>
+<p>结合上文图形界面和命令行的讨论，似乎命令行接口与数据导向的开发方式可以不谋而合。我在一个业务团队中曾经使用这样的一个命令行工具，至今为止都觉得是一种很好的体验。日常工作中编译打包各项事务，都交给这个命令行工具来执行，必要时我可以编写 shell 脚本来调用这些操作。相比图形界面，我并不需要打开一个网页来完成自己的工作。更重要的是，日常研发活动的行为数据，都能够被这个命令行工具收集上去，真是一个很赞的想法。</p>
+<h3 id="平台">平台</h3>
+<p>一个系统在产品形态上是否构成了平台，指的是它的用户能否帮助它提供功能。当然这件事是有利有弊的，平台显然更难管控。但是从规模上来看，平台则更容易发展壮大。毕竟一个人或者几个人的能力是有限的，有更多的用户参与进来，就相当于做了乘法，而不是现有的几个人做加法。</p>
 <p><br/></p>
-<p>就拿向别人介绍，早晨上班前做了几件事来说吧，</p>
-<p>起床、洗漱、整理、出行。</p>
+<p>在没有其他制约因素的情况下，我更倾向于从平台视角考虑问题，尤其用户也是开发者的时候。使用系统的人与开发系统的人，具有天然的平权性，他们都是开发者，都可以用程序解决问题。这样一来，系统所能提供的服务，就变成可扩展的了，开发资源可以随着事项的紧急程度，在平台与用户之间重新分配。所以说，平台打破了需求方与实现方的单向关系，大家一视同仁的看待所有的问题。</p>
 <p><br/></p>
-<p>一般人在不了解总共有几件事之前，其实并不关心我从哪颗牙齿开始刷牙。</p>
-<p>而当他对刷牙感兴趣的时候，我可以在刷牙的主流程中，再给出说明。</p>
+<p>但有些 “平台”，其实并不是按平台的方式来做的。指的是 “平台” 帮助用户实现了太多的功能，用户想帮忙也帮不上。所以，并不是说人们都来用一个系统，这个系统就称为平台了。而是要想想，在平台上能否看到用户的影子。一个比较切题的例子是 VSCode 的插件系统，仅仅依靠 VSCode 团队是不可能完成现今的海量插件的。他们依靠了整个开发者社区，依靠了用户的聪明才智。</p>
 <p><br/></p>
-<p>这就是我们需要的<strong>层次感</strong>。</p>
-<p>交代每一件事情的时候，都点到为止，不向外透露过多没用的信息。</p>
-<p><br/></p>
-<p>题外话是，面向对象编程之所以这么流行，</p>
-<p>是因为它确实在处理<strong>信息隐藏</strong>方面，起到了模范作用，</p>
-<p>面向对象编程方式，很容易下意识的就把信息藏好了，有利于开发大型项目。</p>
-<p><br/></p>
-<p>当然，不了解背后之原因的话，用什么语言都能写出烂代码来。</p>
+<p>在《<a href="https://book.douban.com/subject/25884108/" target="_blank" rel="noopener">程序员的呐喊</a>》中，作者有一段对平台的讨论，十分的鞭辟入里，</p>
+<blockquote>
+<p>没有平台的产品的是没有用的，缺少平台支持的产品肯定会被有平台支持的同等产品取代。Google+ 错误的以为 Facebook 之所以成功是因为人家做了一个好产品。但那并不是他们成功的原因。Facebook 之所以那么成功是因为他们通过让其他人参与进来的方式，搭建了一整套各异的产品。Facebook 上有成百上千种消磨时间的好去处，所以才能满足所有人。</p>
+</blockquote>
 <h3 id="结语">结语</h3>
-<p>本文介绍了我常用的第一个编程技巧：<strong>让主流程清晰</strong>。</p>
-<p>所采用的的办法是，不要把过多暂时没啥用的信息透露给阅读者，</p>
-<p>而是，放到其他地方去。</p>
-<p><br/></p>
-<p>这样从阅读者角度来看，一次性接受的<strong>信息量</strong>变小了，</p>
-<p>也就更容易了解我们到底想做什么了。</p>
-<p><br/></p>
-<p>这无疑是 “为食用者着想” 的真实写照。</p>
-<p>当我们开始考虑别人的时候，好代码之旅也就悄然开始了。</p>
+<p>本文总结了自己对软件服务的一些理解，有些观点认识的还不够全面。但要表达的想法是，面向开发者提供的软件，与面向最终用户提供的软件，可以是两种不同的软件形式，也具有不同的业务属性。随着这些年开发者大军日益强大起来，人们对开发者服务的诉求，也可能会发生转变。</p>
 
           
         
@@ -470,7 +452,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/54/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/56/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/54/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/56/">&gt;</a>
   </nav>
 
 
@@ -516,7 +498,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -591,7 +573,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

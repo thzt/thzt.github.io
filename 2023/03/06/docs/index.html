@@ -1,0 +1,860 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="文档是想法表述的一次阶段性的快照，它是 7*24 小时的活广告， 也是迭代自身想法的参考资料。  我在日常工作过程中，看到很多人不擅长写文档， 一篇文档的完成时间通常是以「天」来计算的， 而我自己通常能在「一小时之内」把文档写完。  这会导致一种很奇怪的现象，在做软件项目的时候， 在我看来，文档就是随手写完的事情， 但是在某些人的规划中，甚至安排了项目结束前一个星期专门写文档。  我觉得值得花一些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何快速的写完一篇文档">
+<meta property="og:url" content="https://thzt.github.io/2023/03/06/docs/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="文档是想法表述的一次阶段性的快照，它是 7*24 小时的活广告， 也是迭代自身想法的参考资料。  我在日常工作过程中，看到很多人不擅长写文档， 一篇文档的完成时间通常是以「天」来计算的， 而我自己通常能在「一小时之内」把文档写完。  这会导致一种很奇怪的现象，在做软件项目的时候， 在我看来，文档就是随手写完的事情， 但是在某些人的规划中，甚至安排了项目结束前一个星期专门写文档。  我觉得值得花一些">
+<meta property="article:published_time" content="2023-03-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-14T00:39:21.744Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2023/03/06/docs/"/>
+
+
+
+
+
+  <title>如何快速的写完一篇文档 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2023/03/06/docs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何快速的写完一篇文档</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-03-06T00:00:00+08:00">
+                2023-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文档是想法表述的一次阶段性的快照，它是 7*24 小时的活广告，</p>
+<p>也是迭代自身想法的参考资料。</p>
+<p><br/></p>
+<p>我在日常工作过程中，看到很多人不擅长写文档，</p>
+<p>一篇文档的完成时间通常是以「天」来计算的，</p>
+<p>而我自己通常能在「一小时之内」把文档写完。</p>
+<p><br/></p>
+<p>这会导致一种很奇怪的现象，在做软件项目的时候，</p>
+<p>在我看来，文档就是随手写完的事情，</p>
+<p>但是在某些人的规划中，甚至安排了项目结束前一个星期专门写文档。</p>
+<p><br/></p>
+<p>我觉得值得花一些时间来介绍，怎样才能快速把文档写完。</p>
+<h3 id="为什么需要文档">为什么需要文档</h3>
+<p>软件项目的从业者们，应当几乎每个人都听说过 “敏捷开发” 的词汇，</p>
+<p>但是真正抓住敏捷思想，或者真正能落到实处的，却少之又少。</p>
+<p><br/></p>
+<p>这可能是很多人在看到专业术语时，仅仅从 “字面意思” 或 “只言片语” 来理解。</p>
+<p>并没有抓住这个术语的发明者，到底想传达什么想法。</p>
+<p><br/></p>
+<p><a href="https://agilemanifesto.org/iso/zhchs/manifesto.html" target="_blank" rel="noopener">敏捷宣言</a>中提到，</p>
+<blockquote>
+<p>工作的软件 胜于 详尽的文档</p>
+</blockquote>
+<p><br/></p>
+<p>这是一个比较，指的是，与其有详细的文档，不如有工作的软件。</p>
+<p>但并没有说，详尽的文档不重要。</p>
+<p><br/></p>
+<p>要想写出好的文档，首先应当建立 “<strong>正确的文档观</strong>”，</p>
+<p>我们就应当写出好文档，能写出好文档的人，就是强。</p>
+<p><br/></p>
+<p>只有当我们重视并尊重一件事情的时候，事情才有好转的可能。</p>
+<h3 id="为什么写的慢">为什么写的慢</h3>
+<p>在介绍如何能快速写完之前，我们可以先来看一下，</p>
+<p>写完一篇文档需要做那些事情，以及是什么阻碍了文档被写完。</p>
+<p><br/></p>
+<p>主要有以下几个方面，我们逐个来讨论原因，</p>
+<ul>
+<li><p>不想写，拖延</p></li>
+<li><p>不知道从哪里开始写</p></li>
+<li><p>写的不好</p></li>
+</ul>
+<h4 id="不想写拖延">1. 不想写，拖延</h4>
+<p>产生这种想法的原因，一个如上文所述，没有意识到文档的重要性和必要性，</p>
+<p>另一个，则是对事项的交付缺乏进度意识。</p>
+<p><br/></p>
+<p>古语说，“账多了不愁，虱子多了不咬”。</p>
+<p>当有很多 “债” 压在自己身上时，就什么也不想做的。</p>
+<p><br/></p>
+<p>这时候要解决的问题是，如何克服 “拖延”，如何让自己行动起来。</p>
+<p>一个比较有效的办法是 “立即做”。</p>
+<p>把手头上的事情，赶紧交付出去，不要堵在自己这里。</p>
+<p><br/></p>
+<p>实际开始执行之后，就会发现，实际的困难远比自己想象的小。</p>
+<p>真正开始做了，就发现其实不难。</p>
+<p><br/></p>
+<p>当自己转起来之后，输出文档，也就变成了顺理成章的事情了。</p>
+<h4 id="不知道从哪里开始写">2. 不知道从哪里开始写</h4>
+<p>当我们决定开始写一篇文档的时候，通常会出现 “无法下笔” 的情况，</p>
+<p>第一句话到底怎么写呢？</p>
+<p><br/></p>
+<p>产生这种情况的原因在于，我们自己的素材库中，缺少 “模板”。</p>
+<p>或者说是，在阅读别人文档的时候，忘记学习对方的 “思维框架” 是什么。</p>
+<p><br/></p>
+<p>在表述一个特定问题时候，人们都是有套路的，</p>
+<p>自己不知道如何表述的原因在于，别人在表述类似问题时，</p>
+<p>只忙着去阅读了，而忘记思考 “他是如何表达出来的”。</p>
+<p><br/></p>
+<p>一个 “文档熟练工” 是如何写文档的呢？他们总是会先从一个框架开始。</p>
+<p>例如，与一线开发打交道比较多的是，方案介绍文档，最常用的套路如下：</p>
+<ul>
+<li><p>背景：为什么会有这篇文档，问题的现状是怎样的</p></li>
+<li><p>目标：预期是什么，哪些人的预期</p></li>
+<li><p>问题：现状是怎样不满足预期的，冲突是什么，痛点是什么</p></li>
+<li><p>方案：为了解决问题有几种办法，为什么选其中一种</p></li>
+</ul>
+<p><br/></p>
+<p>有了这个思维框架之后，我们只需要 “填空” 就行了。</p>
+<h4 id="写的不好">3. 写的不好</h4>
+<p>在写文档的时候，经常会出现，写了一段话之后发现，不是我们想要表达的意思。</p>
+<p>原因在于，我们还不适应用文字来表达想法。</p>
+<p><br/></p>
+<p>用语言和用文字表达想法，是不一样的，</p>
+<p>语言多数是张口就来，缺少明确的目的性，主要以 “情绪沟通” 为主。</p>
+<p>而文字更多的则是想好了再写，是摆事实讲道理，需要有一定的逻辑严密性。</p>
+<p><br/></p>
+<p>所以文档更讲究来龙去脉和思路，更讲究事情的前因后果。</p>
+<p>正是因为如此，有些人也会用文档来整理思路，迭代自己的想法。</p>
+<p><br/></p>
+<p>那么如何才能习惯用文字来表达想法呢，办法是，经常性的把自己的想法记录下来。</p>
+<p>有时候想到了一两句绝妙的想法，那就赶紧记下来，</p>
+<p>并且，经常性的回顾这些小想法，思考这些想法的来龙去脉。</p>
+<p><br/></p>
+<p>这样有助于形成从知识点，到知识脉络、体系的建立。</p>
+<p>当我们有了知识体系之后，逻辑就会变得更加清晰，</p>
+<p>很容易完成从一个结论到另一个的结论的推导。</p>
+<h3 id="怎样快速写完">怎样快速写完</h3>
+<p>说了这么多之后，我们可以正面阐释到 “如何快速的写完一篇文档” 了。</p>
+<ul>
+<li><p>不要拖延，想到了就赶紧写</p></li>
+<li><p>采用思维框架，来开头</p></li>
+<li><p>注重结论的逻辑关系</p></li>
+<li><p>快速交付，让擅长写文档的人，完成后 20%</p></li>
+</ul>
+<p><br/></p>
+<p>前三个在上文已经介绍过了，后面我来介绍至关重要的第四点。</p>
+<p>有很多人在写文档时，认为这是自己的工作，所以必须尽善尽美才可以交付。</p>
+<p>其实不然。</p>
+<p><br/></p>
+<p>跟大多数需要协同完成的工作类似，其实交付比完美更重要。</p>
+<p>文档跟代码也是一样的，是一个持续完善，持续改进的过程。</p>
+<p>写得差不多了，就赶紧交付出来，不要自己闷头打磨。</p>
+<p><br/></p>
+<p>这是因为大部分事情，前 80% 都是容易完成了，后 20% 往往很难。</p>
+<p>我们不如将还未尽善尽美的文档，先抛出来，看看大家的想法，</p>
+<p>有了这次交互之后，对最终完成文档，帮助非常大。</p>
+<p><br/></p>
+<p>实际上，前几步如果自己写的实在费力，或者卡顿严重，</p>
+<p>同样可以抛出来，交给文档写的更好的人，问问他们的思路。</p>
+<p>并不是所有事情都得自己一个人完成。</p>
+<h3 id="结语">结语</h3>
+<p>以上，就是关于 “如何快速的写完一篇文档” 的思路，除了思路之外，</p>
+<p>还需要进行大量的练习，比如经常性的写一些心得体会给自己，</p>
+<p>经常性的，写一些项目总结给自己看。</p>
+<p><br/></p>
+<p>这都会有助于积累素材和思维框架，也有助于帮助自己复盘思路，</p>
+<p>迭代自己的想法，</p>
+<p>我们会发现很多想法不是突然就有的，而是源于之前的一个想法。</p>
+<p><br/></p>
+<p>只有勤学多练，不卡在自己这里，才能充分发挥出文档的作用。</p>
+<p>它就像成为了自己的分身一样，</p>
+<p>7*24 小时不间断的，为其他阅读者传达自己的想法。</p>
+<p><br/></p>
+<p>这可能就是十倍工作效率的秘诀，文档可以屏蔽绝大多数同步的沟通，</p>
+<p>可以避免自己被打断，让自己的思路沉淀下来，</p>
+<p>帮助自己是思维更完整，让自己成为更好的自己。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/02/21/data/" rel="next" title="建立科学的数据观">
+                <i class="fa fa-chevron-left"></i> 建立科学的数据观
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/03/22/tech-lead/" rel="prev" title="Tech Lead 练级指南">
+                Tech Lead 练级指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">305</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要文档"><span class="nav-number">1.</span> <span class="nav-text">为什么需要文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么写的慢"><span class="nav-number">2.</span> <span class="nav-text">为什么写的慢</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不想写拖延"><span class="nav-number">2.1.</span> <span class="nav-text">1. 不想写，拖延</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不知道从哪里开始写"><span class="nav-number">2.2.</span> <span class="nav-text">2. 不知道从哪里开始写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写的不好"><span class="nav-number">2.3.</span> <span class="nav-text">3. 写的不好</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎样快速写完"><span class="nav-number">3.</span> <span class="nav-text">怎样快速写完</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

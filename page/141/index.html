@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/23/semantics-10/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/06/29/problem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/23/semantics-10/" itemprop="url">语言背后的代数学（十）：Curry-Howard-Lambek correspondance</a></h1>
+                <a class="post-title-link" href="/2018/06/29/problem/" itemprop="url">问题本身</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T00:00:00+08:00">
-                2018-02-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-29T00:00:00+08:00">
+                2018-06-29
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,125 +347,141 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-f3c4e7374c59c264.png" /></p>
+            <h3 id="什么是问题">什么是问题</h3>
+<p>多年的学校教育，让我们养成了<strong>擅于解决给定问题</strong>的思维习惯，</p>
+<p>可是从学校毕业后，才慢慢发现，很多问题都不是事先给定的。</p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文我们介绍了笛卡尔闭范畴，它给出了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^{unit,\times,\to}"></span>的语义，</p>
-<p>我们还看到了笛卡尔闭范畴与柯里化之间的关系。</p>
+<p>因此，在急于寻找解决方案之前，我们应该先冷静下来，仔细甄别，</p>
+<p>到底什么才是<strong>真正的问题</strong>？</p>
 <p><br/></p>
-<p>结合《<a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型</a>》系列文章，</p>
-<p>到目前为止我们已经有了，类型理论，逻辑学和范畴论的知识基础了。</p>
-<p>现在我们介绍Curry-Howard-Lambek correspondence，将三者联系起来。</p>
+<p>有不少问题解决大师，对这件事情有过深入的思考。</p>
 <p><br/></p>
-<h3 id="类型方面">1. 类型方面</h3>
+<p>叶茂中在《<a href="https://book.douban.com/subject/25783682/" target="_blank" rel="noopener">营销的16个关键词</a>》中提到过“<strong>冲突理论</strong>”，</p>
+<blockquote>
+<p>营销首先要洞察需求，而洞察需求的目的是帮助消费者解决问题，解决了问题才能获得利益。</p>
+</blockquote>
+<blockquote>
+<p>可是问题从哪来呢？问题就是<strong>冲突</strong>。</p>
+</blockquote>
+<blockquote>
+<p>三流营销寻找冲突，二流营销解决冲突，一流营销制造冲突。</p>
+</blockquote>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-09a5fa1690d11143.png" /></p>
+<p>斋藤嘉则在《<a href="https://book.douban.com/subject/3604068/" target="_blank" rel="noopener">发现问题的思考术</a>》中写道，</p>
+<p>所谓“<strong>问题</strong>”，就是“应有的景象”与“现状”之间的“落差”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">问题 &#x3D; 应有的景象 - 现状</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>参考《<a href="https://thzt.github.io/2017/09/06/type-2/">你好，类型（二）：Lambda calculus</a>》，</p>
-<p>我们来回顾一下简单类型化<span data-katex="\lambda"></span>演算系统。</p>
-<h4 id="语法">1.1 语法</h4>
-<p><span data-katex="t::=x|tu|\lambda x.t"></span></p>
+<p>结合“冲突理论”和“落差理论”，“问题”的定义就很明显了。</p>
+<blockquote>
+<p>我们现阶段所面临的主要矛盾，是人民日益增长的物质文化需要同落后的社会生产之间的矛盾。</p>
+</blockquote>
 <p><br/></p>
-<p>例子：</p>
-<p><span data-katex="\lambda x.x+1"></span></p>
-<p><span data-katex="\lambda f.\lambda x.fx"></span></p>
-<h4 id="类型">1.2 类型</h4>
-<p>基本类型（basic types），<span data-katex="B::=\iota|\cdots"></span></p>
-<p>一般类型（general types），<span data-katex="T::=B|T\to T|T\times T"></span></p>
+<p>总之，没有被达成的<strong>预期</strong>，构成了问题。</p>
+<h3 id="谁的问题">谁的问题</h3>
+<p>我们上文中对<strong>问题本身</strong>进行了讨论，但还有一个值得注意的点，</p>
+<p>那就是，问题与人紧密相关。</p>
 <p><br/></p>
-<p>例子：</p>
-<p><span data-katex="\iota\to\iota\to\iota"></span>，</p>
-<p><span data-katex="(\iota\to\iota)\to\iota"></span></p>
-<h4 id="类型推导规则">1.3 类型推导规则</h4>
-<p>（1）<span data-katex="\frac{~}{\Gamma,x:t\vdash x:T}"></span></p>
+<p>既然没有被达成的预期会构成问题，</p>
+<p>那么就要看，没有达成<strong>谁的预期</strong>？</p>
 <p><br/></p>
-<p>（2）<span data-katex="\frac{\Gamma\vdash t:T~~~~\Gamma\vdash u:U}{\Gamma\vdash\left\langle t,u\right\rangle:T\times U}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_1v:T}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_2v:U}"></span></p>
+<p>这个预期的产生者，就是<strong>问题的主体</strong>，</p>
+<p>能不能满足他的需要，他愿意付出多大<strong>代价</strong>满足需要，决定了问题的<strong>解决方式</strong>。</p>
 <p><br/></p>
-<p>（3）<span data-katex="\frac{\Gamma,x:U\vdash t:T}{\Gamma\vdash\lambda x.t:U\to T}"></span>，<span data-katex="\frac{\Gamma\vdash t:U\to T~~~~\Gamma\vdash u:U}{\Gamma\vdash tu:T}"></span></p>
+<p>而如果考虑问题的时候忽视主体，就容易对问题产生错误的理解，</p>
+<p>甚至画蛇添足，给别人帮了倒忙。</p>
 <p><br/></p>
-<p>其中，<span data-katex="\pi_1\left\langle v_1,v_2 \right\rangle=v_1"></span>，<span data-katex="\pi_2\left\langle v_1,v_2 \right\rangle=v_2"></span>。</p>
+<p>在《<a href="https://book.douban.com/subject/26282714/" target="_blank" rel="noopener">咨询的奥秘</a>》中，有一个著名的案例，称为“橙汁测试”。</p>
+<p>假设你必须为一个年度销售会议选定一个能容纳700人的地方，这显然是一件不容易办到的事情。</p>
+<p>然后当你见到酒店的宴会经理时，还要提出以下苛刻的要求。</p>
 <p><br/></p>
-<h3 id="逻辑方面">2. 逻辑方面</h3>
+<blockquote>
+<p>这700人的早餐必须要以预祝成功的祝酒开始，用橙汁来祝酒。</p>
+</blockquote>
+<blockquote>
+<p>并且，这700人中每个人都必须有一大杯新鲜的冰橙汁。</p>
+</blockquote>
+<blockquote>
+<p>这些橙汁在饮用前，榨出不能超过两个小时。</p>
+</blockquote>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-1a02678c20564afc.png" /></p>
+<p>提出问题后，测试宴会经理怎么答复。</p>
 <p><br/></p>
-<p>参考《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a>》，</p>
-<p>我们构建一个只包含逻辑联接词<span data-katex="\wedge"></span>和<span data-katex="\to"></span>的命题逻辑系统。</p>
-<h4 id="逻辑推导规则">2.1 逻辑推导规则</h4>
-<p>（1）<span data-katex="\frac{~}{\Gamma,A\vdash A}"></span></p>
+<p>他们可能会说，“这办不到”。</p>
+<p>这就说明他们在橙汁测试中不及格。</p>
+<p>他们可能说，“没问题”，</p>
+<p>这种人在橙汁测试中也不及格，因为很可能他们在撒谎。</p>
 <p><br/></p>
-<p>（2）<span data-katex="\frac{\Gamma\vdash A~~~~\Gamma\vdash B}{\Gamma\vdash A\wedge B}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}"></span></p>
+<p>一个好的答复是这样的，</p>
+<blockquote>
+<p>你这真是个问题，我能帮你，……这是所需要的费用。</p>
+</blockquote>
 <p><br/></p>
-<p>（3）<span data-katex="\frac{\Gamma,A\vdash B}{\Gamma\vdash A\to B}"></span>，<span data-katex="\frac{\Gamma\vdash A\to B~~~~\Gamma\vdash A}{\Gamma\vdash B}"></span></p>
-<h4 id="curry-howard-correspondence">2.2 Curry-Howard correspondence</h4>
-<p>我们看到，只要将逻辑系统中的<span data-katex="\wedge"></span>和<span data-katex="\to"></span>，替换成简单类型化<span data-katex="\lambda"></span>演算中的<span data-katex="\times"></span>和<span data-katex="\to"></span>，</p>
-<p>那么这两个系统从推导规则上来看是一致的。</p>
+<p>对的，毫无疑问可以让工人早晨5点去冷冻橙汁，如果付给他们每人1000美元，</p>
+<p>但是你愿意支持这么多吗？</p>
+<p>也许会，也许不会，但这不是宴会经理应该决定的。</p>
 <p><br/></p>
-<p>逻辑中的命题，对应了简单类型化<span data-katex="\lambda"></span>演算中的类型，</p>
-<p>逻辑中命题的证明，对应了简单类型化<span data-katex="\lambda"></span>演算中的项（的类型断言）。</p>
+<p><strong>解决方案</strong>和<strong>代价</strong>都是相伴而生的，</p>
+<p>能否接受这样的解决方案，</p>
+<p>取决于问题的主体，在心中将预期与代价进行的<strong>权衡</strong>。</p>
 <p><br/></p>
-<p>命题<span data-katex="A\to B"></span>，可以这样理解，</p>
-<p>如果该命题可证，则存在将<span data-katex="A"></span>的证明转换为<span data-katex="B"></span>的证明的构建过程（construction）。</p>
-<p>命题<span data-katex="A\wedge B"></span>，可以这样理解，它是<span data-katex="A"></span>和<span data-katex="B"></span>的证明序对（pair）。</p>
+<h3 id="价值">价值</h3>
+<p>正是因为解决一个问题需要成本，</p>
+<p>所以，问题的主体就不得不考虑<strong>收益</strong>，</p>
+<p>需要斟酌投入产出比，找出最划算的方式，在可以接受的范围内把问题解决掉。</p>
 <p><br/></p>
-<p>考虑到以上命题逻辑与类型之间的对应关系，</p>
-<p>我们可以说，<a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">proofs as programs</a>。</p>
+<p>维基百科上，对<strong>价值</strong>是这个定义的，</p>
+<blockquote>
+<p>价值，泛指客体对于主体表现出来的积极意义和有用性。</p>
+</blockquote>
 <p><br/></p>
-<h3 id="范畴论方面">3. 范畴论方面</h3>
+<p>这里也是和<strong>主体</strong>有关。</p>
+<p>不同的人，会认为相同的事物有不同的价值，</p>
+<p>这就是个人的价值观。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-ef752d2a808eaf01.png" /></p>
+<p>结合问题本身而言，解决这个问题有没有用，有多大作用，</p>
+<p>要依据问题的主体而定，</p>
+<p><strong>谁产生了期望，谁就引出了问题，谁付钱，谁就不得不考虑收益。</strong></p>
 <p><br/></p>
-<p>结合《<a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a>》，</p>
-<p>我们给出了简单类型化<span data-katex="\lambda"></span>演算的范畴论解释。</p>
-<h4 id="对象">3.1 对象</h4>
-<p>将简单类型化<span data-katex="\lambda"></span>演算系统的类型，解释为笛卡尔闭范畴<span data-katex="C"></span>中的对象。</p>
-<p><span data-katex="\mathscr{C}[\![\sigma\times\tau]\!]=\mathscr{C}[\![\sigma]\!]\times\mathscr{C}[\![\tau]\!]"></span></p>
-<p><span data-katex="\mathscr{C}[\![\sigma\to\tau]\!]=\mathscr{C}[\![\sigma]\!]\to\mathscr{C}[\![\tau]\!]"></span></p>
-<h4 id="箭头">3.2 箭头</h4>
-<p>将带有自变量项，解释为从自变量类型到项类型的箭头。</p>
-<p><span data-katex="\mathscr{C}[\![\Gamma\vdash M:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\to\mathscr{C}[\![\sigma]\!]"></span></p>
-<h4 id="curry-howard-lambek-correspondance">3.3 Curry-Howard-Lambek correspondance</h4>
-<p>根据简单类型化<span data-katex="\lambda"></span>演算系统中的推导规则，</p>
-<p>我们可以为范畴<span data-katex="C"></span>添加对象和箭头之间的约束条件，</p>
+<p>如果你没有付出，就不必帮别人操心收益。</p>
 <p><br/></p>
-<p>（1）<span data-katex="\frac{~}{\pi_2:\Gamma\times A\to A}"></span></p>
+<h3 id="利益相关者">利益相关者</h3>
+<p>在做事情之前，必须将利益相关者识别出来，</p>
+<p>这在很大程度上决定了事情能否顺利的<strong>进展</strong>下去，</p>
+<p>《<a href="https://book.douban.com/subject/24530471/" target="_blank" rel="noopener">软件系统架构</a>》将这种思想用于了软件架构之中。</p>
 <p><br/></p>
-<p>（2）<span data-katex="\frac{f:\Gamma\to A~~~~g:\Gamma\to B}{\left\langle f,g\right\rangle:\Gamma\to A\times B}"></span>，<span data-katex="\frac{f:\Gamma\to A\times B}{\pi_1\circ f:\Gamma\to A}"></span>，<span data-katex="\frac{f:\Gamma\to A\times B}{\pi_2\circ f:\Gamma\to B}"></span></p>
+<blockquote>
+<p>Stakeholders are the people for whom we build systems.</p>
+</blockquote>
+<blockquote>
+<p>A key part of your role as an architect is knowing how to work with stakeholders in order to create an architecture that meets their complex, overlapping, and often conflicting needs.</p>
+</blockquote>
 <p><br/></p>
-<p>（3）<span data-katex="\frac{f:\Gamma\times A\to B}{g_f:\Gamma\to B^A}"></span>，<span data-katex="\frac{f_1:\Gamma\to B^A~~~~f_2:\Gamma\to A}{e\circ\left\langle f_1,f_2\right\rangle:\Gamma\to B}"></span></p>
+<p>从人文角度考虑软件架构的著作确实很少，</p>
+<p>更多架构方面的书籍，谈论的更多是软件本身的属性。</p>
 <p><br/></p>
-<p><span data-katex="g_f=\Gamma\to B^A"></span>是一个箭头，和<span data-katex="e:B^A\times A\to B"></span>的定义，</p>
-<p>可以参考<a href="http://thzt.github.io/2018/02/19/semantics-9/">前一篇</a>文章中关于笛卡尔闭范畴的定义。</p>
+<p>《<a href="https://book.douban.com/subject/10746257/" target="_blank" rel="noopener">软件架构师的12项修炼</a>》同样写到，</p>
+<blockquote>
+<p>『技术』不能让一个企业运转起来，而『关系』能。</p>
+</blockquote>
+<blockquote>
+<p>成功公式的一个最重要因素就是要明白如何与人相处。</p>
+</blockquote>
 <p><br/></p>
-<p>笛卡尔闭范畴作为简单类型化<span data-katex="\lambda"></span>演算系统的语义模型，</p>
-<p>范畴中箭头之间约束关系，与类型推导规则是一致的，</p>
-<p>而根据Curry-Howard correspondence，类型推导规则与命题逻辑又是一致的。</p>
+<p>因此，在谈论问题的时候，我们应该多从人文角度看待它。</p>
+<p>可能问题的主体并不想问题被解决，问题解决后会不会被<strong>问责</strong>？</p>
+<p>况且还有不少人担心，<strong>被别人指出问题，是在暗示自己不够专业。</strong></p>
 <p><br/></p>
-<p>因此，类型理论，逻辑学和范畴论产生了关联，</p>
-<p>这种三者的对应关系，称为<strong>Curry-Howard-Lambek correspondance</strong>。</p>
+<h3 id="结语">结语</h3>
+<p>考虑问题本身是一个值得深思的话题，</p>
+<p>我们不妨回顾一下以前解决的种种问题，尤其是工作中的问题，</p>
+<p>尝试再反思一下，什么才是当时真正的问题？谁是问题的主体？</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
+<p>问题解决后，哪些人会受益？</p>
+<p>哪些人会被问责？</p>
+<p>哪些人会付出代价？</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-cfb15d029385cd31.png" /></p>
-<p><br/></p>
-<p>本文介绍了Curry-Howard-Lambek correspondance，</p>
-<p>它将本来毫无关系的三个学科联系在了一起，</p>
-<p>类型理论与程序和计算相关，逻辑学与证明（论）相关，</p>
-<p>范畴论与模型（论）和代数学相关。</p>
-<p><br/></p>
-<p>本系列文章到此结束了，与代数学和范畴论相关的内容其实还有很多，</p>
-<p>例如，quotient algebra，comonad，adjoint functor，free monoid，等等概念，</p>
-<p><strong>书山有路勤为径，学海无涯苦作舟</strong>，让我们一起努力吧。</p>
-<p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
-<p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a></p>
-<p><a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">Curry–Howard correspondence</a></p>
-<p><a href="https://wiki.haskell.org/Curry-Howard-Lambek_correspondence" target="_blank" rel="noopener">Curry-Howard-Lambek correspondence</a></p>
-<p><a href="http://www.cs.ox.ac.uk/samson.abramsky/gsem/chll.pdf" target="_blank" rel="noopener">The Curry-Howard Correspondence, and beyond</a></p>
-<p><a href="http://disi.unitn.it/~bernardi/RSISE11/Papers/curry-howard.pdf" target="_blank" rel="noopener">Lectures on the curry-howard Isomorphism</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Intuitionistic_logic" target="_blank" rel="noopener">Intuitionistic logic</a></p>
+<p>所以，很多时候，<strong>别人针对的不是你，</strong></p>
+<p><strong>而是他自己的得失。</strong></p>
 
           
         
@@ -504,7 +520,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/140/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/140/">140</a><span class="page-number current">141</span><a class="page-number" href="/page/142/">142</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/142/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/140/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/140/">140</a><span class="page-number current">141</span><a class="page-number" href="/page/142/">142</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/142/">&gt;</a>
   </nav>
 
 
@@ -550,7 +566,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -625,7 +641,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

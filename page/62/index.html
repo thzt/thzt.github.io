@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/02/19/problem/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/08/10/code-07/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/19/problem/" itemprop="url">问题的纯粹性与复杂性</a></h1>
+                <a class="post-title-link" href="/2020/08/10/code-07/" itemprop="url">编码技巧（七）：让代码易于排错</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-19T00:00:00+08:00">
-                2020-02-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-10T00:00:00+08:00">
+                2020-08-10
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Software/" itemprop="url" rel="index">
+                    <span itemprop="name">Software</span>
                   </a>
                 </span>
 
@@ -347,103 +347,86 @@
       
         
           
-            <p>在古代，知识分子们讲究的是 “学而优则仕”，</p>
-<p>很多人寒窗苦读，是为了考取功名，当官发财。</p>
+            <p>我们知道，代码是不可能没有问题的，</p>
+<p>从编写第一行代码开始，它就有问题 —— 未完成所有的需求。</p>
+<p>在编写代码的过程中，它也一直有问题，</p>
+<p>新代码的业务逻辑有问题，或者新老代码的衔接上有问题。</p>
 <p><br/></p>
-<p>平时他们学的是四书五经，钻研琴棋书画诗词歌赋。</p>
+<p>所以，排查问题是开发者的家常便饭，</p>
+<p>但谁都不愿意排查问题，尤其是排查那些缺少<strong>线索</strong>的问题。</p>
 <p><br/></p>
-<p>记得看过一部电视剧 《混世奇才庞振坤》，主角 <a href="https://baike.baidu.com/item/%E5%BA%9E%E6%8C%AF%E5%9D%A4" target="_blank" rel="noopener">庞振坤</a> 是中原第一才子，</p>
-<p>他轻而易举的对出了扬州八怪之一 <a href="https://baike.baidu.com/item/%E9%BB%84%E6%85%8E" target="_blank" rel="noopener">黄慎</a> 的绝对。</p>
+<p>因此，写出<strong>易于排错</strong>的代码，是一项重要的编码技巧，</p>
+<p>会给自己省出大量的时间，少掉几根头发。</p>
+<h3 id="状态">状态</h3>
+<p>一个系统无缘无故的出问题了，但重启之后又好了。</p>
+<p>换言之，系统是否出现故障，取决于它的 “心情”。</p>
+<p>这就很难排查，因为我们不知道它<strong>当时</strong>是什么 “心情”。</p>
+<p><br/></p>
+<p>上文所谓的 “心情”，指的是程序的运行<strong>状态</strong>，它是变动的，</p>
+<p>同一段代码，在不同的程序状态下，可能会有不同的结果。</p>
+<p><br/></p>
+<p>考虑一段依赖外部数据库<strong>状态</strong>来执行不同任务的代码，</p>
+<p>假如有人在程序执行时，通过其他手段改动了数据库，</p>
+<p>程序的执行结果就<strong>变了</strong>，我们根本不知道发生了什么。</p>
+<p><br/></p>
+<p>所以，要想写出易于排错的代码，必须对程序状态有所警觉，</p>
+<p>程序大部分的<strong>反常</strong>行为，正是由<strong>意料之外</strong>的程序状态所导致的，</p>
+<p>因此我们得想个办法让<strong>状态</strong>一目了然。</p>
+<h3 id="日志">日志</h3>
+<p>如上文所述，“让代码易于排错” 是我们对代码附加的额外<strong>要求</strong>，</p>
+<p>因此，秉持这一信念的开发者，总是会从一开始就考虑到它。</p>
+<p><br/></p>
+<p>一个例子是大多数系统都具有的<strong>日志模块</strong>，</p>
+<p>通常是在系统的设计之初，人们就已经考虑了日志问题。</p>
+<p><br/></p>
+<p>所谓日志，其实是保存了程序执行之关键节点的重要<strong>信息</strong>，</p>
+<p>这些信息为事后排查问题，留下了<strong>线索</strong>，</p>
+<p>让我们可以按图索骥，清晰的找到问题发生的第一现场。</p>
+<p><br/></p>
+<p>虽说日志是一条重要的线索，但也并非多多益善，</p>
+<p>过多无效日志，反而会让重要信息变得难以寻到，</p>
+<p>所以写日志时还是要回到初心，是不是做到了 “让代码易于排错”。</p>
+<h3 id="调试">调试</h3>
+<p>现在很多程序的开发过程，都是离不开调试的，</p>
+<p>调试使得我们可以跟进代码的执行过程中，</p>
+<p>与上文的观点类似，为了 “让代码易于排错”，<strong>调试</strong>也要从一开始就得考虑。</p>
+<p><br/></p>
+<p>具体而言，从编写第一行代码开始，我们就得搭好调试配置，</p>
+<p>让第一行代码就是<strong>可调试的</strong>。</p>
+<p><br/></p>
+<p>以后增加越来越多的功能，可能会破坏调试的可用性，</p>
+<p>这时，我们应时刻保证它可用，甚至<strong>不惜</strong>在代码中写入调试变量。</p>
+<p><br/></p>
+<p>让代码始终可调试，会加速从发现问题到解决问题的<strong>反馈循环</strong>，</p>
+<p>不可调试的代码，我们自己<strong>开发</strong>起来都会很麻烦。</p>
+<h3 id="开发者接口">开发者接口</h3>
+<p>有时候给开发者，提供一些额外的接口，是有必要的，</p>
+<p>虽然这会违反 “最小接口” 原则。</p>
+<p><br/></p>
+<p>这是因为代码其实并非只为<strong>功能</strong>服务的，</p>
+<p>前几篇文章，我们介绍的每一个编程技巧，</p>
+<p>其实都是在不改变代码功能的前提下，对代码做出了调整。</p>
+<p><br/></p>
+<p>这其实是对代码编写者提出了更高的要求，</p>
+<p>即，如何在满足<strong>功能需求</strong>的前提下，写出具有更多优秀<strong>特征</strong>的代码。</p>
+<p><br/></p>
+<p>所以，面向开发者的接口，也是这一思路的体现，</p>
+<p>开发者接口可以获取程序中更多信息，或者实现一些特殊功能，</p>
+<p>为我们增加了与系统交互的一种新途径。</p>
 <p><br/></p>
 <blockquote>
-<p>貂蝉裹足，董卓一旁缕布</p>
+<p><a href="https://medium.com/microsoft-open-source-stories/how-microsoft-rewrote-its-c-compiler-in-c-and-made-it-open-source-4ebed5646f98" target="_blank" rel="noopener">Roslyn</a> was thus born out of an openness mindset: sharing the inner workings of C# for the world to programmatically consume. 共享 C# 的内部工作机制，让世界<strong>以编程的方式</strong>消费。</p>
 </blockquote>
-<blockquote>
-<p>张飞射箭，刘备阵前观弓</p>
-</blockquote>
-<p><br/></p>
-<p>然而，才思敏捷与<strong>擅于治理一方事务</strong>，似乎不应该有什么必然的联系。</p>
-<p>当官之后，日常工作是处理百姓的案子，并不需要能诗擅赋。</p>
-<p><br/></p>
-<p>这种反差哪怕是放到现代，也能给我们一些启示。</p>
-<h3 id="问题的纯粹性">问题的纯粹性</h3>
-<p>回想一下，工作中我们用到的知识，有多少是学校里学的呢？</p>
-<p>我想会非常少。</p>
-<p><br/></p>
-<p>学校中的课程，就如同古代的诗词歌赋一般，更像是一种<strong>思维训练</strong>。</p>
-<p>似乎唯一的作用是避免我们停止思考，让大脑保持活跃。</p>
-<p>但就内容本身而言，很多知识要么是过时的，要么是永远用不上的。</p>
-<p><br/></p>
-<p>刚开始工作时，我们遇到的问题，大多是很<strong>纯粹</strong>的问题，</p>
-<p>可以良好的跟学校中所学的知识联系起来。</p>
-<p>这是其他人已经帮我们加工过了，真实世界中的问题，很少有纯粹的。</p>
-<p><br/></p>
-<p>真实世界中的问题，往往离不开人际关系，</p>
-<p>所以真正的问题往往并不是一个技术问题，而是<strong>人的问题</strong>。</p>
-<p><br/></p>
-<p>比如我们要开发一个系统，实现某些功能，</p>
-<p>这些工作的目的，肯定是要解决现存的一些<strong>麻烦</strong>。</p>
-<p>这些麻烦引起了相关人等的不适，因此才需要有人花时间帮他们解决。</p>
-<p><br/></p>
-<p>可是要想解决麻烦，方法往往并不唯一，肯定还有其他办法，</p>
-<p>所以，拿到纯粹开发任务的人们，其实是在解决别人<strong>加工后</strong>的问题。</p>
-<p><br/></p>
-<p>那些<strong>如何决策</strong>或者<strong>如何分配资源</strong>等方面的考虑，都被屏蔽掉了。</p>
-<p>所以究其根本，可能完全不必做这件事，也可能由别人来做会更合适。</p>
-<h3 id="复杂性的维度">复杂性的维度</h3>
-<p>工作时间久了，所需的各项技能，都会越来越熟练，</p>
-<p>人们的<strong>注意力</strong>因此也会发生转移。</p>
-<p><br/></p>
-<p>我们就发现，大部分的工作任务都不是那么简单，会涉及到很多人，</p>
-<p>工作内容很多时候都是各方<strong>博弈</strong>的结果。</p>
-<p><br/></p>
-<p>无非是谁多做一点，谁少做一点，谁会得到哪些好处，谁将负起更大的责任。</p>
-<p><br/></p>
-<p>所以，站在资源角度来看，什么活都接的人当不了好官，</p>
-<p>管理者应该考虑的是，如何<strong>用好</strong>手里现有的资源，如何向上级争取更多的资源，让百姓都有饭吃。</p>
-<p><br/></p>
-<p>可见，这一看待事情的方式，跟解决技术问题是不同的，</p>
-<p>管理者处理的是 “案子”，而不是 “对子”。</p>
-<p><br/></p>
-<p>和古代类似，很多人想当官的目的是<strong>不想干活</strong>，这其实的对管理者的一种误解，</p>
-<p>当问题足够复杂时，必须有人站在更高的角度来进行协调，</p>
-<p>而协调本身就是一种费时费力的 “活”。</p>
-<p><br/></p>
-<p>就拿软件系统来举例子，如果一个大的系统是由很多子系统集成到一起的，</p>
-<p>那么，这些子系统之间的通信活动，就构成了一种<strong>新的复杂度</strong>。</p>
-<p>这一层面的问题，也需要人来解决，而这正是管理者的职责。</p>
-<h3 id="树木和森林">树木和森林</h3>
-<p>那么了解了这些之后，会给我们带来哪些启示呢？</p>
-<p>我想这会在一定程度上避免我们 “只见树木不见森林”。</p>
-<p><br/></p>
-<p>接到一项工作任务的时候，我们能更<strong>清醒</strong>的看到它的来龙去脉，</p>
-<p>须知有很多事情，我们看到的只是别人想让我们看到的样子，</p>
-<p>还有更多的信息我们是不知道的，被 “蒙在鼓里”，得承认自己不知道。</p>
-<p><br/></p>
-<p>一旦涉及到<strong>纯技术</strong>之外的困难，最好能跟管理者进行沟通，</p>
-<p>说不定能够重新分配资源，或者重新评估问题的解决方案。</p>
-<p><br/></p>
-<p>我曾听人们说过 “要站在老板的角度考虑问题”，</p>
-<p>但很少有人能解释清如何做到，</p>
-<p>这是因为，要想站在老板的角度考虑，必先<strong>了解老板在做什么工作</strong>。</p>
-<p><br/></p>
-<p>有很多不太称职的管理者，本身就在偷懒，或者采用了不太恰当的管理方式，</p>
-<p>这还怎么让人体谅老板呢？</p>
-<p>所以，你得先找到一个好的老板才行。</p>
 <h3 id="结语">结语</h3>
-<p>好的合作并非一团和气相安无事，</p>
-<p>而是互相提要求，不断试探对方的底线。</p>
+<p>排查错误是开发者习以为常的事情，</p>
+<p>为了让写出来的代码易于排错，通常在编写之初就得有所考虑。</p>
 <p><br/></p>
-<p>如果眼睛只看问题的纯技术性，那么从更高维度来看，就可能是资源的<strong>浪费</strong>，</p>
-<p>管理者对于资源浪费视若无睹的话，团队成员就会到处救火，疲于奔命。</p>
+<p>本文介绍了几个常用编码技巧，</p>
+<p>包括写日志、保证代码可调试，提供开发者接口。</p>
+<p>总而言之，就是给代码添加额外的属性，让它具有 “易于排错” 的特征。</p>
 <p><br/></p>
-<p>所以很多问题，其实并不是出在技术本身，</p>
-<p>而是没有一种妥善的方式，尽可能的让多方满意。</p>
-<p><br/></p>
-<p>一个不好的县官，搜刮民脂民膏媚上欺下，最后百姓都累死饿死，他一人升迁，</p>
-<p>而一个好的县官呢，<strong>治理有方</strong>扛住外界压力，最大限度让百姓自立自强，全县富裕。</p>
-<p><br/></p>
-<p>历史如明镜，“古人诚不我欺也”。</p>
+<p>很多事情是类似的，等出了问题之后再考虑办法，就来不及了，</p>
+<p>因此，我们会提前留下线索，帮助未来的自己。</p>
 
           
         
@@ -482,7 +465,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/61/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/63/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/61/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/63/">&gt;</a>
   </nav>
 
 
@@ -528,7 +511,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -603,7 +586,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

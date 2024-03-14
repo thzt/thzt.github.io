@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/03/semantics-5/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/04/26/criticism/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/03/semantics-5/" itemprop="url">语言背后的代数学（五）：<span data-katex="\Sigma"></span>代数</a></h1>
+                <a class="post-title-link" href="/2018/04/26/criticism/" itemprop="url">为什么喷人者恒被喷之</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T00:00:00+08:00">
-                2018-02-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T00:00:00+08:00">
+                2018-04-26
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,163 +347,103 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-89a11ce25d114ae6.png" /></p>
+            <p>不知道你有没有观察到这样一种现象，</p>
+<p>那就是站出来批评别人的，他的论据似乎总是脆弱的，</p>
+<p>迟早会被人找出不公正的地方。</p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文我们介绍了哥德尔定理，它指出了形式化方法的局限性，</p>
-<p>任何包含初等算术<span data-katex="\Pi"></span>的形式理论，都是不完全的，</p>
-<p>且自身的协调性无法在系统内部被证明。</p>
+<p>喷人者恒被喷之。</p>
 <p><br/></p>
-<p>为了理解这句话，上文中我们做出了严谨的定义，</p>
-<p>仔细建立了语法和语义之间的联系。</p>
+<p>确实，站出来指责别人的人，很可能意气用事，</p>
+<p>也很可能在措辞方面不够严谨，</p>
+<p>更有可能没有描述好完整的事实。</p>
 <p><br/></p>
-<p>实际上，语法（符号）层面的推导，属于公式的证明，</p>
-<p>而语义（模型）层面的推导，属于逻辑结论的推理。</p>
-<p>证明和推理之间的关系由系统的可靠性和完全性给出。</p>
+<p>但是，这重要吗？</p>
 <p><br/></p>
-<h3 id="简单类型化演算">1. 简单类型化<span data-katex="\lambda"></span>演算</h3>
+<p>为什么观众们发现了作者表达方式的不合理之处，</p>
+<p>就忘了作者要表达的本意了呢？</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-b3e9594ea835a0b5.png" /></p>
+<h3 id="结论的可靠性">结论的可靠性</h3>
+<p>我们在读书时，做过很多证明题，也见过很多定理，</p>
+<p>如果证明过程出了差错，我们还会相信被证明的结论吗？</p>
+<p>很显然，我们不会。</p>
 <p><br/></p>
-<p>在《<a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型</a>》系列文章中，</p>
-<p>我们介绍了简单类型化<span data-katex="\lambda"></span>演算（simply typed lambda calculus）<span data-katex="\lambda^\to"></span>，</p>
-<p>它是一个形式系统，采用公理化的方式定义。</p>
+<p>但是，结论可未必是错的。</p>
 <p><br/></p>
-<p>当时我们看来，系统中的<span data-katex="\lambda"></span>项，只是一堆符合推导规则的符号，</p>
-<p>我们并不知道它到底代表什么含义。</p>
+<p>因此，这其实是有一个思维的误区在里面，</p>
+<p>实际上，不合理的论证，只能说明结论不可靠，</p>
+<p>并不能说明结论是错的。</p>
 <p><br/></p>
-<p>例如，<span data-katex="\lambda x:T.x+1"></span>，只是一个符号串，</p>
-<p>自然数集上的后继函数<code>f(x)=x+1</code>，能不能作为它的解释，我们是不清楚的，</p>
-<p>只是猜想可能是。</p>
+<p>这是一种思维的惯性，</p>
+<p>遇到类似这种情况，很难理智的跳出来。</p>
 <p><br/></p>
-<p>不幸的是，后继函数并<strong>不足以</strong>作为<span data-katex="\lambda x:T.x+1"></span>的解释，</p>
-<p>因为，集合上的后继函数是没有不动点的，而<span data-katex="\lambda x:T.x+1"></span>有不动点<span data-katex="\perp"></span>。</p>
-<p>我们曾经在《<a href="http://thzt.github.io/2017/03/21/recursive-function-9/">递归函数</a>》系列文章中给出过证明。</p>
+<h3 id="批评别人必须自己没有过错">批评别人必须自己没有过错</h3>
+<p>清代史学家钱大昕在《<a href="https://baike.baidu.com/item/%E5%A5%95%E5%96%BB" target="_blank" rel="noopener">奕喻</a>》一文中写过这样的话，</p>
+<blockquote>
+<p>吾求吾失且不暇，何暇论人哉！</p>
+</blockquote>
 <p><br/></p>
-<h3 id="代数">2. <span data-katex="\Sigma"></span>代数</h3>
+<p>说的是我们自己检查自己的过错尚且没有时间，哪里有时间议论别人呢。</p>
+<p>因此，我们就能用这句话来反驳指责别人的人了吗？</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-31f1e75ef2ff6bcc.png" /></p>
+<p>不能。</p>
 <p><br/></p>
-<p>一般有两种通用的方法，来给出简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>的语义，</p>
-<p>一种是<strong>Henkin模型</strong>，另一种是笛卡尔闭范畴。</p>
+<p>因为钱大昕所说的这句话，是对自身的严格要求，</p>
+<p>并不是说对别人也要作此要求。</p>
 <p><br/></p>
-<p>范畴论我们可以稍后再介绍，这里先介绍Henkin模型，</p>
-<p>不过在这之前，我们还得先了解一些<span data-katex="\Sigma"></span>代数相关的内容。</p>
+<p>我们可以在批评别人的时候，仔细想想自己有没有的过错，</p>
+<p>但是不能要求其他批评者也要这样做。</p>
 <p><br/></p>
-<p><span data-katex="\Sigma"></span>代数是一种数学结构，</p>
-<p>一个<span data-katex="\Sigma"></span>代数，包含了一个或多个集合，称为<strong>载体</strong>（carrier），</p>
-<p>以及一些特征元素，和载体上的一些一阶函数，</p>
-<p><span data-katex="f:A_1\times \cdots \times A_k \rightarrow A"></span></p>
+<p>自己有没有过错和被批评的人有没有过错，</p>
+<p>根本来说就是两回事。</p>
 <p><br/></p>
-<p>例如，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,\cdot\right \rangle"></span></p>
-<p>具有载体<span data-katex="N"></span>，它是自然数集，</p>
-<p>具有特征元素，<span data-katex="0,1\in N"></span>，</p>
-<p>以及函数，<span data-katex="+,*:N \times N \rightarrow N"></span>。</p>
-<p>其中，特征元素可以看成零元函数。</p>
+<h3 id="评判标准不一">评判标准不一</h3>
+<p>所谓对错，其实指的仅仅是，是否满足相应的评判标准而已。</p>
+<p>使用不同的标准来评判，自然就容易得出不一样的结论来。</p>
 <p><br/></p>
-<p>带有多个载体的例子是<span data-katex="\Sigma"></span>代数</p>
-<p><span data-katex="\mathscr{A}_{pcf}=\left \langle N,B,0,1,\cdots ,+,true,false,Eq?,\cdots ,\right \rangle"></span></p>
-<p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
-<p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
+<p>不幸的是，进行评判的人，通常不会事先说明他用了哪个标准来判断，</p>
+<p>而是默认用了他自己的标准。</p>
 <p><br/></p>
-<h3 id="代数数据类型的签名signature">3. 代数数据类型的签名（signature）</h3>
+<p>因此，当有人做出评判的时候，</p>
+<p>我们本能也会拿这件事和自己的标准进行对比，</p>
+<p>而不是本能的拿这件事和陈述者心中的标准进行对比。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-3b8817284e06cf24.png" /></p>
+<p>所以得到的结论只能是，按照我们自己的标准得到的判断，</p>
+<p>而不是站在陈述者的立场上考虑问题了。</p>
 <p><br/></p>
-<p>在简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>中，类型属于形式系统中的概念，</p>
-<p><strong>它并不代表类型中值的集合。</strong></p>
-<p>这种认识可能有助于澄清人们对编程语言中类型的误解。</p>
+<p>既然标准都不统一，争论对错就没有意义了。</p>
+<p>因此，理智的判断者，从不争论对错。</p>
 <p><br/></p>
-<p>例如，我们可以为初等算术系统<span data-katex="\Pi"></span>赋予类型，</p>
-<p>指定<span data-katex="0:nat"></span>，<span data-katex="1:nat"></span>，<span data-katex="+:nat\times nat\to nat"></span>，<span data-katex="\cdot:nat\times nat\to nat"></span>，</p>
-<p>分别为常元符号<span data-katex="0"></span>和<span data-katex="1"></span>，以及二元函数符号<span data-katex="+"></span>和<span data-katex="\cdot"></span>的类型。</p>
+<h3 id="如何尊重事实">如何尊重事实</h3>
+<p>那么事实在哪里呢？</p>
+<p>实际上是没有办法直接描述事实的。</p>
 <p><br/></p>
-<p>常元符号也可以看成是<strong>零元</strong>函数符号。</p>
+<p>因为至少从科学角度来讲，</p>
+<p>我们看到的东西只是它们反射或发出来的光而已。</p>
+<p>而那些光线传入我们眼中，只是这些事物的某一部分特征罢了。</p>
 <p><br/></p>
-<p>这里，我们称以下二元组<span data-katex="\left \langle S,F \right \rangle"></span>，</p>
-<p>为初等算术系统<span data-katex="\Pi"></span>的类型签名。</p>
-<p>其中，<span data-katex="S"></span>是系统中类型的集合<span data-katex="\{nat\}"></span>，</p>
-<p><span data-katex="F"></span>是函数符号的集合<span data-katex="\{0:nat,1:nat,+:nat\times nat\to nat,\cdot:nat\times nat\to nat\}"></span>。</p>
+<p>因此，事物无法不是被观察者眼中的样子。</p>
 <p><br/></p>
-<p>一般的，一个类型签名（signature）<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>，由以下两部分构成，</p>
-<p>（1）<span data-katex="S"></span>是以类型为元素构成的集合，</p>
-<p>（2）<span data-katex="F"></span>是类型上函数符号的集合，<span data-katex="F=\left \{ f:s_1\times \cdots \times s_k\rightarrow s \right \}"></span></p>
-<p>其中，<span data-katex="s_1,\cdots ,s_k,s\in S"></span>。</p>
+<p>那这样就没有办法了解事实了吗？</p>
+<p>也不是。</p>
 <p><br/></p>
-<p>并且，除了初等算术系统<span data-katex="\Pi"></span>，某些系统中可能还会包含变量，</p>
-<p>因此，为了完成类型化，我们还需为这些变量指定类型。</p>
+<p>所谓兼听则明，我们可以多找几个观察者来综合得出结论，</p>
+<p>这样我们汇总出来的事实就更加逼真了。</p>
 <p><br/></p>
-<p>我们称有限集<span data-katex="\Gamma=\left \{ x_1:s_1,\cdots ,x_k:s_k \right \}"></span>，</p>
-<p>为变量<span data-katex="x_1,\cdots,x_k"></span>的一个<strong>指派</strong>（assignment）。</p>
-<p>其中，<span data-katex="s_1,\cdots,x_k"></span>是类型。</p>
+<h3 id="结语">结语</h3>
+<p>喷人者恒被喷之，其实是一种不太合理的现象。</p>
+<p>使人们容易在语言的争论中迷失讨论的目的。</p>
 <p><br/></p>
-<p>有了签名和指派之后，</p>
-<p>类型为<span data-katex="s"></span>的项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>就可以这样定义了，</p>
-<p>（1）如果<span data-katex="x:s\in \Gamma"></span>则<span data-katex="x\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
-<p>（2）如果<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>且<span data-katex="M_i\in Terms^{s_i}\left ( \Sigma,\Gamma \right )"></span>，<span data-katex="i=1,\cdots ,n"></span>，</p>
-<p>则<span data-katex="fM_1\cdots M_k\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
+<p>当然或许作者进行讨论的目的只是想表达一种情绪而已。</p>
 <p><br/></p>
-<p>具有多种类型的项的集合可以记为<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>，</p>
-<p>其中<span data-katex="S"></span>为类型的集合。</p>
+<p>但是，要想看到事实，</p>
+<p>我们就不能纠结作者的论证方式，</p>
+<p>也不能纠结作者是否满足我们心中的道德标准。</p>
 <p><br/></p>
-<h3 id="项的解释">4. 项的解释</h3>
+<p>我们需要做的，仅仅是要对事实保持敬畏，</p>
+<p>多花些时间把事情调查清楚。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-a73d509196611e04.png" /></p>
-<p><br/></p>
-<p><span data-katex="\Sigma"></span>代数，与类型化的项的集合之间，存在着解释关系。</p>
-<p><br/></p>
-<p>如果满足以下两个条件，</p>
-<p>（1）对于每一个类型<span data-katex="s\in S"></span>，恰好存在<span data-katex="\Sigma"></span>代数中的一个载体<span data-katex="A^s"></span>与之对应，</p>
-<p>（2）每一个函数符号<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>，</p>
-<p>恰好存在集合上的一个函数<span data-katex="\mathscr{I}(f):A^{s_1}\times \cdots \times A^{s_k}\rightarrow A^s"></span>与之对应，</p>
-<p><span data-katex="\mathscr{I}(f)"></span>也可以写成<span data-katex="f^{\mathscr{A}}"></span>。</p>
-<p><br/></p>
-<p>我们就称<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>就是<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>所对应的<span data-katex="\Sigma"></span>代数。</p>
-<p><br/></p>
-<p>为了解释含变量的类型化的项，我们需要定义<strong>环境</strong>的概念。</p>
-<p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，指的是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射，</p>
-<p><span data-katex="\eta :\mathscr{V} \rightarrow\cup _sA^s"></span></p>
-<p><br/></p>
-<p>对于含变量<span data-katex="x"></span>的项<span data-katex="M"></span>，<span data-katex="\eta"></span>为它指定了载体上的一个唯一确定的值。</p>
-<p>如果对于指派<span data-katex="\Gamma"></span>而言，<span data-katex="\forall x:s\in\Gamma"></span>，都有<span data-katex="\eta(x)\in A^s"></span>，</p>
-<p>我们就说环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>。</p>
-<p><br/></p>
-<p>假定<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的一个环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，</p>
-<p>在这个环境中，我们就可以将任何项<span data-katex="M\in Terms\left ( \Sigma ,\Gamma \right )"></span>的含义<span data-katex="\mathscr{A}[\![M]\!]\eta"></span>定义如下，</p>
-<p>（1）<span data-katex="\mathscr{A}[\![x]\!]\eta =\eta (x)"></span></p>
-<p>（2）<span data-katex="\mathscr{A}[\![fM_1\cdots M_k]\!]\eta =f^{\mathscr{A}}(\mathscr{A}[\![M_1]\!]\eta ,\cdots ,\mathscr{A}[\![M_k]\!]\eta )"></span></p>
-<p><br/></p>
-<h3 id="例子">5. 例子</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-67b722cee1bda65f.png" /></p>
-<p><br/></p>
-<p>上文我们介绍了初等算术系统<span data-katex="\Pi"></span>的类型签名<span data-katex="\left \langle S,F \right \rangle"></span>，</p>
-<p>其中，<span data-katex="S=\{nat\}"></span>，<span data-katex="F=\{0:nat,1:nat,+:nat\times nat\to nat,\cdot:nat\times nat\to nat\}"></span>。</p>
-<p><br/></p>
-<p>我们可以选择<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,\cdot\right \rangle"></span>作为它的解释，</p>
-<p>它的载体为自然数集<span data-katex="N"></span>，<span data-katex="0,1,+,\cdot"></span>分别为自然数集上的零元和一元函数。</p>
-<p><br/></p>
-<p>如果初等算术系统<span data-katex="\Pi"></span>中的项包含变量，</p>
-<p>我们就可以为<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}"></span>指定环境<span data-katex="\eta"></span>。</p>
-<p><br/></p>
-<p>例如，我们可以假定环境<span data-katex="\eta"></span>满足<span data-katex="\eta(x)=0"></span>，</p>
-<p>则在这个环境中，<span data-katex="x+1"></span>的语义就可以按下式确定了。</p>
-<p><span data-katex="[\![x+1]\!]\eta=+^\mathscr{N}([\![x]\!]\eta,[\![1]\!])\eta=+^\mathscr{N}(\eta(x),1^\mathscr{N})=+^\mathscr{N}(0^\mathscr{N},1^\mathscr{N})=1"></span></p>
-<p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了一种称为<span data-katex="\Sigma"></span>代数的数学结构，</p>
-<p>它可以用来解释带有类型签名的项。</p>
-<p><br/></p>
-<p>可是，要想让这样的<span data-katex="\Sigma"></span>代数称为<span data-katex="\lambda^\to"></span>项的模型，还是不够的，</p>
-<p>我们还必须保证每一个<span data-katex="\lambda^\to"></span>项的解释，都在模型中。</p>
-<p>为此<span data-katex="\Sigma"></span>代数还要满足一些额外的条件。</p>
-<p><br/></p>
-<p>下文我们再详细讨论这些条件。</p>
-<p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
-<p><a href="http://thzt.github.io/2017/03/21/recursive-function-9/">递归函数（九）：最小不动点定理</a></p>
-<p><a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a></p>
+<p>这样比口舌之争要好得多。</p>
+<p>毕竟大家都很忙，对吧。</p>
 
           
         
@@ -542,7 +482,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/146/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/146/">146</a><span class="page-number current">147</span><a class="page-number" href="/page/148/">148</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/148/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/146/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/146/">146</a><span class="page-number current">147</span><a class="page-number" href="/page/148/">148</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/148/">&gt;</a>
   </nav>
 
 
@@ -588,7 +528,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -663,7 +603,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

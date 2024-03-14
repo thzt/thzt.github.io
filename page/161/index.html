@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/10/13/type-8/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/01/30/semantics-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/13/type-8/" itemprop="url">你好，类型（八）：Subtype</a></h1>
+                <a class="post-title-link" href="/2018/01/30/semantics-4/" itemprop="url">语言背后的代数学（四）：哥德尔定理</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T00:00:00+08:00">
-                2017-10-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-30T00:00:00+08:00">
+                2018-01-30
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logic/" itemprop="url" rel="index">
-                    <span itemprop="name">Logic</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,129 +347,129 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-0936c5b2e82c8756.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-f62f4160dd83402d.png" /></p>
 <p><br/></p>
-<h3 id="对象和类">对象和类</h3>
-<p>子类型几乎是面向对象编程语言所特有的，</p>
-<p>在面向对象的编程语言中，计算是由对象和对象之间消息传递来完成的，</p>
-<p>对象（object）通常包含两个组成部分，数据（data）和代码（method）。</p>
+<h3 id="回顾">回顾</h3>
+<p>上文我们介绍了一阶逻辑的语义模型，它包括结构和赋值两个部分，</p>
+<p>其中，结构给出了常元符号、函数符号以及谓词符号在论域中的解释，</p>
+<p>而赋值给出了变元符号在论域中的解释。</p>
 <p><br/></p>
-<p>其中数据（data）一般是可变的，由每个对象所专有，</p>
-<p>通常称之为对象的状态（state）。</p>
-<p>代码（method）通常是不可变的。</p>
+<p>我们通过这种方式，建立了形式符号和论域中数学对象之间的关联，</p>
+<p>本文将继续研究符号和其语义之间的关系。</p>
 <p><br/></p>
-<p>大部分面向对象的编程语言是基于类（class）的，但类（class）却并不是必须的，</p>
-<p>一个支持词法作用域的编程语言中，</p>
-<p>闭包（closure）就是包含内部状态的对象（object）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">; let over lambda</span><br><span class="line">(define counter</span><br><span class="line">    (let ((n 0)) </span><br><span class="line">        (lambda () (set! n (+ n 1)) n)))</span><br><span class="line"></span><br><span class="line">(counter)    ; 1</span><br><span class="line">(counter)    ; 2</span><br></pre></td></tr></table></figure>
+<h3 id="语义方面模型">1. 语义方面（模型）</h3>
 <p><br/></p>
-<p>类（class）实际上可以看做一个工厂函数，用来生成对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">; lambda over let over lambda</span><br><span class="line">(define create-counter</span><br><span class="line">    (lambda () </span><br><span class="line">        (let ((n 0)) </span><br><span class="line">            (lambda () (set! n (+ n 1)) n))))</span><br><span class="line"></span><br><span class="line">(define counter </span><br><span class="line">    (create-counter))</span><br><span class="line"></span><br><span class="line">(counter)    ; 1</span><br><span class="line">(counter)    ; 2</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-e261ec02b84764ca.png" /></p>
 <p><br/></p>
-<h3 id="类型和类">类型和类</h3>
+<h4 id="公式的可满足性">1.1 公式的可满足性</h4>
+<p>我们知道在公理化系统中，逻辑公式<span data-katex="A"></span>可以用来表示推导规则的前提和结论，</p>
+<p>它在给定模型<span data-katex="(M,\sigma)"></span>中的语义<span data-katex="A_{M[\sigma]}"></span>是一个真假值。</p>
+<p>这是合情合理的。</p>
+<p>因为推导本来就应该是从真命题推导出另一个真命题的过程。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-e7993bfcd4e48572.png" /></p>
+<p>由于模型是可以人为选择的，所以，给定一个逻辑公式<span data-katex="A"></span>，</p>
+<p>其语义的真假性，有可能会受到所选模型的影响。</p>
 <p><br/></p>
-<p>类型（type）是与类（class）不同的概念。</p>
-<p>对象所属的类（class）是它的工厂函数，</p>
-<p>而对象的类型（type），是它在形式系统中，所具有的逻辑性质（logical property）。</p>
+<p>如果存在模型<span data-katex="(M, \sigma)"></span>，使得<span data-katex="A_{M[\sigma ]}=T"></span>成立，</p>
+<p>我们就称公式<span data-katex="A"></span>关于模型<span data-katex="(M, \sigma )"></span>是<strong>可满足的</strong>，</p>
+<p>记为<span data-katex="M\models _\sigma A"></span>。</p>
 <p><br/></p>
-<p>子类（subclass），通过编写与父类之间的差别，创建一个新类，目的是代码复用。</p>
+<p>此外，如果有公式集<span data-katex="\Gamma"></span>，</p>
+<p>其中的每一个公式关于模型<span data-katex="(M, \sigma)"></span>都是可满足的，</p>
+<p>我们就称，公式集<span data-katex="\Gamma"></span>关于模型<span data-katex="(M, \sigma )"></span>是可满足的，</p>
+<p>记为<span data-katex="M\models _\sigma\Gamma"></span>。</p>
+<h4 id="重言式">1.2 重言式</h4>
+<p>如果公式<span data-katex="A"></span>，对于任意模型<span data-katex="(M, \sigma)"></span>都是可满足的，</p>
+<p>即，对任意结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，<span data-katex="M\models _\sigma A"></span>都成立，</p>
+<p>我们就称<span data-katex="A"></span>是永真公式，也称为<strong>重言式</strong>，记为<span data-katex="\models A"></span>。</p>
+<p><br/></p>
+<p>重言式，是与模型无关的公式，</p>
+<p>它们在任何模型下都为真。</p>
+<p><br/></p>
+<p>例：<span data-katex="A\vee \neg A"></span>，<span data-katex="\forall x(x\doteq x)"></span>都是重言式。</p>
+<h4 id="逻辑推理">1.3 逻辑推理</h4>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-c7afbb49c56cb45a.png" /></p>
+<p><br/></p>
+<p>有了可满足性，我们就可以进行逻辑推理了。</p>
+<p><br/></p>
+<p>设<span data-katex="A"></span>为公式，<span data-katex="\Gamma"></span>为公式集，<span data-katex="M"></span>为任意结构，<span data-katex="\sigma"></span>为任意赋值，并且，</p>
+<p>如果<span data-katex="M\models _\sigma \Gamma"></span>成立，就有<span data-katex="M\models _\sigma A"></span>成立，</p>
+<p>我们就称，<span data-katex="A"></span>是公式集<span data-katex="\Gamma"></span>的<strong>逻辑结论</strong>或语义结论，</p>
+<p>记为<span data-katex="\Gamma \models A"></span>，也称结论<span data-katex="\Gamma \models A"></span><strong>有效</strong>。</p>
+<p><br/></p>
+<p>因此，<span data-katex="\Gamma \models A"></span>表示了一种语义关系，</p>
+<p>它指出，对任意<span data-katex="M"></span>和任意<span data-katex="\sigma"></span>，如果<span data-katex="\Gamma"></span>为真，那么<span data-katex="A"></span>也为真。</p>
+<p><br/></p>
+<h3 id="语法方面符号">2. 语法方面（符号）</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-1d077dc211a8eae4.png" /></p>
+<p><br/></p>
+<h4 id="序贯">2.1 序贯</h4>
+<p>在《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型</a>》系列文章中，</p>
+<p>我们介绍过序贯的概念。</p>
+<p><br/></p>
+<p>我们知道，在公理系统中，序贯可以用来表示前提和结论之间的符号联系。</p>
+<p>序贯<span data-katex="\Gamma\vdash\Delta"></span>，表示从公式集<span data-katex="\Gamma"></span>出发，根据推导规则，</p>
+<p>可以证明出<span data-katex="\Delta"></span>中至少有一条公式成立。</p>
+<p><br/></p>
+<p>习惯上，序贯<span data-katex="\Gamma\vdash\Delta"></span>成立，也称<span data-katex="\Gamma\vdash\Delta"></span><strong>可证</strong>。</p>
+<p><br/></p>
+<p>值得注意的是，序贯谈论的都是语法层面（符号层面）上的，</p>
+<p>和这些符号的所选择的具体语义无关。</p>
+<h4 id="协调性一致性">2.2 协调性（一致性）</h4>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-73ceac7a2a671bb1.png" /></p>
+<p><br/></p>
+<p>设<span data-katex="\Gamma"></span>为公式集，</p>
+<p>如果不存在一个公式<span data-katex="A"></span>使得序贯<span data-katex="\Gamma \vdash A"></span>与<span data-katex="\Gamma \vdash \neg A"></span>均可证，</p>
+<p>我们就称，公式集<span data-katex="\Gamma"></span>是<strong>协调的</strong>，也称一致的。</p>
+<p><br/></p>
+<p>设<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的公式集，该集合可以是有限集或可数集，</p>
+<p>如果<span data-katex="\Gamma"></span>协调，则称<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的<strong>形式理论</strong>。</p>
+<p><br/></p>
+<h3 id="语法符号和语义模型">3. 语法（符号）和语义（模型）</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-17d1a64e7702d9eb.png" /></p>
+<p><br/></p>
+<h4 id="可靠性和完全性">3.1 可靠性和完全性</h4>
+<p>把公理系统的语法和语义联合起来，</p>
+<p>我们还可以定义出以下这些系统性质。</p>
+<p><br/></p>
+<p>如果序贯<span data-katex="\Gamma \vdash \Lambda"></span>可证，那么<span data-katex="\Gamma \models \Lambda"></span>成立，就说系统是<strong>可靠的</strong>。</p>
+<p>如果<span data-katex="\Gamma \models A"></span>成立，那么<span data-katex="\Gamma \vdash A"></span>可证，就说系统是<strong>完全的</strong>。</p>
+<h4 id="不完全性与协调性不可证">3.2 不完全性与协调性不可证</h4>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-12d70538c2c4cada.png" /></p>
+<p><br/></p>
+<p>是不是任意一个公理系统都是可靠且完全的呢？</p>
+<p>可惜并不是如此。</p>
+<p><br/></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%93%E5%B0%94%E7%89%B9%C2%B7%E5%93%A5%E5%BE%B7%E5%B0%94" target="_blank" rel="noopener">哥德尔</a>在1931年给出了两个定理，终结了人们的幻想，</p>
+<p>分别称为哥德尔不完全性定理，和哥德尔协调性定理。他指出，</p>
+<p><br/></p>
+<p><strong>不完全性</strong></p>
+<p>如果<span data-katex="\Gamma"></span>是一个有穷，并包含初等算术<span data-katex="\Pi"></span>的形式理论，</p>
+<p>那么<span data-katex="\Gamma"></span>是一个不完全的形式理论。</p>
+<p><br/></p>
+<p><strong>协调性</strong></p>
+<p>如果形式理论<span data-katex="\Gamma"></span>包含初等算术<span data-katex="\Pi"></span>，</p>
+<p>那么<span data-katex="\Pi"></span>的协调性不能在<span data-katex="\Gamma"></span>中被证明。</p>
+<p><br/></p>
 <blockquote>
-<p>A subclass is a differential description of a class.</p>
+<p>所以，在软件开发过程中，检查一个软件系统是否符合设计要求，所使用的方法就是对它进行测试，在这个软件系统之外进行证明。</p>
 </blockquote>
 <p><br/></p>
-<p>包含子类（subclass）之后，众多类（class）之间，</p>
-<p>构成一个前序关系（<a href="https://en.wikipedia.org/wiki/Preorder" target="_blank" rel="noopener">preorder</a>）（自反，传递）。</p>
-<p><br/></p>
-<p>而引入子类型（subtype）是为了放宽类型系统的约束条件。</p>
-<p>例如，<span data-katex="(\lambda r:\{x:Nat\}.~r.x)~\{x=0,y=1\}"></span></p>
-<p>其中，<span data-katex="r"></span>的类型为<span data-katex="\{x:Nat\}"></span>，表示记录类型（record）。</p>
-<p><br/></p>
-<p><span data-katex="\{x=0,y=1\}"></span>的类型为<span data-katex="\{x:Nat,y:Nat\}"></span>，与<span data-katex="r"></span>的类型不同，</p>
-<p>根据推导规则，<span data-katex="\frac{\Gamma\vdash t_1:T_1\to T_2~~~~\Gamma\vdash t_2:T_1}{\Gamma\vdash t_1~t_2:T_2}"></span>，</p>
-<p><span data-katex="(\lambda r:\{x:Nat\}.~r.x)~\{x=0,y=1\}"></span>将无法通过类型检查。</p>
-<p><br/></p>
-<p>可是，函数中确实只用到了<span data-katex="r.x"></span>，多传一个<span data-katex="y"></span>理应总是安全的。</p>
-<p>因此，不带子类型的简单类型化<span data-katex="\lambda"></span>演算，它的推导规则就显得过于严谨了。</p>
-<p><br/></p>
-<p>我们可以引入记录类型（record）之间的子类型关系，记为，</p>
-<p><span data-katex="\{x:Nat,y:Nat\}&lt;:\{x:Nat\}"></span></p>
-<p>用于表示类型<span data-katex="\{x:Nat,y:Nat\}"></span>是<span data-katex="\{x:Nat\}"></span>的子类型。</p>
-<p>对于记录类型来说，这里可能有些奇怪，因为更“小”的类型却包含更多的字段。</p>
-<p><br/></p>
-<p>一般的，<span data-katex="S&lt;:T"></span>表示<span data-katex="S"></span>为<span data-katex="T"></span>的子类型，</p>
-<p>如果在某个上下文中，期待一个<span data-katex="T"></span>类型的项，那么<span data-katex="S"></span>在这个上下文中也是合法的，</p>
-<p>即，<span data-katex="\frac{\Gamma\vdash t:S~~~~S&lt;:T}{\Gamma\vdash t:T}"></span></p>
-<p>该推导规则，通常称之为安全替换原则。</p>
-<p><br/></p>
-<p>为了能够安全替换，子类型应该具有自反性：<span data-katex="S&lt;:S"></span>，</p>
-<p>还应该具有传递性，<span data-katex="\frac{S&lt;:U~~~~U&lt;:T}{S&lt;:T}"></span>。</p>
-<p><br/></p>
-<h3 id="top类型与bottom类型">Top类型与Bottom类型</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-6aa9284168e9c36f.png" /></p>
-<p><br/></p>
-<h4 id="top类型">（1）Top类型</h4>
-<p>理解了子类型之后，我们就可以引入一个新的类型常量<span data-katex="Top"></span>，称为Top类型。</p>
-<p>所有其它类型都是它的子类型，<span data-katex="S&lt;:Top"></span>。</p>
-<p><br/></p>
-<p>因为具有自反性和传递性，子类型之间构成了一个前序关系（<a href="https://en.wikipedia.org/wiki/Preorder" target="_blank" rel="noopener">preorder</a>），</p>
-<p>由于记录类型中的字段，顺序是可以置换的，</p>
-<p><span data-katex="\{x:Nat,y:Nat\}"></span>和<span data-katex="\{y:Nat,x:Nat\}"></span>分别为另一个的子类型，</p>
-<p>因此，子类型关系不是一个偏序关系（<a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Formal_definition" target="_blank" rel="noopener">partial order</a>）（自反，传递，反对称）。</p>
-<p><br/></p>
-<h4 id="bottom类型">（2）Bottom类型</h4>
-<p>除了Top类型之外，我们很自然的会问，</p>
-<p>是否存在一个类型，它是所有其他类型的子类型，</p>
-<p>为此，我们需要对类型系统再扩展，引入<span data-katex="Bot"></span>类型常量，称为Bottom类型，</p>
-<p>满足<span data-katex="Bot&lt;:T"></span>。</p>
-<p><br/></p>
-<p><span data-katex="Bot"></span>类型中是不能有闭值的，否则，假设<span data-katex="v"></span>是<span data-katex="Bot"></span>类型的一个值，</p>
-<p>则根据安全替换原则有<span data-katex="v:Top\to Top"></span>，表明<span data-katex="v"></span>是一个函数，</p>
-<p>此外还有<span data-katex="v:\{\}"></span>，表明<span data-katex="v"></span>是一个记录，</p>
-<p>但是<span data-katex="v"></span>作为一个值，不可能既是函数又是记录，矛盾。</p>
-<p><br/></p>
-<p>我们在第六篇中提到过，所谓封闭，指的是不含自由变量。</p>
-<p>所谓值，就是事先约定好的项的子集。</p>
-<p>值都是范式，没有求值规则可被继续使用，是对项求值的最终结果。</p>
-<p><br/></p>
-<p><span data-katex="Bot"></span>类型中虽然不能有闭值，</p>
-<p>但是却可以包含受阻项，即事先约定好的不是值的范式。</p>
-<p><br/></p>
-<p>例如，我们可以指定<span data-katex="error"></span>是一个受阻项（不给它指定求值规则），</p>
-<p>再指定它为Bottom类型，<span data-katex="error:Bot"></span>。</p>
-<p>这样<span data-katex="error"></span>就可以在不同的上下文中，被提升为不同的类型了。</p>
-<p><span data-katex="\lambda x:T."></span></p>
-<p><span data-katex="~~~~if ... then"></span></p>
-<p><span data-katex="~~~~~~~~result"></span></p>
-<p><span data-katex="~~~~else"></span></p>
-<p><span data-katex="~~~~~~~~error"></span></p>
-<p>以上<span data-katex="\lambda"></span>项是良类型的（well typed），无论<span data-katex="result"></span>是何种类型。</p>
-<p><br/></p>
-<p>关于Top类型和Bottom类型，我们最后再看一个例子，</p>
-<p><a href="https://www.typescriptlang.org/index.html" target="_blank" rel="noopener">TypeScript</a>中的<a href="https://www.typescriptlang.org/docs/handbook/basic-types.html#any" target="_blank" rel="noopener">any</a>类型，是一个Top类型，</p>
-<p>而<a href="https://www.typescriptlang.org/docs/handbook/basic-types.html#never" target="_blank" rel="noopener">never</a>类型，是一个Bottom类型。</p>
-<p><br/></p>
 <h3 id="总结">总结</h3>
-<p>本文为简单类型化<span data-katex="\lambda"></span>演算添加了子类型，</p>
-<p>并且对比了类（class）与类型（type）这两个概念。</p>
-<p><br/></p>
-<p>lambda calculus是函数式编程语言的计算模型，</p>
-<p>前几篇，我们保持基本的演算系统（求值规则）不变，</p>
-<p>给它添加了不同的类型推导规则，得到了不同的类型系统。</p>
-<p><br/></p>
-<p><a href="https://www.nada.kth.se/~karlm/ooteori/ObjectCalculus.pdf" target="_blank" rel="noopener">object calculus</a>是面向对象语言的计算模型，</p>
-<p>在它之上，我们同样可以添加相似的类型系统。</p>
-<p><br/></p>
-<p>因此，类型系统是与演算（calculus）独立的概念。</p>
-<p>这印证了我们之前在第一篇中提到的一句话，</p>
-<p>类型系统，可以看做是附着在语言语法之上的一套符号证明系统。</p>
+<p>文本介绍语法（符号证明）和语义（模型）之间的关系，</p>
+<p>让我们认识到了形式化方法的局限性。</p>
+<p>一个足够有用的系统，总会出现不可证的事实，</p>
+<p>并且，在该系统内部，我们甚至都无法证明它是否含有矛盾。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/3864436/" target="_blank" rel="noopener">Let Over Lambda</a></p>
-<p><a href="https://book.douban.com/subject/1761910/" target="_blank" rel="noopener">Types and programming languages</a></p>
-<p><a href="http://lucacardelli.name/Talks/1997-06%20A%20Theory%20of%20Object%20(LICS).pdf" target="_blank" rel="noopener">A Theory of Objects</a></p>
+<p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional log</a></p>
+<p><a href="https://book.douban.com/subject/2364517/" target="_blank" rel="noopener">数理逻辑</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E4%B8%8D%E5%AE%8C%E5%A4%87%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">哥德尔不完备定理</a></p>
 
           
         
@@ -508,7 +508,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/160/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/160/">160</a><span class="page-number current">161</span><a class="page-number" href="/page/162/">162</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/162/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/160/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/160/">160</a><span class="page-number current">161</span><a class="page-number" href="/page/162/">162</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/162/">&gt;</a>
   </nav>
 
 
@@ -554,7 +554,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -629,7 +629,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

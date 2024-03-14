@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/06/03/newbie/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/12/17/development-experience/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/06/03/newbie/" itemprop="url">给新人的一些职业发展建议</a></h1>
+                <a class="post-title-link" href="/2021/12/17/development-experience/" itemprop="url">如何提升 “开发体验”</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-03T00:00:00+08:00">
-                2021-06-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-17T00:00:00+08:00">
+                2021-12-17
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,71 +347,95 @@
       
         
           
-            <p>又到每一年秋招的时候了，又有一大批应届生准备步入职场。这是一件大家都高兴事情，不论对新人自己，还是对公司/部门/团队。</p>
+            <p>很多 web 前端开发者们 把自己定位成了 “用户体验工程师”，</p>
+<p>这是因为前后端岗位的划分，使得软件架构分成了两个部分：界面 和 逻辑。</p>
 <p><br/></p>
-<p>我个人的职业发展也不算特别顺利，本来也<strong>没有任何资格</strong> “帮” 别人规划。但最近跟不少人讨论发现，把自己曲折的经历以及所感所想分享出来，也不全是一件坏事。</p>
+<p>逻辑 关注的是，软件系统如何提供功能。</p>
+<p>界面 关注的是，“人” 如何使用 “软件系统” 提供的功能。</p>
 <p><br/></p>
-<p>成功很难复制但<strong>失败却可学习</strong>，所以失败经验也许比 “成功学” 更重要。本文就着重介绍一下自己在职业发展过程中的体会，希望能为新人多提供一些参考 “素材”。</p>
+<p>前端开发的工作，大部分都是跟 “界面” 相关的，但并仅不限于 图形用户界面（GUI）。</p>
+<p>命令行（CLI） 和 应用程序接口（API），等等，也是界面。</p>
 <p><br/></p>
-<ul>
-<li><p>打造自己的核心竞争力</p></li>
-<li><p>技术是立身之本</p></li>
-<li><p>找到感兴趣的业务</p></li>
-<li><p>关注外部效应创造价值</p></li>
-</ul>
-<h3 id="打造自己的核心竞争力">打造自己的核心竞争力</h3>
-<p>每个人在这个世界上都是独一无二的，变得 “泯然众人” 的原因在于没有想好自己的<strong>核心竞争力</strong>在哪里。有人可能会说 “我完全没有竞争力，对任何事情都没有特别浓厚的兴趣”，这怎么办呢？其实，并<strong>不是</strong>我们先擅长做某些事才有竞争力，而是<strong>先想清楚自己的竞争力在哪里</strong>，然后围绕这个点再做事情。</p>
+<p>GUI 对于普通老百姓而言，使用成本更低，以后没准还会出现 AR/VR 界面。</p>
+<p>但如果用户是 开发者 的话，CLI/API 也许是更好的选择。</p>
 <p><br/></p>
-<p>那么如何打造自己的核心竞争力呢？我所采取的办法就是<strong>求交集</strong>。观察周围的环境，找到自己独一无二的特点，如果没有特点就对多项技能求交集，不学别人的样子<strong>只做别人不做的事情</strong>。所以，个人的职业发展路线与其说是规划出来的 ，倒不如说是结合所处的环境<strong>不断求异</strong>走出来的。</p>
+<p>本文就分析一下，面向开发者提供的软件服务，有哪些容易遗漏的体验优化点。</p>
+<h3 id="cliapi">CLI/API</h3>
+<p>开发者 跟 普通老百姓 的 用户画像 是不一样的，</p>
+<p>开发者会写代码，而老百姓则不一定。</p>
+<p>所以，图形界面（GUI）的方式 也许 不是最优解。</p>
 <p><br/></p>
-<p>比如说，“<strong>专业背景 &amp;&amp; 个人经历 &amp;&amp; 兴趣爱好</strong>” 按这个几个条件求交集，很可能团队中就只剩下自己一个人了，围绕这个点做事情会事半功倍。这是因为工作后跟学校里的状态是不同的，工作后更讲究协作，既然是协作就得想清楚 “<strong>我需要别人怎样帮助我【如何借力】，我能怎样帮助别人【自己的价值】</strong>”。没有找到自己核心竞争力的同学，容易变得像无头苍蝇一样乱撞，也容易被当成资源来使用，这天帮这个忙明天帮那么忙。</p>
+<p>开发者可以敲几行代码 调用 某个功能，而不必在界面上用鼠标操作。</p>
+<p>这种 “调用” 天生具有可组合性，并且管理 “代码” 正是开发者们所擅长的。</p>
 <p><br/></p>
-<p>找到了自己的核心竞争力，就找到了自己的<strong>事业</strong>，所有的事情都应尽量围绕自己的事业来做。</p>
-<h3 id="技术是立身之本">技术是立身之本</h3>
-<p>在工作的前三到五年，应尽量把技术学到一个无法再深入的地步，这几年可能会非常的辛苦，比如说下班后还要额外再自学 2~4 个小时也是家常便饭。</p>
+<p>很多优秀的开源 web 系统，除了 GUI 之外，还包含了不少 CLI，</p>
+<p>比如，gitlab/gerrit/jenkins 等等。</p>
 <p><br/></p>
-<p>这样规划是有几方面的考虑在里面的，</p>
-<ul>
-<li><p>5 年以内工作经验的工程师，一般项目压力不会太大，不为项目本身负责，所以会有固定的时间是属于自己的。</p></li>
-<li><p>工作 5 年左右，随着年龄的增长，家庭方面的琐事也会越来越多，很难腾出完整的大段时间来学习</p></li>
-<li><p>随着年龄的增长，负责的事情越来越多，技术本身所起的作用占比会减少；而前几年，在学技术上的投入产出比是极高的</p></li>
-</ul>
+<p>我们在做一个软件系统的时候，优先从 CLI 入手，我觉得是一个好办法，</p>
+<p>它可以避免我们把精力过早的聚焦在 图形界面 上。</p>
 <p><br/></p>
-<p>技术包含哪些方面的呢？我认为应该全面的看待技术，不仅仅是会写代码这么简单。</p>
-<ul>
-<li><p>算法</p></li>
-<li><p>口语</p></li>
-<li><p>写作</p></li>
-<li><p>健身</p></li>
-</ul>
-<p>这几项我做的也不是很好，尤其是<strong>算法</strong>和<strong>口语</strong>，现在想想也是追悔莫及，这两项直接决定了以后可以工作的<strong>公司范围</strong>，一些大厂或者跨国企业，对这两项都是有要求的。另外两项不太常被提及的是<strong>写作</strong>和<strong>健身</strong>，写作能力会直接关系到自己的<strong>影响力指数</strong>，或者说技术观点的辐射能力，好的文档相当于一个 **7*24 小时的广告位<strong>，持续不断的向外输出自己的见解。健身也是非常重要的，我发现很多开发的身体状态都不是特别好，尤其是有多年经验的资深开发者。健身计划应放在整个职业生涯，甚至</strong>一辈子**的角度来安排。</p>
+<blockquote>
+<p>A good system can't have a weak command language.</p>
+</blockquote>
+<blockquote>
+<p>—— <a href="http://www.cs.yale.edu/homes/perlis-alan/quotes.html" target="_blank" rel="noopener">EPIGRAMS IN PROGRAMMING</a></p>
+</blockquote>
+<h3 id="ide-plugin">IDE plugin</h3>
+<p>开发者们 日常打交道最多的工具就是 IDE 了，</p>
+<p>要想提升 开发体验，应该抓住 IDE 这一常用的 “用户端”。</p>
 <p><br/></p>
-<p>我所谓的<strong>技术</strong>指的是，凡是能仅仅通过自己努力就行实现的事情。所以说技术是立身之本，连自己都控制不好，还怎样做好更大的事情呢？</p>
-<h3 id="找到感兴趣的业务">找到感兴趣的业务</h3>
-<p>老实说刚入职前几年，我也很痛恨 “业务” 这个词汇的。总感觉搞业务不如搞技术那么纯粹，总是掺杂着一些能说会道、巧言令色在里面。但其实并不是软件行业有技术和业务这一说，甚至医院、学校等这样的机构，也会区分<strong>搞业务的</strong>还是<strong>搞技术的</strong>。搞业务的看起来 “务虚不务实”，是因为他们在尝试<strong>消除问题的不确定性</strong>，剩下的问题都是 “务实” 的问题了。</p>
+<p>很多 IDE/编辑器 都具备扩展功能（plugin），</p>
+<p>然而，编写常用编辑器的 扩展，却仍然不是主流的软件功能的提供方式。</p>
+<p>常规的做法只是给软件系统包装一个 GUI 界面。</p>
 <p><br/></p>
-<p>所以说，从商业角度来看，市场或行业变革风起云涌，问题一般是不确定的、不明朗的、甚至有没有问题都不知道。搞业务就需要有一种能力来拨云见日，探索出一条可行的路径出来。技术和业务只是聚焦在了问题解决的不同阶段。</p>
+<p>开发者们 要想使用软件功能，需要打开这个 GUI 界面才可以。</p>
+<p>这就有了一种割裂感，</p>
+<p>尤其是完成不同功能的时候，只能去各个系统 GUI 中跳来跳去。</p>
 <p><br/></p>
-<ul>
-<li>搜集信息：面对不确定的问题，我们得从实际出发，消除一切人为假设；这时候就得<strong>愿意把手弄脏</strong>，尽一切可能的搜集信息。</li>
-<li>定义问题：对状况有了一些了解之后，就得定义到底什么才是要解决的问题了，解决不同的问题，会有不同的成本也会有不同的收益。</li>
-<li>问题拆分：有了问题之后，就需要对问题进行拆分，如何最大限度的把可用资源占满，把问题解决掉。降低成本，提高资源利用率</li>
-<li>进度跟踪：很多问题都是有时效性的，所以能尽早的把问题解决是很重要的一个环节</li>
-<li>反馈结果：问题解决完之后别忘了反馈，这个反馈过程可以验证以上 4 个环节中的任何误判。</li>
-</ul>
+<p>IDE 插件可以很好的串联起这些功能，但前提是各个系统已具备了 CLI 调用方式。</p>
 <p><br/></p>
-<p>一个完整的问题解决链路，我认为可以分为以上 5 个阶段，它是尝试解决不确定性问题的思维闭环，自然科学研究中的 “科学方法” 也是沿用了这个办法。</p>
+<blockquote>
+<p>GNU Emacs is a LISP operating system disguised as a text editor.</p>
+</blockquote>
+<blockquote>
+<p>—— <a href="https://wiki.c2.com/?EmacsStandsFor" target="_blank" rel="noopener">Emacs Stands For</a></p>
+</blockquote>
+<h3 id="浏览器插件">浏览器插件</h3>
+<p>几年前我们做网络编程时候，经常区分 C/S 和 B/S 两种开发模式，</p>
+<p>浏览器端开发 属于后者（B/S），但现在不怎么提及了。</p>
 <p><br/></p>
-<p>找到感兴趣的业务，就是要找到自己感兴趣的问题领域，我想探索哪个领域，我想解决哪方面的问题。拿软件来说，有些部门做出来的系统是为开发者服务的，有些系统则是为老百姓（非开发）服务的，这是两种不同的业务形态。前者需要对开发者的需求有所了解，后者则要对老百姓的需求有了解。值得一提的是，<strong>不论做什么业务，写代码都只是手段</strong>。</p>
-<h3 id="关注外部效应创造价值">关注外部效应创造价值</h3>
-<p>刚开始工作时，我自己都很少关注外部效应，活干完了就觉得万事大吉了。其实写代码犹如搞发明创造，把发明搞出来相当于代码写完，<strong>有没有人来用</strong>这个发明创造更加重要。空有一堆代码，其实没有任何价值，而这些代码被用起来才有价值。所以价值不在<strong>代码里面</strong>产生，而是在<strong>代码之外</strong>产生。</p>
+<p>大部分前端开发的工作，都受限于浏览器环境中，不会考虑对浏览器本身做点什么。</p>
 <p><br/></p>
-<p>转换成这个思路之后，就不会把思维局限在代码内了，而是如何让代码发挥价值上面。会关注哪些人会用这些代码提供的功能，他们还有别的更重要的需求没被满足吗，除了我的方案别人的方案能更高效的满足需求吗？这样考虑的话，会跳出自身作为技术人员的角色范围，多关注一下为什么要做这件事。</p>
+<p>今年九月份，<a href="https://gs.statcounter.com/browser-market-share" target="_blank" rel="noopener">Browser Market Share Worldwide</a> 有份报告指出，</p>
+<p>Chrome 市场占有率已经达到了 64%。</p>
 <p><br/></p>
-<p>代码的外部效应不一定全部产生在团队外部，也有可能是团队之内。本团队的一些同事，可以从代码中受益吗？我是不是应该补齐文档，多做一些沟通工作，是不是应该让自己的工作被更多的人看到呢？连团队的同事都不知道自己在做什么，更不用说代码的用户了。</p>
+<p>不像 C 端浏览器那样发散，开发环境中的浏览器，是更可控的。</p>
+<p>所以，我们可以假设 开发者们 使用了一致的 Chrome 与系统进行交互。</p>
+<p>这样一来 Chrome 插件能起到的作用，就不容忽视了。</p>
 <p><br/></p>
+<p>不像浏览器环境那样，Chrome 插件完全是 C/S 模式下对 Client 进行扩展。</p>
+<p>它有多种多样的办法与本地进程通信，这就大大扩充了站点的能力范围。</p>
 <h3 id="结语">结语</h3>
-<p>本文介绍了我个人在职业发展过程中的一点点体会，有很多点是自己吃了很大的亏才学会的。也有一些见解，可能不太适用于应届生或者刚步入职场的年轻人，但我已经竭力站在相同的起点考虑问题了。我认为在分享方法论的时候，讲自己当时是怎么做的完全没有意义，而是应该分享经验，最后<strong>用自己的经验站在起点考虑方案</strong>。</p>
+<p>以上我们的分析思路 是挖掘所有针对 开发者 友好的 “端” 上场景。</p>
+<p>开发者们日常接触到的 “端” 是与老百姓不同的，</p>
+<p>甚至跟普通公司内部的 其他用户 也是不同的。</p>
+<p><br/></p>
+<p>GUI（常规的图形界面端），CLI/API（terminal 端），</p>
+<p>IDE plugin（开发工具端），浏览器插件（Chrome 端），</p>
+<p>这些端共同形成了一个整体 —— 开发者界面。</p>
+<p><br/></p>
+<p>因此，不同的 “端” 上应用，只是 “开发者界面” 的具体形态罢了。</p>
+<p>合理的打通各端，可以极大的加强软件系统的可交互性。</p>
+<p><br/></p>
+<p>未来 移动办公/物联网 也会兴起，这就意味着新 “端” 出现。</p>
+<p>比如我们完全可以在 移动端 处理审批，用 手环/手表 接到系统的反馈。</p>
+<p><br/></p>
+<p>随着开发者人数越来越多，开发体验 能带来的价值会越来越大。</p>
+<p>按十小时工作制来算，每人每天节省一小时，就能省出 10% 的人力成本。</p>
+<p><br/></p>
+<blockquote>
+<p>技亦灵怪矣哉。</p>
+</blockquote>
 
           
         
@@ -450,7 +474,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/26/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/28/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/26/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/28/">&gt;</a>
   </nav>
 
 
@@ -496,7 +520,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -571,7 +595,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

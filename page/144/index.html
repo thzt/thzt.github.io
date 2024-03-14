@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/11/semantics-8/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/05/31/gradual-typing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/11/semantics-8/" itemprop="url">语言背后的代数学（八）：范畴</a></h1>
+                <a class="post-title-link" href="/2018/05/31/gradual-typing/" itemprop="url">Gradual Typing</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-11T00:00:00+08:00">
-                2018-02-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T00:00:00+08:00">
+                2018-05-31
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
                   </a>
                 </span>
 
@@ -347,179 +347,188 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-cf6fe04651d9f2d5.png" /></p>
+            <p>最近看了一篇文章，<a href="https://medium.com/@gaperton/typescript-static-or-dynamic-64bceb50b93e" target="_blank" rel="noopener">TypeScript: Static or Dynamic? The war is over.</a>，</p>
+<p>它提到了TypeScript是具有<a href="https://en.wikipedia.org/wiki/Gradual_typing" target="_blank" rel="noopener">gradual typing</a>的编程语言。</p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文中，我们用群，拓扑空间，CPO作为例子，</p>
-<p>来说明什么是数学结构，以及数学结构是如何通过映射来保持的。</p>
-<p>群同态保持了群结构，连续映射保持了拓扑结构，</p>
-<p>连续函数保持了完全偏序结构。</p>
-<p><br/></p>
-<p>那么群结构与拓扑结构之间是否有联系呢？</p>
-<p>我们能否建立拓扑空间与群之间的对应关系呢？</p>
-<p><br/></p>
-<p>在代数拓扑中，就存在这样的例子，</p>
-<p>人们找到了和拓扑空间相关的群论概念，例如基本群和同调群，</p>
-<p>拓扑空间的连续映射可以导出这些群的群同态。</p>
-<p><br/></p>
-<p>这就为了人们使用代数学方法研究其他数学分支，奠定了基础，</p>
-<p>实际上，最原始的范畴论想法也是起源于此。</p>
-<p><br/></p>
-<h3 id="图示法">1. 图示法</h3>
-<p>在前一篇中我们学过了幺半群，</p>
-<p>它指的是一个集合<span data-katex="M"></span>，以及<span data-katex="M"></span>上的二元运算<span data-katex="\cdot"></span>，满足以下两个条件，</p>
-<p>（1）<span data-katex="\forall x,y,z\in M"></span>，<span data-katex="(x\cdot y)\cdot z=x\cdot (y\cdot z)"></span>，</p>
-<p>（2）<span data-katex="\exists e\in M"></span>，<span data-katex="\forall x\in M"></span>，<span data-katex="x\cdot e=e\cdot x=x"></span>。</p>
-<p><br/></p>
-<p>这两个条件除了可以用等式来表示，还可以用<strong>图</strong>（diagram）来表示，</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-83faca1582ad5a4b.png" /></p>
-<p><br/></p>
-<p>我们称以上两张图都是<strong>可交换的</strong>（commutative），</p>
-<p>即，沿着不同的路径进行运算，只要起点和终点相同，则运算的结果就相同。</p>
-<p><br/></p>
-<p>例如，<span data-katex="&lt;x,y,z&gt;\mapsto &lt;x,yz&gt;\mapsto x(yz)"></span>，</p>
-<p>总是等于<span data-katex="&lt;x,y,z&gt;\mapsto &lt;xy,z&gt;\mapsto (xy)z"></span>，</p>
-<p>即，<span data-katex="x(yz)=(xy)z"></span>，表明<span data-katex="M"></span>中元素的运算满足结合律。</p>
-<p><br/></p>
-<p>又例，<span data-katex="&lt;0,x&gt;\mapsto &lt;e,x&gt;\mapsto ex"></span>，总是等于<span data-katex="&lt;0,x&gt;\mapsto x"></span>，即<span data-katex="ex=x"></span>，</p>
-<p><span data-katex="&lt;x,0&gt;\mapsto &lt;x,e&gt;\mapsto xe"></span>，总是等于<span data-katex="&lt;x,0&gt;\mapsto x"></span>，即<span data-katex="xe=x"></span>。</p>
-<p>因此，<span data-katex="ex=x=xe"></span>，表明<span data-katex="M"></span>中存在幺元<span data-katex="e"></span>。</p>
-<p><br/></p>
-<p>所以，我们可以用以上两个图表，作为幺半群的定义，称为<strong>图示法</strong>。</p>
-<p><br/></p>
-<p>另一方面，考虑在集合论中讨论映射的时候，一般都不写具体元素，还可以表示为，</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-485a513f584ec085.png" /></p>
-<p><br/></p>
-<p>其中，<span data-katex="\mu:M\times M\to M"></span>，<span data-katex="\eta:1\to M"></span>，是两个函数，</p>
-<p><span data-katex="1=\{0\}"></span>是只有一个元素的集合。</p>
-<p><br/></p>
-<p>用图示法来表示幺半群，更具一般性。</p>
-<p><br/></p>
-<h3 id="范畴">2. 范畴</h3>
-<p>范畴是一个数学概念，也可以用图示法来表示。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-d19a23f4b1b256b2.png" /></p>
-<p><br/></p>
-<p>一个<strong>范畴</strong><span data-katex="Cat"></span>由一系列<strong>对象</strong>（object）和<strong>箭头</strong>（arrow）组成。</p>
-<p>对于每一个箭头<span data-katex="f"></span>，有两个对象与之关联，</p>
-<p>称为箭头<span data-katex="f"></span>的定义域（domain）和值域（codomain）。</p>
-<p><br/></p>
-<p>并且，还要满足以下几条规则，</p>
-<p>（1）对于每一个对象<span data-katex="a"></span>，存在恒等箭头（identity arrow），<span data-katex="i:a\to a"></span></p>
-<p>（2）箭头满足结合律，对于任意的箭头<span data-katex="f,g,h"></span>，有<span data-katex="(f\cdot g)\cdot h=f\cdot (g\cdot h)"></span></p>
-<p>（3）箭头的集合在箭头组合运算下是封闭的</p>
-<p><br/></p>
-<p>其中，<span data-katex="f\cdot g"></span>表示<span data-katex="g"></span>和<span data-katex="f"></span>的组合运算，</p>
-<p>它也是一个箭头，其中<span data-katex="g"></span>的值域是<span data-katex="f"></span>的定义域。</p>
-<p><br/></p>
-<p>例子：</p>
-<p>所有的集合，以集合为对象，集合之间的映射作为箭头，构成了一个范畴，</p>
-<p>所有的群，以群作为对象，群同态作为箭头，构成了一个范畴，</p>
-<p>所有的拓扑空间，以拓扑空间作为对象，拓扑空间之间的连续映射为箭头，构成了一个范畴。</p>
-<p><br/></p>
-<p>以上三个例子中，</p>
-<p>范畴中的对象都是集合，箭头都是映射，这就很容易造成误解。</p>
-<p>因为，<strong>范畴中的对象可以不是集合，箭头也可以不是映射，</strong></p>
-<p>理解这一点至关重要。</p>
-<p><br/></p>
-<p>例如，完全偏序<span data-katex="(D,\leqslant)"></span>，</p>
-<p>以<span data-katex="D"></span>中的元素作为对象，以<span data-katex="x\leqslant y"></span>作为<span data-katex="x,y"></span>之间的箭头，同样构成了一个范畴。</p>
-<p><br/></p>
-<h3 id="函子">3. 函子</h3>
-<p>函子就是两个范畴之间的箭头。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f50234610ae6c94e.png" /></p>
-<p><br/></p>
-<p>一个<strong>函子</strong><span data-katex="F"></span>是范畴<span data-katex="C"></span>到范畴<span data-katex="D"></span>的箭头，<span data-katex="F:C\to D"></span>，它满足以下条件，</p>
-<p><span data-katex="F"></span>把<span data-katex="C"></span>中的对象<span data-katex="c"></span>映射为<span data-katex="D"></span>中的对象<span data-katex="F~c"></span>，把<span data-katex="C"></span>中的箭头<span data-katex="f"></span>映射为<span data-katex="D"></span>中的箭头<span data-katex="F~f"></span>。</p>
-<p>并且，<span data-katex="F~(f\cdot g)=(F~f)\cdot (F~g)"></span>。</p>
-<p><br/></p>
-<p>值得注意的是，</p>
-<p>等式左边的<span data-katex="\cdot"></span>，表示<span data-katex="C"></span>中的箭头组合运算，</p>
-<p>等式右边的<span data-katex="\cdot"></span>，表示<span data-katex="D"></span>中的箭头组合运算。</p>
-<p><br/></p>
-<h3 id="自然变换">4. 自然变换</h3>
-<p>自然变换（natural transformation）是一族箭头，</p>
-<p>将范畴<span data-katex="A"></span>在一个函子中的像（picture），变换成了另一个函子的像。</p>
-<p><br/></p>
-<p>给定两个函子<span data-katex="S,T:A\to B"></span>，其中<span data-katex="A"></span>和<span data-katex="B"></span>是范畴。</p>
-<p>自然变换的每个分量（components）使下图可交换。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-7a6b0cbdb0347ac2.png" /></p>
-<p><br/></p>
-<p>其中，<span data-katex="\tau_a"></span>是<span data-katex="B"></span>中的箭头，<span data-katex="\tau_a:Sa\to Ta"></span>。</p>
-<p><br/></p>
-<h3 id="monad">5. Monad</h3>
-<p>范畴到自身的函子，称为<strong>自函子</strong>（endofunctor）。</p>
-<p>设<span data-katex="T:X\to X"></span>是任意范畴<span data-katex="X"></span>上的自函子，自函子复合之后仍为自函子，</p>
-<p><span data-katex="T^2=T\circ T:X\to X"></span>，<span data-katex="T^3=T^2\circ T:X\to X"></span>。</p>
-<p><br/></p>
-<p>令<span data-katex="\mu:T^2\to T"></span>是一个自然变换，其分量为<span data-katex="\mu_x:T^2x\to Tx"></span>，<span data-katex="\forall x\in X"></span>，</p>
-<p>则使用<span data-katex="\mu"></span>可以定义另外两个自然变换，</p>
-<p><span data-katex="T\mu:T^3\to T^2"></span>，它的分量为<span data-katex="(T\mu)_x=T(\mu_x):T^3x\to T^2x"></span>，</p>
-<p><span data-katex="\mu T:T^3\to T^2"></span>，它的分量为<span data-katex="(\mu T)_x=\mu_{Tx}"></span>。</p>
-<p><br/></p>
-<p>范畴<span data-katex="X"></span>上的一个<strong>Monad</strong>，指的是三元组<span data-katex="\left \langle T,\eta,\mu \right \rangle"></span>，</p>
-<p>它们使下图可交换，</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f24983986f2eab9d.png" /></p>
-<p><br/></p>
-<p>其中，<span data-katex="T:X\to X"></span>是范畴<span data-katex="X"></span>上的自函子，</p>
-<p><span data-katex="\eta:I_X\to T"></span>，<span data-katex="\mu:T^2\to T"></span>是两个自然变换。</p>
-<p><br/></p>
-<p>值得注意的是，Monad与幺半群的图示法是相似的，</p>
-<p>只需要将幺半群定义中的<span data-katex="\times"></span>，改写成自函子的复合运算，</p>
-<p>把单位集合<span data-katex="1"></span>，改写成单位自函子即可。</p>
-<p><br/></p>
-<p>因此，我们说Monad是自函子范畴上的一个幺半群。</p>
+<p>所谓gradual typing，维基百科上是这么解释的，</p>
 <blockquote>
-<p>All told, a monad in X is just a monoid in the category of endofunctors of X, with product x replaced by composition of endofunctors and unit set by the identity endofunctor.</p>
+<p>Gradual typing is a type system in which some variables and expressions may be given types and the correctness of the typing is checked at compile-time (which is static typing) and some expressions may be left untyped and eventual type errors are reported at run-time (which is dynamic typing).</p>
 </blockquote>
 <p><br/></p>
-<h3 id="hask范畴上的monad">6. Hask范畴上的Monad</h3>
-<p>如果把Haskell语言中的类型作为对象，把类型之间的函数看做箭头，</p>
-<p>则在函数复合运算下，构成了一个范畴，称为<strong>Hask范畴</strong>。</p>
+<p>编程语言如果具有gradual typing，</p>
+<p>它就融合了static typing和dynamic typing双方的特点，</p>
+<p>具有gradual typing的语言，也称其类型系统是<a href="http://movep.lif.univ-mrs.fr/documents/lopes-slides.pdf" target="_blank" rel="noopener">hybrid</a>的。</p>
 <p><br/></p>
-<p><strong>函子</strong></p>
-<p>Haskell中类型类（type class）<code>Functor</code>的每一个实例，</p>
-<p>定义了Hask范畴中的一个函子。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Functor (f :: * -&gt; *) where</span><br><span class="line">    fmap :: (a -&gt; b) -&gt; f a -&gt; f b</span><br></pre></td></tr></table></figure>
-<p><code>fmap</code>表示了函子作用在箭头上的结果。</p>
-<p>作用在对象上，可以使用<code>pure :: a -&gt; f a</code>来表示。</p>
+<p>看到这里，我发现自己对dynamic typing的理解还不清晰，</p>
+<p>于是就翻开了<a href="https://www.cs.cmu.edu/~rwh/pfpl/2nded.pdf" target="_blank" rel="noopener">PFPL</a>，</p>
+<p>想把相关的概念重新梳理一下。</p>
 <p><br/></p>
-<p>在Haskell中，一个类型要成为<code>Functor</code>的实例，</p>
-<p>还要满足相应的“<a href="https://wiki.haskell.org/Functor#Functor_Laws" target="_blank" rel="noopener">Functor Law</a>”，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fmap id &#x3D; id</span><br><span class="line">fmap (f . g) &#x3D; fmap f . fmap g</span><br></pre></td></tr></table></figure>
-<p>可以<a href="https://en.wikibooks.org/wiki/Haskell/Category_theory#Functors" target="_blank" rel="noopener">证明</a>，</p>
-<p>这些“Functor Law”刚好使<code>f</code>，<code>fmap</code>和<code>pure</code>构成了范畴论意义上的函子。</p>
+<hr />
+<h4 id="静态阶段和动态阶段">1. 静态阶段和动态阶段</h4>
+<p>大部分程序被编写完之后，直到被运行完，一般会经历如下两个<strong>阶段</strong>（phase），</p>
+<p><strong>static阶段</strong>，和<strong>dynamic阶段</strong>。</p>
 <p><br/></p>
-<p><strong>Monad</strong></p>
-<p>Haskell中类型类<code>Monad</code>的每一个实例，</p>
-<p>定义了Hask范畴中的一个Monad。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Functor m &#x3D;&gt; Monad m where</span><br><span class="line">    return :: a -&gt; m a</span><br><span class="line">    (&gt;&gt;&#x3D;)  :: m a -&gt; (a -&gt; m b) -&gt; m b</span><br></pre></td></tr></table></figure>
-<p>在Haskell中，一个类型要成为<code>Monad</code>的实例，</p>
-<p>还要满足相应的“<a href="https://wiki.haskell.org/Monad#Monad_class" target="_blank" rel="noopener">Monad Law</a>”，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return a &gt;&gt;&#x3D; k                  &#x3D;  k a</span><br><span class="line">m        &gt;&gt;&#x3D; return             &#x3D;  m</span><br><span class="line">m        &gt;&gt;&#x3D; (\x -&gt; k x &gt;&gt;&#x3D; h)  &#x3D;  (m &gt;&gt;&#x3D; k) &gt;&gt;&#x3D; h</span><br></pre></td></tr></table></figure>
-<p>可以<a href="https://en.wikibooks.org/wiki/Haskell/Category_theory#Monads" target="_blank" rel="noopener">证明</a>，</p>
-<p>这些“Monad Law”刚好使<code>m</code>，<code>&gt;&gt;=</code>和<code>return</code>构成了范畴论意义上的Monad。</p>
+<p>在static阶段中，我们会对程序进行语法解析，</p>
+<p>然后经过类型检查（type checking），以确保程序是良类型的（良构的 well-formed）。</p>
+<p>最后在dynamic phase中，执行这些良类型的程序。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了范畴论相关的一些内容，</p>
-<p>介绍了什么是范畴，什么是函子，什么是自然变换，</p>
-<p>这些都是理解笛卡尔闭范畴所必须的。</p>
+<p>—— P35</p>
+<hr />
+<h4 id="静态特性">2. 静态特性</h4>
+<p>对程序进行的类型检查，由一些断言（typing judgments）组成，</p>
+<p>每一条断言，断定特定规则组成的程序，将具有相应的类型，</p>
+<p>这通常被称为<strong>语言的静态特性</strong>（statics）。</p>
 <p><br/></p>
-<p>为了理解什么是范畴，我们列举了前一篇提到的群，拓扑空间，CPO作为例子，</p>
-<p>还借用了Haskell中的Functor和Monad学习了Hask范畴。</p>
+<p>—— P35</p>
+<hr />
+<h4 id="动态特性">3. 动态特性</h4>
+<p><strong>语言的动态特性</strong>（dynamics），描述了程序在执行过程中应该符合的限制条件，</p>
+<p>有多种方式描述语言的动态特性。</p>
 <p><br/></p>
-<p>下文我们将继续学习范畴论，</p>
-<p>理解什么是笛卡尔闭范畴，以及如何用它解释简单类型<span data-katex="\lambda"></span>演算的语义。</p>
+<p>（1）structural dynamics方法</p>
+<p>它定义了一个转换系统（transition system），归纳的定义了程序的逐步执行方式。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Category_(mathematics)" target="_blank" rel="noopener">Category (mathematics)</a></p>
-<p><a href="https://en.wikibooks.org/wiki/Haskell/Category_theory" target="_blank" rel="noopener">Haskell/Category theory</a></p>
-<p><a href="https://book.douban.com/subject/1823110/" target="_blank" rel="noopener">Categories for the Working Mathematician</a></p>
+<p>（2）contextual dynamics方法</p>
+<p>和转换系统类似，只不过转换规则的描述方式有些不同。</p>
+<p><br/></p>
+<p>（3）equational dynamics方法</p>
+<p>它由一些定义了程序等价性（deﬁnitionally equivalent）的规则组成。</p>
+<p><br/></p>
+<p>—— P41</p>
+<hr />
+<h4 id="pcf的静态特性和动态特性">4. PCF的静态特性和动态特性</h4>
+<p>我们以PCF为例，了解一下语言静态特性和动态特性的描述方式，</p>
+<p><br/></p>
+<p>（1）静态特性</p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-76516c26c946e26f.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-b2524f862bce05ff.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
+</figure>
+<p><br/></p>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0a872566e08756d9.png" /></p>
+<p>上图定义了闭值（closed value）<span data-katex="e val"></span>应当满足的推导规则。</p>
+<p>第二个推导规则的前提中，中括号<span data-katex="[e val]"></span>表明<span data-katex="s(e)"></span>对它的参数<span data-katex="e"></span>是立即求值（eager）的，</p>
+<p>如果省略中括号，则表示是惰性求值（lazy）。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-f10a451ba1ab1180.png" /></p>
+<p>上图定义了转化（transition）<span data-katex="e\mapsto e&#39;"></span>应该满足的推导规则。</p>
+<p><br/></p>
+<p>—— P167-P168</p>
+<hr />
+<h4 id="untyped-calculus的静态特性和动态特性">5. untyped <span data-katex="\lambda"></span> calculus的静态特性和动态特性</h4>
+<p>再看看untyped <span data-katex="\lambda"></span> calculus，</p>
+<p><br/></p>
+<p>（1）静态特性</p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0facb126c43e9845.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-bcd68eea45cdf560.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
+</figure>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-a369f8de52cff04e.png" /></p>
+<p>与PCF不同的是，这里用了equational dynamics方法进行描述。</p>
+<p><br/></p>
+<p>—— P185-P186</p>
+<hr />
+<h4 id="untyped-means-uni-typed">6. untyped means uni-typed</h4>
+<p>如果支持递归类型，那么untyped <span data-katex="\lambda"></span> calculus可以看成是，</p>
+<p>具有<strong>统一类型</strong>（uni-typed）<span data-katex="\lambda"></span> calculus的类型化版本。</p>
+<p><br/></p>
+<p>我们可以定义一个这样的递归类型，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-112b868d0efd3ecb.png" /></p>
+<p>因此，函数的参数和函数本身将具有统一的类型（uni-typed）<span data-katex="D"></span>。</p>
+<p><br/></p>
+<p>—— P190</p>
+<hr />
+<h4 id="dynamic-typing">7. dynamic typing</h4>
+<p>下面开始介绍dynamic typing了。</p>
+<p><br/></p>
+<p>将具有dynamic typed的语言，与static typed的语言对立起来看待，是有问题的。</p>
+<p>我们可以换一个角度来看，我们说具有dynamic typed的语言，</p>
+<p>是static typed的语言的一种特殊情况（special case）——它只有一个递归类型。</p>
+<p><br/></p>
+<p>—— P193</p>
+<hr />
+<h4 id="dpcf的静态特性和动态特性">8. DPCF的静态特性和动态特性</h4>
+<p>我们来看DPCF（dynamically Typed PCF）的静态特性和动态特性，</p>
+<p><br/></p>
+<p>（1）静态特性</p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-5ecbbb7286459ea4.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
+</figure>
+<p>我们看到，DPCF的值被划分成了两个<strong>类别</strong>（classes），一个是<span data-katex="number"></span>，另一个是<span data-katex="fun"></span>。</p>
+<p><br/></p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-42bb48f24773362c.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
+</figure>
+<p>它表明，如果<span data-katex="d"></span>包含自由变量，<span data-katex="x_1,\cdots,x_n"></span>，</p>
+<p>则若这些自由变量是良类型的，<span data-katex="d"></span>就是良类型的。</p>
+<p><br/></p>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-274721e24c279f6d.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0bb8c9fad3b39efe.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-f9e834d474d2a247.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-1ed071b445e2e78c.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0b6351d4fadbff13.png" /></p>
+<p><br/></p>
+<p>其中涉及到的符号解释如下，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-dd13ebebc2bd66ad.png" /></p>
+<p><br/></p>
+<p>—— P194-196</p>
+<hr />
+<h4 id="hybrid">9. hybrid</h4>
+<p>一个hybrid的语言，指的是它在类型系统中混合了static typing和dynamic typing，</p>
+<p>它为static typing语言增加了一个<span data-katex="dyn"></span>类型，该类型的值需要满足语言动态特性的要求。</p>
+<p><br/></p>
+<p>DPCF可以嵌入到一个static typed的语言中，被视为一个hybrid的语言。</p>
+<p>只需要在static typed的语言中增加一个类型<span data-katex="dyn"></span>，</p>
+<p>可以说，dynamic typing只是static typing的一种特定用法（a mode of use）。</p>
+<p><br/></p>
+<p>因此，static typing和dynamic typing并不是对立的，</p>
+<p>他们可以和谐共存（coexist harmoniously）。</p>
+<p><br/></p>
+<p>—— P203</p>
+<hr />
+<h4 id="hpcf的静态特性和动态特性">10. HPCF的静态特性和动态特性</h4>
+<p>我们来看HPCF（hybrid PCF）的静态特性和动态特性，</p>
+<p><br/></p>
+<p>（1）静态特性 <img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-66cd2c00ccd7eb68.png" alt="syntax" /></p>
+<p>其中，类型<span data-katex="dyn"></span>中包含了所有具有动态类型的值。</p>
+<p><span data-katex="new"></span>构造器（constructor），会在值上附加一个类别描述符（classifer），以表明它所属的动态类别（class）。</p>
+<p><br/></p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-47e6c1dc31ee881c.png" alt="statics - 1" /><figcaption aria-hidden="true">statics - 1</figcaption>
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-a42aa87a1c3239b0.png" alt="statics - 2" /><figcaption aria-hidden="true">statics - 2</figcaption>
+</figure>
+<p>以上类型断言，保证了表达式具有正确的类型。</p>
+<p><br/></p>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-3ac3c225c1ebf153.png" /></p>
+<p>不同类别的值之间进行转换<span data-katex="cast"></span>，会产生运行时错误。</p>
+<p><br/></p>
+<p>—— P203-P204</p>
+<hr />
+<h4 id="动态类型与静态类型">11. 动态类型与静态类型</h4>
+<p>dynamic语言和static语言的一些异同点。</p>
+<p><br/></p>
+<p>（1）dynamic语言将类别（class）关联到值（value）上，</p>
+<p>而static语言将类型（type）关联到变量（variable）/表达式上。</p>
+<p><br/></p>
+<p>与dynamic语言相关的概念是类别（class），而不是类型（type），</p>
+<p>例如<span data-katex="num"></span>，<span data-katex="fun"></span>，它们可以视为值的标签（tag）。</p>
+<p><br/></p>
+<p>（2）dynamic语言在运行时（run-time）进行类别检查（class checking），</p>
+<p>而static语言在编译时（compile time）进行类型检查（type checking）。</p>
+<p><br/></p>
+<p>dynamic语言可以看做一类特殊的static语言——该语言中只有一个递归类型。</p>
+<p><br/></p>
+<p>—— P208</p>
 
           
         
@@ -558,7 +567,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/143/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/143/">143</a><span class="page-number current">144</span><a class="page-number" href="/page/145/">145</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/145/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/143/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/143/">143</a><span class="page-number current">144</span><a class="page-number" href="/page/145/">145</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/145/">&gt;</a>
   </nav>
 
 
@@ -604,7 +613,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -679,7 +688,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

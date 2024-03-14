@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/11/15/programmable/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/05/17/questioner/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/11/15/programmable/" itemprop="url">可编程的软件服务</a></h1>
+                <a class="post-title-link" href="/2021/05/17/questioner/" itemprop="url">成为一名优秀的提问者</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-15T00:00:00+08:00">
-                2020-11-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-17T00:00:00+08:00">
+                2021-05-17
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Software/" itemprop="url" rel="index">
-                    <span itemprop="name">Software</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,73 +347,75 @@
       
         
           
-            <p>这些年，软件工程师的数量激增猛涨，越来越多的人，具备了用代码解决问题的能力了。这样的发展趋势，对软件行业本身也产生了一定的影响。下面我来列举三个例子：</p>
+            <h3 id="提问者">提问者</h3>
+<p><strong>问题的提出者才是问题的核心，其他人只是协助问题被解决。</strong></p>
+<p><strong>提问者</strong>在问题解决过程中，起着至关重要的作用。</p>
 <p><br/></p>
-<p>其一，<a href="http://homes.sice.indiana.edu/samth/new-web/" target="_blank" rel="noopener">Racket</a> 支持 “面向语言进行编程”（<a href="https://cs.brown.edu/~sk/Publications/Papers/Published/fffkbmt-programmable-prog-lang/paper.pdf" target="_blank" rel="noopener">LOP</a>），是一门 “可编程” 的编程语言。旨在解决使用特定语言编程的时候，<a href="https://wiki.c2.com/?EmbeddedDomainSpecificLanguage" target="_blank" rel="noopener">eDSL</a> 难集成的问题。语言，本来就是编程用的，语言本身也变成了可编程的，这是一件有趣的事情。</p>
+<p>提问者需要： + 交代清楚问题的背景 + 在什么情况下发生的【问题复现】 + 什么时间 + 哪个系统，在什么场景下，怎样操作的时候遇到的 + 有没有日志，是否保留了现场 + 上下文知识有没有解释清楚【谨防那些只有少数人才能听懂的词汇】 + 用到了哪些专有术语、专有名词 + 人名、系统名 缩略语 + 尽可能多的提供全面信息【信息越全面进展越顺畅】 + 尽可能贴全图，能看到更多的信息 + 可能被用于搜索的内容，尽量贴文本不要贴图片 + 截图位置的 url + 界定问题相关者 + 问题责任人【不解决这个问题谁最疼】 + 依赖的上下游【谁最有可能清楚业务逻辑】大型问题一般都要拉人才能解决 + 必须知会到的人【例如，值班人员】 + 同类、相似问题的涉众【避免重复问题】 + 细致描述问题 + 说清楚自己的预期【先不要提要求，而是描述清楚到底想要做什么】 + 问题在哪里，预期为何不能满足需求【哪里不符合预期】 + 进度卡在了哪里，怎样才能往下走 + 进展到什么程度才能标记为 “已解决” + 问题总结和复盘 + 待办事项是否落实到了行动上，还是不了了之【如何跟进】 + 从问题的解决过程中，我们能学到什么，对以后类似问题有什么帮助【不断成长】 + 为什么这个问题会成为一个问题，当时欠缺了哪些条件【反思】</p>
 <p><br/></p>
-<p>其二，<a href="https://medium.com/microsoft-open-source-stories/how-microsoft-rewrote-its-c-compiler-in-c-and-made-it-open-source-4ebed5646f98" target="_blank" rel="noopener">Roslyn</a> 不再是一个编译工具了，而是一个 “编译平台”（<a href="https://github.com/dotnet/roslyn" target="_blank" rel="noopener">Compiler Platform</a>）。因为它共享了编译器内部的工作机制，让世界以编程的方式消费。编译器，不再作为单独的一个工具提供服务了，而是变得更加开放了。</p>
+<p>提出一个好问题很难，把一个问题<strong>描述清楚</strong>更难。</p>
+<p>所以我们不仅仅要努力发现好问题，更重要的是学习 “<strong>把问题交代清楚</strong>” 的技巧。</p>
 <p><br/></p>
-<p>其三，“基础设施即代码”（<a href="https://en.wikipedia.org/wiki/Infrastructure_as_code" target="_blank" rel="noopener">IaC</a>），它本来是随着 2006 年第二代 web 框架的潮流而出现的，当时人们正在考虑底层的计算资源，能否以<a href="https://en.wikipedia.org/wiki/Utility_computing" target="_blank" rel="noopener">按需计费</a>的方式提供服务。基础设施不再使用人工配置的方式提供支持了，而是使用高级的编程语言进行<a href="https://book.douban.com/subject/26589406/" target="_blank" rel="noopener">控制</a>。</p>
+<p>就像写作文一样，每个人不是生来就会写的，写作文包含了很多技巧。</p>
+<p>提问也是如此，要想把问题交代清楚，要想让问题尽快得以解决，就得<strong>学会如何提问</strong>。</p>
 <p><br/></p>
-<p>这三个例子，共同反映了一种新的潮流，现有软件行业内部的一些概念，正在朝着更加有利于编程的方式在发展了。这是全民编程能力提高之后，必然会发生的事情。下文我们就讨论一下，现阶段或者未来，我们应该如何转换想法，如何提供可编程的软件服务。</p>
-<h3 id="api-治理">API 治理</h3>
-<p>对于一个成型的软件系统而言，人们看到的更多是它提供了哪些功能，而不是它的软件架构。但其实它内部的组成方式，以及怎样与外界进行交互，才是最容易被忽视的一点。软件架构是与组织架构密不可分的，<a href="https://zh.wikipedia.org/zh-sg/%E5%BA%B7%E5%A8%81%E5%AE%9A%E5%BE%8B" target="_blank" rel="noopener">康威定律</a> 指出，</p>
-<blockquote>
-<p>设计系统的架构受制于产生这些设计的组织的沟通结构。</p>
-</blockquote>
-<p><br/></p>
-<p>不同形式的组织架构，就会衍生出不同的软件架构。合理架构的目的，正是为了降低研发成本，用最恰当的方式尽可能多的满足<a href="https://book.douban.com/subject/24530471/" target="_blank" rel="noopener">各方利益</a>。《<a href="https://book.douban.com/subject/30333919/" target="_blank" rel="noopener">Clean Architecture</a>》也指出了软件架构对于确定边界的重要性，</p>
-<blockquote>
-<p>Software architecture is the art of drawing lines that I call boundaries.</p>
-</blockquote>
-<blockquote>
-<p>Those boundaries separate software elements from one another, and restrict those on one side from knowing about those on the other.</p>
-</blockquote>
-<p><br/></p>
-<p>所以，软件架构是真实世界的各方利益，投射到软件系统中的写照。好的架构形式，可以促进多方协作，避免不必要的争论。它将不太相关的部分，内聚到独立的子系统中，人们只需要关注系统间是如何交互的即可。</p>
-<p><br/></p>
-<p>让依赖可追踪，是我对系统间依赖如何处理的个人体会。我曾参与过很多遗留系统的迁移工作，也曾亲身体会到了这样的迁移会带来的各种问题，称之为 “给飞机换引擎” 也不为过。一个遗留系统有哪些 api 被外部系统所使用是很难确定的，直接导致了我们对这些遗留系统的无能为力。所以让系统的所有依赖可被追踪，是一个美好的愿景。</p>
-<p><br/></p>
-<p>有很多人已经这样做了，开放的 api 接口并不是直接暴露给用户，而是对这些 api 进行治理。当要依赖某一个 api 的时候，要先到某个管理系统中进行授权。这样做会有很多好处，一方面不会暴露出难以收回的接口，另一方面，这些接口的使用情况，也都一目了然了。</p>
-<h3 id="命令行接口">命令行接口</h3>
-<p>编程设计领域流传着一些 “警句”，称为《<a href="https://cpsc.yale.edu/epigrams-programming" target="_blank" rel="noopener">Epigrams in Programming</a>》。其中，有一句是这样说的：一个优秀的系统，不能没有命令行接口，</p>
-<blockquote>
-<p>A good system can’t have a weak command language.</p>
-</blockquote>
-<p><br/></p>
-<p>命令行接口是<strong>面向程序</strong>的，而常见的图形界面是面向人的。一个系统如果只提供图形界面，那么就难以用程序的方式跟它进行交互，这会使得它自己变得<strong>封闭</strong>，无法纳入到一个更大的<strong>软件生态圈</strong>中。《<a href="https://book.douban.com/subject/7564417/" target="_blank" rel="noopener">Linux/Unix设计思想</a>》也有这样的说法，</p>
-<blockquote>
-<p>良好的程序员编写优秀代码，优秀的程序员借用优秀代码</p>
-</blockquote>
-<p><br/></p>
-<p>能将其他软件模块、程序或配置文件，集成到自己的应用程序中，会成倍的<strong>放大</strong>前辈程序员们的工作成果，这就是软件的 “杠杆效应”。命令行接口，使得系统可以被当做软件杠杆来使用。</p>
-<p><br/></p>
-<p>有很多系统是没有命令行接口的，或者反而是优先提供一种图形界面，与用户进行交互。这样做虽然能够降低用户（人）的使用成本，但也使得其他的程序无法与之对接。并且用户在图形界面上的操作很难聚拢和量化，也为后文的一切从数据出发的研发方式埋下了隐患。</p>
-<p><br/></p>
-<p>但也并不是所有的系统都得这么做的，这是由不同的业务类型来决定的，即不同系统的用户群体是不同的。提供软件服务的系统，通常它的用户也是开发者，他们更喜欢用程序的方式，自动化的解决一些问题。这个时候早于图形界面，优先提供一种对程序友好的方式来提供功能，未尝不是一个更省时省力的性价比更高的做法。</p>
-<h3 id="一切从数据出发">一切从数据出发</h3>
-<p>重视数据是近几年才开始流行的趋势，在以前，人们的关键决策，更多的是依靠行业经验和敏锐的直觉所做出来的，这其实是有挺大风险的。数据导向的研发方式，起源于人们多年来在自然科学领域中的反复实践，这是一套称为<a href="https://zh.wikipedia.org/zh/%E7%A7%91%E5%AD%A6%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">科学方法</a> 的寻求知识的过程，总共分为三个阶段，</p>
+<p><strong>我们应不断的锻炼自己，让自己成长为一名优秀的 “提问者”。</strong></p>
+<h3 id="自我修养">自我修养</h3>
 <ul>
-<li><p>问题的认知与表述</p></li>
-<li><p>实验数据的收集</p></li>
-<li><p>假说的构成与测试</p></li>
+<li>提问者才是问题的核心</li>
 </ul>
-<p>数据成了衡量一个系统的成效，以及后期做出优化的关键法宝了。所以，一切从数据出发，从一开始就打好基础，也就顺理成章的成了新系统的研发标准了。它可能转变了我们的研发方式，所追求的不仅仅是提供哪些功能，而是要把功能、效果的验证，当做一个整体来考虑了。</p>
+<p>应秉持 “<strong>谁提问题谁负责</strong>” 的心态来跟进问题进度，因为没有人比提问者更清楚问题的来龙去脉。</p>
+<p>当有各种原因导致问题卡住的时候，应一日三催，“人挡催人，佛挡催佛”。</p>
+<p>其他人都是问题的<strong>参与者</strong>，只是在问题解决的<strong>某个阶段</strong>协助问题被解决的一部分人而已。</p>
 <p><br/></p>
-<p>结合上文图形界面和命令行的讨论，似乎命令行接口与数据导向的开发方式可以不谋而合。我在一个业务团队中曾经使用这样的一个命令行工具，至今为止都觉得是一种很好的体验。日常工作中编译打包各项事务，都交给这个命令行工具来执行，必要时我可以编写 shell 脚本来调用这些操作。相比图形界面，我并不需要打开一个网页来完成自己的工作。更重要的是，日常研发活动的行为数据，都能够被这个命令行工具收集上去，真是一个很赞的想法。</p>
-<h3 id="平台">平台</h3>
-<p>一个系统在产品形态上是否构成了平台，指的是它的用户能否帮助它提供功能。当然这件事是有利有弊的，平台显然更难管控。但是从规模上来看，平台则更容易发展壮大。毕竟一个人或者几个人的能力是有限的，有更多的用户参与进来，就相当于做了乘法，而不是现有的几个人做加法。</p>
+<ul>
+<li>把问题的背景交代清楚</li>
+</ul>
+<p>要想让别人能贡献自己的力量，<strong>让别人有力使得上</strong>，就得清晰的传达问题的背景，<strong>把更多人带入到出现问题的上下文中。</strong></p>
+<p>一个极端的例子是说 “还是不行”。</p>
+<p>从这句话中我们捕捉不到任何有帮助的信息，而频繁的沟通 “问题背景” 也会提高沟通和参与成本，让问题卡在初级阶段。</p>
 <p><br/></p>
-<p>在没有其他制约因素的情况下，我更倾向于从平台视角考虑问题，尤其用户也是开发者的时候。使用系统的人与开发系统的人，具有天然的平权性，他们都是开发者，都可以用程序解决问题。这样一来，系统所能提供的服务，就变成可扩展的了，开发资源可以随着事项的紧急程度，在平台与用户之间重新分配。所以说，平台打破了需求方与实现方的单向关系，大家一视同仁的看待所有的问题。</p>
+<ul>
+<li>做好问题的广播工作</li>
+</ul>
+<p>有很多问题无法解决，原因之一是没有找到正确的人。尤其是软件相关的问题，业务知识只掌握在少部分人大脑中。</p>
+<p>所以 “拉群” 并不一定都是坏事。</p>
+<p>此外，除了知会能解决问题的人，还要知会可能被问题影响到的人。</p>
 <p><br/></p>
-<p>但有些 “平台”，其实并不是按平台的方式来做的。指的是 “平台” 帮助用户实现了太多的功能，用户想帮忙也帮不上。所以，并不是说人们都来用一个系统，这个系统就称为平台了。而是要想想，在平台上能否看到用户的影子。一个比较切题的例子是 VSCode 的插件系统，仅仅依靠 VSCode 团队是不可能完成现今的海量插件的。他们依靠了整个开发者社区，依靠了用户的聪明才智。</p>
+<ul>
+<li>描述问题的几个关键点</li>
+</ul>
+<p>一个问题是由预期和痛点构成的，提问者需要说清楚<strong>自己的预期是什么</strong>，以及预期不能满足的时候为什么会形成一个痛点，哪里不符合预期。</p>
+<p>提问者还要写清楚问题当前<strong>卡在</strong>了什么地方。</p>
+<p>以及问题解决到什么程度才能标记为 “已解决”，否则<strong>问题的范围</strong>会越来越大，没有截止日期。</p>
 <p><br/></p>
-<p>在《<a href="https://book.douban.com/subject/25884108/" target="_blank" rel="noopener">程序员的呐喊</a>》中，作者有一段对平台的讨论，十分的鞭辟入里，</p>
-<blockquote>
-<p>没有平台的产品的是没有用的，缺少平台支持的产品肯定会被有平台支持的同等产品取代。Google+ 错误的以为 Facebook 之所以成功是因为人家做了一个好产品。但那并不是他们成功的原因。Facebook 之所以那么成功是因为他们通过让其他人参与进来的方式，搭建了一整套各异的产品。Facebook 上有成百上千种消磨时间的好去处，所以才能满足所有人。</p>
-</blockquote>
+<ul>
+<li>问题的总结和复盘</li>
+</ul>
+<p>既然问题的负责人是提问者，那么提问者就应该<strong>跟进</strong>遗留下来的行动事项，否则就容易虎头蛇尾，问题被看清了但是没有被解决。</p>
+<p>优秀的提问者还会考虑如何<strong>举一反三</strong>，让更多的人学会自己在过程中并学会的一切。</p>
+<p>反思这个问题当时为什么会被提出来，<strong>缺少了哪些条件</strong>，以后能否减少类似的问题。</p>
+<p><br/></p>
+<h3 id="值班人员">值班人员</h3>
+<p>除了提问者之外，还有一类问题参与者的角色比较特殊，就是系统的 “值班人员”，Ta 是专门为回答问题而设立的岗位。</p>
+<p><strong>“值班人员” 很容易被当做是问题的负责人，这其实很不利于问题被快速的解决。</strong></p>
+<p>值班人员只是为了降低成本，加速<strong>问题的解决速率</strong>，而人工引入的一些问题参与者而已。</p>
+<p><br/></p>
+<p>所以，优秀的提问者总会<strong>最大限度的利用 “值班人员”</strong>，但不会将问题的 “责任” 交出去，因为问题解决太慢受损失的还是自己。</p>
+<p>Ta 会借助 ”值班人员“ 发现正确的人，拿到更多的信息，找到更多帮助。</p>
+<p>优秀的提问者从一开始就会跟进进度，<strong>哪里卡住破解哪里</strong>。</p>
+<p><br/></p>
+<p>值班人员应该协助提问者，建立上述心智。而像 ”保姆“ 一样跟进每一个问题，会发现自己才是问题的瓶颈点。</p>
+<p>因为有很多问题无法知道的<strong>足够清楚</strong>，当用户询问 ”是否确定“ 的时候，非亲身经历很难答的上来。</p>
+<p>值班人员还应促进同类问题的聚合形成社区，让不同的提问者之间可以互相帮助，提升问题的解答<strong>效率</strong>。</p>
 <h3 id="结语">结语</h3>
-<p>本文总结了自己对软件服务的一些理解，有些观点认识的还不够全面。但要表达的想法是，面向开发者提供的软件，与面向最终用户提供的软件，可以是两种不同的软件形式，也具有不同的业务属性。随着这些年开发者大军日益强大起来，人们对开发者服务的诉求，也可能会发生转变。</p>
+<p>提问者与其他问题参与者是紧密结合在一起的，在提问者的倡导下，各参与者<strong>群策群力</strong>，最终问题得以解决。</p>
+<p><strong>提问者抛出问题，以期望问题自发的消失，这太理想化了。</strong></p>
+<p>每个人都有惰性，并且参与问题讨论也要<strong>消耗资源</strong>，资源并非取之不尽用之不竭，所以人们不会自发的做这些事情。</p>
+<p><br/></p>
+<p>我们应该不遗余力的消除问题解决过程中的卡点，而锻炼提问技巧，提高优秀提问者的比例，是不得不迈过的一道坎。</p>
+<p>当然这道坎迈过以后，还会出现另外一个瓶颈。</p>
+<p>我们<strong>再接再厉</strong>就好了，”长风破浪会有时，直挂云帆济沧海“。</p>
 
           
         
@@ -452,7 +454,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/41/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/43/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/41/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/43/">&gt;</a>
   </nav>
 
 
@@ -498,7 +500,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -573,7 +575,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

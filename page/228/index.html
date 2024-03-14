@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/01/11/monad-in-hask-category/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/05/16/pain-oriented-design/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/01/11/monad-in-hask-category/" itemprop="url">Hask范畴上的Monad</a></h1>
+                <a class="post-title-link" href="/2016/05/16/pain-oriented-design/" itemprop="url">面向痛点的应变之道</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-11T00:00:00+08:00">
-                2016-01-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-16T00:00:00+08:00">
+                2016-05-16
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Haskell/" itemprop="url" rel="index">
-                    <span itemprop="name">Haskell</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,230 +347,74 @@
       
         
           
-            <p>范畴论是一个迷人的领域，</p>
-<p>它是一门研究<strong>数学结构</strong>以及<strong>结构之间关系</strong>的理论。</p>
+            <p>上学写论文时，流传着这么一句话，</p>
+<p>『大家虽然不知道鬼的样子，却都在画鬼。』</p>
+<p>当时，觉得好有道理啊，我们提出了各种理论模型，却不知道世界到底是什么样子。</p>
 <p><br/></p>
-<p>不知道我们学群论时，</p>
-<p>是否感觉到了群同态与集合间映射的相似性。</p>
-<p>学拓扑学时，</p>
-<p>是否感觉到了连续映射与微分流形间光滑映射的相似性。</p>
+<p>没想到后来进入了软件行业，也会遇到同样的问题。</p>
 <p><br/></p>
-<p>范畴论统一了这些相似结构。</p>
-<p>然而，这还要从抽象代数说起。</p>
+<p>我们很多项目，发起人其实并不知道要做成什么，</p>
+<p>只是想做这个，想做那个，</p>
+<p>似乎把想做的功能都做完，项目就成了。</p>
 <p><br/></p>
-<h2 id="幺半群monoid">幺半群（monoid）</h2>
-<p>在抽象代数中，<strong>幺半群</strong>是这样定义的。</p>
+<p>我们假想存在某个问题，甚至都没有去调查，</p>
+<p>我们觉得别人一定会来用，甚至都没想着去接受反馈，</p>
+<p>我们自以为现存方案的问题很多，甚至都没用过它。</p>
 <p><br/></p>
-<p>集合S和S上满足结合律的封闭二元运算"•"，</p>
-<p>所形成的代数结构称为<strong>半群</strong>，记为(S, •)，简记为S</p>
+<p>这就是在『<strong>画鬼</strong>』，</p>
+<p>是一群人憋着实在想做些什么的时候的宏观表现。</p>
 <p><br/></p>
-<p>设S是半群，元素e∈S，称为半群S的<strong>幺元素</strong>，</p>
-<p>如果对于每一个x∈S，有xe=ex=x</p>
+<p>那么，我们积极向上的心态，不对吗，</p>
+<p>我们想造福社会，推动进步，不好吗？</p>
 <p><br/></p>
-<p>如果半群S有幺元素e，则它是唯一的。</p>
-<p>含有幺元素的半群称为<strong>幺半群</strong>。</p>
+<p>当然好，只不过要坚持一些设计原则。</p>
 <p><br/></p>
-<p>注：</p>
-<p>半群G如果有幺元素，且每个元素均可逆，</p>
-<p>则称G为<strong>群</strong></p>
+<h2 id="痛点"><strong>痛点</strong></h2>
+<p>学过软件工程之后，我们知道，进行需求分析时，我们得先确定需求的背景和目的。</p>
+<p>为什么要做这件事，是什么引起的，<strong>动机</strong>是什么。</p>
+<p>只有确定了问题，才能有的放矢。</p>
+<p>这是对新项目而言。</p>
 <p><br/></p>
-<h2 id="图示法diagram">图示法（diagram）</h2>
-<p>一个幺半群M，可以描述为一个集合M，和两个函数</p>
-<p>µ : M × M -&gt; M</p>
-<p>η : 1 -&gt; M</p>
+<p>而对于实际的项目，几乎都是以现有的解决方案为起点的，</p>
+<p>我们还要问，当前方案的<strong>痛点</strong>是什么，哪里做的不够好，</p>
+<p>这些问题的优先级怎么安排，怎样逐步解决它。</p>
 <p><br/></p>
-<p>其中，1 = {0}是只有一个元素的集合。</p>
+<p>通过分析痛点，我们才能找到<strong>立项的原因</strong>。</p>
+<p>不是我们想做什么，而是我们不得不解决它。</p>
+<p>没有迫不得已的形势，事情就不会往前发展。</p>
 <p><br/></p>
-<pre>           1 × µ<br>M × M × M -------&gt; M × M<br>    |                |<br>    | µ × 1          | µ<br>    |                |<br>    v                v<br>  M × M   -------&gt;   M<br>             µ</pre>
-<pre>        η × 1          1 × η<br>1 × M -------&gt; M × M &lt; ------- M × 1<br>  |              |               |<br>  | α            | µ             | β<br>  |              |               |<br>  v              v               v<br>  M      =       M        =      M</pre>
+<p>我们不要急着去解决问题，</p>
+<p>而是先要确定，<strong>到底要解决什么问题</strong>。</p>
 <p><br/></p>
-<p>用元素来表示图表，可以写为，</p>
+<h2 id="应变之道"><strong>应变之道</strong></h2>
+<p>应变，是可以锻炼的。</p>
 <p><br/></p>
-<pre>&lt;x,y,z&gt; |-------&gt;    &lt;x,yz&gt;<br>   -                   -<br>   |                   |<br>   |                   |<br>   v                   v<br>&lt;xy,z&gt;  |-------&gt; (xy)z=x(yz)</pre>
-<pre>&lt;0,x&gt; |-------&gt; &lt;e,x&gt;    &lt;x,e&gt; &lt;-------| &lt;x,0&gt;<br>  -               -        -               -<br>  |               |        |               |<br>  |               |        |               |<br>  v               v        v               v<br>  x       =      ex       xe       =       x</pre>
+<p>看到每一个方案时，不妨考虑下，它们是<strong>怎样被设计出来的</strong>。</p>
+<p>这样才能积累经验，在遇到困难的时候，找到切实可用的办法。</p>
 <p><br/></p>
-<p>可以看出，(xy)z=x(yz)表示了群乘法的结合律，</p>
-<p>x=ex,xe=x表示了幺元e，因此图表展示了幺半群的结构。</p>
+<p>每一个解决方案，都是为它的目的服务的，</p>
+<p>人们做了哪些折衷和让步，又是以何种程度达到目的的。</p>
 <p><br/></p>
-<h2 id="范畴category">范畴（category）</h2>
-<p>一个<strong>范畴</strong>C由一系列<strong>对象</strong>（object）和<strong>箭头</strong>（arrow）组成。</p>
-<p>对于每一个箭头f，有两个对象与之关联，</p>
-<p>称为箭头f的定义域（domain）和值域（codomain）。</p>
-<p>并且，满足以下几条规则，</p>
-<p>（1）对于每一个对象a，存在恒等箭头（identity arrow），i:a-&gt;a</p>
-<p>（2）箭头满足结合律，对于任意的箭头f,g,h有(f•g)•h=f•(g•h)</p>
-<p>（3）箭头的集合在箭头组合运算下是封闭的</p>
+<p>我们要学的，不是会用哪些招数，</p>
+<p>而是，<strong>学会这些招数的创造方法</strong>。</p>
 <p><br/></p>
-<p>注：</p>
-<p>f•g表示g和f的组合运算，它也是一个箭头，其中g的值域是f的定义域</p>
+<p>由此，繁杂的方案就不会迷惑我们了，</p>
+<p>像工匠能看到工具的问题一样，我们会看到<strong>方案的缺陷</strong>，和它们引起的新问题。</p>
 <p><br/></p>
-<p>例：</p>
-<p>所有的集合，以集合作为对象，集合间的映射作为箭头，构成了一个范畴，</p>
-<p>所有的群，以群作为对象，群同态作为箭头，构成了一个范畴，</p>
-<p>所有的拓扑空间，以拓扑空间作为对象，拓扑空间之间的连续映射为箭头，构成了一个范畴，</p>
-<p>所有的微分流形，以微分流形作为对象，流形间的光滑映射为箭头，构成了一个范畴，</p>
-<p>Haskell中，以类型作为对象（类型是值的集合），函数作为箭头，构成了一个范畴（<strong>Hask范畴</strong>）。</p>
+<p>无招胜有招。</p>
 <p><br/></p>
-<h2 id="函子functor">函子（functor）</h2>
-<p>如果把范畴看做对象，则函子可以看做箭头。</p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>不能确定待解决的问题。</p>
+<p>给定一个问题，想不出适用的解决方案。</p>
 <p><br/></p>
-<p>一个<strong>函子</strong>F是范畴C到范畴D的箭头，F:C -&gt; D，</p>
-<p>它满足以下条件，</p>
-<p>F把C中的对象c映射为D中的对象F c，把C中的箭头f映射为D中的箭头F f。</p>
-<p>且满足分配律，F (f•g)=(F f)•(F g)</p>
+<p>这是两个难点。</p>
+<p>我们会假想一个问题，结果做完了以后才发现白费心思。</p>
+<p>我们会用流行的解决方案，结果发现越走越远。</p>
 <p><br/></p>
-<p>注：</p>
-<p>等式左边的"•"表示C中的箭头组合运算，</p>
-<p>等式右边的"•"表示D中的箭头组合运算。</p>
+<p>经验多了，熟练掌握各种框架类库之后，这两个能力并不会相应提高。</p>
+<p>我们需要刻意的训练，才能学会『面向痛点的应变之道』。</p>
 <p><br/></p>
-<p>范畴C到自身的函子，称为<strong>自函子</strong>（endofunctor）。</p>
-<p><br/></p>
-<p>Hask范畴的自函子把Haskell中的类型a映射为另一个类型f a，</p>
-<p>把类型a到类型b的函数，映射为类型f a到类型f b的函数。</p>
-<p><br/></p>
-<p>class Functor f where</p>
-<p>        fmap :: (a -&gt; b) -&gt; f a -&gt; f b</p>
-<p><br/></p>
-<p>class Functor f =&gt; Applicative f where</p>
-<p>        pure :: a -&gt; f a</p>
-<p>        (&lt;*&gt;) :: f (a -&gt; b) -&gt; f a -&gt; f b</p>
-<p><br/></p>
-<p>我们看到，pure和fmap放在一起，</p>
-<p>构成了一个Hask范畴的自函子。</p>
-<p><br/></p>
-<h2 id="自然变换natural-transformation">自然变换（natural transformation）</h2>
-<p>如果把函子看做对象，则自然变换可以看做箭头。</p>
-<p><br/></p>
-<p>若F和G是范畴C到D的函子，则<strong>自然变换</strong>τ是一个箭头，τ: F -&gt; G，</p>
-<p>它满足以下条件，</p>
-<p><br/></p>
-<pre>     f<br>a -------&gt; b</pre>
-<pre>      F f<br>F a -------&gt; F b<br>|            |<br>| τ a        | τ b<br>|            |<br>v            v<br>G a -------&gt; G b<br>      G f</pre>
-<p><br/></p>
-<p>注：</p>
-<p>F a是D中与a对应的对象，F b是D中与b对应的对象，F f是D中与f对应的箭头</p>
-<p><br/></p>
-<h2 id="函子范畴functor-category">函子范畴（functor category）</h2>
-<p>以范畴C到D的函子为对象，以函子间的自然变换为箭头，</p>
-<p>构成了一个范畴，称为<strong>函子范畴</strong>。</p>
-<p><br/></p>
-<p>易知，自然变换可以进行组合运算，</p>
-<p>设µ a : F a -&gt; G a，η a : G a -&gt; H a</p>
-<p>则可以定义一个新的自然变换(η • µ) a = F a -&gt; H a</p>
-<p>可证自然变换的组合运算满足结合律。</p>
-<p><br/></p>
-<p>注：</p>
-<p>函子范畴的对象，不是一个集合，</p>
-<p>函子范畴的箭头，也不是映射。</p>
-<p><br/></p>
-<h2 id="monad">Monad</h2>
-<p>范畴C上的monad，是一个<strong>三元组</strong>(F,µ,η)，其中</p>
-<p>F是范畴C上的自函子，</p>
-<p>µ是F<sup>2到F的自然变换，µ:F</sup>2-&gt;F，</p>
-<p>η是单位自函子I到F的自然变换，η:I-&gt;F</p>
-<p><br/></p>
-<p>且满足以下条件</p>
-<p><br/></p>
-<pre>           F • µ<br>F • F • F -------&gt; F • F<br>    |                |<br>    | µ • F          | µ<br>    |                |<br>    v                v<br>  F • F   -------&gt;   F<br>             µ</pre>
-<pre>        η • F          F • η<br>I • F -------&gt; F • F &lt; ------- F • I<br>                 |                <br>  ||             | µ            ||<br>                 |               <br>                 v                <br>  F      =       F        =      F</pre>
-<p><br/></p>
-<p>在Haskell中可以这样表示：</p>
-<p><br/></p>
-<p>{- 自函子F，作用在对象上时 -}</p>
-<p>fObj :: (Applicative f) =&gt; a -&gt; f a</p>
-<p>fObj = pure</p>
-<p><br/></p>
-<p>{- 自函子F，作用在箭头上时 -}</p>
-<p>fArr :: (Applicative f) =&gt; (a -&gt; b) -&gt; (f a -&gt; f b)</p>
-<p>fArr = fmap</p>
-<p><br/></p>
-<p>{- 自函子F^2 -}</p>
-<p><br/></p>
-<p>f2Obj :: (Applicative f) =&gt; a -&gt; f (f a)</p>
-<p>f2Obj = fObj . fObj</p>
-<p><br/></p>
-<p>f2Arr :: (Applicative f) =&gt; (a -&gt; b) -&gt; (f (f a) -&gt; f (f b))</p>
-<p>f2Arr :: fArr . fArr</p>
-<p><br/></p>
-<p>{- 单位自函子，作用到对象上时 -}</p>
-<p>iObj :: a -&gt; a</p>
-<p>iObj = id</p>
-<p><br/></p>
-<p>{- 单位自函子，作用到箭头上时 -}</p>
-<p>iArr :: (a -&gt; b) -&gt; (a -&gt; b)</p>
-<p>iArr = id</p>
-<p><br/></p>
-<p>{- 自然变换µ:F^2-&gt;F，（µ a:F^2 a-&gt;F a） -}</p>
-<p>µ :: (Applicative f) =&gt; a -&gt; f (f a) -&gt; f a</p>
-<p><br/></p>
-<p>{- 自然变换η:I-&gt;F，（η a:I a-&gt;F a） -}</p>
-<p>η :: (Applicative f) =&gt; a -&gt; a -&gt; (f a)</p>
-<p><br/></p>
-<h2 id="自函子范畴上的幺半群">自函子范畴上的幺半群</h2>
-<p>以范畴C上的自函子为对象，自然变换为箭头，</p>
-<p>构成的函子范畴，称为<strong>自函子范畴</strong>。</p>
-<p><br/></p>
-<p>对比Monad定义中的自函子F与幺半群中的集合M，</p>
-<p><br/></p>
-<p><strong>结合律</strong>：</p>
-<pre>           1 × µ<br>M × M × M -------&gt; M × M<br>    |                |<br>    | µ × 1          | µ<br>    |                |<br>    v                v<br>  M × M   -------&gt;   M<br>             µ</pre>
-<pre>           F • µ<br>F • F • F -------&gt; F • F<br>    |                |<br>    | µ • F          | µ<br>    |                |<br>    v                v<br>  F • F   -------&gt;   F<br>             µ</pre>
-<p><strong>幺元</strong>：</p>
-<pre>        η × 1          1 × η<br>1 × M -------&gt; M × M &lt; ------- M × 1<br>  |              |               |<br>  | α            | µ             | β<br>  |              |               |<br>  v              v               v<br>  M      =       M        =      M</pre>
-<pre>        η • F          F • η<br>I • F -------&gt; F • F &lt; ------- F • I<br>                 |                <br>  ||             | µ            ||<br>                 |               <br>                 v                <br>  F      =       F        =      F</pre>
-<p><br/></p>
-<p>可知，自函子F相当于群的集合M，自然变换µ相当于群乘法，单位自函子相当于幺元，它们构成了一个<strong>幺半群</strong>，</p>
-<p>即<strong>Monad是Hask自函子范畴上的幺半群</strong>。</p>
-<p><br/></p>
-<p>注：</p>
-<p>M × M × M表示集合M的笛卡尔积，</p>
-<p>而F • F • F表示自函子F的组合。</p>
-<p><br/></p>
-<h2 id="幺半群范畴monoidal-category">幺半群范畴（monoidal category）</h2>
-<p>幺半群在范畴论中是有了新的意义，</p>
-<p>比群论中的概念更一般化。</p>
-<p><br/></p>
-<p>我们可以为范畴增加一个满足结合律的二元函子，</p>
-<p>构成一个『范畴论意义上的』<strong>幺半群</strong>（monoid）。</p>
-<p><br/></p>
-<p>说一个范畴是具有幺半群结构的（monodial），</p>
-<p>如果它有一个像笛卡尔积，或者直和，张量积，那样的『乘积』，</p>
-<p>并且，这个『乘积』满足结合律，还有一个单位元。</p>
-<p><br/></p>
-<p>即，一个<strong>严格幺半群范畴</strong>（strict monoidal category）是范畴B上的一个结构&lt;B,□,e&gt;，</p>
-<p>其中□是一个满足结合律的二元函子，□: B × B -&gt; B，</p>
-<p>□ (□ × 1) = □ (1 × □) : B × B × B -&gt; B</p>
-<p>而且存在对象e是二元函子□的单位元，</p>
-<p>□ (e × 1) = id(B) = □ (1 × e)</p>
-<p><br/></p>
-<p>然后就可以在任意的幺半群范畴&lt;B,□,e&gt;中定义幺半群了。</p>
-<p><br/></p>
-<p>幺半群范畴B上的<strong>幺半群</strong>由三部分组成，&lt;c,µ,η&gt;，</p>
-<p>其中c是B中的对象，µ : c □ c -&gt; c，η : e -&gt; c是范畴B中的箭头，</p>
-<p>且满足以下条件</p>
-<pre>               σ                  µ □ 1<br>c □ (c □ c) -------&gt; (c □ c) □ c -------&gt; c □ c<br>    |                                       |<br>    | 1 □ µ                                 | µ<br>    |                                       |<br>    v                                       v<br>  c □ c ----------------------------------&gt; c<br>                        µ</pre>
-<pre>        η □ 1          1 □ η<br>e □ c -------&gt; c □ c &lt; ------- c □ e<br>  |              |               |<br>  | α            | µ             | β<br>  |              |               |<br>  v              v               v<br>  c      =       c        =      c</pre>
-<p><br/></p>
-<h2 id="结语">结语</h2>
-<p>『All told, a monad in X is just a monoid in the category of endofunctors of X,</p>
-<p>with the product × replaced by composition of endofunctors</p>
-<p>and unit set by the identity endofunctor.』</p>
-<p><br/></p>
-<p>一语成谶，很多人都是因为这句话入坑的，</p>
-<p>然而理解它真的很不容易，</p>
-<p>原来这个『幺半群』应该在范畴论意义上进行理解，</p>
-<p>已经不是集合论基础上群论的内容了。</p>
-<p><br/></p>
-<p>在写这篇文章时，我甚至还没有入门，有错误在所难免，</p>
-<p>但是多年坚持下来，似乎对这个问题有些眉目了，</p>
-<p>于是就赶紧整理了一下，希望接下来以此为起点继续努力，勇往直前。</p>
-<p><br/></p>
-<p><strong>参考</strong>：</p>
-<p>《<a href="http://book.douban.com/subject/4201293/" target="_blank" rel="noopener">近世代数引论</a>》</p>
-<p>《<a href="http://book.douban.com/subject/1823110/" target="_blank" rel="noopener">Categories for the Working Mathematician 2nd</a>》</p>
-<p><a href="https://medium.com/@brettwines/implementing-a-category-theoretic-hask-monad-in-haskell-7bf662f2e98b" target="_blank" rel="noopener">Implementing a category-theoretic Hask-monad in Haskell</a></p>
-<p><a href="http://stackoverflow.com/questions/3870088/a-monad-is-just-a-monoid-in-the-category-of-endofunctors-whats-the-problem" target="_blank" rel="noopener">A monad is just a monoid in the category of endofunctors, what's the problem?</a></p>
-<p><a href="http://slides.com/julientournay/a-monad-is-just-a-monoid-in-the-category-of-endofunctors-what-s-the-problem/fullscreen" target="_blank" rel="noopener">A MONAD IS JUST A MONOID IN THE CATEGORY OF ENDOFUNCTORS. WHAT'S THE PROBLEM ?</a></p>
+<p>Love of bustle is not industry. ——Seneca</p>
 
           
         
@@ -609,7 +453,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/227/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/227/">227</a><span class="page-number current">228</span><a class="page-number" href="/page/229/">229</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/229/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/227/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/227/">227</a><span class="page-number current">228</span><a class="page-number" href="/page/229/">229</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/229/">&gt;</a>
   </nav>
 
 
@@ -655,7 +499,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -730,7 +574,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/01/27/semantics-3/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/04/15/exception-first/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/27/semantics-3/" itemprop="url">语言背后的代数学（三）：语义模型</a></h1>
+                <a class="post-title-link" href="/2018/04/15/exception-first/" itemprop="url">异常先行</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T00:00:00+08:00">
-                2018-01-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T00:00:00+08:00">
+                2018-04-15
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,188 +347,142 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-ae7599d28cc05a51.png" /></p>
+            <p>一个软件系统，只是可以提供相应的<a href="https://zh.wikipedia.org/wiki/%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">功能</a>，还不能算是完成了预期的目标，</p>
+<p>它还要满足一些<a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能</a>方面的限制条件。</p>
 <p><br/></p>
-<h3 id="回顾">1. 回顾</h3>
-<p>上文我们从代数学角度重新认识了自然数，</p>
-<p>认识了自然数是如何被编码为符号串的，</p>
-<p>以及自然数在数学上是如何表示的。</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%81%A5%E5%A3%AE%E6%80%A7_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)" target="_blank" rel="noopener">健壮性</a>就是一个典型的例子，</p>
+<p>它反映了系统对于规范要求以外输入情况的处理能力。</p>
 <p><br/></p>
-<p>我们的整体思路是，首先用公理化的方式建立一个形式系统，</p>
-<p>然后为这个形式系统选择一种数学解释作为它的语义，</p>
-<p>这样就建立了符号和数学对象之间的对应关系。</p>
+<p>为了实现健壮性，我们不仅需要考虑所有可能的输入，</p>
+<p>更重要的是要考虑<strong>异常流</strong>，即系统在遭遇异常时究竟如何表现。</p>
 <p><br/></p>
-<p>一般的，这些数学对象需要具有不同的运算性质，有不同的结构，</p>
-<p>因此构成了不同的代数。</p>
+<p>这里有一个常见的误区，那就是，人们为了防止系统崩溃，</p>
+<p>不论是否出现错误，总是让它看起来是正常，</p>
+<p>这其实是一种<strong>自欺欺人</strong>的做法。</p>
 <p><br/></p>
-<p>在《<a href="https://thzt.github.io/2017/09/16/type-5/">你好，类型</a>》系列文章中，</p>
-<p>我们介绍了命题逻辑和一阶谓词逻辑，</p>
-<p>当时，我们只是从形式系统（符号演算）的角度来介绍它们。</p>
+<p>这种做法不仅不能够提高系统的健壮性，</p>
+<p>反而人为的向定位问题增添了很多障碍，提高了沟通成本，</p>
+<p>出错的场景被隐藏掉了，只有接口的提供者才知道原因。</p>
 <p><br/></p>
-<p>例如，我们只要知道公理和推导规则，就可以做出形式证明，</p>
-<p><span data-katex="\forall x(\alpha\leftrightarrow\beta)\vdash\forall x\alpha\leftrightarrow\forall x\beta"></span>。</p>
+<p>那么如何设计一个健壮的系统呢？</p>
+<p>本文提供了一些思路。</p>
 <p><br/></p>
-<p>但是，这些符号到底代表什么含义呢？</p>
-<p>我们当时故意没有提及。</p>
+<h3 id="fail-fast-哲学">1. Fail Fast 哲学</h3>
+<p><a href="http://wiki.c2.com/?FailFast" target="_blank" rel="noopener">Fail Fast</a>是<a href="https://www.erlang.org/" target="_blank" rel="noopener">Erlang</a>语言的编程哲学之一，</p>
+<p>说的是一个子系统在遇到问题的时候，应该尽早崩溃。</p>
 <p><br/></p>
-<p>本文从模型论角度来做出一些解释。</p>
+<p>常见的<code>if-return</code>模式（或者<code>if-throw</code>），就是Fail Fast思想的一种应用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function failSlow() &#123;</span><br><span class="line">    if (x !&#x3D; null) &#123;</span><br><span class="line">        &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function failFast(x) &#123;</span><br><span class="line">    if (x &#x3D;&#x3D; null) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上两个JavaScript函数，表现了不同的处理问题风格。</p>
+<p>如果代码后文要用到<code>x</code>，且当前没有<code>x</code>，那不如<strong>尽早返回</strong>。</p>
 <p><br/></p>
-<h3 id="一阶语言">2. 一阶语言</h3>
+<p>还有一种写法，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function assertPrecondition(x) &#123;</span><br><span class="line">    assert(x &#x3D;&#x3D; null);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码，通过<code>assert</code>对函数的<strong>前置条件</strong>进行了<strong>断言</strong>。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-755d1c07e86c5ac0.png" /></p>
+<p>使用<code>if-return</code>或者<code>assert</code>，会在很大程度上避免嵌套<code>if</code>的出现，</p>
+<p>否则，我们就不得不在很多<code>if</code>条件中编写业务逻辑。</p>
 <p><br/></p>
-<p>首先让我们回顾以下一阶谓词逻辑有哪些符号构成，</p>
+<p>例如，以下展示了嵌套<code>if</code>的某个场景，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (x !&#x3D; null) &#123;</span><br><span class="line">    if (y &gt; 0) &#123;</span><br><span class="line">        if (z) &#123;</span><br><span class="line">            &#x2F;&#x2F; 业务逻辑</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>（1）变元符号集合<span data-katex="V"></span>，</p>
-<p>它由可数个（包括0个）变元符号组成，用<span data-katex="x_1,x_1,\cdots,x_n,\cdots"></span>表示。</p>
-<p>（2）逻辑连接词符号集合<span data-katex="C"></span>，</p>
-<p>它由逻辑连接词符号<span data-katex="\neg,\wedge,\vee,\rightarrow,\leftrightarrow"></span>组成。</p>
-<p>（3）量词符号集合<span data-katex="Q"></span>，包括<span data-katex="\forall,\exists"></span>。</p>
-<p>（4）等词符号集合<span data-katex="E"></span>，只包括一个符号<span data-katex="\doteq"></span>。</p>
-<p>（5）括号集合，包括<span data-katex="),("></span>。</p>
+<p>改成<code>assert</code>后，将前置条件与正常的业务逻辑解耦了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">assert(x !&#x3D; null);</span><br><span class="line">assert(y &gt; 0);</span><br><span class="line">assert(z);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 业务逻辑</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>以上这些符号称为<strong>逻辑符号</strong>，每个<strong>一阶逻辑</strong>都有这些符号。</p>
-<p>而不同的一阶逻辑，还有属于自己的<strong>非逻辑符号</strong>。</p>
+<h3 id="不要吃掉异常">2. 不要吃掉异常</h3>
+<p><strong>如果子系统无法处理某个错误，那就把它抛出来，而不是吃掉它。</strong></p>
 <p><br/></p>
-<p>（1）常元符号集合<span data-katex="\mathscr{L}_c"></span>，</p>
-<p>它由可数个（包括0个）常元符号组成，用<span data-katex="c_1,c_2,\cdots"></span>表示。</p>
-<p>（2）函数符号集合<span data-katex="\mathscr{L}_f"></span>，</p>
-<p>它由可数个（包括0个）函数符号组成，用<span data-katex="f_1,f_2,\cdots"></span>表示。</p>
-<p>（3）谓词符号集合<span data-katex="\mathscr{L}_P"></span>，</p>
-<p>它由可数个（包括0个）谓词符号组成，用<span data-katex="P_1,P_2,\cdots"></span>表示。</p>
-<p>等词符号<span data-katex="\doteq"></span>实际上可以看做是一个谓词符号。</p>
+<p>下面我们来看一个例子，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function service() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        &#x2F;&#x2F; 什么也不做</span><br><span class="line">        &#x2F;&#x2F; 或者即使是写日志</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>因此，一阶谓词逻辑是一种一阶逻辑。</p>
-<p>一阶逻辑中的逻辑符号和非逻辑符号，称为<strong>一阶语言</strong>，记为<span data-katex="\mathscr{L}"></span>。</p>
+<p>以上代码，我们在<code>application</code>函数中调用了<code>service</code>，</p>
+<p>但是<code>service</code>吃掉了异常。</p>
 <p><br/></p>
-<h3 id="初等算术语言">3. 初等算术语言</h3>
+<p>那么一旦<code>application</code>的用户指出了错误，定位问题就是一件麻烦事，</p>
+<p><code>application</code>的编写者，要去询问每一个<code>service</code>的提供者，到底出现了什么状况。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-ce2a07c40769f3b6.png" /></p>
+<p>我们再来看下，如果不吃掉异常会怎样，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function service() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        &#x2F;&#x2F; 写日志</span><br><span class="line">        throw e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>初等算术语言是一个一阶语言，记为<span data-katex="\Pi"></span>。</p>
-<p>它的常元符号集合为<span data-katex="\{0\}"></span>，函数符号集合为<span data-katex="\{S,+,\cdot\}"></span>，</p>
-<p>谓词符号集合为<span data-katex="\{&lt;\}"></span>。</p>
+<p>以上代码，我们修改了<code>service</code>函数，</p>
+<p>它确实捕获了异常，但是如果这个异常<code>service</code>无法处理，那就向上抛出去。</p>
 <p><br/></p>
-<p>其中，<span data-katex="S"></span>可以表示算术中的后继函数，</p>
-<p>而二元函数符号<span data-katex="+"></span>和<span data-katex="\cdot"></span>可以分别表示算术中的加法和乘法，</p>
-<p>谓词符号<span data-katex="&lt;"></span>可以描述自然数之间的小于关系。</p>
+<p>这样的话，甚至根本轮不到<code>application</code>的用户指出错误了，</p>
+<p><code>application</code>自己都能拿到异常的调用栈信息，</p>
+<p>并且，即使由用户指出了，也能不依赖于<code>service</code>来定位问题的原因。</p>
 <p><br/></p>
-<h3 id="语法项和逻辑公式">4. 语法项和逻辑公式</h3>
+<p>可能有人会说，如果异常都被抛出了，没有人处理怎么办？</p>
+<p>是的，吃掉异常不也是没人处理它吗？</p>
+<p>所以，抛出异常就相当于<strong>显式的</strong>向调用者提问，这个异常到底应该如何处理。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-6dad89f5d4167a29.png" /></p>
+<p>换句话说，</p>
+<p><strong>异常被静默处理，应该是大家协商后的决定。</strong></p>
 <p><br/></p>
-<p>从形式语言的角度来看，除了知道语言包含哪些符号之外，还要指定语法，</p>
-<p>习惯上，我们经常使用<a href="https://zh.wikipedia.org/wiki/%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F" target="_blank" rel="noopener">BNF</a>来指定，</p>
-<p><span data-katex="t::=c|x|ft_1\cdots t_n"></span></p>
+<h3 id="让异常成为一种约定">3. 让异常成为一种约定</h3>
+<p>异常和异常的处理应该是一体的，它们应该被<strong>统一的</strong>设计和使用。</p>
+<p>各个系统的边界处，应该如何反馈异常，以及这些异常应该如何被处理，应该事先被约定好。</p>
+<p>这样才会减少冗余的个性化的异常处理逻辑。</p>
 <p><br/></p>
-<p>即一个合法的<strong>项</strong>，可以归纳定义为，</p>
-<p>（1）每一个常元都是合法的项，</p>
-<p>（2）每一个变元都是合法的项，</p>
-<p>（3）如果<span data-katex="t_1,t_2,\cdots,t_n"></span>都是合法的项，而<span data-katex="f"></span>是一个<span data-katex="n"></span>元函数符号，</p>
-<p>那么<span data-katex="ft_1\cdots t_n"></span>也是一个合法的项。</p>
+<p>例如，使用<a href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E4%BE%A7%E9%9D%A2%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1" target="_blank" rel="noopener">面向切面编程</a>，</p>
+<p>我们可以在系统的边界上定义一个<strong>异常切面</strong>，统一处理错误。</p>
 <p><br/></p>
-<p>初等算术语言<span data-katex="\Pi"></span>中的合法项，</p>
-<p>以下符号串都是合法的，</p>
-<p><span data-katex="S0"></span>，<span data-katex="Sx_1"></span>，<span data-katex="+S0SSx"></span>，<span data-katex="\cdot x_1+Sx_1x_2"></span>，</p>
-<p>而<span data-katex="SS&lt;"></span>是不合法的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    MyService.service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 装饰器是一个高阶函数</span><br><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const service &#x3D; Class.service;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            &#x2F;&#x2F; 写日志</span><br><span class="line">            throw e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class MyService &#123;</span><br><span class="line">    @exceptionAOP</span><br><span class="line">    static service() &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>我们知道逻辑证明，并不是建立在形式语法之上的，</p>
-<p>而是建立在公理系统上面，而每一个推导规则都表明了前提和结论之间的关系，</p>
-<p>这些前提和结论，称为<strong>逻辑公式</strong>。</p>
+<p>以上代码，为了简洁起见，我们用<a href="https://tc39.github.io/proposal-decorators/" target="_blank" rel="noopener">装饰器</a>实现了一个异常切面，</p>
+<p>目前，装饰器是<a href="https://github.com/tc39/proposals" target="_blank" rel="noopener">ECMAScript TC39</a> Stage2的特性。</p>
 <p><br/></p>
-<p>一阶语言<span data-katex="\mathscr{L}"></span>中的逻辑公式，用大写字母<span data-katex="A,B,\cdots"></span>表示，定义为，</p>
-<p><span data-katex="A ::= t_1\doteq t_2 | Rt_1\cdot \cdot \cdot t_n | \neg A | A\wedge B | A\vee B | A\rightarrow B | A\leftrightarrow B | \forall xA | \exists xA"></span></p>
+<p>在这个切面中，我们统一的将异常写入了日志中，</p>
+<p>再将异常抛出。</p>
 <p><br/></p>
-<p>即，逻辑公式可以归纳的定义为，</p>
-<p>（1）如果<span data-katex="t_1"></span>和<span data-katex="t_2"></span>是合法的项，则<span data-katex="t_1\doteq t_2"></span>是公式，</p>
-<p>（2）如果<span data-katex="t_1, ..., t_n"></span>是合法的项，而<span data-katex="R"></span>是一个<span data-katex="n"></span>元谓词，则<span data-katex="Rt_1\cdot \cdot \cdot t_n"></span>是公式，</p>
-<p>（3）如果<span data-katex="A"></span>是公式，则<span data-katex="\neg A"></span>是公式，</p>
-<p>（4）若<span data-katex="A, B"></span>是公式，则<span data-katex="A\wedge B, A\vee B, A\rightarrow B, A\leftrightarrow B"></span>都是公式，</p>
-<p>（5）若<span data-katex="A"></span>是公式并且<span data-katex="x"></span>是一个变元，那么<span data-katex="\forall xA"></span>和<span data-katex="\exists xA"></span>也是公式，<span data-katex="x"></span>称为<strong>约束变元</strong>。</p>
+<h3 id="主动抛出异常">4. 主动抛出异常</h3>
+<p>有了异常切面，我们就不用担心未被捕获的异常了，</p>
+<p>向系统中添加一种异常，总是伴随着修改异常切面来完成。</p>
+<p>有了这种异常处理机制，我们就可以<strong>主动抛出一些业务异常</strong>了。</p>
 <p><br/></p>
-<p>例，以下符号串可以看做一个初等算术公式，</p>
-<p><span data-katex="\forall x\neg (Sx\doteq 0), \forall x\forall y(&lt; xy\rightarrow(\exists (y\doteq +xz)))"></span></p>
+<p>例如，上文中提到的<code>assert</code>，如果不满足前置条件断言，</p>
+<p>我们可以主动抛异常。</p>
 <p><br/></p>
-<h3 id="语义模型">5. 语义模型</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1. 新增异常</span><br><span class="line">class PreconditionException extends Error &#123; &#125;;</span><br><span class="line"></span><br><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const &#123; service &#125; &#x3D; Class;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 2. 新增处理方式</span><br><span class="line">            if (e instanceof PreconditionException) &#123;</span><br><span class="line">                &#x2F;&#x2F; 写日志，前置条件断言失败</span><br><span class="line">                throw e;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 写日志</span><br><span class="line">            throw e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const assert &#x3D; condition &#x3D;&gt; &#123;</span><br><span class="line">    if (!condition) &#123;</span><br><span class="line">        throw new PreconditionException;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyService &#123;</span><br><span class="line">    @exceptionAOP</span><br><span class="line">    static service(x) &#123;</span><br><span class="line">        assert(x);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-4edc7a4ce4127d1e.png" /></p>
+<p><strong>注：</strong></p>
+<p>如果认为每次都修改<code>exceptionAOP</code>是一件麻烦事，我们可以这样做，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1. 新增异常</span><br><span class="line">class PreconditionException extends Error &#123; &#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 2. 新增处理方式</span><br><span class="line">exceptionHandler.add(&#123;</span><br><span class="line">    exception: PreconditionException,</span><br><span class="line">    handler: e &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; 写日志，前置条件断言失败</span><br><span class="line">        throw e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>有了一阶语言之后，我们就可以为符号选择语义了，</p>
-<p>通常的，语言的语义有两部分组成，</p>
-<p>其一称为<strong>结构</strong>，用来解释常元符号，函数符号和谓词符号，</p>
-<p>其二称为<strong>赋值</strong>，用来解释变元符号。</p>
+<p>其中<code>exceptionHandler</code>是我们编写的辅助对象，具体实现方式可以灵活选择，</p>
+<p>在切面上的用法如下，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const service &#x3D; Class.service;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            &#x2F;&#x2F; 使用exceptionHandler处理异常</span><br><span class="line">            exceptionHandler.handle(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h4 id="语言结构">5.1 语言结构</h4>
-<p>一阶语言<span data-katex="\mathscr{L}"></span>的<strong>结构</strong><span data-katex="M"></span>是一个偶对，记为<span data-katex="M=(\mathbb{M}, I)"></span>，其中，</p>
-<p>（1）<span data-katex="\mathbb{M}"></span>是一个非空集合，称为<strong>论域</strong>，</p>
-<p>（2）<span data-katex="I"></span>是从<span data-katex="\mathscr{L}"></span>到<span data-katex="\mathbb{M}"></span>的映射，称为<strong>解释</strong>，记为<span data-katex="I:\mathscr{L} \rightarrow \mathbb{M}"></span>，它满足下面三个条件</p>
-<ol type="a">
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个常元符号<span data-katex="c"></span>，<span data-katex="I(c)"></span>是<span data-katex="\mathbb{M}"></span>中的元素</p></li>
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个n元函数符号<span data-katex="f"></span>，<span data-katex="I(f)"></span>是<span data-katex="\mathbb{M}"></span>上的n元函数</p></li>
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个n元谓词符号<span data-katex="P"></span>，<span data-katex="I(P)"></span>是<span data-katex="\mathbb{M}"></span>上的一个n元关系</p></li>
-</ol>
+<h3 id="先考虑异常处理">5. 先考虑异常处理</h3>
+<p>在设计系统的时候，异常以及异常处理方式应该事先考虑，</p>
+<p>否则人们就会按照各自的便利来编写逻辑，</p>
+<p>这样很容易产生<strong>兼容性问题</strong>。</p>
 <p><br/></p>
-<p>例，我们可以指定初等算术语言<span data-katex="\Pi"></span>的结构为，偶对<span data-katex="N=(\mathbb{N}, I)"></span>，</p>
-<p>其中论域<span data-katex="\mathbb{N}"></span>为自然数集，</p>
-<p><span data-katex="I(S)"></span>为自然数集上的加<span data-katex="1"></span>函数，<span data-katex="I(+)"></span>为自然数加法运算，<span data-katex="I(\cdot)"></span>为自然数乘法运算。</p>
-<p><span data-katex="I(&lt;)"></span>为自然数集上的小于关系。</p>
+<p>例如，有些接口可能会通过<strong>返回异常值</strong>来反馈异常，</p>
+<p>而有的接口会通过<strong>上抛异常</strong>来反馈，</p>
+<p>这样在处理方式上就很难统一处理，业务逻辑写起来会比较繁琐。</p>
 <p><br/></p>
-<h4 id="变元赋值">5.2 变元赋值</h4>
-<p>赋值<span data-katex="\sigma"></span>是一个映射，<span data-katex="\sigma:V\to\mathbb{M}"></span>，</p>
-<p>它将<span data-katex="\mathscr{L}"></span>中的每一个变元，赋以论域<span data-katex="\mathbb{M}"></span>中的一个元素<span data-katex="a"></span>，</p>
-<p>记为<span data-katex="\sigma(x)=a"></span>，其中<span data-katex="x\in V,a\in\mathbb{M}"></span>。</p>
+<p>即使已经确定为返回异常值的方式，也容易出现以下问题，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 接口1</span><br><span class="line">&#123;</span><br><span class="line">    isSuccess: boolean,</span><br><span class="line">    message: string,</span><br><span class="line">    data: object</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 接口2</span><br><span class="line">&#123;</span><br><span class="line">    succeed: boolean,</span><br><span class="line">    msg: string,</span><br><span class="line">    data: object</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上两个接口的数据类型是不同的，</p>
+<p>第一个接口用<code>isSuccess</code>来标志异常，第二个用<code>succeed</code>，</p>
+<p>那么这两个接口的调用者，就不得不<strong>分别处理</strong>它们。</p>
 <p><br/></p>
-<p>有了赋值运算之后，公式中的变元就固定下来了，</p>
-<p>我们就可以谈论，在某一指定赋值运算下公式的语义了。</p>
+<p>因此，这是下层服务返回了两种异常，但是期望它们用相同的方式处理，</p>
+<p>这很显然是<strong>系统设计</strong>的不恰当。</p>
 <p><br/></p>
-<h4 id="模型和语义">5.3 模型和语义</h4>
+<p>并且，当我们意识到这个问题的时候，再进行修改就难了，</p>
+<p>抛出异常和处理异常的代码要同时修改，是一种<strong>接口变更</strong>，</p>
+<p>会涉及兼容性问题。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-7d6ac5cbb607ea83.png" /></p>
+<h3 id="结语">结语</h3>
+<p>我们可能都体会过，知道错误但是不知道原因的那种<strong>憋闷感</strong>，</p>
+<p>在整个调用链路上，一环一环的排查，结果发现是某个服务吃掉了异常。</p>
 <p><br/></p>
-<p>给定一阶语言<span data-katex="\mathscr{L}"></span>，并指定结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，</p>
-<p>我们称<span data-katex="(M,\sigma)"></span>是，我们为语言<span data-katex="\mathscr{L}"></span>选择的一个<strong>模型</strong>。</p>
+<p>如果有日志可循，这还不是难事，最多是花费一些时间，</p>
+<p>但如果日志都不健全，定位一个问题简直是难于登天，甚至要手动debug才行。</p>
+<p>究其原因可能是，<strong>人们想要隐藏错误，以使得系统看似健壮。</strong></p>
 <p><br/></p>
-<p><strong>项的语义</strong></p>
-<p>选择了模型<span data-katex="(M,\sigma)"></span>之后，</p>
-<p><span data-katex="\mathscr{L}"></span>中的合法项<span data-katex="t"></span>的<strong>语义</strong>，</p>
-<p>就可以归纳的定义为论域<span data-katex="\mathbb{M}"></span>中的元素了，记为<span data-katex="t_{M[\sigma]}"></span>。</p>
-<p>（1）<span data-katex="x_{M[\sigma ]}=\sigma (x)"></span>，<span data-katex="x"></span>为变元符号</p>
-<p>（2）<span data-katex="c_{M[\sigma ]}=c_M"></span>，<span data-katex="c"></span>为常元符号</p>
-<p>（3）<span data-katex="(ft_1\cdot \cdot \cdot t_n)_{M[\sigma ]}=f_M((t_1)_{M[\sigma ]},\cdot \cdot \cdot (t_n)_{M[\sigma ]})"></span></p>
-<p><br/></p>
-<p>例，初等算术<span data-katex="\Pi"></span>中项的语义，</p>
-<p><span data-katex="(+x_1Sx_7)_{N[\sigma ]}=(x_1)_{N[\sigma ]}+(Sx_7)_{N[\sigma ]}=1+((x_7)_{N[\sigma ]}+1)=1+(7+1)=9"></span></p>
-<p><br/></p>
-<p><strong>逻辑公式的语义</strong></p>
-<p>公式<span data-katex="A"></span>在模型<span data-katex="(M, \sigma )"></span>下的语义是一个真假值，用<span data-katex="A_{M[\sigma ]}"></span>表示，归纳定义如下，</p>
-<p>（1）<span data-katex="(Pt_1\cdot \cdot \cdot t_n)_{M[\sigma ]}=P_M((t_1)_{M[\sigma ]},\cdot \cdot \cdot ,(t_n)_{M[\sigma ]})"></span></p>
-<p>（2）<span data-katex="(t_1\doteq t_2)_{M[\sigma ]}=\begin{cases}T,&amp;\text{if }(t_1)_{M[\sigma ]}=(t_2)_{M[\sigma ]}\\F,&amp;\text{otherwise}\end{cases}"></span></p>
-<p>（3）<span data-katex="(\neg A)_{M[\sigma ]}=B_\neg (A_{M[\sigma ]})"></span></p>
-<p>（4）<span data-katex="(A\vee B)_{M[\sigma ]}=B_\vee (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
-<p>（5）<span data-katex="(A\wedge B)_{M[\sigma ]}=B_\wedge (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
-<p>（6）<span data-katex="(A\rightarrow B)_{M[\sigma ]}=B_\rightarrow (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
-<p>（7）<span data-katex="(A\leftrightarrow B)_{M[\sigma ]}=B_\leftrightarrow (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
-<p>（8）<span data-katex="(\forall x_iA)_{M[\sigma ]}=\begin{cases}T,&amp;\forall a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&amp;\text{otherwise}\end{cases}"></span></p>
-<p>（9）<span data-katex="(\exists x_iA)_{M[\sigma ]}=\begin{cases}T,&amp;\exists a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&amp;\text{otherwise}\end{cases}"></span></p>
-<p><br/></p>
-<p>其中，二元真值函数<span data-katex="B_\wedge, B_\vee, B_\rightarrow, B_\leftrightarrow"></span>，</p>
-<p>分别逻辑连接词符号<span data-katex="\wedge, \vee, \rightarrow, \leftrightarrow"></span>的语义。</p>
-<p><br/></p>
-<p>至此，我们通过为一阶语言指定模型，</p>
-<p>将语言中所有的符号串都进行了解释。</p>
-<p><br/></p>
-<h3 id="总结">6. 总结</h3>
-<p>本文以一阶逻辑为例，从逻辑学角度给出了语义模型的定义，</p>
-<p>由此，一阶逻辑系统中的符号串，都有了一个数学对象与之对应，</p>
-<p>它们是论域，论域集合上的函数和运算。</p>
-<p><br/></p>
-<p>可想而已，这些数学对象是有代数性质的，</p>
-<p>下文我们将继续深入了解。</p>
-<p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://thzt.github.io/2017/09/16/type-5/">你好，类型（五）：Predicate logic</a></p>
-<p><a href="https://book.douban.com/subject/2364517/" target="_blank" rel="noopener">数理逻辑</a></p>
-<p><a href="https://zh.wikipedia.org/zh-hans/%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91" target="_blank" rel="noopener">一阶逻辑</a></p>
+<p>所以，哪有不出错的系统，我们只能<strong>及时修正</strong>。</p>
 
           
         
@@ -567,7 +521,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/148/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/148/">148</a><span class="page-number current">149</span><a class="page-number" href="/page/150/">150</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/150/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/148/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/148/">148</a><span class="page-number current">149</span><a class="page-number" href="/page/150/">150</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/150/">&gt;</a>
   </nav>
 
 
@@ -613,7 +567,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -688,7 +642,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/01/04/psychology-02/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/04/16/about-information/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/04/psychology-02/" itemprop="url">前端开发心理学（二）：选择和坚持</a></h1>
+                <a class="post-title-link" href="/2019/04/16/about-information/" itemprop="url">信息的隐藏、暴露和传递</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-04T00:00:00+08:00">
-                2019-01-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-16T00:00:00+08:00">
+                2019-04-16
               </time>
             
 
@@ -347,94 +347,134 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-04-psychology-02/1023733-adf6674748788dcf.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-04-16-about-information/1023733-16f88d518fb63c18.png" /></p>
 <p><br/></p>
-<p>也不知道是不是我<strong>已身处</strong>开发者行列的缘故，</p>
-<p>从行内来看，我了解到这几年<strong>转行</strong>做程序员的年轻人越来越多了，</p>
-<p>同事中科班出身的，也少之又少。</p>
+<p>信息是一个很复杂的概念，信息论影响了很多学科，</p>
+<p>包括电子工程，计算机科学，物理学，数学，科学哲学，经济学，等等。</p>
 <p><br/></p>
-<p>这可能是跟近几年软件行业的极速发展有关，</p>
-<p>有大量的工作机会，也需要更多的人。</p>
+<blockquote>
+<p>Information theory studies the transmission, processing, extraction, and utilization of information.</p>
+</blockquote>
+<blockquote>
+<p>Abstractly, information can be thought of as the resolution of uncertainty.</p>
+</blockquote>
+<blockquote>
+<p>—— <a href="https://en.wikipedia.org/wiki/Information_theory" target="_blank" rel="noopener">wikipedia: Information theory</a></p>
+</blockquote>
 <p><br/></p>
-<p>我本身也<strong>不是</strong>计算机专业的。</p>
-<p>和当前的这些汹涌从业大军比起来，</p>
-<p>我刚毕业时之所以选择编程，是因为<strong>别无选择</strong>。</p>
+<p>信息可以用来消除不确定性，这个说法来源于 <a href="https://en.wikipedia.org/wiki/Claude_Shannon" target="_blank" rel="noopener">Shannon</a>，</p>
+<p>1948年他发表了 <a href="https://en.wikipedia.org/wiki/A_Mathematical_Theory_of_Communication" target="_blank" rel="noopener">A Mathematical Theory of Communication</a>，</p>
+<p>提出了<a href="https://zh.wikipedia.org/wiki/%E7%86%B5_(%E4%BF%A1%E6%81%AF%E8%AE%BA)" target="_blank" rel="noopener">信息熵</a>的概念。</p>
 <p><br/></p>
-<p>当时几乎找不到任何力所能及的工作，</p>
-<p>只有<strong>编程</strong>这一条路可以走。</p>
+<p>信息熵是随机变量不确定度的度量，</p>
+<p>设<span data-katex="X"></span>是一个随机变量，其字母表（即概率论中的取值空间）为<span data-katex="\mathcal{X}"></span>，</p>
+<p>概率密度函数<span data-katex="p(x)=Pr(X=x),~x\in\mathcal{X}"></span>。</p>
 <p><br/></p>
-<h3 id="如何面对选择">如何面对选择</h3>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-04-psychology-02/1023733-23de84c892fd2bd2.png" /></p>
+<p>则，离散型随机变量<span data-katex="X"></span>的<strong>熵</strong><span data-katex="H(X)"></span>定义为，</p>
+<p><span data-katex="H(X)=-\sum_{x\in\mathcal{X}}p(x)log_2p(x)"></span></p>
 <p><br/></p>
-<p>选择一个行业之前，是需要仔细考虑的，</p>
-<p>虽然学校里并没有特意告知我们<strong>需要一个考虑的过程</strong>。</p>
+<p>熵的单位用比特表示，例如抛掷均匀硬币这一事件的熵为，</p>
+<p><span data-katex="H(X)=-\left [ \frac{1}{2}log_2\left ( \frac{1}{2} \right ) + \frac{1}{2}log_2\left ( \frac{1}{2} \right ) \right ] = 1"></span> 比特。</p>
+<h3 id="信息隐藏">信息隐藏</h3>
+<p>既然信息可以用来消除不确定性，那么是不是信息量越大越好呢？</p>
+<p>其实不然，因为能够<strong>传递信息</strong>的<a href="https://zh.wikipedia.org/wiki/%E5%B8%A6%E5%AE%BD" target="_blank" rel="noopener">带宽</a>是有限的。</p>
+<p>并且，对于接受信息的一方而言，单位时间内能够<strong>接受</strong>的信息量也是有限的。</p>
 <p><br/></p>
-<p>而且当面临多个选择时，<strong>纠结感</strong>也会立刻袭上心来，</p>
-<p>翻来覆去不知道到底哪个选择才是正确的。</p>
+<p>因此，在涉及信息传递的时候，</p>
+<p>我们一方面要考虑如何提高带宽，如何提高接受方的信息处理效率，</p>
+<p>另一方面，还要考虑如何减少<strong>无效信息量</strong>。</p>
 <p><br/></p>
-<p>我认为此时就应该采用<strong>试探法</strong>，</p>
-<p>尽可能多的<strong>行动</strong>起来，尝试做一些<strong>切实相关的</strong>工作。</p>
-<p>不向前走就只能原地踏步，左右为难的根本原因是<strong>信息量不足</strong>。</p>
+<p>现如今，如何处理信息，如何加速有效信息的传递，</p>
+<p>已逐渐成为了<strong>知识密集型</strong>工作的新瓶颈点。</p>
 <p><br/></p>
-<p>这时候就需要进行广泛的调研，</p>
-<p>以纠正了自己不恰当的<strong>假设</strong>与<strong>认知</strong>。</p>
+<p>从这个意义上来看，面向对象编程范式提倡的<strong>封装</strong>思想，</p>
+<p>确实有利于工作效率的进一步提高。</p>
 <p><br/></p>
-<h3 id="如何决定">如何决定</h3>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-04-psychology-02/1023733-f06ba9cd42eb4434.png" /></p>
+<p>不过，封装也本不应该与任何编程范式进行强绑定，</p>
+<p>这可能是面向对象所起到的反作用之一吧。</p>
 <p><br/></p>
-<p>甚至都没人告诉过我们<strong>如何做决定</strong>，这很不幸，</p>
-<p>因此，要么我们做出的决定都比较<strong>草率</strong>，</p>
-<p>要么我们就<strong>难以</strong>做出决定。</p>
+<p>封装隐藏了具体的细节，只暴露出必要的信息，</p>
+<p>有效的降低了信息处理的负荷。</p>
+<h3 id="信息暴露">信息暴露</h3>
+<p>之前在知乎上看到了一个回答，<a href="https://www.zhihu.com/question/39947219/answer/214338328" target="_blank" rel="noopener">VR 电影目前最大的瓶颈是什么？</a>，</p>
+<blockquote>
+<p>电影的本质，是有<strong>框视觉</strong>。「框」是导演给到观众的信息感受区。</p>
+</blockquote>
+<blockquote>
+<p>框内框外都是导演出于自己的艺术创造，为观众重新打造的空间。</p>
+</blockquote>
+<blockquote>
+<p>而景别，就是决定这个框里框外边界的根本。</p>
+</blockquote>
+<blockquote>
+<p>真正电影创作者非常看重画外空间。</p>
+</blockquote>
 <p><br/></p>
-<p>尤其是当我们有众多选择的时候，</p>
-<p>总得有所<strong>取舍</strong>，</p>
-<p>什么都不放弃，就什么也得不到。</p>
+<p>可见电影的好坏，很大程度上取决于创作者特意给观众营造的<strong>视听效果</strong>。</p>
+<p>电影如此，软件设计也是如此。</p>
 <p><br/></p>
-<p>因此，做决定需要用<strong>排除法</strong>，</p>
-<p>不要认为自己擅长做任何事情，而是要看到自己的弱点。</p>
-<p>保持谦虚，将有助于我们回归理性<strong>消除野心</strong>看清现实。</p>
-<h3 id="坚持">坚持</h3>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-01-04-psychology-02/1023733-60edac1166aa09c8.png" /></p>
+<p>我们应该对哪些细节进行隐藏，哪些信息进行暴露，</p>
+<p>对于软件，尤其是框架/工具的设计而言，起着至关重要的作用。</p>
+<p>它会极大的改变用户的使用成本和<strong>学习曲线</strong>。</p>
 <p><br/></p>
-<p>一旦做出决定，似乎只要<strong>坚持住</strong>迎接胜利就行了，</p>
-<p>其实这一点都不简单，</p>
-<p>有太多的人在中途<strong>改变</strong>了主意。</p>
+<p>让别人能更好的理解，是一件很有学问的事情。</p>
+<p>陡峭的学习曲线会使人望而却步，会浪费很多不必要的人力成本。</p>
 <p><br/></p>
-<p>会不会有更好的选择？</p>
-<p>这样做究竟对不对？</p>
-<p>这些<strong>自我怀疑</strong>，很容易让我们半途而废。</p>
+<p>人们总是很难站在缺少信息的一方考虑问题的，</p>
+<p>这称为<a href="https://zh.wikipedia.org/zh-hans/%E7%9F%A5%E8%AD%98%E7%9A%84%E8%A9%9B%E5%92%92" target="_blank" rel="noopener">知识的诅咒</a>，是一种<a href="https://zh.wikipedia.org/wiki/%E8%AA%8D%E7%9F%A5%E5%81%8F%E8%AA%A4" target="_blank" rel="noopener">认知偏差</a>，</p>
+<p>知识的诅咒是影响沟通的重大阻碍之一。</p>
+<h3 id="信息传递">信息传递</h3>
+<p>对于软件开发而言，代码与其说是开发者对功能的具体实现，</p>
+<p>倒不如说是他们对<strong>领域知识</strong>的理解和描述。</p>
 <p><br/></p>
-<p>所以，应对迷茫，唯一的办法就是<strong>傻瓜式的坚持</strong>，</p>
-<p>一旦做出决定，就不要再听别人的<strong>建议</strong>了，</p>
-<p>因为，不在于做什么<strong>事</strong>，而在于做事的<strong>人</strong>。</p>
+<p>不幸的是，由于代码只要能运行就完成了基本功能，</p>
+<p>所以，很大一部分信息量都没有被包含在代码中。</p>
+<p>它们存在于开发者的大脑中，存在于代码之外的地方。</p>
 <p><br/></p>
-<p>选取一个固定时间段，每天坚持完这几个小时，</p>
-<p>不要想那么多，让改变慢慢发生，</p>
-<p>尤其不要考虑这件事<strong>是否</strong>有意义。</p>
+<p>在有众多开发者的企业中，每天产出的新信息是无法估量的，</p>
+<p>如果这些信息没有被很好的隐藏和暴露，</p>
+<p>就会造成信息污染，严重的影响整体的开发效率。</p>
+<p><br/></p>
+<p>不仅如此，软件质量也会受到波及。</p>
+<p>在一个不确定的系统中，发生<strong>莫名其妙的故障</strong>概率大大增加。</p>
+<p>中医讲究“<strong>不通则痛</strong>”，是有道理的。</p>
+<p><br/></p>
+<p>因此，仅从代码的可复用角度来解决问题，是不可取的，</p>
+<p>应该对组织的<strong>沟通结构</strong>和软件<strong>系统架构</strong>，更为关心。</p>
+<p><br/></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%B0%94%E6%96%87%C2%B7%E5%BA%B7%E5%A8%81" target="_blank" rel="noopener">康威</a>在1967年提出，</p>
+<blockquote>
+<p>设计系统的架构受制于产生这些设计的组织的沟通结构。</p>
+</blockquote>
+<blockquote>
+<p>—— <a href="https://zh.wikipedia.org/zh-hans/%E5%BA%B7%E5%A8%81%E5%AE%9A%E5%BE%8B" target="_blank" rel="noopener">康威定律</a></p>
+</blockquote>
+<p><br/></p>
+<p>所以，沟通结构不合理的组织，所产出的软件系统，</p>
+<p>对于解决业务问题而言是力不从心的。</p>
+<p><br/></p>
+<p>也就是组织文化决定了人们做事的方式。</p>
+<p>团队是领导本人处事态度的缩影。</p>
 <h3 id="结语">结语</h3>
-<p>本文描写了与<strong>选择</strong>，<strong>决定</strong>以及<strong>坚持</strong>相关的心理活动，</p>
-<p>这方面我们听说过很多<strong>相互矛盾</strong>的说法，</p>
-<p>“选择大于努力”，“失败只有一种，那就是半途而废”，等等。</p>
+<p>软件开发工作中，与信息相关的内容，还远不止如此，</p>
+<p>比如，组内成员的做事方式，是否纵容了<a href="https://wiki.mbalib.com/wiki/%E4%BF%A1%E6%81%AF%E5%AD%A4%E5%B2%9B" target="_blank" rel="noopener">信息孤岛</a>的形成，</p>
+<p>又比如，管理者是否关心由于信息沟通不畅所产生的问题排查成本。</p>
 <p><br/></p>
-<p>因此，一旦遇到困难，我们就会<strong>陷入纠结</strong>，</p>
-<p>到底是应该灵活选择？还是应当坚持下去？</p>
-<p>是虚心接受别人的建议？还是坚持自己的看法？</p>
+<p>这既是软件本身的特点问题，也是软件团队的管理方式问题，</p>
+<p>违反软件规律的做法，就会受到惩罚。</p>
 <p><br/></p>
-<p>本文倾向于把这种问题分为三个<strong>阶段</strong>，</p>
-<p>在<strong>选择阶段</strong>，我们要尽量多的掌握信息，开阔视野，</p>
-<p>在<strong>决定阶段</strong>，要看清自己的局限性，消除野心，</p>
-<p>而在<strong>坚持阶段</strong>，就得义无反顾的坚持下去，绝不动摇。</p>
-<p><br/></p>
-<p>这样我们的方案，就能够吸取众家之长了，</p>
-<p>也具有较强的<strong>可执行性</strong>。</p>
-<p><br/></p>
-<p>正是，</p>
 <blockquote>
-<p>古人学问无遗力，少壮工夫老始成。</p>
+<p>你一个人要干三天，我给你三个人，你给我干一天。</p>
 </blockquote>
 <blockquote>
-<p>纸上得来终觉浅，绝知此事要躬行。</p>
+<p>五个人不够，我给你加十个人、加二十个人。</p>
 </blockquote>
+<hr />
+<h3 id="参考">参考</h3>
+<p><a href="https://en.wikipedia.org/wiki/Information_theory" target="_blank" rel="noopener">wikipedia: Information theory</a></p>
+<p><a href="https://book.douban.com/subject/2305237/" target="_blank" rel="noopener">信息论基础</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%86%B5_(%E4%BF%A1%E6%81%AF%E8%AE%BA)" target="_blank" rel="noopener">信息熵</a></p>
+<p><a href="https://zh.wikipedia.org/zh-hans/%E5%BA%B7%E5%A8%81%E5%AE%9A%E5%BE%8B" target="_blank" rel="noopener">康威定律</a></p>
 
           
         
@@ -473,7 +513,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/105/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/105/">105</a><span class="page-number current">106</span><a class="page-number" href="/page/107/">107</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/107/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/105/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/105/">105</a><span class="page-number current">106</span><a class="page-number" href="/page/107/">107</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/107/">&gt;</a>
   </nav>
 
 
@@ -519,7 +559,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -594,7 +634,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

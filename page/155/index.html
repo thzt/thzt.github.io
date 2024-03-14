@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/11/28/bisection-method/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/19/semantics-9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/28/bisection-method/" itemprop="url">使用二分法排查问题</a></h1>
+                <a class="post-title-link" href="/2018/02/19/semantics-9/" itemprop="url">语言背后的代数学（九）：笛卡尔闭范畴</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-28T00:00:00+08:00">
-                2017-11-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-19T00:00:00+08:00">
+                2018-02-19
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,132 +347,135 @@
       
         
           
-            <p>数学上的<a href="https://en.wikipedia.org/wiki/Bisection_method" target="_blank" rel="noopener">二分法</a>，是一种方程根的近似解法。</p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-cb66a46077b03ab6.png" /></p>
 <p><br/></p>
-<p>如果要求已知函数<span data-katex="f(x)=0"></span>的根，</p>
-<p>那么我们要先找出一个区间<span data-katex="[a,b]"></span>，使得<span data-katex="f(a)"></span>与<span data-katex="f(b)"></span>异号（正负值不同）。</p>
-<p>根据连续函数的<a href="Intermediate%20value%20theorem">中值定理</a>，</p>
-<p>该区间内必存在方程的一个根。</p>
+<h3 id="回顾">回顾</h3>
+<p>上文我们简单的介绍了一些范畴论相关的内容，</p>
+<p>范畴由一些对象和箭头组成，范畴之间的箭头称为函子，</p>
+<p>函子之间的一族箭头称为自然变换。</p>
 <p><br/></p>
-<p>于是，我们就可以取该区间的中点<span data-katex="m=\frac{a+b}{2}"></span>，逐渐缩小区间，</p>
-<p>如果<span data-katex="f(m)"></span>与<span data-katex="f(a)"></span>异号，则取新区间为<span data-katex="[a,m]"></span>，否则取新区间为<span data-katex="[m,b]"></span>。</p>
-<p>就这样一直迭代，直到达到我们期望的精度为止。</p>
+<p>范畴的对象不一定是集合，所有的箭头也不一定构成一个集合。</p>
+<p>如果一个范畴<span data-katex="C"></span>，它的对象都是集合，所有的箭头也构成了一个集合，</p>
+<p>就称该范畴是一个小范畴（<a href="https://en.wikipedia.org/wiki/Category_(mathematics)#Small_and_large_categories" target="_blank" rel="noopener">small categories</a>）。</p>
 <p><br/></p>
-<p><strong>二分法的主要思路是这样的：</strong></p>
-<p><strong>（1）找到使函数值异号的区间</strong></p>
-<p><strong>（2）在区间内取点试验，缩小范围</strong></p>
+<h3 id="定义域和值域">1. 定义域和值域</h3>
 <p><br/></p>
-<p>幸运的是，这种思想不仅可以用来求解方程，</p>
-<p>还可以用于在软件开发过程中排查问题。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-57ed84963b06aca7.png" /></p>
 <p><br/></p>
-<h3 id="基础二分法">基础二分法</h3>
-<p>我们都知道，排查问题对于开发软件来说，简直是家常便饭，</p>
-<p>经常会遇到莫名其妙的突发状况，软件不能运行了。</p>
-<p>从一开始我们用C语言写<code>Hello world</code>，这种事情就没有间断过，</p>
-<p>导致问题的原因，可能会非常愚蠢，也可能会异常微妙。</p>
+<p>在集合论中，函数自变量所有可取值的集合，称为函数的<strong>定义域</strong>，</p>
+<p>给定函数<span data-katex="f:A\to B"></span>，其中<span data-katex="A"></span>就是<span data-katex="f"></span>的定义域，记为<span data-katex="D_f"></span>，</p>
+<p>集合<span data-katex="f(A)=\{f(x)|x\in A\}"></span>，称为<span data-katex="f"></span>的<strong>值域</strong>，记为<span data-katex="R_f"></span>。</p>
 <p><br/></p>
-<p>稍微长一点的程序，我们就会发现，</p>
-<p>刚开始还是对的，中途不知道怎么的就出现了错误。</p>
-<p>下面我们来看一下如何借用二分法思想，排查这些问题。</p>
+<p>在范畴论中，箭头也有定义域和值域的概念。</p>
+<p>箭头<span data-katex="f:a\to b"></span>，表示了对象<span data-katex="a"></span>和<span data-katex="b"></span>之间的关系，</p>
+<p>我们称<span data-katex="a"></span>为箭头<span data-katex="f"></span>的<strong>定义域</strong>（domain），记为<span data-katex="dom~f"></span>，</p>
+<p><span data-katex="b"></span>为箭头<span data-katex="f"></span>的<strong>值域</strong>（codomain），记为<span data-katex="cod~f"></span>。</p>
 <p><br/></p>
-<p>首先，我们要找到“使函数值异号的区间”，</p>
-<p>即，<strong>找到在什么情况下程序是对的，而在什么情况下是错的。</strong></p>
-<p>那么程序出错的原因，肯定在这两种情况中间，我们只要不断缩小范围即可。</p>
+<p>由此，我们还可以定义范畴<span data-katex="C"></span>中，从对象<span data-katex="a"></span>到对象<span data-katex="b"></span>所有箭头的集合，</p>
+<p><span data-katex="hom(a,b)=\{f|f\in C,dom~f=a,cod~f=b\}"></span>，常被称为<strong><a href="https://en.wikipedia.org/wiki/Morphism#Definition" target="_blank" rel="noopener">hom-set</a></strong>。</p>
 <p><br/></p>
-<p>对于长程序而言，把程序删完，显然应该是对的，</p>
-<p>而整个程序因为其结果不正确是有问题的，</p>
-<p>因此，我们就找到了一个“异号区间”，</p>
-<p>我们可以清楚的看到两套环境，一套是有问题的，而另一套则没有。</p>
+<h3 id="笛卡尔闭范畴">2. 笛卡尔闭范畴</h3>
 <p><br/></p>
-<p>然后我们就可以贴一半代码上去了，看看中间结果是否正确，</p>
-<p>如果是正确的，则证明到目前为止，贴的那一半代码是正确的，</p>
-<p>否则，这一半代码就是有问题的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-813d7932c1fb3fb5.png" /></p>
 <p><br/></p>
-<p>通过界定两套环境，我们就可以大胆的尝试，</p>
-<p>从而迅速将问题规模减半，这正是二分法的威力。</p>
+<p>笛卡尔闭范畴是一种带有附加结构的范畴，这个名字虽然不是那么熟悉，</p>
+<p>而实际上，我们经常遇到它。</p>
 <p><br/></p>
-<h3 id="极端情况法">极端情况法</h3>
-<p>从排查代码问题的小例子中，我们看到了一个极端情况，</p>
-<p>那就是，我们直接把程序删完，来断定这时候应该是没有问题的，</p>
-<p>这种办法，我们可以称为“极端情况法”。</p>
+<h4 id="笛卡尔积">2.1 笛卡尔积</h4>
+<p>两个集合<span data-katex="X"></span>和<span data-katex="Y"></span>的笛卡尔积，是以下所有可能有序对构成的集合，</p>
+<p><span data-katex="X\times Y=\{(x,y)|x\in X,y\in Y\}"></span>。</p>
 <p><br/></p>
-<p>在寻找“异号区间”时，这种办法非常有用。</p>
-<p><strong>我们通常会选取一个极端的情况，在这种情况下，绝对不会出现问题。</strong></p>
-<p>因为如果不这样，我们经常会在问题环境中折腾很久，结果不论怎么弄都有问题。</p>
-<p>此外，如果没有一个极端情况来告诉我们没有问题，就无法二分。</p>
+<h4 id="笛卡尔积上的函数">2.2 笛卡尔积上的函数</h4>
+<p><span data-katex="f:X\times Y\to Z"></span>，是从笛卡尔积<span data-katex="X\times Y"></span>到<span data-katex="Z"></span>的函数，</p>
+<p>我们可以用两种不同的视角来看待它，</p>
+<p>（1）它是一个一元函数，参数取遍<span data-katex="X\times Y"></span>中的所有元素。</p>
+<p>（2）它是一个二元函数，一个参数来自于<span data-katex="X"></span>，另一个来自于<span data-katex="Y"></span>。</p>
+<p>原则上，这两种理解应该是不同的，然而它们却是等价的。</p>
 <p><br/></p>
-<p>我曾经遇到过一个JavaScript的问题，</p>
-<p>有一段代码，在服务器上总是无法运行，提示有非法字符，但是在我本机却没有问题。</p>
-<p>我甚至将每一个字符都逐个对比了，服务器上还是有问题。</p>
+<h4 id="柯里化">2.3 柯里化</h4>
 <p><br/></p>
-<p>怎么折腾都有问题，就意味着我们必须选取极端情况，</p>
-<p>找到极端的什么情况下，一定是没有问题的。</p>
-<p>于是，我将代码都删完了，只写了一个<code>alert()</code>，很明显代码是可以运行的，</p>
-<p>我找到了没有问题的环境。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-28c21c09edf2f2f3.png" /></p>
 <p><br/></p>
-<p>紧接着，我采用二分法，逐渐缩小范围，</p>
-<p>最终发现了一个在编辑器中无法显示的字符，是它导致了JavaScript语法错误。</p>
+<p>笛卡尔闭范畴就是反映这一类性质的数学结构，</p>
+<p>一个范畴中，定义在乘积对象<span data-katex="a\times b"></span>上的箭头<span data-katex="f"></span>，</p>
+<p>总是可以“自然的”由定义在某一个对象<span data-katex="a"></span>或<span data-katex="b"></span>上的箭头来决定。</p>
 <p><br/></p>
-<h3 id="干净实验室法">干净实验室法</h3>
-<p>最近用Lua写了一个脚本，用于转发Nginx中的get/post请求，这是一个稍微复杂的场景，</p>
-<p>如果对Lua和Nginx不熟悉，直接写出可用的正确代码简直是不可能的。</p>
+<p>这就是柯里化（curring）的概念，</p>
+<p>将一个二元函数柯里化指的是，将它看成一个一元函数，</p>
+<p>这个函数返回另一个一元函数。</p>
 <p><br/></p>
-<p>因此，我采用了“干净实验室法”，</p>
-<p>指的是，<strong>重新建立了一套干净的环境用于实验，</strong></p>
-<p>在这个“实验室”中检验成功的写法，才会移植到正式的开发环境中。</p>
+<p>假设<span data-katex="f:X\times Y\to Z"></span>是一个函数，</p>
+<p>令<span data-katex="Z^Y=\{f|f(y)\in Z,y\in Y\}"></span>是所有<span data-katex="Y"></span>到<span data-katex="Z"></span>的函数，</p>
+<p>则存在唯一的<span data-katex="g=X\to Z^Y"></span>，使得<span data-katex="g(x)(y)=f(x,y)"></span>，<span data-katex="\forall x\in X,y\in Y"></span>。</p>
+<p>函数<span data-katex="g"></span>称为<span data-katex="f"></span>的<strong>柯里化</strong>。</p>
 <p><br/></p>
-<p>我先后在这个实验室中，练习并检验了基本的Nginx用法，以及Lua的<code>Hello world</code>，</p>
-<p>接着，如何用Lua发起http请求，如何保留Cookie，都逐个被验证成功。</p>
-<p>最后，我将这些被验证的案例进行总结，集成到开发环境中，</p>
-<p>实现了这个稍微复杂一些的功能。</p>
+<p>用hom-set的术语来表述就是，存在一个一一映射，使得，</p>
+<p><span data-katex="hom(X\times Y,Z)\cong hom(X,Z^Y)"></span></p>
 <p><br/></p>
-<p>这种“干净实验室法”看起来和二分法无关，</p>
-<p>实际上却正是二分法思想的应用。</p>
+<h4 id="cartesian-closed">2.4 Cartesian Closed</h4>
+<p>将以上柯里化的概念推广到范畴论中，我们就有，</p>
+<p>一个笛卡尔闭范畴（cartesian closed category）<span data-katex="C"></span>，是满足以下几个额外条件的范畴。</p>
 <p><br/></p>
-<p>在解决这个问题的时候，我手里总是有两套环境，</p>
-<p>一个没有问题——实验室环境，另一个有问题——功能尚未实现，</p>
-<p>通过不断试验，功能被一个接一个实现，逐渐接近成功。</p>
+<p>（1）<span data-katex="C"></span>中存在一个对象<span data-katex="1"></span>，使得对于任意对象<span data-katex="A\in C"></span>，有唯一的箭头<span data-katex="A\to 1"></span>，</p>
+<p>这样的对象<span data-katex="1"></span>，称为终对象（<a href="https://en.wikipedia.org/wiki/Initial_and_terminal_objects" target="_blank" rel="noopener">terminal object</a>）。</p>
 <p><br/></p>
-<h3 id="排除变量法">排除变量法</h3>
-<p>以上我们提到情况中，有问题的场景都是显而易见的，</p>
-<p>我们清楚的知道在什么情况下会出现错误。</p>
-<p>然而，在另外一些场景中，问题环境就不容易被构造了。</p>
+<p>（2）对于任意两个对象<span data-katex="X"></span>和<span data-katex="Y"></span>，范畴<span data-katex="C"></span>中存在一个对象<span data-katex="X\times Y"></span>，</p>
+<p>以及两个箭头<span data-katex="p_1"></span>和<span data-katex="p_2"></span>，使得，<span data-katex="p_1:X\times Y\to X"></span>，<span data-katex="p_2:X\times Y\to Y"></span>。</p>
 <p><br/></p>
-<p>在进行手机移动端开发的时候，</p>
-<p>我实现过一个滚动容器，可以通过手指上下移动，让它滚动。</p>
-<p>这个功能在iOS上是没问题的，在几乎所有Android手机上也是可以的，</p>
-<p>但是仅在某台测试机上出现了问题，容器滚动后不会停止。</p>
+<p>（3）对于任意两个对象<span data-katex="Y"></span>和<span data-katex="Z"></span>，</p>
+<p>范畴<span data-katex="C"></span>中存在一个对象<span data-katex="Z^Y"></span>，以及一个箭头<span data-katex="e:Z^Y\times Y\to Z"></span>，使得，</p>
+<p>对于任意的箭头<span data-katex="f:X\times Y\to Z"></span>，存在唯一的箭头<span data-katex="g:X\to Z^Y"></span>，</p>
+<p>有<span data-katex="f=e\circ (g\times I)"></span>恒成立。</p>
 <p><br/></p>
-<p>这时候会有很多因素干扰到我，</p>
-<p>是不是测试机的问题？是不是Android原生浏览器的问题？</p>
-<p>是不是代码逻辑的问题？是不是应用中其他库或框架的影响？</p>
+<p>即，<span data-katex="(e\circ (g\times I))(X\times Y)=e((g\times I)(X\times Y))=e(Z^Y\times Y)=Z"></span>。</p>
+<p>其中<span data-katex="I:Y\to Y"></span>，为对象<span data-katex="Y"></span>的恒等箭头，<span data-katex="Z^Y"></span>称为指数对象（exponential object）。</p>
 <p><br/></p>
-<p>这些因素看起来是同时起作用的，因为稍微变动一点，问题就没了。</p>
-<p>这时候，我们就需要谨慎的排除变量，小心的保留问题环境了。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-475047e7eb5b9b6f.png" /></p>
 <p><br/></p>
-<p>使用排除变量法，<strong>我们要在其他因素保持不变的前提下，</strong></p>
-<p><strong>只变动一个因素，并且还要让现象保留。</strong></p>
-<p>于是，我们就可以像抽积木一样，把这些因素逐渐剥离出去了。</p>
+<h3 id="项的解释">3. 项的解释</h3>
+<p>在<a href="http://thzt.github.io/2018/02/04/semantics-6/">第六篇</a>中，为了解释简单类型化<span data-katex="\lambda"></span>演算，</p>
+<p>我们为每一个<span data-katex="\lambda"></span>项，找到了一个<span data-katex="\Sigma"></span>代数中数学对象与之对应，</p>
+<p>简要的说，我们用<span data-katex="\Sigma"></span>代数的载体<span data-katex="A^\sigma"></span>来解释基本类型<span data-katex="\sigma"></span>，</p>
+<p>用载体上的函数集<span data-katex="A^{\sigma\to\tau}"></span>来解释类型为<span data-katex="\sigma\to\tau"></span>的所有函数。</p>
 <p><br/></p>
-<p>最终我们发现，这类现象是Android 1.5机型上原生浏览器的问题，</p>
-<p>该浏览器有Bug，点按屏幕的时候，会触发touchstart和touchend事件，这个是好的，</p>
-<p>而手指在屏幕上移动的时候，将只触发touchstart和touchmove事件，</p>
-<p>touchend事件不被触发了，这是有问题的。</p>
+<p>现在有了笛卡尔闭范畴，我们准备为每一个基本类型选择范畴中的一个对象，</p>
+<p>而将项常量<span data-katex="b"></span>解释为范畴中的一个箭头<span data-katex="unit\to\mathscr{A}[\![b]\!]"></span>（原因在下文解释），</p>
+<p>其中<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>为我们在Henkin模型中定义的含义函数。</p>
 <p><br/></p>
-<p>为此，我们排除了框架的问题，代码的问题，某一台测试机的问题，</p>
-<p>等等这些非决定性因素。</p>
+<h4 id="封闭项的解释">3.1 封闭项的解释</h4>
+<p>我们这样定义一个<strong>含义函数</strong><span data-katex="\mathscr{C}[\![\cdot]\!]"></span>，</p>
+<p>（1）<span data-katex="\mathscr{C}[\![unit]\!]=unit"></span></p>
+<p>（2）<span data-katex="\mathscr{C}[\![b]\!]=unit\to\mathscr{A}[\![b]\!]"></span></p>
+<p>（3）<span data-katex="\mathscr{C}[\![\sigma\times\tau]\!]=\mathscr{C}[\![\sigma]\!]\times\mathscr{C}[\![\tau]\!]"></span></p>
+<p>（4）<span data-katex="\mathscr{C}[\![\sigma\to\tau]\!]=\mathscr{C}[\![\sigma]\!]\to\mathscr{C}[\![\tau]\!]"></span></p>
 <p><br/></p>
-<h3 id="结语">结语</h3>
-<p>本文介绍了二分法，它可用于在软件开发过程中排查问题，</p>
-<p>还介绍了二分法思想的几个简单应用。</p>
+<h4 id="带有自由变量的项">3.2 带有自由变量的项</h4>
+<p>如果<span data-katex="\Gamma\vdash M:\sigma"></span>是一个含有自由变量的<span data-katex="\lambda"></span>项，</p>
+<p>则在笛卡尔闭范畴中，它应该解释为从自由变量的语义对象到<span data-katex="\sigma"></span>的语义对象的一个箭头，</p>
+<p><span data-katex="\mathscr{C}[\![\Gamma\vdash M:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\to\mathscr{C}[\![\sigma]\!]"></span>。</p>
 <p><br/></p>
-<p>使用“极端情况法”，我们总是可以找到一个没有问题的环境，</p>
-<p>使用“干净实验室法”，我们就可以逐渐产出经过验证的代码，</p>
-<p>使用“排除变量法”，我们可以一一排除干扰，找出问题的直接原因。</p>
+<p>值得一提的是，</p>
+<p>这里说明了，项常量<span data-katex="b"></span>为什么不能被解释为范畴中的对象，</p>
+<p>而是解释成了箭头<span data-katex="unit\to\mathscr{A}[\![b]\!]"></span>。</p>
 <p><br/></p>
-<p>这些方法都是我个人经验的总结，它们使我能更有效的解决问题。</p>
-<p>但是，<strong>向有经验的人进行咨询，无疑是更有效的。</strong></p>
-<p>很多问题在见识广博的人眼中，根本不是问题，问路比速跑好。</p>
+<p>其中，类型上下文<span data-katex="\Gamma"></span>的解释，定义如下，</p>
+<p>（1）<span data-katex="\mathscr{C}[\![\varnothing]\!]=unit"></span></p>
+<p>（2）<span data-katex="\mathscr{C}[\![\Gamma,x:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\times\mathscr{C}[\![\sigma]\!]"></span></p>
+<p><br/></p>
+<h3 id="回顾-1">回顾</h3>
+<p>本文介绍了笛卡尔闭范畴，是一种具有特殊结构的范畴，</p>
+<p>它补充了柯里化这一概念所需满足的约束条件。</p>
+<p><br/></p>
+<p>接着我们用笛卡尔闭范畴解释了，</p>
+<p>带有<a href="http://thzt.github.io/2017/09/19/type-6/">单位类型</a>，乘积类型的简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^{unit,\times,\to}"></span>。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
+<p><a href="http://thzt.github.io/2018/02/04/semantics-6/">语言背后的代数学（六）：Henkin模型</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Category_(mathematics)#Small_and_large_categories" target="_blank" rel="noopener">Small and Large Categories</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Class_(set_theory)" target="_blank" rel="noopener">Class</a></p>
+<p><a href="https://book.douban.com/subject/26684696/" target="_blank" rel="noopener">Category Theory for Computing Science</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Cartesian_closed_category" target="_blank" rel="noopener">Cartesian closed category</a></p>
 
           
         
@@ -511,7 +514,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/154/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/154/">154</a><span class="page-number current">155</span><a class="page-number" href="/page/156/">156</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/156/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/154/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/154/">154</a><span class="page-number current">155</span><a class="page-number" href="/page/156/">156</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/156/">&gt;</a>
   </nav>
 
 
@@ -557,7 +560,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -632,7 +635,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

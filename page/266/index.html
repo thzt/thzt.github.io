@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/31/choice/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/06/24/model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/31/choice/" itemprop="url">可替换的设计策略</a></h1>
+                <a class="post-title-link" href="/2015/06/24/model/" itemprop="url">模型观</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-31T00:00:00+08:00">
-                2015-03-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-24T00:00:00+08:00">
+                2015-06-24
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
                   </a>
                 </span>
 
@@ -347,120 +347,129 @@
       
         
           
-            <p>人生就像一棵决策树，</p>
-<p>每一次选择，走向了不同的子节点。</p>
-<p>我们不能后退，也没办法消除历史的影响。</p>
+            <p>Robert Sedgewick/Kevin Wayne的《算法》一书中，</p>
+<p>强调了科学方法，</p>
 <p><br/></p>
-<p>因为时间是单向的，</p>
-<p>没有办法更改历史，</p>
-<p>只能以今天为基础继续向前。</p>
+<p>细致的观察真实世界的特点。</p>
+<p><strong>根据观察结果提出假设模型</strong>。</p>
+<p>根据模型预测未来的事件。</p>
+<p>继续观察并核实预测的准确性。</p>
+<p>如此反复直到确认预测和观察一致。</p>
 <p><br/></p>
-<p>对于软件，我们也倾向于持有相同的观点。</p>
-<p>认为软件的维护成本在后期是不可能缩减的，</p>
-<p>不得不背负以前失误的包袱。</p>
+<p>可是，</p>
+<p>我们永远也没法知道某个假设是否<strong>永远正确</strong>，</p>
+<p>我们只能验证它和我们的观察的一致性。</p>
 <p><br/></p>
-<p>然而，幸运的是，</p>
-<p>软件其实并非如此。</p>
+<p>爱因斯坦说，</p>
+<p>再多的实验也不一定能够证明我是对的，</p>
+<p>但只需要一个实验就能证明我是错的。</p>
 <p><br/></p>
-<p>软件问题，大多数都是设计的问题。</p>
+<p>科学方法可能大家都很清楚，</p>
+<p>但是遇到具体问题，</p>
+<p>人们却容易忽视它。</p>
 <p><br/></p>
-<h2 id="抽象和具体"><strong>抽象和具体</strong></h2>
-<p>和人生不同，</p>
-<p>软件功能的实现，</p>
-<p>限制条件相对宽松。</p>
+<p>实践是检验真理的唯一标准，</p>
+<p>大胆假设，小心求证，</p>
+<p>建立正确的<strong>模型观</strong>，</p>
+<p>可以少走很多弯路。</p>
 <p><br/></p>
-<p>毕业生，决定考研还是就业,</p>
-<p>只能选一个。</p>
-<p>但是，软件可以选择DoWork。</p>
+<h2 id="模型与目标系统"><strong>模型与目标系统</strong></h2>
+<p>我们经常混淆<strong>模型</strong>与<strong>目标系统</strong>的区别，</p>
+<p>把符号“1”，“2”，“3”,...</p>
+<p>当做数学对象中的自然数本身。</p>
 <p><br/></p>
-<p>越抽象，适用范围就越广。</p>
-<p>越具体，就越容易被证明是个错误。</p>
+<p>这只是用印刷符号对<strong>自然数</strong>进行建模，</p>
+<p>实际上还有不同的模型，</p>
+<p>除了阿拉伯数字，还有罗马数字，中国筹，等等，</p>
+<p>甚至还有Church number。</p>
 <p><br/></p>
-<p>好的设计实践，</p>
-<p>是把抽象和具体分开，</p>
-<p>抽象的每一种实现都是可替换的。</p>
+<p>这个世界上<strong>并没有本质的道理</strong>，</p>
+<p>因为，我们无法验证什么是绝对正确的。</p>
 <p><br/></p>
-<p>随着软件的发展，</p>
-<p>后期的维护成本才可能是常量复杂度的，</p>
-<p>因为每一个历史性的错误实现，都是可更改的。</p>
+<p>我们只能拿着模型来进行<strong>假设</strong>，</p>
+<p>然后通过实验<strong>验证</strong>它的准确性。</p>
 <p><br/></p>
-<h2 id="平凡的模块"><strong>平凡的模块</strong></h2>
-<p>武功高强的人们，</p>
-<p>不会频出诡异的绝招，</p>
-<p>招数越平凡，内耗就越小。</p>
+<p>使用模型，我们可以从不同侧面，</p>
+<p>对目标系统进行研究。</p>
 <p><br/></p>
-<p>向外提供抽象接口的人，是在玩小伎俩，</p>
-<p>不要将具体的实现方法托付给别人，</p>
-<p>当问题出现时，让别人更改实现方案，是不可能的。</p>
+<h2 id="模型的发展与多样性"><strong>模型的发展与多样性</strong></h2>
+<p>对观察结果提出的模型，</p>
+<p>是一直在发展的，</p>
+<p>并没有哪一个是终极的。</p>
 <p><br/></p>
-<p>我们应该提供具体的功能，</p>
-<p>功能内部，封装了我们自己的抽象和实现。</p>
+<p>当我们问“<strong>到底是什么</strong>”的时候，</p>
+<p><strong>其实是以静态的观点，分析动态发展中的事物</strong>。</p>
 <p><br/></p>
-<p>其中，抽象是对需求的提取，用来规范模块的外在表现，</p>
-<p>实现是当前采用的解决方案。</p>
+<p>模型在不断修正和演进中，</p>
+<p>对目标系统做出更精确的<strong>解释</strong>。</p>
 <p><br/></p>
-<p>随着时间的发展，当模块不再适用时，</p>
-<p>我们就能在外在表现不变的前提下，</p>
-<p>更改解决方案了。</p>
+<p>例如，lambda calculus，</p>
+<p>是一种计算模型，</p>
+<p>一开始是无类型的，</p>
+<p>但是同样也得不到类型系统的种种好处。</p>
 <p><br/></p>
-<p>不是只提供抽象接口，</p>
-<p>而是把具体功能封装在抽象的接口下，</p>
-<p>一起提供。</p>
+<p>因此lambda calculus就被扩展了，</p>
+<p>变成了typed lambda calculus的一个<strong>特例</strong>。</p>
 <p><br/></p>
-<h2 id="层次与后路"><strong>层次与后路</strong></h2>
-<p>代码量增加，软件会越来越复杂，</p>
-<p>难以定位问题，增加功能，</p>
-<p>这其实是没有建立合理的代码层次。</p>
+<p>对计算建模的方法也并<strong>不唯一</strong>，</p>
+<p>图灵机，combinatory logic，形式语言，等等，</p>
+<p>都是和lambda calculus具有相同计算能力的模型。</p>
 <p><br/></p>
-<p>在不同深度的层次上切换。</p>
-<p>可以让我们总是面对简单可控的问题。</p>
+<h2 id="编程语言"><strong>编程语言</strong></h2>
+<p>编程语言是一种形式语言，</p>
+<p>不同的编程语言，只是用不同的一堆<strong>符号</strong>，</p>
+<p>按着不同的<strong>文法规则</strong>，</p>
+<p>对计算进行建模。</p>
 <p><br/></p>
-<p>一千行的函数太复杂了，</p>
-<p>那是因为代码本来不该写在一个函数中。</p>
+<p>根据形式语言理论，</p>
+<p>不受限文法，与图灵机等价。</p>
 <p><br/></p>
-<p>一万行代码太复杂了，</p>
-<p>那是因为它本来不该写到一个文件中。</p>
+<p>可以把不同的编程语言，</p>
+<p>看做计算过程的多样化模型。</p>
 <p><br/></p>
-<p>一百个文件太复杂了，</p>
-<p>那是因为它们本来不该在一个文件夹下。</p>
+<p>同样，它们的建模方式也在演化，</p>
+<p>语言的规范在发展。</p>
 <p><br/></p>
-<p>划分层次，才能留有后路。</p>
-<p>每天关闭电脑前，检查自己的后路，是个好习惯。</p>
-<p>可以让我们再打开电脑时，问题还是像今天这样简单。</p>
+<p>遇到具体问题，</p>
+<p><strong>我们需要选择合适的编程语言</strong>。</p>
 <p><br/></p>
-<h2 id="唯一性和可选性"><strong>唯一性和可选性</strong></h2>
-<p>当我们遇到紧急问题时，</p>
-<p>通常首先会想到一个权宜之计。</p>
+<p>而编程范型，</p>
+<p>是语义上的一种分类，</p>
+<p>并没有明确的界线。</p>
 <p><br/></p>
-<p>但是，从长久来看，</p>
-<p>不得不做的事情总是会带来麻烦，</p>
-<p>身不由己的决定，也是错误的根源。</p>
+<p>我们也没必要成见太深，</p>
+<p>强行把语言用在<strong>不适用</strong>的场景中。</p>
 <p><br/></p>
-<p>我们应该想尽办法，推迟决定。</p>
-<p>直到我们有两个方案，可以从中选择。</p>
-<p>可选性意味着可控的未来。</p>
-<p><br/></p>
-<p>软件的发展，像棋局一样，</p>
-<p>必须仔细斟酌局势的变化，</p>
-<p>才能避免因小失大。</p>
-<p><br/></p>
-<p>在客观条件限制的范围内，</p>
-<p>有经验的人做出选择，</p>
-<p>新手慌张决定，</p>
-<p>在尽可能多的选择中，才能酝酿出好的设计。</p>
+<p>毕竟，语言是用来沟通和表达的。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>软件不同于人生之处在于，</p>
-<p>软件可以设计，还可以更改，</p>
-<p>只是成本有别。</p>
+<p>当我还是孩子的时候，</p>
+<p>对大自然，就喜欢问“到底是什么”，</p>
+<p>它指引我沿着科学之路越走越远。</p>
 <p><br/></p>
-<p>好的功能模块，在于内部的良好设计。</p>
-<p>虽然外在表现没有什么不同。</p>
+<p>随着学习的深入，</p>
+<p>让我开始懂得<strong>反思问题本身</strong>，</p>
+<p>站在更高的角度。</p>
 <p><br/></p>
-<p>好的设计和代码组织方式，</p>
-<p>威力连绵不绝。</p>
+<p>从模型角度来看，</p>
+<p>物理学就是对大自然现实世界的建模，</p>
+<p>耳熟能详的物理学理论，也只是<strong>可行的模型之一</strong>。</p>
 <p><br/></p>
-<p>多一种选择，多一种可能。</p>
+<p>例如：</p>
+<p>牛顿的万有引力理论，</p>
+<p>爱因斯坦的广义相对论，</p>
+<p>都是引力理论。</p>
+<p><br/></p>
+<p>当然还有其他的引力理论，</p>
+<p><strong>他们都是数学模型，用来解释目标系统</strong>，</p>
+<p>并不是大自然本身。</p>
+<p><br/></p>
+<p>终极理论之梦，</p>
+<p>可能会随着认识的提高，</p>
+<p>不再成为问题了。</p>
+<p><br/></p>
+<p>就像“没有银弹”一样，</p>
+<p><strong>任何领域都没有一劳永逸的事情</strong>。</p>
 
           
         
@@ -499,7 +508,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/265/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/265/">265</a><span class="page-number current">266</span><a class="page-number" href="/page/267/">267</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/267/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/265/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/265/">265</a><span class="page-number current">266</span><a class="page-number" href="/page/267/">267</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/267/">&gt;</a>
   </nav>
 
 
@@ -545,7 +554,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -620,7 +629,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

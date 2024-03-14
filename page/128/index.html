@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/06/29/problem/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/09/29/code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/29/problem/" itemprop="url">问题本身</a></h1>
+                <a class="post-title-link" href="/2018/09/29/code/" itemprop="url">代码形式</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-29T00:00:00+08:00">
-                2018-06-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-29T00:00:00+08:00">
+                2018-09-29
               </time>
             
 
@@ -347,141 +347,105 @@
       
         
           
-            <h3 id="什么是问题">什么是问题</h3>
-<p>多年的学校教育，让我们养成了<strong>擅于解决给定问题</strong>的思维习惯，</p>
-<p>可是从学校毕业后，才慢慢发现，很多问题都不是事先给定的。</p>
+            <p>这几年，编程的<strong>门槛</strong>变得越来越低了，</p>
+<p>相关的软件开发知识也变得越来越普及，</p>
+<p>似乎人人都可以写那么几段代码，这并不是什么难事。</p>
 <p><br/></p>
-<p>因此，在急于寻找解决方案之前，我们应该先冷静下来，仔细甄别，</p>
-<p>到底什么才是<strong>真正的问题</strong>？</p>
+<p>然而，作为一门<strong>技巧</strong>，</p>
+<p>编程初学者和经验丰富的<strong>匠人</strong>，还是有所不同的，</p>
+<p>这不仅体现在最终<strong>结果</strong>上，还体现在对<strong>代码本身</strong>的看待方式上。</p>
 <p><br/></p>
-<p>有不少问题解决大师，对这件事情有过深入的思考。</p>
+<p>我们都知道，代码主要的作用是<strong>实现功能</strong>，</p>
+<p>与他人合作的时候，代码还能起到<strong>沟通想法</strong>的作用。</p>
 <p><br/></p>
-<p>叶茂中在《<a href="https://book.douban.com/subject/25783682/" target="_blank" rel="noopener">营销的16个关键词</a>》中提到过“<strong>冲突理论</strong>”，</p>
-<blockquote>
-<p>营销首先要洞察需求，而洞察需求的目的是帮助消费者解决问题，解决了问题才能获得利益。</p>
-</blockquote>
-<blockquote>
-<p>可是问题从哪来呢？问题就是<strong>冲突</strong>。</p>
-</blockquote>
-<blockquote>
-<p>三流营销寻找冲突，二流营销解决冲突，一流营销制造冲突。</p>
-</blockquote>
+<p>因此，<strong>功能目标</strong>是重要的，<strong>实现方式</strong>是其次，</p>
+<p><strong>沟通的结果</strong>是重要的，<strong>沟通形式</strong>是其次。</p>
 <p><br/></p>
-<p>斋藤嘉则在《<a href="https://book.douban.com/subject/3604068/" target="_blank" rel="noopener">发现问题的思考术</a>》中写道，</p>
-<p>所谓“<strong>问题</strong>”，就是“应有的景象”与“现状”之间的“落差”。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">问题 &#x3D; 应有的景象 - 现状</span><br></pre></td></tr></table></figure>
+<p>本文打算对，代码如何实现功能的<strong>表现形式</strong>，进行探讨。</p>
 <p><br/></p>
-<p>结合“冲突理论”和“落差理论”，“问题”的定义就很明显了。</p>
-<blockquote>
-<p>我们现阶段所面临的主要矛盾，是人民日益增长的物质文化需要同落后的社会生产之间的矛盾。</p>
-</blockquote>
+<h3 id="喜好">喜好</h3>
+<p>通常实现一段功能，我们可以用不止一种方式进行编程，</p>
+<p>那么为什么最后我们选择了其中一种呢？</p>
+<p>这是我们觉得代码有<strong>好坏之分</strong>。</p>
 <p><br/></p>
-<p>总之，没有被达成的<strong>预期</strong>，构成了问题。</p>
-<h3 id="谁的问题">谁的问题</h3>
-<p>我们上文中对<strong>问题本身</strong>进行了讨论，但还有一个值得注意的点，</p>
-<p>那就是，问题与人紧密相关。</p>
+<p>代码能体现开发者的<strong>品味</strong>。</p>
 <p><br/></p>
-<p>既然没有被达成的预期会构成问题，</p>
-<p>那么就要看，没有达成<strong>谁的预期</strong>？</p>
+<p>努力编写出一段看起来<strong>漂亮</strong>的代码，是一件好事，</p>
+<p>但是这件事很容易做得<strong>适得其反</strong>，</p>
+<p>因为好坏的评判标准是模糊的，某些方面也是因人而异的。</p>
 <p><br/></p>
-<p>这个预期的产生者，就是<strong>问题的主体</strong>，</p>
-<p>能不能满足他的需要，他愿意付出多大<strong>代价</strong>满足需要，决定了问题的<strong>解决方式</strong>。</p>
+<p>简而言之，我们认为好的，别人不一定认为好。</p>
+<p>别人认为好的，我们也许不这么认为。</p>
 <p><br/></p>
-<p>而如果考虑问题的时候忽视主体，就容易对问题产生错误的理解，</p>
-<p>甚至画蛇添足，给别人帮了倒忙。</p>
+<p>所以，虽然追求把代码写好是一种好<strong>习惯</strong>，</p>
+<p>但是如果<strong>过于追求</strong>代码形式，就会浪费很多时间，</p>
+<p>而且还不能达到预期的效果。</p>
 <p><br/></p>
-<p>在《<a href="https://book.douban.com/subject/26282714/" target="_blank" rel="noopener">咨询的奥秘</a>》中，有一个著名的案例，称为“橙汁测试”。</p>
-<p>假设你必须为一个年度销售会议选定一个能容纳700人的地方，这显然是一件不容易办到的事情。</p>
-<p>然后当你见到酒店的宴会经理时，还要提出以下苛刻的要求。</p>
+<h3 id="返工">返工</h3>
+<p>很多人在写代码的时候，会<strong>持续不断</strong>的对它进行改动，</p>
+<p>以便让代码在每时每刻都保持<strong>“优雅”</strong>。</p>
 <p><br/></p>
-<blockquote>
-<p>这700人的早餐必须要以预祝成功的祝酒开始，用橙汁来祝酒。</p>
-</blockquote>
-<blockquote>
-<p>并且，这700人中每个人都必须有一大杯新鲜的冰橙汁。</p>
-</blockquote>
-<blockquote>
-<p>这些橙汁在饮用前，榨出不能超过两个小时。</p>
-</blockquote>
+<p>我认为这是不必要的。</p>
+<p>因为这在无形中<strong>增加</strong>了很多工作量。</p>
+<p>而且我们这次的改动，未必不会在以后再被<strong>改回去</strong>。</p>
 <p><br/></p>
-<p>提出问题后，测试宴会经理怎么答复。</p>
+<p>我们应当认识到这是一种<strong>返工</strong>现象。</p>
 <p><br/></p>
-<p>他们可能会说，“这办不到”。</p>
-<p>这就说明他们在橙汁测试中不及格。</p>
-<p>他们可能说，“没问题”，</p>
-<p>这种人在橙汁测试中也不及格，因为很可能他们在撒谎。</p>
+<p>那么，如何才能避免最终代码<strong>脏乱差</strong>呢？</p>
+<p>一个推荐的办法就是“<strong>写两遍</strong>”。</p>
 <p><br/></p>
-<p>一个好的答复是这样的，</p>
-<blockquote>
-<p>你这真是个问题，我能帮你，……这是所需要的费用。</p>
-</blockquote>
+<p>在个人开发过程中，我们可以随意发挥，<strong>先把功能做完</strong>，</p>
+<p>然后在代码提交之前，<strong>重新阅读</strong>一下自己的代码，</p>
+<p>最后一口气把它改好。</p>
 <p><br/></p>
-<p>对的，毫无疑问可以让工人早晨5点去冷冻橙汁，如果付给他们每人1000美元，</p>
-<p>但是你愿意支持这么多吗？</p>
-<p>也许会，也许不会，但这不是宴会经理应该决定的。</p>
+<p>这样会减少大量的返工，还能保证最终的代码质量。</p>
 <p><br/></p>
-<p><strong>解决方案</strong>和<strong>代价</strong>都是相伴而生的，</p>
-<p>能否接受这样的解决方案，</p>
-<p>取决于问题的主体，在心中将预期与代价进行的<strong>权衡</strong>。</p>
+<p>如果一次修改的代码量太大呢？</p>
+<p>这说明我们<strong>一次提交的东西</strong>太多了，需要分多次提交，</p>
+<p>每次提交“写两遍”。</p>
 <p><br/></p>
-<h3 id="价值">价值</h3>
-<p>正是因为解决一个问题需要成本，</p>
-<p>所以，问题的主体就不得不考虑<strong>收益</strong>，</p>
-<p>需要斟酌投入产出比，找出最划算的方式，在可以接受的范围内把问题解决掉。</p>
+<h3 id="重写">重写</h3>
+<p>看到自己写的代码就非常喜欢，看到别人写的，就觉得很不舒服，</p>
+<p>这是<strong>正常</strong>现象。</p>
+<p>但是忍不住修改别人的代码，使他变成自己喜欢的方式，</p>
+<p>这就<strong>不正常</strong>了。</p>
 <p><br/></p>
-<p>维基百科上，对<strong>价值</strong>是这个定义的，</p>
-<blockquote>
-<p>价值，泛指客体对于主体表现出来的积极意义和有用性。</p>
-</blockquote>
+<p>这有几方面值得考虑，</p>
+<p>首先，单纯修改代码的表现形式，价值并不明显，</p>
+<p>也没有明显的<strong>证据</strong>表明，新代码比旧代码更好维护。</p>
 <p><br/></p>
-<p>这里也是和<strong>主体</strong>有关。</p>
-<p>不同的人，会认为相同的事物有不同的价值，</p>
-<p>这就是个人的价值观。</p>
+<p>此外，代码一方面是<strong>实现功能</strong>，另一方面是<strong>沟通实现意图</strong>，</p>
+<p>既然这两方面的目的都达成了，</p>
+<p>就没有必要再修改其<strong>表现形式</strong>。</p>
 <p><br/></p>
-<p>结合问题本身而言，解决这个问题有没有用，有多大作用，</p>
-<p>要依据问题的主体而定，</p>
-<p><strong>谁产生了期望，谁就引出了问题，谁付钱，谁就不得不考虑收益。</strong></p>
+<p>值得一提的是，不对现有代码进行<strong>充分了解</strong>就去修改，这种行为非常危险。</p>
+<p>很容易出现故障，也不见得能比现有代码写的更好，</p>
+<p>觉得脏乱差，很可能是现有代码<strong>需要照顾到的细节</strong>太多了，</p>
+<p>我们脑海中的优雅代码，可能是<strong>暂时没考虑</strong>这些细节怎么处理。</p>
 <p><br/></p>
-<p>如果你没有付出，就不必帮别人操心收益。</p>
+<p>最后，一个旧系统的现有<strong>代码量</strong>其实是很大的，</p>
+<p>短时间内我们不可能将它完全改掉，这需要我们<strong>重写</strong>所有的业务逻辑，</p>
+<p>因此，学会如何在现有代码的基础上工作，是开发者<strong>必备</strong>的一项技能。</p>
 <p><br/></p>
-<h3 id="利益相关者">利益相关者</h3>
-<p>在做事情之前，必须将利益相关者识别出来，</p>
-<p>这在很大程度上决定了事情能否顺利的<strong>进展</strong>下去，</p>
-<p>《<a href="https://book.douban.com/subject/24530471/" target="_blank" rel="noopener">软件系统架构</a>》将这种思想用于了软件架构之中。</p>
-<p><br/></p>
-<blockquote>
-<p>Stakeholders are the people for whom we build systems.</p>
-</blockquote>
-<blockquote>
-<p>A key part of your role as an architect is knowing how to work with stakeholders in order to create an architecture that meets their complex, overlapping, and often conflicting needs.</p>
-</blockquote>
-<p><br/></p>
-<p>从人文角度考虑软件架构的著作确实很少，</p>
-<p>更多架构方面的书籍，谈论的更多是软件本身的属性。</p>
-<p><br/></p>
-<p>《<a href="https://book.douban.com/subject/10746257/" target="_blank" rel="noopener">软件架构师的12项修炼</a>》同样写到，</p>
-<blockquote>
-<p>『技术』不能让一个企业运转起来，而『关系』能。</p>
-</blockquote>
-<blockquote>
-<p>成功公式的一个最重要因素就是要明白如何与人相处。</p>
-</blockquote>
-<p><br/></p>
-<p>因此，在谈论问题的时候，我们应该多从人文角度看待它。</p>
-<p>可能问题的主体并不想问题被解决，问题解决后会不会被<strong>问责</strong>？</p>
-<p>况且还有不少人担心，<strong>被别人指出问题，是在暗示自己不够专业。</strong></p>
+<p>所以，对现有代码，我们应该保持敬畏态度，</p>
+<p>除非从业务上来看，有了巨大的修改，现有代码必须删掉重写，</p>
+<p>否则，不要轻易<strong>重写</strong>它。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>考虑问题本身是一个值得深思的话题，</p>
-<p>我们不妨回顾一下以前解决的种种问题，尤其是工作中的问题，</p>
-<p>尝试再反思一下，什么才是当时真正的问题？谁是问题的主体？</p>
+<p>希望本文能帮助对代码有洁癖的强迫症患者们，尽早摆脱纠结，</p>
+<p>跳出代码形式的<strong>狭小</strong>领域范围，</p>
+<p>早日避开写法问题。</p>
 <p><br/></p>
-<p>问题解决后，哪些人会受益？</p>
-<p>哪些人会被问责？</p>
-<p>哪些人会付出代价？</p>
+<p>况且，如果真要追求可读性和可维护性的话，</p>
+<p>没有什么比<strong>当面讲解</strong>和丰富的<strong>文档</strong>更直接有效了，</p>
+<p>从代码反推逻辑的话，再好的代码也<strong>无法还原</strong>当初的设计意图。</p>
 <p><br/></p>
-<p>所以，很多时候，<strong>别人针对的不是你，</strong></p>
-<p><strong>而是他自己的得失。</strong></p>
+<p>不要过于注重<strong>形式</strong>，要看<strong>意图</strong>，</p>
+<p>需要达成什么目的，达到了没有，</p>
+<p>还有哪些需要改进的，当前改进是否有<strong>成效</strong>。</p>
+<p><br/></p>
+<p>我们已经在<strong>成效甚微</strong>的事情上浪费了太多时间，</p>
+<p>是该放下包袱<strong>轻身</strong>前进了。</p>
 
           
         
@@ -520,7 +484,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/127/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/127/">127</a><span class="page-number current">128</span><a class="page-number" href="/page/129/">129</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/129/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/127/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/127/">127</a><span class="page-number current">128</span><a class="page-number" href="/page/129/">129</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/129/">&gt;</a>
   </nav>
 
 
@@ -566,7 +530,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -641,7 +605,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

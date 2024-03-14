@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/07/12/lazy-evaluation/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/09/11/reuse-oriented-programming/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/07/12/lazy-evaluation/" itemprop="url">惰性求值</a></h1>
+                <a class="post-title-link" href="/2015/09/11/reuse-oriented-programming/" itemprop="url">消除重复与可复用相距多远</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-12T00:00:00+08:00">
-                2015-07-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-11T00:00:00+08:00">
+                2015-09-11
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Haskell/" itemprop="url" rel="index">
-                    <span itemprop="name">Haskell</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,213 +347,153 @@
       
         
           
-            <p><strong>据说</strong>Haskell是一种惰性求值的语言，</p>
-<p>表达式的求值策略是按需求值，即call-by-need。</p>
+            <p>程序员们都讨厌重复，</p>
+<p>因为他们知道，</p>
+<p>这是可以避免的冗余工作量。</p>
+<p>——代码坏味</p>
 <p><br/></p>
-<p>但是到底什么才是按需的，</p>
-<p>求值到什么程度。</p>
-<p>刚开始学习的时候，总是很模糊。</p>
+<p>如果本来就不可避免，</p>
+<p>那只好认了，</p>
+<p>就好像需求不可能不变的事实一样。</p>
 <p><br/></p>
-<p>随着学习的深入，才慢慢了解，</p>
-<p>Haskell规范中，并没有涉及惰性求值，</p>
-<p>只说它是一种<strong>non-strict language</strong>，</p>
-<p>求值策略取决于具体的实现。</p>
+<p>但是，<strong>盲目的消除重复</strong>，</p>
+<p>并不是正确的姿势，</p>
+<p>反而会把简单的事情搞复杂。</p>
 <p><br/></p>
-<p>这是怎么回事呢？</p>
-<p>又要从头开始了。</p>
+<p>为什么程序员们甘心写那么多“public class XXX {}”，</p>
+<p>甘心写那么多“END”，“;”或者“)”，</p>
+<p>而不设法避免呢？</p>
 <p><br/></p>
-<h2 id="non-strictness"><strong>non-strictness</strong></h2>
-<p>non-strict function，是<strong>指称语义</strong>中的概念，</p>
-<p>指称语义将每一段代码，与一个数学对象相对应，</p>
-<p>借此来研究程序的语义。</p>
+<p>为什么不把所有的“this”都提取出来，</p>
+<p>放在一个地方，</p>
+<p>在编译前，再把他们塞入代码中呢。</p>
 <p><br/></p>
-<p>一开始我们认为，程序中的函数，</p>
-<p>会有直接的数学函数与之对应。</p>
+<p>诚然，通过macro，</p>
+<p>可以做一些代码生成之类的事情，</p>
+<p>但是直觉告诉我们，不能乱来。</p>
 <p><br/></p>
-<p>其实不然，</p>
-<p>因为，程序中的很多函数，在处理某些参数的时候，</p>
-<p>行为是“未定义的”，得不到有用的信息，</p>
-<p>这样的数学函数称为<strong>部分函数</strong>（partial function）。</p>
+<p>原因是什么？</p>
+<p>消除重复与面向复用其实还相距太远。</p>
 <p><br/></p>
-<p>这里尽量<a href="http://www.vex.net/~trebla/haskell/lazy.xhtml" target="_blank" rel="noopener">不要提及“不能终止的”</a>，</p>
-<p>因为指称语义并不考虑求值过程。</p>
+<h2 id="什么是面向复用的编程">什么是面向复用的编程</h2>
+<p>“面向”，指的是目的，目标。</p>
 <p><br/></p>
-<p>例如：</p>
-<p>partialFn :: Integer -&gt; Integer</p>
-<p>partialFn 0 = 0</p>
-<p>partialFn n = test $ n + 1</p>
+<p>方法论告诉我们，</p>
+<p>要完成一件事需要3个步骤，</p>
+<p>（1）确定目标</p>
+<p>（2）分析差距</p>
+<p>（3）缩小差距</p>
 <p><br/></p>
-<p>可以看到partial只在参数为0的时候是有意义的。</p>
-<p>所以，与程序中的函数对应的，</p>
-<p>就不是普通意义上的数学函数了，</p>
-<p>还需要<strong>扩充定义域和值域</strong>。</p>
+<p>确定目标是第一步。</p>
 <p><br/></p>
-<p>我们为每个集合增加一个新的值“<strong>⊥</strong>”，称为bottom，</p>
-<p>用来表示“未定义”。</p>
-<p>函数f(n)={0,n=0;⊥,n≠0}，就能表示partialFn了。</p>
+<p>要想让我们的程序被复用，</p>
+<p>首先他要设计成<strong>可以</strong>被复用的，</p>
+<p>不是哪天要用了，忽然就行了。</p>
 <p><br/></p>
-<p>Haskell用undefined来表示⊥，</p>
-<p>undefined也确实包含在所有类型中，</p>
-<p>&gt; :t undefined</p>
-<p>&gt; undefined :: a</p>
+<p>而且，在一套软件中，</p>
+<p>并不是所有的代码都是可复用的，</p>
+<p>有些根本无法复用。</p>
 <p><br/></p>
-<p>通常情况下，</p>
-<p>如果一个数学函数的参数是⊥，则结果就是⊥。</p>
-<p>这样的函数称为<strong>strict function</strong>。</p>
+<p>承认了这两个事实以后，</p>
+<p>任务一下子简单了很多。</p>
 <p><br/></p>
-<p>而Haskell中函数则不同。</p>
-<p>例如：</p>
-<p>nonStrictFn :: Integer -&gt; Integer</p>
-<p>nonStrictFn 0 _ = 0</p>
+<h2 id="提取并不意味着抽象"><strong>提取并不意味着抽象</strong></h2>
+<p>一段代码，在很多地方都出现了，</p>
+<p>我们马上就能想到，</p>
+<p>把它<strong>提取</strong>到了一个函数中。</p>
 <p><br/></p>
-<p>nonStrictFn 0 undefined &gt; 0</p>
+<p>然而这对可复用并没有任何作用，</p>
+<p>我们只是凑巧成功了几次。</p>
 <p><br/></p>
-<p>函数nonStrictFn在参数包含undefined的时候，</p>
-<p>并没有得到undefined，而是得到了一个明确的值0，</p>
-<p>它对应的数学函数是<strong>non-strict function</strong>。</p>
+<p>假如某个调用处的<strong>业务逻辑</strong>发生了变化，</p>
+<p>我们就遇到麻烦了，</p>
+<p>不能修改提取出去的代码，因为别人也在用，</p>
+<p>还要把代码再复制回去，只调整这一块。</p>
 <p><br/></p>
-<p>函数的指称语义是non-strict function，</p>
-<p>这样的语言，称为non-strict language。</p>
+<p>自讨苦吃啊。</p>
+<p>那可如何是好？</p>
 <p><br/></p>
-<h2 id="lazy-evaluation"><strong>lazy evaluation</strong></h2>
-<p>求值，是<strong>操作语义</strong>中的概念。</p>
-<p><strong>能实现non-strict指称语义的求值策略并不是唯一的</strong>。</p>
+<p>这是因为，提取和抽象是不同的，</p>
+<p>提取是文本层次的观察，</p>
+<p>而抽象是逻辑层次的考察。</p>
 <p><br/></p>
-<p>GHC是Haskell目前最流行的编译器，</p>
-<p>它使用了<strong>惰性求值</strong>（lazy evaluation）。</p>
+<p>这段代码虽然在很多地方出现了，</p>
+<p>可是它却由不同的<strong>逻辑单元</strong>组成，</p>
+<p>这就隐藏了很多引起它改变的因素。</p>
+<p>——单一职责原则</p>
 <p><br/></p>
-<p>例如：</p>
-<p>x = 1</p>
-<p>y = 2</p>
-<p>z = (x, y)</p>
+<p>我们应该先把这些逻辑单元封装好，</p>
+<p>然后<strong>拼装</strong>出统一的抽象接口，</p>
+<p>各处对接口进行调用。</p>
+<p>——依赖倒置原则</p>
+<p>——合成/聚合复用原则</p>
 <p><br/></p>
-<p>&gt; :sprint x</p>
-<p>&gt; x = _</p>
-<p>&gt; :sprint y</p>
-<p>&gt; y = _</p>
-<p>&gt; :sprint z</p>
-<p>&gt; y = _</p>
+<p>一旦某个逻辑单元需要调整了，</p>
+<p>那么只需要单独为某处调用，</p>
+<p>再<strong>实现</strong>一个新的接口函数就行了。</p>
+<p>——开-闭原则</p>
 <p><br/></p>
-<p>这里“:sprint”只是打印表达式，而不会求值它。</p>
-<p>“_”用来表示“未求值的”，或称为一个“<strong>thunk</strong>”。</p>
+<h2 id="外表要简单内心不要太简单"><strong>外表要简单，内心不要太简单</strong></h2>
+<p>有人觉得有个<strong>拼装层</strong>太麻烦了，</p>
+<p>还不如直接提取函数好呢，</p>
+<p>这其实是混淆了抽象与实现。</p>
 <p><br/></p>
-<p>thunk在使用的时候，<strong>并不一定被完全求值</strong>。</p>
-<p>&gt; let first = (u, _) = u</p>
-<p>&gt; first z</p>
-<p>&gt; 1</p>
+<p>接口的使用者是看不到实现方式的，</p>
+<p>实现很复杂是为了有更高的灵活性。</p>
+<p>——迪米特法则</p>
 <p><br/></p>
-<p>&gt; :sprint x</p>
-<p>&gt; x = 1</p>
-<p>&gt; :sprint y</p>
-<p>&gt; y = _</p>
-<p>&gt; :sprint z</p>
-<p>&gt; y = (1, _)</p>
+<p><strong>语言的魅力不就是，把复杂藏于只言片语之后吗？</strong></p>
+<p>编程的目的不就是，为多变的业务逻辑提供简洁的描述语言吗？</p>
+<p>——领域特定语言</p>
 <p><br/></p>
-<p>first函数，只求值了第一个参数，</p>
-<p>第二个参数，仍然是未求值的。</p>
+<p>一切都应该尽可能地简单,但不要太简单。</p>
+<p>——爱因斯坦</p>
 <p><br/></p>
-<p>实际上，<strong>thunk的求值是分层次的</strong>，</p>
-<p>为了尽量少的求值，每一次只将表达式求值为<strong>WHNF</strong>（weak head normal form），</p>
-<p>其中的子表达式，仍然是未求值的thunk。</p>
+<h2 id="业务与功能"><strong>业务与功能</strong></h2>
+<p>经常变动的是业务逻辑，</p>
+<p>而可复用的是功能模块。</p>
 <p><br/></p>
-<p>如果不能满足需要，</p>
-<p>就会继续将对应的sub-thunk，再求值为WHNF。</p>
+<p>对逻辑我们要抽象，</p>
+<p>而对功能我们要封装。</p>
 <p><br/></p>
-<h2 id="weak-head-normal-form"><strong>Weak head normal form</strong></h2>
-<p>一个WHNF（weak head normal form），</p>
-<p>是表达式求值的一种结果形式。</p>
+<p><strong>很多新手认为，</strong></p>
+<p><strong>把相关的代码组织在一起就是封装了，</strong></p>
+<p><strong>这与认为把代码提取出来了就是抽象了一样失败。</strong></p>
 <p><br/></p>
-<p>WHNF，只将表达式求值到，</p>
-<p>最外层的<strong>值构造器</strong>或者<strong>lambda抽象</strong>为止。</p>
+<p>要封装，是因为它们“能够封装”，</p>
+<p>而不是代码恰好出现在了一起。</p>
 <p><br/></p>
-<p>例如：以下表达式是WHNF，</p>
-<p>(1 + 1, 2 + 2)，最外层是一个值构造器，(,)</p>
-<p>-&gt; 2 + 2，最外层是一个lambda抽象，</p>
-<p>'h' : ("e" ++ "llo")，最外层是一个值构造器，(:)</p>
+<p>只有<strong>与要描述的业务无关</strong>的功能，</p>
+<p>才是可复用的单元。</p>
 <p><br/></p>
-<p>以下表达式不是WHNF：</p>
-<p>1 + 2，最外层是加法函数调用，(+)</p>
-<p>(-&gt; x + 1) 2，最外层是一个匿名函数调用</p>
-<p>"he" ++ "llo"，最外层是列表的连接函数调用，(++)</p>
+<p>每个页面都发送AJAX请求，</p>
+<p>然后更新一个id="message"的标签，</p>
+<p>这是不可封装的。</p>
 <p><br/></p>
-<p>因此，</p>
-<p>表达式(1 + 1, 2 + 2)会按需首先求值为(thunk1,thunk2),</p>
-<p>如果还需要thunk1的值，thunk1会求值为2。</p>
+<p>而发送AJAX模块，</p>
+<p>更新任一标签内容的模块，</p>
+<p>才是可封装的。</p>
 <p><br/></p>
-<p>例如：</p>
-<p>testFn1 _ = 1</p>
-<p>testFn2 (<em>, </em>) = 2</p>
-<p>tettFn3 (u, _) = 3</p>
-<p>这3个函数会导致表达式(1 + 1, 2 + 2)进行<strong>不同层次</strong>的求值。</p>
+<p>一致的业务流程，也是可以封装的。</p>
+<p>例如，如果有定时任务，</p>
+<p>可以封装一个定时任务管理器，</p>
+<p>只需要挂载任务的配置信息就可以自动执行。</p>
 <p><br/></p>
-<h2 id="seq"><strong>seq</strong></h2>
-<p>为了控制求值程度，</p>
-<p>GHC内置了seq函数。</p>
-<p><br/></p>
-<p>&gt; :t seq</p>
-<p>&gt; seq :: a -&gt; b -&gt; b</p>
-<p><br/></p>
-<p>它表示，<strong>在结果求值为WHNF之前</strong>，</p>
-<p><strong>会先将seq的第一个参数求值为WHNF</strong>。</p>
-<p><br/></p>
-<p>例如：</p>
-<p>u = 1</p>
-<p>v = (u, u)</p>
-<p><br/></p>
-<p>x = 1</p>
-<p>y = seq x (x, x)</p>
-<p><br/></p>
-<p>&gt; :sprint u</p>
-<p>&gt; u = _</p>
-<p>&gt; :sprint v</p>
-<p>&gt; v = _</p>
-<p><br/></p>
-<p>&gt; :sprint x</p>
-<p>&gt; x = _</p>
-<p>&gt; :sprint y</p>
-<p>&gt; y = _</p>
-<p><br/></p>
-<p>我们定义一个函数，用来把参数求值WHNF，</p>
-<p>&gt; let whnf (<em>, </em>) = ()</p>
-<p><br/></p>
-<p>则，</p>
-<p>&gt; whnf v</p>
-<p>&gt; ()</p>
-<p>&gt; whnf y</p>
-<p>&gt; ()</p>
-<p><br/></p>
-<p>&gt; :sprint u</p>
-<p>&gt; u = _</p>
-<p>&gt; :sprint v</p>
-<p>&gt; v = (<em>, </em>)</p>
-<p><br/></p>
-<p>&gt; :sprint x</p>
-<p>&gt; x = 1</p>
-<p>&gt; :sprint y</p>
-<p>&gt; y = (1, 1)</p>
-<p><br/></p>
-<p>使用seq控制求值深度，</p>
-<p>可以防止创建过多的thunk。</p>
+<p>对了，别人有写好了的，</p>
+<p>不用自己做，</p>
+<p>但我们要这么想。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>当我们在REPL中输入一个表达式时，</p>
-<p>实际上调用了print函数，</p>
-<p>它会对表达式完全求值。</p>
+<p>能闻到坏味是好事，</p>
+<p>但是不正确的打扫方法，</p>
+<p>反而会使代码更难维护。</p>
 <p><br/></p>
-<p>因此，表达式求值的层次问题，</p>
-<p><strong>是很难从REPL中看出来的</strong>。</p>
+<p>消除重复是表象，</p>
+<p>而面向复用才是目的。</p>
 <p><br/></p>
-<p>另一方面，WHNF将求值过程分成了一系列节点，</p>
-<p>能清晰的刻画求值程度，</p>
-<p>这可能是我们学习Haskell入门的起点吧。</p>
-<p><br/></p>
-<p>参考：</p>
-<p><a href="https://en.wikibooks.org/wiki/Haskell/Denotational_semantics" target="_blank" rel="noopener">Haskell/Denotational semantics</a></p>
-<p><a href="https://en.wikibooks.org/wiki/Haskell/Laziness" target="_blank" rel="noopener">Haskell/Laziness</a></p>
-<p><a href="http://stackoverflow.com/questions/6872898/haskell-what-is-weak-head-normal-form" target="_blank" rel="noopener">Haskell: What is Weak Head Normal Form?</a></p>
-<p><a href="http://book.douban.com/subject/24294415/" target="_blank" rel="noopener">Parallel and Concurrent Programming in Haskell</a></p>
-<p><a href="https://hackhands.com/lazy-evaluation-works-haskell/" target="_blank" rel="noopener">How Lazy Evaluation Works in Haskell</a></p>
-<p><a href="http://www.vex.net/~trebla/haskell/lazy.xhtml" target="_blank" rel="noopener">Lazy Evaluation of Haskell</a></p>
+<p><strong>和别人读同样的书，</strong></p>
+<p><strong>不一定考上一样的大学，</strong></p>
+<p><strong>更不一定有相同的人生。</strong></p>
 
           
         
@@ -592,7 +532,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/250/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/250/">250</a><span class="page-number current">251</span><a class="page-number" href="/page/252/">252</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/252/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/250/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/250/">250</a><span class="page-number current">251</span><a class="page-number" href="/page/252/">252</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/252/">&gt;</a>
   </nav>
 
 
@@ -638,7 +578,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -713,7 +653,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

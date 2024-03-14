@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/06/type-2/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/11/28/bisection-method/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/06/type-2/" itemprop="url">你好，类型（二）：Lambda calculus</a></h1>
+                <a class="post-title-link" href="/2017/11/28/bisection-method/" itemprop="url">使用二分法排查问题</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-06T00:00:00+08:00">
-                2017-09-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-28T00:00:00+08:00">
+                2017-11-28
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logic/" itemprop="url" rel="index">
-                    <span itemprop="name">Logic</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,162 +347,132 @@
       
         
           
-            <h3 id="匿名函数">1. 匿名函数</h3>
+            <p>数学上的<a href="https://en.wikipedia.org/wiki/Bisection_method" target="_blank" rel="noopener">二分法</a>，是一种方程根的近似解法。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-669ce252032eecd2.png" /></p>
+<p>如果要求已知函数<span data-katex="f(x)=0"></span>的根，</p>
+<p>那么我们要先找出一个区间<span data-katex="[a,b]"></span>，使得<span data-katex="f(a)"></span>与<span data-katex="f(b)"></span>异号（正负值不同）。</p>
+<p>根据连续函数的<a href="Intermediate%20value%20theorem">中值定理</a>，</p>
+<p>该区间内必存在方程的一个根。</p>
 <p><br/></p>
-<p>现在很多种编程语言都支持匿名函数了，</p>
-<p>例如，<a href="https://msdn.microsoft.com/zh-sg/library/bb397687" target="_blank" rel="noopener">C# 3.0</a>，<a href="https://zh.wikipedia.org/wiki/C%2B%2B11" target="_blank" rel="noopener">C++ 11</a>和<a href="https://en.wikipedia.org/wiki/Java_version_history#Java_SE_8" target="_blank" rel="noopener">Java 8</a>中的lambda表达式，</p>
-<p>又例如，<a href="https://docs.python.org/release/2.2.2/ref/ref.html" target="_blank" rel="noopener">Python 2.2.2</a>中的lambda，<a href="http://www-archive.mozilla.org/js/language/E262-3.pdf" target="_blank" rel="noopener">ECMAScript 3</a>的匿名函数，</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">ECMAScript 2015</a>的箭头函数（arrow function）等等。</p>
+<p>于是，我们就可以取该区间的中点<span data-katex="m=\frac{a+b}{2}"></span>，逐渐缩小区间，</p>
+<p>如果<span data-katex="f(m)"></span>与<span data-katex="f(a)"></span>异号，则取新区间为<span data-katex="[a,m]"></span>，否则取新区间为<span data-katex="[m,b]"></span>。</p>
+<p>就这样一直迭代，直到达到我们期望的精度为止。</p>
 <p><br/></p>
-<p>更不论，<a href="https://www.haskell.org/" target="_blank" rel="noopener">Haskell</a>，<a href="https://en.wikipedia.org/wiki/Lisp" target="_blank" rel="noopener">Lisp</a>，<a href="https://en.wikipedia.org/wiki/Standard_ML" target="_blank" rel="noopener">Standard ML</a>，这些函数式编程语言了。</p>
+<p><strong>二分法的主要思路是这样的：</strong></p>
+<p><strong>（1）找到使函数值异号的区间</strong></p>
+<p><strong>（2）在区间内取点试验，缩小范围</strong></p>
 <p><br/></p>
-<p>越来越多的语言拥抱匿名函数，是因为在很多场景中，我们无需给函数事先指定一个名字，</p>
-<p>并且结合<a href="https://zh.wikipedia.org/zh-hans/%E4%BD%9C%E7%94%A8%E5%9F%9F" target="_blank" rel="noopener">词法作用域</a>和高阶函数，会使某些问题用更直观的方式得以解决。</p>
+<p>幸运的是，这种思想不仅可以用来求解方程，</p>
+<p>还可以用于在软件开发过程中排查问题。</p>
 <p><br/></p>
-<p>从理论上来讲，匿名函数具有和一般函数同样的计算能力，</p>
-<p>使用某些技术手段，可以让匿名函数支持递归运算，从而完成任何<a href="https://zh.wikipedia.org/zh-hans/%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">图灵可计算</a>的任务。</p>
+<h3 id="基础二分法">基础二分法</h3>
+<p>我们都知道，排查问题对于开发软件来说，简直是家常便饭，</p>
+<p>经常会遇到莫名其妙的突发状况，软件不能运行了。</p>
+<p>从一开始我们用C语言写<code>Hello world</code>，这种事情就没有间断过，</p>
+<p>导致问题的原因，可能会非常愚蠢，也可能会异常微妙。</p>
 <p><br/></p>
-<p>然而，要想理解这一切，我们首先还得静下心来，从基础的<span data-katex="\lambda"></span>演算开始吧。</p>
+<p>稍微长一点的程序，我们就会发现，</p>
+<p>刚开始还是对的，中途不知道怎么的就出现了错误。</p>
+<p>下面我们来看一下如何借用二分法思想，排查这些问题。</p>
 <p><br/></p>
-<h3 id="自然数">2. 自然数</h3>
+<p>首先，我们要找到“使函数值异号的区间”，</p>
+<p>即，<strong>找到在什么情况下程序是对的，而在什么情况下是错的。</strong></p>
+<p>那么程序出错的原因，肯定在这两种情况中间，我们只要不断缩小范围即可。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-cb4665264c58e9e1.png" /></p>
+<p>对于长程序而言，把程序删完，显然应该是对的，</p>
+<p>而整个程序因为其结果不正确是有问题的，</p>
+<p>因此，我们就找到了一个“异号区间”，</p>
+<p>我们可以清楚的看到两套环境，一套是有问题的，而另一套则没有。</p>
 <p><br/></p>
-<p><span data-katex="\lambda"></span>演算听起来是一个高大上的概念，实际上它只是一套“符号推导系统”，</p>
-<p>人们首先定义某些合法的符号，然后再定义一些符号推导规则，</p>
-<p>最后，就可以计算了，从一堆合法的符号得到另一堆，这种推导过程称之为“演算”。</p>
+<p>然后我们就可以贴一半代码上去了，看看中间结果是否正确，</p>
+<p>如果是正确的，则证明到目前为止，贴的那一半代码是正确的，</p>
+<p>否则，这一半代码就是有问题的。</p>
 <p><br/></p>
-<p>为了让<span data-katex="\lambda"></span>演算更容易被接受，我们暂时先岔开话题，看看自然数是怎么定义的。</p>
+<p>通过界定两套环境，我们就可以大胆的尝试，</p>
+<p>从而迅速将问题规模减半，这正是二分法的威力。</p>
 <p><br/></p>
-<h4 id="peano系统">2.1 Peano系统</h4>
-<p>1889年，皮亚诺（<a href="https://zh.wikipedia.org/wiki/%E6%9C%B1%E5%A1%9E%E4%BD%A9%C2%B7%E7%9A%AE%E4%BA%9E%E8%AB%BE" target="_blank" rel="noopener">Peano</a>）为了给出自然数的集合论定义，</p>
-<p>他建立了一个包含5条公设的公理系统，后人称之为Peano系统。</p>
+<h3 id="极端情况法">极端情况法</h3>
+<p>从排查代码问题的小例子中，我们看到了一个极端情况，</p>
+<p>那就是，我们直接把程序删完，来断定这时候应该是没有问题的，</p>
+<p>这种办法，我们可以称为“极端情况法”。</p>
 <p><br/></p>
-<p>Peano系统是满足以下公设的有序三元组<span data-katex="(M,F,e)"></span>，</p>
-<p>其中<span data-katex="M"></span>为一个集合，<span data-katex="F"></span>是<span data-katex="M"></span>到<span data-katex="M"></span>的函数，<span data-katex="e"></span>为首元素，</p>
-<p>（1）<span data-katex="e\in M"></span></p>
-<p>（2）<span data-katex="M"></span>在<span data-katex="F"></span>下是封闭的</p>
-<p>（3）<span data-katex="e"></span>不在<span data-katex="F"></span>的值域中</p>
-<p>（4）<span data-katex="F"></span>是单射</p>
-<p>（5）如果<span data-katex="M"></span>的子集<span data-katex="A"></span>满足，<span data-katex="e\in A"></span>，且<span data-katex="A"></span>在<span data-katex="F"></span>下封闭，则<span data-katex="A=M"></span>。</p>
+<p>在寻找“异号区间”时，这种办法非常有用。</p>
+<p><strong>我们通常会选取一个极端的情况，在这种情况下，绝对不会出现问题。</strong></p>
+<p>因为如果不这样，我们经常会在问题环境中折腾很久，结果不论怎么弄都有问题。</p>
+<p>此外，如果没有一个极端情况来告诉我们没有问题，就无法二分。</p>
 <p><br/></p>
-<h4 id="后继">2.2 后继</h4>
-<p>设<span data-katex="A"></span>为一个集合，我们称<span data-katex="A\cup\{A\}"></span>为<span data-katex="A"></span>的后继，记作<span data-katex="A^+"></span>，</p>
-<p>求集合后继的操作，称为后继运算。</p>
+<p>我曾经遇到过一个JavaScript的问题，</p>
+<p>有一段代码，在服务器上总是无法运行，提示有非法字符，但是在我本机却没有问题。</p>
+<p>我甚至将每一个字符都逐个对比了，服务器上还是有问题。</p>
 <p><br/></p>
-<p>例如，<span data-katex="\varnothing^+=\varnothing\cup\{\varnothing\}=\{\varnothing\}"></span></p>
-<p><span data-katex="\varnothing^{++}=\varnothing^+\cup\{\varnothing^+\}=\{\varnothing\}\cup\{\{\varnothing\}\}=\{\varnothing,\{\varnothing\}\}"></span></p>
-<p><span data-katex="\varnothing^{+++}=\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}\}"></span>。</p>
+<p>怎么折腾都有问题，就意味着我们必须选取极端情况，</p>
+<p>找到极端的什么情况下，一定是没有问题的。</p>
+<p>于是，我将代码都删完了，只写了一个<code>alert()</code>，很明显代码是可以运行的，</p>
+<p>我找到了没有问题的环境。</p>
 <p><br/></p>
-<h4 id="归纳集">2.3 归纳集</h4>
-<p>设<span data-katex="A"></span>为一个集合，若<span data-katex="A"></span>满足，</p>
-<p>（1）<span data-katex="\varnothing\in A"></span></p>
-<p>（2）<span data-katex="\forall a\in A"></span>，<span data-katex="a^+\in A"></span></p>
-<p>则称<span data-katex="A"></span>是归纳集。</p>
+<p>紧接着，我采用二分法，逐渐缩小范围，</p>
+<p>最终发现了一个在编辑器中无法显示的字符，是它导致了JavaScript语法错误。</p>
 <p><br/></p>
-<p>例如，<span data-katex="\{\varnothing,\varnothing^+,\varnothing^{++},\cdots\}"></span>是一个归纳集。</p>
-<p>从归纳集的定义可知，<span data-katex="\varnothing,\varnothing^+,\varnothing^{++},\cdots"></span>是所有归纳集的元素，</p>
-<p>于是，可以将它们定义为自然数，自然数集记为<span data-katex="N"></span>。</p>
+<h3 id="干净实验室法">干净实验室法</h3>
+<p>最近用Lua写了一个脚本，用于转发Nginx中的get/post请求，这是一个稍微复杂的场景，</p>
+<p>如果对Lua和Nginx不熟悉，直接写出可用的正确代码简直是不可能的。</p>
 <p><br/></p>
-<p>设<span data-katex="\sigma:N\rightarrow N"></span>，满足<span data-katex="\sigma(n)=n^+"></span>，则称<span data-katex="\sigma"></span>为后继函数，</p>
-<p>则可以证明<span data-katex="(N,\sigma,\varnothing)"></span>是一个Peano系统。</p>
+<p>因此，我采用了“干净实验室法”，</p>
+<p>指的是，<strong>重新建立了一套干净的环境用于实验，</strong></p>
+<p>在这个“实验室”中检验成功的写法，才会移植到正式的开发环境中。</p>
 <p><br/></p>
-<h3 id="演算">3. <span data-katex="\lambda"></span>演算</h3>
+<p>我先后在这个实验室中，练习并检验了基本的Nginx用法，以及Lua的<code>Hello world</code>，</p>
+<p>接着，如何用Lua发起http请求，如何保留Cookie，都逐个被验证成功。</p>
+<p>最后，我将这些被验证的案例进行总结，集成到开发环境中，</p>
+<p>实现了这个稍微复杂一些的功能。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-93f8d59a3b3b1bcb.png" /></p>
+<p>这种“干净实验室法”看起来和二分法无关，</p>
+<p>实际上却正是二分法思想的应用。</p>
 <p><br/></p>
-<p><a href="https://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97" target="_blank" rel="noopener"><span data-katex="\lambda"></span>演算</a>，是1930年由邱奇（<a href="https://zh.wikipedia.org/zh-hans/%E9%98%BF%E9%9A%86%E4%BD%90%C2%B7%E9%82%B1%E5%A5%87" target="_blank" rel="noopener">Alonzo Church</a>）发明的一套<a href="https://zh.wikipedia.org/zh/%E5%BD%A2%E5%BC%8F%E7%B3%BB%E7%B5%B1" target="_blank" rel="noopener">形式系统</a>，</p>
-<p>它是从具体的函数定义，函数调用和函数复合中，抽象出来的数学概念。</p>
+<p>在解决这个问题的时候，我手里总是有两套环境，</p>
+<p>一个没有问题——实验室环境，另一个有问题——功能尚未实现，</p>
+<p>通过不断试验，功能被一个接一个实现，逐渐接近成功。</p>
 <p><br/></p>
-<h4 id="语法">3.1 语法</h4>
-<p>形式上，<span data-katex="\lambda"></span>演算由3种语法项（term）组成，</p>
-<p>（1）一个变量<span data-katex="x"></span>本身，是一个合法的<span data-katex="\lambda"></span>项，</p>
-<p>（2）<span data-katex="\lambda x.t_1"></span>，是一个合法的<span data-katex="\lambda"></span>项，称为从项<span data-katex="t_1"></span>中抽象出<span data-katex="x"></span>，</p>
-<p>（3）<span data-katex="t_1 t_2"></span>，是一个合法的<span data-katex="\lambda"></span>项，称为将<span data-katex="t_1"></span>应用于<span data-katex="t_2"></span>。</p>
+<h3 id="排除变量法">排除变量法</h3>
+<p>以上我们提到情况中，有问题的场景都是显而易见的，</p>
+<p>我们清楚的知道在什么情况下会出现错误。</p>
+<p>然而，在另外一些场景中，问题环境就不容易被构造了。</p>
 <p><br/></p>
-<p>例如，<span data-katex="(\lambda x.(xy))"></span>，<span data-katex="(x (\lambda x.(\lambda x.x)))"></span>，<span data-katex="((\lambda y.y)(\lambda x.(xy)))"></span>，都是合法的<span data-katex="\lambda"></span>项。</p>
-<p>为了简化描述，我们通常会省略一些括号，以上三个<span data-katex="\lambda"></span>项可以写成，</p>
-<p><span data-katex="\lambda x.xy"></span>，<span data-katex="x (\lambda x.\lambda x.x)"></span>，<span data-katex="(\lambda y.y)(\lambda x.xy)"></span>，</p>
-<p>对于形如<span data-katex="\lambda x.t_1"></span>的<span data-katex="\lambda"></span>项来说，“<span data-katex="."></span>”后面会向右包含尽量多的内容。</p>
+<p>在进行手机移动端开发的时候，</p>
+<p>我实现过一个滚动容器，可以通过手指上下移动，让它滚动。</p>
+<p>这个功能在iOS上是没问题的，在几乎所有Android手机上也是可以的，</p>
+<p>但是仅在某台测试机上出现了问题，容器滚动后不会停止。</p>
 <p><br/></p>
-<p>现在我们有了一堆合法的字符串了。</p>
-<p>可是，在给定推导规则之前，这些字符串之间都是没有关联的。</p>
-<p>而且，我们也还没有为这些符号指定语义，它们到底代表什么也是不清楚的。</p>
+<p>这时候会有很多因素干扰到我，</p>
+<p>是不是测试机的问题？是不是Android原生浏览器的问题？</p>
+<p>是不是代码逻辑的问题？是不是应用中其他库或框架的影响？</p>
 <p><br/></p>
-<p>很显然给这些符号指定不同的推导规则，会得到不同的公理系统，</p>
-<p>在众多<span data-katex="\lambda"></span>演算系统中，最简单的是<span data-katex="\lambda_\beta"></span>系统，它指定了<span data-katex="\alpha"></span>和<span data-katex="\beta"></span>两种变换。</p>
+<p>这些因素看起来是同时起作用的，因为稍微变动一点，问题就没了。</p>
+<p>这时候，我们就需要谨慎的排除变量，小心的保留问题环境了。</p>
 <p><br/></p>
-<h4 id="变换">3.2 <span data-katex="\alpha"></span>变换</h4>
-<p>设<span data-katex="\lambda"></span>项<span data-katex="P"></span>中包含了<span data-katex="\lambda x.M"></span>，</p>
-<p>则我们可以把<span data-katex="M"></span>中所有自由出现的<span data-katex="x"></span>，全都换成y，即<span data-katex="\lambda y.[y/x]M"></span>，</p>
-<p>这种更名变换，称为<span data-katex="\alpha"></span>变换。</p>
+<p>使用排除变量法，<strong>我们要在其他因素保持不变的前提下，</strong></p>
+<p><strong>只变动一个因素，并且还要让现象保留。</strong></p>
+<p>于是，我们就可以像抽积木一样，把这些因素逐渐剥离出去了。</p>
 <p><br/></p>
-<p>其中，“自由出现”指的是<span data-katex="x"></span>不被其他<span data-katex="\lambda"></span>抽象所绑定，</p>
-<p>例如，<span data-katex="\lambda x.xy"></span>中，<span data-katex="y"></span>是自由的，</p>
-<p>而<span data-katex="x"></span>就不是自由的，因为它被<span data-katex="\lambda x."></span>绑定了。</p>
+<p>最终我们发现，这类现象是Android 1.5机型上原生浏览器的问题，</p>
+<p>该浏览器有Bug，点按屏幕的时候，会触发touchstart和touchend事件，这个是好的，</p>
+<p>而手指在屏幕上移动的时候，将只触发touchstart和touchmove事件，</p>
+<p>touchend事件不被触发了，这是有问题的。</p>
 <p><br/></p>
-<p>如果<span data-katex="P"></span>可以经过有限步<span data-katex="\alpha"></span>变换转换为<span data-katex="Q"></span>，就写为<span data-katex="P\equiv_\alpha Q"></span>。</p>
+<p>为此，我们排除了框架的问题，代码的问题，某一台测试机的问题，</p>
+<p>等等这些非决定性因素。</p>
 <p><br/></p>
-<p>例如，</p>
-<p><span data-katex="\lambda xy.x(xy)=\lambda x.(\lambda y.x(xy))"></span></p>
-<p><span data-katex="\equiv_\alpha\lambda x.(\lambda v.x(xv))"></span></p>
-<p><span data-katex="\equiv_\alpha\lambda u.(\lambda v.u(uv))"></span></p>
-<p><span data-katex="=\lambda uv.u(uv)"></span></p>
+<h3 id="结语">结语</h3>
+<p>本文介绍了二分法，它可用于在软件开发过程中排查问题，</p>
+<p>还介绍了二分法思想的几个简单应用。</p>
 <p><br/></p>
-<h4 id="变换-1">3.3 <span data-katex="\beta"></span>变换</h4>
-<p>形如<span data-katex="(\lambda x.M)N"></span>的<span data-katex="\lambda"></span>项，可以经由<span data-katex="\beta"></span>变换转换为<span data-katex="[N/x]M"></span>，</p>
-<p>指的是，把<span data-katex="M"></span>中所有自由出现的<span data-katex="x"></span>都换成<span data-katex="N"></span>。</p>
+<p>使用“极端情况法”，我们总是可以找到一个没有问题的环境，</p>
+<p>使用“干净实验室法”，我们就可以逐渐产出经过验证的代码，</p>
+<p>使用“排除变量法”，我们可以一一排除干扰，找出问题的直接原因。</p>
 <p><br/></p>
-<p>如果<span data-katex="P"></span>可以经过有限步<span data-katex="\beta"></span>变换转换为<span data-katex="Q"></span>，就写为<span data-katex="P\triangleright_\beta Q"></span>。</p>
-<p><br/></p>
-<p>例如，</p>
-<p><span data-katex="(\lambda x.x(xy))N\triangleright_\beta N(Ny)"></span></p>
-<p><span data-katex="(\lambda x.xx)(\lambda x.xx)\triangleright_\beta [(\lambda x.xx)/x](xx)=(\lambda x.xx)(\lambda x.xx)\triangleright_\beta\cdots"></span></p>
-<p><br/></p>
-<p>我们发现，某些<span data-katex="\lambda"></span>项，可以无限进行<span data-katex="\beta"></span>变换。</p>
-<p>而那些最终会终止的<span data-katex="\beta"></span>变换的结果，称为<span data-katex="\beta"></span>范式（<span data-katex="\beta"></span> normal form）。</p>
-<p><br/></p>
-<h4 id="邱奇编码">3.4 邱奇编码</h4>
-<p>现在我们有<span data-katex="\lambda_\beta"></span>公理系统了，就可以依照<span data-katex="\alpha"></span>或<span data-katex="\beta"></span>变换，对任意合法的<span data-katex="\lambda"></span>项进行变换。</p>
-<p><br/></p>
-<p>假设我们有一个<span data-katex="\lambda"></span>项，<span data-katex="\lambda f.\lambda x.x"></span>，</p>
-<p>还有另外一个<span data-katex="\lambda"></span>项，<span data-katex="\lambda n.\lambda f.\lambda x.f(nfx)"></span>，记为<span data-katex="succ"></span>，</p>
-<p>我们来计算，<span data-katex="succ(\lambda f.\lambda x.x)"></span>，</p>
-<p>可得，<span data-katex="(\lambda n.\lambda f.\lambda x.f(nfx))(\lambda f.\lambda x.x)\triangleright_\beta\lambda f.\lambda x.fx"></span>，</p>
-<p>我们再运用一次<span data-katex="succ"></span>，<span data-katex="succ(\lambda f.\lambda x.fx)\triangleright_\beta\lambda f.\lambda x.f(fx)"></span>。</p>
-<p><br/></p>
-<p>我们发现每次应用<span data-katex="succ"></span>，都会给<span data-katex="\lambda f.\lambda x.x"></span>中加一个<span data-katex="f"></span>，</p>
-<p>最终我们可以得到以下这些<span data-katex="\lambda"></span>项，</p>
-<p><span data-katex="\lambda f.\lambda x.x"></span></p>
-<p><span data-katex="\lambda f.\lambda x.fx"></span></p>
-<p><span data-katex="\lambda f.\lambda x.f(fx)"></span></p>
-<p><span data-katex="\lambda f.\lambda x.f(f(fx))"></span></p>
-<p><span data-katex="\cdots"></span></p>
-<p><span data-katex="\lambda f.\lambda x.f^nx"></span></p>
-<p><br/></p>
-<p>如果我们记<span data-katex="\lambda f.\lambda x.x\equiv 0"></span>，<span data-katex="\lambda f.\lambda x.fx\equiv 1"></span>，<span data-katex="\cdots"></span>，</p>
-<p><span data-katex="\lambda f.\lambda x.f^nx\equiv n"></span>，</p>
-<p>我们就得到了自然数的另一种表示方式，称之为<a href="https://zh.wikipedia.org/wiki/%E9%82%B1%E5%A5%87%E6%95%B0" target="_blank" rel="noopener">邱奇编码</a>。</p>
-<p><br/></p>
-<p>可以看到邱奇编码与归纳集之间有异曲同工之妙。</p>
-<p><br/></p>
-<h4 id="语义">3.5 语义</h4>
-<p>到目前为止，我们并未谈及<span data-katex="\lambda"></span>项到底表示什么含义，</p>
-<p>虽然<span data-katex="\lambda x.M"></span>看起来像是函数定义，<span data-katex="(\lambda x.M)N"></span>看起来像是函数调用。</p>
-<p><br/></p>
-<p>我们谨慎的使用公理化方法，从什么是合法的<span data-katex="\lambda"></span>项出发，</p>
-<p>定义<span data-katex="\lambda_\beta"></span>系统中的公理——合法的<span data-katex="\lambda"></span>项，</p>
-<p>然后又指定了该系统中的推导规则——<span data-katex="\alpha"></span>和<span data-katex="\beta"></span>变换，</p>
-<p>最终得到了一个形式化的公理系统（公理+推导规则）。</p>
-<p><br/></p>
-<p>后文中，我们将谈及<span data-katex="\lambda"></span>项的语义，然后再逐渐给它加上类型。</p>
-<p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
-<p><a href="https://book.douban.com/subject/4323391/" target="_blank" rel="noopener">Lambda-Calculus and Combinators，an Introduction</a></p>
-<p><a href="https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/Selinger-Lambda-Calculus-Notes.pdf" target="_blank" rel="noopener">Lecture Notes on the Lambda Calculus</a></p>
+<p>这些方法都是我个人经验的总结，它们使我能更有效的解决问题。</p>
+<p>但是，<strong>向有经验的人进行咨询，无疑是更有效的。</strong></p>
+<p>很多问题在见识广博的人眼中，根本不是问题，问路比速跑好。</p>
 
           
         
@@ -541,7 +511,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/167/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/167/">167</a><span class="page-number current">168</span><a class="page-number" href="/page/169/">169</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/169/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/167/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/167/">167</a><span class="page-number current">168</span><a class="page-number" href="/page/169/">169</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/169/">&gt;</a>
   </nav>
 
 
@@ -587,7 +557,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -662,7 +632,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/18/polymorphism-of-chain-function/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/05/26/mechanism/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/18/polymorphism-of-chain-function/" itemprop="url">函数>>=的多态性</a></h1>
+                <a class="post-title-link" href="/2015/05/26/mechanism/" itemprop="url">运行机制</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-18T00:00:00+08:00">
-                2015-03-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-26T00:00:00+08:00">
+                2015-05-26
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Haskell/" itemprop="url" rel="index">
-                    <span itemprop="name">Haskell</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,93 +347,80 @@
       
         
           
-            <p>Haskell中一些函数可以作用在多种类型上。</p>
-<p>例如：</p>
-<p>ghci&gt; length [1, 2]</p>
-<p>2</p>
-<p>length :: [Int] -&gt; Int</p>
+            <p>每当我看到一篇好文章的时候，</p>
+<p>都会问自己这样一个问题，</p>
+<p>为什么我没有写出它来？</p>
 <p><br/></p>
-<p>ghci&gt; length ["a", "b", "c"]</p>
-<p>3</p>
-<p>length :: [String] -&gt; Int</p>
+<p>每当我听别人说出一个启发性的观点，</p>
+<p>都会问自己类似的问题，</p>
+<p>为什么我以前没有想到它？</p>
 <p><br/></p>
-<p>我们看length的类型，</p>
-<p>length :: [a] -&gt; Int</p>
-<p>它类型签名中，包含类型变量，类型变量可以具体化为任意类型。</p>
+<p>是什么驱使他们产生好的观点？</p>
+<p>是什么让他们乐于思考？</p>
+<p>他们和别人有什么不同？</p>
 <p><br/></p>
-<p>像这样的函数，称为多态函数。</p>
+<p>在于运行机制。</p>
 <p><br/></p>
-<h2 id="函数"><strong>函数&gt;&gt;=</strong></h2>
-<p>函数&gt;&gt;=定义在Monad类型类中，</p>
-<p>class Monad m where</p>
-<p>    (&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
+<h2 id="理解成功学"><strong>理解成功学</strong></h2>
+<p>听到成功人士分享经验，</p>
+<p>总是认为他们说的有道理，</p>
+<p>好像这样做就能复制成功似的。</p>
 <p><br/></p>
-<p>其中，m是Monad类型类的实例类型，它的kind是* -&gt; *，</p>
-<p>:k m = * -&gt; *</p>
-<p>类型m a是一个具体类型，该类型的值称为monad value。</p>
+<p>然而，其实并非他们所说的内容，</p>
+<p>而是，能让他们得出这些结论的能力，</p>
+<p>导致了他们成功。</p>
 <p><br/></p>
-<p>我们看到，在m确定的情况下，&gt;&gt;=的类型签名中仍然包含类型变量。</p>
-<p>因此，对Monad类型类的某个实例来说，</p>
-<p>&gt;&gt;=可以操作相同m类型但是不同a类型的monad value :: m a。</p>
+<p>为什么呢？</p>
+<p>因为成功者所说的，</p>
+<p>并不是成功的原因，而是成功后的体会。</p>
 <p><br/></p>
-<h2 id="io-monad"><strong>IO monad</strong></h2>
-<p>以Monad类型类的实例IO为例，对于IO来说，IO monad value称为IO action。</p>
-<p>main = do</p>
-<p>    putStrLn "Please input: "</p>
-<p>    inpStr &lt;- getLine</p>
-<p>    putStrLn $ "Hello " ++ inpStr</p>
+<p>人好比机器，</p>
+<p>有输入，有内在的运行机制，</p>
+<p>还有输出。</p>
 <p><br/></p>
-<p>其中，</p>
-<p>putStrLn :: String -&gt; IO ( )</p>
-<p>getLine :: IO String</p>
+<p>决定成功的，</p>
+<p>是输入和运行机制，</p>
+<p>并不是输出。</p>
 <p><br/></p>
-<p>我们来分析一下这3个IO action的类型，</p>
-<p>putStrLn "Please input: " :: IO ( )</p>
-<p>getLine :: IO String</p>
-<p>putStrLn $ "Hello " ++ inpStr :: IO ( )</p>
+<p>而且，好的运行机制，</p>
+<p>可以过滤输入，</p>
+<p>可以将输出反馈到自身，</p>
+<p>还可以调整自己。</p>
 <p><br/></p>
-<p>它们的具体类型都是m a，</p>
-<p>m相同，m = IO。而a不同，分别是( )，String，( )。</p>
+<p>因此，构建良性的运行机制，</p>
+<p>才是成功的秘诀。</p>
 <p><br/></p>
-<p>在do notation中，如果某一行我们没有使用&lt;-为monad value绑定值，</p>
-<p>就相当于使用了函数&gt;&gt;，表示不需要这个绑定值。</p>
-<p>(&gt;&gt;) :: x &gt;&gt; y = x &gt;&gt;= \ _ -&gt; y</p>
+<h2 id="培养人才"><strong>培养人才</strong></h2>
+<p>有人说，</p>
+<p>人才只能培养，不能创造。</p>
+<p>我认为有理。</p>
 <p><br/></p>
-<p>这样的话，我们就可以将main函数还原成&gt;&gt;和&gt;&gt;=的串联形式了，</p>
-<p>putStrLn "Please input: " &gt;&gt; getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
-<p>= putStrLn "Please input: " &gt;&gt;= \ _ -&gt; getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
-<p>= putStrLn "Please input: " &gt;&gt;= ( \ _ -&gt; getLine &gt;&gt;= ( -&gt; putStrLn $ "Hello " ++ inpStr ) )</p>
+<p>培养人才，</p>
+<p>并不是培养出像教师一样思考的人，</p>
+<p>而是培养出像人才一样的思考的人。</p>
 <p><br/></p>
-<h2 id="类型不同的同时出现"><strong>类型不同的&gt;&gt;=同时出现</strong></h2>
-<p>对于第一个&gt;&gt;=，我们能推断出它的大概类型，</p>
-<p>&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ?) -&gt; IO ?</p>
-<p>其中“?”表示尚未确定的类型。</p>
+<p>通过改变输入，让他进行不同的思考，</p>
+<p>然后，引导他思考自己的结论，</p>
+<p>激励他自我调整。</p>
 <p><br/></p>
-<p>而第二个&gt;&gt;=的类型，可以完全确定下来。</p>
-<p>getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
-<p>&gt;&gt;= :: IO String -&gt; (String -&gt; IO ( )) -&gt; IO ( )</p>
+<p>让他可以自我完善，</p>
+<p>改变他的运行机制。</p>
 <p><br/></p>
-<p>那么，第一个&gt;&gt;=的类型也就可以完全确定下来了，</p>
-<p>&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ( )) -&gt; IO ( )</p>
-<p><br/></p>
-<p>由此可见，</p>
-<p>第一个&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ( )) -&gt; IO ( )</p>
-<p>第二个&gt;&gt;= :: IO String -&gt; (String -&gt; IO ( )) -&gt; IO ( )</p>
-<p>两个&gt;&gt;=的类型不同，它们同时出现了。</p>
+<p>学习别人成功的经验，</p>
+<p>只是一种方法，</p>
+<p>能自我成长，</p>
+<p>才能做出令人惊叹的事情。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>do notation是&gt;&gt;和&gt;&gt;=串联形式的语法糖，IO action是 IO monad value，因此可以使用它。</p>
-<p>认为do notation中每行的monad value类型必须相同，是不正确的。</p>
-<p>事实上，他们的类型是m a，m是相同的，而a可以不同。</p>
+<p>你可能会想，</p>
+<p>为什么我能写出这样的文章来，</p>
+<p>而你没有。</p>
 <p><br/></p>
-<p>相似的，Functor和Applicative类型类也定义了一些多态函数。</p>
+<p>这可能也是运行机制不同吧。</p>
 <p><br/></p>
-<p>此外，对于IO类型，《Programming in Haskell》P88说的最清楚</p>
-<p>type IO a = World -&gt; (a, World)</p>
-<p><br/></p>
-<p>World类型的值表示环境的当前状态。</p>
-<p>World -&gt; (a, World)类型的值是一个函数，</p>
-<p>它接受环境状态作为参数，返回一个a类型的值，并影响了环境状态。</p>
+<p>此外，培养人才的方法，</p>
+<p>也可以用来培养自己，</p>
+<p>这就是反馈吧。</p>
 
           
         
@@ -472,7 +459,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/272/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/272/">272</a><span class="page-number current">273</span><a class="page-number" href="/page/274/">274</a><span class="space">&hellip;</span><a class="page-number" href="/page/292/">292</a><a class="extend next" rel="next" href="/page/274/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/272/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/272/">272</a><span class="page-number current">273</span><a class="page-number" href="/page/274/">274</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/274/">&gt;</a>
   </nav>
 
 
@@ -518,7 +505,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">292</span>
+                <span class="site-state-item-count">305</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -593,7 +580,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
