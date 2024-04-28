@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/08/25/structure-and-detail/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/05/type-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/25/structure-and-detail/" itemprop="url">结构与细节</a></h1>
+                <a class="post-title-link" href="/2017/09/05/type-1/" itemprop="url">你好，类型（一）：开篇</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T00:00:00+08:00">
-                2017-08-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-05T00:00:00+08:00">
+                2017-09-05
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
                   </a>
                 </span>
 
@@ -347,107 +347,53 @@
       
         
           
-            <h3 id="架构">架构</h3>
-<p>“架构”一词与建筑行业有着不可分割的关系，</p>
-<p>在最初引入到软件行业中时，</p>
-<p>是为了表达在编写计算机程序之前进行规划和设计的重要性。</p>
+            <p>类型（type），是编程语言中一个经常被人们提及的概念，</p>
+<p>当我们看待一门编程语言的时候，言必谈之类型系统（type system）。</p>
 <p><br/></p>
-<p><a href="http://cabibbo.dia.uniroma3.it/ids/altrui/ieee1471.pdf" target="_blank" rel="noopener">IEEE</a>给出了软件架构的标准定义。</p>
+<p>它到底是显式类型的（explicit typing），还是隐式类型的（implicit typing），</p>
+<p>是静态类型的（static typing），还是动态类型的（dynamic typing），</p>
+<p>类型检查（type check）是较强的（stronger），还是较弱的（weaker）。</p>
+<p><br/></p>
+<p>它是否支持高阶类型（high-order type），是否支持递归类型（recusive type），</p>
+<p>是否支持子类型（subtype），是否支持多态（polymorphism）。</p>
+<p><br/></p>
+<p><strong>这些都是一个有主见的技术爱好者，乐于去了解的内容。</strong></p>
+<hr />
+<p>然而，我发现理解它们并不容易，我们欠缺最基本的数理逻辑和证明论相关的知识。</p>
+<p>类型系统，可以看做是附着在语言语法之上的一套符号证明系统。</p>
 <blockquote>
-<p>Architecture:</p>
-</blockquote>
-<blockquote>
-<p>The fundamental <strong>organization</strong> of a system embodied in its components, their relationships to each other, and to the environment, and the principles guiding its design and <strong>evolution</strong>.</p>
+<p>In programming languages, a type system is a set of rules that assigns a property called type to the various constructs of a computer program, such as variables, expressions, functions or modules.</p>
 </blockquote>
 <p><br/></p>
-<p>维基百科中的描述也值得借鉴，</p>
-<blockquote>
-<p><a href="https://en.wikipedia.org/wiki/Software_architecture" target="_blank" rel="noopener">Software architecture</a> refers to the high level <strong>structures</strong> of a software system, the discipline of creating such <strong>structures</strong>, and the documentation of these <strong>structures</strong>.</p>
-</blockquote>
+<p>给表达式确定类型的过程，相当于对程序应该具备的属性做形式证明，</p>
+<p>因此，数理逻辑是我们的朋友。</p>
 <p><br/></p>
-<p>“架构”定义了软件系统中，各构成要素之间的<strong>关系</strong>与<strong>组织方式</strong>，</p>
-<p>从而体现出系统的一种<strong>结构性</strong>特征。</p>
+<p>另一方面，从语义（semantics）角度对类型进行理解，我们会遇到更大的阻碍，</p>
+<p>因为，这又涉及到了公理集合论和代数学相关的必备知识。</p>
 <p><br/></p>
-<h3 id="细节">细节</h3>
-<p>一个具体的软件，总是由各种细节组成，软件工程师也需要考虑细节问题。</p>
-<p>因为实现一个具体功能的方式总是灵活的，</p>
-<p>所以，在细节层面上会存在有多种多样的选择。</p>
+<p><strong>不过，这些仍然是一个有主见的技术爱好者，乐于去了解的内容。</strong></p>
+<hr />
+<p>本系列文章，我计划从无类型<span data-katex="\lambda"></span>演算开始，逐步介绍简单类型（simply typed）<span data-katex="\lambda"></span>演算，</p>
+<p>介绍递归类型和不动点（fixed point）之间关系，</p>
+<p>介绍组合子逻辑（combinatory logic）。</p>
+<p>然后，回归到本原，学习命题逻辑和一阶谓词逻辑相关的内容，</p>
+<p>建立起逻辑学与类型理论之间的桥梁。</p>
 <p><br/></p>
-<p>经常局限在细节上考虑问题，容易使人忽视全局性质。</p>
-<p>我们致力于在局部上消除冗余，却未必会看到子系统之间的重复，</p>
-<p>追求代码片段的可维护性，也未必会有利于系统整体的清晰易懂。</p>
+<p>时间允许的话，我们还可以探讨模型论相关的内容，在补充了代数学相关的内容之后，</p>
+<p>我们就可以讨论CPO，Henkin模型，Kripke模型，以及笛卡儿闭范畴（CCC）了。</p>
 <p><br/></p>
-<p>因此，为了保持良好的全局性质，在细节上就必定会有所<strong>损失</strong>。</p>
-<p>结构性质对细节来说，与其说是指导方针，倒不如说是一种<strong>人为限制</strong>。</p>
-<p><br/></p>
-<p>例如，在分层架构中，每一层必须是封闭和单向的，不允许跨层请求，</p>
-<p>层次之间也必须隔离的，层内的变化不能影响到其它层。</p>
-<p>这在某些场景下，可能会造成不便，但是如果随意的开放某个层次的访问权限，</p>
-<p>整个项目就是紧耦合的，变得一团糟。</p>
-<p><br/></p>
-<h3 id="物理结构和逻辑结构">物理结构和逻辑结构</h3>
-<p>从数据结构的角度来看，</p>
-<p>物理结构，是指数据的逻辑结构在计算机中的存储形式。</p>
-<p>逻辑结构，是指数据对象中数据元素之间的相互关系。</p>
-<p><br/></p>
-<p>考虑到软件项目，工程的物理结构，可以指相关<strong>文件</strong>的组织方式，</p>
-<p>工程的逻辑结构，可以指相关<strong>概念</strong>之间的关系。</p>
-<p><br/></p>
-<p>物理结构是重要的，它决定工程是如何存储和部署的，</p>
-<p>逻辑结构也是重要的，它决定了项目的参与者们如何理解它。</p>
-<p><br/></p>
-<p>从细节上来看，<a href="https://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E5%BC%82%E5%91%B3" target="_blank" rel="noopener">代码坏味</a>是结构性欠佳的一种表现，</p>
-<p>它们通常是更深层次灾难的根源。</p>
-<p><br/></p>
-<h3 id="数学结构">数学结构</h3>
-<p>数学结构，是与概念相对应的<strong>数学模型</strong>。</p>
-<p><br/></p>
-<p>例如，我们使用链表，栈和队列，来表示数据对象之间的线性关系，</p>
-<p>我们使用<a href="https://en.wikipedia.org/wiki/Monad_(functional_programming)" target="_blank" rel="noopener">monad</a>来表示执行流程中所反映出来的一种自相似性，</p>
-<p>使用<a href="https://en.wikipedia.org/wiki/Process_calculus" target="_blank" rel="noopener">进程代数</a>作为并发系统的形式模型。</p>
-<p><br/></p>
-<p>这些数学模型，有广泛的应用范围，但是也更加抽象，</p>
-<p>增加了在工程中直接使用的难度。</p>
-<p><br/></p>
-<p>因为软件需求通常是定制化的，所以即使两个系统有相同的数学结构，</p>
-<p>在细节上，具体表现形式之间的<strong>差异</strong>，也可能是巨大的。</p>
-<p><br/></p>
-<p>因此，洞悉数学结构，虽然可以帮助我们看到事物本质，</p>
-<p>但是另一方面，也要谨防忽视产品之间差异性带来的危害。</p>
-<p><br/></p>
-<h3 id="复杂性">复杂性</h3>
-<p>软件工程的目的在于控制复杂性，而不是增加复杂性。——<a href="https://en.wikipedia.org/wiki/Pamela_Zave" target="_blank" rel="noopener">Pamela Zave</a></p>
-<p><br/></p>
-<p>对于不同利益相关者而言，他们眼中的软件系统必须是直观且容易理解的。</p>
-<p>例如，<a href="https://en.wikipedia.org/wiki/4%2B1_architectural_view_model" target="_blank" rel="noopener">4+1 architectural view model</a>提供了一种软件架构的描述模型，</p>
-<p>它从不同的视角，对系统进行专门的描述。</p>
-<p><br/></p>
-<p>易知，开发者看来简单的事情，最终用户未必认可，反之亦然。</p>
-<p>因此，复杂性是相对于人而言的，而不是系统本身。</p>
-<p><br/></p>
-<p>复杂的细节，经过封装和<strong>信息隐藏</strong>，可能会表达一个直观的概念，</p>
-<p>对细节的暴露程度不加管控，才是复杂的根源。</p>
-<p><br/></p>
-<h3 id="沟通与说明">沟通与说明</h3>
-<p>知识是需要讲解的，信息的传递也需要沟通，</p>
-<p>良好的设计，并不会自然而然的被人理解。</p>
-<p><br/></p>
-<p>因此，设立流程和规范，不如促进人们加强<strong>沟通</strong>，</p>
-<p>工程师们对前景和蓝图缺乏<strong>共识</strong>，才导致了系统整体结构的紊乱。</p>
-<p><br/></p>
-<p>只有保持相同的愿景，在局部上才能有所折中，</p>
-<p>让步总是出现在未来可以得到更多利益的时候。</p>
-<p><br/></p>
-<p>此外，在说明怎样做的时候，很多人都忘记说明自己的<strong>意图</strong>和动机，</p>
-<p>像法律条文一样教条性的陈述，只会使人敬而远之。</p>
-<p><br/></p>
-<h3 id="结语">结语</h3>
-<p>软件作为一个整体，需要考虑的问题还有很多，</p>
-<p>除了功能性需求之外，还有<a href="https://zh.wikipedia.org/zh/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能性需求</a>，</p>
-<p>只有站在整体考虑问题，才能跳出程序员的范围，从商业角度看待软件项目。</p>
-<p><br/></p>
-<p>反观日常工作中，我们坚持的种种<strong>原则</strong>，</p>
-<p>可能都只是为了缓解强迫症的<strong>不安</strong>和<strong>焦虑</strong>罢了。（自嘲</p>
+<p>有的人说，讨论这些其实一点用都没有，</p>
+<p><strong>我只想说，作为一个有主见的技术爱好者，请别忘了咱们的初心是什么。</strong></p>
+<hr />
+<p><a href="http://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
+<p><a href="http://thzt.github.io/2017/09/06/type-2/">你好，类型（二）：Lambda calculus</a></p>
+<p><a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型（三）：Combinatory logic</a></p>
+<p><a href="http://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a></p>
+<p><a href="http://thzt.github.io/2017/09/16/type-5/">你好，类型（五）：Predicate logic</a></p>
+<p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
+<p><a href="http://thzt.github.io/2017/09/23/type-7/">你好，类型（七）：Recursive type</a></p>
+<p><a href="http://thzt.github.io/2017/10/13/type-8/">你好，类型（八）：Subtype</a></p>
+<p><a href="http://thzt.github.io/2017/10/14/type-9/">你好，类型（九）：Let polymorphism</a></p>
 
           
         
@@ -486,7 +432,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/182/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><span class="page-number current">183</span><a class="page-number" href="/page/184/">184</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/184/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/182/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><span class="page-number current">183</span><a class="page-number" href="/page/184/">184</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/184/">&gt;</a>
   </nav>
 
 
@@ -532,7 +478,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">305</span>
+                <span class="site-state-item-count">306</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

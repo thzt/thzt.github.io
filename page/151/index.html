@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/04/04/be-pride-of-ourselves/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/04/05/abstraction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/04/be-pride-of-ourselves/" itemprop="url">我们赞的是我们自己</a></h1>
+                <a class="post-title-link" href="/2018/04/05/abstraction/" itemprop="url">抽象层的稳定性</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T00:00:00+08:00">
-                2018-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T00:00:00+08:00">
+                2018-04-05
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,109 +347,159 @@
       
         
           
-            <p>从微博，朋友圈，知乎，到Twitter，Facebook，</p>
-<p>这些网站都有一个timeline功能，</p>
-<p>那就是我们的关注者，可以看到我们的活动记录。</p>
+            <p>当我们组织代码的时候，有一个常用的技巧，</p>
+<p>那就是将<strong>公共模块</strong>提取出来，这可以看做是对当前场景的一种抽象。</p>
+<p>它会降低冗余，减少代码量，提高开发效率。</p>
 <p><br/></p>
-<p>因此，我们在这些网站所进行的活动，</p>
-<p>不仅仅和自己有关，还具有<strong>社会属性</strong>。</p>
+<p>不然的话，只是想一想散布在代码仓库中重复的业务逻辑，</p>
+<p>我们那种似乎与生俱来的<strong>洁癖</strong>，就可能本能的产生一种抵触心理。</p>
 <p><br/></p>
-<p>我们赞了一篇文章，可能并不仅仅是因为文章本身有多大价值，</p>
-<p>还有一种可能是，<strong>我们希望关注者们知道我们看过这篇文章。</strong></p>
+<p>然而，公共模块也有可能带来一些问题。</p>
 <p><br/></p>
-<p>因此，被点赞的文章，无形中就增强了我们愿意被别人看到的形象，</p>
-<p>我们赞的是我们自己。</p>
+<p>假设在旧有代码中，由于功能A和功能B出现了公共逻辑，我们提取出模块X以共用。</p>
+<p>这一切看起来是美好的，</p>
+<p>但事实上，它却无意中建立起了A，B对模块X的依赖关系。</p>
 <p><br/></p>
-<h3 id="认同自己">认同自己</h3>
-<p>如果问起，在看到一篇文章的时候，人们在认同什么？</p>
-<p>我们真的是在认同作者所描述的事实吗？</p>
-<p>其实不一定，人们一般只相信自己愿意相信的事情。</p>
+<p>现在我们打算开发新功能C了，它与既有功能A，B有和X相似的公共逻辑，</p>
+<p>但是又不完全一样。</p>
+<p>这时候，我们是修改X呢，还是在功能C中几乎重新再写一遍X呢？</p>
 <p><br/></p>
+<p>我们会发现，自己走到了一条死胡同，</p>
+<p>要么打破原来构建公共模块的初衷，造成诸多修改，</p>
+<p>要么违反我们编写可复用代码的原始动机。</p>
+<p><br/></p>
+<p>我们到底应该怎么面对抽象层的脆弱性呢？</p>
+<p><br/></p>
+<h3 id="不断腐烂的抽象层">不断腐烂的抽象层</h3>
+<p>维基百科上对<a href="https://zh.wikipedia.org/zh-hans/%E6%8A%BD%E8%B1%A1" target="_blank" rel="noopener">抽象</a>给出了下述定义，</p>
 <blockquote>
-<p>一旦你形成了某种信念，它就会影响你对其他所有相关信息的知觉。</p>
+<p>抽象，就是抽取事物一些本质的东西，剔除次要的表面东西。</p>
 </blockquote>
 <p><br/></p>
-<p>这是一种认知偏差，称为<a href="https://zh.wikipedia.org/zh-hans/%E7%A2%BA%E8%AA%8D%E5%81%8F%E8%AA%A4" target="_blank" rel="noopener">确认偏误</a>，</p>
-<p>它指的是，个人选择性地回忆、搜集有利的细节，忽略不利或矛盾的资讯，来支持自己已有的想法。</p>
+<p>在编写软件的过程中，对业务场景建模就是一种抽象手段，</p>
+<p>我们会在多种具体情形中观察<strong>共性</strong>，提取<strong>模式</strong>，</p>
+<p>然后在应用模式的时候，补上差异化的那些特征。</p>
 <p><br/></p>
-<p>我们更喜欢关注那些和我们相似的人，</p>
-<p>仅仅是由于他们发表了我们乐意看到的内容，而不太关心这些内容是否属实。</p>
+<p>当我们静态的看待软件问题时，这是一种极好的开发方法。</p>
+<p>然而，<strong>现实中的软件都是动态变化的</strong>，在整个软件的生命周期中，变化是不可避免的。</p>
+<p>那么，这种建模方式，还是合理的吗？</p>
 <p><br/></p>
-<p>因此，当人们赞同一篇文章的时候，</p>
-<p>无形中会有这样的一种认知惯性左右自己，那就是<strong>作者写出了我的心里话。</strong></p>
+<p>我们将如何保证，当前所建立的抽象，仍然能良好契合未来更多的场景。</p>
+<p>显然这是无法满足的，因为我们不能断定反例不会出现。</p>
+<p>因此，抽象层一旦建立起来，随着时间的发展，它就会变得越来越<strong>脆弱</strong>，越来越不太适用。</p>
 <p><br/></p>
-<p>在日常生活中，和他人进行沟通和交流的时候，我们也是如此，</p>
-<p>与其说是我们同意了别人的观点，倒不如说是这些观点与我们自己产生了<strong>共鸣</strong>。</p>
-<p>我们是在认同自己。</p>
+<p>我想这也就是我们代码仓库中，那些不合理的抽象的根本来源吧。</p>
+<p>也明白了是谁一直在写那些烂代码了。</p>
 <p><br/></p>
-<h3 id="展示自己">展示自己</h3>
-<p>社会心理学中提到过这样一种现象，称为<strong>自我展示</strong>，</p>
-<p>是指我们想要向外在的观众（别人）和内在的观众（自己），展现一种受赞许的形象。</p>
-<p>并致力于管理自己所营造的形象。</p>
+<h3 id="不完备的测试用例">不完备的测试用例</h3>
+<p>如果历史上对业务场景所做的那些假设，随着时间发展不可避免会变得不合理的话，</p>
+<p>那么，我们首先想到的是承认这一点。</p>
+<p>然后考虑在这种情况下该怎样做。</p>
 <p><br/></p>
-<p>不幸的是，在展示自己和保持谦逊这两方面，很容易滋生矛盾，</p>
-<p>我们希望自己被看成是有才华的，同时又是谦逊而诚实的，</p>
-<p>因此，经常会有人为了看起来谦虚而故意贬低自己。</p>
+<p>如果我们总是以最新的业务场景为蓝本构建模型，</p>
+<p>总是调整代码，让它以最恰当的方式描述业务需要，</p>
+<p>或许是一个好办法。</p>
 <p><br/></p>
+<p>现在我们来看看这会带来哪些挑战。</p>
+<p><br/></p>
+<p>首先我们想到的是对测试的挑战，因为我们总是在修改既有代码，</p>
+<p>那么<strong>如何降低这些修改所带来的风险，保证功能的稳定性</strong>，就成了一个问题。</p>
+<p><br/></p>
+<p>在《<a href="https://book.douban.com/subject/1229923/" target="_blank" rel="noopener">重构</a>》一书中，</p>
+<p>Martin Fowler也提到过，<strong>重构的前提是保证代码被自动化的测试用例所覆盖，</strong></p>
+<p>否则，我们就无法确定某次修改是否真的对软件的外在表现没有影响。</p>
+<p><br/></p>
+<p>这在理论上是说得通的。</p>
+<p><br/></p>
+<p>但是在现实中，很多场景尤其是用户界面，</p>
+<p>覆盖所有特性的自动化测试用例，可能很难实现。</p>
+<p><br/></p>
+<p>即使自动化测试跑过了，我们也不能保证它不会出现其他漏洞，</p>
+<p>测试用例可能总是<strong>不够全面</strong>，例如重构化的版本可能增加了某些限制，</p>
+<p>而有没有这些限制不违反测试用例，但是用户却需要他们。</p>
+<p><br/></p>
+<h3 id="防止过拟合">防止过拟合</h3>
+<p>如果我们承认了抽象层的脆弱性，</p>
+<p>另一个考虑问题的角度可能是，<strong>我们能否放弃对冗余程度的坚持。</strong></p>
+<p>即，打破自己洁癖，为了增加可读性，适当的保持系统在一定程度上是重复的。</p>
+<p><br/></p>
+<p>在仅出现两次重复的场景中，我们大可不必为此建立任何抽象，因为，</p>
 <blockquote>
-<p>谦逊常常只是自负者的一种欲扬先抑的把戏。</p>
+<p>过早的优化是万恶之源。</p>
 </blockquote>
 <blockquote>
-<p>——拉罗什富科《箴言集》</p>
+<p>——Donald Knuth</p>
 </blockquote>
 <p><br/></p>
-<p>然而，这并不能说是一种错误，</p>
-<p>而<strong>恰恰是人们在社会活动中的正常心理表现。</strong></p>
+<p>从统计学上来讲，如果样本量太小，就更有可能出现<strong>过拟合</strong>。</p>
+<p>因此，不妨让系统运行一阵子，让业务发展一段时间，</p>
+<p>再将真正的模式提取出来。</p>
 <p><br/></p>
-<p>和自我展示相关的另一个关键词是<strong>期望值管理</strong>，</p>
-<p>由于人们通常期望比意料更好的事情发生，而不是发生糟糕的事情，</p>
-<p>所以，管理好他人对自己的期望，可以更好的赢得信任。</p>
-<p><br/></p>
-<p>回到我们的主题，在社交网站上赞了一篇文章，</p>
-<p>除了对作者表示感谢之外，其实还有一种社会心理在作怪，</p>
-<p>我们正打算表现出，自己乐意被别人认为的样子，我们是在展示自己。</p>
-<p><br/></p>
-<h3 id="被重视">被重视</h3>
+<p>因此，<a href="https://book.douban.com/subject/3138847/" target="_blank" rel="noopener">大前研一</a>这样说，</p>
 <blockquote>
-<p>人类天性中最深切的冲动，那是成为重要人物的欲望。</p>
+<p>解决问题的能力，就是为印证假设不辞劳苦的行动力。</p>
+</blockquote>
+<p>我们可以进行假设，但是要时刻做出推翻它的准备，</p>
+<p>并且<strong>要通过不断收集证据，而不是仅仅依赖逻辑上的正确性来检验它。</strong></p>
+<p><br/></p>
+<p>而从代码层面，我们最关注的其实不是系统的重复程度，</p>
+<p>而是可维护性，或者说可读性，</p>
+<p>可读性并不仅仅与代码的精简程度有关，还与<strong>信息的封装和隐藏</strong>有关。</p>
+<p><br/></p>
+<p>只要我们对必要的细节进行合理隐藏，</p>
+<p>并不会给维护工作带来更多的成本，</p>
+<p>相反，去理解一个不合理的抽象概念，反而是困难的，成本高昂的。</p>
+<p><br/></p>
+<h3 id="工程指标">工程指标</h3>
+<p>从工程角度来讲，一个软件项目就是凑齐一些人，在指定的时间内，</p>
+<p>以约定的可接受的软件质量为前提，做出满足需求规格说明的软件产品的过程。</p>
+<p><br/></p>
+<p>那么抽象层腐烂，或者可维护性差，<strong>真的是整个项目的瓶颈吗？</strong></p>
+<p><br/></p>
+<p>代码难以读懂，我们当然可以说服自己，平心静气的读下去，</p>
+<p>实在无法理解，在可控范围内，我们肯定也可以将相关功能重写。</p>
+<p>因此，代码不是一个软件项目的制约因素。</p>
+<p><br/></p>
+<p>而大部分软件项目的制约因素在于<strong>人日</strong>。</p>
+<p>即，项目的参与者，以及该项目的截止时间。</p>
+<p><br/></p>
+<blockquote>
+<p>一项调查表明，大约70%的软件开发项目，超出了估算的时间，</p>
 </blockquote>
 <blockquote>
-<p>——约翰·杜威</p>
+<p>大型项目平均超出计划交付时间20%到50%，</p>
+</blockquote>
+<blockquote>
+<p>90%以上的软件项目开发费用超出预算，并且项目越大，超出项目计划的程度越高。</p>
 </blockquote>
 <p><br/></p>
-<p>威利.贾姆士也曾说过，人类天性至深的本质，就是渴求被重视。</p>
-<p>这是一种痛苦的，希望被满足的饥饿感。</p>
+<p>因此，绝大多数软件项目所面临的问题都是时间上的问题，</p>
+<p>如何快速交付项目，才是人们关心的事情。</p>
+<p>而代码是否容易维护，只是对交付时间影响很小的一个因素。</p>
 <p><br/></p>
-<p>在任何沟通和谈话环节，</p>
-<p>保持倾听，站在对方角度考虑问题，让别人成为谈话的核心，</p>
-<p>都能让对方喜欢这次谈话，营造愉悦的气氛。</p>
-<p><br/></p>
-<p>而如果只顾自己表达，往往就越是无法顺畅的表达，</p>
-<p>因为人们实际上都不太关注别人，而是重视自己的感受。</p>
-<p><br/></p>
-<p>卡耐基在《<a href="https://book.douban.com/subject/1056295/" target="_blank" rel="noopener">人性的弱点</a>》中还提到与人处事时左右逢源的技巧，</p>
-<p><strong>不要批评、责怪或抱怨，献出你真实、诚恳的赞赏，引起别人的渴望。</strong></p>
-<p><br/></p>
-<p>这一点非常感谢我大学的一名体育老师，</p>
-<p>他给我们讲的第一节课篮球课，就是学会对别人打的好球进行赞赏。</p>
-<p>只有懂得欣赏，才能理解什么是团队合作。</p>
-<p><br/></p>
-<p>写一篇文章是如此，其内容固然重要，</p>
-<p>但更重要的，它应该可以帮助读者树立形象，满足点赞者期望被关注的心理。</p>
-<p><br/></p>
-<p>一个好的产品也是如此，它将不单单提供功能服务，</p>
-<p>更重要的是，<strong>满足用户心理上的需要。</strong></p>
+<p>其他因素当然还有，开发者对业务需求的理解程度，</p>
+<p>以及业务架构是否合理，返工的次数是否过多，人员之前的沟通是否顺畅，等等，</p>
+<p>因此也有人说，<strong>不清晰的产品路线和业务架构，决定了脏乱差的代码结构。</strong></p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>点赞之交，是一个新兴的互联网词汇，</p>
-<p>但其中隐含的心理学概念，却有很多，这对做好一个产品是有启发意义的。</p>
+<p>用静态的角度来看待软件，那么我们可能会写出符合<strong>美感</strong>的程序来，</p>
+<p>但这种美感是脆弱的，不堪一击的，</p>
+<p>一个突如其来的新功能，就可能打破这一切。</p>
 <p><br/></p>
-<p>在做一个产品的时候，多考虑对人性的关怀，是一个好的出发点，</p>
-<p>因为产品毕竟是由人来使用的，</p>
-<p>个人的喜恶偏见，都会影响人们对产品的看法。</p>
+<p>然而，我们又不想每天将自己置身于脏乱差的代码环境之中。</p>
+<p>所以更退一步的话，我们可以放弃美感，保留代码的可读性。</p>
 <p><br/></p>
-<p>为什么一个抖机灵的答案，虽然没有任何实质用处，也能被大家所喜爱，</p>
-<p>我想本文可能就是这个问题的一个答案了吧。</p>
+<p>但是，自古<strong>不谋万世者，不足谋一时，不谋全局者，不足谋一域。</strong></p>
+<p>从整个项目，从工程和业务角度来看，</p>
+<p>代码问题却已经不能成为最重要的问题了，这个问题是否有解或者究竟何解已经不重要了，</p>
+<p>因为，我们关心的问题层面变了。</p>
+<p><br/></p>
+<blockquote>
+<p>路漫漫其修远兮，吾将上下而求索。</p>
+</blockquote>
+<blockquote>
+<p>——屈原</p>
+</blockquote>
 
           
         
@@ -488,7 +538,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/150/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/150/">150</a><span class="page-number current">151</span><a class="page-number" href="/page/152/">152</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/152/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/150/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/150/">150</a><span class="page-number current">151</span><a class="page-number" href="/page/152/">152</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/152/">&gt;</a>
   </nav>
 
 
@@ -534,7 +584,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">305</span>
+                <span class="site-state-item-count">306</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

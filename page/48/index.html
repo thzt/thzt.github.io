@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/12/30/adventure-06/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/01/06/parser/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/30/adventure-06/" itemprop="url">软件设计奇遇记（六）：做事方式</a></h1>
+                <a class="post-title-link" href="/2021/01/06/parser/" itemprop="url">如何编写一个简单的 parser</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-30T00:00:00+08:00">
-                2020-12-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-06T00:00:00+08:00">
+                2021-01-06
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Software/" itemprop="url" rel="index">
-                    <span itemprop="name">Software</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,149 +347,135 @@
       
         
           
-            <p>第三篇中我们提到，软件开发是一项知识密集型工作，开发活动是知识的创造过程。</p>
-<p>知识工作具有很强的不确定性，</p>
-<p>软件工程中的很多方法，都是为了消除这种不确定性而展开的。</p>
+            <h3 id="背景">背景</h3>
+<p>最近由于工作需要，接触了几个与代码解析（parse）相关的工具，</p>
+<p>比如，<a href="https://www.npmjs.com/package/@babel/parser" target="_blank" rel="noopener">@babel/parser</a>，<a href="https://www.npmjs.com/package/typescript" target="_blank" rel="noopener">typescript</a>，<a href="https://www.npmjs.com/package/yaml" target="_blank" rel="noopener">yaml</a>，</p>
+<p>读过一点源码，也在这些优秀工具之上，做过一些简单的工作。</p>
 <p><br/></p>
-<p>除了可以从工程化的角度，从流程、规范或协作的角度消除不确定性之外，</p>
-<p>不同人的做事方式，也会产生不同的影响。</p>
+<p>本文就记录一下当前我对 “代码解析技术” 的浅显理解。</p>
+<h3 id="解析器">解析器</h3>
+<p>解析器（parser）的功能是，将一段字符串，转换成有结构的数据。</p>
+<p>解析过程看起来很神秘，但其实并没有黑魔法。</p>
+<p>人们之所以觉得编写 parser 是一件有难度的事情，主要是由以下几方面决定的。</p>
 <p><br/></p>
-<p>有些人会采用有些行之有效的方法，不仅让自己对事情更有管控力，</p>
-<p>还能对外表现得让别人放心，这是很关键的。</p>
-<p>本文就探讨一下这些方法，仅当抛砖引玉了。</p>
-<h3 id="工作项拆分">工作项拆分</h3>
-<p>任务一般是工作中的最小作业单元，我们每个人的日常工作都是被各种各样的任务所填满，</p>
-<p>但如果只着眼于任务的话，就容易产生只见树木不见森林的错觉。</p>
+<p>其一，很多 parser 的编写教程，都太偏理论，</p>
+<p>上来就讲上下文无关文法、递归可枚举语言、下推自动机，等等。</p>
+<p>全部掌握这些概念，是一件耗时耗力的事情。</p>
 <p><br/></p>
-<p>实际上我们需要考虑的是每天甚至每个月，这些任务是如何联系在一起的，</p>
-<p>它们是如何作为一个更大项目的子任务出现的，</p>
-<p>或者，这个项目是如何作为一个更大战役的子项目出现的。</p>
+<p>其二，解析技术本身就多种多样，适用于不同的待解析的场景，</p>
+<p>比如，LL、LR、LALR、GLR 文法对应的解析器。</p>
+<p>理解每一种解析器的实现方式，也是一件烧脑的事情。</p>
 <p><br/></p>
-<p>战役和项目本来应该是管理者自上而下传达的意图，但有些时候，信息传达的可能未必及时，</p>
-<p>这就需要我们有从叶子追溯到树根的能力。</p>
+<p>其三，日常所用的编程语言都挺复杂的，所以它们的 parser 也就复杂，</p>
+<p>TypeScript 语言的 parser 动辄也有上万行了。</p>
+<p>一下子接触到这么大的代码量，阅读起来会非常困难。</p>
 <p><br/></p>
-<p>除此之外，一个大型任务交给我们手上的话，我们还得学会对它进行拆分。</p>
-<p>把它拆分为可以管控的小部分，每个子部分还可以再拆分，</p>
-<p>这就需要具备整体思维意识。</p>
+<p>然而，以上这些难度，其实并非 parser 本身造成的，</p>
+<p>人们常用的、手写的递归下降 LL(k) 解析器，已经可以解决大多数问题了。</p>
+<p>所以，在学习 parser 之前，得先不要被它吓倒。</p>
 <p><br/></p>
-<p>什么是整体思维意识呢？</p>
-<p>就是把自己放在任务/项目/战役负责人的位置考虑问题，自己对整件事情负责。</p>
-<p>不要寄希望于别人。</p>
+<p>这就好比下棋一样，称为象棋大师是挺难的，没有一定的智商是办不到的，</p>
+<p>但是走棋规则并不难学，大家都能学会。</p>
+<h3 id="编译领域">编译领域</h3>
+<p>如果我们打算投身于编译领域进行开发的话，其实 parser 只是很小的一部分业务，</p>
+<p>大多数常用的语言，都已经有成熟的 parser 工具了，</p>
+<p>所以很难会需要我们从零开始写一个 parser。</p>
 <p><br/></p>
-<p>主要关注以下几个方面：</p>
+<p>因此，编译相关的大部分工作内容，不在于怎么写 parser，</p>
+<p>而在于，如何利用现有 parser 的产物，做上层建筑。</p>
+<p>能手写一个简单的 parser 知道它的原理，能读懂或维护一个复杂的 parser 就足够了。</p>
+<p><br/></p>
+<p>跟其他软件开发领域一样，编译领域所要关心的，同样是业务问题，</p>
+<p>即，如何利用更底层的基础设施，添加一些业务逻辑，在各方资源的限定下，为上层提供可靠的服务。</p>
+<p>并不会因为编译领域更贴近底层，就什么都得从头开始做。</p>
+<p><br/></p>
+<p>所以从这个角度来看，parser 只是编译团队所负责的一块很小的业务，</p>
+<p>除非有明确的业务场景，才会将编写 parser 作为一块独立的项目来推进。</p>
+<h3 id="极简主义">极简主义</h3>
+<p>一个极简主义的 parser，其实并不难实现。</p>
+<p>我写了一个 parser，包括注释在内，总共也就 200 多行代码。</p>
+<p>源码在这里：<a href="https://github.com/thzt/web.frontend.component/blob/master/library/list-parser/parser.js" target="_blank" rel="noopener">github: list-parser</a></p>
+<p><br/></p>
+<p>它用来解析这样的一段字符串，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(a </span><br><span class="line">  (</span><br><span class="line">    (c)</span><br><span class="line">    d</span><br><span class="line">  )</span><br><span class="line"> e-f</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>解析结果如下，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;expr&quot;: &#123;</span><br><span class="line">    &quot;list&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;name&quot;: &quot;Identifier&quot;,</span><br><span class="line">        &quot;pos&quot;: 2,</span><br><span class="line">        &quot;end&quot;: 3,</span><br><span class="line">        &quot;text&quot;: &quot;a&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;list&quot;: [</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;list&quot;: [</span><br><span class="line">              &#123;</span><br><span class="line">                &quot;name&quot;: &quot;Identifier&quot;,</span><br><span class="line">                &quot;pos&quot;: 14,</span><br><span class="line">                &quot;end&quot;: 15,</span><br><span class="line">                &quot;text&quot;: &quot;c&quot;</span><br><span class="line">              &#125;</span><br><span class="line">            ]</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;name&quot;: &quot;Identifier&quot;,</span><br><span class="line">            &quot;pos&quot;: 21,</span><br><span class="line">            &quot;end&quot;: 22,</span><br><span class="line">            &quot;text&quot;: &quot;d&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;name&quot;: &quot;Identifier&quot;,</span><br><span class="line">        &quot;pos&quot;: 28,</span><br><span class="line">        &quot;end&quot;: 31,</span><br><span class="line">        &quot;text&quot;: &quot;e-f&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面我来介绍它是怎么解析的，以及编写这种 parser 的套路是什么。</p>
+<h4 id="代码结构">（1）代码结构</h4>
+<p>一个手写的递归下降语法解析器，代码结构一般是这样的，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const parse &#x3D; (() &#x3D;&gt; &#123;</span><br><span class="line">  let sourceCode;</span><br><span class="line">  let pos;</span><br><span class="line">  let end;</span><br><span class="line">  let token;</span><br><span class="line"></span><br><span class="line">  return parse;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; ---- ---- ---- ---- ---- ---- ---- ---- ----</span><br><span class="line"></span><br><span class="line">  function parse(code) &#123; &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; ---- ---- ---- ---- ---- ---- ---- ---- ----</span><br><span class="line"></span><br><span class="line">  function nextToken() &#123; &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; ---- ---- ---- ---- ---- ---- ---- ---- ----</span><br><span class="line"></span><br><span class="line">  function assert(nameList) &#123; &#125;</span><br><span class="line"></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>首先，我们将私有变量都放到了一个立即执行的函数中（闭包），以避免污染全局空间，</p>
+<p>这样做比将它们定义为 <code>class</code> 的私有变量，会更简洁一些，</p>
+<p>例如对 token 进行赋值时，只需要 <code>token = ...</code> 就行了，不用 <code>this.token = ...</code>。</p>
+<p><br/></p>
+<p>其次，这个立即执行的函数直接返回 <code>parse</code> 函数，</p>
+<p><code>parse</code> 调用的其他函数通过 <code>function</code> 定义，</p>
+<p>不用箭头函数定义的原因，这些函数的名字都会被 “变量提升”，以支持互递归调用。</p>
+<p><br/></p>
+<p>最后，一个 parser 总共包含了以下 3 个部分，</p>
 <ul>
-<li><p>总共要拆分出哪几个子任务，还有没有尚未考虑到的事情</p></li>
-<li><p>拆分出来的每个子任务的进度如何</p></li>
-<li><p>整个任务的卡点在哪里，如何消除卡点，让其他任务可以进展下去</p></li>
+<li><p>parse: 语法分析器，由互递归调用的一堆函数组成</p></li>
+<li><p>nextToken: 词法分析器，读取下一个 token</p></li>
+<li><p>assert: 解析过程中，对上下文进行断言，便于快速排查问题</p></li>
 </ul>
+<h4 id="词法分析器">（2）词法分析器</h4>
+<p><code>nextToken</code> 实现了一个极简的词法分析器，</p>
+<p>调用 <code>nextToken()</code> 就会向后扫描下一个 token，</p>
+<p>如果需要向前看多个 token，只需将扫描结果保存一下就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 向后扫描一个 token</span><br><span class="line"> *&#x2F;</span><br><span class="line">function nextToken() &#123;</span><br><span class="line">  while (true) &#123;</span><br><span class="line">    if (pos &gt;&#x3D; end) &#123;</span><br><span class="line">      return token &#x3D; createToken(&#39;EndOfFile&#39;, pos, pos, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const ch &#x3D; sourceCode.charAt(pos);</span><br><span class="line">    switch (ch) &#123;</span><br><span class="line">      case &#39;(&#39;:</span><br><span class="line">        return token &#x3D; createToken(&#39;LeftBracket&#39;, pos, ++pos, ch);</span><br><span class="line">      case &#39;)&#39;:</span><br><span class="line">        return token &#x3D; createToken(&#39;RightBracket&#39;, pos, ++pos, ch);</span><br><span class="line"></span><br><span class="line">      case &#39; &#39;:</span><br><span class="line">      case &#39;\n&#39;:</span><br><span class="line">        ++pos;</span><br><span class="line">        continue;</span><br><span class="line"></span><br><span class="line">      default:</span><br><span class="line">        if (isIdentifierStart(ch)) &#123;</span><br><span class="line">          return token &#x3D; scanIdentifier();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>值得注意是，<code>nextToken</code> 会对变量 <code>token</code> 进行赋值，</p>
+<p>所以，每次访问 <code>token</code> 都能获取当前词法分析器位置最新的 token。</p>
 <p><br/></p>
-<p>所以具备整体思维意识，会有很强的推动（push）能力，</p>
-<p>这不仅仅是自己对任务管控能力的体现，</p>
-<p>更重要是可以做到对外透明。</p>
+<p>整个分析器的业务逻辑并不复杂，无非就是一个一个的读取单个字符，</p>
+<p>判断单个字符，或者后续的一串字符，能否构成一个 token。</p>
 <p><br/></p>
-<p>别人不知道我们在做什么，那就相当于什么也没做。</p>
-<p>其他人也无从得知怎样提供帮助，以及我们做的事情会不会对他产生影响。</p>
-<h3 id="进度计划">进度计划</h3>
-<p>学会了向上追溯更大的项目，向下拆分工作项之后，</p>
-<p>另一个重要的方法，就是制定进度计划了。</p>
-<p><br/></p>
-<p>我们需要对每一项工作进行评估，给出大致的工作量，以及完成时间。</p>
-<p>我知道把工作量评估准确是一件很难的事情。</p>
-<p>但评估的越准确，未来产生的危害就越小。</p>
-<p><br/></p>
-<p>所以，为期一个月的任务，是值得花费 2-3 天时间来仔细评估工作量的。</p>
-<p>主要考察这几个部分：</p>
+<p>扫描 identifier（标识符） 时也印证了这一点，</p>
+<p>我们判断当前扫描的字符是否 <code>isIdentifierStart</code>（标识符开头），</p>
+<p>如果是的话，就向后扫描，得到一个完整的 identifier token。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(a </span><br><span class="line">  (</span><br><span class="line">    (c)</span><br><span class="line">    d</span><br><span class="line">  )</span><br><span class="line"> e-f</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>对于我们要解析的语言来说，总共只有 4 种 token，跳过了空格和换行符，</p>
 <ul>
-<li><p>有哪些需要外部团队/个人协助才能解决的事情</p></li>
-<li><p>有哪些方案尚未确定的事情</p></li>
-<li><p>到了截止日期，如果不能做完，优先级是什么</p></li>
+<li><p>左括号：<code>(</code></p></li>
+<li><p>右括号：<code>)</code></p></li>
+<li><p>标识符：例如 <code>a</code>，<code>c</code>，<code>d</code>，<code>e-f</code></p></li>
+<li><p>文件结尾（EOF: end of file）</p></li>
 </ul>
+<h4 id="语法分析器">（3）语法分析器</h4>
+<p>语法分析器，是由可互递归调用的多个函数组成的，以下是完整的语法分析器代码，</p>
+<p>因为语言比较简单，所以语法分析器也就不会特别复杂。</p>
 <p><br/></p>
-<p>有些事情是依赖外部资源才能解决的，比如依赖了其他团队提供的软件服务，</p>
-<p>这时候更是要小心谨慎了，因为很可能一件小事会导致整盘延期。</p>
-<p><br/></p>
-<p>此外，自己负责的事情，一定要用心摸清底细，不要听别人的判断，</p>
-<p>要自己真的去看一下，到底还有多少工作量。</p>
-<p><br/></p>
-<p>所以事情都了然于胸之后，就要指定进度计划了，并实时跟进每天整件事的进展，</p>
-<p>进度落后的情况下不要羞于启齿，而是及时是上报风险。</p>
-<p>这样与当前任务相关的其他任务就可以感知到这一点，作出相应的调整了。</p>
-<p><br/></p>
-<p>没有进度计划，会给人一种无限往下拖着不办的感觉，</p>
-<p>别人不知道我们的整体进度到底是怎样的，也就没法安排自己的工作。</p>
-<h3 id="系统分析">系统分析</h3>
-<p>系统分析特指一种从系统/子系统角度考察技术方案的过程，</p>
-<p>是进行技术评审的时候，很常用的一种办法。</p>
-<p><br/></p>
-<p>我们要从需求、设计、系统关系、时序的角度，方方面面介绍自己的技术方案。</p>
-<p>这样可以在着手开发之前把方案确定下来，</p>
-<p>尤其是那些与其他系统进行交互的部分。</p>
-<p><br/></p>
-<p>重点注意以下两点：</p>
 <ul>
-<li><p>自己对需求的理解是不是准确，有没有无法覆盖到的场景</p></li>
-<li><p>是否需要其他系统进行改造，改动量有多大，需要对方系统负责人评估/排期</p></li>
-<li><p>自身系统的设计方案是否合理，有没有其他隐患</p></li>
+<li><p><code>parse</code> 调用了 <code>parseExpr</code></p></li>
+<li><p><code>parseExpr</code> 调用了 <code>parseList</code></p></li>
+<li><p><code>parseList</code> 又调用了 <code>parseExpr</code></p></li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(a </span><br><span class="line">  (</span><br><span class="line">    (c)</span><br><span class="line">    d</span><br><span class="line">  )</span><br><span class="line"> e-f</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>这个 list 的语言构成规则如下：</p>
+<p>一个 <code>list</code> 是由 <code>(</code> 和 <code>)</code> 包围的 <code>exprs</code> 组成</p>
+<p>一个 <code>exprs</code> 是一个多或多个 <code>expr</code>，</p>
+<p>一个 <code>expr</code> 要么是 <code>identifier</code>，要么是 <code>list</code>。</p>
 <p><br/></p>
-<p>系统分析不一定是正式的，但是跟团队进行交流的过程是重要的，</p>
-<p>自己拍脑袋想出来的方案很多情况下都是有问题的。</p>
-<p>这不是由技术能力决定的，而是有很多信息是我们自己不知道的。</p>
+<p>或者记为，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list &#x3D; &#39;(&#39; exprs &#39;)&#39;</span><br><span class="line">exprs &#x3D; expr | expr exprs</span><br><span class="line">expr &#x3D; identifier | list</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">function parse(code) &#123;</span><br><span class="line">  sourceCode &#x3D; code;</span><br><span class="line">  pos &#x3D; 0;</span><br><span class="line">  end &#x3D; sourceCode.length;</span><br><span class="line"></span><br><span class="line">  nextToken();</span><br><span class="line">  assert([&#39;Identifier&#39;, &#39;LeftBracket&#39;]);</span><br><span class="line">  const expr &#x3D; parseExpr();</span><br><span class="line"></span><br><span class="line">  nextToken();</span><br><span class="line">  assert([&#39;EndOfFile&#39;]);</span><br><span class="line"></span><br><span class="line">  return &#123;</span><br><span class="line">    expr,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function parseExpr() &#123;</span><br><span class="line">  assert([&#39;Identifier&#39;, &#39;LeftBracket&#39;]);</span><br><span class="line"></span><br><span class="line">  if (token.name &#x3D;&#x3D;&#x3D; &#39;Identifier&#39;) &#123;</span><br><span class="line">    return token;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  assert([&#39;LeftBracket&#39;]);</span><br><span class="line">  const list &#x3D; parseList();</span><br><span class="line">  return list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function parseList() &#123;</span><br><span class="line">  assert([&#39;LeftBracket&#39;]);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 向后扫描 exprs 各项，放到列表中</span><br><span class="line">  const results &#x3D; [];</span><br><span class="line">  while (true) &#123;</span><br><span class="line">    nextToken();</span><br><span class="line">    assert([&#39;RightBracket&#39;, &#39;Identifier&#39;, &#39;LeftBracket&#39;]);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 遇到右括号，说明当前层级的 exprs 处理完毕</span><br><span class="line">    if (token.name &#x3D;&#x3D;&#x3D; &#39;RightBracket&#39;) &#123;</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    assert([&#39;Identifier&#39;, &#39;LeftBracket&#39;]);</span><br><span class="line">    const expr &#x3D; parseExpr();</span><br><span class="line">    results.push(expr);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return &#123;</span><br><span class="line">    list: results,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>语法分析器编写的办法，就是对着上述语法规则，手动 <code>nextToken()</code>，</p>
+<p>向前看一个（或多个）token，递归的分层次处理问题。</p>
 <p><br/></p>
-<p>要学会开诚布公的，把方案拿出来大家看看，并愿意接受任何调整。</p>
-<p>所以说，做软件并不是技术上行得通或者方案优雅就够了，</p>
-<p>还要考虑外部影响，以及各利益相关者。</p>
-<p><br/></p>
-<p>尤其是在一个复杂系统上进行增量开发的话，征得别人同意才能让自己的工作做的更顺利。</p>
-<p>很多事情是无法让所有人满意的，那就只能说服对方，</p>
-<p>找到一个双方共赢的结合点，才能让工作进展下去。</p>
-<h3 id="风险上报">风险上报</h3>
-<p>软件项目中大部分的风险都是进度风险，其他的不太常见的例如还有资源风险，</p>
-<p>这里我们就只谈进度风险。</p>
-<p><br/></p>
-<p>进度风险产生的原因是多方面的，可能有以下几种：</p>
-<ul>
-<li><p>承诺的截止日期在早，导致不论如何都会延期</p></li>
-<li><p>工作量评估的过于乐观，一些不确定因素没有及早暴露出来</p></li>
-<li><p>依赖方的风险没有及时上报，导致自己延期</p></li>
-</ul>
-<p><br/></p>
-<p>消除进度风险是一件极难办到的事情，这也许是软件领域最难解决的问题之一了。</p>
-<p>究其原因，或许在于任务项目都是一件资源、质量、时间，三方平衡的产物。</p>
-<p><br/></p>
-<p>要想质量好、时间短，就必然会投入更多的资源，就是要加钱，</p>
-<p>而很多时候资源的投入不可能是无限的，而且还有软件工程本身的属性制约。</p>
-<p>软件项目当资源投入到一定程度之后，就无法再缩短时间了。</p>
-<p><br/></p>
-<p>所以一味的缩短项目时间，可能会导致质量低下，或者功能不全。</p>
-<p>这一般是不可忍受的。</p>
-<p><br/></p>
-<p>所以一个比较的管控办法是，</p>
-<p>对功能排优先级，总是在有限资源投入，有限时间，足够高的质量管控前提下，</p>
-<p>优先发布更重要的功能。</p>
-<p><br/></p>
-<p>这样软件项目管理就会变成了这样的事情了：</p>
-<ul>
-<li><p>如何界定功能的优先级</p></li>
-<li><p>如果对研发过程进行管理，减少浪费让更多功能尽快交付</p></li>
-<li><p>如何谈判给研发团队争取更多的时间，只做有核心竞争力的事情</p></li>
-</ul>
-<p><br/></p>
-<p>所以并不是施加压力，逼迫马儿快跑就完事了，这是体力工作的管理方式。</p>
-<p>让马儿快跑只要打它就行了，但是想让它喝水，就得另想办法了。</p>
+<p>其中，<code>assert</code> 起到了关键作用，便于我们在编写代码时，立即发现问题。</p>
 <h3 id="结语">结语</h3>
-<p>文本介绍了可适用于个人的管理软件项目不确定性的办法，</p>
-<p>重要的一点是，如何做到让别人放心。</p>
+<p>以上就是一个 200 行左右的极简 parser 了，但麻雀虽小五脏俱全，</p>
+<p>包含了一些常见的 parser 编写套路。</p>
 <p><br/></p>
-<p>现在的软件系统越来越复杂，所以对工程师的要求，也不仅仅是技术技能这一点了，</p>
-<p>还需要有很强的沟通和推动能力，有责任心，</p>
-<p>但这些说法都很虚，如何才能做到有责任心呢？我想本文或多或少能解决一些疑惑吧。</p>
+<p>根据二八定律，一个实际 parser 中可能花费了 80% 的时间来处理剩下 20% 的问题。</p>
+<p>比如，如何进行发现并显示错误的位置，如何增强解析过程的容错性，</p>
+<p>如何组织代码，怎样按逻辑结构，将词法分析器和语法分析器剥离出去。</p>
 <p><br/></p>
-<p>工程师跳出纯技术的视角之后，关注点才能落在范围更大的事项上，</p>
-<p>也才有机会整合资源，做出更有价值的事情。</p>
-<p>这并不是一件简单的事情，本身也是需要讲究方法的，需要投入精力的。</p>
+<p>现实要解析的语言，往往也会更加复杂，所以词法和语法分析器也会变得很麻烦。</p>
+<p>但这并不是 parser 本身难以编写造成的，而是因为场景复杂。</p>
 <p><br/></p>
-<p>这可能是一件有趣的事情吧。</p>
+<p>本文介绍了我在学习 parser 过程的一些体会。</p>
+<p>单独拿出解析技术本身来看的吧，确实足够艰深和复杂，</p>
+<p>但其实我们很难会遇到，所以日常工作中，会写一个极简的 parser 就足够了。</p>
 
           
         
@@ -528,7 +514,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/47/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><span class="page-number current">48</span><a class="page-number" href="/page/49/">49</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/49/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/47/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><span class="page-number current">48</span><a class="page-number" href="/page/49/">49</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/49/">&gt;</a>
   </nav>
 
 
@@ -574,7 +560,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">305</span>
+                <span class="site-state-item-count">306</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

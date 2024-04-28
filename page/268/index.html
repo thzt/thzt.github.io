@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/06/19/generator/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/06/22/hero-paradox/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/06/19/generator/" itemprop="url">EcmaScript 2015引入的generator</a></h1>
+                <a class="post-title-link" href="/2015/06/22/hero-paradox/" itemprop="url">英雄悖论</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-19T00:00:00+08:00">
-                2015-06-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-22T00:00:00+08:00">
+                2015-06-22
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lisp/" itemprop="url" rel="index">
-                    <span itemprop="name">Lisp</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,133 +347,102 @@
       
         
           
-            <p>Ecmascript 2015刚刚发布了，</p>
-<p>新增了很多<strong>特性</strong>，</p>
-<p>例如，let，promise，iterator，generator，</p>
-<p>proxy，class，module等等。</p>
+            <p>国难出英雄。</p>
 <p><br/></p>
-<p>其中<strong>generator</strong>更是引人注目，</p>
-<p>可以便捷的产生一个iterator。</p>
+<p>祸乱中，才能凸显英雄。</p>
+<p>他们力挽狂澜，建立了丰功伟绩。</p>
 <p><br/></p>
-<p>function* gen() {</p>
-<p>        <strong>yield</strong> 1;</p>
-<p>        <strong>yield</strong> 2;</p>
+<p>然而，</p>
+<p>这似乎<strong>并不是英雄的最高境界</strong>。</p>
 <p><br/></p>
-<p>        return 3;</p>
-<p>}</p>
+<p>有些普通人，防微杜渐，</p>
+<p>做着一些不起眼的小事，</p>
+<p><strong>让灾祸根本就不可能发生</strong>。</p>
 <p><br/></p>
-<p>var i = gen();</p>
+<p>可是他们，却不能称之为英雄，</p>
+<p>因为他们并没有救人于水火。</p>
 <p><br/></p>
-<p>console.log(i.next().value);        //1</p>
-<p>console.log(i.next().value);        //2</p>
-<p>console.log(i.next().value);        //3</p>
-<p>console.log(i.next().value);        //undefined</p>
+<p>这真是一个值得深思的悖论。</p>
 <p><br/></p>
-<p>可见，每次调用i.next，</p>
-<p>gen都会从上一次的<strong>yield</strong>后继续执行。</p>
+<h2 id="里阳县令寇准"><strong>里阳县令寇准</strong></h2>
+<p>《杨家将》中有一段，</p>
+<p>为了避嫌，包拯推荐寇准追查一个案件。</p>
 <p><br/></p>
-<p>这在Ecmascript之前版本看来，</p>
-<p>是不可思议的。</p>
+<p>可是钦差到了里阳县后，</p>
+<p>却发现，<strong>县衙已经荒废很久了</strong>，</p>
+<p>人们都在门口摆摊做买卖。</p>
 <p><br/></p>
-<h2 id="用callcc实现"><strong>用call/cc实现</strong></h2>
-<p>从Scheme的角度来看，</p>
-<p>从断点处继续执行，</p>
-<p>其实就是，<strong>调用yield断点处的continuation</strong>。</p>
+<p>好不容易在后堂，</p>
+<p>找到了在和衙役下棋的寇准。</p>
 <p><br/></p>
-<p>所以，yield并不是一个新概念，</p>
-<p>我们用call/cc实现一下。</p>
+<p>钦差对寇准说：</p>
+<p>你身为县令，</p>
+<p>不但官帽不戴，官服不穿，</p>
+<p>而且还<strong>荒废职守</strong>。</p>
+<p>外面是衙门，根本就<strong>不像衙门</strong>。</p>
 <p><br/></p>
-<p>(define (gen x)</p>
-<p>        (define <strong>k-body</strong> #f)</p>
-<p>        (define <strong>k-yield</strong> #f)</p>
+<p>寇准说：</p>
+<p>没关系的。</p>
 <p><br/></p>
-<p>        (define (yield x)</p>
-<p>                (call/cc (lambda (k2)</p>
-<p>                        (set! <strong>k-yield</strong> k2)</p>
-<p>                        (<strong>k-body</strong> x))))</p>
+<p>我们这儿，最近这几年，</p>
+<p>真是路不拾遗，夜不闭户，</p>
+<p><strong>根本就没有人犯案的</strong>。</p>
 <p><br/></p>
-<p>        (lambda ()</p>
-<p>                (call/cc (lambda (k1)</p>
-<p>                        (if (eq? <strong>k-body</strong> #f)</p>
-<p>                                (begin</p>
-<p>                                        (set! <strong>k-body</strong> k1)</p>
+<p>用不着升堂这么麻烦了，</p>
+<p>很清闲的。</p>
 <p><br/></p>
-<p>                                        (yield x)</p>
-<p>                                        (yield (+ x 1))</p>
+<h2 id="用武之地"><strong>用武之地</strong></h2>
+<p>不做历史研究，</p>
+<p>仅限于故事之中。</p>
 <p><br/></p>
-<p>                                        (+ x 2))</p>
-<p>                                (<strong>k-yield</strong>))))))</p>
+<p>能让人们安居乐业，</p>
+<p>并不是一件容易的事情。</p>
 <p><br/></p>
-<p>(define i (gen 1))</p>
-<p>(i)        ;1</p>
-<p>(i)        ;2</p>
-<p>(i)        ;3</p>
-<p>(i)        ;3</p>
+<p>然而，</p>
+<p><strong>县令却没有以解决过离奇的案件</strong>，</p>
+<p><strong>而为人所知</strong>。</p>
 <p><br/></p>
-<p>仅最后一次调用与Ecmascript不同。</p>
-<p>无伤大雅。</p>
+<p>一个人在事情发展过程中，</p>
+<p>起着什么作用，</p>
+<p>外人通常是无法了解的。</p>
 <p><br/></p>
-<h2 id="用macro进行抽象"><strong>用macro进行抽象</strong></h2>
-<p>像上面那样为每一个generator写call/cc，</p>
-<p>太繁琐了，</p>
-<p>Scheme程序员是不能容忍的。</p>
+<p><strong>没有让事情恶化到急需补救之时</strong>，</p>
+<p><strong>才是最强大的处理方式</strong>。</p>
 <p><br/></p>
-<p>先看看我们<strong>希望</strong>怎样调用，</p>
-<p>(<strong>make-generator</strong> (gen x y)</p>
-<p>        (yield x)</p>
-<p>        (yield y)</p>
+<h2 id="渴而掘井"><strong>渴而掘井</strong></h2>
+<p>夫病已成而后药之，乱已成而后治之，譬犹渴而穿井，斗而铸锥，不亦晚乎！</p>
+<p>——《素问·四气调神大论》</p>
 <p><br/></p>
-<p>        (+ x y))</p>
+<p>已经病重了才用药防治，</p>
+<p>已经有人造反了才治理天下，</p>
+<p>就好比渴极了才挖井、</p>
+<p>要对阵了才去打造铁椎一样。</p>
 <p><br/></p>
-<p>(define i (gen 1 2))</p>
-<p>(i)        ;1</p>
-<p>(i)        ;2</p>
-<p>(i)        ;3</p>
-<p>(i)        ;3</p>
+<p>这告诉我们，</p>
+<p><strong>要把努力放在点滴的小事上</strong>，</p>
+<p>绵绵不绝的为将来做准备。</p>
 <p><br/></p>
-<p>这样就清爽多了，</p>
-<p>还把generator改成了可接收<strong>多参数</strong>的形式。</p>
-<p>make-generator是一个<strong>宏</strong>，它可以<strong>用来定义</strong>generator。</p>
+<p>一个团队，</p>
+<p>等到人心涣散了，才去挽救，</p>
+<p>为时已晚。</p>
 <p><br/></p>
-<p>具体实现如下，</p>
-<p>(define-syntax make-generator</p>
-<p>        (lambda (form)</p>
-<p>                (syntax-case form ()</p>
-<p>                        [(keyword (name ...) . body)</p>
-<p>                        (syntax-case (<strong>datum-&gt;syntax</strong> #'keyword 'yield) ()</p>
-<p>                                [yield</p>
-<p>                                        #'(define (name ...)</p>
-<p>                                                (define k-body #f)</p>
-<p>                                                (define k-yield #f)</p>
-<p><br/></p>
-<p>                                                (define (yield . args)</p>
-<p>                                                        (call/cc (lambda (k2)</p>
-<p>                                                                (set! k-yield k2)</p>
-<p>                                                                (apply k-body args))))</p>
-<p><br/></p>
-<p>                                                (lambda ()</p>
-<p>                                                        (call/cc (lambda (k1)</p>
-<p>                                                                (if (eq? k-body #f)</p>
-<p>                                                                        (begin</p>
-<p>                                                                                (set! k-body k1) . body)</p>
-<p>                                                                        (k-yield))))))])])))</p>
+<p>个人的知识储备，</p>
+<p>应该每时每刻都注意积累，</p>
+<p>用的时候才能游刃有余。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>Ecmascript 2015加入了很多特性，</p>
-<p>把自己搞的更加复杂了，</p>
-<p>这在走一些臃肿语言的老路。</p>
+<p>软件项目中，</p>
+<p>有很多问题，本来是可以避免的。</p>
 <p><br/></p>
-<p>Scheme也不例外，</p>
-<p>R6RS就是膨胀的版本，</p>
-<p>不过还好，从那之后，</p>
-<p>语言分为了两个分支，R7RS力求简洁，</p>
-<p>另一个分支正在进行中，为了工业应用。</p>
+<p>遇到的问题多，</p>
+<p>并把它们解决了，</p>
+<p>也不代表能力超群。</p>
 <p><br/></p>
-<p>追求完美，并不是要增加特性，</p>
-<p>而是要尽量减少特性。</p>
+<p>项目管理，</p>
+<p><strong>亡羊补牢，不如防患于未然</strong>。</p>
 <p><br/></p>
-<p>简洁有效，</p>
-<p>包含了太深刻的内涵。</p>
+<p>而团队建设，</p>
+<p><strong>求贤若渴，不如退而创造良好的环境</strong>。</p>
 
           
         
@@ -512,7 +481,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/267/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/267/">267</a><span class="page-number current">268</span><a class="page-number" href="/page/269/">269</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/269/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/267/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/267/">267</a><span class="page-number current">268</span><a class="page-number" href="/page/269/">269</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/269/">&gt;</a>
   </nav>
 
 
@@ -558,7 +527,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">305</span>
+                <span class="site-state-item-count">306</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/06/creativity/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/07/monad/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/06/creativity/" itemprop="url">你有多少时间用来创造</a></h1>
+                <a class="post-title-link" href="/2015/03/07/monad/" itemprop="url">Monad入门</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-06T00:00:00+08:00">
-                2015-03-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-07T00:00:00+08:00">
+                2015-03-07
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index">
+                    <span itemprop="name">Haskell</span>
                   </a>
                 </span>
 
@@ -347,74 +347,290 @@
       
         
           
-            <p>这个时代，再也不会出现一个百科全书似的人物了。</p>
-<p>在任何一个领域，都包含着无穷无尽的知识。</p>
-<p>一辈子都学不完。</p>
+            <p>当你觉得不能理解某个概念的时候，</p>
+<p>其实是没有和已知的概念建立联系。</p>
 <p><br/></p>
-<p>甚至，有些知识也并不是你真正需要的。</p>
-<p>而是别人以营销的方式强加给你的。</p>
-<p>因为有使用者，就有受益者。</p>
+<p>不要懊恼，也不要急躁。</p>
+<p>应该耐心的从基础学起，欲速则不达。</p>
+<p>Only people who die very young learn all they really need to know in kindergarten.</p>
+<p>只有早死鬼才指望在幼儿园中就学会一切。</p>
+<p>——《Expert C Programming》</p>
 <p><br/></p>
-<p>生活在这个时代，会感到很无奈。</p>
-<p>一直追赶着别人的步伐，却永远没办法赶上他们。</p>
-<p>这是现实的悲哀吗？</p>
+<p>Monad是Haskell中的一个概念。</p>
+<p>你也可以说它是一个数学概念，</p>
+<p>但我们今天不谈数学，只谈Haskell，从简单的入手。</p>
 <p><br/></p>
-<p>我认为不是的。</p>
-<p>这是现实在用巧妙的方式提醒我们。</p>
+<p>要到达Monad的环节，可不是容易的事情。</p>
+<p>我们需要逐步学会一系列全新的概念。</p>
+<p>这也是为什么求快的人总是学不会的原因了。</p>
 <p><br/></p>
-<h2 id="无招胜有招"><strong>无招胜有招</strong></h2>
-<p>每个人生来都是独特的。</p>
-<p>并不是因为它一生之中掌握了独特的知识。</p>
-<p>而是因为它利用现有的知识，进行了独特的创造。</p>
+<p>我们就开始吧。</p>
 <p><br/></p>
-<p>武侠小说中，当出现一本武林秘籍的时候。</p>
-<p>江湖上总是腥风血雨，争来争去。</p>
+<h2 id="值和类型"><strong>值和类型</strong></h2>
+<p>Haskell中表达式是有值的，</p>
+<p>比如，值为1，值为'a'，</p>
+<p>他们在内存中存储方式是一样的。</p>
 <p><br/></p>
-<p>这其实反映了人们的愿望和现实的差异。</p>
-<p>事实上，忽略了理解和创造，获得再多也是没有用的。</p>
+<p>但是，感觉他们应该是不同的东西。</p>
+<p>应该使用类型进行区分。</p>
 <p><br/></p>
-<p>临阵对敌，讲究招数熟练，运转自如，</p>
-<p>更讲究随机应变，活学活用。</p>
+<p>我们称值1的类型是Int，整型</p>
+<p>值'a'的类型为Char，字符型</p>
 <p><br/></p>
-<p>再多的生疏招数，不如一技之长。</p>
-<p>一招鲜，不如自己有思想。</p>
+<p>这样的话，实际上是在值这个概念之上建立了一层抽象。</p>
+<p>不同的值因此有了不同的划分。</p>
 <p><br/></p>
-<p>用同样的招数，有想法的人会产生不同的威力。</p>
-<p>而找到合适的方法克敌制胜，也是招数存在的原因。</p>
+<h2 id="函数"><strong>函数</strong></h2>
+<p>函数用来将一个或多个值变成另一个值。</p>
+<p>函数也是一种值，它也是有类型的。</p>
 <p><br/></p>
-<p>因此，在程序员的世界里，使用别人的解决方案也是没有用的，</p>
-<p>我们应该学习作者的设计思想。</p>
+<p>例如，加法函数add是把两个整型值，变成一个整型值。</p>
+<p>假如已经定义好了add函数，那么Haskell中如下调用它。</p>
+<p>add 1 2</p>
+<p>= 3</p>
 <p><br/></p>
-<h2 id="面向未来进行设计"><strong>面向未来进行设计</strong></h2>
-<p>推倒重来，是新手们喜欢做的事情。</p>
-<p>但是摒弃一切的同时，有用的思想也失去了。</p>
-<p>于是，重新制造，唯一的可能就是历史的倒退。</p>
+<p>现在，我们考虑一个问题。</p>
+<p>如果，我们只为add提供了一个参数，结果是什么。</p>
+<p>即，add 1是什么？</p>
 <p><br/></p>
-<p>然而，高手们不是也能自立门派吗？</p>
+<p>add就好像一台有两个插槽的机器，</p>
+<p>如果插了两个槽分别是1和2，那么它会弹结果3出来。</p>
+<p>如果只插一个槽，那么它还是一台机器，一台只有一个插槽的机器。</p>
 <p><br/></p>
-<p>是的，只有当用尽了各种修复手段之后，</p>
-<p>仍然无法适用时，新的方法才不得已而出现。</p>
+<p>所以，add 1还是一个函数，只不过它只接受1个值作为参数。</p>
+<p>它会返回这个值与1相加的结果。</p>
+<p>也就是说，add 1，把一个整型值变成了另一个整型值。</p>
+<p>我们记add 1的类型为Int -&gt; Int</p>
 <p><br/></p>
-<p>很多设计并不是有意而为之的。</p>
-<p>不得已而放弃之时，才能体会到作者当时的想法。</p>
+<p>接着，我们看add的类型是什么？</p>
+<p>add既可以看做一台有两个插槽的机器，这台机器插满两个槽以后，弹出结果。</p>
+<p>还可以看做一台有一个插槽的机器，插完这个槽以后，返回一台有一个槽的机器。</p>
+<p>例如，add用1调用返回了add 1</p>
 <p><br/></p>
-<p>有趣的是，</p>
-<p>我们如何看待昨天的软件，</p>
-<p>不久以后，人们也会如何看待今天。</p>
+<p>所以，add的类型应该是Int -&gt; (Int -&gt; Int)</p>
+<p>因为，对于任意一个多参数函数，我们总是可以这么想。</p>
+<p>干脆把括号也去了，写成Int -&gt; Int -&gt; Int</p>
 <p><br/></p>
-<p>所以，我们不要猜测软件在未来的使用场景。</p>
-<p>我们要提供足够多的材料，把创造的机会留给未来。</p>
+<p>像以上这样的看待函数的方式，称为柯里化。</p>
+<p>后面我们将看到，Haskell中不仅函数，很多带多参数的东西都可以柯里化一下。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>各种函数库，框架，编程语言，</p>
-<p>简直是数不胜数。</p>
+<h2 id="自定义类型"><strong>自定义类型</strong></h2>
+<p>我们正在处理的值1，2，3和2014，2015，2016，看起来是不同的。</p>
+<p>用同一个Int类型来表示，有点牵强。</p>
+<p>因为实际上，我们相用1，2，3表示月份，而用2014，2015，2016表示年。</p>
 <p><br/></p>
-<p>有些人，以会用而自豪。</p>
-<p>还有人，完全无视别人的成果。</p>
+<p>能提供自定义的类型就好了。</p>
+<p>比如1，2，3是类型Month的值，而2014，2015，2016是类型Year的值。</p>
 <p><br/></p>
-<p>而我们，</p>
-<p>积累有用的思想，</p>
-<p>面向未来进行设计。</p>
+<p>Haskell中提供了关键字data用来自定义类型。</p>
+<p>例如：</p>
+<p>data Month = MonthValue Int</p>
+<p>data Year = YearValue Int</p>
+<p><br/></p>
+<p>其中，Month表示类型，MonthValue表示值构造器，它用来构造这个类型的值。</p>
+<p>例如：</p>
+<p>MonthValue 1就是一个Month类型的值了。</p>
+<p><br/></p>
+<p>我们看到值构造器MonthValue带了参数Int，表示这个类型有一个字段。</p>
+<p>值构造器还可以不带参数，也可以带多个参数。</p>
+<p>这里要注意，Int是一个类型。</p>
+<p><br/></p>
+<p>例如：</p>
+<p>data Bool = True | False</p>
+<p>其中“|”是表示或者的意思。</p>
+<p><br/></p>
+<p>Bool类型有两个值构造器，分别是True和False，它们不带参数。</p>
+<p>即，True就是一个Bool类型的值了。</p>
+<p><br/></p>
+<p>再例如：</p>
+<p>data Date = DateValue Year Month Day</p>
+<p>其中，Date新定义的类型，DateValue是值构造器，</p>
+<p>而Year，Month，Day都是类型。</p>
+<p>它表示Date类型的值由值构造器DateValue来创建，具有3个字段。</p>
+<p><br/></p>
+<p>然后，麻烦的地方来了。</p>
+<p>Haskell就是有这个特点，几乎什么东西都可以带参数。</p>
+<p>带了多个参数以后，又都可以柯里化。</p>
+<p><br/></p>
+<p>现在我们让类型带上参数。</p>
+<p>例如：</p>
+<p>data Maybe a = Nothing | Just a</p>
+<p>其中，Maybe是带参数的类型，称为类型构造器。</p>
+<p>Nothing如上所示，它是一个不带参数的值构造器。</p>
+<p>Just如上所示，它是一个带参数的值构造器。</p>
+<p>“|”是表示或者的意思。</p>
+<p>a表示一个参数类型。</p>
+<p>注意：带参数的类型和类型构造器是一个概念，后文要经常用到。</p>
+<p><br/></p>
+<p>对于类型构造器，可以这样理解。</p>
+<p>Maybe Int才是一个具体的类型。</p>
+<p>它有两个值构造器Nothing和Just Int。</p>
+<p><br/></p>
+<p>我们当然还可以定义两个参数的类型构造器。</p>
+<p>data Either a b = Left a | Right b</p>
+<p><br/></p>
+<p>这样理解，</p>
+<p>Either Int Char才是一个具体的类型，</p>
+<p>它有两个值构造器，Left Int和Right Char</p>
+<p><br/></p>
+<p>刚才我们提到了，</p>
+<p>Haskell中遍布柯里化的思想。</p>
+<p>在这里，Either Int Char是一个具体类型。</p>
+<p><br/></p>
+<p>如果只提供了参数类型Int呢？</p>
+<p>结果Either Int就是个接受一个参数的类型构造器了，即，单参类型构造器。</p>
+<p>因为Either Int还需要一个具体类型，比如Char，才能得到具体的类型Either Int Char</p>
+<p><br/></p>
+<p>到这里，类型就介绍完了。</p>
+<p>看起来还是容易理解的。</p>
+<p><br/></p>
+<p>然后，我们提一下Haskell中故意让你引起混淆的地方。</p>
+<p>Haskell中，值构造器可以和类型构造器同名。</p>
+<p>也就是说：</p>
+<p>data Month = Month Int</p>
+<p>Month到底是什么，根据上下文来定。</p>
+<p><br/></p>
+<h2 id="类型类"><strong>类型类</strong></h2>
+<p>有过面向对象编程经验的人们，对以上还好理解。</p>
+<p>因为至少名字在经验中是有的。</p>
+<p><br/></p>
+<p>而类型类却是一个全新的概念。</p>
+<p>一开始学习时，我认为将它和其他编程语言中的任何概念进行对比，都是糟糕的主意。</p>
+<p>而等我们学到了一定程度，至少知道了这个概念到底是什么之后再联想，这才是好办法。</p>
+<p><br/></p>
+<p>其实以上介绍的“类型”，也尽量先不要类比面向对象中的类型。</p>
+<p><br/></p>
+<p>任何概念的引入都是有原因的。</p>
+<p>我们发现原因才能学到精髓。</p>
+<p><br/></p>
+<p>就像类型是为了对值进行划分一样。</p>
+<p>类型类是为了对类型进行划分。</p>
+<p><br/></p>
+<p>为什么要这样做呢？</p>
+<p>因为，我们想要用同一个函数作用在相同的类型类的不同类型上。</p>
+<p><br/></p>
+<p>例如：判断相等的函数，我们应当既可以比较Int，也可以比较Char</p>
+<p>如果用来比较Int，相等函数的类型是</p>
+<p>intEqual :: Int -&gt; Int -&gt; Bool</p>
+<p>如果用来比较Char，相等函数的类型是</p>
+<p>charEqual :: Char -&gt; Char -&gt; Bool</p>
+<p><br/></p>
+<p>我们不得不为它们设置不同的名字进行区分，</p>
+<p>因为类型不同，它们不是同一个函数，</p>
+<p>这太麻烦了。</p>
+<p><br/></p>
+<p>所以，Haskell就想了一个办法，</p>
+<p>将类型进行划分，比如我们把能够进行比较操作的类型都划分到相等类型类Eq中。</p>
+<p><br/></p>
+<p>那么Int类型和Char就称为Eq类型类的实例。</p>
+<p>相等函数就可以设置同一个名字了。</p>
+<p><br/></p>
+<p>例如：Eq类型类可以这样定义。</p>
+<p>class Eq a where</p>
+<p>    equal :: a -&gt; a -&gt; Bool</p>
+<p><br/></p>
+<p>类型类的实例可以这样声明。</p>
+<p>instance Eq Int where</p>
+<p>    equal i j = i == j</p>
+<p><br/></p>
+<p>这里class和instance，可不是面向对象中的概念呀，虽然勉强有点相似。</p>
+<p><br/></p>
+<p>目前为止还是很容易理解的。</p>
+<p>其中a表示类型，i j是值。</p>
+<p><br/></p>
+<p>又出现了一个Haskell中故意让你引起混淆的地方。</p>
+<p>equal i j = i == j也可以写成equal a b = a == b</p>
+<p>a到底是什么，根据上下文来定。</p>
+<p><br/></p>
+<h2 id="monad"><strong>Monad</strong></h2>
+<p>我们现在有了足够的经验来看Monad了。</p>
+<p>Monad是什么呢？</p>
+<p><br/></p>
+<p>Monad是一个类型类。</p>
+<p>就这么简单。</p>
+<p><br/></p>
+<p>可是，如果不理解类型，类型类，怎么理解Monad呢？</p>
+<p>所以，我们只能循序渐进。</p>
+<p><br/></p>
+<p>我们看一下Moand的定义吧。</p>
+<p>看看还能不能发现新的东西。</p>
+<p><br/></p>
+<p>class Monad m where</p>
+<p>    (&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
+<p>    return :: a -&gt; m a</p>
+<p><br/></p>
+<p>可以看到，Monad类型类为它包含的各个类型，定义了相同的函数&gt;&gt;=和return。</p>
+<p>这里return也不是表示函数的返回值，没有学会之前先不要类比。</p>
+<p><br/></p>
+<p>我们来分析一下它们的含义吧。</p>
+<p>先看return，</p>
+<p>类型类的定义中，return :: a -&gt; m a</p>
+<p>表示了return这个函数的类型。</p>
+<p><br/></p>
+<p>所以，a是一个类型，m a也是一个类型。</p>
+<p>m a怎么可能是一个类型呢？</p>
+<p>因为m是一个类型构造器，它是带一个参数的类型构造器，即，m是一个单参类型构造器。</p>
+<p>比如我们定义的data Maybe a = Nothing | Just a</p>
+<p>Maybe就能以m的身份出现。</p>
+<p><br/></p>
+<p>另外，class Monad m where表示m是类型类Monad的实例。</p>
+<p>所以，Monad类型类的实例，必须是带一个参数的类型。</p>
+<p><br/></p>
+<p>然后，我们看&gt;&gt;=函数</p>
+<p>(&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
+<p>让我们想起了add函数的类型</p>
+<p>Int -&gt; Int -&gt; Int</p>
+<p><br/></p>
+<p>add函数接受两个Int类型的值作为参数，返回一个Int类型的值。</p>
+<p>函数&gt;&gt;=看起来则是，接受m a类型的值，和a -&gt; m b类型的值，返回m b类型的值。</p>
+<p><br/></p>
+<p>其中，m是单参类型构造器，a -&gt; m b表示一个函数，a和m a和m b都表示一个具体的类型。</p>
+<p><br/></p>
+<p>那么&gt;&gt;=和return到底是干什么的呢？</p>
+<p>为什么要定义这么古怪的函数呢？</p>
+<p><br/></p>
+<p>其实我们可以我们可以把m看做一层“壳子”</p>
+<p>在&gt;==操作过程中，这层“壳子”是不改变的。</p>
+<p>return :: a -&gt; m a</p>
+<p>表示我们把一个a类型的值“加壳”变成了m a类型的值。</p>
+<p>(&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
+<p>表示给我一个m a类型的值，和一个函数a -&gt; m b，我就给你一个m b类型的值。</p>
+<p>a -&gt; m b类型的函数，表示把a类型的值变成m b类型的值。</p>
+<p><br/></p>
+<p>函数&gt;&gt;=在顺序操作中是很有用的。</p>
+<p>我们看到m a最终变成了m b，“壳子”还是有的。</p>
+<p>我们再对m b进行操作让它变成m c，“壳子”也还是有的。</p>
+<p><br/></p>
+<p>也正因为如此，在Haskell中，通常称m a类型的值是一个monad值，</p>
+<p>而其中的类型a的值，通常称为monad值中“包含”的值。</p>
+<p><br/></p>
+<h2 id="入门"><strong>入门</strong></h2>
+<p>写到这里，我们才对Monad的概念有了初步的了解。</p>
+<p>勉强算是入门了。</p>
+<p><br/></p>
+<p>因为，首先，对于Monad的应用我们还没有了解。</p>
+<p>其次，只是Monad类型类的实例，并不是一个真正意义上的monad，还要遵循Monad定律。</p>
+<p><br/></p>
+<p>但是相信本文能对继续学习Haskell带来帮助。</p>
+<p><br/></p>
+<p>最后，我们再提一个柯里化的应用。</p>
+<p>记得我们定义了Either类型，它的类型构造器有两个参数。</p>
+<p>data Either a b = Left a | Right b</p>
+<p><br/></p>
+<p>Either类型可以是Monad类型类的实例吗？</p>
+<p>不行。</p>
+<p><br/></p>
+<p>因为Monad类型类的实例必须是一个单参类型构造器，即，接受一个参数的类型。</p>
+<p>而Either接受两个。</p>
+<p><br/></p>
+<p>回想我们对Either的介绍。</p>
+<p>Either Int它是一个单参类型构造器。</p>
+<p>所以，Either int就可以是一个Monad类型类的实例了。</p>
+<p><br/></p>
+<p>Int其实也不必是具体类型，我们其实想表示Either a可以是Monad类型类的实例，</p>
+<p>即，instance Monad (Either a) where</p>
+<p><br/></p>
+<p>你还能Hold住吗？</p>
 
           
         
@@ -453,7 +669,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/289/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/289/">289</a><span class="page-number current">290</span><a class="page-number" href="/page/291/">291</a><span class="space">&hellip;</span><a class="page-number" href="/page/305/">305</a><a class="extend next" rel="next" href="/page/291/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/289/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/289/">289</a><span class="page-number current">290</span><a class="page-number" href="/page/291/">291</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/291/">&gt;</a>
   </nav>
 
 
@@ -499,7 +715,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">305</span>
+                <span class="site-state-item-count">306</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
