@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/01/26/beyond-the-technology/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/02/24/recursive-function-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/26/beyond-the-technology/" itemprop="url">走出技术的舒适区</a></h1>
+                <a class="post-title-link" href="/2017/02/24/recursive-function-1/" itemprop="url">递归函数（一）：开篇</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-26T00:00:00+08:00">
-                2017-01-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-24T00:00:00+08:00">
+                2017-02-24
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,100 +347,40 @@
       
         
           
-            <p>某种东西的<strong>机会成本</strong>，是为了得到它而放弃的东西。</p>
+            <p>提到函数式编程，人们最多想到的可能是它的某些性质，</p>
+<p>例如，不可变性，无副作用，惰性求值，类型推导，等等。</p>
 <p><br/></p>
-<p>有两种方法比较两个人在生产一种物品时的能力。</p>
-<p>一个可以用较少量投入生产物品的生产者，被称为在生产这种物品上具有绝对优势。</p>
-<p>某一个人生产一种物品其机会成本小，被称为有比较优势。</p>
+<p>然而，这些性质可能并不是它能吸引粉丝的根本原因，</p>
+<p>而是它从工业界触手可及的直接应用出发，带我们看到了人类能力的边界，</p>
+<p>函数式编程仿佛一座桥梁，让我们普通程序员也能窥探计算机科学的奥秘。</p>
 <p><br/></p>
-<p>亚当斯密于《国富论》中最早提出了绝对优势理论，</p>
-<p>指各国在生产同样产品时，劳动生产率的绝对差异所导致的各国之间生产优势的不同，</p>
-<p>因此各国专门生产本国劳动生产率较高的产品。</p>
+<p><span data-katex="\lambda"></span>演算是一个简洁的演算系统，但是它的计算能力却能比肩复杂的现代计算机，</p>
+<p>因为它的简洁性质，以及与Lisp语言的紧密关系，对<span data-katex="\lambda"></span>演算有所了解的程序员也比较多。</p>
 <p><br/></p>
-<p>比较优势理论最早由英国经济学家大卫李嘉图在《政治经济学及其赋税原理》中提出，</p>
-<p>是用国与国之间生产同一产品<strong>相对劳动生产率优势</strong>解释国际贸易原因的理论。</p>
-<p>比较优势原理适用于国家与个人。</p>
+<p>提到编程语言，上下文无关文法，以及正则文法，熟悉的人可能会更多，</p>
+<p>书写正则表达式，开发和应用DSL，甚至阅读编程语言的语法规范，都离不开它们。</p>
 <p><br/></p>
-<h3 id="迈克尔乔丹应该自己修剪草坪吗">迈克尔·乔丹应该自己修剪草坪吗</h3>
-<p>迈克尔·乔丹是一个优秀的运动员，是NBA中最优秀的篮球运动员之一。</p>
-<p>他能跳得比大多数人高，投篮也比其他大多数人准。很可能的是，他在其他活动中也出类拔萃。</p>
-<p>例如，乔丹修剪自己的草坪大概比其他任何人都快。</p>
-<p>但是，仅仅由于他能迅速的修剪草坪，就意味着他应该自己修剪草坪吗？</p>
+<p>然而，逻辑系统和递归函数论却鲜有人提及，</p>
+<p>对如何书写递归函数人们可能仍旧心存畏惧，对类型的推导过程和原理也如坠迷雾。</p>
 <p><br/></p>
-<p>为了回答这个问题，我们可以用机会成本和比较优势的概念。</p>
-<p>比如乔丹能用2个小时修剪完草坪，在这同样的2小时中，他能拍一部运动鞋的电视商业广告，并赚到1万美元。</p>
-<p>与他相比，住在乔丹隔壁的小姑娘杰尼弗能用4个小时修剪完乔丹家的草坪。</p>
-<p>在这同样的4个小时中，她可以在麦当劳店工作并赚20美元。</p>
+<p>其实，这是一块广袤的领域，其背景知识可能涉及了数学归纳法，良基或结构归纳法，</p>
+<p>可计算性理论，不动点算子，哥德尔定理，以及证明论，模型论，等等。</p>
+<p>数学背景，我们可能还需要补充，抽象代数，集合论，数理逻辑等离散数学的内容。</p>
 <p><br/></p>
-<p>在这个例子中，乔丹修剪草坪的机会成本是1万美元，而杰尼弗的机会成本是20美元。</p>
-<p>乔丹在修剪草坪上有<strong>绝对优势</strong>，因为他可以用更少的时间干完这件活。</p>
-<p>但是杰尼弗在修剪草坪上有<strong>比较优势</strong>，因为她的机会成本低。</p>
-<p><br/></p>
-<p>乔丹不应该修剪草坪，而应该去拍商业广告片，他应该雇用杰尼弗去修剪草坪。</p>
-<p>只要他支付给杰尼弗的钱大于20美元而低于1万美元，双方的状况都会更好。</p>
-<p><br/></p>
-<h3 id="理论假设与实践检验">理论假设与实践检验</h3>
-<p>诚然，比较优势原理只是一个经济学理论。</p>
-<p>它是否符合实践，取决于使用它的具体场景。</p>
-<p><br/></p>
-<p>然而，理解比较优势之后，人们也可以清楚地看到，</p>
-<p>无论一国是否拥有绝对低成本的优势商品，只要存在相互间的比较优势，</p>
-<p>国际间的自由贸易就可以<strong>使贸易双方都获得贸易利益</strong>。</p>
-<p><br/></p>
-<p>这在实际生活中是也很常见的。</p>
-<p><br/></p>
-<h3 id="程序员的职业发展">程序员的职业发展</h3>
-<p>程序员想要创造更多的价值，会从编码能力坚持不懈的锻炼开始。</p>
-<p>人们相信，只有锻炼好编码能力，才能胜任管理和架构的工作。</p>
-<p>不少程序员认为，公司之所以雇用他们，是因为他们在编程方面具有绝对优势。</p>
-<p><br/></p>
-<p>其实不然，<strong>实际做事情的人并不一定对做这件事具有绝对优势</strong>。</p>
-<p>高级别的程序员不自己处理编码细节，而让别人来做，不是因为自己不擅长，</p>
-<p>而是普通程序员进行编码工作的机会成本更低。</p>
-<p><br/></p>
-<p>当事情多而人员少的时候，某一件事情由谁来做，并不是看谁更擅长解决它，</p>
-<p>而是看，不做这件事，谁比其他人创造的价值更少。</p>
-<p>能创造更多价值的人，不会要求做简单的事情，即使他可能花费最少的时间就能解决它。</p>
-<p><br/></p>
-<p>因此，程序员如果想要从事管理和架构工作，具有绝对优势是不必要的。</p>
-<p>想办法让自己在管理和架构方面具有<strong>比较优势</strong>，而在编码方面不具有比较优势，才是重要的。</p>
-<p><br/></p>
-<h3 id="技术影响力">技术影响力</h3>
-<p>当到达一定程度之后，程序员的级别，可能就和他的技术能力无关了。</p>
-<p>因为很难衡量一个十倍效率的程序员所做之事，别人真的需要十倍的时间才能解决。</p>
-<p>每个人遇到的问题几乎都是全新的，不同的人也有不同的做事方式。</p>
-<p><br/></p>
-<p>但是不同程度的影响力却可以分辨出来。</p>
-<p>有的人可以让<strong>团队</strong>认可从而参与完成某项工作，</p>
-<p>有的人可以让<strong>公司</strong>认可从而参与完成某项工作，</p>
-<p>有的人可以让<strong>业界</strong>认可从而参与完成某项工作。</p>
-<p><br/></p>
-<p>这些事情的影响范围是不同的，所需的影响别人的能力也是不同的，</p>
-<p>所做之事的价值差异也是巨大的。</p>
-<p>不能小看这种能力，让别人做任何事情都是极其困难的，除非找到双赢的选择。</p>
-<p>有影响力才有改变现状的能力。</p>
-<p><br/></p>
-<p>架构师提出了一种架构设计，并不意味着别人会采用它，</p>
-<p>管理者提出了改善工作的建议，并不意味着别人会顺从它。</p>
-<p>我们觉得做某件事情创造了价值，并不意味着别人会认可它。</p>
-<p><br/></p>
-<p>这些都不是技术能力本身可以决定的，需要技术影响力。</p>
-<p>我们需要推进事情进展下去，而不是根本没有人来参与完成它。</p>
-<p><br/></p>
-<h3 id="结语">结语</h3>
-<p>不少人认为，擅长某项工作是导致他们去从事那方面工作的直接原因。</p>
-<p>如果这样考虑的话，会遭遇很多看似不公平的待遇，</p>
-<p>甚至认为自己有能力无法施展。</p>
-<p><br/></p>
-<p>而一些经济学理论指出，是比较优势而不是绝对优势导致了人们从事某项工作，</p>
-<p>是大家都能受益，导致了人们进行某种选择。</p>
-<p><br/></p>
-<p>看清这一点之后，才能走出技术的舒适区。</p>
-<p>因为，精进技术只是为了能够胜任工作，</p>
-<p>而我们真正思考的应该是<strong>如何创造更大的价值</strong>。</p>
-<p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/3719533/" target="_blank" rel="noopener">经济学原理 - 曼昆：第3章</a></p>
+<p>然而，我们的收获将是巨大的，</p>
+<p>我们会看到用有限表示无限的递归思想，以及由这种思想导致的各种计算模型的能力限制。</p>
+<p>递归与其他领域触类旁通之后，我们将走到数学，逻辑，计算机科学的交叉点上，</p>
+<p>我认为这是一件值得高兴的事情。</p>
+<hr />
+<p><a href="http://thzt.github.io/2017/02/24/recursive-function-1/">递归函数（一）：开篇</a></p>
+<p><a href="http://thzt.github.io/2017/02/25/recursive-function-2/">递归函数（二）：编写递归函数的思路和技巧</a></p>
+<p><a href="http://thzt.github.io/2017/03/03/recursive-function-3/">递归函数（三）：归纳原理</a></p>
+<p><a href="http://thzt.github.io/2017/03/06/recursive-function-4/">递归函数（四）：全函数与计算的可终止性</a></p>
+<p><a href="http://thzt.github.io/2017/03/09/recursive-function-5/">递归函数（五）：递归集与递归可枚举集</a></p>
+<p><a href="http://thzt.github.io/2017/03/10/recursive-function-6/">递归函数（六）：最多有多少个程序</a></p>
+<p><a href="http://thzt.github.io/2017/03/14/recursive-function-7/">递归函数（七）：不动点算子</a></p>
+<p><a href="http://thzt.github.io/2017/03/20/recursive-function-8/">递归函数（八）：偏序结构</a></p>
+<p><a href="http://thzt.github.io/2017/03/21/recursive-function-9/">递归函数（九）：最小不动点定理</a></p>
 
           
         
@@ -479,7 +419,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/206/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/206/">206</a><span class="page-number current">207</span><a class="page-number" href="/page/208/">208</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/208/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/206/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/206/">206</a><span class="page-number current">207</span><a class="page-number" href="/page/208/">208</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/208/">&gt;</a>
   </nav>
 
 
@@ -525,7 +465,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">306</span>
+                <span class="site-state-item-count">307</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

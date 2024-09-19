@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/08/22/kanban/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/08/29/create-value-for-the-user/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/22/kanban/" itemprop="url">从敏捷看板到精益看板</a></h1>
+                <a class="post-title-link" href="/2018/08/29/create-value-for-the-user/" itemprop="url">创造用户价值</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T00:00:00+08:00">
-                2018-08-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T00:00:00+08:00">
+                2018-08-29
               </time>
             
 
@@ -347,186 +347,101 @@
       
         
           
-            <p>20世纪40年代后期，丰田公司的一群工程师，</p>
-<p>发现了在连续流动中进行少量生产的方法。</p>
+            <p>我们知道，<strong>产品</strong>是为提供<strong>用户价值</strong>服务的，</p>
+<p>它解决了用户问题，从而创造了商业价值，</p>
+<p>因此，用户才肯花钱购买产品，企业有了<strong>利润</strong>才能活下去。</p>
 <p><br/></p>
-<p>这种方法，可以像传统的大批量生产者，一批生产大量产品的方法，</p>
-<p>一样有效率。</p>
+<p>虽然如此，但是在产品<strong>生产过程</strong>中的每一个环节，</p>
+<p>都能保持<strong>客户第一</strong>的清醒认识，也是不容易的。</p>
 <p><br/></p>
-<p>丰台的业务体系就是从这样的创新中发展起来的，</p>
-<p>对美国和欧洲现存的汽车生产者提出了挑战。</p>
+<p>例如，在安排任务的时候，我们会考虑事情的<strong>优先级</strong>，</p>
+<p>也会考虑<strong>投入产出比</strong>，甚至会优先选择<strong>容易实现</strong>的功能点，</p>
+<p>在局部上，我们可能难以断言，所做的事情，能带来多大的用户价值。</p>
 <p><br/></p>
-<p>精益思想背后的理论基础是，<a href="http://wiki.mbalib.com/wiki/%E5%88%A9%E7%89%B9%E5%B0%94%E6%B3%95%E5%88%99" target="_blank" rel="noopener">利特尔法则</a>，</p>
-<p>限制<strong>在制品</strong>（work-in-progress）数量，可以有效的缩短<strong>平均等待时间</strong>，</p>
-<p>从而提高产能。</p>
+<p>因此，这就带来了几方面的问题，</p>
+<p>本文来探讨一下这些场景。</p>
 <p><br/></p>
-<p>通过把大批量生产改造成<strong>流动性</strong>生产，</p>
-<p>不但可以节省库存成本，而且还可以减少<strong>总的供货时间</strong>。</p>
+<h3 id="完整的需求规格">1. 完整的需求规格</h3>
+<p>完整的需求规格，事实上，远比产品经理所表述的那些还要多。</p>
+<p>例如，系统的异常流，简直随着系统规模呈指数级的增长。</p>
 <p><br/></p>
-<h3 id="敏捷看板">1. 敏捷看板</h3>
-<p><a href="https://zh.wikipedia.org/wiki/%E7%9C%8B%E6%9D%BF_(%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91)" target="_blank" rel="noopener">看板</a>也是丰田公司发明的，</p>
-<p>它是一种可视化的管理系统，</p>
-<p>目的是对生产过程做出持续，渐进的改善。</p>
+<p>大家可能有过这样的感受，</p>
+<p>我们用了<strong>20%</strong>的时间，就能看似完成系统的大部分功能，</p>
+<p>而剩下的那些细节，越经常会消耗掉<strong>80%</strong>以上的时间。</p>
 <p><br/></p>
-<p>当可视化的表达方式，遇到了敏捷开发，</p>
-<p>就衍生出了一种称为“敏捷看板”的概念。</p>
+<p>我认为这是<a href="https://zh.wikipedia.org/wiki/%E5%B8%95%E7%B4%AF%E6%89%98%E6%B3%95%E5%88%99" target="_blank" rel="noopener">帕累托法则</a>（二八定律），</p>
+<p>在软件开发实践中的体现。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-af3970852ef2553d.png" /></p>
+<p>此外，我们对正常业务逻辑的理解，</p>
+<p>也会随着工作的进展，逐渐变得透彻起来，</p>
+<p>交付阶段我们认识到的逻辑<strong>复杂度</strong>，与刚开始时简直不可同日而语。</p>
 <p><br/></p>
-<p>敏捷看板一般由3列构成，</p>
-<p>从左到右依次是，<strong>TODO</strong>，<strong>DOING</strong>和<strong>DONE</strong>。</p>
-<p>在敏捷团队中，可以清楚的看到每个工作事项所处的状态。</p>
+<p>因此，为了交付完整的用户价值，</p>
+<p>就必须尽快理解清需求的所有细节，</p>
+<p>尽快投入到后80%的开发时间中去。</p>
 <p><br/></p>
-<p>但这样的敏捷看板，其实是不能很好的反映精益思想的。</p>
-<p>这是为什么呢？</p>
+<p>在前20%的开发阶段，对需求的全貌过于乐观，是项目延期的主要原因之一。</p>
 <p><br/></p>
-<h3 id="误解">2. 误解</h3>
-<h4 id="对在制品的误解">2.1 对在制品的误解</h4>
-<blockquote>
-<p><a href="http://wiki.mbalib.com/wiki/%E5%9C%A8%E5%88%B6%E5%93%81" target="_blank" rel="noopener">在制品</a>指的是正在加工，尚未完成的产品。</p>
-</blockquote>
+<h3 id="简化需求">2. 简化需求</h3>
+<p>先实现出一版功能的<strong>轮廓</strong>，然后再持续不断的进行<strong>完善</strong>，</p>
+<p>这也是软件开发过程中的一种常见手法。</p>
 <p><br/></p>
-<p>那么，在敏捷看板上，应该指的是DOING的部分吧，</p>
-<p>其实不然。</p>
+<p>这样做其实没什么问题。</p>
 <p><br/></p>
-<p>事实上，所谓在制品，是针对整个产品的所有<strong>生产环节</strong>而言的，</p>
-<p>如果某个产品，需要先A后B，两个具有<strong>依赖关系</strong>的环节，才能制造出成品。</p>
-<p>那么，A<strong>做完的</strong>那些制品，对B来说才叫做在制品。</p>
+<p>无非会稍微增加一些返工的成本，</p>
+<p>如果一开始就对问题有了透彻理解，再<strong>选择</strong>这样的开发方式来迭代，</p>
+<p>那就更没有什么问题了。</p>
 <p><br/></p>
-<p>这样具有依赖关系的环节，通常称为<a href="http://wiki.mbalib.com/wiki/%E5%B7%A5%E5%BA%8F" target="_blank" rel="noopener">工序</a>。</p>
+<p>可是，这样的开发方式，却经常伴随着一种<strong>不良的习惯</strong>，</p>
+<p>那就是有意在<strong>交付阶段</strong>对需求进行<strong>简化</strong>。</p>
+<p>开发者不愿意交付完整的功能点。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-4a606b6bd048bf7c.png" /></p>
+<p>这样其实是危害极大的。</p>
+<p>实际上，实现一个简化版的功能，比实现完整的功能点，要容易太多了。</p>
+<p>某个简单的定制化需求，可能会产生<strong>复杂好几倍</strong>的软件。</p>
 <p><br/></p>
-<p>好，现在我们明白了，</p>
-<p>精益思想说减少在制品，并不是说要减少DOING的那部分内容，</p>
-<p>而是减少<strong>已经完成的制品</strong>在各个工序间的<strong>积压</strong>。</p>
+<p>当然我们也知道业务架构不清的情况下，代码结构也不会清晰，</p>
+<p>不过我们现在暂时不准备讨论这些。</p>
 <p><br/></p>
-<p>减少了积压，前面工序就不用<strong>成批送货</strong>，</p>
-<p>后面工序，也就才能减少<strong>等待时间</strong>。</p>
+<p>所以，如果关心用户价值，那就不要故意简化需求，</p>
+<p>即使实现起来很麻烦，</p>
+<p>这正是开发者要做的事情，<strong>麻烦才有价值</strong>。</p>
 <p><br/></p>
-<p>从这种意义上来讲，一个只包含TODO，DOING和DONE的敏捷看板是不够的，</p>
-<p>它只能反映当前一个工序上，各<strong>流水线</strong>的状态。</p>
-<p>不能反映出工序之间在制品的<strong>积压</strong>情况。</p>
+<h3 id="容易实现">3. 容易实现</h3>
+<p>在职业生涯的前几年，我经常会为了某个功能容不容易实现，而跟别人争论，</p>
+<p>这件事到现在来看，让我感到非常羞愧。</p>
 <p><br/></p>
-<h4 id="对流动性的误解">2.2 对流动性的误解</h4>
-<p>精益思想认为，加快<strong>流动性</strong>，比提高<strong>批量生产效率</strong>更重要。</p>
-<p>这其实是一种全局观点。</p>
+<p>因为，如果简单的实现<strong>满足不了</strong>用户的需要，</p>
+<p>那么这种实现，对<strong>最终产品</strong>来说就没有任何意义，</p>
+<p>创造不了用户价值。</p>
 <p><br/></p>
-<blockquote>
-<p>要么不做，要么快速做完。</p>
-</blockquote>
+<p>虽然我们有时会考虑到投入产出比，</p>
+<p>优先实现更重要，回报率更高的功能点。</p>
+<p>但是，这和容易不容易其实没有什么关系。</p>
 <p><br/></p>
-<p>这样解读是没有问题的。</p>
+<p>用户要的是<strong>功能</strong>，其实不关心我们是怎么实现的。</p>
+<p>实现难以实现的功能点，正是开发者的<strong>本职工作</strong>。</p>
+<p>容易实现和不容易实现的功能，<strong>一起</strong>给用户提供了软件服务。</p>
 <p><br/></p>
-<p>但是如果没有站在全局观点，</p>
-<p>而只站在某道工序的角度理解这句话，</p>
-<p>就产生误解了。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-9e904c65ff11b4c0.png" /></p>
-<p><br/></p>
-<p>人们会误以为，加快流动性，是想办法加快从TODO到DONE的过程，</p>
-<p>其实并不是这样。</p>
-<p>而是指，<strong>加快一个产品，从原材料经历所有工序到成品的过程。</strong></p>
-<p><br/></p>
-<p>一个产品的制造过程，不应该受批量生产限制而停顿。</p>
-<p><br/></p>
-<p>因此，所谓加速流动性，</p>
-<p>并不会要求对各道工序的原生产率进行改善，</p>
-<p>而是改善，在制品<strong>在各工序之间的流转速度</strong>。</p>
-<p><br/></p>
-<h4 id="对瓶颈的误解">2.3 对瓶颈的误解</h4>
-<p>习惯敏捷看板的开发团队，由于看板的<strong>可见性</strong>特点，</p>
-<p>很容易识别出，当前的工作事项出现了哪些问题。</p>
-<p><br/></p>
-<p>很简单，出现了问题，就不能DONE。</p>
-<p>人们也会认为，这就是所谓开发过程中的瓶颈了。</p>
-<p><br/></p>
-<p>其实也不然。</p>
-<p>事实上，精益思想中提到的瓶颈，是一种<strong>资源瓶颈</strong>。</p>
-<p>指的是改成流动性生产之后，即使开启所有的流水线，</p>
-<p>某道工序仍然无法提供下一道工序所需要的原材料。</p>
-<p><br/></p>
-<p>资源指的是流水线。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-bc2177a4cfb3cc22.png" /></p>
-<p><br/></p>
-<p>解决问题的办法，就是提高瓶颈处工序的生产率，或者增加流水线，</p>
-<p>显然，提高其他工序的生产率是没有作用的。</p>
-<p><br/></p>
-<p>提高瓶颈之前工序的生产率，会造成瓶颈处TODO的进一步积压，</p>
-<p>而提高瓶颈之后工序的生产率，则会使它闲置的时间更长。</p>
-<p><br/></p>
-<p>这也是<a href="http://wiki.mbalib.com/wiki/%E7%BA%A6%E6%9D%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">约束理论</a>和核心内容，</p>
-<blockquote>
-<p>任何非瓶颈资源究竟能使系统赚多少钱，不是由它自己的潜能所决定，</p>
-</blockquote>
-<blockquote>
-<p>而是由系统中的其他制约因素所决定。</p>
-</blockquote>
-<p><br/></p>
-<p>所以，落实到敏捷看板上来，</p>
-<p>如果敏捷团队不是整个软件开发过程的瓶颈，</p>
-<p>那么可能提高开发效率，对软件的最终交付是没有作用的。</p>
-<p><br/></p>
-<p>不是整个系统的瓶颈所在。</p>
-<p><br/></p>
-<h3 id="精益看板">3. 精益看板</h3>
-<p>软件开发团队中使用的看板系统，很容易受到以上两种误解的影响。</p>
-<p>结果，软件在制品数量并没有减少，</p>
-<p>虽然整体开发效率，由于看板增强了项目可见性，有所改善。</p>
-<p><br/></p>
-<p>为了将精益思想应用到看板之上，我认为需要按照以下几个步骤来进行梳理。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-c379b186cea16dc2.png" /></p>
-<p><br/></p>
-<h4 id="识别工序">3.1 识别工序</h4>
-<p>首先我们要识别出哪些任务是具有<strong>依赖关系</strong>的，</p>
-<p>哪件事情必须要前一件事情做完后，才能开始处理。</p>
-<p><br/></p>
-<p>这些事情，构成了整个软件开发过程的不同<strong>环节</strong>——工序。</p>
-<p><br/></p>
-<h4 id="识别在制品">3.2 识别在制品</h4>
-<p>有了工序，才能看到在制品的积压情况。</p>
-<p><br/></p>
-<p>例如，软件功能必须开发完成后才能进行测试，</p>
-<p>软件功能开发的结果，是测试的原材料，</p>
-<p>因此，功能开发，测试，构成了两个有依赖关系的工序。</p>
-<p><br/></p>
-<p>如果一次开发完全部功能，再交给别人测试，这就是批量生产方式。</p>
-<p>精益开发思想，指的是<strong>避免积压</strong>，</p>
-<p>开发完一个独立的小功能点，就立即交给别人测试。</p>
-<p><br/></p>
-<h4 id="识别瓶颈">3.3 识别瓶颈</h4>
-<figure>
-<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-08-22-kanban/1023733-c6983b6fe28e5c37.png" alt="潘季驯“束水攻沙”治河之策" /><figcaption aria-hidden="true">潘季驯“束水攻沙”治河之策</figcaption>
-</figure>
-<p>建立了流动性之后，扩大<strong>价值流</strong>就成了第一要务。</p>
-<p>从成品一端开始，不断的扩大需求，就会给前面一连串工序提高<strong>流量要求</strong>。</p>
-<p><br/></p>
-<p>当某道工序开启了所有流水线之后，</p>
-<p>仍然无法提供后面工序所需的原材料之时，</p>
-<p>这道工序就成了系统的瓶颈。</p>
-<p><br/></p>
-<p>这时候，提高瓶颈处TODO到DONE的效率，</p>
-<p>才是对最终产品的交付有帮助。</p>
-<p><br/></p>
-<p>消除了这个瓶颈之后，其他工序随着流动性增强，流量增大，</p>
-<p>会产生另外一个瓶颈，不断解决，持续优化。</p>
+<p>所以，如果关心用户价值，那么在讨论实现难度时，就应该保持警惕，</p>
+<p>是我们本能的避重就轻，</p>
+<p>还是站在了<strong>用户</strong>和<strong>项目按时交付</strong>的角度在考虑问题。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>本文阐述了敏捷看板，TODO，DOING和DONE，三列布局给我们带来的误解，</p>
-<p>并与精益思想进行了对比，</p>
-<p>从而对工序，在制品，瓶颈，有了新的认识。</p>
+<p>我们常说客户第一，实际上真正执行起来是很难的，</p>
+<p>开发者也很难跳出自己的舒适区，全局性的看待软件的整个交付过程。</p>
 <p><br/></p>
-<p>与精益思想相符的是，只有站在产品整个生命周期的角度看待生产过程，</p>
-<p>才能有效的<strong>减少浪费</strong>，发现系统级的瓶颈点。</p>
+<p>大多数开发者都是接到了需求，就去实现它，</p>
+<p>在遇到困难时，就去<strong>质疑</strong>需求的合理性。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/26704157/" target="_blank" rel="noopener">精益思想</a></p>
-<p><a href="https://book.douban.com/subject/26764497/" target="_blank" rel="noopener">精益开发与看板方法</a></p>
-<p><a href="https://book.douban.com/subject/24528138/" target="_blank" rel="noopener">Kanban in Action</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E7%B2%BE%E7%9B%8A%E7%94%9F%E7%94%A2" target="_blank" rel="noopener">精益生产</a></p>
-<p><a href="http://www.sohu.com/a/244696418_249530" target="_blank" rel="noopener">精益看板方法实施的三个层次</a></p>
+<p>其实这样有违<strong>软件系统被研发</strong>的初衷。</p>
+<p><br/></p>
+<p>我们应该从需求的描述中，试图捕捉那些<strong>遗漏</strong>的用户需要，</p>
+<p>认识到完整需求的<strong>真实复杂度</strong>，</p>
+<p>然后耐心去应对困难。</p>
+<p><br/></p>
+<p>我觉得这才是开发者，能为用户价值所做的应有贡献。</p>
+<p>用户也不会关心我们遇到了哪些麻烦。</p>
 
           
         
@@ -565,7 +480,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/136/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/136/">136</a><span class="page-number current">137</span><a class="page-number" href="/page/138/">138</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/138/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/136/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/136/">136</a><span class="page-number current">137</span><a class="page-number" href="/page/138/">138</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/138/">&gt;</a>
   </nav>
 
 
@@ -611,7 +526,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">306</span>
+                <span class="site-state-item-count">307</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2023/09/04/obstruction/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2023/10/08/value/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2023/09/04/obstruction/" itemprop="url">不通则痛</a></h1>
+                <a class="post-title-link" href="/2023/10/08/value/" itemprop="url">论价值的可持续性</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-09-04T00:00:00+08:00">
-                2023-09-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-08T00:00:00+08:00">
+                2023-10-08
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Project/" itemprop="url" rel="index">
-                    <span itemprop="name">Project</span>
+                  <a href="/categories/ToD/" itemprop="url" rel="index">
+                    <span itemprop="name">ToD</span>
                   </a>
                 </span>
 
@@ -347,49 +347,93 @@
       
         
           
-            <h3 id="排队现象">排队现象</h3>
-<p>中医有句话说「通则不痛，痛则不通」，意思是如果经络气血通畅，就不会感到疼痛或不舒服，一旦有疼痛的症状，则说明经络阻塞、气血不畅。人体经络如此，软件项目亦然。</p>
-<p>大家在进行软件开发的时候，应该也遇到过这样的情况 —— 我们依赖了其他人的工作，但是那个人久久不能完成，继而导致我们自己的的工作延期。更加不幸的是，还有那些依赖我们工作的人，他们的工作也延期了。这种状况像极了「气血不通」，不通则痛。</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2023-09-04-obstruction/01.png" /></p>
-<p>这其实是软件开发中的一种任务排队现象，如何才能提高整体的工作效率呢？在 排队理论 中有一个著名的定律，称为 利特尔法则（Little's law），可以很好的解决这个问题。</p>
+            <p>几年前，我在《<a href="https://book.douban.com/subject/25884108/" target="_blank" rel="noopener">程序员的呐喊</a>》中，</p>
+<p>读到了「平台的金科玉律」，至今依然印象深刻。</p>
+<p><br/></p>
 <blockquote>
-<p>限制 在制品（work-in-progress）数量，可以有效的缩短平均等待时间，从而提高「产能」</p>
+<p>平台的金科玉律就是要吃自己的狗粮。</p>
 </blockquote>
-<p>这句话比较难理解，我们可以拿排队到 ATM 取钱的场景 举个例子。队伍越长，每个人的等待时间也就越长。为了能让整体快起来，除了提高 ATM 机器的性能之外，另外的办法就是让取到钱的快点走（减少非必要操作）。</p>
-<p>类比到软件开发，每个依赖别人工作的工程师，就好比排队到 ATM 取钱一样。队首的人占位越久，后面所有的人等待时间也就越长，这时候即使队列中有人工作效率再高，也是帮助不大的。我们应该看一下，是哪个人造成了拥堵，让它赶紧做完。</p>
-<h3 id="识别拥堵">识别拥堵</h3>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2023-09-04-obstruction/02.png" /></p>
-<p>上图是一个能看到 整个研发流程中各个环节 的 Kanban（这是一个专有名词），我们可以看到事项在 哪里造成了拥堵。如上图，提高「实现」环节的效率，其实作用不大，反而会造成「测试」环节的进一步拥堵。</p>
-<p>我们应当让「测试」工作赶紧做完，要么增加人力，让更多的人进行测试，要么先交付已测完的一部分，让下游开始验收工作。由于「测试」环节的拥堵，会导致上游「实现」部分，提高效率是没有意义的。也会导致下游「发布」部分，处于长期的等待中（没活干）。</p>
-<p>下图是一个很常用的待办事项列表，在这个列表中，我们看不到整个研发流程全景，只能看到当前自己这个环节的情况，这就不是一个严格意义上的 Kanban。我们看不到哪个环节产生了拥堵，也看不到哪个环节生产过剩。</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2023-09-04-obstruction/03.png" /></p>
-<p>以上的 Kanban 工具，其实来自于日本丰田公司的 精益生产。它虽然起源于制造业，但现如今已经被用于软件开发之中，通过识别拥堵，来提高软件项目整体的工作效率。</p>
-<h3 id="拥堵的根本原因">拥堵的根本原因</h3>
-<p>高速公路上的 堵车 就像谜一样，人们永远都猜不出第一辆车在干什么。为了弄清堵车的原理，科学家们做了一个实验。他们在一个环形跑道上放置了 22 辆汽车，并让车队以一定的速度匀速行驶。结果发现，其中一辆车突然刹车减速之后，车队很难在短时间内顺畅地运行起来。</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2023-09-04-obstruction/04.gif" /></p>
-<p>所以造成拥堵的原因，主要在于原有的 流动性被破坏了。一辆车刹车或加塞，会导致这个位置 流不动 了，后续的汽车走到这里，就形成了拥堵。所以说，并不是停止造成了拥堵，而是减速。</p>
-<h3 id="解决拥堵">解决拥堵</h3>
-<p>如何保证流动性不被破坏呢？提到流动性，很容易让人联想到河水。古人在治河过程中，确实积累了很多经验。为了避免河水泛滥，通常的做法就是修堤筑坝，限制河水在河道内部流动。但对于某些含沙量比较高的河水（例如 黄河），很容易产生淤积，导致堤坝越垒越高，甚至有超过两岸农田的情况出现。这样一旦决口，危害性反而更大了。</p>
-<p>中国 明末专家 潘季驯 提出了一个新的思路，称为「束水攻沙」。他希望在治河的过程中增加河水流速，让河水能够快速流入大海，这样就不会造成阻塞。此外，增加流速的同时，这些水流会把河中的淤泥和沙子带走，导致河堤内部更低，即使决口造成的危险也更低。</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2023-09-04-obstruction/05.png" /></p>
-<p>这个治河方针对于现代，也是很有启发意义的。对于软件开发而言，我们应当从零开始持续增加流速，看看瓶颈会出现在哪个环节，优化这个环节，从而切到提高整体效率的目的（需求拉动，识别瓶颈）。</p>
-<p>除此之外还有一个增加流速的办法，那就是小批量频繁交付。把功能拆分为容易交付的更小单元，就能避免功能模块在某个环节加工的时间过长（要么不做，要么赶紧做完）。</p>
-<h3 id="执行方案">执行方案</h3>
-<p>上文说了这么多，具体到一个软件项目时应当怎么做呢？其实就两点：看到最慢的环节、优化。</p>
+<blockquote>
+<p>你不能自己吃人吃的东西，却让开发者吃狗吃的东西。</p>
+</blockquote>
+<p><br/></p>
+<p>这个认识对我影响深远，甚至让我认为这是 ToD（开发者服务）产品的本质特征。</p>
+<p>直到最近，才有所改观。</p>
+<p><br/></p>
+<p>一言以蔽之，平台是一把双刃剑，「高灵活性」意味着「低价值绑定」。</p>
+<p>可能会造成平台「无力运转」的局面发生。</p>
+<p>所以需要仔细权衡灵活的程度，而不能一味的追求「自由」。</p>
+<p><br/></p>
+<p>下文我们来详细讨论。</p>
+<h3 id="平台">平台</h3>
+<p>在《<a href="https://book.douban.com/subject/25884108/" target="_blank" rel="noopener">程序员的呐喊</a>》一书中，作者还提到，</p>
+<p><br/></p>
+<blockquote>
+<p>没有平台的产品的是没有用的，缺少平台支持的产品肯定会被有平台支持的同等产品取代。Google+ 错误的以为 Facebook 之所以成功是因为人家做了一个好产品。但那并不是他们成功的原因。Facebook 之所以那么成功是因为他们通过让其他人参与进来的方式，搭建了一整套各异的产品。Facebook 上有成百上千种消磨时间的好去处，所以才能满足所有人。</p>
+</blockquote>
+<p><br/></p>
+<p>平台可以更好的利用规模效应，通过开放接口，短期内实现功能暴增。</p>
+<p>所以，建设平台就能用很少的成本，获取很高的收益。</p>
+<p>因为平台的用户是开发，可以更高限度的让大家一起来共建。</p>
+<p><br/></p>
+<p>但这一好处，并不是放之四海而皆准的，需求区分不同的发展阶段。</p>
+<p>总是追求投入产出比，让全局收益更高，可能也有问题。</p>
+<p>降低成本意味着减员。</p>
+<p><br/></p>
+<p>这有点类似于，</p>
+<p>更好的复用性，意味着更高的耦合性（会让系统更加脆弱）。</p>
+<p>更少的依赖，意味着更低的价值绑定（大家都能自己玩，系统更容易解体）。</p>
+<h3 id="集市">集市</h3>
+<p>在《<a href="https://book.douban.com/subject/25881855/" target="_blank" rel="noopener">大教堂与集市</a>》，仔细分析了两种模式，</p>
 <ul>
-<li>怎样才能看到最慢的环节呢？</li>
+<li><p>大教堂模式：集中管理</p></li>
+<li><p>集市模式：开放共建</p></li>
 </ul>
-<p>其实是要求我们提高项目状态的可见性， Kanban 是一个很好的办法（对于本地团队而言），项目周报是另外一个办法（便于异步沟通）。</p>
-<p>有很多项目的周报，是项目管理者通过汇总大家的进展而形成的，这个其实帮助不大，因为只有项目管理者具备全局视角。单纯汇总一下进展，并不能很好的看到瓶颈之所在。所以，应当由项目管理者向项目组发周报，而不是反之。并且需要在周报中，注明风险和举措。这样所有相关方都会对项目状态有所了解，在非薄弱环节加大人力投入是没有意义的。</p>
-<ul>
-<li>看到了最慢环节之后，该如何优化呢？</li>
-</ul>
-<p>项目管理者需要分析，为什么这个地方会这样慢，有没有办法让它更快的交付出去（拆成更小的任务，或者重排优先级），不要让大家都等着它。 通常某个环节慢的原因在于，单点压力太大，人力紧缺，做不了那么多的事情，却安排了特别多。另外一个原因在于，当前环节一下子答应了太多要求，而导致任务批量太大，其实可以按照优先级拆出更紧急的那部分优先交付。</p>
-<p>值得注意的是，一旦优化了最慢的环节，次慢的环节就变成下一阶段的优化目标了。优化是一个持续不断的过程，以提高流速为目的。</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2023-09-04-obstruction/06.png" /></p>
+<p><br/></p>
+<p>虽然有这两种模式的不同，但实际上很多软件面向双层用户提供了双层架构。</p>
+<p>核心用大教堂模式，工具箱用集市模式。</p>
+<p>这样可以让核心部分更加稳定，让开放的部分更加的活跃（动力、热情、创新）。</p>
+<p><br/></p>
+<p>因此，这是一个尺度和边界的问题，而不是二选一的问题。</p>
+<p>我们依然需要考虑的是，为哪些人提供哪些功能（核心开发者、集成方），</p>
+<p>以及，我们期望每一方如何工作/协作。</p>
+<h3 id="绑定">绑定</h3>
+<p>生活中有一种现象，当我们用了某一类产品时，就会融入这个产品的圈子，</p>
+<p>让我们不得不持续使用它。</p>
+<p>我称之为这种现象为「价值绑定」，这些产品让用户产生了依赖。</p>
+<p><br/></p>
+<p>这种依赖（用户粘性），其实对于维系产品长期发展是非常有必要的。</p>
+<p>平台的核心开发者，也要意识到这一点。</p>
+<p><br/></p>
+<p>一件很悲观的事情是，当我们的工作可有可无时，就会被干掉。</p>
+<p>哪怕是在之前我们一直在为全局寻求最优解。</p>
+<p><br/></p>
+<p>在追求高杠杆撬动更高价值的同时，如果没有留意价值绑定，</p>
+<p>那么一旦其他人的工作可以独立运转时，我们就有危险了（团队亦然）。</p>
+<p><br/></p>
+<p>所以如果我们提供了一个平台，让用户可以独立于我们自行运转，</p>
+<p>这个平台就很容易被越过，它的价值就缩水了。</p>
+<p>平台的核心开发者们，也会被撤换。</p>
+<h3 id="持续">持续</h3>
+<p>无论是个人还是团队，都需要考虑收益的可持续性，而不是一锤子买卖。</p>
+<p>有了持续的收益，才能有持续的投入。</p>
+<p>否则就难以为继。</p>
+<p><br/></p>
+<p>ToD（开发者服务）产品也是如此，不止需要提供「能吃的狗粮」，</p>
+<p>还得考虑这些「狗粮」怎样被不断的吃下去。</p>
+<p>我们提供的工具、系统、平台，也需要考虑用户粘性，不要让他们流失。</p>
+<p><br/></p>
+<p>这看起来似乎比较自私，甚至罔顾大局，但其实不然。</p>
+<p>不要让平台瓦解，是平台维护者需要考虑的第一件大事。</p>
+<p>不然整体来看，这就是一次头脑发热的兴师动众「活动」。</p>
 <h3 id="小结">小结</h3>
-<p>本文介绍了软件项目常见的病症 —— 拥堵。从整个研发链路角度来看，某个环节待办太多处理不过来了，从而导致下游所有人都在排队等待，这种现象在未经治理的软件项目中经常发生。大家都没有意识到拥堵的严重性，也不知道为什么拥堵，更不知道如何解决拥堵问题。</p>
-<p>其实要处理这个问题非常简单，只要 通过不断增加流速，识别并优化最薄弱的环节 即可。所采用的办法多种多样，为了能识别出来，需要提高项目的可见性。为了能在不加人的情况下做出优化，我们可以减少任务的批量大小。这些都是行之有效的办法，可以视实际情况而用。</p>
+<p>至于如何提高用户粘性，如何不让用户流失，如何加强价值绑定，</p>
+<p>ToD 应该多向 ToC/ToB 产品学学经验。</p>
+<p>为了对开发者友好，甚至提倡「用户平权」，也不一定会有好的结果。</p>
+<p><br/></p>
+<p>幸运的是，当我们认识到一个观点局限性的时候，</p>
+<p>就意味着我们摆脱了信仰和迷信，</p>
+<p>也意味着我们的认识得到了新的提升。</p>
 
           
         
@@ -428,7 +472,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/5/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/5/">&gt;</a>
   </nav>
 
 
@@ -474,7 +518,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">306</span>
+                <span class="site-state-item-count">307</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

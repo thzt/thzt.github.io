@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/05/30/software-solution/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/05/31/gradual-typing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/30/software-solution/" itemprop="url">软件方案的能力范围</a></h1>
+                <a class="post-title-link" href="/2018/05/31/gradual-typing/" itemprop="url">Gradual Typing</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T00:00:00+08:00">
-                2018-05-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T00:00:00+08:00">
+                2018-05-31
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Logic/" itemprop="url" rel="index">
+                    <span itemprop="name">Logic</span>
                   </a>
                 </span>
 
@@ -347,164 +347,188 @@
       
         
           
-            <p>软件工程师们每天都会遇到各种各样的问题，</p>
-<p>我们中的绝大多数人，日常的工作内容就是把这些问题解决掉。</p>
-<p>不论是修复一个代码缺陷，还是开发个新的功能，又或者是启动一个新的项目。</p>
+            <p>最近看了一篇文章，<a href="https://medium.com/@gaperton/typescript-static-or-dynamic-64bceb50b93e" target="_blank" rel="noopener">TypeScript: Static or Dynamic? The war is over.</a>，</p>
+<p>它提到了TypeScript是具有<a href="https://en.wikipedia.org/wiki/Gradual_typing" target="_blank" rel="noopener">gradual typing</a>的编程语言。</p>
 <p><br/></p>
-<p>回顾多年的学校教育，无形中让我们养成了以下这样的思维习惯，</p>
-<p>那就是，<strong>针对一个给定的问题，快速的找到答案，</strong></p>
-<p>这使得我们容易在考试中获得高分，以致于让我们有机会接受更好的教育。</p>
-<p><br/></p>
-<p>适应环境，从而沉淀出一套最有效的思维模式，</p>
-<p>这确实可以算是优秀人士的一种衡量标准。</p>
-<p><br/></p>
-<p>然而，这种思维模式一旦被不小心用到了其他环境中，</p>
-<p>那么带来的恶果将是惨重的，</p>
-<p>甚至还是难以觉察的。</p>
-<p><br/></p>
-<h3 id="发现问题">1. 发现问题</h3>
-<p>急着去解决问题，而不去分析<strong>问题本身</strong>，是一个最常见的思维惯性，</p>
-<p>因为在校期间，我们遇到的问题都是严格定义的，</p>
-<p>不太会出现问题本身出现差错的情况。</p>
-<p><br/></p>
-<p>但是现实中，却远不是这样，</p>
-<p>现实中的问题，更多是<strong>不确定的</strong>。</p>
-<p><br/></p>
-<p>例如，一个想要实现工作流引擎的团队，</p>
-<p>他们的业务场景可能并不需要让工作流可配置。</p>
-<p><br/></p>
-<p>那么它们到底为什么要解决这个问题呢？</p>
-<p><br/></p>
-<p>这就是典型的问题本身不明确的一个情形。</p>
-<p>在这时候，我们就需要给“问题”下个合理的定义了，</p>
-<p>到底什么是“问题”？</p>
-<p><br/></p>
-<p>斋藤嘉则在《<a href="https://book.douban.com/subject/3604068/" target="_blank" rel="noopener">发现问题的思考术</a>》中提到，</p>
-<p>所谓“<strong>问题</strong>”，就是“应有的景象”与“现状”之间的“落差”。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">问题 &#x3D; 应有的景象 - 现状</span><br></pre></td></tr></table></figure>
-<p><br/></p>
-<p>而解决方案是否有效，完全取决于问题的定义方式。</p>
-<p><br/></p>
-<p>如果团队仅仅是为了应付经常变动的业务流程，</p>
-<p>那么首先应该考虑的是，为什么业务流程会经常变动，</p>
-<p>而不是考虑如何用技术手段使得它可以任意变动。</p>
-<p><br/></p>
-<p>此外，换一个角度，如果团队的目标根本就不是为了解决业务流程问题，</p>
-<p>而是为了做出一个技术产品，来提高团队的影响力，</p>
-<p>那么开发工作流引擎，也未尝不是一个可行的办法。</p>
-<p><br/></p>
-<p>所以，对问题本身，我们应该有更多的考虑，</p>
-<p>究竟是谁的预期，和现状之间产生了怎样的落差？</p>
-<p><br/></p>
-<h3 id="让方案自动化">2. 让方案自动化</h3>
-<p>软件才出现了不到100年，但是人类社会却繁衍生息了上万年，甚至上十万年，</p>
-<p>从这个角度来看，软件形式的解决方案可能只算是历史上的一瞬间了。</p>
-<p><br/></p>
-<p>软件系统也从人类社会现存的解决方案中学到了很多，</p>
-<p>Smalltalk的设计者之一<a href="https://en.wikipedia.org/wiki/Alan_Kay" target="_blank" rel="noopener">Alan Kay</a>，</p>
-<p>在答复<a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en" target="_blank" rel="noopener">Meaning of "Object-Oriented Programming"</a>的邮件中提到了，</p>
+<p>所谓gradual typing，维基百科上是这么解释的，</p>
 <blockquote>
-<p>I thought of objects being like biological cells and/or individual computers on a network, only able to communicate with messages.</p>
+<p>Gradual typing is a type system in which some variables and expressions may be given types and the correctness of the typing is checked at compile-time (which is static typing) and some expressions may be left untyped and eventual type errors are reported at run-time (which is dynamic typing).</p>
 </blockquote>
 <p><br/></p>
-<p>可以看出，Smalltalk中“对象”的概念，其设计<strong>动机</strong>最初来源于生物学，</p>
-<p>这得益于<a href="https://en.wikipedia.org/wiki/Alan_Kay" target="_blank" rel="noopener">Alan Kay</a>同时具有生物学和数学的知识背景。</p>
+<p>编程语言如果具有gradual typing，</p>
+<p>它就融合了static typing和dynamic typing双方的特点，</p>
+<p>具有gradual typing的语言，也称其类型系统是<a href="http://movep.lif.univ-mrs.fr/documents/lopes-slides.pdf" target="_blank" rel="noopener">hybrid</a>的。</p>
 <p><br/></p>
-<p>我这样写是为了阐述一种现状，</p>
-<p>人们总是寄希望于用软件解决<strong>所有的未解难题</strong>，这是一个常见的思维陷阱。</p>
-<p>因为某些问题的症结点，可能并不在软件层面，</p>
-<p>即使该问题是人们在从事软件开发活动中暴露出来的。</p>
+<p>看到这里，我发现自己对dynamic typing的理解还不清晰，</p>
+<p>于是就翻开了<a href="https://www.cs.cmu.edu/~rwh/pfpl/2nded.pdf" target="_blank" rel="noopener">PFPL</a>，</p>
+<p>想把相关的概念重新梳理一下。</p>
 <p><br/></p>
-<p>例如，想要提高代码的交付质量，而编写一个自动化的测试系统，</p>
-<p>这显然就并没有分析清楚问题的症结所在，</p>
-<p>尤其是应用于那些难以进行自动化测试的领域中。</p>
+<hr />
+<h4 id="静态阶段和动态阶段">1. 静态阶段和动态阶段</h4>
+<p>大部分程序被编写完之后，直到被运行完，一般会经历如下两个<strong>阶段</strong>（phase），</p>
+<p><strong>static阶段</strong>，和<strong>dynamic阶段</strong>。</p>
 <p><br/></p>
-<p>因为，如果将代码质量归结为测试的不够充分，</p>
-<p>那么首先提高<strong>人工测试</strong>的投入量，才是验证“增加测试是否是有效”这一假设的最好办法，</p>
-<p>这也是投入产出比最高的方案。</p>
+<p>在static阶段中，我们会对程序进行语法解析，</p>
+<p>然后经过类型检查（type checking），以确保程序是良类型的（良构的 well-formed）。</p>
+<p>最后在dynamic phase中，执行这些良类型的程序。</p>
 <p><br/></p>
-<p>等到人工测试投入到工作中之后，</p>
-<p>等到那些具有<strong>重复的，可被自动化执行的</strong>部分出现时，</p>
-<p>再将这部分用软件系统来解决，</p>
-<p>我想这才是一个软件系统被考虑用于解决问题的正规途径吧。</p>
+<p>—— P35</p>
+<hr />
+<h4 id="静态特性">2. 静态特性</h4>
+<p>对程序进行的类型检查，由一些断言（typing judgments）组成，</p>
+<p>每一条断言，断定特定规则组成的程序，将具有相应的类型，</p>
+<p>这通常被称为<strong>语言的静态特性</strong>（statics）。</p>
 <p><br/></p>
-<p>而不是反之，</p>
-<p>当可重复性的工作，可被自动化操作的工作，被识别出来之前，</p>
-<p>就先尝试开发一个软件系统，以期望它可以奇迹般的解决问题，</p>
-<p>这样经常会得不偿失。</p>
+<p>—— P35</p>
+<hr />
+<h4 id="动态特性">3. 动态特性</h4>
+<p><strong>语言的动态特性</strong>（dynamics），描述了程序在执行过程中应该符合的限制条件，</p>
+<p>有多种方式描述语言的动态特性。</p>
 <p><br/></p>
-<p>《<a href="https://book.douban.com/subject/1148282/" target="_blank" rel="noopener">计算机程序的构造与解释</a>》中写到，</p>
-<blockquote>
-<p>计算过程是存在于计算机里的一类抽象事物，在其演化进程中，这些过程会去操作一些被称为数据的抽象事物。</p>
-</blockquote>
-<blockquote>
-<p>我们用于指挥这种过程的程序就像是巫师的咒语，它们是用一些诡秘而深奥的程序设计语言，通过符号表达式的形式精心编排而成，它们描述了我们希望相应的计算过程去完成的工作。</p>
-</blockquote>
+<p>（1）structural dynamics方法</p>
+<p>它定义了一个转换系统（transition system），归纳的定义了程序的逐步执行方式。</p>
 <p><br/></p>
-<p>从程序语言的角度来看，</p>
-<p>是先有计算过程，再有了这些计算过程的描述（程序）。</p>
+<p>（2）contextual dynamics方法</p>
+<p>和转换系统类似，只不过转换规则的描述方式有些不同。</p>
 <p><br/></p>
-<p>当我们对现实问题还没有想要一个有效的“过程”解决它时，</p>
-<p>就冒然从事编码（程序）活动，</p>
-<p>这显然是低效的，甚至是无意义的。</p>
+<p>（3）equational dynamics方法</p>
+<p>它由一些定义了程序等价性（deﬁnitionally equivalent）的规则组成。</p>
 <p><br/></p>
-<h3 id="信息管理">3. 信息管理</h3>
-<p>软件开发行业的从业者们，可能会抱有这样的<strong>幻想</strong>，</p>
-<p>是我们现在这个团队，现在这个项目有问题，</p>
-<p>必定存在一个足够优秀的团队，在那里进行开发，是顺畅的高效的，</p>
-<p>没有各种令人分神的事情。</p>
+<p>—— P41</p>
+<hr />
+<h4 id="pcf的静态特性和动态特性">4. PCF的静态特性和动态特性</h4>
+<p>我们以PCF为例，了解一下语言静态特性和动态特性的描述方式，</p>
 <p><br/></p>
-<p>其实，这种幻想可能根本就无法实现。</p>
-<p>因为<strong>每个团队每个项目都不可避免的存在自己的问题，</strong></p>
-<p>有其难以克服或正在想办法克服的瓶颈。</p>
+<p>（1）静态特性</p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-76516c26c946e26f.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-b2524f862bce05ff.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
+</figure>
 <p><br/></p>
-<p>快速进行软件开发是一个不稳定的理想状况，</p>
-<p>有任何一项不论是需求因素，工期因素，人员因素等等条件，不能符合理想标准，</p>
-<p>都会导致开发活动慢下来。</p>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0a872566e08756d9.png" /></p>
+<p>上图定义了闭值（closed value）<span data-katex="e val"></span>应当满足的推导规则。</p>
+<p>第二个推导规则的前提中，中括号<span data-katex="[e val]"></span>表明<span data-katex="s(e)"></span>对它的参数<span data-katex="e"></span>是立即求值（eager）的，</p>
+<p>如果省略中括号，则表示是惰性求值（lazy）。</p>
 <p><br/></p>
-<p>虽然软件开发是有关编程技术的，但它的参与者终究还是人，</p>
-<p>有人就会有目标不统一，或者沟通合作等方面的社会学和心理学问题。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-f10a451ba1ab1180.png" /></p>
+<p>上图定义了转化（transition）<span data-katex="e\mapsto e&#39;"></span>应该满足的推导规则。</p>
 <p><br/></p>
-<p>关键是当其他人在兜售一个软件工程方面的解决方案时，</p>
-<p>如果不强调它会让现状变得像童话般美妙，就没有人愿意去尝试它。</p>
-<p>这就给我们带来了理想情况确实可以达到的错觉。</p>
+<p>—— P167-P168</p>
+<hr />
+<h4 id="untyped-calculus的静态特性和动态特性">5. untyped <span data-katex="\lambda"></span> calculus的静态特性和动态特性</h4>
+<p>再看看untyped <span data-katex="\lambda"></span> calculus，</p>
 <p><br/></p>
-<p>这应该是不可能的，因为在软件工程方面“<a href="https://zh.wikipedia.org/wiki/%E6%B2%A1%E6%9C%89%E9%93%B6%E5%BC%B9" target="_blank" rel="noopener">没有银弹</a>”。</p>
-<p><strong>软件开发的真正困难不在于如何表示一个抽象概念，</strong></p>
-<p><strong>而在于如何将这个抽象概念传递给其他人。</strong></p>
+<p>（1）静态特性</p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0facb126c43e9845.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-bcd68eea45cdf560.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
+</figure>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-a369f8de52cff04e.png" /></p>
+<p>与PCF不同的是，这里用了equational dynamics方法进行描述。</p>
 <p><br/></p>
-<p>因此，在《<a href="https://book.douban.com/subject/1102259/" target="_blank" rel="noopener">人月神话</a>》提到了<a href="https://en.wikipedia.org/wiki/Brooks%27s_law" target="_blank" rel="noopener">Brooks's law</a>，</p>
-<blockquote>
-<p>Adding human resources to a late software project makes it later.</p>
-</blockquote>
-<p>即，向进度落后的项目中增加人手，只会使项目更加落后。</p>
+<p>—— P185-P186</p>
+<hr />
+<h4 id="untyped-means-uni-typed">6. untyped means uni-typed</h4>
+<p>如果支持递归类型，那么untyped <span data-katex="\lambda"></span> calculus可以看成是，</p>
+<p>具有<strong>统一类型</strong>（uni-typed）<span data-katex="\lambda"></span> calculus的类型化版本。</p>
 <p><br/></p>
-<p>因为，新增加的人手会加剧组织沟通不畅的状况，</p>
-<p>而沟通问题或许是造成项目延期的主要原因。</p>
+<p>我们可以定义一个这样的递归类型，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-112b868d0efd3ecb.png" /></p>
+<p>因此，函数的参数和函数本身将具有统一的类型（uni-typed）<span data-katex="D"></span>。</p>
 <p><br/></p>
-<p>在软件开发过程中，如果出现了问题，</p>
-<p>先从沟通和信息不对称的角度进行反思，</p>
-<p>比直接寻求用一个辅助软件系统旁敲侧击，将会更加有效。</p>
+<p>—— P190</p>
+<hr />
+<h4 id="dynamic-typing">7. dynamic typing</h4>
+<p>下面开始介绍dynamic typing了。</p>
 <p><br/></p>
-<h3 id="结语">结语</h3>
-<p>既然从事了软件开发这个行当，对软件系统的威力和价值，当然是有足够的自信，</p>
-<p>但这并不能让我们更加专业化。</p>
+<p>将具有dynamic typed的语言，与static typed的语言对立起来看待，是有问题的。</p>
+<p>我们可以换一个角度来看，我们说具有dynamic typed的语言，</p>
+<p>是static typed的语言的一种特殊情况（special case）——它只有一个递归类型。</p>
 <p><br/></p>
-<p>所谓专业化，我认为并不仅仅是从专业领域（软件）给出任何可行的方案，</p>
-<p>更重要一点是，<strong>从问题领域出发，指出客户方案中的不合理之处。</strong></p>
-<p>这样才能让方案总是直指问题的核心，确实有助于解决问题。</p>
+<p>—— P193</p>
+<hr />
+<h4 id="dpcf的静态特性和动态特性">8. DPCF的静态特性和动态特性</h4>
+<p>我们来看DPCF（dynamically Typed PCF）的静态特性和动态特性，</p>
 <p><br/></p>
-<p>然而，很多情况下，都不是我们可以控制的，</p>
-<p>在对解决方案提出质疑的时候，</p>
-<p>他人的任何不悦，最终才会让我们意识到什么是别人想去解决的问题。</p>
+<p>（1）静态特性</p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-5ecbbb7286459ea4.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
+</figure>
+<p>我们看到，DPCF的值被划分成了两个<strong>类别</strong>（classes），一个是<span data-katex="number"></span>，另一个是<span data-katex="fun"></span>。</p>
 <p><br/></p>
-<p>事实上，<strong>最难达成一致的是对问题本身的认知和大家的目标。</strong></p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-42bb48f24773362c.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
+</figure>
+<p>它表明，如果<span data-katex="d"></span>包含自由变量，<span data-katex="x_1,\cdots,x_n"></span>，</p>
+<p>则若这些自由变量是良类型的，<span data-katex="d"></span>就是良类型的。</p>
 <p><br/></p>
-<p>从“问题 = 应有的景象 - 现状”公式中我们也可以看到，</p>
-<p>在大家都能理性正视现状的基础上，不同的人因为拥有对“应有景象”的不同预期，</p>
-<p>最终会导致人们在心目中实际想要解决不同的问题。</p>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-274721e24c279f6d.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0bb8c9fad3b39efe.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-f9e834d474d2a247.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-1ed071b445e2e78c.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0b6351d4fadbff13.png" /></p>
 <p><br/></p>
-<p>我们想达到的预期，在别人眼里真的是个问题么？</p>
+<p>其中涉及到的符号解释如下，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-dd13ebebc2bd66ad.png" /></p>
+<p><br/></p>
+<p>—— P194-196</p>
+<hr />
+<h4 id="hybrid">9. hybrid</h4>
+<p>一个hybrid的语言，指的是它在类型系统中混合了static typing和dynamic typing，</p>
+<p>它为static typing语言增加了一个<span data-katex="dyn"></span>类型，该类型的值需要满足语言动态特性的要求。</p>
+<p><br/></p>
+<p>DPCF可以嵌入到一个static typed的语言中，被视为一个hybrid的语言。</p>
+<p>只需要在static typed的语言中增加一个类型<span data-katex="dyn"></span>，</p>
+<p>可以说，dynamic typing只是static typing的一种特定用法（a mode of use）。</p>
+<p><br/></p>
+<p>因此，static typing和dynamic typing并不是对立的，</p>
+<p>他们可以和谐共存（coexist harmoniously）。</p>
+<p><br/></p>
+<p>—— P203</p>
+<hr />
+<h4 id="hpcf的静态特性和动态特性">10. HPCF的静态特性和动态特性</h4>
+<p>我们来看HPCF（hybrid PCF）的静态特性和动态特性，</p>
+<p><br/></p>
+<p>（1）静态特性 <img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-66cd2c00ccd7eb68.png" alt="syntax" /></p>
+<p>其中，类型<span data-katex="dyn"></span>中包含了所有具有动态类型的值。</p>
+<p><span data-katex="new"></span>构造器（constructor），会在值上附加一个类别描述符（classifer），以表明它所属的动态类别（class）。</p>
+<p><br/></p>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-47e6c1dc31ee881c.png" alt="statics - 1" /><figcaption aria-hidden="true">statics - 1</figcaption>
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-a42aa87a1c3239b0.png" alt="statics - 2" /><figcaption aria-hidden="true">statics - 2</figcaption>
+</figure>
+<p>以上类型断言，保证了表达式具有正确的类型。</p>
+<p><br/></p>
+<p>（2）动态特性</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-3ac3c225c1ebf153.png" /></p>
+<p>不同类别的值之间进行转换<span data-katex="cast"></span>，会产生运行时错误。</p>
+<p><br/></p>
+<p>—— P203-P204</p>
+<hr />
+<h4 id="动态类型与静态类型">11. 动态类型与静态类型</h4>
+<p>dynamic语言和static语言的一些异同点。</p>
+<p><br/></p>
+<p>（1）dynamic语言将类别（class）关联到值（value）上，</p>
+<p>而static语言将类型（type）关联到变量（variable）/表达式上。</p>
+<p><br/></p>
+<p>与dynamic语言相关的概念是类别（class），而不是类型（type），</p>
+<p>例如<span data-katex="num"></span>，<span data-katex="fun"></span>，它们可以视为值的标签（tag）。</p>
+<p><br/></p>
+<p>（2）dynamic语言在运行时（run-time）进行类别检查（class checking），</p>
+<p>而static语言在编译时（compile time）进行类型检查（type checking）。</p>
+<p><br/></p>
+<p>dynamic语言可以看做一类特殊的static语言——该语言中只有一个递归类型。</p>
+<p><br/></p>
+<p>—— P208</p>
 
           
         
@@ -543,7 +567,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/145/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/145/">145</a><span class="page-number current">146</span><a class="page-number" href="/page/147/">147</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/147/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/145/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/145/">145</a><span class="page-number current">146</span><a class="page-number" href="/page/147/">147</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/147/">&gt;</a>
   </nav>
 
 
@@ -589,7 +613,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">306</span>
+                <span class="site-state-item-count">307</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

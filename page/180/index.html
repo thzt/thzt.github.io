@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/10/type-4/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/15/hilbert-style-and-gentzen-style-deduction-system/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/10/type-4/" itemprop="url">你好，类型（四）：Propositional logic</a></h1>
+                <a class="post-title-link" href="/2017/09/15/hilbert-style-and-gentzen-style-deduction-system/" itemprop="url">Hilbert-style和Gentzen-style演绎系统</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T00:00:00+08:00">
-                2017-09-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-15T00:00:00+08:00">
+                2017-09-15
               </time>
             
 
@@ -347,178 +347,83 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-205ba4a361e6b282.png" /></p>
+            <h3 id="proof-calculus">1. Proof calculus</h3>
+<p>在数理逻辑（mathematical logic）中，</p>
+<p>证明演算（proof calculus）界定了形式系统（formal system）的不同风格（style）。</p>
+<p>最主流的两种风格（style）为，</p>
+<p>希尔伯特风格（Hilbert style）和甘岑风格（Gentzen style）。</p>
 <p><br/></p>
-<p>前两篇中，我们介绍了<span data-katex="\lambda"></span>演算和<span data-katex="CL"></span>（组合子逻辑），</p>
-<p>我们采用了公理化的方法，先定义系统中的公理，然后定义推导规则，</p>
-<p>最终得到了两个形式系统，<span data-katex="\lambda_\beta"></span>系统以及<span data-katex="CL_w"></span>系统。</p>
+<h4 id="hilbert-style">1.1 Hilbert style</h4>
+<p>希尔伯特风格（Hilbert style）的证明演算（proof calculus），</p>
+<p>其断言（judgement）由不包含条件的（unconditional）重言式（tautology）构成，</p>
+<p>称为，希尔伯特系统（Hilbert system）。</p>
 <p><br/></p>
-<p>值得注意的是，公理系统不仅仅包含由公理和推导构成的形式系统，</p>
-<p>还包含给这个形式系统所选择的语义。</p>
+<h4 id="gentzen-style">1.2 Gentzen style</h4>
+<p>甘岑风格（Gentzen style）的证明演算（proof calculus），</p>
+<p>其断言（judgement）由包含条件的（unconditional）重言式（tautology）构成。</p>
+<p>包括，自然演绎（Natural deduction）和相继式演算（Sequent calculus）。</p>
 <p><br/></p>
-<p>给形式系统选择一个可靠的语义，是复杂的，我们将在后文再详细介绍。</p>
-<p>从这一篇开始，我们先开始介绍数理逻辑，</p>
-<p>看看逻辑学是怎么看待形式化问题的。</p>
+<p>（1）自然演绎（Natural deduction）系统，</p>
+<p>断言（judgement）的结论（conclusion）中，</p>
+<p>只包含一个命题（propostion）。</p>
 <p><br/></p>
-<h3 id="命题逻辑形式系统">1. 命题逻辑形式系统</h3>
+<p>（2）相继式演算（Sequent calculus）系统，</p>
+<p>断言（judgement）的结论（conclusion）中，</p>
+<p>可以包含零个或多个命题（propostion）。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-a9e587bd763a4a88.png" /></p>
+<h3 id="hilbert-system">2. Hilbert system</h3>
+<p>观察系统中断言（judgement）的形式，</p>
+<p>是区分演绎系统（deduction system）风格（style）的一种常用方法。</p>
 <p><br/></p>
-<p>下文中，我们采用与<span data-katex="\lambda_\beta"></span>系统，<span data-katex="CL_w"></span>系统相同的方式，</p>
-<p>来介绍命题逻辑（<a href="https://zh.wikipedia.org/zh-hans/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91" target="_blank" rel="noopener">propositional logic</a>）。</p>
+<p>希尔伯特系统（Hilbert system）中的断言（judgement）是最简单的，其形式为，</p>
+<p><span data-katex="B"></span></p>
+<p>用以表示任何逻辑系统（logic）中的公式（formula）。</p>
 <p><br/></p>
-<p>命题逻辑，是在研究命题的证明和推理的过程中抽象出来的，</p>
-<p>先不考虑语义，仅仅从符号的角度（形式化）来考虑它，则是更简单直接的。</p>
+<p>例如，一阶逻辑（first-order logic），命题逻辑（propositional logic），</p>
+<p>高阶逻辑（higher-order logic），或者模态逻辑（modal logic）。</p>
 <p><br/></p>
-<h3 id="公理和推导规则">1.1 公理和推导规则</h3>
-<p>首先我们给出命题逻辑形式系统中的公理，</p>
-<p>（1）<span data-katex="\alpha\to(\beta\to\alpha)"></span></p>
-<p>（2）<span data-katex="(\alpha\to(\beta\to\gamma))\to((\alpha\to\beta)\to(\alpha\to\gamma))"></span></p>
-<p>（3）<span data-katex="(\neg\alpha\to\neg\beta)\to(\beta\to\alpha)"></span></p>
+<p>希尔伯特系统（Hilbert system）中的定理（theorem），</p>
+<p>指的是一段有效证明（valid proof）的最终结论（concluding judgement）。</p>
 <p><br/></p>
-<p>然后，我们给出命题逻辑形式系统中的推导规则，</p>
-<p>（1）<span data-katex="\frac{\alpha,\alpha\to\beta}{\beta}"></span></p>
+<h3 id="natural-deduction">3. Natural deduction</h3>
+<p>自然演绎（Natural deduction）系统中，其断言（judgement）形式如下，</p>
+<p><span data-katex="A_1,A_2,\cdots,A_n\vdash B"></span></p>
 <p><br/></p>
-<p>以上推导规则可以理解为，</p>
-<p>如果<span data-katex="\alpha"></span>和<span data-katex="\alpha\to\beta"></span>成立，则<span data-katex="\beta"></span>成立。</p>
+<p>其中，<span data-katex="A_1,A_2,\cdots,A_n"></span>和<span data-katex="B"></span>都是公式（formula），<span data-katex="n\geqslant 0"></span>，</p>
+<p><span data-katex="A_1,A_2,\cdots,A_n"></span>的顺序是无关紧要的。</p>
 <p><br/></p>
-<p>这里我们采用了推导规则的常用写法，<span data-katex="\frac{P_1,P_2,\cdots,P_n}{C}"></span>，</p>
-<p>横线上面的部分“<span data-katex="P_1,P_2,\cdots,P_n"></span>”称为规则的<strong>前提</strong>（premise），</p>
-<p>横线下面的部分“<span data-katex="C"></span>”，称为<strong>结论</strong>（conclusion）。</p>
+<p>自然演绎（Natural deduction）系统中的定理（theorem），</p>
+<p>指的是这样的公式（formula）<span data-katex="B"></span>，</p>
+<p>其中，<span data-katex="\vdash B"></span>是一段有效证明（valid proof）的最终结论（concluding judgement）。</p>
 <p><br/></p>
-<p>在命题逻辑中，根据公理和推导规则，得到的公式称为<strong>定理</strong>。</p>
-<p>根据公理，定理和推导规则，得到的公式也是定理。</p>
+<p>公式（formula）<span data-katex="A_1,A_2,\cdots,A_n\vdash B"></span>的语义（semantics）如下，</p>
+<p>如果每一个<span data-katex="A_1,A_2,\cdots,A_n"></span>成立，那么<span data-katex="B"></span>也成立。</p>
 <p><br/></p>
-<h3 id="例子">1.2 例子</h3>
-<p>下面我们来看一个例子，</p>
-<p>求证：<span data-katex="(\alpha\to\beta)\to(\alpha\to\alpha)"></span>是一个定理。</p>
+<h3 id="sequent-calculus">4.Sequent calculus</h3>
+<p>相继式演算（Sequent calculus）系统，将自然演绎（Natural deduction）一般化了，</p>
+<p>其断言（judgement）的形式如下，</p>
+<p><span data-katex="A_1,A_2,\cdots,A_n\vdash B_1,B_2,\cdots,B_k"></span></p>
 <p><br/></p>
-<p>证明：</p>
-<p>首先，我们使用公理（1），我们有下式成立，</p>
-<p><span data-katex="\alpha\to(\beta\to\alpha)"></span></p>
+<p>其中，<span data-katex="A_1,A_2,\cdots,A_n"></span>称为前项（antecedent），</p>
+<p><span data-katex="B_1,B_2,\cdots,B_k"></span>称为后项（succedent/consequent），</p>
+<p>它们合起来称为一个序列（sequent）。</p>
 <p><br/></p>
-<p>然后，我们使用公理（2），并令其中的<span data-katex="\gamma=\alpha"></span>，</p>
-<p><span data-katex="(\alpha\to(\beta\to\alpha))\to((\alpha\to\beta)\to(\alpha\to\alpha))"></span></p>
+<p>和自然演绎（Natural deduction）系统相似，</p>
+<p><span data-katex="A_1,A_2,\cdots,A_n"></span>和<span data-katex="B_1,B_2,\cdots,B_k"></span>都是公式（formula），</p>
+<p><span data-katex="n"></span>和<span data-katex="k"></span>都是非负整数，即断言（judgement）的左右两边都可以为空。</p>
 <p><br/></p>
-<p>最后，我们结合以上两个结论，再使用推导规则（1），就得到了，</p>
-<p><span data-katex="(\alpha\to\beta)\to(\alpha\to\alpha)"></span></p>
+<p>相继式演算（Sequent calculus）系统中的定理（theorem），</p>
+<p>指的是这样的公式（formula）<span data-katex="B"></span>，</p>
+<p>其中，<span data-katex="\vdash B"></span>是一段有效证明（valid proof）的最终结论（concluding judgement）。</p>
 <p><br/></p>
-<p>证毕。</p>
+<p>公式（formula）<span data-katex="A_1,A_2,\cdots,A_n\vdash B_1,B_2,\cdots,B_k"></span>的语义（semantics）如下，</p>
+<p>如果每一个<span data-katex="A_1,A_2,\cdots,A_n"></span>成立，那么<span data-katex="B_1,B_2,\cdots,B_k"></span>中至少有一个成立。</p>
 <p><br/></p>
-<h3 id="hilbert-style和gentzen-style">2. Hilbert-style和Gentzen-style</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-e4f97978f3ad51a3.png" /></p>
-<p><br/></p>
-<p>以上的证明过程中，每一行断言，是一个不包含条件的定理，</p>
-<p>这种风格的演绎系统（deduction system）称为具有<strong>Hilbert-style</strong>。</p>
-<p><br/></p>
-<p>如果<span data-katex="\Gamma,\Delta"></span>是有限的公式集合，则，</p>
-<p><span data-katex="\Gamma\vdash\Delta"></span>，称为一个<strong>序贯</strong>（sequent）。</p>
-<p>其中，<span data-katex="\Gamma"></span>称为序贯的前提（antecedent），<span data-katex="\Delta"></span>称为序贯的<strong>结论</strong>（succedent）。</p>
-<p>它表示，如果公式集<span data-katex="\Gamma"></span>都成立，那么<span data-katex="\Delta"></span>中至少有一个成立。</p>
-<p><br/></p>
-<p>如果证明过程中，每一行断言是一个序贯，</p>
-<p>这种风格的演绎系统，称为具有<strong>Gentzen-style</strong>。</p>
-<p><br/></p>
-<p>Hilbert-style演绎系统，通常具有较多的公理，但是具有较少的推导规则，</p>
-<p>Gentzen-style演绎系统，则反之，具有较少的公理，却具有较多的推导规则。</p>
-<p><br/></p>
-<p>如果<span data-katex="\Delta"></span>中总是只包含一个公式，</p>
-<p>则称该演绎系统为<strong>自然演绎系统</strong>（natural deduction system）。</p>
-<p><br/></p>
-<p>如果有限序列，<span data-katex="\Gamma_1\vdash\alpha_1,\Gamma_2\vdash\alpha_2,\cdots,\Gamma_n\vdash\alpha_n"></span>，满足，</p>
-<p>（1）<span data-katex="\Gamma_1,\Gamma_2,\cdots,\Gamma_n"></span>为有限公式集</p>
-<p>（2）<span data-katex="\alpha_1,\alpha_2,\cdots,\alpha_n"></span>为公式</p>
-<p>（3）每个<span data-katex="\Gamma_i\vdash\alpha_i"></span>，<span data-katex="(1\leqslant i\leqslant n)"></span>，都是它之前若干个<span data-katex="\Gamma_j\vdash\alpha_j"></span>，<span data-katex="(1\leqslant j&lt;i\leqslant n)"></span>，应用某条推导规则得到的</p>
-<p><br/></p>
-<p>我们就称这个有限序列，为<span data-katex="\Gamma_n\vdash\alpha_n"></span>的一个<strong>（形式）证明序列</strong>。</p>
-<p>此时，也称<span data-katex="\alpha_n"></span>可由<span data-katex="\Gamma_n"></span><strong>（形式）证明</strong>。</p>
-<p><br/></p>
-<h3 id="命题逻辑的自然演绎系统">3. 命题逻辑的自然演绎系统</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-5a6df9ddc8e52da4.png" /></p>
-<p><br/></p>
-<p>以上定义的形式系统，称为命题逻辑形式系统<span data-katex="P"></span>，</p>
-<p>下面我们再定义一个与之等价的，命题逻辑的自然演绎系统<span data-katex="N"></span>。</p>
-<p><br/></p>
-<h4 id="语法">3.1 语法</h4>
-<p>（1）可数个命题符号：<span data-katex="p_1,p_2,\cdots"></span></p>
-<p>（2）5个联接词符号：<span data-katex="\neg,\lor,\land,\to,\leftrightarrow"></span></p>
-<p>（3）2个辅助符号：<span data-katex="),("></span></p>
-<p><br/></p>
-<h4 id="合法的公式">3.2 合法的公式</h4>
-<p>我们使用<a href="https://zh.wikipedia.org/wiki/%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F" target="_blank" rel="noopener">BNF</a>来定义，</p>
-<p><br/></p>
-<p><span data-katex="\alpha::=p|(\neg\alpha)|(\alpha_1\lor\alpha_2)|(\alpha_1\land\alpha_2)|(\alpha_1\to\alpha_2)|(\alpha_1\leftrightarrow\alpha_2)"></span></p>
-<p><br/></p>
-<h4 id="推导规则">3.3 推导规则</h4>
-<p>（1）包含律：<span data-katex="\frac{\alpha\in\Gamma}{\Gamma\vdash\alpha}"></span></p>
-<p>（2）<span data-katex="\neg"></span>消去律：<span data-katex="\frac{\Gamma,\neg\alpha\vdash\beta;\Gamma,\neg\alpha\vdash\neg\beta}{\Gamma\vdash\alpha}"></span></p>
-<p>（3）<span data-katex="\to"></span>消去律：<span data-katex="\frac{\Gamma\vdash(\alpha\to\beta);\Gamma\to\alpha}{\Gamma\vdash\beta}"></span></p>
-<p>（4）<span data-katex="\to"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta}{\Gamma\vdash\alpha\to\beta}"></span></p>
-<p>（5）<span data-katex="\lor"></span>消去律：<span data-katex="\frac{\Gamma,\alpha\vdash\gamma;\Gamma,\beta\vdash\gamma}{\Gamma,\alpha\lor\beta\vdash\gamma}"></span></p>
-<p>（6）<span data-katex="\lor"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha}{\Gamma\vdash\alpha\lor\beta;\Gamma\vdash\beta\lor\alpha}"></span></p>
-<p>（7）<span data-katex="\land"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\land\beta}{\Gamma\vdash\alpha;\Gamma\vdash\beta}"></span></p>
-<p>（8）<span data-katex="\land"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha;\Gamma\vdash\beta}{\Gamma\vdash\alpha\land\beta}"></span></p>
-<p>（9）<span data-katex="\leftrightarrow"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\alpha}{\Gamma\vdash\beta}"></span>，<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\beta}{\Gamma\vdash\alpha}"></span></p>
-<p>（10）<span data-katex="\leftrightarrow"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta;\Gamma,\beta\vdash\alpha}{\Gamma\vdash\alpha\leftrightarrow\beta}"></span></p>
-<p><br/></p>
-<h4 id="例子-1">3.4 例子</h4>
-<p>以上，我们定义了命题逻辑的自然演绎系统<span data-katex="N"></span>，</p>
-<p>它比命题逻辑形式系统<span data-katex="P"></span>更复杂一些，但是这两个系统是等价的。</p>
-<p><br/></p>
-<p>我们来看一个例子。</p>
-<p>求证，<span data-katex="\alpha\to\beta,\alpha\vdash\beta"></span>是一个定理。</p>
-<p><br/></p>
-<p>证明：</p>
-<p>首先，我们根据包含律有，</p>
-<p><span data-katex="\alpha\to\beta,\alpha\vdash\alpha\to\beta"></span></p>
-<p><span data-katex="\alpha\to\beta,\alpha\vdash\alpha"></span></p>
-<p><br/></p>
-<p>然后，根据这两个结论，以及<span data-katex="\to"></span>消去律，就有，</p>
-<p><span data-katex="\alpha\to\beta,\alpha\vdash\beta"></span>。</p>
-<p><br/></p>
-<p>证毕。</p>
-<p><br/></p>
-<h3 id="系统和的等价性">4. 系统<span data-katex="N"></span>和<span data-katex="P"></span>的等价性</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-20b8095e4265990d.png" /></p>
-<p><br/></p>
-<p>本文我们介绍了两个形式系统，</p>
-<p>命题逻辑形式系统<span data-katex="P"></span>，以及命题逻辑的自然演绎系统<span data-katex="N"></span>，</p>
-<p>可以证明，对于<span data-katex="P"></span>（或<span data-katex="N"></span>）中的公式<span data-katex="\alpha"></span>，<span data-katex="\vdash_N\alpha"></span>当且仅当<span data-katex="\vdash_P\alpha"></span>。</p>
-<p><br/></p>
-<p>因此，这两个系统中的定理集是一样的，</p>
-<p>某个定理在<span data-katex="P"></span>中可证，当且仅当在<span data-katex="N"></span>中也可证。</p>
-<p><br/></p>
-<p>其中，我们令，</p>
-<p><span data-katex="\neg\alpha\to\beta"></span>，表示<span data-katex="\alpha\lor\beta"></span>，</p>
-<p><span data-katex="\neg(\neg\alpha\lor\neg\beta)"></span>，表示<span data-katex="\alpha\land\beta"></span>，</p>
-<p><span data-katex="(\alpha\to\beta)\land(\beta\to\alpha)"></span>，表示<span data-katex="\alpha\leftrightarrow\beta"></span>。</p>
-<p><br/></p>
-<p>对于这两个系统而言，如上文所示，</p>
-<p>我们只进行了符号的推导操作，即对公式进行形式证明，</p>
-<p>至于这些符号到底代表什么意思，我们却故意没有提及。</p>
-<p><br/></p>
-<p>我们并没有说<span data-katex="\lor"></span>表示“或”，也没有说<span data-katex="\land"></span>表示“与”，</p>
-<p>在学数理逻辑的时候，一开始就将形式系统与它的语义模型相区分，</p>
-<p>是非常有益的，后文我们将看到这样做的好处。</p>
-<p><br/></p>
-<h3 id="总结">5. 总结</h3>
-<p>本文介绍了命题逻辑，以及与之相关的两个形式系统<span data-katex="P"></span>和<span data-katex="N"></span>，</p>
-<p>和<span data-katex="\lambda_\beta"></span>，<span data-katex="CL_w"></span>一样，我们采用了公理化的方式构建它们，</p>
-<p>这样得到的形式系统，只是符号演算，还没有被赋予特定的语义，</p>
-<p>下文我们开始介绍一阶谓词逻辑。</p>
-<p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
-<p><a href="https://book.douban.com/subject/2364517/" target="_blank" rel="noopener">数理逻辑</a></p>
+<h3 id="reference">Reference</h3>
 <p><a href="https://en.wikipedia.org/wiki/Proof_calculus" target="_blank" rel="noopener">Proof calculus</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Hilbert_system" target="_blank" rel="noopener">Hilbert system</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Natural_deduction" target="_blank" rel="noopener">Natural deduction</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Sequent_calculus" target="_blank" rel="noopener">Sequent calculus</a></p>
-<p><a href="https://book.douban.com/subject/11632210/" target="_blank" rel="noopener">Practical Foundations for Programming Languages</a></p>
-<p><a href="https://book.douban.com/subject/4323391/" target="_blank" rel="noopener">Lambda-Calculus and Combinators，an Introduction</a></p>
 
           
         
@@ -557,7 +462,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/179/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/179/">179</a><span class="page-number current">180</span><a class="page-number" href="/page/181/">181</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/181/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/179/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/179/">179</a><span class="page-number current">180</span><a class="page-number" href="/page/181/">181</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/181/">&gt;</a>
   </nav>
 
 
@@ -603,7 +508,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">306</span>
+                <span class="site-state-item-count">307</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

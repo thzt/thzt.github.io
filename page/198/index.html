@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/16/good-code/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/20/recursive-function-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/16/good-code/" itemprop="url">什么样的代码才算是好代码</a></h1>
+                <a class="post-title-link" href="/2017/03/20/recursive-function-8/" itemprop="url">递归函数（八）：偏序结构</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-16T00:00:00+08:00">
-                2017-03-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T00:00:00+08:00">
+                2017-03-20
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,140 +347,165 @@
       
         
           
-            <p>我们经常指责别人写的代码，</p>
-<p>例如，他们使用了过多的嵌套循环，或者使用了过多的if-else，</p>
-<p>或者异常处理方式跟“业界”认可的方式不同，</p>
-<p>他们写的代码维护成本很高，是技术债务。</p>
+            <h3 id="回顾">回顾</h3>
+<p>上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式，</p>
+<p>这一篇我们根据不动点算子的性质来证明<code>fact</code>函数就是<code>g</code>函数的不动点。</p>
+<p>随后，我们回归到了数学中，讨论集合上的一种偏序结构，</p>
+<p>这为下文完全偏序集，以及完全偏序集上连续函数的不动点定理做好准备。</p>
 <p><br/></p>
-<p>却不知，他们一定也在指责我们，</p>
-<p>我们引入了过多不必要的抽象，我们写的通用代码结果只在一个地方被用到，</p>
-<p>我们进行了过度设计，拥有代码洁癖，</p>
-<p>他们指出，我们担心的事情永远都没有发生过。</p>
+<h3 id="不动点算子的性质">不动点算子的性质</h3>
 <p><br/></p>
-<p>那么，到底什么才是好代码呢？</p>
-<p><strong>我们凭什么指出某种写法是技术债务，而另外一种不是。</strong></p>
-<p>除去心理因素，“平铺直叙”的代码真的就那么难以维护吗？</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-a8ca5067e631ea34.png" /></p>
 <p><br/></p>
-<p>在这个问题上，经验似乎说明不了什么问题，</p>
-<p>我们深信某种写法较好，仅仅是我们那么认为而已。</p>
-<p>如果其他人不这么认为，也没有办法。</p>
+<p>上文我们介绍了不动点算子<code>fix</code>，</p>
+<p>它可以用来求取任意函数的不动点。</p>
 <p><br/></p>
-<p>我们可能会在白板上跟别人争执，</p>
-<p>讨论代码的演化路径，大谈设计模式，考虑各种开发原则，</p>
-<p>这些似乎都没有什么用，</p>
-<p>关于什么样的写法更好，谁也说服不了谁。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fix :: (a -&gt; a) -&gt; a</span><br><span class="line">fix f &#x3D; let x &#x3D; f x in x</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>对于未来的发展状况，你说会发生，</p>
-<p>别人说不会发生，你还能怎样。</p>
+<p>并且我们说以下函数的不动点为<code>fact = fix g</code>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g :: (Int -&gt; Int) -&gt; Int -&gt; Int</span><br><span class="line">g f n &#x3D; case n of</span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  _ -&gt; n * f (n-1)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h3 id="恰如其分的使用语言特性">恰如其分的使用语言特性</h3>
-<p>编程语言特性，是一种语言级别的抽象机制，</p>
-<p>它可以使人们摆脱细节，用更大的颗粒度描述问题，</p>
-<p>这是一种减轻开发人员心智负担的有效办法。</p>
+<p>但是上文中，我们只是对它们的计算结果进行比对，</p>
+<p>并没有对它进行证明。</p>
 <p><br/></p>
-<p>从这个角度来看，<strong>任何语言特性，</strong></p>
-<p><strong>都是在某个场景中，为了让事情更容易被理解而服务的。</strong></p>
+<p>考虑到<code>fix</code>的性质，<code>fix g = g (fix g)</code>，</p>
+<p>（因为<code>fix g</code>是<code>g</code>的不动点，令<code>h = fix g</code>，上式为<code>h = g h</code></p>
+<p>我们可以使用数学归纳法，证明对于任意的自然数<span data-katex="n"></span>，<code>fact n = fix g n</code>。</p>
 <p><br/></p>
-<p>在现实项目中，有时我们对特性的使用是<strong>不够充分</strong>的，</p>
-<p>我们用更细节的概念，表述了一个宏观问题，就会显得很繁琐。</p>
-<p>也有时，我们还会<strong>滥用</strong>特性，</p>
-<p>用一个更抽象的概念，来刻画一个更为具体的问题。</p>
+<p>我们先证初始条件，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fix g 1 </span><br><span class="line">&#x3D; g (fix g) 1 </span><br><span class="line">&#x3D; case 1 of </span><br><span class="line">    1 -&gt; 1</span><br><span class="line">    _ -&gt; ...</span><br><span class="line">&#x3D; 1</span><br><span class="line">&#x3D; fact 1</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>这两种情形都是不恰当的，而恰当的使用则对我们提出了更高的要求。</p>
-<p>我们需要<strong>更深刻理解这些特性所产生的背景和动机，</strong></p>
-<p>多了解但不限于面向对象，函数式，逻辑式编程语言中的一些编程范式。</p>
+<p>然后再证递推条件，假设<code>fact k = fix g k</code>，</p>
+<p>我们要推出<code>fact (k+1) = fix g (k+1)</code>，其中，<span data-katex="k &gt; 0"></span>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fix g (k+1)</span><br><span class="line">&#x3D; g (fix g) (k+1)</span><br><span class="line">&#x3D; case (k+1) of </span><br><span class="line">    1 -&gt; 1</span><br><span class="line">    _ -&gt; (k+1) * (fix g) k</span><br><span class="line">&#x3D; (k+1) * (fix g) k</span><br><span class="line">&#x3D; (k+1) * fact k</span><br><span class="line">&#x3D; fact (k+1)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>有效的使用语言特性，才能控制代码的复杂度，让它更清晰易懂。</p>
-<p>诚然，再好的自解释性的代码，都不如一行有效的注释。</p>
+<p>因此，对于任意的自然数<span data-katex="n"></span>，<code>fact n = fix g n</code>。</p>
+<p>即，<code>fact = fix g</code>。</p>
 <p><br/></p>
-<h3 id="让代码更容易被分析">让代码更容易被分析</h3>
-<p>代码一旦被写出来，并不一定只有人来阅读它，</p>
-<p>可能会由于种种原因，事后要用程序对它们进行分析。</p>
+<h3 id="不动点算子的有限展开">不动点算子的有限展开</h3>
 <p><br/></p>
-<p>这时候<strong>风格统一的代码，逻辑层次更少的代码，将更有利于被分析。</strong></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-0a009ed0d24a4df6.png" /></p>
 <p><br/></p>
-<p>因此，在编写时一味的减少冗余，建立抽象，不但会对阅读者提出更高的要求，</p>
-<p>还会对代码分析工具提出了更高的要求。</p>
+<p>根据上一节<code>fact = fix g</code>的证明，我们看到，</p>
+<p>每一步递推，我们都使用了不动点算子<code>fix</code>的性质<code>fix g = g (fix g)</code>，</p>
+<p>但是对于一个具有有限存储空间的机器来说，递推的步骤不可能是无限的，</p>
+<p>为了界定最多使用多少次递推，我们定义，<span data-katex="fix^{[n+1]}\ g = g\ (fix^{[n]} g)"></span>。</p>
+<p>并且认为<span data-katex="fix^{[0]}\ g"></span>对于任意的<span data-katex="n"></span>无定义。</p>
+<p><span data-katex="fix^{[1]}\ g\ 1 = 1"></span>，而<span data-katex="fix^{[1]}\ g\ n"></span>在<span data-katex="n &gt; 1"></span>时没有定义，</p>
+<p><span data-katex="fix^{[2]}\ g\ 1 = 1"></span>，<span data-katex="fix^{[2]}\ g\ 2 = 2"></span>，而<span data-katex="fix^{[2]}\ g\ n"></span>在<span data-katex="n &gt; 2"></span>时没有定义。</p>
 <p><br/></p>
-<p>一个稳重的开发者，会避免过度设计，会更有远见，</p>
-<p>所以，<strong>不会编写出高度抽象的代码。</strong></p>
-<p>这会让他的代码更容易被别人维护，集成和自动重构。</p>
+<p>因此，<span data-katex="fix^{[n]}\ g"></span>是一个部分函数，且，</p>
+<p><span data-katex="fix^{[n+1]}\ g"></span>所表示的函数，总是比<span data-katex="fix^{[n]}\ g"></span>的计算能力更强一些，离<code>fact</code>更近一些。</p>
+<p>当<span data-katex="n\rightarrow \infty "></span>时，<span data-katex="fix^{[\infty ]}\ g"></span>就是阶乘函数<code>fact</code>。</p>
 <p><br/></p>
-<p>从不同的角度来看，好代码会变差，评价标准可能因人而异，因具体场景而异，</p>
-<p>因此，<strong>给别人提出代码方面的建议时，还需谨慎。</strong></p>
+<p>即，<span data-katex="\lbrace fix^{[n]} g|\ n\geqslant 0 \rbrace"></span>的最小上界，就是<code>g</code>的不动点。</p>
+<p>那么，什么样的<code>g</code>才能保证这个集合具有最小上界呢？</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%8F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">序理论</a>指出，完全偏序集上的序保持自映射具有最小不动点。</p>
 <p><br/></p>
-<h3 id="将评判标准量化">将评判标准量化</h3>
-<p>可读性，可维护性，是人们讨论最多的话题，</p>
-<p>可是，为什么没有人对性能存有争议，</p>
-<p>为什么没有人对哪段代码效率更高各执一词？</p>
+<p>为此，我们需要先认识什么是偏序集，什么是连续函数。</p>
+<p>使用完全偏序集上的连续函数解释程序中函数的方式，称为<a href="https://zh.wikipedia.org/wiki/%E5%9F%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">域论模型</a>。</p>
 <p><br/></p>
-<p>这是因为，性能指标是可以<strong>量化</strong>的，</p>
-<p>我们可以很简单的<strong>通过数据</strong>来证明自己的假设。</p>
-<p>但是，我们证明可读性与可维护性的时候，却没有这样。</p>
+<h3 id="偏序集与哈斯图">偏序集与哈斯图</h3>
 <p><br/></p>
-<p>我们仅仅是强调它们确实这样，以及如果不这样会有什么后果。</p>
-<p>可是强调起不到任何作用，预测也很容易被反驳，</p>
-<p>因此，<strong>我们应该想办法用数据去证明它</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-548b287983ed9034.png" /></p>
 <p><br/></p>
-<p>很多无法达成共识的想法，也是如此，</p>
-<p>如果与其他人产生了冲突，那一定是两个人对问题有了不同的认识，</p>
-<p>然而，这些认识都只是假设，谈不上谁对谁错，</p>
-<p>因为<strong>缺乏事实论据</strong>。</p>
+<p>在第三篇中，我们讨论过<a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">偏序关系</a>，</p>
+<p>一个偏序集<span data-katex="(D,\leqslant )"></span>是一个集合<span data-katex="D"></span>，</p>
+<p>并且在这个集合上定义了一个偏序关系<span data-katex="\leqslant "></span>。</p>
 <p><br/></p>
-<p>使用事实论据，其实来源于科学方法。</p>
-<p>科学家们会通过逻辑推理得到一些结论，</p>
-<p>同时，必然也会用实验结果去检验这些结论，</p>
-<p>不然大家谁都无法说服对方。</p>
+<p>设<span data-katex="A"></span>为实数集的一个非空子集，我们定义<span data-katex="A"></span>上的偏序关系为<span data-katex="\leqslant "></span>，</p>
+<p><span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x"></span>是小或等于<span data-katex="y"></span>的实数。</p>
+<p>则，<span data-katex="(A,\leqslant )"></span>是一个偏序集。</p>
 <p><br/></p>
-<p>追求逻辑的严密性和正确性的理论学家，是重要的，</p>
-<p>而<strong>构造巧妙的实验，给出事实论据</strong>的实验学家，无疑更重要。</p>
+<p>偏序集反映了集合上的一种偏序结构，它比我们想象中的更为常见，</p>
+<p>例如，一个集合<span data-katex="A"></span>，对于任意两个元素<span data-katex="x,y\in A"></span>，我们定义<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=y"></span>。</p>
+<p>那么<span data-katex="(A,\leqslant )"></span>是一个偏序集。</p>
+<p>因此，如果某个集合构成了一个偏序集，这完全取决于我们怎样定义偏序关系。</p>
 <p><br/></p>
-<h3 id="从关心客户的需求开始">从关心客户的需求开始</h3>
-<p>从项目角度来看，编码是一个必备环节，</p>
-<p>它承载了软件生命周期中，其他各项事宜的开展工作。</p>
-<p>没有代码，软件产品就无从谈起。</p>
+<p>设<span data-katex="(D,\leqslant )"></span>是一个偏序集，</p>
+<p>对于任意的<span data-katex="x,y\in D"></span>，如果总是有<span data-katex="x\leqslant y"></span>或者<span data-katex="y\leqslant x"></span>成立，</p>
+<p>则称<span data-katex="x"></span>和<span data-katex="y"></span>是可比的。</p>
 <p><br/></p>
-<p>然而即使是这样，<strong>编程在商业活动中，也只是一种手段，</strong></p>
-<p>其主要目的，都是为了<strong>解决客户的问题。</strong></p>
+<p><span data-katex="x\leqslant y"></span>，且<span data-katex="x\neq y"></span>，则记为<span data-katex="x&lt;y"></span>。</p>
+<p>如果<span data-katex="x"></span>和<span data-katex="y"></span>是可比的，且<span data-katex="x&lt;y"></span>，如果不存在<span data-katex="z\in D"></span>，使得<span data-katex="x&lt;z&lt;y"></span>，则称<span data-katex="y"></span>覆盖<span data-katex="x"></span>。</p>
 <p><br/></p>
-<p>从客户角度而言，优秀的代码和脏乱的代码并没有什么太大差别，</p>
-<p>维护成本升级成本，看起来会让客户买单，</p>
-<p>但实际压力还是会算到开发者这边来，因为做不出合格的产品就没人买它。</p>
+<p>根据可比性和覆盖性，我们就可以将偏序关系用无向图表示出来了，</p>
+<p>其中，顶点表示元素，边表示覆盖关系，并且省去图中每个顶点处的环，</p>
+<p><span data-katex="y"></span>覆盖<span data-katex="x"></span>就将代表<span data-katex="y"></span>的顶点放在代表<span data-katex="x"></span>的顶点之上，并在<span data-katex="x"></span>和<span data-katex="y"></span>之间连线，</p>
+<p>如果<span data-katex="x&lt;y"></span>，但是<span data-katex="y"></span>不覆盖<span data-katex="x"></span>，就省掉<span data-katex="x"></span>与<span data-katex="y"></span>之间的连线。</p>
 <p><br/></p>
-<p>所以，<strong>代码写的好不好，是程序员自己的事情。</strong></p>
-<p><strong>而代码能否对外提供出好用的功能，才是更重要的。</strong></p>
+<p>这样用来表示有限偏序集的无向图，称为<a href="https://zh.wikipedia.org/wiki/%E5%93%88%E6%96%AF%E5%9C%96" target="_blank" rel="noopener">哈斯图</a>。</p>
 <p><br/></p>
-<p>为了看清这一点，不妨假设我们是项目的负责人，</p>
-<p>我们将怎样向客户解释，我们在为了写出好代码而竭尽全力呢？</p>
-<p>根本无法解释，也解释不通，甚至客户也会感到莫名其妙。</p>
+<p>例如，易证整除关系是整数集上的一种偏序关系，</p>
+<p>我们可以画出偏序集<span data-katex="\lbrace 1,2,3,4,5,6,9,10,15 \rbrace"></span>对应的哈斯图，如下，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-3619f4e73479ac87.png" /></p>
 <p><br/></p>
-<p>客户关心的是，我们的产品什么时候发布，能不能有效的解决他们的问题，</p>
-<p>稳定性如何产品质量如何，</p>
-<p>代码的好与坏，客户为什么要关心。</p>
+<h3 id="全序集与拟序集">全序集与拟序集</h3>
 <p><br/></p>
-<p>因此，<strong>好的代码一定是以创造客户价值为准则的，</strong></p>
-<p>偏离了客户第一，代码写的再漂亮也是于事无补的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-69bf19c128135d6a.png" /></p>
 <p><br/></p>
-<h3 id="结语">结语</h3>
-<p>对代码好坏进行争论，是开发者团队中频繁出现的事情，</p>
-<p>由于每个人的代码风格都是不同的，</p>
-<p>因此，都会认为是自己在维护别人的烂摊子。</p>
+<p>设<span data-katex="(D,\leqslant )"></span>是一个偏序集，如果对于任意<span data-katex="x,y\in D"></span>，<span data-katex="x"></span>和<span data-katex="y"></span>都可比，</p>
+<p>则称<span data-katex="\leqslant "></span>为<span data-katex="D"></span>上的全序关系，此时称<span data-katex="(D,\leqslant )"></span>为全序集。</p>
 <p><br/></p>
-<p>可是，无论从语言特性，可维护性，甚至代码分析角度，</p>
-<p>我们都无法得到一个好代码的有效判断标准，</p>
-<p><strong>反而考虑的事情越多，我们就越不敢评价别人写的好坏。</strong></p>
+<p>可见，实数集以及实数集上的小于等于关系<span data-katex="\leqslant "></span>，构成了一个全序集。</p>
+<p>哈斯图为从下至上的“一条线”，是全序集的充要条件。</p>
 <p><br/></p>
-<p>此外，如果无法用数据说话，我们的判断就会永远停留在个人喜好上，</p>
-<p>在缺乏事实论据的情况下，每个人有不同的品味是正常的表现。</p>
-<p>实际上，构造这样的实验是非常困难的，</p>
-<p>所以<strong>衡量代码的好坏也就不是一件简单的事情。</strong></p>
+<p>设<span data-katex="R"></span>是非空集合<span data-katex="A"></span>上的，反自反的和传递的二元关系，</p>
+<p>则称<span data-katex="R"></span>为<span data-katex="A"></span>上的拟序关系，常将拟序关系记为<span data-katex="&lt;"></span>，并称<span data-katex="(A,&lt;)"></span>为拟序集。</p>
+<p>拟序关系自然具有反对称性。</p>
+<p>（其中，反自反关系，指的是不存在<span data-katex="x\in A"></span>，使得<span data-katex="x&lt;x"></span>。</p>
 <p><br/></p>
-<p>最后，秉持客户第一的准则，</p>
-<p>我们实际上最需要关心的是客户想要什么，而不是我们给自己带来的负担。</p>
-<p>不够优雅的代码，经过充分的测试和调试，也会得到优秀的产品。</p>
+<p>拟序关系与偏序关系的哈斯图在画法上完全相同，只是拟序关系的哈斯图的各顶点都没有环。</p>
 <p><br/></p>
-<p>所以，至于别人写的代码为什么那么烂，我们大可不必介意，</p>
-<p><strong>因为我们也写不出好代码。</strong></p>
+<p>设<span data-katex="(A,&lt;)"></span>是一个拟序集，如果对于任意的<span data-katex="x,y\in A"></span>，</p>
+<p><span data-katex="x&lt;y"></span>，<span data-katex="x=y"></span>，<span data-katex="y&lt;x"></span>三式有且仅有一式成立，则称<span data-katex="&lt;"></span>具有三歧性，</p>
+<p>这样的拟序关系<span data-katex="&lt;"></span>，称为拟全序关系，这样的拟序集<span data-katex="(A,&lt;)"></span>，称为拟全序集。</p>
+<p>拟全序集的哈斯图也是“一条线”。</p>
+<p><br/></p>
+<h3 id="最小元与上确界">最小元与上确界</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-848d5a4650be6c32.png" /></p>
+<p><br/></p>
+<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
+<p>如果存在<span data-katex="y\in S"></span>，且对于任意的<span data-katex="x\in S"></span>，有<span data-katex="y\leqslant x"></span>，</p>
+<p>则称<span data-katex="y"></span>为<span data-katex="S"></span>的最小元。（相似的我们可以定义最大元</p>
+<p><br/></p>
+<p>如果存在<span data-katex="y\in S"></span>，对于任意的<span data-katex="x\in S"></span>，</p>
+<p>如果<span data-katex="x\leqslant y"></span>那么就有<span data-katex="x=y"></span>，</p>
+<p>则称<span data-katex="y"></span>为<span data-katex="S"></span>的极小元。（相似的我们可以定义极大元</p>
+<p><br/></p>
+<p>如果<span data-katex="S"></span>是有穷集，则<span data-katex="S"></span>的极小元一定存在，并且可能有多个，</p>
+<p>但是最小元却不一定存在。</p>
+<p><br/></p>
+<p>上文中，我们画出了偏序集<span data-katex="A=\lbrace 1,2,3,4,5,6,9,10,15 \rbrace"></span>对应的哈斯图，</p>
+<p>我们取<span data-katex="B_1=\lbrace 1,2,3 \rbrace"></span>，<span data-katex="B_2=\lbrace 3,5,15 \rbrace"></span>，<span data-katex="B_3=A"></span>，</p>
+<p>则<span data-katex="1"></span>是<span data-katex="B_1"></span>的最小元，也是极小元，<span data-katex="2,3"></span>是<span data-katex="B_1"></span>的极大元，但<span data-katex="B_1"></span>没有最大元。</p>
+<p><span data-katex="3,5"></span>是<span data-katex="B_2"></span>的极小元，但<span data-katex="B_2"></span>没有最小元，<span data-katex="15"></span>是<span data-katex="B_2"></span>的最大元，也是极大元。</p>
+<p><span data-katex="1"></span>是<span data-katex="B_3"></span>的最小元，也是极小元，<span data-katex="4,6,9,10,15"></span>是<span data-katex="B_3"></span>的极大元，但是<span data-katex="B_3"></span>没有最大元。</p>
+<p><br/></p>
+<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
+<p>如果存在<span data-katex="y\in D"></span>，（注意，不一定是<span data-katex="y\in S"></span></p>
+<p>使得对于任意的<span data-katex="x\in S"></span>，<span data-katex="x\leqslant y"></span>，则称<span data-katex="y"></span>为<span data-katex="S"></span>的上界，</p>
+<p>如果<span data-katex="S"></span>的所有上界存在最小元，则称它为<span data-katex="S"></span>最小上界，或上确界。</p>
+<p>（相似的可以定义下确界</p>
+<p><br/></p>
+<p><span data-katex="S"></span>的上界和下界不一定存在，即使存在，上确界和下确界也不一定存在。</p>
+<p><br/></p>
+<p>设<span data-katex="(A,&lt;)"></span>是一个拟全序集，如果对于<span data-katex="A"></span>中的任何非空子集<span data-katex="S"></span>都有最小元，</p>
+<p>则称<span data-katex="&lt;"></span>是一个良序关系，<span data-katex="(A,&lt;)"></span>是一个良序集。</p>
+<p>例如，自然数集以及自然数集上的小于关系，构成了一个良序集<span data-katex="(N,&lt;)"></span>，</p>
+<p>但是，整数集以及整数集上的小于关系，并不构成良序集，而仅仅是一个拟全序集。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文从一个证明出发，我们了解了不动点算子的工作原理，</p>
+<p>然后引出了一些数学概念，序关系在不动点算子理论中占有很重要的地位，</p>
+<p>所以，这里给出了详细的介绍，下文我们开始讨论最小不动点定理。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%8F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">序理论</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%9F%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">域论模型</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">偏序关系</a></p>
+<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
 
           
         
@@ -519,7 +544,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/197/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/197/">197</a><span class="page-number current">198</span><a class="page-number" href="/page/199/">199</a><span class="space">&hellip;</span><a class="page-number" href="/page/306/">306</a><a class="extend next" rel="next" href="/page/199/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/197/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/197/">197</a><span class="page-number current">198</span><a class="page-number" href="/page/199/">199</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/199/">&gt;</a>
   </nav>
 
 
@@ -565,7 +590,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">306</span>
+                <span class="site-state-item-count">307</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

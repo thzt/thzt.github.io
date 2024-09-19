@@ -1,0 +1,900 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="背景 时隔三年，这是相继 如何编写一个简单的 parser， 以及 如何编写一个简单的解释器，之后的 第三篇， 如何编写一个简单的 debugger。  众所周知，VSCode 通过 LSP 支持了不同的 语言特性， 而通过 DAP 实现了不同语言的 调试功能。  在前两篇文章中，我们基于 LISP 语法， 分别实现了 语法解析 parse（将字符串转换成有结构的数据）， 以及 语义解释 eval">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何编写一个简单的 debugger">
+<meta property="og:url" content="https://thzt.github.io/2024/09/19/debugger/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="背景 时隔三年，这是相继 如何编写一个简单的 parser， 以及 如何编写一个简单的解释器，之后的 第三篇， 如何编写一个简单的 debugger。  众所周知，VSCode 通过 LSP 支持了不同的 语言特性， 而通过 DAP 实现了不同语言的 调试功能。  在前两篇文章中，我们基于 LISP 语法， 分别实现了 语法解析 parse（将字符串转换成有结构的数据）， 以及 语义解释 eval">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/05.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/06.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/08.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/09.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/10.gif">
+<meta property="article:published_time" content="2024-09-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-19T16:48:12.202Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2024/09/19/debugger/"/>
+
+
+
+
+
+  <title>如何编写一个简单的 debugger | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2024/09/19/debugger/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何编写一个简单的 debugger</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-09-19T00:00:00+08:00">
+                2024-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="背景">背景</h3>
+<p>时隔三年，这是相继 <a href="https://thzt.github.io/2021/01/06/parser/">如何编写一个简单的 parser</a>，</p>
+<p>以及 <a href="https://thzt.github.io/2021/01/15/eval/">如何编写一个简单的解释器</a>，之后的 第三篇，</p>
+<p><strong>如何编写一个简单的 debugger</strong>。</p>
+<p><br/></p>
+<p>众所周知，VSCode 通过 <a href="https://microsoft.github.io/language-server-protocol" target="_blank" rel="noopener">LSP</a> 支持了不同的 语言特性，</p>
+<p>而通过 <a href="https://microsoft.github.io/debug-adapter-protocol/" target="_blank" rel="noopener">DAP</a> 实现了不同语言的 调试功能。</p>
+<p><br/></p>
+<p>在前两篇文章中，我们基于 LISP 语法，</p>
+<p>分别实现了 语法解析 parse（将字符串转换成有结构的数据），</p>
+<p>以及 语义解释 eval（对结构化的数据进行求值） 两个过程。</p>
+<p><br/></p>
+<p>但如果仅仅只有这些，对于了解语言技术而言，是不够的。</p>
+<p>此外，我看到 市面上有太多资料介绍 parser 了，</p>
+<p>但其实 parser 只是故事的开始罢了。</p>
+<p><br/></p>
+<p>本文就从 语法设计、解析、解释、调试 整条链路，尝试写点不一样的内容。</p>
+<p>重点写一写 debugger 的实现细节。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/01.png" /></p>
+<p><br/></p>
+<p>值得一提的是，</p>
+<p>有一类专门的工程师，称为编程语言工程师，</p>
+<p>以下所述的内容，对于他们而言，可能太过班门弄斧了。</p>
+<p>在这个语言领域中，我还只是一个小学徒。</p>
+<p>有任何理解不当的地方，还请不吝指出，我也仍在不断的学习中。</p>
+<h3 id="语法设计">语法设计</h3>
+<p>当我们萌生「让字符串跑起来」的想法之后，</p>
+<p>首先应该考虑设计一套 <strong>无歧义的文法</strong>。</p>
+<p><br/></p>
+<p>所谓文法，就是用来描述语言结构的规则集。</p>
+<p>根据文法我们能够知道，哪些字符串是语言中合法的语句，哪些不是。</p>
+<p><br/></p>
+<p>最常见的文法，就是 <a href="https://baike.baidu.com/item/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/2001908" target="_blank" rel="noopener">上下文无关文法</a>。</p>
+<p><br/></p>
+<p>上下文无关文法 由一堆产生式 构成（其次还有 终结符、非终结符），</p>
+<p>举个例子，这就是一段有效的文法（取自 TypeScript 语言，略有删减），</p>
+<p><br/></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SourceFile &#x3D; StatementList</span><br><span class="line">StatementList &#x3D; Statement | Statement StatementList</span><br><span class="line"></span><br><span class="line">Statement &#x3D; VariableDeclaration | FunctionDeclaration</span><br><span class="line"></span><br><span class="line">VariableDeclaration &#x3D; &#39;let&#39; Identifier &#39;&#x3D;&#39; Value</span><br><span class="line">Value &#x3D; NUMBER | CallExpression</span><br><span class="line"></span><br><span class="line">FunctionDeclaration &#x3D; Identifier &#39;(&#39; Identifier &#39;)&#39; &#39;&#123;&#39; FunctionBody &#39;&#125;&#39;</span><br><span class="line">FunctionBody &#x3D; StatementList ReturnStatement</span><br><span class="line">ReturnStatement &#x3D; &#39;return&#39; ReturnExpression</span><br><span class="line"></span><br><span class="line">ReturnExpression &#x3D; Identifier | PlusExpression</span><br><span class="line"></span><br><span class="line">PlusExpression &#x3D; Identifier &#39;+&#39; Identifier</span><br><span class="line">CallExpression &#x3D; Identifier &#39;(&#39; Identifier &#39;)&#39;</span><br><span class="line"></span><br><span class="line">Identifier &#x3D; [a-z]+</span><br><span class="line">Number &#x3D; [0-9]+</span><br><span class="line">Keyword &#x3D; &#39;let&#39; | &#39;return&#39;</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>其中，<code>VariableDeclaration = 'let' Identifier '=' Value</code> 这一行成为一个产生式，</p>
+<p>左边 <code>VariableDeclaration</code> 是非终结符（它会被展开成右边），</p>
+<p>右边 <code>'let'</code> <code>'='</code> 成为终结符（它不能再被展开了），</p>
+<p>右边 <code>Identifier</code> <code>Value</code> 仍为非终结符，可以根据其他相应的产生式规则，继续展开。</p>
+<p><br/></p>
+<p>以上文法，可以用来描述下面这样的语言结构，</p>
+<p>（类似 TypeScript 语言，只是去掉了 function 关键字）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let a &#x3D; 1</span><br><span class="line">let b &#x3D; 2</span><br><span class="line"></span><br><span class="line">f(x)&#123;</span><br><span class="line">  let b &#x3D; 3</span><br><span class="line">  g(y)&#123;</span><br><span class="line">    return y+b</span><br><span class="line">  &#125;</span><br><span class="line">  return g</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let c &#x3D; f(a)</span><br><span class="line">let d &#x3D; c(b)</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/02.png" /></p>
+<p><br/></p>
+<p>我们看到，不论是从<strong>语言</strong>还是从<strong>文法</strong>上，都能反映出一种<strong>递归结构</strong>。</p>
+<p>最直观的感受是，函数定义里面还可以再嵌套一个函数，并可以无限嵌套下去（都是合法的）。</p>
+<p>所以，这就对我们如何解析上下文无关语言，提供了启发 —— <strong>递归处理</strong>。</p>
+<p><br/></p>
+<p>解析过程，无非就是将字符串转成对象而已，</p>
+<p>所以需要文法尽量准确（无歧义），对于同一段字符串，有且只有一种转换方式。</p>
+<h3 id="解析器">解析器</h3>
+<blockquote>
+<p>代码：<a href="https://github.com/thzt/dsl-parser" target="_blank" rel="noopener">thzt/dsl-parser</a></p>
+</blockquote>
+<p><br/></p>
+<p>有很多文章，花了大量篇幅介绍 parser 的编写过程，</p>
+<p>其实日常工作中，从零开始写一个 parser 的时候很少。</p>
+<p>即便是有，那么手写<strong>递归下降语法解析器</strong>，就已经能满足大多数场景了。</p>
+<p><br/></p>
+<p>在 第一篇文章 <a href="https://thzt.github.io/2021/01/06/parser/">如何编写一个简单的 parser</a>中，</p>
+<p>我们已经介绍了编写递归下降语法解析器的<strong>套路</strong>，</p>
+<p>一个 parser 是由一些互递归的函数调用组成（每一个 非终结符/产生式 对应一个函数）。</p>
+<p><br/></p>
+<p>parser 内部会包含一个 nextToken 词法分析器，</p>
+<p>把单个字符组装成带有类型标识的 token 单词，再进行处理。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/03.png" /></p>
+<p><br/></p>
+<p>具体处理的时候后，这些互递归函数，会读取当前 token（或者之后的 token），</p>
+<p>来判定 按照哪个产生式进行解析。</p>
+<p>最终会得到一个树形结构 —— AST（树是递归结构的真实写照），</p>
+<p>这个树形结构的节点，就是文法中的非终结符。</p>
+<p><br/></p>
+<h3 id="解释器">解释器</h3>
+<blockquote>
+<p>代码：<a href="https://github.com/thzt/dsl-interpreter" target="_blank" rel="noopener">thzt/dsl-interpreter</a></p>
+</blockquote>
+<p><br/></p>
+<p>解释器也比较简单，就是一个在<strong>递归结构</strong>中，进行<strong>递归求值</strong>的过程。</p>
+<p>解释器的实现套路在 第二篇 <a href="https://thzt.github.io/2021/01/15/eval/">如何编写一个简单的解释器</a> 中有过介绍，每一个 AST 节点，对应一个 evalXXX 函数，然后递归调用。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/04.png" /></p>
+<p><br/></p>
+<p>稍微有些复杂的是<strong>词法作用域</strong>的实现，</p>
+<p>需要在解释的过程中，遇到函数定义（FunctionDeclaration），先将求值环境与函数关联起来。</p>
+<p>然后等到函数调用（CallExpression）的时候，再取出<strong>当时</strong>的环境进行求值。</p>
+<p><br/></p>
+<p>函数+环境就是<strong>闭包</strong>了，可惜有太多文章没有讲清它。</p>
+<h3 id="调试器">调试器</h3>
+<h4 id="yield">yield</h4>
+<p>终于可以介绍调试器了。首先应该考虑的是，用什么工具对语言进行调试。</p>
+<p>最常见的调试方式有命令行方式（例如 <a href="https://sourceware.org/gdb/" target="_blank" rel="noopener">GDB</a>），还有 IDE 集成方式。</p>
+<p>本文选择较为直观的方式，通过 <a href="https://microsoft.github.io/debug-adapter-protocol/" target="_blank" rel="noopener">DAP</a> 借用 VSCode 进行调试。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/05.png" /></p>
+<p><br/></p>
+<p>第一步，我们需要对解释器进行改造，让它可以停下来。</p>
+<p>常见的办法是将函数改造为 generator，将递归调用改成 <code>yield*</code>，</p>
+<p>然后在特定阶段（需要停下来的时候），通过 <code>yield</code> 把状态信息返回出来。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/06.png" /></p>
+<p><br/></p>
+<p>然后，就可以实现步进了， 只有我们手动调用 next 的时候，解释器才会继续向下执行。</p>
+<p><br/></p>
+<p>更有甚者，我们还可以写一个 runtime，把控制逻辑包一层。</p>
+<p>如下图，模拟我们在 VSCode 中启动调试后，按 Step Over（下一步）所发生的事情，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/07.png" /></p>
+<h4 id="vscode-extension">vscode extension</h4>
+<blockquote>
+<p>代码：<a href="https://github.com/thzt/vscode-dsl-debugger" target="_blank" rel="noopener">thzt/vscode-dsl-debugger</a></p>
+</blockquote>
+<p><br/></p>
+<p>第二步，就是实现一个 VSCode 插件了， 它实现了 <a href="https://microsoft.github.io/debug-adapter-protocol/" target="_blank" rel="noopener">DAP</a> 协议。</p>
+<p><br/></p>
+<p>例如，生命周期事件</p>
+<ul>
+<li><p>初始化 initializeRequest</p></li>
+<li><p>启动调试 launchRequest</p></li>
+<li><p>获取调用栈里面的进程 threadsRequest</p></li>
+<li><p>获取给定进程的调用栈帧 stackTraceRequest</p></li>
+<li><p>获取给定栈帧的作用域分类 scopesRequest</p></li>
+<li><p>获取不同栈帧分类的变量 variablesRequest</p></li>
+</ul>
+<p><br/></p>
+<p>还有 操作按钮事件</p>
+<ul>
+<li><p>Step Over（单行执行）：nextRequest</p></li>
+<li><p>Step In（单步执行）：stepInRequest</p></li>
+</ul>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/08.png" /></p>
+<p><br/></p>
+<p>我们需要做的事情时，如何驱动解释器，按照我们指定的方式执行。</p>
+<p>比如，我们总是可以将复杂操作封装到 runtime 中去。</p>
+<p>需要注意的是 VSCode 所需要的一些 Event（<code>this.sendEvent</code>）和 Response（<code>this.sendResponse</code>）。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/09.png" /></p>
+<h4 id="最终效果">最终效果</h4>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/10.gif" /></p>
+<p><br/></p>
+<p>我们实现了对上述语言的调试功能，</p>
+<p>其中借助了解释器的能力，语言本身支持词法作用域。</p>
+<ul>
+<li><p><code>f</code> 返回一个函数 <code>g</code>，并把它赋值给了 <code>c</code></p></li>
+<li><p><code>c</code> 调用的时候，就会调用内层函数 <code>g</code>，并且 <code>g</code> 的变量 <code>b</code> 取自词法作用域 <code>b=3</code>，而不是最外层的 <code>2</code></p></li>
+<li><p>而 <code>y</code> 的值是 <code>c</code> 的入参 <code>2</code>，因此 <code>d</code> 的返回值为 <code>5</code></p></li>
+</ul>
+<h3 id="结语">结语</h3>
+<p>上文我们编写了一个简单的 debugger，它可以对所设计的语言进行调试。</p>
+<p>有了这些能力之后，我们就可以 debug everything 了（只要世界可以停下来）。</p>
+<p><br/></p>
+<p>我们知道软件领域，当今正在经历翻天覆地的变革，</p>
+<p>但不论怎样变革，也只是一种潮流/趋势，而知识本身并没有变化太多。</p>
+<p><br/></p>
+<p>以上介绍的内容，颇为小众。</p>
+<p>然而这些小众知识，反而能让我们在实际工作中如虎添翼、立竿见影。</p>
+<p><br/></p>
+<p>我也仍在不断的学习中，我们再接再厉。</p>
+<blockquote>
+
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/04/28/ci-cd/" rel="next" title="持续交付">
+                <i class="fa fa-chevron-left"></i> 持续交付
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">307</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法设计"><span class="nav-number">2.</span> <span class="nav-text">语法设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析器"><span class="nav-number">3.</span> <span class="nav-text">解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解释器"><span class="nav-number">4.</span> <span class="nav-text">解释器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试器"><span class="nav-number">5.</span> <span class="nav-text">调试器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#yield"><span class="nav-number">5.1.</span> <span class="nav-text">yield</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vscode-extension"><span class="nav-number">5.2.</span> <span class="nav-text">vscode extension</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最终效果"><span class="nav-number">5.3.</span> <span class="nav-text">最终效果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>
