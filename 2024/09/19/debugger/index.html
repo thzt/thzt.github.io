@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/09.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/10.gif">
 <meta property="article:published_time" content="2024-09-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-19T16:48:12.202Z">
+<meta property="article:modified_time" content="2024-09-19T17:07:22.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/01.png">
 
@@ -368,41 +368,37 @@
 <p>分别实现了 语法解析 parse（将字符串转换成有结构的数据），</p>
 <p>以及 语义解释 eval（对结构化的数据进行求值） 两个过程。</p>
 <p><br/></p>
-<p>但如果仅仅只有这些，对于了解语言技术而言，是不够的。</p>
-<p>此外，我看到 市面上有太多资料介绍 parser 了，</p>
-<p>但其实 parser 只是故事的开始罢了。</p>
+<p>但如果只有这些，对于了解语言技术而言还仍显不够。</p>
+<p>市面上有太多资料介绍 parser 了，但其实这只是故事的开始罢了。</p>
 <p><br/></p>
 <p>本文就从 语法设计、解析、解释、调试 整条链路，尝试写点不一样的内容。</p>
 <p>重点写一写 debugger 的实现细节。</p>
 <p><br/></p>
 <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/01.png" /></p>
 <p><br/></p>
-<p>值得一提的是，</p>
-<p>有一类专门的工程师，称为编程语言工程师，</p>
+<p>值得一提的是，有一类专门的工程师，称为编程语言工程师，</p>
 <p>以下所述的内容，对于他们而言，可能太过班门弄斧了。</p>
 <p>在这个语言领域中，我还只是一个小学徒。</p>
 <p>有任何理解不当的地方，还请不吝指出，我也仍在不断的学习中。</p>
 <h3 id="语法设计">语法设计</h3>
 <p>当我们萌生「让字符串跑起来」的想法之后，</p>
-<p>首先应该考虑设计一套 <strong>无歧义的文法</strong>。</p>
+<p>首先应该考虑的是，如何设计一套<strong>无歧义的文法</strong>。</p>
 <p><br/></p>
 <p>所谓文法，就是用来描述语言结构的规则集。</p>
 <p>根据文法我们能够知道，哪些字符串是语言中合法的语句，哪些不是。</p>
-<p><br/></p>
-<p>最常见的文法，就是 <a href="https://baike.baidu.com/item/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/2001908" target="_blank" rel="noopener">上下文无关文法</a>。</p>
+<p>最常见的文法形式，就是 <a href="https://baike.baidu.com/item/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/2001908" target="_blank" rel="noopener">上下文无关文法</a>。</p>
 <p><br/></p>
 <p>上下文无关文法 由一堆产生式 构成（其次还有 终结符、非终结符），</p>
 <p>举个例子，这就是一段有效的文法（取自 TypeScript 语言，略有删减），</p>
-<p><br/></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SourceFile &#x3D; StatementList</span><br><span class="line">StatementList &#x3D; Statement | Statement StatementList</span><br><span class="line"></span><br><span class="line">Statement &#x3D; VariableDeclaration | FunctionDeclaration</span><br><span class="line"></span><br><span class="line">VariableDeclaration &#x3D; &#39;let&#39; Identifier &#39;&#x3D;&#39; Value</span><br><span class="line">Value &#x3D; NUMBER | CallExpression</span><br><span class="line"></span><br><span class="line">FunctionDeclaration &#x3D; Identifier &#39;(&#39; Identifier &#39;)&#39; &#39;&#123;&#39; FunctionBody &#39;&#125;&#39;</span><br><span class="line">FunctionBody &#x3D; StatementList ReturnStatement</span><br><span class="line">ReturnStatement &#x3D; &#39;return&#39; ReturnExpression</span><br><span class="line"></span><br><span class="line">ReturnExpression &#x3D; Identifier | PlusExpression</span><br><span class="line"></span><br><span class="line">PlusExpression &#x3D; Identifier &#39;+&#39; Identifier</span><br><span class="line">CallExpression &#x3D; Identifier &#39;(&#39; Identifier &#39;)&#39;</span><br><span class="line"></span><br><span class="line">Identifier &#x3D; [a-z]+</span><br><span class="line">Number &#x3D; [0-9]+</span><br><span class="line">Keyword &#x3D; &#39;let&#39; | &#39;return&#39;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>其中，<code>VariableDeclaration = 'let' Identifier '=' Value</code> 这一行成为一个产生式，</p>
-<p>左边 <code>VariableDeclaration</code> 是非终结符（它会被展开成右边），</p>
-<p>右边 <code>'let'</code> <code>'='</code> 成为终结符（它不能再被展开了），</p>
+<p>其中，<code>VariableDeclaration = 'let' Identifier '=' Value</code> 这一行称为一个<strong>产生式</strong>，</p>
+<p>左边 <code>VariableDeclaration</code> 是<strong>非终结符</strong>（它会被展开成右边），</p>
+<p>右边 <code>'let'</code> <code>'='</code> 称为<strong>终结符</strong>（它不能再被展开了），</p>
 <p>右边 <code>Identifier</code> <code>Value</code> 仍为非终结符，可以根据其他相应的产生式规则，继续展开。</p>
 <p><br/></p>
 <p>以上文法，可以用来描述下面这样的语言结构，</p>
-<p>（类似 TypeScript 语言，只是去掉了 function 关键字）</p>
+<p>（类似 TypeScript 语言，只是去掉了 <code>function</code> 关键字）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let a &#x3D; 1</span><br><span class="line">let b &#x3D; 2</span><br><span class="line"></span><br><span class="line">f(x)&#123;</span><br><span class="line">  let b &#x3D; 3</span><br><span class="line">  g(y)&#123;</span><br><span class="line">    return y+b</span><br><span class="line">  &#125;</span><br><span class="line">  return g</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let c &#x3D; f(a)</span><br><span class="line">let d &#x3D; c(b)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
 <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/02.png" /></p>
@@ -412,15 +408,15 @@
 <p>所以，这就对我们如何解析上下文无关语言，提供了启发 —— <strong>递归处理</strong>。</p>
 <p><br/></p>
 <p>解析过程，无非就是将字符串转成对象而已，</p>
-<p>所以需要文法尽量准确（无歧义），对于同一段字符串，有且只有一种转换方式。</p>
+<p>所以我们才需要 文法尽量的准确（无歧义），对于同一段字符串，有且仅有一种转换方式。</p>
 <h3 id="解析器">解析器</h3>
 <blockquote>
 <p>代码：<a href="https://github.com/thzt/dsl-parser" target="_blank" rel="noopener">thzt/dsl-parser</a></p>
 </blockquote>
 <p><br/></p>
-<p>有很多文章，花了大量篇幅介绍 parser 的编写过程，</p>
-<p>其实日常工作中，从零开始写一个 parser 的时候很少。</p>
-<p>即便是有，那么手写<strong>递归下降语法解析器</strong>，就已经能满足大多数场景了。</p>
+<p>有不少文章，重点介绍了 parser 的实现过程，这里就不赘述了，</p>
+<p>日常工作中，我们从零编写一个 parser 的情况很少，基本都用现成的。</p>
+<p>即使有特殊情况，手写<strong>递归下降语法解析器</strong>，也能满足大多数场景了。</p>
 <p><br/></p>
 <p>在 第一篇文章 <a href="https://thzt.github.io/2021/01/06/parser/">如何编写一个简单的 parser</a>中，</p>
 <p>我们已经介绍了编写递归下降语法解析器的<strong>套路</strong>，</p>
@@ -442,7 +438,8 @@
 </blockquote>
 <p><br/></p>
 <p>解释器也比较简单，就是一个在<strong>递归结构</strong>中，进行<strong>递归求值</strong>的过程。</p>
-<p>解释器的实现套路在 第二篇 <a href="https://thzt.github.io/2021/01/15/eval/">如何编写一个简单的解释器</a> 中有过介绍，每一个 AST 节点，对应一个 evalXXX 函数，然后递归调用。</p>
+<p>解释器的实现套路在 第二篇 <a href="https://thzt.github.io/2021/01/15/eval/">如何编写一个简单的解释器</a> 中有过介绍，</p>
+<p>每一个 AST 节点，对应一个 <code>evalXXX</code> 函数，然后递归调用。</p>
 <p><br/></p>
 <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/04.png" /></p>
 <p><br/></p>
@@ -450,7 +447,7 @@
 <p>需要在解释的过程中，遇到函数定义（FunctionDeclaration），先将求值环境与函数关联起来。</p>
 <p>然后等到函数调用（CallExpression）的时候，再取出<strong>当时</strong>的环境进行求值。</p>
 <p><br/></p>
-<p>函数+环境就是<strong>闭包</strong>了，可惜有太多文章没有讲清它。</p>
+<p>函数+环境就是<strong>闭包</strong>了，希望这次把它讲清楚了。</p>
 <h3 id="调试器">调试器</h3>
 <h4 id="yield">yield</h4>
 <p>终于可以介绍调试器了。首先应该考虑的是，用什么工具对语言进行调试。</p>
@@ -459,16 +456,18 @@
 <p><br/></p>
 <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/05.png" /></p>
 <p><br/></p>
-<p>第一步，我们需要对解释器进行改造，让它可以停下来。</p>
+<p>第一步，我们需要对解释器进行改造，让它可以<strong>停下来</strong>。</p>
 <p>常见的办法是将函数改造为 generator，将递归调用改成 <code>yield*</code>，</p>
-<p>然后在特定阶段（需要停下来的时候），通过 <code>yield</code> 把状态信息返回出来。</p>
+<p>然后在特定阶段（需要停下来的时候），通过 <code>yield</code> 把<strong>内部状态</strong>返回出来。</p>
 <p><br/></p>
 <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/06.png" /></p>
 <p><br/></p>
-<p>然后，就可以实现步进了， 只有我们手动调用 next 的时候，解释器才会继续向下执行。</p>
+<p>然后，就可以实现步进了，</p>
+<p>只有我们手动调用 <code>next</code> 的时候，解释器才会继续向下执行。</p>
 <p><br/></p>
 <p>更有甚者，我们还可以写一个 runtime，把控制逻辑包一层。</p>
 <p>如下图，模拟我们在 VSCode 中启动调试后，按 Step Over（下一步）所发生的事情，</p>
+<p><br/></p>
 <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/07.png" /></p>
 <h4 id="vscode-extension">vscode extension</h4>
 <blockquote>
@@ -495,7 +494,7 @@
 <p><br/></p>
 <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/08.png" /></p>
 <p><br/></p>
-<p>我们需要做的事情时，如何驱动解释器，按照我们指定的方式执行。</p>
+<p>我们需要做的事情是，如何驱动解释器，按照我们指定的方式执行。</p>
 <p>比如，我们总是可以将复杂操作封装到 runtime 中去。</p>
 <p>需要注意的是 VSCode 所需要的一些 Event（<code>this.sendEvent</code>）和 Response（<code>this.sendResponse</code>）。</p>
 <p><br/></p>
@@ -503,8 +502,8 @@
 <h4 id="最终效果">最终效果</h4>
 <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/10.gif" /></p>
 <p><br/></p>
-<p>我们实现了对上述语言的调试功能，</p>
-<p>其中借助了解释器的能力，语言本身支持词法作用域。</p>
+<p>至此，我们实现了上述语言的调试功能，</p>
+<p>借助了解释器的能力，语言本身支持词法作用域。</p>
 <ul>
 <li><p><code>f</code> 返回一个函数 <code>g</code>，并把它赋值给了 <code>c</code></p></li>
 <li><p><code>c</code> 调用的时候，就会调用内层函数 <code>g</code>，并且 <code>g</code> 的变量 <code>b</code> 取自词法作用域 <code>b=3</code>，而不是最外层的 <code>2</code></p></li>
@@ -514,16 +513,13 @@
 <p>上文我们编写了一个简单的 debugger，它可以对所设计的语言进行调试。</p>
 <p>有了这些能力之后，我们就可以 debug everything 了（只要世界可以停下来）。</p>
 <p><br/></p>
-<p>我们知道软件领域，当今正在经历翻天覆地的变革，</p>
-<p>但不论怎样变革，也只是一种潮流/趋势，而知识本身并没有变化太多。</p>
+<p>我们知道，软件领域正在经历翻天覆地的变革，</p>
+<p>但不论怎样变革，知识本身并没有太多变化。</p>
 <p><br/></p>
-<p>以上介绍的内容，颇为小众。</p>
-<p>然而这些小众知识，反而能让我们在实际工作中如虎添翼、立竿见影。</p>
+<p>以上介绍的内容，可能颇为小众。</p>
+<p>然而这些小众知识，反而能让我们在实际工作中 如虎添翼、立竿见影。</p>
 <p><br/></p>
-<p>我也仍在不断的学习中，我们再接再厉。</p>
-<blockquote>
-
-</blockquote>
+<p>再接再厉。</p>
 
       
     </div>
