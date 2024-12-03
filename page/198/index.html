@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/20/recursive-function-8/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/21/recursive-function-9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/20/recursive-function-8/" itemprop="url">递归函数（八）：偏序结构</a></h1>
+                <a class="post-title-link" href="/2017/03/21/recursive-function-9/" itemprop="url">递归函数（九）：最小不动点定理</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T00:00:00+08:00">
-                2017-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T00:00:00+08:00">
+                2017-03-21
               </time>
             
 
@@ -348,164 +348,149 @@
         
           
             <h3 id="回顾">回顾</h3>
-<p>上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式，</p>
-<p>这一篇我们根据不动点算子的性质来证明<code>fact</code>函数就是<code>g</code>函数的不动点。</p>
-<p>随后，我们回归到了数学中，讨论集合上的一种偏序结构，</p>
-<p>这为下文完全偏序集，以及完全偏序集上连续函数的不动点定理做好准备。</p>
+<p>上文我们讨论了集合上的偏序结构，之所以谈论它们是因为，</p>
+<p>完全偏序集上的连续函数具有最小不动点，这称之为最小不动点定理，</p>
+<p>除了集合论的一些知识之外，我们还要讨论到底什么是连续函数，以及什么是完全偏序集。</p>
 <p><br/></p>
-<h3 id="不动点算子的性质">不动点算子的性质</h3>
+<h3 id="有向子集与完全偏序">有向子集与完全偏序</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-a8ca5067e631ea34.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-cc5d7e479b1911da.png" /></p>
 <p><br/></p>
-<p>上文我们介绍了不动点算子<code>fix</code>，</p>
-<p>它可以用来求取任意函数的不动点。</p>
+<p>偏序集<span data-katex="(D,\leqslant )"></span>的非空子集<span data-katex="S\subseteq D"></span>叫做有向子集（directed subset），</p>
+<p>当且仅当，对于<span data-katex="S"></span>中的任意元素<span data-katex="a,b\in S"></span>，</p>
+<p>存在<span data-katex="S"></span>中的一个元素<span data-katex="c"></span>，有<span data-katex="a\leqslant c"></span>且<span data-katex="b\leqslant c"></span>。</p>
 <p><br/></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fix :: (a -&gt; a) -&gt; a</span><br><span class="line">fix f &#x3D; let x &#x3D; f x in x</span><br></pre></td></tr></table></figure>
+<p>如果一个偏序集<span data-katex="(D,\leqslant )"></span>的每个有向子集<span data-katex="S\subseteq D"></span>都有上确界（记为<span data-katex="\bigvee S"></span>），</p>
+<p>就称它是一个有向完全偏序集，</p>
+<p>此外，如果它还有最小元，就称它是一个完全偏序集。</p>
 <p><br/></p>
-<p>并且我们说以下函数的不动点为<code>fact = fix g</code>，</p>
+<p>注意，完全偏序集并不是每一个子集都有上确界，</p>
+<p>而是它的每一个有向子集都有上确界。</p>
+<p><br/></p>
+<h3 id="连续函数">连续函数</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-eb3b6c096d73d399.png" /></p>
+<p><br/></p>
+<p>假设<span data-katex="(D,\leqslant )"></span>与<span data-katex="(E,\leqslant )"></span>是完全偏序集，</p>
+<p><span data-katex="f:D\rightarrow E"></span>是集合上定义的一个函数，</p>
+<p>如果<span data-katex="S\subseteq D"></span>，则<span data-katex="f(S)"></span>为<span data-katex="E"></span>的子集，</p>
+<p>其中<span data-katex="f(S)=\lbrace f(d)|\ d\in S \rbrace"></span>。</p>
+<p><br/></p>
+<p>对于任意的<span data-katex="d,d&#39;\in D"></span>，如果<span data-katex="d\leqslant d&#39;"></span>就有<span data-katex="f(d)\leqslant f(d&#39;)"></span>，</p>
+<p>我们就说<span data-katex="f"></span>是单调的。</p>
+<p>可以看出，如果<span data-katex="f"></span>是单调的，且<span data-katex="S"></span>是<span data-katex="D"></span>的有向子集，那么<span data-katex="f(S)"></span>也是<span data-katex="E"></span>的有向子集。</p>
+<p><br/></p>
+<p>如果<span data-katex="f"></span>是单调的，且对于任意有向子集<span data-katex="S\subseteq D"></span>，</p>
+<p>有<span data-katex="f(\bigvee S)=\bigvee f(S)"></span>，就称<span data-katex="f"></span>是连续的。</p>
+<p><br/></p>
+<h3 id="连续函数集上的偏序结构">连续函数集上的偏序结构</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-7c12a71b029409d8.png" /></p>
+<p><br/></p>
+<p>完全偏序集<span data-katex="(D,\leqslant )"></span>到<span data-katex="(E,\leqslant )"></span>的连续函数，也可以定义出一个偏序结构，</p>
+<p>我们称<span data-katex="f\leqslant g"></span>，当且仅当对于每一个<span data-katex="d\in D"></span>，我们有<span data-katex="f(d)\leqslant g(d)"></span>。</p>
+<p>这样我们就得到了一个元素为连续函数的偏序集，<span data-katex="(D\rightarrow E,\leqslant )"></span>。</p>
+<p>可以证明，<span data-katex="(D\rightarrow E,\leqslant )"></span>也是一个完全偏序集。（证略</p>
+<p><br/></p>
+<h3 id="最小不动点定理">最小不动点定理</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-212453ef1b86ac04.png" /></p>
+<p><br/></p>
+<p>如果<span data-katex="(D,\leqslant )"></span>是一个完全偏序集，且<span data-katex="f:D\rightarrow D"></span>是连续的，</p>
+<p>则<span data-katex="f"></span>有最小不动点，<span data-katex="fix_D\ f=\bigvee \lbrace f^n(\perp )|\ n\geqslant 0 \rbrace "></span>。</p>
+<p><br/></p>
+<p>因为<span data-katex="\perp "></span>是<span data-katex="D"></span>中的最小元，且<span data-katex="f(\perp )\in D"></span>，所以，<span data-katex="\perp \leqslant f(\perp )"></span>，</p>
+<p>因为<span data-katex="f"></span>是连续的，所以<span data-katex="f"></span>也一定是单调的，所以，<span data-katex="f(\perp )\leqslant f^2(\perp )"></span>，</p>
+<p>继而，<span data-katex="f^n(\perp )\leqslant f^{n+1}(\perp )"></span>，对于任意的<span data-katex="n\geqslant 0"></span>都成立。</p>
+<p><br/></p>
+<p><span data-katex="\lbrace f^n(\perp )|\ n\geqslant 0 \rbrace"></span>构成了一个全序集，</p>
+<p>所以，它是完全偏序集<span data-katex="(D\rightarrow E,\leqslant)"></span>的一个有向子集，必有上确界。</p>
+<p><br/></p>
+<p>设<span data-katex="a"></span>是上确界，<span data-katex="a=\bigvee \lbrace f^n(\perp )|\ n\geqslant 0 \rbrace "></span>，</p>
+<p>则<span data-katex="a"></span>是<span data-katex="f"></span>的不动点，因为，由<span data-katex="f"></span>的连续性，</p>
+<p><span data-katex="f(a)=f(\bigvee \lbrace f^n(\perp )|\ n\geqslant 0 \rbrace )=\bigvee \lbrace f^{(n+1)}(\perp )|\ n\geqslant 0 \rbrace "></span>，</p>
+<p>而<span data-katex="\lbrace f^n(\perp ) \rbrace"></span>与<span data-katex="\lbrace f^{(n+1)}(\perp ) \rbrace"></span>有同样的上确界，</p>
+<p>所以，<span data-katex="f(a)=a"></span>，即<span data-katex="a"></span>是<span data-katex="f"></span>的不动点。</p>
+<p><br/></p>
+<p>其次，<span data-katex="a"></span>是<span data-katex="f"></span>的最小不动点，</p>
+<p>假设<span data-katex="b=f(b)"></span>是<span data-katex="f"></span>的任意不动点，因为<span data-katex="\perp \leqslant b"></span>，所以<span data-katex="f(\perp )\leqslant f(b)"></span>，</p>
+<p>类似的，对于任意的<span data-katex="n\geqslant 0"></span>，<span data-katex="f^n(\perp )\leqslant f^n(b)"></span>。</p>
+<p><br/></p>
+<p>而<span data-katex="b"></span>是<span data-katex="f"></span>的不动点，所以<span data-katex="f^n(b)=b"></span>，</p>
+<p>因此<span data-katex="b"></span>是集合<span data-katex="\lbrace f^n(\perp )|\ n\geqslant 0 \rbrace"></span>的上界。</p>
+<p>由于集合的最小上界是<span data-katex="a"></span>，所以有<span data-katex="a\leqslant b"></span>。</p>
+<p><br/></p>
+<h3 id="后继函数的不动点">后继函数的不动点</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-be19cfece5c3589e.png" /></p>
+<p><br/></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">succ :: Int -&gt; Int</span><br><span class="line">succ n &#x3D; n+1</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>在第七篇中，我们说<code>fix</code>可以得到任意函数的不动点，</p>
+<p>那么这个<code>succ</code>函数呢？它有没有不动点？</p>
+<p><code>fix succ</code>是什么？</p>
+<p><br/></p>
+<p>现在我们有了最小不动点定理，</p>
+<p>就得验证<code>succ</code>所指称的数学函数，是不是一个完全偏序集上的连续函数，</p>
+<p>如果是的话，它就有不动点。</p>
+<p><br/></p>
+<p>在第四篇为了表示计算的不可终止性，我们对自然数集进行了扩充，<span data-katex="N\cup \lbrace \perp \rbrace"></span>，</p>
+<p>然后用这个集合作为程序中<code>Int</code>类型的值的解释。</p>
+<p><br/></p>
+<p>然而，<span data-katex="N\cup \lbrace \perp \rbrace"></span>不是一个完全偏序集，原因是它没有上界，</p>
+<p>如果我们额外加入一个比其他的自然都大的元素<span data-katex="+\infty "></span>，</p>
+<p>则我们就得到了一个完全偏序集，<span data-katex="N\cup \lbrace \perp \rbrace\cup \lbrace +\infty \rbrace"></span>。</p>
+<p><br/></p>
+<p>然后，我们看<code>succ</code>连续吗？</p>
+<p>首先，它是单调的，如果我们再定义<span data-katex="succ(+\infty )=+\infty "></span>，</p>
+<p>就有<span data-katex="succ(\bigvee N)=\bigvee succ(N)"></span>，</p>
+<p>因此，<code>succ</code>是一个连续函数。</p>
+<p><br/></p>
+<p>根据最小不动点定理，<code>succ</code>的最小不动点是，<span data-katex="fix\ succ=\bigvee \lbrace succ^n(\perp )|\ n\geqslant 0 \rbrace "></span>。</p>
+<p><br/></p>
+<p>由于<span data-katex="succ(\perp )=\perp "></span>，即对于非终止的输入<code>succ</code>的计算也不会终止，</p>
+<p>所以<span data-katex="succ^n(\perp )=\perp "></span>，</p>
+<p>因此，<span data-katex="fix\ succ=\bigvee \lbrace succ^n(\perp )|\ n\geqslant 0 \rbrace =\perp "></span>，</p>
+<p>即，<code>succ</code>的最小不动点是<span data-katex="\perp "></span>，<code>fix succ</code>的计算不会终止。</p>
+<p><br/></p>
+<h3 id="求解阶乘函数">求解阶乘函数</h3>
+<p>上一篇中，我们证明了阶乘函数<code>fact</code>是以下函数的不动点，<code>fact = fix g</code>，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g :: (Int -&gt; Int) -&gt; Int -&gt; Int</span><br><span class="line">g f n &#x3D; case n of</span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  _ -&gt; n * f (n-1)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>但是上文中，我们只是对它们的计算结果进行比对，</p>
-<p>并没有对它进行证明。</p>
+<p>现在我们来看一下，如何运用最小不动点定理来得到这个答案。</p>
+<p>为了避免篇幅过长，关于<code>g</code>函数的连续性证明暂略，</p>
+<p>我们直接使用公式，</p>
+<p><span data-katex="fix\ g=\bigvee \lbrace g^n(\perp )|\ n\geqslant 0 \rbrace "></span>，</p>
+<p>即，<code>g</code>函数的最小不动点，就是集合<span data-katex="D=\lbrace g^n(\perp )|\ n\geqslant 0 \rbrace"></span>的上确界。</p>
 <p><br/></p>
-<p>考虑到<code>fix</code>的性质，<code>fix g = g (fix g)</code>，</p>
-<p>（因为<code>fix g</code>是<code>g</code>的不动点，令<code>h = fix g</code>，上式为<code>h = g h</code></p>
-<p>我们可以使用数学归纳法，证明对于任意的自然数<span data-katex="n"></span>，<code>fact n = fix g n</code>。</p>
+<p>我们先来看一下这个集合<span data-katex="D"></span>中有哪些元素，</p>
+<p>其中，<span data-katex="g(\perp )\in D"></span>，我们将<span data-katex="\perp "></span>传入<span data-katex="g"></span>中，看看会得到什么，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f1 &#x3D; \n -&gt; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  _ -&gt; ...</span><br></pre></td></tr></table></figure>
+<p>这个函数能计算<code>f1 1</code>，但是不能计算<code>f1 2</code>，恰好是<code>fact</code>函数有限展开的一阶项。</p>
 <p><br/></p>
-<p>我们先证初始条件，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fix g 1 </span><br><span class="line">&#x3D; g (fix g) 1 </span><br><span class="line">&#x3D; case 1 of </span><br><span class="line">    1 -&gt; 1</span><br><span class="line">    _ -&gt; ...</span><br><span class="line">&#x3D; 1</span><br><span class="line">&#x3D; fact 1</span><br></pre></td></tr></table></figure>
+<p>我们再来看<span data-katex="g^2(\perp )\in D"></span>，它等于<span data-katex="g(f1)"></span>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f2 &#x3D; \n -&gt; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  _ -&gt; n * f1 (n-1)</span><br></pre></td></tr></table></figure>
+<p>这个函数能计算<code>f2 1</code>以及<code>f2 2</code>，但是不能计算<code>f2 3</code>，恰好是<code>fact</code>函数展开的二阶项。</p>
 <p><br/></p>
-<p>然后再证递推条件，假设<code>fact k = fix g k</code>，</p>
-<p>我们要推出<code>fact (k+1) = fix g (k+1)</code>，其中，<span data-katex="k &gt; 0"></span>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fix g (k+1)</span><br><span class="line">&#x3D; g (fix g) (k+1)</span><br><span class="line">&#x3D; case (k+1) of </span><br><span class="line">    1 -&gt; 1</span><br><span class="line">    _ -&gt; (k+1) * (fix g) k</span><br><span class="line">&#x3D; (k+1) * (fix g) k</span><br><span class="line">&#x3D; (k+1) * fact k</span><br><span class="line">&#x3D; fact (k+1)</span><br></pre></td></tr></table></figure>
+<p>由此，我们看出了规律，</p>
+<p><span data-katex="g^n(\perp )\in D"></span>就是<code>fact</code>函数有限展开的第<span data-katex="n"></span>阶项。</p>
+<p>上一篇中，我们已经证明了，当<span data-katex="n\rightarrow \infty"></span>时，它就是<code>fact</code>函数，</p>
+<p>考虑到<span data-katex="f1,f2,\cdots"></span>这些函数的序关系，</p>
+<p>因此，我们有<span data-katex="fact=\bigvee \lbrace g^n(\perp )|\ n\geqslant 0 \rbrace "></span>。</p>
 <p><br/></p>
-<p>因此，对于任意的自然数<span data-katex="n"></span>，<code>fact n = fix g n</code>。</p>
-<p>即，<code>fact = fix g</code>。</p>
-<p><br/></p>
-<h3 id="不动点算子的有限展开">不动点算子的有限展开</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-0a009ed0d24a4df6.png" /></p>
-<p><br/></p>
-<p>根据上一节<code>fact = fix g</code>的证明，我们看到，</p>
-<p>每一步递推，我们都使用了不动点算子<code>fix</code>的性质<code>fix g = g (fix g)</code>，</p>
-<p>但是对于一个具有有限存储空间的机器来说，递推的步骤不可能是无限的，</p>
-<p>为了界定最多使用多少次递推，我们定义，<span data-katex="fix^{[n+1]}\ g = g\ (fix^{[n]} g)"></span>。</p>
-<p>并且认为<span data-katex="fix^{[0]}\ g"></span>对于任意的<span data-katex="n"></span>无定义。</p>
-<p><span data-katex="fix^{[1]}\ g\ 1 = 1"></span>，而<span data-katex="fix^{[1]}\ g\ n"></span>在<span data-katex="n &gt; 1"></span>时没有定义，</p>
-<p><span data-katex="fix^{[2]}\ g\ 1 = 1"></span>，<span data-katex="fix^{[2]}\ g\ 2 = 2"></span>，而<span data-katex="fix^{[2]}\ g\ n"></span>在<span data-katex="n &gt; 2"></span>时没有定义。</p>
-<p><br/></p>
-<p>因此，<span data-katex="fix^{[n]}\ g"></span>是一个部分函数，且，</p>
-<p><span data-katex="fix^{[n+1]}\ g"></span>所表示的函数，总是比<span data-katex="fix^{[n]}\ g"></span>的计算能力更强一些，离<code>fact</code>更近一些。</p>
-<p>当<span data-katex="n\rightarrow \infty "></span>时，<span data-katex="fix^{[\infty ]}\ g"></span>就是阶乘函数<code>fact</code>。</p>
-<p><br/></p>
-<p>即，<span data-katex="\lbrace fix^{[n]} g|\ n\geqslant 0 \rbrace"></span>的最小上界，就是<code>g</code>的不动点。</p>
-<p>那么，什么样的<code>g</code>才能保证这个集合具有最小上界呢？</p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%8F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">序理论</a>指出，完全偏序集上的序保持自映射具有最小不动点。</p>
-<p><br/></p>
-<p>为此，我们需要先认识什么是偏序集，什么是连续函数。</p>
-<p>使用完全偏序集上的连续函数解释程序中函数的方式，称为<a href="https://zh.wikipedia.org/wiki/%E5%9F%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">域论模型</a>。</p>
-<p><br/></p>
-<h3 id="偏序集与哈斯图">偏序集与哈斯图</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-548b287983ed9034.png" /></p>
-<p><br/></p>
-<p>在第三篇中，我们讨论过<a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">偏序关系</a>，</p>
-<p>一个偏序集<span data-katex="(D,\leqslant )"></span>是一个集合<span data-katex="D"></span>，</p>
-<p>并且在这个集合上定义了一个偏序关系<span data-katex="\leqslant "></span>。</p>
-<p><br/></p>
-<p>设<span data-katex="A"></span>为实数集的一个非空子集，我们定义<span data-katex="A"></span>上的偏序关系为<span data-katex="\leqslant "></span>，</p>
-<p><span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x"></span>是小或等于<span data-katex="y"></span>的实数。</p>
-<p>则，<span data-katex="(A,\leqslant )"></span>是一个偏序集。</p>
-<p><br/></p>
-<p>偏序集反映了集合上的一种偏序结构，它比我们想象中的更为常见，</p>
-<p>例如，一个集合<span data-katex="A"></span>，对于任意两个元素<span data-katex="x,y\in A"></span>，我们定义<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=y"></span>。</p>
-<p>那么<span data-katex="(A,\leqslant )"></span>是一个偏序集。</p>
-<p>因此，如果某个集合构成了一个偏序集，这完全取决于我们怎样定义偏序关系。</p>
-<p><br/></p>
-<p>设<span data-katex="(D,\leqslant )"></span>是一个偏序集，</p>
-<p>对于任意的<span data-katex="x,y\in D"></span>，如果总是有<span data-katex="x\leqslant y"></span>或者<span data-katex="y\leqslant x"></span>成立，</p>
-<p>则称<span data-katex="x"></span>和<span data-katex="y"></span>是可比的。</p>
-<p><br/></p>
-<p><span data-katex="x\leqslant y"></span>，且<span data-katex="x\neq y"></span>，则记为<span data-katex="x&lt;y"></span>。</p>
-<p>如果<span data-katex="x"></span>和<span data-katex="y"></span>是可比的，且<span data-katex="x&lt;y"></span>，如果不存在<span data-katex="z\in D"></span>，使得<span data-katex="x&lt;z&lt;y"></span>，则称<span data-katex="y"></span>覆盖<span data-katex="x"></span>。</p>
-<p><br/></p>
-<p>根据可比性和覆盖性，我们就可以将偏序关系用无向图表示出来了，</p>
-<p>其中，顶点表示元素，边表示覆盖关系，并且省去图中每个顶点处的环，</p>
-<p><span data-katex="y"></span>覆盖<span data-katex="x"></span>就将代表<span data-katex="y"></span>的顶点放在代表<span data-katex="x"></span>的顶点之上，并在<span data-katex="x"></span>和<span data-katex="y"></span>之间连线，</p>
-<p>如果<span data-katex="x&lt;y"></span>，但是<span data-katex="y"></span>不覆盖<span data-katex="x"></span>，就省掉<span data-katex="x"></span>与<span data-katex="y"></span>之间的连线。</p>
-<p><br/></p>
-<p>这样用来表示有限偏序集的无向图，称为<a href="https://zh.wikipedia.org/wiki/%E5%93%88%E6%96%AF%E5%9C%96" target="_blank" rel="noopener">哈斯图</a>。</p>
-<p><br/></p>
-<p>例如，易证整除关系是整数集上的一种偏序关系，</p>
-<p>我们可以画出偏序集<span data-katex="\lbrace 1,2,3,4,5,6,9,10,15 \rbrace"></span>对应的哈斯图，如下，</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-3619f4e73479ac87.png" /></p>
-<p><br/></p>
-<h3 id="全序集与拟序集">全序集与拟序集</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-69bf19c128135d6a.png" /></p>
-<p><br/></p>
-<p>设<span data-katex="(D,\leqslant )"></span>是一个偏序集，如果对于任意<span data-katex="x,y\in D"></span>，<span data-katex="x"></span>和<span data-katex="y"></span>都可比，</p>
-<p>则称<span data-katex="\leqslant "></span>为<span data-katex="D"></span>上的全序关系，此时称<span data-katex="(D,\leqslant )"></span>为全序集。</p>
-<p><br/></p>
-<p>可见，实数集以及实数集上的小于等于关系<span data-katex="\leqslant "></span>，构成了一个全序集。</p>
-<p>哈斯图为从下至上的“一条线”，是全序集的充要条件。</p>
-<p><br/></p>
-<p>设<span data-katex="R"></span>是非空集合<span data-katex="A"></span>上的，反自反的和传递的二元关系，</p>
-<p>则称<span data-katex="R"></span>为<span data-katex="A"></span>上的拟序关系，常将拟序关系记为<span data-katex="&lt;"></span>，并称<span data-katex="(A,&lt;)"></span>为拟序集。</p>
-<p>拟序关系自然具有反对称性。</p>
-<p>（其中，反自反关系，指的是不存在<span data-katex="x\in A"></span>，使得<span data-katex="x&lt;x"></span>。</p>
-<p><br/></p>
-<p>拟序关系与偏序关系的哈斯图在画法上完全相同，只是拟序关系的哈斯图的各顶点都没有环。</p>
-<p><br/></p>
-<p>设<span data-katex="(A,&lt;)"></span>是一个拟序集，如果对于任意的<span data-katex="x,y\in A"></span>，</p>
-<p><span data-katex="x&lt;y"></span>，<span data-katex="x=y"></span>，<span data-katex="y&lt;x"></span>三式有且仅有一式成立，则称<span data-katex="&lt;"></span>具有三歧性，</p>
-<p>这样的拟序关系<span data-katex="&lt;"></span>，称为拟全序关系，这样的拟序集<span data-katex="(A,&lt;)"></span>，称为拟全序集。</p>
-<p>拟全序集的哈斯图也是“一条线”。</p>
-<p><br/></p>
-<h3 id="最小元与上确界">最小元与上确界</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-848d5a4650be6c32.png" /></p>
-<p><br/></p>
-<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
-<p>如果存在<span data-katex="y\in S"></span>，且对于任意的<span data-katex="x\in S"></span>，有<span data-katex="y\leqslant x"></span>，</p>
-<p>则称<span data-katex="y"></span>为<span data-katex="S"></span>的最小元。（相似的我们可以定义最大元</p>
-<p><br/></p>
-<p>如果存在<span data-katex="y\in S"></span>，对于任意的<span data-katex="x\in S"></span>，</p>
-<p>如果<span data-katex="x\leqslant y"></span>那么就有<span data-katex="x=y"></span>，</p>
-<p>则称<span data-katex="y"></span>为<span data-katex="S"></span>的极小元。（相似的我们可以定义极大元</p>
-<p><br/></p>
-<p>如果<span data-katex="S"></span>是有穷集，则<span data-katex="S"></span>的极小元一定存在，并且可能有多个，</p>
-<p>但是最小元却不一定存在。</p>
-<p><br/></p>
-<p>上文中，我们画出了偏序集<span data-katex="A=\lbrace 1,2,3,4,5,6,9,10,15 \rbrace"></span>对应的哈斯图，</p>
-<p>我们取<span data-katex="B_1=\lbrace 1,2,3 \rbrace"></span>，<span data-katex="B_2=\lbrace 3,5,15 \rbrace"></span>，<span data-katex="B_3=A"></span>，</p>
-<p>则<span data-katex="1"></span>是<span data-katex="B_1"></span>的最小元，也是极小元，<span data-katex="2,3"></span>是<span data-katex="B_1"></span>的极大元，但<span data-katex="B_1"></span>没有最大元。</p>
-<p><span data-katex="3,5"></span>是<span data-katex="B_2"></span>的极小元，但<span data-katex="B_2"></span>没有最小元，<span data-katex="15"></span>是<span data-katex="B_2"></span>的最大元，也是极大元。</p>
-<p><span data-katex="1"></span>是<span data-katex="B_3"></span>的最小元，也是极小元，<span data-katex="4,6,9,10,15"></span>是<span data-katex="B_3"></span>的极大元，但是<span data-katex="B_3"></span>没有最大元。</p>
-<p><br/></p>
-<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
-<p>如果存在<span data-katex="y\in D"></span>，（注意，不一定是<span data-katex="y\in S"></span></p>
-<p>使得对于任意的<span data-katex="x\in S"></span>，<span data-katex="x\leqslant y"></span>，则称<span data-katex="y"></span>为<span data-katex="S"></span>的上界，</p>
-<p>如果<span data-katex="S"></span>的所有上界存在最小元，则称它为<span data-katex="S"></span>最小上界，或上确界。</p>
-<p>（相似的可以定义下确界</p>
-<p><br/></p>
-<p><span data-katex="S"></span>的上界和下界不一定存在，即使存在，上确界和下确界也不一定存在。</p>
-<p><br/></p>
-<p>设<span data-katex="(A,&lt;)"></span>是一个拟全序集，如果对于<span data-katex="A"></span>中的任何非空子集<span data-katex="S"></span>都有最小元，</p>
-<p>则称<span data-katex="&lt;"></span>是一个良序关系，<span data-katex="(A,&lt;)"></span>是一个良序集。</p>
-<p>例如，自然数集以及自然数集上的小于关系，构成了一个良序集<span data-katex="(N,&lt;)"></span>，</p>
-<p>但是，整数集以及整数集上的小于关系，并不构成良序集，而仅仅是一个拟全序集。</p>
+<p>即，<code>fact</code>函数就是<code>g</code>函数的最小不动点。</p>
 <p><br/></p>
 <h3 id="总结">总结</h3>
-<p>本文从一个证明出发，我们了解了不动点算子的工作原理，</p>
-<p>然后引出了一些数学概念，序关系在不动点算子理论中占有很重要的地位，</p>
-<p>所以，这里给出了详细的介绍，下文我们开始讨论最小不动点定理。</p>
+<p>到此为止，我想这个系列的文章已经讨论完了，</p>
+<p>本系列文章一直围绕着递归函数和不动点进行分析，</p>
+<p>在内容上可以分为两个部分，前半部分主要与可计算性理论有关，</p>
+<p>后半部分与不动点定理有关，希望对大家有所帮助。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%8F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">序理论</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%9F%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">域论模型</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">偏序关系</a></p>
-<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E6%9C%89%E5%90%91%E9%9B%86%E5%90%88" target="_blank" rel="noopener">有向集合</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%AE%8C%E5%85%A8%E5%81%8F%E5%BA%8F" target="_blank" rel="noopener">完全偏序</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Kleene_fixed-point_theorem" target="_blank" rel="noopener">Kleene fixed-point theorem</a></p>
+<p><a href="https://book.douban.com/subject/1761918/" target="_blank" rel="noopener">Foundations for Programming Languages</a></p>
 
           
         
@@ -544,7 +529,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/197/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/197/">197</a><span class="page-number current">198</span><a class="page-number" href="/page/199/">199</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/199/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/197/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/197/">197</a><span class="page-number current">198</span><a class="page-number" href="/page/199/">199</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/199/">&gt;</a>
   </nav>
 
 
@@ -590,7 +575,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">307</span>
+                <span class="site-state-item-count">308</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

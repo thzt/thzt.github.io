@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2022/02/09/log/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2022/02/22/engineering/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/02/09/log/" itemprop="url">日志·工作模式</a></h1>
+                <a class="post-title-link" href="/2022/02/22/engineering/" itemprop="url">工程化的反思</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-09T00:00:00+08:00">
-                2022-02-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-22T00:00:00+08:00">
+                2022-02-22
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Team/" itemprop="url" rel="index">
-                    <span itemprop="name">Team</span>
+                  <a href="/categories/Project/" itemprop="url" rel="index">
+                    <span itemprop="name">Project</span>
                   </a>
                 </span>
 
@@ -347,78 +347,76 @@
       
         
           
-            <p>在软件运行的过程中，日志提供了一种保留现场的能力。</p>
-<p>通过日志，我们可以排查错误，还可为软件优化提供线索和依据。</p>
-<p>一个系统的稳定性和健壮性，离不开优秀的日志设计。</p>
+            <h3 id="工程">工程</h3>
+<p>在 20 世纪 七八十年代 出现了一系列的 “<a href="https://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6%E5%8D%B1%E6%9C%BA" target="_blank" rel="noopener">软件危机</a>”，</p>
+<p>不少软件项目的结局都很悲惨，</p>
+<p>要么远远超出了规划的时间表，要么软件的质量难以控制。</p>
 <p><br/></p>
-<p>日志并不仅限于软件系统中，在工作和生活中，也能经常看到日志的影子。</p>
-<p>很多人有写日记的习惯，用来记录自己的生活。</p>
-<p>汽车上安装了行车记录仪，它记录了汽车的驾驶情况。</p>
+<p>人们意识到软件领域中遇到的这些问题，其实可以用 <a href="https://zh.wikipedia.org/wiki/%E5%B7%A5%E7%A8%8B%E5%AD%A6#.E5.B7.A5.E7.A8.8B.E5.AD.A6.E6.96.B9.E6.B3.95" target="_blank" rel="noopener">工程方法</a> 得以改善和解决。</p>
+<p>工程师最关键和独特的特点是，发现、理解并结合实际的局限，来达到满意的结果。</p>
+<p>后来又经过几代人的研究和实践，不断丰富形成了<a href="https://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B" target="_blank" rel="noopener">软件工程</a>这一学科。</p>
 <p><br/></p>
-<p>日志有一个特点，它允许我们事后对已经发生的事情 再认识。</p>
-<p>这就好比打开了上帝视角，可以不断的优化我们做事的方式。</p>
-<p>还能优化我们的优化过程。</p>
+<p>所以，<a href="https://zh.wikipedia.org/zh-hans/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88" target="_blank" rel="noopener">软件工程师</a>这个职业自诞生一来，</p>
+<p>就是为了解决上述软件问题的，包括但并不限于软件功能的实现。</p>
 <p><br/></p>
-<p>本文就介绍一下我自己在工作中常用的 “日志·工作模式”。</p>
-<h3 id="思路复现">思路复现</h3>
-<p>写日志是一件需要付出成本的事情，所以我们要分析它能带来多大收益。</p>
-<p>大部分人的工作过程是在大脑中进行的，少部分人会以周报的形式总结进展。</p>
-<p>只有极少部分人愿意 实时的 把自己大脑中的 思考过程 记录下来。</p>
+<p>这是因为要实现一块功能往往是比较容易的，但对整个软件开发活动进行管控却很难。</p>
+<p>我们需要关注项目、产品、质量、人员 等一系列因素，</p>
+<p>才能结合实际情况达成满意的结果。</p>
 <p><br/></p>
-<p>这是因为大脑的运转速度比打字快得多，人们会认为记录下来或拖慢工作效率。</p>
-<p>但其实在某些事情上，可能会有相反的结论。</p>
+<p>那么现在为什么会有专门的 “工程化” 这个说法出现呢？</p>
 <p><br/></p>
+<p>这是因为软件工程师出现后，软件行业经历了飞跃发展，人才涌入促进了社会化分工。</p>
+<p>大家会考虑如何进行资源重组，能够实现更高的产能。</p>
+<p>此外软件领域内部的知识量也越来越大，分治才能解耦进一步提高生产力。</p>
+<p><br/></p>
+<p>在这种趋势之下，软件工程师被划分成了很多不同的角色，</p>
+<p>现在前端、后端、数据库、算法 不同角色的划分只是社会化分工阶段的一次快照，</p>
+<p>以后这些角色还会不断的调整。</p>
+<h3 id="群体">群体</h3>
+<p>以上是前些年的事情，最近市场环境又出现了新的变化，</p>
+<p>软件工程师的人数进一步扩增，甚至已经变成了不小的一个社会性的群体。</p>
+<p>这一群体的出现，会带来如下这些影响，</p>
 <ul>
-<li><p>复杂的、需要深思熟虑、考虑周全的事情</p></li>
-<li><p>需要频繁向他人沟通和介绍的事情</p></li>
-<li><p>需要反复阅读，或需要持续迭代的事情</p></li>
+<li><p>软件工程师人数增多，逐渐会产生一些社会学效应。比如 996、内卷 很大程度都是被这一群体带动起来的</p></li>
+<li><p>这一群体具有一定的相似性，会有专门的为软件工程师提供服务的产品出现，不论是生活上还是工作上</p></li>
+<li><p>一个公司有成百上千名软件工程师的情况已不再罕见，如何解决大规模软件工程师团队的合作和效率问题，关注的人会越来越多</p></li>
 </ul>
 <p><br/></p>
-<p>大脑虽然运转的更快，但它的处理过程和结果都是一次性的。</p>
-<p>凡是需要 “思路复现” 的场景，日志都能起到很好的作用，复现次数越多收益越大。</p>
-<p>在以上这些场景中使用日志，反而会大幅度的提升工作效率。</p>
-<h3 id="可见性">可见性</h3>
-<p>每个人的大脑对其他人来说，是一个黑盒，要想交流必须主动透露信息。</p>
-<p>信息的可见性 对于知识工作而言，具有很强大的隐性价值。</p>
-<p>知识工作需要整合资料、串联不同的人想法，信息越透明效率越高。</p>
+<p>软件危机引发了软件工程，软件工程师的扩增又会引发了新一轮的软件革命。</p>
 <p><br/></p>
-<p>如果每个人都不知道其他人在做什么，这就好比一个个相互隔离的黑盒在工作。</p>
-<p>当然信息增多也会造成污染，提高人们的检索成本。</p>
-<p>但仅就工作内容而言，大部分人的工作可见性，还远未达到信息污染的程度。</p>
+<p>很多软件工程师或组织，对软件项目的理解还很原始，</p>
+<p>或者说 “工程化” 问题还远远没有被解决。</p>
+<p>有多少人仍深陷于延期、需求变更的泥沼中，</p>
+<p>还有多少组织深陷于技术债务、基建不稳的困境中。</p>
 <p><br/></p>
-<p>在管理软件项目的时候，我们知道提高项目的可见性，会增强各参与者的信任度。</p>
-<p>如果每个人都能清晰的看到项目进展，那么风险就不言而喻了，更容易对齐各方预期。</p>
-<p>个人的工作情况也是如此，提高工作的可见性，会减少大量的解释成本。</p>
+<p>这其实是因为大家一开始就没有用工程方法来执行，</p>
+<p>组织内部又缺少对工程理解比较深入的人员。</p>
+<h3 id="工程化">工程化</h3>
+<p>有人可能想说，不是有《软件工程》这门课程么？</p>
+<p>为什么说大家对工程的理解还不够深入呢？</p>
 <p><br/></p>
-<p>其他人都能清晰的了解当前我在忙什么，各项工作都进展到了什么程度。</p>
-<p>工作是很难独立开展的，具有一定的社会属性，离不开跟其他人的互动。</p>
-<h3 id="日积月累">日积月累</h3>
-<p>不能小看积累的效果。积累的作用不仅体现在数量上，还能体现在积累的速度上。</p>
-<p>如果每天写一篇日志来记录自己的工作，</p>
-<p>那么 10 个工作日下来，不是产出 10 篇日志，可能是 12+ 篇。</p>
+<p>这是因为课程 和 实际项目 相距甚远，</p>
+<p>课程不会说 软件项目的开发过程是按交付日期倒排的，</p>
+<p>也不会说 在截止日期之前变更需求应该如何拒绝，</p>
+<p>更不会说 软件项目中遇到的大部分风险点其实出现在团队对外沟通的边界上。</p>
 <p><br/></p>
-<p>在积累的过程中，大脑会不断的习惯积累过程、优化积累效率。</p>
-<p>如果经常编写工作日志，就能写的越来越快，随手几分钟就写出一篇。</p>
+<p>这时候就会需要有一些人，既了解软件开发的整个过程，以便从中识别效率瓶颈；</p>
+<p>又能洞悉人性，在各种利益纠纷中找到共赢点；</p>
+<p>还要对产品定位、项目节奏有牢固的把控。</p>
 <p><br/></p>
-<p>当然我们的目的并不是以量取胜，而是找到了一种新颖的工作模式。</p>
-<p>在这种模式下，我们的大脑被迫采用了 “慢速、沉思” 的方式进行运转。</p>
-<p>运转过程以及产物都被我们记录了，可以随时停下来。</p>
+<p>只有这样才能安全的摆脱 “软件危机”，实现整个组织的 “工程化”。</p>
+<h3 id="小结">小结</h3>
+<p>“工程化” 其实并不仅限于技术这么简单，更多则是 “如何做好一个项目” 的推广和总结。</p>
+<p>软件工程师利用各种手段解除 “软件危机”，过程中所形成的方法才是 “工程化” 方法。</p>
 <p><br/></p>
-<p>这也会养成我们 “慢思考” 的习惯，做计划中的事情，而不是到处忙着救火。</p>
-<h3 id="结语">结语</h3>
-<p>本文介绍了一种全新的工作方法：“日志·工作模式”。</p>
-<p>—— 通过丰富的日志，记录并展示 工作过程和工作进展。</p>
-<p><br/></p>
-<p>日志有助于我们复现思路，减少沟通成本，优化自己的思考过程，</p>
-<p>可以提升工作的可见性，加强与项目成员之间的互动，</p>
-<p>还能提升积累的效率，养成 “慢思考” “提前计划” 的工作习惯。</p>
-<p><br/></p>
-<p>当然，具体要记哪些东西，这就因人而异了，我是尽可能多的把资料记录下来。</p>
-<p>对业务、技术和团队的点滴思考，我都会写成文章，</p>
-<p>这些点滴一旦沉淀下来，对我来说都是可多次使用的财富。</p>
+<p>做一个脚手架、搭建 CI/CD 系统、做组件库，我认为这些说法不够完整，</p>
+<p>它们只是软件项目中的某一些关注点罢了，更核心的要解决的问题可能要复杂得多。</p>
 <p><br/></p>
 <blockquote>
-<p>一勤天下无难事，功夫不负有心人</p>
+<p>松下问童子，言师采药去。</p>
+</blockquote>
+<blockquote>
+<p>只在此山中，云深不知处。</p>
 </blockquote>
 
           
@@ -458,7 +456,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/25/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/27/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/25/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/27/">&gt;</a>
   </nav>
 
 
@@ -504,7 +502,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">307</span>
+                <span class="site-state-item-count">308</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

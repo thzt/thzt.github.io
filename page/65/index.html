@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/08/05/code-06/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/08/10/code-07/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/08/05/code-06/" itemprop="url">编码技巧（六）：正视代码</a></h1>
+                <a class="post-title-link" href="/2020/08/10/code-07/" itemprop="url">编码技巧（七）：让代码易于排错</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-05T00:00:00+08:00">
-                2020-08-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-10T00:00:00+08:00">
+                2020-08-10
               </time>
             
 
@@ -347,119 +347,86 @@
       
         
           
-            <p>虽说开发者的日常工作离不开编码，但能够做到<strong>正视</strong>代码的，却并不多见，</p>
-<p>我不敢说自己就是正视代码的那些人，</p>
-<p>但有几个常见的对代码理解的误区，却值得跟大家探讨一下。</p>
+            <p>我们知道，代码是不可能没有问题的，</p>
+<p>从编写第一行代码开始，它就有问题 —— 未完成所有的需求。</p>
+<p>在编写代码的过程中，它也一直有问题，</p>
+<p>新代码的业务逻辑有问题，或者新老代码的衔接上有问题。</p>
 <p><br/></p>
-<p>对代码造成误解，常常体现在以下几个方面，</p>
-<p>（1）认为代码无所不能</p>
-<p>（2）认为某种形式的代码不是代码</p>
-<p>（3）认为代码越少越好</p>
+<p>所以，排查问题是开发者的家常便饭，</p>
+<p>但谁都不愿意排查问题，尤其是排查那些缺少<strong>线索</strong>的问题。</p>
 <p><br/></p>
-<p>下面我们分别讨论，看看有没有似曾相识的感觉。</p>
-<h3 id="超能力">超能力</h3>
-<p>专长人才更喜欢用自己的<strong>专业</strong>去解决问题，这是毋庸置疑的。</p>
-<p>但这同时也就衍生出了另外一个问题，</p>
-<p>那就是，某些问题是否还存在非本专业的解决方案呢？</p>
+<p>因此，写出<strong>易于排错</strong>的代码，是一项重要的编码技巧，</p>
+<p>会给自己省出大量的时间，少掉几根头发。</p>
+<h3 id="状态">状态</h3>
+<p>一个系统无缘无故的出问题了，但重启之后又好了。</p>
+<p>换言之，系统是否出现故障，取决于它的 “心情”。</p>
+<p>这就很难排查，因为我们不知道它<strong>当时</strong>是什么 “心情”。</p>
 <p><br/></p>
-<p>具体而言，软件开发过程中遇到的问题，是否全都适合用<strong>技术手段（代码）</strong>去解决呢？</p>
-<p>这应该不尽然吧。</p>
-<p>强行用技术手段去解决，可能造成危害，甚至走进<strong>死胡同</strong>。</p>
+<p>上文所谓的 “心情”，指的是程序的运行<strong>状态</strong>，它是变动的，</p>
+<p>同一段代码，在不同的程序状态下，可能会有不同的结果。</p>
 <p><br/></p>
-<p>首先，代码在<strong>理论</strong>上无法解决所有的问题，例如停机问题。</p>
-<p>其次，在实践中，与<strong>人</strong>相关的问题，也不太适合用代码去解决。</p>
+<p>考虑一段依赖外部数据库<strong>状态</strong>来执行不同任务的代码，</p>
+<p>假如有人在程序执行时，通过其他手段改动了数据库，</p>
+<p>程序的执行结果就<strong>变了</strong>，我们根本不知道发生了什么。</p>
 <p><br/></p>
-<p>比如，为了证明代码<strong>完全</strong>没有问题，我想通过写另外的一些代码证明一下，</p>
-<p>这种想法看起来很简单，但几乎是很难实现的。</p>
-<p>理论上，我们只能证明<strong>某些</strong>代码不存在<strong>某类</strong>问题，而无法对任意代码排除所有的问题。</p>
+<p>所以，要想写出易于排错的代码，必须对程序状态有所警觉，</p>
+<p>程序大部分的<strong>反常</strong>行为，正是由<strong>意料之外</strong>的程序状态所导致的，</p>
+<p>因此我们得想个办法让<strong>状态</strong>一目了然。</p>
+<h3 id="日志">日志</h3>
+<p>如上文所述，“让代码易于排错” 是我们对代码附加的额外<strong>要求</strong>，</p>
+<p>因此，秉持这一信念的开发者，总是会从一开始就考虑到它。</p>
 <p><br/></p>
-<p>再比如，为了避免遭受接口变更的影响，我们再写一个系统来监控接口的变更吧，</p>
-<p>我觉得这么做几乎完全没有必要，</p>
-<p>因为这本来就应当是软件研发<strong>流程</strong>的问题，缺乏接口变更流程才是问题所在。</p>
+<p>一个例子是大多数系统都具有的<strong>日志模块</strong>，</p>
+<p>通常是在系统的设计之初，人们就已经考虑了日志问题。</p>
 <p><br/></p>
-<p>认为代码无所不能，不只是浪费精力这么简单，</p>
-<p>更重要的则是，让我们忽视了问题的<strong>非技术性</strong>特点。</p>
-<p>很可能舍近而求远，缘木而求鱼。</p>
+<p>所谓日志，其实是保存了程序执行之关键节点的重要<strong>信息</strong>，</p>
+<p>这些信息为事后排查问题，留下了<strong>线索</strong>，</p>
+<p>让我们可以按图索骥，清晰的找到问题发生的第一现场。</p>
 <p><br/></p>
-<p>给我的启示是，在考虑技术方案的同时，不妨多问自己一句，</p>
-<p>是不是自己对代码过于<strong>自信</strong>了，不写代码有没有更高效的解决方案？</p>
-<h3 id="代码形态">代码形态</h3>
-<p>代码说白了其实就是一段文本，编码了一些信息进去。</p>
-<p>有很多情况下，我们觉得不是代码的 “东西”，其实也是代码。</p>
-<h4 id="配置">（1）配置</h4>
-<p>配置就是代码。</p>
+<p>虽说日志是一条重要的线索，但也并非多多益善，</p>
+<p>过多无效日志，反而会让重要信息变得难以寻到，</p>
+<p>所以写日志时还是要回到初心，是不是做到了 “让代码易于排错”。</p>
+<h3 id="调试">调试</h3>
+<p>现在很多程序的开发过程，都是离不开调试的，</p>
+<p>调试使得我们可以跟进代码的执行过程中，</p>
+<p>与上文的观点类似，为了 “让代码易于排错”，<strong>调试</strong>也要从一开始就得考虑。</p>
 <p><br/></p>
-<p>从编码的角度来看，配置应当跟代码是<strong>平权</strong>的，</p>
-<p>唯一不同的是，所谓的 “配置” 和 “代码”，经历了不同的解码过程。</p>
+<p>具体而言，从编写第一行代码开始，我们就得搭好调试配置，</p>
+<p>让第一行代码就是<strong>可调试的</strong>。</p>
 <p><br/></p>
-<p>能用代码来表示的，其实无需再发明一种配置语言，让用户配它了。</p>
-<p>不要以 “安全性” 作为挡箭牌。</p>
+<p>以后增加越来越多的功能，可能会破坏调试的可用性，</p>
+<p>这时，我们应时刻保证它可用，甚至<strong>不惜</strong>在代码中写入调试变量。</p>
 <p><br/></p>
-<p>对于用户行为的<strong>安全性</strong>，我这里有个不一样的观点，</p>
-<p>有些人可能认为，系统有权提供足够高的安全性，让用户无论如何都不会搞错。</p>
-<p>我却偏偏认为，但凡涉及<strong>编码</strong>的用户行为，其<strong>正确性</strong>都应该交给<strong>编码者</strong>来保证。</p>
+<p>让代码始终可调试，会加速从发现问题到解决问题的<strong>反馈循环</strong>，</p>
+<p>不可调试的代码，我们自己<strong>开发</strong>起来都会很麻烦。</p>
+<h3 id="开发者接口">开发者接口</h3>
+<p>有时候给开发者，提供一些额外的接口，是有必要的，</p>
+<p>虽然这会违反 “最小接口” 原则。</p>
 <p><br/></p>
-<p>稍微复杂一点的编码，都无法通过其他代码来<strong>证明</strong>它没有问题。</p>
-<p>所以，除非你有能力证明 “配置” 的正确性，否则还不如让用户直接写 “代码”。</p>
-<h4 id="数据">（2）数据</h4>
-<p>代码可以作为<strong>数据</strong>，输入给其他代码。</p>
-<p>所以，代码跟数据，其实本质上也没啥不同的，不应该严格区分。</p>
+<p>这是因为代码其实并非只为<strong>功能</strong>服务的，</p>
+<p>前几篇文章，我们介绍的每一个编程技巧，</p>
+<p>其实都是在不改变代码功能的前提下，对代码做出了调整。</p>
 <p><br/></p>
-<p>编译器以用户代码作为<strong>输入</strong>，转换成了目标平台的机器码，</p>
-<p>很多语言的预编译功能，会对用户代码进行<strong>预处理</strong>，编译器看到的也不是我们写的那些代码了。</p>
+<p>这其实是对代码编写者提出了更高的要求，</p>
+<p>即，如何在满足<strong>功能需求</strong>的前提下，写出具有更多优秀<strong>特征</strong>的代码。</p>
 <p><br/></p>
-<p>所以代码作为数据来看，其实完全没有任何问题。</p>
-<p>理解了这一点之后，我们就能写出具备<strong>超高表现力</strong>的代码来。</p>
-<p>有些业务逻辑实在是太复杂了，把它封装成一段 “代码”，往往会是神来之笔。</p>
+<p>所以，面向开发者的接口，也是这一思路的体现，</p>
+<p>开发者接口可以获取程序中更多信息，或者实现一些特殊功能，</p>
+<p>为我们增加了与系统交互的一种新途径。</p>
 <p><br/></p>
-<p>举一个例子，如果我们想找到页面中所有的超链接，常用的办法是，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.querySelectorAll(&#39;a[href]&#39;)</span><br></pre></td></tr></table></figure>
-<p><code>a[href]</code> 是啥意思？</p>
-<p>指的是 HTML 元素中，标签为 <code>&lt;a&gt;</code>，且具有 <code>href</code> 属性的元素 <code>&lt;a href="..."&gt;</code>。</p>
-<p><br/></p>
-<p><code>document.querySelectorAll</code> 接受了一段字符串（代码），作为输入，</p>
-<p>返回了所有的满足这个条件的超链接。</p>
-<p><br/></p>
-<p>如果不这么做，我们就只能自己遍历整个 HTML DOM 树了，过程会更麻烦。</p>
-<p>所以，我们自己能发明一些 “字符串” 或 “代码”，然后当做 “数据” 来传入吗？</p>
-<h3 id="少写代码">少写代码</h3>
-<p>少写代码其实是有助益的，因为写的越少，就表示需要<strong>测试</strong>的也越少。</p>
-<p>更少的代码，也更好维护，想想看到几万行代码，和简短几行代码的感受，肯定是不同的。</p>
-<p><br/></p>
-<p>但是，有些场景下并不是代码<strong>少</strong>就完事了。</p>
-<p>这是因为业务逻辑被编码到了<strong>非文本</strong>形式中，测试起来可能会更难。</p>
-<p>因此，我们需要测试的是<strong>业务逻辑</strong>，而不是代码。</p>
-<p><br/></p>
-<p>一个常见的例子是，拖拽生成页面，</p>
-<p>用户确实能只通过拖拽就把页面给搭建出来，甚至把某些业务<strong>逻辑</strong>也 “拖” 出来，</p>
-<p>但请留意，这些 “拖拽行为” 如何进行<strong>测试</strong>呢？</p>
-<p><br/></p>
-<p>“拖拽” 是不是一种<strong>编码</strong>行为？</p>
-<p>我认为是的。</p>
-<p><br/></p>
-<p>不论 “拖拽” 对信息的编码<strong>结果</strong>是什么，是数据库中的数据，还是中间语言，</p>
-<p>对逻辑进行测试，仍然是逃不过的一个环节。</p>
-<p>我们怎样保证自己 “拖拽” 出来的页面是正确的呢？</p>
-<p><br/></p>
-<p>除此之外，当我们调整拖拽结果并点击提交之后，</p>
-<p>有人会意识到，这是一次<strong>发布</strong>行为吗？</p>
-<p><br/></p>
-<p>因此，非文本形式的 “编码”，可能会因为它没有留下代码，而对 “开发者” 产生误导。</p>
-<p>使得它们发布未经严格测试的软件<strong>功能</strong>。</p>
-<p>从这一点上来看，少写代码可能并不是一个特别好的主意，</p>
+<blockquote>
+<p><a href="https://medium.com/microsoft-open-source-stories/how-microsoft-rewrote-its-c-compiler-in-c-and-made-it-open-source-4ebed5646f98" target="_blank" rel="noopener">Roslyn</a> was thus born out of an openness mindset: sharing the inner workings of C# for the world to programmatically consume. 共享 C# 的内部工作机制，让世界<strong>以编程的方式</strong>消费。</p>
+</blockquote>
 <h3 id="结语">结语</h3>
-<p>本文介绍了自己从业以来遇到了一些代码认知误区，有些反例具有强烈的偏见，</p>
-<p>目的是为了说明在某些场景下频繁出现的一些问题。</p>
+<p>排查错误是开发者习以为常的事情，</p>
+<p>为了让写出来的代码易于排错，通常在编写之初就得有所考虑。</p>
 <p><br/></p>
-<p>但这并不是在说文中提到的解决方案就一定是错的，</p>
-<p>只是说，方案总有利有弊，需要<strong>深思熟虑</strong>。</p>
-<p>得多问自己几个问题。</p>
+<p>本文介绍了几个常用编码技巧，</p>
+<p>包括写日志、保证代码可调试，提供开发者接口。</p>
+<p>总而言之，就是给代码添加额外的属性，让它具有 “易于排错” 的特征。</p>
 <p><br/></p>
-<p>能够做到正视代码，才会把代码写的恰到好处，</p>
-<p>不贪功，不鄙视，不迷信。</p>
-<p><br/></p>
-<p>但即使认识到了以上所有的误区，我们每个人都还有很大的进步空间，</p>
-<p>保持开放的心态，多听听别人的看法总是有益的。</p>
+<p>很多事情是类似的，等出了问题之后再考虑办法，就来不及了，</p>
+<p>因此，我们会提前留下线索，帮助未来的自己。</p>
 
           
         
@@ -498,7 +465,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/64/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><span class="page-number current">65</span><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/66/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/64/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><span class="page-number current">65</span><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/66/">&gt;</a>
   </nav>
 
 
@@ -544,7 +511,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">307</span>
+                <span class="site-state-item-count">308</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

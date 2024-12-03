@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/04/26/criticism/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/05/11/extensibility/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/26/criticism/" itemprop="url">为什么喷人者恒被喷之</a></h1>
+                <a class="post-title-link" href="/2018/05/11/extensibility/" itemprop="url">可扩展性到底有多重要</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T00:00:00+08:00">
-                2018-04-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T00:00:00+08:00">
+                2018-05-11
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,103 +347,159 @@
       
         
           
-            <p>不知道你有没有观察到这样一种现象，</p>
-<p>那就是站出来批评别人的，他的论据似乎总是脆弱的，</p>
-<p>迟早会被人找出不公正的地方。</p>
-<p><br/></p>
-<p>喷人者恒被喷之。</p>
-<p><br/></p>
-<p>确实，站出来指责别人的人，很可能意气用事，</p>
-<p>也很可能在措辞方面不够严谨，</p>
-<p>更有可能没有描述好完整的事实。</p>
-<p><br/></p>
-<p>但是，这重要吗？</p>
-<p><br/></p>
-<p>为什么观众们发现了作者表达方式的不合理之处，</p>
-<p>就忘了作者要表达的本意了呢？</p>
-<p><br/></p>
-<h3 id="结论的可靠性">结论的可靠性</h3>
-<p>我们在读书时，做过很多证明题，也见过很多定理，</p>
-<p>如果证明过程出了差错，我们还会相信被证明的结论吗？</p>
-<p>很显然，我们不会。</p>
-<p><br/></p>
-<p>但是，结论可未必是错的。</p>
-<p><br/></p>
-<p>因此，这其实是有一个思维的误区在里面，</p>
-<p>实际上，不合理的论证，只能说明结论不可靠，</p>
-<p>并不能说明结论是错的。</p>
-<p><br/></p>
-<p>这是一种思维的惯性，</p>
-<p>遇到类似这种情况，很难理智的跳出来。</p>
-<p><br/></p>
-<h3 id="批评别人必须自己没有过错">批评别人必须自己没有过错</h3>
-<p>清代史学家钱大昕在《<a href="https://baike.baidu.com/item/%E5%A5%95%E5%96%BB" target="_blank" rel="noopener">奕喻</a>》一文中写过这样的话，</p>
+            <p><a href="https://en.wikipedia.org/wiki/Extensibility" target="_blank" rel="noopener">可扩展性</a>（extensibility）是软件的一种<a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能性</a>特征，</p>
+<p>维基百科上是这样解释的，</p>
 <blockquote>
-<p>吾求吾失且不暇，何暇论人哉！</p>
+<p>Extensibility is a software engineering and systems design principle where the implementation takes future growth into consideration.</p>
+</blockquote>
+<p>可扩展性，是将软件未来的发展过程也考虑在内，而进行的一种设计选择。</p>
+<p><br/></p>
+<h3 id="高可扩展性系统">1. 高可扩展性系统</h3>
+<p>我们遇到过很多具有高度可扩展的软件系统。</p>
+<p><br/></p>
+<p>例如，以往著名的前端库<a href="https://jquery.com/" target="_blank" rel="noopener">jQuery</a>，它采用了微内核架构，</p>
+<blockquote>
+<p>微内核架构模式可以通过插件的形式添加额外的特性到核⼼系统中，这提供了很好的扩展性，也使得新特性与核⼼系统隔离开来。</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="https://book.douban.com/subject/26797547/" target="_blank" rel="noopener">软件架构模式</a>》</p>
+</blockquote>
+<p>使用微内核架构，用户代码就可以通过插件的形式，集成到已有的核心系统中。</p>
+<p><br/></p>
+<p>jQuery依照它强大的扩展性，以用户自定义jQuery插件的方式，</p>
+<p>让前端开发工作重新繁荣了起来。</p>
+<p><br/></p>
+<p>另一个对我印象深刻极具扩展性的例子是Scheme语言，</p>
+<p>它是一门力求简洁的Lisp方言，</p>
+<blockquote>
+<p>Programming languages should be designed not by piling feature on top of feature, but by removing the weaknesses and restrictions that make additional features appear necessary.</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="http://community.schemewiki.org/?RnRS" target="_blank" rel="noopener">RnRS</a>》</p>
 </blockquote>
 <p><br/></p>
-<p>说的是我们自己检查自己的过错尚且没有时间，哪里有时间议论别人呢。</p>
-<p>因此，我们就能用这句话来反驳指责别人的人了吗？</p>
+<p>为了实现可扩展性，Lisp宏的作用功不可没，</p>
+<p>和通常的编程语言不同的是，</p>
+<p>它除了可以自定义函数，还可以自定义语言的控制结构。</p>
 <p><br/></p>
-<p>不能。</p>
+<p>实际上，Lisp的用户代码可以对读取器和编译器进行扩展，</p>
+<p>影响它们处理代码的方式，因此具备了强大的元编程能力。</p>
 <p><br/></p>
-<p>因为钱大昕所说的这句话，是对自身的严格要求，</p>
-<p>并不是说对别人也要作此要求。</p>
+<p>类似这样，具有高度可扩展性的系统还有很多，</p>
+<p>例如，Scala语言，微服务架构，<a href="https://koajs.com/" target="_blank" rel="noopener">koa</a>框架中的middleware，等等。</p>
 <p><br/></p>
-<p>我们可以在批评别人的时候，仔细想想自己有没有的过错，</p>
-<p>但是不能要求其他批评者也要这样做。</p>
+<p>但是在实际设计软件的时候，应该如何权衡系统的可扩展性呢？</p>
+<p>真的是可扩展性越高越好吗？</p>
 <p><br/></p>
-<p>自己有没有过错和被批评的人有没有过错，</p>
-<p>根本来说就是两回事。</p>
+<h3 id="弊端">2. 弊端</h3>
+<p>具有高度可扩展性的系统，我们用起来确实很好，</p>
+<p>但是，却不见得我们也要有这样的设计。</p>
 <p><br/></p>
-<h3 id="评判标准不一">评判标准不一</h3>
-<p>所谓对错，其实指的仅仅是，是否满足相应的评判标准而已。</p>
-<p>使用不同的标准来评判，自然就容易得出不一样的结论来。</p>
+<h4 id="过度设计">2.1 过度设计</h4>
+<p>这有两方面的因素，</p>
+<p>其一，我们未必有能力设计出，对未来考虑足够周全的系统。</p>
+<p>实际项目中，通常是引入了不恰当的抽象概念，导致过度设计。</p>
 <p><br/></p>
-<p>不幸的是，进行评判的人，通常不会事先说明他用了哪个标准来判断，</p>
-<p>而是默认用了他自己的标准。</p>
+<p>这通常是由于开发者过分自信导致的，</p>
+<blockquote>
+<p>60% 的程序员认为自己是属于天才和良好类，只有 30% 左右的人认为他们是一般的程序员。</p>
+</blockquote>
+<blockquote>
+<p>但实际上，只有不到 1% 的程序员属于天才程序员，有 10% 的良好程序员，其余大量的程序员是一般程序员。</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="https://www.oschina.net/news/79166/apache-foundation-ceo-decades-views" target="_blank" rel="noopener">屋中的大象</a>》</p>
+</blockquote>
 <p><br/></p>
-<p>因此，当有人做出评判的时候，</p>
-<p>我们本能也会拿这件事和自己的标准进行对比，</p>
-<p>而不是本能的拿这件事和陈述者心中的标准进行对比。</p>
+<p>我们能欣赏漂亮设计的优雅之处，不代表我们也能做出这样的设计。</p>
 <p><br/></p>
-<p>所以得到的结论只能是，按照我们自己的标准得到的判断，</p>
-<p>而不是站在陈述者的立场上考虑问题了。</p>
+<h4 id="成本和适用性">2.2 成本和适用性</h4>
+<p>其二，我们不确定现实项目是否需要这样的设计。</p>
+<p>采取任何决策，都不是免费的，总会有各方成本的权衡。</p>
+<p>况且，可扩展性设计，在不恰当的场景中，还会有自己的弊端。</p>
 <p><br/></p>
-<p>既然标准都不统一，争论对错就没有意义了。</p>
-<p>因此，理智的判断者，从不争论对错。</p>
+<p>例如，前文介绍的插件式微内核架构，当各个插件需要互相通信时，</p>
+<p>就会遇到严重的系统集成性问题，</p>
+<p>即，单独使用不会出现问题，当集成到一起，就容易出现各种冲突。</p>
 <p><br/></p>
-<h3 id="如何尊重事实">如何尊重事实</h3>
-<p>那么事实在哪里呢？</p>
-<p>实际上是没有办法直接描述事实的。</p>
+<p>这是我们不愿意见到的。</p>
 <p><br/></p>
-<p>因为至少从科学角度来讲，</p>
-<p>我们看到的东西只是它们反射或发出来的光而已。</p>
-<p>而那些光线传入我们眼中，只是这些事物的某一部分特征罢了。</p>
+<p>又例如，Lisp语言虽然具有高可扩展性，但是却对它的用户提出了很高要求，</p>
+<p>Lisp引入了一件麻烦事，称之为“<a href="http://www.yinwang.org/blog-cn/2017/05/25/dsl" target="_blank" rel="noopener">新语言问题</a>”。</p>
+<p>如果对Lisp宏使用不当，会极大的提高代码库的使用和维护成本。</p>
 <p><br/></p>
-<p>因此，事物无法不是被观察者眼中的样子。</p>
+<p>因此，在讨论是否需要可扩展性设计的时候，我们应当摒弃心中的执念，</p>
+<p>以实际项目环境，以及人员构成为出发点，客观的考虑。</p>
 <p><br/></p>
-<p>那这样就没有办法了解事实了吗？</p>
-<p>也不是。</p>
+<h4 id="以柔性设计为名">2.3 以柔性设计为名</h4>
+<p>最后，可扩展性设计，可看作是一种面向未来的柔性设计（supple design），</p>
+<blockquote>
+<p>为了使项目能够随着开发工作的进行加速前进，而不会由于它自己的老化停滞不前，设计必须要让人们乐于使用，而且易于做出修改，这就是柔性设计。然而，很多过度设计借着柔性设计的名义而自以为是正当的，结果过多的抽象层和间接设计常常成为项目的绊脚石。</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="https://book.douban.com/subject/5344973/" target="_blank" rel="noopener">领域驱动设计</a>》</p>
+</blockquote>
 <p><br/></p>
-<p>所谓兼听则明，我们可以多找几个观察者来综合得出结论，</p>
-<p>这样我们汇总出来的事实就更加逼真了。</p>
+<p>因此，在考虑可扩展性时，不妨问一问自己，</p>
+<p>我们真的对未来考虑清楚了么，还是暂时以可扩展性为由搪塞自己？</p>
+<p>我们真的考虑好可扩展性的代价和弊端了么，还是只看到了它所带来的好处？</p>
+<p><br/></p>
+<h3 id="技术本身的局限性">3. 技术本身的局限性</h3>
+<h4 id="兼容性问题">3.1 兼容性问题</h4>
+<p>软件一旦发布，对于后续升级来说，就容易产生令人头痛的兼容性问题，</p>
+<p><br/></p>
+<p>DLL地狱（DLL Hell）指在Microsoft Windows系统中，</p>
+<p>因为动态链接库（DLL）的版本或兼容性的问题而造成程序无法正常运行。</p>
+<p><br/></p>
+<p>Windows早期并没有很严谨的DLL版本管理机制，</p>
+<p>以致经常发生安装了某软件后，因为其覆盖了系统上原有的同一个DLL档，</p>
+<p>而导致原有可运行的程序无法运行，</p>
+<p>可是，还原回原有的DLL档之后，新安装的软件就无法运行。</p>
+<p><br/></p>
+<p>这经常被人们称之为 DLL地狱（DLL Hell）。</p>
+<p><br/></p>
+<p>Linux 系统中也遇到共享库（Shared Library）的兼容问题，</p>
+<p>共享库的开发者不停的更改共享库的版本，以修正原有的Bug，增加新的功能或改进性能等。</p>
+<p><br/></p>
+<p>由于动态链接的灵活性，使得程序本身和程序所依赖的共享库可以分别独立开发和更新，</p>
+<p>但是共享库版本的更新可能会导致接口的更改或删除，这可能导致依赖于该共享库的程序无法正常运行。</p>
+<p><br/></p>
+<p>由于发布后的软件，并不清楚自己被哪些其他系统所依赖，</p>
+<p>所以，一旦进行了不兼容性的修改，难免有潜在的问题发生。</p>
+<p><br/></p>
+<h4 id="依赖管理">3.2 依赖管理</h4>
+<p>这个问题，以前和朋友们讨论过，但是第一次在公开场合看到有人提及是这篇文章，</p>
+<p><a href="https://zhuanlan.zhihu.com/p/35929167" target="_blank" rel="noopener">[译] 超大型 JavaScript 应用的设计哲学</a>（<a href="https://www.youtube.com/watch?v=ZZmUwXEiPm4" target="_blank" rel="noopener">Youtube</a>），</p>
+<p>作者提到了一个“enhance”的概念，把依赖关系倒置了，</p>
+<p>把“我依赖xxx”倒置为，“我决定被xxx依赖”。</p>
+<p><br/></p>
+<p>这样对于自己的任何修改都将是安全的了，虽然也会带来其他的问题，这里就不谈了。</p>
+<p>毕竟这也是除了进行版本控制之外的另一种依赖管理办法。</p>
+<p><br/></p>
+<h4 id="工程">3.3 工程</h4>
+<p>有了对兼容性的理解之后，本文想引出一个观点，</p>
+<p>那就是，虽然从技术手段上可以削减软件变更带来的外部影响，</p>
+<p>但是我认为，究其根本，软件变更的影响范围管理，却是一个软件工程问题。</p>
+<p><br/></p>
+<p>高可扩展性诚然重要，但是工程上有一套合适的接口变更方案更重要。</p>
+<p>如果变更是无法避免的话，那么与其避免发生，倒不如对它进行疏导和管控。</p>
+<p><br/></p>
+<p>历史上大禹治水的典故，也有类似想法的写照，</p>
+<blockquote>
+<p>禹从鲧治水的失败中汲取教训，改变了"堵"的办法，对洪水进行疏导。</p>
+</blockquote>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>喷人者恒被喷之，其实是一种不太合理的现象。</p>
-<p>使人们容易在语言的争论中迷失讨论的目的。</p>
+<p>我们都期望当前维护的系统具有高度可扩展性，以减少眼前的工作负担，</p>
+<p>但是，一方面这类系统实际上需要很强的预见性才能设计出来，难免出现偏差。</p>
+<p>另一方面，高可扩展性也未必没有弊端，是否具有优势也与当前的项目场景有关。</p>
 <p><br/></p>
-<p>当然或许作者进行讨论的目的只是想表达一种情绪而已。</p>
+<p>此外，除了从技术角度考虑软件本身的设计和实现之外，</p>
+<p>我们还可以跳出来，从工程角度来重新看待这个问题。</p>
+<p>有时候，维护一个高可扩展性的软件系统，可能反而不如简单系统外加合适的变更方案更有效。</p>
 <p><br/></p>
-<p>但是，要想看到事实，</p>
-<p>我们就不能纠结作者的论证方式，</p>
-<p>也不能纠结作者是否满足我们心中的道德标准。</p>
-<p><br/></p>
-<p>我们需要做的，仅仅是要对事实保持敬畏，</p>
-<p>多花些时间把事情调查清楚。</p>
-<p><br/></p>
-<p>这样比口舌之争要好得多。</p>
-<p>毕竟大家都很忙，对吧。</p>
+<p>毕竟，目前软件都是由人来参与的，</p>
+<p>并用来解决人的问题。</p>
 
           
         
@@ -482,7 +538,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/148/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/148/">148</a><span class="page-number current">149</span><a class="page-number" href="/page/150/">150</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/150/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/148/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/148/">148</a><span class="page-number current">149</span><a class="page-number" href="/page/150/">150</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/150/">&gt;</a>
   </nav>
 
 
@@ -528,7 +584,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">307</span>
+                <span class="site-state-item-count">308</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

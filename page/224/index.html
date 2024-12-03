@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/06/25/complete-partial-order/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/07/01/the-way-to-express/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/06/25/complete-partial-order/" itemprop="url">不动点算子与完全偏序</a></h1>
+                <a class="post-title-link" href="/2016/07/01/the-way-to-express/" itemprop="url">重在表达</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-25T00:00:00+08:00">
-                2016-06-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-01T00:00:00+08:00">
+                2016-07-01
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,165 +347,121 @@
       
         
           
-            <h2 id="域论模型"><strong>域论模型</strong></h2>
-<p>类型化lambda演算，有两个常用模型。</p>
-<p>其一，域论模型。其二，递归函数论模型。</p>
+            <p>如果我们以发展的眼光来看待自身拥有的技能，</p>
+<p>就会发现，</p>
+<p>练习和使用是两个不同的概念。</p>
 <p><br/></p>
-<p>在众多域论模型中，</p>
-<p>主要关心的是一种具有完全偏序（complete partial order）结构的域，简称CPO。</p>
-<p>研究它的主要原因是，它是带有不动点算子的模型，</p>
-<p>而且它还提供了一种解释递归类型表达式的方法。</p>
-<p>域论方法是递归函数论模型的基础。</p>
+<p>我们可以不断练习，越来越熟练，</p>
+<p>还可以花时间练习新的技能。</p>
+<p>我们也可以越来越会使用已经学会的技能，</p>
+<p>对自己的控制能力越来越强。</p>
 <p><br/></p>
-<h2 id="递归"><strong>递归</strong></h2>
-<p>加入递归之后，对表达式进行归约就可能会无限的进行下去，</p>
-<p>因此将出现没有范式（normal form）的表达式。</p>
-<p>于是，把每个表达式指称为一个数值，这种想法就可能有问题了。</p>
-<p>下面我们引入不动点算子（fixed-point operator），用来它定义递归。</p>
+<p>这其中隐含了一个客观事实在里面，</p>
+<p>那就是技能是永远学不完的，</p>
+<p>也永远练习不到足够熟练的程度。</p>
 <p><br/></p>
-<p><span data-katex="letrec~f:\sigma=M~in~N"></span></p>
-<p>它表示<span data-katex="N"></span>，但是<span data-katex="N"></span>中f的值，是等式<span data-katex="f=M"></span>的解。</p>
-<p>而<span data-katex="M"></span>中可能会包含<span data-katex="f"></span>。</p>
-<p><span data-katex="M"></span>的类型根据等式<span data-katex="f=M"></span>也是<span data-katex="\sigma"></span>。</p>
+<p>因此，我们就需要在练习和使用之间找到平衡，</p>
+<p>什么时候增加熟练度，</p>
+<p>什么时候学习新技能，</p>
+<p>什么时候练习如何使用它们，</p>
+<p>怎样才能做到灵活运用。</p>
 <p><br/></p>
-<p>我们将看到，<span data-katex="letrec"></span>是<span data-katex="let"></span>与不动点算子的语法糖（syntactic sugar）。</p>
-<p>首先，我们先用<span data-katex="letrec"></span>定义阶乘函数，来计算<span data-katex="5!"></span>。</p>
-<p><span data-katex="letrec~f:nat\rightarrow nat=\lambda y:nat.~(if~Eq?~y~0~then~1~else~y*f(y-1))~in~f~5"></span></p>
+<h2 id="能不能先上手"><strong>能不能先上手</strong></h2>
+<p>如果说计算机行业对比其他行业有门槛的话，</p>
+<p>想必就只有一个了，</p>
+<p>那就是，是否有能力把目前的疑问放下，以后再绕回来解决。</p>
 <p><br/></p>
-<p>其中<span data-katex="f"></span>是下列等式的解。</p>
-<p><span data-katex="f=\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
+<p>每个概念在第一次遇到的时候，</p>
+<p>是依赖于以后某个未知概念才可以理解的。</p>
+<p>因此，我们要首先把它们全都装入大脑中，</p>
+<p>然后等时机成熟，触类旁通。</p>
 <p><br/></p>
-<h2 id="不动点算子"><strong>不动点算子</strong></h2>
-<p>从数学的角度来看，并不是所有形如<span data-katex="f:\sigma =M"></span>的等式都有解，</p>
-<p>如果有多个解，也不知道选择哪个解。</p>
-<p>我们先假设每个这样的等式都有解，为此我们增加一个不动点算子来得到这个解。</p>
+<p>某个概念没有理解，就无法理解后续概念，</p>
+<p>或者无法使用没有理解的概念，</p>
+<p>这是软件从业者最大的障碍。</p>
 <p><br/></p>
-<p>一般的，如果<span data-katex="F:\sigma \rightarrow \sigma"></span>是某一类型到自身的函数。</p>
-<p>那么<span data-katex="F"></span>的一个不动点，是使得<span data-katex="x=F(x)"></span>的值<span data-katex="x:\sigma"></span>。</p>
+<p>我们可以设想这样一个场景，</p>
+<p>假如我们曾经理解过，但是现在印象模糊了，</p>
+<p>那么还不是一样使用它吗？</p>
 <p><br/></p>
-<p>经过观察我们发现，阶乘函数<span data-katex="f"></span>是以下函数的<span data-katex="F"></span>的不动点，即满足<span data-katex="f=F(f)"></span>。</p>
-<p><span data-katex="F=_{def}\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
-<p>其中，<span data-katex="f:nat\rightarrow nat"></span>，<span data-katex="F:(nat\rightarrow nat)\rightarrow (nat\rightarrow nat)"></span></p>
+<p>直觉，和依靠不足的信息进行决策的能力，</p>
+<p>也是需要锻炼的。</p>
 <p><br/></p>
-<p>我们定义，<span data-katex="fix_\sigma :(\sigma \rightarrow \sigma )\rightarrow \sigma"></span>，是对应于每个类型<span data-katex="\sigma"></span>的不动点算子。</p>
-<p>满足的如下等式公理，</p>
-<p><span data-katex="fix_\sigma =\lambda f:\sigma \rightarrow \sigma .~f(fix_\sigma f)"></span></p>
+<h2 id="什么是基础"><strong>什么是基础</strong></h2>
+<p>很多人都强调基础的重要性，</p>
+<p>那么什么是基础呢？</p>
+<p>对软件行业来说，哪些是基础呢？</p>
 <p><br/></p>
-<p>可知，对任意的<span data-katex="F:\sigma \rightarrow \sigma"></span>，<span data-katex="fix_\sigma F"></span>是<span data-katex="F"></span>的不动点，即，</p>
-<p><span data-katex="fix_\sigma F=F(fix_\sigma F)"></span></p>
+<p>基础，就是那些，</p>
+<p>你感觉用不着，但如果成为专家是显然需要的知识。</p>
 <p><br/></p>
-<p>我们就可以用<span data-katex="let"></span>和<span data-katex="fix_\sigma"></span>表示<span data-katex="letrec"></span>了。</p>
-<p><span data-katex="letrec~f:\sigma =M~in~N=_{def}let~f:\sigma =(fix_\sigma \lambda f:\sigma .~M)~in~N"></span></p>
+<p>是的，那些用不着的知识，</p>
+<p>潜移默化的影响着你，</p>
+<p>影响每一招每一式的施展，</p>
+<p>这才是基础。</p>
 <p><br/></p>
-<h2 id="归约"><strong>归约</strong></h2>
-<p>我们以阶乘函数为例，来说明带有不动点算子的表达式是如何归约的。</p>
-<p>为了行文方便，我们省略<span data-katex="fix_{nat\rightarrow nat}"></span>的下标，直接记为<span data-katex="fix"></span>。</p>
-<p>定义阶乘函数<span data-katex="fact=_{def}fix~F"></span>，其中，</p>
-<p><span data-katex="F=_{def}\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
+<p>例如，我们在做Web开发，</p>
+<p>那么网络技术，编译原理，算法，设计模式，等等都是基础。</p>
+<p>它们能让我们跳出当前的场景看待问题。</p>
 <p><br/></p>
-<p>我们来计算<span data-katex="fact~n"></span>。</p>
-<p><span data-katex="fact~n=(fix~F)~n"></span></p>
-<p><span data-katex="=((\lambda f:nat\rightarrow nat.~f(fix~f))~F)~n"></span></p>
-<p><span data-katex="=(F~(fix~F))~n"></span></p>
-<p><span data-katex="=((\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1))~(fix~F))~n"></span></p>
-<p><span data-katex="=(if~Eq?~n~0~then~1~else~n*(fix~F))~(n-1)"></span></p>
+<p>那如果我们做编译器的开发呢，</p>
+<p>那么形式语言理论，语义学，类型理论，数理逻辑，等等都是基础。</p>
+<p>再深入下去还有，</p>
+<p>可见，基础之下还有基础，像冰山一样隐藏在水面之下。</p>
 <p><br/></p>
-<h2 id="无法终止的运算"><strong>无法终止的运算</strong></h2>
-<p>由于递归允许我们写出没有范式的表达式，</p>
-<p>所以我们相应的必须给这样的表达式赋予含义。</p>
+<h2 id="关键在哪"><strong>关键在哪</strong></h2>
+<p>如果用一句话形容软件工程师的工作，</p>
+<p>我想说，软件工程师，就是用DSL降低问题复杂度的人们。</p>
+<p>各行各业解决问题的角度都有不同，</p>
+<p>而软件工程师，独爱DSL——领域特定语言。</p>
 <p><br/></p>
-<p>例如，</p>
-<p><span data-katex="letrec~f:nat\rightarrow nat=\lambda x:nat.~f(x+1)~in~f~3"></span></p>
-<p>尽管该表达式的类型是<span data-katex="nat"></span>，但是我们无法把它简化为一个数值。</p>
-<p>所以该表达式的含义就不是一个自然数了。</p>
+<p>既然和语言有关，那就需要很强的表达能力，</p>
+<p>像优秀的作家一样，词汇量固然重要，</p>
+<p>但是如果要让人耐看，就必须表达的好。</p>
 <p><br/></p>
-<p>一方面，认为该表达式的类型是<span data-katex="nat"></span>是合理的，它是类型规则的推导结论。</p>
-<p>另一方面，如果我们说该表达式的值是『未定义的』，</p>
-<p>那么<span data-katex="f"></span>的语义就变成了部分函数（partial function）。</p>
+<p>因此重点在于设计这些DSL的描述方式上，</p>
+<p>在于如何使用已有的知识，进行整合。</p>
+<p>这是一种创造性的活动。</p>
 <p><br/></p>
-<p>我们不如给自然数集附加一个值<span data-katex="\perp _{nat}"></span>，</p>
-<p>用来表示类型<span data-katex="nat"></span>上无法终止的运算（nonterminating computation）。</p>
-<p>这给了我们一个把部分函数看成完全函数（total function）的方法。</p>
+<p>拿个篮球活动的例子来引出问题吧，</p>
+<p>我曾问过高手们一个问题，</p>
+<p>“你怎样保证失误率那么低的？”</p>
+<p>“两个办法，训练时努力降低失误率，比赛时，不用失误率高的动作”。</p>
 <p><br/></p>
-<h2 id="cpo"><strong>CPO</strong></h2>
-<p><strong>偏序</strong></p>
-<p>一个偏序（partial order）<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个集合<span data-katex="D"></span>，以及集合上的一个关系（relation）<span data-katex="\leqslant"></span>，</p>
-<p>这个关系具有自反性，反对称性，和传递性。</p>
+<p>这给了我很强的启示，</p>
+<p>原来如何使用是一门艺术，</p>
+<p>使用方式决定了最后的表现。</p>
 <p><br/></p>
-<p>若对于任意<span data-katex="d\in D"></span>有<span data-katex="d\leqslant d"></span>，则称<span data-katex="\leqslant"></span>具有自反性（reflexive）。</p>
-<p>若<span data-katex="a\leqslant b"></span>且<span data-katex="b\leqslant a"></span>有<span data-katex="a=b"></span>，则称<span data-katex="\leqslant"></span>具有反对称性（anti-symmetric）。</p>
-<p>若<span data-katex="a\leqslant b"></span>且<span data-katex="b\leqslant c"></span>有<span data-katex="a\leqslant c"></span>，则称<span data-katex="\leqslant"></span>具有传递性（transitive）。</p>
+<h2 id="那么路线是什么"><strong>那么路线是什么</strong></h2>
+<p>综上所述，我们得到了一个从入门到成熟的行走路线，</p>
+<p>首先，我们要不求甚解的往大脑中塞下很多东西，</p>
+<p>并强迫自己使用，还要有足够好的恒心让自己一遍一遍重新回来琢磨它。</p>
 <p><br/></p>
-<p><strong>上界与最小上界</strong></p>
-<p>如果<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个偏序，则子集<span data-katex="S\subseteq D"></span>的上界（upper bound），</p>
-<p>是<span data-katex="D"></span>中的一个元素<span data-katex="x\in D"></span>，使得对于任意的<span data-katex="y\in S"></span>有<span data-katex="y\leqslant x"></span>。</p>
-<p>最小上界（least upper bound）是那个<span data-katex="\leqslant"></span>任何其它上界的元素。</p>
+<p>然后，我们要向下挖掘那些看起来没用的，但成为专家显然需要的知识。</p>
+<p>把这些知识放在水面下，用露出的那一点点“细枝末节”去应付浮躁的潮流。</p>
+<p>这样就不会随波逐流了，水深才会心静，心静而气自闲。</p>
 <p><br/></p>
-<p><strong>有向集</strong></p>
-<p>如果<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个偏序，称子集<span data-katex="S\subseteq D"></span>是有向的（directed），</p>
-<p>如果<span data-katex="S"></span>的每一个有限子集<span data-katex="S_0\subseteq S"></span>在<span data-katex="S"></span>中都有上界。</p>
-<p>有向集（directed set）的一个性质是，所有有向集都非空。</p>
+<p>最后，我们把重点放在表达上，</p>
+<p>不要使用那些不熟练的知识，它们是训练时攻克的目标。</p>
+<p>要有能力在紧要关头只用熟练的知识解决问题。</p>
 <p><br/></p>
-<p><strong>完全偏序</strong></p>
-<p>完全偏序（complete partial order）简称CPO，它是一个偏序<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>，</p>
-<p>且每一个有向子集<span data-katex="S\subseteq D"></span>都有最小上界，我们把这个最小上界记为<span data-katex="\bigvee S"></span>。</p>
-<p>可证，任何一个有限的偏序，都是完全偏序。</p>
+<p>为什么会失误？是因为本来就没有多大可能它会成功。</p>
+<p>那么为什么还要用它，而不去选择其他成功率高的方式？</p>
+<p>因为没有成功率高的方式吗？那为什么不去训练？</p>
+<p>没有什么好练的啊？把那些计划以后再练的练了吧。</p>
 <p><br/></p>
-<p>一个不是CPO的例子是自然数集，自然数集<span data-katex="N"></span>本身是有向的，但没有最小上界。</p>
-<p>如果我们加入一个比其他自然数都大的元素<span data-katex="\infty"></span>，我们就得到了一个CPO。</p>
+<p>这样就变成了一个以训练为本，重在表达的正向循环了。</p>
 <p><br/></p>
-<h2 id="cpo的提升"><strong>CPO的提升</strong></h2>
-<p><strong>有奇点的CPO</strong></p>
-<p>如果<span data-katex="\mathscr{D}=\left \langle D,\leqslant  \right \rangle"></span>是一个有最小元（least element）的偏序，</p>
-<p>则称为<span data-katex="\mathscr{D}"></span>是有奇点（pointed）的，我们用<span data-katex="\perp _D"></span>表示<span data-katex="D"></span>的最小元。</p>
-<p><br/></p>
-<p><strong>提升集</strong></p>
-<p>对于任意的集合<span data-katex="A"></span>，我们构建一个CPO，<span data-katex="A_\perp =\left \langle A\cup \{\perp \} ,\leqslant  \right \rangle"></span>，</p>
-<p>其中，<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=\perp"></span>或<span data-katex="x=y"></span>。</p>
-<p>我们称<span data-katex="A_\perp"></span>为<span data-katex="A"></span>的提升集（lifted set）。</p>
-<p><br/></p>
-<p>用这个方法，我们可以提升任何一个CPO，<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D  \right \rangle"></span>，</p>
-<p>得到<span data-katex="\mathscr{D}_\perp =\left \langle D\cup \{\perp \},\leqslant \right \rangle"></span>，</p>
-<p>其中<span data-katex="\perp"></span>与<span data-katex="D"></span>中的任何元素都不等，新的序关系<span data-katex="x\leqslant y"></span>当且仅当<span data-katex="x=\perp"></span>或<span data-katex="x\leqslant _D y"></span>。</p>
-<p><br/></p>
-<p>可证，如果<span data-katex="\mathscr{D}"></span>是一个CPO，则<span data-katex="\mathscr{D}_\perp"></span>是一个有奇点的CPO。</p>
-<p><br/></p>
-<h2 id="连续函数"><strong>连续函数</strong></h2>
-<p><strong>单调函数</strong></p>
-<p>设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>和<span data-katex="\mathscr{E}=\left \langle E,\leqslant _E \right \rangle"></span>是CPO，</p>
-<p><span data-katex="f:D\rightarrow E"></span>是集合<span data-katex="D"></span>到<span data-katex="E"></span>的一个函数，我们说<span data-katex="f"></span>是单调的（monotonic），</p>
-<p>如果<span data-katex="a\leqslant b"></span>就有<span data-katex="f(a)\leqslant f(b)"></span>。</p>
-<p><br/></p>
-<p><strong>连续函数</strong></p>
-<p>一个单调函数<span data-katex="f"></span>是连续的（continuous），如果对于任意有向子集<span data-katex="S\subseteq D"></span>，有<span data-katex="f(\bigvee S)=\bigvee f(S)"></span>。</p>
-<p><br/></p>
-<p><strong>提升函数</strong></p>
-<p>我们定义<span data-katex="f:D\rightarrow E"></span>对应的提升函数（lifted function）为<span data-katex="f_\perp =(D\cup\{ \perp \})\rightarrow (E\cup\{ \perp \})"></span>。</p>
-<p>其中，如果<span data-katex="a\in D"></span>，则<span data-katex="f_\perp (a)=f(a)"></span>，否则<span data-katex="f_\perp (a)=\perp"></span>。</p>
-<p><br/></p>
-<p><strong>函数集构成CPO</strong></p>
-<p>假设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>和<span data-katex="\mathscr{E}=\left \langle E,\leqslant _E \right \rangle"></span>是CPO，</p>
-<p>对于连续函数<span data-katex="f,g:D\rightarrow E"></span>，我们称<span data-katex="f\leqslant_{D\rightarrow E} g"></span>，如果对于任意<span data-katex="d\in D"></span>，都有<span data-katex="f(d)\leqslant _E g(d)"></span>。</p>
-<p>于是，所有这些连续函数构成了一个CPO，记为<span data-katex="\mathscr{D}\rightarrow \mathscr{E}=\left \langle D\rightarrow E,\leqslant _{D\rightarrow E} \right \rangle"></span>。</p>
-<p><br/></p>
-<h2 id="最小不动点"><strong>最小不动点</strong></h2>
-<p>我们称<span data-katex="a"></span>是<span data-katex="f"></span>的最小不动点（least fixed point），</p>
-<p>如果<span data-katex="a=f(a)"></span>且对于任意的<span data-katex="b=f(b)"></span>，我们有<span data-katex="a\leqslant b"></span>。</p>
-<p><br/></p>
-<p>如果<span data-katex="\mathscr{D}"></span>是一个有奇点的CPO，且<span data-katex="f:D\rightarrow D"></span>是连续的，则<span data-katex="f"></span>有最小不动点，</p>
-<p><span data-katex="fix_D f=\bigvee \{ f^n(\perp )~|~n\geqslant 0 \}"></span>，</p>
-<p>且<span data-katex="fix_D"></span>是连续的。</p>
-<p><br/></p>
-<p>例如，设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>是有奇点的CPO，则恒等函数<span data-katex="id:D\rightarrow D"></span>的最小不动点是<span data-katex="\perp _D"></span>。</p>
-<p><span data-katex="fix_D~id=\bigvee \{ id^n(\perp _D)~|~n\geqslant 0 \}=\bigvee \{ \perp _D \}=\perp _D"></span></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>初等数学中，某些函数是没有不动点的。</p>
-<p>那么在什么情况下，形如<span data-katex="f:\sigma =M"></span>的表达式有解呢？</p>
-<p>定义了递归之后，对类型化lambda演算的模型产生了什么影响呢？</p>
+<p>做到随机应变，并不是一件容易的事情，</p>
+<p>要么基本功太弱，要么没有控制自己的能力总是想使用不纯熟的技能。</p>
 <p><br/></p>
-<p>这是一直以来我心中是一个问题。</p>
-<p>诚然，类型化lambda演算有不同的解释方式，但以上域论模型通俗易懂，</p>
-<p>也算是告一段落吧，以后的路还长着呢。</p>
+<p>没有在比赛场上训练的选手，</p>
+<p>也没有线上环境试错的码农。</p>
+<p><br/></p>
+<p>大家都在打基础，练表达，</p>
+<p>基本功诚然重要，但是打基础大家都懂，不是盲区，</p>
+<p>重在表达，就很少有人意识到了。</p>
 
           
         
@@ -544,7 +500,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/223/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/223/">223</a><span class="page-number current">224</span><a class="page-number" href="/page/225/">225</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/225/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/223/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/223/">223</a><span class="page-number current">224</span><a class="page-number" href="/page/225/">225</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/225/">&gt;</a>
   </nav>
 
 
@@ -590,7 +546,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">307</span>
+                <span class="site-state-item-count">308</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

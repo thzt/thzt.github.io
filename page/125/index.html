@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/11/22/smart-user/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/12/15/beyond-generality/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/22/smart-user/" itemprop="url">我们的用户是聪明人</a></h1>
+                <a class="post-title-link" href="/2018/12/15/beyond-generality/" itemprop="url">一般性之外的考虑</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-22T00:00:00+08:00">
-                2018-11-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-15T00:00:00+08:00">
+                2018-12-15
               </time>
             
 
@@ -347,152 +347,105 @@
       
         
           
-            <p>我们常说用户第一，以及注重实现用户价值，</p>
-<p>一点都不假，</p>
-<p>因为，<strong>技术细节是用户不关心的事情</strong>。</p>
+            <p>软件工程师们对社会的价值，</p>
+<p>得益于人们认识到<strong>机器可以大幅度的减少重复劳动时间</strong>。</p>
 <p><br/></p>
-<p>我们也很尊重用户，尽一切可能满足用户的需要，</p>
-<p>想方设法的为用户着想，</p>
-<p>第一时间帮用户解决问题。</p>
+<p>于是，程序员们经常通过探索多个不同场景中的<strong>相似之处</strong>，</p>
+<p>用软件手段<strong>一次性的</strong>解决多个问题。</p>
 <p><br/></p>
-<p>这是一件值得<strong>夸赞</strong>的事情。</p>
+<p>但是好景不长。</p>
+<p>因为随着<strong>待覆盖</strong>的问题场景增多，</p>
+<p>它们就变得<strong>不那么相似了</strong>，而是各有各的不同。</p>
 <p><br/></p>
-<p>可是，<strong>我们到底应该把用户当做一个什么样的人</strong>，</p>
-<p>大家可能会有不同的看法。</p>
+<p>于是问题就来了，</p>
+<p>我们是应该<strong>简化</strong>需求，以发挥软件的最大作用，</p>
+<p>还是应该处理好所有<strong>细节</strong>，以满足用户的多样性需求。</p>
 <p><br/></p>
-<p>有的人认为，我们应该<strong>相信用户</strong>，尽量给用户提供更多的可能性。</p>
-<p>而有的人则认为，</p>
-<p>我们<strong>不该相信</strong>任何人，需要对用户行为加以限制。</p>
+<p>这是一件值得深思的事情。</p>
 <p><br/></p>
-<p>究竟怎样做才是合理的呢？</p>
-<p>本文就针对这个问题，尝试进行一些思考，斟酌一下利弊。</p>
+<h3 id="相似之处的不稳定性">相似之处的不稳定性</h3>
+<p>提取不同事情之间的相似之处，通常有两种方式。</p>
 <p><br/></p>
-<h3 id="作品是一面镜子">作品是一面镜子</h3>
-<p>我现在认可一个观点，</p>
-<p>那就是，<strong>作品实际上反映了作者的处事态度和行为准则</strong>，</p>
-<p>有什么样的作者，就有什么样的作品。</p>
+<p>其一，是从具体细节上来看，它们都要做一部分<strong>相同的事情</strong>。</p>
+<p>例如，两个页面要展示同一块内容。</p>
 <p><br/></p>
-<p>如果我们平时工作严谨，喜欢规矩做事，</p>
-<p>那么做出来的软件，就更可能<strong>要求用户向我们一样</strong>，</p>
-<p>不能恣意而为，需要受到一些限制。</p>
+<p>其二，是从抽象层次上来看，它们要做的事情可以<strong>一概而言</strong>，</p>
+<p>例如，两个页面都要向服务端发起请求，但具体的请求内容是不同的。</p>
 <p><br/></p>
-<p>反之，如果我们更喜欢自由，喜欢打破常规，</p>
-<p>那么我们就更喜欢提供出<strong>灵活的解决方案</strong>，</p>
-<p>让用户自由发挥。</p>
+<p>这两种提取相似性的方式，都很有效，但不完美。</p>
+<p>我们很容易找出反例，破坏它们的<strong>稳定性</strong>，</p>
+<p>尤其是当需要考虑的事情增多时。</p>
 <p><br/></p>
-<p>因此，<strong>我们自己是什么样的人，就会做出什么样的软件</strong>。</p>
-<p>不能强求。</p>
+<p>这里有个常见的<strong>误区</strong>，</p>
+<p>人们通常会认为，抽象意味着稳定，其实不是这么回事，</p>
+<p>事实上，<strong>我们很难判断当前的抽象是否合理。</strong></p>
 <p><br/></p>
-<p>或者换句话说，</p>
-<p><strong>要想改变软件，只能先改变自己。</strong></p>
+<p>而大多数软件灾难的发生，均在于，</p>
+<p>对可能发生的场景了解得不够深入，而过早的建立了<strong>不正确的抽象</strong>。</p>
 <p><br/></p>
-<h3 id="是谁解决了问题">是谁解决了问题</h3>
-<p>那么用户到底需要什么样软件呢？</p>
-<p>我认为这取决于我们<strong>对解题的理解方式</strong>，</p>
-<p>问题到底是怎么被解决的？</p>
+<h3 id="软件的目标用户和现有用户">软件的目标用户和现有用户</h3>
+<p>值得一提的是，软件的<strong>目标用户</strong>可以和<strong>现有用户</strong>不同，</p>
+<p>我们打算提供什么样的特性，</p>
+<p>与现有用户期望得到什么样的特性，应该有所<strong>区分</strong>。</p>
 <p><br/></p>
-<p>对问题的本身的探讨很有意思，</p>
-<p>因为我们经常会忽略<strong>问题的主体</strong>。</p>
+<p>否则，我们永远也无法满足当前用户的所有需求，</p>
+<p>或者即使满足了一部分用户的需求，</p>
+<p>也难免<strong>损害</strong>另一部分用户。</p>
 <p><br/></p>
-<p>这个问题是谁关心的，是谁的问题，谁最需要它被解决？</p>
-<p>解决了它哪些人会受益？</p>
+<p>因此，<strong>考虑好放弃什么，比考虑要提供什么，更重要</strong>。</p>
+<p>软件可以不令它现有的用户全部满意，</p>
+<p>但不可以没有自己的<strong>发展目标</strong>。</p>
 <p><br/></p>
-<p>其实，软件只是解决方案的一种，没有它问题不见得不能用其他办法解决，</p>
-<p>有了它，问题也不见得能被很好的解决。</p>
+<p>实际上，为人处世也当如此，</p>
+<p>不论我们怎样做，都改变不了一部分人的<strong>评价</strong>。</p>
+<p>所以，我们不能以得到更多的好评为目标。</p>
 <p><br/></p>
-<p>因此，对于问题本身来说，软件的作用不像我们想象中的那样重要，</p>
-<p>问题也不是我们解决的，</p>
-<p><strong>是用户解决了问题。</strong></p>
+<p>软件也当有自身的独立<strong>品格</strong>。</p>
 <p><br/></p>
-<p>我认为在这件事上<strong>保持谦卑</strong>，至关重要。</p>
+<h3 id="软件方案的不确定性">软件方案的不确定性</h3>
+<p>如果从产品维度考虑问题的话，软件功能将是<strong>可取舍的</strong>，</p>
+<p>而一旦确定了功能列表，本来我认为具体实现将是不可妥协的。</p>
 <p><br/></p>
-<h3 id="这是谁的问题">这是谁的问题</h3>
-<p>以前读过一本书《<a href="https://book.douban.com/subject/1135754/" target="_blank" rel="noopener">你的灯亮着吗？</a>》，</p>
-<p>它深入探讨了<strong>问题的本质</strong>，</p>
-<p>其中有很多生动的小例子。</p>
+<p>其实仍有商量的余地。</p>
+<p>如果将自己跳出功能的实现者这个角色，</p>
+<p>具体的实现方式，也是可以影响到<strong>上层决策</strong>的。</p>
 <p><br/></p>
-<p>印象比较深的一个例子是这样的。</p>
+<p>我在实现层面的种种考量，以及面向未来的<strong>远见</strong>和<strong>铺垫</strong>，</p>
+<p>其实都来源于我们对软件产品的<strong>预期</strong>和<strong>判断</strong>。</p>
 <p><br/></p>
-<p>在日内瓦湖的山脉中，有一条很长的汽车隧道，</p>
-<p>尽管隧道照明设施很好，但仍然需要预防在停电的情况下发生灾难。</p>
-<p>于是人们在隧道入口处放了一个标识牌。</p>
+<p>因此在开发阶段早期进行<strong>不必要的优化</strong>，是危险的，</p>
+<p>我们对问题的理解还不够深入，</p>
+<p>很容易沉溺于自己的<strong>想象</strong>中。</p>
 <p><br/></p>
-<p>上面写着， <strong>警告：前有隧道请打开车头灯。</strong></p>
+<p>其实，人们很难区分<strong>什么是自己的假设</strong>，什么是事实，</p>
+<p>这可以认为是一个人性的弱点。</p>
 <p><br/></p>
-<p>但是问题来了，很多游客在返程时却发现自己的车没电了，</p>
-<p>因为他们忘记关掉车灯了。</p>
+<p>例如，拥有代码洁癖的程序员，</p>
+<p>其实并不能<strong>证明</strong>特定的代码对别人来说也是干净的，</p>
+<p>因此，干净的代码更好，就是一种人为假设。</p>
 <p><br/></p>
-<p>警察们被迫用上他们所有的资源，好让车启动起来，或者把它们拖走。</p>
-<p>游客们也是怨声载道。</p>
+<p>我们只能说，有时候是这样，有时候又不是。</p>
+<p>软件设计便是如此，我们根据经验所得到的一些判断，只是一种假设，而不是事实。</p>
+<p><strong>越笃定，往往越容易出问题。</strong></p>
 <p><br/></p>
-<p>好了，现在我们就可以提问了，</p>
-<p><strong>这是谁的问题？</strong></p>
-<p><br/></p>
-<p>结果，不仅司机认为这是工程师的问题，而且可能连工程师也这么认为。</p>
-<p><br/></p>
-<h3 id="用户愿意解决问题吗">用户愿意解决问题吗</h3>
-<p>为了解决这个问题，工程师们可能会想出很多不同的办法，</p>
-<p>例如，可以在附近建一个充电站，但是这要花很多钱。</p>
-<p><br/></p>
-<p>或者，在隧道尽头再立一块标识牌，写上，关掉车灯。</p>
-<p>但是这样的话，夜晚行车的人们也会关掉车灯。</p>
-<p><br/></p>
-<p>所以，按照程序员们审慎的思维习惯，这个标识牌应该这么写，</p>
 <blockquote>
-<p>如果这是白天，并且如果您的车灯开着，那么熄灭车灯；</p>
+<p>解决问题的能力，就是为印证假设不辞劳苦的行动力。</p>
 </blockquote>
 <blockquote>
-<p>如果天色已晚，并且如果您的车灯没开，那么打开车灯；</p>
+<p>——《<a href="https://book.douban.com/subject/26633567/" target="_blank" rel="noopener">思考的技术</a>》</p>
 </blockquote>
-<blockquote>
-<p>如果这是白天，并且如果您的车灯没开，那么就别打开；</p>
-</blockquote>
-<blockquote>
-<p>如果天色已晚，并且如果您的车灯开着，那么就别关它。</p>
-</blockquote>
-<p><br/></p>
-<p>等人们读完这标识牌，汽车早就飞驰而过，沉到湖底了。</p>
-<p>这根本就不是一个可以接受的解决方案。</p>
-<p><br/></p>
-<p>事实上，总工程师也没有把问题复杂化，</p>
-<p>而是用了一种方法，“<strong>把问题当做他们的问题</strong>”，</p>
-<p>工程师只是起了一点<strong>辅助作用</strong>。</p>
-<p><br/></p>
-<p>他假设司机们非常愿意解决这个问题，但是需要一点<strong>提醒</strong>。</p>
-<p>他还假设司机们不是那种彻头彻尾的傻瓜。</p>
-<p><br/></p>
-<p>因此，工程师们所需要做的，只是在隧道的尽头加一块标识牌，写上，</p>
-<p><strong>您的等亮着吗？</strong></p>
-<p><br/></p>
-<p>这个标识牌使问题消失了，</p>
-<p>如果人们的灯真的亮着，一个小小的提醒，</p>
-<p>可能比那些复杂的解决方案都更有效。</p>
-<p><br/></p>
-<h3 id="方案能否被采纳">方案能否被采纳</h3>
-<p>反观我们软件行业，框架的设计者们，</p>
-<p><strong>把用户当傻子</strong>的例子，也是屡见不鲜。</p>
-<p><br/></p>
-<p>他们不让用户干这个，也不让用户干那个，</p>
-<p>这样做貌似会防止用户犯错，</p>
-<p>但实际上并非如此。</p>
-<p><br/></p>
-<p><strong>如果用户受到了限制，他们就会自己想办法，</strong></p>
-<p>绕过这些限制，用<strong>非常规</strong>的手段把问题解决掉。</p>
-<p><br/></p>
-<p><strong>不容易犯错的办法，不见得是用户乐意采用的办法。</strong></p>
-<p>所以，方案能否被采纳，与能不能解决问题，同等重要。</p>
-<p><br/></p>
-<p>此外，由于种种原因，用户可能会被方案所<strong>绑架</strong>，</p>
-<p>他们不得不使用某些软件，</p>
-<p>这就造成了一些假象，让人们<strong>误以为</strong>自己做的还不错。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>总之，<strong>是工程师协助用户解决了问题，</strong></p>
-<p><strong>而不是工程师自己解决了问题。</strong></p>
+<p>越有经验的开发者，就越容易相信自己的经验，</p>
+<p>软件工程师们也经常认为自己工作在<strong>确定的</strong>问题背景之中。</p>
 <p><br/></p>
-<p>我们应该和用户站在一起，才能体会到问题发生的真实场景，</p>
-<p>让我们认为用户是聪明人吧，他们不是笨蛋，</p>
-<p>他们是<strong>合作伙伴</strong>，而不仅仅是软件的使用者。</p>
+<p>其实实际项目中的很多问题都是<strong>不能确定的</strong>，</p>
+<p>各个参与者，影响了软件的最终形态，</p>
+<p>并非是由<strong>市场</strong>这个单一因素所驱动的。</p>
+<p><br/></p>
+<p>当我们意识到自己处于混沌之中的时候，</p>
+<p>才能看清软件的真实目标，</p>
+<p>它就像迷雾中的探险船一样，<strong>即使暂时找不到方向，也要先找一个方向前行。</strong></p>
 
           
         
@@ -531,7 +484,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/124/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/124/">124</a><span class="page-number current">125</span><a class="page-number" href="/page/126/">126</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/126/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/124/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/124/">124</a><span class="page-number current">125</span><a class="page-number" href="/page/126/">126</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/126/">&gt;</a>
   </nav>
 
 
@@ -577,7 +530,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">307</span>
+                <span class="site-state-item-count">308</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

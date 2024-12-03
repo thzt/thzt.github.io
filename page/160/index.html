@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/09/semantics-7/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/11/semantics-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/09/semantics-7/" itemprop="url">语言背后的代数学（七）：数学结构</a></h1>
+                <a class="post-title-link" href="/2018/02/11/semantics-8/" itemprop="url">语言背后的代数学（八）：范畴</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T00:00:00+08:00">
-                2018-02-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-11T00:00:00+08:00">
+                2018-02-11
               </time>
             
 
@@ -347,263 +347,179 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-e24e6ddb6c6118a2.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-cf6fe04651d9f2d5.png" /></p>
 <p><br/></p>
 <h3 id="回顾">回顾</h3>
-<p>上文我们介绍了Henkin模型，以及它的环境模型条件和组合模型条件，</p>
-<p>它们分别为合法的<span data-katex="\lambda"></span>项和<span data-katex="CL"></span>项，找到了对应的语义解释。</p>
-<p>然而这只是简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>的其中一种解释。</p>
+<p>上文中，我们用群，拓扑空间，CPO作为例子，</p>
+<p>来说明什么是数学结构，以及数学结构是如何通过映射来保持的。</p>
+<p>群同态保持了群结构，连续映射保持了拓扑结构，</p>
+<p>连续函数保持了完全偏序结构。</p>
 <p><br/></p>
-<p>另一种常用的解释方式，建立在范畴论基础之上，称为<strong>笛卡尔闭范畴</strong>。</p>
-<p>为了理解这个概念，我们需要补充一些简单的范畴论方面的内容。</p>
+<p>那么群结构与拓扑结构之间是否有联系呢？</p>
+<p>我们能否建立拓扑空间与群之间的对应关系呢？</p>
 <p><br/></p>
-<h3 id="数学结构">1. 数学结构</h3>
+<p>在代数拓扑中，就存在这样的例子，</p>
+<p>人们找到了和拓扑空间相关的群论概念，例如基本群和同调群，</p>
+<p>拓扑空间的连续映射可以导出这些群的群同态。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-ce31cbd5a6af6c3a.png" /></p>
+<p>这就为了人们使用代数学方法研究其他数学分支，奠定了基础，</p>
+<p>实际上，最原始的范畴论想法也是起源于此。</p>
 <p><br/></p>
-<p>范畴论的研究数学结构的形式化方法，</p>
-<p>它不考虑具体的数学对象，而是考虑数学对象以及它们之间的联系。</p>
+<h3 id="图示法">1. 图示法</h3>
+<p>在前一篇中我们学过了幺半群，</p>
+<p>它指的是一个集合<span data-katex="M"></span>，以及<span data-katex="M"></span>上的二元运算<span data-katex="\cdot"></span>，满足以下两个条件，</p>
+<p>（1）<span data-katex="\forall x,y,z\in M"></span>，<span data-katex="(x\cdot y)\cdot z=x\cdot (y\cdot z)"></span>，</p>
+<p>（2）<span data-katex="\exists e\in M"></span>，<span data-katex="\forall x\in M"></span>，<span data-katex="x\cdot e=e\cdot x=x"></span>。</p>
 <p><br/></p>
-<p>学习范畴论最好的办法，我认为不宜马上从抽象的概念开始，</p>
-<p>而是先回到具体的例子上面，找到相似性，<strong>理解概念被发明的动机</strong>。</p>
+<p>这两个条件除了可以用等式来表示，还可以用<strong>图</strong>（diagram）来表示，</p>
 <p><br/></p>
-<p>因此，我们要先理解什么是<strong>数学结构</strong>。</p>
-<p>后文中，我们会首先介绍最常被提及的群结构，然后再介绍拓扑空间和CPO（完全偏序）。</p>
-<p>有了这些例子之后，对抽象概念的理解是事半功倍的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-83faca1582ad5a4b.png" /></p>
 <p><br/></p>
-<h3 id="群结构">2. 群结构</h3>
+<p>我们称以上两张图都是<strong>可交换的</strong>（commutative），</p>
+<p>即，沿着不同的路径进行运算，只要起点和终点相同，则运算的结果就相同。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-3f960ea2439e2f98.png" /></p>
+<p>例如，<span data-katex="&lt;x,y,z&gt;\mapsto &lt;x,yz&gt;\mapsto x(yz)"></span>，</p>
+<p>总是等于<span data-katex="&lt;x,y,z&gt;\mapsto &lt;xy,z&gt;\mapsto (xy)z"></span>，</p>
+<p>即，<span data-katex="x(yz)=(xy)z"></span>，表明<span data-katex="M"></span>中元素的运算满足结合律。</p>
 <p><br/></p>
-<p>群是一种满足结合律的乘法结构，</p>
-<p>但是它的运算对象，却并不局限于整数，有理数甚至实数上。</p>
-<p>因此，群论对概念采用了不同的定义方式，和初等代数有明显的不同。</p>
+<p>又例，<span data-katex="&lt;0,x&gt;\mapsto &lt;e,x&gt;\mapsto ex"></span>，总是等于<span data-katex="&lt;0,x&gt;\mapsto x"></span>，即<span data-katex="ex=x"></span>，</p>
+<p><span data-katex="&lt;x,0&gt;\mapsto &lt;x,e&gt;\mapsto xe"></span>，总是等于<span data-katex="&lt;x,0&gt;\mapsto x"></span>，即<span data-katex="xe=x"></span>。</p>
+<p>因此，<span data-katex="ex=x=xe"></span>，表明<span data-katex="M"></span>中存在幺元<span data-katex="e"></span>。</p>
 <p><br/></p>
-<p>在初等代数中，我们研究的是具体的运算系统，</p>
-<p>例如，我们会先介绍什么是自然数，然后再介绍自然数上的四则运算。</p>
-<p>群论则不然。</p>
+<p>所以，我们可以用以上两个图表，作为幺半群的定义，称为<strong>图示法</strong>。</p>
 <p><br/></p>
-<p>它会先抽象的定义满足哪些条件的运算系统是<strong>群</strong>，</p>
-<p>然后再去寻找（或证明）具体的运算系统满足这些条件。</p>
+<p>另一方面，考虑在集合论中讨论映射的时候，一般都不写具体元素，还可以表示为，</p>
 <p><br/></p>
-<p>为此，我们先从条件最弱的<strong>半群</strong>开始，</p>
-<p>逐渐增加约束条件，最终认识群结构是怎么建立起来的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-485a513f584ec085.png" /></p>
 <p><br/></p>
-<p><strong>半群</strong></p>
-<p>集合<span data-katex="G"></span>和<span data-katex="G"></span>上满足结合律的二元运算<span data-katex="\cdot"></span>，</p>
-<p>所形成的代数结构，叫做<strong>半群</strong>，记为<span data-katex="(G,\cdot)"></span>，</p>
-<p>半群运算<span data-katex="x\cdot y"></span>，也常简记为<span data-katex="xy"></span>。</p>
+<p>其中，<span data-katex="\mu:M\times M\to M"></span>，<span data-katex="\eta:1\to M"></span>，是两个函数，</p>
+<p><span data-katex="1=\{0\}"></span>是只有一个元素的集合。</p>
 <p><br/></p>
-<p>好在我们<a href="https://thzt.github.io/2018/01/20/semantics-2/">第二篇</a>中，对“什么是代数”进行了严谨的定义，</p>
-<p>因此，对这里提到的“代数结构”应该并不陌生，很显然半群是一个代数。</p>
+<p>用图示法来表示幺半群，更具一般性。</p>
 <p><br/></p>
-<p>满足半群条件的例子是非常多的，</p>
-<p>例如，自然数集以及自然数上的乘法运算，构成了一个半群。</p>
+<h3 id="范畴">2. 范畴</h3>
+<p>范畴是一个数学概念，也可以用图示法来表示。</p>
 <p><br/></p>
-<p>值得注意的是，集合和运算要放在一起考虑才行，</p>
-<p>集合包含了运算对象，运算表明了运算对象之间的关系。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-d19a23f4b1b256b2.png" /></p>
 <p><br/></p>
-<p><strong>幺半群</strong></p>
+<p>一个<strong>范畴</strong><span data-katex="Cat"></span>由一系列<strong>对象</strong>（object）和<strong>箭头</strong>（arrow）组成。</p>
+<p>对于每一个箭头<span data-katex="f"></span>，有两个对象与之关联，</p>
+<p>称为箭头<span data-katex="f"></span>的定义域（domain）和值域（codomain）。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-3fa823cd8d83854d.png" /></p>
+<p>并且，还要满足以下几条规则，</p>
+<p>（1）对于每一个对象<span data-katex="a"></span>，存在恒等箭头（identity arrow），<span data-katex="i:a\to a"></span></p>
+<p>（2）箭头满足结合律，对于任意的箭头<span data-katex="f,g,h"></span>，有<span data-katex="(f\cdot g)\cdot h=f\cdot (g\cdot h)"></span></p>
+<p>（3）箭头的集合在箭头组合运算下是封闭的</p>
 <p><br/></p>
-<p>设<span data-katex="G"></span>是半群，元素<span data-katex="e\in G"></span>，称为半群<span data-katex="G"></span>的幺元，</p>
-<p>如果<span data-katex="\forall x\in G"></span>，<span data-katex="ex=xe=x"></span>。</p>
-<p>可以证明，如果半群存在幺元，则必定是唯一的。</p>
+<p>其中，<span data-katex="f\cdot g"></span>表示<span data-katex="g"></span>和<span data-katex="f"></span>的组合运算，</p>
+<p>它也是一个箭头，其中<span data-katex="g"></span>的值域是<span data-katex="f"></span>的定义域。</p>
 <p><br/></p>
-<p>幺元常被记为<span data-katex="1_S"></span>，或者直接写成<span data-katex="1"></span>。</p>
-<p>具有幺元的半群，称为<strong>幺半群</strong>，记为<span data-katex="(G,\cdot,e)"></span>。</p>
+<p>例子：</p>
+<p>所有的集合，以集合为对象，集合之间的映射作为箭头，构成了一个范畴，</p>
+<p>所有的群，以群作为对象，群同态作为箭头，构成了一个范畴，</p>
+<p>所有的拓扑空间，以拓扑空间作为对象，拓扑空间之间的连续映射为箭头，构成了一个范畴。</p>
 <p><br/></p>
-<p>幺半群的例子，我们可以考虑字符串及其连接运算，</p>
-<p>在连接运算下，空串是幺元。</p>
+<p>以上三个例子中，</p>
+<p>范畴中的对象都是集合，箭头都是映射，这就很容易造成误解。</p>
+<p>因为，<strong>范畴中的对象可以不是集合，箭头也可以不是映射，</strong></p>
+<p>理解这一点至关重要。</p>
 <p><br/></p>
-<p><strong>群</strong></p>
-<p>设<span data-katex="G"></span>是幺半群，如果它的每个元素都可逆，我们就称它为<strong>群</strong>。</p>
+<p>例如，完全偏序<span data-katex="(D,\leqslant)"></span>，</p>
+<p>以<span data-katex="D"></span>中的元素作为对象，以<span data-katex="x\leqslant y"></span>作为<span data-katex="x,y"></span>之间的箭头，同样构成了一个范畴。</p>
 <p><br/></p>
-<p>所谓可逆指的是，<span data-katex="\forall g\in G"></span>，<span data-katex="\exists g^{-1}\in G"></span>，</p>
-<p>使得<span data-katex="gg^{-1}=g^{-1}g=e"></span>，</p>
-<p>其中<span data-katex="e\in G"></span>为<span data-katex="G"></span>的幺元。</p>
+<h3 id="函子">3. 函子</h3>
+<p>函子就是两个范畴之间的箭头。</p>
 <p><br/></p>
-<p>自然数集以及自然数上的乘法运算组成的代数结构，是半群，</p>
-<p>如果把自然数<span data-katex="1"></span>看做幺元，则构成了一个幺半群，但是它不是群。</p>
-<p>因为，除了<span data-katex="1"></span>之外，任何自然数都没有逆元。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f50234610ae6c94e.png" /></p>
 <p><br/></p>
-<p>字符串及其连接运算，构成了一个幺半群，但也不是群，</p>
-<p>因为，没有任何两个非空字符串连接在一起会得到空串。</p>
+<p>一个<strong>函子</strong><span data-katex="F"></span>是范畴<span data-katex="C"></span>到范畴<span data-katex="D"></span>的箭头，<span data-katex="F:C\to D"></span>，它满足以下条件，</p>
+<p><span data-katex="F"></span>把<span data-katex="C"></span>中的对象<span data-katex="c"></span>映射为<span data-katex="D"></span>中的对象<span data-katex="F~c"></span>，把<span data-katex="C"></span>中的箭头<span data-katex="f"></span>映射为<span data-katex="D"></span>中的箭头<span data-katex="F~f"></span>。</p>
+<p>并且，<span data-katex="F~(f\cdot g)=(F~f)\cdot (F~g)"></span>。</p>
 <p><br/></p>
-<p>下面我们来看一个群的例子。</p>
+<p>值得注意的是，</p>
+<p>等式左边的<span data-katex="\cdot"></span>，表示<span data-katex="C"></span>中的箭头组合运算，</p>
+<p>等式右边的<span data-katex="\cdot"></span>，表示<span data-katex="D"></span>中的箭头组合运算。</p>
 <p><br/></p>
-<p>如果我们把整数集（包含正负整数）看做运算对象的集合，</p>
-<p>把整数集上的加法运算看做群定义中的二元运算，</p>
-<p>整数<span data-katex="0"></span>看做加法运算的幺元，则这样的运算系统构成了一个群。</p>
-<p>因为，每一个整数的相反数，都是它的逆元。</p>
+<h3 id="自然变换">4. 自然变换</h3>
+<p>自然变换（natural transformation）是一族箭头，</p>
+<p>将范畴<span data-katex="A"></span>在一个函子中的像（picture），变换成了另一个函子的像。</p>
 <p><br/></p>
-<p><strong>群同态</strong></p>
+<p>给定两个函子<span data-katex="S,T:A\to B"></span>，其中<span data-katex="A"></span>和<span data-katex="B"></span>是范畴。</p>
+<p>自然变换的每个分量（components）使下图可交换。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-346888ad855e2420.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-7a6b0cbdb0347ac2.png" /></p>
 <p><br/></p>
-<p>有了群之后，很自然的一步我们会考虑两个群是否足够相似，</p>
-<p>这就需要我们找到两个群之间的对应关系。</p>
+<p>其中，<span data-katex="\tau_a"></span>是<span data-katex="B"></span>中的箭头，<span data-katex="\tau_a:Sa\to Ta"></span>。</p>
 <p><br/></p>
-<p>设<span data-katex="(G,\cdot)"></span>和<span data-katex="(G&#39;,\circ)"></span>是两个群，</p>
-<p>我们把映射<span data-katex="f:G\to G&#39;"></span>称为<strong>群同态</strong>，如果<span data-katex="\forall a,b\in G"></span>，</p>
-<p>都有<span data-katex="f(a\cdot b)=f(a)\circ f(b)"></span>。</p>
-<p><br/></p>
-<p>如果<span data-katex="f"></span>是单射，则称<span data-katex="f"></span>为单同态，</p>
-<p>如果<span data-katex="f"></span>是满射，则称<span data-katex="f"></span>为满同态。</p>
-<p><br/></p>
-<p>如果<span data-katex="f"></span>是双射，则称<span data-katex="f"></span>为<strong>群同构</strong>。</p>
-<p>同构的两个群，记为<span data-katex="G\cong G&#39;"></span>。</p>
-<p><br/></p>
-<p><strong>小结</strong></p>
-<p>现在我们理解了半群，幺半群，群，群同态，</p>
-<p>这些概念放在一起，就是所谓的群结构。</p>
-<p>结构一般所指的是一些运算规则，或者约束条件。</p>
-<p><br/></p>
-<p>为了更好的理解数学结构，</p>
-<p>下面我们来介绍另一个概念，它来自拓扑学，称为拓扑空间。</p>
-<p><br/></p>
-<h3 id="拓扑结构">3. 拓扑结构</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-e87418f9539b42b7.png" /></p>
-<p><br/></p>
-<p>拓扑学，被人们戏称橡皮膜上的几何学，</p>
-<p>它主要研究在连续变换下保持不变的几何性质，</p>
-<p>例如，连通性和紧致性。</p>
-<p><br/></p>
-<p>这里我们先不展开，</p>
-<p>主要看一下在拓扑学中是怎么建立数学结构的。</p>
-<p><br/></p>
-<p><strong>子集族</strong></p>
-<p>设<span data-katex="X"></span>是一个非空集合，<span data-katex="2^X"></span>是<span data-katex="X"></span>的幂集（所有子集构成的集合），</p>
-<p>把<span data-katex="2^X"></span>的子集（即以<span data-katex="X"></span>的一部分子集为成员的集合）称为<span data-katex="X"></span>的<strong>子集族</strong>。</p>
-<p><br/></p>
-<p><strong>拓扑空间</strong></p>
-<p>设<span data-katex="X"></span>是一个非空集合，<span data-katex="X"></span>的一个子集族<span data-katex="\tau"></span>称为<span data-katex="X"></span>的一个<strong>拓扑</strong>，</p>
-<p>如果它满足</p>
-<p>（1）<span data-katex="X"></span>和<span data-katex="\varnothing"></span>都包含在<span data-katex="\tau"></span>中</p>
-<p>（2）<span data-katex="\tau"></span>中任意多个成员的并集仍在<span data-katex="\tau"></span>中</p>
-<p>（3）<span data-katex="\tau"></span>中有限多个成员的交集仍在<span data-katex="\tau"></span>中</p>
-<p><br/></p>
-<p>集合<span data-katex="X"></span>和它的一个拓扑<span data-katex="\tau"></span>一起称为一个<strong>拓扑空间</strong>，记作<span data-katex="(X,\tau)"></span>。</p>
-<p>称<span data-katex="\tau"></span>中的成员为这个拓扑空间的<strong>开集</strong>。</p>
-<p><br/></p>
-<p>从定义看出，给出集合的一个拓扑就是规定它的哪些子集是开集。</p>
-<p><br/></p>
-<p><strong>连续映射</strong></p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-0926fa9e83c0403c.png" /></p>
-<p><br/></p>
-<p>设<span data-katex="X"></span>和<span data-katex="Y"></span>都是拓扑空间，<span data-katex="f:X\rightarrow Y"></span>是一个映射，</p>
-<p><span data-katex="x\in X"></span>，如果对于包含<span data-katex="f(x)\in Y"></span>的每一个开集<span data-katex="V"></span>，必存在包含<span data-katex="x"></span>的开集<span data-katex="U"></span>，</p>
-<p>使得，<span data-katex="f(U)\subseteq V"></span>，则我们就说，<span data-katex="f"></span>在<span data-katex="x"></span>处<strong>连续</strong>。</p>
-<p><br/></p>
-<p>如果映射<span data-katex="f:X\rightarrow Y"></span>在任一点<span data-katex="x\in X"></span>都连续，</p>
-<p>则说<span data-katex="f"></span>是<strong>连续映射</strong>。</p>
-<p><br/></p>
-<p><strong>同胚映射</strong></p>
-<p>如果<span data-katex="f:X\rightarrow Y"></span>是双射，</p>
-<p>并且<span data-katex="f"></span>及其逆<span data-katex="f^{-1}:Y\rightarrow X"></span>都是连续的，</p>
-<p>则称<span data-katex="f"></span>是一个<strong>同胚映射</strong>，简称同胚。</p>
-<p><br/></p>
-<p>当存在<span data-katex="X"></span>到<span data-katex="Y"></span>的同胚映射时，就称<span data-katex="X"></span>与<span data-katex="Y"></span>同胚，</p>
-<p>记作<span data-katex="X \cong Y"></span>。</p>
-<p><br/></p>
-<p>值得注意的是，同胚映射中条件<span data-katex="f^{-1}"></span>连续不可忽视，</p>
-<p>它不能从双射和<span data-katex="f"></span>的连续性推出来。</p>
-<p><br/></p>
-<p><strong>小结</strong></p>
-<p>以上我们介绍了拓扑空间，以及两个拓扑空间之间的连续映射，</p>
-<p>这和群以及两个群之间的群同态是很相似的。</p>
-<p><br/></p>
-<p>它们表现出了一种结构上的相似性，</p>
-<p>范畴论正是看到这种相似性，于是跳出具体的运算系统，</p>
-<p>例如，它可以考虑群结构与拓扑结构之间的关系。</p>
-<p><br/></p>
-<p>接下来我们来介绍CPO（完全偏序）。</p>
-<p>它在范畴论中，对于摆脱集合论的观念束缚，帮助是很大的。</p>
-<p><br/></p>
-<h3 id="完全偏序">4. 完全偏序</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-da911483f36bc6fa.png" /></p>
-<p><br/></p>
-<p>在《<a href="https://thzt.github.io/2017/03/21/recursive-function-9/">递归函数</a>》系列文章中，</p>
-<p>我们已经介绍过CPO（<a href="https://zh.wikipedia.org/zh-hans/%E5%AE%8C%E5%85%A8%E5%81%8F%E5%BA%8F" target="_blank" rel="noopener">完全偏序</a>）的概念了。</p>
-<p>为了方便与本文中其他概念进行对比，我们再简单的梳理一下。</p>
-<p><br/></p>
-<p><strong>二元关系</strong></p>
-<p>集合<span data-katex="S"></span>和<span data-katex="T"></span>上的<strong>二元关系</strong><span data-katex="R"></span>，</p>
-<p>指的是它们笛卡尔积<span data-katex="S\times T"></span>的子集，<span data-katex="R\subseteq S\times T"></span>。</p>
-<p><br/></p>
-<p><strong>自反性，对称性，反对称性，传递性</strong></p>
-<p>一个二元关系<span data-katex="R\subseteq A\times A"></span>是<strong>自反的</strong>，如果<span data-katex="R(a,a)"></span>对于所有的<span data-katex="a\in A"></span>成立；</p>
-<p>是<strong>对称的</strong>，如果<span data-katex="R(a,b)"></span>就有<span data-katex="R(b,a)"></span>，对于所有的<span data-katex="a,b\in A"></span>都成立；</p>
-<p>是<strong>反对称的</strong>，如果<span data-katex="R(a,b)"></span>且<span data-katex="R(b,a)"></span>，则<span data-katex="a,b"></span>是同一个元素，对于所有的<span data-katex="a,b\in A"></span>都成立；</p>
-<p>是<strong>传递的</strong>，如果<span data-katex="R(a,b)"></span>和<span data-katex="R(b,c)"></span>能推出<span data-katex="R(a,c)"></span>，对于所有的<span data-katex="a,b,c\in A"></span>都成立。</p>
-<p><br/></p>
-<p><strong>偏序关系</strong></p>
-<p>等价关系是同时具有自反性，对称性和传递性的关系。</p>
-<p><strong>偏序关系</strong>是具有自反性，反对称性和传递性的关系。</p>
-<p><br/></p>
-<p>等价关系的一个例子就是相等性，</p>
-<p>相等性关系<span data-katex="R(a,b)"></span>当且仅当<span data-katex="a,b"></span>是同一个元素。</p>
-<p><br/></p>
-<p>偏序关系，例如通常的序关系<span data-katex="R\subseteq N\times N"></span>，</p>
-<p><span data-katex="R(a,b)"></span>当且仅当<span data-katex="a\leqslant b"></span>。</p>
-<p><br/></p>
-<p><strong>最小元与上确界</strong></p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-47acd03f6e8d8a00.png" /></p>
-<p><br/></p>
-<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
-<p>如果存在<span data-katex="y\in S"></span>，且对于任意的<span data-katex="x\in S"></span>，有<span data-katex="y\leqslant x"></span>，</p>
-<p>则称<span data-katex="y"></span>为<span data-katex="S"></span>的<strong>最小元</strong>。</p>
-<p><br/></p>
-<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
-<p>如果存在<span data-katex="y\in D"></span>，（注意，<span data-katex="y"></span>不一定在子集<span data-katex="S"></span>中）</p>
-<p>使得对于任意的<span data-katex="x\in S"></span>，<span data-katex="x\leqslant y"></span>，则称<span data-katex="y"></span>为<span data-katex="S"></span>的<strong>上界</strong>，</p>
-<p>如果<span data-katex="S"></span>的所有上界存在最小元，则称它为<span data-katex="S"></span>最小上界，或<strong>上确界</strong>。</p>
-<p><br/></p>
-<p><strong>完全偏序集</strong></p>
-<p>偏序集<span data-katex="(D,\leqslant )"></span>的非空子集<span data-katex="S\subseteq D"></span>叫做<strong>有向子集</strong>，</p>
-<p>当且仅当，对于<span data-katex="S"></span>中的任意元素<span data-katex="a,b\in S"></span>，</p>
-<p>存在<span data-katex="S"></span>中的一个元素<span data-katex="c"></span>，有<span data-katex="a\leqslant c"></span>且<span data-katex="b\leqslant c"></span>。</p>
-<p><br/></p>
-<p>如果一个偏序集<span data-katex="(D,\leqslant )"></span>的每个有向子集<span data-katex="S\subseteq D"></span>都有上确界（记为<span data-katex="\bigvee S"></span>）</p>
-<p>就称它是一个有向完全偏序集，</p>
-<p>此外，如果它还有最小元，就称它是一个<strong>完全偏序集</strong>。</p>
-<p><br/></p>
-<p>注意，完全偏序集并不是每一个子集都有上确界，</p>
-<p>而是它的每一个有向子集都有上确界。</p>
-<p><br/></p>
-<p><strong>连续函数</strong></p>
-<p>假设<span data-katex="(D,\leqslant )"></span>与<span data-katex="(E,\leqslant )"></span>是完全偏序集，<span data-katex="f:D\rightarrow E"></span>是集合上定义的一个函数，</p>
-<p>对于任意的<span data-katex="d,d&#39;\in D"></span>，如果<span data-katex="d\leqslant d&#39;"></span>就有<span data-katex="f(d)\leqslant f(d&#39;)"></span>，</p>
-<p>我们就说<span data-katex="f"></span>是<strong>单调的</strong>。</p>
-<p><br/></p>
-<p>如果<span data-katex="f"></span>是单调的，且对于任意有向子集<span data-katex="S\subseteq D"></span>，</p>
-<p>有<span data-katex="f(\bigvee S)=\bigvee f(S)"></span>，就称<span data-katex="f"></span>是<strong>连续的</strong>。</p>
-<p><br/></p>
-<p><strong>小结</strong></p>
-<p>我们又重新回顾了完全偏序这一概念，</p>
-<p>实际上，任意一个CPO（完全偏序），都构成了一个范畴，</p>
-<p>而所有的群，也构成了一个范畴。</p>
-<p><br/></p>
-<p>群范畴的对象是集合，而CPO（完全偏序）范畴的对象不一定是集合。</p>
-<p>这对摆脱集合论来理解范畴是很关键的。</p>
+<h3 id="monad">5. Monad</h3>
+<p>范畴到自身的函子，称为<strong>自函子</strong>（endofunctor）。</p>
+<p>设<span data-katex="T:X\to X"></span>是任意范畴<span data-katex="X"></span>上的自函子，自函子复合之后仍为自函子，</p>
+<p><span data-katex="T^2=T\circ T:X\to X"></span>，<span data-katex="T^3=T^2\circ T:X\to X"></span>。</p>
+<p><br/></p>
+<p>令<span data-katex="\mu:T^2\to T"></span>是一个自然变换，其分量为<span data-katex="\mu_x:T^2x\to Tx"></span>，<span data-katex="\forall x\in X"></span>，</p>
+<p>则使用<span data-katex="\mu"></span>可以定义另外两个自然变换，</p>
+<p><span data-katex="T\mu:T^3\to T^2"></span>，它的分量为<span data-katex="(T\mu)_x=T(\mu_x):T^3x\to T^2x"></span>，</p>
+<p><span data-katex="\mu T:T^3\to T^2"></span>，它的分量为<span data-katex="(\mu T)_x=\mu_{Tx}"></span>。</p>
+<p><br/></p>
+<p>范畴<span data-katex="X"></span>上的一个<strong>Monad</strong>，指的是三元组<span data-katex="\left \langle T,\eta,\mu \right \rangle"></span>，</p>
+<p>它们使下图可交换，</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f24983986f2eab9d.png" /></p>
+<p><br/></p>
+<p>其中，<span data-katex="T:X\to X"></span>是范畴<span data-katex="X"></span>上的自函子，</p>
+<p><span data-katex="\eta:I_X\to T"></span>，<span data-katex="\mu:T^2\to T"></span>是两个自然变换。</p>
+<p><br/></p>
+<p>值得注意的是，Monad与幺半群的图示法是相似的，</p>
+<p>只需要将幺半群定义中的<span data-katex="\times"></span>，改写成自函子的复合运算，</p>
+<p>把单位集合<span data-katex="1"></span>，改写成单位自函子即可。</p>
+<p><br/></p>
+<p>因此，我们说Monad是自函子范畴上的一个幺半群。</p>
+<blockquote>
+<p>All told, a monad in X is just a monoid in the category of endofunctors of X, with product x replaced by composition of endofunctors and unit set by the identity endofunctor.</p>
+</blockquote>
+<p><br/></p>
+<h3 id="hask范畴上的monad">6. Hask范畴上的Monad</h3>
+<p>如果把Haskell语言中的类型作为对象，把类型之间的函数看做箭头，</p>
+<p>则在函数复合运算下，构成了一个范畴，称为<strong>Hask范畴</strong>。</p>
+<p><br/></p>
+<p><strong>函子</strong></p>
+<p>Haskell中类型类（type class）<code>Functor</code>的每一个实例，</p>
+<p>定义了Hask范畴中的一个函子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Functor (f :: * -&gt; *) where</span><br><span class="line">    fmap :: (a -&gt; b) -&gt; f a -&gt; f b</span><br></pre></td></tr></table></figure>
+<p><code>fmap</code>表示了函子作用在箭头上的结果。</p>
+<p>作用在对象上，可以使用<code>pure :: a -&gt; f a</code>来表示。</p>
+<p><br/></p>
+<p>在Haskell中，一个类型要成为<code>Functor</code>的实例，</p>
+<p>还要满足相应的“<a href="https://wiki.haskell.org/Functor#Functor_Laws" target="_blank" rel="noopener">Functor Law</a>”，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fmap id &#x3D; id</span><br><span class="line">fmap (f . g) &#x3D; fmap f . fmap g</span><br></pre></td></tr></table></figure>
+<p>可以<a href="https://en.wikibooks.org/wiki/Haskell/Category_theory#Functors" target="_blank" rel="noopener">证明</a>，</p>
+<p>这些“Functor Law”刚好使<code>f</code>，<code>fmap</code>和<code>pure</code>构成了范畴论意义上的函子。</p>
+<p><br/></p>
+<p><strong>Monad</strong></p>
+<p>Haskell中类型类<code>Monad</code>的每一个实例，</p>
+<p>定义了Hask范畴中的一个Monad。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Functor m &#x3D;&gt; Monad m where</span><br><span class="line">    return :: a -&gt; m a</span><br><span class="line">    (&gt;&gt;&#x3D;)  :: m a -&gt; (a -&gt; m b) -&gt; m b</span><br></pre></td></tr></table></figure>
+<p>在Haskell中，一个类型要成为<code>Monad</code>的实例，</p>
+<p>还要满足相应的“<a href="https://wiki.haskell.org/Monad#Monad_class" target="_blank" rel="noopener">Monad Law</a>”，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return a &gt;&gt;&#x3D; k                  &#x3D;  k a</span><br><span class="line">m        &gt;&gt;&#x3D; return             &#x3D;  m</span><br><span class="line">m        &gt;&gt;&#x3D; (\x -&gt; k x &gt;&gt;&#x3D; h)  &#x3D;  (m &gt;&gt;&#x3D; k) &gt;&gt;&#x3D; h</span><br></pre></td></tr></table></figure>
+<p>可以<a href="https://en.wikibooks.org/wiki/Haskell/Category_theory#Monads" target="_blank" rel="noopener">证明</a>，</p>
+<p>这些“Monad Law”刚好使<code>m</code>，<code>&gt;&gt;=</code>和<code>return</code>构成了范畴论意义上的Monad。</p>
 <p><br/></p>
 <h3 id="总结">总结</h3>
-<p>本文介绍了三种数学结构，群结构，拓扑结构，以及CPO（完全偏序）。</p>
-<p>作为例子，可以为后面学习范畴论打下扎实的基础。</p>
+<p>本文介绍了范畴论相关的一些内容，</p>
+<p>介绍了什么是范畴，什么是函子，什么是自然变换，</p>
+<p>这些都是理解笛卡尔闭范畴所必须的。</p>
 <p><br/></p>
-<p>我们看到了这些数学结构之间的相似性，</p>
-<p>从下一篇开始，我们要开始范畴论的学习之旅了。</p>
+<p>为了理解什么是范畴，我们列举了前一篇提到的群，拓扑空间，CPO作为例子，</p>
+<p>还借用了Haskell中的Functor和Monad学习了Hask范畴。</p>
+<p><br/></p>
+<p>下文我们将继续学习范畴论，</p>
+<p>理解什么是笛卡尔闭范畴，以及如何用它解释简单类型<span data-katex="\lambda"></span>演算的语义。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Category_theory" target="_blank" rel="noopener">Category theory</a></p>
-<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
-<p><a href="https://book.douban.com/subject/4201293/" target="_blank" rel="noopener">近世代数引论</a></p>
-<p><a href="https://book.douban.com/subject/1230382/" target="_blank" rel="noopener">基础拓扑学讲义</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Category_(mathematics)" target="_blank" rel="noopener">Category (mathematics)</a></p>
+<p><a href="https://en.wikibooks.org/wiki/Haskell/Category_theory" target="_blank" rel="noopener">Haskell/Category theory</a></p>
+<p><a href="https://book.douban.com/subject/1823110/" target="_blank" rel="noopener">Categories for the Working Mathematician</a></p>
 
           
         
@@ -642,7 +558,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/159/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/159/">159</a><span class="page-number current">160</span><a class="page-number" href="/page/161/">161</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/161/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/159/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/159/">159</a><span class="page-number current">160</span><a class="page-number" href="/page/161/">161</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/161/">&gt;</a>
   </nav>
 
 
@@ -688,7 +604,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">307</span>
+                <span class="site-state-item-count">308</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2024/09/19/debugger/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2024/12/03/owner/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2024/09/19/debugger/" itemprop="url">如何编写一个简单的 debugger</a></h1>
+                <a class="post-title-link" href="/2024/12/03/owner/" itemprop="url">如何像负责人一样思考问题</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-09-19T00:00:00+08:00">
-                2024-09-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-12-03T00:00:00+08:00">
+                2024-12-03
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,175 +347,172 @@
       
         
           
-            <h3 id="背景">背景</h3>
-<p>时隔三年，这是相继 <a href="https://thzt.github.io/2021/01/06/parser/">如何编写一个简单的 parser</a>，</p>
-<p>以及 <a href="https://thzt.github.io/2021/01/15/eval/">如何编写一个简单的解释器</a>，之后的 第三篇，</p>
-<p><strong>如何编写一个简单的 debugger</strong>。</p>
+            <p>现在网络上的风气不太好，吸人眼球的说辞，容易被广泛传播，</p>
+<p>而积极向上，具有真知灼见的言论，反而可能会被认为是笑谈。</p>
 <p><br/></p>
-<p>众所周知，VSCode 通过 <a href="https://microsoft.github.io/language-server-protocol" target="_blank" rel="noopener">LSP</a> 支持了不同的 语言特性，</p>
-<p>而通过 <a href="https://microsoft.github.io/debug-adapter-protocol/" target="_blank" rel="noopener">DAP</a> 实现了不同语言的 调试功能。</p>
+<p>有很多真正有用的道理，被认为是 PUA，</p>
+<p>也有很多发自内心的努力和奋斗，被认为是内卷。</p>
 <p><br/></p>
-<p>在前两篇文章中，我们基于 LISP 语法，</p>
-<p>分别实现了 语法解析 parse（将字符串转换成有结构的数据），</p>
-<p>以及 语义解释 eval（对结构化的数据进行求值） 两个过程。</p>
-<p><br/></p>
-<p>但如果只有这些，对于了解语言技术而言还仍显不够。</p>
-<p>市面上有太多资料介绍 parser 了，但其实这只是故事的开始罢了。</p>
-<p><br/></p>
-<p>本文就从 语法设计、解析、解释、调试 整条链路，尝试写点不一样的内容。</p>
-<p>重点写一写 debugger 的实现细节。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/01.png" /></p>
-<p><br/></p>
-<p>值得一提的是，有一类专门的工程师，称为编程语言工程师，</p>
-<p>以下所述的内容，对于他们而言，可能太过班门弄斧了。</p>
-<p>在这个语言领域中，我还只是一个小学徒。</p>
-<p>有任何理解不当的地方，还请不吝指出，我也仍在不断的学习中。</p>
-<h3 id="语法设计">语法设计</h3>
-<p>当我们萌生「让字符串跑起来」的想法之后，</p>
-<p>首先应该考虑的是，如何设计一套<strong>无歧义的文法</strong>。</p>
-<p><br/></p>
-<p>所谓文法，就是用来描述语言结构的规则集。</p>
-<p>根据文法我们能够知道，哪些字符串是语言中合法的语句，哪些不是。</p>
-<p>最常见的文法形式，就是 <a href="https://baike.baidu.com/item/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/2001908" target="_blank" rel="noopener">上下文无关文法</a>。</p>
-<p><br/></p>
-<p>上下文无关文法 由一堆产生式 构成（其次还有 终结符、非终结符），</p>
-<p>举个例子，这就是一段有效的文法（取自 TypeScript 语言，略有删减），</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SourceFile &#x3D; StatementList</span><br><span class="line">StatementList &#x3D; Statement | Statement StatementList</span><br><span class="line"></span><br><span class="line">Statement &#x3D; VariableDeclaration | FunctionDeclaration</span><br><span class="line"></span><br><span class="line">VariableDeclaration &#x3D; &#39;let&#39; Identifier &#39;&#x3D;&#39; Value</span><br><span class="line">Value &#x3D; NUMBER | CallExpression</span><br><span class="line"></span><br><span class="line">FunctionDeclaration &#x3D; Identifier &#39;(&#39; Identifier &#39;)&#39; &#39;&#123;&#39; FunctionBody &#39;&#125;&#39;</span><br><span class="line">FunctionBody &#x3D; StatementList ReturnStatement</span><br><span class="line">ReturnStatement &#x3D; &#39;return&#39; ReturnExpression</span><br><span class="line"></span><br><span class="line">ReturnExpression &#x3D; Identifier | PlusExpression</span><br><span class="line"></span><br><span class="line">PlusExpression &#x3D; Identifier &#39;+&#39; Identifier</span><br><span class="line">CallExpression &#x3D; Identifier &#39;(&#39; Identifier &#39;)&#39;</span><br><span class="line"></span><br><span class="line">Identifier &#x3D; [a-z]+</span><br><span class="line">Number &#x3D; [0-9]+</span><br><span class="line">Keyword &#x3D; &#39;let&#39; | &#39;return&#39;</span><br></pre></td></tr></table></figure>
-<p><br/></p>
-<p>其中，<code>VariableDeclaration = 'let' Identifier '=' Value</code> 这一行称为一个<strong>产生式</strong>，</p>
-<p>左边 <code>VariableDeclaration</code> 是<strong>非终结符</strong>（它会被展开成右边），</p>
-<p>右边 <code>'let'</code> <code>'='</code> 称为<strong>终结符</strong>（它不能再被展开了），</p>
-<p>右边 <code>Identifier</code> <code>Value</code> 仍为非终结符，可以根据其他相应的产生式规则，继续展开。</p>
-<p><br/></p>
-<p>以上文法，可以用来描述下面这样的语言结构，</p>
-<p>（类似 TypeScript 语言，只是去掉了 <code>function</code> 关键字）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let a &#x3D; 1</span><br><span class="line">let b &#x3D; 2</span><br><span class="line"></span><br><span class="line">f(x)&#123;</span><br><span class="line">  let b &#x3D; 3</span><br><span class="line">  g(y)&#123;</span><br><span class="line">    return y+b</span><br><span class="line">  &#125;</span><br><span class="line">  return g</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let c &#x3D; f(a)</span><br><span class="line">let d &#x3D; c(b)</span><br></pre></td></tr></table></figure>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/02.png" /></p>
-<p><br/></p>
-<p>我们看到，不论是从<strong>语言</strong>还是从<strong>文法</strong>上，都能反映出一种<strong>递归结构</strong>。</p>
-<p>最直观的感受是，函数定义里面还可以再嵌套一个函数，并可以无限嵌套下去（都是合法的）。</p>
-<p>所以，这就对我们如何解析上下文无关语言，提供了启发 —— <strong>递归处理</strong>。</p>
-<p><br/></p>
-<p>解析过程，无非就是将字符串转成对象而已，</p>
-<p>所以我们才需要 文法尽量的准确（无歧义），对于同一段字符串，有且仅有一种转换方式。</p>
-<h3 id="解析器">解析器</h3>
-<blockquote>
-<p>代码：<a href="https://github.com/thzt/dsl-parser" target="_blank" rel="noopener">thzt/dsl-parser</a></p>
-</blockquote>
-<p><br/></p>
-<p>有不少文章，重点介绍了 parser 的实现过程，这里就不赘述了，</p>
-<p>日常工作中，我们从零编写一个 parser 的情况很少，基本都用现成的。</p>
-<p>即使有特殊情况，手写<strong>递归下降语法解析器</strong>，也能满足大多数场景了。</p>
-<p><br/></p>
-<p>在 第一篇文章 <a href="https://thzt.github.io/2021/01/06/parser/">如何编写一个简单的 parser</a>中，</p>
-<p>我们已经介绍了编写递归下降语法解析器的<strong>套路</strong>，</p>
-<p>一个 parser 是由一些互递归的函数调用组成（每一个 非终结符/产生式 对应一个函数）。</p>
-<p><br/></p>
-<p>parser 内部会包含一个 nextToken 词法分析器，</p>
-<p>把单个字符组装成带有类型标识的 token 单词，再进行处理。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/03.png" /></p>
-<p><br/></p>
-<p>具体处理的时候后，这些互递归函数，会读取当前 token（或者之后的 token），</p>
-<p>来判定 按照哪个产生式进行解析。</p>
-<p>最终会得到一个树形结构 —— AST（树是递归结构的真实写照），</p>
-<p>这个树形结构的节点，就是文法中的非终结符。</p>
-<p><br/></p>
-<h3 id="解释器">解释器</h3>
-<blockquote>
-<p>代码：<a href="https://github.com/thzt/dsl-interpreter" target="_blank" rel="noopener">thzt/dsl-interpreter</a></p>
-</blockquote>
-<p><br/></p>
-<p>解释器也比较简单，就是一个在<strong>递归结构</strong>中，进行<strong>递归求值</strong>的过程。</p>
-<p>解释器的实现套路在 第二篇 <a href="https://thzt.github.io/2021/01/15/eval/">如何编写一个简单的解释器</a> 中有过介绍，</p>
-<p>每一个 AST 节点，对应一个 <code>evalXXX</code> 函数，然后递归调用。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/04.png" /></p>
-<p><br/></p>
-<p>稍微有些复杂的是<strong>词法作用域</strong>的实现，</p>
-<p>需要在解释的过程中，遇到函数定义（FunctionDeclaration），先将求值环境与函数关联起来。</p>
-<p>然后等到函数调用（CallExpression）的时候，再取出<strong>当时</strong>的环境进行求值。</p>
-<p><br/></p>
-<p>函数+环境就是<strong>闭包</strong>了，希望这次把它讲清楚了。</p>
-<h3 id="调试器">调试器</h3>
-<h4 id="yield">yield</h4>
-<p>终于可以介绍调试器了。首先应该考虑的是，用什么工具对语言进行调试。</p>
-<p>最常见的调试方式有命令行方式（例如 <a href="https://sourceware.org/gdb/" target="_blank" rel="noopener">GDB</a>），还有 IDE 集成方式。</p>
-<p>本文选择较为直观的方式，通过 <a href="https://microsoft.github.io/debug-adapter-protocol/" target="_blank" rel="noopener">DAP</a> 借用 VSCode 进行调试。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/05.png" /></p>
-<p><br/></p>
-<p>第一步，我们需要对解释器进行改造，让它可以<strong>停下来</strong>。</p>
-<p>常见的办法是将函数改造为 generator，将递归调用改成 <code>yield*</code>，</p>
-<p>然后在特定阶段（需要停下来的时候），通过 <code>yield</code> 把<strong>内部状态</strong>返回出来。</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/06.png" /></p>
-<p><br/></p>
-<p>然后，就可以实现步进了，</p>
-<p>只有我们手动调用 <code>next</code> 的时候，解释器才会继续向下执行。</p>
-<p><br/></p>
-<p>更有甚者，我们还可以写一个 runtime，把控制逻辑包一层。</p>
-<p>如下图，模拟我们在 VSCode 中启动调试后，按 Step Over（下一步）所发生的事情，</p>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/07.png" /></p>
-<h4 id="vscode-extension">vscode extension</h4>
-<blockquote>
-<p>代码：<a href="https://github.com/thzt/vscode-dsl-debugger" target="_blank" rel="noopener">thzt/vscode-dsl-debugger</a></p>
-</blockquote>
-<p><br/></p>
-<p>第二步，就是实现一个 VSCode 插件了， 它实现了 <a href="https://microsoft.github.io/debug-adapter-protocol/" target="_blank" rel="noopener">DAP</a> 协议。</p>
-<p><br/></p>
-<p>例如，生命周期事件</p>
+<p>我们应该学会进行区分，</p>
 <ul>
-<li><p>初始化 initializeRequest</p></li>
-<li><p>启动调试 launchRequest</p></li>
-<li><p>获取调用栈里面的进程 threadsRequest</p></li>
-<li><p>获取给定进程的调用栈帧 stackTraceRequest</p></li>
-<li><p>获取给定栈帧的作用域分类 scopesRequest</p></li>
-<li><p>获取不同栈帧分类的变量 variablesRequest</p></li>
+<li><p>是我要做什么，还是别人让我做什么</p></li>
+<li><p>坚持做的事情，是否对我自己真的有价值</p></li>
 </ul>
 <p><br/></p>
-<p>还有 操作按钮事件</p>
+<p>例如，当前市场上，很多产品琳琅满目，各种功能一应俱全。</p>
+<p>我们会发现很多功能，甚至都不是自己需要的。</p>
+<p>那么你买下这个产品，就还得为不需要的这些功能买单。</p>
+<p><br/></p>
+<p>购买产品如此，个人的发展也是如此。</p>
+<p>要想成为更好的自己，首先要明确自己需要什么。</p>
+<p>而不是别人告诉我，我需要什么。</p>
+<p><br/></p>
+<p>然而，也不能盲目的拒绝一切好意。</p>
+<p>须知，上士闻道，勤而行之。</p>
+<p>具备优秀才能的人士，往往不吝吸收所有对自己有用的内容，丰富自身。</p>
+<p><br/></p>
+<p>总而言之，</p>
 <ul>
-<li><p>Step Over（单行执行）：nextRequest</p></li>
-<li><p>Step In（单步执行）：stepInRequest</p></li>
+<li><p>先认识自己，区分什么是内心中真正的需求：致人而不致于人</p></li>
+<li><p>积极采纳一切优秀的方案和见解，实现目标：开放的心态</p></li>
+<li><p>对以上自己做的事情，正确的评价：有自己的判断</p></li>
+</ul>
+<h3 id="学会负责">学会负责</h3>
+<p>在工作过的这些年中，我遇到过很多优秀的同事、合作伙伴。</p>
+<p><br/></p>
+<p>我发现对工作事项的把控，大致可以分为两个阶段</p>
+<ul>
+<li><p>别人告诉我解决什么问题，我来搞定</p></li>
+<li><p>我知道问题是什么，自己搞不定的时候，向外寻求帮助</p></li>
 </ul>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/08.png" /></p>
+<p>前者经常被认为是「工具人」，而后者更像是具备了「负责人」心态，</p>
+<p>后者更值得我们去学习、效仿。</p>
 <p><br/></p>
-<p>我们需要做的事情是，如何驱动解释器，按照我们指定的方式执行。</p>
-<p>比如，我们总是可以将复杂操作封装到 runtime 中去。</p>
-<p>需要注意的是 VSCode 所需要的一些 Event（<code>this.sendEvent</code>）和 Response（<code>this.sendResponse</code>）。</p>
+<p>学会对一些事项负责，并不是一件容易的事情，</p>
+<p>至少不像看起来那样简单。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/09.png" /></p>
-<h4 id="最终效果">最终效果</h4>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/10.gif" /></p>
+<p>这就好比，我们能品尝出美食，但是自己却很难做出来。</p>
+<p>也好比，能看到好的文章，但是自己却很难写出来。</p>
+<p>有很多事情都是这样的，我能听懂别人讲的，并不代表讲课简单。</p>
 <p><br/></p>
-<p>至此，我们实现了上述语言的调试功能，</p>
-<p>借助了解释器的能力，语言本身支持词法作用域。</p>
+<p>对一些事项负责，也有类似的情况。不妨考虑以下几个问题，</p>
 <ul>
-<li><p><code>f</code> 返回一个函数 <code>g</code>，并把它赋值给了 <code>c</code></p></li>
-<li><p><code>c</code> 调用的时候，就会调用内层函数 <code>g</code>，并且 <code>g</code> 的变量 <code>b</code> 取自词法作用域 <code>b=3</code>，而不是最外层的 <code>2</code></p></li>
-<li><p>而 <code>y</code> 的值是 <code>c</code> 的入参 <code>2</code>，因此 <code>d</code> 的返回值为 <code>5</code></p></li>
+<li><p>如果某一天负责人不在时，我能不能无缝对接他的工作</p></li>
+<li><p>如果让我写他的周报，怎么写，能不能写全</p></li>
+<li><p>我知道团队里的每个人，每天都在忙什么吗</p></li>
 </ul>
-<h3 id="结语">结语</h3>
-<p>上文我们编写了一个简单的 debugger，它可以对所设计的语言进行调试。</p>
-<p>有了这些能力之后，我们就可以 debug everything 了（只要世界可以停下来）。</p>
 <p><br/></p>
-<p>在自己实现 debugger 之前，会认为这些技术蕴含着难以理解的理论知识，</p>
-<p>实际写完之后却发现，主要还是对「树」结构数据进行的处理，</p>
-<p>只要了解 <strong>递归、封装、会调用 API、有工程思想</strong>，都能把它写出来。</p>
-<p>比较困难的时，如何对现有实现进行<strong>优化</strong>，这些往往是某些文章、资料、书籍重点介绍的内容。</p>
+<p>我们会发现，上述几个问题，都很难回答。</p>
+<p>这就是一个看起来简单，实际困难的例子。</p>
+<h3 id="专业性">专业性</h3>
+<p>看到这里，有人可能会说了，你这是给我画饼吧，</p>
+<p>让我当负责人，又不加钱。</p>
+<p>公司又不是我的，做的好不好关我什么事。</p>
 <p><br/></p>
-<p>我们知道，软件领域正在经历翻天覆地的变革，</p>
-<p>但不论怎样变革，知识本身并没有太多变化。</p>
+<p>对的，诚然我们都是打工人，也很难摆脱打工的命运。</p>
+<p>但是为了自身发展，我们难道不应该「不遗余力」的追求专业性的提高么。</p>
+<p>就算是在画饼，也要看对自己是不是有用，不要放弃进步的机会。</p>
 <p><br/></p>
-<p>以上介绍的内容，可能颇为小众。</p>
-<p>然而这些小众知识，反而能让我们在实际工作中 如虎添翼、立竿见影。</p>
+<p>退一步来讲，从「工具人」进阶为「负责人」，</p>
+<p>也能让自己把控更大范围的事项，创造更多的价值。</p>
+<p>只有自己强大了，留给强者的空位才会轮到我们，才会加钱。</p>
 <p><br/></p>
-<p>再接再厉。</p>
+<p>因此，我们要先做到专业性上的看齐，然后等待机会。</p>
+<p>这才叫做，机会是留给有准备的人。</p>
+<p>准备不是干等着，而是在一直做事情完善自身。</p>
+<h3 id="思维">思维</h3>
+<p>那么如何才能从「工具人」思维，转变为「负责人」思维呢？</p>
+<p>我认为有以下几点值得参考</p>
+<ul>
+<li><p>范围内事情，要做到井井有条、头头是道</p></li>
+<li><p>问题到你为止，不要等别人来问你</p></li>
+<li><p>从问题解决者，到问题发现者</p></li>
+</ul>
+<p><br/></p>
+<p>下面逐个来解释说明。</p>
+<h4 id="井井有条">井井有条</h4>
+<blockquote>
+<p>范围内事情，要做到井井有条、头头是道</p>
+</blockquote>
+<p><br/></p>
+<p>这体现了对工作内容的把控程度，一屋不扫何以扫天下。</p>
+<p>如果自己负责的事情，外界看起来很乱，</p>
+<p>那么就会给人一种不堪重任的感觉。</p>
+<p><br/></p>
+<p>主要从下面三个维度来加强，</p>
+<ul>
+<li><p>任务维度：单独一件事情的进展，风险，下一步计划【任务管理】</p></li>
+<li><p>事项总览：手头上总共几件事，每件事的投入度，工作重心【优先级、工作分配】</p></li>
+<li><p>宏观思考：所有事情（包括想法），在各自问题域中的位置和影响。在整个团队中的作用【价值思考】</p></li>
+</ul>
+<p><br/></p>
+<p>做到这些，是为了把事管好，不出乱子。</p>
+<h4 id="问题终止">问题终止</h4>
+<blockquote>
+<p>问题到你为止，不要等别人来问你</p>
+</blockquote>
+<p><br/></p>
+<p>工作中总是会遇到问题的，解决问题是常态。</p>
+<p>但我们不应该陷入，来一个问题就解决一个问题的死循环中。</p>
+<p>还要对问题本身有更深入的思考。</p>
+<p><br/></p>
+<ul>
+<li><p>为什么会有这个问题：不然解决完了以后，还会有下一个类似的问题，永远解决不完。如何让问题消失</p></li>
+<li><p>这是谁的问题：谁是发起方，他为什么要解决这个问题，价值是什么</p></li>
+<li><p>为什么我会去解决这个问题：对方为什么解决不了，我在解决这个问题时能发挥哪些独特的作用</p></li>
+</ul>
+<p>在以上三个方面多加思考，就会发现日常中很多「活」，都没经过细想。</p>
+<p><br/></p>
+<p>此外，什么叫做「到底为止」呢，</p>
+<p>意思是，只要告诉你之后，其他人就不用再关心这个问题了。</p>
+<p>这个问题是什么、怎么解决、进度、交付，我们全全负责，就像这个问题不存在一样。</p>
+<p><br/></p>
+<p>不要等着别人来问我们，解决的怎么样了。</p>
+<h4 id="发现问题">发现问题</h4>
+<blockquote>
+<p>从问题解决者，到问题发现者</p>
+</blockquote>
+<p><br/></p>
+<p>活是干不完的，一个活干完，立马就会有下一个排进来。</p>
+<p>要这样想，公司招你进来不是让你「干活的」，而是让你解决问题的。</p>
+<p><br/></p>
+<p>那么你应该解决哪些问题呢？</p>
+<p>答案是</p>
+<ul>
+<li><p>解决问题之前，先要有足够的信息量</p></li>
+<li><p>从上层视角发现问题</p></li>
+</ul>
+<p><br/></p>
+<p>当然这不是说老板认为的问题都是对的，但最起码应该站在同一个视角考虑。</p>
+<p>也不是说不能协助别人，而是说弄明白来龙去脉，避免跑偏。</p>
+<p>因为有很多问题都是经过拆分、加工过的，做完了可能对原始问题帮助不大。</p>
+<p><br/></p>
+<p>要想有足够的信息量，看到核心问题在哪，就得「抬起头来做事」。</p>
+<p>得知道团队正在发生着什么事，老板和各个负责人正在为哪些问题分心。</p>
+<p>要能看到自己所解决的问题，在整个团队中的位置。</p>
+<p><br/></p>
+<p>有句话说，你看到的问题，可能是别人的解决方案。</p>
+<p>之所以有很多限制，往往都是人为的，问题本身通常都非常简单。</p>
+<h3 id="小结">小结</h3>
+<p>以上我们分析了</p>
+<ul>
+<li><p>为什么要学会负责一些事项</p></li>
+<li><p>如何正确的判断哪些是对自己有用的努力，为什么要追求专业性</p></li>
+<li><p>如何从「事、问题、活」三个角度，转变为负责人思维</p></li>
+</ul>
+<p><br/></p>
+<p>要想当一个合格的负责人，并不简单，上文写的这些应该也只是皮毛。</p>
+<p>但是只要我们不断的像优秀同事、合作伙伴学习，</p>
+<p>只要不断的追求专业性，我们总能越做越好。</p>
+<p><br/></p>
+<p>怕的是什么，怕的是受不良言论的影响，要么像打了鸡血一样盲目奋斗，</p>
+<p>要么畏首畏尾，为了不让别人说是内卷而躺平自身（浪费的是自己的时间）。</p>
+<p><br/></p>
+<p>行动起来吧，干就完了，又不是没那条件。</p>
+<blockquote>
+<p>Today is better than yesterday.</p>
+</blockquote>
 
           
         
@@ -554,7 +551,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/2/">&gt;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/2/">&gt;</a>
   </nav>
 
 
@@ -600,7 +597,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">307</span>
+                <span class="site-state-item-count">308</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

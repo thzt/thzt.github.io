@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/11/11/service/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/11/15/programmable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/11/11/service/" itemprop="url">对 “开发者服务” 的一些反思</a></h1>
+                <a class="post-title-link" href="/2020/11/15/programmable/" itemprop="url">可编程的软件服务</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-11T00:00:00+08:00">
-                2020-11-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-15T00:00:00+08:00">
+                2020-11-15
               </time>
             
 
@@ -347,82 +347,73 @@
       
         
           
-            <p>软件是为了提供价值而存在的，但是价值的<strong>兑现形式</strong>却多种多样，</p>
-<p>彼得·德鲁克 在《<a href="https://book.douban.com/subject/1322025/" target="_blank" rel="noopener">卓有成效的管理者</a>》中提到，</p>
-<p>知识工作的价值，必须经过<strong>转换</strong>才能产出成果。</p>
+            <p>这些年，软件工程师的数量激增猛涨，越来越多的人，具备了用代码解决问题的能力了。这样的发展趋势，对软件行业本身也产生了一定的影响。下面我来列举三个例子：</p>
 <p><br/></p>
-<p>一个电商网站在那里放着，没有什么价值。</p>
-<p>只有当有人用它创造了收益，才真正产生了价值。</p>
-<p>它的价值体现在交易链路中很小的一个<strong>环节</strong>。</p>
+<p>其一，<a href="http://homes.sice.indiana.edu/samth/new-web/" target="_blank" rel="noopener">Racket</a> 支持 “面向语言进行编程”（<a href="https://cs.brown.edu/~sk/Publications/Papers/Published/fffkbmt-programmable-prog-lang/paper.pdf" target="_blank" rel="noopener">LOP</a>），是一门 “可编程” 的编程语言。旨在解决使用特定语言编程的时候，<a href="https://wiki.c2.com/?EmbeddedDomainSpecificLanguage" target="_blank" rel="noopener">eDSL</a> 难集成的问题。语言，本来就是编程用的，语言本身也变成了可编程的，这是一件有趣的事情。</p>
 <p><br/></p>
-<p>除了这种面向业务的软件形式之外，</p>
-<p>还有一种典型向<strong>开发者</strong>提供服务的软件。</p>
-<p>比如说，一个通用工具，一个框架，一个研发平台，等等。</p>
+<p>其二，<a href="https://medium.com/microsoft-open-source-stories/how-microsoft-rewrote-its-c-compiler-in-c-and-made-it-open-source-4ebed5646f98" target="_blank" rel="noopener">Roslyn</a> 不再是一个编译工具了，而是一个 “编译平台”（<a href="https://github.com/dotnet/roslyn" target="_blank" rel="noopener">Compiler Platform</a>）。因为它共享了编译器内部的工作机制，让世界以编程的方式消费。编译器，不再作为单独的一个工具提供服务了，而是变得更加开放了。</p>
 <p><br/></p>
-<p>这些软件所产生的价值，就更不好衡量了。</p>
-<p>本文就针对这种情况进行一些反思。</p>
-<h3 id="不确定性">不确定性</h3>
-<p>为开发者提供服务的软件，它的用户（开发者）并不为这些软件买单，</p>
-<p>通常为这些软件买单的是开发者所服务的<strong>公司</strong>。</p>
+<p>其三，“基础设施即代码”（<a href="https://en.wikipedia.org/wiki/Infrastructure_as_code" target="_blank" rel="noopener">IaC</a>），它本来是随着 2006 年第二代 web 框架的潮流而出现的，当时人们正在考虑底层的计算资源，能否以<a href="https://en.wikipedia.org/wiki/Utility_computing" target="_blank" rel="noopener">按需计费</a>的方式提供服务。基础设施不再使用人工配置的方式提供支持了，而是使用高级的编程语言进行<a href="https://book.douban.com/subject/26589406/" target="_blank" rel="noopener">控制</a>。</p>
 <p><br/></p>
-<p>即，公司愿意投入一些成本，购买或自研这样的一些软件服务。</p>
-<p>所以这些服务的提供者，必须向公司证明这样做是<strong>值得的</strong>。</p>
+<p>这三个例子，共同反映了一种新的潮流，现有软件行业内部的一些概念，正在朝着更加有利于编程的方式在发展了。这是全民编程能力提高之后，必然会发生的事情。下文我们就讨论一下，现阶段或者未来，我们应该如何转换想法，如何提供可编程的软件服务。</p>
+<h3 id="api-治理">API 治理</h3>
+<p>对于一个成型的软件系统而言，人们看到的更多是它提供了哪些功能，而不是它的软件架构。但其实它内部的组成方式，以及怎样与外界进行交互，才是最容易被忽视的一点。软件架构是与组织架构密不可分的，<a href="https://zh.wikipedia.org/zh-sg/%E5%BA%B7%E5%A8%81%E5%AE%9A%E5%BE%8B" target="_blank" rel="noopener">康威定律</a> 指出，</p>
+<blockquote>
+<p>设计系统的架构受制于产生这些设计的组织的沟通结构。</p>
+</blockquote>
 <p><br/></p>
-<p>这是一件比较难证明的事情。</p>
-<p>因为大多数的软件开发任务都有很大的<strong>不确定性</strong>。</p>
-<p>我们很难说一个<strong>结果</strong>是由单一因素影响的。</p>
+<p>不同形式的组织架构，就会衍生出不同的软件架构。合理架构的目的，正是为了降低研发成本，用最恰当的方式尽可能多的满足<a href="https://book.douban.com/subject/24530471/" target="_blank" rel="noopener">各方利益</a>。《<a href="https://book.douban.com/subject/30333919/" target="_blank" rel="noopener">Clean Architecture</a>》也指出了软件架构对于确定边界的重要性，</p>
+<blockquote>
+<p>Software architecture is the art of drawing lines that I call boundaries.</p>
+</blockquote>
+<blockquote>
+<p>Those boundaries separate software elements from one another, and restrict those on one side from knowing about those on the other.</p>
+</blockquote>
 <p><br/></p>
-<p>另一方面，提供开发者服务之后，用户（开发者）的体验即使能够得以提升，</p>
-<p>但是最终效果也未必会有明显提升。</p>
+<p>所以，软件架构是真实世界的各方利益，投射到软件系统中的写照。好的架构形式，可以促进多方协作，避免不必要的争论。它将不太相关的部分，内聚到独立的子系统中，人们只需要关注系统间是如何交互的即可。</p>
 <p><br/></p>
-<p>一个更好的兵器，确实能提升武力，</p>
-<p>但最后杀了多少敌人，其实跟<strong>个人意愿</strong>也有很大的关系。</p>
-<h3 id="重复劳动">重复劳动</h3>
-<p>有效的组织代码，其主要目的我觉得不是为了避免重复，</p>
-<p>而是为了让复杂的项目变得更容易<strong>管理</strong>。</p>
+<p>让依赖可追踪，是我对系统间依赖如何处理的个人体会。我曾参与过很多遗留系统的迁移工作，也曾亲身体会到了这样的迁移会带来的各种问题，称之为 “给飞机换引擎” 也不为过。一个遗留系统有哪些 api 被外部系统所使用是很难确定的，直接导致了我们对这些遗留系统的无能为力。所以让系统的所有依赖可被追踪，是一个美好的愿景。</p>
 <p><br/></p>
-<p>类似的，当多个团队都有相似工作的时候，</p>
-<p>看起来他们在重复解决同一个问题，但其实<strong>业务场景</strong>很难是完全一样的。</p>
+<p>有很多人已经这样做了，开放的 api 接口并不是直接暴露给用户，而是对这些 api 进行治理。当要依赖某一个 api 的时候，要先到某个管理系统中进行授权。这样做会有很多好处，一方面不会暴露出难以收回的接口，另一方面，这些接口的使用情况，也都一目了然了。</p>
+<h3 id="命令行接口">命令行接口</h3>
+<p>编程设计领域流传着一些 “警句”，称为《<a href="https://cpsc.yale.edu/epigrams-programming" target="_blank" rel="noopener">Epigrams in Programming</a>》。其中，有一句是这样说的：一个优秀的系统，不能没有命令行接口，</p>
+<blockquote>
+<p>A good system can’t have a weak command language.</p>
+</blockquote>
 <p><br/></p>
-<p>所以，把大家做的事情整合起来，找出通用方案，</p>
-<p>可以不从解决重复劳动的角度考虑，而是考虑，</p>
-<p>是否存在一个<strong>性价比</strong>更高的方案，可以同时解决所有团队的所有问题。</p>
+<p>命令行接口是<strong>面向程序</strong>的，而常见的图形界面是面向人的。一个系统如果只提供图形界面，那么就难以用程序的方式跟它进行交互，这会使得它自己变得<strong>封闭</strong>，无法纳入到一个更大的<strong>软件生态圈</strong>中。《<a href="https://book.douban.com/subject/7564417/" target="_blank" rel="noopener">Linux/Unix设计思想</a>》也有这样的说法，</p>
+<blockquote>
+<p>良好的程序员编写优秀代码，优秀的程序员借用优秀代码</p>
+</blockquote>
 <p><br/></p>
-<p>无疑这个通用方案，比起单独解决任何一个问题都更加的复杂。</p>
-<p>而且每个团队，还要自行<strong>适配</strong>到具体的问题中去。</p>
+<p>能将其他软件模块、程序或配置文件，集成到自己的应用程序中，会成倍的<strong>放大</strong>前辈程序员们的工作成果，这就是软件的 “杠杆效应”。命令行接口，使得系统可以被当做软件杠杆来使用。</p>
 <p><br/></p>
-<p>从软件的角度来看，消除重复就意味着建立<strong>依赖</strong>，</p>
-<p>依赖链路变长，整个系统的可靠性，以及人员的沟通效率，都会受到影响。</p>
-<h3 id="适合的问题">适合的问题</h3>
-<p>开发者在日常工作中，确实需要很多外部服务，</p>
-<p>但还是需要问一个问题，为什么他们自己不能解决呢？</p>
+<p>有很多系统是没有命令行接口的，或者反而是优先提供一种图形界面，与用户进行交互。这样做虽然能够降低用户（人）的使用成本，但也使得其他的程序无法与之对接。并且用户在图形界面上的操作很难聚拢和量化，也为后文的一切从数据出发的研发方式埋下了隐患。</p>
 <p><br/></p>
-<p>这可能要涉及 “问题谁最适合去解决” 的话题了。</p>
-<p>就像打仗的士兵，实在没有心思在前线造炮弹一样，</p>
-<p>每个团队其实都有当前<strong>最紧要</strong>的事情。</p>
+<p>但也并不是所有的系统都得这么做的，这是由不同的业务类型来决定的，即不同系统的用户群体是不同的。提供软件服务的系统，通常它的用户也是开发者，他们更喜欢用程序的方式，自动化的解决一些问题。这个时候早于图形界面，优先提供一种对程序友好的方式来提供功能，未尝不是一个更省时省力的性价比更高的做法。</p>
+<h3 id="一切从数据出发">一切从数据出发</h3>
+<p>重视数据是近几年才开始流行的趋势，在以前，人们的关键决策，更多的是依靠行业经验和敏锐的直觉所做出来的，这其实是有挺大风险的。数据导向的研发方式，起源于人们多年来在自然科学领域中的反复实践，这是一套称为<a href="https://zh.wikipedia.org/zh/%E7%A7%91%E5%AD%A6%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">科学方法</a> 的寻求知识的过程，总共分为三个阶段，</p>
+<ul>
+<li><p>问题的认知与表述</p></li>
+<li><p>实验数据的收集</p></li>
+<li><p>假说的构成与测试</p></li>
+</ul>
+<p>数据成了衡量一个系统的成效，以及后期做出优化的关键法宝了。所以，一切从数据出发，从一开始就打好基础，也就顺理成章的成了新系统的研发标准了。它可能转变了我们的研发方式，所追求的不仅仅是提供哪些功能，而是要把功能、效果的验证，当做一个整体来考虑了。</p>
 <p><br/></p>
-<p>而对于面向开发者提供服务的团队而言，他们所面的问题可能是，</p>
-<p>如何让<strong>更多的</strong>开发者来使用这些服务。</p>
-<p>毕竟这些服务的价值，必须需要有人使用才能转化为成果。</p>
+<p>结合上文图形界面和命令行的讨论，似乎命令行接口与数据导向的开发方式可以不谋而合。我在一个业务团队中曾经使用这样的一个命令行工具，至今为止都觉得是一种很好的体验。日常工作中编译打包各项事务，都交给这个命令行工具来执行，必要时我可以编写 shell 脚本来调用这些操作。相比图形界面，我并不需要打开一个网页来完成自己的工作。更重要的是，日常研发活动的行为数据，都能够被这个命令行工具收集上去，真是一个很赞的想法。</p>
+<h3 id="平台">平台</h3>
+<p>一个系统在产品形态上是否构成了平台，指的是它的用户能否帮助它提供功能。当然这件事是有利有弊的，平台显然更难管控。但是从规模上来看，平台则更容易发展壮大。毕竟一个人或者几个人的能力是有限的，有更多的用户参与进来，就相当于做了乘法，而不是现有的几个人做加法。</p>
 <p><br/></p>
-<p>有这样的想法在逻辑上是很说得过去的，</p>
-<p>但却在无形之中，会对前线开发者，造成一些压力。</p>
-<p>因为不但要应对敌人的攻势，还要应对临阵<strong>换一批新炮弹</strong>的风险。</p>
+<p>在没有其他制约因素的情况下，我更倾向于从平台视角考虑问题，尤其用户也是开发者的时候。使用系统的人与开发系统的人，具有天然的平权性，他们都是开发者，都可以用程序解决问题。这样一来，系统所能提供的服务，就变成可扩展的了，开发资源可以随着事项的紧急程度，在平台与用户之间重新分配。所以说，平台打破了需求方与实现方的单向关系，大家一视同仁的看待所有的问题。</p>
 <p><br/></p>
-<p>把事情交给别人做，就会有这样的问题。</p>
-<p>根本原因是，这两个团队的考核方式是不同的。</p>
-<p>证明一个炮弹是好的，跟证明一个士兵是优秀的，是两回事。</p>
+<p>但有些 “平台”，其实并不是按平台的方式来做的。指的是 “平台” 帮助用户实现了太多的功能，用户想帮忙也帮不上。所以，并不是说人们都来用一个系统，这个系统就称为平台了。而是要想想，在平台上能否看到用户的影子。一个比较切题的例子是 VSCode 的插件系统，仅仅依靠 VSCode 团队是不可能完成现今的海量插件的。他们依靠了整个开发者社区，依靠了用户的聪明才智。</p>
+<p><br/></p>
+<p>在《<a href="https://book.douban.com/subject/25884108/" target="_blank" rel="noopener">程序员的呐喊</a>》中，作者有一段对平台的讨论，十分的鞭辟入里，</p>
+<blockquote>
+<p>没有平台的产品的是没有用的，缺少平台支持的产品肯定会被有平台支持的同等产品取代。Google+ 错误的以为 Facebook 之所以成功是因为人家做了一个好产品。但那并不是他们成功的原因。Facebook 之所以那么成功是因为他们通过让其他人参与进来的方式，搭建了一整套各异的产品。Facebook 上有成百上千种消磨时间的好去处，所以才能满足所有人。</p>
+</blockquote>
 <h3 id="结语">结语</h3>
-<p>在一些中大型软件企业中，开发者已经是一个不小的群体了。</p>
-<p>这样的一个大群体的研发活动，也会催生出很多很多的需求。</p>
-<p><br/></p>
-<p>本文是反思了一下，为这样的群体提供服务，会遇到哪些难题。</p>
-<p>首先是开发者服务的价值，难以衡量，</p>
-<p>其实是，消除重复劳动的同时，也会增加整个系统的复杂度，</p>
-<p>最后，事情分拆导致的不同考核标准，可能会让一方受到影响。</p>
-<p><br/></p>
-<p>所以说，事在人为，不在于事而在于人。</p>
-<p>历史的转折总是不那么符合逻辑的。</p>
+<p>本文总结了自己对软件服务的一些理解，有些观点认识的还不够全面。但要表达的想法是，面向开发者提供的软件，与面向最终用户提供的软件，可以是两种不同的软件形式，也具有不同的业务属性。随着这些年开发者大军日益强大起来，人们对开发者服务的诉求，也可能会发生转变。</p>
 
           
         
@@ -461,7 +452,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/57/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/page/59/">59</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><a class="extend next" rel="next" href="/page/59/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/57/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/page/59/">59</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/59/">&gt;</a>
   </nav>
 
 
@@ -507,7 +498,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">307</span>
+                <span class="site-state-item-count">308</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
