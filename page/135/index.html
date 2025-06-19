@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/09/18/promo/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/09/20/system/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/18/promo/" itemprop="url">推广的误区</a></h1>
+                <a class="post-title-link" href="/2018/09/20/system/" itemprop="url">系统架构的重要性</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-18T00:00:00+08:00">
-                2018-09-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-20T00:00:00+08:00">
+                2018-09-20
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,86 +347,134 @@
       
         
           
-            <p>现代的软件系统，它的复杂度越来越大，</p>
-<p>各项技术的专业性<strong>分化</strong>也越来越严重，</p>
-<p>因此，很少商业软件是由<strong>一个人</strong>独立完成的。</p>
-<p><br/></p>
-<p>且不论软件整个生命周期中有过参与的种种<strong>角色</strong>，</p>
-<p>就只看到软件的<strong>开发者</strong>，这也是一个不小的<strong>群体</strong>。</p>
-<p><br/></p>
-<p>既然是一个群体，那么一起共事的其他开发者，就可能对自身的工作内容产生<strong>影响</strong>，</p>
-<p>一些优秀的团队喜欢招聘<strong>代码品味</strong>相同的人，也是这个道理。</p>
-<p><br/></p>
-<p>不同的代码品味，会极大的增加沟通和软件维护<strong>成本</strong>，</p>
-<p>也会影响到做事情的方式，影响看待问题的角度，</p>
-<p>影响代码库今后的发展方向。</p>
-<p><br/></p>
-<p>所以，与别人沟通，甚至说服别人，采用与自己相类似的方式编写代码，</p>
-<p>可以预见是一件<strong>经常发生</strong>的事情。</p>
-<p><br/></p>
-<p>然而，很多看似合理的的尝试，却<strong>很少</strong>会成功。</p>
-<p>当我们找到了一个完美的解决方案，打算<strong>推广</strong>给别人的时候，</p>
-<p>等待我们的往往是<strong>冷漠</strong>和<strong>拒绝</strong>。</p>
-<p><br/></p>
-<h3 id="先确认目标是否一致">先确认目标是否一致</h3>
-<p>首先我们应该知道的是，方案总是为解决特定的问题服务的，</p>
-<p>我们应当<strong>瞄准问题</strong>，而不是瞄准方案。</p>
-<p>我们定义了什么样的问题，就能找到什么样的方案。</p>
-<p><br/></p>
-<p>值得一提的是，我在这里并没有强调问题的固定不变的，</p>
-<p>事实上，问题本身经常是<strong>变动的</strong>，</p>
-<p>这可能有悖于我们在学校中学到的一些常识。</p>
-<p><br/></p>
-<p>因此，在我们向别人推广方案的时候，应该同时向别人<strong>确认</strong>一下问题，</p>
-<p>我们是否正打算解决同一个问题？</p>
-<p>我们预期达到的目标是否一致？</p>
-<p><br/></p>
-<p>不幸的是，目标通常是<strong>不一致</strong>的。</p>
-<p>所以方案不被认可，当然是<strong>显而易见</strong>的了。</p>
-<p><br/></p>
-<h3 id="别人不是在反对你的方案">别人不是在反对你的方案</h3>
-<p>即使我们目标达成了一致，</p>
-<p>为了实现这个目标所要付出的<strong>代价</strong>，也可能不同。</p>
-<p>对我们自身而言简单的方案，可能会给别人带来很大的<strong>麻烦</strong>。</p>
-<p><br/></p>
-<p>因此，别人不是在反对你的<strong>方案</strong>，</p>
-<p>而是在反对你给他带来的<strong>麻烦</strong>。</p>
-<p><br/></p>
-<p>看清了这一点之后，我们就不会绞尽脑汁找各种理由<strong>说服</strong>别人了，</p>
-<p>而是转而去分析，</p>
-<p>到底存在哪些困难，如何避免？</p>
-<p><br/></p>
-<p>要知道，如果别人想<strong>反驳</strong>你，总能找到办法。</p>
-<p><br/></p>
-<h3 id="我们从不推行方案">我们从不推行方案</h3>
-<p>咨询行业有一个法则，那就是，</p>
+            <h3 id="拆分和集成问题">拆分和集成问题</h3>
 <blockquote>
-<p>如果客户没雇佣你，就不要为他们解决问题。</p>
+<p>I claim that you want to start communicating between independent modules no sooner than you absolutely HAVE to, and that you should avoid splitting things up until you really need to, because that communication complexity often swamps the complexity of the actual pieces involved in it.</p>
+</blockquote>
+<blockquote>
+<p>—— <a href="https://yarchive.net/comp/microkernels.html" target="_blank" rel="noopener">Linus</a></p>
 </blockquote>
 <p><br/></p>
-<p>咨询是在他人的<strong>请求</strong>下去影响别人的艺术，</p>
-<p>而在我们身边，却有很多<strong>主动提供</strong>“帮助”的反例。</p>
+<p>这是 <a href="https://en.wikipedia.org/wiki/Linus_Torvalds" target="_blank" rel="noopener">Linus</a> 03年关于集成问题的一些讨论。</p>
+<p>让我们认识到一种现象，</p>
+<p>把<strong>复杂系统</strong>拆分成模块，似乎并没有降低<strong>整个系统</strong>的复杂度。</p>
 <p><br/></p>
-<p>所以，方案并不是推行出来的，</p>
-<p>而是有人<strong>需要</strong>它。</p>
+<p>它降低的只是<strong>子系统</strong>的复杂度。</p>
 <p><br/></p>
-<p>想想我们有多少次，为了让别人学会什么东西，而强行灌输自己的想法？</p>
-<p>知识一旦变得廉价就和<strong>噪音</strong>无异了。</p>
+<p>而整个系统的复杂度，</p>
+<p>反而会由于拆分后的模块之间，不得不进行<strong>交互</strong>，</p>
+<p>变得更加复杂。</p>
 <p><br/></p>
-<p>因此好的推广，一定是以发现客户<strong>需求</strong>为前提的，</p>
-<p>没有客户需求的方案，只是为了实现我们<strong>自身的</strong>需求，</p>
-<p>我们应该付费给客户。</p>
+<p>为什么会这样呢？</p>
+<p>因为，<strong>消息传递</strong>可以看做是一种<strong>计算过程</strong>。</p>
+<p><br/></p>
+<h3 id="消息传递">消息传递</h3>
+<p><a href="https://en.wikipedia.org/wiki/Alan_Kay" target="_blank" rel="noopener">Alan Kay</a>当时在向别人解释<strong>面向对象编程</strong>的时候谈到，</p>
+<p>面向对象，原意是将对象类比为生物学中的细胞，<strong>计算过程</strong>通过对象之间交换信息来完成。</p>
+<p><br/></p>
+<blockquote>
+<p>I thought of objects being like biological cells and/or individual computers on a network, only able to communicate with messages.</p>
+</blockquote>
+<blockquote>
+<p>—— <a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en" target="_blank" rel="noopener">Dr. Alan Kay on the Meaning of “Object-Oriented Programming”</a></p>
+</blockquote>
+<p><br/></p>
+<p>这样结果就很清晰了，在使用面向对象编程时候，</p>
+<p>将系统划分成多个<strong>对象</strong>，只是第一步，</p>
+<p>剩下的工作是，使用<strong>传递消息</strong>的方式，<strong>用这些对象</strong>完成计算任务。</p>
+<p><br/></p>
+<h3 id="状态">状态</h3>
+<p>与之类似的想法，还有 <a href="https://en.wikipedia.org/wiki/Wolfram_Alpha" target="_blank" rel="noopener">Wolfram</a> 提出的 <a href="http://mathworld.wolfram.com/CellularAutomaton.html" target="_blank" rel="noopener">元胞自动机</a>，</p>
+<p><br/></p>
+<blockquote>
+<p>A cellular automaton is a collection of "colored" cells on a grid of specified shape that evolves through a number of discrete time steps according to a set of rules based on the states of neighboring cells.</p>
+</blockquote>
+<p><br/></p>
+<p>整个系统的<strong>最终状态</strong>，是<strong>计算执行后</strong>的结果，</p>
+<p>将系统拆分成子系统之后，计算任务并不是完全由子系统承担了，</p>
+<p>事实上，子系统承担了一部分，子系统<strong>之间的</strong>信息传递过程承担了另一部分。</p>
+<p><br/></p>
+<blockquote>
+<p>系统并不是其组成物的简单加总，而是这些组成物之间互动的产物。—— Russell Ackoff</p>
+</blockquote>
+<blockquote>
+<p>整体大于其各部分之和。 —— Aristotle</p>
+</blockquote>
+<p><br/></p>
+<h3 id="系统架构">系统架构</h3>
+<p>对于开发<strong>复杂系统</strong>的团队，</p>
+<p>有一个能在<strong>系统</strong>和<strong>子系统</strong>层面进行管控的角色，</p>
+<p>就变得异常重要了。</p>
+<p><br/></p>
+<p>Ta不但负责系统的拆分，更重要的是，</p>
+<p>明确系统拆分后，各<strong>组成部分</strong>之间的<strong>交互过程</strong>。</p>
+<p><br/></p>
+<p>担任这个角色的人员，常被称为<strong>系统架构师</strong>。</p>
+<p>下面我们来看一些<strong>反模式</strong>。</p>
+<p><br/></p>
+<h3 id="静默失败">静默失败</h3>
+<p>子系统或模块之间的边界处，经常会出现静默失败的情形，</p>
+<p>由于是整个系统一起提供了产品功能，</p>
+<p>单独子系统的<strong>健壮性</strong>，其实并没有如实反映到最终产品中。</p>
+<p><br/></p>
+<p>如果上层系统对静默失败没有防范，那么这简直一定会成为一个<strong>缺陷</strong>。</p>
+<p>这代表着业务处理逻辑并不全面。</p>
+<p><br/></p>
+<p>现在我们看到，这是一个只能从<strong>系统层面</strong>寻求解决方案的问题，</p>
+<p>子系统或模块之间的交互方式，没有一个<strong>明确的</strong>方式，</p>
+<p>是产生这类问题的主要原因。</p>
+<p><br/></p>
+<h3 id="外部服务的稳定性">外部服务的稳定性</h3>
+<p>现代软件系统越来越复杂，很多系统还会依赖一些<strong>在线</strong>提供服务的外部系统，</p>
+<p>这些外部系统在不通知用户的情况下进行重启，或者由于某种原因停止服务，</p>
+<p>对上层系统的危害将是十分严重的。</p>
+<p><br/></p>
+<p>在底层系统失控时，上层系统应该做出哪些反应，</p>
+<p>这应当是系统架构师的<strong>关注</strong>的事情，</p>
+<p>如果没有明确的举措，故障将不是<strong>偶然的</strong>，而是<strong>被设计好的</strong>。</p>
+<p><br/></p>
+<p>值得一提的是，这里我们并不是说强行让外部系统变得稳定，</p>
+<p>而是说，应当具有明确的<strong>应对措施</strong>。</p>
+<p><br/></p>
+<h3 id="接口约定">接口约定</h3>
+<p>接口不只是传递了数据，我认为更重要的是传递了<strong>信息</strong>，</p>
+<p>被调用者所有内部实现的信息，被封装到了接口之下，用户不用关心接口之外的东西，</p>
+<p>接口反映了被调用者期望调用者知道的一切。</p>
+<p><br/></p>
+<p>这是很理想化的，</p>
+<p>实际上以上所说的接口包含了<strong>接口文档</strong>。</p>
+<p><br/></p>
+<p>系统架构师应当让子系统的维护者们，在不必相互理解<strong>细节</strong>的情况下还能顺利工作，</p>
+<p>所以，与其说拆分实现了<strong>功能独立性</strong>，</p>
+<p>不如说，拆分实现了<strong>信息独立性</strong>。</p>
+<p><br/></p>
+<p>那些能有效降低维护者之间<strong>信息沟通</strong>的拆分方式，才是更好的。</p>
+<blockquote>
+<p>Organizations which design systems are constrained to produce designs which are copies of the communication structures of these organizations.</p>
+</blockquote>
+<blockquote>
+<p>—— <a href="https://en.wikipedia.org/wiki/Conway%27s_law" target="_blank" rel="noopener">Conway's law</a></p>
+</blockquote>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>我们在和别人讨论方案的时候，经常会遇到这些情况，</p>
-<p>要么，别人不认同我们的<strong>预期</strong>，</p>
-<p>要么，对别人来说<strong>收益</strong>不明显，</p>
-<p>要么，他们没发现有什么<strong>问题</strong>。</p>
-<p><br/></p>
-<p>强行推广自己的方案，会逐渐失去话语权。</p>
 <blockquote>
-<p>The more one talked, the less powerful he appeared.</p>
+<p><strong>系统</strong>是由一组实体和这些实体之间的关系所构成的集合，其功能要大于这些实体各自的功能之和。</p>
 </blockquote>
+<blockquote>
+<p><strong>系统思维</strong>，就是把某个疑问，某种状况或某个难题明确的视为一个系统，也就是视为一组相互关联的实体。</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="https://book.douban.com/subject/26938710/" target="_blank" rel="noopener">系统架构：复杂系统的产品设计与开发</a>》</p>
+</blockquote>
+<p><br/></p>
+<p>如果我们开发过复杂系统，就也有可能遇到过上述<strong>集成</strong>层面的问题，</p>
+<p>当然没有被列举的问题还有很多，</p>
+<p>但是这恰好印证了文中开头所阐释的那一点，拆分并不会降低整个系统的复杂度。</p>
+<p><br/></p>
+<p>完成拆分之后，子系统或模块之间的<strong>信息传递</strong>，才是重中之重。</p>
+<p><br/></p>
+<p>怎样让这些信息传递过程，运行的更可靠更稳定，</p>
+<p>才是提高整个产品功能稳定性的关键点。</p>
 
           
         
@@ -465,7 +513,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/134/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/134/">134</a><span class="page-number current">135</span><a class="page-number" href="/page/136/">136</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/136/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/134/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/134/">134</a><span class="page-number current">135</span><a class="page-number" href="/page/136/">136</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/136/">&gt;</a>
   </nav>
 
 
@@ -511,7 +559,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">308</span>
+                <span class="site-state-item-count">309</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -586,7 +634,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

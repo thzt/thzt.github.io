@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/12/dont-make-the-change/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/14/recursive-function-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/12/dont-make-the-change/" itemprop="url">不要做出改变</a></h1>
+                <a class="post-title-link" href="/2017/03/14/recursive-function-7/" itemprop="url">递归函数（七）：不动点算子</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-12T00:00:00+08:00">
-                2017-03-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-14T00:00:00+08:00">
+                2017-03-14
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,108 +347,143 @@
       
         
           
-            <p>看不惯周围人群的随波逐流，</p>
-<p>有些人就会<strong>强迫自己做出一些改变</strong>，创造性的发表一些见解，</p>
-<p>看起来像是进行了独立的思考。</p>
+            <h3 id="回顾">回顾</h3>
+<p>以上几篇文章中，我们讨论了可计算性理论相关的一些内容，</p>
+<p>可计算性与递归函数论存在着千丝万缕的联系，</p>
+<p>不动点理论也是这样的，我们定义的递归函数一定存在吗？</p>
+<p>在什么情况下它是存在的？</p>
 <p><br/></p>
-<p>在进行未来规划时，</p>
-<p>有些人会表现出不安于现状，制定出一些尚未实现的目标，</p>
-<p>好<strong>让自己的明天和今天不同</strong>。</p>
+<p>要回答以上这些问题，还要从方程，不动点，不动点算子说起。</p>
 <p><br/></p>
-<p>与他人合作时，</p>
-<p>有些人可以看穿现有工作流程中的漏洞，找到种种弊端，</p>
-<p>然后动员大家的力量去改善它们。</p>
+<h3 id="约束方程">约束方程</h3>
 <p><br/></p>
-<p>这些似乎都是好的表现，好的仿佛事情就应该这样似的。</p>
-<p>人们期望改变，就好像人们已经厌倦了平淡一样。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-c82626b07032c9e8.png" /></p>
 <p><br/></p>
-<p>然而，在一个浮躁的环境中，想要做出改变，</p>
-<p>就好比一个不思进取的环境中，墨守成规一样。</p>
+<p>在中学时代，我们学过“方程”的概念，</p>
+<p>方程可以简单表述为含有未知数的等式，例如，<span data-katex="3x+3=2"></span>。</p>
+<p>未知数可以同时出现在等式的两边，例如，<span data-katex="2x+3=2-x"></span>。</p>
+<p>通过合并同类项，我们可以求解<span data-katex="x"></span>。</p>
 <p><br/></p>
-<p><strong>在浮躁的环境中，做出改变是简单的，</strong></p>
-<p><strong>难的是平心静气，坚持用笨方法做好平凡的事情。</strong></p>
+<p>在大学时代，我们还学过线性方程组和微分方程，</p>
+<p>例如，求解矩阵的特征值和特征向量，<span data-katex="Av=\lambda v"></span></p>
+<p>二阶常微分方程（<a href="https://zh.wikipedia.org/wiki/%E8%B4%9D%E5%A1%9E%E5%B0%94%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">贝塞尔方程</a>），<span data-katex="x^2y&#39;&#39;+xy&#39;+(x^2-\alpha ^2)y=0"></span>。</p>
 <p><br/></p>
-<h3 id="坚持主见">坚持主见</h3>
-<p>产生新颖的见解是不容易的，</p>
-<p>这需要我们无时无刻不进行思考，不要放过任何闪现出来的好想法。</p>
-<p>甚至，我们还需要不择手段的去记录它们，</p>
-<p>以防它们从我们身边溜走。</p>
+<p>在计算机科学中，同样的未知“数”的思想，</p>
+<p>还出现在了类型推导（例如：<a href="https://en.wikipedia.org/wiki/Unification_(computer_science)" target="_blank" rel="noopener">unification</a>）与递归函数的定义中。</p>
 <p><br/></p>
-<p><strong>与环境对抗，一定是痛苦的</strong>，格格不入的人们会受到排挤。</p>
-<p>然而，这与我们的感受是相悖的，好像并没有人站出来反对我们，</p>
-<p>这是因为现在的环境已经改变了，并不反对新的想法产生。</p>
+<p>以上这些例子，方程是“约束”的一种表现形式。</p>
 <p><br/></p>
-<p>当今社会正处于高速发展的过程中，</p>
-<p>没有人会在乎谁的观点，也没有人会浪费时间嘲笑别人。</p>
-<p>这个社会不缺乏新颖的见解，</p>
-<p>不管是谁，只要好好想一想，都能做出不一样的改变。</p>
+<p>我们回到最简单的阶乘函数<code>fact</code>的定义式，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int</span><br><span class="line">fact 1 &#x3D; 1</span><br><span class="line">fact n &#x3D; n * fact (n-1)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>因此，当创新已经自然而然的时候，我们就需要谋求不变了。</p>
-<p><strong>坚持自己的观点，比产生一个新想法更加困难。</strong></p>
+<p>去掉语法糖，稍微修改一下，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int</span><br><span class="line">fact n &#x3D; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  n -&gt; n * fact (n-1)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h3 id="滴水石穿">滴水石穿</h3>
-<p>不知道从什么时候开始，我们就学会了制定计划，</p>
-<p>我们要读完那些书，还要学会那些技能。</p>
+<p>我们发现，<code>fact</code>的定义和“方程”十分相似，<code>fact</code>同时出现在了等式的两边，</p>
+<p>阶乘函数，就是这个“方程”的“解”。</p>
 <p><br/></p>
-<p>如果没有一个努力的方向，我们就不被社会认同，</p>
-<p>会被认为不思进取，安于现状。</p>
-<p>无数伟大先哲也警告过我们，居安思危，戒奢以俭，</p>
-<p>学习如逆水行舟，不进则退。</p>
+<h3 id="函数的不动点">函数的不动点</h3>
 <p><br/></p>
-<p>然而，当今社会，努力已经变成了常态，</p>
-<p>大家都很拼命，都在努力的刷新技能，</p>
-<p>闲暇时光，不做出些努力才是不正常的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-417c44596d6f438d.png" /></p>
 <p><br/></p>
-<p>因此，努力所创造的价值就不那么明显了，</p>
-<p>社会中并不缺少拼命努力的人。</p>
+<p>在中学数学中，我们已经学过不动点了，只是当时印象不是那么深刻，</p>
+<p>函数的不动点，是指被这个函数映射到其自身的那些点。</p>
+<p>例如：<span data-katex="f(x)=x^2-3x+4"></span>，</p>
+<p>则<span data-katex="2"></span>是函数<span data-katex="f"></span>的一个不动点，<span data-katex="f(2)=2"></span>。</p>
 <p><br/></p>
-<p><strong>在闲暇时光能够怡然自得，回馈社会，才是难得的。</strong></p>
-<p><strong>不去学新的东西，磨炼已有的技能使之更加纯熟，也更有价值。</strong></p>
+<p>并不是每一个函数都有不动点，</p>
+<p>例如，实数域上的函数<span data-katex="f(x)=x+1"></span>，就没有不动点，对于任意实数<span data-katex="x"></span>，永远都不等于<span data-katex="x+1"></span>。</p>
+<p>（不动点是和定义域有关的，以后我们还会重新讨论<span data-katex="f(x)=x+1"></span>的不动点。</p>
 <p><br/></p>
-<h3 id="能做什么">能做什么</h3>
-<p>人们都厌恶流程，似乎流程一定阻碍生产力一样，</p>
-<p>任何一个来到团队的新人，都想方设法的去发现流程中不足，</p>
-<p>好一点的会对流程做出改善。</p>
+<p>一般的，函数<span data-katex="f(x)"></span>的不动点，指的是这样的<span data-katex="x"></span>，使得<span data-katex="x=f(x)"></span>。</p>
 <p><br/></p>
-<p>然而，这些流程本身，不就是一种工作模式吗，</p>
-<p><strong>经常变动就相当于没有流程，从根本上违背了流程的用意，</strong></p>
+<p>重新温习了不动点相关的知识之后，</p>
+<p>我们就可以对上面的阶乘函数进行改造了，</p>
+<p>我们要把阶乘函数看做另外一个函数的不动点。</p>
 <p><br/></p>
-<p>每一个团队都在追求创新，</p>
-<p>墨守成规的团队，会被看做效率低下的，</p>
-<p>不作出改变的团队，会被认为是死气沉沉的。</p>
+<p>定义函数<span data-katex="g"></span>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g :: (Int -&gt; Int) -&gt; Int -&gt; Int</span><br><span class="line">g f n &#x3D; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  n -&gt; n * f (n-1)</span><br></pre></td></tr></table></figure>
+<p>我们可以得到，<code>g fact = fact</code>，</p>
+<p>因此，<code>fact</code>实际上就是函数<code>g</code>的不动点。</p>
 <p><br/></p>
-<p>其实不然，</p>
-<p><strong>当我们做某件事情很容易的时候，就要想一想我们该不该做这件事情了。</strong></p>
-<p>因为很有可能，做这件事情并不会带来多大的价值。</p>
+<p>于是，在“方程”中求解<code>fact</code>的过程，</p>
+<p>就转换成了求解函数<code>g</code>的不动点的过程了。</p>
 <p><br/></p>
-<p>在浮躁的社会竞争中，能沉得住气的团队更加罕见，</p>
-<p>平心静气把事情做好的团队更是少之又少。</p>
+<h3 id="不动点算子">不动点算子</h3>
 <p><br/></p>
-<p>工作流程可能是简陋的，但是，</p>
-<p>少一分考虑我们要做什么，就会多一分考虑我们能做什么。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-6179cf69f757a05a.png" /></p>
 <p><br/></p>
-<h3 id="结语">结语</h3>
-<p>创新，指的不是做出改变，</p>
-<p>而是<strong>通过观察现状和潮流，找出阻力，进行反思</strong>。</p>
+<p>我们怎样求解函数<code>g</code>的不动点呢？</p>
+<p>在Haskell中，可以很方便的定义一个高阶函数<code>fix</code>，它可以用来求解任意函数的不动点，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fix :: (a -&gt; a) -&gt; a</span><br><span class="line">fix g &#x3D; let x &#x3D; g x in x</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>当人人都可以改变自己时，改变本身就是潮流，</p>
-<p>我们要反思不改变会发生什么，</p>
-<p>我们能不能在<strong>坚持主见</strong>中受益。</p>
+<p>我们试验一下<code>fix</code>的强大威力，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fact 10</span><br><span class="line">&gt; 3628800</span><br><span class="line"></span><br><span class="line">fix g 10</span><br><span class="line">&gt; 3628800</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>当人人都在学习的时候，学习本身就是潮流，</p>
-<p>我们要反思不学习新技能会发生什么，</p>
-<p><strong>我们能用自己的知识给别人带来什么。</strong></p>
+<p>注意，<code>fix g</code>得到的是<code>g</code>的不动点，而不是<code>fact</code>的不动点，</p>
+<p>即<code>(fix g) = g (fix g)</code>。</p>
 <p><br/></p>
-<p>在团队中，当人人都在考虑创新时，</p>
-<p>我们要反思不创新会发生什么,</p>
-<p>我们能不能通过<strong>坚持本分</strong>，带来效率的提升。</p>
+<p>有了<code>fix</code>，我们就可以构造匿名递归函数了，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fact&#39; :: Int -&gt; Int</span><br><span class="line">fact&#39; &#x3D; fix $ \fact -&gt; \n -&gt; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  n -&gt; n * fact (n-1)</span><br></pre></td></tr></table></figure>
+<p><code>fix</code>后面跟的函数没有名字，它是匿名的，但是经过<code>fix</code>作用后，可以产生一个递归函数。</p>
+<p>也就是说，为了实现递归，函数是可以没有名字的。</p>
 <p><br/></p>
-<p>无论我们做出什么都可能遇到阻力，</p>
-<p>这时候我们要多方观察，仔细分析阻力的来源，</p>
-<p>学会站在对立面，给敌人擂鼓助威，帮他们想办法。</p>
+<h3 id="y组合子">Y组合子</h3>
 <p><br/></p>
-<p>因为很多情况下，做与不做，到底怎样做，</p>
-<p>真的没有什么不同。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-2506f85747258985.png" /></p>
+<p><br/></p>
+<p>Y组合子，是<a href="https://zh.wikipedia.org/wiki/Haskell_Curry" target="_blank" rel="noopener">Haskell B. Curry</a>在研究<span data-katex="\lambda"></span>演算时发现的，</p>
+<p>它的表现形式如下，</p>
+<p><span data-katex="Y:=\lambda f.(\lambda x.(f\ (x\ x))\ \lambda x.(f\ (x\ x)))"></span></p>
+<p><br/></p>
+<p>在<span data-katex="\lambda"></span>演算中，（<span data-katex="\alpha"></span>转换和<span data-katex="\beta"></span>规约</p>
+<p>我们可以证明，对于任何函数<code>g</code>，<span data-katex="(Y g) = (g (Y g))"></span>。</p>
+<p><br/></p>
+<p>因此，Y组合子是一个不动点算子，它可以得到任意函数的不动点。</p>
+<p>其他的不动点算子还有图灵不动点组合子<span data-katex="\Theta"></span>，</p>
+<p><span data-katex="\Theta:=(\lambda x.\lambda y.(y\ (x\ x\ y)))\ (\lambda x.\lambda y.(y\ (x\ x\ y)))"></span></p>
+<p><br/></p>
+<p>讨论Y组合子在Haskell中的表示方式是有趣的，因为直接翻译过去会报类型错误，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">y :: (a -&gt; a) -&gt; a</span><br><span class="line">y &#x3D; \f -&gt; (\x -&gt; f (x x)) (\x -&gt; f (x x))</span><br><span class="line"></span><br><span class="line">-- Occurs check: cannot construct the infinite type: r0 ~ r0 -&gt; a</span><br><span class="line">-- Expected type: r0 -&gt; a</span><br><span class="line">--   Actual type: (r0 -&gt; a) -&gt; a</span><br><span class="line">-- In the first argument of ‘x’, namely ‘x’</span><br><span class="line">-- In the first argument of ‘f’, namely ‘(x x)’</span><br></pre></td></tr></table></figure>
+<p>类型系统无法确定<code>x</code>的类型。</p>
+<p><br/></p>
+<p>问题出在表达式<code>x x</code>上面，</p>
+<p>假设<code>x x</code>的类型为<code>a</code>，则第一个<code>x</code>的类型就应该为<code>? -&gt; a</code>，</p>
+<p>于是，第二个<code>x</code>的类型肯定也应该是<code>? -&gt; a</code>。（因为都是<code>x</code></p>
+<p><br/></p>
+<p>又因为<code>x x</code>的类型为<code>a</code>，</p>
+<p>所以第一个<code>x</code>的类型<code>? -&gt; a</code>中，<code>?</code>的类型就应该是<code>? -&gt; a</code>，</p>
+<p>（因为<code>((? -&gt; a) -&gt; a)</code>作用到<code>(? -&gt; a)</code>才能得到<code>a</code></p>
+<p><br/></p>
+<p><code>?</code>的类型是<code>? -&gt; a</code>，因此<code>?</code>应该是一个<a href="https://zh.m.wikipedia.org/wiki/%E9%80%92%E5%BD%92%E7%B1%BB%E5%9E%8B" target="_blank" rel="noopener">递归类型</a>。</p>
+<p><br/></p>
+<p>下面我们来定义递归类型<code>Mu</code>，来帮助编译器进行恰当的类型推导，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">newtype Mu a &#x3D; Mu (Mu a -&gt; a)</span><br><span class="line"></span><br><span class="line">y :: (a -&gt; a) -&gt; a</span><br><span class="line">y f &#x3D; (\h -&gt; h $ Mu h) (\x -&gt; f . (\(Mu g) -&gt; g) x $ x)</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>最后，<code>fact'</code>就可以使用Y组合子来定义了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fact&#39; :: Int -&gt; Int</span><br><span class="line">fact&#39; &#x3D; y $ \fact -&gt; \n -&gt; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  n -&gt; n * fact (n-1)</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文从简单的“方程”思想出发，引出了不动点的概念，</p>
+<p>然后把递归函数看做了另外一个函数的不动点，</p>
+<p>最后，我们讨论了Y组合子这样一个具体的不动点算子。</p>
+<p><br/></p>
+<p>可是，这里隐藏着一个问题，我们看到<code>fix</code>是可以求解任意函数的不动点的，</p>
+<p>而对于以下递归函数<code>succ</code>，即<span data-katex="f(x)=x+1"></span>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">succ :: Int -&gt; Int</span><br><span class="line">succ n &#x3D; n+1</span><br></pre></td></tr></table></figure>
+<p>在实数域上是显然没有不动点的。</p>
+<p><br/></p>
+<p>那么<code>fix succ</code>是什么呢？</p>
+<p>这个问题，我们将在后文中继续讨论。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://zh.wikipedia.org/zh-cn/%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">方程</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F" target="_blank" rel="noopener">特征值和特征向量</a></p>
+<p><a href="https://zh.wikipedia.org/zh/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">微分方程</a></p>
+<p><a href="https://zh.wikipedia.org/zh-hans/%E4%B8%8D%E5%8A%A8%E7%82%B9" target="_blank" rel="noopener">不动点</a></p>
+<p><a href="https://zh.wikipedia.org/zh-hans/%E4%B8%8D%E5%8A%A8%E7%82%B9%E7%BB%84%E5%90%88%E5%AD%90" target="_blank" rel="noopener">不动点组合子</a></p>
+<p><a href="https://en.wikibooks.org/wiki/Haskell/Fix_and_recursion" target="_blank" rel="noopener">Haskell/Fix and recursion</a></p>
+<p><a href="http://stackoverflow.com/questions/4273413/y-combinator-in-haskell/5885270#5885270" target="_blank" rel="noopener">Y Combinator in Haskell</a></p>
 
           
         
@@ -487,7 +522,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/201/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/201/">201</a><span class="page-number current">202</span><a class="page-number" href="/page/203/">203</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/203/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/201/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/201/">201</a><span class="page-number current">202</span><a class="page-number" href="/page/203/">203</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/203/">&gt;</a>
   </nav>
 
 
@@ -533,7 +568,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">308</span>
+                <span class="site-state-item-count">309</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -608,7 +643,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

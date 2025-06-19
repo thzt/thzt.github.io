@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/05/08/bustle/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/05/15/paradox/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/05/08/bustle/" itemprop="url">外驱力</a></h1>
+                <a class="post-title-link" href="/2020/05/15/paradox/" itemprop="url">迭代无法解决的架构问题</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-08T00:00:00+08:00">
-                2020-05-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-15T00:00:00+08:00">
+                2020-05-15
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,165 +347,125 @@
       
         
           
-            <p>平时我们会收到很多，略带催促的信息，</p>
-<p><strong>仿佛再不行动，就来不及了。</strong></p>
+            <p>当一个问题无解、或左右为难的时候，</p>
+<p>就不能只从<strong>当前状态</strong>出发解决问题了，</p>
+<p>而是得跳出当前状态，思考导致这种困境的原因。</p>
 <p><br/></p>
-<p>放在以前，我会由衷的表示<strong>感谢</strong>，</p>
-<p>感谢别人指点迷津，感谢别人告诉我这么重要的信息。</p>
+<p>就像走迷宫一样，遇到死胡同之后，要退回来。</p>
 <p><br/></p>
-<p>但随着这种信息越来越多，随着多次忙碌之后并无所获，</p>
-<p>我才明白了一个道理。</p>
+<p>有些软件问题，其实也是类似的，</p>
+<p>怎么看都无解，就得好好想想了，这种状态是如何<strong>造成</strong>的？</p>
 <p><br/></p>
-<p>在听到一个宝贵的建议时，</p>
-<p>要分清我们的行动是对自己有益，还是<strong>只对</strong>散播消息的人有益。</p>
+<p>比如，我们依赖了一个不稳定的外部系统，它频繁失败，</p>
+<p>用户感知到的都是我们系统的问题，怎么办？</p>
+<p>我们又没办法避免这个外部系统失败。</p>
 <p><br/></p>
-<p><strong>谁是这条消息的最终受益者。</strong></p>
+<p>又比如，一个复杂的系统，里面包含很多业务逻辑，</p>
+<p>用户经常需要确认具体逻辑后才能放心使用，</p>
+<p>怎样减少咨询量？总不能让用户自己看代码吧。</p>
 <p><br/></p>
-<p>例如，最近 “儿童编程” 行业，似有蓄意待发之势，</p>
-<p>似乎到了入学年龄，再不学编程就晚了，跟不上社会发展了。</p>
+<p>这些都是很棘手的问题。</p>
+<p>难解之处在于，几乎所有解决方案都<strong>堵死</strong>了。</p>
+<p>似乎保持现状才是最好的办法。</p>
 <p><br/></p>
-<p>身为软件行业的从业者，我了解这个行业的情况，</p>
-<p>要那么小的孩子学复杂的程序设计，个人感觉并不是特别合适，</p>
-<p>除非兴趣使然。</p>
+<p>下面我们就来分析一下这两个问题，看看怎样退一步海阔天空。</p>
+<h3 id="功利主义">功利主义</h3>
+<p>在分析问题之前，需要明确的是，退回来及时止损需要<strong>头脑清晰</strong>，</p>
+<p>并不是每个必须支付的成本，都得有回报。</p>
 <p><br/></p>
-<p>那么，谁是这条消息的最终受益者呢？</p>
-<p>更大的可能是散播 “儿童编程” <strong>急迫性</strong>的培训机构。</p>
+<p>我认为仅仅通过 “投入产出比” 来制定所有决策，是不恰当的，</p>
+<p>有些事情，并不是那么好<strong>衡量</strong>的，</p>
+<p>也有一些事情，很长<strong>时间</strong>之后才能看到价值。</p>
 <p><br/></p>
-<p><strong>有些人会为了更多的利益，故意制造紧张气氛。</strong></p>
+<p>所以，如果总是抱着 “功利” 的心态去做软件，</p>
+<p>那其实就<strong>不应该</strong>做软件，</p>
+<p>因为肯定还有比做软件 “投入产出比” 更高的事情嘛。</p>
 <p><br/></p>
-<p>以上说法，并不是在贬低 “儿童编程”，</p>
-<p>除了 “儿童编程” 之外，类似的例子真是举不胜举。</p>
-<p><br/></p>
-<p>在信息爆炸的时代，要谨防自己的 “行为” 被 “胁迫”。</p>
-<p>不由自主的做那些实际上没什么意义的事情。</p>
-<h3 id="营销手段">营销手段</h3>
-<p>我们可以反思，在生活中哪些情况下，我们会 “上当受骗”。</p>
-<p>是不是当旁人鼓吹<strong>对我们有好处</strong>的时候？</p>
-<p><br/></p>
-<p>叶茂中 在《<a href="https://book.douban.com/subject/25783682/" target="_blank" rel="noopener">营销的 16 个关键字</a>》中提到，</p>
+<p>走错了路，就得有勇气退回来，</p>
+<p>还想着只往高处走，这就是出现悖论的原因。</p>
+<h3 id="依赖的脆弱性">依赖的脆弱性</h3>
 <blockquote>
-<p>营销首先要 —— 洞察需求；</p>
+<p>我们依赖了一个不稳定的外部系统，它频繁失败，</p>
 </blockquote>
 <blockquote>
-<p>洞察需求的目的是 —— 帮助消费者解决问题；</p>
+<p>用户感知到的都是我们系统的问题，怎么办？</p>
+</blockquote>
+<p><br/></p>
+<p>依赖链路越长，整个系统的稳定性就越差，</p>
+<p>这是因为每个环节的失败，都会导致整条链路不可用。</p>
+<p><br/></p>
+<p>所以，总是把系统按调用链路进行拆分，并不是一个好主意。</p>
+<p>职责分离的同时，也增加了系统出现问题的可能性。</p>
+<p><br/></p>
+<p>此外，对于链式系统中的每个环节来说，上下游管理都是一笔不小的开销，</p>
+<p>依赖一个脆弱的系统，却还得提供可靠的功能，</p>
+<p>产生这个悖论的原因就出在这里。</p>
+<p><br/></p>
+<p>链式结构的系统，整体可用性不可能高于每个环节的可用性。</p>
+<p><br/></p>
+<p>因此，要么提高每个<strong>环节</strong>的稳定性，</p>
+<p>要么别对外声称整个系统是可靠的，及时向上抛出异常。</p>
+<p><br/></p>
+<p>用户操作一个貌似可靠的系统，最后得到一个*<strong>常失败</strong>的结果，</p>
+<p>这才是导致心态崩溃的根本原因。</p>
+<p><br/></p>
+<p>最后，在调用外部服务的时候，不应当只关注正常的返回结果，</p>
+<p>而是应当把每个外部服务，理解为<strong>多返回值</strong>（一个正常 + N种失败）接口。</p>
+<p>对于每种可能的失败，都应该专门处理。</p>
+<h3 id="延迟决定">延迟决定</h3>
+<blockquote>
+<p>一个复杂的系统，里面包含很多业务逻辑，</p>
 </blockquote>
 <blockquote>
-<p>解决问题的目的是 —— 获取利益。</p>
-</blockquote>
-<p><br/></p>
-<p>看到了么，汽车公司生产汽车，并不是因为好玩，而是因为<strong>有利可图</strong>。</p>
-<p><br/></p>
-<p>为了获取利益，就得帮用户解决问题，</p>
-<p>如果用户觉得自己没问题呢？</p>
-<p>那就<strong>制造问题</strong>。</p>
-<p><br/></p>
-<blockquote>
-<p>问题是什么？问题就是冲突！</p>
+<p>用户经常需要确认具体逻辑后才能放心使用，</p>
 </blockquote>
 <blockquote>
-<p>三流营销寻找冲突</p>
+<p>怎样减少咨询量？</p>
 </blockquote>
+<p><br/></p>
+<p>《<a href="https://book.douban.com/subject/26915970/" target="_blank" rel="noopener">Clean Architecture</a>》中有过这样一段话，</p>
 <blockquote>
-<p>二流营销解决冲突</p>
-</blockquote>
-<blockquote>
-<p>一流营销制造冲突</p>
+<p>Good architects design the policy so that decisions about the details can be delayed and deferred for as long as possible.</p>
 </blockquote>
 <p><br/></p>
-<p>所以，你觉得自己不需要，我觉得你需要，</p>
-<p>那就有了问题，有利可图。</p>
+<p>好的软件架构总想办法<strong>延迟决定</strong>。</p>
+<p>这是因为，越早做出的决定，就会包含越多的假设。</p>
+<p>软件设计是很惧怕假设的，假设意味着，未来它可能是正确的，也可能是<strong>不正确</strong>的。</p>
 <p><br/></p>
-<p>商业活动中哪有什么宝贵的建议，无非是各取所需。</p>
-<h3 id="穷忙">穷忙</h3>
-<blockquote>
-<p>Love of bustle is not industry.</p>
-</blockquote>
-<p>忙碌并不等于勤奋。</p>
+<p>过度设计的原因之一就是，<strong>假想敌</strong>太强大。</p>
 <p><br/></p>
-<p>忙起来，并不代表忙完以后自己就进步了。</p>
-<p>更有可能的结果是，<strong>让你忙</strong>的那个人受益了。</p>
+<p>回到减少咨询量的问题上来，用户之所以不放心使用，</p>
+<p>是因为我们提前帮用户做了很多不必要的事情。</p>
+<p>更合理的方法是，延迟决定，<strong>让用户来决定</strong>需要做哪些事情。</p>
 <p><br/></p>
-<p>所以，我们经常能看到一个现象，</p>
-<p>那些进步飞快的人，通常都是想尽办法<strong>腾出时间，做自己的事情</strong>，</p>
-<p>而那些忙得连自己时间都没有的人，通常会原地踏步。</p>
+<p>用户想做一些事情，反而跑过来问我们给他做了没有，</p>
+<p>这种 “保姆式” 的软件系统帮了倒忙。</p>
 <p><br/></p>
-<p>很少人会关心我们个人的成长。</p>
-<p>没有时间<strong>主动努力</strong>的人，只是在被动的<strong>穷忙</strong>。</p>
+<p>业务逻辑本来应当是当前系统该隐藏的那部分知识，这正是软件边界如此划分的原因之一，</p>
+<p>如果边界两侧，总是会有不可避免的信息沟通，</p>
+<p>这只能说明是边界的<strong>划分</strong>不合理。</p>
 <p><br/></p>
-<p>就拿加班来说吧，谁是最终受益者？</p>
-<p>那得看加班在做什么。</p>
-<p><br/></p>
-<p>把加班给公司创造收益的同时，能得到的个人 “<strong>成长</strong>”，等同于 “<strong>进步</strong>”。</p>
-<p>这是公司鼓励加班的常用<strong>伎俩</strong>。</p>
-<p><br/></p>
-<p>事实上，为了这么一丁点的 “进步”，真的用不了那么长时间。</p>
-<h3 id="事实-vs-观点">事实 vs 观点</h3>
-<p>最好不要小看舆论的作用，</p>
-<p>因为，你听到的通常不是事实，而是别人想让你听到的 “观点”。</p>
-<p><br/></p>
-<p>《<a href="https://book.douban.com/subject/1012611/" target="_blank" rel="noopener">乌合之众</a>》里这样说，</p>
-<blockquote>
-<p>人一到群体中，智商就严重降低，为了获得认同，个体愿意抛弃是非，用智商去换取那份让人备感安全的归属感。</p>
-</blockquote>
-<blockquote>
-<p>所以不要轻易的成为集体的一份子，这样很容易被别有用心的人利用，即使你以为自己只不过是随声附和了一下而已，实际上你已经成了帮凶。</p>
-</blockquote>
-<p><br/></p>
-<p>作为群体里的一员，我们很难辨别<strong>舆论事件</strong>背后的真实<strong>动机</strong>。</p>
-<p>不要全信，也不要全不信，就对了。</p>
-<p>事件背后总会有看不见的手，在影响着它的走势。</p>
-<p><br/></p>
-<p>并且，同一件事，从不同的角度审判，会得到不同的观点，</p>
-<p>只看到审判 “观点”，却看不到事件本身，就是盲目的，很容易被<strong>煽动</strong>。</p>
-<p><br/></p>
-<p>一个比较好的能让自己<strong>冷静</strong>下来的办法是，</p>
-<p>经常询问自己，</p>
-<p>如果我跟舆论保持一致，<strong>谁是最终受益者</strong>？</p>
-<p><br/></p>
-<p>谁在背后左右着我们的狂热行为？</p>
-<h3 id="蛋糕的力量">蛋糕的力量</h3>
-<p>有时候我们可能会想，难道<strong>受益</strong>真的这么重要吗？</p>
-<p>难道就没有诚心助人的时候吗？</p>
-<p><br/></p>
-<p>我觉得是有的。</p>
-<p>但受益的形式，却并不仅仅只有<strong>金钱</strong>。</p>
-<p><br/></p>
-<p>每个人都有能<strong>让自己</strong>感到受益的方式，这是人性的弱点。</p>
-<p>夺走到手的 “蛋糕” 会让人感到<strong>不适</strong>。</p>
-<p><br/></p>
-<p>所以，如果能开启上帝视角，看到每个人心中最在乎的那块 “蛋糕”，</p>
-<p>就会无往不利，左右逢源。</p>
-<p><br/></p>
-<p>《<a href="https://book.douban.com/subject/11445548/" target="_blank" rel="noopener">自私的基因</a>》中说过，</p>
-<blockquote>
-<p>达尔文的 “适者生存” 其实是 “稳定者生存” 这个普遍法则的特殊情况。</p>
-</blockquote>
-<blockquote>
-<p>宇宙为稳定的物质所占据。</p>
-</blockquote>
-<p><br/></p>
-<p>一个现存的组织，会无形中形成一道利益网，</p>
-<p>每个人手中，都有自己的那块 “蛋糕”，组织依靠着这样利益网而 “稳定” 存在。</p>
-<p>让任何人蒙受<strong>损失</strong>的行为，都会受到<strong>无形力量</strong>的阻挡。</p>
-<p><br/></p>
-<p>所以，从利益角度来看，水能载舟亦能覆舟。</p>
-<p>能驱使人，也会受制于人。</p>
+<p>我们应该退回来解决边界划分问题，而不是信息沟通问题。</p>
 <h3 id="结语">结语</h3>
-<p>通过营造紧张气氛，来<strong>驱使</strong>我们花钱的事件，已经屡见不鲜了。</p>
-<p>最终受益者所用的技巧是，假装好意<strong>制造</strong>危机。</p>
+<p>以上我们分析了软件系统中的两个典型问题，</p>
+<p>（1）依赖了一个频繁失败的外部系统，怎么服务好上游用户？</p>
+<p>（2）怎样避免用户咨询复杂系统的业务逻辑？</p>
 <p><br/></p>
-<p>因此，忙碌起来，并不等于生活将会有什么改变，</p>
-<p>有改变的永远是<strong>驱使</strong>我们忙碌起来的人。</p>
+<p>可以看到这两个问题，都跟<strong>软件架构</strong>有关。</p>
+<p>这并不是一个巧合。</p>
 <p><br/></p>
-<p>我们看到的，正是别人想让我们看到的，</p>
-<p>所以，真相通常远不是人们认为的那样简单，真相是制造舆论之人的<strong>动机</strong>。</p>
-<p>事件反而只是他们可利用的<strong>武器</strong>罢了。</p>
+<p>软件开发过程中的很多 “死胡同” 其实正是<strong>架构问题</strong>的外在表现。</p>
+<p>由于架构不合理，所以怎么做都不对。</p>
 <p><br/></p>
-<p>人性的弱点来源于<strong>趋利避害</strong>，</p>
-<p>能抓住人们的逐利心理，就能<strong>左右</strong>他人的行为，</p>
-<p>也能理解在组织中做出<strong>变革</strong>的难处。</p>
+<p>近些年来在国内疯狂流行的 “敏捷” 开发，是重迭代轻架构的，</p>
+<p>给人一种假象，任何问题都可以通过迭代抹平，</p>
+<p>其实不然。</p>
 <p><br/></p>
-<p>有时候，不是你该努力了，而是别人想从你这里赚钱了。</p>
+<p>迭代到 “死胡同”，还不肯及时止损的开发团队，非常的痛苦。</p>
+<p>一方面背着业绩压力，不得不往高处走，</p>
+<p>另一方面是，实在走不上去，又不能往回退。</p>
+<p><br/></p>
+<p>不知道这样的局面，什么时候才能有所改善。</p>
 
           
         
@@ -544,7 +504,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/73/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/75/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/73/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/75/">&gt;</a>
   </nav>
 
 
@@ -590,7 +550,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">308</span>
+                <span class="site-state-item-count">309</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -665,7 +625,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

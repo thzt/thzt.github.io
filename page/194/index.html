@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/06/23/code-management/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/06/28/probability-theory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/23/code-management/" itemprop="url">代码的组织和管理方式</a></h1>
+                <a class="post-title-link" href="/2017/06/28/probability-theory/" itemprop="url">概率论的数学基础</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-23T00:00:00+08:00">
-                2017-06-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-28T00:00:00+08:00">
+                2017-06-28
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,139 +347,128 @@
       
         
           
-            <p>我们先从一个简单的问题开始。</p>
-<p><br/ ></p>
-<p>为什么我们要把代码提取到一个函数中呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const f &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>有的人说是为了<strong>避免重复</strong>。</p>
-<p>代码有重复，就意味着代码中有些部分是相同一致的，</p>
-<p>我们就不得不手工维护这种一致性，重复的代码必须被同时修改或者删除。</p>
-<p>如果写到一个函数中，那么只需修改一处即可。</p>
-<p><br/ ></p>
-<p>有的人说是为了<strong>可复用</strong>。</p>
-<p>当前开发工作中的某些功能，未来可能还会被用到，</p>
-<p>所以，为了避免重复劳动，将这些功能提取出来，为了以后可以直接使用。</p>
-<p><br/ ></p>
-<p>然而，将重复代码提取到一个地方进行引用，会建立更多的<strong>依赖</strong>，</p>
-<p>我们也不能简单的修改一个被多处使用的函数，函数的某些调用者可能并不需要这种变更。</p>
-<p><br/ ></p>
-<p>此外，代码复用也未必会按照我们的计划发生，</p>
-<p>为了满足新项目的需要，我们常常不得不对它再进行调整，</p>
-<p>接着，老项目也得进行相应的修改，</p>
-<p>过度设计得不偿失。</p>
-<p><br/ ></p>
-<p>因此，只考虑消除重复和可复用性，并不能让代码更好。</p>
-<p>我们还要进行其他几个方面的考虑。</p>
-<p><br/ ></p>
-<h3 id="理解复杂性">理解复杂性</h3>
-<p>可能我们已经意识到了，</p>
-<p><strong>写代码最难的地方，并不是要实现功能，</strong></p>
-<p><strong>而是要思考如何组织代码，如何管理它们。</strong></p>
-<p><br/ ></p>
-<p>代码具有双重作用，不但要实现软件所提供的功能，还要承载软件的复杂性。</p>
-<p>如果不对这些复杂性进行管控，就没有人能理解软件，也无法维护它。</p>
-<p><br/ ></p>
-<p>所以，写代码和阅读代码，实际上是一个知识的表述和理解过程。</p>
-<p>提取功能模块的目的，并不仅仅是为了消除重复，或者让它可复用，</p>
-<p><strong>而是为了让软件系统更容易被理解。</strong></p>
-<p><br/ ></p>
-<h3 id="区分表述方式和外部接口">区分表述方式和外部接口</h3>
-<p>一块逻辑完整的功能，当做一个整体来看待，</p>
-<p>会提高了表述单元的粒度，简化主流程，降低构建大型软件时的心智负担。</p>
-<p><br/ ></p>
-<p>只被调用一次的函数仍然被提取出来，实际上是为了表述问题方便，</p>
-<p>它能提高我们看待问题的层次。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const main &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    task1();</span><br><span class="line">    task2();</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>然而，如果因此意外的建立了依赖，就是危险的，</p>
-<p>逻辑上互相依赖的功能，和逻辑上是一个整体但是为了表述方便而拆分成多个部分的功能，是截然不同的。</p>
-<p><strong>一旦建立了依赖，就得时刻考虑修改所产生的外在影响。</strong></p>
-<p>我们无法轻易修改一个被多处引用的函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const main &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    task1();    &#x2F;&#x2F;危险</span><br><span class="line">    task2();</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const other &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    task1();    &#x2F;&#x2F;危险</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>封装是一个避免产生过多依赖的办法，它可以很好的区分表述和依赖，</strong></p>
-<p>我们将某些函数设置为私有函数，是为了表述方便，</p>
-<p>而将另外一些函数设置为功能接口，是为了建立依赖。</p>
-<p><br/ ></p>
-<p>当私有函数进行调整的时候，我们是换了一种表述方式，</p>
-<p>而当功能接口进行调整的时候，我们就得考虑对外影响了。</p>
-<p><br/ ></p>
-<p>需要注意的是，封装是和面向对象无关的，</p>
-<p>一个模块可以不具有内部状态，但是仍然可以最小化它的功能接口。</p>
-<p>封装思想会指导我们，先从系统各模块之间的依赖角度考虑问题，而后再考虑具体实现。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const f1 &#x3D; () &#x3D;&gt; &#123; &#125;;    &#x2F;&#x2F;为了表述问题方便</span><br><span class="line">const f2 &#x3D; () &#x3D;&gt; &#123; &#125;;    &#x2F;&#x2F;被依赖</span><br><span class="line"></span><br><span class="line">export default f2;</span><br></pre></td></tr></table></figure>
-<h3 id="用抽象指导具体">用抽象指导具体</h3>
-<p>抽象是一种为了消除个体差异从而将不同的事物统一看待的方法。</p>
-<p>因此，抽象不可避免的会丢失一些细节信息。</p>
-<p><br/ ></p>
-<p>然而，<strong>抽象是一种分析问题的方式，不是一种解决方案。</strong></p>
-<p>随着软件的演变，人们通常会采取不同的归类方式重新看待问题，</p>
-<p>这样所得的抽象概念往往是易变的，且与原来不同。</p>
-<p><br/ ></p>
-<p>比如，前端轮询发送Ajax请求，和用js实现一个倒计时，是相似的，</p>
-<p>它们都是以固定的时长执行一个任务，无论是同步的还是异步的。</p>
-<p>这时候，建立一个任务执行者，用它来执行这些任务是合理的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">taskExecutor(&#123;</span><br><span class="line">    interval: 500,</span><br><span class="line">    execute: next &#x3D;&gt; &#123;</span><br><span class="line">        ...</span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>如果增加了新场景，那么任务执行者可能就不适用了，</p>
-<p>例如，在node中异步读取一个文件夹下的所有文件。</p>
-<p><br/ ></p>
-<p>通过建立新的抽象，我们可以将它们三个统一看待，</p>
-<p>即，它们三个都是在考虑，如何递归的执行一个任务，无论是同步的或者异步的。</p>
-<p><br/ ></p>
-<p>于是我们可以建立一个递归执行者，</p>
-<p>上述任务执行者只是当前递归执行者的一个具体应用，任务执行者可以用递归执行者实现出来。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">recursion(init, (current, next) &#x3D;&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">    next(value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">const taskExecutor &#x3D; (&#123; interval, execute &#125;) &#x3D;&gt; &#123;</span><br><span class="line">    recursion(null, (_, next) &#x3D;&gt; &#123;</span><br><span class="line">        execute(() &#x3D;&gt; &#123;</span><br><span class="line">            setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">                next();</span><br><span class="line">            &#125;, interval);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在具体工作中，<strong>不同的抽象给出了不同适用范围的解决方案，</strong></p>
-<p>上述递归执行者的适用范围更广，但却不一定总是最好的，</p>
-<p><strong>抽象思维指导了我们如何解决问题，但并不意味着我们必须这样解决。</strong></p>
-<p><br/ ></p>
-<p>例如，以上三个问题都可以看做执行一个任务，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const execute &#x3D; fn &#x3D;&gt; fn();</span><br><span class="line"></span><br><span class="line">execute(task);</span><br></pre></td></tr></table></figure>
-<p>如此这样的抽象，对于解决问题来说，意义就不明显了，</p>
-<p>并没有给我们带来任何便利和额外的价值。</p>
-<p><br/ ></p>
-<h3 id="抓住数学模型和语言结构">抓住数学模型和语言结构</h3>
-<p><strong>程序员自己发明的抽象通常是不稳定的，</strong></p>
-<p>这种抽象完全取决于当前项目中我们具体处理的问题，</p>
-<p>一旦问题场景发生了变化，抽象概念也会发生变化。</p>
-<p>因此，有经验的程序员极少发明新的概念，而是使用已有的成熟概念。</p>
-<p><br/ ></p>
-<p>有两种成熟的抽象概念值得借鉴，</p>
-<p>其一是问题背后的数学模型，其二是代码本身所具有的语言结构。</p>
-<p><br/ ></p>
-<p>所谓数学模型，就是使用数学概念和语言对问题进行分析和描述。</p>
-<p>这些数学概念一般而言都是通用的，不存在理解上的歧义性，</p>
-<p>我们只需要把问题向它们靠拢即可，不用自己来发明。</p>
-<p><br/ ></p>
-<p>所谓语言结构，指的是当前所使用的编程语言所提供的那些抽象方式，</p>
-<p>例如，函数，类，模块，数据类型，高阶函数，泛型，多态性，等等。</p>
-<p>使用这些内置的语言结构来书写代码，会避免代码晦涩难懂。</p>
-<p><br/ ></p>
-<p>因此，<strong>好的代码，总是能清晰的看到背后的数学，并且使用了足够丰富的语言结构。</strong></p>
-<p><br/ ></p>
-<p>将数据结构从代码中分离，就是这样的一个例子，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const graph &#x3D; new Graph;</span><br><span class="line"></span><br><span class="line">graph.addEdges(vertex, vertices);</span><br><span class="line">graph.findSuccessors(vertex);</span><br><span class="line">graph.findPredecessors(vertex);</span><br></pre></td></tr></table></figure>
-<p>以上代码，使用了一个称之为图的数据结构，并且，使用了类来表示它。</p>
-<p><br/ ></p>
-<p>数据结构是稳定的，对图进行的所有操作都是固定的，很少发生变化，大家都能理解发生了什么，</p>
-<p>此外，使用类进行表示，有助于把所有操作图状态的函数放在一起，并且可以避免对外建立无谓的依赖。</p>
-<p>值得一提的是，数学不只是数据结构，编程语言也不只有类这么一个概念。</p>
-<p><br/ ></p>
-<p>例如，字符串经过词法分析，会得到一系列token，</p>
-<p>在数学上，token可以视为与之相应的有穷自动机所接受的子串，</p>
-<p>在语言结构上，返回token的过程可以用generator来表示。</p>
-<p><br/ ></p>
-<p>不考虑数学，或者从不使用高级语言结构，就不得不自创一些难懂的概念，</p>
-<p>这和平铺直叙的书写代码一样难以维护。</p>
-<p><br/ ></p>
-<h3 id="结语">结语</h3>
-<p>写代码除了是一个实现功能的过程，还是一个管理复杂性的过程，</p>
-<p>管理复杂性，涉及到代码的组织和管理。</p>
-<p><br/ ></p>
-<p>涉及到我们如何向别人把软件系统表述清楚，</p>
-<p>涉及到我们如何管理模块之间的依赖关系，</p>
-<p>涉及到我们如何抽象的看待事物。</p>
-<p><br/ ></p>
-<p>仔细的斟酌和考量才会写出好代码，不假思索一定会带来灾难，</p>
-<p>我想这应该是一名专业的程序员与门外汉的根本区别吧。</p>
+            <h3 id="外测度">外测度</h3>
+<p>设<span data-katex="E\subseteq R^n"></span>，如果<span data-katex="\{I_k\}"></span>是<span data-katex="R^n"></span>中的可数个开矩体，</p>
+<p>且有<span data-katex="E\subseteq\;{\tiny\begin{matrix}\\ \normalsize \cup \\ ^{\scriptsize k\geqslant 1}\end{matrix}}\;I_k"></span>，</p>
+<p>则称<span data-katex="\{I_k\}"></span>为<span data-katex="E"></span>的一个<strong><span data-katex="L"></span>-覆盖</strong>。</p>
+<p><br/></p>
+<p>显然这样的覆盖有很多，且每一个<span data-katex="L"></span>-覆盖<span data-katex="\{I_k\}"></span>确定了一个非负广义实值<span data-katex="\;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\tiny k\geqslant 1}\end{matrix}}\; |I_k|"></span>，</p>
+<p>（可以是<span data-katex="+\infty"></span>，<span data-katex="|I_k|"></span>表示<span data-katex="I_k"></span>的体积），</p>
+<p>我们称，<span data-katex="m^*(E)=inf\{ \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\tiny k\geqslant 1}\end{matrix}}\; |I_k| \}"></span>，</p>
+<p>为点集<span data-katex="E"></span>的<strong>Lebesgue外测度</strong>。</p>
+<p><br/></p>
+<p><span data-katex="R^n"></span>中点集的外测度具有以下性质：</p>
+<p>（1）非负性：<span data-katex="m^*(E)\geqslant 0"></span>，<span data-katex="m^*(\varnothing)=0"></span></p>
+<p>（2）单调性：如果<span data-katex="E_1\subseteq E_2"></span>，那么<span data-katex="m^*(E_1)\leqslant m^*(E_2)"></span></p>
+<p>（3）次可加性：<span data-katex="m^*( \;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize k=1}\end{matrix}}\;E_k )\leqslant \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\scriptsize k=1}\end{matrix}}\; m^*(E_k)"></span></p>
+<p><br/></p>
+<p>现在我们把外测度的概念，从<span data-katex="R^n"></span>扩展到任意非空集合<span data-katex="X"></span>上，</p>
+<p>设<span data-katex="X"></span>是一个非空集合，<span data-katex="\mu^*"></span>是定义在幂集<span data-katex="\mathscr{P}(X)"></span>上的一个取广义实值的集合函数，且满足，</p>
+<p>（1）<span data-katex="\mu^*(\varnothing)=0"></span>，<span data-katex="\mu^*(E)\geqslant 0,\ E\subseteq X"></span></p>
+<p>（2）如果<span data-katex="E_1,E_2\subseteq X"></span>，<span data-katex="E_1\subseteq E_2"></span>，那么<span data-katex="\mu^*(E_1)\leqslant\mu^*(E_2)"></span></p>
+<p>（3）如果<span data-katex="\{E_n\}"></span>是<span data-katex="X"></span>的子集列，则有<span data-katex="\mu^*( \;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize n=1}\end{matrix}}\;E_n )\leqslant \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\scriptsize n=1}\end{matrix}}\; \mu^*(E_n)"></span></p>
+<p>那么我们就称<span data-katex="\mu^*"></span>是<span data-katex="X"></span>上的一个<strong>外测度</strong>。</p>
+<p><br/></p>
+<h3 id="可测集">可测集</h3>
+<p>设<span data-katex="E\subseteq R^n"></span>，如果对于任意的点集<span data-katex="T\subseteq R^n"></span>，有</p>
+<p><span data-katex="m^*(T)=m^*(T\cap E)+m^*(T\cap \overline{E})"></span>，</p>
+<p>则称<span data-katex="E"></span>为Lebesgue可测集，简称<strong>可测集</strong>，</p>
+<p>可测集的全体称为可测集类<span data-katex="\mathscr{M}"></span>。</p>
+<p><br/></p>
+<p>可测集具有以下性质：</p>
+<p>（1）<span data-katex="\varnothing\in\mathscr{M}"></span></p>
+<p>（2）如果<span data-katex="E\in\mathscr{M}"></span>，则<span data-katex="\overline{E}\in\mathscr{M}"></span></p>
+<p>（3）如果<span data-katex="E_1\in\mathscr{M}"></span>，<span data-katex="E_2\in\mathscr{M}"></span>，则<span data-katex="E_1\cup E_2"></span>，<span data-katex="E_1\cap E_2"></span>，以及<span data-katex="E_1 \backslash E_2"></span>都属于<span data-katex="\mathscr{M}"></span></p>
+<p>（4）如果<span data-katex="E_i\in\mathscr{M},i=1,2,\cdots"></span>，则其并集也属于<span data-katex="\mathscr{M}"></span></p>
+<p>如果进一步有<span data-katex="E_i\cap E_j=\varnothing,i\neq j"></span>，则</p>
+<p><span data-katex="m^*( \;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize i=1}\end{matrix}}\;E_i )= \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\scriptsize i=1}\end{matrix}}\; m^*(E_i)"></span>，</p>
+<p>即<span data-katex="m^*"></span>在<span data-katex="\mathscr{M}"></span>上满足<strong>可数可加性</strong>（或称<strong><span data-katex="\sigma"></span>-可加性</strong>）。</p>
+<p><br/></p>
+<p><span data-katex="R^n"></span>中的可测集类<span data-katex="\mathscr{M}"></span>构成了一个<span data-katex="\sigma"></span>-代数，</p>
+<p>对于可测集<span data-katex="E"></span>，其外测度称为<strong>测度</strong>，记为<span data-katex="m(E)"></span>，</p>
+<p>这就是通常所说的<span data-katex="R^n"></span>上的<strong>Lebesgue测度</strong>。</p>
+<p><br/></p>
+<h3 id="代数"><span data-katex="\sigma"></span>代数</h3>
+<p>设<span data-katex="\mathscr{F}"></span>是由集合<span data-katex="\Omega"></span>中的一些子集所构成的集合族，</p>
+<p>且满足下述条件：</p>
+<p>（1）<span data-katex="\varnothing\in\mathscr{F}"></span></p>
+<p>（2）如果<span data-katex="A\in\mathscr{F}"></span>，则<span data-katex="\overline{A}\in\mathscr{F}"></span></p>
+<p>（3）如果<span data-katex="A_n\in\mathscr{F},n=1,2,\cdots"></span>，则<span data-katex="\;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize n=1}\end{matrix}}\;A_n\in\mathscr{F}"></span></p>
+<p>这时我们称<span data-katex="\mathscr{F}"></span>是一个<strong><span data-katex="\sigma"></span>-代数</strong>。</p>
+<p><br/></p>
+<p>设<span data-katex="\mathscr{M}"></span>是集合<span data-katex="\Omega"></span>中一些子集所构成的集合族，</p>
+<p>我们称<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F}"></span><strong>包含</strong><span data-katex="\mathscr{M}"></span>，</p>
+<p>如果对于任意的<span data-katex="A\in\mathscr{M}"></span>，都有<span data-katex="A\in\mathscr{F}"></span>。</p>
+<p><br/></p>
+<p>我们称<span data-katex="\mathscr{F}"></span>为包含<span data-katex="\mathscr{M}"></span>的<strong>最小<span data-katex="\sigma"></span>-代数</strong>，</p>
+<p>如果对于任意的包含<span data-katex="\mathscr{M}"></span>的<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F&#39;}"></span>，</p>
+<p>如果<span data-katex="A\in\mathscr{F}"></span>，那么<span data-katex="A\in\mathscr{F&#39;}"></span>。</p>
+<p><br/></p>
+<p>包含<span data-katex="\mathscr{M}"></span>的最小<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F}"></span>，记为<span data-katex="\sigma(\mathscr{M})"></span>，</p>
+<p>称为<strong>由<span data-katex="\mathscr{M}"></span>生成的<span data-katex="\sigma"></span>-代数</strong>。</p>
+<p><br/></p>
+<h3 id="可测空间">可测空间</h3>
+<p>集合<span data-katex="\Omega"></span>连同其子集的<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F}"></span>一起，称为<strong>可测空间</strong>，记为<span data-katex="(\Omega,\mathscr{F})"></span>。</p>
+<p>三元组<span data-katex="(\Omega,\mathscr{F},\mu)"></span>称为<strong>测度空间</strong>，其中，<span data-katex="\mu"></span>为定义在<span data-katex="(\Omega,\mathscr{F})"></span>上的测度。</p>
+<p>如果<span data-katex="N\in\mathscr{F}"></span>，且<span data-katex="\mu(N)=0"></span>，则称<span data-katex="N"></span>为<span data-katex="\mu"></span>的<strong>零测集</strong>。</p>
+<p><br/></p>
+<p>如果测度空间<span data-katex="(X,\mathscr{F},\mathbf{P})"></span>满足<span data-katex="\mathbf{P}(X)=1"></span>，</p>
+<p>则称它为<strong>概率空间</strong>，对应的<span data-katex="\mathbf{P}"></span>称为<strong>概率测度</strong>。</p>
+<p>在概率空间<span data-katex="(X,\mathscr{F},\mathbf{P})"></span>中，<span data-katex="\mathscr{F}"></span>中的集合<span data-katex="A"></span>称为<strong>事件</strong>，</p>
+<p><span data-katex="\mathbf{P}(A)"></span>称为<strong>事件<span data-katex="A"></span>发生的概率</strong>。</p>
+<p><br/></p>
+<h3 id="borel集">Borel集</h3>
+<p>由<span data-katex="R^n"></span>中一切开集构成的开集族所生成的<span data-katex="\sigma"></span>-代数，</p>
+<p>称为<strong>Borel <span data-katex="\sigma"></span>-代数</strong>，记为<span data-katex="\mathscr{B}=\mathscr{B}(R^n)"></span>，</p>
+<p><span data-katex="\mathscr{B}"></span>中的元素称为<strong>Borel集</strong>。</p>
+<p><br/></p>
+<p>我们可以将Borel集的概念扩展到拓扑空间，</p>
+<p>拓扑空间<span data-katex="(X,\mathscr{O})"></span>，其中<span data-katex="\mathscr{O}"></span>是拓扑空间的开集族，</p>
+<p>我们称<span data-katex="\mathscr{B}=\sigma(\mathscr{O})"></span>为<span data-katex="X"></span>上的<strong>Borel集合族</strong>，</p>
+<p>其中的集合称为<span data-katex="X"></span>中的<strong>Borel集</strong>，而<span data-katex="(X,\mathscr{B})"></span>称为<strong>拓扑可测空间</strong>。</p>
+<p><br/></p>
+<p>可以证明，任一Borel集都是可测集。</p>
+<p><br/></p>
+<h3 id="随机变量">随机变量</h3>
+<p>设<span data-katex="(\Omega,\mathscr{F})"></span>和<span data-katex="(S,\mathscr{B})"></span>是可测空间，</p>
+<p>如果映射<span data-katex="X:\Omega\rightarrow S"></span>满足，<span data-katex="X^{-1}(\mathscr{B})\subseteq\mathscr{F}"></span>，</p>
+<p>就称它是<strong><span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测的</strong>，记为<span data-katex="X\in\mathscr{F}|\mathscr{B}"></span>。</p>
+<p>即，对于任意的<span data-katex="B\in\mathscr{B}"></span>，由<span data-katex="X^{-1}(B):=\{\omega:X(\omega)\in B\}\in\mathscr{F}"></span>。</p>
+<p><br/></p>
+<p>在概率论中，<span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测映射，通常称为<strong>随机元</strong>，或取值于<span data-katex="S"></span>的<strong>随机变量</strong>。</p>
+<p>当<span data-katex="S=R^k"></span>（具有欧氏距离），<span data-katex="\mathscr{B}=\mathscr{B}(R^k),k&gt;1"></span>，（Borel集）</p>
+<p>随机元<span data-katex="X"></span>（<span data-katex="X"></span>是<span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测的）称为<strong>随机向量</strong>。</p>
+<p><br/></p>
+<p>可测映射可以将测度由已知的空间导向另一个空间，</p>
+<p>设<span data-katex="(\Omega,\mathscr{F})"></span>和<span data-katex="(S,\mathscr{B})"></span>是可测空间，</p>
+<p>并且在<span data-katex="(\Omega,\mathscr{F})"></span>上给定某个概率测度<span data-katex="\mathbf{P}"></span>，</p>
+<p>设<span data-katex="X:\Omega\rightarrow S"></span>是<span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测映射。</p>
+<p>在<span data-katex="\mathscr{B}"></span>上的测度称作随机元<span data-katex="X"></span>的<strong>概率分布</strong>或分布，用<span data-katex="\mathbf{P}_X"></span>表示，</p>
+<p>如果<span data-katex="\mathbf{P}_X"></span>满足以下条件，<span data-katex="\mathbf{P}_X(B):=\mathbf{P}(X^{-1}(B)),\ B\in\mathscr{B}"></span>。</p>
+<p>测度<span data-katex="\mathbf{P}_X"></span>称为在可测映射<span data-katex="X"></span>下，测度<span data-katex="\mathbf{P}"></span>的<strong>像</strong>。</p>
+<p><br/></p>
+<p>可证，在<span data-katex="(S,\mathscr{B})"></span>上的任意概率测度<span data-katex="\mathbf{Q}"></span>都可以看做某个随机元<span data-katex="X"></span>的分布。</p>
+<p><br/></p>
+<h3 id="随机过程">随机过程</h3>
+<p>在某个可测空间<span data-katex="(\Omega,\mathscr{F})"></span>上，对每个<span data-katex="t\in T"></span>给定随机元<span data-katex="X(t)"></span>，</p>
+<p>则随机元族<span data-katex="X=\{X(t),t\in T\}"></span>，称为<strong>随机函数</strong>。</p>
+<p><br/></p>
+<p>这里需要解释一下，在上述定义中，</p>
+<p>所有的随机元<span data-katex="X(t),t\in T"></span>都是定义在同一个可测空间<span data-katex="(\Omega,\mathscr{F})"></span>上，</p>
+<p>但是，为了有利于研究，经常认为随机元<span data-katex="X(t),t\in T"></span>的值域可以是不同的。</p>
+<p>准确的说，给定一个可测空间族<span data-katex="(S_t,\mathscr{B}_t),t\in T"></span>，这时，引进的随机元族<span data-katex="X=\{X(t),t\in T\}"></span>，</p>
+<p>可以看做是定义在<span data-katex="T\times\Omega"></span>上的函数<span data-katex="X=X(t,\omega)"></span>，</p>
+<p>并且对每个<span data-katex="t\in T"></span>取值于<span data-katex="S_t"></span>，同时是<span data-katex="\mathscr{F}|\mathscr{B}_t"></span>-可测映射（<span data-katex="X(t,\cdot):\Omega\rightarrow S_t"></span>）。</p>
+<p><br/></p>
+<p>对固定的<span data-katex="\omega"></span>，函数<span data-katex="X(\cdot,\omega)"></span>或<span data-katex="X(t,\omega),t\in T"></span>，称作<strong>轨道</strong>，<strong>实现</strong>或<strong>样本函数</strong>。</p>
+<p><br/></p>
+<p>在随机函数的符号中，一般来说要省略自变量<span data-katex="\omega"></span>，简写为<span data-katex="X(t)"></span>，或<span data-katex="X_t"></span>，</p>
+<p>这两种简写的利用要根据具体情况而定。</p>
+<p>如果<span data-katex="T\subseteq R=(-\infty,+\infty)"></span>，则参数<span data-katex="t\in T"></span>可以解释为时间，而随机函数称作<strong>随机过程</strong>。</p>
+<p><br/></p>
+<p>当集合<span data-katex="T"></span>为直线，半直线，线段，区间或半区间，则说是<strong>连续时间的随机过程</strong>，</p>
+<p>而当<span data-katex="T\subseteq Z=\{\cdots,-1,0,1,\cdots\}"></span>，则说是<strong>离散时间随机过程</strong>或<strong>随机序列</strong>，</p>
+<p>如果<span data-katex="T\subseteq R^d,d&gt;1"></span>，则<span data-katex="X"></span>称为<strong>随机场</strong>。</p>
 
           
         
@@ -518,7 +507,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/193/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/193/">193</a><span class="page-number current">194</span><a class="page-number" href="/page/195/">195</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/195/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/193/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/193/">193</a><span class="page-number current">194</span><a class="page-number" href="/page/195/">195</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/195/">&gt;</a>
   </nav>
 
 
@@ -564,7 +553,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">308</span>
+                <span class="site-state-item-count">309</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -639,7 +628,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

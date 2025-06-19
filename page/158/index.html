@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/19/semantics-9/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/23/semantics-10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/19/semantics-9/" itemprop="url">语言背后的代数学（九）：笛卡尔闭范畴</a></h1>
+                <a class="post-title-link" href="/2018/02/23/semantics-10/" itemprop="url">语言背后的代数学（十）：Curry-Howard-Lambek correspondance</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-19T00:00:00+08:00">
-                2018-02-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T00:00:00+08:00">
+                2018-02-23
               </time>
             
 
@@ -347,135 +347,125 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-cb66a46077b03ab6.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-f3c4e7374c59c264.png" /></p>
 <p><br/></p>
 <h3 id="回顾">回顾</h3>
-<p>上文我们简单的介绍了一些范畴论相关的内容，</p>
-<p>范畴由一些对象和箭头组成，范畴之间的箭头称为函子，</p>
-<p>函子之间的一族箭头称为自然变换。</p>
+<p>上文我们介绍了笛卡尔闭范畴，它给出了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^{unit,\times,\to}"></span>的语义，</p>
+<p>我们还看到了笛卡尔闭范畴与柯里化之间的关系。</p>
 <p><br/></p>
-<p>范畴的对象不一定是集合，所有的箭头也不一定构成一个集合。</p>
-<p>如果一个范畴<span data-katex="C"></span>，它的对象都是集合，所有的箭头也构成了一个集合，</p>
-<p>就称该范畴是一个小范畴（<a href="https://en.wikipedia.org/wiki/Category_(mathematics)#Small_and_large_categories" target="_blank" rel="noopener">small categories</a>）。</p>
+<p>结合《<a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型</a>》系列文章，</p>
+<p>到目前为止我们已经有了，类型理论，逻辑学和范畴论的知识基础了。</p>
+<p>现在我们介绍Curry-Howard-Lambek correspondence，将三者联系起来。</p>
 <p><br/></p>
-<h3 id="定义域和值域">1. 定义域和值域</h3>
+<h3 id="类型方面">1. 类型方面</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-57ed84963b06aca7.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-09a5fa1690d11143.png" /></p>
 <p><br/></p>
-<p>在集合论中，函数自变量所有可取值的集合，称为函数的<strong>定义域</strong>，</p>
-<p>给定函数<span data-katex="f:A\to B"></span>，其中<span data-katex="A"></span>就是<span data-katex="f"></span>的定义域，记为<span data-katex="D_f"></span>，</p>
-<p>集合<span data-katex="f(A)=\{f(x)|x\in A\}"></span>，称为<span data-katex="f"></span>的<strong>值域</strong>，记为<span data-katex="R_f"></span>。</p>
+<p>参考《<a href="https://thzt.github.io/2017/09/06/type-2/">你好，类型（二）：Lambda calculus</a>》，</p>
+<p>我们来回顾一下简单类型化<span data-katex="\lambda"></span>演算系统。</p>
+<h4 id="语法">1.1 语法</h4>
+<p><span data-katex="t::=x|tu|\lambda x.t"></span></p>
 <p><br/></p>
-<p>在范畴论中，箭头也有定义域和值域的概念。</p>
-<p>箭头<span data-katex="f:a\to b"></span>，表示了对象<span data-katex="a"></span>和<span data-katex="b"></span>之间的关系，</p>
-<p>我们称<span data-katex="a"></span>为箭头<span data-katex="f"></span>的<strong>定义域</strong>（domain），记为<span data-katex="dom~f"></span>，</p>
-<p><span data-katex="b"></span>为箭头<span data-katex="f"></span>的<strong>值域</strong>（codomain），记为<span data-katex="cod~f"></span>。</p>
+<p>例子：</p>
+<p><span data-katex="\lambda x.x+1"></span></p>
+<p><span data-katex="\lambda f.\lambda x.fx"></span></p>
+<h4 id="类型">1.2 类型</h4>
+<p>基本类型（basic types），<span data-katex="B::=\iota|\cdots"></span></p>
+<p>一般类型（general types），<span data-katex="T::=B|T\to T|T\times T"></span></p>
 <p><br/></p>
-<p>由此，我们还可以定义范畴<span data-katex="C"></span>中，从对象<span data-katex="a"></span>到对象<span data-katex="b"></span>所有箭头的集合，</p>
-<p><span data-katex="hom(a,b)=\{f|f\in C,dom~f=a,cod~f=b\}"></span>，常被称为<strong><a href="https://en.wikipedia.org/wiki/Morphism#Definition" target="_blank" rel="noopener">hom-set</a></strong>。</p>
+<p>例子：</p>
+<p><span data-katex="\iota\to\iota\to\iota"></span>，</p>
+<p><span data-katex="(\iota\to\iota)\to\iota"></span></p>
+<h4 id="类型推导规则">1.3 类型推导规则</h4>
+<p>（1）<span data-katex="\frac{~}{\Gamma,x:t\vdash x:T}"></span></p>
 <p><br/></p>
-<h3 id="笛卡尔闭范畴">2. 笛卡尔闭范畴</h3>
+<p>（2）<span data-katex="\frac{\Gamma\vdash t:T~~~~\Gamma\vdash u:U}{\Gamma\vdash\left\langle t,u\right\rangle:T\times U}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_1v:T}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_2v:U}"></span></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-813d7932c1fb3fb5.png" /></p>
+<p>（3）<span data-katex="\frac{\Gamma,x:U\vdash t:T}{\Gamma\vdash\lambda x.t:U\to T}"></span>，<span data-katex="\frac{\Gamma\vdash t:U\to T~~~~\Gamma\vdash u:U}{\Gamma\vdash tu:T}"></span></p>
 <p><br/></p>
-<p>笛卡尔闭范畴是一种带有附加结构的范畴，这个名字虽然不是那么熟悉，</p>
-<p>而实际上，我们经常遇到它。</p>
+<p>其中，<span data-katex="\pi_1\left\langle v_1,v_2 \right\rangle=v_1"></span>，<span data-katex="\pi_2\left\langle v_1,v_2 \right\rangle=v_2"></span>。</p>
 <p><br/></p>
-<h4 id="笛卡尔积">2.1 笛卡尔积</h4>
-<p>两个集合<span data-katex="X"></span>和<span data-katex="Y"></span>的笛卡尔积，是以下所有可能有序对构成的集合，</p>
-<p><span data-katex="X\times Y=\{(x,y)|x\in X,y\in Y\}"></span>。</p>
+<h3 id="逻辑方面">2. 逻辑方面</h3>
 <p><br/></p>
-<h4 id="笛卡尔积上的函数">2.2 笛卡尔积上的函数</h4>
-<p><span data-katex="f:X\times Y\to Z"></span>，是从笛卡尔积<span data-katex="X\times Y"></span>到<span data-katex="Z"></span>的函数，</p>
-<p>我们可以用两种不同的视角来看待它，</p>
-<p>（1）它是一个一元函数，参数取遍<span data-katex="X\times Y"></span>中的所有元素。</p>
-<p>（2）它是一个二元函数，一个参数来自于<span data-katex="X"></span>，另一个来自于<span data-katex="Y"></span>。</p>
-<p>原则上，这两种理解应该是不同的，然而它们却是等价的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-1a02678c20564afc.png" /></p>
 <p><br/></p>
-<h4 id="柯里化">2.3 柯里化</h4>
+<p>参考《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a>》，</p>
+<p>我们构建一个只包含逻辑联接词<span data-katex="\wedge"></span>和<span data-katex="\to"></span>的命题逻辑系统。</p>
+<h4 id="逻辑推导规则">2.1 逻辑推导规则</h4>
+<p>（1）<span data-katex="\frac{~}{\Gamma,A\vdash A}"></span></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-28c21c09edf2f2f3.png" /></p>
+<p>（2）<span data-katex="\frac{\Gamma\vdash A~~~~\Gamma\vdash B}{\Gamma\vdash A\wedge B}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}"></span></p>
 <p><br/></p>
-<p>笛卡尔闭范畴就是反映这一类性质的数学结构，</p>
-<p>一个范畴中，定义在乘积对象<span data-katex="a\times b"></span>上的箭头<span data-katex="f"></span>，</p>
-<p>总是可以“自然的”由定义在某一个对象<span data-katex="a"></span>或<span data-katex="b"></span>上的箭头来决定。</p>
+<p>（3）<span data-katex="\frac{\Gamma,A\vdash B}{\Gamma\vdash A\to B}"></span>，<span data-katex="\frac{\Gamma\vdash A\to B~~~~\Gamma\vdash A}{\Gamma\vdash B}"></span></p>
+<h4 id="curry-howard-correspondence">2.2 Curry-Howard correspondence</h4>
+<p>我们看到，只要将逻辑系统中的<span data-katex="\wedge"></span>和<span data-katex="\to"></span>，替换成简单类型化<span data-katex="\lambda"></span>演算中的<span data-katex="\times"></span>和<span data-katex="\to"></span>，</p>
+<p>那么这两个系统从推导规则上来看是一致的。</p>
 <p><br/></p>
-<p>这就是柯里化（curring）的概念，</p>
-<p>将一个二元函数柯里化指的是，将它看成一个一元函数，</p>
-<p>这个函数返回另一个一元函数。</p>
+<p>逻辑中的命题，对应了简单类型化<span data-katex="\lambda"></span>演算中的类型，</p>
+<p>逻辑中命题的证明，对应了简单类型化<span data-katex="\lambda"></span>演算中的项（的类型断言）。</p>
 <p><br/></p>
-<p>假设<span data-katex="f:X\times Y\to Z"></span>是一个函数，</p>
-<p>令<span data-katex="Z^Y=\{f|f(y)\in Z,y\in Y\}"></span>是所有<span data-katex="Y"></span>到<span data-katex="Z"></span>的函数，</p>
-<p>则存在唯一的<span data-katex="g=X\to Z^Y"></span>，使得<span data-katex="g(x)(y)=f(x,y)"></span>，<span data-katex="\forall x\in X,y\in Y"></span>。</p>
-<p>函数<span data-katex="g"></span>称为<span data-katex="f"></span>的<strong>柯里化</strong>。</p>
+<p>命题<span data-katex="A\to B"></span>，可以这样理解，</p>
+<p>如果该命题可证，则存在将<span data-katex="A"></span>的证明转换为<span data-katex="B"></span>的证明的构建过程（construction）。</p>
+<p>命题<span data-katex="A\wedge B"></span>，可以这样理解，它是<span data-katex="A"></span>和<span data-katex="B"></span>的证明序对（pair）。</p>
 <p><br/></p>
-<p>用hom-set的术语来表述就是，存在一个一一映射，使得，</p>
-<p><span data-katex="hom(X\times Y,Z)\cong hom(X,Z^Y)"></span></p>
+<p>考虑到以上命题逻辑与类型之间的对应关系，</p>
+<p>我们可以说，<a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">proofs as programs</a>。</p>
 <p><br/></p>
-<h4 id="cartesian-closed">2.4 Cartesian Closed</h4>
-<p>将以上柯里化的概念推广到范畴论中，我们就有，</p>
-<p>一个笛卡尔闭范畴（cartesian closed category）<span data-katex="C"></span>，是满足以下几个额外条件的范畴。</p>
+<h3 id="范畴论方面">3. 范畴论方面</h3>
 <p><br/></p>
-<p>（1）<span data-katex="C"></span>中存在一个对象<span data-katex="1"></span>，使得对于任意对象<span data-katex="A\in C"></span>，有唯一的箭头<span data-katex="A\to 1"></span>，</p>
-<p>这样的对象<span data-katex="1"></span>，称为终对象（<a href="https://en.wikipedia.org/wiki/Initial_and_terminal_objects" target="_blank" rel="noopener">terminal object</a>）。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-ef752d2a808eaf01.png" /></p>
 <p><br/></p>
-<p>（2）对于任意两个对象<span data-katex="X"></span>和<span data-katex="Y"></span>，范畴<span data-katex="C"></span>中存在一个对象<span data-katex="X\times Y"></span>，</p>
-<p>以及两个箭头<span data-katex="p_1"></span>和<span data-katex="p_2"></span>，使得，<span data-katex="p_1:X\times Y\to X"></span>，<span data-katex="p_2:X\times Y\to Y"></span>。</p>
+<p>结合《<a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a>》，</p>
+<p>我们给出了简单类型化<span data-katex="\lambda"></span>演算的范畴论解释。</p>
+<h4 id="对象">3.1 对象</h4>
+<p>将简单类型化<span data-katex="\lambda"></span>演算系统的类型，解释为笛卡尔闭范畴<span data-katex="C"></span>中的对象。</p>
+<p><span data-katex="\mathscr{C}[\![\sigma\times\tau]\!]=\mathscr{C}[\![\sigma]\!]\times\mathscr{C}[\![\tau]\!]"></span></p>
+<p><span data-katex="\mathscr{C}[\![\sigma\to\tau]\!]=\mathscr{C}[\![\sigma]\!]\to\mathscr{C}[\![\tau]\!]"></span></p>
+<h4 id="箭头">3.2 箭头</h4>
+<p>将带有自变量项，解释为从自变量类型到项类型的箭头。</p>
+<p><span data-katex="\mathscr{C}[\![\Gamma\vdash M:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\to\mathscr{C}[\![\sigma]\!]"></span></p>
+<h4 id="curry-howard-lambek-correspondance">3.3 Curry-Howard-Lambek correspondance</h4>
+<p>根据简单类型化<span data-katex="\lambda"></span>演算系统中的推导规则，</p>
+<p>我们可以为范畴<span data-katex="C"></span>添加对象和箭头之间的约束条件，</p>
 <p><br/></p>
-<p>（3）对于任意两个对象<span data-katex="Y"></span>和<span data-katex="Z"></span>，</p>
-<p>范畴<span data-katex="C"></span>中存在一个对象<span data-katex="Z^Y"></span>，以及一个箭头<span data-katex="e:Z^Y\times Y\to Z"></span>，使得，</p>
-<p>对于任意的箭头<span data-katex="f:X\times Y\to Z"></span>，存在唯一的箭头<span data-katex="g:X\to Z^Y"></span>，</p>
-<p>有<span data-katex="f=e\circ (g\times I)"></span>恒成立。</p>
+<p>（1）<span data-katex="\frac{~}{\pi_2:\Gamma\times A\to A}"></span></p>
 <p><br/></p>
-<p>即，<span data-katex="(e\circ (g\times I))(X\times Y)=e((g\times I)(X\times Y))=e(Z^Y\times Y)=Z"></span>。</p>
-<p>其中<span data-katex="I:Y\to Y"></span>，为对象<span data-katex="Y"></span>的恒等箭头，<span data-katex="Z^Y"></span>称为指数对象（exponential object）。</p>
+<p>（2）<span data-katex="\frac{f:\Gamma\to A~~~~g:\Gamma\to B}{\left\langle f,g\right\rangle:\Gamma\to A\times B}"></span>，<span data-katex="\frac{f:\Gamma\to A\times B}{\pi_1\circ f:\Gamma\to A}"></span>，<span data-katex="\frac{f:\Gamma\to A\times B}{\pi_2\circ f:\Gamma\to B}"></span></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-475047e7eb5b9b6f.png" /></p>
+<p>（3）<span data-katex="\frac{f:\Gamma\times A\to B}{g_f:\Gamma\to B^A}"></span>，<span data-katex="\frac{f_1:\Gamma\to B^A~~~~f_2:\Gamma\to A}{e\circ\left\langle f_1,f_2\right\rangle:\Gamma\to B}"></span></p>
 <p><br/></p>
-<h3 id="项的解释">3. 项的解释</h3>
-<p>在<a href="http://thzt.github.io/2018/02/04/semantics-6/">第六篇</a>中，为了解释简单类型化<span data-katex="\lambda"></span>演算，</p>
-<p>我们为每一个<span data-katex="\lambda"></span>项，找到了一个<span data-katex="\Sigma"></span>代数中数学对象与之对应，</p>
-<p>简要的说，我们用<span data-katex="\Sigma"></span>代数的载体<span data-katex="A^\sigma"></span>来解释基本类型<span data-katex="\sigma"></span>，</p>
-<p>用载体上的函数集<span data-katex="A^{\sigma\to\tau}"></span>来解释类型为<span data-katex="\sigma\to\tau"></span>的所有函数。</p>
+<p><span data-katex="g_f=\Gamma\to B^A"></span>是一个箭头，和<span data-katex="e:B^A\times A\to B"></span>的定义，</p>
+<p>可以参考<a href="http://thzt.github.io/2018/02/19/semantics-9/">前一篇</a>文章中关于笛卡尔闭范畴的定义。</p>
 <p><br/></p>
-<p>现在有了笛卡尔闭范畴，我们准备为每一个基本类型选择范畴中的一个对象，</p>
-<p>而将项常量<span data-katex="b"></span>解释为范畴中的一个箭头<span data-katex="unit\to\mathscr{A}[\![b]\!]"></span>（原因在下文解释），</p>
-<p>其中<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>为我们在Henkin模型中定义的含义函数。</p>
+<p>笛卡尔闭范畴作为简单类型化<span data-katex="\lambda"></span>演算系统的语义模型，</p>
+<p>范畴中箭头之间约束关系，与类型推导规则是一致的，</p>
+<p>而根据Curry-Howard correspondence，类型推导规则与命题逻辑又是一致的。</p>
 <p><br/></p>
-<h4 id="封闭项的解释">3.1 封闭项的解释</h4>
-<p>我们这样定义一个<strong>含义函数</strong><span data-katex="\mathscr{C}[\![\cdot]\!]"></span>，</p>
-<p>（1）<span data-katex="\mathscr{C}[\![unit]\!]=unit"></span></p>
-<p>（2）<span data-katex="\mathscr{C}[\![b]\!]=unit\to\mathscr{A}[\![b]\!]"></span></p>
-<p>（3）<span data-katex="\mathscr{C}[\![\sigma\times\tau]\!]=\mathscr{C}[\![\sigma]\!]\times\mathscr{C}[\![\tau]\!]"></span></p>
-<p>（4）<span data-katex="\mathscr{C}[\![\sigma\to\tau]\!]=\mathscr{C}[\![\sigma]\!]\to\mathscr{C}[\![\tau]\!]"></span></p>
+<p>因此，类型理论，逻辑学和范畴论产生了关联，</p>
+<p>这种三者的对应关系，称为<strong>Curry-Howard-Lambek correspondance</strong>。</p>
 <p><br/></p>
-<h4 id="带有自由变量的项">3.2 带有自由变量的项</h4>
-<p>如果<span data-katex="\Gamma\vdash M:\sigma"></span>是一个含有自由变量的<span data-katex="\lambda"></span>项，</p>
-<p>则在笛卡尔闭范畴中，它应该解释为从自由变量的语义对象到<span data-katex="\sigma"></span>的语义对象的一个箭头，</p>
-<p><span data-katex="\mathscr{C}[\![\Gamma\vdash M:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\to\mathscr{C}[\![\sigma]\!]"></span>。</p>
+<h3 id="总结">总结</h3>
 <p><br/></p>
-<p>值得一提的是，</p>
-<p>这里说明了，项常量<span data-katex="b"></span>为什么不能被解释为范畴中的对象，</p>
-<p>而是解释成了箭头<span data-katex="unit\to\mathscr{A}[\![b]\!]"></span>。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-cfb15d029385cd31.png" /></p>
 <p><br/></p>
-<p>其中，类型上下文<span data-katex="\Gamma"></span>的解释，定义如下，</p>
-<p>（1）<span data-katex="\mathscr{C}[\![\varnothing]\!]=unit"></span></p>
-<p>（2）<span data-katex="\mathscr{C}[\![\Gamma,x:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\times\mathscr{C}[\![\sigma]\!]"></span></p>
+<p>本文介绍了Curry-Howard-Lambek correspondance，</p>
+<p>它将本来毫无关系的三个学科联系在了一起，</p>
+<p>类型理论与程序和计算相关，逻辑学与证明（论）相关，</p>
+<p>范畴论与模型（论）和代数学相关。</p>
 <p><br/></p>
-<h3 id="回顾-1">回顾</h3>
-<p>本文介绍了笛卡尔闭范畴，是一种具有特殊结构的范畴，</p>
-<p>它补充了柯里化这一概念所需满足的约束条件。</p>
-<p><br/></p>
-<p>接着我们用笛卡尔闭范畴解释了，</p>
-<p>带有<a href="http://thzt.github.io/2017/09/19/type-6/">单位类型</a>，乘积类型的简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^{unit,\times,\to}"></span>。</p>
+<p>本系列文章到此结束了，与代数学和范畴论相关的内容其实还有很多，</p>
+<p>例如，quotient algebra，comonad，adjoint functor，free monoid，等等概念，</p>
+<p><strong>书山有路勤为径，学海无涯苦作舟</strong>，让我们一起努力吧。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
-<p><a href="http://thzt.github.io/2018/02/04/semantics-6/">语言背后的代数学（六）：Henkin模型</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Category_(mathematics)#Small_and_large_categories" target="_blank" rel="noopener">Small and Large Categories</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Class_(set_theory)" target="_blank" rel="noopener">Class</a></p>
-<p><a href="https://book.douban.com/subject/26684696/" target="_blank" rel="noopener">Category Theory for Computing Science</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Cartesian_closed_category" target="_blank" rel="noopener">Cartesian closed category</a></p>
+<p><a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
+<p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a></p>
+<p><a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">Curry–Howard correspondence</a></p>
+<p><a href="https://wiki.haskell.org/Curry-Howard-Lambek_correspondence" target="_blank" rel="noopener">Curry-Howard-Lambek correspondence</a></p>
+<p><a href="http://www.cs.ox.ac.uk/samson.abramsky/gsem/chll.pdf" target="_blank" rel="noopener">The Curry-Howard Correspondence, and beyond</a></p>
+<p><a href="http://disi.unitn.it/~bernardi/RSISE11/Papers/curry-howard.pdf" target="_blank" rel="noopener">Lectures on the curry-howard Isomorphism</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Intuitionistic_logic" target="_blank" rel="noopener">Intuitionistic logic</a></p>
 
           
         
@@ -514,7 +504,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/157/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/157/">157</a><span class="page-number current">158</span><a class="page-number" href="/page/159/">159</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/159/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/157/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/157/">157</a><span class="page-number current">158</span><a class="page-number" href="/page/159/">159</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/159/">&gt;</a>
   </nav>
 
 
@@ -560,7 +550,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">308</span>
+                <span class="site-state-item-count">309</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -635,7 +625,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

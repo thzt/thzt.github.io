@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/07/21/with-goals/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/08/06/invention/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/21/with-goals/" itemprop="url">带着问题去学技术</a></h1>
+                <a class="post-title-link" href="/2019/08/06/invention/" itemprop="url">别出心裁，自出机杼</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T00:00:00+08:00">
-                2019-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T00:00:00+08:00">
+                2019-08-06
               </time>
             
 
@@ -347,86 +347,111 @@
       
         
           
-            <p>最近一直有这样的感触，</p>
-<p>软件项目或许应该看成是<strong>把信息重新组织，然后调库实现</strong>的过程。</p>
-<p>即使人们眼中的“纯技术项目”，也是如此。</p>
+            <p>金庸小说《<a href="http://www.my2852.com/wuxia/jinyong/xajh/076.htm" target="_blank" rel="noopener">笑傲江湖</a>》中，风清扬在指点令狐冲剑法前说过，</p>
+<blockquote>
+<p>五岳剑派中各有无数蠢才，</p>
+</blockquote>
+<blockquote>
+<p>以为将师父传下来的剑招学得精熟，自然而然便成高手，</p>
+</blockquote>
+<blockquote>
+<p>哼哼，熟读唐诗三百首，不会作诗也会吟！</p>
+</blockquote>
+<blockquote>
+<p>熟读了人家诗句，做几首打油诗是可以的，但若不能自出机杼，能成大诗人么？</p>
+</blockquote>
 <p><br/></p>
-<p>很少有项目会从零开始，大多数项目都是采用现有的实现，</p>
-<p>是否<strong>调整</strong>现有的方案，取决于在使用过程中是否遇到了<strong>问题</strong>。</p>
-<p>没有遇到问题，就不要重新造轮子，因为投入产出比太低。</p>
+<blockquote>
+<p>手指便是剑。那招‘金玉满堂’，定要用剑才能使吗？</p>
+</blockquote>
+<blockquote>
+<p>剑招中虽没这等姿式，难道你不会别出心裁，随手配合么？</p>
+</blockquote>
 <p><br/></p>
-<p>比起社区中现有的成熟方案，</p>
-<p>自己写的<strong>新代码</strong>，很难考虑的足够周全，</p>
-<p>只有经过多轮修正之后，才会变得稳定可靠。</p>
+<p>这几句话给了我们很多启示，</p>
+<p>一方面，人们容易拘泥方法本身，而忘记当初的<strong>目的</strong>，</p>
+<p>另一方面，大家更倾向于使用已有的方法，而不是<strong>自己创造</strong>。</p>
 <p><br/></p>
-<p>没有看清当前到底要解决什么<strong>问题</strong>，</p>
-<p>或者容易将<strong>问题解决</strong>与<strong>个人成长</strong>相关联，</p>
-<p>是人们很容易掉入的陷阱。</p>
+<p>实际上，能达成目的的方法是多种多样的，</p>
+<p>除了使用已有的方法之外，还可以自行发明新方法。</p>
+<h3 id="看清目的">看清目的</h3>
+<p>在做一件事情之前，能看清<strong>目的</strong>是很必要的，</p>
+<p>我们要明白事情的前因后果，来龙去脉，</p>
+<p>我们从哪里来，<strong>动机</strong>是什么；到哪里去，<strong>目的</strong>是什么？</p>
 <p><br/></p>
-<p>带着问题去行动，始终明确自己的目标，</p>
-<p>才能让<strong>工作更有成效</strong>。</p>
-<h3 id="编码的层次">编码的层次</h3>
-<p>在编码之前，我们应该先明确编码的目的，</p>
-<p><strong>不相关的代码，不要写。</strong></p>
+<p>理解了这些之后，我们的思维才不会停留在<strong>特定点</strong>上，</p>
+<p>而是连成了一条<strong>线</strong>。</p>
+<p>当前关注点的，前驱事件是什么，后继事件是什么？</p>
 <p><br/></p>
-<p>为了编写商品展示页面，没必要重写一个双向绑定库，</p>
-<p>为了搭建工程脚手架，也没必要重写一个数据流框架，</p>
-<p>为了创造新的构建工具，更没必要重写一个语法解析器。</p>
+<p>有了目的之后，方法才能做到<strong>灵活可变</strong>，</p>
+<p>不接受变通的方法，是有问题的。</p>
+<h3 id="方法可变">方法可变</h3>
+<p>其实，当我们遇到<strong>第一个</strong>可行方法的时候，大脑会欺骗我们，</p>
+<p>让我们认为这是唯一方法。</p>
 <p><br/></p>
-<p>为了实现目标，没必要转而去考虑另外一件<strong>没问题的</strong>事情。</p>
-<p>我们得时刻保持清醒，知道自己在什么位置在哪个层面进行工作。</p>
+<p>因此要做到方法可变，除了看清目的之外，</p>
+<p>另外一个需要克服的困难就是，努力找到<strong>第二个</strong>可行的办法。</p>
+<p>有<strong>比较</strong>才有利弊，做选择才有意义。</p>
 <p><br/></p>
-<p>现实中，有不少人在做某件事情的时候，容易被其他事情所吸引，</p>
-<p>这经常会被<strong>错误的</strong>解读为更强的好奇心，或者能举一反三。</p>
-<p>这是自欺欺人。</p>
-<h3 id="技术的深度">技术的深度</h3>
-<p>很难说技术的深度和广度哪个更重要，</p>
-<p>不过，很少有人会单纯以技术广度作为自己的核心竞争力。</p>
-<p>没有深度的广度，将没有意义。</p>
+<p>当我们只有一种选择时，通常这个选择就是<strong>盲目的</strong>，没有根据。</p>
+<h3 id="大胆创新">大胆创新</h3>
+<p>有人说，“你从未有过新想法，除非你在写博士论文。”</p>
+<p>我很赞同这个说法，</p>
+<p>这是在说，不要盲目创新，不能“思而不学”。</p>
 <p><br/></p>
-<p>如果做事的时候，不够专注，总是容易被其他事情所吸引，</p>
-<p>那么在技术深度上，就难有建树。</p>
-<p>因为不论在什么时刻，我们总是不清楚当前<strong>最重要的事情</strong>是什么。</p>
+<p>然而，即使我们认可这一点，也不妨碍<strong>强调</strong>创新的重要性，</p>
+<p>也就是说，在意识到别人可能已经发明过的同时，</p>
+<p>仍然有胆略，用自己的思路，得出<strong>不同观点</strong>，是值得提倡的一件事。</p>
 <p><br/></p>
-<p>如果使用 <a href="https://github.com/webpack/webpack" target="_blank" rel="noopener">webpack</a>，会导致我们研究源码，</p>
-<p>研究源码，又会导致我们学习 <a href="https://github.com/acornjs/acorn" target="_blank" rel="noopener">acorn</a>（parser），</p>
-<p>学习 parser，我们又会被编译器设计所吸引的话。</p>
+<p>很多人都不知道什么是自己的观点，</p>
+<p>其实观点每天都有，只是我们习惯性的没看到而已。</p>
 <p><br/></p>
-<p>这个链路中的每一个环节，我们都很难有深度。</p>
-<p>因为我们不清楚自己的<strong>目标</strong>是什么。</p>
+<p>打开一本书之前，我们会假定作者要写哪些内容，</p>
+<p>学到一个新知识点之前，我们利用已有的知识，会先猜测一个大概。</p>
+<p>这些就是<strong>自己的观点</strong>，是根据已有的知识体系<strong>推断</strong>出来的。</p>
 <p><br/></p>
-<p>我们到底是学习使用 webpack，还是学会 webpack 的实现方式？</p>
-<p>到底是学习具体的 parser，还是学会通用的编译技术？</p>
-<p>每一个领域，我们都浅尝辄止了，学了个四不像。</p>
-<h3 id="问题导向">问题导向</h3>
-<p>因此，我们应该围绕着技术深度，拓展广度， <strong>带着问题学技术。</strong></p>
+<p>要敢于在学习之前猜测结果。</p>
+<h3 id="科学精神">科学精神</h3>
+<p>人们可能会说，敢于假设谁都可以做啊，</p>
+<p>但是万一假设是错的怎么办呢？</p>
 <p><br/></p>
-<p>我们得清楚的知道，<strong>当前的目标是什么</strong>，</p>
-<p>而对其他相关事情的了解，也不是多多益善的，不要乱点技能树。</p>
+<p>是的，所有的假设都<strong>无法证明</strong>，只能修正，</p>
+<p>不遗余力的<strong>印证</strong>和<strong>刷新</strong>自己的想法。</p>
 <p><br/></p>
-<p>如果我们想学实现<strong>原理</strong>，那么就专注的看<strong>源码</strong>，</p>
-<p>不要转而去学相关的<strong>理论知识</strong>。</p>
-<p>如果当前的目标是补充理论知识，那么就别再转而去学<strong>基础数学</strong>。</p>
+<p>有用的结论，吸取；</p>
+<p>不好的观点，弃之。</p>
+<h3 id="知识体系">知识体系</h3>
+<p>观点是推断出来的，不是凭空产生的，</p>
+<p>因此，搭建一个行之有效的<strong>知识体系</strong>是很重要的。</p>
 <p><br/></p>
-<p>不断的挖坑而不填，是一种不良的学习习惯。</p>
-<p>这并不是说不要钻研，而是应该有意识的限制自己<strong>向下钻研的程度</strong>，</p>
-<p>够用就行了。</p>
+<p>那么，如何建立知识体系呢？</p>
+<p>其实说白了，就是建立知识点之间的<strong>联系</strong>。</p>
+<p><br/></p>
+<p>提到联系，我们可以从数据结构中受到启发，</p>
+<p>链表，反映了数据之间的前驱后继关系，</p>
+<p>树，反映了兄弟 / 父子关系，</p>
+<p>图，反映了远距离的类比关系。</p>
+<p><br/></p>
+<p>因此，在搭建知识体系时，我们可以，</p>
+<p>找到知识点的<strong>前因</strong>和<strong>后果</strong>，</p>
+<p>找到知识点的<strong>同级</strong>知识点，和它们的<strong>共同祖先</strong>，</p>
+<p>找到不同领域知识点之间的<strong>相似性</strong>。</p>
 <h3 id="结语">结语</h3>
-<p><a href="https://zh.wikipedia.org/zh/%E7%8D%A8%E5%AD%A4%E6%B1%82%E6%95%97" target="_blank" rel="noopener">独孤求败</a>在剑冢中埋了几把剑，</p>
-<p>（1）利剑：凌厉刚猛，无坚不摧，弱冠前以之与河朔群雄争锋。</p>
-<p>（2）紫薇软剑：三十岁前所用，误伤义士不祥，乃弃之深谷。</p>
-<p>（3）玄铁重剑：重剑无锋，大巧不工，四十岁前恃之横行天下。</p>
-<p>（4）木剑：四十岁后，不滞于物，草木竹石均可为剑。</p>
+<p>只看诗词，不自己写，永远也不会写，</p>
+<p>只学别人的办法，不自己发明，永远拘泥不化。</p>
 <p><br/></p>
-<p>这也反映了一个道理，<strong>目的是首要的，手段次之</strong>。</p>
+<p>知识体系的搭建过程也是可以<strong>变通</strong>的，甚至可用于思维方式本身，</p>
+<p>哪些思维方式是有用的？如何锻炼自己的逻辑思维？</p>
+<p>同层级的思维方式还有哪些？有没有更高级的指导原则？</p>
 <p><br/></p>
-<p>年轻时确实应该不断的磨炼技能，为了能做更多的事情，为了“横行天下”，</p>
-<p>可一旦到了某个阶段，再追求技能本身就意义不大了，</p>
-<p>应该考虑怎样快速的达成<strong>目的</strong>，“草木竹石均可为剑”。</p>
+<p>上文将知识点之间的联系与<strong>数据结构</strong>进行了类比，</p>
+<p>这是不全面的，是一家之言，</p>
+<p>没有提到的关联种类，当然可以<strong>自行添加</strong>。</p>
 <p><br/></p>
-<p>所以，<strong>工程</strong>还是要跟<strong>科研</strong>区分开的，即使做的是创新项目。</p>
-<p>创新项目之所以创新，主要是覆盖了<strong>全新的业务场景</strong>，</p>
-<p>并不是用了鲜为人知的高端技术。</p>
+<p>例如，时间维度的联系，某个概念出现之后，它产生了哪些影响？</p>
+<p>或者社会维度的联系，事情的利益相关者是哪些人？谁会最终受益？</p>
+<p><br/></p>
+<p>总之，学别人的方法，走自己的路。</p>
 
           
         
@@ -465,7 +490,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/98/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/98/">98</a><span class="page-number current">99</span><a class="page-number" href="/page/100/">100</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/100/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/98/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/98/">98</a><span class="page-number current">99</span><a class="page-number" href="/page/100/">100</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/100/">&gt;</a>
   </nav>
 
 
@@ -511,7 +536,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">308</span>
+                <span class="site-state-item-count">309</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -586,7 +611,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

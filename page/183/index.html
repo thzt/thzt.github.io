@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/07/type-3/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/10/type-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/07/type-3/" itemprop="url">你好，类型（三）：Combinatory logic</a></h1>
+                <a class="post-title-link" href="/2017/09/10/type-4/" itemprop="url">你好，类型（四）：Propositional logic</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T00:00:00+08:00">
-                2017-09-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T00:00:00+08:00">
+                2017-09-10
               </time>
             
 
@@ -347,106 +347,177 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-4a9e412b8a890927.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-205ba4a361e6b282.png" /></p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上一篇中，我们介绍了<span data-katex="\lambda"></span>演算，</p>
-<p>它是由一堆合法的符号和一些推导规则构成的公理系统，</p>
-<p>在众多<span data-katex="\lambda"></span>演算中，我们介绍了最常用的<span data-katex="\lambda_\beta"></span>系统，</p>
-<p>它指定了<span data-katex="\alpha"></span>和<span data-katex="\beta"></span>两种对<span data-katex="\lambda"></span>项的变换规则。</p>
+<p>前两篇中，我们介绍了<span data-katex="\lambda"></span>演算和<span data-katex="CL"></span>（组合子逻辑），</p>
+<p>我们采用了公理化的方法，先定义系统中的公理，然后定义推导规则，</p>
+<p>最终得到了两个形式系统，<span data-katex="\lambda_\beta"></span>系统以及<span data-katex="CL_w"></span>系统。</p>
 <p><br/></p>
-<p>作为形式系统，上一篇中，我们展现了它的编码能力，</p>
-<p>将邱奇编码，与公理集合论中自然数的归纳集定义，进行了对比。</p>
+<p>值得注意的是，公理系统不仅仅包含由公理和推导构成的形式系统，</p>
+<p>还包含给这个形式系统所选择的语义。</p>
 <p><br/></p>
-<p>本文我们将介绍另一套形式系统，</p>
-<p>组合子逻辑（combinatory logic）。</p>
+<p>给形式系统选择一个可靠的语义，是复杂的，我们将在后文再详细介绍。</p>
+<p>从这一篇开始，我们先开始介绍数理逻辑，</p>
+<p>看看逻辑学是怎么看待形式化问题的。</p>
 <p><br/></p>
-<h3 id="组合子逻辑">1. 组合子逻辑</h3>
+<h3 id="命题逻辑形式系统">1. 命题逻辑形式系统</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-c22a4eec9f8ab941.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-a9e587bd763a4a88.png" /></p>
 <p><br/></p>
-<p><span data-katex="CL"></span>（组合子逻辑），与<span data-katex="\lambda"></span>演算很相似，只是不需要对变量进行绑定，</p>
-<p>和函数作用在值上不同的是，组合子作用在函数上，从而生成另一个函数。</p>
-<p>例如，我们可以定义一个组合子<span data-katex="B"></span>，使得<span data-katex="(B(f,g))(x) = f(g(x))"></span>，其中，<span data-katex="f"></span>和<span data-katex="g"></span>都是函数。</p>
+<p>下文中，我们采用与<span data-katex="\lambda_\beta"></span>系统，<span data-katex="CL_w"></span>系统相同的方式，</p>
+<p>来介绍命题逻辑（<a href="https://zh.wikipedia.org/zh-hans/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91" target="_blank" rel="noopener">propositional logic</a>）。</p>
 <p><br/></p>
-<p>为了避免过早的谈及语义，我们和<span data-katex="\lambda"></span>演算一样，使用公理化的方法来定义它，</p>
-<p>首先我们要说明什么是公理，即什么是合法的<span data-katex="CL"></span>项，</p>
-<p>（1）所有的变量，常量，以及组合子<span data-katex="I"></span>，<span data-katex="K"></span>，<span data-katex="S"></span>，都是合法的<span data-katex="CL"></span>项，</p>
-<p>（2）如果<span data-katex="X"></span>和<span data-katex="Y"></span>是合法的<span data-katex="CL"></span>项，那么<span data-katex="(XY)"></span>也是。</p>
+<p>命题逻辑，是在研究命题的证明和推理的过程中抽象出来的，</p>
+<p>先不考虑语义，仅仅从符号的角度（形式化）来考虑它，则是更简单直接的。</p>
 <p><br/></p>
-<p>例如，以下字符串都是合法的<span data-katex="CL"></span>项，</p>
-<p><span data-katex="((S(KS))K)"></span>，<span data-katex="((S(Kv_0))((SK)K))"></span>。</p>
+<h3 id="公理和推导规则">1.1 公理和推导规则</h3>
+<p>首先我们给出命题逻辑形式系统中的公理，</p>
+<p>（1）<span data-katex="\alpha\to(\beta\to\alpha)"></span></p>
+<p>（2）<span data-katex="(\alpha\to(\beta\to\gamma))\to((\alpha\to\beta)\to(\alpha\to\gamma))"></span></p>
+<p>（3）<span data-katex="(\neg\alpha\to\neg\beta)\to(\beta\to\alpha)"></span></p>
 <p><br/></p>
-<p>同样为了简化，某些情况下括号是可以省略的，如果我们默认各个<span data-katex="CL"></span>项都是左结合的，</p>
-<p>因此，<span data-katex="(((UV)W)X)"></span>可以简写为<span data-katex="UVWX"></span>。</p>
+<p>然后，我们给出命题逻辑形式系统中的推导规则，</p>
+<p>（1）<span data-katex="\frac{\alpha,\alpha\to\beta}{\beta}"></span></p>
 <p><br/></p>
-<h3 id="weak-reduction">2. Weak reduction</h3>
+<p>以上推导规则可以理解为，</p>
+<p>如果<span data-katex="\alpha"></span>和<span data-katex="\alpha\to\beta"></span>成立，则<span data-katex="\beta"></span>成立。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-252bce1d956bac05.png" /></p>
+<p>这里我们采用了推导规则的常用写法，<span data-katex="\frac{P_1,P_2,\cdots,P_n}{C}"></span>，</p>
+<p>横线上面的部分“<span data-katex="P_1,P_2,\cdots,P_n"></span>”称为规则的<strong>前提</strong>（premise），</p>
+<p>横线下面的部分“<span data-katex="C"></span>”，称为<strong>结论</strong>（conclusion）。</p>
 <p><br/></p>
-<p>现在，我们要完成公理化的第二步了，那就是给合法的<span data-katex="CL"></span>项指定变换规则，</p>
-<p>在<span data-katex="CL"></span>（组合子逻辑中）中，我们称之为weak reduction，即我们令，</p>
-<p>（1）<span data-katex="IX"></span>，可以变换为<span data-katex="X"></span>，</p>
-<p>（2）<span data-katex="KXY"></span>，可以变换为<span data-katex="X"></span>，</p>
-<p>（3）<span data-katex="SXYZ"></span>，可以变换为<span data-katex="XZ(YZ)"></span>。</p>
+<p>在命题逻辑中，根据公理和推导规则，得到的公式称为<strong>定理</strong>。</p>
+<p>根据公理，定理和推导规则，得到的公式也是定理。</p>
 <p><br/></p>
-<p>如果<span data-katex="U"></span>经过有限步weak reduction转换为<span data-katex="V"></span>，就写为<span data-katex="U\triangleright_w V"></span>。</p>
-<p>与<span data-katex="\lambda"></span>项的<span data-katex="\beta"></span>范式一样，我们将不能再继续进行weak reduction的<span data-katex="CL"></span>项，称为weak范式（weak normal form）。</p>
+<h3 id="例子">1.2 例子</h3>
+<p>下面我们来看一个例子，</p>
+<p>求证：<span data-katex="(\alpha\to\beta)\to(\alpha\to\alpha)"></span>是一个定理。</p>
 <p><br/></p>
-<p>我们来看一个例子，</p>
-<p>设<span data-katex="B=S(KS)K"></span>，来计算<span data-katex="BXYZ"></span>，</p>
-<p><span data-katex="BXYZ=S(KS)KXYZ"></span></p>
-<p><span data-katex="\triangleright_w KSX(KX)YZ"></span>，因为<span data-katex="S(KS)KX\triangleright_w KSX(KX)"></span>，</p>
-<p><span data-katex="\triangleright_w S(KX)YZ"></span>，因为<span data-katex="KSX\triangleright_w S"></span>，</p>
-<p><span data-katex="\triangleright_w KXZ(YZ)"></span>，</p>
-<p><span data-katex="\triangleright_w X(YZ)"></span>。</p>
+<p>证明：</p>
+<p>首先，我们使用公理（1），我们有下式成立，</p>
+<p><span data-katex="\alpha\to(\beta\to\alpha)"></span></p>
 <p><br/></p>
-<p>有了合法的<span data-katex="CL"></span>项（公理），以及weak reduction（推导规则），</p>
-<p>我们就建立了另一个形式系统<span data-katex="CL_w"></span>。</p>
+<p>然后，我们使用公理（2），并令其中的<span data-katex="\gamma=\alpha"></span>，</p>
+<p><span data-katex="(\alpha\to(\beta\to\alpha))\to((\alpha\to\beta)\to(\alpha\to\alpha))"></span></p>
 <p><br/></p>
-<h3 id="与演算之间的关系">3. <span data-katex="CL"></span>与<span data-katex="\lambda"></span>演算之间的关系</h3>
+<p>最后，我们结合以上两个结论，再使用推导规则（1），就得到了，</p>
+<p><span data-katex="(\alpha\to\beta)\to(\alpha\to\alpha)"></span></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-bb0fb9c0c8923e03.png" /></p>
+<p>证毕。</p>
 <p><br/></p>
+<h3 id="hilbert-style和gentzen-style">2. Hilbert-style和Gentzen-style</h3>
 <p><br/></p>
-<p>以上我们看到<span data-katex="CL"></span>项，似乎只能进行项的应用（application）操作，对应于<span data-katex="\lambda"></span>项的用法为<span data-katex="(MN)"></span>，</p>
-<p>然而，其实<span data-katex="CL"></span>的威力却不止于此，它的计算能力是与<span data-katex="\lambda"></span>演算相当的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-e4f97978f3ad51a3.png" /></p>
 <p><br/></p>
-<p>为了证明等价性，建立<span data-katex="CL"></span>项与<span data-katex="\lambda"></span>项之间的关系，</p>
-<p>现在我们用<span data-katex="I"></span>，<span data-katex="K"></span>，<span data-katex="S"></span>三个组合子，来定义与<span data-katex="\lambda x.M"></span>相似的概念。</p>
+<p>以上的证明过程中，每一行断言，是一个不包含条件的定理，</p>
+<p>这种风格的演绎系统（deduction system）称为具有<strong>Hilbert-style</strong>。</p>
 <p><br/></p>
-<p>对于任意的<span data-katex="CL"></span>项<span data-katex="M"></span>，以及任意的变量<span data-katex="x"></span>，我们定义<span data-katex="[x].M"></span>用如下方式表示，</p>
-<p>（1）<span data-katex="[x].M=KM"></span>，如果<span data-katex="M"></span>中不含有<span data-katex="x"></span>，</p>
-<p>（2）<span data-katex="[x].x=I"></span>，</p>
-<p>（3）<span data-katex="[x].Ux=U"></span>，如果<span data-katex="U"></span>中不含有<span data-katex="x"></span>，</p>
-<p>（4）<span data-katex="[x].UV=S([x].U)([x].V)"></span>，如果（1）和（3）都不适用的话。</p>
+<p>如果<span data-katex="\Gamma,\Delta"></span>是有限的公式集合，则，</p>
+<p><span data-katex="\Gamma\vdash\Delta"></span>，称为一个<strong>序贯</strong>（sequent）。</p>
+<p>其中，<span data-katex="\Gamma"></span>称为序贯的前提（antecedent），<span data-katex="\Delta"></span>称为序贯的<strong>结论</strong>（succedent）。</p>
+<p>它表示，如果公式集<span data-katex="\Gamma"></span>都成立，那么<span data-katex="\Delta"></span>中至少有一个成立。</p>
 <p><br/></p>
-<p>例如，</p>
-<p><span data-katex="[x].xy=S([x].x)([x].y)=SI(Ky)"></span></p>
+<p>如果证明过程中，每一行断言是一个序贯，</p>
+<p>这种风格的演绎系统，称为具有<strong>Gentzen-style</strong>。</p>
 <p><br/></p>
-<p>可见，<span data-katex="[x].M"></span>可以完全用<span data-katex="I"></span>，<span data-katex="K"></span>，<span data-katex="S"></span>三个组合子来构建出来，</p>
-<p>它表示了与<span data-katex="\lambda x.M"></span>相对应的概念。</p>
+<p>Hilbert-style演绎系统，通常具有较多的公理，但是具有较少的推导规则，</p>
+<p>Gentzen-style演绎系统，则反之，具有较少的公理，却具有较多的推导规则。</p>
 <p><br/></p>
-<p>因此，我们可以建立<span data-katex="\lambda"></span>项与<span data-katex="CL"></span>项的对应关系了，</p>
-<p>在<span data-katex="CL"></span>中，<span data-katex="X=Y"></span>，相当于<span data-katex="\lambda"></span>演算中，<span data-katex="X\equiv_\alpha Y"></span>，可以统一记为<span data-katex="X\equiv Y"></span></p>
-<p><span data-katex="X\triangleright_w Y"></span>，相当于<span data-katex="X\triangleright_\beta Y"></span>，可以统一记为<span data-katex="X\triangleright_{\beta,w} Y"></span>。</p>
+<p>如果<span data-katex="\Delta"></span>中总是只包含一个公式，</p>
+<p>则称该演绎系统为<strong>自然演绎系统</strong>（natural deduction system）。</p>
 <p><br/></p>
-<p>相应的，<span data-katex="I"></span>，<span data-katex="K"></span>，<span data-katex="S"></span>也可以使用<span data-katex="\lambda"></span>项来表示，</p>
-<p><span data-katex="I=\lambda x.x"></span>，<span data-katex="K=\lambda xy.x"></span>，<span data-katex="S=\lambda xyz.xz(yz)"></span>。</p>
+<p>如果有限序列，<span data-katex="\Gamma_1\vdash\alpha_1,\Gamma_2\vdash\alpha_2,\cdots,\Gamma_n\vdash\alpha_n"></span>，满足，</p>
+<p>（1）<span data-katex="\Gamma_1,\Gamma_2,\cdots,\Gamma_n"></span>为有限公式集</p>
+<p>（2）<span data-katex="\alpha_1,\alpha_2,\cdots,\alpha_n"></span>为公式</p>
+<p>（3）每个<span data-katex="\Gamma_i\vdash\alpha_i"></span>，<span data-katex="(1\leqslant i\leqslant n)"></span>，都是它之前若干个<span data-katex="\Gamma_j\vdash\alpha_j"></span>，<span data-katex="(1\leqslant j&lt;i\leqslant n)"></span>，应用某条推导规则得到的</p>
 <p><br/></p>
-<h3 id="不动点定理">4. 不动点定理</h3>
-<p>在<span data-katex="\lambda"></span>演算和<span data-katex="CL"></span>中，存在组合子<span data-katex="Y"></span>，使得<span data-katex="Yx\triangleright_{\beta,w} x(Yx)"></span>。</p>
+<p>我们就称这个有限序列，为<span data-katex="\Gamma_n\vdash\alpha_n"></span>的一个<strong>（形式）证明序列</strong>。</p>
+<p>此时，也称<span data-katex="\alpha_n"></span>可由<span data-katex="\Gamma_n"></span><strong>（形式）证明</strong>。</p>
 <p><br/></p>
-<p>证明：令<span data-katex="U=\lambda ux.x(uux)"></span>，<span data-katex="Y=UU"></span>，则，</p>
-<p><span data-katex="Yx=(\lambda u.(\lambda x.x(uux)))Ux=x(UUx)=x(Yx)"></span>。</p>
+<h3 id="命题逻辑的自然演绎系统">3. 命题逻辑的自然演绎系统</h3>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文我们用公理化的方法，创建了另一个形式系统<span data-katex="CL_w"></span>，</p>
-<p>接着，我们发现<span data-katex="CL_w"></span>实际上是与<span data-katex="\lambda_\beta"></span>等价的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-5a6df9ddc8e52da4.png" /></p>
 <p><br/></p>
-<p>可悲的是，知道<span data-katex="\lambda"></span>演算的人很多，但是知道<span data-katex="CL"></span>（组合子逻辑）的人却很少，这简直是不可思议的。</p>
-<p>下文中，我们将继续沿着公理化和形式系统的道路向前走，敲开数理逻辑的大门。</p>
+<p>以上定义的形式系统，称为命题逻辑形式系统<span data-katex="P"></span>，</p>
+<p>下面我们再定义一个与之等价的，命题逻辑的自然演绎系统<span data-katex="N"></span>。</p>
+<p><br/></p>
+<h4 id="语法">3.1 语法</h4>
+<p>（1）可数个命题符号：<span data-katex="p_1,p_2,\cdots"></span></p>
+<p>（2）5个联接词符号：<span data-katex="\neg,\lor,\land,\to,\leftrightarrow"></span></p>
+<p>（3）2个辅助符号：<span data-katex="),("></span></p>
+<p><br/></p>
+<h4 id="合法的公式">3.2 合法的公式</h4>
+<p>我们使用<a href="https://zh.wikipedia.org/wiki/%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F" target="_blank" rel="noopener">BNF</a>来定义，</p>
+<p><br/></p>
+<p><span data-katex="\alpha::=p|(\neg\alpha)|(\alpha_1\lor\alpha_2)|(\alpha_1\land\alpha_2)|(\alpha_1\to\alpha_2)|(\alpha_1\leftrightarrow\alpha_2)"></span></p>
+<p><br/></p>
+<h4 id="推导规则">3.3 推导规则</h4>
+<p>（1）包含律：<span data-katex="\frac{\alpha\in\Gamma}{\Gamma\vdash\alpha}"></span></p>
+<p>（2）<span data-katex="\neg"></span>消去律：<span data-katex="\frac{\Gamma,\neg\alpha\vdash\beta;\Gamma,\neg\alpha\vdash\neg\beta}{\Gamma\vdash\alpha}"></span></p>
+<p>（3）<span data-katex="\to"></span>消去律：<span data-katex="\frac{\Gamma\vdash(\alpha\to\beta);\Gamma\to\alpha}{\Gamma\vdash\beta}"></span></p>
+<p>（4）<span data-katex="\to"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta}{\Gamma\vdash\alpha\to\beta}"></span></p>
+<p>（5）<span data-katex="\lor"></span>消去律：<span data-katex="\frac{\Gamma,\alpha\vdash\gamma;\Gamma,\beta\vdash\gamma}{\Gamma,\alpha\lor\beta\vdash\gamma}"></span></p>
+<p>（6）<span data-katex="\lor"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha}{\Gamma\vdash\alpha\lor\beta;\Gamma\vdash\beta\lor\alpha}"></span></p>
+<p>（7）<span data-katex="\land"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\land\beta}{\Gamma\vdash\alpha;\Gamma\vdash\beta}"></span></p>
+<p>（8）<span data-katex="\land"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha;\Gamma\vdash\beta}{\Gamma\vdash\alpha\land\beta}"></span></p>
+<p>（9）<span data-katex="\leftrightarrow"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\alpha}{\Gamma\vdash\beta}"></span>，<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\beta}{\Gamma\vdash\alpha}"></span></p>
+<p>（10）<span data-katex="\leftrightarrow"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta;\Gamma,\beta\vdash\alpha}{\Gamma\vdash\alpha\leftrightarrow\beta}"></span></p>
+<p><br/></p>
+<h4 id="例子-1">3.4 例子</h4>
+<p>以上，我们定义了命题逻辑的自然演绎系统<span data-katex="N"></span>，</p>
+<p>它比命题逻辑形式系统<span data-katex="P"></span>更复杂一些，但是这两个系统是等价的。</p>
+<p><br/></p>
+<p>我们来看一个例子。</p>
+<p>求证，<span data-katex="\alpha\to\beta,\alpha\vdash\beta"></span>是一个定理。</p>
+<p><br/></p>
+<p>证明：</p>
+<p>首先，我们根据包含律有，</p>
+<p><span data-katex="\alpha\to\beta,\alpha\vdash\alpha\to\beta"></span></p>
+<p><span data-katex="\alpha\to\beta,\alpha\vdash\alpha"></span></p>
+<p><br/></p>
+<p>然后，根据这两个结论，以及<span data-katex="\to"></span>消去律，就有，</p>
+<p><span data-katex="\alpha\to\beta,\alpha\vdash\beta"></span>。</p>
+<p><br/></p>
+<p>证毕。</p>
+<p><br/></p>
+<h3 id="系统和的等价性">4. 系统<span data-katex="N"></span>和<span data-katex="P"></span>的等价性</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-20b8095e4265990d.png" /></p>
+<p><br/></p>
+<p>本文我们介绍了两个形式系统，</p>
+<p>命题逻辑形式系统<span data-katex="P"></span>，以及命题逻辑的自然演绎系统<span data-katex="N"></span>，</p>
+<p>可以证明，对于<span data-katex="P"></span>（或<span data-katex="N"></span>）中的公式<span data-katex="\alpha"></span>，<span data-katex="\vdash_N\alpha"></span>当且仅当<span data-katex="\vdash_P\alpha"></span>。</p>
+<p><br/></p>
+<p>因此，这两个系统中的定理集是一样的，</p>
+<p>某个定理在<span data-katex="P"></span>中可证，当且仅当在<span data-katex="N"></span>中也可证。</p>
+<p><br/></p>
+<p>其中，我们令，</p>
+<p><span data-katex="\neg\alpha\to\beta"></span>，表示<span data-katex="\alpha\lor\beta"></span>，</p>
+<p><span data-katex="\neg(\neg\alpha\lor\neg\beta)"></span>，表示<span data-katex="\alpha\land\beta"></span>，</p>
+<p><span data-katex="(\alpha\to\beta)\land(\beta\to\alpha)"></span>，表示<span data-katex="\alpha\leftrightarrow\beta"></span>。</p>
+<p><br/></p>
+<p>对于这两个系统而言，如上文所示，</p>
+<p>我们只进行了符号的推导操作，即对公式进行形式证明，</p>
+<p>至于这些符号到底代表什么意思，我们却故意没有提及。</p>
+<p><br/></p>
+<p>我们并没有说<span data-katex="\lor"></span>表示“或”，也没有说<span data-katex="\land"></span>表示“与”，</p>
+<p>在学数理逻辑的时候，一开始就将形式系统与它的语义模型相区分，</p>
+<p>是非常有益的，后文我们将看到这样做的好处。</p>
+<p><br/></p>
+<h3 id="总结">5. 总结</h3>
+<p>本文介绍了命题逻辑，以及与之相关的两个形式系统<span data-katex="P"></span>和<span data-katex="N"></span>，</p>
+<p>和<span data-katex="\lambda_\beta"></span>，<span data-katex="CL_w"></span>一样，我们采用了公理化的方式构建它们，</p>
+<p>这样得到的形式系统，只是符号演算，还没有被赋予特定的语义，</p>
+<p>下文我们开始介绍一阶谓词逻辑。</p>
+<p><br/></p>
 <h3 id="参考">参考</h3>
+<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
+<p><a href="https://book.douban.com/subject/2364517/" target="_blank" rel="noopener">数理逻辑</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Proof_calculus" target="_blank" rel="noopener">Proof calculus</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Hilbert_system" target="_blank" rel="noopener">Hilbert system</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Natural_deduction" target="_blank" rel="noopener">Natural deduction</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Sequent_calculus" target="_blank" rel="noopener">Sequent calculus</a></p>
+<p><a href="https://book.douban.com/subject/11632210/" target="_blank" rel="noopener">Practical Foundations for Programming Languages</a></p>
 <p><a href="https://book.douban.com/subject/4323391/" target="_blank" rel="noopener">Lambda-Calculus and Combinators，an Introduction</a></p>
 
           
@@ -486,7 +557,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/182/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><span class="page-number current">183</span><a class="page-number" href="/page/184/">184</a><span class="space">&hellip;</span><a class="page-number" href="/page/308/">308</a><a class="extend next" rel="next" href="/page/184/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/182/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><span class="page-number current">183</span><a class="page-number" href="/page/184/">184</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/184/">&gt;</a>
   </nav>
 
 
@@ -532,7 +603,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">308</span>
+                <span class="site-state-item-count">309</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -607,7 +678,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
