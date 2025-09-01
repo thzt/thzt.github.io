@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/05/31/gradual-typing/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/06/13/teacher/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/31/gradual-typing/" itemprop="url">Gradual Typing</a></h1>
+                <a class="post-title-link" href="/2018/06/13/teacher/" itemprop="url">教学之法</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T00:00:00+08:00">
-                2018-05-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T00:00:00+08:00">
+                2018-06-13
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logic/" itemprop="url" rel="index">
-                    <span itemprop="name">Logic</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,188 +347,114 @@
       
         
           
-            <p>最近看了一篇文章，<a href="https://medium.com/@gaperton/typescript-static-or-dynamic-64bceb50b93e" target="_blank" rel="noopener">TypeScript: Static or Dynamic? The war is over.</a>，</p>
-<p>它提到了TypeScript是具有<a href="https://en.wikipedia.org/wiki/Gradual_typing" target="_blank" rel="noopener">gradual typing</a>的编程语言。</p>
-<p><br/></p>
-<p>所谓gradual typing，维基百科上是这么解释的，</p>
+            <blockquote>
+<p>对于有些事情，似乎每个人都是专家。</p>
+</blockquote>
 <blockquote>
-<p>Gradual typing is a type system in which some variables and expressions may be given types and the correctness of the typing is checked at compile-time (which is static typing) and some expressions may be left untyped and eventual type errors are reported at run-time (which is dynamic typing).</p>
+<p>教学就是一个好例子。</p>
+</blockquote>
+<blockquote>
+<p>任何人，只要智商超过 80，又懂得一点什么东西，似乎都可以当老师。</p>
+</blockquote>
+<blockquote>
+<p>—— 《<a href="https://book.douban.com/subject/1866824/" target="_blank" rel="noopener">理解专业程序员</a>》</p>
 </blockquote>
 <p><br/></p>
-<p>编程语言如果具有gradual typing，</p>
-<p>它就融合了static typing和dynamic typing双方的特点，</p>
-<p>具有gradual typing的语言，也称其类型系统是<a href="http://movep.lif.univ-mrs.fr/documents/lopes-slides.pdf" target="_blank" rel="noopener">hybrid</a>的。</p>
+<p>回忆一下我们在学校中遇到的那些<strong>优秀教师</strong>，</p>
+<p>他们和蔼可亲，关爱学生，</p>
+<p>讲授着现在看来我们早就学会了的知识。</p>
 <p><br/></p>
-<p>看到这里，我发现自己对dynamic typing的理解还不清晰，</p>
-<p>于是就翻开了<a href="https://www.cs.cmu.edu/~rwh/pfpl/2nded.pdf" target="_blank" rel="noopener">PFPL</a>，</p>
-<p>想把相关的概念重新梳理一下。</p>
+<p>因此，这就很容易就给人们造成一种假象，</p>
+<p>那就是，只要态度好，足够敬业，</p>
+<p>成为一名特级教师<strong>似乎</strong>只是时间问题。</p>
 <p><br/></p>
-<hr />
-<h4 id="静态阶段和动态阶段">1. 静态阶段和动态阶段</h4>
-<p>大部分程序被编写完之后，直到被运行完，一般会经历如下两个<strong>阶段</strong>（phase），</p>
-<p><strong>static阶段</strong>，和<strong>dynamic阶段</strong>。</p>
+<p>这显然是不可能的。</p>
 <p><br/></p>
-<p>在static阶段中，我们会对程序进行语法解析，</p>
-<p>然后经过类型检查（type checking），以确保程序是良类型的（良构的 well-formed）。</p>
-<p>最后在dynamic phase中，执行这些良类型的程序。</p>
+<p>我们能清晰的理解教师的讲解，</p>
+<p>并不代表着我们也能讲授的这么清晰。</p>
 <p><br/></p>
-<p>—— P35</p>
-<hr />
-<h4 id="静态特性">2. 静态特性</h4>
-<p>对程序进行的类型检查，由一些断言（typing judgments）组成，</p>
-<p>每一条断言，断定特定规则组成的程序，将具有相应的类型，</p>
-<p>这通常被称为<strong>语言的静态特性</strong>（statics）。</p>
+<p>教学方法是一个很艰深的话题。</p>
 <p><br/></p>
-<p>—— P35</p>
-<hr />
-<h4 id="动态特性">3. 动态特性</h4>
-<p><strong>语言的动态特性</strong>（dynamics），描述了程序在执行过程中应该符合的限制条件，</p>
-<p>有多种方式描述语言的动态特性。</p>
+<h3 id="兴趣">兴趣</h3>
+<p>爱因斯坦说，“兴趣是最好的老师”，</p>
+<p>如何让知识的接受者，对相关知识产生兴趣，是传递知识的前提。</p>
 <p><br/></p>
-<p>（1）structural dynamics方法</p>
-<p>它定义了一个转换系统（transition system），归纳的定义了程序的逐步执行方式。</p>
+<p>我们无法在一个抗拒的大脑中，塞下任何东西。</p>
 <p><br/></p>
-<p>（2）contextual dynamics方法</p>
-<p>和转换系统类似，只不过转换规则的描述方式有些不同。</p>
+<p>温伯格 在《<a href="https://book.douban.com/subject/26282714/" target="_blank" rel="noopener">咨询的奥秘</a>》中提到，</p>
+<blockquote>
+<p>如果他们没有雇用你，就不要为他们解决问题。</p>
+</blockquote>
 <p><br/></p>
-<p>（3）equational dynamics方法</p>
-<p>它由一些定义了程序等价性（deﬁnitionally equivalent）的规则组成。</p>
+<p>同理，在打算讲授知识之前，必须事先明确，</p>
+<p><strong>如果别人不需要这些知识，或者说不肯为这些知识付出代价，</strong></p>
+<p><strong>就不要讲授给他们听。</strong></p>
 <p><br/></p>
-<p>—— P41</p>
-<hr />
-<h4 id="pcf的静态特性和动态特性">4. PCF的静态特性和动态特性</h4>
-<p>我们以PCF为例，了解一下语言静态特性和动态特性的描述方式，</p>
+<p>真经必须由玄奘法师，亲自<strong>求取</strong>。</p>
 <p><br/></p>
-<p>（1）静态特性</p>
-<figure>
-<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-76516c26c946e26f.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
-</figure>
-<figure>
-<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-b2524f862bce05ff.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
-</figure>
+<p>因此，一个好的知识传递者，</p>
+<p>必定首先吸引受众的兴趣，让他们对知识<a href="https://book.douban.com/subject/27030507/" target="_blank" rel="noopener">上瘾</a>，</p>
+<p>曾记否，“人之患，在好为人师”。</p>
 <p><br/></p>
-<p>（2）动态特性</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0a872566e08756d9.png" /></p>
-<p>上图定义了闭值（closed value）<span data-katex="e val"></span>应当满足的推导规则。</p>
-<p>第二个推导规则的前提中，中括号<span data-katex="[e val]"></span>表明<span data-katex="s(e)"></span>对它的参数<span data-katex="e"></span>是立即求值（eager）的，</p>
-<p>如果省略中括号，则表示是惰性求值（lazy）。</p>
+<h3 id="经验">经验</h3>
+<p>教学是一项需要<strong>充分准备</strong>的过程。</p>
+<p>教学是一项需要<strong>充分准备</strong>的过程。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-f10a451ba1ab1180.png" /></p>
-<p>上图定义了转化（transition）<span data-katex="e\mapsto e&#39;"></span>应该满足的推导规则。</p>
+<p>临时的经验总结，并不会给知识接纳者带来任何好处，</p>
+<p>混乱的信息反而会给人们带来更多的心智负担。</p>
 <p><br/></p>
-<p>—— P167-P168</p>
-<hr />
-<h4 id="untyped-calculus的静态特性和动态特性">5. untyped <span data-katex="\lambda"></span> calculus的静态特性和动态特性</h4>
-<p>再看看untyped <span data-katex="\lambda"></span> calculus，</p>
+<p>为此，我们需要仔细考虑，将哪些知识传递给别人。</p>
+<p><strong>事后总结的规律，并不等同于做好这件事的有效办法。</strong></p>
 <p><br/></p>
-<p>（1）静态特性</p>
-<figure>
-<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0facb126c43e9845.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
-</figure>
-<figure>
-<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-bcd68eea45cdf560.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
-</figure>
-<p>（2）动态特性</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-a369f8de52cff04e.png" /></p>
-<p>与PCF不同的是，这里用了equational dynamics方法进行描述。</p>
+<p>例如，我们知道掌握平衡的办法，但这并不能教会婴儿学会走路。</p>
+<p>我们知道骑自行车的诀窍，也不能用来教会别人怎样骑车。</p>
 <p><br/></p>
-<p>—— P185-P186</p>
-<hr />
-<h4 id="untyped-means-uni-typed">6. untyped means uni-typed</h4>
-<p>如果支持递归类型，那么untyped <span data-katex="\lambda"></span> calculus可以看成是，</p>
-<p>具有<strong>统一类型</strong>（uni-typed）<span data-katex="\lambda"></span> calculus的类型化版本。</p>
+<p>事后总结和事前的学习方法，是两码事。</p>
 <p><br/></p>
-<p>我们可以定义一个这样的递归类型，</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-112b868d0efd3ecb.png" /></p>
-<p>因此，函数的参数和函数本身将具有统一的类型（uni-typed）<span data-katex="D"></span>。</p>
+<p>因此，作为一个好的知识传递者，就得首先忘掉自身所学，</p>
+<p>站在初学者角度，<strong>想出教会自己的办法。</strong></p>
 <p><br/></p>
-<p>—— P190</p>
-<hr />
-<h4 id="dynamic-typing">7. dynamic typing</h4>
-<p>下面开始介绍dynamic typing了。</p>
+<p>所以，技能熟练的人，并不一定擅于教学，</p>
+<p>也可能只是他当时，遇到了一个好老师罢了。</p>
 <p><br/></p>
-<p>将具有dynamic typed的语言，与static typed的语言对立起来看待，是有问题的。</p>
-<p>我们可以换一个角度来看，我们说具有dynamic typed的语言，</p>
-<p>是static typed的语言的一种特殊情况（special case）——它只有一个递归类型。</p>
+<p>忘掉自身所掌握的信息，通常是一件困难的事情，</p>
+<p>因为人们经常不小心就中了“<a href="https://zh.wikipedia.org/wiki/%E7%9F%A5%E8%AD%98%E7%9A%84%E8%A9%9B%E5%92%92" target="_blank" rel="noopener">知识的诅咒</a>”，无法理解别人的处境。</p>
+<p>需要勤加<strong>练习</strong>。</p>
 <p><br/></p>
-<p>—— P193</p>
-<hr />
-<h4 id="dpcf的静态特性和动态特性">8. DPCF的静态特性和动态特性</h4>
-<p>我们来看DPCF（dynamically Typed PCF）的静态特性和动态特性，</p>
+<h3 id="结语">结语</h3>
+<p>编程也是一个不缺乏专家的领域。</p>
 <p><br/></p>
-<p>（1）静态特性</p>
-<figure>
-<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-5ecbbb7286459ea4.png" alt="syntax" /><figcaption aria-hidden="true">syntax</figcaption>
-</figure>
-<p>我们看到，DPCF的值被划分成了两个<strong>类别</strong>（classes），一个是<span data-katex="number"></span>，另一个是<span data-katex="fun"></span>。</p>
+<blockquote>
+<p>如果你看到一条广告招收“有经验的”程序员，那意思往往就是一年或者两年经验。</p>
+</blockquote>
+<blockquote>
+<p>实际上，如果谁有 15 年的编程经验，人们倒会觉得这人简直是个智障。</p>
+</blockquote>
 <p><br/></p>
-<figure>
-<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-42bb48f24773362c.png" alt="statics" /><figcaption aria-hidden="true">statics</figcaption>
-</figure>
-<p>它表明，如果<span data-katex="d"></span>包含自由变量，<span data-katex="x_1,\cdots,x_n"></span>，</p>
-<p>则若这些自由变量是良类型的，<span data-katex="d"></span>就是良类型的。</p>
+<p>在编程行业中传递知识，变得极为困难，</p>
+<p>因为首先大多数人，<strong>不认为自己需要被传授。</strong></p>
 <p><br/></p>
-<p>（2）动态特性</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-274721e24c279f6d.png" /></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0bb8c9fad3b39efe.png" /></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-f9e834d474d2a247.png" /></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-1ed071b445e2e78c.png" /></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-0b6351d4fadbff13.png" /></p>
+<p>其次，学会某项技能的专业人士，也很难正视自己的学习经历，</p>
+<p>通常人们会将已掌握的知识，归结为自身的“聪明”，</p>
+<p>而避免谈论当时的<strong>外部环境</strong>。</p>
 <p><br/></p>
-<p>其中涉及到的符号解释如下，</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-dd13ebebc2bd66ad.png" /></p>
+<p>实际上，如果不投身于特定的环境中，仅凭聪明才智，</p>
+<p>是很难学会任何技能的。</p>
 <p><br/></p>
-<p>—— P194-196</p>
-<hr />
-<h4 id="hybrid">9. hybrid</h4>
-<p>一个hybrid的语言，指的是它在类型系统中混合了static typing和dynamic typing，</p>
-<p>它为static typing语言增加了一个<span data-katex="dyn"></span>类型，该类型的值需要满足语言动态特性的要求。</p>
+<p>另一方面，布鲁克斯 在《<a href="https://book.douban.com/subject/26358448/" target="_blank" rel="noopener">人月神话</a>》中提到，</p>
+<blockquote>
+<p>所有软件活动包括根本任务——打造由抽象软件实体构成的复杂<strong>概念结构</strong>，</p>
+</blockquote>
+<blockquote>
+<p>次要任务——使用编程语言表达这些抽象实体，在空间和时间限制内将它们映射成机器语言。</p>
+</blockquote>
 <p><br/></p>
-<p>DPCF可以嵌入到一个static typed的语言中，被视为一个hybrid的语言。</p>
-<p>只需要在static typed的语言中增加一个类型<span data-katex="dyn"></span>，</p>
-<p>可以说，dynamic typing只是static typing的一种特定用法（a mode of use）。</p>
+<p>软件活动是围绕那些人为创造的<strong>抽象概念</strong>展开的，</p>
+<p>所以，如何传递这些由<strong>抽象概念</strong>构成的知识，是软件活动中最困难的部分。</p>
 <p><br/></p>
-<p>因此，static typing和dynamic typing并不是对立的，</p>
-<p>他们可以和谐共存（coexist harmoniously）。</p>
-<p><br/></p>
-<p>—— P203</p>
-<hr />
-<h4 id="hpcf的静态特性和动态特性">10. HPCF的静态特性和动态特性</h4>
-<p>我们来看HPCF（hybrid PCF）的静态特性和动态特性，</p>
-<p><br/></p>
-<p>（1）静态特性 <img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-66cd2c00ccd7eb68.png" alt="syntax" /></p>
-<p>其中，类型<span data-katex="dyn"></span>中包含了所有具有动态类型的值。</p>
-<p><span data-katex="new"></span>构造器（constructor），会在值上附加一个类别描述符（classifer），以表明它所属的动态类别（class）。</p>
-<p><br/></p>
-<figure>
-<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-47e6c1dc31ee881c.png" alt="statics - 1" /><figcaption aria-hidden="true">statics - 1</figcaption>
-</figure>
-<figure>
-<img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-a42aa87a1c3239b0.png" alt="statics - 2" /><figcaption aria-hidden="true">statics - 2</figcaption>
-</figure>
-<p>以上类型断言，保证了表达式具有正确的类型。</p>
-<p><br/></p>
-<p>（2）动态特性</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-05-31-gradual-typing/1023733-3ac3c225c1ebf153.png" /></p>
-<p>不同类别的值之间进行转换<span data-katex="cast"></span>，会产生运行时错误。</p>
-<p><br/></p>
-<p>—— P203-P204</p>
-<hr />
-<h4 id="动态类型与静态类型">11. 动态类型与静态类型</h4>
-<p>dynamic语言和static语言的一些异同点。</p>
-<p><br/></p>
-<p>（1）dynamic语言将类别（class）关联到值（value）上，</p>
-<p>而static语言将类型（type）关联到变量（variable）/表达式上。</p>
-<p><br/></p>
-<p>与dynamic语言相关的概念是类别（class），而不是类型（type），</p>
-<p>例如<span data-katex="num"></span>，<span data-katex="fun"></span>，它们可以视为值的标签（tag）。</p>
-<p><br/></p>
-<p>（2）dynamic语言在运行时（run-time）进行类别检查（class checking），</p>
-<p>而static语言在编译时（compile time）进行类型检查（type checking）。</p>
-<p><br/></p>
-<p>dynamic语言可以看做一类特殊的static语言——该语言中只有一个递归类型。</p>
-<p><br/></p>
-<p>—— P208</p>
+<p>这就进入了一个两难困境。</p>
+<p>我们需要传递知识，可知识又不容易被传递，</p>
+<p>教学之法，值得慎重考虑。</p>
 
           
         
@@ -567,7 +493,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/147/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/147/">147</a><span class="page-number current">148</span><a class="page-number" href="/page/149/">149</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/149/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/147/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/147/">147</a><span class="page-number current">148</span><a class="page-number" href="/page/149/">149</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/149/">&gt;</a>
   </nav>
 
 
@@ -613,7 +539,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">309</span>
+                <span class="site-state-item-count">310</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

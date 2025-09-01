@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/06/28/probability-theory/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/07/04/free-algebra/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/28/probability-theory/" itemprop="url">概率论的数学基础</a></h1>
+                <a class="post-title-link" href="/2017/07/04/free-algebra/" itemprop="url">Free Algebra</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-28T00:00:00+08:00">
-                2017-06-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-04T00:00:00+08:00">
+                2017-07-04
               </time>
             
 
@@ -347,128 +347,209 @@
       
         
           
-            <h3 id="外测度">外测度</h3>
-<p>设<span data-katex="E\subseteq R^n"></span>，如果<span data-katex="\{I_k\}"></span>是<span data-katex="R^n"></span>中的可数个开矩体，</p>
-<p>且有<span data-katex="E\subseteq\;{\tiny\begin{matrix}\\ \normalsize \cup \\ ^{\scriptsize k\geqslant 1}\end{matrix}}\;I_k"></span>，</p>
-<p>则称<span data-katex="\{I_k\}"></span>为<span data-katex="E"></span>的一个<strong><span data-katex="L"></span>-覆盖</strong>。</p>
+            <h3 id="functor">functor</h3>
+<p>函子（functor）就是范畴（category）间的态射（morphism）。</p>
 <p><br/></p>
-<p>显然这样的覆盖有很多，且每一个<span data-katex="L"></span>-覆盖<span data-katex="\{I_k\}"></span>确定了一个非负广义实值<span data-katex="\;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\tiny k\geqslant 1}\end{matrix}}\; |I_k|"></span>，</p>
-<p>（可以是<span data-katex="+\infty"></span>，<span data-katex="|I_k|"></span>表示<span data-katex="I_k"></span>的体积），</p>
-<p>我们称，<span data-katex="m^*(E)=inf\{ \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\tiny k\geqslant 1}\end{matrix}}\; |I_k| \}"></span>，</p>
-<p>为点集<span data-katex="E"></span>的<strong>Lebesgue外测度</strong>。</p>
+<p>设有范畴<span data-katex="D"></span>和<span data-katex="C"></span>，一个<strong>函子</strong>（functor）<span data-katex="U:D\rightarrow C"></span>由两部分组成，</p>
+<p>（1）作用在对象上的函数，它将<span data-katex="D"></span>中的每一个对象<span data-katex="d"></span>，映射为<span data-katex="C"></span>中的一个对象<span data-katex="Ud"></span></p>
+<p>（2）作用在箭头上的函数，它将<span data-katex="D"></span>中的每一个箭头<span data-katex="g:d\rightarrow d&#39;"></span>，映射为<span data-katex="C"></span>中的一个箭头<span data-katex="Ug:Ud\rightarrow Ud&#39;"></span></p>
+<p>并且，这两个函数使得以下等式成立，</p>
+<p><span data-katex="U(1_d)=1_{Ud}"></span></p>
+<p><span data-katex="U(h\circ g)=Uh\circ Ug"></span></p>
 <p><br/></p>
-<p><span data-katex="R^n"></span>中点集的外测度具有以下性质：</p>
-<p>（1）非负性：<span data-katex="m^*(E)\geqslant 0"></span>，<span data-katex="m^*(\varnothing)=0"></span></p>
-<p>（2）单调性：如果<span data-katex="E_1\subseteq E_2"></span>，那么<span data-katex="m^*(E_1)\leqslant m^*(E_2)"></span></p>
-<p>（3）次可加性：<span data-katex="m^*( \;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize k=1}\end{matrix}}\;E_k )\leqslant \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\scriptsize k=1}\end{matrix}}\; m^*(E_k)"></span></p>
+<h3 id="forgetful-functor">forgetful functor</h3>
+<p>一个函子可能会“遗忘”范畴中的部分（或全部）结构，这样的函子称为<strong>遗忘函子</strong>（forgetful functor）。</p>
+<p>例如，遗忘函子<span data-katex="U:Grp\rightarrow Set"></span>，将范畴<span data-katex="Grp"></span>中的每一个群<span data-katex="g"></span>，映射为一个由群<span data-katex="g"></span>的所有元素组成的集合<span data-katex="Ug"></span>，</p>
+<p>（“遗忘”了建立在群乘法之上的群结构，）</p>
+<p>并且将范畴<span data-katex="Grp"></span>中的任意两个群之间的群同态<span data-katex="\varphi:g\rightarrow g&#39;"></span>，映射为两个集合之间的函数<span data-katex="\phi"></span>。</p>
 <p><br/></p>
-<p>现在我们把外测度的概念，从<span data-katex="R^n"></span>扩展到任意非空集合<span data-katex="X"></span>上，</p>
-<p>设<span data-katex="X"></span>是一个非空集合，<span data-katex="\mu^*"></span>是定义在幂集<span data-katex="\mathscr{P}(X)"></span>上的一个取广义实值的集合函数，且满足，</p>
-<p>（1）<span data-katex="\mu^*(\varnothing)=0"></span>，<span data-katex="\mu^*(E)\geqslant 0,\ E\subseteq X"></span></p>
-<p>（2）如果<span data-katex="E_1,E_2\subseteq X"></span>，<span data-katex="E_1\subseteq E_2"></span>，那么<span data-katex="\mu^*(E_1)\leqslant\mu^*(E_2)"></span></p>
-<p>（3）如果<span data-katex="\{E_n\}"></span>是<span data-katex="X"></span>的子集列，则有<span data-katex="\mu^*( \;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize n=1}\end{matrix}}\;E_n )\leqslant \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\scriptsize n=1}\end{matrix}}\; \mu^*(E_n)"></span></p>
-<p>那么我们就称<span data-katex="\mu^*"></span>是<span data-katex="X"></span>上的一个<strong>外测度</strong>。</p>
+<p>一个函子<span data-katex="U:D\rightarrow C"></span>称为<strong>完全的</strong>（full），</p>
+<p>如果对于<span data-katex="D"></span>中的任意两个对象<span data-katex="d,d&#39;"></span>，以及对应<span data-katex="C"></span>中的箭头<span data-katex="f:Ud\rightarrow Ud&#39;"></span>，</p>
+<p>存在<span data-katex="B"></span>的箭头<span data-katex="g:d\rightarrow d&#39;"></span>，使得<span data-katex="f=Ug"></span>。</p>
 <p><br/></p>
-<h3 id="可测集">可测集</h3>
-<p>设<span data-katex="E\subseteq R^n"></span>，如果对于任意的点集<span data-katex="T\subseteq R^n"></span>，有</p>
-<p><span data-katex="m^*(T)=m^*(T\cap E)+m^*(T\cap \overline{E})"></span>，</p>
-<p>则称<span data-katex="E"></span>为Lebesgue可测集，简称<strong>可测集</strong>，</p>
-<p>可测集的全体称为可测集类<span data-katex="\mathscr{M}"></span>。</p>
+<p>一个函子<span data-katex="U:D\rightarrow C"></span>称为<strong>忠实的</strong>（faithful），</p>
+<p>如果对于<span data-katex="D"></span>中的任意两个对象<span data-katex="d,d&#39;"></span>，以及<span data-katex="D"></span>中的任意两个箭头<span data-katex="g_1,g_2:d\rightarrow d&#39;"></span>，</p>
+<p>如果<span data-katex="Ug_1=Ug_2"></span>，就有<span data-katex="g_1=g_2"></span>。</p>
 <p><br/></p>
-<p>可测集具有以下性质：</p>
-<p>（1）<span data-katex="\varnothing\in\mathscr{M}"></span></p>
-<p>（2）如果<span data-katex="E\in\mathscr{M}"></span>，则<span data-katex="\overline{E}\in\mathscr{M}"></span></p>
-<p>（3）如果<span data-katex="E_1\in\mathscr{M}"></span>，<span data-katex="E_2\in\mathscr{M}"></span>，则<span data-katex="E_1\cup E_2"></span>，<span data-katex="E_1\cap E_2"></span>，以及<span data-katex="E_1 \backslash E_2"></span>都属于<span data-katex="\mathscr{M}"></span></p>
-<p>（4）如果<span data-katex="E_i\in\mathscr{M},i=1,2,\cdots"></span>，则其并集也属于<span data-katex="\mathscr{M}"></span></p>
-<p>如果进一步有<span data-katex="E_i\cap E_j=\varnothing,i\neq j"></span>，则</p>
-<p><span data-katex="m^*( \;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize i=1}\end{matrix}}\;E_i )= \;{\tiny\begin{matrix}\infty\\ \tiny \sum \\ ^{\scriptsize i=1}\end{matrix}}\; m^*(E_i)"></span>，</p>
-<p>即<span data-katex="m^*"></span>在<span data-katex="\mathscr{M}"></span>上满足<strong>可数可加性</strong>（或称<strong><span data-katex="\sigma"></span>-可加性</strong>）。</p>
+<h3 id="hom-set">hom-set</h3>
+<p>以上两个概念（完全的，忠实的），可以使用hom-set术语重新描述，</p>
+<p>设<span data-katex="D"></span>中有两个对象<span data-katex="d,d&#39;"></span>，函子<span data-katex="U:D\rightarrow C"></span>，</p>
+<p>将<span data-katex="D"></span>中每一个箭头<span data-katex="g:d\rightarrow d&#39;"></span>映射为<span data-katex="C"></span>中的一个箭头<span data-katex="Ug:Ud\rightarrow Ud&#39;"></span>，</p>
+<p>这样就定义了一个函数<span data-katex="U_{d,d&#39;}"></span>，<span data-katex="U_{d,d&#39;}:hom(d,d&#39;)\rightarrow hom(Ud,Ud&#39;)"></span>，</p>
+<p>我们说函子<span data-katex="U"></span>是完全的，如果<span data-katex="U_{d,d&#39;}"></span>是一个满射（surjective），</p>
+<p>我们说函子<span data-katex="U"></span>是忠实的，如果<span data-katex="U_{d,d&#39;}"></span>是一个单射（injective）。</p>
 <p><br/></p>
-<p><span data-katex="R^n"></span>中的可测集类<span data-katex="\mathscr{M}"></span>构成了一个<span data-katex="\sigma"></span>-代数，</p>
-<p>对于可测集<span data-katex="E"></span>，其外测度称为<strong>测度</strong>，记为<span data-katex="m(E)"></span>，</p>
-<p>这就是通常所说的<span data-katex="R^n"></span>上的<strong>Lebesgue测度</strong>。</p>
+<p>其中，<span data-katex="hom(d,d&#39;)"></span>表示所有从对象<span data-katex="d"></span>到对象<span data-katex="d&#39;"></span>的箭头所构成的集合，</p>
+<p><span data-katex="hom(d,d&#39;)=\{g|g\ in\ D,\ dom\ g=c,\ cod g=c&#39;\}"></span></p>
+<p><span data-katex="dom"></span>表示箭头<span data-katex="g"></span>的始端，<span data-katex="cod"></span>表示箭头<span data-katex="g"></span>的终端。</p>
 <p><br/></p>
-<h3 id="代数"><span data-katex="\sigma"></span>代数</h3>
-<p>设<span data-katex="\mathscr{F}"></span>是由集合<span data-katex="\Omega"></span>中的一些子集所构成的集合族，</p>
-<p>且满足下述条件：</p>
-<p>（1）<span data-katex="\varnothing\in\mathscr{F}"></span></p>
-<p>（2）如果<span data-katex="A\in\mathscr{F}"></span>，则<span data-katex="\overline{A}\in\mathscr{F}"></span></p>
-<p>（3）如果<span data-katex="A_n\in\mathscr{F},n=1,2,\cdots"></span>，则<span data-katex="\;{\tiny\begin{matrix}\infty\\ \normalsize \cup \\ ^{\scriptsize n=1}\end{matrix}}\;A_n\in\mathscr{F}"></span></p>
-<p>这时我们称<span data-katex="\mathscr{F}"></span>是一个<strong><span data-katex="\sigma"></span>-代数</strong>。</p>
+<p>如果一个函子既是完全的，又是忠实的，我们就说它是完全忠实的，这时<span data-katex="U_{d,d&#39;}"></span>是一个双射（bijection）。</p>
 <p><br/></p>
-<p>设<span data-katex="\mathscr{M}"></span>是集合<span data-katex="\Omega"></span>中一些子集所构成的集合族，</p>
-<p>我们称<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F}"></span><strong>包含</strong><span data-katex="\mathscr{M}"></span>，</p>
-<p>如果对于任意的<span data-katex="A\in\mathscr{M}"></span>，都有<span data-katex="A\in\mathscr{F}"></span>。</p>
+<h3 id="comma-category">comma category</h3>
+<p>给定范畴<span data-katex="E,C,D"></span>和函子<span data-katex="T,S"></span>，<span data-katex="E\;{\tiny\begin{matrix}^{\normalsize T}\\ \normalsize \rightarrow \\ ^{\scriptsize}\end{matrix} }\;C\;{\tiny\begin{matrix}^{\normalsize S}\\ \normalsize \leftarrow \\ ^{\scriptsize}\end{matrix} }\;D"></span>，</p>
+<p><strong>逗号范畴</strong>（comma category）<span data-katex="(T\downarrow S)"></span>，由以下对象和箭头组成，</p>
+<p>它的对象为三元组<span data-katex="\left\langle e,d,f\right\rangle"></span>，</p>
+<p>其中，<span data-katex="e"></span>是<span data-katex="E"></span>中的对象，<span data-katex="d"></span>是<span data-katex="D"></span>中的对象，<span data-katex="f:Te\rightarrow Sd"></span>是<span data-katex="C"></span>中的箭头，</p>
+<p>它的箭头为二元组<span data-katex="\left\langle k,h\right\rangle:\left\langle e,d,f\right\rangle\rightarrow\left\langle e&#39;,d&#39;,f&#39;\right\rangle"></span>，</p>
+<p>其中，<span data-katex="k:e\rightarrow e&#39;"></span>，<span data-katex="h:d\rightarrow d&#39;"></span>，并且满足，<span data-katex="f&#39;\circ Tk=Sh\circ f"></span>。</p>
 <p><br/></p>
-<p>我们称<span data-katex="\mathscr{F}"></span>为包含<span data-katex="\mathscr{M}"></span>的<strong>最小<span data-katex="\sigma"></span>-代数</strong>，</p>
-<p>如果对于任意的包含<span data-katex="\mathscr{M}"></span>的<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F&#39;}"></span>，</p>
-<p>如果<span data-katex="A\in\mathscr{F}"></span>，那么<span data-katex="A\in\mathscr{F&#39;}"></span>。</p>
+<h3 id="coslice-category">coslice category</h3>
+<p>取<span data-katex="C"></span>中的某个元素<span data-katex="c_0"></span>，它唯一对应一个函子<span data-katex="T:1\rightarrow C"></span>，</p>
+<p>在这种情况下逗号范畴<span data-katex="(T\downarrow S)"></span>，记为<span data-katex="(c_0\downarrow S)"></span>，称为<strong>余切片范畴</strong>（coslice category）。</p>
 <p><br/></p>
-<p>包含<span data-katex="\mathscr{M}"></span>的最小<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F}"></span>，记为<span data-katex="\sigma(\mathscr{M})"></span>，</p>
-<p>称为<strong>由<span data-katex="\mathscr{M}"></span>生成的<span data-katex="\sigma"></span>-代数</strong>。</p>
+<p>它的对象是，<span data-katex="\left\langle d,f\right\rangle"></span>，</p>
+<p>其中，<span data-katex="d"></span>是<span data-katex="D"></span>中的对象，<span data-katex="f:c_0\rightarrow Sd"></span>是<span data-katex="C"></span>中的箭头。</p>
+<p>它的箭头是，<span data-katex="h:\left\langle d,f\right\rangle\rightarrow\left\langle d&#39;,f&#39;\right\rangle"></span>，</p>
+<p>其中，<span data-katex="h:d\rightarrow d&#39;"></span>，并且满足，<span data-katex="f&#39;=Sh\circ f"></span>。</p>
 <p><br/></p>
-<h3 id="可测空间">可测空间</h3>
-<p>集合<span data-katex="\Omega"></span>连同其子集的<span data-katex="\sigma"></span>-代数<span data-katex="\mathscr{F}"></span>一起，称为<strong>可测空间</strong>，记为<span data-katex="(\Omega,\mathscr{F})"></span>。</p>
-<p>三元组<span data-katex="(\Omega,\mathscr{F},\mu)"></span>称为<strong>测度空间</strong>，其中，<span data-katex="\mu"></span>为定义在<span data-katex="(\Omega,\mathscr{F})"></span>上的测度。</p>
-<p>如果<span data-katex="N\in\mathscr{F}"></span>，且<span data-katex="\mu(N)=0"></span>，则称<span data-katex="N"></span>为<span data-katex="\mu"></span>的<strong>零测集</strong>。</p>
+<p>如果<span data-katex="S:D\rightarrow C"></span>是一个单位函子（identity functor），</p>
+<p>那么<span data-katex="(c_0\downarrow S)"></span>，还可以写为<span data-katex="(c_0\downarrow C)"></span>。</p>
 <p><br/></p>
-<p>如果测度空间<span data-katex="(X,\mathscr{F},\mathbf{P})"></span>满足<span data-katex="\mathbf{P}(X)=1"></span>，</p>
-<p>则称它为<strong>概率空间</strong>，对应的<span data-katex="\mathbf{P}"></span>称为<strong>概率测度</strong>。</p>
-<p>在概率空间<span data-katex="(X,\mathscr{F},\mathbf{P})"></span>中，<span data-katex="\mathscr{F}"></span>中的集合<span data-katex="A"></span>称为<strong>事件</strong>，</p>
-<p><span data-katex="\mathbf{P}(A)"></span>称为<strong>事件<span data-katex="A"></span>发生的概率</strong>。</p>
+<h3 id="slice-category">slice category</h3>
+<p>同理，我们可以定义<strong>切片范畴</strong>（slice category）<span data-katex="(C\downarrow c_0)"></span>，</p>
+<p>只需要取<span data-katex="T"></span>为单位函子，<span data-katex="S"></span>为函子<span data-katex="S:1\rightarrow C"></span>即可。</p>
 <p><br/></p>
-<h3 id="borel集">Borel集</h3>
-<p>由<span data-katex="R^n"></span>中一切开集构成的开集族所生成的<span data-katex="\sigma"></span>-代数，</p>
-<p>称为<strong>Borel <span data-katex="\sigma"></span>-代数</strong>，记为<span data-katex="\mathscr{B}=\mathscr{B}(R^n)"></span>，</p>
-<p><span data-katex="\mathscr{B}"></span>中的元素称为<strong>Borel集</strong>。</p>
+<h3 id="initial-object-terminal-object">initial object &amp; terminal object</h3>
+<p>设<span data-katex="C"></span>是一个范畴，<span data-katex="c"></span>是它的一个对象，如果对于<span data-katex="C"></span>中的任意对象<span data-katex="x"></span>，存在唯一的箭头<span data-katex="c\rightarrow x"></span>，</p>
+<p>就称<span data-katex="c"></span>是范畴<span data-katex="C"></span>的<strong>始对象</strong>（initial object）。</p>
 <p><br/></p>
-<p>我们可以将Borel集的概念扩展到拓扑空间，</p>
-<p>拓扑空间<span data-katex="(X,\mathscr{O})"></span>，其中<span data-katex="\mathscr{O}"></span>是拓扑空间的开集族，</p>
-<p>我们称<span data-katex="\mathscr{B}=\sigma(\mathscr{O})"></span>为<span data-katex="X"></span>上的<strong>Borel集合族</strong>，</p>
-<p>其中的集合称为<span data-katex="X"></span>中的<strong>Borel集</strong>，而<span data-katex="(X,\mathscr{B})"></span>称为<strong>拓扑可测空间</strong>。</p>
+<p>同理，如果对于<span data-katex="C"></span>中的任意对象<span data-katex="x"></span>，存在唯一的箭头<span data-katex="x\rightarrow c"></span>，</p>
+<p>则称<span data-katex="c"></span>是范畴<span data-katex="C"></span>的<strong>终对象</strong>（terminal object）。</p>
 <p><br/></p>
-<p>可以证明，任一Borel集都是可测集。</p>
+<h3 id="initial-morphism-terminal-morphism">initial morphism &amp; terminal morphism</h3>
+<p>设<span data-katex="D,C"></span>是范畴，<span data-katex="U:D\rightarrow C"></span>是函子，<span data-katex="c"></span>是范畴<span data-katex="C"></span>中的一个对象，</p>
+<p>根据始对象的定义，余切片范畴<span data-katex="(c\downarrow U)"></span>的始对象<span data-katex="\left\langle d,f\right\rangle"></span>，满足以下条件，</p>
+<p>对于范畴中的任意对象，<span data-katex="\left\langle d&#39;,f&#39;\right\rangle"></span>，</p>
+<p>存在唯一的箭头，<span data-katex="h:d\rightarrow d&#39;"></span>，使得<span data-katex="f&#39;=Uh\circ f"></span>。</p>
 <p><br/></p>
-<h3 id="随机变量">随机变量</h3>
-<p>设<span data-katex="(\Omega,\mathscr{F})"></span>和<span data-katex="(S,\mathscr{B})"></span>是可测空间，</p>
-<p>如果映射<span data-katex="X:\Omega\rightarrow S"></span>满足，<span data-katex="X^{-1}(\mathscr{B})\subseteq\mathscr{F}"></span>，</p>
-<p>就称它是<strong><span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测的</strong>，记为<span data-katex="X\in\mathscr{F}|\mathscr{B}"></span>。</p>
-<p>即，对于任意的<span data-katex="B\in\mathscr{B}"></span>，由<span data-katex="X^{-1}(B):=\{\omega:X(\omega)\in B\}\in\mathscr{F}"></span>。</p>
+<p>该条件称为，<strong>初始性质</strong>（initial property），</p>
+<p>始对象<span data-katex="\left\langle d,f\right\rangle"></span>，称为从对象<span data-katex="c"></span>到函子<span data-katex="U"></span>的<strong>始态射</strong>（initial morphism）。</p>
 <p><br/></p>
-<p>在概率论中，<span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测映射，通常称为<strong>随机元</strong>，或取值于<span data-katex="S"></span>的<strong>随机变量</strong>。</p>
-<p>当<span data-katex="S=R^k"></span>（具有欧氏距离），<span data-katex="\mathscr{B}=\mathscr{B}(R^k),k&gt;1"></span>，（Borel集）</p>
-<p>随机元<span data-katex="X"></span>（<span data-katex="X"></span>是<span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测的）称为<strong>随机向量</strong>。</p>
+<p>同理，我们把切片范畴<span data-katex="(U\downarrow c)"></span>的终对象，</p>
+<p>定义为从函子<span data-katex="U"></span>到对象<span data-katex="c"></span>的<strong>终态射</strong>（terminal morphism），</p>
+<p>终对象所满足的性质，称为<strong>终止性质</strong>（terminal property）。</p>
 <p><br/></p>
-<p>可测映射可以将测度由已知的空间导向另一个空间，</p>
-<p>设<span data-katex="(\Omega,\mathscr{F})"></span>和<span data-katex="(S,\mathscr{B})"></span>是可测空间，</p>
-<p>并且在<span data-katex="(\Omega,\mathscr{F})"></span>上给定某个概率测度<span data-katex="\mathbf{P}"></span>，</p>
-<p>设<span data-katex="X:\Omega\rightarrow S"></span>是<span data-katex="\mathscr{F}|\mathscr{B}"></span>-可测映射。</p>
-<p>在<span data-katex="\mathscr{B}"></span>上的测度称作随机元<span data-katex="X"></span>的<strong>概率分布</strong>或分布，用<span data-katex="\mathbf{P}_X"></span>表示，</p>
-<p>如果<span data-katex="\mathbf{P}_X"></span>满足以下条件，<span data-katex="\mathbf{P}_X(B):=\mathbf{P}(X^{-1}(B)),\ B\in\mathscr{B}"></span>。</p>
-<p>测度<span data-katex="\mathbf{P}_X"></span>称为在可测映射<span data-katex="X"></span>下，测度<span data-katex="\mathbf{P}"></span>的<strong>像</strong>。</p>
+<p>在不引起歧义的情况下，</p>
+<p>我们将始态射和终态射统称为<strong>泛态射</strong>（universal morphism）。</p>
 <p><br/></p>
-<p>可证，在<span data-katex="(S,\mathscr{B})"></span>上的任意概率测度<span data-katex="\mathbf{Q}"></span>都可以看做某个随机元<span data-katex="X"></span>的分布。</p>
+<h3 id="adjoint-functor">adjoint functor</h3>
+<p>设<span data-katex="D,C"></span>是范畴，<span data-katex="U:D\rightarrow C"></span>是函子，<span data-katex="c_1,c_2"></span>是范畴<span data-katex="C"></span>中的对象，</p>
+<p><span data-katex="\left\langle d_1,f_1\right\rangle"></span>是从对象<span data-katex="c_1"></span>到函子<span data-katex="U"></span>的始态射，<span data-katex="f_1:c_1\rightarrow U(d_1)"></span>，</p>
+<p><span data-katex="\left\langle d_2,f_2\right\rangle"></span>是从对象<span data-katex="c_2"></span>到函子<span data-katex="U"></span>的始态射，<span data-katex="f_2:c_2\rightarrow U(d_2)"></span>，</p>
+<p>根据初始性质（initial property），</p>
+<p>对于<span data-katex="C"></span>中的箭头<span data-katex="h:c_1\rightarrow c_2"></span>，存在<span data-katex="D"></span>中唯一的箭头<span data-katex="g:d_1\rightarrow d_2"></span>，</p>
+<p>使得，<span data-katex="f_2\circ h=Ug\circ f_1"></span>。</p>
 <p><br/></p>
-<h3 id="随机过程">随机过程</h3>
-<p>在某个可测空间<span data-katex="(\Omega,\mathscr{F})"></span>上，对每个<span data-katex="t\in T"></span>给定随机元<span data-katex="X(t)"></span>，</p>
-<p>则随机元族<span data-katex="X=\{X(t),t\in T\}"></span>，称为<strong>随机函数</strong>。</p>
+<p>以上定义了一个从范畴<span data-katex="C"></span>到<span data-katex="D"></span>的一个对应关系，</p>
+<p>我们把范畴<span data-katex="C"></span>中的对象<span data-katex="c_1,c_2"></span>，分别对应到了范畴<span data-katex="D"></span>的对象<span data-katex="d_1,d_2"></span>上，</p>
+<p>把范畴<span data-katex="C"></span>中的箭头<span data-katex="h:c_1\rightarrow c_2"></span>，对应到了范畴<span data-katex="D"></span>的箭头<span data-katex="g:d_1\rightarrow d_2"></span>上。</p>
 <p><br/></p>
-<p>这里需要解释一下，在上述定义中，</p>
-<p>所有的随机元<span data-katex="X(t),t\in T"></span>都是定义在同一个可测空间<span data-katex="(\Omega,\mathscr{F})"></span>上，</p>
-<p>但是，为了有利于研究，经常认为随机元<span data-katex="X(t),t\in T"></span>的值域可以是不同的。</p>
-<p>准确的说，给定一个可测空间族<span data-katex="(S_t,\mathscr{B}_t),t\in T"></span>，这时，引进的随机元族<span data-katex="X=\{X(t),t\in T\}"></span>，</p>
-<p>可以看做是定义在<span data-katex="T\times\Omega"></span>上的函数<span data-katex="X=X(t,\omega)"></span>，</p>
-<p>并且对每个<span data-katex="t\in T"></span>取值于<span data-katex="S_t"></span>，同时是<span data-katex="\mathscr{F}|\mathscr{B}_t"></span>-可测映射（<span data-katex="X(t,\cdot):\Omega\rightarrow S_t"></span>）。</p>
+<p>如果范畴<span data-katex="C"></span>中的任意对象都满足这个条件（初始性质），</p>
+<p>我们就找到了一个从范畴<span data-katex="C"></span>到范畴<span data-katex="D"></span>的函子，<span data-katex="F:C\rightarrow D"></span>，</p>
+<p><span data-katex="F"></span>称为<span data-katex="U"></span>的<strong>左伴随函子</strong>（left adjoint），<span data-katex="U"></span>称为<span data-katex="F"></span>的<strong>右伴随函子</strong>（right adjoint），记为<span data-katex="F\dashv U"></span>。</p>
 <p><br/></p>
-<p>对固定的<span data-katex="\omega"></span>，函数<span data-katex="X(\cdot,\omega)"></span>或<span data-katex="X(t,\omega),t\in T"></span>，称作<strong>轨道</strong>，<strong>实现</strong>或<strong>样本函数</strong>。</p>
+<p>范畴<span data-katex="C"></span>中的一族箭头<span data-katex="f_1,f_2,\cdots"></span>，构成了一个自然变换，<span data-katex="N:id_C\rightarrow U\circ F"></span>，其中<span data-katex="id_C"></span>是范畴<span data-katex="C"></span>的单位自函子。</p>
 <p><br/></p>
-<p>在随机函数的符号中，一般来说要省略自变量<span data-katex="\omega"></span>，简写为<span data-katex="X(t)"></span>，或<span data-katex="X_t"></span>，</p>
-<p>这两种简写的利用要根据具体情况而定。</p>
-<p>如果<span data-katex="T\subseteq R=(-\infty,+\infty)"></span>，则参数<span data-katex="t\in T"></span>可以解释为时间，而随机函数称作<strong>随机过程</strong>。</p>
+<p>伴随函子的概念还可以用hom-set来描述，</p>
+<p>设<span data-katex="D"></span>和<span data-katex="C"></span>都是范畴，<span data-katex="U:D\rightarrow C"></span>，<span data-katex="F:C\rightarrow D"></span>是函子，如果<span data-katex="F\dashv U"></span>，</p>
+<p>那么，对于<span data-katex="D"></span>中的任意对象<span data-katex="d"></span>，<span data-katex="C"></span>中的任意对象<span data-katex="c"></span>，<span data-katex="\varphi:hom_D(Fc,d)\rightarrow hom_C(c,Ud)"></span>是一个双射，</p>
+<p>且对于任意的<span data-katex="k,f\in hom_D(Fc,d),h\in hom_C(c,Ud)"></span>，有<span data-katex="\varphi(k\circ f)=Uk\circ\varphi f"></span>，<span data-katex="\varphi(f\circ Fh)=\varphi f\circ h"></span>。</p>
 <p><br/></p>
-<p>当集合<span data-katex="T"></span>为直线，半直线，线段，区间或半区间，则说是<strong>连续时间的随机过程</strong>，</p>
-<p>而当<span data-katex="T\subseteq Z=\{\cdots,-1,0,1,\cdots\}"></span>，则说是<strong>离散时间随机过程</strong>或<strong>随机序列</strong>，</p>
-<p>如果<span data-katex="T\subseteq R^d,d&gt;1"></span>，则<span data-katex="X"></span>称为<strong>随机场</strong>。</p>
+<h3 id="algebra">algebra</h3>
+<p>在泛代数（universal algebra）中，一个<strong>代数</strong>（algebra）或者说一个代数结构（algebra structure），</p>
+<p>由一个集合<span data-katex="A"></span>以及集合<span data-katex="A"></span>上是一系列运算构成。</p>
+<p>集合<span data-katex="A"></span>上的<span data-katex="n"></span>元运算是一个函数，它将<span data-katex="A"></span>中的<span data-katex="n"></span>个元素，映射为一个，</p>
+<p>代数中所有运算的集合记为<span data-katex="\Omega"></span>，我们称该代数是一个<strong><span data-katex="\Omega"></span>类型的代数</strong>。</p>
+<p><br/></p>
+<p>在泛代数和伴随函子之间有紧密的联系，</p>
+<p>假设范畴<span data-katex="Alg_\tau"></span>，由所有<span data-katex="\tau"></span>类型的代数构成，</p>
+<p>遗忘函子<span data-katex="G:Alg_\tau\rightarrow Set"></span>，具有左伴随函子<span data-katex="F"></span>，</p>
+<p>则对于范畴<span data-katex="Set"></span>中的任意集合<span data-katex="S"></span>，<span data-katex="FS"></span>给出了由<span data-katex="S"></span>生成的，类型为<span data-katex="\tau"></span>的<strong>自由代数</strong>（free algebra），</p>
+<p>自由代数中的对象，称为<strong>自由对象</strong>（free object）。</p>
+<p><br/></p>
+<h3 id="kleene-closure">Kleene closure</h3>
+<p>集合<span data-katex="V"></span>的<strong>克林闭包</strong>（Kleene closure）由下式定义，</p>
+<p><span data-katex="V^*=\;{\tiny\begin{matrix}^{\scriptsize}\\ \normalsize \cup \\ ^{\scriptsize i\in N}\end{matrix} }\;V_i=V_0\cup V_1\cup V_2\cup\cdots"></span></p>
+<p>其中，<span data-katex="V_0=\{\epsilon\}"></span>，<span data-katex="V_1=V"></span>，<span data-katex="V_{i+1}=\{uv:u\in V_i,v\in V\}"></span>。</p>
+<p><br/></p>
+<p><span data-katex="V^*"></span>中的元素称为<strong>字符串</strong>（string），<span data-katex="V_{i+1}"></span>定义中的<span data-katex="uv"></span>称为字符串的<strong>连接</strong>操作。</p>
+<p><br/></p>
+<h3 id="free-monoid">free monoid</h3>
+<p><span data-katex="V^*"></span>中所有的字符串，以空串<span data-katex="\{\epsilon\}"></span>作为单位元，以连接操作作为群乘法，构成了一个幺半群（monoid），</p>
+<p>称为由<span data-katex="V"></span>生成的<strong>自由幺半群</strong>（free monoid）。</p>
+<p><br/></p>
+<p>设范畴<span data-katex="Mon"></span>为所有的幺半群构成的范畴，它的对象为具体的某个幺半群，它的箭头为幺半群之间的群同态。</p>
+<p>设范畴<span data-katex="Set"></span>为所有的集合构成的范畴，它的对象为具体的某个集合，它的箭头由集合之间的映射。</p>
+<p><br/></p>
+<p>设<span data-katex="U:Mon\rightarrow Set"></span>为范畴<span data-katex="Mon"></span>到<span data-katex="Set"></span>之间的遗忘函子，我们定义，</p>
+<p>它将范畴<span data-katex="Mon"></span>中的幺半群，映射为其元素集合，</p>
+<p>它将范畴<span data-katex="Mon"></span>中的群同态，映射为群元素集合之间的映射。</p>
+<p>则<span data-katex="Set"></span>中某集合<span data-katex="\Sigma"></span>上的自由幺半群<span data-katex="\Sigma^*"></span>，就是由该集合生成的自由代数。</p>
+<p><br/></p>
+<h3 id="proof">proof</h3>
+<p>要证<span data-katex="\Sigma^*"></span>是一个由<span data-katex="\Sigma"></span>生成的自由代数，</p>
+<p>只需证明<span data-katex="\left\langle\Sigma^*,f\right\rangle"></span>是对象<span data-katex="\Sigma"></span>到函子<span data-katex="U"></span>的始态射，</p>
+<p>其中，<span data-katex="f"></span>是范畴<span data-katex="Set"></span>中的箭头（集合间的映射）<span data-katex="f:\Sigma\rightarrow\Sigma^*"></span>。</p>
+<p><br/></p>
+<p>始态射<span data-katex="\left\langle\Sigma^*,f\right\rangle"></span>是余切片范畴<span data-katex="(\Sigma\downarrow Mon)"></span>的始对象，且满足初始性质，</p>
+<p>对于范畴<span data-katex="Mon"></span>中的任意幺半群<span data-katex="(M,*)"></span>，给定范畴<span data-katex="Set"></span>中的任意箭头（集合间的映射）<span data-katex="h:\Sigma\rightarrow M"></span>，</p>
+<p>存在唯一的<span data-katex="Mon"></span>中的箭头（群同态）<span data-katex="g:\Sigma^*\rightarrow M"></span>，使得，<span data-katex="h=Ug\circ f"></span>，</p>
+<p>因为，群同态<span data-katex="g:\Sigma^*\rightarrow M"></span>已经表示成集合的映射了，所以，<span data-katex="Ug"></span>可以表示为<span data-katex="g"></span>。</p>
+<p><br/></p>
+<p>即，需要证明集合<span data-katex="\Sigma"></span>到<span data-katex="M"></span>函数<span data-katex="h:\Sigma\rightarrow M"></span>，决定了一个唯一群同态<span data-katex="g:\Sigma^*\rightarrow M"></span>。</p>
+<p><br/></p>
+<p>我们使用数学归纳法进行证明，</p>
+<p>因为<span data-katex="\Sigma^*"></span>由多个不相交的子集<span data-katex="\Sigma_i"></span>构成，</p>
+<p><span data-katex="g"></span>可以看做从由多个分量组成，<span data-katex="g_i:\Sigma_i\rightarrow M"></span>。</p>
+<p><br/></p>
+<p>根据<span data-katex="\Sigma_1"></span>的定义，<span data-katex="\Sigma_1=\Sigma"></span>，所以<span data-katex="g_1:\Sigma\rightarrow M"></span>是唯一确定的，只能是<span data-katex="h"></span>，</p>
+<p>又<span data-katex="\Sigma_0=\{\epsilon\}"></span>，所以<span data-katex="g_0:\{\epsilon\}\rightarrow M"></span>，如果<span data-katex="g_0"></span>是群同态，则必须<span data-katex="g_0(\epsilon)=e"></span>，其中<span data-katex="e"></span>为<span data-katex="M"></span>的单位元，所以<span data-katex="g_0"></span>也是唯一确定的。</p>
+<p>此外，要想<span data-katex="g_{i+1}"></span>是群同态，必须有<span data-katex="g_{i+1}(uv)=g_i(u)g(v)"></span>，其中<span data-katex="uv\in\Sigma_{i+1},u\in\Sigma_i,v\in\Sigma"></span>，所以<span data-katex="g_{i+1}:\Sigma_{i+1}\rightarrow M"></span>也是唯一确定的。</p>
+<p><br/></p>
+<p>因此，<span data-katex="g"></span>如果是一个群同态，就可以由<span data-katex="h"></span>唯一确定。</p>
+<p><br/></p>
+<p>总之，函数<span data-katex="h:\Sigma\rightarrow M"></span>确定了唯一的群同态<span data-katex="g:\Sigma^*\rightarrow M"></span>，</p>
+<p>使得<span data-katex="h=g\circ f"></span>，其中<span data-katex="f:\Sigma\rightarrow M"></span>，</p>
+<p>因此，<span data-katex="\Sigma^*"></span>就是由<span data-katex="\Sigma"></span>生成的自由代数。</p>
+<p><br/></p>
+<h3 id="note">note</h3>
+<p><span data-katex="\Sigma^*"></span>实际上是一个集合，它连同字符串的连接操作构成了一个自由幺半群，</p>
+<p>这个自由幺半群在遗忘函子<span data-katex="U:Mon\rightarrow Set"></span>中的像是集合<span data-katex="\Sigma^*"></span>，</p>
+<p><span data-katex="\Sigma"></span>也在范畴<span data-katex="Set"></span>中，但不是自由幺半群在<span data-katex="Set"></span>中的像，它们之间的箭头是<span data-katex="f:\Sigma\rightarrow\Sigma^*"></span>。</p>
+<p><br/></p>
+<p>自由幺半群是一个自由代数，它的生成集是<span data-katex="\Sigma"></span>，而不是它在<span data-katex="Set"></span>中的像<span data-katex="\Sigma^*"></span>。</p>
+<p>指的是，对于任意的从生成集<span data-katex="\Sigma"></span>到其他集合<span data-katex="M"></span>的映射<span data-katex="h:\Sigma\rightarrow M"></span>，</p>
+<p>存在唯一的群同态<span data-katex="g:\Sigma^*\rightarrow M"></span>（这里用映射表示了群同态），使得初始性质（initial property）成立。</p>
+<p><br/></p>
+<p>此外，与自由幺半群类似的，</p>
+<p><strong>自由单子</strong>（free monad）是由自函子生成的幺半群（单子），</p>
+<p><span data-katex="F:Functor\to Monad"></span>，</p>
+<p>自函子范畴<span data-katex="Functor"></span>，对象是自函子，箭头是自函子之间的自然变换，</p>
+<p>单子范畴<span data-katex="Monad"></span>，对象是单子（由自函子构成的幺半群），箭头是幺半群同态。</p>
+<p><br/></p>
+<p>遗忘函子<span data-katex="U:Monad\to Functor"></span>，</p>
+<p>将单子范畴<span data-katex="Monad"></span>中的单子，映射成自函子范畴<span data-katex="Functor"></span>中的函子，</p>
+<p>将单子范畴<span data-katex="Monad"></span>中的幺半群同态，映射为自函子范畴<span data-katex="Functor"></span>中的自然变换，</p>
+<p>其中，<span data-katex="F"></span>为<span data-katex="U"></span>的左伴随函子，<span data-katex="F\dashv U"></span>。</p>
+<p><br/></p>
+<h3 id="reference">reference</h3>
+<p><a href="https://book.douban.com/subject/1823110/" target="_blank" rel="noopener">Categories for the Working Mathematician 2nd</a></p>
+<p><a href="http://www.math.mcgill.ca/triples/Barr-Wells-ctcs.pdf" target="_blank" rel="noopener">Category theory for computer science</a></p>
+<p><a href="https://book.douban.com/subject/1823106/" target="_blank" rel="noopener">A Course in Universal Algebra</a></p>
+<p><br/></p>
+<p><a href="https://en.wikipedia.org/wiki/Universal_algebra" target="_blank" rel="noopener">Wikipedia: Universal Algebra</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Forgetful_functor" target="_blank" rel="noopener">Wikipedia: Forgetful functor</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Initial_and_terminal_objects" target="_blank" rel="noopener">Wikipedia: Initial and terminal objects</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Comma_category" target="_blank" rel="noopener">Wikipedia: Comma Category</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Universal_property" target="_blank" rel="noopener">Wikipedia: Universal Property</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Adjoint_functors" target="_blank" rel="noopener">Wikipedia: Adjoint Functor</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Free_object" target="_blank" rel="noopener">Wikipedia: Free Object</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Free_algebra" target="_blank" rel="noopener">Wikipedia: Free Algebra</a></p>
+<p><br/></p>
+<p><a href="https://en.wikipedia.org/wiki/Free_monoid" target="_blank" rel="noopener">Wikipedia: Free Monoid</a></p>
+<p><a href="https://math.stackexchange.com/questions/58553/why-is-the-free-monoid-free" target="_blank" rel="noopener">Stack Exchange: Why is the free monoid free?</a></p>
+<p><br/></p>
+<p><a href="https://en.wikipedia.org/wiki/Monad_(functional_programming)#Free_monads" target="_blank" rel="noopener">Wikipedia: Free Monad</a></p>
 
           
         
@@ -507,7 +588,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/193/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/193/">193</a><span class="page-number current">194</span><a class="page-number" href="/page/195/">195</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/195/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/193/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/193/">193</a><span class="page-number current">194</span><a class="page-number" href="/page/195/">195</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/195/">&gt;</a>
   </nav>
 
 
@@ -553,7 +634,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">309</span>
+                <span class="site-state-item-count">310</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

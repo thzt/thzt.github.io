@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/09/11/reuse-oriented-programming/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/09/21/define-syntax/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/11/reuse-oriented-programming/" itemprop="url">消除重复与可复用相距多远</a></h1>
+                <a class="post-title-link" href="/2015/09/21/define-syntax/" itemprop="url">Scheme元编程</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-11T00:00:00+08:00">
-                2015-09-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-21T00:00:00+08:00">
+                2015-09-21
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Lisp/" itemprop="url" rel="index">
+                    <span itemprop="name">Lisp</span>
                   </a>
                 </span>
 
@@ -347,153 +347,229 @@
       
         
           
-            <p>程序员们都讨厌重复，</p>
-<p>因为他们知道，</p>
-<p>这是可以避免的冗余工作量。</p>
-<p>——代码坏味</p>
+            <p><a href="https://en.wikipedia.org/wiki/Homoiconicity" target="_blank" rel="noopener">同相性</a>，指的是，</p>
+<p>程序和程序所操作的数据采用了统一编码。</p>
 <p><br/></p>
-<p>如果本来就不可避免，</p>
-<p>那只好认了，</p>
-<p>就好像需求不可能不变的事实一样。</p>
+<p>Lisp语言使用了S表达式，</p>
+<p>例如，(fn x)</p>
+<p>既可以看做是程序，用参数x调用函数fn，</p>
+<p>也可以看做是数据，由符号fn和符号x构成的列表。</p>
 <p><br/></p>
-<p>但是，<strong>盲目的消除重复</strong>，</p>
-<p>并不是正确的姿势，</p>
-<p>反而会把简单的事情搞复杂。</p>
+<p><strong>同相性使得我们，可以像处理数据一样处理代码。</strong></p>
+<p>做一些代码转换之类的工作，十分简单。</p>
 <p><br/></p>
-<p>为什么程序员们甘心写那么多“public class XXX {}”，</p>
-<p>甘心写那么多“END”，“;”或者“)”，</p>
-<p>而不设法避免呢？</p>
+<p>例如，</p>
+<p>当遇到(fn x)时，</p>
+<p>我们可以让它先转换成，</p>
+<p>(begin</p>
+<p>    (display x)</p>
+<p>    (gn x))</p>
+<p>然后再执行。</p>
 <p><br/></p>
-<p>为什么不把所有的“this”都提取出来，</p>
-<p>放在一个地方，</p>
-<p>在编译前，再把他们塞入代码中呢。</p>
+<p>甚至也可以用来定义变量，</p>
+<p>(define-with-display (f a)</p>
+<p>    (g a))</p>
 <p><br/></p>
-<p>诚然，通过macro，</p>
-<p>可以做一些代码生成之类的事情，</p>
-<p>但是直觉告诉我们，不能乱来。</p>
+<p>转换成，</p>
+<p>(define (f a)</p>
+<p>    (display a)</p>
+<p>    (g a))</p>
 <p><br/></p>
-<p>原因是什么？</p>
-<p>消除重复与面向复用其实还相距太远。</p>
+<p>这种代码层面的转换称为“宏”(macro)。</p>
 <p><br/></p>
-<h2 id="什么是面向复用的编程">什么是面向复用的编程</h2>
-<p>“面向”，指的是目的，目标。</p>
+<h2 id="定义一个宏"><strong>定义一个宏</strong></h2>
+<p>Scheme是Lisp的一个简洁方言，</p>
+<p>它使用define-syntax来定义宏。</p>
 <p><br/></p>
-<p>方法论告诉我们，</p>
-<p>要完成一件事需要3个步骤，</p>
-<p>（1）确定目标</p>
-<p>（2）分析差距</p>
-<p>（3）缩小差距</p>
+<p>本质上，宏是一个特殊的标识符，</p>
+<p>它关联了转换器函数。</p>
 <p><br/></p>
-<p>确定目标是第一步。</p>
+<p>表达式的求值过程，分为了3个阶段，</p>
+<p>读取期，宏展开期，运行期。</p>
 <p><br/></p>
-<p>要想让我们的程序被复用，</p>
-<p>首先他要设计成<strong>可以</strong>被复用的，</p>
-<p>不是哪天要用了，忽然就行了。</p>
+<p>在遇到宏调用的时候，</p>
+<p>Scheme会先调用与之关联的转换器，进行代码转换，(宏展开期)</p>
+<p><strong>然后再求值结果表达式</strong>。(运行期)</p>
 <p><br/></p>
-<p>而且，在一套软件中，</p>
-<p>并不是所有的代码都是可复用的，</p>
-<p>有些根本无法复用。</p>
+<p>在解释器中，宏展开和表达式求值可能是交替进行的，</p>
+<p>而在编译器中，他们是两个独立的阶段。</p>
 <p><br/></p>
-<p>承认了这两个事实以后，</p>
-<p>任务一下子简单了很多。</p>
+<p>(define-syntax or</p>
+<p>    (syntax-rules ()</p>
+<p>        [(_) #f]</p>
+<p>        [(_ e) e]</p>
+<p>        [(_ e1 e2 e3 ...)</p>
+<p>         (let ([t e1]) (if t t (or e2 e3 ...)))]))</p>
 <p><br/></p>
-<h2 id="提取并不意味着抽象"><strong>提取并不意味着抽象</strong></h2>
-<p>一段代码，在很多地方都出现了，</p>
-<p>我们马上就能想到，</p>
-<p>把它<strong>提取</strong>到了一个函数中。</p>
+<p>以上代码定义了一个宏，or，</p>
+<p>它用来对(or ...)表达式进行变换。</p>
 <p><br/></p>
-<p>然而这对可复用并没有任何作用，</p>
-<p>我们只是凑巧成功了几次。</p>
+<p>(or)转换成了#f</p>
+<p>(or a)转换成了a</p>
+<p>(or a b)转换成了(let ([t a]) (if t t (or b)))</p>
 <p><br/></p>
-<p>假如某个调用处的<strong>业务逻辑</strong>发生了变化，</p>
-<p>我们就遇到麻烦了，</p>
-<p>不能修改提取出去的代码，因为别人也在用，</p>
-<p>还要把代码再复制回去，只调整这一块。</p>
+<p>我们看到，</p>
+<p>宏展开是支持递归调用的。</p>
 <p><br/></p>
-<p>自讨苦吃啊。</p>
-<p>那可如何是好？</p>
+<h2 id="模式匹配"><strong>模式匹配</strong></h2>
+<p>syntax-rules使用了模式匹配来定义转换器，</p>
+<p>它的每一条语句给定了形如“[模式 模板]”的转换规则，</p>
+<p>如果模式匹配成功了，</p>
+<p>就按着模板的方式进行转换。</p>
 <p><br/></p>
-<p>这是因为，提取和抽象是不同的，</p>
-<p>提取是文本层次的观察，</p>
-<p>而抽象是逻辑层次的考察。</p>
+<p>[(_ e) e]</p>
 <p><br/></p>
-<p>这段代码虽然在很多地方出现了，</p>
-<p>可是它却由不同的<strong>逻辑单元</strong>组成，</p>
-<p>这就隐藏了很多引起它改变的因素。</p>
-<p>——单一职责原则</p>
+<p>其中，</p>
+<p>模式是(_ e)，</p>
+<p>模板是e，</p>
+<p>“_”表示通配符。</p>
 <p><br/></p>
-<p>我们应该先把这些逻辑单元封装好，</p>
-<p>然后<strong>拼装</strong>出统一的抽象接口，</p>
-<p>各处对接口进行调用。</p>
-<p>——依赖倒置原则</p>
-<p>——合成/聚合复用原则</p>
+<p>这个模式匹配了(or e)，</p>
+<p>转换结果为e，</p>
+<p>即它能把(or a)转换成a。</p>
 <p><br/></p>
-<p>一旦某个逻辑单元需要调整了，</p>
-<p>那么只需要单独为某处调用，</p>
-<p>再<strong>实现</strong>一个新的接口函数就行了。</p>
-<p>——开-闭原则</p>
+<p>我们再来看(_ e1 e2 e3 ...)，</p>
+<p>其中的省略号“...”，</p>
+<p><strong>并不是为了演示方便故意省略了。</strong></p>
 <p><br/></p>
-<h2 id="外表要简单内心不要太简单"><strong>外表要简单，内心不要太简单</strong></h2>
-<p>有人觉得有个<strong>拼装层</strong>太麻烦了，</p>
-<p>还不如直接提取函数好呢，</p>
-<p>这其实是混淆了抽象与实现。</p>
+<p>“...”是一个标识符，是模式匹配的一部分，</p>
+<p>它用来代表“和前面一样的匹配”。</p>
+<p>模板中也出现了“...”，</p>
+<p>它会根据模式中“...”来进行填充。</p>
 <p><br/></p>
-<p>接口的使用者是看不到实现方式的，</p>
-<p>实现很复杂是为了有更高的灵活性。</p>
-<p>——迪米特法则</p>
+<p>Scheme中使用的模式匹配，是一个庞大的主题，</p>
+<p>甚至<strong>模式匹配已经构成了一门新的语言，</strong></p>
+<p>TSPL4中进行了详细的解释，<a href="http://www.scheme.com/tspl4/syntax.html#./syntax:h2" target="_blank" rel="noopener">Syntax-Rules Transformers</a></p>
 <p><br/></p>
-<p><strong>语言的魅力不就是，把复杂藏于只言片语之后吗？</strong></p>
-<p>编程的目的不就是，为多变的业务逻辑提供简洁的描述语言吗？</p>
-<p>——领域特定语言</p>
+<h2 id="转换器函数"><strong>转换器函数</strong></h2>
+<p>另外一种定义宏的方式是，</p>
+<p>显式的指定宏展开器函数。</p>
 <p><br/></p>
-<p>一切都应该尽可能地简单,但不要太简单。</p>
-<p>——爱因斯坦</p>
+<p>(define-syntax r</p>
+<p>    (lambda (x)</p>
+<p>        (display x)</p>
+<p>        (display "")</p>
+<p>        #t))</p>
 <p><br/></p>
-<h2 id="业务与功能"><strong>业务与功能</strong></h2>
-<p>经常变动的是业务逻辑，</p>
-<p>而可复用的是功能模块。</p>
+<p>我们用lambda定义了一个匿名函数，</p>
+<p>并让它与宏标识符r相关联。</p>
 <p><br/></p>
-<p>对逻辑我们要抽象，</p>
-<p>而对功能我们要封装。</p>
+<p>我们直接在REPL中看看r是什么，</p>
 <p><br/></p>
-<p><strong>很多新手认为，</strong></p>
-<p><strong>把相关的代码组织在一起就是封装了，</strong></p>
-<p><strong>这与认为把代码提取出来了就是抽象了一样失败。</strong></p>
+<p>#&lt;syntax r&gt;</p>
+<p>#t</p>
 <p><br/></p>
-<p>要封装，是因为它们“能够封装”，</p>
-<p>而不是代码恰好出现在了一起。</p>
+<p>第一行是(display x)副作用，</p>
+<p>可见x的值是#&lt;syntax r&gt;，称为<strong>语法对象</strong>(syntax object)。</p>
 <p><br/></p>
-<p>只有<strong>与要描述的业务无关</strong>的功能，</p>
-<p>才是可复用的单元。</p>
+<p>然后r被转换成#t，</p>
+<p>第二行是REPL中打印了#t的值。</p>
 <p><br/></p>
-<p>每个页面都发送AJAX请求，</p>
-<p>然后更新一个id="message"的标签，</p>
-<p>这是不可封装的。</p>
+<p>为了处理转换器中匹配到的语法对象，</p>
+<p>Scheme语言提供了syntax-case特殊形式。</p>
 <p><br/></p>
-<p>而发送AJAX模块，</p>
-<p>更新任一标签内容的模块，</p>
-<p>才是可封装的。</p>
+<p>(define-syntax or</p>
+<p>    (lambda (x)</p>
+<p>        (syntax-case x ()</p>
+<p>            [(_) #'#f]</p>
+<p>            [(_ e) #'e]</p>
+<p>            [(_ e1 e2 e3 ...)</p>
+<p>             #'(let ([t e1]) (if t t (or e2 e3 ...)))])))</p>
 <p><br/></p>
-<p>一致的业务流程，也是可以封装的。</p>
-<p>例如，如果有定时任务，</p>
-<p>可以封装一个定时任务管理器，</p>
-<p>只需要挂载任务的配置信息就可以自动执行。</p>
+<p>它使用了与syntax-rules相同的模式匹配规则，</p>
+<p>不同的是，我们还需要<strong>显式构造模板中的语法对象</strong>。</p>
 <p><br/></p>
-<p>对了，别人有写好了的，</p>
-<p>不用自己做，</p>
-<p>但我们要这么想。</p>
+<p>对于宏调用(or a b)来说，x的值是#&lt;syntax (or a b)&gt;，</p>
+<p><strong>syntax-case会先求值x，然后解开语法对象的封装</strong>，得到(or a b)，</p>
+<p>再进行模式匹配。</p>
+<p><br/></p>
+<h2 id="语法对象"><strong>语法对象</strong></h2>
+<p>语法对象，包装了标识符的作用域信息。</p>
+<p><br/></p>
+<p>我们知道Scheme的宏是卫生的(hygienic)，</p>
+<p><strong>宏展开后的标识符还处在其来源处的词法作用域中，</strong></p>
+<p>为了达成这个目的，作用域信息就要被保存起来。</p>
+<p><br/></p>
+<p>Scheme的不同实现有不同的做法，</p>
+<p><a href="http://www.scheme.com/download/" target="_blank" rel="noopener">Petite Chez Scheme</a>使用了<strong>语法对象</strong>进行封装。</p>
+<p><br/></p>
+<p>语法对象由syntax特殊形式创建，(syntax e)</p>
+<p>#'e是它的简写，</p>
+<p>在程序的读取阶段会被展开为(syntax e)。</p>
+<p><br/></p>
+<p>前文我们说，</p>
+<p>“模式匹配构成了一门新的语言”，并不为过，</p>
+<p>因为#'有很多规则(<strong>坑</strong>)需要我们了解。</p>
+<p><br/></p>
+<p>（1）出现在“模式”中的变量，称为模式变量(pattern variable)，</p>
+<p><strong>模式变量的值是它匹配的值</strong>。</p>
+<p>例如：(_ a b)匹配(or x y)，a和b就是模式变量，a的值是x，b的值是y</p>
+<p><br/></p>
+<p>（2）#'e的值是一个语法对象，<strong>e可以是模式变量也可以不是</strong>。</p>
+<p>如果e是模式变量，则值为#&lt;syntax e匹配的值&gt;，</p>
+<p>如果e不是模式变量，则值为#&lt;syntax e&gt;。</p>
+<p><br/></p>
+<p>（3）“模板”中的模式变量，必须出现在#'或者#'(...)中，<strong>不能裸写</strong>。</p>
+<p><a href="http://www.scheme.com/tspl4/syntax.html#./syntax:h3" target="_blank" rel="noopener">Pattern variables, however, can be referenced only within syntax expressions</a></p>
+<p><br/></p>
+<p>（4）<strong>#'(a b)不是一个语法对象，而是由语法对象构成的列表</strong>，(#'a #'b)</p>
+<p>例如：[(_ a) #'(a b)]，结果是(#&lt;syntax a匹配的值&gt; #&lt;syntax b&gt;)</p>
+<p>注意到b不是模式变量。</p>
+<p><br/></p>
+<p>（5）多层#'，读取器会先将每一层展开成(syntax ...)再求值。</p>
+<p>例如：#'#'a实际上是(syntax (syntax a))，</p>
+<p>求值为(#&lt;syntax syntax&gt; (#&lt;syntax syntax&gt; #&lt;syntax a匹配的值&gt;))。</p>
+<p>注意到syntax不是模式变量。</p>
+<p><br/></p>
+<h2 id="可以定义宏的宏"><strong>可以定义宏的宏</strong></h2>
+<p>syntax-rules是用来定义宏的，</p>
+<p>然而，它也是一个宏，它最终被展开为syntax-case。</p>
+<p><br/></p>
+<p>(define-syntax syntax-rules</p>
+<p>    (lambda (x)</p>
+<p>        (syntax-case x ()</p>
+<p>            [(_ (i ...) ((keyword . pattern) template) ...)</p>
+<p>             #'(lambda (x)</p>
+<p>                     (syntax-case x (i ...)</p>
+<p>                         [(_ . pattern) #'template] ...))])))</p>
+<p><br/></p>
+<p>syntax-rules的目的，</p>
+<p>是为了避免显式的书写lambda和#'。</p>
+<p><br/></p>
+<p>像这种生成syntax-case的宏还有很多，</p>
+<p>例如，with-syntax。</p>
+<p><br/></p>
+<p>(define-syntax with-syntax</p>
+<p>    (lambda (x)</p>
+<p>        (syntax-case x ()</p>
+<p>            [(_ ((p e) ...) b1 b2 ...)</p>
+<p>             #'(syntax-case (list e ...) ()</p>
+<p>                     [(p ...) (let () b1 b2 ...)])])))</p>
+<p><br/></p>
+<p>with-syntax的目的，</p>
+<p>是把匹配条件写在一起，</p>
+<p>最后输出到一个模板中。</p>
+<p><br/></p>
+<p>从这里我们可以看到，</p>
+<p>syntax-case第一个参数的值，</p>
+<p>可以是语法对象的列表。</p>
+<p><br/></p>
+<p>syntax-case会对列表中的语法对象，</p>
+<p>解除#&lt;syntax ...&gt;的封装，</p>
+<p>然后再进行模式匹配。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>能闻到坏味是好事，</p>
-<p>但是不正确的打扫方法，</p>
-<p>反而会使代码更难维护。</p>
+<p>Lisp的宏非常强大，</p>
+<p>很多人只是听说过，</p>
+<p>没有切身使用过，</p>
+<p>隐约觉得宏可以解决任何问题。</p>
 <p><br/></p>
-<p>消除重复是表象，</p>
-<p>而面向复用才是目的。</p>
+<p>其实不然，</p>
+<p><strong>Lisp宏只是做了一些代码的变换，</strong></p>
+<p><strong>简化了已完成功能的描述方式。</strong></p>
 <p><br/></p>
-<p><strong>和别人读同样的书，</strong></p>
-<p><strong>不一定考上一样的大学，</strong></p>
-<p><strong>更不一定有相同的人生。</strong></p>
+<p>本文对Scheme宏的定义和使用做了简单介绍，</p>
+<p>希望能揭开它的神秘面纱。</p>
 
           
         
@@ -532,7 +608,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/254/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/254/">254</a><span class="page-number current">255</span><a class="page-number" href="/page/256/">256</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/256/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/254/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/254/">254</a><span class="page-number current">255</span><a class="page-number" href="/page/256/">256</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/256/">&gt;</a>
   </nav>
 
 
@@ -578,7 +654,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">309</span>
+                <span class="site-state-item-count">310</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

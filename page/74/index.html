@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/05/15/paradox/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/06/30/code-00/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/05/15/paradox/" itemprop="url">迭代无法解决的架构问题</a></h1>
+                <a class="post-title-link" href="/2020/06/30/code-00/" itemprop="url">编码技巧（零）：为食用者着想</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-15T00:00:00+08:00">
-                2020-05-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-30T00:00:00+08:00">
+                2020-06-30
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Software/" itemprop="url" rel="index">
+                    <span itemprop="name">Software</span>
                   </a>
                 </span>
 
@@ -347,125 +347,85 @@
       
         
           
-            <p>当一个问题无解、或左右为难的时候，</p>
-<p>就不能只从<strong>当前状态</strong>出发解决问题了，</p>
-<p>而是得跳出当前状态，思考导致这种困境的原因。</p>
+            <h3 id="背景">背景</h3>
+<p>一直以来，总觉得告诉别人自己怎样写代码，会不太恰当，</p>
+<p>因为每个人都有自己认为的<strong>较好的</strong>编码方式，并没有高下之分，</p>
+<p>不同的无非是经历不同，见识各异罢了。</p>
 <p><br/></p>
-<p>就像走迷宫一样，遇到死胡同之后，要退回来。</p>
+<p>然而有些时候，一些高龄程序猿们，又容易变得像<strong>絮絮叨叨</strong>的老人一样，</p>
+<p>激动的想向他人讲解自己的辛酸旅程，介绍它们见过的奇闻异事，</p>
+<p>或者分享历史某个时间点上，自己雀跃的像孩童般的心情。</p>
 <p><br/></p>
-<p>有些软件问题，其实也是类似的，</p>
-<p>怎么看都无解，就得好好想想了，这种状态是如何<strong>造成</strong>的？</p>
+<p>因此，才有了这一系列的文章，</p>
+<p>意图向朋友们介绍，个人视角之下的某几个 <strong>“编程技巧”</strong>。</p>
+<p>有些可能是有用的，有些也可能毫无帮助，止增笑耳。</p>
+<h3 id="总诀">总诀</h3>
+<p>小说中不少武学秘籍都有一篇《总诀》，其中记载了整本秘籍的指导原则。</p>
+<p>如果我们把<strong>编程</strong>看做一种武功绝学的话，</p>
+<p>那么我想也应该一些指导原则才行。</p>
 <p><br/></p>
-<p>比如，我们依赖了一个不稳定的外部系统，它频繁失败，</p>
-<p>用户感知到的都是我们系统的问题，怎么办？</p>
-<p>我们又没办法避免这个外部系统失败。</p>
+<p>指导原则不应该太多，否则容易使人忘掉哪个才是真正的原则。</p>
+<p>小时候玩过一款单机游戏，有个可以给主角加<strong>先天资质</strong>的桥段，让我印象深刻。</p>
 <p><br/></p>
-<p>又比如，一个复杂的系统，里面包含很多业务逻辑，</p>
-<p>用户经常需要确认具体逻辑后才能放心使用，</p>
-<p>怎样减少咨询量？总不能让用户自己看代码吧。</p>
-<p><br/></p>
-<p>这些都是很棘手的问题。</p>
-<p>难解之处在于，几乎所有解决方案都<strong>堵死</strong>了。</p>
-<p>似乎保持现状才是最好的办法。</p>
-<p><br/></p>
-<p>下面我们就来分析一下这两个问题，看看怎样退一步海阔天空。</p>
-<h3 id="功利主义">功利主义</h3>
-<p>在分析问题之前，需要明确的是，退回来及时止损需要<strong>头脑清晰</strong>，</p>
-<p>并不是每个必须支付的成本，都得有回报。</p>
-<p><br/></p>
-<p>我认为仅仅通过 “投入产出比” 来制定所有决策，是不恰当的，</p>
-<p>有些事情，并不是那么好<strong>衡量</strong>的，</p>
-<p>也有一些事情，很长<strong>时间</strong>之后才能看到价值。</p>
-<p><br/></p>
-<p>所以，如果总是抱着 “功利” 的心态去做软件，</p>
-<p>那其实就<strong>不应该</strong>做软件，</p>
-<p>因为肯定还有比做软件 “投入产出比” 更高的事情嘛。</p>
-<p><br/></p>
-<p>走错了路，就得有勇气退回来，</p>
-<p>还想着只往高处走，这就是出现悖论的原因。</p>
-<h3 id="依赖的脆弱性">依赖的脆弱性</h3>
 <blockquote>
-<p>我们依赖了一个不稳定的外部系统，它频繁失败，</p>
+<p>主角：老伯伯，你煮的菜好像都很好吃耶，闻起来都很香。</p>
 </blockquote>
 <blockquote>
-<p>用户感知到的都是我们系统的问题，怎么办？</p>
+<p>林厨子：其实啊，做菜没什么秘诀，只要<strong>有着一颗为食用者着想的心</strong>即可。</p>
 </blockquote>
 <p><br/></p>
-<p>依赖链路越长，整个系统的稳定性就越差，</p>
-<p>这是因为每个环节的失败，都会导致整条链路不可用。</p>
-<p><br/></p>
-<p>所以，总是把系统按调用链路进行拆分，并不是一个好主意。</p>
-<p>职责分离的同时，也增加了系统出现问题的可能性。</p>
-<p><br/></p>
-<p>此外，对于链式系统中的每个环节来说，上下游管理都是一笔不小的开销，</p>
-<p>依赖一个脆弱的系统，却还得提供可靠的功能，</p>
-<p>产生这个悖论的原因就出在这里。</p>
-<p><br/></p>
-<p>链式结构的系统，整体可用性不可能高于每个环节的可用性。</p>
-<p><br/></p>
-<p>因此，要么提高每个<strong>环节</strong>的稳定性，</p>
-<p>要么别对外声称整个系统是可靠的，及时向上抛出异常。</p>
-<p><br/></p>
-<p>用户操作一个貌似可靠的系统，最后得到一个*<strong>常失败</strong>的结果，</p>
-<p>这才是导致心态崩溃的根本原因。</p>
-<p><br/></p>
-<p>最后，在调用外部服务的时候，不应当只关注正常的返回结果，</p>
-<p>而是应当把每个外部服务，理解为<strong>多返回值</strong>（一个正常 + N种失败）接口。</p>
-<p>对于每种可能的失败，都应该专门处理。</p>
-<h3 id="延迟决定">延迟决定</h3>
 <blockquote>
-<p>一个复杂的系统，里面包含很多业务逻辑，</p>
+<p>林厨子：一个厨师不能只想到要将自己的菜做得多色香味俱全，</p>
 </blockquote>
 <blockquote>
-<p>用户经常需要确认具体逻辑后才能放心使用，</p>
+<p>而应该想着是什么人要吃你这道菜，怎样的口味是最适合他，而去调理。</p>
 </blockquote>
 <blockquote>
-<p>怎样减少咨询量？</p>
+<p>因为这道菜终究是要给人吃的，而不是拿来观赏或评论的。</p>
 </blockquote>
 <p><br/></p>
-<p>《<a href="https://book.douban.com/subject/26915970/" target="_blank" rel="noopener">Clean Architecture</a>》中有过这样一段话，</p>
+<p>主角听完，略有所悟。</p>
+<p>“为食用者着想的心” 作为编码原则，我想应该榜上有名吧。</p>
+<h3 id="技巧">技巧</h3>
+<p>有了 “总诀” 之后，剩下的就该谈谈 “技巧” 了，好比 “武学招式”。</p>
+<p>特定的招式（或套路）其实并不是特别重要，因为达成目的通常会有很多不同的方式。</p>
+<p>招式是由人创造出来的，当然也就可以由人来<strong>改造</strong>。</p>
+<p><br/></p>
+<p>这让我想起了金庸武侠《笑傲江湖》中的对话，</p>
 <blockquote>
-<p>Good architects design the policy so that decisions about the details can be delayed and deferred for as long as possible.</p>
+<p>风清扬道：“五岳剑派中各有无数蠢才，以为将师父传下来的剑招学得精熟，自然而然便成高手，</p>
+</blockquote>
+<blockquote>
+<p>哼哼，熟读唐诗三百首，不会作诗也会吟！</p>
+</blockquote>
+<blockquote>
+<p>熟读了人家诗句，做几首打油诗是可以的，但若不能自出机杼，能成大诗人么？”</p>
 </blockquote>
 <p><br/></p>
-<p>好的软件架构总想办法<strong>延迟决定</strong>。</p>
-<p>这是因为，越早做出的决定，就会包含越多的假设。</p>
-<p>软件设计是很惧怕假设的，假设意味着，未来它可能是正确的，也可能是<strong>不正确</strong>的。</p>
+<p>风清扬强调的是 “自出机杼”，而不是因循守旧，</p>
+<p>没有招式（技巧），难道就不能<strong>自己创造</strong>么？</p>
 <p><br/></p>
-<p>过度设计的原因之一就是，<strong>假想敌</strong>太强大。</p>
+<p>我要表达的正是这个意思，</p>
+<p>我们应该学会自创武功，总结出适合自己的技巧。</p>
 <p><br/></p>
-<p>回到减少咨询量的问题上来，用户之所以不放心使用，</p>
-<p>是因为我们提前帮用户做了很多不必要的事情。</p>
-<p>更合理的方法是，延迟决定，<strong>让用户来决定</strong>需要做哪些事情。</p>
+<p>回到编码中来，其实每个人多多少少都有自己的技巧，</p>
+<p>有不同的<strong>编码风格</strong>，</p>
+<p>但要想更进一步的话，增长见闻应是必不可少的。</p>
 <p><br/></p>
-<p>用户想做一些事情，反而跑过来问我们给他做了没有，</p>
-<p>这种 “保姆式” 的软件系统帮了倒忙。</p>
+<p>本系列文章，会介绍一些个人常用的技巧，朋友们可以随意改编，但求 “制敌有效”。</p>
+<h3 id="小结">小结</h3>
+<p>以上，我介绍了本系列文章的写作动机，是想向朋友们分享编码过程中的种种体会，</p>
+<p>本着 “为食用者着想的心” 作为指导原则，</p>
+<p>我发现把代码写好，并不是一件容易的事情。</p>
 <p><br/></p>
-<p>业务逻辑本来应当是当前系统该隐藏的那部分知识，这正是软件边界如此划分的原因之一，</p>
-<p>如果边界两侧，总是会有不可避免的信息沟通，</p>
-<p>这只能说明是边界的<strong>划分</strong>不合理。</p>
+<p>我计划这样安排，每篇文章介绍一个小技巧，</p>
+<p>详细介绍产生这个技巧的<strong>动机</strong>，以及如何使用这个技巧。</p>
 <p><br/></p>
-<p>我们应该退回来解决边界划分问题，而不是信息沟通问题。</p>
-<h3 id="结语">结语</h3>
-<p>以上我们分析了软件系统中的两个典型问题，</p>
-<p>（1）依赖了一个频繁失败的外部系统，怎么服务好上游用户？</p>
-<p>（2）怎样避免用户咨询复杂系统的业务逻辑？</p>
+<p>这个过程中，会让我们重新反思代码本身，</p>
+<p>改善自己的<strong>武功路数</strong>。</p>
 <p><br/></p>
-<p>可以看到这两个问题，都跟<strong>软件架构</strong>有关。</p>
-<p>这并不是一个巧合。</p>
-<p><br/></p>
-<p>软件开发过程中的很多 “死胡同” 其实正是<strong>架构问题</strong>的外在表现。</p>
-<p>由于架构不合理，所以怎么做都不对。</p>
-<p><br/></p>
-<p>近些年来在国内疯狂流行的 “敏捷” 开发，是重迭代轻架构的，</p>
-<p>给人一种假象，任何问题都可以通过迭代抹平，</p>
-<p>其实不然。</p>
-<p><br/></p>
-<p>迭代到 “死胡同”，还不肯及时止损的开发团队，非常的痛苦。</p>
-<p>一方面背着业绩压力，不得不往高处走，</p>
-<p>另一方面是，实在走不上去，又不能往回退。</p>
-<p><br/></p>
-<p>不知道这样的局面，什么时候才能有所改善。</p>
+<p>当然，最最重要的还是抛砖引玉，</p>
+<p>每个人内心深处都藏着一套 “绝世武功”，只等着你想要去<strong>施展</strong>的那一天到来。</p>
 
           
         
@@ -504,7 +464,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/73/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/75/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/73/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/75/">&gt;</a>
   </nav>
 
 
@@ -550,7 +510,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">309</span>
+                <span class="site-state-item-count">310</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

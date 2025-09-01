@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/07/20/code-03/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/07/23/code-04/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/07/20/code-03/" itemprop="url">编码技巧（三）：写明用意</a></h1>
+                <a class="post-title-link" href="/2020/07/23/code-04/" itemprop="url">编码技巧（四）：零缺陷</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-20T00:00:00+08:00">
-                2020-07-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-23T00:00:00+08:00">
+                2020-07-23
               </time>
             
 
@@ -348,85 +348,102 @@
         
           
             <h3 id="背景">背景</h3>
-<p>前几篇文章中，我们介绍了两个与 “隐藏信息” 有关的编程技巧，</p>
-<p>（1） “让主流程清晰”：尽可能少的在主流程中堆放不相关的内容。</p>
-<p>（2） “提取工具”：组装更大的信息块，避免频繁的应对细节。</p>
+<p>除了编码之外，开发者平时最常遇到的麻烦就是<strong>软件缺陷</strong>了，</p>
+<p>指的是，软件在某些情况下，表现出了与<strong>预期</strong>不符的行为。</p>
 <p><br/></p>
-<p>这两个技巧所做的都是，尽可能的<strong>少</strong>的披露内容，</p>
-<p>减少阅读者一次感受到的信息量，目的是帮助阅读者抓住重点、看清脉络。</p>
-<p>在展现信息时，要讲究<strong>策略</strong>，不要一股脑的席卷而来。</p>
+<p>确保软件没有缺陷，是一件很难的事情，</p>
+<p>因为一方面，预期是会<strong>变</strong>的，</p>
+<p>另一方面，修改软件的一部分也许会不小心<strong>影响</strong>到其他部分。</p>
 <p><br/></p>
-<p>可是，这并不意味着，代码中该保存尽量<strong>少</strong>的信息。</p>
-<p>相反我们得把<strong>业务知识</strong>想方设法，以各种<strong>形式</strong> “固化” 下来。</p>
-<p>代码中无法保存的，还应考虑其他形式。</p>
+<p>那么就这样听天由命了么？</p>
+<p>很显然这是不行的。</p>
 <p><br/></p>
-<p>下文我们来探讨几个常见的场景，看看我们 “遗失” 了哪些内容。</p>
-<h3 id="代码的局限性">代码的局限性</h3>
-<p>我们知道，代码是<strong>执行过程</strong>的一种编码形式，</p>
-<p>它最终交给机器运行，机器只要能按照步骤得到最终结果就行了，</p>
-<p>代码中并不需要储存除了执行过程之外的其他信息。</p>
+<p>写出高缺陷率的代码，是<strong>不专业</strong>的表现。</p>
+<p>只有运行起来没问题的代码，再追求清晰易懂才是有意义的。</p>
 <p><br/></p>
-<p>然而，一个完整的业务逻辑，肯定不仅仅只包含过程信息，</p>
-<p>还包括背景、设计意图、决策、解释说明，等等一系列内容。</p>
-<p>这些内容是代码中<strong>不必记载</strong>的，也是最容易丢失的。</p>
+<p>文本就来探讨，如何写出低缺陷代码的编码技巧。</p>
+<h3 id="亲手测试">亲手测试</h3>
+<p>在讨论技巧之前，我们不妨先反思一下，</p>
+<p>是哪些事实，让我们坚信自己写的代码<strong>肯定</strong>没有问题？</p>
 <p><br/></p>
-<p>如果我们手头上只有代码，却没有任何与代码相关的说明，</p>
-<p>修改这样的代码，风险是极高的，很容易出现各种<strong>意想不到</strong>的后果。</p>
+<p>我认为只有一条，那就是我们<strong>自己测试</strong>过了。</p>
+<p>不论是通过自动化的测试，还是手工测试，</p>
+<p>不论是通过肉眼亲见，还是通过逻辑证明。</p>
 <p><br/></p>
-<p>所以，一个 “为食用者着想” 的开发者，总是会惦记着代码的局限性，</p>
-<p>想方设法将更多的业务<strong>知识</strong>保存下来，前人栽树后人乘凉。</p>
-<h3 id="文能补拙">文能补拙</h3>
-<p>有一句流传很广的说法 —— “好的代码本身就是文档”。</p>
-<p>引发了很多误解。</p>
+<p>我们应该只相信<strong>自己</strong>测试过的代码。</p>
+<p>不能将 ”确保代码没有问题“ 这件事委托给他人。</p>
 <p><br/></p>
-<p>本来这是人们对 “好代码” 的高度赞扬。</p>
-<p>是想说 “好代码” 太容易理解了，简直<strong>不需要</strong>再另写文档了。</p>
-<p>结果导致了很多初学者，为了彰显自己代码写的好，而故意不写文档。</p>
+<p>所以，一个<strong>负责任</strong>的开发者，绝不会交付没有经过自测的代码。</p>
+<p>让别人找出问题再修复，肯定会耗费更多的时间。</p>
 <p><br/></p>
-<p>要知道，有没有文档，跟代码写的好不好是两码事，</p>
-<p>事实上，不写文档只会让代码<strong>更糟</strong>。</p>
+<p>这就是为什么有时候改一行代码，也需要很久的原因了，</p>
+<p>因为这一行代码，可能会影响到很多其他模块，</p>
+<p>这些受影响到的模块，都应<strong>完整的</strong>进行测试。</p>
 <p><br/></p>
-<p>因此，勤能补拙是良训，</p>
-<p>如果代码写不清楚，那就多补充一些文档，这才是专业的做法。</p>
-<h3 id="拆分">拆分</h3>
-<p>随着业务规模的增长，软件所需适用到的场景会越来也多，</p>
-<p>代码量会越来越大，系统也会越来越复杂。</p>
-<p>为了对复杂系统进行<strong>管控</strong>，“拆分” 子系统是一个很常用的办法。</p>
+<p><strong>假设</strong>自己的写的代码没有问题，正是产生问题的根本原因。</p>
+<h3 id="直面需求">直面需求</h3>
+<p>有的人可能要说了，某些缺陷可能并不是编码引起的，</p>
+<p>而是因为<strong>需求变更</strong>所致。</p>
 <p><br/></p>
-<p>但 “拆分” 却并不能降低系统的<strong>整体</strong>复杂度。</p>
+<p>其实不然。</p>
+<p>真实的需求就在那里，绝大多数情况下，变更的都不是需求，</p>
+<p>而是对需求的<strong>理解</strong>。</p>
 <p><br/></p>
-<p>好比把一个团队划分为十个小组之后，</p>
-<p>管理这十个小组，比直接管理所有成员，负担是变小了，</p>
-<p>但团队作为一个<strong>整体</strong>来看，却是更复杂了。</p>
+<p>产品经理说这样做，就这样实现，说那样做，就那样实现，</p>
+<p>这正是<strong>误解需求</strong>的主要原因。</p>
 <p><br/></p>
-<p>所以，并不是拆分的越细越好，</p>
-<p>因为每个具有独立边界的子系统，都得考虑自己如何与其他系统进行<strong>交互</strong>。</p>
-<p>这会在无形中增加额外的沟通负担，整个系统所包含的全部<strong>信息量</strong>会为之暴涨。</p>
-<h3 id="用法说明">用法说明</h3>
-<p>每一个提供对外服务的子系统，都有义务写明如何使用当前系统所提供的功能。</p>
+<p>为了能够真正的理解需求，开发者应该走在产品经理的前面，</p>
+<p>不然代码写完了，发现不满足需求，不是还要修改么？</p>
 <p><br/></p>
-<p>没有明确用法的软件服务，用户就会选择自认为便利的方式来使用，</p>
-<p>这会增加服务提供方所必须覆盖的业务<strong>场景</strong>之数量。</p>
-<p>一旦有人这样用了，以后就不得不继续支持。</p>
+<p>为了能让自己少<strong>改</strong>几次代码，一定得做到比任何人<strong>更懂</strong>需求才行。</p>
+<h3 id="完整日志">完整日志</h3>
+<p>代码未写完之前，日志先行。</p>
+<p>大部分的软件缺陷，是由<strong>输入</strong>跟预期不符造成的。</p>
 <p><br/></p>
-<p>其次，用户可能会以一种导致软件崩溃的方式来使用它，有意或无意的，</p>
-<p>这虽然有利于我们发现漏洞，</p>
-<p>但防御性编程会大大增加我们的业务复杂度，还得专门处理一些<strong>虚构</strong>出来的问题。</p>
+<p>意料之外的输入参数，会导致<strong>不确定</strong>的执行结果。</p>
+<p>所以，代码逻辑的执行<strong>日志</strong>，</p>
+<p>不论对排查问题，还是对编写低缺陷率的代码而言，都是非常重要的。</p>
 <p><br/></p>
-<p>所以，对于一个软件服务而言，写明用户到底该如何<strong>使用</strong>它，是非常重要的。</p>
-<p>这部分内容是通过代码无法<strong>领会</strong>到的。</p>
+<p>在出现问题的时候，我们必须能<strong>一目了然</strong>的知道问题出在哪里。</p>
+<p>经验表明，“问题排查的简易程度” 与 “代码的低缺陷率” 是正相关的。</p>
+<p>越容易排错的代码，缺陷率越低。</p>
+<p><br/></p>
+<p>因此，在写代码之前，就得先考虑清楚，</p>
+<p>如果我写的代码得到了<strong>奇怪的</strong>结果，要怎么定位问题？</p>
+<p><strong>日志</strong>是行之有效的一种手段。</p>
+<p><br/></p>
+<p>易于定位问题的代码，能有效避免事后很大一堆麻烦事。</p>
+<h3 id="也谈单测">也谈单测</h3>
+<p>单测，通常指的是自动化的单元测试，</p>
+<p>它是实现单元测试的一种自动化的<strong>手段</strong>，一般是运行一个脚本来执行程序，</p>
+<p>再检测执行结果是否跟预期相符。</p>
+<p><br/></p>
+<p>与流行说法不同，我认为写单测其实并<strong>不是</strong>那么重要。</p>
+<p>尤其是每次写完代码都要费力<strong>改</strong>好多单测的话，</p>
+<p>那还不如不写。</p>
+<p><br/></p>
+<p>上文提到过，确保代码没有缺陷的办法是自己进行完整的<strong>测试</strong>。</p>
+<p>至于用什么办法确保，要灵活应对。</p>
+<p><br/></p>
+<p>如果担心别人写的代码，影响了自己负责的功能，是可以写一点单测，</p>
+<p>如果需要频繁的构造数据来测试某一块代码，也可以写一点单测，</p>
+<p>除此之外，单测真的非常鸡肋。</p>
+<p><br/></p>
+<p>最后，追求单测<strong>覆盖率</strong>，没有太大意义，</p>
+<p>“覆盖率” 这个指标，只能检测是否所有代码都<strong>有用</strong>，有没有代码执行不到。</p>
+<p>至于执行到的代码有没有错误，覆盖率不关心这些。</p>
+<p><br/></p>
+<p>所以，我们完全可以写出覆盖率 100% 的问题代码。</p>
 <h3 id="结语">结语</h3>
-<p>在编码过程中会发现有些内容，只用代码没办法交代清楚，</p>
-<p>这时候就不应该<strong>吝啬</strong>笔墨了。</p>
+<p>本文讨论了编写高质量（低缺陷率）代码的几个方法：</p>
+<p>（1）亲手测试：凡需交付的代码，必完整的亲手测试过</p>
+<p>（2）直面需求：做到比任何人更懂需求，才能确保代码跟预期相符</p>
+<p>（3）完整日志：代码未写，日志先行，让输入输出一目了然，易于排错</p>
 <p><br/></p>
-<p>多写一些注释，多写一些文档，并不意味着我们写不好代码。</p>
-<p>反而恰恰意味着，我们对代码的<strong>局限性</strong>有更深的自知之明。</p>
+<p>还讨论了个人对 “单元测试” 以及 “单测覆盖率” 的看法。</p>
+<p>盲目追求漂亮的数字，最终就会自缚手脚。</p>
 <p><br/></p>
-<p>最后，独立系统的 “使用文档”，经常被人忽视，</p>
-<p>如果别人不知道如何使用的话，可能甚至都不知道系统提供了此项功能。</p>
-<p><br/></p>
-<p>所以，好代码虽然会讲究信息披露的必要性，但仍然会传达出<strong>足够</strong>的信息，</p>
-<p>给人一种 “想了解的都在那里” 的感觉。</p>
+<p>低缺陷率的代码，来源于专业精神，妥协于外力，最后还得自己收拾烂摊子。</p>
 
           
         
@@ -465,7 +482,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/69/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/71/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/69/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/71/">&gt;</a>
   </nav>
 
 
@@ -511,7 +528,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">309</span>
+                <span class="site-state-item-count">310</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

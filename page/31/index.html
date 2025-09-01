@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/12/17/development-experience/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2021/12/19/pull/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/17/development-experience/" itemprop="url">如何提升 “开发体验”</a></h1>
+                <a class="post-title-link" href="/2021/12/19/pull/" itemprop="url">方案的 “推动” 和 “拉动”</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-17T00:00:00+08:00">
-                2021-12-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-19T00:00:00+08:00">
+                2021-12-19
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ToD/" itemprop="url" rel="index">
-                    <span itemprop="name">ToD</span>
+                  <a href="/categories/Team/" itemprop="url" rel="index">
+                    <span itemprop="name">Team</span>
                   </a>
                 </span>
 
@@ -347,94 +347,117 @@
       
         
           
-            <p>很多 web 前端开发者们 把自己定位成了 “用户体验工程师”，</p>
-<p>这是因为前后端岗位的划分，使得软件架构分成了两个部分：界面 和 逻辑。</p>
+            <p>当我们有了一个好办法解决问题的时候，就会想着把它<strong>推广</strong>给更多的人使用。</p>
+<p>“推行方案” 看起来像是一件 推己及人 的好事，但经常会遇到很大的阻力。</p>
+<p>这是为什么呢？</p>
 <p><br/></p>
-<p>逻辑 关注的是，软件系统如何提供功能。</p>
-<p>界面 关注的是，“人” 如何使用 “软件系统” 提供的功能。</p>
+<p>“文无第一，武无第二”，讨论方案的双方更像是在 “文斗”，</p>
+<p>一个问题经常会有<strong>多种解法</strong>，并且我们很难确定哪个是最好的解法。</p>
 <p><br/></p>
-<p>前端开发的工作，大部分都是跟 “界面” 相关的，但并仅不限于 图形用户界面（GUI）。</p>
-<p>命令行（CLI） 和 应用程序接口（API），等等，也是界面。</p>
+<p>在推行方案的时候，大家经常讨论的是 “你这个办法好不好”，</p>
+<p>却不是 “我有没有遇到你说的这个<strong>问题</strong>”。</p>
 <p><br/></p>
-<p>GUI 对于普通老百姓而言，使用成本更低，以后没准还会出现 AR/VR 界面。</p>
-<p>但如果用户是 开发者 的话，CLI/API 也许是更好的选择。</p>
+<p>我们拿着 方案 到处<strong>找</strong> 问题，相当于拿着 “锤子” 到处找 “钉子”，</p>
+<p>这是推行方案时遇到阻力的最重要的一个原因。</p>
 <p><br/></p>
-<p>本文就分析一下，面向开发者提供的软件服务，有哪些容易遗漏的体验优化点。</p>
-<h3 id="cliapi">CLI/API</h3>
-<p>开发者 跟 普通老百姓 的 用户画像 是不一样的，</p>
-<p>开发者会写代码，而老百姓则不一定。</p>
-<p>所以，图形界面（GUI）的方式 也许 不是最优解。</p>
+<p>那么如何扭转这种局势呢？本文就讨论一下我常用的做法。</p>
+<h3 id="去解决问题">去解决问题</h3>
+<p>首先，我们的目的不应该是为了推行方案，而是为了解决问题。</p>
+<p>既然是为了解决问题，那么方案就是可以<strong>调整</strong>的。</p>
+<p>所以，与他人讨论的关键在于，识别 “问题” 是什么，而不是 “方案” 是否优雅。</p>
 <p><br/></p>
-<p>开发者可以敲几行代码 调用 某个功能，而不必在界面上用鼠标操作。</p>
-<p>这种 “调用” 天生具有可组合性，并且管理 “代码” 正是开发者们所擅长的。</p>
+<p>比如当我们用了一种配置方案生成表单，我想拿出来给别人使用时，</p>
+<p>就会想，其他人有没有这样的<strong>需求</strong>？我的方案在他的场景中是否合理？</p>
+<p>如果对方有其他方面的诉求，我能不能改方案？</p>
 <p><br/></p>
-<p>很多优秀的开源 web 系统，除了 GUI 之外，还包含了不少 CLI，</p>
-<p>比如，gitlab/gerrit/jenkins 等等。</p>
+<p>对自己而言，我们已经实现了从 问题识别 到 方案设计 的全过程。</p>
+<p>但向外推广时，状态就又回到了 问题识别 阶段，</p>
+<p>我们需要<strong>重新</strong>讨论 问题是什么，并考虑 旧方案 是否还适用。</p>
 <p><br/></p>
-<p>我们在做一个软件系统的时候，优先从 CLI 入手，我觉得是一个好办法，</p>
-<p>它可以避免我们把精力过早的聚焦在 图形界面 上。</p>
+<p>我们考虑更多场景的时候，原有的解决方案很可能就<strong>行不通</strong>了。</p>
+<p>要么部分问题解决不了，要么无法满足 扩展性 或 易用性 方面的诉求。</p>
 <p><br/></p>
-<blockquote>
-<p>A good system can't have a weak command language.</p>
-</blockquote>
-<blockquote>
-<p>—— <a href="http://www.cs.yale.edu/homes/perlis-alan/quotes.html" target="_blank" rel="noopener">EPIGRAMS IN PROGRAMMING</a></p>
-</blockquote>
-<h3 id="ide-plugin">IDE plugin</h3>
-<p>开发者们 日常打交道最多的工具就是 IDE 了，</p>
-<p>要想提升 开发体验，应该抓住 IDE 这一常用的 “用户端”。</p>
+<p>总之，<strong>在推行方案时，要抱着 “解决新问题” 调整 “旧方案” 的心态去做</strong>。</p>
+<h3 id="要事第一">要事第一</h3>
+<p>有时候会想，为什么我们辛辛苦苦的去 “<strong>推</strong>” 一件事情，还费力不讨好呢。</p>
+<p>比如我们想推行 React 中的最佳实践，别人为什么就不领情呢？</p>
+<p>难道说我的这种方案不够好吗？难道他们没有这种需求吗？</p>
 <p><br/></p>
-<p>很多 IDE/编辑器 都具备扩展功能（plugin），</p>
-<p>然而，编写常用编辑器的 扩展，却仍然不是主流的软件功能的提供方式。</p>
-<p>常规的做法只是给软件系统包装一个 GUI 界面。</p>
+<p>“方案” 是合理的，“问题” 也是存在的，为什么还是有阻力呢？</p>
+<p>原因在于，我们要做的事情 对别人来说可能并不 <strong>紧急</strong>。</p>
+<p>可能对方在加班解决大量需求<strong>做不完</strong>的问题，哪有时间关心<strong>写的</strong>好不好。</p>
 <p><br/></p>
-<p>开发者们 要想使用软件功能，需要打开这个 GUI 界面才可以。</p>
-<p>这就有了一种割裂感，</p>
-<p>尤其是完成不同功能的时候，只能去各个系统 GUI 中跳来跳去。</p>
+<p>因此，我经常借 “<strong>拉力</strong>” 而非 “推力”，用 “<strong>问题驱动</strong>” 的方式 考察这件事。</p>
+<p>先搜集需求，列出优先级，为紧急重要的需求<strong>找</strong>方案，</p>
+<p>这样方案一旦得手，大家都很高兴，阻力自然就不存在了。</p>
 <p><br/></p>
-<p>IDE 插件可以很好的串联起这些功能，但前提是各个系统已具备了 CLI 调用方式。</p>
+<p>这需要我们坚持 “谦逊” 的品格，</p>
+<p><strong>不是为了推行自己的方案，而是为了解决 用户的 “燃眉之急”</strong>。</p>
+<h3 id="消除假想敌">消除假想敌</h3>
+<p>在进行工具开发的时候，我们很容易对问题的<strong>难度</strong>进行过多假设，</p>
+<p>而实际上，大多数方案只要解决一些足够<strong>具体</strong>的问题就够了。</p>
 <p><br/></p>
-<blockquote>
-<p>GNU Emacs is a LISP operating system disguised as a text editor.</p>
-</blockquote>
-<blockquote>
-<p>—— <a href="https://wiki.c2.com/?EmacsStandsFor" target="_blank" rel="noopener">Emacs Stands For</a></p>
-</blockquote>
-<h3 id="浏览器插件">浏览器插件</h3>
-<p>几年前我们做网络编程时候，经常区分 C/S 和 B/S 两种开发模式，</p>
-<p>浏览器端开发 属于后者（B/S），但现在不怎么提及了。</p>
+<p>比如，我们想要设计一个函数用来处理向量，</p>
+<p>很容易在设计的时候，就考虑 N 维向量的 一般性 处理方法。</p>
+<p>而忽视实际问题<strong>场景</strong>中，到底会出现哪几种可能。</p>
 <p><br/></p>
-<p>大部分前端开发的工作，都受限于浏览器环境中，不会考虑对浏览器本身做点什么。</p>
+<p>不合理的假设，会增加问题的复杂度，也会增加解决方案的抽象程度。</p>
+<p>如果真实场景中只会处理 二维 和 三维 向量，</p>
+<p>我们对于 N 维向量的假设，会导致很多工作白费，用起来也很<strong>不接地气</strong>。</p>
 <p><br/></p>
-<p>今年九月份，<a href="https://gs.statcounter.com/browser-market-share" target="_blank" rel="noopener">Browser Market Share Worldwide</a> 有份报告指出，</p>
-<p>Chrome 市场占有率已经达到了 64%。</p>
+<p>尤其是对于<strong>快速迭代</strong>的业务领域，能快速解决问题的办法就是好办法，</p>
+<p>方案是不是优雅，适用性是不是更广，未来好不好维护，甚至都不是最重要的。</p>
+<p>也许过了半年之后，连项目本身都不存在了。</p>
 <p><br/></p>
-<p>不像 C 端浏览器那样发散，开发环境中的浏览器，是更可控的。</p>
-<p>所以，我们可以假设 开发者们 使用了一致的 Chrome 与系统进行交互。</p>
-<p>这样一来 Chrome 插件能起到的作用，就不容忽视了。</p>
+<p><strong>消除假想敌，会让我们的方案更 “务实”，用最小的成本获得最大的价值。</strong></p>
+<h3 id="调整工作重心">调整工作重心</h3>
+<p>除了考虑 “推行方案” 为什么会遇到阻力之外，</p>
+<p>我们还应考虑 <strong>为什么我们会遇到</strong> “推行方案受阻” 的问题。</p>
+<p>为什么我们没能解决紧急的问题，为什么需要我们自己去兜售方案呢？</p>
 <p><br/></p>
-<p>不像浏览器环境那样，Chrome 插件完全是 C/S 模式下对 Client 进行扩展。</p>
-<p>它有多种多样的办法与本地进程通信，这就大大扩充了站点的能力范围。</p>
+<p>我想这可能在于 团队上下 没有针对 “<strong>解决正确的问题</strong>” 达成统一。</p>
+<p>这是沟通的问题，也是管理的问题。</p>
+<p><br/></p>
+<p>作为 开发 我们应该反思，有没有<strong>抓住</strong>外部环境中的核心问题。</p>
+<p>作为 管理者 应该反思，有没有识别关键问题并向团队<strong>输入</strong>。</p>
+<p><br/></p>
+<p>如果团队的大部分精力都在解决一个 “错误” 的问题，</p>
+<p>那么团队整体的 <strong>绩效</strong> 就不会太好。</p>
+<p><br/></p>
+<p>整个团队应当反思，是不是大家都在闭门造车，是不是对外部事件充耳不闻。</p>
+<p>我们该如何让外部反馈更加具体？如何在更大的环境中创造双赢？</p>
+<p><br/></p>
+<p>因此，<strong>经常出现 “推” 方案的团队，需要反思自己在大环境中的定位</strong>。</p>
 <h3 id="结语">结语</h3>
-<p>以上我们的分析思路 是挖掘所有针对 开发者 友好的 “端” 上场景。</p>
-<p>开发者们日常接触到的 “端” 是与老百姓不同的，</p>
-<p>甚至跟普通公司内部的 其他用户 也是不同的。</p>
+<p>不论是在业务部门还是工具开发部门，“<strong>推</strong>” 方案的例子比比皆是，</p>
+<p>在业务部门开发的好好的，就遇到工具部门过来 “推” 方案，</p>
+<p>在工具部门做了一个新东西，就想着 “推” 到各个业务团队去落地。</p>
 <p><br/></p>
-<p>GUI（常规的图形界面端），CLI/API（terminal 端），</p>
-<p>IDE plugin（开发工具端），浏览器插件（Chrome 端），</p>
-<p>这些端共同形成了一个整体 —— 开发者界面。</p>
+<p>这种事情频繁发生，就说明组织内部的<strong>需求流动</strong>是反向的。</p>
+<p>工具部门没有把精力用在 紧急重要 的问题上面。</p>
 <p><br/></p>
-<p>因此，不同的 “端” 上应用，只是 “开发者界面” 的具体形态罢了。</p>
-<p>合理的打通各端，可以极大的加强软件系统的可交互性。</p>
+<p>极少数情况下，会出现工具部门具备前瞻性，想要做出一些变革。</p>
+<p>但历史上的成功变革，没有一个不是 “<strong>以民为本</strong>” 的。</p>
 <p><br/></p>
-<p>未来 移动办公/物联网 也会兴起，这就意味着新 “端” 出现。</p>
-<p>比如我们完全可以在 移动端 处理审批，用 手环/手表 接到系统的反馈。</p>
+<p>本文从四个角度分析了 “推” 方案产生的原因：</p>
+<ul>
+<li><p>不是为了解决问题，而是为了推行我的方案</p></li>
+<li><p>我要解决的问题，对别人来说并不紧急</p></li>
+<li><p>假想了很多真实情况下并不存在的问题，导致方案过于抽象</p></li>
+<li><p>团队没有识别正确的问题，导致工作重心走偏</p></li>
+</ul>
 <p><br/></p>
-<p>随着开发者人数越来越多，开发体验 能带来的价值会越来越大。</p>
-<p>按十小时工作制来算，每人每天节省一小时，就能省出 10% 的人力成本。</p>
+<p>我更喜欢用 “问题驱动” 的方式 “<strong>拉动</strong>” 方案产生，构成一个反馈闭环，</p>
+<p><strong>（1）找到自己的用户，了解需求，发现和定义问题</strong></p>
+<p><strong>（2）根据具体的问题确定务实的方案</strong></p>
+<p><strong>（3）在真实环境中进行验证，不断的改进方案</strong></p>
+<p><br/></p>
+<p>以上反馈闭环，会促使 问题与方案 “越卷越大”。</p>
+<p>我们不断的解决更多的问题，促使方案中的技术含量越来越高。</p>
+<p>而不是反之。</p>
 <p><br/></p>
 <blockquote>
-<p>技亦灵怪矣哉。</p>
+<p>不是一番寒彻骨，怎得梅花扑鼻香。</p>
 </blockquote>
 
           
@@ -474,7 +497,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/30/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><span class="page-number current">31</span><a class="page-number" href="/page/32/">32</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/32/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/30/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><span class="page-number current">31</span><a class="page-number" href="/page/32/">32</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/32/">&gt;</a>
   </nav>
 
 
@@ -520,7 +543,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">309</span>
+                <span class="site-state-item-count">310</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

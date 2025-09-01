@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/09/recursive-function-5/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/10/recursive-function-6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/09/recursive-function-5/" itemprop="url">递归函数（五）：递归集与递归可枚举集</a></h1>
+                <a class="post-title-link" href="/2017/03/10/recursive-function-6/" itemprop="url">递归函数（六）：最多有多少个程序</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-09T00:00:00+08:00">
-                2017-03-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T00:00:00+08:00">
+                2017-03-10
               </time>
             
 
@@ -348,111 +348,158 @@
         
           
             <h3 id="回顾">回顾</h3>
-<p>上文中我们讨论了全函数和部分函数，以及计算的可终止性。</p>
-<p>本文我们从数论函数开始，给原始递归函数集增加一种新的运算，得到了一个更大的集合。</p>
-<p>然后根据递归函数，我们可以定义递归集和递归可枚举集，</p>
-<p>为以后讨论可计算性与可判定性打好基础。</p>
+<p>上一篇中，我们通过引入极小化算子定义了递归函数，</p>
+<p>使用递归函数，我们又定义了递归集与递归可枚举集，</p>
+<p>本文我们要讨论，为什么递归可枚举集是“可枚举”的，以及什么是可计算函数。</p>
 <p><br/></p>
-<h3 id="数论函数">数论函数</h3>
+<h3 id="可计算性">可计算性</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-567ebbb9d0fa7c88.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3315ef8756b21619.png" /></p>
 <p><br/></p>
-<p>自然数集一般记为<span data-katex="N=\lbrace 0,1,2,\cdots \rbrace "></span>，那么<span data-katex="n"></span>个自然数集的笛卡尔积记为<span data-katex="N^n"></span>，</p>
-<p>于是，我们称集合<span data-katex="N^n"></span>到<span data-katex="N"></span>的部分函数为<span data-katex="n"></span>元部分数论函数。</p>
-<p>作为数论函数，<span data-katex="2x"></span>是一个全函数，而<span data-katex="x/2"></span>，<span data-katex="x-y"></span>，<span data-katex="\sqrt{x}"></span>只是部分函数，</p>
-<p>它们的计算结果，<span data-katex="3/2"></span>，<span data-katex="4-6"></span>，<span data-katex="\sqrt{5}"></span>都不在<span data-katex="N"></span>中，于是相应定义域中的点可视为没有定义。</p>
+<p>我们听说过，现代计算机在计算能力上是与图灵机等价的，</p>
+<p>什么叫做计算能力呢？</p>
+<p>它指的是图灵机可计算的函数集，与现代计算机可计算的函数集是相等的。</p>
 <p><br/></p>
-<p>为什么讨论数论函数呢，其一是因为它是一个典型数学的问题，</p>
-<p>另外一点，则是因为我们经常把其他数学问题转换成数论问题，例如，<a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E6%95%B0" target="_blank" rel="noopener">哥德尔编码</a>。</p>
-<p>本文中，使用数论函数，可以简化我们的描述方式。</p>
+<p>为了简单起见，我们不去讨论图灵机，而是从现代计算机直接说起，</p>
+<p>设<span data-katex="\mathscr{P}"></span>是一段程序，<span data-katex="n"></span>是一个正整数，</p>
+<p>我们称数论函数<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>为程序<span data-katex="\mathscr{P}"></span>所计算的<span data-katex="n"></span>元部分函数，</p>
+<p>如果对于相同的输入，</p>
+<p>要么：（1）程序<span data-katex="\mathscr{P}"></span>的计算可以终止，此时计算结果等于<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>的相应函数值；</p>
+<p>要么：（2）程序<span data-katex="\mathscr{P}"></span>的计算不能终止，此时<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>无定义。</p>
 <p><br/></p>
-<p>一个谓词，指的是返回布尔值的函数，</p>
-<p>我们还可以将谓词看做值域为<span data-katex="\lbrace 0,1\rbrace "></span>的一个数论函数。</p>
-<p><span data-katex="0"></span>代表<code>True</code>，<span data-katex="1"></span>代表<code>False</code>。</p>
+<p>设<span data-katex="f(x_1,x_2,\cdots ,x_n)"></span>是一个部分函数，如果存在程序<span data-katex="\mathscr{P}"></span>可计算<span data-katex="f"></span>，则称<span data-katex="f"></span>是部分可计算的。</p>
+<p>如果一个函数，既是部分可计算的，又是全函数，则称这个函数是可计算的。</p>
 <p><br/></p>
-<h3 id="极小化算子">极小化算子</h3>
+<p>可以证明，所有的原始递归函数和递归函数都是部分可计算的。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-b1d4c18df4caf3bc.png" /></p>
+<h3 id="通用程序">通用程序</h3>
+<p>我们使用现代计算机进行编程的时候，并不是直接把程序的输入传给程序，</p>
+<p>而是将程序本身以及它的输入，传给计算机，最后由计算机得到计算结果，</p>
+<p>像这种接受任何程序和它的输入作为自己的输入，返回程序执行结果的程序，称为通用程序。</p>
+<p>为此，通用程序需要把输入的程序进行编码。</p>
 <p><br/></p>
-<p>在前一篇中，我们从三个初始函数出发，</p>
-<p>通过合成运算和原始递归运算，得到了原始递归函数集，</p>
-<p>递归函数集是相对于这两种运算封闭的。</p>
+<p>常用的编码方法，涉及<a href="https://zh.wikipedia.org/wiki/%E9%85%8D%E5%AF%B9%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">配对函数</a>和<a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E6%95%B0" target="_blank" rel="noopener">哥德尔编码</a>。</p>
+<p>为了不引入太多的复杂性，我们可以将程序的编码理解为存储程序的二进制数据，</p>
+<p>不同的程序会有不同的二进制表示，每一个二进制表示可以对应一段程序（虽然可能不合法）。</p>
+<p>哥德尔编码做的事情就是将程序和自然数集一一对应起来。</p>
 <p><br/></p>
-<p>然而，这样定义的原始递归函数，并不能包括所有的数论函数，</p>
-<p>一个典型的例子就是，<a href="https://zh.wikipedia.org/zh/%E9%98%BF%E5%85%8B%E6%9B%BC%E5%87%BD%E6%95%B8" target="_blank" rel="noopener">阿克曼函数</a>，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ackermann :: Int -&gt; Int -&gt; Int </span><br><span class="line">ackermann 0 x &#x3D; x+1</span><br><span class="line">ackermann k 0 &#x3D; ackermann (k-1) 1</span><br><span class="line">ackermann k x &#x3D; ackermann (k-1) $ ackermann k x-1</span><br></pre></td></tr></table></figure>
-<p>它并不是一个原始递归函数，（证略</p>
-<p>因此原始递归函数集并不足以表示计算机程序中的所有函数。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3c5dd1454fcd0559.png" /></p>
 <p><br/></p>
-<p>为此，我们需要对原始递归函数集进行扩充，我们定义一个新的运算，称为极小化运算，</p>
-<p>设<span data-katex="P(x_1,\cdots ,x_n,t)"></span>是一个谓词，令</p>
-<p><span data-katex="f(x_1,\cdots ,x_n)=min\ P(x_1,\cdots ,x_n,t)"></span></p>
+<p>因此，所有程序的个数是可数的，而这些程序可计算的函数个数也一定是可数的，</p>
+<p>它们可能是全函数，也可能是部分函数。</p>
+<p>（其中，“可数”指的是可数集，可数集是与自然数集之间存在一一映射的集合。</p>
 <p><br/></p>
-<p><span data-katex="f(x_1,\cdots ,x_n)"></span>的值，或者是使<span data-katex="P(x_1,\cdots ,x_n,t)"></span>为真的最小<span data-katex="t"></span>值，</p>
-<p>或者无定义，此时不存在<span data-katex="t"></span>使得<span data-katex="P(x_1,\cdots ,x_n,t)"></span>为真。</p>
-<p>这样通过<span data-katex="min"></span>得到<span data-katex="f(x_1,\cdots ,x_n)"></span>的过程称为极小化运算，</p>
-<p>也称部分函数<span data-katex="f(x_1,\cdots ,x_n)"></span>是由谓词经过极小化运算得到的。</p>
+<p>然而，自然数集上的函数全体并不可数，（证略</p>
+<p>所以肯定存在程序不可计算的函数。</p>
 <p><br/></p>
-<p>以上我们给谓词定义了极小化运算，现在我们将极小化运算推广到一般的函数上面，</p>
-<p>设<span data-katex="g(x_1,\cdots ,x_n,t)"></span>是一个<span data-katex="n+1"></span>元函数，令</p>
-<p><span data-katex="f(x_1,\cdots ,x_n)=min\lbrace g(x_1,\cdots ,x_n,t)=0\rbrace "></span></p>
-<p>则称部分函数<span data-katex="f(x_1,\cdots ,x_n)"></span>是由函数<span data-katex="g(x_1,\cdots ,x_n,t)"></span>经过极小化运算得到的。</p>
+<h3 id="集合个数的可枚举性">集合个数的可枚举性</h3>
 <p><br/></p>
-<h3 id="递归函数集">递归函数集</h3>
-<p>和定义原始递归函数集一样，我们从以下三个初始函数出发，</p>
-<p>（1）零函数<span data-katex="n(x)=0"></span></p>
-<p>（2）后继函数<span data-katex="s(x)=x+1"></span></p>
-<p>（3）投影函数<span data-katex="u^n_i(x_1,\cdots ,x_n)=x_i"></span>，<span data-katex="1\leqslant i\leqslant n"></span></p>
-<p>由初始函数，经过有限次合成运算，原始递归运算，以及极小化运算，得到的函数称为递归函数。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-a6e30544d2c6c7c3.png" /></p>
 <p><br/></p>
-<p>递归函数并不一定是全函数，因为极小化运算可能会导致结果函数在某些点无定义，</p>
-<p>递归的部分函数称为部分递归函数。</p>
+<p>程序<span data-katex="\mathscr{P}"></span>所计算的函数，我们可以记为<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>，</p>
+<p>由此，我们可以定义通用程序<span data-katex="\Phi "></span>，则有，</p>
+<p><span data-katex="\Phi (x_1,x_2,\cdots ,x_n,y)=\psi (x_1,x_2,\cdots ,x_n)"></span></p>
+<p>其中，<span data-katex="y"></span>是程序<span data-katex="\mathscr{P}"></span>的编码。</p>
 <p><br/></p>
-<p>可以证明阿克曼函数是递归函数，但不是原始递归函数，</p>
-<p>因此，原始递归函数集是递归函数集的真子集。</p>
+<p>因为，所有的程序与自然数集一一对应，</p>
+<p>所以，<span data-katex="\Phi (x_1,x_2,\cdots ,x_n,0),\Phi (x_1,x_2,\cdots ,x_n,1),\cdots"></span></p>
+<p>枚举了所有的<span data-katex="n"></span>元可计算函数。</p>
 <p><br/></p>
-<h3 id="递归可枚举集">递归可枚举集</h3>
+<p>我们定义<span data-katex="W_y=\lbrace x\in N|\Phi(x,y)\downarrow \rbrace "></span>，</p>
+<p>根据递归可枚举集的定义，每一个<span data-katex="W_y"></span>是一个递归可枚举集。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-6f7383f96e58c74e.png" /></p>
+<p>又因为<span data-katex="\Phi(x,0),\Phi(x,1),\cdots "></span>枚举了所有的可计算函数，</p>
+<p>而上一篇中我们看到，递归可枚举集是由部分递归函数（即，可计算函数）定义的，</p>
+<p>一个部分递归函数确定出一个递归可枚举集，</p>
+<p>所以，<span data-katex="W_0,W_1,\cdots "></span>枚举了所有的递归可枚举集。</p>
 <p><br/></p>
-<p>在具体实践中，我们经常会遇到这样的问题，</p>
-<p>给定一个元素，我们需要判断这个元素是否属于某个集合。</p>
-<p>这种问题，称为集合的成员资格问题。</p>
+<p>因此，集合<span data-katex="B"></span>是递归可枚举的，当且仅当存在<span data-katex="y\in N"></span>，使得<span data-katex="B=W_y"></span>，</p>
+<p>称为枚举定理，这就是“枚举”的含义。</p>
 <p><br/></p>
-<p>沿用这一思路，我们可以使用一个谓词<span data-katex="\chi _B"></span>来定义相应的集合<span data-katex="B\subseteq N"></span>，</p>
-<p><span data-katex="B=\lbrace x\in N|\chi _B(x)\rbrace "></span></p>
-<p>谓词<span data-katex="\chi _B(x)"></span>为真，则<span data-katex="x\in B"></span>。</p>
-<p>这个谓词<span data-katex="\chi _B(x)"></span>，通常称为集合<span data-katex="B"></span>的特征函数。</p>
+<p>令<span data-katex="K=\lbrace n\in N|n\in W_n\rbrace "></span>，</p>
+<p>则<span data-katex="K"></span>是递归可枚举的，但不是递归的，（证略</p>
+<p>因此，<span data-katex="\bar{K}"></span>不是递归可枚举的，否则<span data-katex="K"></span>就是递归集了。</p>
+<p>（根据，集合<span data-katex="B"></span>是递归的当且仅当<span data-katex="B"></span>和<span data-katex="\bar{B}"></span>是递归可枚举的，见上一篇</p>
 <p><br/></p>
-<p>如果特征函数<span data-katex="\chi _B"></span>是一个递归的全函数，</p>
-<p>则我们总是可以判断<span data-katex="\chi _B(x)"></span>等于<span data-katex="0"></span>还是<span data-katex="1"></span>，</p>
-<p>这样的集合<span data-katex="B"></span>称为递归集。</p>
+<p>因此，我们找到了一个非递归的递归可枚举集<span data-katex="K"></span>，</p>
+<p>以及一个非递归可枚举集<span data-katex="\bar{K}"></span>。</p>
 <p><br/></p>
-<p>如果存在部分递归函数<span data-katex="g"></span>，使得<span data-katex="B=\lbrace x\in N|g(x)\downarrow \rbrace"></span>，</p>
-<p>即，<span data-katex="x\in B"></span>当且仅当<span data-katex="g"></span>在<span data-katex="x"></span>处有定义，</p>
-<p>则称集合<span data-katex="B"></span>是一个递归可枚举集。</p>
-<p>每一个部分递归函数，都确定出一个递归可枚举集。</p>
+<h3 id="停机问题">停机问题</h3>
 <p><br/></p>
-<p>因此，对于每一个自然数<span data-katex="x\in N"></span>，</p>
-<p>我们总是可以通过递归集<span data-katex="B"></span>的特征函数<span data-katex="\chi _B"></span>，来判断<span data-katex="x"></span>是否<span data-katex="B"></span>的成员。</p>
-<p>而对于递归可枚举集，就不容乐观了，</p>
-<p>如果某个自然数<span data-katex="x\in N"></span>是<span data-katex="B"></span>的成员，那么我们可以断定这件事，因为<span data-katex="g(x)"></span>有定义，</p>
-<p>但是如果某个自然数<span data-katex="y\in N"></span>不是<span data-katex="B"></span>的成员，我们就不能确定，因为这时候<span data-katex="g(x)"></span>无定义。</p>
-<p>（<span data-katex="g(x)"></span>无定义，则它对应的图灵机不停机，后文我们详细讨论</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-1fb62dcb731ff72f.png" /></p>
 <p><br/></p>
-<p>因此，集合<span data-katex="B"></span>是递归的当且仅当<span data-katex="B"></span>和<span data-katex="\bar{B}"></span>是递归可枚举的，</p>
-<p>其中<span data-katex="\bar{B}"></span>为<span data-katex="B"></span>的补集。</p>
+<p>任给一个程序和一个自然数，问该程序对这个自然数输入的计算是否停止，</p>
+<p>这个问题称为停机问题。</p>
+<p><br/></p>
+<p>我们可以用谓词<span data-katex="H(x,y)"></span>描述这个问题，</p>
+<p><span data-katex="H(x,y)"></span>，表示以<span data-katex="y"></span>为代码的程序对输入<span data-katex="x"></span>的计算最终停止。</p>
+<p>那么，<span data-katex="H(x,y)"></span>是不可计算的，即，不存在一个程序来计算<span data-katex="H(x,y)"></span>。</p>
+<p><br/></p>
+<p>我们来证明一下，假设有一个程序可以计算<span data-katex="H(x,y)"></span>，</p>
+<p>那么我们就能用它来构造一个新程序<span data-katex="\mathscr{P}"></span>，它的输入是<span data-katex="x"></span>，</p>
+<p>这段程序当<span data-katex="H(x,x)"></span>为真时，计算不停止，而当<span data-katex="H(x,x)"></span>为假时，计算停止。</p>
+<p><br/></p>
+<p>程序<span data-katex="\mathscr{P}"></span>也可以进行编码，假设为<span data-katex="y_0"></span>，现在我们来判断<span data-katex="H(y_0,y_0)"></span>。</p>
+<p><br/></p>
+<p>如果<span data-katex="H(y_0,y_0)"></span>为真，意味着编码为<span data-katex="y_0"></span>的程序以<span data-katex="y_0"></span>作为输入最终停止，</p>
+<p>即程序<span data-katex="\mathscr{P}"></span>，输入为<span data-katex="y_0"></span>时，最终停止，</p>
+<p>可是根据<span data-katex="\mathscr{P}"></span>的定义，此时<span data-katex="H(x,x)=H(y_0,y_0)"></span>为假才会停止，矛盾。</p>
+<p><br/></p>
+<p>如果<span data-katex="H(y_0,y_0)"></span>为假，意味着编码为<span data-katex="y_0"></span>的程序以<span data-katex="y_0"></span>作为参数最终不会停止，</p>
+<p>即程序<span data-katex="\mathscr{P}"></span>，输入为<span data-katex="y_0"></span>时，最终不停止，</p>
+<p>可是根据<span data-katex="\mathscr{P}"></span>的定义，此时<span data-katex="H(x,x)=H(y_0,y_0)"></span>为真才不会停止，矛盾。</p>
+<p><br/></p>
+<p><span data-katex="H(y_0,y_0)"></span>不能为真也不能为假，矛盾，</p>
+<p>因此，计算<span data-katex="H(x,y)"></span>的程序不存在，我们也无法用它来构造程序<span data-katex="\mathscr{P}"></span>。</p>
+<p><br/></p>
+<h3 id="可判定性">可判定性</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-5e01504f5037d0e0.png" /></p>
+<p><br/></p>
+<p>可判定性问题，指的是一个询问真或者假的问题是否可以被回答。</p>
+<p>如果我们总能回答出这个问题是真或者是假，就称该问题是可判定的，</p>
+<p>如果我们只能当问题为真的时候确定为真，为假的时候所进行的计算可能不会终止，那么就称该问题是半可判定的。</p>
+<p><br/></p>
+<p>某元素是否属于一个递归集，是可判定的，</p>
+<p>某元素是否属于一个递归可枚举集，是半可判定的。</p>
+<p><br/></p>
+<p>因为，递归集是使用一个递归的全函数定义的，</p>
+<p>而递归可枚举集是使用第一个部分递归函数定义的，</p>
+<p>我们无法判断某个部分递归函数，在接受某参数时，是没有定义，还是计算尚未停止。</p>
+<p>即，判断元素是否属于某递归可枚举集的程序可能永不停机。</p>
 <p><br/></p>
 <h3 id="总结">总结</h3>
-<p>本文介绍了数论函数，递归函数集，然后用递归函数分别定义了递归集和递归可枚举集，</p>
-<p>可是为什么递归可枚举集是“可枚举”的呢？</p>
+<p>本文介绍了函数的可计算性，通用程序，以及最多有多少个程序，</p>
+<p>还了解了停机问题和可判定性问题。</p>
 <p><br/></p>
-<p>是因为每一个递归可枚举集可以一一对应一个自然数，这是怎样做到的呢？</p>
-<p>这需要我们理解总共有多少个可能的程序，以及什么是通用程序。</p>
+<p>这些都是可计算性理论的基础，我们清晰的看到了人类的计算能力，</p>
+<p>以及用递归所能计算的函数范围，后文中我们开始讨论不动点理论，</p>
+<p>这同样是一个有趣的话题。</p>
+<hr />
+<h3 id="附">附</h3>
+<p>配对函数和哥德尔数，是对数偶和有穷数列的一种编码方式。</p>
 <p><br/></p>
+<p>（1）配对函数</p>
+<p>令<span data-katex="\langle x,y\rangle=2^x(2y+1)-1"></span>，称<span data-katex="\langle x,y\rangle "></span>为配对函数，它是一个原始递归函数。</p>
+<p>任给一个数<span data-katex="z"></span>，存在唯一的一对数<span data-katex="x"></span>和<span data-katex="y"></span>，使得<span data-katex="\langle x,y\rangle =z"></span>。</p>
+<p><span data-katex="x"></span>是<span data-katex="z+1"></span>含有因子<span data-katex="2"></span>的个数，即使得<span data-katex="2^t|(z+1)"></span>的<span data-katex="t"></span>的最大值。</p>
+<p><span data-katex="(z+1)/2^x"></span>必为奇数，<span data-katex="y"></span>是<span data-katex="2y+1=(z+1)/2^x"></span>的唯一解。</p>
+<p>一般的，记<span data-katex="l(z)=x"></span>，<span data-katex="r(z)=y"></span>，则<span data-katex="l(z)"></span>和<span data-katex="r(z)"></span>也是原始递归函数。</p>
+<p><br/></p>
+<p>（2）哥德尔数</p>
+<p>记<span data-katex="[a_1,a_2,\cdots ,a_n]=\prod_{i=1}^{n}p_i^{a_i}"></span>，</p>
+<p><span data-katex="[a_1,a_2,\cdots ,a_n]"></span>称为有穷数列<span data-katex="(a_1,a_2,\cdots ,a_n)"></span>的哥德尔数。</p>
+<p>其中，<span data-katex="p_i"></span>是第<span data-katex="i"></span>个素数。</p>
+<p><br/></p>
+<p>例如，<span data-katex="[2,0,1,3]=2^2\cdot 3^0\cdot 5^1\cdot 7^3=6860"></span>。</p>
+<p>对于每一个固定的<span data-katex="n"></span>，<span data-katex="[a_1,a_2,\cdots ,a_n]"></span>是原始递归函数，并且这种编码具有唯一性。</p>
+<hr />
 <h3 id="参考">参考</h3>
-<p><a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92%E9%9B%86%E5%90%88" target="_blank" rel="noopener">递归集</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92%E5%8F%AF%E6%9E%9A%E4%B8%BE%E9%9B%86%E5%90%88" target="_blank" rel="noopener">递归可枚举集</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E9%85%8D%E5%AF%B9%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">配对函数</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E6%95%B0" target="_blank" rel="noopener">哥德尔数</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E6%95%B8%E9%9B%86" target="_blank" rel="noopener">可数集</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E5%88%A4%E5%AE%9A%E6%80%A7" target="_blank" rel="noopener">可判定性</a></p>
+<p><a href="https://zh.wikipedia.org/zh-hans/%E5%BA%B7%E6%89%98%E5%B0%94%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">康托尔定理</a></p>
 
           
         
@@ -491,7 +538,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/204/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/204/">204</a><span class="page-number current">205</span><a class="page-number" href="/page/206/">206</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/206/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/204/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/204/">204</a><span class="page-number current">205</span><a class="page-number" href="/page/206/">206</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/206/">&gt;</a>
   </nav>
 
 
@@ -537,7 +584,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">309</span>
+                <span class="site-state-item-count">310</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

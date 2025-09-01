@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/31/choice/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/04/02/s-expression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/31/choice/" itemprop="url">可替换的设计策略</a></h1>
+                <a class="post-title-link" href="/2015/04/02/s-expression/" itemprop="url">理解S表达式</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-31T00:00:00+08:00">
-                2015-03-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-04-02T00:00:00+08:00">
+                2015-04-02
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Lisp/" itemprop="url" rel="index">
+                    <span itemprop="name">Lisp</span>
                   </a>
                 </span>
 
@@ -347,120 +347,130 @@
       
         
           
-            <p>人生就像一棵决策树，</p>
-<p>每一次选择，走向了不同的子节点。</p>
-<p>我们不能后退，也没办法消除历史的影响。</p>
+            <p>S表达式，是Lisp语言的特色，</p>
+<p>让我们有能力对程序和数据进行统一编码。</p>
 <p><br/></p>
-<p>因为时间是单向的，</p>
-<p>没有办法更改历史，</p>
-<p>只能以今天为基础继续向前。</p>
+<p>这种一致性，</p>
+<p>使得我们可以和处理数据一样处理Lisp代码，</p>
+<p>正因为这样，才可以建立其他语言无法比拟的宏系统（macro system）。</p>
 <p><br/></p>
-<p>对于软件，我们也倾向于持有相同的观点。</p>
-<p>认为软件的维护成本在后期是不可能缩减的，</p>
-<p>不得不背负以前失误的包袱。</p>
+<p>S表达式真是天才之作呀。</p>
+<p>它是凭空想出来的吗？</p>
 <p><br/></p>
-<p>然而，幸运的是，</p>
-<p>软件其实并非如此。</p>
+<p>不是的。</p>
+<p>S表达式是<strong>二叉树的一种线性编码</strong>。</p>
 <p><br/></p>
-<p>软件问题，大多数都是设计的问题。</p>
+<h3 id="二叉树">二叉树</h3>
+<p>我们知道二叉树是很重要的数据结构，</p>
+<p>可以用来存储结构化的数据。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">        *</span><br><span class="line">     &#x2F;     \</span><br><span class="line">   *         *</span><br><span class="line"> &#x2F;   \     &#x2F;   \</span><br><span class="line">a     b   c     d</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h2 id="抽象和具体"><strong>抽象和具体</strong></h2>
-<p>和人生不同，</p>
-<p>软件功能的实现，</p>
-<p>限制条件相对宽松。</p>
+<p>二叉树的每个节点，</p>
+<p>或者是叶节点，或者有2个子节点，</p>
+<p>叶节点可以用来存储数据。</p>
 <p><br/></p>
-<p>毕业生，决定考研还是就业,</p>
-<p>只能选一个。</p>
-<p>但是，软件可以选择DoWork。</p>
+<p>可是，这样表示二叉树，太麻烦了。</p>
+<p>不容易书写。</p>
 <p><br/></p>
-<p>越抽象，适用范围就越广。</p>
-<p>越具体，就越容易被证明是个错误。</p>
+<p>于是，先哲们发明了<strong>点对表示法</strong>，</p>
+<p><code>((a . b) . (c . d))</code>可以表示上面的二叉树，</p>
+<p>其中“<code>.</code>”表示节点。</p>
 <p><br/></p>
-<p>好的设计实践，</p>
-<p>是把抽象和具体分开，</p>
-<p>抽象的每一种实现都是可替换的。</p>
+<p><strong>S表达式</strong>是点对表示法的形式定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原子 -&gt; 数字 | 符号</span><br><span class="line">S表达式 -&gt; 原子 | (S表达式 . S表达式)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>随着软件的发展，</p>
-<p>后期的维护成本才可能是常量复杂度的，</p>
-<p>因为每一个历史性的错误实现，都是可更改的。</p>
+<p>所以，S表达式或者是原子，</p>
+<p>或者是递归的由其他S表达式构成的点对。</p>
 <p><br/></p>
-<h2 id="平凡的模块"><strong>平凡的模块</strong></h2>
-<p>武功高强的人们，</p>
-<p>不会频出诡异的绝招，</p>
-<p>招数越平凡，内耗就越小。</p>
+<h3 id="s表达式的化简">S表达式的化简</h3>
+<p>实际使用时，</p>
+<p>书写S表达式，还要同时写很多点号“<code>.</code>”，</p>
+<p>这也是一件麻烦的事情。</p>
 <p><br/></p>
-<p>向外提供抽象接口的人，是在玩小伎俩，</p>
-<p>不要将具体的实现方法托付给别人，</p>
-<p>当问题出现时，让别人更改实现方案，是不可能的。</p>
+<p>因此，Lisp语言定义了一套S表达式的<strong>化简规则</strong>。</p>
+<p>（1）如果一个点号右邻一个左括号，那么就可以将这个点号，左括号以及匹配的右括号，一起去掉。</p>
+<p>例如：<code>(a . (b . c)) &lt;=&gt; (a b . c)</code></p>
 <p><br/></p>
-<p>我们应该提供具体的功能，</p>
-<p>功能内部，封装了我们自己的抽象和实现。</p>
+<p>（2）如果一个点号右邻<strong>原子nil</strong>，那么就可以把这个点号和原子<code>nil</code>，一起去掉。</p>
+<p>例如：<code>(a . (b . nil)) &lt;=&gt; (a b . nil) &lt;=&gt; (a b)</code></p>
 <p><br/></p>
-<p>其中，抽象是对需求的提取，用来规范模块的外在表现，</p>
-<p>实现是当前采用的解决方案。</p>
+<p><strong>列表</strong>是一种特殊类型的S表达式，</p>
+<p>如果一个S表达式不是原子，</p>
+<p>而且经过化简可以把点号都去掉，</p>
+<p>就说这个S表达式是一个列表。</p>
 <p><br/></p>
-<p>随着时间的发展，当模块不再适用时，</p>
-<p>我们就能在外在表现不变的前提下，</p>
-<p>更改解决方案了。</p>
+<p>例如：<code>(a . (b . (c . nil))) &lt;=&gt; (a b c)</code></p>
+<p>是一个列表。</p>
 <p><br/></p>
-<p>不是只提供抽象接口，</p>
-<p>而是把具体功能封装在抽象的接口下，</p>
-<p>一起提供。</p>
+<p>为了使用方便，还允许有<strong>空表</strong>，</p>
+<p>而且还定义空表等价于原子<code>nil</code>。</p>
+<p><code>() &lt;=&gt; nil</code></p>
 <p><br/></p>
-<h2 id="层次与后路"><strong>层次与后路</strong></h2>
-<p>代码量增加，软件会越来越复杂，</p>
-<p>难以定位问题，增加功能，</p>
-<p>这其实是没有建立合理的代码层次。</p>
+<p>例如：<code>(a . (b . ())) &lt;=&gt; (a . (b . nil)) &lt;=&gt; (a b)</code></p>
 <p><br/></p>
-<p>在不同深度的层次上切换。</p>
-<p>可以让我们总是面对简单可控的问题。</p>
+<p>值得注意的是，</p>
+<p>空表的记法，使<code>nil</code>身兼三职，</p>
+<p>（1）<code>nil</code>表示一个原子</p>
+<p>（2）<code>nil</code>表示空表</p>
+<p>（3）<code>nil</code>表示逻辑值“假”</p>
+<p><code>nil</code>成为了Lisp语言中唯一的<strong>既是原子又是列表</strong>的表达式。</p>
 <p><br/></p>
-<p>一千行的函数太复杂了，</p>
-<p>那是因为代码本来不该写在一个函数中。</p>
+<h3 id="常用函数paircons和car">常用函数pair?，cons和car</h3>
+<p>Scheme语言是Lisp的一种方言，</p>
+<p>它没有<code>nil</code>的概念，只有空表<code>()</code>。</p>
 <p><br/></p>
-<p>一万行代码太复杂了，</p>
-<p>那是因为它本来不该写到一个文件中。</p>
+<p>在介绍常用函数之前，</p>
+<p>我们需要知道，Scheme语言的<a href="http://en.wikipedia.org/wiki/Evaluation_strategy" target="_blank" rel="noopener">求值策略</a>（evaluation strategy）。</p>
 <p><br/></p>
-<p>一百个文件太复杂了，</p>
-<p>那是因为它们本来不该在一个文件夹下。</p>
+<p>Scheme语言中的函数是按值调用的（call by value），</p>
+<p>在求值函数体之前，实参会先被求值。</p>
 <p><br/></p>
-<p>划分层次，才能留有后路。</p>
-<p>每天关闭电脑前，检查自己的后路，是个好习惯。</p>
-<p>可以让我们再打开电脑时，问题还是像今天这样简单。</p>
+<p>因此，<code>(display (* 2 3))</code>中，</p>
+<p><code>(* 2 3)</code>并不会被看成是具有3个元素的列表，而是看成乘法函数调用，</p>
+<p>在<code>display</code>调用之前，会先求值<code>(* 2 3) =&gt; 6</code>，结果是显示<code>6</code>。</p>
 <p><br/></p>
-<h2 id="唯一性和可选性"><strong>唯一性和可选性</strong></h2>
-<p>当我们遇到紧急问题时，</p>
-<p>通常首先会想到一个权宜之计。</p>
+<p>假如，我们一定要把<code>(* 2 3)</code>看成是列表呢？</p>
+<p>就需要引用它。<code>(display '(* 2 3))</code></p>
+<p>此时，<code>'(* 2 3)</code>求值为列表<code>(* 2 3)</code>。</p>
+<p>结果是显示<code>(* 2 3)</code>。</p>
 <p><br/></p>
-<p>但是，从长久来看，</p>
-<p>不得不做的事情总是会带来麻烦，</p>
-<p>身不由己的决定，也是错误的根源。</p>
+<p>我们来看<code>pair?</code>函数，</p>
+<p>它只有在参数是点对的情况下返回<code>#t</code>，其余都返回<code>#f</code>。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(pair? &#39;(a . c)) &#x3D;&gt; #t</span><br><span class="line">(pair? &#39;(a b c)) &#x3D;&gt; #t</span><br><span class="line">(pair? &#39;()) &#x3D;&gt; #f</span><br><span class="line">(pair? &#39;abc) &#x3D;&gt; #f</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>我们应该想尽办法，推迟决定。</p>
-<p>直到我们有两个方案，可以从中选择。</p>
-<p>可选性意味着可控的未来。</p>
+<p>值得注意的是，</p>
+<p>（1）空表不是点对。</p>
+<p>因为它是原子<code>nil</code>，虽然Scheme语言中没有内置原子<code>nil</code>。</p>
+<p>可以通过另外一个函数看出来，<code>atom?</code>用来判断参数是否原子。</p>
+<p><code>(atom? '()) =&gt; #t</code></p>
 <p><br/></p>
-<p>软件的发展，像棋局一样，</p>
-<p>必须仔细斟酌局势的变化，</p>
-<p>才能避免因小失大。</p>
+<p>（2）<strong>列表</strong>是点对的简写。</p>
+<p><code>(a b c) &lt;=&gt; (a . (b . (c . ())))</code></p>
 <p><br/></p>
-<p>在客观条件限制的范围内，</p>
-<p>有经验的人做出选择，</p>
-<p>新手慌张决定，</p>
-<p>在尽可能多的选择中，才能酝酿出好的设计。</p>
+<p>我们再来看<code>cons</code>函数，</p>
+<p><code>cons</code>接受两个参数，将他们拼成一个点对，</p>
+<p>结果是<strong>化简后的</strong>S表达式。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(cons &#39;a &#39;b) &#x3D;&gt; (a . b)</span><br><span class="line">(cons &#39;a &#39;(b)) &#x3D;&gt; (a . (b)) &lt;&#x3D;&gt; (a b)</span><br><span class="line">(cons &#39;(a) &#39;(b)) &#x3D;&gt; ((a) . (b)) &lt;&#x3D;&gt; ((a) b)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>软件不同于人生之处在于，</p>
-<p>软件可以设计，还可以更改，</p>
-<p>只是成本有别。</p>
+<p>最后来看一下<code>car</code>和<code>cdr</code>函数，</p>
+<p>它们接受一个点对作为参数，</p>
+<p><code>car</code>获取点对的左元素，<code>cdr</code>获取右元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(car &#39;(a . b)) &#x3D;&gt; a</span><br><span class="line">(cdr &#39;(a . b)) &#x3D;&gt; b</span><br><span class="line">(car &#39;(a b)) &lt;&#x3D;&gt; (car &#39;(a . (b))) &#x3D;&gt; a</span><br><span class="line">(cdr &#39;(a b)) &lt;&#x3D;&gt; (car &#39;(a . (b))) &#x3D;&gt; (b)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>好的功能模块，在于内部的良好设计。</p>
-<p>虽然外在表现没有什么不同。</p>
+<h3 id="结语">结语</h3>
+<p>刚学Lisp语言的时候，</p>
+<p>查看了很多书，对S表达式的解释，总是不够清楚。</p>
 <p><br/></p>
-<p>好的设计和代码组织方式，</p>
-<p>威力连绵不绝。</p>
+<p>无意间找到了<strong>马希文</strong>老师的《LISP语言》，</p>
+<p>书中用中国人的方式写了对Lisp语言的理解，</p>
+<p>言简意赅。</p>
 <p><br/></p>
-<p>多一种选择，多一种可能。</p>
+<p>让我认识到了，</p>
+<p>真正精髓的知识，都一定是简单的，</p>
+<p>难以理解的东西，可能作者也没有搞明白。</p>
 
           
         
@@ -499,7 +509,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/282/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/282/">282</a><span class="page-number current">283</span><a class="page-number" href="/page/284/">284</a><span class="space">&hellip;</span><a class="page-number" href="/page/309/">309</a><a class="extend next" rel="next" href="/page/284/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/282/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/282/">282</a><span class="page-number current">283</span><a class="page-number" href="/page/284/">284</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/284/">&gt;</a>
   </nav>
 
 
@@ -545,7 +555,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">309</span>
+                <span class="site-state-item-count">310</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
