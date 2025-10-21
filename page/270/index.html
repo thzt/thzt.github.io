@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/07/04/valley/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/07/12/lazy-evaluation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/07/04/valley/" itemprop="url">吸星大法</a></h1>
+                <a class="post-title-link" href="/2015/07/12/lazy-evaluation/" itemprop="url">惰性求值</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-04T00:00:00+08:00">
-                2015-07-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-12T00:00:00+08:00">
+                2015-07-12
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index">
+                    <span itemprop="name">Haskell</span>
                   </a>
                 </span>
 
@@ -347,170 +347,213 @@
       
         
           
-            <p>文学作品，</p>
-<p>有时候，并非字里行间所写的含义。</p>
-<p><strong>不同的阅读者，会有不同的体会</strong>。</p>
+            <p><strong>据说</strong>Haskell是一种惰性求值的语言，</p>
+<p>表达式的求值策略是按需求值，即call-by-need。</p>
 <p><br/></p>
-<p>阅读也当如此，</p>
-<p>可以看做是一种促进自己思考的过程。</p>
+<p>但是到底什么才是按需的，</p>
+<p>求值到什么程度。</p>
+<p>刚开始学习的时候，总是很模糊。</p>
 <p><br/></p>
-<p>金庸《笑傲江湖》一书中，</p>
-<p>提到了“吸星大法”，</p>
-<p>可以吸取其他武林高手的内力，为己所用。</p>
+<p>随着学习的深入，才慢慢了解，</p>
+<p>Haskell规范中，并没有涉及惰性求值，</p>
+<p>只说它是一种<strong>non-strict language</strong>，</p>
+<p>求值策略取决于具体的实现。</p>
 <p><br/></p>
-<p>但是，最终也难免受混杂内力的反噬之苦。</p>
+<p>这是怎么回事呢？</p>
+<p>又要从头开始了。</p>
 <p><br/></p>
-<p>如果，我们把内力比作别人的经验，</p>
-<p>吸取内力，看做向别人学习，</p>
-<p>反噬就正好类似于不同说法之间的矛盾了。</p>
+<h2 id="non-strictness"><strong>non-strictness</strong></h2>
+<p>non-strict function，是<strong>指称语义</strong>中的概念，</p>
+<p>指称语义将每一段代码，与一个数学对象相对应，</p>
+<p>借此来研究程序的语义。</p>
 <p><br/></p>
-<p><strong>怎样向别人学习</strong>，</p>
-<p>这正是我们要思考的。</p>
+<p>一开始我们认为，程序中的函数，</p>
+<p>会有直接的数学函数与之对应。</p>
 <p><br/></p>
-<p><strong>怎样避免思维混乱</strong>，</p>
-<p>这正是我们该反思的。</p>
+<p>其实不然，</p>
+<p>因为，程序中的很多函数，在处理某些参数的时候，</p>
+<p>行为是“未定义的”，得不到有用的信息，</p>
+<p>这样的数学函数称为<strong>部分函数</strong>（partial function）。</p>
 <p><br/></p>
-<h2 id="空箱和深谷"><strong>空箱和深谷</strong></h2>
-<p>吸星大法的心法，有这样一句：</p>
-<p>当令丹田<strong>常如空箱，恒似深谷</strong>，</p>
-<p>空箱可贮物，深谷可容水。</p>
-<p>若有内息，散之于任脉诸穴。</p>
+<p>这里尽量<a href="http://www.vex.net/~trebla/haskell/lazy.xhtml" target="_blank" rel="noopener">不要提及“不能终止的”</a>，</p>
+<p>因为指称语义并不考虑求值过程。</p>
 <p><br/></p>
-<p>这样的说法，就是要<strong>保持谦虚</strong>，</p>
-<p>只有表示不足，</p>
-<p>高手才肯将经验传授给我们。</p>
+<p>例如：</p>
+<p>partialFn :: Integer -&gt; Integer</p>
+<p>partialFn 0 = 0</p>
+<p>partialFn n = test $ n + 1</p>
 <p><br/></p>
-<p>而一旦学到些什么，</p>
-<p>也不要自满，</p>
-<p>仍然保持谦虚的态度。</p>
+<p>可以看到partial只在参数为0的时候是有意义的。</p>
+<p>所以，与程序中的函数对应的，</p>
+<p>就不是普通意义上的数学函数了，</p>
+<p>还需要<strong>扩充定义域和值域</strong>。</p>
 <p><br/></p>
-<p>这件事看似简单，实则太难，</p>
-<p><strong>我们期待的高手，可能永远都没有出现</strong>。</p>
+<p>我们为每个集合增加一个新的值“<strong>⊥</strong>”，称为bottom，</p>
+<p>用来表示“未定义”。</p>
+<p>函数f(n)={0,n=0;⊥,n≠0}，就能表示partialFn了。</p>
 <p><br/></p>
-<p>这是因为自视太高，</p>
-<p>把所有遇到的人，都当做普通人，</p>
-<p>没有发现他们的可学之处。</p>
+<p>Haskell用undefined来表示⊥，</p>
+<p>undefined也确实包含在所有类型中，</p>
+<p>&gt; :t undefined</p>
+<p>&gt; undefined :: a</p>
 <p><br/></p>
-<p>而实际上，我们每遇到一个人，</p>
-<p>都应该<strong>主动降低自己的水平</strong>，</p>
-<p>让他们有东西可以传授。</p>
+<p>通常情况下，</p>
+<p>如果一个数学函数的参数是⊥，则结果就是⊥。</p>
+<p>这样的函数称为<strong>strict function</strong>。</p>
 <p><br/></p>
-<p>别人是否高于我们，并不重要，</p>
-<p>我们要学会示弱。</p>
+<p>而Haskell中函数则不同。</p>
+<p>例如：</p>
+<p>nonStrictFn :: Integer -&gt; Integer</p>
+<p>nonStrictFn 0 _ = 0</p>
 <p><br/></p>
-<p>这就是“空箱”和“深谷”给我们的启发。</p>
+<p>nonStrictFn 0 undefined &gt; 0</p>
 <p><br/></p>
-<h2 id="散之于任脉诸穴"><strong>散之于任脉诸穴</strong></h2>
-<p>正统的内功心法，</p>
-<p>讲究把真气储存在丹田中。</p>
+<p>函数nonStrictFn在参数包含undefined的时候，</p>
+<p>并没有得到undefined，而是得到了一个明确的值0，</p>
+<p>它对应的数学函数是<strong>non-strict function</strong>。</p>
 <p><br/></p>
-<p>但是吸星大法，却要将吸取的内力，</p>
-<p>散于任脉诸穴。</p>
+<p>函数的指称语义是non-strict function，</p>
+<p>这样的语言，称为non-strict language。</p>
 <p><br/></p>
-<p>这是为什么呢？</p>
+<h2 id="lazy-evaluation"><strong>lazy evaluation</strong></h2>
+<p>求值，是<strong>操作语义</strong>中的概念。</p>
+<p><strong>能实现non-strict指称语义的求值策略并不是唯一的</strong>。</p>
 <p><br/></p>
-<p>其实，这是不得已为之的，</p>
-<p>因为，<strong>丹田容量毕竟有限</strong>，</p>
-<p>每天吸取大量的真气，是无法容纳的。</p>
+<p>GHC是Haskell目前最流行的编译器，</p>
+<p>它使用了<strong>惰性求值</strong>（lazy evaluation）。</p>
 <p><br/></p>
-<p>所以要把它们散开，</p>
-<p>才能储存起来。</p>
+<p>例如：</p>
+<p>x = 1</p>
+<p>y = 2</p>
+<p>z = (x, y)</p>
 <p><br/></p>
-<p>这其实就是告诉我们，</p>
-<p>不要只将别人的建议记在心中，</p>
-<p><strong>而是要以书面形式记录下来</strong>。</p>
+<p>&gt; :sprint x</p>
+<p>&gt; x = _</p>
+<p>&gt; :sprint y</p>
+<p>&gt; y = _</p>
+<p>&gt; :sprint z</p>
+<p>&gt; y = _</p>
 <p><br/></p>
-<p>以后，用到之处，</p>
-<p>我们会<strong>找到</strong>自己当时的理解，</p>
-<p>记忆的容量是有限的。</p>
+<p>这里“:sprint”只是打印表达式，而不会求值它。</p>
+<p>“_”用来表示“未求值的”，或称为一个“<strong>thunk</strong>”。</p>
 <p><br/></p>
-<p>这样做，</p>
-<p>可以最大化我们的收获，</p>
-<p>不会忘掉任何有用的知识。</p>
+<p>thunk在使用的时候，<strong>并不一定被完全求值</strong>。</p>
+<p>&gt; let first = (u, _) = u</p>
+<p>&gt; first z</p>
+<p>&gt; 1</p>
 <p><br/></p>
-<p>这就是“散之于任脉诸穴”给我们的启发。</p>
+<p>&gt; :sprint x</p>
+<p>&gt; x = 1</p>
+<p>&gt; :sprint y</p>
+<p>&gt; y = _</p>
+<p>&gt; :sprint z</p>
+<p>&gt; y = (1, _)</p>
 <p><br/></p>
-<h2 id="反噬"><strong>反噬</strong></h2>
-<p>吸星大法会因为体内的异种真气，</p>
-<p>反噬练功者，</p>
-<p>这些真气<strong>彼此之间有矛盾之处</strong>。</p>
+<p>first函数，只求值了第一个参数，</p>
+<p>第二个参数，仍然是未求值的。</p>
 <p><br/></p>
-<p>这也是可以理解的，</p>
-<p>类比学习，</p>
-<p>不同人传授给我们的经验，</p>
-<p>可能是相冲突的。</p>
+<p>实际上，<strong>thunk的求值是分层次的</strong>，</p>
+<p>为了尽量少的求值，每一次只将表达式求值为<strong>WHNF</strong>（weak head normal form），</p>
+<p>其中的子表达式，仍然是未求值的thunk。</p>
 <p><br/></p>
-<p>甚至还有表面上对我们好，</p>
-<p>来达到自己目的的。</p>
+<p>如果不能满足需要，</p>
+<p>就会继续将对应的sub-thunk，再求值为WHNF。</p>
 <p><br/></p>
-<p>这是当经验累积到一定程度，</p>
-<p>必然会遭遇的。</p>
+<h2 id="weak-head-normal-form"><strong>Weak head normal form</strong></h2>
+<p>一个WHNF（weak head normal form），</p>
+<p>是表达式求值的一种结果形式。</p>
 <p><br/></p>
-<p>我们该如何分辨呢，</p>
-<p>到底应该选择哪条道路呢？</p>
+<p>WHNF，只将表达式求值到，</p>
+<p>最外层的<strong>值构造器</strong>或者<strong>lambda抽象</strong>为止。</p>
 <p><br/></p>
-<p>还要看《笑傲江湖》中的令狐冲是怎样破解的。</p>
+<p>例如：以下表达式是WHNF，</p>
+<p>(1 + 1, 2 + 2)，最外层是一个值构造器，(,)</p>
+<p>-&gt; 2 + 2，最外层是一个lambda抽象，</p>
+<p>'h' : ("e" ++ "llo")，最外层是一个值构造器，(:)</p>
 <p><br/></p>
-<p>令狐冲因为学了吸星大法，</p>
-<p>受到反噬，</p>
-<p>最终得到少林方丈传授《<strong>易筋经</strong>》所救。</p>
+<p>以下表达式不是WHNF：</p>
+<p>1 + 2，最外层是加法函数调用，(+)</p>
+<p>(-&gt; x + 1) 2，最外层是一个匿名函数调用</p>
+<p>"he" ++ "llo"，最外层是列表的连接函数调用，(++)</p>
 <p><br/></p>
-<p>不管这是否一个真实的故事，</p>
-<p><strong>我们且看能挖掘的到什么有用的感想</strong>。</p>
+<p>因此，</p>
+<p>表达式(1 + 1, 2 + 2)会按需首先求值为(thunk1,thunk2),</p>
+<p>如果还需要thunk1的值，thunk1会求值为2。</p>
 <p><br/></p>
-<h2 id="洗髓易筋"><strong>洗髓易筋</strong></h2>
-<p>《易筋经》所言，</p>
-<p>登正果者，其初基有二：</p>
-<p>一曰清虚，一曰脱换。</p>
-<p>能清虚则无障，能脱换则无碍。</p>
-<p>无碍无障，始可入定出定矣。</p>
-<p>知乎此，则进道有其基矣。</p>
-<p>所云清虚者，洗髓是也;</p>
-<p>脱换者，易筋是也。</p>
+<p>例如：</p>
+<p>testFn1 _ = 1</p>
+<p>testFn2 (<em>, </em>) = 2</p>
+<p>tettFn3 (u, _) = 3</p>
+<p>这3个函数会导致表达式(1 + 1, 2 + 2)进行<strong>不同层次</strong>的求值。</p>
 <p><br/></p>
-<p>其洗髓之说，谓人之生感于情欲，</p>
-<p>一落有形之身，而脏腑肢骸悉为滓秽所染，</p>
-<p>必洗涤净尽，无一毫之瑕障，</p>
-<p>方可步超凡入圣之门，不由此则进道无基。</p>
-<p><strong>所言洗髓者，欲清其内</strong>；</p>
-<p><strong>易筋者，欲坚其外</strong>。</p>
-<p>如果能内清静、外坚固，</p>
-<p>登寿域在反掌之间耳，何患无成?</p>
+<h2 id="seq"><strong>seq</strong></h2>
+<p>为了控制求值程度，</p>
+<p>GHC内置了seq函数。</p>
 <p><br/></p>
-<p>我们看到，易筋经讲究“<strong>清内坚外</strong>”，</p>
-<p>这是非常值得学习的。</p>
+<p>&gt; :t seq</p>
+<p>&gt; seq :: a -&gt; b -&gt; b</p>
 <p><br/></p>
-<p>我们，</p>
-<p>之所以受到人们的说辞所累，</p>
-<p>是因为我们的<strong>内心不够清净</strong>。</p>
-<p>之所以容易改变自己的决策，</p>
-<p>是因为我们的<strong>行动不够坚定</strong>。</p>
+<p>它表示，<strong>在结果求值为WHNF之前</strong>，</p>
+<p><strong>会先将seq的第一个参数求值为WHNF</strong>。</p>
 <p><br/></p>
-<p>因此，我们就应当在学习别人经验的同时，</p>
-<p>形成<strong>自己的价值观</strong>，</p>
-<p>锻炼<strong>执行能力</strong>。</p>
+<p>例如：</p>
+<p>u = 1</p>
+<p>v = (u, u)</p>
 <p><br/></p>
-<p>只有这样，</p>
-<p>异种真气才不会反噬我们，</p>
-<p>反而成了我们的兵器库。</p>
+<p>x = 1</p>
+<p>y = seq x (x, x)</p>
+<p><br/></p>
+<p>&gt; :sprint u</p>
+<p>&gt; u = _</p>
+<p>&gt; :sprint v</p>
+<p>&gt; v = _</p>
+<p><br/></p>
+<p>&gt; :sprint x</p>
+<p>&gt; x = _</p>
+<p>&gt; :sprint y</p>
+<p>&gt; y = _</p>
+<p><br/></p>
+<p>我们定义一个函数，用来把参数求值WHNF，</p>
+<p>&gt; let whnf (<em>, </em>) = ()</p>
+<p><br/></p>
+<p>则，</p>
+<p>&gt; whnf v</p>
+<p>&gt; ()</p>
+<p>&gt; whnf y</p>
+<p>&gt; ()</p>
+<p><br/></p>
+<p>&gt; :sprint u</p>
+<p>&gt; u = _</p>
+<p>&gt; :sprint v</p>
+<p>&gt; v = (<em>, </em>)</p>
+<p><br/></p>
+<p>&gt; :sprint x</p>
+<p>&gt; x = 1</p>
+<p>&gt; :sprint y</p>
+<p>&gt; y = (1, 1)</p>
+<p><br/></p>
+<p>使用seq控制求值深度，</p>
+<p>可以防止创建过多的thunk。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>怎样形成自己的价值观呢？</p>
-<p>怎样锻炼自己的执行能力呢？</p>
+<p>当我们在REPL中输入一个表达式时，</p>
+<p>实际上调用了print函数，</p>
+<p>它会对表达式完全求值。</p>
 <p><br/></p>
-<p>我的办法是<strong>多总结，多记录</strong>，</p>
-<p>只有说出来的，写出来的，</p>
-<p>才是思想的真实反映。</p>
+<p>因此，表达式求值的层次问题，</p>
+<p><strong>是很难从REPL中看出来的</strong>。</p>
 <p><br/></p>
-<p>从语言的华丽程度上面，</p>
-<p>就能看出一个人是否认真的活着。</p>
+<p>另一方面，WHNF将求值过程分成了一系列节点，</p>
+<p>能清晰的刻画求值程度，</p>
+<p>这可能是我们学习Haskell入门的起点吧。</p>
 <p><br/></p>
-<p>当然，</p>
-<p>不学吸星大法和易筋经的人，</p>
-<p>也会活的很好，</p>
-<p>这是当然。</p>
-<p><br/></p>
-<p><strong>每个人的人生都很精彩</strong>。</p>
+<p>参考：</p>
+<p><a href="https://en.wikibooks.org/wiki/Haskell/Denotational_semantics" target="_blank" rel="noopener">Haskell/Denotational semantics</a></p>
+<p><a href="https://en.wikibooks.org/wiki/Haskell/Laziness" target="_blank" rel="noopener">Haskell/Laziness</a></p>
+<p><a href="http://stackoverflow.com/questions/6872898/haskell-what-is-weak-head-normal-form" target="_blank" rel="noopener">Haskell: What is Weak Head Normal Form?</a></p>
+<p><a href="http://book.douban.com/subject/24294415/" target="_blank" rel="noopener">Parallel and Concurrent Programming in Haskell</a></p>
+<p><a href="https://hackhands.com/lazy-evaluation-works-haskell/" target="_blank" rel="noopener">How Lazy Evaluation Works in Haskell</a></p>
+<p><a href="http://www.vex.net/~trebla/haskell/lazy.xhtml" target="_blank" rel="noopener">Lazy Evaluation of Haskell</a></p>
 
           
         
@@ -549,7 +592,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/269/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/269/">269</a><span class="page-number current">270</span><a class="page-number" href="/page/271/">271</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/271/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/269/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/269/">269</a><span class="page-number current">270</span><a class="page-number" href="/page/271/">271</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/271/">&gt;</a>
   </nav>
 
 
@@ -595,7 +638,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">310</span>
+                <span class="site-state-item-count">311</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

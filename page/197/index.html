@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/05/24/pumping-lemma/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/06/23/code-management/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/24/pumping-lemma/" itemprop="url">Pumping Lemma</a></h1>
+                <a class="post-title-link" href="/2017/06/23/code-management/" itemprop="url">代码的组织和管理方式</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T00:00:00+08:00">
-                2017-05-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-23T00:00:00+08:00">
+                2017-06-23
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,128 +347,139 @@
       
         
           
-            <h2 id="regular-languages">1. Regular Languages</h2>
-<h3 id="definition-of-a-dfa">1.1 Definition of a DFA</h3>
-<p>A <strong>deterministic finite automaton</strong> consist of:</p>
-<ol type="1">
-<li><p>A finite set of <strong>states</strong>, often denoted <span data-katex="Q"></span>.</p></li>
-<li><p>A finite set of <strong>input symbols</strong>, often denoted <span data-katex="\Sigma"></span>.</p></li>
-<li><p>A <strong>transition function</strong> that takes as arguments a state and an input symbol and return a state. The transition function will commonly be denoted <span data-katex="\delta"></span>. In our informal graph representation of automata, <span data-katex="\delta"></span> was represented by arcs between states and the labels on the arcs. If <span data-katex="q"></span> is a state, and <span data-katex="a"></span> is an input symbol, then <span data-katex="\delta(q,a)"></span> is that state <span data-katex="p"></span> such that there is an arc labeled <span data-katex="a"></span> from <span data-katex="q"></span> to <span data-katex="p"></span>.</p></li>
-<li><p>A <strong>start state</strong>, one of the states in <span data-katex="Q"></span>.</p></li>
-<li><p>A set of <strong>final</strong> or <strong>accepting</strong> states <span data-katex="F"></span>. The set <span data-katex="F"></span> is subset of <span data-katex="Q"></span>.</p></li>
-</ol>
+            <p>我们先从一个简单的问题开始。</p>
 <p><br/ ></p>
-<p>A deterministic finite automaton will often be referred to by its acronym: DFA. The most succinct representation of a DFA is a listing of the five components above. In proofs we often talk about a DFA in "five-tuple" notation:</p>
-<p><span data-katex="A=(Q,\Sigma ,\delta ,q_0,F)"></span></p>
-<p>where <span data-katex="A"></span> is the name of the DFA, <span data-katex="Q"></span> is its set of states, <span data-katex="\Sigma"></span> its input symbols, <span data-katex="\delta"></span> its transition function, <span data-katex="q_0"></span> its start state, and <span data-katex="F"></span> its set of accepting states.</p>
+<p>为什么我们要把代码提取到一个函数中呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const f &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>有的人说是为了<strong>避免重复</strong>。</p>
+<p>代码有重复，就意味着代码中有些部分是相同一致的，</p>
+<p>我们就不得不手工维护这种一致性，重复的代码必须被同时修改或者删除。</p>
+<p>如果写到一个函数中，那么只需修改一处即可。</p>
 <p><br/ ></p>
-<h3 id="extended-transition-function">1.2 Extended transition function</h3>
-<p>Now we need to make the notion of the language of a DFA precise. To do so, we define an <strong>extended transition function</strong> that describes what happens when we start in any state and follow any sequence of inputs. If <span data-katex="\delta"></span> is our transition function, then the extended transition function constructed from <span data-katex="\delta"></span> will be called <span data-katex="\hat{\delta}"></span>. The extended transition function is a function that takes a state <span data-katex="q"></span> and a string <span data-katex="w"></span> and returns a state <span data-katex="p"></span> -- the state that the automaton reaches when starting in state <span data-katex="q"></span> and processing the sequence of inputs <span data-katex="w"></span>. We define <span data-katex="\hat{\delta}"></span> by induction on the length of the input string, as follows:</p>
+<p>有的人说是为了<strong>可复用</strong>。</p>
+<p>当前开发工作中的某些功能，未来可能还会被用到，</p>
+<p>所以，为了避免重复劳动，将这些功能提取出来，为了以后可以直接使用。</p>
 <p><br/ ></p>
-<p><strong>Basic:</strong> <span data-katex="\hat{\delta}(q,\epsilon)"></span>. That is, if we are in state <span data-katex="q"></span> and read no inputs, then we are still in state <span data-katex="q"></span>.</p>
+<p>然而，将重复代码提取到一个地方进行引用，会建立更多的<strong>依赖</strong>，</p>
+<p>我们也不能简单的修改一个被多处使用的函数，函数的某些调用者可能并不需要这种变更。</p>
 <p><br/ ></p>
-<p><strong>Induction:</strong> Suppose <span data-katex="w"></span> is a string of form <span data-katex="xa"></span>; that is, <span data-katex="a"></span> is the last symbol of <span data-katex="w"></span>, and <span data-katex="x"></span> is the string consisting of all but the last symbol. For example, <span data-katex="w=1101"></span> is broken into <span data-katex="x=110"></span> and <span data-katex="a=1"></span>. Then</p>
-<p><span data-katex="\hat{\delta}(q,w)=\delta(\hat{\delta}(q,x),a)"></span></p>
+<p>此外，代码复用也未必会按照我们的计划发生，</p>
+<p>为了满足新项目的需要，我们常常不得不对它再进行调整，</p>
+<p>接着，老项目也得进行相应的修改，</p>
+<p>过度设计得不偿失。</p>
 <p><br/ ></p>
-<h3 id="the-pumping-lemma-for-regular-languages">1.3 The Pumping Lemma for Regular Languages</h3>
-<p>Let <span data-katex="L"></span> be a regular language. Then there exists a constants <span data-katex="n"></span> (which depends on <span data-katex="L"></span>) such that for every string <span data-katex="w"></span> in <span data-katex="L"></span> such that <span data-katex="|w|\geqslant n"></span>, we can break <span data-katex="w"></span> into three strings, <span data-katex="w=xyz"></span>, such that:</p>
-<ol type="1">
-<li><p><span data-katex="y\neq \epsilon"></span></p></li>
-<li><p><span data-katex="|xy|\leqslant n"></span></p></li>
-<li><p>For all <span data-katex="k\geqslant 0"></span>, the string <span data-katex="xy^kz"></span> is also in <span data-katex="L"></span>.</p></li>
-</ol>
+<p>因此，只考虑消除重复和可复用性，并不能让代码更好。</p>
+<p>我们还要进行其他几个方面的考虑。</p>
 <p><br/ ></p>
-<p>That is, we can always find a nonempty string <span data-katex="y"></span> not too far from the beginning of <span data-katex="w"></span> that can be "pumped"; that is, repeating <span data-katex="y"></span> any number of times, or deleting it (the case <span data-katex="k=0"></span>), keeps the resulting string in the language <span data-katex="L"></span>.</p>
+<h3 id="理解复杂性">理解复杂性</h3>
+<p>可能我们已经意识到了，</p>
+<p><strong>写代码最难的地方，并不是要实现功能，</strong></p>
+<p><strong>而是要思考如何组织代码，如何管理它们。</strong></p>
 <p><br/ ></p>
-<p><strong>Proof:</strong> Suppose <span data-katex="L"></span> is regular. Then <span data-katex="L=L(A)"></span> for some DFA <span data-katex="A"></span>. Suppose <span data-katex="A"></span> has <span data-katex="n"></span> states. Now, consider any string <span data-katex="w"></span> of length <span data-katex="n"></span> or more, say <span data-katex="w=a_1a_2\cdots a_m"></span>, where <span data-katex="m\geqslant n"></span> and each <span data-katex="a_i"></span> in an input symbol. For <span data-katex="i=0,1,\cdots ,n"></span> define state <span data-katex="p_i"></span> to be <span data-katex="\hat{\delta}(q_0,a_1a_2\cdots a_i)"></span>, where <span data-katex="\delta"></span> is the transition function of <span data-katex="A"></span>, and <span data-katex="q_0"></span> is the start state of <span data-katex="A"></span>. That is, <span data-katex="p_i"></span> is the state <span data-katex="A"></span> is in in after reading the first <span data-katex="i"></span> symbols of <span data-katex="w"></span>. Note that <span data-katex="p_0=q_0"></span>.</p>
+<p>代码具有双重作用，不但要实现软件所提供的功能，还要承载软件的复杂性。</p>
+<p>如果不对这些复杂性进行管控，就没有人能理解软件，也无法维护它。</p>
 <p><br/ ></p>
-<p>By the <a href="https://en.wikipedia.org/wiki/Pigeonhole_principle" target="_blank" rel="noopener">pigeonhole principle</a>, it is not possible for the <span data-katex="n+1"></span> different <span data-katex="p_i"></span>'s for <span data-katex="i=0,1,\cdots ,n"></span> to be distinct, since there are only <span data-katex="n"></span> different states. Thus, we can find two different integers <span data-katex="i"></span> and <span data-katex="j"></span>, with <span data-katex="0\leqslant i\leqslant j\leqslant n"></span>, such that <span data-katex="p_i=p_j"></span>. Now, we can break <span data-katex="w=xyz"></span> as follows:</p>
-<ol type="1">
-<li><p><span data-katex="x=a_1a_2\cdots a_i"></span></p></li>
-<li><p><span data-katex="y=a_{i+1}a_{i+2}\cdots a_j"></span></p></li>
-<li><p><span data-katex="z=a_{j+1}a_{j+2}\cdots a_m"></span></p></li>
-</ol>
+<p>所以，写代码和阅读代码，实际上是一个知识的表述和理解过程。</p>
+<p>提取功能模块的目的，并不仅仅是为了消除重复，或者让它可复用，</p>
+<p><strong>而是为了让软件系统更容易被理解。</strong></p>
 <p><br/ ></p>
-<p>That is, <span data-katex="x"></span> takes us to <span data-katex="p_i"></span> once; <span data-katex="y"></span> takes us from <span data-katex="p_i"></span> back to <span data-katex="p_i"></span> (since <span data-katex="p_i"></span> is also <span data-katex="p_j"></span>), and <span data-katex="z"></span> is the balance of <span data-katex="w"></span>. The relationships among the strings and states are suggested by Figure below. Note that <span data-katex="x"></span> may be empty, in the case that <span data-katex="i=0"></span>. Also, <span data-katex="z"></span> may be empty if <span data-katex="j=n=m"></span>. However, <span data-katex="y"></span> can not be empty, since <span data-katex="i"></span> is strictly less than <span data-katex="j"></span>.</p>
+<h3 id="区分表述方式和外部接口">区分表述方式和外部接口</h3>
+<p>一块逻辑完整的功能，当做一个整体来看待，</p>
+<p>会提高了表述单元的粒度，简化主流程，降低构建大型软件时的心智负担。</p>
 <p><br/ ></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-05-24-pumping-lemma/1023733-43bdf83dc793438f.png" /></p>
-<p>Figure: Every string longer than the number of states must cause a state to repeat.</p>
+<p>只被调用一次的函数仍然被提取出来，实际上是为了表述问题方便，</p>
+<p>它能提高我们看待问题的层次。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const main &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    task1();</span><br><span class="line">    task2();</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>然而，如果因此意外的建立了依赖，就是危险的，</p>
+<p>逻辑上互相依赖的功能，和逻辑上是一个整体但是为了表述方便而拆分成多个部分的功能，是截然不同的。</p>
+<p><strong>一旦建立了依赖，就得时刻考虑修改所产生的外在影响。</strong></p>
+<p>我们无法轻易修改一个被多处引用的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const main &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    task1();    &#x2F;&#x2F;危险</span><br><span class="line">    task2();</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const other &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    task1();    &#x2F;&#x2F;危险</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>封装是一个避免产生过多依赖的办法，它可以很好的区分表述和依赖，</strong></p>
+<p>我们将某些函数设置为私有函数，是为了表述方便，</p>
+<p>而将另外一些函数设置为功能接口，是为了建立依赖。</p>
 <p><br/ ></p>
-<p>Now, consider what happens if the automaton <span data-katex="A"></span> receives the input <span data-katex="xy^kz"></span> for any <span data-katex="k\geqslant 0"></span>. If <span data-katex="k=0"></span>, then the automaton goes from the start state <span data-katex="q_0"></span> (which is also <span data-katex="p_0"></span>) to <span data-katex="p_i"></span> on input <span data-katex="x"></span>. Since <span data-katex="p_i"></span> is also <span data-katex="p_j"></span>, it must be that <span data-katex="A"></span> goes from <span data-katex="p_i"></span> to the accepting state shown in Figure above on input <span data-katex="z"></span>. Thus <span data-katex="A"></span> accepts <span data-katex="xz"></span>.</p>
+<p>当私有函数进行调整的时候，我们是换了一种表述方式，</p>
+<p>而当功能接口进行调整的时候，我们就得考虑对外影响了。</p>
 <p><br/ ></p>
-<p>If <span data-katex="k\geqslant 0"></span>, then <span data-katex="A"></span> goes from <span data-katex="q_0"></span> to <span data-katex="p_i"></span> on input <span data-katex="x"></span>, circles from <span data-katex="p_i"></span> to <span data-katex="p_i"></span> <span data-katex="k"></span> times on input <span data-katex="y^k"></span>, and then goes to the accepting state on input <span data-katex="z"></span>. Thus, for any <span data-katex="k\geqslant 0"></span>, <span data-katex="xy^kz"></span> is also accepted by <span data-katex="A"></span>; that is, <span data-katex="xy^kz"></span> is in <span data-katex="L"></span>.</p>
+<p>需要注意的是，封装是和面向对象无关的，</p>
+<p>一个模块可以不具有内部状态，但是仍然可以最小化它的功能接口。</p>
+<p>封装思想会指导我们，先从系统各模块之间的依赖角度考虑问题，而后再考虑具体实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const f1 &#x3D; () &#x3D;&gt; &#123; &#125;;    &#x2F;&#x2F;为了表述问题方便</span><br><span class="line">const f2 &#x3D; () &#x3D;&gt; &#123; &#125;;    &#x2F;&#x2F;被依赖</span><br><span class="line"></span><br><span class="line">export default f2;</span><br></pre></td></tr></table></figure>
+<h3 id="用抽象指导具体">用抽象指导具体</h3>
+<p>抽象是一种为了消除个体差异从而将不同的事物统一看待的方法。</p>
+<p>因此，抽象不可避免的会丢失一些细节信息。</p>
 <p><br/ ></p>
-<h2 id="context-free-languages">2. Context-Free Languages</h2>
-<h3 id="definition-of-context-free-grammars">2.1 Definition of Context-Free Grammars</h3>
-<p>There are four important components in a grammatical description of a language:</p>
-<ol type="1">
-<li><p>There is a finite set of symbols that form the strings of the language being defined. We call this alphabet the <strong>terminals</strong>, or <strong>terminal symbols</strong>.</p></li>
-<li><p>There is a finite set of <strong>variables</strong>, also called sometimes <strong>nonterminals</strong> or <strong>syntactic categories</strong>. Each variable represent a language; i.e., a set of strings.</p></li>
-<li><p>One of the variables represents the language being defined; it is called the <strong>start symbol</strong>. Other variables represent auxiliary classes of strings that are used to help define the language of the start symbol.</p></li>
-<li><p>There is a finite set of <strong>productions</strong> or <strong>rules</strong> that represent the recursive definition of a languages. Each production consists of:</p></li>
-</ol>
-<ol type="a">
-<li><p>A variable that is being (partially) defined by the production. This variable is often called the <strong>head</strong> of the produciton.</p></li>
-<li><p>The production symbol <span data-katex="\rightarrow"></span>.</p></li>
-<li><p>A string of zero or more terminals and variables. This string, called the body of the production, represents one way to form strings in the languages of the variables of the head. In so doing, we leave terminals unchanged and substitue for each variable of the body any string that is known to be in the language of that variable.</p></li>
-</ol>
+<p>然而，<strong>抽象是一种分析问题的方式，不是一种解决方案。</strong></p>
+<p>随着软件的演变，人们通常会采取不同的归类方式重新看待问题，</p>
+<p>这样所得的抽象概念往往是易变的，且与原来不同。</p>
 <p><br/ ></p>
-<p>The four components just described form a <strong>context-free grammar</strong>, or just <strong>grammar</strong>, or CFG. We shall represent a CFG <span data-katex="G"></span> by its four components, that is, <span data-katex="G=(V,T,P,S)"></span>, where <span data-katex="V"></span> is the set of variables, <span data-katex="T"></span> the terminals, <span data-katex="P"></span> the set of productions, and <span data-katex="S"></span> the start symbol.</p>
+<p>比如，前端轮询发送Ajax请求，和用js实现一个倒计时，是相似的，</p>
+<p>它们都是以固定的时长执行一个任务，无论是同步的还是异步的。</p>
+<p>这时候，建立一个任务执行者，用它来执行这些任务是合理的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">taskExecutor(&#123;</span><br><span class="line">    interval: 500,</span><br><span class="line">    execute: next &#x3D;&gt; &#123;</span><br><span class="line">        ...</span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果增加了新场景，那么任务执行者可能就不适用了，</p>
+<p>例如，在node中异步读取一个文件夹下的所有文件。</p>
 <p><br/ ></p>
-<h3 id="chomsky-normal-form">2.2 Chomsky Normal Form</h3>
-<p><strong>Theorem</strong></p>
-<p>If <span data-katex="G"></span> is a CFG generating a language that contains at least one string other than <span data-katex="\epsilon"></span>, then there is another CFG <span data-katex="G_1"></span> such that <span data-katex="L(G_1)=L(G)-\{\epsilon\}"></span>, and <span data-katex="G_1"></span> has no <span data-katex="\epsilon"></span>-productions, unit productions, or useless symbols.</p>
+<p>通过建立新的抽象，我们可以将它们三个统一看待，</p>
+<p>即，它们三个都是在考虑，如何递归的执行一个任务，无论是同步的或者异步的。</p>
 <p><br/ ></p>
-<p>We complete our study of grammatical simplifications by showing that every nonemtpy CFL without <span data-katex="\epsilon"></span> has a grammar <span data-katex="G"></span> in which all productions are in one of two simple forms, either:</p>
-<ol type="1">
-<li><p><span data-katex="A\rightarrow BC"></span>, where <span data-katex="A"></span>, <span data-katex="B"></span> and <span data-katex="C"></span>, are each variables, or</p></li>
-<li><p><span data-katex="A\rightarrow a"></span>, where <span data-katex="A"></span> is a variable and <span data-katex="a"></span> is a terminal.</p></li>
-</ol>
+<p>于是我们可以建立一个递归执行者，</p>
+<p>上述任务执行者只是当前递归执行者的一个具体应用，任务执行者可以用递归执行者实现出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">recursion(init, (current, next) &#x3D;&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">    next(value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">const taskExecutor &#x3D; (&#123; interval, execute &#125;) &#x3D;&gt; &#123;</span><br><span class="line">    recursion(null, (_, next) &#x3D;&gt; &#123;</span><br><span class="line">        execute(() &#x3D;&gt; &#123;</span><br><span class="line">            setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">                next();</span><br><span class="line">            &#125;, interval);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在具体工作中，<strong>不同的抽象给出了不同适用范围的解决方案，</strong></p>
+<p>上述递归执行者的适用范围更广，但却不一定总是最好的，</p>
+<p><strong>抽象思维指导了我们如何解决问题，但并不意味着我们必须这样解决。</strong></p>
 <p><br/ ></p>
-<p>Further, <span data-katex="G"></span> has no useless symbols. Such a grammar is said to be in <strong>Chomsky Normal Form</strong>, or CNF.</p>
+<p>例如，以上三个问题都可以看做执行一个任务，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const execute &#x3D; fn &#x3D;&gt; fn();</span><br><span class="line"></span><br><span class="line">execute(task);</span><br></pre></td></tr></table></figure>
+<p>如此这样的抽象，对于解决问题来说，意义就不明显了，</p>
+<p>并没有给我们带来任何便利和额外的价值。</p>
 <p><br/ ></p>
-<p><strong>Theorem</strong></p>
-<p>If <span data-katex="G"></span> is a CFG whose language contains at least one string other than <span data-katex="\epsilon"></span>, then there is a grammar <span data-katex="G_1"></span> in Chomsky Normal Form, such that <span data-katex="L(G_1)=L(G)-\{\epsilon\}"></span>.</p>
+<h3 id="抓住数学模型和语言结构">抓住数学模型和语言结构</h3>
+<p><strong>程序员自己发明的抽象通常是不稳定的，</strong></p>
+<p>这种抽象完全取决于当前项目中我们具体处理的问题，</p>
+<p>一旦问题场景发生了变化，抽象概念也会发生变化。</p>
+<p>因此，有经验的程序员极少发明新的概念，而是使用已有的成熟概念。</p>
 <p><br/ ></p>
-<h3 id="parse-trees">2.3 Parse Trees</h3>
-<p>Let <span data-katex="G=(V,T,P,S)"></span> be a CFG. If the recursive inference procedure tells us that terminal string <span data-katex="w"></span> is in the language of variable <span data-katex="A"></span>, then there is a parse tree with root <span data-katex="A"></span> and yield <span data-katex="w"></span>.</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-05-24-pumping-lemma/1023733-2c93eb7c6f29be7c.png" /></p>
+<p>有两种成熟的抽象概念值得借鉴，</p>
+<p>其一是问题背后的数学模型，其二是代码本身所具有的语言结构。</p>
 <p><br/ ></p>
-<p><strong>Theorem</strong></p>
-<p>Suppose we have a parse tree according to a Chomsky-Normal-Form grammar <span data-katex="G=(V,T,P,S)"></span>, and suppose that the yield of the tree is a terminal string <span data-katex="w"></span>. If the length of the longest path is <span data-katex="n"></span>, then <span data-katex="|w|\leqslant 2^{n-1}"></span>.</p>
+<p>所谓数学模型，就是使用数学概念和语言对问题进行分析和描述。</p>
+<p>这些数学概念一般而言都是通用的，不存在理解上的歧义性，</p>
+<p>我们只需要把问题向它们靠拢即可，不用自己来发明。</p>
 <p><br/ ></p>
-<h3 id="the-pumping-lemma-for-context-free-languages">2.4 The Pumping Lemma for Context-Free Languages</h3>
-<p>The pumping lemma for CFL's is quite similar to the pumping lemma for regular languages, but we break each string <span data-katex="z"></span> in the CFL <span data-katex="L"></span> into five parts, and we pump the second and fourth, in tandem.</p>
+<p>所谓语言结构，指的是当前所使用的编程语言所提供的那些抽象方式，</p>
+<p>例如，函数，类，模块，数据类型，高阶函数，泛型，多态性，等等。</p>
+<p>使用这些内置的语言结构来书写代码，会避免代码晦涩难懂。</p>
 <p><br/ ></p>
-<p>Let <span data-katex="L"></span> be a CFL. Then there exists a constant <span data-katex="n"></span> such that if <span data-katex="z"></span> is any string in <span data-katex="L"></span> such that <span data-katex="|z|"></span> is at least <span data-katex="n"></span>, then we can write <span data-katex="z=uvwxy"></span>, subject to the following conditions:</p>
-<ol type="1">
-<li><p><span data-katex="|vwx|\leqslant n"></span>. That is, the middle portion is not too long.</p></li>
-<li><p><span data-katex="vx\neq \epsilon"></span>. Since <span data-katex="v"></span> and <span data-katex="x"></span> are the pieces to be "pumped", this condition says that at least one of the strings we pump must not be empty.</p></li>
-<li><p>For all <span data-katex="i\geqslant 0"></span>, <span data-katex="uv^iwx^iy"></span> is in <span data-katex="L"></span>. That is, the two string <span data-katex="v"></span> and <span data-katex="x"></span> may be "pumped" any number of times, including <span data-katex="0"></span>, and the resulting string will still be a member of <span data-katex="L"></span>.</p></li>
-</ol>
+<p>因此，<strong>好的代码，总是能清晰的看到背后的数学，并且使用了足够丰富的语言结构。</strong></p>
 <p><br/ ></p>
-<p><strong>Proof:</strong> Our first step is to find a Chomsky-Normal-Form grammar <span data-katex="G"></span> for <span data-katex="L"></span>. Technically, we cannot find such a grammar if <span data-katex="L"></span> is the CFL <span data-katex="\varnothing"></span> or <span data-katex="\{\epsilon \}"></span>. However, if <span data-katex="L=\varnothing"></span> then the statement of the theorem, which talks about a string <span data-katex="z"></span> in <span data-katex="L"></span> surely cannot be violated, since there is no such <span data-katex="z"></span> in <span data-katex="\varnothing"></span>. Also, the CNF grammar <span data-katex="G"></span> will actually generate <span data-katex="L-\{\epsilon\}"></span>, but that is again not of importance, since we shall surely pick <span data-katex="n&gt;0"></span>, in which case <span data-katex="z"></span> cannot be <span data-katex="\epsilon"></span> anyway.</p>
+<p>将数据结构从代码中分离，就是这样的一个例子，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const graph &#x3D; new Graph;</span><br><span class="line"></span><br><span class="line">graph.addEdges(vertex, vertices);</span><br><span class="line">graph.findSuccessors(vertex);</span><br><span class="line">graph.findPredecessors(vertex);</span><br></pre></td></tr></table></figure>
+<p>以上代码，使用了一个称之为图的数据结构，并且，使用了类来表示它。</p>
 <p><br/ ></p>
-<p>Now, starting with a CNF grammar <span data-katex="G=(V,T,P,S)"></span> such that <span data-katex="L(G)=L=\{\epsilon\}"></span>, let <span data-katex="G"></span> have <span data-katex="m"></span> variables. Choose <span data-katex="n=2^m"></span>. Next suppose that <span data-katex="z"></span> in <span data-katex="L"></span> is of length at least <span data-katex="n"></span>. Because any parse tree whose longest path is of length <span data-katex="m"></span> or less must have a yield of length <span data-katex="2^{m-1}=n/2"></span> or less. Such a parse tree cannot have yield <span data-katex="z"></span>, because <span data-katex="z"></span> is too long. Thus, any parse tree with yield <span data-katex="z"></span> has a path of length at least <span data-katex="m+1"></span>.</p>
+<p>数据结构是稳定的，对图进行的所有操作都是固定的，很少发生变化，大家都能理解发生了什么，</p>
+<p>此外，使用类进行表示，有助于把所有操作图状态的函数放在一起，并且可以避免对外建立无谓的依赖。</p>
+<p>值得一提的是，数学不只是数据结构，编程语言也不只有类这么一个概念。</p>
 <p><br/ ></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-05-24-pumping-lemma/1023733-67178ea72804bcbb.png" /></p>
-<p>Figure above suggests the longest path in the tree for <span data-katex="z"></span>, where <span data-katex="k"></span> is at least <span data-katex="m"></span> and the path is of length <span data-katex="k+1"></span>. Since <span data-katex="k\geqslant m"></span>, there are at least <span data-katex="m+1"></span> occurrences of variables <span data-katex="A_0,A_1,\cdots ,A_k"></span> on the path. As there are only <span data-katex="m"></span> different variables in <span data-katex="V"></span>, at least two of the last <span data-katex="m+1"></span> variables on the path (that is, <span data-katex="A_{k-m}"></span> through <span data-katex="A_k"></span>, inclusive) must be the same variable. Suppose <span data-katex="A_i=A_j"></span>, where <span data-katex="k-m\leqslant i&lt;j\leqslant k"></span>.</p>
+<p>例如，字符串经过词法分析，会得到一系列token，</p>
+<p>在数学上，token可以视为与之相应的有穷自动机所接受的子串，</p>
+<p>在语言结构上，返回token的过程可以用generator来表示。</p>
 <p><br/ ></p>
-<p>Then it is possible to divide the tree as shown in Figure bellow.</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-05-24-pumping-lemma/1023733-a7391506188759fe.png" /></p>
+<p>不考虑数学，或者从不使用高级语言结构，就不得不自创一些难懂的概念，</p>
+<p>这和平铺直叙的书写代码一样难以维护。</p>
 <p><br/ ></p>
-<p>String <span data-katex="w"></span> is the yield of the subtree rooted at <span data-katex="A_j"></span>. String <span data-katex="v"></span> and <span data-katex="x"></span> are the strings to the left and right, repectively, of <span data-katex="w"></span> in the yield of the larger subtree rooted at <span data-katex="A_i"></span>. Note that, since there are no unit productions, <span data-katex="v"></span> and <span data-katex="x"></span> could not both be <span data-katex="\epsilon"></span>, although one could be. Finally, <span data-katex="u"></span> and <span data-katex="y"></span> are those portions of <span data-katex="z"></span> that are to the left and right, respectively, of the subtree rooted at <span data-katex="A_i"></span>.</p>
+<h3 id="结语">结语</h3>
+<p>写代码除了是一个实现功能的过程，还是一个管理复杂性的过程，</p>
+<p>管理复杂性，涉及到代码的组织和管理。</p>
 <p><br/ ></p>
-<p>If <span data-katex="A_i=A_j=A"></span>, then we can construct new parse trees from the original tree, as suggested in Figure bellow (a). First we may replace the subtree rooted at <span data-katex="A_i"></span>, which has yield <span data-katex="vwx"></span>, by the subtree rooted at <span data-katex="A_j"></span>, which has yield <span data-katex="w"></span>. The reason we can do so is that both of these trees have root labeled <span data-katex="A"></span>. The resulting tree is suggested in Figure bellow (b); it has yield <span data-katex="uwy"></span> and corresponds to the case <span data-katex="i=0"></span> in the pattern of strings <span data-katex="uv^iwx^iy"></span>.</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-05-24-pumping-lemma/1023733-b043df1df50b4bad.png" /></p>
+<p>涉及到我们如何向别人把软件系统表述清楚，</p>
+<p>涉及到我们如何管理模块之间的依赖关系，</p>
+<p>涉及到我们如何抽象的看待事物。</p>
 <p><br/ ></p>
-<p>Another option is suggested by Figure bellow. There, we have replaced the subtree rooted at <span data-katex="A_j"></span> by the entire subtree rooted at <span data-katex="A_i"></span>. Again, the justification is that we are substituting one tree with root labeled <span data-katex="A"></span> for another tree with the same root label. The yield of this tree is <span data-katex="uv^2wx^2y"></span>. Were we to then replace the subtree of Figure below with yield <span data-katex="w"></span> by the largar subtree with yield <span data-katex="vwx"></span>, we would have a tree with yield <span data-katex="uv^3wx^3y"></span>, and so on, for any exponent <span data-katex="i"></span>. Thus, there are parse trees in <span data-katex="G"></span> for all strings of the form <span data-katex="uv^iwx^iy"></span>, and we have almost proved the pumping lamma.</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-05-24-pumping-lemma/1023733-ae51262c073baa7d.png" /></p>
-<p><br/ ></p>
-<p>The remaining detail is condition (1), which says that <span data-katex="|vwx|\leqslant n"></span>. However, we picked <span data-katex="A_i"></span> to be close to the buttom of the tree; that is <span data-katex="k-i\leqslant m"></span>. Thus, the longest path in the subtree rooted at <span data-katex="A_i"></span> is no greater than <span data-katex="m+1"></span>. Because the subtree rooted at <span data-katex="A_i"></span> has a yield whose length is no greater than <span data-katex="2^m=n"></span>.</p>
-<p><br/ ></p>
-<h2 id="reference">Reference</h2>
-<p><a href="https://book.douban.com/subject/2249114/" target="_blank" rel="noopener">Introduction to Automata Theory Languages and Computation</a></p>
+<p>仔细的斟酌和考量才会写出好代码，不假思索一定会带来灾难，</p>
+<p>我想这应该是一名专业的程序员与门外汉的根本区别吧。</p>
 
           
         
@@ -507,7 +518,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/196/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/196/">196</a><span class="page-number current">197</span><a class="page-number" href="/page/198/">198</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/198/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/196/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/196/">196</a><span class="page-number current">197</span><a class="page-number" href="/page/198/">198</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/198/">&gt;</a>
   </nav>
 
 
@@ -553,7 +564,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">310</span>
+                <span class="site-state-item-count">311</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/06/30/code-00/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/07/08/code-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/06/30/code-00/" itemprop="url">编码技巧（零）：为食用者着想</a></h1>
+                <a class="post-title-link" href="/2020/07/08/code-01/" itemprop="url">编码技巧（一）：让主流程清晰</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-30T00:00:00+08:00">
-                2020-06-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-08T00:00:00+08:00">
+                2020-07-08
               </time>
             
 
@@ -348,84 +348,90 @@
         
           
             <h3 id="背景">背景</h3>
-<p>一直以来，总觉得告诉别人自己怎样写代码，会不太恰当，</p>
-<p>因为每个人都有自己认为的<strong>较好的</strong>编码方式，并没有高下之分，</p>
-<p>不同的无非是经历不同，见识各异罢了。</p>
+<p>上文介绍了我所看来的 “编码总诀” —— 要有一颗 “为食用者着想的心”。</p>
+<p>可具体要怎样 “着想” 呢，还没有详细说明。</p>
+<p>本文就以此作为出发点，介绍我常用的第一个<strong>编码技巧</strong>。</p>
 <p><br/></p>
-<p>然而有些时候，一些高龄程序猿们，又容易变得像<strong>絮絮叨叨</strong>的老人一样，</p>
-<p>激动的想向他人讲解自己的辛酸旅程，介绍它们见过的奇闻异事，</p>
-<p>或者分享历史某个时间点上，自己雀跃的像孩童般的心情。</p>
+<p>不过在这之前，我们需对编程本身，进行一些讨论。</p>
+<h3 id="编码活动">编码活动</h3>
+<p><strong>首先</strong>，以编程作为工作的话，那么写代码的<strong>目的</strong>就不应该是为了好玩，</p>
+<p>而是应该是为了解决问题，</p>
+<p>这就好比汽车公司造车一样，并不是因为制造汽车很有趣，而是因为它能赚钱。</p>
 <p><br/></p>
-<p>因此，才有了这一系列的文章，</p>
-<p>意图向朋友们介绍，个人视角之下的某几个 <strong>“编程技巧”</strong>。</p>
-<p>有些可能是有用的，有些也可能毫无帮助，止增笑耳。</p>
-<h3 id="总诀">总诀</h3>
-<p>小说中不少武学秘籍都有一篇《总诀》，其中记载了整本秘籍的指导原则。</p>
-<p>如果我们把<strong>编程</strong>看做一种武功绝学的话，</p>
-<p>那么我想也应该一些指导原则才行。</p>
+<p>所以代码至少要能解决问题，</p>
+<p>之后才有余地来讨论够不够<strong>好</strong>。</p>
 <p><br/></p>
-<p>指导原则不应该太多，否则容易使人忘掉哪个才是真正的原则。</p>
-<p>小时候玩过一款单机游戏，有个可以给主角加<strong>先天资质</strong>的桥段，让我印象深刻。</p>
+<p><strong>其次</strong>，虽然解决正确的问题，要比正确的解决问题重要得多，</p>
+<p>但本系列文章，却不打算讨论前者，</p>
+<p>讨论后者也有价值，我们需要有一些侧重点。</p>
 <p><br/></p>
-<blockquote>
-<p>主角：老伯伯，你煮的菜好像都很好吃耶，闻起来都很香。</p>
-</blockquote>
-<blockquote>
-<p>林厨子：其实啊，做菜没什么秘诀，只要<strong>有着一颗为食用者着想的心</strong>即可。</p>
-</blockquote>
+<p>我们将仅限于考虑给定问题，应如何更好的去解决它。</p>
+<p>通常人们将问题视为 “<strong>业务</strong>”，将解决方案视为 “<strong>技术</strong>”。</p>
+<p>业务也有可能是纯技术性质的，技术也可能会用到非编码手段。</p>
 <p><br/></p>
-<blockquote>
-<p>林厨子：一个厨师不能只想到要将自己的菜做得多色香味俱全，</p>
-</blockquote>
-<blockquote>
-<p>而应该想着是什么人要吃你这道菜，怎样的口味是最适合他，而去调理。</p>
-</blockquote>
-<blockquote>
-<p>因为这道菜终究是要给人吃的，而不是拿来观赏或评论的。</p>
-</blockquote>
+<p><strong>最后</strong>，编码可看做是一件<strong>知识生产活动</strong>，我们总是处在中间层，</p>
+<p>底层是我们可利用的各种 “技术” 工具，上层是我们需解决的 “业务” 问题，</p>
+<p>我们将连接上下两层的逻辑过程，固化成代码，交给计算机运行。</p>
 <p><br/></p>
-<p>主角听完，略有所悟。</p>
-<p>“为食用者着想的心” 作为编码原则，我想应该榜上有名吧。</p>
-<h3 id="技巧">技巧</h3>
-<p>有了 “总诀” 之后，剩下的就该谈谈 “技巧” 了，好比 “武学招式”。</p>
-<p>特定的招式（或套路）其实并不是特别重要，因为达成目的通常会有很多不同的方式。</p>
-<p>招式是由人创造出来的，当然也就可以由人来<strong>改造</strong>。</p>
+<p>同时这些代码，还得好理解，不然别人就没法更新它了，</p>
+<p>所以，代码中必须包含足够多的<strong>信息</strong>，这些信息还得被清晰的<strong>表达</strong>出来才行。</p>
 <p><br/></p>
-<p>这让我想起了金庸武侠《笑傲江湖》中的对话，</p>
-<blockquote>
-<p>风清扬道：“五岳剑派中各有无数蠢才，以为将师父传下来的剑招学得精熟，自然而然便成高手，</p>
-</blockquote>
-<blockquote>
-<p>哼哼，熟读唐诗三百首，不会作诗也会吟！</p>
-</blockquote>
-<blockquote>
-<p>熟读了人家诗句，做几首打油诗是可以的，但若不能自出机杼，能成大诗人么？”</p>
-</blockquote>
+<p>总结一下，</p>
+<p>（1）代码首先要能解决问题，才能谈论写的好不好</p>
+<p>（2）有所侧重，并不代表不懂其他方面的重要性</p>
+<p>（3）编码是将知识固化下来的过程</p>
+<h3 id="信息表达">信息表达</h3>
+<p>接上文，我们说 “编码是将知识固化下来的过程”，代码中的确包含了很大的信息量。</p>
+<p>于是问题就来了，怎样将这么大的信息量合理的<strong>表达</strong>出来？</p>
 <p><br/></p>
-<p>风清扬强调的是 “自出机杼”，而不是因循守旧，</p>
-<p>没有招式（技巧），难道就不能<strong>自己创造</strong>么？</p>
+<p>是一股脑的都放到一起么？不行，这就像流水账一样，读起来很费劲。</p>
+<p>所以，更好的写法，应该得有层次性，有主次之分。</p>
+<p>让阅读者容易找到它<strong>感兴趣</strong>的那部分内容。</p>
 <p><br/></p>
-<p>我要表达的正是这个意思，</p>
-<p>我们应该学会自创武功，总结出适合自己的技巧。</p>
+<p>现代很多书籍的内容编排，都采用了这种方式。</p>
+<p>一本书的开头，往往不是第一章的第一句话，而是要先有一个<strong>目录</strong>，</p>
+<p>目录使人方便查找，降低了学习成本。</p>
 <p><br/></p>
-<p>回到编码中来，其实每个人多多少少都有自己的技巧，</p>
-<p>有不同的<strong>编码风格</strong>，</p>
-<p>但要想更进一步的话，增长见闻应是必不可少的。</p>
+<p>在写代码时，我们也可以这么干。</p>
+<p>这就得出了我常用的第一个编程技巧：<strong>让主流程清晰</strong>。</p>
 <p><br/></p>
-<p>本系列文章，会介绍一些个人常用的技巧，朋友们可以随意改编，但求 “制敌有效”。</p>
-<h3 id="小结">小结</h3>
-<p>以上，我介绍了本系列文章的写作动机，是想向朋友们分享编码过程中的种种体会，</p>
-<p>本着 “为食用者着想的心” 作为指导原则，</p>
-<p>我发现把代码写好，并不是一件容易的事情。</p>
+<p>代码中的信息量虽然大，但大多数阅读者肯定并不想全部了解它，</p>
+<p>所以有些信息就得<strong>隐藏</strong>起来，暂时先不告诉他。</p>
+<p>这样阅读起来就轻松多了，我们只提供给他最言简意赅的 “主流程”。</p>
 <p><br/></p>
-<p>我计划这样安排，每篇文章介绍一个小技巧，</p>
-<p>详细介绍产生这个技巧的<strong>动机</strong>，以及如何使用这个技巧。</p>
+<p>跟 “主流程” 无关的事情，尽量隐藏起来，放到别的地方去。</p>
+<h3 id="主流程">主流程</h3>
+<p>那么什么是主流程呢？</p>
+<p>或者，到底应该把哪些事情作为主流程呢？</p>
 <p><br/></p>
-<p>这个过程中，会让我们重新反思代码本身，</p>
-<p>改善自己的<strong>武功路数</strong>。</p>
+<p>这就是需要记起我们的 “编码总诀” 了 —— “为食用者着想”。</p>
+<p>一个对当前工作并不了解的新人，最可能关注什么？</p>
+<p>以后我们自己来改代码时，怎样才能以最快的速度想起来当时做了什么。</p>
 <p><br/></p>
-<p>当然，最最重要的还是抛砖引玉，</p>
-<p>每个人内心深处都藏着一套 “绝世武功”，只等着你想要去<strong>施展</strong>的那一天到来。</p>
+<p>就拿向别人介绍，早晨上班前做了几件事来说吧，</p>
+<p>起床、洗漱、整理、出行。</p>
+<p><br/></p>
+<p>一般人在不了解总共有几件事之前，其实并不关心我从哪颗牙齿开始刷牙。</p>
+<p>而当他对刷牙感兴趣的时候，我可以在刷牙的主流程中，再给出说明。</p>
+<p><br/></p>
+<p>这就是我们需要的<strong>层次感</strong>。</p>
+<p>交代每一件事情的时候，都点到为止，不向外透露过多没用的信息。</p>
+<p><br/></p>
+<p>题外话是，面向对象编程之所以这么流行，</p>
+<p>是因为它确实在处理<strong>信息隐藏</strong>方面，起到了模范作用，</p>
+<p>面向对象编程方式，很容易下意识的就把信息藏好了，有利于开发大型项目。</p>
+<p><br/></p>
+<p>当然，不了解背后之原因的话，用什么语言都能写出烂代码来。</p>
+<h3 id="结语">结语</h3>
+<p>本文介绍了我常用的第一个编程技巧：<strong>让主流程清晰</strong>。</p>
+<p>所采用的的办法是，不要把过多暂时没啥用的信息透露给阅读者，</p>
+<p>而是，放到其他地方去。</p>
+<p><br/></p>
+<p>这样从阅读者角度来看，一次性接受的<strong>信息量</strong>变小了，</p>
+<p>也就更容易了解我们到底想做什么了。</p>
+<p><br/></p>
+<p>这无疑是 “为食用者着想” 的真实写照。</p>
+<p>当我们开始考虑别人的时候，好代码之旅也就悄然开始了。</p>
 
           
         
@@ -464,7 +470,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/73/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/75/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/73/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/75/">&gt;</a>
   </nav>
 
 
@@ -510,7 +516,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">310</span>
+                <span class="site-state-item-count">311</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

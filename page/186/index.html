@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/06/type-2/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/07/type-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/06/type-2/" itemprop="url">你好，类型（二）：Lambda calculus</a></h1>
+                <a class="post-title-link" href="/2017/09/07/type-3/" itemprop="url">你好，类型（三）：Combinatory logic</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-06T00:00:00+08:00">
-                2017-09-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T00:00:00+08:00">
+                2017-09-07
               </time>
             
 
@@ -347,162 +347,107 @@
       
         
           
-            <h3 id="匿名函数">1. 匿名函数</h3>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-4a9e412b8a890927.png" /></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-669ce252032eecd2.png" /></p>
+<h3 id="回顾">回顾</h3>
+<p>上一篇中，我们介绍了<span data-katex="\lambda"></span>演算，</p>
+<p>它是由一堆合法的符号和一些推导规则构成的公理系统，</p>
+<p>在众多<span data-katex="\lambda"></span>演算中，我们介绍了最常用的<span data-katex="\lambda_\beta"></span>系统，</p>
+<p>它指定了<span data-katex="\alpha"></span>和<span data-katex="\beta"></span>两种对<span data-katex="\lambda"></span>项的变换规则。</p>
 <p><br/></p>
-<p>现在很多种编程语言都支持匿名函数了，</p>
-<p>例如，<a href="https://msdn.microsoft.com/zh-sg/library/bb397687" target="_blank" rel="noopener">C# 3.0</a>，<a href="https://zh.wikipedia.org/wiki/C%2B%2B11" target="_blank" rel="noopener">C++ 11</a>和<a href="https://en.wikipedia.org/wiki/Java_version_history#Java_SE_8" target="_blank" rel="noopener">Java 8</a>中的lambda表达式，</p>
-<p>又例如，<a href="https://docs.python.org/release/2.2.2/ref/ref.html" target="_blank" rel="noopener">Python 2.2.2</a>中的lambda，<a href="http://www-archive.mozilla.org/js/language/E262-3.pdf" target="_blank" rel="noopener">ECMAScript 3</a>的匿名函数，</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">ECMAScript 2015</a>的箭头函数（arrow function）等等。</p>
+<p>作为形式系统，上一篇中，我们展现了它的编码能力，</p>
+<p>将邱奇编码，与公理集合论中自然数的归纳集定义，进行了对比。</p>
 <p><br/></p>
-<p>更不论，<a href="https://www.haskell.org/" target="_blank" rel="noopener">Haskell</a>，<a href="https://en.wikipedia.org/wiki/Lisp" target="_blank" rel="noopener">Lisp</a>，<a href="https://en.wikipedia.org/wiki/Standard_ML" target="_blank" rel="noopener">Standard ML</a>，这些函数式编程语言了。</p>
+<p>本文我们将介绍另一套形式系统，</p>
+<p>组合子逻辑（combinatory logic）。</p>
 <p><br/></p>
-<p>越来越多的语言拥抱匿名函数，是因为在很多场景中，我们无需给函数事先指定一个名字，</p>
-<p>并且结合<a href="https://zh.wikipedia.org/zh-hans/%E4%BD%9C%E7%94%A8%E5%9F%9F" target="_blank" rel="noopener">词法作用域</a>和高阶函数，会使某些问题用更直观的方式得以解决。</p>
+<h3 id="组合子逻辑">1. 组合子逻辑</h3>
 <p><br/></p>
-<p>从理论上来讲，匿名函数具有和一般函数同样的计算能力，</p>
-<p>使用某些技术手段，可以让匿名函数支持递归运算，从而完成任何<a href="https://zh.wikipedia.org/zh-hans/%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">图灵可计算</a>的任务。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-c22a4eec9f8ab941.png" /></p>
 <p><br/></p>
-<p>然而，要想理解这一切，我们首先还得静下心来，从基础的<span data-katex="\lambda"></span>演算开始吧。</p>
+<p><span data-katex="CL"></span>（组合子逻辑），与<span data-katex="\lambda"></span>演算很相似，只是不需要对变量进行绑定，</p>
+<p>和函数作用在值上不同的是，组合子作用在函数上，从而生成另一个函数。</p>
+<p>例如，我们可以定义一个组合子<span data-katex="B"></span>，使得<span data-katex="(B(f,g))(x) = f(g(x))"></span>，其中，<span data-katex="f"></span>和<span data-katex="g"></span>都是函数。</p>
 <p><br/></p>
-<h3 id="自然数">2. 自然数</h3>
+<p>为了避免过早的谈及语义，我们和<span data-katex="\lambda"></span>演算一样，使用公理化的方法来定义它，</p>
+<p>首先我们要说明什么是公理，即什么是合法的<span data-katex="CL"></span>项，</p>
+<p>（1）所有的变量，常量，以及组合子<span data-katex="I"></span>，<span data-katex="K"></span>，<span data-katex="S"></span>，都是合法的<span data-katex="CL"></span>项，</p>
+<p>（2）如果<span data-katex="X"></span>和<span data-katex="Y"></span>是合法的<span data-katex="CL"></span>项，那么<span data-katex="(XY)"></span>也是。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-cb4665264c58e9e1.png" /></p>
+<p>例如，以下字符串都是合法的<span data-katex="CL"></span>项，</p>
+<p><span data-katex="((S(KS))K)"></span>，<span data-katex="((S(Kv_0))((SK)K))"></span>。</p>
 <p><br/></p>
-<p><span data-katex="\lambda"></span>演算听起来是一个高大上的概念，实际上它只是一套“符号推导系统”，</p>
-<p>人们首先定义某些合法的符号，然后再定义一些符号推导规则，</p>
-<p>最后，就可以计算了，从一堆合法的符号得到另一堆，这种推导过程称之为“演算”。</p>
+<p>同样为了简化，某些情况下括号是可以省略的，如果我们默认各个<span data-katex="CL"></span>项都是左结合的，</p>
+<p>因此，<span data-katex="(((UV)W)X)"></span>可以简写为<span data-katex="UVWX"></span>。</p>
 <p><br/></p>
-<p>为了让<span data-katex="\lambda"></span>演算更容易被接受，我们暂时先岔开话题，看看自然数是怎么定义的。</p>
+<h3 id="weak-reduction">2. Weak reduction</h3>
 <p><br/></p>
-<h4 id="peano系统">2.1 Peano系统</h4>
-<p>1889年，皮亚诺（<a href="https://zh.wikipedia.org/wiki/%E6%9C%B1%E5%A1%9E%E4%BD%A9%C2%B7%E7%9A%AE%E4%BA%9E%E8%AB%BE" target="_blank" rel="noopener">Peano</a>）为了给出自然数的集合论定义，</p>
-<p>他建立了一个包含5条公设的公理系统，后人称之为Peano系统。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-252bce1d956bac05.png" /></p>
 <p><br/></p>
-<p>Peano系统是满足以下公设的有序三元组<span data-katex="(M,F,e)"></span>，</p>
-<p>其中<span data-katex="M"></span>为一个集合，<span data-katex="F"></span>是<span data-katex="M"></span>到<span data-katex="M"></span>的函数，<span data-katex="e"></span>为首元素，</p>
-<p>（1）<span data-katex="e\in M"></span></p>
-<p>（2）<span data-katex="M"></span>在<span data-katex="F"></span>下是封闭的</p>
-<p>（3）<span data-katex="e"></span>不在<span data-katex="F"></span>的值域中</p>
-<p>（4）<span data-katex="F"></span>是单射</p>
-<p>（5）如果<span data-katex="M"></span>的子集<span data-katex="A"></span>满足，<span data-katex="e\in A"></span>，且<span data-katex="A"></span>在<span data-katex="F"></span>下封闭，则<span data-katex="A=M"></span>。</p>
+<p>现在，我们要完成公理化的第二步了，那就是给合法的<span data-katex="CL"></span>项指定变换规则，</p>
+<p>在<span data-katex="CL"></span>（组合子逻辑中）中，我们称之为weak reduction，即我们令，</p>
+<p>（1）<span data-katex="IX"></span>，可以变换为<span data-katex="X"></span>，</p>
+<p>（2）<span data-katex="KXY"></span>，可以变换为<span data-katex="X"></span>，</p>
+<p>（3）<span data-katex="SXYZ"></span>，可以变换为<span data-katex="XZ(YZ)"></span>。</p>
 <p><br/></p>
-<h4 id="后继">2.2 后继</h4>
-<p>设<span data-katex="A"></span>为一个集合，我们称<span data-katex="A\cup\{A\}"></span>为<span data-katex="A"></span>的后继，记作<span data-katex="A^+"></span>，</p>
-<p>求集合后继的操作，称为后继运算。</p>
+<p>如果<span data-katex="U"></span>经过有限步weak reduction转换为<span data-katex="V"></span>，就写为<span data-katex="U\triangleright_w V"></span>。</p>
+<p>与<span data-katex="\lambda"></span>项的<span data-katex="\beta"></span>范式一样，我们将不能再继续进行weak reduction的<span data-katex="CL"></span>项，称为weak范式（weak normal form）。</p>
 <p><br/></p>
-<p>例如，<span data-katex="\varnothing^+=\varnothing\cup\{\varnothing\}=\{\varnothing\}"></span></p>
-<p><span data-katex="\varnothing^{++}=\varnothing^+\cup\{\varnothing^+\}=\{\varnothing\}\cup\{\{\varnothing\}\}=\{\varnothing,\{\varnothing\}\}"></span></p>
-<p><span data-katex="\varnothing^{+++}=\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}\}"></span>。</p>
+<p>我们来看一个例子，</p>
+<p>设<span data-katex="B=S(KS)K"></span>，来计算<span data-katex="BXYZ"></span>，</p>
+<p><span data-katex="BXYZ=S(KS)KXYZ"></span></p>
+<p><span data-katex="\triangleright_w KSX(KX)YZ"></span>，因为<span data-katex="S(KS)KX\triangleright_w KSX(KX)"></span>，</p>
+<p><span data-katex="\triangleright_w S(KX)YZ"></span>，因为<span data-katex="KSX\triangleright_w S"></span>，</p>
+<p><span data-katex="\triangleright_w KXZ(YZ)"></span>，</p>
+<p><span data-katex="\triangleright_w X(YZ)"></span>。</p>
 <p><br/></p>
-<h4 id="归纳集">2.3 归纳集</h4>
-<p>设<span data-katex="A"></span>为一个集合，若<span data-katex="A"></span>满足，</p>
-<p>（1）<span data-katex="\varnothing\in A"></span></p>
-<p>（2）<span data-katex="\forall a\in A"></span>，<span data-katex="a^+\in A"></span></p>
-<p>则称<span data-katex="A"></span>是归纳集。</p>
+<p>有了合法的<span data-katex="CL"></span>项（公理），以及weak reduction（推导规则），</p>
+<p>我们就建立了另一个形式系统<span data-katex="CL_w"></span>。</p>
 <p><br/></p>
-<p>例如，<span data-katex="\{\varnothing,\varnothing^+,\varnothing^{++},\cdots\}"></span>是一个归纳集。</p>
-<p>从归纳集的定义可知，<span data-katex="\varnothing,\varnothing^+,\varnothing^{++},\cdots"></span>是所有归纳集的元素，</p>
-<p>于是，可以将它们定义为自然数，自然数集记为<span data-katex="N"></span>。</p>
+<h3 id="与演算之间的关系">3. <span data-katex="CL"></span>与<span data-katex="\lambda"></span>演算之间的关系</h3>
 <p><br/></p>
-<p>设<span data-katex="\sigma:N\rightarrow N"></span>，满足<span data-katex="\sigma(n)=n^+"></span>，则称<span data-katex="\sigma"></span>为后继函数，</p>
-<p>则可以证明<span data-katex="(N,\sigma,\varnothing)"></span>是一个Peano系统。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-bb0fb9c0c8923e03.png" /></p>
 <p><br/></p>
-<h3 id="演算">3. <span data-katex="\lambda"></span>演算</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-93f8d59a3b3b1bcb.png" /></p>
+<p>以上我们看到<span data-katex="CL"></span>项，似乎只能进行项的应用（application）操作，对应于<span data-katex="\lambda"></span>项的用法为<span data-katex="(MN)"></span>，</p>
+<p>然而，其实<span data-katex="CL"></span>的威力却不止于此，它的计算能力是与<span data-katex="\lambda"></span>演算相当的。</p>
 <p><br/></p>
-<p><a href="https://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97" target="_blank" rel="noopener"><span data-katex="\lambda"></span>演算</a>，是1930年由邱奇（<a href="https://zh.wikipedia.org/zh-hans/%E9%98%BF%E9%9A%86%E4%BD%90%C2%B7%E9%82%B1%E5%A5%87" target="_blank" rel="noopener">Alonzo Church</a>）发明的一套<a href="https://zh.wikipedia.org/zh/%E5%BD%A2%E5%BC%8F%E7%B3%BB%E7%B5%B1" target="_blank" rel="noopener">形式系统</a>，</p>
-<p>它是从具体的函数定义，函数调用和函数复合中，抽象出来的数学概念。</p>
+<p>为了证明等价性，建立<span data-katex="CL"></span>项与<span data-katex="\lambda"></span>项之间的关系，</p>
+<p>现在我们用<span data-katex="I"></span>，<span data-katex="K"></span>，<span data-katex="S"></span>三个组合子，来定义与<span data-katex="\lambda x.M"></span>相似的概念。</p>
 <p><br/></p>
-<h4 id="语法">3.1 语法</h4>
-<p>形式上，<span data-katex="\lambda"></span>演算由3种语法项（term）组成，</p>
-<p>（1）一个变量<span data-katex="x"></span>本身，是一个合法的<span data-katex="\lambda"></span>项，</p>
-<p>（2）<span data-katex="\lambda x.t_1"></span>，是一个合法的<span data-katex="\lambda"></span>项，称为从项<span data-katex="t_1"></span>中抽象出<span data-katex="x"></span>，</p>
-<p>（3）<span data-katex="t_1 t_2"></span>，是一个合法的<span data-katex="\lambda"></span>项，称为将<span data-katex="t_1"></span>应用于<span data-katex="t_2"></span>。</p>
-<p><br/></p>
-<p>例如，<span data-katex="(\lambda x.(xy))"></span>，<span data-katex="(x (\lambda x.(\lambda x.x)))"></span>，<span data-katex="((\lambda y.y)(\lambda x.(xy)))"></span>，都是合法的<span data-katex="\lambda"></span>项。</p>
-<p>为了简化描述，我们通常会省略一些括号，以上三个<span data-katex="\lambda"></span>项可以写成，</p>
-<p><span data-katex="\lambda x.xy"></span>，<span data-katex="x (\lambda x.\lambda x.x)"></span>，<span data-katex="(\lambda y.y)(\lambda x.xy)"></span>，</p>
-<p>对于形如<span data-katex="\lambda x.t_1"></span>的<span data-katex="\lambda"></span>项来说，“<span data-katex="."></span>”后面会向右包含尽量多的内容。</p>
-<p><br/></p>
-<p>现在我们有了一堆合法的字符串了。</p>
-<p>可是，在给定推导规则之前，这些字符串之间都是没有关联的。</p>
-<p>而且，我们也还没有为这些符号指定语义，它们到底代表什么也是不清楚的。</p>
-<p><br/></p>
-<p>很显然给这些符号指定不同的推导规则，会得到不同的公理系统，</p>
-<p>在众多<span data-katex="\lambda"></span>演算系统中，最简单的是<span data-katex="\lambda_\beta"></span>系统，它指定了<span data-katex="\alpha"></span>和<span data-katex="\beta"></span>两种变换。</p>
-<p><br/></p>
-<h4 id="变换">3.2 <span data-katex="\alpha"></span>变换</h4>
-<p>设<span data-katex="\lambda"></span>项<span data-katex="P"></span>中包含了<span data-katex="\lambda x.M"></span>，</p>
-<p>则我们可以把<span data-katex="M"></span>中所有自由出现的<span data-katex="x"></span>，全都换成y，即<span data-katex="\lambda y.[y/x]M"></span>，</p>
-<p>这种更名变换，称为<span data-katex="\alpha"></span>变换。</p>
-<p><br/></p>
-<p>其中，“自由出现”指的是<span data-katex="x"></span>不被其他<span data-katex="\lambda"></span>抽象所绑定，</p>
-<p>例如，<span data-katex="\lambda x.xy"></span>中，<span data-katex="y"></span>是自由的，</p>
-<p>而<span data-katex="x"></span>就不是自由的，因为它被<span data-katex="\lambda x."></span>绑定了。</p>
-<p><br/></p>
-<p>如果<span data-katex="P"></span>可以经过有限步<span data-katex="\alpha"></span>变换转换为<span data-katex="Q"></span>，就写为<span data-katex="P\equiv_\alpha Q"></span>。</p>
+<p>对于任意的<span data-katex="CL"></span>项<span data-katex="M"></span>，以及任意的变量<span data-katex="x"></span>，我们定义<span data-katex="[x].M"></span>用如下方式表示，</p>
+<p>（1）<span data-katex="[x].M=KM"></span>，如果<span data-katex="M"></span>中不含有<span data-katex="x"></span>，</p>
+<p>（2）<span data-katex="[x].x=I"></span>，</p>
+<p>（3）<span data-katex="[x].Ux=U"></span>，如果<span data-katex="U"></span>中不含有<span data-katex="x"></span>，</p>
+<p>（4）<span data-katex="[x].UV=S([x].U)([x].V)"></span>，如果（1）和（3）都不适用的话。</p>
 <p><br/></p>
 <p>例如，</p>
-<p><span data-katex="\lambda xy.x(xy)=\lambda x.(\lambda y.x(xy))"></span></p>
-<p><span data-katex="\equiv_\alpha\lambda x.(\lambda v.x(xv))"></span></p>
-<p><span data-katex="\equiv_\alpha\lambda u.(\lambda v.u(uv))"></span></p>
-<p><span data-katex="=\lambda uv.u(uv)"></span></p>
+<p><span data-katex="[x].xy=S([x].x)([x].y)=SI(Ky)"></span></p>
 <p><br/></p>
-<h4 id="变换-1">3.3 <span data-katex="\beta"></span>变换</h4>
-<p>形如<span data-katex="(\lambda x.M)N"></span>的<span data-katex="\lambda"></span>项，可以经由<span data-katex="\beta"></span>变换转换为<span data-katex="[N/x]M"></span>，</p>
-<p>指的是，把<span data-katex="M"></span>中所有自由出现的<span data-katex="x"></span>都换成<span data-katex="N"></span>。</p>
+<p>可见，<span data-katex="[x].M"></span>可以完全用<span data-katex="I"></span>，<span data-katex="K"></span>，<span data-katex="S"></span>三个组合子来构建出来，</p>
+<p>它表示了与<span data-katex="\lambda x.M"></span>相对应的概念。</p>
 <p><br/></p>
-<p>如果<span data-katex="P"></span>可以经过有限步<span data-katex="\beta"></span>变换转换为<span data-katex="Q"></span>，就写为<span data-katex="P\triangleright_\beta Q"></span>。</p>
+<p>因此，我们可以建立<span data-katex="\lambda"></span>项与<span data-katex="CL"></span>项的对应关系了，</p>
+<p>在<span data-katex="CL"></span>中，<span data-katex="X=Y"></span>，相当于<span data-katex="\lambda"></span>演算中，<span data-katex="X\equiv_\alpha Y"></span>，可以统一记为<span data-katex="X\equiv Y"></span></p>
+<p><span data-katex="X\triangleright_w Y"></span>，相当于<span data-katex="X\triangleright_\beta Y"></span>，可以统一记为<span data-katex="X\triangleright_{\beta,w} Y"></span>。</p>
 <p><br/></p>
-<p>例如，</p>
-<p><span data-katex="(\lambda x.x(xy))N\triangleright_\beta N(Ny)"></span></p>
-<p><span data-katex="(\lambda x.xx)(\lambda x.xx)\triangleright_\beta [(\lambda x.xx)/x](xx)=(\lambda x.xx)(\lambda x.xx)\triangleright_\beta\cdots"></span></p>
+<p>相应的，<span data-katex="I"></span>，<span data-katex="K"></span>，<span data-katex="S"></span>也可以使用<span data-katex="\lambda"></span>项来表示，</p>
+<p><span data-katex="I=\lambda x.x"></span>，<span data-katex="K=\lambda xy.x"></span>，<span data-katex="S=\lambda xyz.xz(yz)"></span>。</p>
 <p><br/></p>
-<p>我们发现，某些<span data-katex="\lambda"></span>项，可以无限进行<span data-katex="\beta"></span>变换。</p>
-<p>而那些最终会终止的<span data-katex="\beta"></span>变换的结果，称为<span data-katex="\beta"></span>范式（<span data-katex="\beta"></span> normal form）。</p>
+<h3 id="不动点定理">4. 不动点定理</h3>
+<p>在<span data-katex="\lambda"></span>演算和<span data-katex="CL"></span>中，存在组合子<span data-katex="Y"></span>，使得<span data-katex="Yx\triangleright_{\beta,w} x(Yx)"></span>。</p>
 <p><br/></p>
-<h4 id="邱奇编码">3.4 邱奇编码</h4>
-<p>现在我们有<span data-katex="\lambda_\beta"></span>公理系统了，就可以依照<span data-katex="\alpha"></span>或<span data-katex="\beta"></span>变换，对任意合法的<span data-katex="\lambda"></span>项进行变换。</p>
+<p>证明：令<span data-katex="U=\lambda ux.x(uux)"></span>，<span data-katex="Y=UU"></span>，则，</p>
+<p><span data-katex="Yx=(\lambda u.(\lambda x.x(uux)))Ux=x(UUx)=x(Yx)"></span>。</p>
 <p><br/></p>
-<p>假设我们有一个<span data-katex="\lambda"></span>项，<span data-katex="\lambda f.\lambda x.x"></span>，</p>
-<p>还有另外一个<span data-katex="\lambda"></span>项，<span data-katex="\lambda n.\lambda f.\lambda x.f(nfx)"></span>，记为<span data-katex="succ"></span>，</p>
-<p>我们来计算，<span data-katex="succ(\lambda f.\lambda x.x)"></span>，</p>
-<p>可得，<span data-katex="(\lambda n.\lambda f.\lambda x.f(nfx))(\lambda f.\lambda x.x)\triangleright_\beta\lambda f.\lambda x.fx"></span>，</p>
-<p>我们再运用一次<span data-katex="succ"></span>，<span data-katex="succ(\lambda f.\lambda x.fx)\triangleright_\beta\lambda f.\lambda x.f(fx)"></span>。</p>
+<h3 id="总结">总结</h3>
+<p>本文我们用公理化的方法，创建了另一个形式系统<span data-katex="CL_w"></span>，</p>
+<p>接着，我们发现<span data-katex="CL_w"></span>实际上是与<span data-katex="\lambda_\beta"></span>等价的。</p>
 <p><br/></p>
-<p>我们发现每次应用<span data-katex="succ"></span>，都会给<span data-katex="\lambda f.\lambda x.x"></span>中加一个<span data-katex="f"></span>，</p>
-<p>最终我们可以得到以下这些<span data-katex="\lambda"></span>项，</p>
-<p><span data-katex="\lambda f.\lambda x.x"></span></p>
-<p><span data-katex="\lambda f.\lambda x.fx"></span></p>
-<p><span data-katex="\lambda f.\lambda x.f(fx)"></span></p>
-<p><span data-katex="\lambda f.\lambda x.f(f(fx))"></span></p>
-<p><span data-katex="\cdots"></span></p>
-<p><span data-katex="\lambda f.\lambda x.f^nx"></span></p>
-<p><br/></p>
-<p>如果我们记<span data-katex="\lambda f.\lambda x.x\equiv 0"></span>，<span data-katex="\lambda f.\lambda x.fx\equiv 1"></span>，<span data-katex="\cdots"></span>，</p>
-<p><span data-katex="\lambda f.\lambda x.f^nx\equiv n"></span>，</p>
-<p>我们就得到了自然数的另一种表示方式，称之为<a href="https://zh.wikipedia.org/wiki/%E9%82%B1%E5%A5%87%E6%95%B0" target="_blank" rel="noopener">邱奇编码</a>。</p>
-<p><br/></p>
-<p>可以看到邱奇编码与归纳集之间有异曲同工之妙。</p>
-<p><br/></p>
-<h4 id="语义">3.5 语义</h4>
-<p>到目前为止，我们并未谈及<span data-katex="\lambda"></span>项到底表示什么含义，</p>
-<p>虽然<span data-katex="\lambda x.M"></span>看起来像是函数定义，<span data-katex="(\lambda x.M)N"></span>看起来像是函数调用。</p>
-<p><br/></p>
-<p>我们谨慎的使用公理化方法，从什么是合法的<span data-katex="\lambda"></span>项出发，</p>
-<p>定义<span data-katex="\lambda_\beta"></span>系统中的公理——合法的<span data-katex="\lambda"></span>项，</p>
-<p>然后又指定了该系统中的推导规则——<span data-katex="\alpha"></span>和<span data-katex="\beta"></span>变换，</p>
-<p>最终得到了一个形式化的公理系统（公理+推导规则）。</p>
-<p><br/></p>
-<p>后文中，我们将谈及<span data-katex="\lambda"></span>项的语义，然后再逐渐给它加上类型。</p>
-<p><br/></p>
+<p>可悲的是，知道<span data-katex="\lambda"></span>演算的人很多，但是知道<span data-katex="CL"></span>（组合子逻辑）的人却很少，这简直是不可思议的。</p>
+<p>下文中，我们将继续沿着公理化和形式系统的道路向前走，敲开数理逻辑的大门。</p>
 <h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
 <p><a href="https://book.douban.com/subject/4323391/" target="_blank" rel="noopener">Lambda-Calculus and Combinators，an Introduction</a></p>
-<p><a href="https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/Selinger-Lambda-Calculus-Notes.pdf" target="_blank" rel="noopener">Lecture Notes on the Lambda Calculus</a></p>
 
           
         
@@ -541,7 +486,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/185/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/185/">185</a><span class="page-number current">186</span><a class="page-number" href="/page/187/">187</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/187/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/185/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/185/">185</a><span class="page-number current">186</span><a class="page-number" href="/page/187/">187</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/187/">&gt;</a>
   </nav>
 
 
@@ -587,7 +532,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">310</span>
+                <span class="site-state-item-count">311</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

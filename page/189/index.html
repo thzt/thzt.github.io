@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/08/17/source-code/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/08/25/structure-and-detail/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/17/source-code/" itemprop="url">源码的误区</a></h1>
+                <a class="post-title-link" href="/2017/08/25/structure-and-detail/" itemprop="url">结构与细节</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T00:00:00+08:00">
-                2017-08-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T00:00:00+08:00">
+                2017-08-25
               </time>
             
 
@@ -347,139 +347,107 @@
       
         
           
-            <p>当我们还是小孩子的时候，就有了强烈的好奇心，</p>
-<p>我们经常摆弄一些精致的小玩具，</p>
-<p>总想拆开它们，看清里面的巧妙构造。</p>
+            <h3 id="架构">架构</h3>
+<p>“架构”一词与建筑行业有着不可分割的关系，</p>
+<p>在最初引入到软件行业中时，</p>
+<p>是为了表达在编写计算机程序之前进行规划和设计的重要性。</p>
 <p><br/></p>
-<p>这种探究内部运行机制的好奇心，是人们研究大自然的源动力，</p>
-<p>物理学家观测分析自然现象，</p>
-<p>总结规律，然后进行预测指导实践。</p>
+<p><a href="http://cabibbo.dia.uniroma3.it/ids/altrui/ieee1471.pdf" target="_blank" rel="noopener">IEEE</a>给出了软件架构的标准定义。</p>
+<blockquote>
+<p>Architecture:</p>
+</blockquote>
+<blockquote>
+<p>The fundamental <strong>organization</strong> of a system embodied in its components, their relationships to each other, and to the environment, and the principles guiding its design and <strong>evolution</strong>.</p>
+</blockquote>
 <p><br/></p>
-<p>软件工程师也是这样的，</p>
-<p>当他们使用了一个设计精巧的类库的时候，</p>
-<p>就总是禁不住这种诱惑，去熟读源码，想搞清楚到底别人是怎么实现的。</p>
+<p>维基百科中的描述也值得借鉴，</p>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Software_architecture" target="_blank" rel="noopener">Software architecture</a> refers to the high level <strong>structures</strong> of a software system, the discipline of creating such <strong>structures</strong>, and the documentation of these <strong>structures</strong>.</p>
+</blockquote>
 <p><br/></p>
-<p>无疑，这是一件值得赞赏的事情。</p>
-<p>然而，却包含了一个不容易觉察的误区。</p>
+<p>“架构”定义了软件系统中，各构成要素之间的<strong>关系</strong>与<strong>组织方式</strong>，</p>
+<p>从而体现出系统的一种<strong>结构性</strong>特征。</p>
 <p><br/></p>
-<p>那就是，</p>
-<p><strong>好用的东西，其实主要并不在于内部结构的精巧，</strong></p>
-<p><strong>而在于用户界面设计的友好。</strong></p>
+<h3 id="细节">细节</h3>
+<p>一个具体的软件，总是由各种细节组成，软件工程师也需要考虑细节问题。</p>
+<p>因为实现一个具体功能的方式总是灵活的，</p>
+<p>所以，在细节层面上会存在有多种多样的选择。</p>
 <p><br/></p>
-<p>实际上，大部分类库在源码级别，会屏蔽一些脏乱细节，</p>
-<p>源码看起来并不是那么优美，</p>
-<p>可是，最终会给用户提供优雅一致的接口（界面）。</p>
+<p>经常局限在细节上考虑问题，容易使人忽视全局性质。</p>
+<p>我们致力于在局部上消除冗余，却未必会看到子系统之间的重复，</p>
+<p>追求代码片段的可维护性，也未必会有利于系统整体的清晰易懂。</p>
 <p><br/></p>
-<h3 id="不要让用户关心细节">不要让用户关心细节</h3>
-<p>我们在编码的时候，如果只是为了<strong>功能性</strong>的目的来实现它，</p>
-<p>那么，用户在使用的时候，就会感到非常难受。</p>
-<p>他们不得不转换思维，将已有知识用我们提供的接口（界面）来表示，</p>
-<p>甚至不得不搞清楚我们到底做了什么，才能猜到它的用法。</p>
+<p>因此，为了保持良好的全局性质，在细节上就必定会有所<strong>损失</strong>。</p>
+<p>结构性质对细节来说，与其说是指导方针，倒不如说是一种<strong>人为限制</strong>。</p>
 <p><br/></p>
-<p>我们先暂时岔开话题，</p>
-<p>我们知道，汇编语言具备与现代高级语言一样的图灵完备性，</p>
-<p>是编译器或解释器提高了语言的易用性，减小了<a href="https://en.wikipedia.org/wiki/Semantic_gap" target="_blank" rel="noopener">Semantic Gap</a>。</p>
+<p>例如，在分层架构中，每一层必须是封闭和单向的，不允许跨层请求，</p>
+<p>层次之间也必须隔离的，层内的变化不能影响到其它层。</p>
+<p>这在某些场景下，可能会造成不便，但是如果随意的开放某个层次的访问权限，</p>
+<p>整个项目就是紧耦合的，变得一团糟。</p>
 <p><br/></p>
-<p>用户使用高级语言，或者DSL，来描述领域知识，</p>
-<p>然后计算机将它们翻译成可执行的过程。</p>
+<h3 id="物理结构和逻辑结构">物理结构和逻辑结构</h3>
+<p>从数据结构的角度来看，</p>
+<p>物理结构，是指数据的逻辑结构在计算机中的存储形式。</p>
+<p>逻辑结构，是指数据对象中数据元素之间的相互关系。</p>
 <p><br/></p>
-<p>因此，程序语言的设计目的之一，</p>
-<p>是为了对知识进行更直接的表述，而不需要过多的转换。</p>
+<p>考虑到软件项目，工程的物理结构，可以指相关<strong>文件</strong>的组织方式，</p>
+<p>工程的逻辑结构，可以指相关<strong>概念</strong>之间的关系。</p>
 <p><br/></p>
-<p>当我们编写软件时，是处于用户与已有系统的中间位置，</p>
-<p>一方面，我们为用户屏蔽了实现细节，</p>
-<p>另一方面，在实现这些功能的时候，我们也不用考虑更底层的细节。</p>
+<p>物理结构是重要的，它决定工程是如何存储和部署的，</p>
+<p>逻辑结构也是重要的，它决定了项目的参与者们如何理解它。</p>
 <p><br/></p>
-<p>一个软件系统，</p>
-<p>如果必须通过阅读源码，才可以被正确使用，</p>
-<p>那就是非常危险的，很容易被误用。</p>
+<p>从细节上来看，<a href="https://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E5%BC%82%E5%91%B3" target="_blank" rel="noopener">代码坏味</a>是结构性欠佳的一种表现，</p>
+<p>它们通常是更深层次灾难的根源。</p>
 <p><br/></p>
-<p>因此，我们应该将注意力聚焦在接口（界面）上，</p>
-<p>关注用户应该<strong>怎样使用</strong>这些功能。</p>
-<p>至于实现手段，却是灵活多样的，也是用户不必关心的。</p>
+<h3 id="数学结构">数学结构</h3>
+<p>数学结构，是与概念相对应的<strong>数学模型</strong>。</p>
 <p><br/></p>
-<h3 id="源码并不是那么重要">源码并不是那么重要</h3>
-<p>软件业是一个年轻的行业，也是一个高速发展的行业，</p>
-<p>这使得软件行业的从业者们，普遍缺乏经验，</p>
-<p>浮躁和唯利是图，让好的编程方式，难以传承。</p>
+<p>例如，我们使用链表，栈和队列，来表示数据对象之间的线性关系，</p>
+<p>我们使用<a href="https://en.wikipedia.org/wiki/Monad_(functional_programming)" target="_blank" rel="noopener">monad</a>来表示执行流程中所反映出来的一种自相似性，</p>
+<p>使用<a href="https://en.wikipedia.org/wiki/Process_calculus" target="_blank" rel="noopener">进程代数</a>作为并发系统的形式模型。</p>
 <p><br/></p>
-<p>如果说阅读源码，可以学习功能的实现方式，我觉得这并不为过。</p>
-<p>但是，软件设计的精髓，我认为并不在实现细节上，</p>
-<p>而在于<strong>用户接口（界面）的设计</strong>上。</p>
+<p>这些数学模型，有广泛的应用范围，但是也更加抽象，</p>
+<p>增加了在工程中直接使用的难度。</p>
 <p><br/></p>
-<p>过多的关注源码，往往会忽视重点。</p>
-<p>我们会看到，作者实现的太巧妙了，内部结构太优雅了，</p>
-<p>却没有看到，同样的功能，作者居然可以提供这种方式让用户使用。</p>
+<p>因为软件需求通常是定制化的，所以即使两个系统有相同的数学结构，</p>
+<p>在细节上，具体表现形式之间的<strong>差异</strong>，也可能是巨大的。</p>
 <p><br/></p>
-<p>例如：这个前端日志库，<a href="https://github.com/adamschwartz/log" target="_blank" rel="noopener">log</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log(&#39;this is *italic*&#39;)</span><br><span class="line">log(&#39;this word _bold_&#39;)</span><br><span class="line">log(&#39;this word &#96;code&#96;&#39;)</span><br></pre></td></tr></table></figure>
-<p>将会在控制台上，分别打印斜体，粗体和代码片段。</p>
-<p>还提供了这样的语法，让用户编写自定义样式，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log(&#39;this is [c&#x3D;&quot;color: red&quot;]red[c]&#39;)</span><br></pre></td></tr></table></figure>
+<p>因此，洞悉数学结构，虽然可以帮助我们看到事物本质，</p>
+<p>但是另一方面，也要谨防忽视产品之间差异性带来的危害。</p>
 <p><br/></p>
-<p>提供一套类似<a href="https://en.wikipedia.org/wiki/Markdown" target="_blank" rel="noopener">markdown</a>的语法，是非常漂亮直接的，</p>
-<p>而原生的<code>console.log</code>写法就比较麻烦。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&#39;%c error &#39;,&#39;color:#fff;background:red;&#39;)</span><br></pre></td></tr></table></figure>
+<h3 id="复杂性">复杂性</h3>
+<p>软件工程的目的在于控制复杂性，而不是增加复杂性。——<a href="https://en.wikipedia.org/wiki/Pamela_Zave" target="_blank" rel="noopener">Pamela Zave</a></p>
 <p><br/></p>
-<p>所以，一个简单的类库，稍有经验的开发者，都可以实现出来，</p>
-<p>但是，并不是每个人都能想出好的办法，让用户易于使用。</p>
+<p>对于不同利益相关者而言，他们眼中的软件系统必须是直观且容易理解的。</p>
+<p>例如，<a href="https://en.wikipedia.org/wiki/4%2B1_architectural_view_model" target="_blank" rel="noopener">4+1 architectural view model</a>提供了一种软件架构的描述模型，</p>
+<p>它从不同的视角，对系统进行专门的描述。</p>
 <p><br/></p>
-<h3 id="用户接口界面的设计之道">用户接口（界面）的设计之道</h3>
-<p>现在我们知道用户接口（界面）的重要性了。</p>
-<p>那么，到底应该如何设计一个好用的用户接口（界面）呢？</p>
+<p>易知，开发者看来简单的事情，最终用户未必认可，反之亦然。</p>
+<p>因此，复杂性是相对于人而言的，而不是系统本身。</p>
 <p><br/></p>
-<p>这需要我们先理解“<strong>知识的诅咒</strong>”，这一<a href="https://zh.wikipedia.org/wiki/%E8%AA%8D%E7%9F%A5%E5%81%8F%E8%AA%A4" target="_blank" rel="noopener">认知偏误</a>，</p>
-<p>它指的是，懂得多的人，通常难以从懂得少的人的角度思考问题。</p>
+<p>复杂的细节，经过封装和<strong>信息隐藏</strong>，可能会表达一个直观的概念，</p>
+<p>对细节的暴露程度不加管控，才是复杂的根源。</p>
 <p><br/></p>
-<p>例如，专家常用术语交谈，却丧失了与非专业人士的沟通能力，</p>
-<p>又例如，程序员们写的代码和文档，自己明白，但是别人读起来却很困难，</p>
-<p>或者，我们设计的用户接口（界面），自己会用，但是别人却不知道如何下手。</p>
+<h3 id="沟通与说明">沟通与说明</h3>
+<p>知识是需要讲解的，信息的传递也需要沟通，</p>
+<p>良好的设计，并不会自然而然的被人理解。</p>
 <p><br/></p>
-<p>这些都是“知识的诅咒”。</p>
-<p>为了避免这个问题，我们必须想办法让自己站在初学者的角度，重新考虑问题。</p>
+<p>因此，设立流程和规范，不如促进人们加强<strong>沟通</strong>，</p>
+<p>工程师们对前景和蓝图缺乏<strong>共识</strong>，才导致了系统整体结构的紊乱。</p>
 <p><br/></p>
-<p>下面我们介绍三个常用的办法，<strong>（1）不要假设别人知道</strong>。</p>
+<p>只有保持相同的愿景，在局部上才能有所折中，</p>
+<p>让步总是出现在未来可以得到更多利益的时候。</p>
 <p><br/></p>
-<p>对于引入的每一个概念，我们必须小心谨慎，</p>
-<p>从背景和动机开始，像讲故事一样的说清楚。</p>
-<p><br/></p>
-<p>经常性的写文章，是一种很好的锻炼方式，</p>
-<p>写代码和写文章是一脉相承的。</p>
-<p><br/></p>
-<p>另一个办法是，为我们设计的接口（界面）<strong>（2）编写丰富的文档</strong>，</p>
-<p>因为不介绍如何使用，就没有人知道如何正确使用它，通读源码也不行。</p>
-<p>没有文档，就不能判定使用方式是否作者预期的。</p>
-<p><br/></p>
-<p>最后，要<strong>（3）多向别人分享和介绍</strong>自己学会的知识，</p>
-<p>通过不断的磨炼，揣摩听众的反应，会掌握一些技巧，</p>
-<p>学会如何吸引别人的注意力，以及学会如何简洁清晰的表达一个论点。</p>
-<p><br/></p>
-<p>能把事情讲明白，是一件不容易的事情。</p>
+<p>此外，在说明怎样做的时候，很多人都忘记说明自己的<strong>意图</strong>和动机，</p>
+<p>像法律条文一样教条性的陈述，只会使人敬而远之。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>以上提到的三点，看起来和代码没有什么关系，</p>
-<p>是因为，设计接口（界面）并不是一个编码过程，</p>
-<p>而是一个<strong>知识传递</strong>过程。</p>
+<p>软件作为一个整体，需要考虑的问题还有很多，</p>
+<p>除了功能性需求之外，还有<a href="https://zh.wikipedia.org/zh/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能性需求</a>，</p>
+<p>只有站在整体考虑问题，才能跳出程序员的范围，从商业角度看待软件项目。</p>
 <p><br/></p>
-<p>我们必须为用户筛选出期望他们了解的知识，</p>
-<p>像电影一样，调动观众情绪的一个重要手段，就是信息配比（<a href="https://www.zhihu.com/question/39947219/answer/214338328" target="_blank" rel="noopener">框视觉</a>），</p>
-<p>即，导演对“信息露出”和“信息隐藏”的控制。</p>
-<p><br/></p>
-<p>在阅读源码时，聚焦到每一段的代码中，人们很容易忽视整体性，</p>
-<p>会重点考虑功能的<strong>实现方式</strong>，而非<strong>提供方式</strong>，</p>
-<p>这正是阅读源码的常见误区所在。</p>
-<p><br/></p>
-<p>所以，除了看别人如何<strong>达成目标</strong>之外，还要看别人是如何<strong>确定目标</strong>的，</p>
-<p>阅读源码是很重要，会让我们学会很多技巧，</p>
-<p>但是它却对确定一个更好的目标毫无帮助。</p>
-<p><br/></p>
-<p>虽然，可维护性和可扩展性也是重要的，关系到我们对代码的维护成本，</p>
-<p>但这是我们自己的问题，不是用户的问题。</p>
-<p>用户不会关心他们是怎么实现的，何况又是我们故意隐藏起来的。</p>
-<p><br/></p>
-<p>用户只关心我们有没有解决他们的问题，</p>
-<p>有没有<strong>给他们提供</strong>一种低成本的方式来解决，</p>
-<p>至于要降低我们自己成本的诉求，只好会心一笑了。</p>
+<p>反观日常工作中，我们坚持的种种<strong>原则</strong>，</p>
+<p>可能都只是为了缓解强迫症的<strong>不安</strong>和<strong>焦虑</strong>罢了。（自嘲</p>
 
           
         
@@ -518,7 +486,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/188/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/188/">188</a><span class="page-number current">189</span><a class="page-number" href="/page/190/">190</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/190/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/188/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/188/">188</a><span class="page-number current">189</span><a class="page-number" href="/page/190/">190</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/190/">&gt;</a>
   </nav>
 
 
@@ -564,7 +532,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">310</span>
+                <span class="site-state-item-count">311</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

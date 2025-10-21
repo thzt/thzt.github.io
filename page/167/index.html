@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/01/27/semantics-3/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/01/30/semantics-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/27/semantics-3/" itemprop="url">语言背后的代数学（三）：语义模型</a></h1>
+                <a class="post-title-link" href="/2018/01/30/semantics-4/" itemprop="url">语言背后的代数学（四）：哥德尔定理</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T00:00:00+08:00">
-                2018-01-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-30T00:00:00+08:00">
+                2018-01-30
               </time>
             
 
@@ -347,188 +347,129 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-ae7599d28cc05a51.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-f62f4160dd83402d.png" /></p>
 <p><br/></p>
-<h3 id="回顾">1. 回顾</h3>
-<p>上文我们从代数学角度重新认识了自然数，</p>
-<p>认识了自然数是如何被编码为符号串的，</p>
-<p>以及自然数在数学上是如何表示的。</p>
+<h3 id="回顾">回顾</h3>
+<p>上文我们介绍了一阶逻辑的语义模型，它包括结构和赋值两个部分，</p>
+<p>其中，结构给出了常元符号、函数符号以及谓词符号在论域中的解释，</p>
+<p>而赋值给出了变元符号在论域中的解释。</p>
 <p><br/></p>
-<p>我们的整体思路是，首先用公理化的方式建立一个形式系统，</p>
-<p>然后为这个形式系统选择一种数学解释作为它的语义，</p>
-<p>这样就建立了符号和数学对象之间的对应关系。</p>
+<p>我们通过这种方式，建立了形式符号和论域中数学对象之间的关联，</p>
+<p>本文将继续研究符号和其语义之间的关系。</p>
 <p><br/></p>
-<p>一般的，这些数学对象需要具有不同的运算性质，有不同的结构，</p>
-<p>因此构成了不同的代数。</p>
+<h3 id="语义方面模型">1. 语义方面（模型）</h3>
 <p><br/></p>
-<p>在《<a href="https://thzt.github.io/2017/09/16/type-5/">你好，类型</a>》系列文章中，</p>
-<p>我们介绍了命题逻辑和一阶谓词逻辑，</p>
-<p>当时，我们只是从形式系统（符号演算）的角度来介绍它们。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-e261ec02b84764ca.png" /></p>
 <p><br/></p>
-<p>例如，我们只要知道公理和推导规则，就可以做出形式证明，</p>
-<p><span data-katex="\forall x(\alpha\leftrightarrow\beta)\vdash\forall x\alpha\leftrightarrow\forall x\beta"></span>。</p>
+<h4 id="公式的可满足性">1.1 公式的可满足性</h4>
+<p>我们知道在公理化系统中，逻辑公式<span data-katex="A"></span>可以用来表示推导规则的前提和结论，</p>
+<p>它在给定模型<span data-katex="(M,\sigma)"></span>中的语义<span data-katex="A_{M[\sigma]}"></span>是一个真假值。</p>
+<p>这是合情合理的。</p>
+<p>因为推导本来就应该是从真命题推导出另一个真命题的过程。</p>
 <p><br/></p>
-<p>但是，这些符号到底代表什么含义呢？</p>
-<p>我们当时故意没有提及。</p>
+<p>由于模型是可以人为选择的，所以，给定一个逻辑公式<span data-katex="A"></span>，</p>
+<p>其语义的真假性，有可能会受到所选模型的影响。</p>
 <p><br/></p>
-<p>本文从模型论角度来做出一些解释。</p>
+<p>如果存在模型<span data-katex="(M, \sigma)"></span>，使得<span data-katex="A_{M[\sigma ]}=T"></span>成立，</p>
+<p>我们就称公式<span data-katex="A"></span>关于模型<span data-katex="(M, \sigma )"></span>是<strong>可满足的</strong>，</p>
+<p>记为<span data-katex="M\models _\sigma A"></span>。</p>
 <p><br/></p>
-<h3 id="一阶语言">2. 一阶语言</h3>
+<p>此外，如果有公式集<span data-katex="\Gamma"></span>，</p>
+<p>其中的每一个公式关于模型<span data-katex="(M, \sigma)"></span>都是可满足的，</p>
+<p>我们就称，公式集<span data-katex="\Gamma"></span>关于模型<span data-katex="(M, \sigma )"></span>是可满足的，</p>
+<p>记为<span data-katex="M\models _\sigma\Gamma"></span>。</p>
+<h4 id="重言式">1.2 重言式</h4>
+<p>如果公式<span data-katex="A"></span>，对于任意模型<span data-katex="(M, \sigma)"></span>都是可满足的，</p>
+<p>即，对任意结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，<span data-katex="M\models _\sigma A"></span>都成立，</p>
+<p>我们就称<span data-katex="A"></span>是永真公式，也称为<strong>重言式</strong>，记为<span data-katex="\models A"></span>。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-755d1c07e86c5ac0.png" /></p>
+<p>重言式，是与模型无关的公式，</p>
+<p>它们在任何模型下都为真。</p>
 <p><br/></p>
-<p>首先让我们回顾以下一阶谓词逻辑有哪些符号构成，</p>
+<p>例：<span data-katex="A\vee \neg A"></span>，<span data-katex="\forall x(x\doteq x)"></span>都是重言式。</p>
+<h4 id="逻辑推理">1.3 逻辑推理</h4>
 <p><br/></p>
-<p>（1）变元符号集合<span data-katex="V"></span>，</p>
-<p>它由可数个（包括0个）变元符号组成，用<span data-katex="x_1,x_1,\cdots,x_n,\cdots"></span>表示。</p>
-<p>（2）逻辑连接词符号集合<span data-katex="C"></span>，</p>
-<p>它由逻辑连接词符号<span data-katex="\neg,\wedge,\vee,\rightarrow,\leftrightarrow"></span>组成。</p>
-<p>（3）量词符号集合<span data-katex="Q"></span>，包括<span data-katex="\forall,\exists"></span>。</p>
-<p>（4）等词符号集合<span data-katex="E"></span>，只包括一个符号<span data-katex="\doteq"></span>。</p>
-<p>（5）括号集合，包括<span data-katex="),("></span>。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-c7afbb49c56cb45a.png" /></p>
 <p><br/></p>
-<p>以上这些符号称为<strong>逻辑符号</strong>，每个<strong>一阶逻辑</strong>都有这些符号。</p>
-<p>而不同的一阶逻辑，还有属于自己的<strong>非逻辑符号</strong>。</p>
+<p>有了可满足性，我们就可以进行逻辑推理了。</p>
 <p><br/></p>
-<p>（1）常元符号集合<span data-katex="\mathscr{L}_c"></span>，</p>
-<p>它由可数个（包括0个）常元符号组成，用<span data-katex="c_1,c_2,\cdots"></span>表示。</p>
-<p>（2）函数符号集合<span data-katex="\mathscr{L}_f"></span>，</p>
-<p>它由可数个（包括0个）函数符号组成，用<span data-katex="f_1,f_2,\cdots"></span>表示。</p>
-<p>（3）谓词符号集合<span data-katex="\mathscr{L}_P"></span>，</p>
-<p>它由可数个（包括0个）谓词符号组成，用<span data-katex="P_1,P_2,\cdots"></span>表示。</p>
-<p>等词符号<span data-katex="\doteq"></span>实际上可以看做是一个谓词符号。</p>
+<p>设<span data-katex="A"></span>为公式，<span data-katex="\Gamma"></span>为公式集，<span data-katex="M"></span>为任意结构，<span data-katex="\sigma"></span>为任意赋值，并且，</p>
+<p>如果<span data-katex="M\models _\sigma \Gamma"></span>成立，就有<span data-katex="M\models _\sigma A"></span>成立，</p>
+<p>我们就称，<span data-katex="A"></span>是公式集<span data-katex="\Gamma"></span>的<strong>逻辑结论</strong>或语义结论，</p>
+<p>记为<span data-katex="\Gamma \models A"></span>，也称结论<span data-katex="\Gamma \models A"></span><strong>有效</strong>。</p>
 <p><br/></p>
-<p>因此，一阶谓词逻辑是一种一阶逻辑。</p>
-<p>一阶逻辑中的逻辑符号和非逻辑符号，称为<strong>一阶语言</strong>，记为<span data-katex="\mathscr{L}"></span>。</p>
+<p>因此，<span data-katex="\Gamma \models A"></span>表示了一种语义关系，</p>
+<p>它指出，对任意<span data-katex="M"></span>和任意<span data-katex="\sigma"></span>，如果<span data-katex="\Gamma"></span>为真，那么<span data-katex="A"></span>也为真。</p>
 <p><br/></p>
-<h3 id="初等算术语言">3. 初等算术语言</h3>
+<h3 id="语法方面符号">2. 语法方面（符号）</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-ce2a07c40769f3b6.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-1d077dc211a8eae4.png" /></p>
 <p><br/></p>
-<p>初等算术语言是一个一阶语言，记为<span data-katex="\Pi"></span>。</p>
-<p>它的常元符号集合为<span data-katex="\{0\}"></span>，函数符号集合为<span data-katex="\{S,+,\cdot\}"></span>，</p>
-<p>谓词符号集合为<span data-katex="\{&lt;\}"></span>。</p>
+<h4 id="序贯">2.1 序贯</h4>
+<p>在《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型</a>》系列文章中，</p>
+<p>我们介绍过序贯的概念。</p>
 <p><br/></p>
-<p>其中，<span data-katex="S"></span>可以表示算术中的后继函数，</p>
-<p>而二元函数符号<span data-katex="+"></span>和<span data-katex="\cdot"></span>可以分别表示算术中的加法和乘法，</p>
-<p>谓词符号<span data-katex="&lt;"></span>可以描述自然数之间的小于关系。</p>
+<p>我们知道，在公理系统中，序贯可以用来表示前提和结论之间的符号联系。</p>
+<p>序贯<span data-katex="\Gamma\vdash\Delta"></span>，表示从公式集<span data-katex="\Gamma"></span>出发，根据推导规则，</p>
+<p>可以证明出<span data-katex="\Delta"></span>中至少有一条公式成立。</p>
 <p><br/></p>
-<h3 id="语法项和逻辑公式">4. 语法项和逻辑公式</h3>
+<p>习惯上，序贯<span data-katex="\Gamma\vdash\Delta"></span>成立，也称<span data-katex="\Gamma\vdash\Delta"></span><strong>可证</strong>。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-6dad89f5d4167a29.png" /></p>
+<p>值得注意的是，序贯谈论的都是语法层面（符号层面）上的，</p>
+<p>和这些符号的所选择的具体语义无关。</p>
+<h4 id="协调性一致性">2.2 协调性（一致性）</h4>
 <p><br/></p>
-<p>从形式语言的角度来看，除了知道语言包含哪些符号之外，还要指定语法，</p>
-<p>习惯上，我们经常使用<a href="https://zh.wikipedia.org/wiki/%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F" target="_blank" rel="noopener">BNF</a>来指定，</p>
-<p><span data-katex="t::=c|x|ft_1\cdots t_n"></span></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-73ceac7a2a671bb1.png" /></p>
 <p><br/></p>
-<p>即一个合法的<strong>项</strong>，可以归纳定义为，</p>
-<p>（1）每一个常元都是合法的项，</p>
-<p>（2）每一个变元都是合法的项，</p>
-<p>（3）如果<span data-katex="t_1,t_2,\cdots,t_n"></span>都是合法的项，而<span data-katex="f"></span>是一个<span data-katex="n"></span>元函数符号，</p>
-<p>那么<span data-katex="ft_1\cdots t_n"></span>也是一个合法的项。</p>
+<p>设<span data-katex="\Gamma"></span>为公式集，</p>
+<p>如果不存在一个公式<span data-katex="A"></span>使得序贯<span data-katex="\Gamma \vdash A"></span>与<span data-katex="\Gamma \vdash \neg A"></span>均可证，</p>
+<p>我们就称，公式集<span data-katex="\Gamma"></span>是<strong>协调的</strong>，也称一致的。</p>
 <p><br/></p>
-<p>初等算术语言<span data-katex="\Pi"></span>中的合法项，</p>
-<p>以下符号串都是合法的，</p>
-<p><span data-katex="S0"></span>，<span data-katex="Sx_1"></span>，<span data-katex="+S0SSx"></span>，<span data-katex="\cdot x_1+Sx_1x_2"></span>，</p>
-<p>而<span data-katex="SS&lt;"></span>是不合法的。</p>
+<p>设<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的公式集，该集合可以是有限集或可数集，</p>
+<p>如果<span data-katex="\Gamma"></span>协调，则称<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的<strong>形式理论</strong>。</p>
 <p><br/></p>
-<p>我们知道逻辑证明，并不是建立在形式语法之上的，</p>
-<p>而是建立在公理系统上面，而每一个推导规则都表明了前提和结论之间的关系，</p>
-<p>这些前提和结论，称为<strong>逻辑公式</strong>。</p>
+<h3 id="语法符号和语义模型">3. 语法（符号）和语义（模型）</h3>
 <p><br/></p>
-<p>一阶语言<span data-katex="\mathscr{L}"></span>中的逻辑公式，用大写字母<span data-katex="A,B,\cdots"></span>表示，定义为，</p>
-<p><span data-katex="A ::= t_1\doteq t_2 | Rt_1\cdot \cdot \cdot t_n | \neg A | A\wedge B | A\vee B | A\rightarrow B | A\leftrightarrow B | \forall xA | \exists xA"></span></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-17d1a64e7702d9eb.png" /></p>
 <p><br/></p>
-<p>即，逻辑公式可以归纳的定义为，</p>
-<p>（1）如果<span data-katex="t_1"></span>和<span data-katex="t_2"></span>是合法的项，则<span data-katex="t_1\doteq t_2"></span>是公式，</p>
-<p>（2）如果<span data-katex="t_1, ..., t_n"></span>是合法的项，而<span data-katex="R"></span>是一个<span data-katex="n"></span>元谓词，则<span data-katex="Rt_1\cdot \cdot \cdot t_n"></span>是公式，</p>
-<p>（3）如果<span data-katex="A"></span>是公式，则<span data-katex="\neg A"></span>是公式，</p>
-<p>（4）若<span data-katex="A, B"></span>是公式，则<span data-katex="A\wedge B, A\vee B, A\rightarrow B, A\leftrightarrow B"></span>都是公式，</p>
-<p>（5）若<span data-katex="A"></span>是公式并且<span data-katex="x"></span>是一个变元，那么<span data-katex="\forall xA"></span>和<span data-katex="\exists xA"></span>也是公式，<span data-katex="x"></span>称为<strong>约束变元</strong>。</p>
+<h4 id="可靠性和完全性">3.1 可靠性和完全性</h4>
+<p>把公理系统的语法和语义联合起来，</p>
+<p>我们还可以定义出以下这些系统性质。</p>
 <p><br/></p>
-<p>例，以下符号串可以看做一个初等算术公式，</p>
-<p><span data-katex="\forall x\neg (Sx\doteq 0), \forall x\forall y(&lt; xy\rightarrow(\exists (y\doteq +xz)))"></span></p>
+<p>如果序贯<span data-katex="\Gamma \vdash \Lambda"></span>可证，那么<span data-katex="\Gamma \models \Lambda"></span>成立，就说系统是<strong>可靠的</strong>。</p>
+<p>如果<span data-katex="\Gamma \models A"></span>成立，那么<span data-katex="\Gamma \vdash A"></span>可证，就说系统是<strong>完全的</strong>。</p>
+<h4 id="不完全性与协调性不可证">3.2 不完全性与协调性不可证</h4>
 <p><br/></p>
-<h3 id="语义模型">5. 语义模型</h3>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-12d70538c2c4cada.png" /></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-4edc7a4ce4127d1e.png" /></p>
+<p>是不是任意一个公理系统都是可靠且完全的呢？</p>
+<p>可惜并不是如此。</p>
 <p><br/></p>
-<p>有了一阶语言之后，我们就可以为符号选择语义了，</p>
-<p>通常的，语言的语义有两部分组成，</p>
-<p>其一称为<strong>结构</strong>，用来解释常元符号，函数符号和谓词符号，</p>
-<p>其二称为<strong>赋值</strong>，用来解释变元符号。</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%93%E5%B0%94%E7%89%B9%C2%B7%E5%93%A5%E5%BE%B7%E5%B0%94" target="_blank" rel="noopener">哥德尔</a>在1931年给出了两个定理，终结了人们的幻想，</p>
+<p>分别称为哥德尔不完全性定理，和哥德尔协调性定理。他指出，</p>
 <p><br/></p>
-<h4 id="语言结构">5.1 语言结构</h4>
-<p>一阶语言<span data-katex="\mathscr{L}"></span>的<strong>结构</strong><span data-katex="M"></span>是一个偶对，记为<span data-katex="M=(\mathbb{M}, I)"></span>，其中，</p>
-<p>（1）<span data-katex="\mathbb{M}"></span>是一个非空集合，称为<strong>论域</strong>，</p>
-<p>（2）<span data-katex="I"></span>是从<span data-katex="\mathscr{L}"></span>到<span data-katex="\mathbb{M}"></span>的映射，称为<strong>解释</strong>，记为<span data-katex="I:\mathscr{L} \rightarrow \mathbb{M}"></span>，它满足下面三个条件</p>
-<ol type="a">
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个常元符号<span data-katex="c"></span>，<span data-katex="I(c)"></span>是<span data-katex="\mathbb{M}"></span>中的元素</p></li>
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个n元函数符号<span data-katex="f"></span>，<span data-katex="I(f)"></span>是<span data-katex="\mathbb{M}"></span>上的n元函数</p></li>
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个n元谓词符号<span data-katex="P"></span>，<span data-katex="I(P)"></span>是<span data-katex="\mathbb{M}"></span>上的一个n元关系</p></li>
-</ol>
+<p><strong>不完全性</strong></p>
+<p>如果<span data-katex="\Gamma"></span>是一个有穷，并包含初等算术<span data-katex="\Pi"></span>的形式理论，</p>
+<p>那么<span data-katex="\Gamma"></span>是一个不完全的形式理论。</p>
 <p><br/></p>
-<p>例，我们可以指定初等算术语言<span data-katex="\Pi"></span>的结构为，偶对<span data-katex="N=(\mathbb{N}, I)"></span>，</p>
-<p>其中论域<span data-katex="\mathbb{N}"></span>为自然数集，</p>
-<p><span data-katex="I(S)"></span>为自然数集上的加<span data-katex="1"></span>函数，<span data-katex="I(+)"></span>为自然数加法运算，<span data-katex="I(\cdot)"></span>为自然数乘法运算。</p>
-<p><span data-katex="I(&lt;)"></span>为自然数集上的小于关系。</p>
+<p><strong>协调性</strong></p>
+<p>如果形式理论<span data-katex="\Gamma"></span>包含初等算术<span data-katex="\Pi"></span>，</p>
+<p>那么<span data-katex="\Pi"></span>的协调性不能在<span data-katex="\Gamma"></span>中被证明。</p>
 <p><br/></p>
-<h4 id="变元赋值">5.2 变元赋值</h4>
-<p>赋值<span data-katex="\sigma"></span>是一个映射，<span data-katex="\sigma:V\to\mathbb{M}"></span>，</p>
-<p>它将<span data-katex="\mathscr{L}"></span>中的每一个变元，赋以论域<span data-katex="\mathbb{M}"></span>中的一个元素<span data-katex="a"></span>，</p>
-<p>记为<span data-katex="\sigma(x)=a"></span>，其中<span data-katex="x\in V,a\in\mathbb{M}"></span>。</p>
+<blockquote>
+<p>所以，在软件开发过程中，检查一个软件系统是否符合设计要求，所使用的方法就是对它进行测试，在这个软件系统之外进行证明。</p>
+</blockquote>
 <p><br/></p>
-<p>有了赋值运算之后，公式中的变元就固定下来了，</p>
-<p>我们就可以谈论，在某一指定赋值运算下公式的语义了。</p>
-<p><br/></p>
-<h4 id="模型和语义">5.3 模型和语义</h4>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-7d6ac5cbb607ea83.png" /></p>
-<p><br/></p>
-<p>给定一阶语言<span data-katex="\mathscr{L}"></span>，并指定结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，</p>
-<p>我们称<span data-katex="(M,\sigma)"></span>是，我们为语言<span data-katex="\mathscr{L}"></span>选择的一个<strong>模型</strong>。</p>
-<p><br/></p>
-<p><strong>项的语义</strong></p>
-<p>选择了模型<span data-katex="(M,\sigma)"></span>之后，</p>
-<p><span data-katex="\mathscr{L}"></span>中的合法项<span data-katex="t"></span>的<strong>语义</strong>，</p>
-<p>就可以归纳的定义为论域<span data-katex="\mathbb{M}"></span>中的元素了，记为<span data-katex="t_{M[\sigma]}"></span>。</p>
-<p>（1）<span data-katex="x_{M[\sigma ]}=\sigma (x)"></span>，<span data-katex="x"></span>为变元符号</p>
-<p>（2）<span data-katex="c_{M[\sigma ]}=c_M"></span>，<span data-katex="c"></span>为常元符号</p>
-<p>（3）<span data-katex="(ft_1\cdot \cdot \cdot t_n)_{M[\sigma ]}=f_M((t_1)_{M[\sigma ]},\cdot \cdot \cdot (t_n)_{M[\sigma ]})"></span></p>
-<p><br/></p>
-<p>例，初等算术<span data-katex="\Pi"></span>中项的语义，</p>
-<p><span data-katex="(+x_1Sx_7)_{N[\sigma ]}=(x_1)_{N[\sigma ]}+(Sx_7)_{N[\sigma ]}=1+((x_7)_{N[\sigma ]}+1)=1+(7+1)=9"></span></p>
-<p><br/></p>
-<p><strong>逻辑公式的语义</strong></p>
-<p>公式<span data-katex="A"></span>在模型<span data-katex="(M, \sigma )"></span>下的语义是一个真假值，用<span data-katex="A_{M[\sigma ]}"></span>表示，归纳定义如下，</p>
-<p>（1）<span data-katex="(Pt_1\cdot \cdot \cdot t_n)_{M[\sigma ]}=P_M((t_1)_{M[\sigma ]},\cdot \cdot \cdot ,(t_n)_{M[\sigma ]})"></span></p>
-<p>（2）<span data-katex="(t_1\doteq t_2)_{M[\sigma ]}=\begin{cases}T,&amp;\text{if }(t_1)_{M[\sigma ]}=(t_2)_{M[\sigma ]}\\F,&amp;\text{otherwise}\end{cases}"></span></p>
-<p>（3）<span data-katex="(\neg A)_{M[\sigma ]}=B_\neg (A_{M[\sigma ]})"></span></p>
-<p>（4）<span data-katex="(A\vee B)_{M[\sigma ]}=B_\vee (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
-<p>（5）<span data-katex="(A\wedge B)_{M[\sigma ]}=B_\wedge (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
-<p>（6）<span data-katex="(A\rightarrow B)_{M[\sigma ]}=B_\rightarrow (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
-<p>（7）<span data-katex="(A\leftrightarrow B)_{M[\sigma ]}=B_\leftrightarrow (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
-<p>（8）<span data-katex="(\forall x_iA)_{M[\sigma ]}=\begin{cases}T,&amp;\forall a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&amp;\text{otherwise}\end{cases}"></span></p>
-<p>（9）<span data-katex="(\exists x_iA)_{M[\sigma ]}=\begin{cases}T,&amp;\exists a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&amp;\text{otherwise}\end{cases}"></span></p>
-<p><br/></p>
-<p>其中，二元真值函数<span data-katex="B_\wedge, B_\vee, B_\rightarrow, B_\leftrightarrow"></span>，</p>
-<p>分别逻辑连接词符号<span data-katex="\wedge, \vee, \rightarrow, \leftrightarrow"></span>的语义。</p>
-<p><br/></p>
-<p>至此，我们通过为一阶语言指定模型，</p>
-<p>将语言中所有的符号串都进行了解释。</p>
-<p><br/></p>
-<h3 id="总结">6. 总结</h3>
-<p>本文以一阶逻辑为例，从逻辑学角度给出了语义模型的定义，</p>
-<p>由此，一阶逻辑系统中的符号串，都有了一个数学对象与之对应，</p>
-<p>它们是论域，论域集合上的函数和运算。</p>
-<p><br/></p>
-<p>可想而已，这些数学对象是有代数性质的，</p>
-<p>下文我们将继续深入了解。</p>
+<h3 id="总结">总结</h3>
+<p>文本介绍语法（符号证明）和语义（模型）之间的关系，</p>
+<p>让我们认识到了形式化方法的局限性。</p>
+<p>一个足够有用的系统，总会出现不可证的事实，</p>
+<p>并且，在该系统内部，我们甚至都无法证明它是否含有矛盾。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="https://thzt.github.io/2017/09/16/type-5/">你好，类型（五）：Predicate logic</a></p>
+<p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional log</a></p>
 <p><a href="https://book.douban.com/subject/2364517/" target="_blank" rel="noopener">数理逻辑</a></p>
-<p><a href="https://zh.wikipedia.org/zh-hans/%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91" target="_blank" rel="noopener">一阶逻辑</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E4%B8%8D%E5%AE%8C%E5%A4%87%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">哥德尔不完备定理</a></p>
 
           
         
@@ -567,7 +508,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/166/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/168/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/166/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/168/">&gt;</a>
   </nav>
 
 
@@ -613,7 +554,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">310</span>
+                <span class="site-state-item-count">311</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

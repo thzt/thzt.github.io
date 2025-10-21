@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/10/14/type-9/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/10/21/type-10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/type-9/" itemprop="url">你好，类型（九）：Let polymorphism</a></h1>
+                <a class="post-title-link" href="/2017/10/21/type-10/" itemprop="url">你好，类型（十）：Parametric polymorphism</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T00:00:00+08:00">
-                2017-10-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-21T00:00:00+08:00">
+                2017-10-21
               </time>
             
 
@@ -348,177 +348,149 @@
         
           
             <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-de568f58ab090c54.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-60e9a5a9b2cc6fbd.png" /></p>
 <p><br/></p>
-<h3 id="类型变量">类型变量</h3>
-<p>到目前为止，我们遇到的每一个<span data-katex="\lambda"></span>项都有唯一确定的类型，</p>
-<p>因为，项的类型都被显式的注释在了它的后面。</p>
-<p>例如，我们可以定义一个恒等函数<span data-katex="id=\lambda x:Nat.~x:Nat\to Nat"></span>，</p>
-<p>则<span data-katex="id"></span>的类型就是固定的，<span data-katex="Nat\to Nat"></span>，而<span data-katex="id~true"></span>就不是良类型的。</p>
+<h3 id="回顾">回顾</h3>
+<p>上文我们介绍了let多态，</p>
+<p>将let表达式<span data-katex="let~x=t_1~in~t_2"></span>，看做了<span data-katex="[x\mapsto t_1]t_2"></span>的简写，</p>
+<p>即，把<span data-katex="t_2"></span>中出现的所有<span data-katex="x"></span>，都用<span data-katex="t_1"></span>替换掉，因此这些副本可以具有不同的类型。</p>
 <p><br/></p>
-<p>为每一个类型的恒等函数都定义各自的版本，是非常繁琐的，</p>
-<p>因此，一个自然的想法是，我们能否让<span data-katex="id"></span>的类型参数化，</p>
-<p>让它在不同的上下文中，实例化为不同的具体类型。</p>
-<p>例如，<span data-katex="id=\lambda x:X.~x:X\to X"></span>，其中<span data-katex="X"></span>是类型参量。</p>
+<p>本文将介绍另外一种多态形式，称为参数化多态（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism" target="_blank" rel="noopener">parametric polymorphism</a>），例如，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data Maybe a &#x3D; Nothing | Just a</span><br></pre></td></tr></table></figure>
+<p>以上Haskell代码，定义了一个<code>Maybe a</code>类型，</p>
+<p>其中<code>Maybe</code>称为类型构造器（type constructor），<code>a</code>是它的参数。</p>
 <p><br/></p>
-<h3 id="类型代换">类型代换</h3>
-<p>类型代换<span data-katex="\sigma"></span>，指的是一个从类型变量到类型的有限映射。</p>
-<p>例如，<span data-katex="\sigma=[X\mapsto T,Y\mapsto U]"></span>，会将类型变量<span data-katex="X,Y"></span>分别代换为<span data-katex="T,U"></span>。</p>
-<p>其中，<span data-katex="X,Y"></span>称为代换<span data-katex="\sigma"></span>的定义域，记为<span data-katex="dom(\sigma)"></span>，</p>
-<p>而<span data-katex="T,U"></span>称为代换<span data-katex="\sigma"></span>的值域，记为<span data-katex="range(\sigma)"></span>。</p>
+<p><code>Maybe</code>不是一个合法的类型，它只有和某个具体的<code>a</code>放在一起，才是一个合法的类型，</p>
+<p>例如，<code>Maybe Int</code>，<code>Maybe Char</code>。</p>
 <p><br/></p>
-<p>值得一提的是，所有的代换都是同时进行的，<span data-katex="\sigma=[X\mapsto Bool,Y\mapsto X\to X]"></span>，</p>
-<p>是将<span data-katex="X"></span>映射成<span data-katex="Bool"></span>，将<span data-katex="Y"></span>映射成<span data-katex="X\to X"></span>，而不是<span data-katex="Bool\to Bool"></span>。</p>
+<h3 id="system-f">System F</h3>
 <p><br/></p>
-<p>代换可以用下面的方式来定义，</p>
-<p>（1）<span data-katex="\sigma(X)=X"></span>，如果<span data-katex="X\notin dom(\sigma)"></span></p>
-<p>（2）<span data-katex="\sigma(X)=T"></span>，如果<span data-katex="(X\mapsto T)\in\sigma"></span></p>
-<p>（3）<span data-katex="\sigma(Nat)=Nat"></span>，<span data-katex="\sigma(Bool)=Bool"></span></p>
-<p>（4）<span data-katex="\sigma(T_1\to T_2)=\sigma T_1\to\sigma T_2"></span></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-2c1c907d268a3169.png" /></p>
 <p><br/></p>
-<p>对于类型上下文<span data-katex="\Gamma=\{x_1:T_1,\cdots,x_n:T_n\}"></span>来说，</p>
-<p><span data-katex="\sigma\Gamma=\{x_1:\sigma T_1,\cdots,x_n:\sigma T_n\}"></span></p>
+<p>为了实现参数化多态，我们需要对简单类型化<span data-katex="\lambda"></span>演算（<span data-katex="\lambda^\to"></span>系统）进行扩展，</p>
+<p>在<span data-katex="\lambda^\to"></span>中，我们用<span data-katex="\lambda x.t"></span>来表示<span data-katex="\lambda"></span>抽象（lambda abstraction），</p>
+<p>而使用<span data-katex="t_1~t_2"></span>来表示<span data-katex="\lambda"></span>应用（lambda application）。</p>
 <p><br/></p>
-<p>类型代换的一个重要特性是它保留了类型声明的有效性，</p>
-<p>如果包含类型变量的项是良类型的，那么它的所有代换实例也都是良类型的。</p>
+<p>现在我们引入一种新的抽象形式，<span data-katex="\lambda X.t"></span>，它的参数<span data-katex="X"></span>是一个类型，称为类型抽象，</p>
+<p>再引入一种新的应用形式，<span data-katex="t[T]"></span>，称为类型实例化，其中<span data-katex="T"></span>是一个类型表达式。</p>
 <p><br/></p>
-<h3 id="类型推断">类型推断</h3>
+<p>求值规则如下，</p>
+<p><span data-katex="(\lambda X.t)[T]\to[X\mapsto T]t"></span></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-030a50394cdb2096.png" /></p>
+<p>例如，我们可以这样定义一个多态函数，<span data-katex="id=\lambda X.\lambda x:X.x"></span></p>
+<p>当把它应用于类型<span data-katex="Nat"></span>时，</p>
+<p><span data-katex="id[Nat]\to[X\mapsto Nat](\lambda x:X.x)=\lambda x:Nat.x"></span>，它为<span data-katex="Nat"></span>类型上的恒等函数。</p>
+<p>而把它应用于类型<span data-katex="Bool"></span>时，</p>
+<p><span data-katex="id[Bool]\to[X\mapsto Bool](\lambda x:X.x)=\lambda x:Bool.x"></span>，它为<span data-katex="Bool"></span>类型上的恒等函数，</p>
 <p><br/></p>
-<p>在类型上下文<span data-katex="\Gamma"></span>中，对于包含类型变量的项<span data-katex="t"></span>，我们通常会提出两个问题，</p>
+<p>可见，<span data-katex="id"></span>的具体类型，依赖于它的类型参数。</p>
+<p>它应用于任意一个类型<span data-katex="T"></span>，<span data-katex="id[T]"></span>都会得到一个类型为<span data-katex="T\to T"></span>的函数，</p>
+<p>因此，人们通常将<span data-katex="id"></span>的类型记为<span data-katex="\forall X.X\to X"></span>。</p>
 <p><br/></p>
-<p>（1）它的所有代换实例，是否都是良类型的？</p>
-<p>即，是否<span data-katex="\forall\sigma\exists T,\sigma\Gamma\vdash\sigma t:T"></span>。</p>
+<p>类型规则如下，</p>
+<p>（1）<span data-katex="\frac{\Gamma,X\vdash t:T}{\Gamma\vdash\lambda X.t:\forall X.T}"></span></p>
+<p>（2）<span data-katex="\frac{\Gamma\vdash t_1:\forall X.T_1}{\Gamma\vdash t[T_2]:[X\mapsto T_2]T_1}"></span></p>
+<p>其中，类型<span data-katex="\forall X.T"></span>，叫做全称类型（universal type），</p>
+<p><span data-katex="\forall"></span>称为全称量词（universal quantifier），</p>
+<p>引入了全称类型之后得到的系统，称为System F。</p>
 <p><br/></p>
-<p>（2）是否存在良类型的代换实例？</p>
-<p>即，是否<span data-katex="\exists\sigma\exists T,\sigma\Gamma\vdash\sigma t:T"></span>。</p>
+<h3 id="rank-n-types">Rank-N Types</h3>
 <p><br/></p>
-<p>对于第一个问题，将引出参数化多态（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism" target="_blank" rel="noopener">parametric polymorphism</a>），</p>
-<p>例如，<span data-katex="\lambda f:X\to X.\lambda a:X.f(f(a))"></span>，它的类型为<span data-katex="(X\to X)\to X\to X"></span>，</p>
-<p>无论用什么具体类型<span data-katex="T"></span>来代换<span data-katex="X"></span>，代换实例都是良类型的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-bbff0b1e749dff2f.png" /></p>
 <p><br/></p>
-<p>对于第二个问题，原始的项可能不是良类型的，</p>
-<p>但是可以选择合适的类型代换使之实例化为良类型的项。</p>
+<p>有了全称类型之后，函数的参数类型和返回值类型，都有可能具有全称类型。</p>
+<p>不难看出，函数返回值类型的全称量词，总是可以提取出来，放到最外面，</p>
+<p>但是参数类型的全称量词，不能提取出来。</p>
 <p><br/></p>
-<p>例如，<span data-katex="\lambda f:Y.\lambda a:X.f(f(a))"></span>，是不可类型化的，</p>
-<p>但是如果用<span data-katex="Nat\to Nat"></span>代换<span data-katex="Y"></span>，用<span data-katex="Nat"></span>代换<span data-katex="X"></span>，</p>
-<p><span data-katex="\sigma=[X\mapsto Nat,Y\mapsto Nat\to Nat]"></span>，</p>
-<p>就可以得到，<span data-katex="\lambda f:Nat\to Nat.\lambda a:Nat.f(f(a))"></span>，</p>
-<p>可类型化为<span data-katex="(Nat\to Nat)\to Nat\to Nat"></span>。</p>
+<p>例如，<span data-katex="\forall X.X\to (\forall Y.Y\to X)"></span>，相当于<span data-katex="\forall X.\forall Y.X\to Y\to X"></span>，</p>
+<p>而<span data-katex="(\forall X.X\to X)\to Nat"></span>，与<span data-katex="\forall X.(X\to X)\to Nat"></span>则不同。</p>
 <p><br/></p>
-<p>或者，取<span data-katex="\sigma&#39;=[Y\mapsto X\to X]"></span>，结果也能得到一个良类型的项，尽管仍包含变量。</p>
+<p>不包含全称量词的类型表达式，具有rank-0类型，也称为单态类型（monotype），</p>
+<p>全称量词都可以提取出来类型表达式，具有rank-1类型（rank-1 type），</p>
+<p>一个函数类型，它的入参具有rank-n类型，那么该函数就具有rank-(n+1)类型。</p>
 <p><br/></p>
-<p>在寻找类型变量有效实例的过程中，出现了类型推断（<a href="https://en.wikipedia.org/wiki/Type_inference" target="_blank" rel="noopener">type inference</a>）的概念。</p>
-<p>意味着由编译器来帮助推断<span data-katex="\lambda"></span>项的具体类型，</p>
-<p>在<a href="https://en.wikipedia.org/wiki/ML_(programming_language)" target="_blank" rel="noopener">ML</a>语言中，程序员可以忽略所有的类型注释——隐式类型（<a href="http://wiki.c2.com/?ImplicitTyping" target="_blank" rel="noopener">implicit typing</a>）。</p>
+<p>例如，</p>
+<p><span data-katex="((\forall X.X\to X)\to Nat)\to Bool\to Bool"></span>，具有rank-3类型，</p>
+<p><span data-katex="Nat\to (\forall X.X\to X)"></span>，具有rank-1类型。</p>
 <p><br/></p>
-<p>在进行推断的时候，对每一个原始的<span data-katex="\lambda"></span>抽象<span data-katex="\lambda x.t"></span>，</p>
-<p>都用新的类型变量进行注释，写成<span data-katex="\lambda x:X.t"></span>，</p>
-<p>然后采取特定的类型推导算法，找到使项通过类型检查的一个最一般化的解。</p>
+<p>System F的功能是很强大的，但是<a href="https://en.wikipedia.org/wiki/System_F#Use_in_programming_languages" target="_blank" rel="noopener">不幸的是</a>，</p>
+<p>人们发现，该系统中的类型推导算法是<a href="https://en.wikipedia.org/wiki/Undecidable_problem" target="_blank" rel="noopener">不可判定的</a>。</p>
+<p>例如，一般而言，一个rank-3及其以上rank-N类型的表达式，其类型是不可确定的，</p>
+<p>为了确定它的类型，人们不得不手工加上必要的类型信息。</p>
 <p><br/></p>
-<p>设<span data-katex="\Gamma"></span>为类型上下文，<span data-katex="t"></span>为项，</p>
-<p><span data-katex="(\Gamma,t)"></span>的解，是指这样的一个序对<span data-katex="(\sigma,T)"></span>，使得<span data-katex="\sigma\Gamma\vdash\sigma t:T"></span>成立。</p>
+<p>Haskell采用了<a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system" target="_blank" rel="noopener">Hindley–Milner类型系统</a>，</p>
+<p>它是System F的一个子集，其中包含了可判定的类型推导算法。</p>
+<p>在Haskell中，类型参量（type variable）默认具有全称类型（universally quantified），</p>
+<p>例如，<code>a -&gt; a</code>，实际上表示类型<span data-katex="\forall a.a\to a"></span>，</p>
+<p><code>a -&gt; a</code>可看做<code>(-&gt;) a a</code>类型，其中<code>-&gt;</code>为函数类型构造器。</p>
 <p><br/></p>
-<p>例如，设<span data-katex="\Gamma=f:X,a:Y"></span>，<span data-katex="t=f~a"></span>，则</p>
-<p><span data-katex="(\sigma=[X\mapsto Y\to Nat],Nat)"></span>，<span data-katex="(\sigma=[X\mapsto Y\to Z],Z)"></span>，</p>
-<p>都是<span data-katex="(\Gamma,t)"></span>的解。</p>
+<h3 id="非直谓性">非直谓性</h3>
 <p><br/></p>
-<h3 id="基于约束的类型化">基于约束的类型化</h3>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-630de5020f6c4e74.png" /></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-0936c05365786fa4.png" /></p>
+<p>在数学和逻辑学中，一个定义称为非直谓的（<a href="https://en.wikipedia.org/wiki/Impredicativity" target="_blank" rel="noopener">impredicative</a>），</p>
+<p>指的是它包含了自引用（self-reference）。</p>
+<p>例如，在定义一个集合的时候，用到了正在定义的这个集合。</p>
 <p><br/></p>
-<h4 id="约束集">（1）约束集</h4>
-<p>在实际情况中，<span data-katex="(\Gamma,t)"></span>的解，并不一定满足其他类型表达式的约束条件，</p>
-<p>所以，我们寻找的是满足这些约束条件的特解。</p>
+<p><a href="https://en.wikipedia.org/wiki/Russell%27s_paradox" target="_blank" rel="noopener">罗素悖论</a>就是用非直谓的方式构造出来的，</p>
+<p>如果我们定义<span data-katex="R=\{x|x\notin x\}"></span>，那么<span data-katex="R\in R\Leftrightarrow R\notin R"></span>。</p>
+<p>非直谓定义并不一定导致矛盾，有些情况下还是有用的，</p>
+<p>例如，我们可以非直谓的定义，集合中的最小元素为，<span data-katex="A_{min}=x"></span>，<span data-katex="\forall y.x\leqslant y"></span>。</p>
 <p><br/></p>
-<p>所谓约束条件，实际上指的是约束集<span data-katex="C"></span>，</p>
-<p>它由一些包含类型参量的项的等式构成，<span data-katex="\{S_i=T_i|i\in l..n\}"></span>。</p>
+<p>具有参数化多态的类型表达式，</p>
+<p>也有直谓（predicative）和非直谓（impredicative）之分。</p>
 <p><br/></p>
-<p>如果一个代换<span data-katex="\sigma"></span>的代换实例，<span data-katex="\sigma S"></span>和<span data-katex="\sigma T"></span>相同，则称该代换合一（unify）了等式<span data-katex="S=T"></span>。</p>
-<p>如果<span data-katex="\sigma"></span>能合一<span data-katex="C"></span>中的所有等式，则称<span data-katex="\sigma"></span>能合一（unify）或满足（satisfy）<span data-katex="C"></span>。</p>
+<p>如果它可以用一个多态类型实例化，例如用它自己来实例化，</p>
+<p>就称为非直谓多态类型（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism#Impredicative_polymorphism" target="_blank" rel="noopener">impredicative polymorphism</a>）。</p>
 <p><br/></p>
-<p>我们用<span data-katex="\Gamma\vdash t:T|_\chi C"></span>，来表示约束集<span data-katex="C"></span>满足时，项<span data-katex="t"></span>在<span data-katex="\Gamma"></span>下的类型为<span data-katex="T"></span>，</p>
-<p>其中<span data-katex="\chi"></span>为约束集中，所有类型变量的集合，有时为了讨论方便可以省略它。</p>
+<p>反之，如果一个多态类型表达式，只能用单态类型实例化，</p>
+<p>就称它具有直谓多态类型（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism#Predicative_polymorphism" target="_blank" rel="noopener">predicative_polymorphism</a>）。</p>
 <p><br/></p>
-<p>例如，对于项<span data-katex="t=\lambda x:X\to Y.x~0"></span>，</p>
-<p>约束集可以写为<span data-katex="\{Nat\to Z=X\to Y\}"></span>，则<span data-katex="t"></span>类型为<span data-katex="(X\to Y)\to Z"></span>。（算法略）</p>
-<p>而代换<span data-katex="\sigma=[X\mapsto Nat,Z\mapsto Bool,Y\mapsto Bool]"></span>，</p>
-<p>使得等式<span data-katex="Nat\to Z=X\to Y"></span>成立，</p>
-<p>所以，我们推断出了<span data-katex="(Nat\to Bool)\to Bool"></span>是项<span data-katex="t"></span>的一个可能类型。</p>
+<h3 id="单态限制">单态限制</h3>
 <p><br/></p>
-<h4 id="约束集的解">（2）约束集的解</h4>
-<p>约束集的解一般不是唯一的，所以一个关键问题是如何确定一个“最好”的解。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-01d0844dfc8cb281.png" /></p>
 <p><br/></p>
-<p>我们称代换<span data-katex="\sigma"></span>比<span data-katex="\sigma&#39;"></span>更具一般性（more general），如果<span data-katex="\sigma&#39;=\gamma\circ\sigma"></span>，记为<span data-katex="\sigma\sqsubseteq\sigma&#39;"></span>，</p>
-<p>其中，<span data-katex="\gamma"></span>为一个代换，<span data-katex="\gamma\circ\sigma"></span>表示代换的复合，<span data-katex="(\gamma\circ\sigma)S=\gamma(\sigma S)"></span>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f x &#x3D; let g y z &#x3D; ([x,y], z) </span><br><span class="line">      in ...</span><br></pre></td></tr></table></figure>
+<p>假设<code>x</code>的类型为<code>a</code>，那么<code>g</code>的类型只能为<code>a -&gt; b -&gt; ([a], b)</code>，</p>
+<p>其中，由于列表类型的限制，<code>x</code>和<code>y</code>必须具有相同的类型。</p>
 <p><br/></p>
-<p>约束集<span data-katex="C"></span>的主合一子（principal unifier）指的是代换<span data-katex="\sigma"></span>，</p>
-<p>它能满足<span data-katex="C"></span>，且对于所有满足<span data-katex="C"></span>的代换<span data-katex="\sigma&#39;"></span>，都有<span data-katex="\sigma\sqsubseteq\sigma&#39;"></span>。</p>
+<p>此时，只有<code>b</code>可以具有全称量词，即<span data-katex="\forall b.a\to b\to ([a],b)"></span>，</p>
+<p>因为<code>a</code>在类型上下文中，已经出现了，不能再被实例化为其他的类型了。</p>
+<p>我们称，<code>g</code>的第一个参数<code>a</code>具有单态性（monomorphism）。</p>
 <p><br/></p>
-<p>如果<span data-katex="(\Gamma,t,S,C)"></span>的解<span data-katex="(\sigma,T)"></span>，对于任何其他解<span data-katex="(\sigma&#39;,T&#39;)"></span>，都有<span data-katex="\sigma\sqsubseteq\sigma&#39;"></span>，</p>
-<p>则称<span data-katex="(\sigma,T)"></span>是一个主解（principal solution），称<span data-katex="T"></span>为<span data-katex="t"></span>的主类型（principal type）。</p>
-<p>可以证明，如果<span data-katex="(\Gamma,t,S,C)"></span>有解，则它必有一个主解。</p>
+<p>例如，<code>(g True, g 'c')</code>不是良类型的，</p>
+<p>而<code>(g True, g False)</code>是良类型的。</p>
 <p><br/></p>
-<h3 id="let多态">let多态</h3>
+<p>值得一提的是，显式的给<code>g</code>注明类型，也不能阻止<code>a</code>的单态行为，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f x &#x3D; let </span><br><span class="line">         g :: a -&gt; b -&gt; ([a],b) </span><br><span class="line">         g y z &#x3D; ([x,y], z) </span><br><span class="line">      in ...</span><br></pre></td></tr></table></figure>
+<p>此时，<code>a</code>仍然是单态的。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-14-type-9/1023733-6e7e4c43cf611904.png" /></p>
+<p>在<a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system" target="_blank" rel="noopener">Hindley–Milner类型系统</a>中，</p>
+<p>如果一个类型变量，不在类型上下文中出现，它就可以被全称化（generalize）。</p>
+<p>但是Haskell考虑到性能和模块间的类型推导，</p>
+<p>还增加了特殊的单态限制（monomorphism restriction）避免全称化。</p>
 <p><br/></p>
-<p>多态（polymorphism）指的是单独一段程序能在不同的上下文中实例化为不同的类型。</p>
-<p>其中let多态，是由let表达式引入的多态性。</p>
-<p><br/></p>
-<h4 id="单态性">（1）单态性</h4>
-<p>假设我们定义了一个<span data-katex="double"></span>函数，它能将一个函数对参数应用两次，</p>
-<p><span data-katex="let~double=\lambda f:Nat\to Nat.\lambda a:Nat.f(f(a))~in"></span></p>
-<p><span data-katex="~~~~double~(\lambda x:Nat.succ~x)~1"></span></p>
-<p>此时，<span data-katex="double"></span>的类型为<span data-katex="(Nat\to Nat)\to Nat\to Nat"></span>。</p>
-<p><br/></p>
-<p>如果我们想将<span data-katex="double"></span>应用于其他类型，就必须重写一个新的<span data-katex="double&#39;"></span>，</p>
-<p><span data-katex="let~double&#39;=\lambda f:Bool\to Bool.\lambda a:Bool.f(f(a))~in"></span></p>
-<p><span data-katex="~~~~double&#39;~(\lambda x:Bool.x)~true"></span></p>
-<p>此时<span data-katex="double&#39;"></span>的类型为<span data-katex="(Bool\to Bool)\to Bool\to Bool"></span>。</p>
-<p><br/></p>
-<p>我们不能让一个<span data-katex="double"></span>函数，既能用于<span data-katex="Nat"></span>类型，又能用于<span data-katex="Bool"></span>类型。</p>
-<p>即使在<span data-katex="double"></span>中用类型变量也没有用，</p>
-<p><span data-katex="let~double=\lambda f:X\to X.\lambda a:X.f(f(a))~in~\cdots"></span></p>
-<p><br/></p>
-<p>例如，如果写，</p>
-<p><span data-katex="let~double=\lambda f:X\to X.\lambda a:X.f(f(a))~in"></span></p>
-<p><span data-katex="~~~~let~a=double~(\lambda x:Nat.succ~x)~1~in"></span></p>
-<p><span data-katex="~~~~~~~~let~b=double~(\lambda x:Bool.x)~true~in~\cdots"></span></p>
-<p>则在<span data-katex="a"></span>定义中使用<span data-katex="double"></span>，会产生一个约束<span data-katex="X\to X=Nat\to Nat"></span>，</p>
-<p>而在<span data-katex="b"></span>定义中使用<span data-katex="double"></span>，则会产生约束<span data-katex="X\to X=Bool\to Bool"></span>，</p>
-<p>这样会使类型变量<span data-katex="X"></span>的求解发生矛盾，导致整个程序不可类型化。</p>
-<p><br/></p>
-<h4 id="多态性">（2）多态性</h4>
-<p>let多态所做的事情，就是打破这个限制，</p>
-<p>让类型参量<span data-katex="X"></span>在上述不同的上下文中，可以分别实例化为<span data-katex="Nat"></span>和<span data-katex="Bool"></span>。</p>
-<p><br/></p>
-<p>这需要改变与let表达式相关的类型推导规则，在第七篇中，我们提到过，</p>
-<p><span data-katex="\frac{\Gamma\vdash t_1:T_1~~~~\Gamma,x:T_1\vdash t_2:T_2}{\Gamma\vdash let~x:T_1=t_1~in~t_2:T_2}"></span></p>
-<p>它会首先计算<span data-katex="T_1"></span>作为<span data-katex="x"></span>的类型，然后再用<span data-katex="x"></span>来确定<span data-katex="T_2"></span>的类型。</p>
-<p>此时，let表达式<span data-katex="let~x=t_1:T_1~in~t_2"></span>，可以看做<span data-katex="(\lambda x:T_1.t_2)t_1"></span>的简写。</p>
-<p><br/></p>
-<p>为了引入多态性，我们需要对上述类型推导规则进行修改，</p>
-<p><span data-katex="\frac{\Gamma\vdash[x\mapsto t_1]t_2:T_2}{\Gamma\vdash let~x=t_1~in~t_2:T_2}"></span></p>
-<p>它表示，先将<span data-katex="t_2"></span>中的<span data-katex="x"></span>用<span data-katex="t_1"></span>代换掉，然后再确定<span data-katex="t_2"></span>的类型。</p>
-<p><br/></p>
-<p>这样的话，</p>
-<p><span data-katex="let~double=\lambda f:X\to X.\lambda a:X.f(f(a))~in"></span></p>
-<p><span data-katex="~~~~let~a=double~(\lambda x:Nat.succ~x)~1~in"></span></p>
-<p><span data-katex="~~~~~~~~let~b=double~(\lambda x:Bool.x)~true~in~\cdots"></span></p>
-<p><br/></p>
-<p>就相当于，</p>
-<p><span data-katex="let~a=\lambda f:X\to X.\lambda a:X.f(f(a))~(\lambda x:Nat.succ~x)~1~in"></span></p>
-<p><span data-katex="~~~~let~b=\lambda f:Y\to Y.\lambda a:Y.f(f(a))~(\lambda x:Bool.x)~true~in~\cdots"></span></p>
-<p>通过let多态，产生了<span data-katex="double"></span>的两个副本，并为之分配了不同的类型参量。</p>
-<p><br/></p>
-<p>此时，let表达式<span data-katex="let~x=t_1~in~t_2"></span>，可以看做<span data-katex="[x\mapsto t_1]t_2"></span>的简写。</p>
+<h4 id="rule-1">Rule 1</h4>
+<p>在一组相互依赖的声明中，满足以下两个条件，其中的类型变量才会被全称化，</p>
+<p>（1）每一个变量，都被函数或模式匹配所绑定，</p>
+<p>（2）被模式匹配绑定的变量，都有显式的类型签名。</p>
+<h4 id="rule-2">Rule 2</h4>
+<p>导入到其他模块（module）的单态类型变量，被认为是有歧义的（ambiguous），</p>
+<p>类型通过其来源模块内的<code>default</code>声明来决定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module M1(len1) where </span><br><span class="line">  default( Int, Double ) </span><br><span class="line">  len1 &#x3D; genericLength &quot;Hello&quot;</span><br><span class="line"></span><br><span class="line">module M2 where </span><br><span class="line">  import M1(len1) </span><br><span class="line">  len2 &#x3D; (2 * len1) :: Rational</span><br></pre></td></tr></table></figure>
+<p>当模块<code>M1</code>的类型推导结束后，根据Rule 1，<code>len1</code>具有单态类型，<code>len1 :: Num a =&gt; a</code>，</p>
+<p>Rule 2表明，类型变量<code>a</code>具有歧义性，必须使用<code>default</code>声明来解决歧义。</p>
+<p>因此，根据<code>default( Int, Double )</code>，<code>len1</code>得到了类型<code>Int</code>，</p>
+<p>不过，<code>M2</code>中对<code>len1 :: Int</code>的使用导致了类型错误。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system#Let-polymorphism" target="_blank" rel="noopener">Hindley–Milner type system</a></p>
 <p><a href="https://book.douban.com/subject/1761910/" target="_blank" rel="noopener">Types and programming languages</a></p>
 <p><a href="https://www.haskell.org/definition/haskell2010.pdf" target="_blank" rel="noopener">Haskell 2010 Language Report</a></p>
+<p><a href="https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#arbitrary-rank-polymorphism" target="_blank" rel="noopener">Glasgow Haskell Compiler User's Guide</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Parametric_polymorphism" target="_blank" rel="noopener">Parametric polymorphism</a></p>
+<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/putting.pdf" target="_blank" rel="noopener">Practical type inference for arbitrary-rank types</a></p>
+<p><a href="https://en.wikipedia.org/wiki/System_F" target="_blank" rel="noopener">System F</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system" target="_blank" rel="noopener">Hindley–Milner type system</a></p>
 
           
         
@@ -557,7 +529,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/177/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/177/">177</a><span class="page-number current">178</span><a class="page-number" href="/page/179/">179</a><span class="space">&hellip;</span><a class="page-number" href="/page/310/">310</a><a class="extend next" rel="next" href="/page/179/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/177/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/177/">177</a><span class="page-number current">178</span><a class="page-number" href="/page/179/">179</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/179/">&gt;</a>
   </nav>
 
 
@@ -603,7 +575,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">310</span>
+                <span class="site-state-item-count">311</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
