@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/23/semantics-10/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/28/information-flow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/23/semantics-10/" itemprop="url">语言背后的代数学（十）：Curry-Howard-Lambek correspondance</a></h1>
+                <a class="post-title-link" href="/2018/02/28/information-flow/" itemprop="url">项目中的信息流动</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T00:00:00+08:00">
-                2018-02-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T00:00:00+08:00">
+                2018-02-28
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,125 +347,134 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-f3c4e7374c59c264.png" /></p>
+            <p>刚开始从事软件开发工作的时候，</p>
+<p>我认为编程活动是一种<strong>对特定问题寻求解答</strong>的过程。</p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文我们介绍了笛卡尔闭范畴，它给出了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^{unit,\times,\to}"></span>的语义，</p>
-<p>我们还看到了笛卡尔闭范畴与柯里化之间的关系。</p>
+<p>例如，如果我们计划在页面上实现一个列表，显示用户查询的数据，</p>
+<p>那么，我们就得编写后端接口，查询数据库，返回当前所查询的数据，</p>
+<p>最后在前端展示在列表中。</p>
 <p><br/></p>
-<p>结合《<a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型</a>》系列文章，</p>
-<p>到目前为止我们已经有了，类型理论，逻辑学和范畴论的知识基础了。</p>
-<p>现在我们介绍Curry-Howard-Lambek correspondence，将三者联系起来。</p>
+<p>这会涉及到很多方面的知识，</p>
+<p>例如，我们首先需要掌握前后端所用的编程语言，</p>
+<p>了解如何使用它们进行数据库查询操作，</p>
+<p>此外，我们还要知道前端如何向后端发起请求，</p>
+<p>还有，拿到数据后如何在页面中进行展示，等等。</p>
 <p><br/></p>
-<h3 id="类型方面">1. 类型方面</h3>
+<p>只要能实现这些功能，我们就完成了工作。</p>
+<p>我一直以来就是这样认为的。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-09a5fa1690d11143.png" /></p>
+<p>这会促使我自己努力的<strong>钻研技术</strong>，</p>
+<p>由点及面，举一反三的掌握各种有用的技术细节，</p>
+<p>从而在实现的过程中，游刃有余。</p>
 <p><br/></p>
-<p>参考《<a href="https://thzt.github.io/2017/09/06/type-2/">你好，类型（二）：Lambda calculus</a>》，</p>
-<p>我们来回顾一下简单类型化<span data-katex="\lambda"></span>演算系统。</p>
-<h4 id="语法">1.1 语法</h4>
-<p><span data-katex="t::=x|tu|\lambda x.t"></span></p>
+<p>这当然不能说是一件坏事。</p>
 <p><br/></p>
-<p>例子：</p>
-<p><span data-katex="\lambda x.x+1"></span></p>
-<p><span data-katex="\lambda f.\lambda x.fx"></span></p>
-<h4 id="类型">1.2 类型</h4>
-<p>基本类型（basic types），<span data-katex="B::=\iota|\cdots"></span></p>
-<p>一般类型（general types），<span data-katex="T::=B|T\to T|T\times T"></span></p>
+<p>且不谈商业价值，(因为做的事情有没有价值，不同的判断标准会有所不同)</p>
+<p>我们就只说谈论一个开发团队。</p>
 <p><br/></p>
-<p>例子：</p>
-<p><span data-katex="\iota\to\iota\to\iota"></span>，</p>
-<p><span data-katex="(\iota\to\iota)\to\iota"></span></p>
-<h4 id="类型推导规则">1.3 类型推导规则</h4>
-<p>（1）<span data-katex="\frac{~}{\Gamma,x:t\vdash x:T}"></span></p>
+<p>我认识到，只从事编码工作的人员，</p>
+<p>并没有解决团队中所面临的<strong>关键问题</strong>。</p>
 <p><br/></p>
-<p>（2）<span data-katex="\frac{\Gamma\vdash t:T~~~~\Gamma\vdash u:U}{\Gamma\vdash\left\langle t,u\right\rangle:T\times U}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_1v:T}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_2v:U}"></span></p>
+<h3 id="识别瓶颈">识别瓶颈</h3>
+<p>和解决技术问题一样，在寻找解决方案之前，我们都习惯抬起头来先看看问题本身。</p>
 <p><br/></p>
-<p>（3）<span data-katex="\frac{\Gamma,x:U\vdash t:T}{\Gamma\vdash\lambda x.t:U\to T}"></span>，<span data-katex="\frac{\Gamma\vdash t:U\to T~~~~\Gamma\vdash u:U}{\Gamma\vdash tu:T}"></span></p>
+<p>以团队为单位交付产品，</p>
+<p>关于如何实现一个功能，这真的是团队所遇到的瓶颈问题吗？</p>
+<p>是人们都束手无策，导致其他工作都无法进展的环节吗？</p>
 <p><br/></p>
-<p>其中，<span data-katex="\pi_1\left\langle v_1,v_2 \right\rangle=v_1"></span>，<span data-katex="\pi_2\left\langle v_1,v_2 \right\rangle=v_2"></span>。</p>
+<p>我想大多数团队并不是这样的吧。</p>
 <p><br/></p>
-<h3 id="逻辑方面">2. 逻辑方面</h3>
+<p>除非一些科研机构，或者探索性的项目之外，</p>
+<p>我们要实现的功能，大多数别人都已经做过了，只需要整合一下就行了。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-1a02678c20564afc.png" /></p>
+<p>因此，<strong>实现一个给定的功能，并不是团队所遇到的瓶颈问题。</strong></p>
 <p><br/></p>
-<p>参考《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a>》，</p>
-<p>我们构建一个只包含逻辑联接词<span data-katex="\wedge"></span>和<span data-katex="\to"></span>的命题逻辑系统。</p>
-<h4 id="逻辑推导规则">2.1 逻辑推导规则</h4>
-<p>（1）<span data-katex="\frac{~}{\Gamma,A\vdash A}"></span></p>
+<p>那么团队的瓶颈到底是什么呢？</p>
+<p>很可惜，我不能一言以蔽之，</p>
+<p>但我想向大家展示一个软件行业的<strong>秘密</strong>。</p>
 <p><br/></p>
-<p>（2）<span data-katex="\frac{\Gamma\vdash A~~~~\Gamma\vdash B}{\Gamma\vdash A\wedge B}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}"></span></p>
+<p>那就是，和其他工作一样，</p>
+<p><strong>软件开发工作所处理的主要问题，仍然是与人相关的问题。</strong></p>
 <p><br/></p>
-<p>（3）<span data-katex="\frac{\Gamma,A\vdash B}{\Gamma\vdash A\to B}"></span>，<span data-katex="\frac{\Gamma\vdash A\to B~~~~\Gamma\vdash A}{\Gamma\vdash B}"></span></p>
-<h4 id="curry-howard-correspondence">2.2 Curry-Howard correspondence</h4>
-<p>我们看到，只要将逻辑系统中的<span data-katex="\wedge"></span>和<span data-katex="\to"></span>，替换成简单类型化<span data-katex="\lambda"></span>演算中的<span data-katex="\times"></span>和<span data-katex="\to"></span>，</p>
-<p>那么这两个系统从推导规则上来看是一致的。</p>
+<p>我们会考虑如何合作，如何分工，</p>
+<p>也会考虑如何沟通，如何做计划，</p>
+<p>每天工作的大部分时间，都不是在编码，而是在讨论和交流。</p>
 <p><br/></p>
-<p>逻辑中的命题，对应了简单类型化<span data-katex="\lambda"></span>演算中的类型，</p>
-<p>逻辑中命题的证明，对应了简单类型化<span data-katex="\lambda"></span>演算中的项（的类型断言）。</p>
+<p>我们开发的软件，一般也是由人来使用它，</p>
+<p>即使是提供程序接口，那也是由人来调用它。</p>
+<p>我们必须告诉别人如何正确的使用它，还要了解用户的感受。</p>
 <p><br/></p>
-<p>命题<span data-katex="A\to B"></span>，可以这样理解，</p>
-<p>如果该命题可证，则存在将<span data-katex="A"></span>的证明转换为<span data-katex="B"></span>的证明的构建过程（construction）。</p>
-<p>命题<span data-katex="A\wedge B"></span>，可以这样理解，它是<span data-katex="A"></span>和<span data-katex="B"></span>的证明序对（pair）。</p>
+<p>这一切都离不开人。</p>
+<p>所以，与人相关的问题才是瓶颈问题。</p>
 <p><br/></p>
-<p>考虑到以上命题逻辑与类型之间的对应关系，</p>
-<p>我们可以说，<a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">proofs as programs</a>。</p>
+<h3 id="信息流动">信息流动</h3>
+<p>项目中涉及到的所有人员，他们肯定都不是独立的，</p>
+<p>每个人至少在某个方面，会与其他人会产生关联。</p>
 <p><br/></p>
-<h3 id="范畴论方面">3. 范畴论方面</h3>
+<p>人们会把自己知道的事情，传达给其他人，</p>
+<p><strong>像这种从已知到未知的知识传达过程，我们可以称之为“信息流动”。</strong></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-ef752d2a808eaf01.png" /></p>
+<p>信息流动不畅，是生产效率低下的主要原因之一。</p>
+<p>因为在给定的问题上下文中，人们都有能力去解决它。</p>
+<p>所以，关键就在于上下文是否清晰，是否准确。</p>
 <p><br/></p>
-<p>结合《<a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a>》，</p>
-<p>我们给出了简单类型化<span data-katex="\lambda"></span>演算的范畴论解释。</p>
-<h4 id="对象">3.1 对象</h4>
-<p>将简单类型化<span data-katex="\lambda"></span>演算系统的类型，解释为笛卡尔闭范畴<span data-katex="C"></span>中的对象。</p>
-<p><span data-katex="\mathscr{C}[\![\sigma\times\tau]\!]=\mathscr{C}[\![\sigma]\!]\times\mathscr{C}[\![\tau]\!]"></span></p>
-<p><span data-katex="\mathscr{C}[\![\sigma\to\tau]\!]=\mathscr{C}[\![\sigma]\!]\to\mathscr{C}[\![\tau]\!]"></span></p>
-<h4 id="箭头">3.2 箭头</h4>
-<p>将带有自变量项，解释为从自变量类型到项类型的箭头。</p>
-<p><span data-katex="\mathscr{C}[\![\Gamma\vdash M:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\to\mathscr{C}[\![\sigma]\!]"></span></p>
-<h4 id="curry-howard-lambek-correspondance">3.3 Curry-Howard-Lambek correspondance</h4>
-<p>根据简单类型化<span data-katex="\lambda"></span>演算系统中的推导规则，</p>
-<p>我们可以为范畴<span data-katex="C"></span>添加对象和箭头之间的约束条件，</p>
+<p>我想我们都有过返工的经历，</p>
+<p>我们可以迅速的完成一个功能，但是这一定不是该功能的最终版本，</p>
+<p>经常性地改动待实现的功能本身，是一件很容易令人崩溃的事情。</p>
 <p><br/></p>
-<p>（1）<span data-katex="\frac{~}{\pi_2:\Gamma\times A\to A}"></span></p>
+<p>正是因为这种原因，程序员们都厌恶需求变更。</p>
 <p><br/></p>
-<p>（2）<span data-katex="\frac{f:\Gamma\to A~~~~g:\Gamma\to B}{\left\langle f,g\right\rangle:\Gamma\to A\times B}"></span>，<span data-katex="\frac{f:\Gamma\to A\times B}{\pi_1\circ f:\Gamma\to A}"></span>，<span data-katex="\frac{f:\Gamma\to A\times B}{\pi_2\circ f:\Gamma\to B}"></span></p>
+<p>但是从整个项目的角度来看，</p>
+<p><strong>需求其实并没有经历过多的变更，变更的只是每个人对需求的理解。</strong></p>
 <p><br/></p>
-<p>（3）<span data-katex="\frac{f:\Gamma\times A\to B}{g_f:\Gamma\to B^A}"></span>，<span data-katex="\frac{f_1:\Gamma\to B^A~~~~f_2:\Gamma\to A}{e\circ\left\langle f_1,f_2\right\rangle:\Gamma\to B}"></span></p>
+<p>用户的需求就在那里，是我们没有做好沟通，</p>
+<p>产品经理的认识就在那里，是大家没有进行更充分的交流。</p>
+<p>这就是信息流动的一个例子。</p>
 <p><br/></p>
-<p><span data-katex="g_f=\Gamma\to B^A"></span>是一个箭头，和<span data-katex="e:B^A\times A\to B"></span>的定义，</p>
-<p>可以参考<a href="http://thzt.github.io/2018/02/19/semantics-9/">前一篇</a>文章中关于笛卡尔闭范畴的定义。</p>
+<p>此外，当出现了一个故障的时候，</p>
+<p>我们会经常性的发现，故障的原因不是因为粗心大意造成的，</p>
+<p>而是因为理解不一致，编写代码的程序员对真实的系统做了不正确的假设。</p>
 <p><br/></p>
-<p>笛卡尔闭范畴作为简单类型化<span data-katex="\lambda"></span>演算系统的语义模型，</p>
-<p>范畴中箭头之间约束关系，与类型推导规则是一致的，</p>
-<p>而根据Curry-Howard correspondence，类型推导规则与命题逻辑又是一致的。</p>
+<p>相信我，<strong>没有人会做那些明知道会出错的事情。</strong></p>
 <p><br/></p>
-<p>因此，类型理论，逻辑学和范畴论产生了关联，</p>
-<p>这种三者的对应关系，称为<strong>Curry-Howard-Lambek correspondance</strong>。</p>
+<p>这是信息流动的另外一个例子。</p>
+<p>总而言之，信息流动不畅造成了很多<strong>系统层面</strong>的问题。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
+<h3 id="为什么不知道">为什么不知道</h3>
+<p>要解决信息流动不畅，最直接办法就是找出人们“为什么不知道”的原因，</p>
+<p>然后<strong>想办法让必要的信息传递到他们那里。</strong></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-cfb15d029385cd31.png" /></p>
+<p>寄希望于人们去主动询问，是不起作用的。</p>
+<p>因为<strong>人们不知道他自己“不知道什么”。</strong></p>
 <p><br/></p>
-<p>本文介绍了Curry-Howard-Lambek correspondance，</p>
-<p>它将本来毫无关系的三个学科联系在了一起，</p>
-<p>类型理论与程序和计算相关，逻辑学与证明（论）相关，</p>
-<p>范畴论与模型（论）和代数学相关。</p>
+<p>如果是整个项目组，经常性的对需求理解产生变更，</p>
+<p>那么就应该从<strong>增强信息流动</strong>的角度出发，促进更多的沟通，</p>
+<p>而不是应该是从软件工程的角度，控制需求不让它变更。</p>
 <p><br/></p>
-<p>本系列文章到此结束了，与代数学和范畴论相关的内容其实还有很多，</p>
-<p>例如，quotient algebra，comonad，adjoint functor，free monoid，等等概念，</p>
-<p><strong>书山有路勤为径，学海无涯苦作舟</strong>，让我们一起努力吧。</p>
+<p>采取的办法，可以是请产品经理多做一些宣讲，</p>
+<p>将客户请到开发团队中，大声的说出自己的看法。</p>
+<p>而寄希望于开发团队自己去询问用户，这从根本上就无法达成。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
-<p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a></p>
-<p><a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">Curry–Howard correspondence</a></p>
-<p><a href="https://wiki.haskell.org/Curry-Howard-Lambek_correspondence" target="_blank" rel="noopener">Curry-Howard-Lambek correspondence</a></p>
-<p><a href="http://www.cs.ox.ac.uk/samson.abramsky/gsem/chll.pdf" target="_blank" rel="noopener">The Curry-Howard Correspondence, and beyond</a></p>
-<p><a href="http://disi.unitn.it/~bernardi/RSISE11/Papers/curry-howard.pdf" target="_blank" rel="noopener">Lectures on the curry-howard Isomorphism</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Intuitionistic_logic" target="_blank" rel="noopener">Intuitionistic logic</a></p>
+<p><strong>信息流动应该从掌握信息的一方，主动传递到没有掌握信息的一方，</strong></p>
+<p><strong>而不是反之。</strong></p>
+<p><br/></p>
+<p>如果整个项目组的产品质量低下，且其主要原因不在于大家的态度上面，</p>
+<p>那就应该请系统的设计者，或者架构师，多做一些分享。</p>
+<p><br/></p>
+<p>如果大家对整个软件的全貌没有统一的认识，就会进行各式各样的假设，</p>
+<p>直到出现故障的时候，才知道自己进行了错误的假设。</p>
+<p>邀请掌握全貌的人员，帮大家进行梳理，是个好办法，</p>
+<p>盲人摸象，很容易造成不一致的理解。</p>
+<p><br/></p>
+<h3 id="结语">结语</h3>
+<p>促进信息流动是一件重要但是很难做好的事情，</p>
+<p>团队中的每个成员，都应该有责任避免，让整个团队在信息缺失的情况下疲于奔命。</p>
+<p><br/></p>
+<p>我甚至觉得，在技术实现不成问题的情况下，</p>
+<p>整个团队本来就应该将<strong>最大化信息流动</strong>视为第一要务。</p>
+<p>只有这样，团队才有战斗力，看起来像是凝聚成了一个人那样。</p>
+<p><br/></p>
+<p>民齐者强。</p>
 
           
         
@@ -504,7 +513,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/159/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/159/">159</a><span class="page-number current">160</span><a class="page-number" href="/page/161/">161</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/161/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/159/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/159/">159</a><span class="page-number current">160</span><a class="page-number" href="/page/161/">161</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/161/">&gt;</a>
   </nav>
 
 
@@ -550,7 +559,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">311</span>
+                <span class="site-state-item-count">312</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/26/great/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/27/purity/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/26/great/" itemprop="url">巨人与泥足</a></h1>
+                <a class="post-title-link" href="/2015/03/27/purity/" itemprop="url">Haskell的纯函数性</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-26T00:00:00+08:00">
-                2015-03-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-27T00:00:00+08:00">
+                2015-03-27
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index">
+                    <span itemprop="name">Haskell</span>
                   </a>
                 </span>
 
@@ -347,95 +347,107 @@
       
         
           
-            <p>术业有专攻。</p>
-<p>每个人都有自己擅长的技能。</p>
-<p>完成擅长的任务，是一件愉快的事情。</p>
+            <p>表达式是在环境中求值的。</p>
+<p>如果允许表达式改变环境，</p>
+<p>那么，其他表达式的求值结果，就是不可预料的。</p>
 <p><br/></p>
-<p>在一个团队中，最默契的配合，</p>
-<p>就是大家都在各自擅长的领域中工作。</p>
-<p>互相之间都是不可替代的。</p>
+<p>环境，是专业术语，也可称为执行环境，</p>
+<p>里面保存的是，变量和值的绑定关系。</p>
 <p><br/></p>
-<p>这样的生活，</p>
-<p>每天都有幸福感。</p>
-<p>因为我们得到了尊重。</p>
+<p>Haskell是一门纯函数式语言，</p>
+<p>并不是说，函数的每次求值结果都相同。</p>
+<p>而是说，<strong>任何函数都不会修改它的执行环境</strong>。</p>
 <p><br/></p>
-<p>然而，有些人的生活却并非如此。</p>
+<p>例如，对于从屏幕上读取字符的函数，</p>
+<p>每次调用，并不一定会返回相同的值。</p>
+<p>但是，执行后，它确实不会影响环境中的绑定关系。</p>
 <p><br/></p>
-<p>他们做着自己不想做的事情，</p>
-<p>但是又无力改变。</p>
+<p>因此，输入输出操作，也是纯函数，</p>
+<p>理解执行环境和现实世界的区别，是关键。</p>
 <p><br/></p>
-<p>为什么不能让他们去做自己喜欢的工作呢？</p>
+<h2 id="io"><strong>IO</strong></h2>
+<p>Haskell是一门静态强类型的语言。</p>
+<p>任何表达式在编译前类型都是确定的。</p>
 <p><br/></p>
-<p>其实，原因很简单，</p>
-<p>他们并不擅长自己向往的工作。</p>
+<p>输入输出与IO a类型有关。</p>
+<p>其中，IO是类型构造器，:k IO = * -&gt; *</p>
+<p>因此，IO a才是一个具体类型。</p>
 <p><br/></p>
-<p>因此，擅长什么，</p>
-<p>就会被要求做什么，</p>
-<p>不论我们是否愿意。</p>
+<p>IO是如何定义的呢？</p>
+<p>type IO a = World -&gt; (a, World)</p>
+<p>World类型的值表示现实世界的状态。</p>
 <p><br/></p>
-<h2 id="额外的努力"><strong>额外的努力</strong></h2>
-<p>重复，在软件行业中，是一个敏感的话题。</p>
-<p>因为，重复是可以用软件办法解决的，</p>
-<p>大量重复，可能意味着没有使用软件思维来考虑问题。</p>
+<p>IO a类型的值是一个函数，它接受现实世界的当前状态作为参数，</p>
+<p>返回一个元组，这个元组由类型a的值和对现实世界改变后的状态构成。</p>
 <p><br/></p>
-<p>现如今，几乎所有的软件问题，</p>
-<p>都能找到大量的类库和框架。</p>
+<p>由于，我们并不需要手动传递World类型的值作为参数来调用，</p>
+<p>所以，应该<strong>把IO a类型的值理解为一个惰性求值的表达式</strong>，</p>
+<p>对该表达式按需求值，得到一个a类型的值。</p>
 <p><br/></p>
-<p>高级程序员，经常叮嘱新人，</p>
-<p>绝不要重新造车轮。</p>
-<p>如果有能用的，一定要用现成的。</p>
+<p>IO a类型的表达式，称为<strong>action</strong>。</p>
+<p>IO a类型的action中，惰性包含了一个a类型的值。</p>
 <p><br/></p>
-<p>站在巨人的肩膀上，</p>
-<p>我们的软件开发效率才会越来越高。</p>
+<p>例如：</p>
+<p>getChar :: IO Char</p>
+<p>求值getChar表达式，就会得到一个Char类型的值。</p>
 <p><br/></p>
-<p>但有时候，现存的工具，并不是很完美。</p>
-<p>甚至，瑕疵多的令人难以忍受。</p>
+<p>例如：</p>
+<p>IO ( )</p>
+<p>其中，( )表示空元组类型，该类型只有一个值，空元组( )。</p>
+<p>“( )”既可以表示类型，又可以表示值，取决于它出现的上下文。</p>
+<p>另外，Haskell中习惯将空元组看做无用数据。</p>
 <p><br/></p>
-<p>我们该怎么办呢？</p>
-<p>忍痛修补，还是重新创造？</p>
+<p>在IO ( )中，( )是作为IO类型构造器的参数出现的，表示空元组类型，</p>
+<p>所以说，IO ( )类型的action中，惰性包含了一个空元组值。</p>
 <p><br/></p>
-<p>答案就是。</p>
-<p>我们需要<strong>用额外的努力做自己选择的事情</strong>。</p>
+<p>例如：</p>
+<p>putStrLn :: String -&gt; IO ( )</p>
+<p>putStrLn是一个函数，</p>
+<p>它接受String类型的值作为参数，</p>
+<p>返回一个IO ( )类型的action。</p>
 <p><br/></p>
-<p>重新制造的车轮，</p>
-<p>如果拿来用，就是浪费时间。</p>
-<p>但是，如果拿来思考，那就是积累经验。</p>
+<h2 id="do"><strong>do</strong></h2>
+<p>main :: IO ( )</p>
+<p>main = do</p>
+<p>    putStrLn "Please input: "</p>
+<p>    inpStr &lt;- getLine</p>
+<p>    putStrLn $ "Hello " ++ inpStr</p>
 <p><br/></p>
-<p>当我们用额外的努力，做任何事情的时候，</p>
-<p>没有人会批评我们。</p>
+<p>以上程序定义了main函数，是一个IO ( )类型的action。</p>
 <p><br/></p>
-<p>这才是走自己路的正确方式。</p>
+<p>do关键字，是Haskell中的一种写法，</p>
+<p>用来表示顺序执行。</p>
 <p><br/></p>
-<h2 id="根基"><strong>根基</strong></h2>
-<p>像冰山一样，我们的基本功隐藏在微末的表象之下，</p>
-<p>而我们进行的这些积累，其实很少来源于相关的工作，</p>
-<p>主要在于自己额外的努力。</p>
+<p>其中，</p>
+<p>putStrLn :: String -&gt; IO ( )</p>
+<p>getLine :: IO String</p>
 <p><br/></p>
-<p>努力，会改变我们擅长的事情，</p>
-<p>改变我们的想法，</p>
-<p>从而影响今后的工作内容。</p>
+<p>putStrLn $ "Hello " ++ inpStr</p>
+<p>= putStrLn ( "Hello " ++ inpStr )</p>
 <p><br/></p>
-<p>如果想成为一个巨人，</p>
-<p>没有额外的努力，就好像把根基建立在泥足之上。</p>
+<p>因此，</p>
+<p>putStrLn "Please input: " :: IO ( )，在屏幕上输出字符串“Please input: ”，</p>
+<p>inpStr &lt;- getLine，求值惰性表达式getLine，<strong>把action里面包含的值拿出来</strong>，绑定到inpStr上。</p>
+<p>putStrLn $ "Hello " ++ inpStr，在屏幕上输出字符串"Hello "与变量inpStr连接后的结果。</p>
 <p><br/></p>
-<p>人们只看到巨人很高，</p>
-<p>却没看到他的基础更牢。</p>
-<p><br/></p>
-<p>努力，并不限于技术，</p>
-<p>就好像武功不只是招式一样，</p>
-<p>还有心法，以及个人的修养和认识。</p>
-<p><br/></p>
-<p>这些见解，</p>
-<p>只有真正的思考，和认真的活着，</p>
-<p>才能得到。</p>
+<p>IO操作，每次执行的效果并不相同，</p>
+<p>但<strong>仍然都是纯函数</strong>，</p>
+<p>在于它们不会修改执行环境中的变量绑定关系。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>在《边城浪子》中，阿飞说：</p>
-<p>我知道，你们这一辈的年轻人，不止是聪明，用功。</p>
-<p>比我们当年还要高出很多倍。</p>
-<p>但是，我仍然希望，你们明白一点。</p>
-<p>就是，真正伟大的武功，并不是单靠聪明和用功，就能够练的出来的。</p>
-<p>是<strong>先要有一颗伟大的心，才能够真正的练到伟大的武功</strong>。</p>
+<p>很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，</p>
+<p>这种说法，其实是为了解释给不熟悉的人看的。</p>
+<p>事实上，<strong>Haskell中的任何函数都是纯函数</strong>。</p>
+<p><br/></p>
+<p>类似的，</p>
+<p>Haskell语言中Bug的数量可以控制到非常少，</p>
+<p>并不是因为通过Monad将IO和其他函数分离开，</p>
+<p>而是因为任何函数都不能改变环境中变量的绑定关系，</p>
+<p>即，函数的纯粹性。</p>
+<p><br/></p>
+<p>此外，Monad，Applicative和Functor这些类型类，</p>
+<p>提高了语言的抽象程度，让复杂度更可控，</p>
+<p>我想，这才是Bug数量少的真正原因吧。</p>
 
           
         
@@ -474,7 +486,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/286/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/286/">286</a><span class="page-number current">287</span><a class="page-number" href="/page/288/">288</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/288/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/286/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/286/">286</a><span class="page-number current">287</span><a class="page-number" href="/page/288/">288</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/288/">&gt;</a>
   </nav>
 
 
@@ -520,7 +532,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">311</span>
+                <span class="site-state-item-count">312</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

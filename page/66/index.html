@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/08/26/code-09/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/09/01/delivery/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/08/26/code-09/" itemprop="url">编码技巧（九）：少写一些</a></h1>
+                <a class="post-title-link" href="/2020/09/01/delivery/" itemprop="url">软件研发的效率与效能</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-26T00:00:00+08:00">
-                2020-08-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-01T00:00:00+08:00">
+                2020-09-01
               </time>
             
 
@@ -347,81 +347,213 @@
       
         
           
-            <p>维护过别人代码的开发者们，大概都能理解这样一种心情吧，</p>
-<p>就如同盲人摸象，又好似如鲠在喉，</p>
-<p>想要快速挪动脚步，奈何有力使不出来。</p>
+            <p>“效率” 和 “效能” 是不同的。</p>
+<p>“效率” 是一个比值，是有效产出占总投入的<strong>比例</strong>。</p>
+<blockquote>
+<p>In general, <a href="https://en.wikipedia.org/wiki/Efficiency" target="_blank" rel="noopener">efficiency</a> is a measurable concept, quantitatively determined by the ratio of useful output to total input.</p>
+</blockquote>
 <p><br/></p>
-<p>这是因为代码中留存下来的信息太少了，<strong>即使</strong>我们在编写时意识到了这一点，</p>
-<p>总有一些背景信息是无法保存下来的，导致之后阅读起来不知所云。</p>
-<p>看不懂就不敢轻易动它，不然很容易引发<strong>故障</strong>。</p>
+<p>而 “效能” 则是指产生<strong>期望结果</strong>的能力。</p>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Effectiveness" target="_blank" rel="noopener">Effectiveness</a> is the capability of producing a desired result or the ability to produce desired output.</p>
+</blockquote>
 <p><br/></p>
-<p>在第三篇中我们曾介绍过 “写明用意” 这种编码技巧，</p>
-<p>目的就是给今后的维护者们，提供更多的线索。</p>
+<p>效率强调<strong>资源</strong>的有效利用，以最少的投入得到最大的产出，也就是 “正确的做事”，</p>
+<p>效能重视组织<strong>目标</strong>的达成、重视结果，追求 “做正确的事情”。</p>
+<p>本文主要介绍，我对<strong>软件</strong>研发效率、效能的理解。</p>
 <p><br/></p>
-<p>但是面对一些 “祖传” 代码，如果已经是<strong>信息残缺</strong>了，</p>
-<p>我们该怎么做呢？</p>
+<p>软件研发常以 “<a href="https://wiki.mbalib.com/wiki/%E9%A1%B9%E7%9B%AE" target="_blank" rel="noopener">项目</a>” 的形式存在，</p>
+<p>是指一群人在<strong>资源</strong>有限的情况下，完成<strong>目标</strong>的活动。</p>
 <p><br/></p>
-<p>本文我们就讨论这种情况下，该如何编码。</p>
-<h3 id="摆正心态">摆正心态</h3>
-<p>开发者<strong>不愿意</strong>维护别人写的代码，可能是一种 “强迫思维”，</p>
-<p>未必是因为他人写的代码不好阅读。</p>
+<p>正因为<strong>资源</strong>有限，所以我们应当关注 “效率”，以更好的利用资源，</p>
+<p>也因为项目是以完成<strong>目标</strong>为本的，所以还要关注 “效能”，才能达到期望的结果。</p>
 <p><br/></p>
-<p>这时候首先要做的事情就是，调整心态，</p>
-<p>对自己说：“这就是一段代码，是可以阅读的，我能读懂它。”</p>
+<p>那么对于软件项目而言，</p>
+<p>如何更好的利用资源，如何正确的设定项目目标呢？</p>
+<h3 id="衡量方式">衡量方式</h3>
+<p>软件研发是一种知识工作，</p>
+<p>知识工作与体力工作成果的<strong>衡量方法</strong>是不同的。</p>
 <p><br/></p>
-<p>千万<strong>不要</strong>试图重写它，改成用自己的代码重新描述。</p>
-<p>因为重写后的代码，又会带来一部分<strong>信息损失</strong>，</p>
-<p>不但很难复原老代码的所有业务逻辑，对新的维护者来说也是一场灾难。</p>
+<p>彼得·德鲁克 在《<a href="https://book.douban.com/subject/1322025/" target="_blank" rel="noopener">卓有成效的管理者</a>》中提到，</p>
+<blockquote>
+<p>对于体力工作，我们所重视的只是 “效率”。体力工作的成果，通常可以用数量和质量来衡量。我们已有一套完整的衡量方法和制度，但是这种衡量方法和制度，并不能适用于知识工作，衡量知识工作主要应看其<strong>结果</strong>。</p>
+</blockquote>
 <p><br/></p>
-<p>此外，如果开发者曾阅读过一些知名开源项目源码的话，</p>
-<p>他的 “代码洁癖” 可能会好转很多，</p>
-<p>因为知名项目的源代码，<strong>未必</strong>就比自己同事写的代码更好。</p>
+<p>虽然开发者们经常自嘲在从事体力劳动，但实际上软件研发正是一种<strong>知识</strong>密集型的活动。</p>
+<p>比起建筑行业来看，软件研发并不像大家一起在盖房子，</p>
+<p>更像是合伙写一本<strong>书</strong>。</p>
 <p><br/></p>
-<p>由于跟同事是在一个团队中，对项目背景有着相似的认知，</p>
-<p>同事的代码，反而<strong>更好</strong>阅读。</p>
-<h3 id="源码分析">源码分析</h3>
-<p>对代码的每一次阅读，都是要花费人力的，</p>
-<p>所以不妨把自己每次费力读懂后的心得，<strong>注释</strong>到代码中，</p>
-<p>这会给后来人省下非常多的时间。</p>
+<p>开发者们平时所应对的是不可见的<strong>抽象</strong>概念，</p>
+<p>如何确保对这些抽象概念理解一致，如何完美的契合到一起，</p>
+<p>才是比较困难的事情。</p>
 <p><br/></p>
-<p>有些代码是无法被注释的，或者是没有修改权限，</p>
-<p>或者编译过程不可重现，</p>
-<p>那么就不妨将<strong>源码分析</strong>写入文档中，就像我们阅读开源代码一样。</p>
+<p>软件研发项目都有一个 “不可见” 的沟通成本，正如《<a href="https://book.douban.com/subject/1102259/" target="_blank" rel="noopener">人月神话</a>》中所言，</p>
+<blockquote>
+<p>软件开发的真正困难不在于如何表示一个抽象概念，而在于如何将这个抽象概念传递给其他人。向进度落后的项目中增加人手，只会使项目更加落后。</p>
+</blockquote>
 <p><br/></p>
-<p>对开源代码我们可以做源码分析，对同事的代码为什么不行呢？</p>
+<p>事实上，拼命编写大量难以理解的代码，正是软件研发活动迟缓的罪魁祸首之一。</p>
+<p>而产生这种状况的原因之一，</p>
+<p>正是一些管理者使用了不恰当的方式，通过代码行数来<strong>衡量</strong>开发者的成果。</p>
 <p><br/></p>
-<p>能看懂别人的代码，就不用重写了，</p>
-<p>这样才能站在巨人的肩膀上，继续往前看。</p>
-<p>不然已经可用的功能，为什么要重新开发一遍，这是极大的资源浪费。</p>
-<h3 id="代码量">代码量</h3>
-<p>这样就引出了本文介绍的一个编码技巧 “少写代码”，</p>
-<p>能做到在不必要的情况下，克服自己的强迫症，不写或少写代码，</p>
-<p>反而能事半功倍，捷足先登。</p>
+<p>因此，要想优化组织的效率和效能，</p>
+<p>首先要做的事情是，改变组织内部不恰当的衡量手段，</p>
+<p>衡量方式决定了优化<strong>目标</strong>。</p>
+<h3 id="过程管理">过程管理</h3>
+<p>没有好的过程，就难以产生好的结果。</p>
 <p><br/></p>
-<p>写出来代码，有两种显而易见的危害，</p>
-<p>（1）代码越多，缺陷就越多</p>
-<p>（2）代码越多，硬编码就越多</p>
+<p>很多人在进行软件项目管理的时候，容易陷入一个误区，</p>
+<p>那就是对 “流程” 盲目的相信。</p>
+<p>认为造成当前研发活动 “较慢” 的原因在于，没有一个好的流程。</p>
 <p><br/></p>
-<p>先看第一个，程序是一种不稳定的结构，稍不注意就会出问题，</p>
-<p>代码写的越多，就越难顾得<strong>周全</strong>，</p>
-<p>所以人们才会想到系统拆分和信息隐藏，让每一段程序的职责尽可能的少一些。</p>
+<p>其实软件研发过程，并非如此这般简单。</p>
+<p><a href="https://wiki.mbalib.com/wiki/%E7%BA%A6%E6%9D%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">约束理论</a>的创始人 艾利·高德拉特，在其著作《<a href="https://book.douban.com/subject/1464593/" target="_blank" rel="noopener">目标</a>》中提到，</p>
+<blockquote>
+<p>非瓶颈资源的利用程度，并不是由其生产潜力来决定，而是由系统中的其他制约因素来决定。</p>
+</blockquote>
 <p><br/></p>
-<p>但这也仅是权宜之计，当代码量巨大的时候，</p>
-<p>所以，我们不但要反思系统拆分的合理性，还要反思 “为什么我们有这么多的代码”。</p>
+<p>也就是 “木桶原理”。如果软件研发过程中，存在一个<strong>瓶颈</strong>，</p>
+<p>那么不消除这个瓶颈因素的话，提高其他环节的利用率，是没有意义的。</p>
 <p><br/></p>
-<p>再看第二条，所谓 “硬编码” 指的是 “写死” 的逻辑，</p>
-<p>为了把功能写出来，一些尚未确定的信息只能先硬编码了，</p>
-<p>这样会埋下隐患，<strong>尾大不掉</strong>，使代码丧失灵活性，难以应接新的需求。</p>
+<p>这就得出了软件研发过程管理的一个常用方法，</p>
+<blockquote>
+<p>识别并设法减少瓶颈因素，直到瓶颈因素不再对效能产生约束；消除一个瓶颈之后，又会涌现出另外一个新的瓶颈，如此循环不已。</p>
+</blockquote>
+<p><br/></p>
+<p>这种方法以迭代的方式，通过识别和消除瓶颈，系统性的提升效能。</p>
+<p>由消除一个又一个瓶颈来不断演化发展出一个<strong>新过程</strong>。</p>
+<p><br/></p>
+<p>所以，软件研发过程管理，其实是瓶颈的<strong>识别</strong>和消除过程，</p>
+<p>并非简单的使用一个 “预先设计好的” 流程，就可以凑效的。</p>
+<h3 id="可见性">可见性</h3>
+<p>有了上述理论之后，为了更好的识别和消除瓶颈，</p>
+<p>人们通常要做的事情是，提高项目的<strong>可见性</strong>，</p>
+<p>即，让项目的所有参与者，一目了然的看到项目的瓶颈（制约因素）在哪里。</p>
+<p><br/></p>
+<p>提升项目的可见性有很多好处。</p>
+<p>其一，有助于项目管理者，知道瓶颈在哪里，对过程不断的进行优化。</p>
+<p>其二，有助于项目中各利益相关者，权衡自己的决策，尽可能让多方满意。</p>
+<p><br/></p>
+<p>这后面一点通常不被人们所重视。</p>
+<p>其实，资源有限的情况下，最终方案是各方<strong>权衡</strong>的结果，</p>
+<p>很难是让所有人都满意。</p>
+<p><br/></p>
+<p>比如说，产品经理在研发团队交付能力之外，试图增加额外的功能，是没有意义的。</p>
+<p>因为当前研发瓶颈在于<strong>交付能力</strong>上。</p>
+<p>这时最好的办法不是赶工做出来，而是进行<strong>协商</strong>。</p>
+<p><br/></p>
+<p>赶工会影响软件质量，不赶工又会影响功能，到底应该怎么做？</p>
+<p>这个决策交给研发团队自己来决定，是非常有风险的，</p>
+<p>因为他们不知道，最终应以什么样的<strong>底线</strong>，以什么样的<strong>优先级</strong>交付功能。</p>
+<p><br/></p>
+<p>这件事其实应是产品、测试、研发，三方都要参与权衡的结果。</p>
+<p>提升项目的可见性，会使得权衡过程变得透明，更有利于项目达成多方<strong>预期</strong>的目标。</p>
+<p><br/></p>
+<p>无独有偶，在《<a href="https://book.douban.com/subject/24530471/" target="_blank" rel="noopener">软件系统架构</a>》中，也提到了类似的想法，</p>
+<blockquote>
+<p>A key part of your role as an architect is knowing how to work with stakeholders in order to create an architecture that meets their complex, overlapping, and often conflicting needs.</p>
+</blockquote>
+<p>好的架构应满足各利益相关者的需求。</p>
+<h3 id="软件工具">软件工具</h3>
+<p>软件研发产物，可以用来提升软件研发<strong>本身</strong>的效率。</p>
+<p>这是一件很有意思的事情，是一种<strong>反馈</strong>效应。</p>
+<p><br/></p>
+<p>“<a href="https://zh.wikipedia.org/zh-hans/%E5%8F%8D%E9%A6%88" target="_blank" rel="noopener">反馈</a>” 是控制论中的概念，</p>
+<p>是指将系统的输出返回到输入端，以某种方式改变<strong>总输入</strong>，进而影响系统功能的过程。</p>
+<p><br/></p>
+<p>软件研发团队可以不用每次都<strong>从零开始</strong>，</p>
+<p>最好每次都能 “站在自己的肩膀上” 继续前进，或说 “吃自己的狗粮”。</p>
+<p>这就需要建立 “产物” 要能被下次可用的意识。</p>
+<p><br/></p>
+<p>其中一个最容易想到的做法是制造 “工具”，工具可以辅助开发，</p>
+<p>让重复性的人工操作，变成<strong>自动化</strong>处理。</p>
+<p><br/></p>
+<p>然而同时，软件工具又会引入新的复杂度，那就是学会如何使用这些工具带来的成本。</p>
+<p>不要小瞧了这看似 “微不足道” 的成本。</p>
+<p><br/></p>
+<p>有一个认知偏误，称为 “<a href="https://zh.wikipedia.org/zh-hans/%E7%9F%A5%E8%AD%98%E7%9A%84%E8%A9%9B%E5%92%92" target="_blank" rel="noopener">知识的诅咒</a>”，</p>
+<p>指的是，知道知识的人，其实很难理解不知道知识人的处境。</p>
+<p>所以事实上，工具会比我们料想的<strong>更难</strong>使用。</p>
+<p><br/></p>
+<p>在《<a href="https://link.zhihu.com/?target=https%3A//book.douban.com/subject/4745287/">软件架构师应该知道的97件事</a>》，也曾提到过，</p>
+<blockquote>
+<p>Reuse is about people and education, not just architect.</p>
+</blockquote>
+<p><br/></p>
+<p>设计优良的工具，细致考虑并精巧实现的框架，并不会自然而然的就被人们使用。</p>
+<p>人们要能够使用它，需要满足一些条件：</p>
+<p>大家知道它们<strong>存在</strong>；大家知道<strong>如何</strong>使用它们；大家认识到利用已有资源<strong>好过</strong>自己动手。</p>
+<p><br/></p>
+<p>综上，我们应避免<strong>盲目的</strong>制造工具，</p>
+<p>而是应该把精力着眼于整个系统上，看清楚工具到底带来怎样的<strong>反馈</strong>效应。</p>
+<p>有些时候，工具反而拖累了研发效率也说不定呢。</p>
+<h3 id="项目目标">项目目标</h3>
+<p>一个正确的目标，在项目早期是很难确定下来的，</p>
+<p>所以才出现了各种各样的软件研发<strong>策略</strong>，例如 敏捷开发、极限编程。</p>
+<p><br/></p>
+<p>近来越来越多的团队，采用了 “迭代式” 的研发方式，</p>
+<p>采用不断增长的方式<strong>逼近</strong>目标。</p>
+<p>即，如果暂时无法明确目标的话，就不妨<strong>延迟决定</strong>，先向前走。</p>
+<p><br/></p>
+<p>在《<a href="https://book.douban.com/subject/26915970/" target="_blank" rel="noopener">Clean Architecture</a>》中有这样一段话，</p>
+<blockquote>
+<p>Good architects design the policy so that decisions about the details can be delayed and deferred for as long as possible.</p>
+</blockquote>
+<p><br/></p>
+<p>然而很不幸，软件团队又不得不身处于一个 “传统” 的更大型的商业组织之中。</p>
+<p>这样的组织通常有个特点是，先有<strong>目标</strong>才能有<strong>预算</strong>，</p>
+<p>如果在立项的时候无法确定目标，组织就不能判断是否值得开展。</p>
+<p><br/></p>
+<p>有了预算，研发团队才申请到更多的<strong>资源</strong>，</p>
+<p>争取到更长的项目周期，或者争取到更多的研发人员。</p>
+<p>团队售卖的是 “期望”，买回来的是 “资源”。</p>
+<p><br/></p>
+<p>这并不是仅仅通过一个好的 “研发策略”，或者好的 “架构” 就可以解决的。</p>
+<p>一个好的管理者会有商业头脑，让团队一开始就工作在 “可以达成” 的项目之中。</p>
+<p><br/></p>
+<p>很多项目之所以失败，根本原因可能并不是团队的交付能力问题，</p>
+<p>而是一开始就在 “<a href="https://zh.wikipedia.org/wiki/%E6%AD%BB%E4%BA%A1%E8%A1%8C%E8%BB%8D" target="_blank" rel="noopener">死亡行军</a>”。</p>
+<h3 id="做出改变">做出改变</h3>
+<p>现在我们已经了解了影响效率和效能的种种因素了，</p>
+<p>但是，谈到对现有组织作出<strong>改变</strong>，仍然是很难的。</p>
+<p><br/></p>
+<p>这是因为组织的行为，是受<strong>大环境</strong>潜移默化而影响的，</p>
+<p>组织中的每个个体，都已经尽量达到了自身<strong>收益</strong>的最大值，</p>
+<p>虽然这种状态并不一定是组织整体收益的最大值状态。</p>
+<p><br/></p>
+<p>博弈论中有一个经常被提及之 “囚徒困境” 的例子，</p>
+<p>两个囚徒中的每一个人，在不论对方如何选择的情况下，选择 “招供” 都是收益最大的。</p>
+<p>人们称这样的决策状态，是达到了 “<a href="https://wiki.mbalib.com/wiki/%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1" target="_blank" rel="noopener">纳什均衡</a>”。</p>
+<p><br/></p>
+<p>很显然，两个囚徒一起选择 “不招”，才是对他们两个同时最优的决策，</p>
+<p>他们为什么没有这样做呢？这是由局中人的<strong>收益</strong>决定的。</p>
+<p>改变收益是<strong>打破</strong>纳什均衡最有效的方法之一。</p>
+<p><br/></p>
+<p>对组织做出的任何改变也是如此，</p>
+<p>如果没有来自公司层面的赞成和支持，及时的调整 “<strong>奖惩制度</strong>”，</p>
+<p>那么谈论改变，就失去了意义。</p>
+<p><br/></p>
+<p>换句话说，想要人们在研发效率和效能上提升，就得<strong>鼓励</strong>这样的行为，</p>
+<p>《乌合之众》中，有这样一句话，</p>
+<blockquote>
+<p>人一到群体中，智商就严重降低，为了获得认同，个体愿意抛弃是非，用智商去换取那份让人备感安全的归属感。</p>
+</blockquote>
 <h3 id="结语">结语</h3>
-<p>本文的前几篇文章中，介绍了很多 “写” 代码的技巧，</p>
-<p>殊不知，“不写” 代码，也是需要技巧的，</p>
-<p>忍住自己体内 “能写代码” 的洪荒之力，才能更好的将力量<strong>用对</strong>地方。</p>
+<p>整篇分析下来，可能会有些悲观。</p>
 <p><br/></p>
-<p>总而言之，少改别人的代码，能用的功能不要再写一遍，</p>
-<p>用更少的代码解决问题，</p>
-<p>在不明朗的情况下，先别开始写。</p>
+<p>软件研发牵涉到的因素特别多，健康的研发活动<strong>反而</strong>是一个不太稳定的状态，</p>
+<p>只要 衡量方式、研发过程、可见性、软件工具、项目目标，有一个出现问题，</p>
+<p>都会产生灾难性的结果，导致 “稳定的” 失败结局。</p>
 <p><br/></p>
-<p>自此才能做到收放自如，游刃有余。</p>
+<p>软件研发涉及 项目、架构、管理，等等多个专业领域，</p>
+<p>一群人不得不紧密合作各取所长，才能实现当初的 “承诺”，</p>
+<p>因此，<strong>人员</strong>才是最核心的竞争力之一。</p>
+<p><br/></p>
+<p>最后，软件研发活动不是孤立存在的，它总是从属于更广泛的<strong>商业活动</strong>之中，</p>
+<p>我们难以改变自己，因为外界的 “奖惩规则” 影响了人们的选择，</p>
+<p>即使改变了自己，作为一个整体仍需按照外界的 “游戏规则” 抢夺资源。</p>
+<p><br/></p>
+<p>这真是现代信息化战争的一个主战场呢。</p>
 
           
         
@@ -460,7 +592,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/65/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/65/">65</a><span class="page-number current">66</span><a class="page-number" href="/page/67/">67</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/67/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/65/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/65/">65</a><span class="page-number current">66</span><a class="page-number" href="/page/67/">67</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/67/">&gt;</a>
   </nav>
 
 
@@ -506,7 +638,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">311</span>
+                <span class="site-state-item-count">312</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

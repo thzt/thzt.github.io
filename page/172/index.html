@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/12/22/reading/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/12/25/lie-group-and-lie-algebra/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/22/reading/" itemprop="url">如何在阅读的过程中开启上帝视角</a></h1>
+                <a class="post-title-link" href="/2017/12/25/lie-group-and-lie-algebra/" itemprop="url">李群和李代数</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-22T00:00:00+08:00">
-                2017-12-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
+                2017-12-25
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,139 +347,170 @@
       
         
           
-            <p>阅读，表面上看起来是阅读者在理解文字，</p>
-<p>但究其根本，却是读者在与作者进行思想交流。</p>
+            <h3 id="群论">群论</h3>
+<p>集合<span data-katex="G"></span>，配以满足以下条件的映射<span data-katex="G\times G\to G"></span>（群乘法），称为<strong>群</strong>：</p>
+<p>（a）<span data-katex="(g_1g_2)g_3=g_1(g_2g_3)"></span>，<span data-katex="\forall g_1,g_2,g_3\in G"></span></p>
+<p>（b）存在恒等元<span data-katex="e\in G"></span>，使得<span data-katex="eg=ge=g"></span>，<span data-katex="\forall g\in G"></span></p>
+<p>（c）<span data-katex="\forall g\in G"></span>，存在逆元<span data-katex="g^{-1}\in G"></span>，使得<span data-katex="g^{-1}g=gg^{-1}=e"></span></p>
 <p><br/></p>
-<p>有些人不擅于阅读，容易被字面意思所累，</p>
-<p>他们总是纠结于只言片语，抑或作者的表述方式，</p>
-<p>这真是一件事倍功半的事情呀。</p>
+<p>乘法满足交换律的群，称为<strong>阿贝尔群</strong>，</p>
+<p>只含有有限个元素的群，叫做<strong>有限群</strong>，否则叫做<strong>无限群</strong>。</p>
 <p><br/></p>
-<p>不只是读书，</p>
-<p>在与人沟通的时候，实际上也是一个阅读过程，</p>
-<p>我们需要从别人的语言和肢体动作上，理解他要表达的含义。</p>
+<p>群<span data-katex="G"></span>的子集<span data-katex="H"></span>称为<span data-katex="G"></span>的<strong>子群</strong>，</p>
+<p>如果<span data-katex="H"></span>用<span data-katex="G"></span>的乘法为乘法也构成群。</p>
 <p><br/></p>
-<p>怎样快速理解别人的要传达的含义，</p>
-<p>怎样听到他人内心深处的声音，</p>
-<p>怎样开启上帝视角呢？</p>
+<p><strong>同态</strong></p>
+<p>设<span data-katex="G"></span>和<span data-katex="G&#39;"></span>是群，映射<span data-katex="\mu:G\to G&#39;"></span>叫做<strong>同态</strong>，</p>
+<p>若<span data-katex="\mu(g_1g_2)=\mu(g_1)(g_2)"></span>，<span data-katex="\forall g_1,g_2\in G"></span>。</p>
 <p><br/></p>
-<p>我采取的办法，就是<strong>考察动机</strong>。</p>
-<p>有了动机以后，我们就能明白他人为什么要进行沟通，</p>
-<p>以及沟通之后要达到的目标是什么？</p>
+<p>同态映射<span data-katex="\mu:G\to G&#39;"></span>有以下性质：</p>
+<p>（a）若<span data-katex="e,e&#39;"></span>分别为<span data-katex="G,G&#39;"></span>的恒等元，则<span data-katex="\mu(e)=e&#39;"></span></p>
+<p>（b）<span data-katex="\mu(g^{-1})=\mu(g)^{-1}"></span>，<span data-katex="\forall g\in G"></span></p>
+<p>（c）<span data-katex="\mu[G]"></span>是<span data-katex="G&#39;"></span>的子群</p>
 <p><br/></p>
-<p>想一想我们小学的时候，</p>
-<p>不是经常让我们总结作者的<strong>写作目的</strong>吗？</p>
-<p>对的，写作就是为其目的服务的。</p>
+<p>一一到上的同态映射称为<strong>同构</strong>，</p>
+<p>同构<span data-katex="\mu:G\to G"></span>称为群<span data-katex="G"></span>上的<strong>自同构</strong>。</p>
 <p><br/></p>
-<h3 id="大数学家是怎么做数学的">大数学家是怎么做数学的</h3>
-<p>有一次，<a href="https://zh.wikipedia.org/wiki/%E5%BC%A0%E5%AF%BF%E6%AD%A6" target="_blank" rel="noopener">张寿武</a>问<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%B0%94%E5%BE%B7%C2%B7%E6%B3%95%E5%B0%94%E5%BB%B7%E6%96%AF" target="_blank" rel="noopener">法尔廷斯</a>一个分析的问题，</p>
-<p>法尔廷斯要他到图书馆去查3卷书，告诉他答案就在里面，</p>
-<p>并让他第二天给出答案。</p>
+<p><span data-katex="\forall g\in G"></span>，可以构造一个自同构映射，</p>
+<p>记为<span data-katex="I_g:G\to G"></span>，</p>
+<p>定义为<span data-katex="I_g(h):=ghg^{-1}"></span>，<span data-katex="\forall h\in G"></span>，</p>
+<p>称为<strong>伴随同构</strong>，或称<strong>内自同构</strong>。</p>
 <p><br/></p>
-<p>这3卷书每一卷都有1000多页，</p>
-<p>张寿武花了一个多小时也没有找到需要的那一页，</p>
-<p>于是决定自己算。</p>
+<p><strong>直积群</strong></p>
+<p>群<span data-katex="G"></span>和<span data-katex="G&#39;"></span>（看做两个集合），它们的卡氏积<span data-katex="G\times G&#39;"></span>，</p>
+<p>按下列乘法构成的群，称为<span data-katex="G"></span>和<span data-katex="G&#39;"></span>的<strong>直积群</strong>，</p>
+<p><span data-katex="(g_1,g&#39;_1)(g_2,g&#39;_2):=(g_1g_2,g&#39;_1,g&#39;_2)"></span>，</p>
+<p><span data-katex="\forall g_1,g_2\in G,g&#39;_1,g&#39;_2\in G&#39;"></span></p>
 <p><br/></p>
-<p>张寿武后来回忆说，“我第一次发现自己也能算出来，特别得意。</p>
-<p>这时我才知道大数学家是怎么做数学的，</p>
-<p>他不是哪里不懂查哪里的文献，</p>
-<p>而是哪里不懂就做哪里。”</p>
+<p><strong>左陪集</strong></p>
+<p>设<span data-katex="H"></span>是群<span data-katex="G"></span>的子群，<span data-katex="g\in G"></span>，</p>
+<p>则<span data-katex="gH\equiv \{gh|h\in H\}"></span>称为<span data-katex="H"></span>的含<span data-katex="g"></span>的<strong>左陪集</strong>，</p>
+<p>类似的可以定义<strong>右陪集</strong>。</p>
 <p><br/></p>
-<p>在普林斯顿跟法尔廷斯学了一年，张寿武学会了怎么做数学，</p>
-<p>不是在图书馆里把别人的东西筹一筹，把别人的数学联在一起，</p>
-<p>而是<strong>从最基础的地方去做</strong>。</p>
+<p>如果子群<span data-katex="H"></span>的两个左陪集有交，则两者必相等。</p>
 <p><br/></p>
-<p>我们显然不能和这些大数学家们相提并论，</p>
-<p>但是这种学习方式却非常有指导意义。</p>
+<p>群<span data-katex="G"></span>的子群<span data-katex="H"></span>称为<strong>正规子群</strong>，或<strong>不变子群</strong>，</p>
+<p>若<span data-katex="ghg^{-1}\in H"></span>，<span data-katex="\forall g\in G,h\in H"></span>。</p>
 <p><br/></p>
-<p>在进行学习的时候，我们应当首先理解学科的背景和历史，</p>
-<p>理解科学家们在历史的进程中，都在<strong>面临哪些问题</strong>，</p>
-<p>因此我们就能知道，</p>
-<p>每一个公式每一个定理，都有其出现的<strong>动机</strong>。</p>
+<p>设<span data-katex="G"></span>是群，则<span data-katex="A(G)\equiv \{\mu:G\to G\}"></span>，<span data-katex="\mu"></span>为自同构映射，</p>
+<p><span data-katex="A(G)"></span>以映射的复合为群乘法构成群，称为群<span data-katex="G"></span>的<strong>自同构群</strong>。</p>
 <p><br/></p>
-<p>理解了动机，就抓住了学科的线索。</p>
-<p>就可以站在概念发明者的角度考虑问题。</p>
+<p>以<span data-katex="A_I(G)"></span>代表<span data-katex="G"></span>上全体内自同构映射的集合，</p>
+<p>即<span data-katex="A_I(G)\equiv \{I_g:G\to G|g\in G\}\subset A(G)"></span>，</p>
+<p>则<span data-katex="A_I(G)"></span>是群<span data-katex="A(G)"></span>的一个正规子群。</p>
 <p><br/></p>
-<h3 id="小说中侦探的思维模式">小说中侦探的思维模式</h3>
-<p>看侦探小说是我的一个业余爱好，</p>
-<p>我可以发现自己有哪些逻辑误区，</p>
-<p>还可以和嫌犯做智力博弈。</p>
+<p><strong>半直积群</strong></p>
+<p>设<span data-katex="H"></span>和<span data-katex="K"></span>是群，且存在同态映射<span data-katex="\mu:K\to A(H)"></span>，</p>
+<p>并且<span data-katex="\forall k\in K"></span>，把<span data-katex="\mu(k)\in A(H)"></span>简记为<span data-katex="\mu_k"></span>，</p>
+<p>则<span data-katex="G\equiv H\times K"></span>配以下式定义的群乘法，</p>
+<p><span data-katex="(h,k)(h&#39;,k&#39;):=(h\mu_k(h&#39;),kk&#39;)"></span>，</p>
+<p><span data-katex="\forall h,h&#39;\in H,k,k&#39;\in K"></span>，</p>
+<p>所构成的群称为<span data-katex="H"></span>和<span data-katex="K"></span>的<strong>半直积群</strong>，记为<span data-katex="G\equiv H\bigotimes_S K"></span>。</p>
 <p><br/></p>
-<p>我发现很多时候，侦探们的思维其实都是<strong>跳跃性</strong>的，</p>
-<p>是<strong>先有一个想法再去求证，</strong></p>
-<p>而不是他们自己号称的具有逻辑连贯性。</p>
+<h3 id="李群">李群</h3>
+<p>若<span data-katex="G"></span>既是<span data-katex="n"></span>维（实）流形又是群，其群乘映射<span data-katex="G\times G\to G"></span>，</p>
+<p>和求逆映射<span data-katex="G\to G"></span>，都是<span data-katex="C^\infty"></span>的，</p>
+<p>则<span data-katex="G"></span>叫做<strong><span data-katex="n"></span>维（实）李群</strong>。</p>
 <p><br/></p>
-<p>这一点和科学家们的思路是相类似的。</p>
-<p>学者们是先提出一个理论，再在实验中进行检验。</p>
-<p>而不是设法从实验数据中反推出它的理论解释。</p>
+<p>李群<span data-katex="G"></span>和<span data-katex="G&#39;"></span>之间的<span data-katex="C^\infty"></span>同态映射<span data-katex="\mu:G\to G&#39;"></span>，称为<strong>李群同态</strong>。</p>
+<p>李群同态<span data-katex="\mu"></span>称为<strong>李群同构</strong>，若<span data-katex="\mu"></span>为微分同胚。</p>
 <p><br/></p>
-<p>侦探们首先会站在嫌犯角度，理解它的犯罪<strong>动机</strong>，</p>
-<p>理解了动机之后，犯罪事实的发生就成了必然。</p>
+<p>李群<span data-katex="G"></span>的子集<span data-katex="H"></span>称为<span data-katex="G"></span>的<strong>李子群</strong>，</p>
+<p>若<span data-katex="H"></span>既是<span data-katex="G"></span>的子流形，又是<span data-katex="G"></span>的子群。</p>
 <p><br/></p>
-<p>随后，我们只要观察嫌犯做了哪些平时不做的事情，</p>
-<p>就一定会有证据留下来。</p>
+<p><strong>左平移</strong></p>
+<p><span data-katex="\forall g\in G"></span>，映射<span data-katex="L_g:h\mapsto gh"></span>，<span data-katex="\forall h\in G"></span>，</p>
+<p>叫做由<span data-katex="g"></span>生成的<strong>左平移</strong>。</p>
 <p><br/></p>
-<p>有了证据，就真相大白了。</p>
-<p>抓住了动机，就打开了上帝视角。</p>
+<p>以下讨论经常涉及<span data-katex="G"></span>的一点的矢量，和<span data-katex="G"></span>的一个子集上的矢量场，</p>
+<p>我们将用<span data-katex="A,B,\cdots"></span>代表一点的矢量，</p>
+<p>用<span data-katex="\bar{A},\bar{B},\cdots"></span>代表矢量场，</p>
+<p>用<span data-katex="\bar{A}_g"></span>代表矢量场<span data-katex="\bar{A}"></span>在点<span data-katex="g\in G"></span>的值。</p>
 <p><br/></p>
-<h3 id="代码需要注释编写它的动机">代码需要注释编写它的动机</h3>
-<p>有人说好的代码不需要注释，</p>
-<p>我并不太认同这句话。</p>
+<p><span data-katex="G"></span>上矢量场<span data-katex="\bar{A}"></span>，叫做<strong>左不变的</strong>，</p>
+<p>若<span data-katex="L_{g*}\bar{A}=\bar{A}"></span>，<span data-katex="\forall g\in G"></span>，</p>
+<p>其中<span data-katex="L_{g*}"></span>是由左平移映射<span data-katex="L_g:G\to G"></span>诱导的推前映射。</p>
 <p><br/></p>
-<p>因为代码的主要作用是编码计算过程，</p>
-<p>而不是为了说明为什么要编写它。</p>
+<p>考虑到微分同胚<span data-katex="\phi:M\to N"></span>，它诱导的推前映射<span data-katex="\phi_*"></span>把<span data-katex="M"></span>上的矢量场<span data-katex="\bar{A}"></span>，</p>
+<p>映射为<span data-katex="N"></span>上的矢量场<span data-katex="\phi_*(\bar{A})"></span>，</p>
+<p>满足<span data-katex="(\phi_*\bar{A})|_{\phi(p)}=\phi_*(\bar{A}|_p)"></span>，<span data-katex="\forall p\in M"></span>。</p>
+<p>令<span data-katex="M=N=G"></span>，<span data-katex="\phi=L_g"></span>，<span data-katex="p=h"></span>，</p>
+<p>我们有<span data-katex="(L_{g*}\bar{A})_{gh}=L_{g*}(\bar{A}_h)"></span>。</p>
 <p><br/></p>
-<p>代码被编写的原因，是一个很重要的线索，</p>
-<p>有了原因，任何一个称职的程序员都可以重写这段代码。</p>
-<p>但是指望<strong>从代码反推出编写它的原因，就很难了</strong>。</p>
+<p>取左不变矢量场定义中的等式在<span data-katex="gh"></span>处的值，可得，</p>
+<p><span data-katex="(L_{g*}\bar{A})_{gh}=\bar{A}_{gh}"></span>，<span data-katex="\forall g,h\in G"></span>，</p>
+<p>因此，我们得到了一个<strong>左不变矢量场的等价定义</strong>，</p>
+<p><span data-katex="\bar{A}_{gh}=L_{g*}(\bar{A}_h)"></span>。</p>
 <p><br/></p>
-<p>注释的作用，就是为了填补这些遗失的信息。</p>
+<p>左不变矢量场之和，以及左不变矢量场乘以常数，仍为左不变矢量场，</p>
+<p>因此所有左不变矢量场的集合<span data-katex="\mathscr{L}\equiv \{\bar{A}\}"></span>是一个<strong>矢量空间</strong>。</p>
 <p><br/></p>
-<p>因此，好的注释或文档，</p>
-<p>会花费很多笔墨，描写问题产生的背景信息，</p>
-<p>让代码的维护者，能更真切的理解到<strong>当时的处境</strong>。</p>
+<p><span data-katex="G"></span>上全体左不变矢量场的集合<span data-katex="\mathscr{L}"></span>，</p>
+<p>与<span data-katex="G"></span>的恒等元<span data-katex="e"></span>的切空间<span data-katex="V_e"></span>，（作为两个矢量空间）同构。</p>
 <p><br/></p>
-<p>而这些都是代码本身无法描述清楚的。</p>
+<h3 id="李代数">李代数</h3>
+<p>在矢量空间<span data-katex="\mathscr{V}"></span>上定义某种称为“乘法”的映射，就得到一个<strong>代数</strong>。</p>
 <p><br/></p>
-<h3 id="读书时从字里行间猜测出作者的写作目的">读书时从字里行间猜测出作者的写作目的</h3>
-<p>在读书的时候，经常会发现作者某句话表述的模棱两可，</p>
-<p>我们会一遍一遍的根据上下文揣测作者的含义，</p>
-<p>这种事情做久了，就会发现非常影响读书的效率。</p>
+<p>一种重要的乘法叫做<strong>李括号</strong>，记做<span data-katex="[,]:\mathscr{V}\times\mathscr{V}\to\mathscr{V}"></span>，</p>
+<p>它是满足以下两个条件的双线性映射：</p>
+<p>（a）<span data-katex="[A,B]=-[B,A]"></span>，<span data-katex="\forall A,B\in\mathscr{V}"></span></p>
+<p>（b）<span data-katex="[A,[B,C]]+[C,[A,B]]+[B,[C,A]]=0"></span>，<span data-katex="\forall A,B,C\in\mathscr{V}"></span></p>
+<p>条件（b）称为<strong>雅可比恒等式</strong>。</p>
 <p><br/></p>
-<p>实际上，作者也是有局限性的，</p>
-<p>他可能会表述不清，也可能会产生歧义，</p>
-<p>这些都是可以理解的。</p>
+<p>定义了李括号的矢量空间，称为<strong>李代数</strong>，</p>
+<p>任意两个元素的李括号都为零的李代数，称为<strong>阿贝尔李代数</strong>。</p>
 <p><br/></p>
-<p>所以，关键是我们怎样从这么少的文字中，<strong>洞察</strong>到作者更深层次的思想。</p>
-<p>而不是从只言片语中，去理解当前这些文字所表达的那些含义。</p>
-<p>我们需要能理解到更多的<strong>言外之意</strong>。</p>
+<p><span data-katex="G"></span>上全体左不变矢量场的集合<span data-katex="\mathscr{L}"></span>是李代数。</p>
 <p><br/></p>
-<p>要做出这样的洞察，就得抓住作者的写作目的，</p>
-<p>每一段文字，都是为他本段的写作目的服务的，</p>
-<p>每一章节的文字，都是为他本章的写作目的服务的。</p>
-<p>整本书，都是为他本书的写作目的服务的。</p>
+<p><strong>李代数同态</strong></p>
+<p>设<span data-katex="\mathscr{V}"></span>和<span data-katex="\mathscr{W}"></span>是李代数，</p>
+<p>线性映射<span data-katex="\beta:\mathscr{V}\to\mathscr{W}"></span>称为<strong>李代数同态</strong>，</p>
+<p>若它保李括号，即<span data-katex="\beta([A,B])=[\beta(A),\beta(B)]"></span>，<span data-katex="\forall A,B\in\mathscr{V}"></span>。</p>
 <p><br/></p>
-<p>因此，<strong>前言和绪论是必不可少的阅读环节，是重中之重</strong>。</p>
+<p>李代数同态<span data-katex="\beta:\mathscr{V}\to\mathscr{W}"></span>称为<strong>李代数同构</strong>，</p>
+<p>若<span data-katex="\beta"></span>是一一到上映射。</p>
 <p><br/></p>
-<p>前言交代了整本书的成书背景，</p>
-<p>以及作者计划怎样用本书向读者传达信息。</p>
+<p><strong>李群的李代数</strong></p>
+<p>对李群<span data-katex="G"></span>的恒等元<span data-katex="e"></span>的切空间<span data-katex="V_e"></span>用下式定义李括号，</p>
+<p><span data-katex="[A,B]:=[\bar{A},\bar{B}]_e"></span>，<span data-katex="\forall A,B\in V_e"></span>，</p>
+<p>其中<span data-katex="\bar{A},\bar{B}"></span>分别是<span data-katex="A,B"></span>对应的左不变矢量场。</p>
+<p>则<span data-katex="V_e"></span>成为李代数，称为<strong>李群<span data-katex="G"></span>的李代数</strong>，记为<span data-katex="\mathscr{G}"></span>。</p>
 <p><br/></p>
-<p>理解了背景，就站在了作者的角度，</p>
-<p>甚至能预测他要写什么内容。</p>
+<p>给定一个李代数，总可以找到唯一的单联通李群，</p>
+<p>它以所给李代数为李代数。</p>
 <p><br/></p>
-<h3 id="结语">结语</h3>
-<p>阅读是一个理解的过程，</p>
-<p>但是理解的源泉，并不能仅局限于别人所表达出来的那些信息，</p>
-<p><strong>更多的理解能力，是要通过读者的洞察力，抓住作者的写作目的。</strong></p>
+<p>设<span data-katex="\mathscr{G}"></span>和<span data-katex="\hat{\mathscr{G}}"></span>分别是李群<span data-katex="G"></span>和<span data-katex="\hat{G}"></span>的李代数，</p>
+<p><span data-katex="\rho:G\to\hat{G}"></span>是同态映射，</p>
+<p>则<span data-katex="\rho"></span>在点<span data-katex="e\in G"></span>诱导的推前映射<span data-katex="\rho_*:\mathscr{G}\to\hat{\mathscr{G}}"></span>，</p>
+<p>是李代数同态。</p>
 <p><br/></p>
-<p>抓住了写作目的，就有了作者成书的<strong>动机</strong>，</p>
-<p>才能摆脱具体的文字编码方式，</p>
-<p>与作者进行思想层面上的沟通和交流。</p>
+<p><strong>李子代数</strong></p>
+<p>李代数<span data-katex="\mathscr{G}"></span>的子空间<span data-katex="\mathscr{H}"></span>，称为<span data-katex="\mathscr{G}"></span>的<strong>李子代数</strong>，</p>
+<p>若<span data-katex="[A,B]\in\mathscr{H}"></span>，<span data-katex="\forall A,B\in\mathscr{H}"></span>。</p>
+<p>其中<span data-katex="[A,B]"></span>是把<span data-katex="A,B"></span>看做<span data-katex="\mathscr{G}"></span>的元素时的李括号，</p>
+<p>现在也称为子代数<span data-katex="\mathscr{H}"></span>的李括号。</p>
 <p><br/></p>
-<p>当然，这难免会有一些偏差，</p>
-<p>但因此我们有了更大的收获，才是我们最关心的，</p>
-<p>我们提高了阅读效率，节省了时间。</p>
+<p>设<span data-katex="H"></span>是李群<span data-katex="G"></span>的李子群，</p>
+<p>则<span data-katex="H"></span>的李代数<span data-katex="\mathscr{H}"></span>是<span data-katex="\mathscr{G}"></span>的李子代数。</p>
 <p><br/></p>
-<p>何必跟自己过不去呢？</p>
+<p>李代数<span data-katex="\mathscr{G}"></span>的子代数<span data-katex="\mathscr{H}"></span>称为<span data-katex="\mathscr{G}"></span>的<strong>理想</strong>，</p>
+<p>若<span data-katex="[A,\mu]\in\mathscr{H}"></span>，<span data-katex="\forall A\in\mathscr{G},\mu\in\mathscr{H}"></span>。</p>
+<p><br/></p>
+<p>设<span data-katex="\mathscr{H}\subset\mathscr{G}"></span>是理想，</p>
+<p><span data-katex="\mathscr{G}/\mathscr{H}"></span>代表以等价类为元素的集合，</p>
+<p>（<span data-katex="A,B\in\mathscr{G}"></span>叫做等价的，若<span data-katex="A-B\in\mathscr{H}"></span>）</p>
+<p>则<span data-katex="\mathscr{G}/\mathscr{H}"></span>是李代数，称为<strong>商李代数</strong>。</p>
+<p><br/></p>
+<p>李代数<span data-katex="\mathscr{G}"></span>为<strong>单李代数</strong>，若它不是阿贝尔李代数，</p>
+<p>而且除<span data-katex="\mathscr{G}"></span>及<span data-katex="\{0\}"></span>外不含理想。</p>
+<p><span data-katex="\mathscr{G}"></span>称为<strong>半单李代数</strong>，若它不含非零的阿贝尔理想。</p>
+<p><br/></p>
+<p>相应的，李群<span data-katex="G"></span>称为<strong>单李群</strong>，若它不是阿贝尔群，</p>
+<p>而且除<span data-katex="G"></span>外不含正规子群。</p>
+<p><span data-katex="G"></span>称为<strong>半单李群</strong>，若它不含阿贝尔正规子群。</p>
+<hr />
+<h3 id="参考">参考</h3>
+<p><a href="https://book.douban.com/subject/3613832/" target="_blank" rel="noopener">微分几何入门与广义相对论（中册） - 附录G</a></p>
 
           
         
@@ -518,7 +549,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/171/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/171/">171</a><span class="page-number current">172</span><a class="page-number" href="/page/173/">173</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/173/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/171/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/171/">171</a><span class="page-number current">172</span><a class="page-number" href="/page/173/">173</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/173/">&gt;</a>
   </nav>
 
 
@@ -564,7 +595,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">311</span>
+                <span class="site-state-item-count">312</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

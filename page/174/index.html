@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/11/28/bisection-method/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/12/12/change-is-hard/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/28/bisection-method/" itemprop="url">使用二分法排查问题</a></h1>
+                <a class="post-title-link" href="/2017/12/12/change-is-hard/" itemprop="url">敢于为改变付出代价</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-28T00:00:00+08:00">
-                2017-11-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T00:00:00+08:00">
+                2017-12-12
               </time>
             
 
@@ -347,132 +347,132 @@
       
         
           
-            <p>数学上的<a href="https://en.wikipedia.org/wiki/Bisection_method" target="_blank" rel="noopener">二分法</a>，是一种方程根的近似解法。</p>
+            <p>像做工程一样量产软件，是人们的一种愿望，</p>
+<p>但实际执行起来，却异常困难。</p>
 <p><br/></p>
-<p>如果要求已知函数<span data-katex="f(x)=0"></span>的根，</p>
-<p>那么我们要先找出一个区间<span data-katex="[a,b]"></span>，使得<span data-katex="f(a)"></span>与<span data-katex="f(b)"></span>异号（正负值不同）。</p>
-<p>根据连续函数的<a href="Intermediate%20value%20theorem">中值定理</a>，</p>
-<p>该区间内必存在方程的一个根。</p>
+<p>这些年我参与过的项目中，</p>
+<p>几乎每个项目都有这样或者那样的工程问题，</p>
+<p>阻碍着效率的进一步提高。</p>
 <p><br/></p>
-<p>于是，我们就可以取该区间的中点<span data-katex="m=\frac{a+b}{2}"></span>，逐渐缩小区间，</p>
-<p>如果<span data-katex="f(m)"></span>与<span data-katex="f(a)"></span>异号，则取新区间为<span data-katex="[a,m]"></span>，否则取新区间为<span data-katex="[m,b]"></span>。</p>
-<p>就这样一直迭代，直到达到我们期望的精度为止。</p>
+<p>要么需求有问题，要么工期有问题，要么代码有问题，</p>
+<p>要么文档有问题，等等等等。</p>
 <p><br/></p>
-<p><strong>二分法的主要思路是这样的：</strong></p>
-<p><strong>（1）找到使函数值异号的区间</strong></p>
-<p><strong>（2）在区间内取点试验，缩小范围</strong></p>
+<p>不同的团队会遇到不同的问题。</p>
 <p><br/></p>
-<p>幸运的是，这种思想不仅可以用来求解方程，</p>
-<p>还可以用于在软件开发过程中排查问题。</p>
+<p>而且，同一个团队，只要不进行较大规模的人员调整，</p>
+<p>再多的反思，也不会从本质上解决这些问题。</p>
 <p><br/></p>
-<h3 id="基础二分法">基础二分法</h3>
-<p>我们都知道，排查问题对于开发软件来说，简直是家常便饭，</p>
-<p>经常会遇到莫名其妙的突发状况，软件不能运行了。</p>
-<p>从一开始我们用C语言写<code>Hello world</code>，这种事情就没有间断过，</p>
-<p>导致问题的原因，可能会非常愚蠢，也可能会异常微妙。</p>
+<p>因此，我们有理由相信，<strong>工程问题是团队相关的。</strong></p>
 <p><br/></p>
-<p>稍微长一点的程序，我们就会发现，</p>
-<p>刚开始还是对的，中途不知道怎么的就出现了错误。</p>
-<p>下面我们来看一下如何借用二分法思想，排查这些问题。</p>
+<p><strong>团队文化看起来会对任何变化造成一种阻力，</strong></p>
+<p><strong>导致某些改变永远无法完成。</strong></p>
 <p><br/></p>
-<p>首先，我们要找到“使函数值异号的区间”，</p>
-<p>即，<strong>找到在什么情况下程序是对的，而在什么情况下是错的。</strong></p>
-<p>那么程序出错的原因，肯定在这两种情况中间，我们只要不断缩小范围即可。</p>
+<h3 id="要做出改变">要做出改变</h3>
+<p>在讨论为什么无法改变之前，</p>
+<p>让我们先谈论一下为什么要进行改变吧。</p>
 <p><br/></p>
-<p>对于长程序而言，把程序删完，显然应该是对的，</p>
-<p>而整个程序因为其结果不正确是有问题的，</p>
-<p>因此，我们就找到了一个“异号区间”，</p>
-<p>我们可以清楚的看到两套环境，一套是有问题的，而另一套则没有。</p>
+<p><a href="https://en.wikipedia.org/wiki/Eliyahu_M._Goldratt" target="_blank" rel="noopener">Eliyahu M. Goldratt</a>提出了一套企业管理方法，称为约束理论（theory of constraints）。</p>
+<p>他认为，<strong>非瓶颈资源的利用程度，并不是由其生产潜力来决定，</strong></p>
+<p><strong>而是由系统中的其他制约因素来决定。</strong></p>
 <p><br/></p>
-<p>然后我们就可以贴一半代码上去了，看看中间结果是否正确，</p>
-<p>如果是正确的，则证明到目前为止，贴的那一半代码是正确的，</p>
-<p>否则，这一半代码就是有问题的。</p>
+<blockquote>
+<p>他指着NCX-IO机器说：</p>
+</blockquote>
+<blockquote>
+<p>你们系统的主要制约因素就在于这部机器。</p>
+</blockquote>
+<blockquote>
+<p>当你们给非瓶颈的工作量超越了这部机器的工作量时，</p>
+</blockquote>
+<blockquote>
+<p>你们不但没有提高生产力，反而制造出过多的存货。</p>
+</blockquote>
+<blockquote>
+<p>因此，也就和目标背道而驰。</p>
+</blockquote>
+<blockquote>
+<p>—— 《目标：简单而有效的常识管理》</p>
+</blockquote>
 <p><br/></p>
-<p>通过界定两套环境，我们就可以大胆的尝试，</p>
-<p>从而迅速将问题规模减半，这正是二分法的威力。</p>
+<p>在企业管理中，要想系统性的提高效能，</p>
+<p>就要识别并设法减少瓶颈因素，直到瓶颈因素不再对效能产生约束。</p>
+<p>消除一个瓶颈之后，又会涌现出另外一个新的瓶颈，如此循环不已。</p>
 <p><br/></p>
-<h3 id="极端情况法">极端情况法</h3>
-<p>从排查代码问题的小例子中，我们看到了一个极端情况，</p>
-<p>那就是，我们直接把程序删完，来断定这时候应该是没有问题的，</p>
-<p>这种办法，我们可以称为“极端情况法”。</p>
+<p>该理论在实际应用中是很有效果的，</p>
+<p>类似木桶原理，只有桶壁上的所有木板都足够高，才能盛满水。</p>
 <p><br/></p>
-<p>在寻找“异号区间”时，这种办法非常有用。</p>
-<p><strong>我们通常会选取一个极端的情况，在这种情况下，绝对不会出现问题。</strong></p>
-<p>因为如果不这样，我们经常会在问题环境中折腾很久，结果不论怎么弄都有问题。</p>
-<p>此外，如果没有一个极端情况来告诉我们没有问题，就无法二分。</p>
+<h3 id="假如可以改变">假如可以改变</h3>
+<p>不幸的是，像很多方法论一样，约束理论也忽略了一个事实，</p>
+<p>那就是，<strong>现状实际上是无法立即改变的，甚至是无法改变的。</strong></p>
 <p><br/></p>
-<p>我曾经遇到过一个JavaScript的问题，</p>
-<p>有一段代码，在服务器上总是无法运行，提示有非法字符，但是在我本机却没有问题。</p>
-<p>我甚至将每一个字符都逐个对比了，服务器上还是有问题。</p>
+<p>就像一列冲向悬崖的火车一样，我们甚至没有办法让它停下来。</p>
+<p>有些看起来有效的方法论，其实很难执行成功。</p>
 <p><br/></p>
-<p>怎么折腾都有问题，就意味着我们必须选取极端情况，</p>
-<p>找到极端的什么情况下，一定是没有问题的。</p>
-<p>于是，我将代码都删完了，只写了一个<code>alert()</code>，很明显代码是可以运行的，</p>
-<p>我找到了没有问题的环境。</p>
+<p>我们来看一个常见的例子，例如，</p>
+<p>我们都知道敏捷开发的好处，敏捷开发也有很多成功的案例，</p>
+<p>但是我们经历的项目中，有几个改造成了敏捷形式呢？</p>
 <p><br/></p>
-<p>紧接着，我采用二分法，逐渐缩小范围，</p>
-<p>最终发现了一个在编辑器中无法显示的字符，是它导致了JavaScript语法错误。</p>
+<p>另一个例子，</p>
+<p>开发者们都厌恶脏乱的代码，人们也知道代码评审以及设计评审的重要性，</p>
+<p>但是又有几个团队，能坚持做这样的事情呢？</p>
 <p><br/></p>
-<h3 id="干净实验室法">干净实验室法</h3>
-<p>最近用Lua写了一个脚本，用于转发Nginx中的get/post请求，这是一个稍微复杂的场景，</p>
-<p>如果对Lua和Nginx不熟悉，直接写出可用的正确代码简直是不可能的。</p>
+<p>所以，<strong>并不是人们意识不到改变，</strong></p>
+<p><strong>也并不是人们从主观意愿上不接受这些改变，</strong></p>
+<p><strong>而是从经济学角度来讲，人们并不会为改变买单。</strong></p>
 <p><br/></p>
-<p>因此，我采用了“干净实验室法”，</p>
-<p>指的是，<strong>重新建立了一套干净的环境用于实验，</strong></p>
-<p>在这个“实验室”中检验成功的写法，才会移植到正式的开发环境中。</p>
+<h3 id="改变对一个系统的影响">改变对一个系统的影响</h3>
+<p>我看过《大明王朝》这个电视剧，所述年代里国库亏空严重，</p>
+<p>于是内阁想出了一个办法，那就是将浙江的稻田改成桑田，</p>
+<p>桑田产的蚕丝织成绸缎，会比原来的种稻利润更高。</p>
 <p><br/></p>
-<p>我先后在这个实验室中，练习并检验了基本的Nginx用法，以及Lua的<code>Hello world</code>，</p>
-<p>接着，如何用Lua发起http请求，如何保留Cookie，都逐个被验证成功。</p>
-<p>最后，我将这些被验证的案例进行总结，集成到开发环境中，</p>
-<p>实现了这个稍微复杂一些的功能。</p>
+<p>这看起来是利国利民的好事情，</p>
+<p>而且站在改稻为桑已经落实的基础上，有百利而无一害。</p>
+<p>可是，<strong>到实际执行时，却又不容易了。</strong></p>
 <p><br/></p>
-<p>这种“干净实验室法”看起来和二分法无关，</p>
-<p>实际上却正是二分法思想的应用。</p>
+<p>因为，将稻田改成桑田，当地的农民就没粮食了，</p>
+<p>于是，必须去别的地方买粮。</p>
+<p>而粮食需求旺盛，也会导致粮价上涨。</p>
 <p><br/></p>
-<p>在解决这个问题的时候，我手里总是有两套环境，</p>
-<p>一个没有问题——实验室环境，另一个有问题——功能尚未实现，</p>
-<p>通过不断试验，功能被一个接一个实现，逐渐接近成功。</p>
+<p>粮价上涨了，当地农民就买不起了，必须把土地卖了才行。</p>
+<p>农民担心自己的土地，所以改稻为桑的国策就无法推行下去了。</p>
 <p><br/></p>
-<h3 id="排除变量法">排除变量法</h3>
-<p>以上我们提到情况中，有问题的场景都是显而易见的，</p>
-<p>我们清楚的知道在什么情况下会出现错误。</p>
-<p>然而，在另外一些场景中，问题环境就不容易被构造了。</p>
+<p>所以，要想推行国策，就得先解决粮食问题。</p>
+<p>可是哪有多余的粮食呢？谁肯借出这些粮食呢？</p>
 <p><br/></p>
-<p>在进行手机移动端开发的时候，</p>
-<p>我实现过一个滚动容器，可以通过手指上下移动，让它滚动。</p>
-<p>这个功能在iOS上是没问题的，在几乎所有Android手机上也是可以的，</p>
-<p>但是仅在某台测试机上出现了问题，容器滚动后不会停止。</p>
+<p>这就形成了一个死局。</p>
+<p><strong>不是方法出现了问题，而是方法无法推行的问题。</strong></p>
 <p><br/></p>
-<p>这时候会有很多因素干扰到我，</p>
-<p>是不是测试机的问题？是不是Android原生浏览器的问题？</p>
-<p>是不是代码逻辑的问题？是不是应用中其他库或框架的影响？</p>
+<p>就好像囚徒困境中的两个囚犯一样，</p>
+<p>每个人都有自己的小算盘，谁都不肯损害自己的利益，</p>
+<p>当然也就无法达到全局最优了。</p>
 <p><br/></p>
-<p>这些因素看起来是同时起作用的，因为稍微变动一点，问题就没了。</p>
-<p>这时候，我们就需要谨慎的排除变量，小心的保留问题环境了。</p>
+<h3 id="为何无法改变">为何无法改变</h3>
+<p>我们看到，将改变的决策落地执行，才是最困难的地方。</p>
+<p><strong>任何改变都需要消耗资源，</strong></p>
+<p><strong>而这些消耗，都必须从当前系统中的其他地方“借”出来。</strong></p>
 <p><br/></p>
-<p>使用排除变量法，<strong>我们要在其他因素保持不变的前提下，</strong></p>
-<p><strong>只变动一个因素，并且还要让现象保留。</strong></p>
-<p>于是，我们就可以像抽积木一样，把这些因素逐渐剥离出去了。</p>
+<p>想要做出改变的团队，也是如此。</p>
 <p><br/></p>
-<p>最终我们发现，这类现象是Android 1.5机型上原生浏览器的问题，</p>
-<p>该浏览器有Bug，点按屏幕的时候，会触发touchstart和touchend事件，这个是好的，</p>
-<p>而手指在屏幕上移动的时候，将只触发touchstart和touchmove事件，</p>
-<p>touchend事件不被触发了，这是有问题的。</p>
+<p>一个好的工程实践看起来行之有效，</p>
+<p>但是<strong>人们一旦意识到，要想改变就必须先付出代价时，</strong></p>
+<p><strong>就推行不下去了。</strong></p>
 <p><br/></p>
-<p>为此，我们排除了框架的问题，代码的问题，某一台测试机的问题，</p>
-<p>等等这些非决定性因素。</p>
+<p>人们都知道问题在哪里，可是仍然无法扭转局面。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>本文介绍了二分法，它可用于在软件开发过程中排查问题，</p>
-<p>还介绍了二分法思想的几个简单应用。</p>
+<p>我们一线开发者，很容易会将工程问题归结为项目经理的失职，</p>
+<p>这是很不专业的行为。</p>
+<p>因为从人们意识到改变，到真实的做出改变，还有很多的路要走。</p>
 <p><br/></p>
-<p>使用“极端情况法”，我们总是可以找到一个没有问题的环境，</p>
-<p>使用“干净实验室法”，我们就可以逐渐产出经过验证的代码，</p>
-<p>使用“排除变量法”，我们可以一一排除干扰，找出问题的直接原因。</p>
+<p>会遇到团队文化所带来的无形阻力，</p>
+<p>会遇到资源分配方面的种种问题。</p>
 <p><br/></p>
-<p>这些方法都是我个人经验的总结，它们使我能更有效的解决问题。</p>
-<p>但是，<strong>向有经验的人进行咨询，无疑是更有效的。</strong></p>
-<p>很多问题在见识广博的人眼中，根本不是问题，问路比速跑好。</p>
+<p>驱使自己做出有挑战的事情，已经很不容易了，</p>
+<p>何况驱使别人，驱使一个团队，</p>
+<p>我们只能根据团队成员的<strong>心理诉求</strong>以及<strong>利益得失</strong>，制定出可以执行得下去的方案。</p>
+<p><br/></p>
+<p>所以，不要怪项目经理了，</p>
+<p><strong>毕竟谁也不想加班。</strong></p>
 
           
         
@@ -511,7 +511,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/173/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/173/">173</a><span class="page-number current">174</span><a class="page-number" href="/page/175/">175</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/175/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/173/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/173/">173</a><span class="page-number current">174</span><a class="page-number" href="/page/175/">175</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/175/">&gt;</a>
   </nav>
 
 
@@ -557,7 +557,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">311</span>
+                <span class="site-state-item-count">312</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

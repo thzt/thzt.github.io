@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/14/recursive-function-7/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/03/16/good-code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/14/recursive-function-7/" itemprop="url">递归函数（七）：不动点算子</a></h1>
+                <a class="post-title-link" href="/2017/03/16/good-code/" itemprop="url">什么样的代码才算是好代码</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-14T00:00:00+08:00">
-                2017-03-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-16T00:00:00+08:00">
+                2017-03-16
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,143 +347,140 @@
       
         
           
-            <h3 id="回顾">回顾</h3>
-<p>以上几篇文章中，我们讨论了可计算性理论相关的一些内容，</p>
-<p>可计算性与递归函数论存在着千丝万缕的联系，</p>
-<p>不动点理论也是这样的，我们定义的递归函数一定存在吗？</p>
-<p>在什么情况下它是存在的？</p>
+            <p>我们经常指责别人写的代码，</p>
+<p>例如，他们使用了过多的嵌套循环，或者使用了过多的if-else，</p>
+<p>或者异常处理方式跟“业界”认可的方式不同，</p>
+<p>他们写的代码维护成本很高，是技术债务。</p>
 <p><br/></p>
-<p>要回答以上这些问题，还要从方程，不动点，不动点算子说起。</p>
+<p>却不知，他们一定也在指责我们，</p>
+<p>我们引入了过多不必要的抽象，我们写的通用代码结果只在一个地方被用到，</p>
+<p>我们进行了过度设计，拥有代码洁癖，</p>
+<p>他们指出，我们担心的事情永远都没有发生过。</p>
 <p><br/></p>
-<h3 id="约束方程">约束方程</h3>
+<p>那么，到底什么才是好代码呢？</p>
+<p><strong>我们凭什么指出某种写法是技术债务，而另外一种不是。</strong></p>
+<p>除去心理因素，“平铺直叙”的代码真的就那么难以维护吗？</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-c82626b07032c9e8.png" /></p>
+<p>在这个问题上，经验似乎说明不了什么问题，</p>
+<p>我们深信某种写法较好，仅仅是我们那么认为而已。</p>
+<p>如果其他人不这么认为，也没有办法。</p>
 <p><br/></p>
-<p>在中学时代，我们学过“方程”的概念，</p>
-<p>方程可以简单表述为含有未知数的等式，例如，<span data-katex="3x+3=2"></span>。</p>
-<p>未知数可以同时出现在等式的两边，例如，<span data-katex="2x+3=2-x"></span>。</p>
-<p>通过合并同类项，我们可以求解<span data-katex="x"></span>。</p>
+<p>我们可能会在白板上跟别人争执，</p>
+<p>讨论代码的演化路径，大谈设计模式，考虑各种开发原则，</p>
+<p>这些似乎都没有什么用，</p>
+<p>关于什么样的写法更好，谁也说服不了谁。</p>
 <p><br/></p>
-<p>在大学时代，我们还学过线性方程组和微分方程，</p>
-<p>例如，求解矩阵的特征值和特征向量，<span data-katex="Av=\lambda v"></span></p>
-<p>二阶常微分方程（<a href="https://zh.wikipedia.org/wiki/%E8%B4%9D%E5%A1%9E%E5%B0%94%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">贝塞尔方程</a>），<span data-katex="x^2y&#39;&#39;+xy&#39;+(x^2-\alpha ^2)y=0"></span>。</p>
+<p>对于未来的发展状况，你说会发生，</p>
+<p>别人说不会发生，你还能怎样。</p>
 <p><br/></p>
-<p>在计算机科学中，同样的未知“数”的思想，</p>
-<p>还出现在了类型推导（例如：<a href="https://en.wikipedia.org/wiki/Unification_(computer_science)" target="_blank" rel="noopener">unification</a>）与递归函数的定义中。</p>
+<h3 id="恰如其分的使用语言特性">恰如其分的使用语言特性</h3>
+<p>编程语言特性，是一种语言级别的抽象机制，</p>
+<p>它可以使人们摆脱细节，用更大的颗粒度描述问题，</p>
+<p>这是一种减轻开发人员心智负担的有效办法。</p>
 <p><br/></p>
-<p>以上这些例子，方程是“约束”的一种表现形式。</p>
+<p>从这个角度来看，<strong>任何语言特性，</strong></p>
+<p><strong>都是在某个场景中，为了让事情更容易被理解而服务的。</strong></p>
 <p><br/></p>
-<p>我们回到最简单的阶乘函数<code>fact</code>的定义式，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int</span><br><span class="line">fact 1 &#x3D; 1</span><br><span class="line">fact n &#x3D; n * fact (n-1)</span><br></pre></td></tr></table></figure>
+<p>在现实项目中，有时我们对特性的使用是<strong>不够充分</strong>的，</p>
+<p>我们用更细节的概念，表述了一个宏观问题，就会显得很繁琐。</p>
+<p>也有时，我们还会<strong>滥用</strong>特性，</p>
+<p>用一个更抽象的概念，来刻画一个更为具体的问题。</p>
 <p><br/></p>
-<p>去掉语法糖，稍微修改一下，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int</span><br><span class="line">fact n &#x3D; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  n -&gt; n * fact (n-1)</span><br></pre></td></tr></table></figure>
+<p>这两种情形都是不恰当的，而恰当的使用则对我们提出了更高的要求。</p>
+<p>我们需要<strong>更深刻理解这些特性所产生的背景和动机，</strong></p>
+<p>多了解但不限于面向对象，函数式，逻辑式编程语言中的一些编程范式。</p>
 <p><br/></p>
-<p>我们发现，<code>fact</code>的定义和“方程”十分相似，<code>fact</code>同时出现在了等式的两边，</p>
-<p>阶乘函数，就是这个“方程”的“解”。</p>
+<p>有效的使用语言特性，才能控制代码的复杂度，让它更清晰易懂。</p>
+<p>诚然，再好的自解释性的代码，都不如一行有效的注释。</p>
 <p><br/></p>
-<h3 id="函数的不动点">函数的不动点</h3>
+<h3 id="让代码更容易被分析">让代码更容易被分析</h3>
+<p>代码一旦被写出来，并不一定只有人来阅读它，</p>
+<p>可能会由于种种原因，事后要用程序对它们进行分析。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-417c44596d6f438d.png" /></p>
+<p>这时候<strong>风格统一的代码，逻辑层次更少的代码，将更有利于被分析。</strong></p>
 <p><br/></p>
-<p>在中学数学中，我们已经学过不动点了，只是当时印象不是那么深刻，</p>
-<p>函数的不动点，是指被这个函数映射到其自身的那些点。</p>
-<p>例如：<span data-katex="f(x)=x^2-3x+4"></span>，</p>
-<p>则<span data-katex="2"></span>是函数<span data-katex="f"></span>的一个不动点，<span data-katex="f(2)=2"></span>。</p>
+<p>因此，在编写时一味的减少冗余，建立抽象，不但会对阅读者提出更高的要求，</p>
+<p>还会对代码分析工具提出了更高的要求。</p>
 <p><br/></p>
-<p>并不是每一个函数都有不动点，</p>
-<p>例如，实数域上的函数<span data-katex="f(x)=x+1"></span>，就没有不动点，对于任意实数<span data-katex="x"></span>，永远都不等于<span data-katex="x+1"></span>。</p>
-<p>（不动点是和定义域有关的，以后我们还会重新讨论<span data-katex="f(x)=x+1"></span>的不动点。</p>
+<p>一个稳重的开发者，会避免过度设计，会更有远见，</p>
+<p>所以，<strong>不会编写出高度抽象的代码。</strong></p>
+<p>这会让他的代码更容易被别人维护，集成和自动重构。</p>
 <p><br/></p>
-<p>一般的，函数<span data-katex="f(x)"></span>的不动点，指的是这样的<span data-katex="x"></span>，使得<span data-katex="x=f(x)"></span>。</p>
+<p>从不同的角度来看，好代码会变差，评价标准可能因人而异，因具体场景而异，</p>
+<p>因此，<strong>给别人提出代码方面的建议时，还需谨慎。</strong></p>
 <p><br/></p>
-<p>重新温习了不动点相关的知识之后，</p>
-<p>我们就可以对上面的阶乘函数进行改造了，</p>
-<p>我们要把阶乘函数看做另外一个函数的不动点。</p>
+<h3 id="将评判标准量化">将评判标准量化</h3>
+<p>可读性，可维护性，是人们讨论最多的话题，</p>
+<p>可是，为什么没有人对性能存有争议，</p>
+<p>为什么没有人对哪段代码效率更高各执一词？</p>
 <p><br/></p>
-<p>定义函数<span data-katex="g"></span>，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g :: (Int -&gt; Int) -&gt; Int -&gt; Int</span><br><span class="line">g f n &#x3D; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  n -&gt; n * f (n-1)</span><br></pre></td></tr></table></figure>
-<p>我们可以得到，<code>g fact = fact</code>，</p>
-<p>因此，<code>fact</code>实际上就是函数<code>g</code>的不动点。</p>
+<p>这是因为，性能指标是可以<strong>量化</strong>的，</p>
+<p>我们可以很简单的<strong>通过数据</strong>来证明自己的假设。</p>
+<p>但是，我们证明可读性与可维护性的时候，却没有这样。</p>
 <p><br/></p>
-<p>于是，在“方程”中求解<code>fact</code>的过程，</p>
-<p>就转换成了求解函数<code>g</code>的不动点的过程了。</p>
+<p>我们仅仅是强调它们确实这样，以及如果不这样会有什么后果。</p>
+<p>可是强调起不到任何作用，预测也很容易被反驳，</p>
+<p>因此，<strong>我们应该想办法用数据去证明它</strong>。</p>
 <p><br/></p>
-<h3 id="不动点算子">不动点算子</h3>
+<p>很多无法达成共识的想法，也是如此，</p>
+<p>如果与其他人产生了冲突，那一定是两个人对问题有了不同的认识，</p>
+<p>然而，这些认识都只是假设，谈不上谁对谁错，</p>
+<p>因为<strong>缺乏事实论据</strong>。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-6179cf69f757a05a.png" /></p>
+<p>使用事实论据，其实来源于科学方法。</p>
+<p>科学家们会通过逻辑推理得到一些结论，</p>
+<p>同时，必然也会用实验结果去检验这些结论，</p>
+<p>不然大家谁都无法说服对方。</p>
 <p><br/></p>
-<p>我们怎样求解函数<code>g</code>的不动点呢？</p>
-<p>在Haskell中，可以很方便的定义一个高阶函数<code>fix</code>，它可以用来求解任意函数的不动点，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fix :: (a -&gt; a) -&gt; a</span><br><span class="line">fix g &#x3D; let x &#x3D; g x in x</span><br></pre></td></tr></table></figure>
+<p>追求逻辑的严密性和正确性的理论学家，是重要的，</p>
+<p>而<strong>构造巧妙的实验，给出事实论据</strong>的实验学家，无疑更重要。</p>
 <p><br/></p>
-<p>我们试验一下<code>fix</code>的强大威力，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fact 10</span><br><span class="line">&gt; 3628800</span><br><span class="line"></span><br><span class="line">fix g 10</span><br><span class="line">&gt; 3628800</span><br></pre></td></tr></table></figure>
+<h3 id="从关心客户的需求开始">从关心客户的需求开始</h3>
+<p>从项目角度来看，编码是一个必备环节，</p>
+<p>它承载了软件生命周期中，其他各项事宜的开展工作。</p>
+<p>没有代码，软件产品就无从谈起。</p>
 <p><br/></p>
-<p>注意，<code>fix g</code>得到的是<code>g</code>的不动点，而不是<code>fact</code>的不动点，</p>
-<p>即<code>(fix g) = g (fix g)</code>。</p>
+<p>然而即使是这样，<strong>编程在商业活动中，也只是一种手段，</strong></p>
+<p>其主要目的，都是为了<strong>解决客户的问题。</strong></p>
 <p><br/></p>
-<p>有了<code>fix</code>，我们就可以构造匿名递归函数了，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fact&#39; :: Int -&gt; Int</span><br><span class="line">fact&#39; &#x3D; fix $ \fact -&gt; \n -&gt; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  n -&gt; n * fact (n-1)</span><br></pre></td></tr></table></figure>
-<p><code>fix</code>后面跟的函数没有名字，它是匿名的，但是经过<code>fix</code>作用后，可以产生一个递归函数。</p>
-<p>也就是说，为了实现递归，函数是可以没有名字的。</p>
+<p>从客户角度而言，优秀的代码和脏乱的代码并没有什么太大差别，</p>
+<p>维护成本升级成本，看起来会让客户买单，</p>
+<p>但实际压力还是会算到开发者这边来，因为做不出合格的产品就没人买它。</p>
 <p><br/></p>
-<h3 id="y组合子">Y组合子</h3>
+<p>所以，<strong>代码写的好不好，是程序员自己的事情。</strong></p>
+<p><strong>而代码能否对外提供出好用的功能，才是更重要的。</strong></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-2506f85747258985.png" /></p>
+<p>为了看清这一点，不妨假设我们是项目的负责人，</p>
+<p>我们将怎样向客户解释，我们在为了写出好代码而竭尽全力呢？</p>
+<p>根本无法解释，也解释不通，甚至客户也会感到莫名其妙。</p>
 <p><br/></p>
-<p>Y组合子，是<a href="https://zh.wikipedia.org/wiki/Haskell_Curry" target="_blank" rel="noopener">Haskell B. Curry</a>在研究<span data-katex="\lambda"></span>演算时发现的，</p>
-<p>它的表现形式如下，</p>
-<p><span data-katex="Y:=\lambda f.(\lambda x.(f\ (x\ x))\ \lambda x.(f\ (x\ x)))"></span></p>
+<p>客户关心的是，我们的产品什么时候发布，能不能有效的解决他们的问题，</p>
+<p>稳定性如何产品质量如何，</p>
+<p>代码的好与坏，客户为什么要关心。</p>
 <p><br/></p>
-<p>在<span data-katex="\lambda"></span>演算中，（<span data-katex="\alpha"></span>转换和<span data-katex="\beta"></span>规约</p>
-<p>我们可以证明，对于任何函数<code>g</code>，<span data-katex="(Y g) = (g (Y g))"></span>。</p>
+<p>因此，<strong>好的代码一定是以创造客户价值为准则的，</strong></p>
+<p>偏离了客户第一，代码写的再漂亮也是于事无补的。</p>
 <p><br/></p>
-<p>因此，Y组合子是一个不动点算子，它可以得到任意函数的不动点。</p>
-<p>其他的不动点算子还有图灵不动点组合子<span data-katex="\Theta"></span>，</p>
-<p><span data-katex="\Theta:=(\lambda x.\lambda y.(y\ (x\ x\ y)))\ (\lambda x.\lambda y.(y\ (x\ x\ y)))"></span></p>
+<h3 id="结语">结语</h3>
+<p>对代码好坏进行争论，是开发者团队中频繁出现的事情，</p>
+<p>由于每个人的代码风格都是不同的，</p>
+<p>因此，都会认为是自己在维护别人的烂摊子。</p>
 <p><br/></p>
-<p>讨论Y组合子在Haskell中的表示方式是有趣的，因为直接翻译过去会报类型错误，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">y :: (a -&gt; a) -&gt; a</span><br><span class="line">y &#x3D; \f -&gt; (\x -&gt; f (x x)) (\x -&gt; f (x x))</span><br><span class="line"></span><br><span class="line">-- Occurs check: cannot construct the infinite type: r0 ~ r0 -&gt; a</span><br><span class="line">-- Expected type: r0 -&gt; a</span><br><span class="line">--   Actual type: (r0 -&gt; a) -&gt; a</span><br><span class="line">-- In the first argument of ‘x’, namely ‘x’</span><br><span class="line">-- In the first argument of ‘f’, namely ‘(x x)’</span><br></pre></td></tr></table></figure>
-<p>类型系统无法确定<code>x</code>的类型。</p>
+<p>可是，无论从语言特性，可维护性，甚至代码分析角度，</p>
+<p>我们都无法得到一个好代码的有效判断标准，</p>
+<p><strong>反而考虑的事情越多，我们就越不敢评价别人写的好坏。</strong></p>
 <p><br/></p>
-<p>问题出在表达式<code>x x</code>上面，</p>
-<p>假设<code>x x</code>的类型为<code>a</code>，则第一个<code>x</code>的类型就应该为<code>? -&gt; a</code>，</p>
-<p>于是，第二个<code>x</code>的类型肯定也应该是<code>? -&gt; a</code>。（因为都是<code>x</code></p>
+<p>此外，如果无法用数据说话，我们的判断就会永远停留在个人喜好上，</p>
+<p>在缺乏事实论据的情况下，每个人有不同的品味是正常的表现。</p>
+<p>实际上，构造这样的实验是非常困难的，</p>
+<p>所以<strong>衡量代码的好坏也就不是一件简单的事情。</strong></p>
 <p><br/></p>
-<p>又因为<code>x x</code>的类型为<code>a</code>，</p>
-<p>所以第一个<code>x</code>的类型<code>? -&gt; a</code>中，<code>?</code>的类型就应该是<code>? -&gt; a</code>，</p>
-<p>（因为<code>((? -&gt; a) -&gt; a)</code>作用到<code>(? -&gt; a)</code>才能得到<code>a</code></p>
+<p>最后，秉持客户第一的准则，</p>
+<p>我们实际上最需要关心的是客户想要什么，而不是我们给自己带来的负担。</p>
+<p>不够优雅的代码，经过充分的测试和调试，也会得到优秀的产品。</p>
 <p><br/></p>
-<p><code>?</code>的类型是<code>? -&gt; a</code>，因此<code>?</code>应该是一个<a href="https://zh.m.wikipedia.org/wiki/%E9%80%92%E5%BD%92%E7%B1%BB%E5%9E%8B" target="_blank" rel="noopener">递归类型</a>。</p>
-<p><br/></p>
-<p>下面我们来定义递归类型<code>Mu</code>，来帮助编译器进行恰当的类型推导，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">newtype Mu a &#x3D; Mu (Mu a -&gt; a)</span><br><span class="line"></span><br><span class="line">y :: (a -&gt; a) -&gt; a</span><br><span class="line">y f &#x3D; (\h -&gt; h $ Mu h) (\x -&gt; f . (\(Mu g) -&gt; g) x $ x)</span><br></pre></td></tr></table></figure>
-<p><br/></p>
-<p>最后，<code>fact'</code>就可以使用Y组合子来定义了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fact&#39; :: Int -&gt; Int</span><br><span class="line">fact&#39; &#x3D; y $ \fact -&gt; \n -&gt; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  n -&gt; n * fact (n-1)</span><br></pre></td></tr></table></figure>
-<p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文从简单的“方程”思想出发，引出了不动点的概念，</p>
-<p>然后把递归函数看做了另外一个函数的不动点，</p>
-<p>最后，我们讨论了Y组合子这样一个具体的不动点算子。</p>
-<p><br/></p>
-<p>可是，这里隐藏着一个问题，我们看到<code>fix</code>是可以求解任意函数的不动点的，</p>
-<p>而对于以下递归函数<code>succ</code>，即<span data-katex="f(x)=x+1"></span>，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">succ :: Int -&gt; Int</span><br><span class="line">succ n &#x3D; n+1</span><br></pre></td></tr></table></figure>
-<p>在实数域上是显然没有不动点的。</p>
-<p><br/></p>
-<p>那么<code>fix succ</code>是什么呢？</p>
-<p>这个问题，我们将在后文中继续讨论。</p>
-<p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://zh.wikipedia.org/zh-cn/%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">方程</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F" target="_blank" rel="noopener">特征值和特征向量</a></p>
-<p><a href="https://zh.wikipedia.org/zh/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">微分方程</a></p>
-<p><a href="https://zh.wikipedia.org/zh-hans/%E4%B8%8D%E5%8A%A8%E7%82%B9" target="_blank" rel="noopener">不动点</a></p>
-<p><a href="https://zh.wikipedia.org/zh-hans/%E4%B8%8D%E5%8A%A8%E7%82%B9%E7%BB%84%E5%90%88%E5%AD%90" target="_blank" rel="noopener">不动点组合子</a></p>
-<p><a href="https://en.wikibooks.org/wiki/Haskell/Fix_and_recursion" target="_blank" rel="noopener">Haskell/Fix and recursion</a></p>
-<p><a href="http://stackoverflow.com/questions/4273413/y-combinator-in-haskell/5885270#5885270" target="_blank" rel="noopener">Y Combinator in Haskell</a></p>
+<p>所以，至于别人写的代码为什么那么烂，我们大可不必介意，</p>
+<p><strong>因为我们也写不出好代码。</strong></p>
 
           
         
@@ -522,7 +519,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/203/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/203/">203</a><span class="page-number current">204</span><a class="page-number" href="/page/205/">205</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/205/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/203/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/203/">203</a><span class="page-number current">204</span><a class="page-number" href="/page/205/">205</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/205/">&gt;</a>
   </nav>
 
 
@@ -568,7 +565,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">311</span>
+                <span class="site-state-item-count">312</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

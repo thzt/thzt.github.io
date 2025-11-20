@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/12/01/fee/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/12/02/extra/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/12/01/fee/" itemprop="url">像企业一样考虑问题</a></h1>
+                <a class="post-title-link" href="/2019/12/02/extra/" itemprop="url">写好一个系统需要额外付出多少努力</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-01T00:00:00+08:00">
-                2019-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-02T00:00:00+08:00">
+                2019-12-02
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,128 +347,155 @@
       
         
           
-            <p>乐于助人是一种美德，从小我们受到的教育是，做好事不求回报，</p>
-<p>但有些时候，无偿助人并不是一件轻松的事情。</p>
-<p>另一方面，有些人确实是需要帮助的，但又找不到愿意帮助他们的人。</p>
+            <p>当今软件<strong>生态</strong>已经越来越复杂了，一个简单的产品，</p>
+<p>可能动辄涉及到十个，甚至数十个子系统，</p>
+<p>把所有这些子系统当做一个整体来看的话，写好它是一件很难的事情。</p>
 <p><br/></p>
-<p>这两点结合起来就是，缺少了一个<strong>媒介</strong>，</p>
-<p>让帮助别人的人，愿意付出自己的时间，</p>
-<p>让遇到困难的人，有效的得到帮助。</p>
+<p>本文就来探讨一下，一个<strong>勉强能跑</strong>的系统，跟一个<strong>生态优良</strong>的系统，</p>
+<p>到底有什么区别，以及需要额外付出多少努力。</p>
+<h3 id="异常">异常</h3>
+<p>一个勉强能跑的系统，不会覆盖所有的异常流程，</p>
+<p>每个函数只有一个返回值，它们被看做<strong>永远不会抛异常</strong>。</p>
 <p><br/></p>
-<p>这个媒介就是“<strong>费用</strong>”。</p>
+<p>然而，这肯定是一种不合理的假设，</p>
+<p>当有一个函数可能会抛出异常时，事情就变得复杂了。</p>
+<p>这个函数的调用方到底该怎样“<strong>消化</strong>”这个异常呢？</p>
 <p><br/></p>
-<p>一旦“帮忙”有了“费用”属性，就变成了“服务”。</p>
-<p>帮助别人的人，成了<strong>服务的提供者</strong>，</p>
-<p>需要帮助的人，成了<strong>要服务的客户</strong>。</p>
+<p>除此之外，甚至在<strong>业务层面</strong>，也会包含一些“非正常”的业务逻辑，</p>
+<p>比如一个没有注册的用户访问授权页面，应该怎么处理？</p>
+<p>或者是，一个接口被传入了跟预期不符的参数时，应该怎样反应？</p>
 <p><br/></p>
-<p>客户可以选择<strong>是否购买</strong>某一个服务，</p>
-<p>服务的提供者，也可以选择以<strong>什么样的价格</strong>出售服务。</p>
+<p>把所有功能看做一个整体，那么正常流程应该只有一种，</p>
+<p>出错的可能，会有很多种。</p>
 <p><br/></p>
-<p>双方更容易达成共识。</p>
-<h3 id="免费陷阱">免费陷阱</h3>
-<p><a href="https://baike.baidu.com/item/Gerald%20M.%20Weinberg/6766440" target="_blank" rel="noopener">温伯格</a>在《<a href="https://book.douban.com/subject/26282714/" target="_blank" rel="noopener">咨询的奥秘</a>》中提到，</p>
-<blockquote>
-<p>如果他们没雇佣你，就不要为他们解决问题。</p>
-</blockquote>
+<p>如果每一种出错，都经过了<strong>深思熟虑</strong>的处理，而不是默认结果，</p>
+<p>那么，加上异常流程的系统，会比勉强能跑的系统，<strong>复杂数倍</strong>。</p>
+<p>一个可靠的接口，会由一个正常结果，与 N 个异常组成。</p>
+<h3 id="日志">日志</h3>
+<p>对一个没有日志的系统排查问题，是非常困难的，</p>
+<p>很难还原出当时的运行现场。</p>
 <p><br/></p>
-<p>不要免费帮别人解决问题，因为这样做会改变<strong>问题的性质</strong>。</p>
+<p>一个常见的方法是在业务逻辑的<strong>字里行间</strong>写下日志，</p>
+<p>这种侵入性的日志编写方法，会降低代码的可读性，</p>
+<p>让逻辑变得晦涩难懂。</p>
 <p><br/></p>
-<p>为什么呢？因为问题理应由问题的负责人<strong>买单</strong>。</p>
-<p>只有他们能决定采用多大的<strong>成本</strong>，把问题解决到什么<strong>程度</strong>。</p>
-<p>而一旦问题解决<strong>不需要成本</strong>时，<strong>问题本身</strong>就会发生变化。</p>
+<p>而非侵入的日志编写方法，可能无法覆盖到所有细节，</p>
+<p>一般是通过<strong>异常切面</strong>来做。</p>
 <p><br/></p>
-<p>不需要成本，比需要少量的成本有着本质的不同。</p>
+<p>不论用哪种方法，增加了日志功能的系统，会比勉强能跑的系统复杂了一些。</p>
+<p>这是毋庸置疑的。</p>
+<p>因为日志功能已经算是原系统的一种<strong>非功能需求</strong>了。</p>
+<h3 id="单测">单测</h3>
+<p>专业程序员喜欢用日志和单测来检查问题，遇到问题跑一下单测，</p>
+<p>能省掉很多构造数据的成本。</p>
 <p><br/></p>
-<p>比如说，一位老年人想要出去逛逛，一般会选择在附近走走。</p>
-<p>这是因为出行是要花钱的。</p>
+<p>然而，有单测覆盖的系统，也一定会增加不少代码量，</p>
+<p>对于那些<strong>功能频繁变动</strong>的系统，甚至每改一些代码，就得相应的改改单测。</p>
 <p><br/></p>
-<p>但如果用老人卡免费乘公交呢？</p>
-<p>问题就不同了，反正不花钱。</p>
-<p>不用考虑给别人带来的<strong>麻烦</strong>，只看自己的需要就行了。</p>
+<p>单测虽然一定程度上增加了代码的可靠性，</p>
+<p>但同时，也增加了代码的<strong>编写成本</strong>。</p>
 <p><br/></p>
-<p>因此，“费用”是“麻烦”的度量指标，</p>
-<p>不收费，容易给自己一种<strong>假象</strong>，那就是没有给别人带来麻烦。</p>
-<p>并且<strong>永远没有</strong>，零加多少个零还是零。</p>
+<p>除此之外，软件的每一次<strong>持续集成</strong>都会跑一遍单测，</p>
+<p>花在修补单测上面的时间，可能会出乎意料的多。</p>
 <p><br/></p>
-<p>如果不想<strong>一直免费</strong>下去，那就从一开始多少收点费用吧。</p>
-<h3 id="定价方式">定价方式</h3>
-<p>平时我们买东西的机会很多，但是<strong>卖东西的经验</strong>却很少，</p>
-<p>关于售卖服务，有很多值得注意的细节。</p>
+<p>因此，编写成本和软件质量是不可兼得的。</p>
+<p>没有一劳永逸的办法。</p>
 <p><br/></p>
-<p>首先，服务价格的高低，跟我们自身付出了多少“努力”无关。</p>
-<p>而是跟客户感受到的“<strong>价值</strong>”有关。</p>
-<p>客户认可的，就是合理的。</p>
+<p>有单测的系统，在维护者看来，确实更加复杂，</p>
+<p>单测可以看做是给代码加了“有测试覆盖”这条<strong>额外的属性</strong>。</p>
+<h3 id="环境">环境</h3>
+<p>有些系统是要分本地环境和线上环境的，</p>
+<p>本地开发时，跟线上运行时，系统的表现可能会不同。</p>
+<p>简而言之，某些行为可能会跑到不同的<strong>分支</strong>里面。</p>
 <p><br/></p>
-<p>其次，在提供服务之前，应<strong>先谈好费用</strong>，</p>
-<p>是否收费，以及用怎样的方式收费，应提前确定。</p>
-<p>把选择权交给客户。</p>
+<p>最起码，他们也可能会从不同数据库中读取信息。</p>
+<p>这样做也会增加系统的复杂性。</p>
 <p><br/></p>
-<p>最后，<strong>咨询类</strong>的服务，应考虑<strong>按时间收费</strong>。</p>
-<p>因为随着时间增长，客户的问题会发生<strong>变化</strong>，问题是解决不完的。</p>
+<p>要发布一个系统，我们必须保证它在<strong>好几个环境</strong>都表现良好，</p>
+<p>而不是仅仅线上表现良好就够了。</p>
 <p><br/></p>
-<blockquote>
-<p>接受心理咨询辅导之后，被辅导者下什么样的决心、是否改变生活方式，</p>
-</blockquote>
-<blockquote>
-<p>这都是被辅导者本人的课题，辅导顾问不能干涉。</p>
-</blockquote>
-<blockquote>
-<p>辅导顾问要竭尽全力的加以援助，但不可以妄加干涉。</p>
-</blockquote>
-<blockquote>
-<p>—— 《<a href="https://book.douban.com/subject/26369699/" target="_blank" rel="noopener">被讨厌的勇气</a>》</p>
-</blockquote>
+<p>一旦有多个子系统，都区分了不同环境，问题就更麻烦了，</p>
+<p>在调用某个接口的时候，我们必须严格区分调用的是<strong>哪个环境</strong>中的接口。</p>
+<p>这比只有线上一套环境的系统，又复杂了好多。</p>
+<h3 id="调试">调试</h3>
+<p>有些系统的设计之初，只是为了满足功能，</p>
+<p>可一旦跟其他系统打交道时，就会涉及调试和排查问题。</p>
 <p><br/></p>
-<p>按问题的解决程度付费，一不小心就会<strong>干涉</strong>到他人的课题。</p>
-<p>客户有时候并不想把问题解决完，而是引出更深层次的问题。</p>
-<h3 id="不忘初心">不忘初心</h3>
-<p>一旦决定收费，就得具备<strong>商业心态</strong>，</p>
-<p>和很多优秀的企业一样，要想长期经营下去，必须考虑<strong>利润</strong>。</p>
-<p>然而，追求利润却永远都<strong>不是</strong>第一位的，它只是<strong>努力提高服务质量</strong>的产物。</p>
+<p>一个不能调试的系统，在排错时是特别麻烦的，</p>
+<p>我们只能一行行的读代码，在大脑中记录程序状态，人肉调试。</p>
 <p><br/></p>
-<blockquote>
-<p>企业需要持续不断地改进和完善自己的产品，你也应该这么做。</p>
-</blockquote>
-<blockquote>
-<p>—— 《<a href="https://book.douban.com/subject/26835090/" target="_blank" rel="noopener">软技能</a>》</p>
-</blockquote>
+<p>这种情况在遇到<strong>多态</strong>函数时，会变得超级烧脑。</p>
+<p>很多运行时数据的丢失，导致我们不知道程序到底该执行哪段代码。</p>
 <p><br/></p>
-<p>要知道我们的初心是“让需要帮助的人得到帮助”。</p>
-<p>所以，在收费的时候，更重要的是<strong>牢记初心</strong>，</p>
-<p>而不仅仅是为了赚钱。</p>
+<p>因此，一个设计优良的系统，一定会在必要时考虑它自身的调试问题，</p>
+<p>怎样对开发者友好，如何通过<strong>程序断点</strong>，调试进去。</p>
 <p><br/></p>
-<blockquote>
-<p>商务和生活一样也是一种社会活动，合作与竞争并存。</p>
-</blockquote>
-<blockquote>
-<p>政府工作也好，社会工作也罢，不管你从事的是哪个行业，也都大抵如此。</p>
-</blockquote>
-<blockquote>
-<p>以销售为例，只有你一个人是不可能做成买卖的，必须得有另一个人购买你所推销的东西。</p>
-</blockquote>
-<blockquote>
-<p>—— 《<a href="https://book.douban.com/subject/6801742/" target="_blank" rel="noopener">人生定位</a>》</p>
-</blockquote>
+<p>系统具备<strong>可调试性</strong>，也相当于给系统增加了额外要求。</p>
+<h3 id="文档">文档</h3>
+<p>一个接口，并不是仅提供功能就完事了，</p>
+<p>接口以及<strong>如何使用</strong>这个接口，本来应该是一体的。</p>
+<p>没有使用文档的接口，相当于只完成了一部分功能。</p>
 <p><br/></p>
-<p>必须改进自己的服务，身临其境的为客户解决问题，</p>
-<p>才能长期的经营下去。</p>
+<p>除此之外，系统的架构文档，也一样重要，</p>
+<p>它被划分为了几个子系统，每个子系统是如何交互的？</p>
+<p>否则，子系统之间类似“元胞自动机”一样的<strong>诡异交互方式</strong>，就没办法理解了。</p>
+<p><br/></p>
+<p>注释应该也算是一种说明性的文档，只不过它是写到代码中的，</p>
+<p>有丰富注释的代码，确实会省去每个人的阅读成本，这些成本累积起来是很可观的，</p>
+<p>但对代码编写者来说，也会<strong>花费</strong>不少精力。</p>
+<p><br/></p>
+<p>有详细文档和注释的系统，会比勉强能跑的系统，更好维护，</p>
+<p>从可维护角度来讲，这是对系统提出了更高的要求。</p>
+<h3 id="监控">监控</h3>
+<p>现在有很多系统是 7*24 小时运行的，一旦出错每一秒都会有损失，</p>
+<p>因此，有监控是对这种系统提出的另一种要求。</p>
+<p>当出现错误的时候，我们希望能<strong>检测</strong>到，通过报警机制，自动通知相关的责任人。</p>
+<p><br/></p>
+<p>增加了监控机制的系统，会比正常的系统略微复杂一些，</p>
+<p>如果把监控系统也看成原系统一部分的话。</p>
+<p><br/></p>
+<p>如果没有额外的通用监控系统，为每个系统单独配一个监控，是一件麻烦的事情。</p>
+<p>还得保证这些<strong>监控系统自身</strong>不会对现有功能产生影响。</p>
+<p><br/></p>
+<p>不可监控的系统，相当于扔出去的炸弹，不知道什么时候它会爆炸，</p>
+<p>但是使得系统可监控，也在一定程度上增加了复杂度，</p>
+<p>需要额外的努力才能做到。</p>
+<h3 id="回滚">回滚</h3>
+<p>可回滚是系统的一种较为苛刻的属性，要想能回滚，需要系统先具有这种属性才行。</p>
+<p>一个系统是否<strong>可回滚</strong>，在设计阶段就得考虑清楚。</p>
+<p>并且它的每一次发布，都得指定详细的发布和回滚计划。</p>
+<p><br/></p>
+<p>一个能回滚的系统，得做到它每一次发布所做的修改<strong>可撤销</strong>，</p>
+<p>包括对数据库的修改，以及接口的兼容性，还有依赖方其他系统的影响。</p>
+<p><br/></p>
+<p>这件事看起来简单，<strong>实则很难</strong>做到，</p>
+<p>比如，对数据库结构进行了变更，而老接口又不可兼容的时候，</p>
+<p>很多系统其实是不可回滚的。</p>
+<p><br/></p>
+<p>又比如一些工具类库，版本号只能往上加，不能撤销，</p>
+<p>那么一旦发布了某个<strong>不兼容</strong>的版本，就只能硬着头皮往下走了。</p>
 <h3 id="结语">结语</h3>
-<p>不久之前，有些朋友想花钱请我帮忙，我没有同意，</p>
-<p>因为我不想让他们<strong>破费</strong>，也觉得自己不值这么多钱。</p>
-<p>最后不了了之。</p>
+<p>为系统提出的每一个<strong>要求</strong>，都是要付出成本的。</p>
+<p>一个勉强能跑的系统，人们对它的要求更低。</p>
 <p><br/></p>
-<p>现在我不这样认为了。</p>
+<p>如果要求它更可靠，覆盖所有的异常流程，有日志可跟踪，</p>
+<p>有单测覆盖，支持多套环境，可调式，有详细的文档，</p>
+<p>支持监控，可回滚，它就会变得越来越复杂。</p>
 <p><br/></p>
-<p>因为，从某种意义上来讲，</p>
-<p>拒绝收费，也就是在<strong>拒绝提供</strong>高质量的服务。</p>
-<p>双方都没有得到好处。</p>
+<p>除此之外，肯定还有对系统的其他要求，例如自动扩缩容，</p>
+<p>自动降级，安全方面的防护，等等。</p>
 <p><br/></p>
-<p>反之，收取适当的“费用”却可以打破这种僵局，</p>
-<p>给别人答谢你的机会。</p>
+<p>因此，写好一个系统，并不是仅仅让它能跑就完事了，</p>
+<p>额外还要做出很多事情。</p>
 <p><br/></p>
-<blockquote>
-<p>Let them win.</p>
-</blockquote>
+<p>这些功能加起来，足以让一个简简单单的应用，变得超级复杂，</p>
+<p>很多<strong>侵入式</strong>的写法，会让代码变得几乎不可维护。</p>
+<p><br/></p>
+<p>最后，一个系统到底要不要做得这么复杂，其实是设计者该考虑的事情，</p>
+<p>系统要不要具备这样的隐性功能，要不要投入这么多人力去实现，</p>
+<p>都是<strong>值得商榷</strong>的，并不是额外的功能越多越好。</p>
+<p><br/></p>
+<p>没有好的系统，只看是否达到预期罢了。</p>
 
           
         
@@ -507,7 +534,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/87/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><span class="page-number current">88</span><a class="page-number" href="/page/89/">89</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/89/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/87/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><span class="page-number current">88</span><a class="page-number" href="/page/89/">89</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/89/">&gt;</a>
   </nav>
 
 
@@ -553,7 +580,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">311</span>
+                <span class="site-state-item-count">312</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/06/28/loss-of-information/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/07/21/with-goals/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/28/loss-of-information/" itemprop="url">编程语言的表述习惯与信息损失</a></h1>
+                <a class="post-title-link" href="/2019/07/21/with-goals/" itemprop="url">带着问题去学技术</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T00:00:00+08:00">
-                2019-06-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T00:00:00+08:00">
+                2019-07-21
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,77 +347,86 @@
       
         
           
-            <h3 id="模型">模型</h3>
-<p><a href="https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B_(%E6%95%B0%E5%AD%A6)" target="_blank" rel="noopener">计算模型</a>是<a href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E8%AE%A1%E7%AE%97%E6%80%A7%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">可计算性理论</a>中的一个概念，</p>
-<p>它描述了我们使用怎样的方式，根据一组输入<strong>计算</strong>得到输出。</p>
+            <p>最近一直有这样的感触，</p>
+<p>软件项目或许应该看成是<strong>把信息重新组织，然后调库实现</strong>的过程。</p>
+<p>即使人们眼中的“纯技术项目”，也是如此。</p>
 <p><br/></p>
-<p>计算模型有很多种，<a href="https://zh.wikipedia.org/wiki/%E5%9B%BE%E7%81%B5%E6%9C%BA" target="_blank" rel="noopener">图灵机</a>，<a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">递归函数</a>，<a href="https://zh.wikipedia.org/zh/%CE%9B%E6%BC%94%E7%AE%97" target="_blank" rel="noopener">λ演算</a>，<a href="https://zh.wikipedia.org/wiki/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91" target="_blank" rel="noopener">谓词逻辑</a>，<a href="https://zh.wikipedia.org/wiki/%E5%BD%A2%E5%BC%8F%E6%96%87%E6%B3%95" target="_blank" rel="noopener">形式文法</a>，</p>
-<p><a href="https://zh.wikipedia.org/wiki/%E7%BB%84%E5%90%88%E5%AD%90%E9%80%BB%E8%BE%91" target="_blank" rel="noopener">组合子逻辑</a>，<a href="https://zh.wikipedia.org/wiki/%E7%B4%B0%E8%83%9E%E8%87%AA%E5%8B%95%E6%A9%9F" target="_blank" rel="noopener">元胞自动机</a>，等等等等。</p>
-<p>这些计算模型都是<strong>数学化</strong>的，为我们提供了刻画<strong>计算</strong>的不同方式。</p>
+<p>很少有项目会从零开始，大多数项目都是采用现有的实现，</p>
+<p>是否<strong>调整</strong>现有的方案，取决于在使用过程中是否遇到了<strong>问题</strong>。</p>
+<p>没有遇到问题，就不要重新造轮子，因为投入产出比太低。</p>
 <p><br/></p>
-<p>常见的计算机都是<a href="https://zh.wikipedia.org/wiki/%E5%86%AF%C2%B7%E8%AF%BA%E4%BC%8A%E6%9B%BC%E7%BB%93%E6%9E%84" target="_blank" rel="noopener">冯·诺伊曼结构</a>的，</p>
-<p>是<a href="https://zh.wikipedia.org/zh-hans/%E9%80%9A%E7%94%A8%E5%9C%96%E9%9D%88%E6%A9%9F" target="_blank" rel="noopener">通用图灵机</a>的具体实现，</p>
-<p>它可以接受一段<strong>程序</strong>作为输入，输出这段程序的执行结果。</p>
+<p>比起社区中现有的成熟方案，</p>
+<p>自己写的<strong>新代码</strong>，很难考虑的足够周全，</p>
+<p>只有经过多轮修正之后，才会变得稳定可靠。</p>
 <p><br/></p>
-<p>直接用机器可识别的<strong>指令</strong>进行编程，是非常麻烦的，因为指令与自然语言相距甚远，</p>
-<p>于是人们想到引入一个间接层，</p>
-<p>通过编译器或者解释器，将更贴近自然语言的<strong>源代码</strong>，转换成计算机指令，</p>
-<p>使人们可以<strong>脱离</strong>具体的计算机体系结构考虑问题。</p>
-<h3 id="集成">集成</h3>
-<p>从计算模型的角度理解<strong>面向对象设计</strong>，是有帮助的。</p>
+<p>没有看清当前到底要解决什么<strong>问题</strong>，</p>
+<p>或者容易将<strong>问题解决</strong>与<strong>个人成长</strong>相关联，</p>
+<p>是人们很容易掉入的陷阱。</p>
 <p><br/></p>
-<p>面向对象是把一个大型系统，拆分为互通<strong>消息</strong>的多个<strong>子系统</strong>，</p>
-<p>子系统的<strong>内部状态</strong>，对外是不可见的。</p>
+<p>带着问题去行动，始终明确自己的目标，</p>
+<p>才能让<strong>工作更有成效</strong>。</p>
+<h3 id="编码的层次">编码的层次</h3>
+<p>在编码之前，我们应该先明确编码的目的，</p>
+<p><strong>不相关的代码，不要写。</strong></p>
 <p><br/></p>
-<p>然而，子系统的最终状态，是<a href="https://zh.wikipedia.org/zh-hans/%E4%B8%8D%E5%8F%AF%E5%88%A4%E5%AE%9A%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">不可判定的</a>，</p>
-<p>获得最终状态的唯一办法，就是将它们集成到一起，开始运行，</p>
-<p>这其实构成了一种新的计算模型——<a href="http://lucacardelli.name/Papers/PrimObjImpSIPL.A4.pdf" target="_blank" rel="noopener">Object Calculus</a>。</p>
+<p>为了编写商品展示页面，没必要重写一个双向绑定库，</p>
+<p>为了搭建工程脚手架，也没必要重写一个数据流框架，</p>
+<p>为了创造新的构建工具，更没必要重写一个语法解析器。</p>
 <p><br/></p>
-<p>从模型角度来看，状态的演变是一个<strong>计算</strong>过程，</p>
-<p><strong>拆分</strong>和<strong>集成</strong>是完成同一个任务的两个重要步骤。</p>
-<h3 id="表述">表述</h3>
-<p>不同的编程语言会影响一个人的<strong>表述习惯</strong>，</p>
-<p>因为，能用省力的办法达到目的，多数人都不会绕行。</p>
+<p>为了实现目标，没必要转而去考虑另外一件<strong>没问题的</strong>事情。</p>
+<p>我们得时刻保持清醒，知道自己在什么位置在哪个层面进行工作。</p>
 <p><br/></p>
-<p><strong>理论上</strong>在任何一种<strong>通用编程语言</strong>中实现另一种语言，都是没问题的，</p>
-<p>但很少有人会为了解决问题便利，<strong>当场</strong>发明一种新语言。</p>
+<p>现实中，有不少人在做某件事情的时候，容易被其他事情所吸引，</p>
+<p>这经常会被<strong>错误的</strong>解读为更强的好奇心，或者能举一反三。</p>
+<p>这是自欺欺人。</p>
+<h3 id="技术的深度">技术的深度</h3>
+<p>很难说技术的深度和广度哪个更重要，</p>
+<p>不过，很少有人会单纯以技术广度作为自己的核心竞争力。</p>
+<p>没有深度的广度，将没有意义。</p>
 <p><br/></p>
-<p>例如，在用<a href="https://zh.wikipedia.org/zh-hans/C%E8%AF%AD%E8%A8%80" target="_blank" rel="noopener">C语言</a>编程的时候，</p>
-<p>我们一般不会先实现一套面向对象系统，再用面向对象的方式去编程，</p>
-<p>即使在某些场景下，面向对象更能贴近问题的本质。</p>
+<p>如果做事的时候，不够专注，总是容易被其他事情所吸引，</p>
+<p>那么在技术深度上，就难有建树。</p>
+<p>因为不论在什么时刻，我们总是不清楚当前<strong>最重要的事情</strong>是什么。</p>
 <p><br/></p>
-<p>所以，编程其实更像是一种<strong>翻译</strong>工作，</p>
-<p>把要做的事情<strong>翻译</strong>成已有的编程语言，而不是转而去<strong>创造</strong>一门新语言。</p>
-<p>而现有的语言，会影响译文的繁杂程度。</p>
-<h3 id="损失">损失</h3>
-<p>在进行编码的时候，有一些信息是无法写入代码的，</p>
-<p>毕竟程序只要<strong>能运行</strong>就好了，开发者在阅读代码时才需要<strong>可读性</strong>。</p>
-<p>那些未写入代码中的信息，就造成了理解障碍。</p>
+<p>如果使用 <a href="https://github.com/webpack/webpack" target="_blank" rel="noopener">webpack</a>，会导致我们研究源码，</p>
+<p>研究源码，又会导致我们学习 <a href="https://github.com/acornjs/acorn" target="_blank" rel="noopener">acorn</a>（parser），</p>
+<p>学习 parser，我们又会被编译器设计所吸引的话。</p>
 <p><br/></p>
-<p>那么用<strong>不同的编程语言</strong>进行编程，会导致不同的信息损失吗？</p>
-<p>我想会的。</p>
+<p>这个链路中的每一个环节，我们都很难有深度。</p>
+<p>因为我们不清楚自己的<strong>目标</strong>是什么。</p>
 <p><br/></p>
-<p>在用命令式语言进行编程的时候，我们能清晰的看到程序的执行过程，</p>
-<p>而面向对象语言的执行过程，就被<strong>隐式的</strong>表现为对象方法之间的调用了，</p>
-<p>至于对象<strong>为什么这样设计</strong>，我们就不得而知了。</p>
+<p>我们到底是学习使用 webpack，还是学会 webpack 的实现方式？</p>
+<p>到底是学习具体的 parser，还是学会通用的编译技术？</p>
+<p>每一个领域，我们都浅尝辄止了，学了个四不像。</p>
+<h3 id="问题导向">问题导向</h3>
+<p>因此，我们应该围绕着技术深度，拓展广度， <strong>带着问题学技术。</strong></p>
 <p><br/></p>
-<p>在用函数式语言进行编程的时候，程序的执行被<strong>打散</strong>为了函数的调用，</p>
-<p>我们通过测试能明确知道结果是正确的，</p>
-<p>但是这些小函数之间<strong>为什么那样组合</strong>，理解起来就很困难了。</p>
+<p>我们得清楚的知道，<strong>当前的目标是什么</strong>，</p>
+<p>而对其他相关事情的了解，也不是多多益善的，不要乱点技能树。</p>
 <p><br/></p>
-<p>所以不同的编程语言，采用不同的编程范式，会导致不同的信息损失，</p>
-<p>信息损失过大，就会对阅读者造成<strong>负担</strong>，</p>
-<p>高昂的维护成本，加剧了代码的腐烂。</p>
+<p>如果我们想学实现<strong>原理</strong>，那么就专注的看<strong>源码</strong>，</p>
+<p>不要转而去学相关的<strong>理论知识</strong>。</p>
+<p>如果当前的目标是补充理论知识，那么就别再转而去学<strong>基础数学</strong>。</p>
+<p><br/></p>
+<p>不断的挖坑而不填，是一种不良的学习习惯。</p>
+<p>这并不是说不要钻研，而是应该有意识的限制自己<strong>向下钻研的程度</strong>，</p>
+<p>够用就行了。</p>
 <h3 id="结语">结语</h3>
-<p>代码建立了开发者与计算机之间的桥梁，</p>
-<p>遇到一个具体的问题，开发者首先会在大脑中从<strong>模型</strong>的角度分析它，</p>
-<p>然后，再用具体的编程语言实现它，这是一个<strong>翻译</strong>过程。</p>
+<p><a href="https://zh.wikipedia.org/zh/%E7%8D%A8%E5%AD%A4%E6%B1%82%E6%95%97" target="_blank" rel="noopener">独孤求败</a>在剑冢中埋了几把剑，</p>
+<p>（1）利剑：凌厉刚猛，无坚不摧，弱冠前以之与河朔群雄争锋。</p>
+<p>（2）紫薇软剑：三十岁前所用，误伤义士不祥，乃弃之深谷。</p>
+<p>（3）玄铁重剑：重剑无锋，大巧不工，四十岁前恃之横行天下。</p>
+<p>（4）木剑：四十岁后，不滞于物，草木竹石均可为剑。</p>
 <p><br/></p>
-<p>本文强调的是，翻译过程会受制于具体编程语言的<strong>表述习惯</strong>，</p>
-<p>也会造成不同程度的<strong>信息损失</strong>。</p>
+<p>这也反映了一个道理，<strong>目的是首要的，手段次之</strong>。</p>
 <p><br/></p>
-<p>所以，编程语言并不是越灵活越好，</p>
-<p>编写者能进行的选择越多，我们越不明白当初 Ta <strong>为什么</strong>这样做。</p>
+<p>年轻时确实应该不断的磨炼技能，为了能做更多的事情，为了“横行天下”，</p>
+<p>可一旦到了某个阶段，再追求技能本身就意义不大了，</p>
+<p>应该考虑怎样快速的达成<strong>目的</strong>，“草木竹石均可为剑”。</p>
+<p><br/></p>
+<p>所以，<strong>工程</strong>还是要跟<strong>科研</strong>区分开的，即使做的是创新项目。</p>
+<p>创新项目之所以创新，主要是覆盖了<strong>全新的业务场景</strong>，</p>
+<p>并不是用了鲜为人知的高端技术。</p>
 
           
         
@@ -456,7 +465,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/102/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/102/">102</a><span class="page-number current">103</span><a class="page-number" href="/page/104/">104</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/104/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/102/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/102/">102</a><span class="page-number current">103</span><a class="page-number" href="/page/104/">104</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/104/">&gt;</a>
   </nav>
 
 
@@ -502,7 +511,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">311</span>
+                <span class="site-state-item-count">312</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

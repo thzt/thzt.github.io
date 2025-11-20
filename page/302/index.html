@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/01/27/y-combinator-in-lisp/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/01/27/y-combinator-in-javascript/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/01/27/y-combinator-in-lisp/" itemprop="url">Y combinator in lisp</a></h1>
+                <a class="post-title-link" href="/2015/01/27/y-combinator-in-javascript/" itemprop="url">Y combinator in javascript</a></h1>
         
 
         <div class="post-meta">
@@ -347,138 +347,106 @@
       
         
           
-            <p>本文借助阶乘函数，在lisp中推导了Y combinator。</p>
+            <p>本文借助阶乘函数，在javascript中推导了Y combinator。</p>
 <p><br/></p>
-<h2 id="原始的fact定义"><strong>原始的fact定义</strong></h2>
-<p>(define fact</p>
-<p>    (lambda (n)</p>
-<p>        (if (= n 0)</p>
-<p>            1</p>
-<p>            (* n (fact (- n 1))))))</p>
+<h2 id="原始的阶乘函数定义"><strong>原始的阶乘函数定义</strong></h2>
+<p>var fact=function(n){</p>
+<p>    return n==0?1:n*fact(n-1);</p>
+<p>};</p>
 <p><br/></p>
-<h2 id="定义下文中用到的两个函数high-fact与fact-proto"><strong>定义下文中用到的两个函数high-fact与fact-proto</strong></h2>
-<p>(define high-fact</p>
-<p>    (lambda (f)</p>
-<p>        (lambda (n)</p>
-<p>            (if (= n 0)</p>
-<p>                1</p>
-<p>                (* n ((f f) (- n 1)))</p>
-<p>            )</p>
-<p>        )</p>
-<p>    )</p>
-<p>)</p>
+<p>console.assert(fact(5)==120);</p>
 <p><br/></p>
-<p>(define fact-proto</p>
-<p>    (lambda (h)</p>
-<p>        (lambda (x)</p>
-<p>            (if (= x 0)</p>
-<p>                1</p>
-<p>                (* x (h (- x 1)))</p>
-<p>            )</p>
-<p>        )</p>
-<p>    )</p>
-<p>)</p>
+<h2 id="把递归函数作为参数传递"><strong>把递归函数作为参数传递</strong></h2>
+<p>var highFact=function(f){</p>
+<p>    return function(n){</p>
+<p>        return n==0?1:n*f(f)(n-1);</p>
+<p>    };</p>
+<p>};</p>
 <p><br/></p>
-<h2 id="fact就是high-fact对自身的调用"><strong>fact就是high-fact对自身的调用</strong></h2>
-<p>fact&lt;=&gt;</p>
-<p>(high-fact high-fact)</p>
+<p>console.assert(highFact(highFact)(5)==120);</p>
 <p><br/></p>
-<h2 id="使用一个辅助函数消除重复出现的两个high-fact"><strong>使用一个辅助函数消除重复出现的两个high-fact</strong></h2>
-<p>fact&lt;=&gt;</p>
-<p>(</p>
-<p>    (lambda (g) (g g))</p>
-<p>    high-fact</p>
-<p>)</p>
+<h2 id="借助辅助函数消除对自身的调用"><strong>借助辅助函数消除对自身的调用</strong></h2>
+<p>var fact=(function(g){</p>
+<p>    return g(g);</p>
+<p>}(function(f){</p>
+<p>    return function(n){</p>
+<p>        return n==0?1:n*f(f)(n-1);</p>
+<p>    };</p>
+<p>}));</p>
 <p><br/></p>
-<h2 id="代入high-fact的定义"><strong>代入high-fact的定义</strong></h2>
-<p>fact&lt;=&gt;</p>
-<p>(</p>
-<p>    (lambda (g) (g g))</p>
-<p>    (lambda (f)</p>
-<p>        (lambda (n)</p>
-<p>            ;;;; 变换前</p>
-<p>            (if (= n 0)</p>
-<p>                1</p>
-<p>                (* n</p>
-<p>                    ((f f) (- n 1)))</p>
-<p>            )</p>
-<p>        )</p>
-<p>    )</p>
-<p>)</p>
+<p>console.assert(fact(5)==120);</p>
 <p><br/></p>
-<h2 id="将局部表达式变换为对fact-proto的调用"><strong>将局部表达式变换为对fact-proto的调用</strong></h2>
-<p>fact&lt;=&gt;</p>
-<p>(</p>
-<p>    (lambda (g) (g g))</p>
-<p>    (lambda (f)</p>
-<p>        (lambda (n)</p>
-<p>            ;;;; 变换后</p>
-<p>            (</p>
-<p>                (fact-proto (f f))</p>
-<p>                n</p>
-<p>            )</p>
-<p>        )</p>
-<p>    )</p>
-<p>)</p>
+<h2 id="构造递归原型"><strong>构造递归原型</strong></h2>
+<p>var fact=(function(g){</p>
+<p>    return g(g);</p>
+<p>}(function(f){</p>
+<p>    return function(n){</p>
+<p>        var factProto=function(h){</p>
+<p>            return function(x){</p>
+<p>                return x==0?1:x*h(x-1);</p>
+<p>            };</p>
+<p>        };</p>
+<p>        return factProto(f(f))(n);</p>
+<p>    };</p>
+<p>}));</p>
 <p><br/></p>
-<h2 id="将fact-proto变成形参"><strong>将fact-proto变成形参</strong></h2>
-<p>fact&lt;=&gt;</p>
-<p>(</p>
-<p>    (lambda (k)</p>
-<p>        (</p>
-<p>            (lambda (g) (g g))</p>
-<p>            (lambda (f)</p>
-<p>                (lambda (n)</p>
-<p>                    (</p>
-<p>                        (k (f f))</p>
-<p>                        n</p>
-<p>                    )</p>
-<p>                )</p>
-<p>            )</p>
-<p>        )</p>
-<p>    )</p>
-<p>    fact-proto</p>
-<p>)</p>
+<p>console.assert(fact(5)==120);</p>
+<p><br/></p>
+<h2 id="将递归原型提取出来"><strong>将递归原型提取出来</strong></h2>
+<p>var factProto=function(h){</p>
+<p>    return function(x){</p>
+<p>        return x==0?1:x*h(x-1);</p>
+<p>    };</p>
+<p>};</p>
+<p><br/></p>
+<p>var fact=(function(g){</p>
+<p>    return g(g);</p>
+<p>}(function(f){</p>
+<p>    return function(n){</p>
+<p>        return factProto(f(f))(n);</p>
+<p>    };</p>
+<p>}));</p>
+<p><br/></p>
+<p>console.assert(fact(5)==120);</p>
+<p><br/></p>
+<h2 id="把递归原型变成形参"><strong>把递归原型变成形参</strong></h2>
+<p>var fact=(function(k){</p>
+<p>    return (function(g){</p>
+<p>        return g(g);</p>
+<p>    }(function(f){</p>
+<p>        return function(n){</p>
+<p>            return k(f(f))(n);</p>
+<p>        };</p>
+<p>    }));</p>
+<p>}(factProto));</p>
+<p><br/></p>
+<p>console.assert(fact(5)==120);</p>
 <p><br/></p>
 <h2 id="得到y-combinator"><strong>得到Y combinator</strong></h2>
-<p>fact&lt;=&gt;</p>
-<p>(</p>
-<p>    y-combinator</p>
-<p>    fact-proto</p>
-<p>)</p>
+<p>var yCombinator=function(k){</p>
+<p>    return (function(g){</p>
+<p>        return g(g);</p>
+<p>    }(function(f){</p>
+<p>        return function(n){</p>
+<p>            return k(f(f))(n);</p>
+<p>        };</p>
+<p>    }));</p>
+<p>};</p>
 <p><br/></p>
-<p>(define y-combinator</p>
-<p>    (lambda (k)</p>
-<p>        (</p>
-<p>            (lambda (g) (g g))</p>
-<p>            (lambda (f)</p>
-<p>                (lambda (n)</p>
-<p>                    (</p>
-<p>                        (k (f f))</p>
-<p>                        n</p>
-<p>                    )</p>
-<p>                )</p>
-<p>            )</p>
-<p>        )</p>
-<p>    )</p>
-<p>)</p>
-<p><br/></p>
-<p>紧凑一点</p>
-<p>(define y-combinator</p>
-<p>    (lambda (k)</p>
-<p>        ((lambda (g) (g g))</p>
-<p>        (lambda (f)</p>
-<p>            (lambda (n)</p>
-<p>                ((k (f f))</p>
-<p>                n))))))</p>
+<p>console.assert(yCombinator(factProto)(5)==120);</p>
 <p><br/></p>
 <h2 id="扩展为多参数形式"><strong>扩展为多参数形式</strong></h2>
-<p>(define y-combinator</p>
-<p>    (lambda (k)</p>
-<p>        ((lambda (g) (g g))</p>
-<p>        (lambda (f)</p>
-<p>            (lambda ns</p>
-<p>                (apply (k (f f)) ns))))))</p>
+<p>var yCombinator=function(k){</p>
+<p>    return (function(g){</p>
+<p>        return g(g);</p>
+<p>    }(function(f){</p>
+<p>        return function(){</p>
+<p>            return k(f(f)).apply(null,arguments);</p>
+<p>        };</p>
+<p>    }));</p>
+<p>};</p>
+<p><br/></p>
+<p>console.assert(yCombinator(factProto)(5)==120);</p>
 
           
         
@@ -517,7 +485,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/301/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/301/">301</a><span class="page-number current">302</span><a class="page-number" href="/page/303/">303</a><span class="space">&hellip;</span><a class="page-number" href="/page/311/">311</a><a class="extend next" rel="next" href="/page/303/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/301/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/301/">301</a><span class="page-number current">302</span><a class="page-number" href="/page/303/">303</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/303/">&gt;</a>
   </nav>
 
 
@@ -563,7 +531,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">311</span>
+                <span class="site-state-item-count">312</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
