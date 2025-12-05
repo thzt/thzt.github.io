@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/12/document/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/19/semantics-9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/12/document/" itemprop="url">如何写好一篇文档</a></h1>
+                <a class="post-title-link" href="/2018/02/19/semantics-9/" itemprop="url">语言背后的代数学（九）：笛卡尔闭范畴</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T00:00:00+08:00">
-                2018-02-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-19T00:00:00+08:00">
+                2018-02-19
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,107 +347,135 @@
       
         
           
-            <h3 id="背景">背景</h3>
-<blockquote>
-<p>所有软件活动包括<strong>根本任务</strong>——打造由抽象软件实体构成的复杂概念结构，</p>
-</blockquote>
-<blockquote>
-<p><strong>次要任务</strong>——使用编程语言表达这些抽象实体，在空间和时间限制内将它们映射成机器语言。</p>
-</blockquote>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-cb66a46077b03ab6.png" /></p>
 <p><br/></p>
-<p>编程人员所处理的工作内容，具有抽象性和不可见性，很难直观的将它表现给别人看。</p>
-<p>而且，在编写软件的过程中，人们还会创造一个接一个的抽象概念。</p>
-<p>相比使用编程语言将某一个概念实现而言，<strong>理解和传递这些抽象的概念才是根本难题。</strong></p>
+<h3 id="回顾">回顾</h3>
+<p>上文我们简单的介绍了一些范畴论相关的内容，</p>
+<p>范畴由一些对象和箭头组成，范畴之间的箭头称为函子，</p>
+<p>函子之间的一族箭头称为自然变换。</p>
 <p><br/></p>
-<p>我想开发者们都有这样的认识吧，实现一个给定的功能总是简单的，</p>
-<p>而恰如其分的实现一个表述不清的功能，才是困难的。</p>
-<p><strong>开发人员的主要工作量，并不在编码环节，而是与外界交互。</strong></p>
+<p>范畴的对象不一定是集合，所有的箭头也不一定构成一个集合。</p>
+<p>如果一个范畴<span data-katex="C"></span>，它的对象都是集合，所有的箭头也构成了一个集合，</p>
+<p>就称该范畴是一个小范畴（<a href="https://en.wikipedia.org/wiki/Category_(mathematics)#Small_and_large_categories" target="_blank" rel="noopener">small categories</a>）。</p>
 <p><br/></p>
-<p>从这个角度来看，在软件项目中，我并不认为具有自解释性的代码就足够了。</p>
-<p>还得有必要的解释性文档。</p>
+<h3 id="定义域和值域">1. 定义域和值域</h3>
 <p><br/></p>
-<h3 id="传递知识">传递知识</h3>
-<p>文档是一种知识传递的形式，它可以存档，可以重复利用。</p>
-<p>如果编写者和阅读者决定使用文档的形式来传递知识，</p>
-<p>那么我认为首先应该注意的是，“<strong><a href="https://zh.wikipedia.org/wiki/%E7%9F%A5%E8%AD%98%E7%9A%84%E8%A9%9B%E5%92%92" target="_blank" rel="noopener">知识的诅咒</a></strong>”这种认知偏差。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-57ed84963b06aca7.png" /></p>
 <p><br/></p>
-<blockquote>
-<p>知道某知识的人，下意识的是不了解不知道该知识的人的处境的。</p>
-</blockquote>
+<p>在集合论中，函数自变量所有可取值的集合，称为函数的<strong>定义域</strong>，</p>
+<p>给定函数<span data-katex="f:A\to B"></span>，其中<span data-katex="A"></span>就是<span data-katex="f"></span>的定义域，记为<span data-katex="D_f"></span>，</p>
+<p>集合<span data-katex="f(A)=\{f(x)|x\in A\}"></span>，称为<span data-katex="f"></span>的<strong>值域</strong>，记为<span data-katex="R_f"></span>。</p>
 <p><br/></p>
-<p>代码的编写者，下意识的会认为，别人知道自己所做的种种假设，</p>
-<p>接口的提供者，下意识的会认为，别人知道该如何调用它。</p>
-<p>这就是最容易出现问题的环节，也是最消耗人力的环节。</p>
+<p>在范畴论中，箭头也有定义域和值域的概念。</p>
+<p>箭头<span data-katex="f:a\to b"></span>，表示了对象<span data-katex="a"></span>和<span data-katex="b"></span>之间的关系，</p>
+<p>我们称<span data-katex="a"></span>为箭头<span data-katex="f"></span>的<strong>定义域</strong>（domain），记为<span data-katex="dom~f"></span>，</p>
+<p><span data-katex="b"></span>为箭头<span data-katex="f"></span>的<strong>值域</strong>（codomain），记为<span data-katex="cod~f"></span>。</p>
 <p><br/></p>
-<p><strong>编写文档，如果寄希望于阅读者来主动咨询自己，就写不出好文档，</strong></p>
-<p><strong>而是应该把写文档看做提供服务，向阅读者传递必要的知识。</strong></p>
+<p>由此，我们还可以定义范畴<span data-katex="C"></span>中，从对象<span data-katex="a"></span>到对象<span data-katex="b"></span>所有箭头的集合，</p>
+<p><span data-katex="hom(a,b)=\{f|f\in C,dom~f=a,cod~f=b\}"></span>，常被称为<strong><a href="https://en.wikipedia.org/wiki/Morphism#Definition" target="_blank" rel="noopener">hom-set</a></strong>。</p>
 <p><br/></p>
-<p>如果能把自己决策的动机写下来，就是一篇好的设计文档，</p>
-<p>如果能把期望别人如何使用写下来，就是一份好的接口文档。</p>
-<p>当然，有计划的人会先写文档。</p>
+<h3 id="笛卡尔闭范畴">2. 笛卡尔闭范畴</h3>
 <p><br/></p>
-<h3 id="必要的">必要的</h3>
-<p>有一些知识如果不出现在文档中，就会对阅读者造成困扰。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-813d7932c1fb3fb5.png" /></p>
 <p><br/></p>
-<p>例如，<strong>好的文档应该首先交代背景知识，</strong></p>
-<p>如果文档一上来就开始写自己关心的内容，</p>
-<p>读者就不会那么容易切换到合适的上下文中，</p>
-<p>如果不交代背景，阅读者就不知道这篇文档到底想做什么。</p>
+<p>笛卡尔闭范畴是一种带有附加结构的范畴，这个名字虽然不是那么熟悉，</p>
+<p>而实际上，我们经常遇到它。</p>
 <p><br/></p>
-<p>还有，<strong>好的文档不应该把疑问抛给读者，</strong></p>
-<p>如果文档会引发疑问，那么这个疑问就很有可能不会被提出来，</p>
-<p>而是由阅读者自主选择一个结论，显然这个结论很难与编写者的预期相符。</p>
+<h4 id="笛卡尔积">2.1 笛卡尔积</h4>
+<p>两个集合<span data-katex="X"></span>和<span data-katex="Y"></span>的笛卡尔积，是以下所有可能有序对构成的集合，</p>
+<p><span data-katex="X\times Y=\{(x,y)|x\in X,y\in Y\}"></span>。</p>
 <p><br/></p>
-<p><strong>懂得站在对方角度考虑问题的编写者，迟早会摸索出这样的文档编写方式。</strong></p>
-<p>为了尽快的达到这一点，我们还需要一些技巧。</p>
+<h4 id="笛卡尔积上的函数">2.2 笛卡尔积上的函数</h4>
+<p><span data-katex="f:X\times Y\to Z"></span>，是从笛卡尔积<span data-katex="X\times Y"></span>到<span data-katex="Z"></span>的函数，</p>
+<p>我们可以用两种不同的视角来看待它，</p>
+<p>（1）它是一个一元函数，参数取遍<span data-katex="X\times Y"></span>中的所有元素。</p>
+<p>（2）它是一个二元函数，一个参数来自于<span data-katex="X"></span>，另一个来自于<span data-katex="Y"></span>。</p>
+<p>原则上，这两种理解应该是不同的，然而它们却是等价的。</p>
 <p><br/></p>
-<p>一个典型的技巧就是，如果觉得某些内容没什么必要，那也写出来。</p>
-<p>因为阅读者可以忽略任何他想忽略的内容。</p>
-<p>因此，对于专属名词，甚至上文已经提到过的概念，</p>
-<p>也要不厌其烦的进行介绍，因为读者可能会略过它们。</p>
+<h4 id="柯里化">2.3 柯里化</h4>
 <p><br/></p>
-<p>还是那句话，</p>
-<p><strong>要以文档提供服务，而不是寄希望于读者主动咨询。</strong></p>
-<p>提高文档的可读性，并不影响读者在主动性方面对自身的严格要求。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-28c21c09edf2f2f3.png" /></p>
 <p><br/></p>
-<h3 id="不必要的">不必要的</h3>
-<p>上文我们提到了，即使编写者认为没有什么必要的内容，也可以写到文档中。</p>
-<p>因为读者可以忽略它们，而被忽略总比没有表述清楚要好。</p>
+<p>笛卡尔闭范畴就是反映这一类性质的数学结构，</p>
+<p>一个范畴中，定义在乘积对象<span data-katex="a\times b"></span>上的箭头<span data-katex="f"></span>，</p>
+<p>总是可以“自然的”由定义在某一个对象<span data-katex="a"></span>或<span data-katex="b"></span>上的箭头来决定。</p>
 <p><br/></p>
-<p>可是，也并不是所有的内容都应该出现在文档中，</p>
-<p>这可能会影响读者的整体思路，</p>
-<p>对的，<strong>删除内容也一定是出自对读者的关心。</strong></p>
+<p>这就是柯里化（curring）的概念，</p>
+<p>将一个二元函数柯里化指的是，将它看成一个一元函数，</p>
+<p>这个函数返回另一个一元函数。</p>
 <p><br/></p>
-<p>我想熟知面向对象编程的开发者们，一定知道信息隐藏这一技巧吧，</p>
-<p>所谓信息隐藏，指的是对不必要的细节进行封装，对外表现出具有整体一致性的概念。</p>
-<p><strong>也只有对不必要的细节进行隐藏，才有办法表达更复杂的概念。</strong></p>
+<p>假设<span data-katex="f:X\times Y\to Z"></span>是一个函数，</p>
+<p>令<span data-katex="Z^Y=\{f|f(y)\in Z,y\in Y\}"></span>是所有<span data-katex="Y"></span>到<span data-katex="Z"></span>的函数，</p>
+<p>则存在唯一的<span data-katex="g=X\to Z^Y"></span>，使得<span data-katex="g(x)(y)=f(x,y)"></span>，<span data-katex="\forall x\in X,y\in Y"></span>。</p>
+<p>函数<span data-katex="g"></span>称为<span data-katex="f"></span>的<strong>柯里化</strong>。</p>
 <p><br/></p>
-<p><strong>诚然，实现的细节是需要隐藏的，</strong></p>
-<p><strong>但这也要建立在，对概念的外在解释足够好的基础上。</strong></p>
-<p>例如，如果你没有写明如何使用一份代码，哪怕写了很多私有函数，</p>
-<p>也不算做好了信息隐藏，因为读者不得不去了解它的实现细节。</p>
+<p>用hom-set的术语来表述就是，存在一个一一映射，使得，</p>
+<p><span data-katex="hom(X\times Y,Z)\cong hom(X,Z^Y)"></span></p>
 <p><br/></p>
-<p>因此，代码不能算是文档，</p>
-<p>它并不能说明我们为什么要这样解决问题，</p>
-<p>它只是编码了实现给定功能的计算细节。</p>
+<h4 id="cartesian-closed">2.4 Cartesian Closed</h4>
+<p>将以上柯里化的概念推广到范畴论中，我们就有，</p>
+<p>一个笛卡尔闭范畴（cartesian closed category）<span data-katex="C"></span>，是满足以下几个额外条件的范畴。</p>
 <p><br/></p>
-<p>最后，如果我们已经做好了信息隐藏，那么被隐藏的细节，就不该暴露给读者，</p>
-<p>这样有利于我们在更高的抽象层次上讨论问题。</p>
+<p>（1）<span data-katex="C"></span>中存在一个对象<span data-katex="1"></span>，使得对于任意对象<span data-katex="A\in C"></span>，有唯一的箭头<span data-katex="A\to 1"></span>，</p>
+<p>这样的对象<span data-katex="1"></span>，称为终对象（<a href="https://en.wikipedia.org/wiki/Initial_and_terminal_objects" target="_blank" rel="noopener">terminal object</a>）。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文主要介绍了写好文档的思路和原则，</p>
-<p>主要思路是，<strong>把编写文档看做提供主动的服务，而不是被动的咨询。</strong></p>
+<p>（2）对于任意两个对象<span data-katex="X"></span>和<span data-katex="Y"></span>，范畴<span data-katex="C"></span>中存在一个对象<span data-katex="X\times Y"></span>，</p>
+<p>以及两个箭头<span data-katex="p_1"></span>和<span data-katex="p_2"></span>，使得，<span data-katex="p_1:X\times Y\to X"></span>，<span data-katex="p_2:X\times Y\to Y"></span>。</p>
 <p><br/></p>
-<p>有一些知识需要广播出来，人们才可以有效的接收到，</p>
-<p>这就是<strong>分享精神</strong>。</p>
+<p>（3）对于任意两个对象<span data-katex="Y"></span>和<span data-katex="Z"></span>，</p>
+<p>范畴<span data-katex="C"></span>中存在一个对象<span data-katex="Z^Y"></span>，以及一个箭头<span data-katex="e:Z^Y\times Y\to Z"></span>，使得，</p>
+<p>对于任意的箭头<span data-katex="f:X\times Y\to Z"></span>，存在唯一的箭头<span data-katex="g:X\to Z^Y"></span>，</p>
+<p>有<span data-katex="f=e\circ (g\times I)"></span>恒成立。</p>
 <p><br/></p>
-<p>如果期望别人主动，这就另当别论了，</p>
-<p>我写了一篇文档给你看，目的是为了锻炼你的主动性，</p>
-<p>我会觉得这一定是哪里有问题。</p>
+<p>即，<span data-katex="(e\circ (g\times I))(X\times Y)=e((g\times I)(X\times Y))=e(Z^Y\times Y)=Z"></span>。</p>
+<p>其中<span data-katex="I:Y\to Y"></span>，为对象<span data-katex="Y"></span>的恒等箭头，<span data-katex="Z^Y"></span>称为指数对象（exponential object）。</p>
 <p><br/></p>
-<p>具有相关知识的开发者，有义务将这些知识传承下去，</p>
-<p><strong>如果别人因为信息缺失，浪费了时间，我会感到愧疚。</strong></p>
-<p>你呢？</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-475047e7eb5b9b6f.png" /></p>
+<p><br/></p>
+<h3 id="项的解释">3. 项的解释</h3>
+<p>在<a href="http://thzt.github.io/2018/02/04/semantics-6/">第六篇</a>中，为了解释简单类型化<span data-katex="\lambda"></span>演算，</p>
+<p>我们为每一个<span data-katex="\lambda"></span>项，找到了一个<span data-katex="\Sigma"></span>代数中数学对象与之对应，</p>
+<p>简要的说，我们用<span data-katex="\Sigma"></span>代数的载体<span data-katex="A^\sigma"></span>来解释基本类型<span data-katex="\sigma"></span>，</p>
+<p>用载体上的函数集<span data-katex="A^{\sigma\to\tau}"></span>来解释类型为<span data-katex="\sigma\to\tau"></span>的所有函数。</p>
+<p><br/></p>
+<p>现在有了笛卡尔闭范畴，我们准备为每一个基本类型选择范畴中的一个对象，</p>
+<p>而将项常量<span data-katex="b"></span>解释为范畴中的一个箭头<span data-katex="unit\to\mathscr{A}[\![b]\!]"></span>（原因在下文解释），</p>
+<p>其中<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>为我们在Henkin模型中定义的含义函数。</p>
+<p><br/></p>
+<h4 id="封闭项的解释">3.1 封闭项的解释</h4>
+<p>我们这样定义一个<strong>含义函数</strong><span data-katex="\mathscr{C}[\![\cdot]\!]"></span>，</p>
+<p>（1）<span data-katex="\mathscr{C}[\![unit]\!]=unit"></span></p>
+<p>（2）<span data-katex="\mathscr{C}[\![b]\!]=unit\to\mathscr{A}[\![b]\!]"></span></p>
+<p>（3）<span data-katex="\mathscr{C}[\![\sigma\times\tau]\!]=\mathscr{C}[\![\sigma]\!]\times\mathscr{C}[\![\tau]\!]"></span></p>
+<p>（4）<span data-katex="\mathscr{C}[\![\sigma\to\tau]\!]=\mathscr{C}[\![\sigma]\!]\to\mathscr{C}[\![\tau]\!]"></span></p>
+<p><br/></p>
+<h4 id="带有自由变量的项">3.2 带有自由变量的项</h4>
+<p>如果<span data-katex="\Gamma\vdash M:\sigma"></span>是一个含有自由变量的<span data-katex="\lambda"></span>项，</p>
+<p>则在笛卡尔闭范畴中，它应该解释为从自由变量的语义对象到<span data-katex="\sigma"></span>的语义对象的一个箭头，</p>
+<p><span data-katex="\mathscr{C}[\![\Gamma\vdash M:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\to\mathscr{C}[\![\sigma]\!]"></span>。</p>
+<p><br/></p>
+<p>值得一提的是，</p>
+<p>这里说明了，项常量<span data-katex="b"></span>为什么不能被解释为范畴中的对象，</p>
+<p>而是解释成了箭头<span data-katex="unit\to\mathscr{A}[\![b]\!]"></span>。</p>
+<p><br/></p>
+<p>其中，类型上下文<span data-katex="\Gamma"></span>的解释，定义如下，</p>
+<p>（1）<span data-katex="\mathscr{C}[\![\varnothing]\!]=unit"></span></p>
+<p>（2）<span data-katex="\mathscr{C}[\![\Gamma,x:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\times\mathscr{C}[\![\sigma]\!]"></span></p>
+<p><br/></p>
+<h3 id="回顾-1">回顾</h3>
+<p>本文介绍了笛卡尔闭范畴，是一种具有特殊结构的范畴，</p>
+<p>它补充了柯里化这一概念所需满足的约束条件。</p>
+<p><br/></p>
+<p>接着我们用笛卡尔闭范畴解释了，</p>
+<p>带有<a href="http://thzt.github.io/2017/09/19/type-6/">单位类型</a>，乘积类型的简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^{unit,\times,\to}"></span>。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
+<p><a href="http://thzt.github.io/2018/02/04/semantics-6/">语言背后的代数学（六）：Henkin模型</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Category_(mathematics)#Small_and_large_categories" target="_blank" rel="noopener">Small and Large Categories</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Class_(set_theory)" target="_blank" rel="noopener">Class</a></p>
+<p><a href="https://book.douban.com/subject/26684696/" target="_blank" rel="noopener">Category Theory for Computing Science</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Cartesian_closed_category" target="_blank" rel="noopener">Cartesian closed category</a></p>
 
           
         
@@ -486,7 +514,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/162/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/162/">162</a><span class="page-number current">163</span><a class="page-number" href="/page/164/">164</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/164/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/162/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/162/">162</a><span class="page-number current">163</span><a class="page-number" href="/page/164/">164</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/164/">&gt;</a>
   </nav>
 
 
@@ -532,7 +560,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">312</span>
+                <span class="site-state-item-count">313</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -543,7 +571,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

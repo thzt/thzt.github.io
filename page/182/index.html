@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/23/type-7/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/10/13/type-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/23/type-7/" itemprop="url">你好，类型（七）：Recursive type</a></h1>
+                <a class="post-title-link" href="/2017/10/13/type-8/" itemprop="url">你好，类型（八）：Subtype</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T00:00:00+08:00">
-                2017-09-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T00:00:00+08:00">
+                2017-10-13
               </time>
             
 
@@ -347,126 +347,129 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d2143e00a8cc56ad.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-0936c5b2e82c8756.png" /></p>
 <p><br/></p>
-<p>上文我们介绍了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^\to"></span>，并给它扩充了单位类型，</p>
-<p>本文继续为它添加新的特性。</p>
+<h3 id="对象和类">对象和类</h3>
+<p>子类型几乎是面向对象编程语言所特有的，</p>
+<p>在面向对象的编程语言中，计算是由对象和对象之间消息传递来完成的，</p>
+<p>对象（object）通常包含两个组成部分，数据（data）和代码（method）。</p>
 <p><br/></p>
-<p>我们将提到<code>let</code>和<code>letrec</code>表达式，函数的不动点，</p>
-<p>代数数据类型，以及递归类型。</p>
+<p>其中数据（data）一般是可变的，由每个对象所专有，</p>
+<p>通常称之为对象的状态（state）。</p>
+<p>代码（method）通常是不可变的。</p>
 <p><br/></p>
-<p>最后我们发现，无类型系统实际上是具有，唯一递归类型的一种情形。</p>
+<p>大部分面向对象的编程语言是基于类（class）的，但类（class）却并不是必须的，</p>
+<p>一个支持词法作用域的编程语言中，</p>
+<p>闭包（closure）就是包含内部状态的对象（object）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">; let over lambda</span><br><span class="line">(define counter</span><br><span class="line">    (let ((n 0)) </span><br><span class="line">        (lambda () (set! n (+ n 1)) n)))</span><br><span class="line"></span><br><span class="line">(counter)    ; 1</span><br><span class="line">(counter)    ; 2</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h3 id="let绑定">let绑定</h3>
-<p>当写一个复杂表达式的时候，为了避免重复和增加可读性，</p>
-<p>通常我们会给某些子表达式命名，</p>
-<p>其中一个常用办法是，使用<code>let</code>表达式。</p>
+<p>类（class）实际上可以看做一个工厂函数，用来生成对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">; lambda over let over lambda</span><br><span class="line">(define create-counter</span><br><span class="line">    (lambda () </span><br><span class="line">        (let ((n 0)) </span><br><span class="line">            (lambda () (set! n (+ n 1)) n))))</span><br><span class="line"></span><br><span class="line">(define counter </span><br><span class="line">    (create-counter))</span><br><span class="line"></span><br><span class="line">(counter)    ; 1</span><br><span class="line">(counter)    ; 2</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>为此，我们要对简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^\to"></span>进行扩展，</p>
-<p>添加<code>let</code>表达式的语法项，求值规则以及类型规则。</p>
+<h3 id="类型和类">类型和类</h3>
 <p><br/></p>
-<p>新的语法：</p>
-<p><span data-katex="t::=...|let~x:T=t~in~t"></span></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-e7993bfcd4e48572.png" /></p>
 <p><br/></p>
-<p>新的求值规则：</p>
-<p><span data-katex="let~x:T=v~in~t\to [x\mapsto v]t"></span></p>
-<p><span data-katex="\frac{t_1\to t&#39;_1}{let~x:T_1=t_1~in~t_2\to let~x:T_1=t&#39;_1~in~t_2}"></span></p>
+<p>类型（type）是与类（class）不同的概念。</p>
+<p>对象所属的类（class）是它的工厂函数，</p>
+<p>而对象的类型（type），是它在形式系统中，所具有的逻辑性质（logical property）。</p>
 <p><br/></p>
-<p>新的类型规则：</p>
-<p><span data-katex="\frac{\Gamma\vdash t_1:T_1~~~~\Gamma,x:T_1\vdash t_2:T_2}{\Gamma\vdash let~x:T_1=t_1~in~t_2:T_2}"></span></p>
+<p>子类（subclass），通过编写与父类之间的差别，创建一个新类，目的是代码复用。</p>
+<blockquote>
+<p>A subclass is a differential description of a class.</p>
+</blockquote>
 <p><br/></p>
-<p>这样我们就可以写出<code>let</code>表达式了，</p>
-<p><span data-katex="let~x:T_1=t_1~in~t_2"></span>，</p>
-<p>它表示，求值表达式<span data-katex="t_1"></span>，然后将其绑定到<span data-katex="t_2"></span>中自由出现的<span data-katex="x"></span>上面，</p>
-<p>即在当前这种情况下（顾及<a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system#Let-polymorphism" target="_blank" rel="noopener">let polymorphism</a>），<code>let</code>可以表示为，<span data-katex="(\lambda x:T_1.t_2)t_1"></span>。</p>
+<p>包含子类（subclass）之后，众多类（class）之间，</p>
+<p>构成一个前序关系（<a href="https://en.wikipedia.org/wiki/Preorder" target="_blank" rel="noopener">preorder</a>）（自反，传递）。</p>
 <p><br/></p>
-<h3 id="不动点">不动点</h3>
+<p>而引入子类型（subtype）是为了放宽类型系统的约束条件。</p>
+<p>例如，<span data-katex="(\lambda r:\{x:Nat\}.~r.x)~\{x=0,y=1\}"></span></p>
+<p>其中，<span data-katex="r"></span>的类型为<span data-katex="\{x:Nat\}"></span>，表示记录类型（record）。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d43b3ce324057f79.png" /></p>
+<p><span data-katex="\{x=0,y=1\}"></span>的类型为<span data-katex="\{x:Nat,y:Nat\}"></span>，与<span data-katex="r"></span>的类型不同，</p>
+<p>根据推导规则，<span data-katex="\frac{\Gamma\vdash t_1:T_1\to T_2~~~~\Gamma\vdash t_2:T_1}{\Gamma\vdash t_1~t_2:T_2}"></span>，</p>
+<p><span data-katex="(\lambda r:\{x:Nat\}.~r.x)~\{x=0,y=1\}"></span>将无法通过类型检查。</p>
 <p><br/></p>
-<p>以上<code>let</code>表达式，<span data-katex="let~x:T_1=t_1~in~t_2"></span>，</p>
-<p>对<span data-katex="t_1"></span>求值的时候有一个限制，那就是<span data-katex="t_1"></span>中不能出现<span data-katex="x"></span>，</p>
-<p>否则就像方程一样，<span data-katex="x"></span>出现在了等式的两边，<span data-katex="x=t_1(x)"></span>，</p>
-<p>此时，<span data-katex="t_2"></span>中自由出现的<span data-katex="x"></span>，将是这个方程的解。</p>
+<p>可是，函数中确实只用到了<span data-katex="r.x"></span>，多传一个<span data-katex="y"></span>理应总是安全的。</p>
+<p>因此，不带子类型的简单类型化<span data-katex="\lambda"></span>演算，它的推导规则就显得过于严谨了。</p>
 <p><br/></p>
-<p>不过，通常而言，<span data-katex="t_1"></span>中是可以出现<span data-katex="x"></span>的，</p>
-<p>这时候我们就需要使用<code>letrec</code>进行绑定了。</p>
+<p>我们可以引入记录类型（record）之间的子类型关系，记为，</p>
+<p><span data-katex="\{x:Nat,y:Nat\}&lt;:\{x:Nat\}"></span></p>
+<p>用于表示类型<span data-katex="\{x:Nat,y:Nat\}"></span>是<span data-katex="\{x:Nat\}"></span>的子类型。</p>
+<p>对于记录类型来说，这里可能有些奇怪，因为更“小”的类型却包含更多的字段。</p>
 <p><br/></p>
-<p>为了看清<code>letrec</code>的真面目，我们用一个求阶乘的例子来说明问题，</p>
-<p><span data-katex="letrec~f:nat\to nat=\lambda y:nat.(if~Eq?~y~0~then~1~else~y*f(y-1))~in~f~5"></span></p>
-<p>其中，<span data-katex="nat"></span>表示整数类型。</p>
+<p>一般的，<span data-katex="S&lt;:T"></span>表示<span data-katex="S"></span>为<span data-katex="T"></span>的子类型，</p>
+<p>如果在某个上下文中，期待一个<span data-katex="T"></span>类型的项，那么<span data-katex="S"></span>在这个上下文中也是合法的，</p>
+<p>即，<span data-katex="\frac{\Gamma\vdash t:S~~~~S&lt;:T}{\Gamma\vdash t:T}"></span></p>
+<p>该推导规则，通常称之为安全替换原则。</p>
 <p><br/></p>
-<p>为了求解<span data-katex="f=\lambda y:nat.(if~Eq?~y~0~then~1~else~y*f(y-1))"></span>，</p>
-<p>我们定义一个新函数<span data-katex="F"></span>，使得，</p>
-<p><span data-katex="F=\lambda f:nat\to nat.\lambda y:nat.(if~Eq?~y~0~then~1~else~y*f(y-1))"></span>，</p>
-<p>注意到<span data-katex="f=F(f)"></span>，所以<span data-katex="f"></span>是<span data-katex="F"></span>的不动点。</p>
+<p>为了能够安全替换，子类型应该具有自反性：<span data-katex="S&lt;:S"></span>，</p>
+<p>还应该具有传递性，<span data-katex="\frac{S&lt;:U~~~~U&lt;:T}{S&lt;:T}"></span>。</p>
 <p><br/></p>
-<p>这里我们暂且不讨论不动点的存在性和唯一性问题，</p>
-<p>只是引入一个不动点算子，<span data-katex="fix_\sigma:(\sigma\to\sigma)\to\sigma"></span>，</p>
-<p>它可以用来计算任意函数<span data-katex="F:\sigma\to\sigma"></span>的不动点。</p>
+<h3 id="top类型与bottom类型">Top类型与Bottom类型</h3>
 <p><br/></p>
-<p>为了达到这个目的，<span data-katex="fix_\sigma"></span>必须满足以下约束条件，</p>
-<p><span data-katex="fix_\sigma=\lambda f:\sigma\to\sigma.f(fix_\sigma f)"></span>。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-6aa9284168e9c36f.png" /></p>
 <p><br/></p>
-<p>引入了<span data-katex="fix_\sigma"></span>之后，<code>letrec</code>就可以用<code>let</code>表示出来了，</p>
-<p><span data-katex="letrec~f:\sigma=t_1~in~t_2\Leftrightarrow let~f:\sigma=(fix_\sigma\lambda f:\sigma.t_1)~in~t_2"></span></p>
+<h4 id="top类型">（1）Top类型</h4>
+<p>理解了子类型之后，我们就可以引入一个新的类型常量<span data-katex="Top"></span>，称为Top类型。</p>
+<p>所有其它类型都是它的子类型，<span data-katex="S&lt;:Top"></span>。</p>
 <p><br/></p>
-<h3 id="代数数据类型">代数数据类型</h3>
+<p>因为具有自反性和传递性，子类型之间构成了一个前序关系（<a href="https://en.wikipedia.org/wiki/Preorder" target="_blank" rel="noopener">preorder</a>），</p>
+<p>由于记录类型中的字段，顺序是可以置换的，</p>
+<p><span data-katex="\{x:Nat,y:Nat\}"></span>和<span data-katex="\{y:Nat,x:Nat\}"></span>分别为另一个的子类型，</p>
+<p>因此，子类型关系不是一个偏序关系（<a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Formal_definition" target="_blank" rel="noopener">partial order</a>）（自反，传递，反对称）。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b810f4430ac7c159.png" /></p>
+<h4 id="bottom类型">（2）Bottom类型</h4>
+<p>除了Top类型之外，我们很自然的会问，</p>
+<p>是否存在一个类型，它是所有其他类型的子类型，</p>
+<p>为此，我们需要对类型系统再扩展，引入<span data-katex="Bot"></span>类型常量，称为Bottom类型，</p>
+<p>满足<span data-katex="Bot&lt;:T"></span>。</p>
 <p><br/></p>
-<p>在某些编程语言中，可以自定义递归类型，例如在Haskell中，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data List a &#x3D; Nil | Cons a (List a)</span><br><span class="line"></span><br><span class="line">lst :: List Int </span><br><span class="line">lst &#x3D; Cons 1 $ Cons 2 $ Nil</span><br></pre></td></tr></table></figure>
-<p>以上定义采用了递归的方式，定义了一个<a href="https://wiki.haskell.org/Algebraic_data_type" target="_blank" rel="noopener">代数数据类型</a><code>List</code>，</p>
-<p>所谓代数数据类型，是由基本类型经过复合运算，得来的类型。</p>
+<p><span data-katex="Bot"></span>类型中是不能有闭值的，否则，假设<span data-katex="v"></span>是<span data-katex="Bot"></span>类型的一个值，</p>
+<p>则根据安全替换原则有<span data-katex="v:Top\to Top"></span>，表明<span data-katex="v"></span>是一个函数，</p>
+<p>此外还有<span data-katex="v:\{\}"></span>，表明<span data-katex="v"></span>是一个记录，</p>
+<p>但是<span data-katex="v"></span>作为一个值，不可能既是函数又是记录，矛盾。</p>
 <p><br/></p>
-<p>Haskell中，使用<code>|</code>表示和类型（sum type），</p>
-<p>而带参数值构造器（value constructor）<code>Cons</code>，用于表示各参数（<code>a</code>，<code>List a</code>）类型的积类型（product type），</p>
-<p>无参构造器<code>Nil</code>，用来表示单位乘积类型（empty product）。</p>
-<p>（关于函数类型与指数的关系，以后有机会再介绍。）</p>
+<p>我们在第六篇中提到过，所谓封闭，指的是不含自由变量。</p>
+<p>所谓值，就是事先约定好的项的子集。</p>
+<p>值都是范式，没有求值规则可被继续使用，是对项求值的最终结果。</p>
 <p><br/></p>
-<p>和<code>letrec</code>中的场景相似的是，<code>List</code>也出现在了等式的两边，</p>
-<p>于是，我们定义<span data-katex="\mu t.\sigma"></span>，表示满足等式<span data-katex="t=\sigma"></span>的最小类型，</p>
-<p>其中，<span data-katex="t"></span>和<span data-katex="\sigma"></span>是类型，且<span data-katex="t"></span>通常会在<span data-katex="\sigma"></span>中出现。</p>
+<p><span data-katex="Bot"></span>类型中虽然不能有闭值，</p>
+<p>但是却可以包含受阻项，即事先约定好的不是值的范式。</p>
 <p><br/></p>
-<p>因此，以上递归定义的<code>List</code>类型可以表示为，</p>
-<p><span data-katex="\mu\phi.\lambda\alpha.(1+\alpha\times(\phi~\alpha))"></span></p>
+<p>例如，我们可以指定<span data-katex="error"></span>是一个受阻项（不给它指定求值规则），</p>
+<p>再指定它为Bottom类型，<span data-katex="error:Bot"></span>。</p>
+<p>这样<span data-katex="error"></span>就可以在不同的上下文中，被提升为不同的类型了。</p>
+<p><span data-katex="\lambda x:T."></span></p>
+<p><span data-katex="~~~~if ... then"></span></p>
+<p><span data-katex="~~~~~~~~result"></span></p>
+<p><span data-katex="~~~~else"></span></p>
+<p><span data-katex="~~~~~~~~error"></span></p>
+<p>以上<span data-katex="\lambda"></span>项是良类型的（well typed），无论<span data-katex="result"></span>是何种类型。</p>
 <p><br/></p>
-<p>其中，<span data-katex="\alpha"></span>表示类型参数<code>a</code>，</p>
-<p><span data-katex="\phi"></span>是一个函数，用于表示类型构造器（data constructor）<code>List</code>，</p>
-<p><span data-katex="\mu"></span>算子用来计算类型的不动点。</p>
-<p><br/></p>
-<h3 id="无类型演算">无类型<span data-katex="\lambda"></span>演算</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b7bb889f262aaa84.png" /></p>
-<p><br/></p>
-<p>在无类型<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda_\beta"></span>中，</p>
-<p>定义递归类型，<span data-katex="\mu t.t\to t"></span>，它满足类型等式<span data-katex="t=t\to t"></span>。</p>
-<p><br/></p>
-<p>这样的话，无类型<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda_\beta"></span>，</p>
-<p>就可以无缝的嵌入到一个类型化的系统中去了，</p>
-<p>该系统只存在一个类型，即递归类型<span data-katex="\mu t.t\to t"></span>，</p>
-<p>所有的项，都具有这个类型。</p>
-<p><br/></p>
-<p>因此，对于支持递归类型的系统而言，</p>
-<p>无类型相当于具有唯一类型（Untyped means uni-typed）。</p>
+<p>关于Top类型和Bottom类型，我们最后再看一个例子，</p>
+<p><a href="https://www.typescriptlang.org/index.html" target="_blank" rel="noopener">TypeScript</a>中的<a href="https://www.typescriptlang.org/docs/handbook/basic-types.html#any" target="_blank" rel="noopener">any</a>类型，是一个Top类型，</p>
+<p>而<a href="https://www.typescriptlang.org/docs/handbook/basic-types.html#never" target="_blank" rel="noopener">never</a>类型，是一个Bottom类型。</p>
 <p><br/></p>
 <h3 id="总结">总结</h3>
-<p>本文介绍了递归类型，引入了两个算子<span data-katex="fix_\sigma"></span>和<span data-katex="\mu"></span>，分别用来求解函数和类型的不动点。</p>
-<p>但是，待求的不动点是否存在，是否唯一，我们仍不能确定。</p>
-<p>要想证明这件事情并不简单，需要补充很多额外的数学知识，例如，良基归纳法和最小不动点定理，</p>
-<p>此外，不动点的存在性，和递归的终止性也有关系。</p>
+<p>本文为简单类型化<span data-katex="\lambda"></span>演算添加了子类型，</p>
+<p>并且对比了类（class）与类型（type）这两个概念。</p>
 <p><br/></p>
-<p>好在我们所遇到的大多数场景，都是满足这些要求的，</p>
-<p>因为，我们总是先确信这个解是存在的，然后再去编程，例如，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int </span><br><span class="line">fact 1 &#x3D; 1</span><br><span class="line">fact n &#x3D; n * fact (n - 1)</span><br></pre></td></tr></table></figure>
-<p>将<code>fact</code>写到等式两边，能让我们更方便对<code>fact</code>进行定义。</p>
+<p>lambda calculus是函数式编程语言的计算模型，</p>
+<p>前几篇，我们保持基本的演算系统（求值规则）不变，</p>
+<p>给它添加了不同的类型推导规则，得到了不同的类型系统。</p>
+<p><br/></p>
+<p><a href="https://www.nada.kth.se/~karlm/ooteori/ObjectCalculus.pdf" target="_blank" rel="noopener">object calculus</a>是面向对象语言的计算模型，</p>
+<p>在它之上，我们同样可以添加相似的类型系统。</p>
+<p><br/></p>
+<p>因此，类型系统是与演算（calculus）独立的概念。</p>
+<p>这印证了我们之前在第一篇中提到的一句话，</p>
+<p>类型系统，可以看做是附着在语言语法之上的一套符号证明系统。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Algebraic_data_type" target="_blank" rel="noopener">Algebraic data type</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Empty_product" target="_blank" rel="noopener">Empty product</a></p>
-<p><a href="https://book.douban.com/subject/1761918/" target="_blank" rel="noopener">Foundations for programmming languages</a></p>
-<p><a href="https://book.douban.com/subject/26782198/" target="_blank" rel="noopener">Practical Foundations for Programming Languages</a></p>
+<p><a href="https://book.douban.com/subject/3864436/" target="_blank" rel="noopener">Let Over Lambda</a></p>
+<p><a href="https://book.douban.com/subject/1761910/" target="_blank" rel="noopener">Types and programming languages</a></p>
+<p><a href="http://lucacardelli.name/Talks/1997-06%20A%20Theory%20of%20Object%20(LICS).pdf" target="_blank" rel="noopener">A Theory of Objects</a></p>
 
           
         
@@ -505,7 +508,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/181/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><span class="page-number current">182</span><a class="page-number" href="/page/183/">183</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/183/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/181/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><span class="page-number current">182</span><a class="page-number" href="/page/183/">183</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/183/">&gt;</a>
   </nav>
 
 
@@ -551,7 +554,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">312</span>
+                <span class="site-state-item-count">313</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -562,7 +565,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

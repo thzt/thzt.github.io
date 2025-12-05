@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/07/23/code-04/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/07/31/code-05/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/07/23/code-04/" itemprop="url">编码技巧（四）：零缺陷</a></h1>
+                <a class="post-title-link" href="/2020/07/31/code-05/" itemprop="url">编码技巧（五）：适当可扩展</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-23T00:00:00+08:00">
-                2020-07-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-31T00:00:00+08:00">
+                2020-07-31
               </time>
             
 
@@ -347,103 +347,120 @@
       
         
           
-            <h3 id="背景">背景</h3>
-<p>除了编码之外，开发者平时最常遇到的麻烦就是<strong>软件缺陷</strong>了，</p>
-<p>指的是，软件在某些情况下，表现出了与<strong>预期</strong>不符的行为。</p>
+            <p>宋代禅宗大师<strong>青原行思</strong>提出参禅的三重境界：</p>
+<blockquote>
+<p>参禅之初，看山是山，看水是水；</p>
+</blockquote>
+<blockquote>
+<p>禅有悟时，看山不是山，看水不是水；</p>
+</blockquote>
+<blockquote>
+<p>禅中彻悟，看山仍然山，看水仍然是水。</p>
+</blockquote>
 <p><br/></p>
-<p>确保软件没有缺陷，是一件很难的事情，</p>
-<p>因为一方面，预期是会<strong>变</strong>的，</p>
-<p>另一方面，修改软件的一部分也许会不小心<strong>影响</strong>到其他部分。</p>
+<p>它体现了人们对陌生事物的<strong>认知过程</strong>。</p>
+<p>迷信 —— 怀疑 —— 心领神会。</p>
 <p><br/></p>
-<p>那么就这样听天由命了么？</p>
-<p>很显然这是不行的。</p>
+<p>回到编程技巧上来，我打算好好讨论一下程序的<strong>可扩展性</strong>，</p>
+<p>根据我个人的经验，大致上也经历了这样的一个认知过程。</p>
 <p><br/></p>
-<p>写出高缺陷率的代码，是<strong>不专业</strong>的表现。</p>
-<p>只有运行起来没问题的代码，再追求清晰易懂才是有意义的。</p>
+<p>编程行业流传着这么一句话：<strong>过早</strong>优化是万恶之源。</p>
+<p>但什么情况下才能称得上 “过早” 呢？</p>
+<p>并不是那么好解释清楚。</p>
 <p><br/></p>
-<p>文本就来探讨，如何写出低缺陷代码的编码技巧。</p>
-<h3 id="亲手测试">亲手测试</h3>
-<p>在讨论技巧之前，我们不妨先反思一下，</p>
-<p>是哪些事实，让我们坚信自己写的代码<strong>肯定</strong>没有问题？</p>
+<p>且听我慢慢道来。</p>
+<h3 id="迷信">迷信</h3>
+<p>很多人刚入行的时候，都想写出<strong>高度可扩展</strong>的程序，</p>
+<p>这是因为他们觉得，实现新功能时，</p>
+<p>通过对程序进行<strong>扩展</strong>，而不是进行<strong>修改</strong>，这样的方式更加<strong>高明</strong>。</p>
 <p><br/></p>
-<p>我认为只有一条，那就是我们<strong>自己测试</strong>过了。</p>
-<p>不论是通过自动化的测试，还是手工测试，</p>
-<p>不论是通过肉眼亲见，还是通过逻辑证明。</p>
+<p>说这是 “高明” 的做法，其实并非毫无道理。</p>
+<p>因为修改代码，可能会对现有功能产生影响，一旦疏于测试就会导致软件故障。</p>
+<p>这是大家都不想见到的事情。</p>
 <p><br/></p>
-<p>我们应该只相信<strong>自己</strong>测试过的代码。</p>
-<p>不能将 ”确保代码没有问题“ 这件事委托给他人。</p>
+<p>如果老程序提供了优秀的<strong>扩展方式</strong>，</p>
+<p>那么实现新功能时，就能尽可能少的<strong>影响</strong>已有功能，有利于编写出更稳定的程序来。</p>
 <p><br/></p>
-<p>所以，一个<strong>负责任</strong>的开发者，绝不会交付没有经过自测的代码。</p>
-<p>让别人找出问题再修复，肯定会耗费更多的时间。</p>
+<p>就拿我个人而言，早期写出来的代码，都是以 “可扩展” 作为第一原则的。</p>
+<p>这样写出来的代码很 “抽象”，因为所有功能都是从 “核心” 中扩展出来的。</p>
+<p>这其实是 “微内核架构” 的一种表现形式。</p>
 <p><br/></p>
-<p>这就是为什么有时候改一行代码，也需要很久的原因了，</p>
-<p>因为这一行代码，可能会影响到很多其他模块，</p>
-<p>这些受影响到的模块，都应<strong>完整的</strong>进行测试。</p>
+<p>但这并不是一帆风顺的，这样发展下去，事情就越发的显得不对劲了，</p>
+<p>主要体现在两个方面。</p>
+<p>（1）不同的扩展之间，遇到了<strong>集成问题</strong>，他们之间互相干扰，或产生了依赖。</p>
+<p>（2）可扩展的程序内核太过抽象，提高了他人<strong>合作</strong>的门槛。</p>
 <p><br/></p>
-<p><strong>假设</strong>自己的写的代码没有问题，正是产生问题的根本原因。</p>
-<h3 id="直面需求">直面需求</h3>
-<p>有的人可能要说了，某些缺陷可能并不是编码引起的，</p>
-<p>而是因为<strong>需求变更</strong>所致。</p>
+<p>所以，自此我感受到，自己正在经历从第一阶段到第二阶段的转变。</p>
+<p>我意识到自己对 “可扩展性” 产生了 “迷信”，对它产生了怀疑。</p>
+<h3 id="怀疑">怀疑</h3>
+<p>从迷信演变而来的怀疑，很容易变得<strong>盲目</strong>，变得矫枉过正，</p>
+<p>这是 “看山不是山，看水不是水” 的真实写照。</p>
+<p>不过这个阶段也是必须的。</p>
 <p><br/></p>
-<p>其实不然。</p>
-<p>真实的需求就在那里，绝大多数情况下，变更的都不是需求，</p>
-<p>而是对需求的<strong>理解</strong>。</p>
+<p>因为在极力怀疑 “可扩展性” 的同时，让我清晰认识到了它的<strong>反面</strong>。</p>
 <p><br/></p>
-<p>产品经理说这样做，就这样实现，说那样做，就那样实现，</p>
-<p>这正是<strong>误解需求</strong>的主要原因。</p>
+<p>其一，人们认为抽象度较高的程序，具备更广泛的适用性，所以会更稳固。</p>
+<p>这是建立在 “<strong>正确抽象</strong>” 基础上而言的。</p>
 <p><br/></p>
-<p>为了能够真正的理解需求，开发者应该走在产品经理的前面，</p>
-<p>不然代码写完了，发现不满足需求，不是还要修改么？</p>
+<p>而在软件项目的早期，由于很多概念的沟通和理解，并没有足够深入，</p>
+<p>开发者很把 “正确的抽象” 建立出来。</p>
+<p>所以很多早期编写的抽象代码，到中后期还得进行<strong>调整</strong>。</p>
 <p><br/></p>
-<p>为了能让自己少<strong>改</strong>几次代码，一定得做到比任何人<strong>更懂</strong>需求才行。</p>
-<h3 id="完整日志">完整日志</h3>
-<p>代码未写完之前，日志先行。</p>
-<p>大部分的软件缺陷，是由<strong>输入</strong>跟预期不符造成的。</p>
+<p>一旦抽象层进行了调整，影响范围则是巨大的，</p>
+<p>这意味着所有建立在这套抽象代码基础上的<strong>具体实现</strong>，都要进行修改。</p>
+<p>所以，不合理的抽象，比不抽象，给软件带来的灾害更大。</p>
 <p><br/></p>
-<p>意料之外的输入参数，会导致<strong>不确定</strong>的执行结果。</p>
-<p>所以，代码逻辑的执行<strong>日志</strong>，</p>
-<p>不论对排查问题，还是对编写低缺陷率的代码而言，都是非常重要的。</p>
+<p>其二，代码如果不是结合<strong>场景</strong>来编写的话，就容易产生<strong>假设</strong>，</p>
+<p>或说是，假想敌太强大。</p>
 <p><br/></p>
-<p>在出现问题的时候，我们必须能<strong>一目了然</strong>的知道问题出在哪里。</p>
-<p>经验表明，“问题排查的简易程度” 与 “代码的低缺陷率” 是正相关的。</p>
-<p>越容易排错的代码，缺陷率越低。</p>
+<p>如果程序一开始就打算解决 “绝不会” 发生的问题，就会使它变得 “不必要” 之复杂。</p>
+<p>这是一种资源的浪费，不论是心智还是人力上。</p>
 <p><br/></p>
-<p>因此，在写代码之前，就得先考虑清楚，</p>
-<p>如果我写的代码得到了<strong>奇怪的</strong>结果，要怎么定位问题？</p>
-<p><strong>日志</strong>是行之有效的一种手段。</p>
+<p>综合以上两点，我们产生了以下两个疑问：</p>
+<p>（1）如何才能建立出 “正确” 的抽象？</p>
+<p>（2）如何才能编写出 “恰如其分” 的代码？</p>
 <p><br/></p>
-<p>易于定位问题的代码，能有效避免事后很大一堆麻烦事。</p>
-<h3 id="也谈单测">也谈单测</h3>
-<p>单测，通常指的是自动化的单元测试，</p>
-<p>它是实现单元测试的一种自动化的<strong>手段</strong>，一般是运行一个脚本来执行程序，</p>
-<p>再检测执行结果是否跟预期相符。</p>
+<p>这两个疑问，通通指向了一个概念 —— “适当”。</p>
+<p>这正是第三个阶段我们所考虑的事情了。</p>
+<h3 id="心领神会">心领神会</h3>
+<p>要想做到心领神会，就不能有所 “迷信”，还不能 “盲目的怀疑”。</p>
+<p>我们须认识到解决方案的<strong>正反两面</strong>才能做到。</p>
 <p><br/></p>
-<p>与流行说法不同，我认为写单测其实并<strong>不是</strong>那么重要。</p>
-<p>尤其是每次写完代码都要费力<strong>改</strong>好多单测的话，</p>
-<p>那还不如不写。</p>
+<p>“可扩展性” 其实并非一个程序所必须具备的<strong>特征</strong>，</p>
+<p>且要想具备这个特征，是需要投入<strong>成本</strong>的。</p>
+<p>这恰如 “代码的整洁性” 这个特征一样，写出干净的代码，是需要花时间的。</p>
 <p><br/></p>
-<p>上文提到过，确保代码没有缺陷的办法是自己进行完整的<strong>测试</strong>。</p>
-<p>至于用什么办法确保，要灵活应对。</p>
+<p>所以，首先我们应考虑的是，当前程序<strong>要不要</strong>提供扩展功能，</p>
+<p>以及以什么样的方式提供，如何降低其他开发者的扩展成本。</p>
 <p><br/></p>
-<p>如果担心别人写的代码，影响了自己负责的功能，是可以写一点单测，</p>
-<p>如果需要频繁的构造数据来测试某一块代码，也可以写一点单测，</p>
-<p>除此之外，单测真的非常鸡肋。</p>
+<p>我们得带着问题出发，不要 “过早优化”。</p>
+<p>有扩展的<strong>需求</strong>，再设计扩展功能，</p>
+<p>而不是反之。</p>
 <p><br/></p>
-<p>最后，追求单测<strong>覆盖率</strong>，没有太大意义，</p>
-<p>“覆盖率” 这个指标，只能检测是否所有代码都<strong>有用</strong>，有没有代码执行不到。</p>
-<p>至于执行到的代码有没有错误，覆盖率不关心这些。</p>
+<p>其次，秉持 “刚好够用” 原则，能<strong>覆盖</strong>当前遇到的所有场景就够了，</p>
+<p>并不需要 “过度设计”。</p>
 <p><br/></p>
-<p>所以，我们完全可以写出覆盖率 100% 的问题代码。</p>
+<p>把<strong>前瞻性</strong>放在大脑中，而不是直接写进代码里。</p>
+<p>省得以后想错了，还要进行全局修改。</p>
+<p><br/></p>
+<p>总之，做到心领神会，就得写出 “恰当” 的代码。</p>
+<p>写的不多，没有<strong>假设</strong>太多实际不会发生的问题，</p>
+<p>写的也不少，确实<strong>完整</strong>覆盖了现有的需求。</p>
 <h3 id="结语">结语</h3>
-<p>本文讨论了编写高质量（低缺陷率）代码的几个方法：</p>
-<p>（1）亲手测试：凡需交付的代码，必完整的亲手测试过</p>
-<p>（2）直面需求：做到比任何人更懂需求，才能确保代码跟预期相符</p>
-<p>（3）完整日志：代码未写，日志先行，让输入输出一目了然，易于排错</p>
+<p>本文介绍了一个新的编码技巧：“适当可扩展”，</p>
+<p>什么样的代码才能成为 “适当” 的呢？文中详细的进行了解释。</p>
 <p><br/></p>
-<p>还讨论了个人对 “单元测试” 以及 “单测覆盖率” 的看法。</p>
-<p>盲目追求漂亮的数字，最终就会自缚手脚。</p>
+<p>值得一提，代码的各种优秀<strong>特征</strong>，都是需要花费精力来写出来的，</p>
+<p>也就说需要成本，我们才能有收益。</p>
 <p><br/></p>
-<p>低缺陷率的代码，来源于专业精神，妥协于外力，最后还得自己收拾烂摊子。</p>
+<p>所以，提供 “可扩展性”，必然得是满足了相关的需求，</p>
+<p>不能是开发者一厢情愿而为之。</p>
+<p><br/></p>
+<p>当然为了追求技术精进，高度可扩展的案例，也是非常值得学习的。</p>
+<p>这并不冲突。</p>
+<p><br/></p>
+<p>我们可以身怀绝技，但用的时候却只 “恰到好处”。</p>
+<p>这才是行家的手笔呀。</p>
 
           
         
@@ -482,7 +499,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/71/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><span class="page-number current">72</span><a class="page-number" href="/page/73/">73</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/73/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/71/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><span class="page-number current">72</span><a class="page-number" href="/page/73/">73</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/73/">&gt;</a>
   </nav>
 
 
@@ -528,7 +545,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">312</span>
+                <span class="site-state-item-count">313</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -539,7 +556,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

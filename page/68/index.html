@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/08/19/code-08/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2020/08/26/code-09/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/08/19/code-08/" itemprop="url">编码技巧（八）：吃自己的狗粮</a></h1>
+                <a class="post-title-link" href="/2020/08/26/code-09/" itemprop="url">编码技巧（九）：少写一些</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-19T00:00:00+08:00">
-                2020-08-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-26T00:00:00+08:00">
+                2020-08-26
               </time>
             
 
@@ -347,120 +347,81 @@
       
         
           
-            <p>“吃自己的狗粮” 有好几个层面的含义，</p>
-<p>（1）本意是指，一个公司使用自己生产的产品。</p>
-<p>（2）对于软件公司或开发者而言，指的是，使用自己开发的软件。</p>
-<p>（3）此外，还可能是在介绍一种优秀的<strong>编程技巧</strong>。</p>
+            <p>维护过别人代码的开发者们，大概都能理解这样一种心情吧，</p>
+<p>就如同盲人摸象，又好似如鲠在喉，</p>
+<p>想要快速挪动脚步，奈何有力使不出来。</p>
 <p><br/></p>
-<p>首先，开发者亲自使用自己开发的软件，这是有好处的，</p>
-<p>不然的话，开发者就很难真正看到解决方案的<strong>蹩脚</strong>之处。</p>
+<p>这是因为代码中留存下来的信息太少了，<strong>即使</strong>我们在编写时意识到了这一点，</p>
+<p>总有一些背景信息是无法保存下来的，导致之后阅读起来不知所云。</p>
+<p>看不懂就不敢轻易动它，不然很容易引发<strong>故障</strong>。</p>
 <p><br/></p>
-<p>功能<strong>怎样实现</strong>，与已经实现的功能<strong>如何使用</strong>，这是两种不同的知识。</p>
-<p>只有真正用一下自己提供的功能，才能发现它的<strong>难用</strong>之处。</p>
+<p>在第三篇中我们曾介绍过 “写明用意” 这种编码技巧，</p>
+<p>目的就是给今后的维护者们，提供更多的线索。</p>
 <p><br/></p>
-<p>因此，“吃自己的狗粮” 能帮助开发者站在用户角度考虑问题，</p>
-<p>有利于开发者编写<strong>易学易用</strong>的软件出来。</p>
+<p>但是面对一些 “祖传” 代码，如果已经是<strong>信息残缺</strong>了，</p>
+<p>我们该怎么做呢？</p>
 <p><br/></p>
-<p>其次，为什么说 “吃自己的狗粮” 是一种编程技巧呢？</p>
-<p>这是因为要做到 “能让自己能吃到狗粮”，会改变软件的<strong>功能提供方式</strong>。</p>
+<p>本文我们就讨论这种情况下，该如何编码。</p>
+<h3 id="摆正心态">摆正心态</h3>
+<p>开发者<strong>不愿意</strong>维护别人写的代码，可能是一种 “强迫思维”，</p>
+<p>未必是因为他人写的代码不好阅读。</p>
 <p><br/></p>
-<p>我们来详细讨论一下这种编程技巧。</p>
-<h3 id="平台">平台</h3>
-<p>在我看来，软件制品有两种截然不同的分类，</p>
-<p>可以按产品的<strong>最终用户</strong>来划分，面向<strong>非</strong>开发者的，与面向<strong>开发者</strong>的。</p>
+<p>这时候首先要做的事情就是，调整心态，</p>
+<p>对自己说：“这就是一段代码，是可以阅读的，我能读懂它。”</p>
 <p><br/></p>
-<p>面向<strong>非</strong>开发者的软件系统，通常是为了解决特定业务问题的。</p>
-<p>软件在交付之后，所提供的功能一般就确定下来了，</p>
-<p>用户只会使用这个软件，并不会为这个软件提供<strong>新功能</strong>。</p>
+<p>千万<strong>不要</strong>试图重写它，改成用自己的代码重新描述。</p>
+<p>因为重写后的代码，又会带来一部分<strong>信息损失</strong>，</p>
+<p>不但很难复原老代码的所有业务逻辑，对新的维护者来说也是一场灾难。</p>
 <p><br/></p>
-<p>而面向<strong>开发者</strong>的软件系统，其出发点就有所不同了，</p>
-<p>它除了会提供一些核心的业务功能之外，还会为用户提供 “编程接口”。</p>
-<p>这种软件最终提供的功能，是该系统的<strong>编写者</strong>与<strong>用户</strong>共同实现的。</p>
+<p>此外，如果开发者曾阅读过一些知名开源项目源码的话，</p>
+<p>他的 “代码洁癖” 可能会好转很多，</p>
+<p>因为知名项目的源代码，<strong>未必</strong>就比自己同事写的代码更好。</p>
 <p><br/></p>
-<p>这种软件系统的 “编写者” 与 “用户” 几乎是<strong>平权</strong>的，</p>
-<p>大家都在同一个舞台上玩耍，一起提供业务功能。</p>
-<p>所以，这样的软件系统，也常被称为一个 “平台”。</p>
+<p>由于跟同事是在一个团队中，对项目背景有着相似的认知，</p>
+<p>同事的代码，反而<strong>更好</strong>阅读。</p>
+<h3 id="源码分析">源码分析</h3>
+<p>对代码的每一次阅读，都是要花费人力的，</p>
+<p>所以不妨把自己每次费力读懂后的心得，<strong>注释</strong>到代码中，</p>
+<p>这会给后来人省下非常多的时间。</p>
 <p><br/></p>
-<p>平台的参与者有三种人，</p>
-<ul>
-<li><p>平台的编写者，即开发平台系统的工程师，也可以称为 “平台开发者”，</p></li>
-<li><p>平台的开发者用户，即使用平台编程接口的工程师，通常特指为 “平台用户”，</p></li>
-<li><p>平台的非开发者用户，只使用平台所提供业务功能的普通用户。</p></li>
-</ul>
-<h4 id="归还主动权">（1）归还主动权</h4>
-<p>平台开发者们，比起一般系统的开发者而言，会更懂得 “吃自己的狗粮”。</p>
-<p>这可能是因为平台的用户群体中，<strong>天然的</strong>就包括他们自己吧。</p>
+<p>有些代码是无法被注释的，或者是没有修改权限，</p>
+<p>或者编译过程不可重现，</p>
+<p>那么就不妨将<strong>源码分析</strong>写入文档中，就像我们阅读开源代码一样。</p>
 <p><br/></p>
-<p>如果某个功能点，平台用户可以自己编程解决，</p>
-<p>那么为何不把<strong>主动权</strong>还给用户呢？</p>
-<p>毕竟猜测用户可能需要什么功能，还不如让用户自己来决定。</p>
+<p>对开源代码我们可以做源码分析，对同事的代码为什么不行呢？</p>
 <p><br/></p>
-<p>所以平台的开发者需要考虑，如何让用户自己开发所需的功能。</p>
-<p>愿意开发，而且容易开发。</p>
-<h4 id="尊重用户">（2）尊重用户</h4>
-<p>平台的开发者们，也更不喜欢把用户当成<strong>傻子</strong>，因为他们自己就是用户。</p>
-<p>那种提供 “傻瓜接口” 的建议，最终会坑到他们自己。</p>
+<p>能看懂别人的代码，就不用重写了，</p>
+<p>这样才能站在巨人的肩膀上，继续往前看。</p>
+<p>不然已经可用的功能，为什么要重新开发一遍，这是极大的资源浪费。</p>
+<h3 id="代码量">代码量</h3>
+<p>这样就引出了本文介绍的一个编码技巧 “少写代码”，</p>
+<p>能做到在不必要的情况下，克服自己的强迫症，不写或少写代码，</p>
+<p>反而能事半功倍，捷足先登。</p>
 <p><br/></p>
-<p>所以，“吃自己的狗粮” 会促进开发者们更加的<strong>尊重</strong>用户。</p>
-<p>毕竟提供 “精心设计的” <strong>看似</strong>不用自测的操作方式，还不如把<strong>责任</strong>交还回给用户，</p>
-<p>让他们<strong>自己</strong>为行为负责。</p>
+<p>写出来代码，有两种显而易见的危害，</p>
+<p>（1）代码越多，缺陷就越多</p>
+<p>（2）代码越多，硬编码就越多</p>
 <p><br/></p>
-<p>这是因为复杂逻辑的<strong>正确性</strong>，很难使用<strong>通用方法</strong>进行验证。</p>
-<p>让用户意识到任何新功能的发布，都是需要验证的，是一种很好的软件素养。</p>
-<h3 id="核心">核心</h3>
-<p>在第五篇文章中，我们提到了<strong>扩展性</strong>，介绍了 “适当可扩展” 的编程技巧。</p>
-<p>要做到 “适当” 需要我们摈弃 “奇技淫巧”，回归 “大智若愚”。</p>
+<p>先看第一个，程序是一种不稳定的结构，稍不注意就会出问题，</p>
+<p>代码写的越多，就越难顾得<strong>周全</strong>，</p>
+<p>所以人们才会想到系统拆分和信息隐藏，让每一段程序的职责尽可能的少一些。</p>
 <p><br/></p>
-<p>少发明新的概念，多用朴实无华的代码表达想法，</p>
-<p>少在代码中体现还未证实的假设，想到了不代表要写到代码里面去。</p>
+<p>但这也仅是权宜之计，当代码量巨大的时候，</p>
+<p>所以，我们不但要反思系统拆分的合理性，还要反思 “为什么我们有这么多的代码”。</p>
 <p><br/></p>
-<p>“吃自己的狗粮” 也需要做到 “适当”。</p>
-<p>软件系统是否要做成一个 “平台”，要视<strong>业务需要</strong>而定。</p>
-<p>当然系统开发者，可以有编写一个平台的<strong>野心</strong>，但未必需要在代码中体现出来。</p>
-<h4 id="平权">（1）平权</h4>
-<p>上文我们说 “平台的编写者” 与 “平台用户” 是 “平权” 的。</p>
-<p>其实权力并非完全等同。</p>
-<p>这里所说的 “平权” 主要体现在以下两个方面。</p>
-<p><br/></p>
-<p>（1）平台用户，比起一般系统的用户而言，可以为系统贡献新功能。</p>
-<p>（2）平台的编写者，也能以平台用户的身份提供功能。</p>
-<p><br/></p>
-<p>其中第一点，平台赋予了用户更高的权限，</p>
-<p>第二点，平台在某种情况下，可以视编写者为普通用户。</p>
-<p><br/></p>
-<p>于是这里就出现了一个需要<strong>权衡</strong>的点，</p>
-<p>狗粮有很多，哪些是自己要吃的？</p>
-<p>盲目把所有狗粮都吃了，其实反而是有问题的。</p>
-<h4 id="功能">（2）功能</h4>
-<p>要想回答上面的问题，还是得站在<strong>用户的角度</strong>考虑问题，</p>
-<p>也就是回到了 “吃自己狗粮” 的原始目的。</p>
-<p><br/></p>
-<p>值得一提的是，用户在任何时刻，需要的都是<strong>功能</strong>，</p>
-<p>而不是自己编写功能的<strong>能力</strong>。</p>
-<p>实在没有办法的话，才接受自己动手。</p>
-<p><br/></p>
-<p>因此，<strong>功能 &gt; 自己动手 &gt; 自己无法动手</strong>。</p>
-<p>所以不论我们提供多么优雅的 “编程接口”，都不如直接给用户提供他想要的功能。</p>
-<p>同时，如果实在无法提供功能，那么最好让用户可以自己动手。</p>
-<p><br/></p>
-<p>这才是 “吃狗粮” 的最佳姿势。</p>
+<p>再看第二条，所谓 “硬编码” 指的是 “写死” 的逻辑，</p>
+<p>为了把功能写出来，一些尚未确定的信息只能先硬编码了，</p>
+<p>这样会埋下隐患，<strong>尾大不掉</strong>，使代码丧失灵活性，难以应接新的需求。</p>
 <h3 id="结语">结语</h3>
-<p>“吃自己的狗粮” 是一个很宽泛的概念，可以适用于很多行业，</p>
-<p>就算聚焦到软件开发来看，也并非只适用于 “平台开发” 这一狭小的领域。</p>
+<p>本文的前几篇文章中，介绍了很多 “写” 代码的技巧，</p>
+<p>殊不知，“不写” 代码，也是需要技巧的，</p>
+<p>忍住自己体内 “能写代码” 的洪荒之力，才能更好的将力量<strong>用对</strong>地方。</p>
 <p><br/></p>
-<p>本文只是借着 “平台开发者” 为引子，介绍了 “吃狗粮” 的几个常用姿势。</p>
-<ul>
-<li><p>把自己当成用户</p></li>
-<li><p>让用户自己能决定做什么</p></li>
-<li><p>把责任还给用户，不要越俎代庖</p></li>
-<li><p>用户想要的是功能，不是自己编写功能的能力</p></li>
-</ul>
+<p>总而言之，少改别人的代码，能用的功能不要再写一遍，</p>
+<p>用更少的代码解决问题，</p>
+<p>在不明朗的情况下，先别开始写。</p>
 <p><br/></p>
-<p>总而言之，“吃自己的狗粮” 代表了一种以用户为中心的工作态度，</p>
-<p>用户到底需要什么？我们真的理解用户需求了吗？</p>
-<p><br/></p>
-<p>毕竟，只有用户赢了我们才会赢，</p>
-<p>不听用户的心声，私自做主，是编程之大忌呀。</p>
+<p>自此才能做到收放自如，游刃有余。</p>
 
           
         
@@ -499,7 +460,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/67/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/">67</a><span class="page-number current">68</span><a class="page-number" href="/page/69/">69</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/69/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/67/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/">67</a><span class="page-number current">68</span><a class="page-number" href="/page/69/">69</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/69/">&gt;</a>
   </nav>
 
 
@@ -545,7 +506,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">312</span>
+                <span class="site-state-item-count">313</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -556,7 +517,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

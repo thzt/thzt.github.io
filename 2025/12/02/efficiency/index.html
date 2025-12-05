@@ -1,0 +1,925 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="最近 AI 闹的沸沸扬扬，已经有很多公司开始裁员了。 作为软件从业人员，受影响不可谓不大。 但我们公司暂时还是安全的，因为 AI 并没有颠覆现有业务。  我相信有业务，才有软件开发需要。 正如有市场，所推出的产品才有价值，才能卖得出去。 有价值，开发者才有饭吃。  因此，AI 并不一定意味着降本，也可以用来增效。 裁员的公司，要么业务跟不上了，要么暂不需要效率那么高。  但是行业到底会如何发展，谁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="作为一线开发，我是如何使用 AI 提效的">
+<meta property="og:url" content="https://thzt.github.io/2025/12/02/efficiency/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="最近 AI 闹的沸沸扬扬，已经有很多公司开始裁员了。 作为软件从业人员，受影响不可谓不大。 但我们公司暂时还是安全的，因为 AI 并没有颠覆现有业务。  我相信有业务，才有软件开发需要。 正如有市场，所推出的产品才有价值，才能卖得出去。 有价值，开发者才有饭吃。  因此，AI 并不一定意味着降本，也可以用来增效。 裁员的公司，要么业务跟不上了，要么暂不需要效率那么高。  但是行业到底会如何发展，谁">
+<meta property="article:published_time" content="2025-12-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-05T00:13:33.242Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2025/12/02/efficiency/"/>
+
+
+
+
+
+  <title>作为一线开发，我是如何使用 AI 提效的 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2025/12/02/efficiency/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">作为一线开发，我是如何使用 AI 提效的</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-12-02T00:00:00+08:00">
+                2025-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">AI</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近 AI 闹的沸沸扬扬，已经有很多公司开始裁员了。</p>
+<p>作为软件从业人员，受影响不可谓不大。</p>
+<p>但我们公司暂时还是安全的，因为 AI 并没有颠覆<strong>现有业务</strong>。</p>
+<p><br/></p>
+<p>我相信有<strong>业务</strong>，才有软件开发需要。</p>
+<p>正如有市场，所推出的产品才有价值，才能卖得出去。</p>
+<p>有<strong>价值</strong>，开发者才有饭吃。</p>
+<p><br/></p>
+<p>因此，AI 并不一定意味着<strong>降本</strong>，也可以用来<strong>增效</strong>。</p>
+<p>裁员的公司，要么<strong>业务跟不上了</strong>，要么暂不需要效率那么高。</p>
+<p><br/></p>
+<p>但是行业到底会如何发展，谁也说不准，</p>
+<p>也不是我们普通程序员可以左右的，</p>
+<p>本文只谈一下，我最近在一线开发过程中，使用 AI 编程的<strong>心得</strong>。</p>
+<p><br/></p>
+<p>反正焦虑也没用，</p>
+<p>不如考虑下，<strong>怎么用 AI 把实际工作做得更好</strong>吧。</p>
+<h3 id="ai-的概率性">AI 的概率性</h3>
+<p>在开发过程中，我发现 AI 具有「<strong>概率性</strong>」，就像抛硬币一样。</p>
+<ul>
+<li><p>可能今天觉得还行，明天又不行了</p></li>
+<li><p>这个问题行，下个问题没准又不行了</p></li>
+<li><p>同一个需求，刚开做的时候行，做着做着不行了</p></li>
+</ul>
+<p><br/></p>
+<p>而对于具有<strong>概率特征</strong>的问题而言，最好的回答是<strong>用统计学术语</strong>。</p>
+<p><strong>分布函数</strong>是怎样的，<strong>数学期望</strong>是多少。</p>
+<p>而不是回答「<strong>到底</strong>」怎么样，根本就没有到底这回事。</p>
+<p><br/></p>
+<p>所以，对于那些问「AI 到底有没有用」「AI 到底提效了多少」之类的问题，</p>
+<p>我都拒绝回答。</p>
+<p>因为我不知道，你说的是什么场景、哪一类需求、什么时间范围内的<strong>统计值</strong>？</p>
+<h3 id="ai-编程有效场景总结">AI 编程「有效场景」总结</h3>
+<p>但即使无法给出量化数据，我们仍然可以给出一些经验总结。</p>
+<p>下文整理了我在一线开发过程中，高频使用的「<strong>AI 有效场景</strong>」。</p>
+<h4 id="知识辅助类">1. 知识辅助类</h4>
+<p>知识辅助类，指的是有了 AI 之后，我不用再上网查资料了。</p>
+<p>也不用一行行读代码了，类似这样的工作。</p>
+<p><br/></p>
+<ul>
+<li><p>【<strong>查找</strong>】找到代码位置（当文件很多时，找到要从哪里开始改）</p></li>
+<li><p>【<strong>理解</strong>】梳理现存代码中的业务逻辑、执行过程、数据传递、引用位置 等</p></li>
+<li><p>【<strong>调库</strong>】查找二三方库的 API、用法、最佳实践、代码示例 等</p></li>
+</ul>
+<p><br/></p>
+<p>理解代码库，知道从哪里开始改，改了以后会不会改错，</p>
+<p>这是一线开发最关心的问题。</p>
+<p>有些项目的的代码太多了，或者是可维护性太差了，人工甚至都不知道<strong>从哪下手</strong>。</p>
+<p><br/></p>
+<p>有了 AI 辅助之后，我可以询问 AI，让它帮我<strong>梳理</strong>现有代码逻辑，</p>
+<p>不用自己完整的阅读代码库了。甚至对于一个陌生的项目，也可以立即上手了。</p>
+<p><br/></p>
+<p>除此之外，有了 AI 之后，我很少再去网上<strong>搜索</strong>相关问题的帖子了。</p>
+<p>尤其是某些三方库的原理、API 用法、示例代码等。</p>
+<p>我可以让 AI 帮我生成示例快速学会（不是直接改代码），抄作业更快了。</p>
+<h4 id="打字辅助类">2. 打字辅助类</h4>
+<p>所谓打字辅助，指的是我知道怎么写，但是打字会很麻烦。</p>
+<p>有了 AI 之后，我可以<strong>让 AI 帮我写</strong>，最后只需要验证结果是否「跟我想的」一样即可。</p>
+<p><br/></p>
+<blockquote>
+<p>值得注意的是，这跟完全交给 AI 写，是两码事。</p>
+</blockquote>
+<blockquote>
+<p>如果我自己都不知道怎么写，然后交给 AI，那就是「<strong>撞大运编程</strong>」。</p>
+</blockquote>
+<p><br/></p>
+<ul>
+<li><p>【<strong>补全</strong>】tab 提示下一步要写的代码</p></li>
+<li><p>【<strong>重构</strong>】用可控的方式重构代码（开发知道怎么改，只是比较费事）</p></li>
+<li><p>【<strong>新建</strong>】新代码（新建一个组件、页面，并完成基本功能）</p></li>
+</ul>
+<p><br/></p>
+<p>tab 补全是最常用的，省了很多打字工作。因为写代码的时候，经常会<strong>批量修改</strong>。</p>
+<p>改了一处之后，按 tab tab tab 一路把其他地方都改了，就很省键盘。</p>
+<p>但是仍然会有很多改错的地方，只需要停下来自己写就行了。</p>
+<p><br/></p>
+<p>再就是重构了，有时候需要较大规模的<strong>移动代码</strong>，为了让代码结构适合最新的问题。</p>
+<p>这时候自己手工移动，就很麻烦，也容易遗漏。</p>
+<p>交给 AI 来处理，只需要 Code Review 就行了。</p>
+<p><br/></p>
+<p>最后就是新建代码的场景，这也是各大新闻、广告<strong>吹的最多</strong>的场景。</p>
+<p><br/></p>
+<blockquote>
+<p>什么一键生成一个「贪吃蛇」游戏之类的。</p>
+</blockquote>
+<blockquote>
+<p>不幸的是，实际上很少有项目需要「贪吃蛇」功能，所以「提效不明显」。</p>
+</blockquote>
+<p><br/></p>
+<p>我用到新建代码，通常是在需要一个<strong>新功能模块</strong>时，</p>
+<p>我会让 AI 帮我生成「<strong>样板代码</strong>」，即使功能不全，只要勉强能跑就行。</p>
+<p>接着，我会在样板代码上<strong>迭代</strong>开发。而不是期望 AI 把功能都实现完整。</p>
+<h4 id="排查辅助类">3. 排查辅助类</h4>
+<p>排查辅助类的比较少，但也挺重要的。</p>
+<p>遇到问题之后，有了一个可以实时<strong>沟通</strong>的伙伴，经常能少走很多弯路。</p>
+<p>有时候 AI 甚至还能给出新思路。</p>
+<p><br/></p>
+<ul>
+<li>【<strong>分析</strong>】问题定位（根据报错信息，分析原因。但能否自动修复，要看场景和具体问题）</li>
+</ul>
+<p><br/></p>
+<p>有了 AI 之后，分析问题的<strong>手段和能力</strong>大大增加了。</p>
+<p>而不是本来我都没办法解决，交给 AI 后就自动解决了，反正我没遇到过。</p>
+<p>相反，是我跟 AI 一起，能把本质原因<strong>更快的</strong>找到了。</p>
+<p><br/></p>
+<blockquote>
+<p>比如，之前在排查前端生产环境中的问题时，经常需要 sourcemap，</p>
+</blockquote>
+<blockquote>
+<p>否则就无法通过编译后的代码，找到对应的源码在哪里。</p>
+</blockquote>
+<blockquote>
+<p>现在，我都是直接把编译后的代码直接丢给 AI，让它帮我找。</p>
+</blockquote>
+<p><br/></p>
+<p>再举个例子，在排查问题时，经常执行逻辑会<strong>下钻</strong>到所调用的二三方库中，</p>
+<p>这时候人工阅读这些库的代码，是很麻烦的，</p>
+<p>可以让 AI 帮我们分析执行过程，迅速找到症结所在。</p>
+<h3 id="与-ai-工具的交互方式总结">与 AI 工具的「交互方式」总结</h3>
+<p>上文我列举了一些高频场景，</p>
+<p>可以看到，始终让 AI <strong>安全可控</strong>是非常重要的。</p>
+<p><br/></p>
+<p>我也尝试过一些类似 openspec 之类的 SDD 实践（规范驱动开发），</p>
+<p>也就是先把需求描述清楚后，让 AI 一把全输出。</p>
+<p>诚然，这也不失为一种办法吧，但要看情况。</p>
+<p><br/></p>
+<p>下面我来总结一下，与 AI 工具的交互方法，或者说是一些<strong>方法论</strong>。</p>
+<h4 id="拆分问题">1. 拆分问题</h4>
+<blockquote>
+<p>通过问题拆分，简化问题。</p>
+</blockquote>
+<blockquote>
+<p>让 AI 只解决问题的<strong>一部分</strong>，而不是全部。</p>
+</blockquote>
+<blockquote>
+<p>每解决一部分提交一次，<strong>不断丰富</strong>功能（不是一次搞定，而是迭代出来）</p>
+</blockquote>
+<p><br/></p>
+<p>上下文工程，我认为最妙的地方不在于总是试图「<strong>补齐</strong>」上下文，</p>
+<p>而在于你可以「<strong>构造</strong>」任意的上下文，来驱动 AI 实现<strong>特定</strong>目的。</p>
+<p><br/></p>
+<p>所以遇到问题之后，我们是可以对问题进行拆分的，</p>
+<p>比如，当你想要实现一个网页时，你可以分为<strong>好几个问题</strong>。</p>
+<ul>
+<li><p>第一个问题，你可以先让 AI 实现一个空白页（最小可用版本）</p></li>
+<li><p>第二个问题，你可以让 AI 在空白页基础上，逐步实现每个部分</p></li>
+<li><p>第三个问题，你可以再让 AI 补齐某些交互逻辑</p></li>
+</ul>
+<p><br/></p>
+<p>每一个问题对于 AI 来说都是<strong>新的</strong>，它所完成的工作，始终在你的掌控中。</p>
+<p>虽然你可以一次性把所有需求都描述清楚，</p>
+<p>但那样会打很多字，AI 也很难一次性都弄对（弄不对修起来更麻烦）。</p>
+<h4 id="目的和手段">2. 目的和手段</h4>
+<blockquote>
+<p>利用一切可以利用的手段，完成功能开发，而<strong>不是排斥</strong>它们，也<strong>不要迷信</strong>。</p>
+</blockquote>
+<blockquote>
+<p>如果无效（哪怕是对当前问题无效），果断放弃</p>
+</blockquote>
+<p><br/></p>
+<p>任何 AI 用法之类的<strong>广告</strong>，都是手段，也可能是虚假宣传。</p>
+<p>我们要做的是，<strong>知道有，然后选择性的使用</strong>。</p>
+<p><br/></p>
+<p>如果有效，那就尝试用起来。如果无效，那也别怀疑自己，果断放弃。</p>
+<p>由于 AI 具有概率性，所以不见得你的问题，刚好适用。</p>
+<p>也不见得你现在遇到的这个问题，正好适用。</p>
+<p><br/></p>
+<p>思路就是，用好一切可用的手段，并牢记自己的<strong>目的</strong>。</p>
+<h4 id="人工介入">3. 人工介入</h4>
+<blockquote>
+<p>几次无法解决问题（换了模型还是无法解决），那就果断人工介入</p>
+</blockquote>
+<blockquote>
+<p>这就需要对 AI 生成的所有代码心中有数。即使不全了解，也要能堪比「历史遗留代码」那样，能看懂、可维护</p>
+</blockquote>
+<blockquote>
+<p>不要全都交给 AI（否则成本立马就上来了，得不偿失）</p>
+</blockquote>
+<p><br/></p>
+<p>时刻保持<strong>人工可介入</strong>的工作状态，不要都甩给 AI 去做。</p>
+<p>因为实际项目跟广告里写的不一样。</p>
+<p>广告里写的那些项目，<strong>跑完分就完事了</strong>，实际项目你还要<strong>继续</strong>加功能的。</p>
+<p><br/></p>
+<p>所以，我不建议把方向盘交给 AI，除非那种以后完全不会动的功能。</p>
+<p>比如有个动画效果，实现了就行了，以后根本不会改。</p>
+<p>但如果有个复杂表单，以后很可能会再改，甚至一会就要累加功能了，那至少自己也要能<strong>看懂</strong>吧。</p>
+<p><br/></p>
+<blockquote>
+<p>所以对于 AI 能否取代程序员，我是持保留态度的。</p>
+</blockquote>
+<blockquote>
+<p>那要看解决什么<strong>问题</strong>，以及取代<strong>什么样的</strong>程序员。</p>
+</blockquote>
+<h3 id="结语">结语</h3>
+<p>本文主要阐述了，作为一线开发，我正在高频使用的 <strong>AI 有效编程</strong>的场景，</p>
+<p>以及，我个人<strong>与 AI 进行交互</strong>的思路和方法。</p>
+<p><br/></p>
+<p>很惭愧的是，我还是无法做到网传的那种「上下文大师」的水准，</p>
+<p>说什么，用人类语言就可以编程啊，只要描述清楚需求后 AI 就可以接管一切啊，</p>
+<p>我都<strong>没有达成过</strong>。</p>
+<p><br/></p>
+<blockquote>
+<p>关键是，我没有一个需要有「贪吃蛇」游戏的项目</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2025/11/20/effective/" rel="next" title="AI 的适用性和有效性">
+                <i class="fa fa-chevron-left"></i> AI 的适用性和有效性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ai-的概率性"><span class="nav-number">1.</span> <span class="nav-text">AI 的概率性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ai-编程有效场景总结"><span class="nav-number">2.</span> <span class="nav-text">AI 编程「有效场景」总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#知识辅助类"><span class="nav-number">2.1.</span> <span class="nav-text">1. 知识辅助类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#打字辅助类"><span class="nav-number">2.2.</span> <span class="nav-text">2. 打字辅助类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排查辅助类"><span class="nav-number">2.3.</span> <span class="nav-text">3. 排查辅助类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与-ai-工具的交互方式总结"><span class="nav-number">3.</span> <span class="nav-text">与 AI 工具的「交互方式」总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#拆分问题"><span class="nav-number">3.1.</span> <span class="nav-text">1. 拆分问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目的和手段"><span class="nav-number">3.2.</span> <span class="nav-text">2. 目的和手段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#人工介入"><span class="nav-number">3.3.</span> <span class="nav-text">3. 人工介入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

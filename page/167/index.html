@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/03/semantics-5/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/04/semantics-6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/03/semantics-5/" itemprop="url">语言背后的代数学（五）：<span data-katex="\Sigma"></span>代数</a></h1>
+                <a class="post-title-link" href="/2018/02/04/semantics-6/" itemprop="url">语言背后的代数学（六）：Henkin模型</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T00:00:00+08:00">
-                2018-02-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T00:00:00+08:00">
+                2018-02-04
               </time>
             
 
@@ -347,162 +347,155 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-89a11ce25d114ae6.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-5f7af604e7dc18d6.png" /></p>
 <p><br/></p>
 <h3 id="回顾">回顾</h3>
-<p>上文我们介绍了哥德尔定理，它指出了形式化方法的局限性，</p>
-<p>任何包含初等算术<span data-katex="\Pi"></span>的形式理论，都是不完全的，</p>
-<p>且自身的协调性无法在系统内部被证明。</p>
+<p>为了解释简单类型化演算<span data-katex="\lambda^\to"></span>中项，</p>
+<p>我们介绍了<span data-katex="\Sigma"></span>代数，</p>
+<p>用<span data-katex="\Sigma"></span>代数中的载体<span data-katex="A^\sigma"></span>来解释基本类型<span data-katex="\sigma"></span>，</p>
+<p>用载体上的函数集<span data-katex="A^{\sigma\to\tau}=\{f|f:A^\sigma\to A^\tau\}"></span>来解释类型为<span data-katex="\sigma\to\tau"></span>的所有函数。</p>
 <p><br/></p>
-<p>为了理解这句话，上文中我们做出了严谨的定义，</p>
-<p>仔细建立了语法和语义之间的联系。</p>
+<p>但只是做这些对应关系，还是不够的，</p>
+<p>我们还得证明，这样的解释是“足够多的”，</p>
+<p>以保证每一个合法<span data-katex="\lambda^\to"></span>项的解释，都在这个<span data-katex="\Sigma"></span>代数中。</p>
 <p><br/></p>
-<p>实际上，语法（符号）层面的推导，属于公式的证明，</p>
-<p>而语义（模型）层面的推导，属于逻辑结论的推理。</p>
-<p>证明和推理之间的关系由系统的可靠性和完全性给出。</p>
+<p>尤其是使用集合上的函数，来解释具有不动点的<span data-katex="\lambda"></span>项时，</p>
+<p><span data-katex="A^{\sigma\to\tau}"></span>的条件应当适当放宽一些，它不一定恰好是函数集<span data-katex="\{f|f:A^\sigma\to A^\tau\}"></span>。</p>
+<p>为此我们需要更抽象的，从语义角度定义函数是如何作用到它的参数上的。</p>
 <p><br/></p>
-<h3 id="简单类型化演算">1. 简单类型化<span data-katex="\lambda"></span>演算</h3>
+<h3 id="作用结构">1. 作用结构</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-b3e9594ea835a0b5.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-506b2f2655924ecf.png" /></p>
 <p><br/></p>
-<p>在《<a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型</a>》系列文章中，</p>
-<p>我们介绍了简单类型化<span data-katex="\lambda"></span>演算（simply typed lambda calculus）<span data-katex="\lambda^\to"></span>，</p>
-<p>它是一个形式系统，采用公理化的方式定义。</p>
+<p>从形式系统的角度来看，<span data-katex="\lambda"></span>项的“应用”，是推导规则的一部分，</p>
+<p>包括类型推导规则，<span data-katex="\frac{\Gamma\vdash t_1:T_1\to T_2~~~~\Gamma\vdash t_2:T_1}{\Gamma\vdash t_1~t_2:T_2}"></span>，</p>
+<p>还包括求值规则，<span data-katex="(\lambda x:T.t)~v\to [x\mapsto v]t"></span>。</p>
 <p><br/></p>
-<p>当时我们看来，系统中的<span data-katex="\lambda"></span>项，只是一堆符合推导规则的符号，</p>
-<p>我们并不知道它到底代表什么含义。</p>
+<p>项的“应用”，我们可以定义为<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong>（applicative structure）。</p>
 <p><br/></p>
-<p>例如，<span data-katex="\lambda x:T.x+1"></span>，只是一个符号串，</p>
-<p>自然数集上的后继函数<code>f(x)=x+1</code>，能不能作为它的解释，我们是不清楚的，</p>
-<p>只是猜想可能是。</p>
+<p>假设<span data-katex="\lambda x:\sigma.t"></span>是一个类型为<span data-katex="\sigma\to\tau"></span>的<span data-katex="\lambda"></span>项，</p>
+<p>我们可以把它“应用于”类型为<span data-katex="\sigma"></span>的项<span data-katex="v:\sigma"></span>，</p>
+<p>我们有，<span data-katex="(\lambda x:\sigma.t)~v=([x\mapsto v]t):\tau"></span>。</p>
 <p><br/></p>
-<p>不幸的是，后继函数并<strong>不足以</strong>作为<span data-katex="\lambda x:T.x+1"></span>的解释，</p>
-<p>因为，集合上的后继函数是没有不动点的，而<span data-katex="\lambda x:T.x+1"></span>有不动点<span data-katex="\perp"></span>。</p>
-<p>我们曾经在《<a href="http://thzt.github.io/2017/03/21/recursive-function-9/">递归函数</a>》系列文章中给出过证明。</p>
+<p>因此，<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong><span data-katex="App^{\sigma,\tau}"></span>，</p>
+<p>指的是这样的一个映射，<span data-katex="App^{\sigma,\tau}:A^{\sigma\to\tau}\to A^\sigma \to A^\tau"></span>，</p>
+<p>它将集合<span data-katex="A^{\sigma\to\tau}"></span>中的一个函数，以及集合<span data-katex="A^\sigma"></span>中的一个元素，</p>
+<p>映射成集合<span data-katex="A^\tau"></span>中的一个元素。</p>
 <p><br/></p>
-<h3 id="代数">2. <span data-katex="\Sigma"></span>代数</h3>
+<p>一个有效的作用结构，必须具有<strong>外延性条件</strong>（extensional），</p>
+<p>即，<span data-katex="\forall f,g\in A^\sigma\to\tau"></span>，</p>
+<p>如果对于任意的<span data-katex="d\in A^\sigma"></span>，都有<span data-katex="App~f~d=App~g~d"></span>，则必有<span data-katex="f=g"></span>。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-31f1e75ef2ff6bcc.png" /></p>
+<p>它指出集合<span data-katex="A^\sigma\to\tau"></span>的两个函数，如果在<span data-katex="App^{\sigma,\tau}"></span>下的作用效果相同，</p>
+<p>那么它们必须是同一个函数。</p>
 <p><br/></p>
-<p>一般有两种通用的方法，来给出简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>的语义，</p>
-<p>一种是<strong>Henkin模型</strong>，另一种是笛卡尔闭范畴。</p>
+<h3 id="项的唯一解释">2. 项的唯一解释</h3>
 <p><br/></p>
-<p>范畴论我们可以稍后再介绍，这里先介绍Henkin模型，</p>
-<p>不过在这之前，我们还得先了解一些<span data-katex="\Sigma"></span>代数相关的内容。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-c8757c95811cbd2d.png" /></p>
 <p><br/></p>
-<p><span data-katex="\Sigma"></span>代数是一种数学结构，</p>
-<p>一个<span data-katex="\Sigma"></span>代数，包含了一个或多个集合，称为<strong>载体</strong>（carrier），</p>
-<p>以及一些特征元素，和载体上的一些一阶函数，</p>
-<p><span data-katex="f:A_1\times \cdots \times A_k \rightarrow A"></span></p>
+<p>有了满足外延性条件的作用结构之后，</p>
+<p>我们就可以归纳的定义出<strong>含义函数</strong>（meaning function）<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>了，</p>
 <p><br/></p>
-<p>例如，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,\cdot\right \rangle"></span></p>
-<p>具有载体<span data-katex="N"></span>，它是自然数集，</p>
-<p>具有特征元素，<span data-katex="0,1\in N"></span>，</p>
-<p>以及函数，<span data-katex="+,*:N \times N \rightarrow N"></span>。</p>
-<p>其中，特征元素可以看成零元函数。</p>
+<p>（1）<span data-katex="\mathscr{A}[\![\varnothing\vdash c:\sigma]\!]\eta=Const(c)"></span></p>
+<p>（2）<span data-katex="\mathscr{A}[\![x:\sigma\vdash x:\sigma]\!]\eta=\eta(x)"></span></p>
+<p>（3）<span data-katex="\mathscr{A}[\![\Gamma,x:\sigma\vdash M:\tau]\!]\eta=\mathscr{A}[\![\Gamma\vdash M:\tau]\!]\eta"></span></p>
+<p>（4）<span data-katex="\mathscr{A}[\![\Gamma\vdash MN:\tau]\!]\eta=App^{\sigma,\tau}~\mathscr{A}[\![\Gamma\vdash M:\sigma\to\tau]\!]\eta~\mathscr{A}[\![\Gamma\vdash N:\sigma]\!]\eta"></span></p>
+<p>（5）<span data-katex="\mathscr{A}[\![\Gamma\vdash\lambda x:\sigma.M:\sigma\to\tau]\!]\eta="></span>，存在唯一的<span data-katex="f\in A^{\sigma\to\tau}"></span>，使得，</p>
+<p><span data-katex="\forall d\in A^\sigma"></span>，<span data-katex="App~f~d=\mathscr{A}[\![\Gamma,x:\sigma\vdash M:\tau]\!]\eta[x\mapsto d]"></span></p>
 <p><br/></p>
-<p>带有多个载体的例子是<span data-katex="\Sigma"></span>代数</p>
-<p><span data-katex="\mathscr{A}_{pcf}=\left \langle N,B,0,1,\cdots ,+,true,false,Eq?,\cdots ,\right \rangle"></span></p>
-<p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
-<p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
+<p>其中，<span data-katex="\eta"></span>是满足指派<span data-katex="\Gamma"></span>的环境，</p>
+<p><span data-katex="Const"></span>是一个映射，将项常量映射到所有<span data-katex="A^\sigma"></span>并集的元素上，</p>
+<p>使得，如果<span data-katex="c:\sigma"></span>，则<span data-katex="Const(c)\in A^\sigma"></span>。</p>
 <p><br/></p>
-<h3 id="代数数据类型的签名signature">3. 代数数据类型的签名（signature）</h3>
+<p>由于以上几个等式覆盖了所有的<span data-katex="\lambda"></span>项，因此这样定义的含义函数是完全的。</p>
+<p>并且由于它为每一个<span data-katex="\lambda"></span>项都指定了确定的语义，因此它给出的解释方式也是唯一的。</p>
+<p>它称为<strong>Henkin模型</strong>。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-3b8817284e06cf24.png" /></p>
+<p>Henkin模型是可靠的，</p>
+<p>设<span data-katex="\mathscr{A}"></span>是<span data-katex="\lambda^\to"></span>的任意Henkin模型，</p>
+<p><span data-katex="\Gamma\vdash M:\sigma"></span>是可证的，<span data-katex="\eta"></span>是一个满足指派<span data-katex="\Gamma"></span>的环境，</p>
+<p>则<span data-katex="\mathscr{A}[\![\Gamma\vdash M:\sigma]\!]\eta\in A^\sigma"></span>。</p>
 <p><br/></p>
-<p>在简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>中，类型属于形式系统中的概念，</p>
-<p><strong>它并不代表类型中值的集合。</strong></p>
-<p>这种认识可能有助于澄清人们对编程语言中类型的误解。</p>
+<p>即，如果一个类型断言是可证的，则它在语义上也成立。</p>
+<p>（关于完全性的讨论，略）</p>
 <p><br/></p>
-<p>例如，我们可以为初等算术系统<span data-katex="\Pi"></span>赋予类型，</p>
-<p>指定<span data-katex="0:nat"></span>，<span data-katex="1:nat"></span>，<span data-katex="+:nat\times nat\to nat"></span>，<span data-katex="\cdot:nat\times nat\to nat"></span>，</p>
-<p>分别为常元符号<span data-katex="0"></span>和<span data-katex="1"></span>，以及二元函数符号<span data-katex="+"></span>和<span data-katex="\cdot"></span>的类型。</p>
+<h3 id="例子">3. 例子</h3>
 <p><br/></p>
-<p>常元符号也可以看成是<strong>零元</strong>函数符号。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-edbc7c129e5a928d.png" /></p>
 <p><br/></p>
-<p>这里，我们称以下二元组<span data-katex="\left \langle S,F \right \rangle"></span>，</p>
-<p>为初等算术系统<span data-katex="\Pi"></span>的类型签名。</p>
-<p>其中，<span data-katex="S"></span>是系统中类型的集合<span data-katex="\{nat\}"></span>，</p>
-<p><span data-katex="F"></span>是函数符号的集合<span data-katex="\{0:nat,1:nat,+:nat\times nat\to nat,\cdot:nat\times nat\to nat\}"></span>。</p>
+<p>我们可以对具有单一类型<span data-katex="nat"></span>的<span data-katex="\lambda"></span>演算，定义它的Henkin模型，</p>
+<p>令<span data-katex="A^{nat}"></span>为自然数集，<span data-katex="A^{\sigma\to\tau}"></span>为所有从<span data-katex="A^\sigma"></span>到<span data-katex="A^\tau"></span>的函数集合，</p>
+<p>这称为<strong>自然数上的完全集合论函数体系</strong>，</p>
+<p>（full set-theoretic function hierarchy over the natural number）。</p>
 <p><br/></p>
-<p>一般的，一个类型签名（signature）<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>，由以下两部分构成，</p>
-<p>（1）<span data-katex="S"></span>是以类型为元素构成的集合，</p>
-<p>（2）<span data-katex="F"></span>是类型上函数符号的集合，<span data-katex="F=\left \{ f:s_1\times \cdots \times s_k\rightarrow s \right \}"></span></p>
-<p>其中，<span data-katex="s_1,\cdots ,s_k,s\in S"></span>。</p>
+<p>我们通过<span data-katex="App~f~x=f(x)"></span>，把函数<span data-katex="f\in A^{\sigma\to\tau}"></span>，作用到参数<span data-katex="x\in A^\sigma"></span>上。</p>
+<p>下面我们得出<span data-katex="\lambda x:nat\to nat.\lambda y:nat.xy"></span>的语义。</p>
 <p><br/></p>
-<p>并且，除了初等算术系统<span data-katex="\Pi"></span>，某些系统中可能还会包含变量，</p>
-<p>因此，为了完成类型化，我们还需为这些变量指定类型。</p>
+<p>由于该项是封闭项，选择什么样的环境<span data-katex="\eta"></span>都是无关紧要的。</p>
+<p>根据上文“含义函数”<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>的归纳定义，我们有，</p>
+<p><span data-katex="\mathscr{A}[\![\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy]\!]\eta="></span></p>
+<p>唯一的<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>，使得，</p>
+<p><span data-katex="\forall h\in A^{nat\to nat}"></span>，<span data-katex="App~f~h=\mathscr{A}[\![x:nat\to nat\vdash\lambda y:nat.xy]\!]\eta[x\mapsto h]"></span></p>
 <p><br/></p>
-<p>我们称有限集<span data-katex="\Gamma=\left \{ x_1:s_1,\cdots ,x_k:s_k \right \}"></span>，</p>
-<p>为变量<span data-katex="x_1,\cdots,x_k"></span>的一个<strong>指派</strong>（assignment）。</p>
-<p>其中，<span data-katex="s_1,\cdots,x_k"></span>是类型。</p>
+<p>然后我们再来看下，<span data-katex="\mathscr{A}[\![x:nat\to nat\vdash\lambda y:nat.xy]\!]\eta[x\mapsto h]="></span>，</p>
+<p>唯一的<span data-katex="g\in A^{nat\to nat}"></span>，使得，</p>
+<p><span data-katex="\forall n\in A^{nat}"></span>，<span data-katex="App~g~n=[\![x:nat\to nat,y:nat\vdash xy]\!]\eta[x\mapsto h][y\mapsto n]"></span></p>
+<p>即，唯一的<span data-katex="g\in A^{nat\to nat}"></span>，使得，<span data-katex="\forall n\in A^{nat}"></span>，<span data-katex="App~g~n=App~h~n"></span>。</p>
+<p>那么这个唯一的<span data-katex="g\in A^{nat\to nat}"></span>，实际上就是<span data-katex="h"></span>了。</p>
 <p><br/></p>
-<p>有了签名和指派之后，</p>
-<p>类型为<span data-katex="s"></span>的项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>就可以这样定义了，</p>
-<p>（1）如果<span data-katex="x:s\in \Gamma"></span>则<span data-katex="x\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
-<p>（2）如果<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>且<span data-katex="M_i\in Terms^{s_i}\left ( \Sigma,\Gamma \right )"></span>，<span data-katex="i=1,\cdots ,n"></span>，</p>
-<p>则<span data-katex="fM_1\cdots M_k\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
+<p>其中，<span data-katex="App~g~n=App~h~n"></span>是因为，</p>
+<p><span data-katex="App~g~n=[\![x:nat\to nat,y:nat\vdash xy]\!]\eta[x\mapsto h][y\mapsto n]"></span></p>
+<p><span data-katex="=[\![h:nat\to nat,n:nat\vdash hn]\!]\eta"></span></p>
+<p><span data-katex="=App~h~n"></span></p>
 <p><br/></p>
-<p>具有多种类型的项的集合可以记为<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>，</p>
-<p>其中<span data-katex="S"></span>为类型的集合。</p>
+<p>综合以上两个步骤，<span data-katex="\mathscr{A}[\![\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy]\!]\eta="></span>，</p>
+<p>唯一的<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>，使得，</p>
+<p><span data-katex="\forall h\in A^{nat\to nat}"></span>，<span data-katex="App~f~h=h"></span>。</p>
+<p>因此，<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>的语义是一个恒等函数。</p>
 <p><br/></p>
-<h3 id="项的解释">4. 项的解释</h3>
+<p>我们从语义上证明了以下等式，</p>
+<p><span data-katex="\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy=\lambda x:nat\to nat.x"></span>。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-a73d509196611e04.png" /></p>
+<h3 id="环境模型条件和组合模型条件">4. 环境模型条件和组合模型条件</h3>
 <p><br/></p>
-<p><span data-katex="\Sigma"></span>代数，与类型化的项的集合之间，存在着解释关系。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-00c5200af9d0405a.png" /></p>
 <p><br/></p>
-<p>如果满足以下两个条件，</p>
-<p>（1）对于每一个类型<span data-katex="s\in S"></span>，恰好存在<span data-katex="\Sigma"></span>代数中的一个载体<span data-katex="A^s"></span>与之对应，</p>
-<p>（2）每一个函数符号<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>，</p>
-<p>恰好存在集合上的一个函数<span data-katex="\mathscr{I}(f):A^{s_1}\times \cdots \times A^{s_k}\rightarrow A^s"></span>与之对应，</p>
-<p><span data-katex="\mathscr{I}(f)"></span>也可以写成<span data-katex="f^{\mathscr{A}}"></span>。</p>
+<p>以上定义的作用结构<span data-katex="App^{\sigma,\tau}"></span>称为满足<strong>环境模型条件</strong>（enviroment model condition），</p>
+<p>依赖了环境<span data-katex="\eta"></span>这一附加概念。</p>
+<p>它使得每一个合法的<span data-katex="\lambda"></span>项，都有模型中一个唯一确定的数学对象与之对应。</p>
 <p><br/></p>
-<p>我们就称<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>就是<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>所对应的<span data-katex="\Sigma"></span>代数。</p>
+<p>由于<span data-katex="\lambda"></span>项有<span data-katex="\lambda"></span>“抽象”和<span data-katex="\lambda"></span>“应用”双重复杂性，</p>
+<p>所以，建立一个合理的解释也比较麻烦。</p>
+<p>在《<a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型</a>》系列文章中，</p>
+<p>我们介绍过组合子逻辑，我们知道可以将任意的<span data-katex="\lambda"></span>项转换成对应的<span data-katex="CL"></span>项，反之亦然。</p>
 <p><br/></p>
-<p>为了解释含变量的类型化的项，我们需要定义<strong>环境</strong>的概念。</p>
-<p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，指的是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射，</p>
-<p><span data-katex="\eta :\mathscr{V} \rightarrow\cup _sA^s"></span></p>
+<p>因此，如果存在模型可以解释所有的<span data-katex="CL"></span>项，那么使用它也就可以解释所有<span data-katex="\lambda"></span>项了。</p>
+<p><span data-katex="CL"></span>项比<span data-katex="\lambda"></span>项更为简洁，它不包含<span data-katex="\lambda"></span>“抽象”，只包含<span data-katex="K"></span>和<span data-katex="S"></span>这两个组合子。</p>
 <p><br/></p>
-<p>对于含变量<span data-katex="x"></span>的项<span data-katex="M"></span>，<span data-katex="\eta"></span>为它指定了载体上的一个唯一确定的值。</p>
-<p>如果对于指派<span data-katex="\Gamma"></span>而言，<span data-katex="\forall x:s\in\Gamma"></span>，都有<span data-katex="\eta(x)\in A^s"></span>，</p>
-<p>我们就说环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>。</p>
+<p>类似于<span data-katex="\lambda"></span>项的“应用”，</p>
+<p>对于<span data-katex="K"></span>和<span data-katex="S"></span>的“组合”，我们同样可以定义<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong>。</p>
 <p><br/></p>
-<p>假定<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的一个环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，</p>
-<p>在这个环境中，我们就可以将任何项<span data-katex="M\in Terms\left ( \Sigma ,\Gamma \right )"></span>的含义<span data-katex="\mathscr{A}[\![M]\!]\eta"></span>定义如下，</p>
-<p>（1）<span data-katex="\mathscr{A}[\![x]\!]\eta =\eta (x)"></span></p>
-<p>（2）<span data-katex="\mathscr{A}[\![fM_1\cdots M_k]\!]\eta =f^{\mathscr{A}}(\mathscr{A}[\![M_1]\!]\eta ,\cdots ,\mathscr{A}[\![M_k]\!]\eta )"></span></p>
+<p>给定<span data-katex="\Sigma"></span>代数，对任意类型<span data-katex="\rho,\sigma,\tau"></span>，如果存在元素<span data-katex="K_{\sigma,\tau}\in A^{\sigma\to(\tau\to\sigma)}"></span>，</p>
+<p><span data-katex="S_{\rho,\sigma,\tau}\in A^{(\rho\to\sigma\to\tau)\to(\rho\to\sigma)\to\rho\tau}"></span>，</p>
+<p>满足下列对合适类型<span data-katex="x,y,z"></span>的等式条件，</p>
+<p><span data-katex="K_{\sigma,\tau}xy=x"></span>，<span data-katex="S_{\rho,\sigma,\tau}xyz=(xz)(yz)"></span>，</p>
+<p>我们就称，该作用结构满足<strong>组合模型条件</strong>（combinatory model condition）。</p>
 <p><br/></p>
-<h3 id="例子">5. 例子</h3>
+<p>由于所有<span data-katex="CL"></span>项都可以表示成<span data-katex="K"></span>和<span data-katex="S"></span>的“组合”，</p>
+<p>因此，满足组合模型条件的作用结构，可以唯一解释所有<span data-katex="CL"></span>项。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-67b722cee1bda65f.png" /></p>
-<p><br/></p>
-<p>上文我们介绍了初等算术系统<span data-katex="\Pi"></span>的类型签名<span data-katex="\left \langle S,F \right \rangle"></span>，</p>
-<p>其中，<span data-katex="S=\{nat\}"></span>，<span data-katex="F=\{0:nat,1:nat,+:nat\times nat\to nat,\cdot:nat\times nat\to nat\}"></span>。</p>
-<p><br/></p>
-<p>我们可以选择<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,\cdot\right \rangle"></span>作为它的解释，</p>
-<p>它的载体为自然数集<span data-katex="N"></span>，<span data-katex="0,1,+,\cdot"></span>分别为自然数集上的零元和一元函数。</p>
-<p><br/></p>
-<p>如果初等算术系统<span data-katex="\Pi"></span>中的项包含变量，</p>
-<p>我们就可以为<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}"></span>指定环境<span data-katex="\eta"></span>。</p>
-<p><br/></p>
-<p>例如，我们可以假定环境<span data-katex="\eta"></span>满足<span data-katex="\eta(x)=0"></span>，</p>
-<p>则在这个环境中，<span data-katex="x+1"></span>的语义就可以按下式确定了。</p>
-<p><span data-katex="[\![x+1]\!]\eta=+^\mathscr{N}([\![x]\!]\eta,[\![1]\!])\eta=+^\mathscr{N}(\eta(x),1^\mathscr{N})=+^\mathscr{N}(0^\mathscr{N},1^\mathscr{N})=1"></span></p>
+<p>可以证明，一个满足外延性条件的作用结构，</p>
+<p>如果它满足环境模型条件，当且仅当它也同样满足组合模型条件。</p>
 <p><br/></p>
 <h3 id="总结">总结</h3>
-<p>本文介绍了一种称为<span data-katex="\Sigma"></span>代数的数学结构，</p>
-<p>它可以用来解释带有类型签名的项。</p>
+<p>本文介绍了Henkin模型作用结构所满足的条件，环境模型条件和组合模型条件，</p>
+<p>它们是等价的，有了它们我们才能给出<span data-katex="\lambda"></span>项的可靠解释，</p>
+<p>即，任何合法的<span data-katex="\lambda"></span>项都有唯一解释，且在语法上可证的<span data-katex="\lambda"></span>项，在语义上也成立。</p>
 <p><br/></p>
-<p>可是，要想让这样的<span data-katex="\Sigma"></span>代数称为<span data-katex="\lambda^\to"></span>项的模型，还是不够的，</p>
-<p>我们还必须保证每一个<span data-katex="\lambda^\to"></span>项的解释，都在模型中。</p>
-<p>为此<span data-katex="\Sigma"></span>代数还要满足一些额外的条件。</p>
-<p><br/></p>
-<p>下文我们再详细讨论这些条件。</p>
+<p>下文我们开始学习范畴论，为理解笛卡尔闭范畴打好基础。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
-<p><a href="http://thzt.github.io/2017/03/21/recursive-function-9/">递归函数（九）：最小不动点定理</a></p>
+<p><a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型（三）：Combinatory logic</a></p>
 <p><a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a></p>
 
           
@@ -542,7 +535,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/166/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/168/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/166/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/168/">&gt;</a>
   </nav>
 
 
@@ -588,7 +581,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">312</span>
+                <span class="site-state-item-count">313</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -599,7 +592,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

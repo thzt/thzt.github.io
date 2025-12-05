@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/04/05/abstraction/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/04/15/exception-first/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/05/abstraction/" itemprop="url">抽象层的稳定性</a></h1>
+                <a class="post-title-link" href="/2018/04/15/exception-first/" itemprop="url">异常先行</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T00:00:00+08:00">
-                2018-04-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T00:00:00+08:00">
+                2018-04-15
               </time>
             
 
@@ -347,159 +347,142 @@
       
         
           
-            <p>当我们组织代码的时候，有一个常用的技巧，</p>
-<p>那就是将<strong>公共模块</strong>提取出来，这可以看做是对当前场景的一种抽象。</p>
-<p>它会降低冗余，减少代码量，提高开发效率。</p>
+            <p>一个软件系统，只是可以提供相应的<a href="https://zh.wikipedia.org/wiki/%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">功能</a>，还不能算是完成了预期的目标，</p>
+<p>它还要满足一些<a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能</a>方面的限制条件。</p>
 <p><br/></p>
-<p>不然的话，只是想一想散布在代码仓库中重复的业务逻辑，</p>
-<p>我们那种似乎与生俱来的<strong>洁癖</strong>，就可能本能的产生一种抵触心理。</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%81%A5%E5%A3%AE%E6%80%A7_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)" target="_blank" rel="noopener">健壮性</a>就是一个典型的例子，</p>
+<p>它反映了系统对于规范要求以外输入情况的处理能力。</p>
 <p><br/></p>
-<p>然而，公共模块也有可能带来一些问题。</p>
+<p>为了实现健壮性，我们不仅需要考虑所有可能的输入，</p>
+<p>更重要的是要考虑<strong>异常流</strong>，即系统在遭遇异常时究竟如何表现。</p>
 <p><br/></p>
-<p>假设在旧有代码中，由于功能A和功能B出现了公共逻辑，我们提取出模块X以共用。</p>
-<p>这一切看起来是美好的，</p>
-<p>但事实上，它却无意中建立起了A，B对模块X的依赖关系。</p>
+<p>这里有一个常见的误区，那就是，人们为了防止系统崩溃，</p>
+<p>不论是否出现错误，总是让它看起来是正常，</p>
+<p>这其实是一种<strong>自欺欺人</strong>的做法。</p>
 <p><br/></p>
-<p>现在我们打算开发新功能C了，它与既有功能A，B有和X相似的公共逻辑，</p>
-<p>但是又不完全一样。</p>
-<p>这时候，我们是修改X呢，还是在功能C中几乎重新再写一遍X呢？</p>
+<p>这种做法不仅不能够提高系统的健壮性，</p>
+<p>反而人为的向定位问题增添了很多障碍，提高了沟通成本，</p>
+<p>出错的场景被隐藏掉了，只有接口的提供者才知道原因。</p>
 <p><br/></p>
-<p>我们会发现，自己走到了一条死胡同，</p>
-<p>要么打破原来构建公共模块的初衷，造成诸多修改，</p>
-<p>要么违反我们编写可复用代码的原始动机。</p>
+<p>那么如何设计一个健壮的系统呢？</p>
+<p>本文提供了一些思路。</p>
 <p><br/></p>
-<p>我们到底应该怎么面对抽象层的脆弱性呢？</p>
+<h3 id="fail-fast-哲学">1. Fail Fast 哲学</h3>
+<p><a href="http://wiki.c2.com/?FailFast" target="_blank" rel="noopener">Fail Fast</a>是<a href="https://www.erlang.org/" target="_blank" rel="noopener">Erlang</a>语言的编程哲学之一，</p>
+<p>说的是一个子系统在遇到问题的时候，应该尽早崩溃。</p>
 <p><br/></p>
-<h3 id="不断腐烂的抽象层">不断腐烂的抽象层</h3>
-<p>维基百科上对<a href="https://zh.wikipedia.org/zh-hans/%E6%8A%BD%E8%B1%A1" target="_blank" rel="noopener">抽象</a>给出了下述定义，</p>
-<blockquote>
-<p>抽象，就是抽取事物一些本质的东西，剔除次要的表面东西。</p>
-</blockquote>
+<p>常见的<code>if-return</code>模式（或者<code>if-throw</code>），就是Fail Fast思想的一种应用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function failSlow() &#123;</span><br><span class="line">    if (x !&#x3D; null) &#123;</span><br><span class="line">        &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function failFast(x) &#123;</span><br><span class="line">    if (x &#x3D;&#x3D; null) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上两个JavaScript函数，表现了不同的处理问题风格。</p>
+<p>如果代码后文要用到<code>x</code>，且当前没有<code>x</code>，那不如<strong>尽早返回</strong>。</p>
 <p><br/></p>
-<p>在编写软件的过程中，对业务场景建模就是一种抽象手段，</p>
-<p>我们会在多种具体情形中观察<strong>共性</strong>，提取<strong>模式</strong>，</p>
-<p>然后在应用模式的时候，补上差异化的那些特征。</p>
+<p>还有一种写法，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function assertPrecondition(x) &#123;</span><br><span class="line">    assert(x &#x3D;&#x3D; null);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码，通过<code>assert</code>对函数的<strong>前置条件</strong>进行了<strong>断言</strong>。</p>
 <p><br/></p>
-<p>当我们静态的看待软件问题时，这是一种极好的开发方法。</p>
-<p>然而，<strong>现实中的软件都是动态变化的</strong>，在整个软件的生命周期中，变化是不可避免的。</p>
-<p>那么，这种建模方式，还是合理的吗？</p>
+<p>使用<code>if-return</code>或者<code>assert</code>，会在很大程度上避免嵌套<code>if</code>的出现，</p>
+<p>否则，我们就不得不在很多<code>if</code>条件中编写业务逻辑。</p>
 <p><br/></p>
-<p>我们将如何保证，当前所建立的抽象，仍然能良好契合未来更多的场景。</p>
-<p>显然这是无法满足的，因为我们不能断定反例不会出现。</p>
-<p>因此，抽象层一旦建立起来，随着时间的发展，它就会变得越来越<strong>脆弱</strong>，越来越不太适用。</p>
+<p>例如，以下展示了嵌套<code>if</code>的某个场景，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (x !&#x3D; null) &#123;</span><br><span class="line">    if (y &gt; 0) &#123;</span><br><span class="line">        if (z) &#123;</span><br><span class="line">            &#x2F;&#x2F; 业务逻辑</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>我想这也就是我们代码仓库中，那些不合理的抽象的根本来源吧。</p>
-<p>也明白了是谁一直在写那些烂代码了。</p>
+<p>改成<code>assert</code>后，将前置条件与正常的业务逻辑解耦了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">assert(x !&#x3D; null);</span><br><span class="line">assert(y &gt; 0);</span><br><span class="line">assert(z);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 业务逻辑</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h3 id="不完备的测试用例">不完备的测试用例</h3>
-<p>如果历史上对业务场景所做的那些假设，随着时间发展不可避免会变得不合理的话，</p>
-<p>那么，我们首先想到的是承认这一点。</p>
-<p>然后考虑在这种情况下该怎样做。</p>
+<h3 id="不要吃掉异常">2. 不要吃掉异常</h3>
+<p><strong>如果子系统无法处理某个错误，那就把它抛出来，而不是吃掉它。</strong></p>
 <p><br/></p>
-<p>如果我们总是以最新的业务场景为蓝本构建模型，</p>
-<p>总是调整代码，让它以最恰当的方式描述业务需要，</p>
-<p>或许是一个好办法。</p>
+<p>下面我们来看一个例子，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function service() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        &#x2F;&#x2F; 什么也不做</span><br><span class="line">        &#x2F;&#x2F; 或者即使是写日志</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>现在我们来看看这会带来哪些挑战。</p>
+<p>以上代码，我们在<code>application</code>函数中调用了<code>service</code>，</p>
+<p>但是<code>service</code>吃掉了异常。</p>
 <p><br/></p>
-<p>首先我们想到的是对测试的挑战，因为我们总是在修改既有代码，</p>
-<p>那么<strong>如何降低这些修改所带来的风险，保证功能的稳定性</strong>，就成了一个问题。</p>
+<p>那么一旦<code>application</code>的用户指出了错误，定位问题就是一件麻烦事，</p>
+<p><code>application</code>的编写者，要去询问每一个<code>service</code>的提供者，到底出现了什么状况。</p>
 <p><br/></p>
-<p>在《<a href="https://book.douban.com/subject/1229923/" target="_blank" rel="noopener">重构</a>》一书中，</p>
-<p>Martin Fowler也提到过，<strong>重构的前提是保证代码被自动化的测试用例所覆盖，</strong></p>
-<p>否则，我们就无法确定某次修改是否真的对软件的外在表现没有影响。</p>
+<p>我们再来看下，如果不吃掉异常会怎样，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function service() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        &#x2F;&#x2F; 写日志</span><br><span class="line">        throw e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>这在理论上是说得通的。</p>
+<p>以上代码，我们修改了<code>service</code>函数，</p>
+<p>它确实捕获了异常，但是如果这个异常<code>service</code>无法处理，那就向上抛出去。</p>
 <p><br/></p>
-<p>但是在现实中，很多场景尤其是用户界面，</p>
-<p>覆盖所有特性的自动化测试用例，可能很难实现。</p>
+<p>这样的话，甚至根本轮不到<code>application</code>的用户指出错误了，</p>
+<p><code>application</code>自己都能拿到异常的调用栈信息，</p>
+<p>并且，即使由用户指出了，也能不依赖于<code>service</code>来定位问题的原因。</p>
 <p><br/></p>
-<p>即使自动化测试跑过了，我们也不能保证它不会出现其他漏洞，</p>
-<p>测试用例可能总是<strong>不够全面</strong>，例如重构化的版本可能增加了某些限制，</p>
-<p>而有没有这些限制不违反测试用例，但是用户却需要他们。</p>
+<p>可能有人会说，如果异常都被抛出了，没有人处理怎么办？</p>
+<p>是的，吃掉异常不也是没人处理它吗？</p>
+<p>所以，抛出异常就相当于<strong>显式的</strong>向调用者提问，这个异常到底应该如何处理。</p>
 <p><br/></p>
-<h3 id="防止过拟合">防止过拟合</h3>
-<p>如果我们承认了抽象层的脆弱性，</p>
-<p>另一个考虑问题的角度可能是，<strong>我们能否放弃对冗余程度的坚持。</strong></p>
-<p>即，打破自己洁癖，为了增加可读性，适当的保持系统在一定程度上是重复的。</p>
+<p>换句话说，</p>
+<p><strong>异常被静默处理，应该是大家协商后的决定。</strong></p>
 <p><br/></p>
-<p>在仅出现两次重复的场景中，我们大可不必为此建立任何抽象，因为，</p>
-<blockquote>
-<p>过早的优化是万恶之源。</p>
-</blockquote>
-<blockquote>
-<p>——Donald Knuth</p>
-</blockquote>
+<h3 id="让异常成为一种约定">3. 让异常成为一种约定</h3>
+<p>异常和异常的处理应该是一体的，它们应该被<strong>统一的</strong>设计和使用。</p>
+<p>各个系统的边界处，应该如何反馈异常，以及这些异常应该如何被处理，应该事先被约定好。</p>
+<p>这样才会减少冗余的个性化的异常处理逻辑。</p>
 <p><br/></p>
-<p>从统计学上来讲，如果样本量太小，就更有可能出现<strong>过拟合</strong>。</p>
-<p>因此，不妨让系统运行一阵子，让业务发展一段时间，</p>
-<p>再将真正的模式提取出来。</p>
+<p>例如，使用<a href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E4%BE%A7%E9%9D%A2%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1" target="_blank" rel="noopener">面向切面编程</a>，</p>
+<p>我们可以在系统的边界上定义一个<strong>异常切面</strong>，统一处理错误。</p>
 <p><br/></p>
-<p>因此，<a href="https://book.douban.com/subject/3138847/" target="_blank" rel="noopener">大前研一</a>这样说，</p>
-<blockquote>
-<p>解决问题的能力，就是为印证假设不辞劳苦的行动力。</p>
-</blockquote>
-<p>我们可以进行假设，但是要时刻做出推翻它的准备，</p>
-<p>并且<strong>要通过不断收集证据，而不是仅仅依赖逻辑上的正确性来检验它。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    MyService.service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 装饰器是一个高阶函数</span><br><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const service &#x3D; Class.service;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            &#x2F;&#x2F; 写日志</span><br><span class="line">            throw e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class MyService &#123;</span><br><span class="line">    @exceptionAOP</span><br><span class="line">    static service() &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>而从代码层面，我们最关注的其实不是系统的重复程度，</p>
-<p>而是可维护性，或者说可读性，</p>
-<p>可读性并不仅仅与代码的精简程度有关，还与<strong>信息的封装和隐藏</strong>有关。</p>
+<p>以上代码，为了简洁起见，我们用<a href="https://tc39.github.io/proposal-decorators/" target="_blank" rel="noopener">装饰器</a>实现了一个异常切面，</p>
+<p>目前，装饰器是<a href="https://github.com/tc39/proposals" target="_blank" rel="noopener">ECMAScript TC39</a> Stage2的特性。</p>
 <p><br/></p>
-<p>只要我们对必要的细节进行合理隐藏，</p>
-<p>并不会给维护工作带来更多的成本，</p>
-<p>相反，去理解一个不合理的抽象概念，反而是困难的，成本高昂的。</p>
+<p>在这个切面中，我们统一的将异常写入了日志中，</p>
+<p>再将异常抛出。</p>
 <p><br/></p>
-<h3 id="工程指标">工程指标</h3>
-<p>从工程角度来讲，一个软件项目就是凑齐一些人，在指定的时间内，</p>
-<p>以约定的可接受的软件质量为前提，做出满足需求规格说明的软件产品的过程。</p>
+<h3 id="主动抛出异常">4. 主动抛出异常</h3>
+<p>有了异常切面，我们就不用担心未被捕获的异常了，</p>
+<p>向系统中添加一种异常，总是伴随着修改异常切面来完成。</p>
+<p>有了这种异常处理机制，我们就可以<strong>主动抛出一些业务异常</strong>了。</p>
 <p><br/></p>
-<p>那么抽象层腐烂，或者可维护性差，<strong>真的是整个项目的瓶颈吗？</strong></p>
+<p>例如，上文中提到的<code>assert</code>，如果不满足前置条件断言，</p>
+<p>我们可以主动抛异常。</p>
 <p><br/></p>
-<p>代码难以读懂，我们当然可以说服自己，平心静气的读下去，</p>
-<p>实在无法理解，在可控范围内，我们肯定也可以将相关功能重写。</p>
-<p>因此，代码不是一个软件项目的制约因素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1. 新增异常</span><br><span class="line">class PreconditionException extends Error &#123; &#125;;</span><br><span class="line"></span><br><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const &#123; service &#125; &#x3D; Class;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 2. 新增处理方式</span><br><span class="line">            if (e instanceof PreconditionException) &#123;</span><br><span class="line">                &#x2F;&#x2F; 写日志，前置条件断言失败</span><br><span class="line">                throw e;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 写日志</span><br><span class="line">            throw e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const assert &#x3D; condition &#x3D;&gt; &#123;</span><br><span class="line">    if (!condition) &#123;</span><br><span class="line">        throw new PreconditionException;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyService &#123;</span><br><span class="line">    @exceptionAOP</span><br><span class="line">    static service(x) &#123;</span><br><span class="line">        assert(x);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>而大部分软件项目的制约因素在于<strong>人日</strong>。</p>
-<p>即，项目的参与者，以及该项目的截止时间。</p>
+<p><strong>注：</strong></p>
+<p>如果认为每次都修改<code>exceptionAOP</code>是一件麻烦事，我们可以这样做，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1. 新增异常</span><br><span class="line">class PreconditionException extends Error &#123; &#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 2. 新增处理方式</span><br><span class="line">exceptionHandler.add(&#123;</span><br><span class="line">    exception: PreconditionException,</span><br><span class="line">    handler: e &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; 写日志，前置条件断言失败</span><br><span class="line">        throw e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<blockquote>
-<p>一项调查表明，大约70%的软件开发项目，超出了估算的时间，</p>
-</blockquote>
-<blockquote>
-<p>大型项目平均超出计划交付时间20%到50%，</p>
-</blockquote>
-<blockquote>
-<p>90%以上的软件项目开发费用超出预算，并且项目越大，超出项目计划的程度越高。</p>
-</blockquote>
+<p>其中<code>exceptionHandler</code>是我们编写的辅助对象，具体实现方式可以灵活选择，</p>
+<p>在切面上的用法如下，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const service &#x3D; Class.service;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            &#x2F;&#x2F; 使用exceptionHandler处理异常</span><br><span class="line">            exceptionHandler.handle(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>因此，绝大多数软件项目所面临的问题都是时间上的问题，</p>
-<p>如何快速交付项目，才是人们关心的事情。</p>
-<p>而代码是否容易维护，只是对交付时间影响很小的一个因素。</p>
+<h3 id="先考虑异常处理">5. 先考虑异常处理</h3>
+<p>在设计系统的时候，异常以及异常处理方式应该事先考虑，</p>
+<p>否则人们就会按照各自的便利来编写逻辑，</p>
+<p>这样很容易产生<strong>兼容性问题</strong>。</p>
 <p><br/></p>
-<p>其他因素当然还有，开发者对业务需求的理解程度，</p>
-<p>以及业务架构是否合理，返工的次数是否过多，人员之前的沟通是否顺畅，等等，</p>
-<p>因此也有人说，<strong>不清晰的产品路线和业务架构，决定了脏乱差的代码结构。</strong></p>
+<p>例如，有些接口可能会通过<strong>返回异常值</strong>来反馈异常，</p>
+<p>而有的接口会通过<strong>上抛异常</strong>来反馈，</p>
+<p>这样在处理方式上就很难统一处理，业务逻辑写起来会比较繁琐。</p>
+<p><br/></p>
+<p>即使已经确定为返回异常值的方式，也容易出现以下问题，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 接口1</span><br><span class="line">&#123;</span><br><span class="line">    isSuccess: boolean,</span><br><span class="line">    message: string,</span><br><span class="line">    data: object</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 接口2</span><br><span class="line">&#123;</span><br><span class="line">    succeed: boolean,</span><br><span class="line">    msg: string,</span><br><span class="line">    data: object</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上两个接口的数据类型是不同的，</p>
+<p>第一个接口用<code>isSuccess</code>来标志异常，第二个用<code>succeed</code>，</p>
+<p>那么这两个接口的调用者，就不得不<strong>分别处理</strong>它们。</p>
+<p><br/></p>
+<p>因此，这是下层服务返回了两种异常，但是期望它们用相同的方式处理，</p>
+<p>这很显然是<strong>系统设计</strong>的不恰当。</p>
+<p><br/></p>
+<p>并且，当我们意识到这个问题的时候，再进行修改就难了，</p>
+<p>抛出异常和处理异常的代码要同时修改，是一种<strong>接口变更</strong>，</p>
+<p>会涉及兼容性问题。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>用静态的角度来看待软件，那么我们可能会写出符合<strong>美感</strong>的程序来，</p>
-<p>但这种美感是脆弱的，不堪一击的，</p>
-<p>一个突如其来的新功能，就可能打破这一切。</p>
+<p>我们可能都体会过，知道错误但是不知道原因的那种<strong>憋闷感</strong>，</p>
+<p>在整个调用链路上，一环一环的排查，结果发现是某个服务吃掉了异常。</p>
 <p><br/></p>
-<p>然而，我们又不想每天将自己置身于脏乱差的代码环境之中。</p>
-<p>所以更退一步的话，我们可以放弃美感，保留代码的可读性。</p>
+<p>如果有日志可循，这还不是难事，最多是花费一些时间，</p>
+<p>但如果日志都不健全，定位一个问题简直是难于登天，甚至要手动debug才行。</p>
+<p>究其原因可能是，<strong>人们想要隐藏错误，以使得系统看似健壮。</strong></p>
 <p><br/></p>
-<p>但是，自古<strong>不谋万世者，不足谋一时，不谋全局者，不足谋一域。</strong></p>
-<p>从整个项目，从工程和业务角度来看，</p>
-<p>代码问题却已经不能成为最重要的问题了，这个问题是否有解或者究竟何解已经不重要了，</p>
-<p>因为，我们关心的问题层面变了。</p>
-<p><br/></p>
-<blockquote>
-<p>路漫漫其修远兮，吾将上下而求索。</p>
-</blockquote>
-<blockquote>
-<p>——屈原</p>
-</blockquote>
+<p>所以，哪有不出错的系统，我们只能<strong>及时修正</strong>。</p>
 
           
         
@@ -538,7 +521,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/156/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><span class="page-number current">157</span><a class="page-number" href="/page/158/">158</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/158/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/156/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><span class="page-number current">157</span><a class="page-number" href="/page/158/">158</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/158/">&gt;</a>
   </nav>
 
 
@@ -584,7 +567,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">312</span>
+                <span class="site-state-item-count">313</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -595,7 +578,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

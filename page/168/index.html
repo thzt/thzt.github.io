@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/01/30/semantics-4/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/03/semantics-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/30/semantics-4/" itemprop="url">语言背后的代数学（四）：哥德尔定理</a></h1>
+                <a class="post-title-link" href="/2018/02/03/semantics-5/" itemprop="url">语言背后的代数学（五）：<span data-katex="\Sigma"></span>代数</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-30T00:00:00+08:00">
-                2018-01-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T00:00:00+08:00">
+                2018-02-03
               </time>
             
 
@@ -347,129 +347,163 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-f62f4160dd83402d.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-89a11ce25d114ae6.png" /></p>
 <p><br/></p>
 <h3 id="回顾">回顾</h3>
-<p>上文我们介绍了一阶逻辑的语义模型，它包括结构和赋值两个部分，</p>
-<p>其中，结构给出了常元符号、函数符号以及谓词符号在论域中的解释，</p>
-<p>而赋值给出了变元符号在论域中的解释。</p>
+<p>上文我们介绍了哥德尔定理，它指出了形式化方法的局限性，</p>
+<p>任何包含初等算术<span data-katex="\Pi"></span>的形式理论，都是不完全的，</p>
+<p>且自身的协调性无法在系统内部被证明。</p>
 <p><br/></p>
-<p>我们通过这种方式，建立了形式符号和论域中数学对象之间的关联，</p>
-<p>本文将继续研究符号和其语义之间的关系。</p>
+<p>为了理解这句话，上文中我们做出了严谨的定义，</p>
+<p>仔细建立了语法和语义之间的联系。</p>
 <p><br/></p>
-<h3 id="语义方面模型">1. 语义方面（模型）</h3>
+<p>实际上，语法（符号）层面的推导，属于公式的证明，</p>
+<p>而语义（模型）层面的推导，属于逻辑结论的推理。</p>
+<p>证明和推理之间的关系由系统的可靠性和完全性给出。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-e261ec02b84764ca.png" /></p>
+<h3 id="简单类型化演算">1. 简单类型化<span data-katex="\lambda"></span>演算</h3>
 <p><br/></p>
-<h4 id="公式的可满足性">1.1 公式的可满足性</h4>
-<p>我们知道在公理化系统中，逻辑公式<span data-katex="A"></span>可以用来表示推导规则的前提和结论，</p>
-<p>它在给定模型<span data-katex="(M,\sigma)"></span>中的语义<span data-katex="A_{M[\sigma]}"></span>是一个真假值。</p>
-<p>这是合情合理的。</p>
-<p>因为推导本来就应该是从真命题推导出另一个真命题的过程。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-b3e9594ea835a0b5.png" /></p>
 <p><br/></p>
-<p>由于模型是可以人为选择的，所以，给定一个逻辑公式<span data-katex="A"></span>，</p>
-<p>其语义的真假性，有可能会受到所选模型的影响。</p>
+<p>在《<a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型</a>》系列文章中，</p>
+<p>我们介绍了简单类型化<span data-katex="\lambda"></span>演算（simply typed lambda calculus）<span data-katex="\lambda^\to"></span>，</p>
+<p>它是一个形式系统，采用公理化的方式定义。</p>
 <p><br/></p>
-<p>如果存在模型<span data-katex="(M, \sigma)"></span>，使得<span data-katex="A_{M[\sigma ]}=T"></span>成立，</p>
-<p>我们就称公式<span data-katex="A"></span>关于模型<span data-katex="(M, \sigma )"></span>是<strong>可满足的</strong>，</p>
-<p>记为<span data-katex="M\models _\sigma A"></span>。</p>
+<p>当时我们看来，系统中的<span data-katex="\lambda"></span>项，只是一堆符合推导规则的符号，</p>
+<p>我们并不知道它到底代表什么含义。</p>
 <p><br/></p>
-<p>此外，如果有公式集<span data-katex="\Gamma"></span>，</p>
-<p>其中的每一个公式关于模型<span data-katex="(M, \sigma)"></span>都是可满足的，</p>
-<p>我们就称，公式集<span data-katex="\Gamma"></span>关于模型<span data-katex="(M, \sigma )"></span>是可满足的，</p>
-<p>记为<span data-katex="M\models _\sigma\Gamma"></span>。</p>
-<h4 id="重言式">1.2 重言式</h4>
-<p>如果公式<span data-katex="A"></span>，对于任意模型<span data-katex="(M, \sigma)"></span>都是可满足的，</p>
-<p>即，对任意结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，<span data-katex="M\models _\sigma A"></span>都成立，</p>
-<p>我们就称<span data-katex="A"></span>是永真公式，也称为<strong>重言式</strong>，记为<span data-katex="\models A"></span>。</p>
+<p>例如，<span data-katex="\lambda x:T.x+1"></span>，只是一个符号串，</p>
+<p>自然数集上的后继函数<code>f(x)=x+1</code>，能不能作为它的解释，我们是不清楚的，</p>
+<p>只是猜想可能是。</p>
 <p><br/></p>
-<p>重言式，是与模型无关的公式，</p>
-<p>它们在任何模型下都为真。</p>
+<p>不幸的是，后继函数并<strong>不足以</strong>作为<span data-katex="\lambda x:T.x+1"></span>的解释，</p>
+<p>因为，集合上的后继函数是没有不动点的，而<span data-katex="\lambda x:T.x+1"></span>有不动点<span data-katex="\perp"></span>。</p>
+<p>我们曾经在《<a href="http://thzt.github.io/2017/03/21/recursive-function-9/">递归函数</a>》系列文章中给出过证明。</p>
 <p><br/></p>
-<p>例：<span data-katex="A\vee \neg A"></span>，<span data-katex="\forall x(x\doteq x)"></span>都是重言式。</p>
-<h4 id="逻辑推理">1.3 逻辑推理</h4>
+<h3 id="代数">2. <span data-katex="\Sigma"></span>代数</h3>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-c7afbb49c56cb45a.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-31f1e75ef2ff6bcc.png" /></p>
 <p><br/></p>
-<p>有了可满足性，我们就可以进行逻辑推理了。</p>
+<p>一般有两种通用的方法，来给出简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>的语义，</p>
+<p>一种是<strong>Henkin模型</strong>，另一种是笛卡尔闭范畴。</p>
 <p><br/></p>
-<p>设<span data-katex="A"></span>为公式，<span data-katex="\Gamma"></span>为公式集，<span data-katex="M"></span>为任意结构，<span data-katex="\sigma"></span>为任意赋值，并且，</p>
-<p>如果<span data-katex="M\models _\sigma \Gamma"></span>成立，就有<span data-katex="M\models _\sigma A"></span>成立，</p>
-<p>我们就称，<span data-katex="A"></span>是公式集<span data-katex="\Gamma"></span>的<strong>逻辑结论</strong>或语义结论，</p>
-<p>记为<span data-katex="\Gamma \models A"></span>，也称结论<span data-katex="\Gamma \models A"></span><strong>有效</strong>。</p>
+<p>范畴论我们可以稍后再介绍，这里先介绍Henkin模型，</p>
+<p>不过在这之前，我们还得先了解一些<span data-katex="\Sigma"></span>代数相关的内容。</p>
 <p><br/></p>
-<p>因此，<span data-katex="\Gamma \models A"></span>表示了一种语义关系，</p>
-<p>它指出，对任意<span data-katex="M"></span>和任意<span data-katex="\sigma"></span>，如果<span data-katex="\Gamma"></span>为真，那么<span data-katex="A"></span>也为真。</p>
+<p><span data-katex="\Sigma"></span>代数是一种数学结构，</p>
+<p>一个<span data-katex="\Sigma"></span>代数，包含了一个或多个集合，称为<strong>载体</strong>（carrier），</p>
+<p>以及一些特征元素，和载体上的一些一阶函数，</p>
+<p><span data-katex="f:A_1\times \cdots \times A_k \rightarrow A"></span></p>
 <p><br/></p>
-<h3 id="语法方面符号">2. 语法方面（符号）</h3>
+<p>例如，<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,\cdot\right \rangle"></span></p>
+<p>具有载体<span data-katex="N"></span>，它是自然数集，</p>
+<p>具有特征元素，<span data-katex="0,1\in N"></span>，</p>
+<p>以及函数，<span data-katex="+,*:N \times N \rightarrow N"></span>。</p>
+<p>其中，特征元素可以看成零元函数。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-1d077dc211a8eae4.png" /></p>
+<p>带有多个载体的例子是<span data-katex="\Sigma"></span>代数</p>
+<p><span data-katex="\mathscr{A}_{pcf}=\left \langle N,B,0,1,\cdots ,+,true,false,Eq?,\cdots ,\right \rangle"></span></p>
+<p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
+<p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
 <p><br/></p>
-<h4 id="序贯">2.1 序贯</h4>
-<p>在《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型</a>》系列文章中，</p>
-<p>我们介绍过序贯的概念。</p>
+<h3 id="代数数据类型的签名signature">3. 代数数据类型的签名（signature）</h3>
 <p><br/></p>
-<p>我们知道，在公理系统中，序贯可以用来表示前提和结论之间的符号联系。</p>
-<p>序贯<span data-katex="\Gamma\vdash\Delta"></span>，表示从公式集<span data-katex="\Gamma"></span>出发，根据推导规则，</p>
-<p>可以证明出<span data-katex="\Delta"></span>中至少有一条公式成立。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-3b8817284e06cf24.png" /></p>
 <p><br/></p>
-<p>习惯上，序贯<span data-katex="\Gamma\vdash\Delta"></span>成立，也称<span data-katex="\Gamma\vdash\Delta"></span><strong>可证</strong>。</p>
+<p>在简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>中，类型属于形式系统中的概念，</p>
+<p><strong>它并不代表类型中值的集合。</strong></p>
+<p>这种认识可能有助于澄清人们对编程语言中类型的误解。</p>
 <p><br/></p>
-<p>值得注意的是，序贯谈论的都是语法层面（符号层面）上的，</p>
-<p>和这些符号的所选择的具体语义无关。</p>
-<h4 id="协调性一致性">2.2 协调性（一致性）</h4>
+<p>例如，我们可以为初等算术系统<span data-katex="\Pi"></span>赋予类型，</p>
+<p>指定<span data-katex="0:nat"></span>，<span data-katex="1:nat"></span>，<span data-katex="+:nat\times nat\to nat"></span>，<span data-katex="\cdot:nat\times nat\to nat"></span>，</p>
+<p>分别为常元符号<span data-katex="0"></span>和<span data-katex="1"></span>，以及二元函数符号<span data-katex="+"></span>和<span data-katex="\cdot"></span>的类型。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-73ceac7a2a671bb1.png" /></p>
+<p>常元符号也可以看成是<strong>零元</strong>函数符号。</p>
 <p><br/></p>
-<p>设<span data-katex="\Gamma"></span>为公式集，</p>
-<p>如果不存在一个公式<span data-katex="A"></span>使得序贯<span data-katex="\Gamma \vdash A"></span>与<span data-katex="\Gamma \vdash \neg A"></span>均可证，</p>
-<p>我们就称，公式集<span data-katex="\Gamma"></span>是<strong>协调的</strong>，也称一致的。</p>
+<p>这里，我们称以下二元组<span data-katex="\left \langle S,F \right \rangle"></span>，</p>
+<p>为初等算术系统<span data-katex="\Pi"></span>的类型签名。</p>
+<p>其中，<span data-katex="S"></span>是系统中类型的集合<span data-katex="\{nat\}"></span>，</p>
+<p><span data-katex="F"></span>是函数符号的集合<span data-katex="\{0:nat,1:nat,+:nat\times nat\to nat,\cdot:nat\times nat\to nat\}"></span>。</p>
 <p><br/></p>
-<p>设<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的公式集，该集合可以是有限集或可数集，</p>
-<p>如果<span data-katex="\Gamma"></span>协调，则称<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的<strong>形式理论</strong>。</p>
+<p>一般的，一个类型签名（signature）<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>，由以下两部分构成，</p>
+<p>（1）<span data-katex="S"></span>是以类型为元素构成的集合，</p>
+<p>（2）<span data-katex="F"></span>是类型上函数符号的集合，<span data-katex="F=\left \{ f:s_1\times \cdots \times s_k\rightarrow s \right \}"></span></p>
+<p>其中，<span data-katex="s_1,\cdots ,s_k,s\in S"></span>。</p>
 <p><br/></p>
-<h3 id="语法符号和语义模型">3. 语法（符号）和语义（模型）</h3>
+<p>并且，除了初等算术系统<span data-katex="\Pi"></span>，某些系统中可能还会包含变量，</p>
+<p>因此，为了完成类型化，我们还需为这些变量指定类型。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-17d1a64e7702d9eb.png" /></p>
+<p>我们称有限集<span data-katex="\Gamma=\left \{ x_1:s_1,\cdots ,x_k:s_k \right \}"></span>，</p>
+<p>为变量<span data-katex="x_1,\cdots,x_k"></span>的一个<strong>指派</strong>（assignment）。</p>
+<p>其中，<span data-katex="s_1,\cdots,x_k"></span>是类型。</p>
 <p><br/></p>
-<h4 id="可靠性和完全性">3.1 可靠性和完全性</h4>
-<p>把公理系统的语法和语义联合起来，</p>
-<p>我们还可以定义出以下这些系统性质。</p>
+<p>有了签名和指派之后，</p>
+<p>类型为<span data-katex="s"></span>的项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>就可以这样定义了，</p>
+<p>（1）如果<span data-katex="x:s\in \Gamma"></span>则<span data-katex="x\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
+<p>（2）如果<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>且<span data-katex="M_i\in Terms^{s_i}\left ( \Sigma,\Gamma \right )"></span>，<span data-katex="i=1,\cdots ,n"></span>，</p>
+<p>则<span data-katex="fM_1\cdots M_k\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
 <p><br/></p>
-<p>如果序贯<span data-katex="\Gamma \vdash \Lambda"></span>可证，那么<span data-katex="\Gamma \models \Lambda"></span>成立，就说系统是<strong>可靠的</strong>。</p>
-<p>如果<span data-katex="\Gamma \models A"></span>成立，那么<span data-katex="\Gamma \vdash A"></span>可证，就说系统是<strong>完全的</strong>。</p>
-<h4 id="不完全性与协调性不可证">3.2 不完全性与协调性不可证</h4>
+<p>具有多种类型的项的集合可以记为<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>，</p>
+<p>其中<span data-katex="S"></span>为类型的集合。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-12d70538c2c4cada.png" /></p>
+<h3 id="项的解释">4. 项的解释</h3>
 <p><br/></p>
-<p>是不是任意一个公理系统都是可靠且完全的呢？</p>
-<p>可惜并不是如此。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-a73d509196611e04.png" /></p>
 <p><br/></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%93%E5%B0%94%E7%89%B9%C2%B7%E5%93%A5%E5%BE%B7%E5%B0%94" target="_blank" rel="noopener">哥德尔</a>在1931年给出了两个定理，终结了人们的幻想，</p>
-<p>分别称为哥德尔不完全性定理，和哥德尔协调性定理。他指出，</p>
+<p><span data-katex="\Sigma"></span>代数，与类型化的项的集合之间，存在着解释关系。</p>
 <p><br/></p>
-<p><strong>不完全性</strong></p>
-<p>如果<span data-katex="\Gamma"></span>是一个有穷，并包含初等算术<span data-katex="\Pi"></span>的形式理论，</p>
-<p>那么<span data-katex="\Gamma"></span>是一个不完全的形式理论。</p>
+<p>如果满足以下两个条件，</p>
+<p>（1）对于每一个类型<span data-katex="s\in S"></span>，恰好存在<span data-katex="\Sigma"></span>代数中的一个载体<span data-katex="A^s"></span>与之对应，</p>
+<p>（2）每一个函数符号<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>，</p>
+<p>恰好存在集合上的一个函数<span data-katex="\mathscr{I}(f):A^{s_1}\times \cdots \times A^{s_k}\rightarrow A^s"></span>与之对应，</p>
+<p><span data-katex="\mathscr{I}(f)"></span>也可以写成<span data-katex="f^{\mathscr{A}}"></span>。</p>
 <p><br/></p>
-<p><strong>协调性</strong></p>
-<p>如果形式理论<span data-katex="\Gamma"></span>包含初等算术<span data-katex="\Pi"></span>，</p>
-<p>那么<span data-katex="\Pi"></span>的协调性不能在<span data-katex="\Gamma"></span>中被证明。</p>
+<p>我们就称<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>就是<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>所对应的<span data-katex="\Sigma"></span>代数。</p>
 <p><br/></p>
-<blockquote>
-<p>所以，在软件开发过程中，检查一个软件系统是否符合设计要求，所使用的方法就是对它进行测试，在这个软件系统之外进行证明。</p>
-</blockquote>
+<p>为了解释含变量的类型化的项，我们需要定义<strong>环境</strong>的概念。</p>
+<p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，指的是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射，</p>
+<p><span data-katex="\eta :\mathscr{V} \rightarrow\cup _sA^s"></span></p>
+<p><br/></p>
+<p>对于含变量<span data-katex="x"></span>的项<span data-katex="M"></span>，<span data-katex="\eta"></span>为它指定了载体上的一个唯一确定的值。</p>
+<p>如果对于指派<span data-katex="\Gamma"></span>而言，<span data-katex="\forall x:s\in\Gamma"></span>，都有<span data-katex="\eta(x)\in A^s"></span>，</p>
+<p>我们就说环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>。</p>
+<p><br/></p>
+<p>假定<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的一个环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，</p>
+<p>在这个环境中，我们就可以将任何项<span data-katex="M\in Terms\left ( \Sigma ,\Gamma \right )"></span>的含义<span data-katex="\mathscr{A}[\![M]\!]\eta"></span>定义如下，</p>
+<p>（1）<span data-katex="\mathscr{A}[\![x]\!]\eta =\eta (x)"></span></p>
+<p>（2）<span data-katex="\mathscr{A}[\![fM_1\cdots M_k]\!]\eta =f^{\mathscr{A}}(\mathscr{A}[\![M_1]\!]\eta ,\cdots ,\mathscr{A}[\![M_k]\!]\eta )"></span></p>
+<p><br/></p>
+<h3 id="例子">5. 例子</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-67b722cee1bda65f.png" /></p>
+<p><br/></p>
+<p>上文我们介绍了初等算术系统<span data-katex="\Pi"></span>的类型签名<span data-katex="\left \langle S,F \right \rangle"></span>，</p>
+<p>其中，<span data-katex="S=\{nat\}"></span>，<span data-katex="F=\{0:nat,1:nat,+:nat\times nat\to nat,\cdot:nat\times nat\to nat\}"></span>。</p>
+<p><br/></p>
+<p>我们可以选择<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}=\left \langle N,0,1,+,\cdot\right \rangle"></span>作为它的解释，</p>
+<p>它的载体为自然数集<span data-katex="N"></span>，<span data-katex="0,1,+,\cdot"></span>分别为自然数集上的零元和一元函数。</p>
+<p><br/></p>
+<p>如果初等算术系统<span data-katex="\Pi"></span>中的项包含变量，</p>
+<p>我们就可以为<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{N}"></span>指定环境<span data-katex="\eta"></span>。</p>
+<p><br/></p>
+<p>例如，我们可以假定环境<span data-katex="\eta"></span>满足<span data-katex="\eta(x)=0"></span>，</p>
+<p>则在这个环境中，<span data-katex="x+1"></span>的语义就可以按下式确定了。</p>
+<p><span data-katex="[\![x+1]\!]\eta=+^\mathscr{N}([\![x]\!]\eta,[\![1]\!])\eta=+^\mathscr{N}(\eta(x),1^\mathscr{N})=+^\mathscr{N}(0^\mathscr{N},1^\mathscr{N})=1"></span></p>
 <p><br/></p>
 <h3 id="总结">总结</h3>
-<p>文本介绍语法（符号证明）和语义（模型）之间的关系，</p>
-<p>让我们认识到了形式化方法的局限性。</p>
-<p>一个足够有用的系统，总会出现不可证的事实，</p>
-<p>并且，在该系统内部，我们甚至都无法证明它是否含有矛盾。</p>
+<p>本文介绍了一种称为<span data-katex="\Sigma"></span>代数的数学结构，</p>
+<p>它可以用来解释带有类型签名的项。</p>
+<p><br/></p>
+<p>可是，要想让这样的<span data-katex="\Sigma"></span>代数称为<span data-katex="\lambda^\to"></span>项的模型，还是不够的，</p>
+<p>我们还必须保证每一个<span data-katex="\lambda^\to"></span>项的解释，都在模型中。</p>
+<p>为此<span data-katex="\Sigma"></span>代数还要满足一些额外的条件。</p>
+<p><br/></p>
+<p>下文我们再详细讨论这些条件。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional log</a></p>
-<p><a href="https://book.douban.com/subject/2364517/" target="_blank" rel="noopener">数理逻辑</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E4%B8%8D%E5%AE%8C%E5%A4%87%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">哥德尔不完备定理</a></p>
+<p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
+<p><a href="http://thzt.github.io/2017/03/21/recursive-function-9/">递归函数（九）：最小不动点定理</a></p>
+<p><a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a></p>
 
           
         
@@ -508,7 +542,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/167/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/167/">167</a><span class="page-number current">168</span><a class="page-number" href="/page/169/">169</a><span class="space">&hellip;</span><a class="page-number" href="/page/312/">312</a><a class="extend next" rel="next" href="/page/169/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/167/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/167/">167</a><span class="page-number current">168</span><a class="page-number" href="/page/169/">169</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/169/">&gt;</a>
   </nav>
 
 
@@ -554,7 +588,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">312</span>
+                <span class="site-state-item-count">313</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -565,7 +599,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
