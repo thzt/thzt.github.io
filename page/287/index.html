@@ -360,8 +360,7 @@
 <p>不是的。</p>
 <p>S表达式是<strong>二叉树的一种线性编码</strong>。</p>
 <p><br/></p>
-<h3 id="二叉树">二叉树</h3>
-<p>我们知道二叉树是很重要的数据结构，</p>
+<h3 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h3><p>我们知道二叉树是很重要的数据结构，</p>
 <p>可以用来存储结构化的数据。</p>
 <p>例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">        *</span><br><span class="line">     &#x2F;     \</span><br><span class="line">   *         *</span><br><span class="line"> &#x2F;   \     &#x2F;   \</span><br><span class="line">a     b   c     d</span><br></pre></td></tr></table></figure>
@@ -383,8 +382,7 @@
 <p>所以，S表达式或者是原子，</p>
 <p>或者是递归的由其他S表达式构成的点对。</p>
 <p><br/></p>
-<h3 id="s表达式的化简">S表达式的化简</h3>
-<p>实际使用时，</p>
+<h3 id="S表达式的化简"><a href="#S表达式的化简" class="headerlink" title="S表达式的化简"></a>S表达式的化简</h3><p>实际使用时，</p>
 <p>书写S表达式，还要同时写很多点号“<code>.</code>”，</p>
 <p>这也是一件麻烦的事情。</p>
 <p><br/></p>
@@ -416,8 +414,7 @@
 <p>（3）<code>nil</code>表示逻辑值“假”</p>
 <p><code>nil</code>成为了Lisp语言中唯一的<strong>既是原子又是列表</strong>的表达式。</p>
 <p><br/></p>
-<h3 id="常用函数paircons和car">常用函数pair?，cons和car</h3>
-<p>Scheme语言是Lisp的一种方言，</p>
+<h3 id="常用函数pair-，cons和car"><a href="#常用函数pair-，cons和car" class="headerlink" title="常用函数pair?，cons和car"></a>常用函数pair?，cons和car</h3><p>Scheme语言是Lisp的一种方言，</p>
 <p>它没有<code>nil</code>的概念，只有空表<code>()</code>。</p>
 <p><br/></p>
 <p>在介绍常用函数之前，</p>
@@ -431,8 +428,8 @@
 <p>在<code>display</code>调用之前，会先求值<code>(* 2 3) =&gt; 6</code>，结果是显示<code>6</code>。</p>
 <p><br/></p>
 <p>假如，我们一定要把<code>(* 2 3)</code>看成是列表呢？</p>
-<p>就需要引用它。<code>(display '(* 2 3))</code></p>
-<p>此时，<code>'(* 2 3)</code>求值为列表<code>(* 2 3)</code>。</p>
+<p>就需要引用它。<code>(display &#39;(* 2 3))</code></p>
+<p>此时，<code>&#39;(* 2 3)</code>求值为列表<code>(* 2 3)</code>。</p>
 <p>结果是显示<code>(* 2 3)</code>。</p>
 <p><br/></p>
 <p>我们来看<code>pair?</code>函数，</p>
@@ -444,7 +441,7 @@
 <p>（1）空表不是点对。</p>
 <p>因为它是原子<code>nil</code>，虽然Scheme语言中没有内置原子<code>nil</code>。</p>
 <p>可以通过另外一个函数看出来，<code>atom?</code>用来判断参数是否原子。</p>
-<p><code>(atom? '()) =&gt; #t</code></p>
+<p><code>(atom? &#39;()) =&gt; #t</code></p>
 <p><br/></p>
 <p>（2）<strong>列表</strong>是点对的简写。</p>
 <p><code>(a b c) &lt;=&gt; (a . (b . (c . ())))</code></p>
@@ -460,8 +457,7 @@
 <p><code>car</code>获取点对的左元素，<code>cdr</code>获取右元素。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(car &#39;(a . b)) &#x3D;&gt; a</span><br><span class="line">(cdr &#39;(a . b)) &#x3D;&gt; b</span><br><span class="line">(car &#39;(a b)) &lt;&#x3D;&gt; (car &#39;(a . (b))) &#x3D;&gt; a</span><br><span class="line">(cdr &#39;(a b)) &lt;&#x3D;&gt; (car &#39;(a . (b))) &#x3D;&gt; (b)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h3 id="结语">结语</h3>
-<p>刚学Lisp语言的时候，</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>刚学Lisp语言的时候，</p>
 <p>查看了很多书，对S表达式的解释，总是不够清楚。</p>
 <p><br/></p>
 <p>无意间找到了<strong>马希文</strong>老师的《LISP语言》，</p>

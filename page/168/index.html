@@ -347,10 +347,9 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-5f7af604e7dc18d6.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-5f7af604e7dc18d6.png" alt=""></p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>为了解释简单类型化演算<span data-katex="\lambda^\to"></span>中项，</p>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>为了解释简单类型化演算<span data-katex="\lambda^\to"></span>中项，</p>
 <p>我们介绍了<span data-katex="\Sigma"></span>代数，</p>
 <p>用<span data-katex="\Sigma"></span>代数中的载体<span data-katex="A^\sigma"></span>来解释基本类型<span data-katex="\sigma"></span>，</p>
 <p>用载体上的函数集<span data-katex="A^{\sigma\to\tau}=\{f|f:A^\sigma\to A^\tau\}"></span>来解释类型为<span data-katex="\sigma\to\tau"></span>的所有函数。</p>
@@ -363,9 +362,8 @@
 <p><span data-katex="A^{\sigma\to\tau}"></span>的条件应当适当放宽一些，它不一定恰好是函数集<span data-katex="\{f|f:A^\sigma\to A^\tau\}"></span>。</p>
 <p>为此我们需要更抽象的，从语义角度定义函数是如何作用到它的参数上的。</p>
 <p><br/></p>
-<h3 id="作用结构">1. 作用结构</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-506b2f2655924ecf.png" /></p>
+<h3 id="1-作用结构"><a href="#1-作用结构" class="headerlink" title="1. 作用结构"></a>1. 作用结构</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-506b2f2655924ecf.png" alt=""></p>
 <p><br/></p>
 <p>从形式系统的角度来看，<span data-katex="\lambda"></span>项的“应用”，是推导规则的一部分，</p>
 <p>包括类型推导规则，<span data-katex="\frac{\Gamma\vdash t_1:T_1\to T_2~~~~\Gamma\vdash t_2:T_1}{\Gamma\vdash t_1~t_2:T_2}"></span>，</p>
@@ -389,9 +387,8 @@
 <p>它指出集合<span data-katex="A^\sigma\to\tau"></span>的两个函数，如果在<span data-katex="App^{\sigma,\tau}"></span>下的作用效果相同，</p>
 <p>那么它们必须是同一个函数。</p>
 <p><br/></p>
-<h3 id="项的唯一解释">2. 项的唯一解释</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-c8757c95811cbd2d.png" /></p>
+<h3 id="2-项的唯一解释"><a href="#2-项的唯一解释" class="headerlink" title="2. 项的唯一解释"></a>2. 项的唯一解释</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-c8757c95811cbd2d.png" alt=""></p>
 <p><br/></p>
 <p>有了满足外延性条件的作用结构之后，</p>
 <p>我们就可以归纳的定义出<strong>含义函数</strong>（meaning function）<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>了，</p>
@@ -419,9 +416,8 @@
 <p>即，如果一个类型断言是可证的，则它在语义上也成立。</p>
 <p>（关于完全性的讨论，略）</p>
 <p><br/></p>
-<h3 id="例子">3. 例子</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-edbc7c129e5a928d.png" /></p>
+<h3 id="3-例子"><a href="#3-例子" class="headerlink" title="3. 例子"></a>3. 例子</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-edbc7c129e5a928d.png" alt=""></p>
 <p><br/></p>
 <p>我们可以对具有单一类型<span data-katex="nat"></span>的<span data-katex="\lambda"></span>演算，定义它的Henkin模型，</p>
 <p>令<span data-katex="A^{nat}"></span>为自然数集，<span data-katex="A^{\sigma\to\tau}"></span>为所有从<span data-katex="A^\sigma"></span>到<span data-katex="A^\tau"></span>的函数集合，</p>
@@ -456,9 +452,8 @@
 <p>我们从语义上证明了以下等式，</p>
 <p><span data-katex="\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy=\lambda x:nat\to nat.x"></span>。</p>
 <p><br/></p>
-<h3 id="环境模型条件和组合模型条件">4. 环境模型条件和组合模型条件</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-00c5200af9d0405a.png" /></p>
+<h3 id="4-环境模型条件和组合模型条件"><a href="#4-环境模型条件和组合模型条件" class="headerlink" title="4. 环境模型条件和组合模型条件"></a>4. 环境模型条件和组合模型条件</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-00c5200af9d0405a.png" alt=""></p>
 <p><br/></p>
 <p>以上定义的作用结构<span data-katex="App^{\sigma,\tau}"></span>称为满足<strong>环境模型条件</strong>（enviroment model condition），</p>
 <p>依赖了环境<span data-katex="\eta"></span>这一附加概念。</p>
@@ -487,15 +482,13 @@
 <p>可以证明，一个满足外延性条件的作用结构，</p>
 <p>如果它满足环境模型条件，当且仅当它也同样满足组合模型条件。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了Henkin模型作用结构所满足的条件，环境模型条件和组合模型条件，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了Henkin模型作用结构所满足的条件，环境模型条件和组合模型条件，</p>
 <p>它们是等价的，有了它们我们才能给出<span data-katex="\lambda"></span>项的可靠解释，</p>
 <p>即，任何合法的<span data-katex="\lambda"></span>项都有唯一解释，且在语法上可证的<span data-katex="\lambda"></span>项，在语义上也成立。</p>
 <p><br/></p>
 <p>下文我们开始学习范畴论，为理解笛卡尔闭范畴打好基础。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型（三）：Combinatory logic</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型（三）：Combinatory logic</a></p>
 <p><a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a></p>
 
           

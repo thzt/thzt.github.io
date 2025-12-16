@@ -368,14 +368,13 @@
 <p>符号1，我们通常认为它是自然数1。</p>
 <p>但这只是通俗的说法。</p>
 <p><br/></p>
-<p>事实上，符号1，符号2，符号3，...属于目标语言范围，</p>
-<p>而自然数1，自然数2，自然数3，...属于元语言范围。</p>
+<p>事实上，符号1，符号2，符号3，…属于目标语言范围，</p>
+<p>而自然数1，自然数2，自然数3，…属于元语言范围。</p>
 <p><br/></p>
 <p>符号1和自然数1是不同的，</p>
 <p>如果愿意，我们当然可以用符号a表示自然数1。</p>
 <p><br/></p>
-<h2 id="λ演算形式语法"><strong>λ演算——形式语法</strong></h2>
-<p>λ演算系统，是一个形式系统，</p>
+<h2 id="λ演算——形式语法"><a href="#λ演算——形式语法" class="headerlink" title="λ演算——形式语法"></a><strong>λ演算——形式语法</strong></h2><p>λ演算系统，是一个形式系统，</p>
 <p>用来研究编程语言。</p>
 <p><br/></p>
 <p>在内容上，大体分为几个部分。</p>
@@ -411,8 +410,7 @@
 <p>我们将采用Lisp语言来讨论λ演算。</p>
 <p>因为，他们可以看做只是语法不同的两套形式系统。</p>
 <p><br/></p>
-<h2 id="λ演算公理语义"><strong>λ演算——公理语义</strong></h2>
-<p><strong>公理语义</strong>，</p>
+<h2 id="λ演算——公理语义"><a href="#λ演算——公理语义" class="headerlink" title="λ演算——公理语义"></a><strong>λ演算——公理语义</strong></h2><p><strong>公理语义</strong>，</p>
 <p>是一套等式证明系统，</p>
 <p>用来区分一个形式系统中的两个表达式，</p>
 <p>是不是等价。</p>
@@ -452,41 +450,40 @@
 <p><br/></p>
 <p>例如：</p>
 <p>(</p>
-<p>    (lambda (x)</p>
-<p>        (lambda (y)</p>
-<p>            (+ x y)))</p>
-<p>    (- a y)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(- a y)</p>
 <p>)</p>
 <p><br/></p>
 <p>如果我们单纯把形参x替换成(- a y)</p>
 <p>结果如下：</p>
-<p>(lambda (y)</p>
-<p>    (+ (- a y) y))</p>
+<p>(lambda (y) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (- a y) y))</p>
 <p>其中，函数体(+ (- a y) y)中，</p>
 <p>第一个y就会被绑定的符号y所捕获。</p>
 <p><br/></p>
 <p>这容易引起歧义，</p>
 <p>因此，在这种情况下，我们需要为绑定变量更名。即，</p>
-<p>(lambda (z)</p>
-<p>    (+ (- a y) z))</p>
+<p>(lambda (z) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (- a y) z))</p>
 <p><br/></p>
-<h2 id="λ演算不动点"><strong>λ演算——不动点</strong></h2>
-<p>我们看到λ演算中，所有函数都是匿名的，</p>
+<h2 id="λ演算——不动点"><a href="#λ演算——不动点" class="headerlink" title="λ演算——不动点"></a><strong>λ演算——不动点</strong></h2><p>我们看到λ演算中，所有函数都是匿名的，</p>
 <p>这样在函数体内部引用函数本身，是很困难的事情。</p>
 <p><br/></p>
 <p>例如，阶乘函数，</p>
 <p>(define fact</p>
-<p>    (lambda (n)</p>
-<p>        (if (= n 1)</p>
-<p>            1</p>
-<p>            (* n (fact (- n 1))))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n (fact (- n 1))))))</p>
 <p>函数内部引用了函数本身。</p>
 <p><br/></p>
 <p>改写成等式形式，</p>
 <p>fact = (lambda (n)</p>
-<p>    (if (= n 1)</p>
-<p>        1</p>
-<p>        (* n (fact (- n 1)))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n (fact (- n 1)))))</p>
 <p>我们发现，在等式两边都出现了fact。</p>
 <p><br/></p>
 <p>这使得我们回忆起了<strong>代数学</strong>中，</p>
@@ -495,15 +492,15 @@
 <p><br/></p>
 <p>其中，</p>
 <p>G(f) = (lambda (n)</p>
-<p>    (if (= n 1)</p>
-<p>        1</p>
-<p>        (* n (f (- n 1)))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n (f (- n 1)))))</p>
 <p>或，</p>
 <p>G = (lambda (f)</p>
-<p>        (lambda (n)</p>
-<p>            (if (= n 1)</p>
-<p>                1</p>
-<p>                (* n (f (- n 1))))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* n (f (- n 1))))))</p>
 <p><br/></p>
 <p>待求取的函数fact，是这个方程的解。即，</p>
 <p>fact = G(fact)。</p>
@@ -522,17 +519,16 @@
 <p><br/></p>
 <p>其中，</p>
 <p>Y = (lambda (k)</p>
-<p>        ((lambda (g) (g g))</p>
-<p>        (lambda (f)</p>
-<p>            (lambda (n)</p>
-<p>                ((k (f f))</p>
-<p>                n)))))</p>
-<p>                </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((lambda (g) (g g))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (f)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((k (f f))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n)))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p>这里需要注意，<strong>Y本身不是G的不动点</strong>，</p>
 <p>YG才是。</p>
 <p><br/></p>
-<h2 id="λ演算操作语义"><strong>λ演算——操作语义</strong></h2>
-<p><strong>操作语义</strong>，</p>
+<h2 id="λ演算——操作语义"><a href="#λ演算——操作语义" class="headerlink" title="λ演算——操作语义"></a><strong>λ演算——操作语义</strong></h2><p><strong>操作语义</strong>，</p>
 <p>是一套推导规则，</p>
 <p>据此表达式可以规约成更简单的形式。</p>
 <p><br/></p>
@@ -552,19 +548,19 @@
 <p>另外，某些表达式，β规约<strong>不可终止</strong>的。</p>
 <p>例如：</p>
 <p>(</p>
-<p>    (lambda (x)</p>
-<p>        (x x))</p>
-<p>    (lambda (x)</p>
-<p>        (x x))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x x))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x x))</p>
 <p>)</p>
 <p>-&gt;</p>
 <p>(</p>
-<p>    (lambda (x)</p>
-<p>        (x x))</p>
-<p>    (lambda (x)</p>
-<p>        (x x))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x x))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x x))</p>
 <p>)</p>
-<p>-&gt; ...</p>
+<p>-&gt; …</p>
 <p><br/></p>
 <p>对于β规约可终止的表达式，人们发现，</p>
 <p>按不同的次序，对表达式进行规约，</p>
@@ -572,8 +568,7 @@
 <p>称为<strong>范式</strong>（normal form）。</p>
 <p>这种性质，称为<strong>汇聚性</strong>（confluence）。</p>
 <p><br/></p>
-<h2 id="λ演算指称语义"><strong>λ演算——指称语义</strong></h2>
-<p><strong>指称语义</strong>，</p>
+<h2 id="λ演算——指称语义"><a href="#λ演算——指称语义" class="headerlink" title="λ演算——指称语义"></a><strong>λ演算——指称语义</strong></h2><p><strong>指称语义</strong>，</p>
 <p>是通过为每一个表达式指定一个数学对象，</p>
 <p>作为该表达式的指称，</p>
 <p>来说明表达式语义的一种办法。</p>
@@ -591,14 +586,13 @@
 <p><br/></p>
 <p>整个表达式指称，自然数1与自然数2的加法操作。</p>
 <p><br/></p>
-<p>记为： E[[+]] = 加法函数</p>
+<p>记为：<br>E[[+]] = 加法函数</p>
 <p>E[[1]] = 自然数1</p>
 <p>E[[2]] = 自然数2</p>
 <p>E[[e1+e2]] = E[[e1]]+E[[e2]]</p>
 <p>其中，等式右边的+表示自然数加法操作。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>λ演算虽然语法简单，但是内涵丰富，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>λ演算虽然语法简单，但是内涵丰富，</p>
 <p>这很符合<strong>Scheme语言</strong>的设计哲学。</p>
 <p><br/></p>
 <p>从模型论的角度来看，</p>
@@ -805,7 +799,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#λ演算形式语法"><span class="nav-number">1.</span> <span class="nav-text">λ演算——形式语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#λ演算公理语义"><span class="nav-number">2.</span> <span class="nav-text">λ演算——公理语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#λ演算不动点"><span class="nav-number">3.</span> <span class="nav-text">λ演算——不动点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#λ演算操作语义"><span class="nav-number">4.</span> <span class="nav-text">λ演算——操作语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#λ演算指称语义"><span class="nav-number">5.</span> <span class="nav-text">λ演算——指称语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#λ演算——形式语法"><span class="nav-number">1.</span> <span class="nav-text">λ演算——形式语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#λ演算——公理语义"><span class="nav-number">2.</span> <span class="nav-text">λ演算——公理语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#λ演算——不动点"><span class="nav-number">3.</span> <span class="nav-text">λ演算——不动点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#λ演算——操作语义"><span class="nav-number">4.</span> <span class="nav-text">λ演算——操作语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#λ演算——指称语义"><span class="nav-number">5.</span> <span class="nav-text">λ演算——指称语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>

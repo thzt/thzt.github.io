@@ -351,7 +351,7 @@
 <p>Web前端，似乎经历着历史上已经发生过很多次的事情。</p>
 <p><br/></p>
 <p>很多人找不到自己的努力方向了，</p>
-<p>Backbone，Ember，AngularJS，ReactJS，...</p>
+<p>Backbone，Ember，AngularJS，ReactJS，…</p>
 <p>到底该学哪个？</p>
 <p><br/></p>
 <p>一阵阵枪林弹雨，扫的我们抬不起头来，</p>
@@ -384,8 +384,7 @@
 <p>慢慢的，我们就发现了，</p>
 <p>框架也只不过是别人活学活用的成果罢了。</p>
 <p><br/></p>
-<h2 id="扩展性"><strong>扩展性</strong></h2>
-<p>我们来学习一下jQuery的设计思想。</p>
+<h2 id="扩展性"><a href="#扩展性" class="headerlink" title="扩展性"></a><strong>扩展性</strong></h2><p>我们来学习一下jQuery的设计思想。</p>
 <p><br/></p>
 <p>JavaScript经常做的，</p>
 <p>大概就是选取页面的元素，然后做一些事情了。</p>
@@ -414,12 +413,12 @@
 <p>类库的开发者接口如下，</p>
 <p>扩展静态方法，</p>
 <p>$.extend({</p>
-<p>    staticMethod:function(){}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;staticMethod:function(){}</p>
 <p>});</p>
 <p><br/></p>
 <p>扩展实例方法，</p>
 <p>$.prototype.extend({</p>
-<p>    instanceMethod:function(){}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;instanceMethod:function(){}</p>
 <p>});</p>
 <p><br/></p>
 <p>这种思路，很值得借鉴，</p>
@@ -429,41 +428,40 @@
 <p>类库自带的功能越多，</p>
 <p>以后修改这些功能的可能性就越大。</p>
 <p><br/></p>
-<h2 id="实现"><strong>实现</strong></h2>
-<p>至于如何实现，网上可以找到很多教程，</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a><strong>实现</strong></h2><p>至于如何实现，网上可以找到很多教程，</p>
 <p>下面只写了一下我自己的实现。</p>
 <p><br/></p>
 <p>(function(global,document){</p>
-<p>    jQuery.prototype=InstanceCreation.prototype;</p>
-<p>    jQuery.extend=jQuery.prototype.extend=extend;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;jQuery.prototype=InstanceCreation.prototype;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;jQuery.extend=jQuery.prototype.extend=extend;</p>
 <p><br/></p>
-<p>    function jQuery(selector){</p>
-<p>        return new InstanceCreation(selector);</p>
-<p>    }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function jQuery(selector){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new InstanceCreation(selector);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p><br/></p>
-<p>    function InstanceCreation(selector){</p>
-<p>        var instance=this;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function InstanceCreation(selector){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var instance=this;</p>
 <p><br/></p>
-<p>        instance[0]=document.querySelector(selector);</p>
-<p>        return this;</p>
-<p>    }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instance[0]=document.querySelector(selector);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p><br/></p>
-<p>    function extend(material){</p>
-<p>        var depository=this;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function extend(material){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var depository=this;</p>
 <p><br/></p>
-<p>        for(var property in material){</p>
-<p>            if(!material.hasOwnProperty(property)){</p>
-<p>                continue;</p>
-<p>            }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(var property in material){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!material.hasOwnProperty(property)){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p><br/></p>
-<p>            depository[property]=material[property];</p>
-<p>        }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depository[property]=material[property];</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p><br/></p>
-<p>        return this;</p>
-<p>    };</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
 <p><br/></p>
-<p>    //export:</p>
-<p>    global.$=jQuery;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;//export:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;global.$=jQuery;</p>
 <p>}(window,document));</p>
 <p><br/></p>
 <p>对实现不详细描述，还有其他原因，</p>
@@ -475,17 +473,16 @@
 <p>是为了有个直观的印象，jQuery核心其实很小。</p>
 <p>所有其他功能都是扩展出来的。</p>
 <p><br/></p>
-<h2 id="插件"><strong>插件</strong></h2>
-<p>类似jQuery这样，</p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a><strong>插件</strong></h2><p>类似jQuery这样，</p>
 <p>提供基础核心，再提供对核心的扩展方式，</p>
 <p>称为插件式开发。</p>
 <p><br/></p>
 <p>我们只需要使用</p>
 <p>$.prototype.extend({</p>
-<p>    pluginName:function(){}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pluginName:function(){}</p>
 <p>});</p>
 <p><br/></p>
-<p><span class="math inline">\((selector)就有了一个pluginName方法了。\)</span>(selector).pluginName</p>
+<p>$(selector)就有了一个pluginName方法了。$(selector).pluginName</p>
 <p><br/></p>
 <p>正因为有这么便捷的功能，</p>
 <p>jQuery插件的数量才惊人的多。</p>
@@ -494,37 +491,36 @@
 <p>每个部分是一个插件对象，只对这一块元素进行操作，</p>
 <p>这符合面向对象的思想。</p>
 <p><br/></p>
-<p>$(container1).pluginName1(...);</p>
-<p>$(container1).pluginName2(...);</p>
+<p>$(container1).pluginName1(…);</p>
+<p>$(container1).pluginName2(…);</p>
 <p><br/></p>
 <p>我们把问题简化了，</p>
 <p>对整个页面的控制，转换成对这些自定义插件的控制了。</p>
 <p><br/></p>
-<h2 id="缺点和改进"><strong>缺点和改进</strong></h2>
-<p>经过一段时间使用后，</p>
+<h2 id="缺点和改进"><a href="#缺点和改进" class="headerlink" title="缺点和改进"></a><strong>缺点和改进</strong></h2><p>经过一段时间使用后，</p>
 <p>我们发现jQuery插件有一个缺点，</p>
-<p>$(container).pluginName(...);</p>
+<p>$(container).pluginName(…);</p>
 <p><br/></p>
 <p>一个插件的所有操作，都必须放到同一个pluginName方法中。</p>
 <p>如果我们想初始化和取值，就不得不这样操作，</p>
-<p>$(container).pluginName('init',data);</p>
-<p>$(container).pluginName('getValue');</p>
+<p>$(container).pluginName(‘init’,data);</p>
+<p>$(container).pluginName(‘getValue’);</p>
 <p><br/></p>
 <p>后果就是pluginName这个函数中，我们就要写很多switch语句。</p>
 <p>$.prototype.extend({</p>
-<p>    pluginName:function(operationName,arg0){</p>
-<p>        switch(operationName){</p>
-<p>            case 'init':</p>
-<p>                //...</p>
-<p>                break;</p>
-<p>                </p>
-<p>            case 'getValue':</p>
-<p>                //...</p>
-<p>                break;</p>
-<p>                </p>
-<p>            //...</p>
-<p>        }</p>
-<p>    }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pluginName:function(operationName,arg0){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch(operationName){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case ‘init’:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//…</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case ‘getValue’:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//…</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//…</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p>});</p>
 <p><br/></p>
 <p>还算清晰，</p>
@@ -541,28 +537,28 @@
 <p>假如我们已经设计好了，想这样用。pluginManager.extend</p>
 <p><br/></p>
 <p>(function($){</p>
-<p>    $.pluginManager.extend('pluginName',{</p>
-<p>        init:initPlugin</p>
-<p>    });</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.extend(‘pluginName’,{</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init:initPlugin</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
 <p><br/></p>
-<p>    function initPlugin(){</p>
-<p>        var $selector=this;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function initPlugin(){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this;</p>
 <p><br/></p>
-<p>        //arguments[0]===data</p>
-<p>        //...</p>
-<p>    }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//arguments[0]===data</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//…</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p>}(jQuery));</p>
 <p><br/></p>
 <p>(function($){</p>
-<p>    $.pluginManager.extend('pluginName',{</p>
-<p>        getValue:getValueFromPlugin</p>
-<p>    });</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.extend(‘pluginName’,{</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getValue:getValueFromPlugin</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
 <p><br/></p>
-<p>    function getValueFromPlugin(){</p>
-<p>        var $selector=this;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function getValueFromPlugin(){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this;</p>
 <p><br/></p>
-<p>        //...</p>
-<p>    }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//…</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p>}(jQuery));</p>
 <p><br/></p>
 <p>我们避免了为插件添加操作的麻烦，</p>
@@ -573,8 +569,7 @@
 <p>可以的，我已经做好了。</p>
 <p>但是，实现并不重要，关键是思想。</p>
 <p><br/></p>
-<h2 id="持续改进"><strong>持续改进</strong></h2>
-<p>并不是技术本身想要更新，</p>
+<h2 id="持续改进"><a href="#持续改进" class="headerlink" title="持续改进"></a><strong>持续改进</strong></h2><p>并不是技术本身想要更新，</p>
 <p>是创新的业务需要，促进了创新的技术出现，</p>
 <p>不适应性越强烈，改进工具的可能性就越大。</p>
 <p><br/></p>
@@ -583,20 +578,20 @@
 <p><br/></p>
 <p>插件在使用过程中，可能会设置一些缺省值，</p>
 <p>例如：初始化，</p>
-<p>$(container).pluginName('init',data);</p>
-<p>$(container).pluginName('init');</p>
+<p>$(container).pluginName(‘init’,data);</p>
+<p>$(container).pluginName(‘init’);</p>
 <p>都是有可能的。</p>
 <p><br/></p>
 <p>每个插件中都单独处理缺省值，是很啰嗦的事情。</p>
 <p>function initPlugin(){</p>
-<p>    var $selector=this,</p>
-<p>        data=arguments[0]||'Hello';</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data=arguments[0]||’Hello’;</p>
 <p><br/></p>
-<p>    //... }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;//…<br>}</p>
 <p><br/></p>
 <p>啰嗦也就罢了，</p>
 <p>最不能容忍的是，代码中出现了硬编码。</p>
-<p>'Hello'是业务数据，跟插件本身无关。</p>
+<p>‘Hello’是业务数据，跟插件本身无关。</p>
 <p><br/></p>
 <p>还记得吗，</p>
 <p>类库自带的功能越多，</p>
@@ -604,30 +599,30 @@
 <p><br/></p>
 <p>所以，我们得想一个办法把他们分离出去。pluginManager.filter</p>
 <p>(function($){</p>
-<p>    $.pluginManager.extend('pluginName',{</p>
-<p>        init:initPlugin</p>
-<p>    });</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.extend(‘pluginName’,{</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init:initPlugin</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
 <p><br/></p>
-<p>    function initPlugin(){</p>
-<p>        var $selector=this,</p>
-<p>            data=arguments[0];</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function initPlugin(){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data=arguments[0];</p>
 <p><br/></p>
-<p>        //...</p>
-<p>    }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//…</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p>}(jQuery));</p>
 <p><br/></p>
 <p>(function($){</p>
-<p>    $.pluginManager.<strong>filter</strong>('pluginName',{</p>
-<p>        init:filterInit</p>
-<p>    });</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;$.pluginManager.<strong>filter</strong>(‘pluginName’,{</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init:filterInit</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;});</p>
 <p><br/></p>
-<p>    function filterInit(){</p>
-<p>        var $selector=this;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;function filterInit(){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $selector=this;</p>
 <p><br/></p>
-<p>        return [</p>
-<p>            arguments[0]||'Hello'</p>
-<p>        ];</p>
-<p>    }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return [</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arguments[0]||’Hello’</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;];</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p>}(jQuery));</p>
 <p><br/></p>
 <p>因此，我们增加了一层，</p>
@@ -650,8 +645,7 @@
 <p>也是可以的，我也已经做好了。</p>
 <p>但是，实现并不重要，关键是思想。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>我们分析了jQuery的设计思想，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>我们分析了jQuery的设计思想，</p>
 <p>并拿来随机应变，设计了自己的插件管理器。</p>
 <p><br/></p>
 <p>使用框架了吗？</p>
@@ -671,30 +665,30 @@
 <p>我们可以自己写一个bindTemplate来进行模板的读写操作。</p>
 <p><br/></p>
 <p>设置值</p>
-<p>$(container).bindTemplate('setData',{</p>
-<p>    attr:'data-model',</p>
-<p>    data:json,</p>
-<p>    set:setFieldValue</p>
+<p>$(container).bindTemplate(‘setData’,{</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;attr:’data-model’,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;data:json,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;set:setFieldValue</p>
 <p>});</p>
 <p><br/></p>
 <p>读取值</p>
-<p>$(container).bindTemplate('getData',{</p>
-<p>    attr:'data-model',</p>
-<p>    get:getFieldValue</p>
+<p>$(container).bindTemplate(‘getData’,{</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;attr:’data-model’,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;get:getFieldValue</p>
 <p>});</p>
 <p><br/></p>
 <p>我们可以把json对象，绑定到HTML对象上，再从HTML中取回同样结构的json对象。</p>
 <p>而与HTML元素的排列方式无关。</p>
 <p>json=[</p>
-<p>    0,</p>
-<p>    {</p>
-<p>        val:1</p>
-<p>    }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;0,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;{</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val:1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p>];</p>
 <p><br/></p>
-<p>&lt;span data-model="[0]"&gt;&lt;/span&gt;</p>
+<p>&lt;span data-model=”[0]”&gt;&lt;/span&gt;</p>
 <p>&lt;div&gt;</p>
-<p>    &lt;span data-model="[1].val"&gt;&lt;/span&gt;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;span data-model=”[1].val”&gt;&lt;/span&gt;</p>
 <p>&lt;/div&gt;</p>
 <p><br/></p>
 <p>setFieldValue与getFieldValue我设置成了函数，</p>
@@ -702,10 +696,10 @@
 <p>以获得最大的灵活性。</p>
 <p><br/></p>
 <p>并且，利用$.pluginManager.filter，接口可以简化成，</p>
-<p>$(container).bindTemplate('setData',{</p>
-<p>    data:json</p>
+<p>$(container).bindTemplate(‘setData’,{</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;data:json</p>
 <p>});</p>
-<p>$(container).bindTemplate('getData');</p>
+<p>$(container).bindTemplate(‘getData’);</p>
 <p><br/></p>
 <p>源代码如下：</p>
 <p><a href="https://github.com/thzt/web.frontend.component/blob/master/library/jquerycore/jquerycore.js" target="_blank" rel="noopener">jQuery core</a></p>

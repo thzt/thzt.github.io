@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾 上文我们介绍了哥德尔定理，它指出了形式化方法的局限性， 任何包含初等算术的形式理论，都是不完全的， 且自身的协调性无法在系统内部被证明。  为了理解这句话，上文中我们做出了严谨的定义， 仔细建立了语法和语义之间的联系。  实际上，语法（符号）层面的推导，属于公式的证明， 而语义（模型）层面的推导，属于逻辑结论的推理。 证明和推理之间的关系由系统的可靠性和完全性给出。  1. 简单类型化演">
+<meta name="description" content="回顾上文我们介绍了哥德尔定理，它指出了形式化方法的局限性， 任何包含初等算术的形式理论，都是不完全的， 且自身的协调性无法在系统内部被证明。  为了理解这句话，上文中我们做出了严谨的定义， 仔细建立了语法和语义之间的联系。  实际上，语法（符号）层面的推导，属于公式的证明， 而语义（模型）层面的推导，属于逻辑结论的推理。 证明和推理之间的关系由系统的可靠性和完全性给出。  1. 简单类型化演算">
 <meta property="og:type" content="article">
 <meta property="og:title" content="语言背后的代数学（五）：&lt;span data-katex&#x3D;&quot;\Sigma&quot;&gt;&lt;&#x2F;span&gt;代数">
 <meta property="og:url" content="https://thzt.github.io/2018/02/03/semantics-5/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾 上文我们介绍了哥德尔定理，它指出了形式化方法的局限性， 任何包含初等算术的形式理论，都是不完全的， 且自身的协调性无法在系统内部被证明。  为了理解这句话，上文中我们做出了严谨的定义， 仔细建立了语法和语义之间的联系。  实际上，语法（符号）层面的推导，属于公式的证明， 而语义（模型）层面的推导，属于逻辑结论的推理。 证明和推理之间的关系由系统的可靠性和完全性给出。  1. 简单类型化演">
+<meta property="og:description" content="回顾上文我们介绍了哥德尔定理，它指出了形式化方法的局限性， 任何包含初等算术的形式理论，都是不完全的， 且自身的协调性无法在系统内部被证明。  为了理解这句话，上文中我们做出了严谨的定义， 仔细建立了语法和语义之间的联系。  实际上，语法（符号）层面的推导，属于公式的证明， 而语义（模型）层面的推导，属于逻辑结论的推理。 证明和推理之间的关系由系统的可靠性和完全性给出。  1. 简单类型化演算">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-89a11ce25d114ae6.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-b3e9594ea835a0b5.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-31f1e75ef2ff6bcc.png">
@@ -352,10 +352,9 @@
       
 
       
-        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-89a11ce25d114ae6.png" /></p>
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-89a11ce25d114ae6.png" alt=""></p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文我们介绍了哥德尔定理，它指出了形式化方法的局限性，</p>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上文我们介绍了哥德尔定理，它指出了形式化方法的局限性，</p>
 <p>任何包含初等算术<span data-katex="\Pi"></span>的形式理论，都是不完全的，</p>
 <p>且自身的协调性无法在系统内部被证明。</p>
 <p><br/></p>
@@ -366,9 +365,8 @@
 <p>而语义（模型）层面的推导，属于逻辑结论的推理。</p>
 <p>证明和推理之间的关系由系统的可靠性和完全性给出。</p>
 <p><br/></p>
-<h3 id="简单类型化演算">1. 简单类型化<span data-katex="\lambda"></span>演算</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-b3e9594ea835a0b5.png" /></p>
+<h3 id="1-简单类型化演算"><a href="#1-简单类型化演算" class="headerlink" title="1. 简单类型化演算"></a>1. 简单类型化<span data-katex="\lambda"></span>演算</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-b3e9594ea835a0b5.png" alt=""></p>
 <p><br/></p>
 <p>在《<a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型</a>》系列文章中，</p>
 <p>我们介绍了简单类型化<span data-katex="\lambda"></span>演算（simply typed lambda calculus）<span data-katex="\lambda^\to"></span>，</p>
@@ -385,9 +383,8 @@
 <p>因为，集合上的后继函数是没有不动点的，而<span data-katex="\lambda x:T.x+1"></span>有不动点<span data-katex="\perp"></span>。</p>
 <p>我们曾经在《<a href="http://thzt.github.io/2017/03/21/recursive-function-9/">递归函数</a>》系列文章中给出过证明。</p>
 <p><br/></p>
-<h3 id="代数">2. <span data-katex="\Sigma"></span>代数</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-31f1e75ef2ff6bcc.png" /></p>
+<h3 id="2-代数"><a href="#2-代数" class="headerlink" title="2. 代数"></a>2. <span data-katex="\Sigma"></span>代数</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-31f1e75ef2ff6bcc.png" alt=""></p>
 <p><br/></p>
 <p>一般有两种通用的方法，来给出简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>的语义，</p>
 <p>一种是<strong>Henkin模型</strong>，另一种是笛卡尔闭范畴。</p>
@@ -411,9 +408,8 @@
 <p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
 <p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
 <p><br/></p>
-<h3 id="代数数据类型的签名signature">3. 代数数据类型的签名（signature）</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-3b8817284e06cf24.png" /></p>
+<h3 id="3-代数数据类型的签名（signature）"><a href="#3-代数数据类型的签名（signature）" class="headerlink" title="3. 代数数据类型的签名（signature）"></a>3. 代数数据类型的签名（signature）</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-3b8817284e06cf24.png" alt=""></p>
 <p><br/></p>
 <p>在简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>中，类型属于形式系统中的概念，</p>
 <p><strong>它并不代表类型中值的集合。</strong></p>
@@ -451,9 +447,8 @@
 <p>具有多种类型的项的集合可以记为<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>，</p>
 <p>其中<span data-katex="S"></span>为类型的集合。</p>
 <p><br/></p>
-<h3 id="项的解释">4. 项的解释</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-a73d509196611e04.png" /></p>
+<h3 id="4-项的解释"><a href="#4-项的解释" class="headerlink" title="4. 项的解释"></a>4. 项的解释</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-a73d509196611e04.png" alt=""></p>
 <p><br/></p>
 <p><span data-katex="\Sigma"></span>代数，与类型化的项的集合之间，存在着解释关系。</p>
 <p><br/></p>
@@ -478,9 +473,8 @@
 <p>（1）<span data-katex="\mathscr{A}[\![x]\!]\eta =\eta (x)"></span></p>
 <p>（2）<span data-katex="\mathscr{A}[\![fM_1\cdots M_k]\!]\eta =f^{\mathscr{A}}(\mathscr{A}[\![M_1]\!]\eta ,\cdots ,\mathscr{A}[\![M_k]\!]\eta )"></span></p>
 <p><br/></p>
-<h3 id="例子">5. 例子</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-67b722cee1bda65f.png" /></p>
+<h3 id="5-例子"><a href="#5-例子" class="headerlink" title="5. 例子"></a>5. 例子</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-03-semantics-5/1023733-67b722cee1bda65f.png" alt=""></p>
 <p><br/></p>
 <p>上文我们介绍了初等算术系统<span data-katex="\Pi"></span>的类型签名<span data-katex="\left \langle S,F \right \rangle"></span>，</p>
 <p>其中，<span data-katex="S=\{nat\}"></span>，<span data-katex="F=\{0:nat,1:nat,+:nat\times nat\to nat,\cdot:nat\times nat\to nat\}"></span>。</p>
@@ -495,8 +489,7 @@
 <p>则在这个环境中，<span data-katex="x+1"></span>的语义就可以按下式确定了。</p>
 <p><span data-katex="[\![x+1]\!]\eta=+^\mathscr{N}([\![x]\!]\eta,[\![1]\!])\eta=+^\mathscr{N}(\eta(x),1^\mathscr{N})=+^\mathscr{N}(0^\mathscr{N},1^\mathscr{N})=1"></span></p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了一种称为<span data-katex="\Sigma"></span>代数的数学结构，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了一种称为<span data-katex="\Sigma"></span>代数的数学结构，</p>
 <p>它可以用来解释带有类型签名的项。</p>
 <p><br/></p>
 <p>可是，要想让这样的<span data-katex="\Sigma"></span>代数称为<span data-katex="\lambda^\to"></span>项的模型，还是不够的，</p>
@@ -505,8 +498,7 @@
 <p><br/></p>
 <p>下文我们再详细讨论这些条件。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
 <p><a href="http://thzt.github.io/2017/03/21/recursive-function-9/">递归函数（九）：最小不动点定理</a></p>
 <p><a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a></p>
 
@@ -698,7 +690,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单类型化演算"><span class="nav-number">2.</span> <span class="nav-text">1. 简单类型化演算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代数"><span class="nav-number">3.</span> <span class="nav-text">2. 代数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代数数据类型的签名signature"><span class="nav-number">4.</span> <span class="nav-text">3. 代数数据类型的签名（signature）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项的解释"><span class="nav-number">5.</span> <span class="nav-text">4. 项的解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">6.</span> <span class="nav-text">5. 例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-简单类型化演算"><span class="nav-number">2.</span> <span class="nav-text">1. 简单类型化演算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-代数"><span class="nav-number">3.</span> <span class="nav-text">2. 代数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-代数数据类型的签名（signature）"><span class="nav-number">4.</span> <span class="nav-text">3. 代数数据类型的签名（signature）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-项的解释"><span class="nav-number">5.</span> <span class="nav-text">4. 项的解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-例子"><span class="nav-number">6.</span> <span class="nav-text">5. 例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

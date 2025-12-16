@@ -362,18 +362,17 @@
 <p>我们用术语尾递归优化（tail recursion optimization）,</p>
 <p>来介绍Proper tail recursion的技术细节。</p>
 <p><br/></p>
-<h2 id="尾调用"><strong>尾调用</strong></h2>
-<p>这是一个很常见的概念，</p>
+<h2 id="尾调用"><a href="#尾调用" class="headerlink" title="尾调用"></a><strong>尾调用</strong></h2><p>这是一个很常见的概念，</p>
 <p>但是为了完整性，这里还是要说一说。</p>
 <p><br/></p>
 <p>我们看两个函数，f和g，他们的定义如下，</p>
 <p><br/></p>
 <p>(define (f a)</p>
-<p>    (g 2)</p>
-<p>    (display a))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a))</p>
 <p><br/></p>
 <p>(define (g b)</p>
-<p>    (display b))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display b))</p>
 <p><br/></p>
 <p>(f 1)</p>
 <p><br/></p>
@@ -392,11 +391,11 @@
 <p>我们改一下例子，</p>
 <p><br/></p>
 <p>(define (f a)</p>
-<p>    (display a)</p>
-<p>    (g 2))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2))</p>
 <p><br/></p>
 <p>(define (g b)</p>
-<p>    (display b))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display b))</p>
 <p><br/></p>
 <p>(f 1)</p>
 <p><br/></p>
@@ -417,8 +416,7 @@
 <p>使得尾递归可以在常量的调用栈空间中执行，</p>
 <p>我们就可以放心的使用尾递归来替代循环了。</p>
 <p><br/></p>
-<h2 id="调用栈和调用图"><strong>调用栈和调用图</strong></h2>
-<p>从语言的实现角度来看，</p>
+<h2 id="调用栈和调用图"><a href="#调用栈和调用图" class="headerlink" title="调用栈和调用图"></a><strong>调用栈和调用图</strong></h2><p>从语言的实现角度来看，</p>
 <p>每一次函数调用会初始化一个新的frame，</p>
 <p>frame中保存着形参与实参的绑定。</p>
 <p><br/></p>
@@ -454,11 +452,11 @@
 <p>跟踪运行环境的变化，我们发现，</p>
 <p>在实现词法作用域之后，环境并不是一个栈结构的。</p>
 <p><br/></p>
-<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;top-level： frame0</p>
-<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入f： frame1 &lt;- frame0</p>
-<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入g： frame2 &lt;- frame0</p>
-<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;回到f： frame1 &lt;- frame0</p>
-<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;回到top-level： frame0</p>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;top-level： frame0</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;进入f： frame1 &lt;- frame0</p>
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;进入g： frame2 &lt;- frame0</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;回到f： frame1 &lt;- frame0</p>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])&nbsp;&nbsp;&nbsp;&nbsp;;回到top-level： frame0</p>
 <p><br/></p>
 <p>我们可以把frame0看成树根，</p>
 <p>frame1，frame2看成子节点，</p>
@@ -469,21 +467,20 @@
 <p>那么尾调用也就不必服从弹栈规则了，</p>
 <p>g返回，可以让执行环境返回到f该返回的状态。</p>
 <p><br/></p>
-<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]) ;top-level： frame0</p>
-<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]) ;进入f： frame1 &lt;- frame0</p>
-<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]) ;进入g： frame2 &lt;- frame0</p>
-<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])) ;<strong>直接返回到top-level</strong>： frame0</p>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;top-level： frame0</p>
+<p>(<strong>[(a 1)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入f： frame1 &lt;- frame0</p>
+<p>(<strong>[(b 2)]</strong> [(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)])    ;进入g： frame2 &lt;- frame0</p>
+<p>([(f #&lt;procedure&gt;) (g #&lt;procedure&gt;)]))    ;<strong>直接返回到top-level</strong>： frame0</p>
 <p><br/></p>
 <p>这种技术，称为<strong>尾调用优化</strong>。</p>
 <p><br/></p>
-<h2 id="尾递归的执行环境"><strong>尾递归的执行环境</strong></h2>
-<p>我们来分析一下尾递归的执行环境，</p>
+<h2 id="尾递归的执行环境"><a href="#尾递归的执行环境" class="headerlink" title="尾递归的执行环境"></a><strong>尾递归的执行环境</strong></h2><p>我们来分析一下尾递归的执行环境，</p>
 <p>请看阶乘函数的尾递归版本，</p>
 <p><br/></p>
 <p>(define (fact n <strong>result</strong>)</p>
-<p>    (if (= n 1)</p>
-<p>        <strong>result</strong></p>
-<p>        (fact (- n 1) (* result n))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (= n 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>result</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1) (* result n))))</p>
 <p><br/></p>
 <p>(+ 4 (fact 3 1))</p>
 <p><br/></p>
@@ -501,13 +498,10 @@
 <p>可是要返回到哪里呢？</p>
 <p>我们看到以上的一系列调用都是<strong>尾调用</strong>，</p>
 <p>所以，直接返回到了最开始调用(fact 3 1)的地方，</p>
-执行环境变成了，([(fact #
-<procedure>
-<p>)])，</p>
+<p>执行环境变成了，([(fact #<procedure>)])，</p>
 <p>于是，在这环境中求值(+ 4 6) -&gt; 10</p>
 <p><br/></p>
-<h2 id="与continuation的关联"><strong>与continuation的关联</strong></h2>
-<p>我们看到，要想实现这样的调用结构，</p>
+<h2 id="与continuation的关联"><a href="#与continuation的关联" class="headerlink" title="与continuation的关联"></a><strong>与continuation的关联</strong></h2><p>我们看到，要想实现这样的调用结构，</p>
 <p>需要把环境中的绑定关系分配在<strong>内存堆</strong>中，</p>
 <p>这样就可以让函数的调用者，显式控制返回环境了。</p>
 <p><br/></p>
@@ -525,15 +519,15 @@
 <p><br/></p>
 <p><strong>非尾调用</strong>的情况，</p>
 <p>(define *cont*</p>
-<p>    (lambda (x) x))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) x))</p>
 <p><br/></p>
 <p>(define (f a cont)</p>
-<p>    (g 2</p>
-<p>        <strong>(lambda (v)</strong></p>
-<p>            <strong>(cont (display a)))</strong>))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v)</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(cont (display a)))</strong>))</p>
 <p><br/></p>
 <p>(define (g b cont)</p>
-<p>    (cont (display b)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display b)))</p>
 <p><br/></p>
 <p>(f 1 *cont*)</p>
 <p><br/></p>
@@ -543,18 +537,18 @@
 <p>我们看到非尾调用的g的continuation，</p>
 <p>是执行display，再执行f的continuation。即，</p>
 <p>(lambda (v)</p>
-<p>    (cont (display a)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display a)))</p>
 <p><br/></p>
 <p>我们再看<strong>尾调用</strong>情况，</p>
 <p>(define *cont*</p>
-<p>    (lambda (x) x))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) x))</p>
 <p><br/></p>
 <p>(define (f a cont)</p>
-<p>    (display a)</p>
-<p>    (g 2 <strong>cont</strong>))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g 2 <strong>cont</strong>))</p>
 <p><br/></p>
 <p>(define (g b cont)</p>
-<p>    (cont (display b)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (display b)))</p>
 <p><br/></p>
 <p>(f 1 *cont*)</p>
 <p><br/></p>
@@ -567,8 +561,7 @@
 <p>这给了我们一种方案，在写解释器的时候，</p>
 <p>可以使用CPS来进行尾调用优化。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>为了进行尾调用优化，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>为了进行尾调用优化，</p>
 <p>语言实现必须对调用图进行控制，</p>
 <p>或者说，显式的控制continuation。</p>
 <p><br/></p>

@@ -347,17 +347,15 @@
       
         
           
-            <h3 id="回顾">回顾</h3>
-<p>以上几篇文章中，我们讨论了可计算性理论相关的一些内容，</p>
+            <h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>以上几篇文章中，我们讨论了可计算性理论相关的一些内容，</p>
 <p>可计算性与递归函数论存在着千丝万缕的联系，</p>
 <p>不动点理论也是这样的，我们定义的递归函数一定存在吗？</p>
 <p>在什么情况下它是存在的？</p>
 <p><br/></p>
 <p>要回答以上这些问题，还要从方程，不动点，不动点算子说起。</p>
 <p><br/></p>
-<h3 id="约束方程">约束方程</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-c82626b07032c9e8.png" /></p>
+<h3 id="约束方程"><a href="#约束方程" class="headerlink" title="约束方程"></a>约束方程</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-c82626b07032c9e8.png" alt=""></p>
 <p><br/></p>
 <p>在中学时代，我们学过“方程”的概念，</p>
 <p>方程可以简单表述为含有未知数的等式，例如，<span data-katex="3x+3=2"></span>。</p>
@@ -366,10 +364,10 @@
 <p><br/></p>
 <p>在大学时代，我们还学过线性方程组和微分方程，</p>
 <p>例如，求解矩阵的特征值和特征向量，<span data-katex="Av=\lambda v"></span></p>
-<p>二阶常微分方程（<a href="https://zh.wikipedia.org/wiki/%E8%B4%9D%E5%A1%9E%E5%B0%94%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">贝塞尔方程</a>），<span data-katex="x^2y&#39;&#39;+xy&#39;+(x^2-\alpha ^2)y=0"></span>。</p>
+<p>二阶常微分方程（<a href="https://zh.wikipedia.org/wiki/%E8%B4%9D%E5%A1%9E%E5%B0%94%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">贝塞尔方程</a>），<span data-katex="x^2y''+xy'+(x^2-\alpha ^2)y=0"></span>。</p>
 <p><br/></p>
 <p>在计算机科学中，同样的未知“数”的思想，</p>
-<p>还出现在了类型推导（例如：<a href="https://en.wikipedia.org/wiki/Unification_(computer_science)" target="_blank" rel="noopener">unification</a>）与递归函数的定义中。</p>
+<p>还出现在了类型推导（例如：<a href="https://en.wikipedia.org/wiki/Unification_(computer_science" target="_blank" rel="noopener">unification</a>)）与递归函数的定义中。</p>
 <p><br/></p>
 <p>以上这些例子，方程是“约束”的一种表现形式。</p>
 <p><br/></p>
@@ -382,9 +380,8 @@
 <p>我们发现，<code>fact</code>的定义和“方程”十分相似，<code>fact</code>同时出现在了等式的两边，</p>
 <p>阶乘函数，就是这个“方程”的“解”。</p>
 <p><br/></p>
-<h3 id="函数的不动点">函数的不动点</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-417c44596d6f438d.png" /></p>
+<h3 id="函数的不动点"><a href="#函数的不动点" class="headerlink" title="函数的不动点"></a>函数的不动点</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-417c44596d6f438d.png" alt=""></p>
 <p><br/></p>
 <p>在中学数学中，我们已经学过不动点了，只是当时印象不是那么深刻，</p>
 <p>函数的不动点，是指被这个函数映射到其自身的那些点。</p>
@@ -409,9 +406,8 @@
 <p>于是，在“方程”中求解<code>fact</code>的过程，</p>
 <p>就转换成了求解函数<code>g</code>的不动点的过程了。</p>
 <p><br/></p>
-<h3 id="不动点算子">不动点算子</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-6179cf69f757a05a.png" /></p>
+<h3 id="不动点算子"><a href="#不动点算子" class="headerlink" title="不动点算子"></a>不动点算子</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-6179cf69f757a05a.png" alt=""></p>
 <p><br/></p>
 <p>我们怎样求解函数<code>g</code>的不动点呢？</p>
 <p>在Haskell中，可以很方便的定义一个高阶函数<code>fix</code>，它可以用来求解任意函数的不动点，</p>
@@ -428,9 +424,8 @@
 <p><code>fix</code>后面跟的函数没有名字，它是匿名的，但是经过<code>fix</code>作用后，可以产生一个递归函数。</p>
 <p>也就是说，为了实现递归，函数是可以没有名字的。</p>
 <p><br/></p>
-<h3 id="y组合子">Y组合子</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-2506f85747258985.png" /></p>
+<h3 id="Y组合子"><a href="#Y组合子" class="headerlink" title="Y组合子"></a>Y组合子</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-14-recursive-function-7/1023733-2506f85747258985.png" alt=""></p>
 <p><br/></p>
 <p>Y组合子，是<a href="https://zh.wikipedia.org/wiki/Haskell_Curry" target="_blank" rel="noopener">Haskell B. Curry</a>在研究<span data-katex="\lambda"></span>演算时发现的，</p>
 <p>它的表现形式如下，</p>
@@ -460,11 +455,10 @@
 <p>下面我们来定义递归类型<code>Mu</code>，来帮助编译器进行恰当的类型推导，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">newtype Mu a &#x3D; Mu (Mu a -&gt; a)</span><br><span class="line"></span><br><span class="line">y :: (a -&gt; a) -&gt; a</span><br><span class="line">y f &#x3D; (\h -&gt; h $ Mu h) (\x -&gt; f . (\(Mu g) -&gt; g) x $ x)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>最后，<code>fact'</code>就可以使用Y组合子来定义了。</p>
+<p>最后，<code>fact&#39;</code>就可以使用Y组合子来定义了。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fact&#39; :: Int -&gt; Int</span><br><span class="line">fact&#39; &#x3D; y $ \fact -&gt; \n -&gt; case n of </span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  n -&gt; n * fact (n-1)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文从简单的“方程”思想出发，引出了不动点的概念，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文从简单的“方程”思想出发，引出了不动点的概念，</p>
 <p>然后把递归函数看做了另外一个函数的不动点，</p>
 <p>最后，我们讨论了Y组合子这样一个具体的不动点算子。</p>
 <p><br/></p>
@@ -476,8 +470,7 @@
 <p>那么<code>fix succ</code>是什么呢？</p>
 <p>这个问题，我们将在后文中继续讨论。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://zh.wikipedia.org/zh-cn/%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">方程</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zh.wikipedia.org/zh-cn/%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">方程</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F" target="_blank" rel="noopener">特征值和特征向量</a></p>
 <p><a href="https://zh.wikipedia.org/zh/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">微分方程</a></p>
 <p><a href="https://zh.wikipedia.org/zh-hans/%E4%B8%8D%E5%8A%A8%E7%82%B9" target="_blank" rel="noopener">不动点</a></p>

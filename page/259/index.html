@@ -362,23 +362,22 @@
 <p>当遇到(fn x)时，</p>
 <p>我们可以让它先转换成，</p>
 <p>(begin</p>
-<p>    (display x)</p>
-<p>    (gn x))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(gn x))</p>
 <p>然后再执行。</p>
 <p><br/></p>
 <p>甚至也可以用来定义变量，</p>
 <p>(define-with-display (f a)</p>
-<p>    (g a))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g a))</p>
 <p><br/></p>
 <p>转换成，</p>
 <p>(define (f a)</p>
-<p>    (display a)</p>
-<p>    (g a))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display a)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g a))</p>
 <p><br/></p>
 <p>这种代码层面的转换称为“宏”(macro)。</p>
 <p><br/></p>
-<h2 id="定义一个宏"><strong>定义一个宏</strong></h2>
-<p>Scheme是Lisp的一个简洁方言，</p>
+<h2 id="定义一个宏"><a href="#定义一个宏" class="headerlink" title="定义一个宏"></a><strong>定义一个宏</strong></h2><p>Scheme是Lisp的一个简洁方言，</p>
 <p>它使用define-syntax来定义宏。</p>
 <p><br/></p>
 <p>本质上，宏是一个特殊的标识符，</p>
@@ -395,14 +394,14 @@
 <p>而在编译器中，他们是两个独立的阶段。</p>
 <p><br/></p>
 <p>(define-syntax or</p>
-<p>    (syntax-rules ()</p>
-<p>        [(_) #f]</p>
-<p>        [(_ e) e]</p>
-<p>        [(_ e1 e2 e3 ...)</p>
-<p>         (let ([t e1]) (if t t (or e2 e3 ...)))]))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(syntax-rules ()</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_) #f]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e) e]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e1 e2 e3 …)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (let ([t e1]) (if t t (or e2 e3 …)))]))</p>
 <p><br/></p>
 <p>以上代码定义了一个宏，or，</p>
-<p>它用来对(or ...)表达式进行变换。</p>
+<p>它用来对(or …)表达式进行变换。</p>
 <p><br/></p>
 <p>(or)转换成了#f</p>
 <p>(or a)转换成了a</p>
@@ -411,8 +410,7 @@
 <p>我们看到，</p>
 <p>宏展开是支持递归调用的。</p>
 <p><br/></p>
-<h2 id="模式匹配"><strong>模式匹配</strong></h2>
-<p>syntax-rules使用了模式匹配来定义转换器，</p>
+<h2 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a><strong>模式匹配</strong></h2><p>syntax-rules使用了模式匹配来定义转换器，</p>
 <p>它的每一条语句给定了形如“[模式 模板]”的转换规则，</p>
 <p>如果模式匹配成功了，</p>
 <p>就按着模板的方式进行转换。</p>
@@ -428,28 +426,27 @@
 <p>转换结果为e，</p>
 <p>即它能把(or a)转换成a。</p>
 <p><br/></p>
-<p>我们再来看(_ e1 e2 e3 ...)，</p>
-<p>其中的省略号“...”，</p>
+<p>我们再来看(_ e1 e2 e3 …)，</p>
+<p>其中的省略号“…”，</p>
 <p><strong>并不是为了演示方便故意省略了。</strong></p>
 <p><br/></p>
-<p>“...”是一个标识符，是模式匹配的一部分，</p>
+<p>“…”是一个标识符，是模式匹配的一部分，</p>
 <p>它用来代表“和前面一样的匹配”。</p>
-<p>模板中也出现了“...”，</p>
-<p>它会根据模式中“...”来进行填充。</p>
+<p>模板中也出现了“…”，</p>
+<p>它会根据模式中“…”来进行填充。</p>
 <p><br/></p>
 <p>Scheme中使用的模式匹配，是一个庞大的主题，</p>
 <p>甚至<strong>模式匹配已经构成了一门新的语言，</strong></p>
 <p>TSPL4中进行了详细的解释，<a href="http://www.scheme.com/tspl4/syntax.html#./syntax:h2" target="_blank" rel="noopener">Syntax-Rules Transformers</a></p>
 <p><br/></p>
-<h2 id="转换器函数"><strong>转换器函数</strong></h2>
-<p>另外一种定义宏的方式是，</p>
+<h2 id="转换器函数"><a href="#转换器函数" class="headerlink" title="转换器函数"></a><strong>转换器函数</strong></h2><p>另外一种定义宏的方式是，</p>
 <p>显式的指定宏展开器函数。</p>
 <p><br/></p>
 <p>(define-syntax r</p>
-<p>    (lambda (x)</p>
-<p>        (display x)</p>
-<p>        (display "")</p>
-<p>        #t))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(display x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(display “\n”)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#t))</p>
 <p><br/></p>
 <p>我们用lambda定义了一个匿名函数，</p>
 <p>并让它与宏标识符r相关联。</p>
@@ -469,12 +466,12 @@
 <p>Scheme语言提供了syntax-case特殊形式。</p>
 <p><br/></p>
 <p>(define-syntax or</p>
-<p>    (lambda (x)</p>
-<p>        (syntax-case x ()</p>
-<p>            [(_) #'#f]</p>
-<p>            [(_ e) #'e]</p>
-<p>            [(_ e1 e2 e3 ...)</p>
-<p>             #'(let ([t e1]) (if t t (or e2 e3 ...)))])))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_) #’#f]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e) #’e]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ e1 e2 e3 …)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #’(let ([t e1]) (if t t (or e2 e3 …)))])))</p>
 <p><br/></p>
 <p>它使用了与syntax-rules相同的模式匹配规则，</p>
 <p>不同的是，我们还需要<strong>显式构造模板中的语法对象</strong>。</p>
@@ -483,8 +480,7 @@
 <p><strong>syntax-case会先求值x，然后解开语法对象的封装</strong>，得到(or a b)，</p>
 <p>再进行模式匹配。</p>
 <p><br/></p>
-<h2 id="语法对象"><strong>语法对象</strong></h2>
-<p>语法对象，包装了标识符的作用域信息。</p>
+<h2 id="语法对象"><a href="#语法对象" class="headerlink" title="语法对象"></a><strong>语法对象</strong></h2><p>语法对象，包装了标识符的作用域信息。</p>
 <p><br/></p>
 <p>我们知道Scheme的宏是卫生的(hygienic)，</p>
 <p><strong>宏展开后的标识符还处在其来源处的词法作用域中，</strong></p>
@@ -494,57 +490,56 @@
 <p><a href="http://www.scheme.com/download/" target="_blank" rel="noopener">Petite Chez Scheme</a>使用了<strong>语法对象</strong>进行封装。</p>
 <p><br/></p>
 <p>语法对象由syntax特殊形式创建，(syntax e)</p>
-<p>#'e是它的简写，</p>
+<p>#‘e是它的简写，</p>
 <p>在程序的读取阶段会被展开为(syntax e)。</p>
 <p><br/></p>
 <p>前文我们说，</p>
 <p>“模式匹配构成了一门新的语言”，并不为过，</p>
-<p>因为#'有很多规则(<strong>坑</strong>)需要我们了解。</p>
+<p>因为#’有很多规则(<strong>坑</strong>)需要我们了解。</p>
 <p><br/></p>
 <p>（1）出现在“模式”中的变量，称为模式变量(pattern variable)，</p>
 <p><strong>模式变量的值是它匹配的值</strong>。</p>
 <p>例如：(_ a b)匹配(or x y)，a和b就是模式变量，a的值是x，b的值是y</p>
 <p><br/></p>
-<p>（2）#'e的值是一个语法对象，<strong>e可以是模式变量也可以不是</strong>。</p>
+<p>（2）#’e的值是一个语法对象，<strong>e可以是模式变量也可以不是</strong>。</p>
 <p>如果e是模式变量，则值为#&lt;syntax e匹配的值&gt;，</p>
 <p>如果e不是模式变量，则值为#&lt;syntax e&gt;。</p>
 <p><br/></p>
-<p>（3）“模板”中的模式变量，必须出现在#'或者#'(...)中，<strong>不能裸写</strong>。</p>
+<p>（3）“模板”中的模式变量，必须出现在#’或者#’(…)中，<strong>不能裸写</strong>。</p>
 <p><a href="http://www.scheme.com/tspl4/syntax.html#./syntax:h3" target="_blank" rel="noopener">Pattern variables, however, can be referenced only within syntax expressions</a></p>
 <p><br/></p>
-<p>（4）<strong>#'(a b)不是一个语法对象，而是由语法对象构成的列表</strong>，(#'a #'b)</p>
-<p>例如：[(_ a) #'(a b)]，结果是(#&lt;syntax a匹配的值&gt; #&lt;syntax b&gt;)</p>
+<p>（4）<strong>#’(a b)不是一个语法对象，而是由语法对象构成的列表</strong>，(#’a #’b)</p>
+<p>例如：[(_ a) #’(a b)]，结果是(#&lt;syntax a匹配的值&gt; #&lt;syntax b&gt;)</p>
 <p>注意到b不是模式变量。</p>
 <p><br/></p>
-<p>（5）多层#'，读取器会先将每一层展开成(syntax ...)再求值。</p>
-<p>例如：#'#'a实际上是(syntax (syntax a))，</p>
+<p>（5）多层#’，读取器会先将每一层展开成(syntax …)再求值。</p>
+<p>例如：#’#’a实际上是(syntax (syntax a))，</p>
 <p>求值为(#&lt;syntax syntax&gt; (#&lt;syntax syntax&gt; #&lt;syntax a匹配的值&gt;))。</p>
 <p>注意到syntax不是模式变量。</p>
 <p><br/></p>
-<h2 id="可以定义宏的宏"><strong>可以定义宏的宏</strong></h2>
-<p>syntax-rules是用来定义宏的，</p>
+<h2 id="可以定义宏的宏"><a href="#可以定义宏的宏" class="headerlink" title="可以定义宏的宏"></a><strong>可以定义宏的宏</strong></h2><p>syntax-rules是用来定义宏的，</p>
 <p>然而，它也是一个宏，它最终被展开为syntax-case。</p>
 <p><br/></p>
 <p>(define-syntax syntax-rules</p>
-<p>    (lambda (x)</p>
-<p>        (syntax-case x ()</p>
-<p>            [(_ (i ...) ((keyword . pattern) template) ...)</p>
-<p>             #'(lambda (x)</p>
-<p>                     (syntax-case x (i ...)</p>
-<p>                         [(_ . pattern) #'template] ...))])))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ (i …) ((keyword . pattern) template) …)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #’(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (syntax-case x (i …)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [(_ . pattern) #’template] …))])))</p>
 <p><br/></p>
 <p>syntax-rules的目的，</p>
-<p>是为了避免显式的书写lambda和#'。</p>
+<p>是为了避免显式的书写lambda和#’。</p>
 <p><br/></p>
 <p>像这种生成syntax-case的宏还有很多，</p>
 <p>例如，with-syntax。</p>
 <p><br/></p>
 <p>(define-syntax with-syntax</p>
-<p>    (lambda (x)</p>
-<p>        (syntax-case x ()</p>
-<p>            [(_ ((p e) ...) b1 b2 ...)</p>
-<p>             #'(syntax-case (list e ...) ()</p>
-<p>                     [(p ...) (let () b1 b2 ...)])])))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(syntax-case x ()</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ ((p e) …) b1 b2 …)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #’(syntax-case (list e …) ()</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [(p …) (let () b1 b2 …)])])))</p>
 <p><br/></p>
 <p>with-syntax的目的，</p>
 <p>是把匹配条件写在一起，</p>
@@ -555,11 +550,10 @@
 <p>可以是语法对象的列表。</p>
 <p><br/></p>
 <p>syntax-case会对列表中的语法对象，</p>
-<p>解除#&lt;syntax ...&gt;的封装，</p>
+<p>解除#&lt;syntax …&gt;的封装，</p>
 <p>然后再进行模式匹配。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>Lisp的宏非常强大，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>Lisp的宏非常强大，</p>
 <p>很多人只是听说过，</p>
 <p>没有切身使用过，</p>
 <p>隐约觉得宏可以解决任何问题。</p>

@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾 上文中我们讨论了全函数和部分函数，以及计算的可终止性。 本文我们从数论函数开始，给原始递归函数集增加一种新的运算，得到了一个更大的集合。 然后根据递归函数，我们可以定义递归集和递归可枚举集， 为以后讨论可计算性与可判定性打好基础。  数论函数    自然数集一般记为，那么个自然数集的笛卡尔积记为， 于是，我们称集合到的部分函数为元部分数论函数。 作为数论函数，是一个全函数，而，，只是部分函数">
+<meta name="description" content="回顾上文中我们讨论了全函数和部分函数，以及计算的可终止性。 本文我们从数论函数开始，给原始递归函数集增加一种新的运算，得到了一个更大的集合。 然后根据递归函数，我们可以定义递归集和递归可枚举集， 为以后讨论可计算性与可判定性打好基础。  数论函数   自然数集一般记为，那么个自然数集的笛卡尔积记为， 于是，我们称集合到的部分函数为元部分数论函数。 作为数论函数，是一个全函数，而，，只是部分函数，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="递归函数（五）：递归集与递归可枚举集">
 <meta property="og:url" content="https://thzt.github.io/2017/03/09/recursive-function-5/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾 上文中我们讨论了全函数和部分函数，以及计算的可终止性。 本文我们从数论函数开始，给原始递归函数集增加一种新的运算，得到了一个更大的集合。 然后根据递归函数，我们可以定义递归集和递归可枚举集， 为以后讨论可计算性与可判定性打好基础。  数论函数    自然数集一般记为，那么个自然数集的笛卡尔积记为， 于是，我们称集合到的部分函数为元部分数论函数。 作为数论函数，是一个全函数，而，，只是部分函数">
+<meta property="og:description" content="回顾上文中我们讨论了全函数和部分函数，以及计算的可终止性。 本文我们从数论函数开始，给原始递归函数集增加一种新的运算，得到了一个更大的集合。 然后根据递归函数，我们可以定义递归集和递归可枚举集， 为以后讨论可计算性与可判定性打好基础。  数论函数   自然数集一般记为，那么个自然数集的笛卡尔积记为， 于是，我们称集合到的部分函数为元部分数论函数。 作为数论函数，是一个全函数，而，，只是部分函数，">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-567ebbb9d0fa7c88.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-b1d4c18df4caf3bc.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-6f7383f96e58c74e.png">
@@ -349,15 +349,13 @@
       
 
       
-        <h3 id="回顾">回顾</h3>
-<p>上文中我们讨论了全函数和部分函数，以及计算的可终止性。</p>
+        <h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上文中我们讨论了全函数和部分函数，以及计算的可终止性。</p>
 <p>本文我们从数论函数开始，给原始递归函数集增加一种新的运算，得到了一个更大的集合。</p>
 <p>然后根据递归函数，我们可以定义递归集和递归可枚举集，</p>
 <p>为以后讨论可计算性与可判定性打好基础。</p>
 <p><br/></p>
-<h3 id="数论函数">数论函数</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-567ebbb9d0fa7c88.png" /></p>
+<h3 id="数论函数"><a href="#数论函数" class="headerlink" title="数论函数"></a>数论函数</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-567ebbb9d0fa7c88.png" alt=""></p>
 <p><br/></p>
 <p>自然数集一般记为<span data-katex="N=\lbrace 0,1,2,\cdots \rbrace "></span>，那么<span data-katex="n"></span>个自然数集的笛卡尔积记为<span data-katex="N^n"></span>，</p>
 <p>于是，我们称集合<span data-katex="N^n"></span>到<span data-katex="N"></span>的部分函数为<span data-katex="n"></span>元部分数论函数。</p>
@@ -372,9 +370,8 @@
 <p>我们还可以将谓词看做值域为<span data-katex="\lbrace 0,1\rbrace "></span>的一个数论函数。</p>
 <p><span data-katex="0"></span>代表<code>True</code>，<span data-katex="1"></span>代表<code>False</code>。</p>
 <p><br/></p>
-<h3 id="极小化算子">极小化算子</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-b1d4c18df4caf3bc.png" /></p>
+<h3 id="极小化算子"><a href="#极小化算子" class="headerlink" title="极小化算子"></a>极小化算子</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-b1d4c18df4caf3bc.png" alt=""></p>
 <p><br/></p>
 <p>在前一篇中，我们从三个初始函数出发，</p>
 <p>通过合成运算和原始递归运算，得到了原始递归函数集，</p>
@@ -400,8 +397,7 @@
 <p><span data-katex="f(x_1,\cdots ,x_n)=min\lbrace g(x_1,\cdots ,x_n,t)=0\rbrace "></span></p>
 <p>则称部分函数<span data-katex="f(x_1,\cdots ,x_n)"></span>是由函数<span data-katex="g(x_1,\cdots ,x_n,t)"></span>经过极小化运算得到的。</p>
 <p><br/></p>
-<h3 id="递归函数集">递归函数集</h3>
-<p>和定义原始递归函数集一样，我们从以下三个初始函数出发，</p>
+<h3 id="递归函数集"><a href="#递归函数集" class="headerlink" title="递归函数集"></a>递归函数集</h3><p>和定义原始递归函数集一样，我们从以下三个初始函数出发，</p>
 <p>（1）零函数<span data-katex="n(x)=0"></span></p>
 <p>（2）后继函数<span data-katex="s(x)=x+1"></span></p>
 <p>（3）投影函数<span data-katex="u^n_i(x_1,\cdots ,x_n)=x_i"></span>，<span data-katex="1\leqslant i\leqslant n"></span></p>
@@ -413,9 +409,8 @@
 <p>可以证明阿克曼函数是递归函数，但不是原始递归函数，</p>
 <p>因此，原始递归函数集是递归函数集的真子集。</p>
 <p><br/></p>
-<h3 id="递归可枚举集">递归可枚举集</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-6f7383f96e58c74e.png" /></p>
+<h3 id="递归可枚举集"><a href="#递归可枚举集" class="headerlink" title="递归可枚举集"></a>递归可枚举集</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-09-recursive-function-5/1023733-6f7383f96e58c74e.png" alt=""></p>
 <p><br/></p>
 <p>在具体实践中，我们经常会遇到这样的问题，</p>
 <p>给定一个元素，我们需要判断这个元素是否属于某个集合。</p>
@@ -445,15 +440,13 @@
 <p>因此，集合<span data-katex="B"></span>是递归的当且仅当<span data-katex="B"></span>和<span data-katex="\bar{B}"></span>是递归可枚举的，</p>
 <p>其中<span data-katex="\bar{B}"></span>为<span data-katex="B"></span>的补集。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了数论函数，递归函数集，然后用递归函数分别定义了递归集和递归可枚举集，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了数论函数，递归函数集，然后用递归函数分别定义了递归集和递归可枚举集，</p>
 <p>可是为什么递归可枚举集是“可枚举”的呢？</p>
 <p><br/></p>
 <p>是因为每一个递归可枚举集可以一一对应一个自然数，这是怎样做到的呢？</p>
 <p>这需要我们理解总共有多少个可能的程序，以及什么是通用程序。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92%E9%9B%86%E5%90%88" target="_blank" rel="noopener">递归集</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92%E9%9B%86%E5%90%88" target="_blank" rel="noopener">递归集</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92%E5%8F%AF%E6%9E%9A%E4%B8%BE%E9%9B%86%E5%90%88" target="_blank" rel="noopener">递归可枚举集</a></p>
 
       

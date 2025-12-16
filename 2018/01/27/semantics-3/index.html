@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="1. 回顾 上文我们从代数学角度重新认识了自然数， 认识了自然数是如何被编码为符号串的， 以及自然数在数学上是如何表示的。  我们的整体思路是，首先用公理化的方式建立一个形式系统， 然后为这个形式系统选择一种数学解释作为它的语义， 这样就建立了符号和数学对象之间的对应关系。  一般的，这些数学对象需要具有不同的运算性质，有不同的结构， 因此构成了不同的代数。  在《你好，类型》系列文章中， 我">
+<meta name="description" content="1. 回顾上文我们从代数学角度重新认识了自然数， 认识了自然数是如何被编码为符号串的， 以及自然数在数学上是如何表示的。  我们的整体思路是，首先用公理化的方式建立一个形式系统， 然后为这个形式系统选择一种数学解释作为它的语义， 这样就建立了符号和数学对象之间的对应关系。  一般的，这些数学对象需要具有不同的运算性质，有不同的结构， 因此构成了不同的代数。  在《你好，类型》系列文章中， 我们">
 <meta property="og:type" content="article">
 <meta property="og:title" content="语言背后的代数学（三）：语义模型">
 <meta property="og:url" content="https://thzt.github.io/2018/01/27/semantics-3/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="1. 回顾 上文我们从代数学角度重新认识了自然数， 认识了自然数是如何被编码为符号串的， 以及自然数在数学上是如何表示的。  我们的整体思路是，首先用公理化的方式建立一个形式系统， 然后为这个形式系统选择一种数学解释作为它的语义， 这样就建立了符号和数学对象之间的对应关系。  一般的，这些数学对象需要具有不同的运算性质，有不同的结构， 因此构成了不同的代数。  在《你好，类型》系列文章中， 我">
+<meta property="og:description" content="1. 回顾上文我们从代数学角度重新认识了自然数， 认识了自然数是如何被编码为符号串的， 以及自然数在数学上是如何表示的。  我们的整体思路是，首先用公理化的方式建立一个形式系统， 然后为这个形式系统选择一种数学解释作为它的语义， 这样就建立了符号和数学对象之间的对应关系。  一般的，这些数学对象需要具有不同的运算性质，有不同的结构， 因此构成了不同的代数。  在《你好，类型》系列文章中， 我们">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-ae7599d28cc05a51.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-755d1c07e86c5ac0.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-ce2a07c40769f3b6.png">
@@ -352,10 +352,9 @@
       
 
       
-        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-ae7599d28cc05a51.png" /></p>
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-ae7599d28cc05a51.png" alt=""></p>
 <p><br/></p>
-<h3 id="回顾">1. 回顾</h3>
-<p>上文我们从代数学角度重新认识了自然数，</p>
+<h3 id="1-回顾"><a href="#1-回顾" class="headerlink" title="1. 回顾"></a>1. 回顾</h3><p>上文我们从代数学角度重新认识了自然数，</p>
 <p>认识了自然数是如何被编码为符号串的，</p>
 <p>以及自然数在数学上是如何表示的。</p>
 <p><br/></p>
@@ -378,9 +377,8 @@
 <p><br/></p>
 <p>本文从模型论角度来做出一些解释。</p>
 <p><br/></p>
-<h3 id="一阶语言">2. 一阶语言</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-755d1c07e86c5ac0.png" /></p>
+<h3 id="2-一阶语言"><a href="#2-一阶语言" class="headerlink" title="2. 一阶语言"></a>2. 一阶语言</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-755d1c07e86c5ac0.png" alt=""></p>
 <p><br/></p>
 <p>首先让我们回顾以下一阶谓词逻辑有哪些符号构成，</p>
 <p><br/></p>
@@ -406,21 +404,19 @@
 <p>因此，一阶谓词逻辑是一种一阶逻辑。</p>
 <p>一阶逻辑中的逻辑符号和非逻辑符号，称为<strong>一阶语言</strong>，记为<span data-katex="\mathscr{L}"></span>。</p>
 <p><br/></p>
-<h3 id="初等算术语言">3. 初等算术语言</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-ce2a07c40769f3b6.png" /></p>
+<h3 id="3-初等算术语言"><a href="#3-初等算术语言" class="headerlink" title="3. 初等算术语言"></a>3. 初等算术语言</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-ce2a07c40769f3b6.png" alt=""></p>
 <p><br/></p>
 <p>初等算术语言是一个一阶语言，记为<span data-katex="\Pi"></span>。</p>
 <p>它的常元符号集合为<span data-katex="\{0\}"></span>，函数符号集合为<span data-katex="\{S,+,\cdot\}"></span>，</p>
-<p>谓词符号集合为<span data-katex="\{&lt;\}"></span>。</p>
+<p>谓词符号集合为<span data-katex="\{<\}"></span>。</p>
 <p><br/></p>
 <p>其中，<span data-katex="S"></span>可以表示算术中的后继函数，</p>
 <p>而二元函数符号<span data-katex="+"></span>和<span data-katex="\cdot"></span>可以分别表示算术中的加法和乘法，</p>
-<p>谓词符号<span data-katex="&lt;"></span>可以描述自然数之间的小于关系。</p>
+<p>谓词符号<span data-katex="<"></span>可以描述自然数之间的小于关系。</p>
 <p><br/></p>
-<h3 id="语法项和逻辑公式">4. 语法项和逻辑公式</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-6dad89f5d4167a29.png" /></p>
+<h3 id="4-语法项和逻辑公式"><a href="#4-语法项和逻辑公式" class="headerlink" title="4. 语法项和逻辑公式"></a>4. 语法项和逻辑公式</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-6dad89f5d4167a29.png" alt=""></p>
 <p><br/></p>
 <p>从形式语言的角度来看，除了知道语言包含哪些符号之外，还要指定语法，</p>
 <p>习惯上，我们经常使用<a href="https://zh.wikipedia.org/wiki/%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F" target="_blank" rel="noopener">BNF</a>来指定，</p>
@@ -435,7 +431,7 @@
 <p>初等算术语言<span data-katex="\Pi"></span>中的合法项，</p>
 <p>以下符号串都是合法的，</p>
 <p><span data-katex="S0"></span>，<span data-katex="Sx_1"></span>，<span data-katex="+S0SSx"></span>，<span data-katex="\cdot x_1+Sx_1x_2"></span>，</p>
-<p>而<span data-katex="SS&lt;"></span>是不合法的。</p>
+<p>而<span data-katex="SS<"></span>是不合法的。</p>
 <p><br/></p>
 <p>我们知道逻辑证明，并不是建立在形式语法之上的，</p>
 <p>而是建立在公理系统上面，而每一个推导规则都表明了前提和结论之间的关系，</p>
@@ -452,43 +448,37 @@
 <p>（5）若<span data-katex="A"></span>是公式并且<span data-katex="x"></span>是一个变元，那么<span data-katex="\forall xA"></span>和<span data-katex="\exists xA"></span>也是公式，<span data-katex="x"></span>称为<strong>约束变元</strong>。</p>
 <p><br/></p>
 <p>例，以下符号串可以看做一个初等算术公式，</p>
-<p><span data-katex="\forall x\neg (Sx\doteq 0), \forall x\forall y(&lt; xy\rightarrow(\exists (y\doteq +xz)))"></span></p>
+<p><span data-katex="\forall x\neg (Sx\doteq 0), \forall x\forall y(< xy\rightarrow(\exists (y\doteq +xz)))"></span></p>
 <p><br/></p>
-<h3 id="语义模型">5. 语义模型</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-4edc7a4ce4127d1e.png" /></p>
+<h3 id="5-语义模型"><a href="#5-语义模型" class="headerlink" title="5. 语义模型"></a>5. 语义模型</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-4edc7a4ce4127d1e.png" alt=""></p>
 <p><br/></p>
 <p>有了一阶语言之后，我们就可以为符号选择语义了，</p>
 <p>通常的，语言的语义有两部分组成，</p>
 <p>其一称为<strong>结构</strong>，用来解释常元符号，函数符号和谓词符号，</p>
 <p>其二称为<strong>赋值</strong>，用来解释变元符号。</p>
 <p><br/></p>
-<h4 id="语言结构">5.1 语言结构</h4>
-<p>一阶语言<span data-katex="\mathscr{L}"></span>的<strong>结构</strong><span data-katex="M"></span>是一个偶对，记为<span data-katex="M=(\mathbb{M}, I)"></span>，其中，</p>
+<h4 id="5-1-语言结构"><a href="#5-1-语言结构" class="headerlink" title="5.1 语言结构"></a>5.1 语言结构</h4><p>一阶语言<span data-katex="\mathscr{L}"></span>的<strong>结构</strong><span data-katex="M"></span>是一个偶对，记为<span data-katex="M=(\mathbb{M}, I)"></span>，其中，</p>
 <p>（1）<span data-katex="\mathbb{M}"></span>是一个非空集合，称为<strong>论域</strong>，</p>
 <p>（2）<span data-katex="I"></span>是从<span data-katex="\mathscr{L}"></span>到<span data-katex="\mathbb{M}"></span>的映射，称为<strong>解释</strong>，记为<span data-katex="I:\mathscr{L} \rightarrow \mathbb{M}"></span>，它满足下面三个条件</p>
-<ol type="a">
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个常元符号<span data-katex="c"></span>，<span data-katex="I(c)"></span>是<span data-katex="\mathbb{M}"></span>中的元素</p></li>
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个n元函数符号<span data-katex="f"></span>，<span data-katex="I(f)"></span>是<span data-katex="\mathbb{M}"></span>上的n元函数</p></li>
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个n元谓词符号<span data-katex="P"></span>，<span data-katex="I(P)"></span>是<span data-katex="\mathbb{M}"></span>上的一个n元关系</p></li>
-</ol>
+<p>a) 对<span data-katex="\mathscr{L}"></span>中的每一个常元符号<span data-katex="c"></span>，<span data-katex="I(c)"></span>是<span data-katex="\mathbb{M}"></span>中的元素</p>
+<p>b) 对<span data-katex="\mathscr{L}"></span>中的每一个n元函数符号<span data-katex="f"></span>，<span data-katex="I(f)"></span>是<span data-katex="\mathbb{M}"></span>上的n元函数</p>
+<p>c) 对<span data-katex="\mathscr{L}"></span>中的每一个n元谓词符号<span data-katex="P"></span>，<span data-katex="I(P)"></span>是<span data-katex="\mathbb{M}"></span>上的一个n元关系</p>
 <p><br/></p>
 <p>例，我们可以指定初等算术语言<span data-katex="\Pi"></span>的结构为，偶对<span data-katex="N=(\mathbb{N}, I)"></span>，</p>
 <p>其中论域<span data-katex="\mathbb{N}"></span>为自然数集，</p>
 <p><span data-katex="I(S)"></span>为自然数集上的加<span data-katex="1"></span>函数，<span data-katex="I(+)"></span>为自然数加法运算，<span data-katex="I(\cdot)"></span>为自然数乘法运算。</p>
-<p><span data-katex="I(&lt;)"></span>为自然数集上的小于关系。</p>
+<p><span data-katex="I(<)"></span>为自然数集上的小于关系。</p>
 <p><br/></p>
-<h4 id="变元赋值">5.2 变元赋值</h4>
-<p>赋值<span data-katex="\sigma"></span>是一个映射，<span data-katex="\sigma:V\to\mathbb{M}"></span>，</p>
+<h4 id="5-2-变元赋值"><a href="#5-2-变元赋值" class="headerlink" title="5.2 变元赋值"></a>5.2 变元赋值</h4><p>赋值<span data-katex="\sigma"></span>是一个映射，<span data-katex="\sigma:V\to\mathbb{M}"></span>，</p>
 <p>它将<span data-katex="\mathscr{L}"></span>中的每一个变元，赋以论域<span data-katex="\mathbb{M}"></span>中的一个元素<span data-katex="a"></span>，</p>
 <p>记为<span data-katex="\sigma(x)=a"></span>，其中<span data-katex="x\in V,a\in\mathbb{M}"></span>。</p>
 <p><br/></p>
 <p>有了赋值运算之后，公式中的变元就固定下来了，</p>
 <p>我们就可以谈论，在某一指定赋值运算下公式的语义了。</p>
 <p><br/></p>
-<h4 id="模型和语义">5.3 模型和语义</h4>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-7d6ac5cbb607ea83.png" /></p>
+<h4 id="5-3-模型和语义"><a href="#5-3-模型和语义" class="headerlink" title="5.3 模型和语义"></a>5.3 模型和语义</h4><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-27-semantics-3/1023733-7d6ac5cbb607ea83.png" alt=""></p>
 <p><br/></p>
 <p>给定一阶语言<span data-katex="\mathscr{L}"></span>，并指定结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，</p>
 <p>我们称<span data-katex="(M,\sigma)"></span>是，我们为语言<span data-katex="\mathscr{L}"></span>选择的一个<strong>模型</strong>。</p>
@@ -507,14 +497,14 @@
 <p><strong>逻辑公式的语义</strong></p>
 <p>公式<span data-katex="A"></span>在模型<span data-katex="(M, \sigma )"></span>下的语义是一个真假值，用<span data-katex="A_{M[\sigma ]}"></span>表示，归纳定义如下，</p>
 <p>（1）<span data-katex="(Pt_1\cdot \cdot \cdot t_n)_{M[\sigma ]}=P_M((t_1)_{M[\sigma ]},\cdot \cdot \cdot ,(t_n)_{M[\sigma ]})"></span></p>
-<p>（2）<span data-katex="(t_1\doteq t_2)_{M[\sigma ]}=\begin{cases}T,&amp;\text{if }(t_1)_{M[\sigma ]}=(t_2)_{M[\sigma ]}\\F,&amp;\text{otherwise}\end{cases}"></span></p>
+<p>（2）<span data-katex="(t_1\doteq t_2)_{M[\sigma ]}=\begin{cases}T,&\text{if }(t_1)_{M[\sigma ]}=(t_2)_{M[\sigma ]}\\F,&\text{otherwise}\end{cases}"></span> </p>
 <p>（3）<span data-katex="(\neg A)_{M[\sigma ]}=B_\neg (A_{M[\sigma ]})"></span></p>
 <p>（4）<span data-katex="(A\vee B)_{M[\sigma ]}=B_\vee (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
 <p>（5）<span data-katex="(A\wedge B)_{M[\sigma ]}=B_\wedge (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
 <p>（6）<span data-katex="(A\rightarrow B)_{M[\sigma ]}=B_\rightarrow (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
 <p>（7）<span data-katex="(A\leftrightarrow B)_{M[\sigma ]}=B_\leftrightarrow (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
-<p>（8）<span data-katex="(\forall x_iA)_{M[\sigma ]}=\begin{cases}T,&amp;\forall a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&amp;\text{otherwise}\end{cases}"></span></p>
-<p>（9）<span data-katex="(\exists x_iA)_{M[\sigma ]}=\begin{cases}T,&amp;\exists a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&amp;\text{otherwise}\end{cases}"></span></p>
+<p>（8）<span data-katex="(\forall x_iA)_{M[\sigma ]}=\begin{cases}T,&\forall a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&\text{otherwise}\end{cases}"></span></p>
+<p>（9）<span data-katex="(\exists x_iA)_{M[\sigma ]}=\begin{cases}T,&\exists a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&\text{otherwise}\end{cases}"></span></p>
 <p><br/></p>
 <p>其中，二元真值函数<span data-katex="B_\wedge, B_\vee, B_\rightarrow, B_\leftrightarrow"></span>，</p>
 <p>分别逻辑连接词符号<span data-katex="\wedge, \vee, \rightarrow, \leftrightarrow"></span>的语义。</p>
@@ -522,16 +512,14 @@
 <p>至此，我们通过为一阶语言指定模型，</p>
 <p>将语言中所有的符号串都进行了解释。</p>
 <p><br/></p>
-<h3 id="总结">6. 总结</h3>
-<p>本文以一阶逻辑为例，从逻辑学角度给出了语义模型的定义，</p>
+<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h3><p>本文以一阶逻辑为例，从逻辑学角度给出了语义模型的定义，</p>
 <p>由此，一阶逻辑系统中的符号串，都有了一个数学对象与之对应，</p>
 <p>它们是论域，论域集合上的函数和运算。</p>
 <p><br/></p>
 <p>可想而已，这些数学对象是有代数性质的，</p>
 <p>下文我们将继续深入了解。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://thzt.github.io/2017/09/16/type-5/">你好，类型（五）：Predicate logic</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://thzt.github.io/2017/09/16/type-5/">你好，类型（五）：Predicate logic</a></p>
 <p><a href="https://book.douban.com/subject/2364517/" target="_blank" rel="noopener">数理逻辑</a></p>
 <p><a href="https://zh.wikipedia.org/zh-hans/%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91" target="_blank" rel="noopener">一阶逻辑</a></p>
 
@@ -723,7 +711,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">1. 回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一阶语言"><span class="nav-number">2.</span> <span class="nav-text">2. 一阶语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初等算术语言"><span class="nav-number">3.</span> <span class="nav-text">3. 初等算术语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法项和逻辑公式"><span class="nav-number">4.</span> <span class="nav-text">4. 语法项和逻辑公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义模型"><span class="nav-number">5.</span> <span class="nav-text">5. 语义模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语言结构"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 语言结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变元赋值"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 变元赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型和语义"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 模型和语义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">6. 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-回顾"><span class="nav-number">1.</span> <span class="nav-text">1. 回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-一阶语言"><span class="nav-number">2.</span> <span class="nav-text">2. 一阶语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-初等算术语言"><span class="nav-number">3.</span> <span class="nav-text">3. 初等算术语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-语法项和逻辑公式"><span class="nav-number">4.</span> <span class="nav-text">4. 语法项和逻辑公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-语义模型"><span class="nav-number">5.</span> <span class="nav-text">5. 语义模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-语言结构"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 语言结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-变元赋值"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 变元赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-模型和语义"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 模型和语义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-总结"><span class="nav-number">6.</span> <span class="nav-text">6. 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

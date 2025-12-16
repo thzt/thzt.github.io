@@ -347,8 +347,7 @@
       
         
           
-            <h3 id="拆分和集成问题">拆分和集成问题</h3>
-<blockquote>
+            <h3 id="拆分和集成问题"><a href="#拆分和集成问题" class="headerlink" title="拆分和集成问题"></a>拆分和集成问题</h3><blockquote>
 <p>I claim that you want to start communicating between independent modules no sooner than you absolutely HAVE to, and that you should avoid splitting things up until you really need to, because that communication complexity often swamps the complexity of the actual pieces involved in it.</p>
 </blockquote>
 <blockquote>
@@ -368,8 +367,7 @@
 <p>为什么会这样呢？</p>
 <p>因为，<strong>消息传递</strong>可以看做是一种<strong>计算过程</strong>。</p>
 <p><br/></p>
-<h3 id="消息传递">消息传递</h3>
-<p><a href="https://en.wikipedia.org/wiki/Alan_Kay" target="_blank" rel="noopener">Alan Kay</a>当时在向别人解释<strong>面向对象编程</strong>的时候谈到，</p>
+<h3 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h3><p><a href="https://en.wikipedia.org/wiki/Alan_Kay" target="_blank" rel="noopener">Alan Kay</a>当时在向别人解释<strong>面向对象编程</strong>的时候谈到，</p>
 <p>面向对象，原意是将对象类比为生物学中的细胞，<strong>计算过程</strong>通过对象之间交换信息来完成。</p>
 <p><br/></p>
 <blockquote>
@@ -383,11 +381,10 @@
 <p>将系统划分成多个<strong>对象</strong>，只是第一步，</p>
 <p>剩下的工作是，使用<strong>传递消息</strong>的方式，<strong>用这些对象</strong>完成计算任务。</p>
 <p><br/></p>
-<h3 id="状态">状态</h3>
-<p>与之类似的想法，还有 <a href="https://en.wikipedia.org/wiki/Wolfram_Alpha" target="_blank" rel="noopener">Wolfram</a> 提出的 <a href="http://mathworld.wolfram.com/CellularAutomaton.html" target="_blank" rel="noopener">元胞自动机</a>，</p>
+<h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><p>与之类似的想法，还有 <a href="https://en.wikipedia.org/wiki/Wolfram_Alpha" target="_blank" rel="noopener">Wolfram</a> 提出的 <a href="http://mathworld.wolfram.com/CellularAutomaton.html" target="_blank" rel="noopener">元胞自动机</a>，</p>
 <p><br/></p>
 <blockquote>
-<p>A cellular automaton is a collection of "colored" cells on a grid of specified shape that evolves through a number of discrete time steps according to a set of rules based on the states of neighboring cells.</p>
+<p>A cellular automaton is a collection of “colored” cells on a grid of specified shape that evolves through a number of discrete time steps according to a set of rules based on the states of neighboring cells.</p>
 </blockquote>
 <p><br/></p>
 <p>整个系统的<strong>最终状态</strong>，是<strong>计算执行后</strong>的结果，</p>
@@ -401,8 +398,7 @@
 <p>整体大于其各部分之和。 —— Aristotle</p>
 </blockquote>
 <p><br/></p>
-<h3 id="系统架构">系统架构</h3>
-<p>对于开发<strong>复杂系统</strong>的团队，</p>
+<h3 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h3><p>对于开发<strong>复杂系统</strong>的团队，</p>
 <p>有一个能在<strong>系统</strong>和<strong>子系统</strong>层面进行管控的角色，</p>
 <p>就变得异常重要了。</p>
 <p><br/></p>
@@ -412,8 +408,7 @@
 <p>担任这个角色的人员，常被称为<strong>系统架构师</strong>。</p>
 <p>下面我们来看一些<strong>反模式</strong>。</p>
 <p><br/></p>
-<h3 id="静默失败">静默失败</h3>
-<p>子系统或模块之间的边界处，经常会出现静默失败的情形，</p>
+<h3 id="静默失败"><a href="#静默失败" class="headerlink" title="静默失败"></a>静默失败</h3><p>子系统或模块之间的边界处，经常会出现静默失败的情形，</p>
 <p>由于是整个系统一起提供了产品功能，</p>
 <p>单独子系统的<strong>健壮性</strong>，其实并没有如实反映到最终产品中。</p>
 <p><br/></p>
@@ -424,8 +419,7 @@
 <p>子系统或模块之间的交互方式，没有一个<strong>明确的</strong>方式，</p>
 <p>是产生这类问题的主要原因。</p>
 <p><br/></p>
-<h3 id="外部服务的稳定性">外部服务的稳定性</h3>
-<p>现代软件系统越来越复杂，很多系统还会依赖一些<strong>在线</strong>提供服务的外部系统，</p>
+<h3 id="外部服务的稳定性"><a href="#外部服务的稳定性" class="headerlink" title="外部服务的稳定性"></a>外部服务的稳定性</h3><p>现代软件系统越来越复杂，很多系统还会依赖一些<strong>在线</strong>提供服务的外部系统，</p>
 <p>这些外部系统在不通知用户的情况下进行重启，或者由于某种原因停止服务，</p>
 <p>对上层系统的危害将是十分严重的。</p>
 <p><br/></p>
@@ -436,8 +430,7 @@
 <p>值得一提的是，这里我们并不是说强行让外部系统变得稳定，</p>
 <p>而是说，应当具有明确的<strong>应对措施</strong>。</p>
 <p><br/></p>
-<h3 id="接口约定">接口约定</h3>
-<p>接口不只是传递了数据，我认为更重要的是传递了<strong>信息</strong>，</p>
+<h3 id="接口约定"><a href="#接口约定" class="headerlink" title="接口约定"></a>接口约定</h3><p>接口不只是传递了数据，我认为更重要的是传递了<strong>信息</strong>，</p>
 <p>被调用者所有内部实现的信息，被封装到了接口之下，用户不用关心接口之外的东西，</p>
 <p>接口反映了被调用者期望调用者知道的一切。</p>
 <p><br/></p>
@@ -453,11 +446,10 @@
 <p>Organizations which design systems are constrained to produce designs which are copies of the communication structures of these organizations.</p>
 </blockquote>
 <blockquote>
-<p>—— <a href="https://en.wikipedia.org/wiki/Conway%27s_law" target="_blank" rel="noopener">Conway's law</a></p>
+<p>—— <a href="https://en.wikipedia.org/wiki/Conway%27s_law" target="_blank" rel="noopener">Conway’s law</a></p>
 </blockquote>
 <p><br/></p>
-<h3 id="结语">结语</h3>
-<blockquote>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><blockquote>
 <p><strong>系统</strong>是由一组实体和这些实体之间的关系所构成的集合，其功能要大于这些实体各自的功能之和。</p>
 </blockquote>
 <blockquote>

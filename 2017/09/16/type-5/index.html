@@ -350,7 +350,7 @@
 
       
         <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-16-type-5/1023733-dcc93601bf1fa0ab.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-16-type-5/1023733-dcc93601bf1fa0ab.png" alt=""></p>
 <p><br/></p>
 <p>从形式系统的角度来看，</p>
 <p>一阶谓词逻辑，只是比命题逻辑多添加了一些公理，</p>
@@ -367,9 +367,7 @@
 <p>本文我们来扩充前一篇中提到的，命题逻辑形式系统<span data-katex="P"></span>，</p>
 <p>以及，命题逻辑的自然演绎系统<span data-katex="N"></span>。</p>
 <p><br/></p>
-<h3 id="一阶谓词逻辑形式系统">1. 一阶谓词逻辑形式系统</h3>
-<h4 id="公理和推导规则">1.1 公理和推导规则</h4>
-<p>命题逻辑形式系统<span data-katex="P"></span>，只有三条公理，一条推导规则，</p>
+<h3 id="1-一阶谓词逻辑形式系统"><a href="#1-一阶谓词逻辑形式系统" class="headerlink" title="1. 一阶谓词逻辑形式系统"></a>1. 一阶谓词逻辑形式系统</h3><h4 id="1-1-公理和推导规则"><a href="#1-1-公理和推导规则" class="headerlink" title="1.1 公理和推导规则"></a>1.1 公理和推导规则</h4><p>命题逻辑形式系统<span data-katex="P"></span>，只有三条公理，一条推导规则，</p>
 <p>以下我们保持推导规则不变，为它添加四条公理，</p>
 <p>这样得到的系统，我们记为<span data-katex="K_\mathscr{L}"></span>。</p>
 <p><br/></p>
@@ -383,10 +381,9 @@
 <p>推导规则：</p>
 <p>（1）与命题逻辑形式系统<span data-katex="P"></span>相同</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-16-type-5/1023733-67359ade157c41ea.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-16-type-5/1023733-67359ade157c41ea.png" alt=""></p>
 <p><br/></p>
-<h4 id="辖域和自由出现">1.2 辖域和自由出现</h4>
-<p>其中（5）和（6）中提到了“自由出现”的概念，</p>
+<h4 id="1-2-辖域和自由出现"><a href="#1-2-辖域和自由出现" class="headerlink" title="1.2 辖域和自由出现"></a>1.2 辖域和自由出现</h4><p>其中（5）和（6）中提到了“自由出现”的概念，</p>
 <p>现在解释如下，</p>
 <p><br/></p>
 <p>我们称公式<span data-katex="\forall x\alpha"></span>中的<span data-katex="\alpha"></span>，为量词<span data-katex="\forall x"></span>的辖域。</p>
@@ -397,19 +394,16 @@
 <p>由于<span data-katex="\to"></span>的优先级比较低，上式相当于<span data-katex="(\forall x_1 F(x_1))\to F(x_1)"></span>，</p>
 <p>所以，第一个<span data-katex="x_1"></span>是约束出现，第二个<span data-katex="x_1"></span>是自由出现。</p>
 <p><br/></p>
-<h4 id="例式">1.3 例式</h4>
-<p>上述公理（4）中，出现了<span data-katex="\alpha(x/t)"></span>，它称为公式<span data-katex="\alpha"></span>的例式。</p>
+<h4 id="1-3-例式"><a href="#1-3-例式" class="headerlink" title="1.3 例式"></a>1.3 例式</h4><p>上述公理（4）中，出现了<span data-katex="\alpha(x/t)"></span>，它称为公式<span data-katex="\alpha"></span>的例式。</p>
 <p>它表示，将<span data-katex="\alpha"></span>中每一个自由出现的<span data-katex="x"></span>，都替换为项<span data-katex="t"></span>之后，得到的公式。</p>
 <p><br/></p>
-<h4 id="简写">1.4 简写</h4>
-<p>我们记，</p>
+<h4 id="1-4-简写"><a href="#1-4-简写" class="headerlink" title="1.4 简写"></a>1.4 简写</h4><p>我们记，</p>
 <p><span data-katex="\alpha\lor\beta"></span>，为<span data-katex="\neg\alpha\to\beta"></span>的简写，</p>
 <p><span data-katex="\alpha\land\beta"></span>，为<span data-katex="\neg(\neg\alpha\lor\neg\beta)"></span>的简写，</p>
 <p><span data-katex="\alpha\leftrightarrow\beta"></span>，为<span data-katex="(\alpha\to\beta)\land(\beta\to\alpha)"></span>的简写，</p>
 <p><span data-katex="\exists x\alpha"></span>，为<span data-katex="\neg\forall x(\neg\alpha)"></span>的简写。</p>
 <p><br/></p>
-<h4 id="举个例子">1.5 举个例子</h4>
-<p>求证：设项<span data-katex="t"></span>对变元符号<span data-katex="x"></span>在<span data-katex="\alpha"></span>中自由，则<span data-katex="\alpha(x/t)\to\exists x\alpha"></span>是<span data-katex="K_\mathscr{L}"></span>是一条定理。</p>
+<h4 id="1-5-举个例子"><a href="#1-5-举个例子" class="headerlink" title="1.5 举个例子"></a>1.5 举个例子</h4><p>求证：设项<span data-katex="t"></span>对变元符号<span data-katex="x"></span>在<span data-katex="\alpha"></span>中自由，则<span data-katex="\alpha(x/t)\to\exists x\alpha"></span>是<span data-katex="K_\mathscr{L}"></span>是一条定理。</p>
 <p><br/></p>
 <p>证明：</p>
 <p>因为<span data-katex="(\neg\alpha)(x/t)=\neg(\alpha(x/t))"></span>，</p>
@@ -425,9 +419,8 @@
 <p><br/></p>
 <p>证毕。</p>
 <p><br/></p>
-<h3 id="一阶谓词逻辑的自然演绎系统">2. 一阶谓词逻辑的自然演绎系统</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-16-type-5/1023733-9f7fea082bc4031e.png" /></p>
+<h3 id="2-一阶谓词逻辑的自然演绎系统"><a href="#2-一阶谓词逻辑的自然演绎系统" class="headerlink" title="2. 一阶谓词逻辑的自然演绎系统"></a>2. 一阶谓词逻辑的自然演绎系统</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-16-type-5/1023733-9f7fea082bc4031e.png" alt=""></p>
 <p><br/></p>
 <p>上一篇中我们介绍了命题逻辑的自然演绎系统<span data-katex="N"></span>，</p>
 <p>而且，我们知道了<span data-katex="N"></span>是与命题逻辑形式系统<span data-katex="P"></span>是等价的。</p>
@@ -443,8 +436,7 @@
 <p>由于<span data-katex="N_\mathscr{L}"></span>是对<span data-katex="N"></span>的扩充，</p>
 <p>下文中，我们只列出新增的公理和推导规则。</p>
 <p><br/></p>
-<h4 id="公理和推导规则-1">2.1 公理和推导规则</h4>
-<p><br/></p>
+<h4 id="2-1-公理和推导规则"><a href="#2-1-公理和推导规则" class="headerlink" title="2.1 公理和推导规则"></a>2.1 公理和推导规则</h4><p><br/></p>
 <p>公理：</p>
 <p>公理集仍为空集。</p>
 <p><br/></p>
@@ -456,8 +448,7 @@
 <p>（14）<span data-katex="\exists"></span>消去律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta}{\Gamma\cup\{\exists x\alpha\}\vdash\beta}"></span>，<span data-katex="x"></span>不在<span data-katex="\Gamma\cup\{\beta\}"></span>中自由出现</p>
 <p>（15）<span data-katex="\exists"></span>引入律：<span data-katex="\frac{\Gamma\vdash\alpha(x/t)}{\Gamma\vdash\exists x\alpha}"></span>，<span data-katex="t"></span>对<span data-katex="x"></span>在<span data-katex="\alpha"></span>中自由出现</p>
 <p><br/></p>
-<h4 id="举个例子-1">2.2 举个例子</h4>
-<p>求证：<span data-katex="\forall x(\alpha\leftrightarrow\beta)\vdash\forall x\alpha\leftrightarrow\forall x\beta"></span></p>
+<h4 id="2-2-举个例子"><a href="#2-2-举个例子" class="headerlink" title="2.2 举个例子"></a>2.2 举个例子</h4><p>求证：<span data-katex="\forall x(\alpha\leftrightarrow\beta)\vdash\forall x\alpha\leftrightarrow\forall x\beta"></span></p>
 <p><br/></p>
 <p>证明：</p>
 <p>根据规则（1）包含律，</p>
@@ -480,8 +471,7 @@
 <p><br/></p>
 <p>证毕。</p>
 <p><br/></p>
-<h3 id="总结">3. 总结</h3>
-<p>本文介绍了两种风格的一阶谓词逻辑演算系统，</p>
+<h3 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h3><p>本文介绍了两种风格的一阶谓词逻辑演算系统，</p>
 <p>其中<span data-katex="K_\mathscr{L}"></span>是Hilbert-style演绎系统，</p>
 <p><span data-katex="N_\mathscr{L}"></span>是Gentzen-style自然演绎系统，</p>
 <p>可以证明它们是等价的。</p>
@@ -490,8 +480,7 @@
 <p>我们有了足够的基础之后，就可以给<span data-katex="\lambda_\beta"></span>系统加上类型，</p>
 <p>开始介绍简单类型<span data-katex="\lambda"></span>演算了。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
 
       
     </div>
@@ -681,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一阶谓词逻辑形式系统"><span class="nav-number">1.</span> <span class="nav-text">1. 一阶谓词逻辑形式系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#公理和推导规则"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 公理和推导规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#辖域和自由出现"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 辖域和自由出现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例式"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 例式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简写"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 简写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举个例子"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 举个例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一阶谓词逻辑的自然演绎系统"><span class="nav-number">2.</span> <span class="nav-text">2. 一阶谓词逻辑的自然演绎系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#公理和推导规则-1"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 公理和推导规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举个例子-1"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 举个例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">3. 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-一阶谓词逻辑形式系统"><span class="nav-number">1.</span> <span class="nav-text">1. 一阶谓词逻辑形式系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-公理和推导规则"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 公理和推导规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-辖域和自由出现"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 辖域和自由出现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-例式"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 例式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-简写"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 简写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-举个例子"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 举个例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-一阶谓词逻辑的自然演绎系统"><span class="nav-number">2.</span> <span class="nav-text">2. 一阶谓词逻辑的自然演绎系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-公理和推导规则"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 公理和推导规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-举个例子"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 举个例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-总结"><span class="nav-number">3.</span> <span class="nav-text">3. 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

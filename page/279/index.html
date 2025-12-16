@@ -360,8 +360,7 @@
 <p>概念的差距，产生了无法逾越的鸿沟。</p>
 <p>我们还是认真的从头开始吧。</p>
 <p><br/></p>
-<h2 id="lambda-calculus"><strong>lambda calculus</strong></h2>
-<p>lambda calculus简称LC，</p>
+<h2 id="lambda-calculus"><a href="#lambda-calculus" class="headerlink" title="lambda calculus"></a><strong>lambda calculus</strong></h2><p>lambda calculus简称LC，</p>
 <p>它是一个形式系统，</p>
 <p>用来研究函数的组合和应用。</p>
 <p><br/></p>
@@ -387,12 +386,10 @@
 <p><br/></p>
 <p>其中，“≡”表示语法上相等。</p>
 <p><br/></p>
-<h2 id="替换规则"><strong>替换规则</strong></h2>
-<p>[N/x]M</p>
+<h2 id="替换规则"><a href="#替换规则" class="headerlink" title="替换规则"></a><strong>替换规则</strong></h2><p>[N/x]M</p>
 <p>表示把M中所有的x替换成N。</p>
 <p><br/></p>
-<h2 id="α转换"><strong>α转换</strong></h2>
-<p>α转换说的是，</p>
+<h2 id="α转换"><a href="#α转换" class="headerlink" title="α转换"></a><strong>α转换</strong></h2><p>α转换说的是，</p>
 <p>可以将λx.PQ中的x改为其他变量y，</p>
 <p>只需要同时将PQ中的自由变量x改为y即可。</p>
 <p><br/></p>
@@ -404,8 +401,7 @@
 <p><br/></p>
 <p>α转换相当于<strong>变量更名</strong>。</p>
 <p><br/></p>
-<h2 id="β归约"><strong>β归约</strong></h2>
-<p>β归约相当于<strong>函数调用</strong>。</p>
+<h2 id="β归约"><a href="#β归约" class="headerlink" title="β归约"></a><strong>β归约</strong></h2><p>β归约相当于<strong>函数调用</strong>。</p>
 <p><br/></p>
 <p>(λx.M)N -&gt; [N/x]M</p>
 <p>即，对(λx.M)N进行β归约，</p>
@@ -414,8 +410,7 @@
 <p>一个<strong>β范式</strong>（weak normal form），</p>
 <p>是不能再进行β归约的λ项。</p>
 <p><br/></p>
-<h2 id="churchrosser定理"><strong>Church–Rosser定理</strong></h2>
-<p>如果λ项P能β归约为M，即P-&gt;M，</p>
+<h2 id="Church–Rosser定理"><a href="#Church–Rosser定理" class="headerlink" title="Church–Rosser定理"></a><strong>Church–Rosser定理</strong></h2><p>如果λ项P能β归约为M，即P-&gt;M，</p>
 <p>也能β归约为N，P-&gt;N，</p>
 <p>则存在λ项T，满足，</p>
 <p>M-&gt;T且N-&gt;T。</p>
@@ -423,8 +418,7 @@
 <p>它表示了λ项β归约的<strong>汇聚性</strong>。</p>
 <p>而且，λ项在α等价的条件下，至多存在一个β范式。</p>
 <p><br/></p>
-<h2 id="combinator-logic"><strong>Combinator logic</strong></h2>
-<p>Combinator logic简称为CL，</p>
+<h2 id="Combinator-logic"><a href="#Combinator-logic" class="headerlink" title="Combinator logic"></a><strong>Combinator logic</strong></h2><p>Combinator logic简称为CL，</p>
 <p>它是一个形式系统，</p>
 <p>与lambda calculus具有同样的计算能力。</p>
 <p><br/></p>
@@ -445,27 +439,24 @@
 <p>UVWX ≡ (((UV)W)X)，</p>
 <p>其中，“≡”表示语法上相等。</p>
 <p><br/></p>
-<h2 id="替换规则-1"><strong>替换规则</strong></h2>
-<p>[U/x]Y</p>
+<h2 id="替换规则-1"><a href="#替换规则-1" class="headerlink" title="替换规则"></a><strong>替换规则</strong></h2><p>[U/x]Y</p>
 <p>表示把Y中所有的x替换成U。</p>
 <p><br/></p>
 <p>例如：</p>
 <p>[(SK)/x](yxx) ≡ y(SK)(SK)</p>
 <p><br/></p>
-<h2 id="弱归约weak-reduction"><strong>弱归约（Weak reduction）</strong></h2>
-<p>以下形式的CL项可以进行弱归约，</p>
+<h2 id="弱归约（Weak-reduction）"><a href="#弱归约（Weak-reduction）" class="headerlink" title="弱归约（Weak reduction）"></a><strong>弱归约（Weak reduction）</strong></h2><p>以下形式的CL项可以进行弱归约，</p>
 <p>IX -&gt; X</p>
 <p>KXY -&gt; X</p>
-<p>SXYZ -&gt; XZ(YZ)</p>
+<p>SXYZ -&gt; XZ(YZ) </p>
 <p><br/></p>
-<p>如果进行这些变换可以使U变成U'，</p>
-<p>就称CL项U可以弱归约为U'。</p>
+<p>如果进行这些变换可以使U变成U’，</p>
+<p>就称CL项U可以弱归约为U’。</p>
 <p><br/></p>
 <p>一个<strong>弱范式</strong>（weak normal form），</p>
 <p>是不能再进行弱归约的CL项。</p>
 <p><br/></p>
-<h2 id="churchrosser定理-1"><strong>Church–Rosser定理</strong></h2>
-<p>与lambda calculus一样，</p>
+<h2 id="Church–Rosser定理-1"><a href="#Church–Rosser定理-1" class="headerlink" title="Church–Rosser定理"></a><strong>Church–Rosser定理</strong></h2><p>与lambda calculus一样，</p>
 <p>对于CL，也有类似的定理，</p>
 <p><br/></p>
 <p>如果CL项U可以弱归约为X，即U-&gt;X，</p>
@@ -476,15 +467,12 @@
 <p>这表示了CL项弱归约的<strong>汇聚性</strong>。</p>
 <p>而且，CL项至多存在一个弱范式。</p>
 <p><br/></p>
-<h2 id="cl项的抽象"><strong>CL项的抽象</strong></h2>
-<p>为了和lambda演算进行对比，</p>
+<h2 id="CL项的抽象"><a href="#CL项的抽象" class="headerlink" title="CL项的抽象"></a><strong>CL项的抽象</strong></h2><p>为了和lambda演算进行对比，</p>
 <p>我们定义CL项的抽象，</p>
-<ol type="a">
-<li><p>[x].M ≡ KM，如果x不是M中的自由变量</p></li>
-<li><p>[x].x ≡ I</p></li>
-<li><p>[x].Ux ≡ U，如果x不是U中的自由变量</p></li>
-<li><p>[x].UV ≡ S([x].U)([x].V)，如果不满足(a)或(c)</p></li>
-</ol>
+<p>(a) [x].M ≡ KM，如果x不是M中的自由变量</p>
+<p>(b) [x].x ≡ I</p>
+<p>(c) [x].Ux ≡ U，如果x不是U中的自由变量</p>
+<p>(d) [x].UV ≡ S([x].U)([x].V)，如果不满足(a)或(c)</p>
 <p><br/></p>
 <p>可以证明，</p>
 <p>([x].M)N可以弱归约为[N/x]M。</p>
@@ -494,8 +482,7 @@
 <p>而对于lambda calculus中的λ项λx.xy，</p>
 <p>λx是λ项的一部分。</p>
 <p><br/></p>
-<h2 id="lc和cl的相似性"><strong>LC和CL的相似性</strong></h2>
-<p>经过以上学习，</p>
+<h2 id="LC和CL的相似性"><a href="#LC和CL的相似性" class="headerlink" title="LC和CL的相似性"></a><strong>LC和CL的相似性</strong></h2><p>经过以上学习，</p>
 <p>我们发现，</p>
 <p>LC中的<strong>α等价</strong>，对应着CL中的<strong>语法等价</strong>，</p>
 <p>LC中的<strong>β归约</strong>，对应着CL中的<strong>弱归约</strong>，</p>
@@ -504,8 +491,7 @@
 <p>我们就可以统一的，</p>
 <p>用LC中的符号来说明问题了。</p>
 <p><br/></p>
-<h2 id="组合子"><strong>组合子</strong></h2>
-<p>LC中的<strong>组合子</strong>，</p>
+<h2 id="组合子"><a href="#组合子" class="headerlink" title="组合子"></a><strong>组合子</strong></h2><p>LC中的<strong>组合子</strong>，</p>
 <p>表示一个闭项（closed pure term），</p>
 <p>它不是一个原子，也不包含自由变量。</p>
 <p><br/></p>
@@ -521,8 +507,7 @@
 <p>K ≡ λxy.x</p>
 <p>S ≡ λxyz.xz(yz)</p>
 <p><br/></p>
-<h2 id="不动点定理"><strong>不动点定理</strong></h2>
-<p>在LC和CL中，</p>
+<h2 id="不动点定理"><a href="#不动点定理" class="headerlink" title="不动点定理"></a><strong>不动点定理</strong></h2><p>在LC和CL中，</p>
 <p><strong>对于任意x，存在它的不动点Yx，满足，</strong></p>
 <p><strong>Yx -&gt; x(Yx)</strong></p>
 <p><br/></p>
@@ -541,8 +526,7 @@
 <p>x(UUx) -&gt;</p>
 <p>x(Yx)</p>
 <p><br/></p>
-<h2 id="不动点组合子"><strong>不动点组合子</strong></h2>
-<p>不动点组合子并不是唯一的，</p>
+<h2 id="不动点组合子"><a href="#不动点组合子" class="headerlink" title="不动点组合子"></a><strong>不动点组合子</strong></h2><p>不动点组合子并不是唯一的，</p>
 <p><br/></p>
 <p>存在不止一个Y，</p>
 <p>使得对于任意x，Yx -&gt; x(Yx)。</p>
@@ -554,8 +538,7 @@
 <p><strong>Curry-Ros组合子</strong></p>
 <p>Y ≡ λx.VV，V ≡ λy.x(yy)</p>
 <p><br/></p>
-<h2 id="不动点定理的用法"><strong>不动点定理的用法</strong></h2>
-<p>根据不动点定理，</p>
+<h2 id="不动点定理的用法"><a href="#不动点定理的用法" class="headerlink" title="不动点定理的用法"></a><strong>不动点定理的用法</strong></h2><p>根据不动点定理，</p>
 <p>我们能得到任意LC项或CL项的不动点，</p>
 <p>所以，<strong>不动点方程总是有解的</strong>。</p>
 <p><br/></p>
@@ -576,42 +559,39 @@
 <p>这也表明可以不依赖于副作用，</p>
 <p>用Y来定义<strong>匿名递归函数</strong>。</p>
 <p><br/></p>
-<h2 id="用y组合子解递归方程"><strong>用Y组合子解递归方程</strong></h2>
-<p>Haskell中的Turing Y组合子定义如下：</p>
+<h2 id="用Y组合子解递归方程"><a href="#用Y组合子解递归方程" class="headerlink" title="用Y组合子解递归方程"></a><strong>用Y组合子解递归方程</strong></h2><p>Haskell中的Turing Y组合子定义如下：</p>
 <p><strong>import Unsafe.Coerce</strong></p>
-<p>u =  -&gt; x $ u <strong>(unsafeCoerce</strong> u<strong>)</strong> x</p>
+<p>u = \u x -&gt; x $ u <strong>(unsafeCoerce</strong> u<strong>)</strong> x</p>
 <p>y = u u</p>
 <p><br/></p>
 <p>斐波那契函数fib的递归定义，</p>
-<p>fib = -&gt; if n&lt;2 then 1 else (n*) $ fib $ n-1</p>
+<p>fib = \n -&gt; if n&lt;2 then 1 else (n*) $ fib $ n-1</p>
 <p><br/></p>
 <p>为了<strong>消除等式右边fib</strong>，</p>
 <p>我们把它转换成不动点方程，</p>
-<p>fib = (&gt; -&gt; if n&lt;2 then 1 else (n*) $ f $ n-1) fib</p>
+<p>fib = (\f -&gt; \n -&gt; if n&lt;2 then 1 else (n*) $ f $ n-1) fib</p>
 <p>用Y组合子求解，得到了一个匿名的递归函数，</p>
-<p>fib = y $ <strong>&gt;</strong> -&gt; if n&lt;2 then 1 else (n*) $ <strong>f</strong> $ n-1</p>
+<p>fib = y $ <strong>\f -&gt;</strong> \n -&gt; if n&lt;2 then 1 else (n*) $ <strong>f</strong> $ n-1</p>
 <p><br/></p>
 <p>验证一下运行结果，</p>
 <p>fib 5</p>
 <p>=&gt; 120</p>
 <p><br/></p>
-<h2 id="不动点存在性的疑问"><strong>不动点存在性的疑问</strong></h2>
-<p>方程解的性质是由方程决定的，</p>
+<h2 id="不动点存在性的疑问"><a href="#不动点存在性的疑问" class="headerlink" title="不动点存在性的疑问"></a><strong>不动点存在性的疑问</strong></h2><p>方程解的性质是由方程决定的，</p>
 <p><strong>解法无法改变解的性质</strong>。</p>
 <p><br/></p>
 <p>例如：</p>
-<p>a = undefined = (-&gt; undefined) a</p>
-<p>解为：a = y $ -&gt; undefined <strong>= undefined</strong></p>
+<p>a = undefined = (\a -&gt; undefined) a</p>
+<p>解为：a = y $ \a -&gt; undefined <strong>= undefined</strong></p>
 <p><br/></p>
-<p>add = -&gt; add n+1</p>
+<p>add = \n -&gt; add n+1</p>
 <p>这个一个无限递归函数。</p>
 <p>转换为不动点方程的形式，</p>
-<p>add = (&gt; -&gt; f n+1) add</p>
-<p>解为：add = y $ (&gt; -&gt; f n+1)</p>
+<p>add = (\f -&gt; \n -&gt; f n+1) add</p>
+<p>解为：add = y $ (\f -&gt; \n -&gt; f n+1)</p>
 <p>这个add<strong>仍然是</strong>一个无限递归函数。</p>
 <p><br/></p>
-<h2 id="初等函数的不动点"><strong>初等函数的不动点</strong></h2>
-<p>另外，对于初等函数的不动点方程，</p>
+<h2 id="初等函数的不动点"><a href="#初等函数的不动点" class="headerlink" title="初等函数的不动点"></a><strong>初等函数的不动点</strong></h2><p>另外，对于初等函数的不动点方程，</p>
 <p>x = f(x)</p>
 <p>程序中直接写成x = f(x)会<strong>导致无限递归</strong>，</p>
 <p>因为初等函数方程给出来的是<strong>约束</strong>，</p>
@@ -619,21 +599,21 @@
 <p><br/></p>
 <p>例如：</p>
 <p>求解f(x) = 2x的不动点，</p>
-<p>**直接写x = 2*x是一个无限的递归**，并不能解出x = 0来，</p>
+<p><strong>直接写x = 2*x是一个无限的递归</strong>，并不能解出x = 0来，</p>
 <p>因此，x = 2*x实际表示的是一个无限递归的计算过程。</p>
 <p><br/></p>
 <p>然而，<strong>仍然</strong>会存在满足这个方程的解。</p>
 <p>不动点方程形式如下，</p>
-<p>x = (-&gt; 2*x) x</p>
-<p>解为：x = y $ -&gt; 2*x</p>
+<p>x = (\x -&gt; 2*x) x</p>
+<p>解为：x = y $ \x -&gt; 2*x</p>
 <p>确实可以使等式成立，</p>
 <p>但它<strong>同样表示</strong>的是一个无限递归的计算过程。</p>
 <p><br/></p>
 <p>f(x) = 2x的不动点方程，对应的“计算过程”<strong>应该是</strong>，</p>
 <p>x = 0</p>
 <p>不动点方程的形式如下，</p>
-<p>x = (-&gt; 0) x</p>
-<p>解为：x = y $ -&gt; 0 <strong>= 0</strong></p>
+<p>x = (\x -&gt; 0) x</p>
+<p>解为：x = y $ \x -&gt; 0 <strong>= 0</strong></p>
 <p><br/></p>
 <p>因此，</p>
 <p>初等函数的不动点，</p>
@@ -641,8 +621,7 @@
 <p>初等函数方程是一种<strong>约束规则</strong>，</p>
 <p>LC或CL的等式是一种<strong>推导规则</strong>。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>不动点问题，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>不动点问题，</p>
 <p>一直是我的心结。</p>
 <p>只可惜功力不够，总是想不明白。</p>
 <p><br/></p>

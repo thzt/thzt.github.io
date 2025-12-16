@@ -376,8 +376,7 @@
 <p>我们要好好学习一下<strong>理论基础</strong>，</p>
 <p>看一下正则表达式的真面目。</p>
 <p><br/></p>
-<h2 id="形式语言"><strong>形式语言</strong></h2>
-<p>日常生活中，</p>
+<h2 id="形式语言"><a href="#形式语言" class="headerlink" title="形式语言"></a><strong>形式语言</strong></h2><p>日常生活中，</p>
 <p>也有这样的认识，</p>
 <p>我们所了解的汉字是<strong>有限的</strong>，</p>
 <p>但是我们能说的话，却是<strong>无限的</strong>。</p>
@@ -414,33 +413,32 @@
 <p><br/></p>
 <p><strong>这给了我们用有限来描述无限的能力</strong>。</p>
 <p><br/></p>
-<h2 id="文法"><strong>文法</strong></h2>
-<p>为了描述语言的结构，</p>
+<h2 id="文法"><a href="#文法" class="headerlink" title="文法"></a><strong>文法</strong></h2><p>为了描述语言的结构，</p>
 <p>John Backus和Peter Naur创造了一种<strong>语言的描述方法</strong>，</p>
 <p>称为BNF（Backus-Naur Form）。</p>
 <p><br/></p>
-<p>expr ::= term {"+" term | "-" term}.</p>
-<p>term ::= factor {"*" factor | "/" factor}.</p>
-<p>factor ::= "(" expr ")".</p>
+<p>expr ::= term {“+” term | “-“ term}.</p>
+<p>term ::= factor {“*” factor | “/“ factor}.</p>
+<p>factor ::= “(“ expr “)”.</p>
 <p><br/></p>
 <p>BNF表示中的每一行，称为一个“产生式”，</p>
 <p>::=表示左边的项可以由右边的项来产生。</p>
 <p>其中，用引号括起来的项，称为“终结符”，相当于字面量。</p>
 <p>不用引号括起来的项，称为“非终结符”，它们可以由其他项组成。</p>
 <p><br/></p>
-<p>{...}是约定好了的符号，</p>
+<p>{…}是约定好了的符号，</p>
 <p>用来表示它包含的项可以出现0次或更多次。</p>
 <p><br/></p>
-<p>常用的还有[...]，</p>
+<p>常用的还有[…]，</p>
 <p>用来表示，可以出现也可以不出现。</p>
 <p><br/></p>
 <p>以上BNF描述了算术表达式的语法。</p>
 <p>例如：1*(2+3)，可以从exp开始生成出来，</p>
-<p>expr</p>
-<p>=&gt; factor "*" factor</p>
-<p>=&gt; factor "*" "(" expr ")"</p>
-<p>=&gt; factor "*" "(" term "+" term ")"</p>
-<p>=&gt; 1 "*" "(" 2 "+" 3 ")"</p>
+<p>expr </p>
+<p>=&gt; factor “*” factor</p>
+<p>=&gt; factor “*” “(“ expr “)”</p>
+<p>=&gt; factor “*” “(“ term “+” term “)”</p>
+<p>=&gt; 1 “*” “(“ 2 “+” 3 “)”</p>
 <p><br/></p>
 <p>expr称为“开始符号”。</p>
 <p><br/></p>
@@ -448,8 +446,7 @@
 <p>一个语言的所有终结符，非终结符，产生式，开始符号，</p>
 <p>构成了这个<strong>语言的文法</strong>。</p>
 <p><br/></p>
-<h2 id="语言的分类"><strong>语言的分类</strong></h2>
-<p>乔姆斯基，根据语言文法产生式的特点，</p>
+<h2 id="语言的分类"><a href="#语言的分类" class="headerlink" title="语言的分类"></a><strong>语言的分类</strong></h2><p>乔姆斯基，根据语言文法产生式的特点，</p>
 <p>把语言分为了4类。</p>
 <p><br/></p>
 <p>不同的文法，能描述不能范围的语言集合。</p>
@@ -488,8 +485,7 @@
 <p>这还需要用到<a href="http://baike.baidu.com/link?url=QF5rQxOWA6OA8NpOrQv3ThcPGZ2FF0Wzu7BWjwnLOtJE4AFgX2IN9pf6FWDVuOxV98GdMGWoHNMal5b61j7h__" target="_blank" rel="noopener">泵引理</a>这个重要工具。</p>
 <p>水深危险。</p>
 <p><br/></p>
-<h2 id="自动机"><strong>自动机</strong></h2>
-<p>自动机，是一种假想的机器，</p>
+<h2 id="自动机"><a href="#自动机" class="headerlink" title="自动机"></a><strong>自动机</strong></h2><p>自动机，是一种假想的机器，</p>
 <p>常被人提及的是“图灵机”。</p>
 <p>它是各种自动机中运算能力最强的机器。</p>
 <p><br/></p>
@@ -522,8 +518,7 @@
 <p>通过上下文无关文法，构建下推自动机，</p>
 <p>对词汇流进行<strong>解析</strong>（parse）。</p>
 <p><br/></p>
-<h2 id="计算模型"><strong>计算模型</strong></h2>
-<p><strong>形式语言</strong>和<strong>自动机</strong>，</p>
+<h2 id="计算模型"><a href="#计算模型" class="headerlink" title="计算模型"></a><strong>计算模型</strong></h2><p><strong>形式语言</strong>和<strong>自动机</strong>，</p>
 <p>可以看做是两种<strong>计算模型</strong>，</p>
 <p>它们从不同的角度描述了同一个问题。</p>
 <p><br/></p>
@@ -546,8 +541,7 @@
 <p><br/></p>
 <p>这一结论称为，Church-Turing论题。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>各种计算模型，虽然在能力上是相同的，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>各种计算模型，虽然在能力上是相同的，</p>
 <p>但是它们<strong>各有所长</strong>，</p>
 <p>于是被用到了形形色色的地方。</p>
 <p><br/></p>

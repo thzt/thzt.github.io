@@ -347,13 +347,12 @@
       
         
           
-            <h3 id="背景">背景</h3>
-<p><a href="https://github.com/facebook/react/releases/tag/v16.8.0" target="_blank" rel="noopener">React 16.8.0</a>开始已经支持 <a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">Hooks</a>了，</p>
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><a href="https://github.com/facebook/react/releases/tag/v16.8.0" target="_blank" rel="noopener">React 16.8.0</a>开始已经支持 <a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">Hooks</a>了，</p>
 <p>传言 Hooks 受到了<a href="https://github.com/reactjs/rfcs/blob/master/text/0068-react-hooks.md#credits-and-prior-art" target="_blank" rel="noopener">Algebraic Effects</a>的启发，</p>
 <p>毕竟React团队有不少<a href="https://github.com/ocamllabs/ocaml-effects-tutorial#2-effectful-computations-in-a-pure-setting" target="_blank" rel="noopener">OCaml</a>开发者。</p>
 <p><br/></p>
 <blockquote>
-<p>OCaml with support for (unchecked) algebraic effects and handlers.</p>
+<p>OCaml with support for (unchecked) algebraic effects and handlers. </p>
 </blockquote>
 <blockquote>
 <p>Effects and handlers provide concurrency and compose part of <a href="https://github.com/ocamllabs/ocaml-multicore" target="_blank" rel="noopener">Multicore OCaml</a>.</p>
@@ -365,12 +364,11 @@
 <p>以下我将algebraic effects当做专题来进行了调研，其中涉及了很多能力之外的知识，</p>
 <p>因此，出现理解上的错误是不可避免的。</p>
 <p>就当是阶段性的总结吧，读者还请注意分辨，茶余饭后止增笑耳。</p>
-<h3 id="delimited-continuation">1. delimited continuation</h3>
-<p>但是究竟什么是Algebraic Effects，查了很多资料都没找到答案，</p>
+<h3 id="1-delimited-continuation"><a href="#1-delimited-continuation" class="headerlink" title="1. delimited continuation"></a>1. delimited continuation</h3><p>但是究竟什么是Algebraic Effects，查了很多资料都没找到答案，</p>
 <p>Sam Galson有一篇文章<a href="https://medium.com/yld-engineering-blog/continuations-coroutines-fibers-effects-e163dda9dedc" target="_blank" rel="noopener">Continuations, coroutines, fibers, effects</a>从JS的角度介绍了react的理论基础，</p>
 <p>里面提到了<a href="https://en.wikipedia.org/wiki/Delimited_continuation" target="_blank" rel="noopener">Delimited Continuation</a>，它可用来实现各种effects。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-9631b2677b32eaaa.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-9631b2677b32eaaa.png" alt=""></p>
 <p><br/></p>
 <p>其中<a href="https://en.wikipedia.org/wiki/Continuation" target="_blank" rel="noopener">Continuation</a>应该是一个很熟悉的概念了，</p>
 <p>current continuation（当前位置的continuation）表示程序从某个位置开始，之后到程序结束所有后续的计算，</p>
@@ -402,8 +400,7 @@
 <p>多个<code>shift</code>的场景，<code>k</code>里面又有<code>shift</code>，</p>
 <p>第二个<code>shift</code>返回并不会导致<code>reset</code>结束，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(reset</span><br><span class="line">   (begin</span><br><span class="line">     (shift k (cons 1 (k (void))))</span><br><span class="line">     (shift k (cons 2 (k (void))))</span><br><span class="line">     null))</span><br></pre></td></tr></table></figure>
-<h3 id="模拟-generator">2. 模拟 generator</h3>
-<p>有了delimited continuation我们就可以实现很多常见的effects了，</p>
+<h3 id="2-模拟-generator"><a href="#2-模拟-generator" class="headerlink" title="2. 模拟 generator"></a>2. 模拟 generator</h3><p>有了delimited continuation我们就可以实现很多常见的effects了，</p>
 <p>包括IO操作，yield，try/catch等等，</p>
 <p><br/></p>
 <p>下面直接引用这篇文章中的例子，<a href="https://medium.com/yld-engineering-blog/continuations-coroutines-fibers-effects-e163dda9dedc" target="_blank" rel="noopener">Continuations, coroutines, fibers, effects</a></p>
@@ -432,15 +429,13 @@
 <p>并且为了区分其他的<code>handle</code>调用，把<code>effect</code>写为<code>handle</code>的形参。</p>
 <p><br/></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const hello &#x3D; () &#x3D;&gt;</span><br><span class="line">  handle((effect) &#x3D;&gt; &#123;</span><br><span class="line">    const continueWith &#x3D; effect(false)</span><br><span class="line">    return continueWith + &#39;world&#39;;</span><br><span class="line">  &#125;, (isShy, cont) &#x3D;&gt; &#123;</span><br><span class="line">    return isShy ? cont(&#39;goodbye&#39;) : cont(&#39;hello&#39;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="algebraic-effects">3. algebraic? effects?</h3>
-<p>但是，为什么<code>shift</code>是一种<code>effect</code>呢？</p>
+<h3 id="3-algebraic-effects"><a href="#3-algebraic-effects" class="headerlink" title="3. algebraic? effects?"></a>3. algebraic? effects?</h3><p>但是，为什么<code>shift</code>是一种<code>effect</code>呢？</p>
 <p>这个<code>effect</code>为什么又是<code>algebraic</code>的呢？</p>
 <p><br/></p>
 <p>要揭开这个谜题还得去啃论文了。</p>
-<h4 id="model-effects">3.1 model effects</h4>
-<p>首先在<a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/08/algeff-tr-2016-v2.pdf" target="_blank" rel="noopener">Algebraic Effects for Functional Programming</a>中，作者Daan Leijen提到，</p>
+<h4 id="3-1-model-effects"><a href="#3-1-model-effects" class="headerlink" title="3.1 model effects"></a>3.1 model effects</h4><p>首先在<a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/08/algeff-tr-2016-v2.pdf" target="_blank" rel="noopener">Algebraic Effects for Functional Programming</a>中，作者Daan Leijen提到，</p>
 <blockquote>
-<p>Algebraic effect handlers, are recently gaining in popularity as a purely functional approach to modeling effects.</p>
+<p>Algebraic effect handlers, are recently gaining in popularity as a purely functional approach to modeling effects. </p>
 </blockquote>
 <blockquote>
 <p>In this article, we give an end-to-end overview of practical algebraic effects in the context of a compiled implementation in the Koka language.</p>
@@ -456,13 +451,12 @@
 <p><br/></p>
 <p>因此，引文[34]中肯定提到了Algebraic effects和algebraic effect handlers，</p>
 <p>他们都是建模effect的手段。</p>
-<h4 id="computational-λ-calculus">3.2 computational λ-calculus</h4>
-<p>我们找到了这篇文献，<a href="http://homepages.inf.ed.ac.uk/gdp/publications/alg_ops_gen_effects.pdf" target="_blank" rel="noopener">Algebraic Operations and Generic Effects</a>，作者Gordon Plotkin and John Power是这么说的，</p>
+<h4 id="3-2-computational-λ-calculus"><a href="#3-2-computational-λ-calculus" class="headerlink" title="3.2 computational λ-calculus"></a>3.2 computational λ-calculus</h4><p>我们找到了这篇文献，<a href="http://homepages.inf.ed.ac.uk/gdp/publications/alg_ops_gen_effects.pdf" target="_blank" rel="noopener">Algebraic Operations and Generic Effects</a>，作者Gordon Plotkin and John Power是这么说的，</p>
 <blockquote>
-<p>Eugenio Moggi, in [13, 15], introduced the idea of giving a uniﬁed category theoretic semantics for computational eﬀects, ...</p>
+<p>Eugenio Moggi, in [13, 15], introduced the idea of giving a uniﬁed category theoretic semantics for computational eﬀects, … </p>
 </blockquote>
 <blockquote>
-<p>Examples of such eﬀects are: nondeterminism, probabilistic nonde-terminism, exceptions, interactive input/output, side-eﬀects, and continuations with, ...</p>
+<p>Examples of such eﬀects are: nondeterminism, probabilistic nonde-terminism, exceptions, interactive input/output, side-eﬀects, and continuations with, …</p>
 </blockquote>
 <p><br/></p>
 <p>作者说Eugenio Moggi从category theory出发，给computational effects提供了统一的语义（这个理论模型叫computational λ-calculus），</p>
@@ -476,14 +470,14 @@
 <p>唯一不同的是，computational λ-calculus严格区分的values和computations。</p>
 <p><br/></p>
 <blockquote>
-<p>However, the calculus does not contain operations, the constructs that actually create the eﬀects.</p>
+<p>However, the calculus does not contain operations, the constructs that actually create the eﬀects. </p>
 </blockquote>
 <p>不过computational λ-calculus也有缺陷，它不包含operations。</p>
 <p>而所谓operations，就是那些可以产生effects的东西。</p>
 <p><br/></p>
 <p>但是，Eugenio Moggi还是很强的，虽然computational λ-calculus不包含operations，但是computational metalanguage包含了，</p>
 <blockquote>
-<p>Moggi’s computational metalanguage does contain operations, and his paper [14] includes semantics for them, but he only demanded naturality of the operations in C, and he did not develop a body of theory in support of that semantics. Here, by demanding the stronger coherence condition of parametrised naturality in CT ,</p>
+<p>Moggi’s computational metalanguage does contain operations, and his paper [14] includes semantics for them, but he only demanded naturality of the operations in C, and he did not develop a body of theory in support of that semantics. Here, by demanding the stronger coherence condition of parametrised naturality in CT , </p>
 </blockquote>
 <blockquote>
 <p>we provide a notion of algebraic operations, which we support by equivalence theorems to indicate deﬁnitiveness of the axioms, and which are further supported by our development of a uniﬁed operational semantics in [20].</p>
@@ -497,7 +491,7 @@
 </blockquote>
 <p><br/></p>
 <p>当然新概念总是会有定义的，</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-200782f6dccd0c8b.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-200782f6dccd0c8b.png" alt=""></p>
 <p><br/></p>
 <p>所以，<code>algebraic operations</code>主要还是从语义角度来看的。</p>
 <p>它给computational λ-calculus扩充了operation，还给这些operation选了一个catetory theory的语义。</p>
@@ -506,18 +500,17 @@
 <p><a href="https://core.ac.uk/download/pdf/21173011.pdf" target="_blank" rel="noopener">Notions of computation and monads</a></p>
 <p><a href="https://www.irif.fr/~mellies/mpri/mpri-ens/articles/moggi-computational-lambda-calculus-and-monads.pdf" target="_blank" rel="noopener">Computational Lambda-Calculus and Monads</a></p>
 <p><a href="https://www.ics.uci.edu/~jajones/INF102-S18/readings/09_Moggi.pdf" target="_blank" rel="noopener">An Abstract View of Programming Languages</a></p>
-<h4 id="operations-vs-effects">3.3 operations vs effects</h4>
-<p>以上提到了computational effects，algebraic operation，</p>
+<h4 id="3-3-operations-vs-effects"><a href="#3-3-operations-vs-effects" class="headerlink" title="3.3 operations vs effects"></a>3.3 operations vs effects</h4><p>以上提到了computational effects，algebraic operation，</p>
 <p>怎么就变成algebraic effects了呢？</p>
 <p><br/></p>
 <p>这个名词来自这篇文献，<a href="http://homepages.inf.ed.ac.uk/gdp/publications/Op_Sem_Comp_Lam.pdf" target="_blank" rel="noopener">Adequacy for Algebraic Eﬀects</a>，它是上一篇文献的引文，作者还是Gordon Plotkin and John Power</p>
 <blockquote>
-<p>Moggi proposed a monadic account of computational eﬀects. He also presented the computational λ-calculus ... a core call-by-value functional programming language for eﬀects; the eﬀects are obtained by adding appropriate operations.</p>
+<p>Moggi proposed a monadic account of computational eﬀects. He also presented the computational λ-calculus … a core call-by-value functional programming language for eﬀects; the eﬀects are obtained by adding appropriate operations.</p>
 </blockquote>
 <p>嗯嗯，跟我们理解的一致。</p>
 <p><br/></p>
 <blockquote>
-<p>The question arises as to whether one can give a corresponding treatment of operational semantics.</p>
+<p>The question arises as to whether one can give a corresponding treatment of operational semantics. </p>
 </blockquote>
 <blockquote>
 <p>In this paper we give such a treatment in the case of algebraic eﬀects where the operations are given by a single-sorted algebraic signature Σ; semantically such an n-ary operation f is taken to denote a family of morphisms fx : T(x) n −→ T(x) parametrically natural with respect to morphisms in the Kleisli category C T ; T is then said to support the family f x .</p>
@@ -528,10 +521,10 @@
 <p><br/></p>
 <p>所以，operation是一个语法概念，effects是语义概念。</p>
 <p>从 <a href="https://www.eff-lang.org/handlers-tutorial.pdf" target="_blank" rel="noopener">An Introduction to Algebraic Eﬀects and Handlers</a>这篇文献中我们可以看出来，</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-b653060aab9f0da8.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-b653060aab9f0da8.png" alt=""></p>
 <p><br/></p>
 <blockquote>
-<p>Algebraic eﬀects are an approach to computational eﬀects based on a premise that impure behaviour arises from a set of operations such as get &amp; set for mutable store, read &amp; print for interactive input &amp; output, or raise for exceptions [16,18].</p>
+<p>Algebraic eﬀects are an approach to computational eﬀects based on a premise that impure behaviour arises from a set of operations such as get &amp; set for mutable store, read &amp; print for interactive input &amp; output, or raise for exceptions [16,18]. </p>
 </blockquote>
 <blockquote>
 <p>This naturally gives rise to handlers not only of exceptions, but of any other eﬀect, yielding a novel concept that, amongst others, can capture stream redirection, backtracking, co-operative multi-threading, and delimited continuations [21,22,5].</p>
@@ -541,25 +534,23 @@
 <p>并且其语义还是algebraic的，所以，称为algebraic effects还是挺合适的，</p>
 <p>只不过algebraic太笼统了，容易让人产生其他联系。</p>
 <p>把algebraic effects理解为algebraic operation的定义可能更好一些。</p>
-<h4 id="handler">3.4 handler</h4>
-<p>这篇文章<a href="https://www.eff-lang.org/handlers-tutorial.pdf" target="_blank" rel="noopener">An Introduction to Algebraic Eﬀects and Handlers</a>中介绍了algebraic effects handler的用法，</p>
+<h4 id="3-4-handler"><a href="#3-4-handler" class="headerlink" title="3.4 handler"></a>3.4 handler</h4><p>这篇文章<a href="https://www.eff-lang.org/handlers-tutorial.pdf" target="_blank" rel="noopener">An Introduction to Algebraic Eﬀects and Handlers</a>中介绍了algebraic effects handler的用法，</p>
 <p>加上handler之后，就和delimited continuation的概念串起来了。</p>
 <p>后文还介绍了用delimited continuation实现各种effects的方法，</p>
 <p>例如，对于input/output</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-b9b39c23f7786869.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-b9b39c23f7786869.png" alt=""></p>
 <p><br/></p>
 <p>对于exception，</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-ad3d214f7968ef96.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-ad3d214f7968ef96.png" alt=""></p>
 <p><br/></p>
 <p>对于non-determinism</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-1ec0cf263b903d6e.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-1ec0cf263b903d6e.png" alt=""></p>
 <p><br/></p>
 <p>还有好多，毕竟computational λ-calculus中的operation就是为了建模各种effects的。</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-4ef97b9314b0222c.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-4ef97b9314b0222c.png" alt=""></p>
 <p>出自<a href="https://core.ac.uk/download/pdf/21173011.pdf" target="_blank" rel="noopener">Notions of computation and monads</a></p>
-<hr />
-<h3 id="结语">结语</h3>
-<ol type="1">
+<hr>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><ol>
 <li>λ calculus 只建模了values不包含computaion。</li>
 <li>Eugenio Moggi发明了computational λ-calculus基于category theory建模了values和computation。</li>
 <li>作为扩展Gordon Plotkin and John Power为computational λ-calculus增加了operation用来建模effect。</li>
@@ -572,9 +563,8 @@
 <p>暂且这么理解吧，中间肯定会有很多理解不当之处，</p>
 <p>因为我个人也不是学习这个方向的，所以阅读者还请多多见谅，</p>
 <p>有专业人士路过的话，请不吝指正。</p>
-<hr />
-<h3 id="参考">参考</h3>
-<p><a href="https://github.com/facebook/react/releases/tag/v16.8.0" target="_blank" rel="noopener">React 16.8.0</a></p>
+<hr>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://github.com/facebook/react/releases/tag/v16.8.0" target="_blank" rel="noopener">React 16.8.0</a></p>
 <p><a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">Hooks</a></p>
 <p><a href="https://github.com/reactjs/rfcs/blob/master/text/0068-react-hooks.md" target="_blank" rel="noopener">github: reactjs/rfcs</a></p>
 <p><a href="https://github.com/ocamllabs/ocaml-effects-tutorial#2-effectful-computations-in-a-pure-setting" target="_blank" rel="noopener">OCaml: Concurrent Programming with Effect Handlers</a></p>

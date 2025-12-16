@@ -364,16 +364,15 @@
 <p><br/></p>
 <p>这还要从环境说起。</p>
 <p><br/></p>
-<h2 id="环境的表示"><strong>环境的表示</strong></h2>
-<p>调用一个函数，它的形参有可能会<strong>遮挡</strong>外层的变量，</p>
+<h2 id="环境的表示"><a href="#环境的表示" class="headerlink" title="环境的表示"></a><strong>环境的表示</strong></h2><p>调用一个函数，它的形参有可能会<strong>遮挡</strong>外层的变量，</p>
 <p>等函数执行完后，这个被遮挡的值还要恢复，</p>
 <p>所以我们必须把要被遮挡的值存起来。</p>
 <p><br/></p>
 <p>我们可以用一个列表表示环境。</p>
 <p><br/></p>
 <p>(</p>
-<p>    [(x 3)]</p>
-<p>    [(x 1) (y 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 3)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 1) (y 2)]</p>
 <p>)</p>
 <p><br/></p>
 <p>它表示一个环境，每个元素称为一个<strong>frame</strong>，</p>
@@ -388,20 +387,19 @@
 <p>并把frame放到环境顶端。</p>
 <p><br/></p>
 <p>(</p>
-<p>    [(x 4) (y 5) (z 6)]</p>
-<p>    [(x 3)]</p>
-<p>    [(x 1) (y 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 4) (y 5) (z 6)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 3)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 1) (y 2)]</p>
 <p>)</p>
 <p><br/></p>
 <p>函数执行完后，环境要恢复成以前的样子，</p>
 <p><br/></p>
 <p>(</p>
-<p>    [(x 3)]</p>
-<p>    [(x 1) (y 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 3)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 1) (y 2)]</p>
 <p>)</p>
 <p><br/></p>
-<h2 id="动态作用域top-level变量"><strong>动态作用域：top-level变量</strong></h2>
-<p>Emacs Lisp 24.1之前，还是动态作用域的，</p>
+<h2 id="动态作用域：top-level变量"><a href="#动态作用域：top-level变量" class="headerlink" title="动态作用域：top-level变量"></a><strong>动态作用域：top-level变量</strong></h2><p>Emacs Lisp 24.1之前，还是动态作用域的，</p>
 <p>之后可以选择性的使用，只需要设置buffer-local变量，</p>
 <p>lexical-binding不为nil即可。</p>
 <p><br/></p>
@@ -412,14 +410,14 @@
 <p>(define a 1)</p>
 <p><br/></p>
 <p>环境：(</p>
-<p>    [(a 1)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1)]</p>
 <p>)</p>
 <p><br/></p>
 <p>(define (fn x)</p>
-<p>    (+ x a))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x a))</p>
 <p><br/></p>
 <p>环境：(</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>注意，</p>
@@ -430,8 +428,8 @@
 <p><br/></p>
 <p><strong>调用函数了，在环境中增加一个frame，</strong></p>
 <p>环境：(</p>
-<p>    [(x 2)]</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 2)] </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>在环境中，找到了x的值是2，a的值是1，</p>
@@ -439,27 +437,26 @@
 <p><br/></p>
 <p>函数返回后，</p>
 <p>环境：(</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
-<h2 id="动态作用域被遮挡的top-level变量"><strong>动态作用域：被遮挡的top-level变量</strong></h2>
-<p>环境：(</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;)]</p>
+<h2 id="动态作用域：被遮挡的top-level变量"><a href="#动态作用域：被遮挡的top-level变量" class="headerlink" title="动态作用域：被遮挡的top-level变量"></a><strong>动态作用域：被遮挡的top-level变量</strong></h2><p>环境：(</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>(define (gn a)</p>
-<p>    (fn 2))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn 2))</p>
 <p><br/></p>
 <p>环境：(</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>(gn 3)</p>
 <p>=&gt; (fn 2)</p>
 <p><br/></p>
 <p>环境：(</p>
-<p>    [(a 3)]</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>(gn 3)</p>
@@ -467,9 +464,9 @@
 <p>=&gt; (+ x a)</p>
 <p><br/></p>
 <p>环境：(</p>
-<p>    [(x 2)]</p>
-<p>    [(a 3)]</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>在环境中，找到了x的值是2，a的值是3，</p>
@@ -477,17 +474,16 @@
 <p><br/></p>
 <p>(fn 2)调用结束后，</p>
 <p>环境：(</p>
-<p>    [(a 3)]</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>(gn 3)调用结束后，</p>
 <p>环境：(</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
-<h2 id="动态作用域意料之外"><strong>动态作用域：意料之外</strong></h2>
-<p>在使用动态作用域时，我们发现，</p>
+<h2 id="动态作用域：意料之外"><a href="#动态作用域：意料之外" class="headerlink" title="动态作用域：意料之外"></a><strong>动态作用域：意料之外</strong></h2><p>在使用动态作用域时，我们发现，</p>
 <p>(fn 2)的值，是根据它被使用的位置决定的，</p>
 <p><strong>函数中的自由变量a，在不同的执行环境中，可能有不同的值。</strong></p>
 <p><br/></p>
@@ -507,8 +503,7 @@
 <p><br/></p>
 <p>这对较大规模的工程来说，是非常耗时的。</p>
 <p><br/></p>
-<h2 id="词法作用域被遮挡的top-level变量"><strong>词法作用域：被遮挡的top-level变量</strong></h2>
-<p>词法作用域的环境变化规则是不同的，</p>
+<h2 id="词法作用域：被遮挡的top-level变量"><a href="#词法作用域：被遮挡的top-level变量" class="headerlink" title="词法作用域：被遮挡的top-level变量"></a><strong>词法作用域：被遮挡的top-level变量</strong></h2><p>词法作用域的环境变化规则是不同的，</p>
 <p>假如函数调用前的环境是#<env>，</p>
 <p><strong>（1）函数调用时，frame要添加到该函数定义时的环境#<env-fn>中去，</strong></p>
 <p><strong>（2）函数返回后，整个环境要恢复成调用函数之前的环境#<env>。</strong></p>
@@ -521,29 +516,29 @@
 <p>(define a 1)</p>
 <p><br/></p>
 <p>环境#<env-fn>：(</p>
-<p>    [(a 1)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1)]</p>
 <p>)</p>
 <p><br/></p>
 <p>(define (fn x)</p>
-<p>    (+ x a))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x a))</p>
 <p><br/></p>
 <p>环境#<env-fn>：(</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>(define (gn a)</p>
-<p>    (fn 2))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn 2))</p>
 <p><br/></p>
 <p>环境#<env-fn>：(</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>(gn 3)</p>
 <p>=&gt; (fn 2)</p>
 <p><br/></p>
 <p>环境#<env>：(</p>
-<p>    [(a 3)]</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>(gn 3)</p>
@@ -552,45 +547,44 @@
 <p><br/></p>
 <p>注意，这里fn定义时的环境是，</p>
 <p>环境#<env-fn>：(</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><strong>并且frame是最后被修改的状态</strong>。</p>
 <p><br/></p>
 <p>所以调用fn后，</p>
 <p>环境#<env-fn-extended>：(</p>
-<p>    [(x 2)]</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(x 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>因此，(+ x a) =&gt; 3</p>
 <p><br/></p>
 <p>(fn 2)调用结束后，<strong>要恢复成调用之前环境，</strong></p>
 <p>环境#<env>：(</p>
-<p>    [(a 3)]</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 3)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
 <p>(gn 3)调用结束后，</p>
 <p>环境#<env-fn>：(</p>
-<p>    [(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(a 1) (fn #&lt;procedure&gt;) (gn #&lt;procedure&gt;)]</p>
 <p>)</p>
 <p><br/></p>
-<h2 id="词法作用域实现方式"><strong>词法作用域：实现方式</strong></h2>
-<p>怎样实现词法作用域呢？</p>
+<h2 id="词法作用域：实现方式"><a href="#词法作用域：实现方式" class="headerlink" title="词法作用域：实现方式"></a><strong>词法作用域：实现方式</strong></h2><p>怎样实现词法作用域呢？</p>
 <p>这里的关键在于拿到函数定义时的环境。</p>
 <p><br/></p>
 <p><strong>最好把函数的形参列表，函数体，和定义时的环境打包成一个对象，</strong></p>
-<p>(define-record-type closure</p>
-<p>    (fields param body env))</p>
+<p>(define-record-type closure </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fields param body env))</p>
 <p><br/></p>
 <p>这个打包好的对象，就称为“<strong>闭包</strong>”。</p>
 <p><br/></p>
 <p>(define (eval-lambda exp env)</p>
-<p>    (display "eval-lambda")</p>
-<p>    (let ((param (caadr exp))</p>
-<p>        (body (caddr exp)))</p>
-<p>        </p>
-<p>        (make-closure param body env)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display “eval-lambda\n”)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let ((param (caadr exp))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(body (caddr exp)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(make-closure param body env)))</p>
 <p><br/></p>
 <p>当调用一个函数时，</p>
 <p>我们先将定义时的环境提取出来，</p>
@@ -598,20 +592,19 @@
 <p>最后让函数体在这个扩展后的环境中执行即可。</p>
 <p><br/></p>
 <p>(define (eval-function-call-list exp env)</p>
-<p>    (display "eval-function-call-list")</p>
-<p>    (let* ((closure (eval-exp (car exp) env))</p>
-<p>        (arg (eval-exp (cadr exp) env))</p>
-<p>        (body (closure-body closure))</p>
-<p>        (<strong>lexical-env</strong> (closure-env closure))</p>
-<p>        (param (closure-param closure))</p>
-<p>        (frame (create-frame)))</p>
-<p>        </p>
-<p>        (extend-frame frame param arg)</p>
-<p>        (let ((executing-env (extend-env <strong>lexical-env</strong> frame)))</p>
-<p>            (eval-exp body executing-env))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display “eval-function-call-list\n”)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let* ((closure (eval-exp (car exp) env))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(arg (eval-exp (cadr exp) env))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(body (closure-body closure))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lexical-env</strong> (closure-env closure))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(param (closure-param closure))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(frame (create-frame)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(extend-frame frame param arg)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let ((executing-env (extend-env <strong>lexical-env</strong> frame)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(eval-exp body executing-env))))</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>要理解一个概念，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>要理解一个概念，</p>
 <p>只从使用者的角度来看，</p>
 <p>是不够的。</p>
 <p><br/></p>

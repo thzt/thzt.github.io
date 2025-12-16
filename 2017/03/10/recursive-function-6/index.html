@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾 上一篇中，我们通过引入极小化算子定义了递归函数， 使用递归函数，我们又定义了递归集与递归可枚举集， 本文我们要讨论，为什么递归可枚举集是“可枚举”的，以及什么是可计算函数。  可计算性    我们听说过，现代计算机在计算能力上是与图灵机等价的， 什么叫做计算能力呢？ 它指的是图灵机可计算的函数集，与现代计算机可计算的函数集是相等的。  为了简单起见，我们不去讨论图灵机，而是从现代计算机直接说">
+<meta name="description" content="回顾上一篇中，我们通过引入极小化算子定义了递归函数， 使用递归函数，我们又定义了递归集与递归可枚举集， 本文我们要讨论，为什么递归可枚举集是“可枚举”的，以及什么是可计算函数。  可计算性   我们听说过，现代计算机在计算能力上是与图灵机等价的， 什么叫做计算能力呢？ 它指的是图灵机可计算的函数集，与现代计算机可计算的函数集是相等的。  为了简单起见，我们不去讨论图灵机，而是从现代计算机直接说起，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="递归函数（六）：最多有多少个程序">
 <meta property="og:url" content="https://thzt.github.io/2017/03/10/recursive-function-6/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾 上一篇中，我们通过引入极小化算子定义了递归函数， 使用递归函数，我们又定义了递归集与递归可枚举集， 本文我们要讨论，为什么递归可枚举集是“可枚举”的，以及什么是可计算函数。  可计算性    我们听说过，现代计算机在计算能力上是与图灵机等价的， 什么叫做计算能力呢？ 它指的是图灵机可计算的函数集，与现代计算机可计算的函数集是相等的。  为了简单起见，我们不去讨论图灵机，而是从现代计算机直接说">
+<meta property="og:description" content="回顾上一篇中，我们通过引入极小化算子定义了递归函数， 使用递归函数，我们又定义了递归集与递归可枚举集， 本文我们要讨论，为什么递归可枚举集是“可枚举”的，以及什么是可计算函数。  可计算性   我们听说过，现代计算机在计算能力上是与图灵机等价的， 什么叫做计算能力呢？ 它指的是图灵机可计算的函数集，与现代计算机可计算的函数集是相等的。  为了简单起见，我们不去讨论图灵机，而是从现代计算机直接说起，">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3315ef8756b21619.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3c5dd1454fcd0559.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-a6e30544d2c6c7c3.png">
@@ -351,14 +351,12 @@
       
 
       
-        <h3 id="回顾">回顾</h3>
-<p>上一篇中，我们通过引入极小化算子定义了递归函数，</p>
+        <h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上一篇中，我们通过引入极小化算子定义了递归函数，</p>
 <p>使用递归函数，我们又定义了递归集与递归可枚举集，</p>
 <p>本文我们要讨论，为什么递归可枚举集是“可枚举”的，以及什么是可计算函数。</p>
 <p><br/></p>
-<h3 id="可计算性">可计算性</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3315ef8756b21619.png" /></p>
+<h3 id="可计算性"><a href="#可计算性" class="headerlink" title="可计算性"></a>可计算性</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3315ef8756b21619.png" alt=""></p>
 <p><br/></p>
 <p>我们听说过，现代计算机在计算能力上是与图灵机等价的，</p>
 <p>什么叫做计算能力呢？</p>
@@ -376,8 +374,7 @@
 <p><br/></p>
 <p>可以证明，所有的原始递归函数和递归函数都是部分可计算的。</p>
 <p><br/></p>
-<h3 id="通用程序">通用程序</h3>
-<p>我们使用现代计算机进行编程的时候，并不是直接把程序的输入传给程序，</p>
+<h3 id="通用程序"><a href="#通用程序" class="headerlink" title="通用程序"></a>通用程序</h3><p>我们使用现代计算机进行编程的时候，并不是直接把程序的输入传给程序，</p>
 <p>而是将程序本身以及它的输入，传给计算机，最后由计算机得到计算结果，</p>
 <p>像这种接受任何程序和它的输入作为自己的输入，返回程序执行结果的程序，称为通用程序。</p>
 <p>为此，通用程序需要把输入的程序进行编码。</p>
@@ -387,7 +384,7 @@
 <p>不同的程序会有不同的二进制表示，每一个二进制表示可以对应一段程序（虽然可能不合法）。</p>
 <p>哥德尔编码做的事情就是将程序和自然数集一一对应起来。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3c5dd1454fcd0559.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-3c5dd1454fcd0559.png" alt=""></p>
 <p><br/></p>
 <p>因此，所有程序的个数是可数的，而这些程序可计算的函数个数也一定是可数的，</p>
 <p>它们可能是全函数，也可能是部分函数。</p>
@@ -396,9 +393,8 @@
 <p>然而，自然数集上的函数全体并不可数，（证略</p>
 <p>所以肯定存在程序不可计算的函数。</p>
 <p><br/></p>
-<h3 id="集合个数的可枚举性">集合个数的可枚举性</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-a6e30544d2c6c7c3.png" /></p>
+<h3 id="集合个数的可枚举性"><a href="#集合个数的可枚举性" class="headerlink" title="集合个数的可枚举性"></a>集合个数的可枚举性</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-a6e30544d2c6c7c3.png" alt=""></p>
 <p><br/></p>
 <p>程序<span data-katex="\mathscr{P}"></span>所计算的函数，我们可以记为<span data-katex="\psi (x_1,x_2,\cdots ,x_n)"></span>，</p>
 <p>由此，我们可以定义通用程序<span data-katex="\Phi "></span>，则有，</p>
@@ -428,9 +424,8 @@
 <p>因此，我们找到了一个非递归的递归可枚举集<span data-katex="K"></span>，</p>
 <p>以及一个非递归可枚举集<span data-katex="\bar{K}"></span>。</p>
 <p><br/></p>
-<h3 id="停机问题">停机问题</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-1fb62dcb731ff72f.png" /></p>
+<h3 id="停机问题"><a href="#停机问题" class="headerlink" title="停机问题"></a>停机问题</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-1fb62dcb731ff72f.png" alt=""></p>
 <p><br/></p>
 <p>任给一个程序和一个自然数，问该程序对这个自然数输入的计算是否停止，</p>
 <p>这个问题称为停机问题。</p>
@@ -456,9 +451,8 @@
 <p><span data-katex="H(y_0,y_0)"></span>不能为真也不能为假，矛盾，</p>
 <p>因此，计算<span data-katex="H(x,y)"></span>的程序不存在，我们也无法用它来构造程序<span data-katex="\mathscr{P}"></span>。</p>
 <p><br/></p>
-<h3 id="可判定性">可判定性</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-5e01504f5037d0e0.png" /></p>
+<h3 id="可判定性"><a href="#可判定性" class="headerlink" title="可判定性"></a>可判定性</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-10-recursive-function-6/1023733-5e01504f5037d0e0.png" alt=""></p>
 <p><br/></p>
 <p>可判定性问题，指的是一个询问真或者假的问题是否可以被回答。</p>
 <p>如果我们总能回答出这个问题是真或者是假，就称该问题是可判定的，</p>
@@ -472,16 +466,14 @@
 <p>我们无法判断某个部分递归函数，在接受某参数时，是没有定义，还是计算尚未停止。</p>
 <p>即，判断元素是否属于某递归可枚举集的程序可能永不停机。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了函数的可计算性，通用程序，以及最多有多少个程序，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了函数的可计算性，通用程序，以及最多有多少个程序，</p>
 <p>还了解了停机问题和可判定性问题。</p>
 <p><br/></p>
 <p>这些都是可计算性理论的基础，我们清晰的看到了人类的计算能力，</p>
 <p>以及用递归所能计算的函数范围，后文中我们开始讨论不动点理论，</p>
 <p>这同样是一个有趣的话题。</p>
-<hr />
-<h3 id="附">附</h3>
-<p>配对函数和哥德尔数，是对数偶和有穷数列的一种编码方式。</p>
+<hr>
+<h3 id="附"><a href="#附" class="headerlink" title="附"></a>附</h3><p>配对函数和哥德尔数，是对数偶和有穷数列的一种编码方式。</p>
 <p><br/></p>
 <p>（1）配对函数</p>
 <p>令<span data-katex="\langle x,y\rangle=2^x(2y+1)-1"></span>，称<span data-katex="\langle x,y\rangle "></span>为配对函数，它是一个原始递归函数。</p>
@@ -497,9 +489,8 @@
 <p><br/></p>
 <p>例如，<span data-katex="[2,0,1,3]=2^2\cdot 3^0\cdot 5^1\cdot 7^3=6860"></span>。</p>
 <p>对于每一个固定的<span data-katex="n"></span>，<span data-katex="[a_1,a_2,\cdots ,a_n]"></span>是原始递归函数，并且这种编码具有唯一性。</p>
-<hr />
-<h3 id="参考">参考</h3>
-<p><a href="https://zh.wikipedia.org/wiki/%E9%85%8D%E5%AF%B9%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">配对函数</a></p>
+<hr>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zh.wikipedia.org/wiki/%E9%85%8D%E5%AF%B9%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">配对函数</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E6%95%B0" target="_blank" rel="noopener">哥德尔数</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E6%95%B8%E9%9B%86" target="_blank" rel="noopener">可数集</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E5%88%A4%E5%AE%9A%E6%80%A7" target="_blank" rel="noopener">可判定性</a></p>

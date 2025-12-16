@@ -366,22 +366,20 @@
 <p><br/></p>
 <p>我们就开始吧。</p>
 <p><br/></p>
-<h2 id="值和类型"><strong>值和类型</strong></h2>
-<p>Haskell中表达式是有值的，</p>
-<p>比如，值为1，值为'a'，</p>
+<h2 id="值和类型"><a href="#值和类型" class="headerlink" title="值和类型"></a><strong>值和类型</strong></h2><p>Haskell中表达式是有值的，</p>
+<p>比如，值为1，值为’a’，</p>
 <p>他们在内存中存储方式是一样的。</p>
 <p><br/></p>
 <p>但是，感觉他们应该是不同的东西。</p>
 <p>应该使用类型进行区分。</p>
 <p><br/></p>
 <p>我们称值1的类型是Int，整型</p>
-<p>值'a'的类型为Char，字符型</p>
+<p>值’a’的类型为Char，字符型</p>
 <p><br/></p>
 <p>这样的话，实际上是在值这个概念之上建立了一层抽象。</p>
 <p>不同的值因此有了不同的划分。</p>
 <p><br/></p>
-<h2 id="函数"><strong>函数</strong></h2>
-<p>函数用来将一个或多个值变成另一个值。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a><strong>函数</strong></h2><p>函数用来将一个或多个值变成另一个值。</p>
 <p>函数也是一种值，它也是有类型的。</p>
 <p><br/></p>
 <p>例如，加法函数add是把两个整型值，变成一个整型值。</p>
@@ -414,8 +412,7 @@
 <p>像以上这样的看待函数的方式，称为柯里化。</p>
 <p>后面我们将看到，Haskell中不仅函数，很多带多参数的东西都可以柯里化一下。</p>
 <p><br/></p>
-<h2 id="自定义类型"><strong>自定义类型</strong></h2>
-<p>我们正在处理的值1，2，3和2014，2015，2016，看起来是不同的。</p>
+<h2 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a><strong>自定义类型</strong></h2><p>我们正在处理的值1，2，3和2014，2015，2016，看起来是不同的。</p>
 <p>用同一个Int类型来表示，有点牵强。</p>
 <p>因为实际上，我们相用1，2，3表示月份，而用2014，2015，2016表示年。</p>
 <p><br/></p>
@@ -490,8 +487,7 @@
 <p>data Month = Month Int</p>
 <p>Month到底是什么，根据上下文来定。</p>
 <p><br/></p>
-<h2 id="类型类"><strong>类型类</strong></h2>
-<p>有过面向对象编程经验的人们，对以上还好理解。</p>
+<h2 id="类型类"><a href="#类型类" class="headerlink" title="类型类"></a><strong>类型类</strong></h2><p>有过面向对象编程经验的人们，对以上还好理解。</p>
 <p>因为至少名字在经验中是有的。</p>
 <p><br/></p>
 <p>而类型类却是一个全新的概念。</p>
@@ -527,11 +523,11 @@
 <p><br/></p>
 <p>例如：Eq类型类可以这样定义。</p>
 <p>class Eq a where</p>
-<p>    equal :: a -&gt; a -&gt; Bool</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;equal :: a -&gt; a -&gt; Bool</p>
 <p><br/></p>
 <p>类型类的实例可以这样声明。</p>
 <p>instance Eq Int where</p>
-<p>    equal i j = i == j</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;equal i j = i == j</p>
 <p><br/></p>
 <p>这里class和instance，可不是面向对象中的概念呀，虽然勉强有点相似。</p>
 <p><br/></p>
@@ -542,8 +538,7 @@
 <p>equal i j = i == j也可以写成equal a b = a == b</p>
 <p>a到底是什么，根据上下文来定。</p>
 <p><br/></p>
-<h2 id="monad"><strong>Monad</strong></h2>
-<p>我们现在有了足够的经验来看Monad了。</p>
+<h2 id="Monad"><a href="#Monad" class="headerlink" title="Monad"></a><strong>Monad</strong></h2><p>我们现在有了足够的经验来看Monad了。</p>
 <p>Monad是什么呢？</p>
 <p><br/></p>
 <p>Monad是一个类型类。</p>
@@ -555,9 +550,9 @@
 <p>我们看一下Moand的定义吧。</p>
 <p>看看还能不能发现新的东西。</p>
 <p><br/></p>
-<p>class Monad m where</p>
-<p>    (&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
-<p>    return :: a -&gt; m a</p>
+<p>class Monad m where </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;return :: a -&gt; m a</p>
 <p><br/></p>
 <p>可以看到，Monad类型类为它包含的各个类型，定义了相同的函数&gt;&gt;=和return。</p>
 <p>这里return也不是表示函数的返回值，没有学会之前先不要类比。</p>
@@ -604,8 +599,7 @@
 <p>也正因为如此，在Haskell中，通常称m a类型的值是一个monad值，</p>
 <p>而其中的类型a的值，通常称为monad值中“包含”的值。</p>
 <p><br/></p>
-<h2 id="入门"><strong>入门</strong></h2>
-<p>写到这里，我们才对Monad的概念有了初步的了解。</p>
+<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a><strong>入门</strong></h2><p>写到这里，我们才对Monad的概念有了初步的了解。</p>
 <p>勉强算是入门了。</p>
 <p><br/></p>
 <p>因为，首先，对于Monad的应用我们还没有了解。</p>

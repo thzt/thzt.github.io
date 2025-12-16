@@ -350,7 +350,7 @@
             <p>一个软件系统，只是可以提供相应的<a href="https://zh.wikipedia.org/wiki/%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">功能</a>，还不能算是完成了预期的目标，</p>
 <p>它还要满足一些<a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能</a>方面的限制条件。</p>
 <p><br/></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%81%A5%E5%A3%AE%E6%80%A7_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)" target="_blank" rel="noopener">健壮性</a>就是一个典型的例子，</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%81%A5%E5%A3%AE%E6%80%A7_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" target="_blank" rel="noopener">健壮性</a>)就是一个典型的例子，</p>
 <p>它反映了系统对于规范要求以外输入情况的处理能力。</p>
 <p><br/></p>
 <p>为了实现健壮性，我们不仅需要考虑所有可能的输入，</p>
@@ -367,8 +367,7 @@
 <p>那么如何设计一个健壮的系统呢？</p>
 <p>本文提供了一些思路。</p>
 <p><br/></p>
-<h3 id="fail-fast-哲学">1. Fail Fast 哲学</h3>
-<p><a href="http://wiki.c2.com/?FailFast" target="_blank" rel="noopener">Fail Fast</a>是<a href="https://www.erlang.org/" target="_blank" rel="noopener">Erlang</a>语言的编程哲学之一，</p>
+<h3 id="1-Fail-Fast-哲学"><a href="#1-Fail-Fast-哲学" class="headerlink" title="1. Fail Fast 哲学"></a>1. Fail Fast 哲学</h3><p><a href="http://wiki.c2.com/?FailFast" target="_blank" rel="noopener">Fail Fast</a>是<a href="https://www.erlang.org/" target="_blank" rel="noopener">Erlang</a>语言的编程哲学之一，</p>
 <p>说的是一个子系统在遇到问题的时候，应该尽早崩溃。</p>
 <p><br/></p>
 <p>常见的<code>if-return</code>模式（或者<code>if-throw</code>），就是Fail Fast思想的一种应用。</p>
@@ -389,8 +388,7 @@
 <p>改成<code>assert</code>后，将前置条件与正常的业务逻辑解耦了。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">assert(x !&#x3D; null);</span><br><span class="line">assert(y &gt; 0);</span><br><span class="line">assert(z);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 业务逻辑</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h3 id="不要吃掉异常">2. 不要吃掉异常</h3>
-<p><strong>如果子系统无法处理某个错误，那就把它抛出来，而不是吃掉它。</strong></p>
+<h3 id="2-不要吃掉异常"><a href="#2-不要吃掉异常" class="headerlink" title="2. 不要吃掉异常"></a>2. 不要吃掉异常</h3><p><strong>如果子系统无法处理某个错误，那就把它抛出来，而不是吃掉它。</strong></p>
 <p><br/></p>
 <p>下面我们来看一个例子，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function service() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        &#x2F;&#x2F; 什么也不做</span><br><span class="line">        &#x2F;&#x2F; 或者即使是写日志</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -418,8 +416,7 @@
 <p>换句话说，</p>
 <p><strong>异常被静默处理，应该是大家协商后的决定。</strong></p>
 <p><br/></p>
-<h3 id="让异常成为一种约定">3. 让异常成为一种约定</h3>
-<p>异常和异常的处理应该是一体的，它们应该被<strong>统一的</strong>设计和使用。</p>
+<h3 id="3-让异常成为一种约定"><a href="#3-让异常成为一种约定" class="headerlink" title="3. 让异常成为一种约定"></a>3. 让异常成为一种约定</h3><p>异常和异常的处理应该是一体的，它们应该被<strong>统一的</strong>设计和使用。</p>
 <p>各个系统的边界处，应该如何反馈异常，以及这些异常应该如何被处理，应该事先被约定好。</p>
 <p>这样才会减少冗余的个性化的异常处理逻辑。</p>
 <p><br/></p>
@@ -434,8 +431,7 @@
 <p>在这个切面中，我们统一的将异常写入了日志中，</p>
 <p>再将异常抛出。</p>
 <p><br/></p>
-<h3 id="主动抛出异常">4. 主动抛出异常</h3>
-<p>有了异常切面，我们就不用担心未被捕获的异常了，</p>
+<h3 id="4-主动抛出异常"><a href="#4-主动抛出异常" class="headerlink" title="4. 主动抛出异常"></a>4. 主动抛出异常</h3><p>有了异常切面，我们就不用担心未被捕获的异常了，</p>
 <p>向系统中添加一种异常，总是伴随着修改异常切面来完成。</p>
 <p>有了这种异常处理机制，我们就可以<strong>主动抛出一些业务异常</strong>了。</p>
 <p><br/></p>
@@ -452,8 +448,7 @@
 <p>在切面上的用法如下，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const service &#x3D; Class.service;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            &#x2F;&#x2F; 使用exceptionHandler处理异常</span><br><span class="line">            exceptionHandler.handle(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h3 id="先考虑异常处理">5. 先考虑异常处理</h3>
-<p>在设计系统的时候，异常以及异常处理方式应该事先考虑，</p>
+<h3 id="5-先考虑异常处理"><a href="#5-先考虑异常处理" class="headerlink" title="5. 先考虑异常处理"></a>5. 先考虑异常处理</h3><p>在设计系统的时候，异常以及异常处理方式应该事先考虑，</p>
 <p>否则人们就会按照各自的便利来编写逻辑，</p>
 <p>这样很容易产生<strong>兼容性问题</strong>。</p>
 <p><br/></p>
@@ -474,8 +469,7 @@
 <p>抛出异常和处理异常的代码要同时修改，是一种<strong>接口变更</strong>，</p>
 <p>会涉及兼容性问题。</p>
 <p><br/></p>
-<h3 id="结语">结语</h3>
-<p>我们可能都体会过，知道错误但是不知道原因的那种<strong>憋闷感</strong>，</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>我们可能都体会过，知道错误但是不知道原因的那种<strong>憋闷感</strong>，</p>
 <p>在整个调用链路上，一环一环的排查，结果发现是某个服务吃掉了异常。</p>
 <p><br/></p>
 <p>如果有日志可循，这还不是难事，最多是花费一些时间，</p>

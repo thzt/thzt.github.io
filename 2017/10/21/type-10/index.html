@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾 上文我们介绍了let多态， 将let表达式，看做了的简写， 即，把中出现的所有，都用替换掉，因此这些副本可以具有不同的类型。  本文将介绍另外一种多态形式，称为参数化多态（parametric polymorphism），例如， 1data Maybe a &#x3D; Nothing | Just a 以上Haskell代码，定义了一个Maybe a类型， 其中Maybe称为类型构造">
+<meta name="description" content="回顾上文我们介绍了let多态， 将let表达式，看做了的简写， 即，把中出现的所有，都用替换掉，因此这些副本可以具有不同的类型。  本文将介绍另外一种多态形式，称为参数化多态（parametric polymorphism），例如， 1data Maybe a &#x3D; Nothing | Just a 以上Haskell代码，定义了一个Maybe a类型， 其中Maybe称为类型构造器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="你好，类型（十）：Parametric polymorphism">
 <meta property="og:url" content="https://thzt.github.io/2017/10/21/type-10/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾 上文我们介绍了let多态， 将let表达式，看做了的简写， 即，把中出现的所有，都用替换掉，因此这些副本可以具有不同的类型。  本文将介绍另外一种多态形式，称为参数化多态（parametric polymorphism），例如， 1data Maybe a &#x3D; Nothing | Just a 以上Haskell代码，定义了一个Maybe a类型， 其中Maybe称为类型构造">
+<meta property="og:description" content="回顾上文我们介绍了let多态， 将let表达式，看做了的简写， 即，把中出现的所有，都用替换掉，因此这些副本可以具有不同的类型。  本文将介绍另外一种多态形式，称为参数化多态（parametric polymorphism），例如， 1data Maybe a &#x3D; Nothing | Just a 以上Haskell代码，定义了一个Maybe a类型， 其中Maybe称为类型构造器">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-60e9a5a9b2cc6fbd.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-2c1c907d268a3169.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-bbff0b1e749dff2f.png">
@@ -352,10 +352,9 @@
 
       
         <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-60e9a5a9b2cc6fbd.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-60e9a5a9b2cc6fbd.png" alt=""></p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文我们介绍了let多态，</p>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上文我们介绍了let多态，</p>
 <p>将let表达式<span data-katex="let~x=t_1~in~t_2"></span>，看做了<span data-katex="[x\mapsto t_1]t_2"></span>的简写，</p>
 <p>即，把<span data-katex="t_2"></span>中出现的所有<span data-katex="x"></span>，都用<span data-katex="t_1"></span>替换掉，因此这些副本可以具有不同的类型。</p>
 <p><br/></p>
@@ -367,9 +366,8 @@
 <p><code>Maybe</code>不是一个合法的类型，它只有和某个具体的<code>a</code>放在一起，才是一个合法的类型，</p>
 <p>例如，<code>Maybe Int</code>，<code>Maybe Char</code>。</p>
 <p><br/></p>
-<h3 id="system-f">System F</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-2c1c907d268a3169.png" /></p>
+<h3 id="System-F"><a href="#System-F" class="headerlink" title="System F"></a>System F</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-2c1c907d268a3169.png" alt=""></p>
 <p><br/></p>
 <p>为了实现参数化多态，我们需要对简单类型化<span data-katex="\lambda"></span>演算（<span data-katex="\lambda^\to"></span>系统）进行扩展，</p>
 <p>在<span data-katex="\lambda^\to"></span>中，我们用<span data-katex="\lambda x.t"></span>来表示<span data-katex="\lambda"></span>抽象（lambda abstraction），</p>
@@ -398,9 +396,8 @@
 <p><span data-katex="\forall"></span>称为全称量词（universal quantifier），</p>
 <p>引入了全称类型之后得到的系统，称为System F。</p>
 <p><br/></p>
-<h3 id="rank-n-types">Rank-N Types</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-bbff0b1e749dff2f.png" /></p>
+<h3 id="Rank-N-Types"><a href="#Rank-N-Types" class="headerlink" title="Rank-N Types"></a>Rank-N Types</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-bbff0b1e749dff2f.png" alt=""></p>
 <p><br/></p>
 <p>有了全称类型之后，函数的参数类型和返回值类型，都有可能具有全称类型。</p>
 <p>不难看出，函数返回值类型的全称量词，总是可以提取出来，放到最外面，</p>
@@ -428,9 +425,8 @@
 <p>例如，<code>a -&gt; a</code>，实际上表示类型<span data-katex="\forall a.a\to a"></span>，</p>
 <p><code>a -&gt; a</code>可看做<code>(-&gt;) a a</code>类型，其中<code>-&gt;</code>为函数类型构造器。</p>
 <p><br/></p>
-<h3 id="非直谓性">非直谓性</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-630de5020f6c4e74.png" /></p>
+<h3 id="非直谓性"><a href="#非直谓性" class="headerlink" title="非直谓性"></a>非直谓性</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-630de5020f6c4e74.png" alt=""></p>
 <p><br/></p>
 <p>在数学和逻辑学中，一个定义称为非直谓的（<a href="https://en.wikipedia.org/wiki/Impredicativity" target="_blank" rel="noopener">impredicative</a>），</p>
 <p>指的是它包含了自引用（self-reference）。</p>
@@ -450,9 +446,8 @@
 <p>反之，如果一个多态类型表达式，只能用单态类型实例化，</p>
 <p>就称它具有直谓多态类型（<a href="https://en.wikipedia.org/wiki/Parametric_polymorphism#Predicative_polymorphism" target="_blank" rel="noopener">predicative_polymorphism</a>）。</p>
 <p><br/></p>
-<h3 id="单态限制">单态限制</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-01d0844dfc8cb281.png" /></p>
+<h3 id="单态限制"><a href="#单态限制" class="headerlink" title="单态限制"></a>单态限制</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-21-type-10/1023733-01d0844dfc8cb281.png" alt=""></p>
 <p><br/></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f x &#x3D; let g y z &#x3D; ([x,y], z) </span><br><span class="line">      in ...</span><br></pre></td></tr></table></figure>
 <p>假设<code>x</code>的类型为<code>a</code>，那么<code>g</code>的类型只能为<code>a -&gt; b -&gt; ([a], b)</code>，</p>
@@ -462,7 +457,7 @@
 <p>因为<code>a</code>在类型上下文中，已经出现了，不能再被实例化为其他的类型了。</p>
 <p>我们称，<code>g</code>的第一个参数<code>a</code>具有单态性（monomorphism）。</p>
 <p><br/></p>
-<p>例如，<code>(g True, g 'c')</code>不是良类型的，</p>
+<p>例如，<code>(g True, g &#39;c&#39;)</code>不是良类型的，</p>
 <p>而<code>(g True, g False)</code>是良类型的。</p>
 <p><br/></p>
 <p>值得一提的是，显式的给<code>g</code>注明类型，也不能阻止<code>a</code>的单态行为，</p>
@@ -474,12 +469,10 @@
 <p>但是Haskell考虑到性能和模块间的类型推导，</p>
 <p>还增加了特殊的单态限制（monomorphism restriction）避免全称化。</p>
 <p><br/></p>
-<h4 id="rule-1">Rule 1</h4>
-<p>在一组相互依赖的声明中，满足以下两个条件，其中的类型变量才会被全称化，</p>
+<h4 id="Rule-1"><a href="#Rule-1" class="headerlink" title="Rule 1"></a>Rule 1</h4><p>在一组相互依赖的声明中，满足以下两个条件，其中的类型变量才会被全称化，</p>
 <p>（1）每一个变量，都被函数或模式匹配所绑定，</p>
 <p>（2）被模式匹配绑定的变量，都有显式的类型签名。</p>
-<h4 id="rule-2">Rule 2</h4>
-<p>导入到其他模块（module）的单态类型变量，被认为是有歧义的（ambiguous），</p>
+<h4 id="Rule-2"><a href="#Rule-2" class="headerlink" title="Rule 2"></a>Rule 2</h4><p>导入到其他模块（module）的单态类型变量，被认为是有歧义的（ambiguous），</p>
 <p>类型通过其来源模块内的<code>default</code>声明来决定。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module M1(len1) where </span><br><span class="line">  default( Int, Double ) </span><br><span class="line">  len1 &#x3D; genericLength &quot;Hello&quot;</span><br><span class="line"></span><br><span class="line">module M2 where </span><br><span class="line">  import M1(len1) </span><br><span class="line">  len2 &#x3D; (2 * len1) :: Rational</span><br></pre></td></tr></table></figure>
 <p>当模块<code>M1</code>的类型推导结束后，根据Rule 1，<code>len1</code>具有单态类型，<code>len1 :: Num a =&gt; a</code>，</p>
@@ -487,10 +480,9 @@
 <p>因此，根据<code>default( Int, Double )</code>，<code>len1</code>得到了类型<code>Int</code>，</p>
 <p>不过，<code>M2</code>中对<code>len1 :: Int</code>的使用导致了类型错误。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/1761910/" target="_blank" rel="noopener">Types and programming languages</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://book.douban.com/subject/1761910/" target="_blank" rel="noopener">Types and programming languages</a></p>
 <p><a href="https://www.haskell.org/definition/haskell2010.pdf" target="_blank" rel="noopener">Haskell 2010 Language Report</a></p>
-<p><a href="https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#arbitrary-rank-polymorphism" target="_blank" rel="noopener">Glasgow Haskell Compiler User's Guide</a></p>
+<p><a href="https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#arbitrary-rank-polymorphism" target="_blank" rel="noopener">Glasgow Haskell Compiler User’s Guide</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Parametric_polymorphism" target="_blank" rel="noopener">Parametric polymorphism</a></p>
 <p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/putting.pdf" target="_blank" rel="noopener">Practical type inference for arbitrary-rank types</a></p>
 <p><a href="https://en.wikipedia.org/wiki/System_F" target="_blank" rel="noopener">System F</a></p>
@@ -684,7 +676,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#system-f"><span class="nav-number">2.</span> <span class="nav-text">System F</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rank-n-types"><span class="nav-number">3.</span> <span class="nav-text">Rank-N Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非直谓性"><span class="nav-number">4.</span> <span class="nav-text">非直谓性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单态限制"><span class="nav-number">5.</span> <span class="nav-text">单态限制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rule-1"><span class="nav-number">5.1.</span> <span class="nav-text">Rule 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rule-2"><span class="nav-number">5.2.</span> <span class="nav-text">Rule 2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-F"><span class="nav-number">2.</span> <span class="nav-text">System F</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rank-N-Types"><span class="nav-number">3.</span> <span class="nav-text">Rank-N Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非直谓性"><span class="nav-number">4.</span> <span class="nav-text">非直谓性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单态限制"><span class="nav-number">5.</span> <span class="nav-text">单态限制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rule-1"><span class="nav-number">5.1.</span> <span class="nav-text">Rule 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rule-2"><span class="nav-number">5.2.</span> <span class="nav-text">Rule 2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

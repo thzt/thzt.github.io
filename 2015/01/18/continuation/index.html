@@ -363,12 +363,11 @@
 <p>《The Scheme Programming Language 4th》第3.3节介绍了continuation的概念，</p>
 <p>为了说明call/cc，作者举了一个小例子。</p>
 <p>(let ([x (call/cc (lambda (k) k))])</p>
-<p>  (x (lambda (ignore) "hi")))</p>
-<p>=&gt; "hi"</p>
+<p>&nbsp;&nbsp;(x (lambda (ignore) “hi”)))</p>
+<p>=&gt; “hi”</p>
 <p>如果你像我一样，感到很困惑，那么希望本文对你有所帮助。</p>
 <p><br/></p>
-<h3 id="continuation的概念"><strong>continuation的概念</strong></h3>
-<p>scheme是一门简洁的语言，</p>
+<h3 id="continuation的概念"><a href="#continuation的概念" class="headerlink" title="continuation的概念"></a><strong>continuation的概念</strong></h3><p>scheme是一门简洁的语言，</p>
 <p>scheme程序不包含语句，它只由表达式构成，</p>
 <p>程序的执行，就是表达式的求值过程。</p>
 <p><br/></p>
@@ -395,12 +394,11 @@
 <p>不同表达式的continuation是不同的，代表了不同的工作状态。</p>
 <p>甚至，同一个表达式在程序执行过程的不同时期，continuation也是不同的。</p>
 <p><br/></p>
-<h3 id="callcc"><strong>call/cc</strong></h3>
-<p>scheme语言内置提供了call/cc函数，用来获得当前的continuation。</p>
+<h3 id="call-cc"><a href="#call-cc" class="headerlink" title="call/cc"></a><strong>call/cc</strong></h3><p>scheme语言内置提供了call/cc函数，用来获得当前的continuation。</p>
 <p>例如：</p>
 <p>(+ 0 (call/cc</p>
-<p>  (lambda (k)</p>
-<p>    (k 1))))</p>
+<p>&nbsp;&nbsp;(lambda (k)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k 1))))</p>
 <p>=&gt; 1</p>
 <p>call/cc获得的是如下expression的continuation。</p>
 <p>(+ 0 expression)</p>
@@ -408,7 +406,7 @@
 <p>由于expression的后续程序，期望使用expression的值进行加0操作。</p>
 <p>所以，这个continuation就相当于</p>
 <p>(lambda (x)</p>
-<p>  (+ 0 x))</p>
+<p>&nbsp;&nbsp;(+ 0 x))</p>
 <p><br/></p>
 <p>下面我们对call/cc的求值规则进行详细说明，</p>
 <p>（1）call/cc接受一个单参函数fn作为参数</p>
@@ -417,8 +415,8 @@
 <p><br/></p>
 <p>再看一下上面的例子。</p>
 <p>(+ 0 (call/cc</p>
-<p>  (lambda (k)</p>
-<p>    (k 1))))</p>
+<p>&nbsp;&nbsp;(lambda (k)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k 1))))</p>
 <p>call/cc的参数fn，是一个函数(lambda (k) (k 1))</p>
 <p>为了求值(+ 0 (call/cc fn))我们会先求值(call/cc fn)，</p>
 <p>根据call/cc的求值规则（2），fn的形参k，就是call/cc的continuation。</p>
@@ -428,8 +426,8 @@
 <p><br/></p>
 <p>第二种情况，如果continuation没有被调用呢？</p>
 <p>(+ 0 (call/cc</p>
-<p>  (lambda (k)</p>
-<p>    2)))</p>
+<p>&nbsp;&nbsp;(lambda (k)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;2)))</p>
 <p>根据call/cc的求值规则（2），(fn continuation) =&gt; 2</p>
 <p>根据call/cc的求值规则（3），fn的continuation就是call/cc的continuation，</p>
 <p>再根据continuation的定义，程序会跳转到call/cc的工作状态，使用2作为call/cc表达式的值，继续向下执行。</p>
@@ -437,42 +435,41 @@
 <p><br/></p>
 <p>最后，我们来分析本文开头那个例子，</p>
 <p>(let ([x (call/cc (lambda (k) k))])</p>
-<p>  (x (lambda (ignore) "hi")))</p>
-<p>=&gt; "hi"</p>
+<p>&nbsp;&nbsp;(x (lambda (ignore) “hi”)))</p>
+<p>=&gt; “hi”</p>
 <p>call/cc的continuation是什么呢？</p>
 <p>(lambda (z)</p>
-<p>  (let [(x z)]</p>
-<p>    (x (lambda (ignore) "hi"))))</p>
-<p>即，首先将call/cc表达式的值z绑定到x，然后使用(lambda (ignore) "hi")作为参数调用x。</p>
+<p>&nbsp;&nbsp;(let [(x z)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(x (lambda (ignore) “hi”))))</p>
+<p>即，首先将call/cc表达式的值z绑定到x，然后使用(lambda (ignore) “hi”)作为参数调用x。</p>
 <p>请注意区分，continuation中的let表达式和原来要求值的let表达式是不同的。</p>
 <p><br/></p>
 <p>整个程序是这样执行的，</p>
-<p>为了求值let表达式，我们要先将call/cc表达式的值绑定到x，然后用(lambda (ignore) "hi")作为参数调用x，</p>
+<p>为了求值let表达式，我们要先将call/cc表达式的值绑定到x，然后用(lambda (ignore) “hi”)作为参数调用x，</p>
 <p>这使得我们必须先求值call/cc。</p>
 <p>根据上面分析的call/cc求值过程，k就是continuation，而(fn continuation)就是((lambda (k) k) continuation) &lt;=&gt; k，</p>
 <p>k是fn的返回值，并没有被调用，属于上面的第二种情况，</p>
 <p>程序会跳转到call/cc的工作状态，使用k作为call/cc表达式的值，继续向下执行。</p>
 <p>于是，程序变成了，</p>
 <p>(let ([x k])</p>
-<p>  (x (lambda (ignore) "hi")))</p>
-<p>然后，x会绑定为k，用(lambda (ignore) "hi")作为参数调用x。</p>
+<p>&nbsp;&nbsp;(x (lambda (ignore) “hi”)))</p>
+<p>然后，x会绑定为k，用(lambda (ignore) “hi”)作为参数调用x。</p>
 <p><br/></p>
-<p>可是，x是continuation，用(lambda (ignore) "hi")作为参数调用x，</p>
-<p>类似上面的第一种情况，根据continuation的定义，程序会跳转到call/cc的工作状态，使用(lambda (ignore) "hi")作为call/cc表达式的值，继续向下执行。</p>
-<p>(let ([x (lambda (ignore) "hi")])</p>
-<p>  (x (lambda (ignore) "hi")))</p>
-<p>=&gt; "hi"</p>
-<p>所以，整个let表达式的值就是"hi"了。</p>
+<p>可是，x是continuation，用(lambda (ignore) “hi”)作为参数调用x，</p>
+<p>类似上面的第一种情况，根据continuation的定义，程序会跳转到call/cc的工作状态，使用(lambda (ignore) “hi”)作为call/cc表达式的值，继续向下执行。</p>
+<p>(let ([x (lambda (ignore) “hi”)])</p>
+<p>&nbsp;&nbsp;(x (lambda (ignore) “hi”)))</p>
+<p>=&gt; “hi”</p>
+<p>所以，整个let表达式的值就是”hi”了。</p>
 <p><br/></p>
-<h3 id="总结"><strong>总结</strong></h3>
-<p>以上的例子比较简单，执行过程中只求值了一次call/cc，即continuation就一个。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>以上的例子比较简单，执行过程中只求值了一次call/cc，即continuation就一个。</p>
 <p>如果执行过程中，多次调用了call/cc，会产生多个continuation，这时continuation的跳转就需要进行区分了。</p>
 <p>例如，下面著名的“阴阳谜题”，你可以试试看，</p>
 <p>(let* [(yin ((lambda (foo) (newline) foo)</p>
-<p>      (call/cc (lambda (bar) bar))))</p>
-<p>    (yang ((lambda (foo) (write-char #/*) foo)</p>
-<p>      (call/cc (lambda (bar) bar))))]</p>
-<p>  (yin yang))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (bar) bar))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(yang ((lambda (foo) (write-char #/*) foo)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(call/cc (lambda (bar) bar))))]</p>
+<p>&nbsp;&nbsp;(yin yang))</p>
 <p><br/></p>
 <p>起初，我以为continuation是scheme的语言特性，但其实很多语言都实现了它，只不过可能不是first class的，</p>
 <p>因此，这是和语言无关的概念，值得我们深入学习。</p>
@@ -666,7 +663,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#continuation的概念"><span class="nav-number">1.</span> <span class="nav-text">continuation的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#callcc"><span class="nav-number">2.</span> <span class="nav-text">call&#x2F;cc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#continuation的概念"><span class="nav-number">1.</span> <span class="nav-text">continuation的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#call-cc"><span class="nav-number">2.</span> <span class="nav-text">call&#x2F;cc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

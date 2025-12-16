@@ -347,7 +347,7 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d2143e00a8cc56ad.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d2143e00a8cc56ad.png" alt=""></p>
 <p><br/></p>
 <p>上文我们介绍了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^\to"></span>，并给它扩充了单位类型，</p>
 <p>本文继续为它添加新的特性。</p>
@@ -357,8 +357,7 @@
 <p><br/></p>
 <p>最后我们发现，无类型系统实际上是具有，唯一递归类型的一种情形。</p>
 <p><br/></p>
-<h3 id="let绑定">let绑定</h3>
-<p>当写一个复杂表达式的时候，为了避免重复和增加可读性，</p>
+<h3 id="let绑定"><a href="#let绑定" class="headerlink" title="let绑定"></a>let绑定</h3><p>当写一个复杂表达式的时候，为了避免重复和增加可读性，</p>
 <p>通常我们会给某些子表达式命名，</p>
 <p>其中一个常用办法是，使用<code>let</code>表达式。</p>
 <p><br/></p>
@@ -370,7 +369,7 @@
 <p><br/></p>
 <p>新的求值规则：</p>
 <p><span data-katex="let~x:T=v~in~t\to [x\mapsto v]t"></span></p>
-<p><span data-katex="\frac{t_1\to t&#39;_1}{let~x:T_1=t_1~in~t_2\to let~x:T_1=t&#39;_1~in~t_2}"></span></p>
+<p><span data-katex="\frac{t_1\to t'_1}{let~x:T_1=t_1~in~t_2\to let~x:T_1=t'_1~in~t_2}"></span></p>
 <p><br/></p>
 <p>新的类型规则：</p>
 <p><span data-katex="\frac{\Gamma\vdash t_1:T_1~~~~\Gamma,x:T_1\vdash t_2:T_2}{\Gamma\vdash let~x:T_1=t_1~in~t_2:T_2}"></span></p>
@@ -380,9 +379,8 @@
 <p>它表示，求值表达式<span data-katex="t_1"></span>，然后将其绑定到<span data-katex="t_2"></span>中自由出现的<span data-katex="x"></span>上面，</p>
 <p>即在当前这种情况下（顾及<a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system#Let-polymorphism" target="_blank" rel="noopener">let polymorphism</a>），<code>let</code>可以表示为，<span data-katex="(\lambda x:T_1.t_2)t_1"></span>。</p>
 <p><br/></p>
-<h3 id="不动点">不动点</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d43b3ce324057f79.png" /></p>
+<h3 id="不动点"><a href="#不动点" class="headerlink" title="不动点"></a>不动点</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d43b3ce324057f79.png" alt=""></p>
 <p><br/></p>
 <p>以上<code>let</code>表达式，<span data-katex="let~x:T_1=t_1~in~t_2"></span>，</p>
 <p>对<span data-katex="t_1"></span>求值的时候有一个限制，那就是<span data-katex="t_1"></span>中不能出现<span data-katex="x"></span>，</p>
@@ -411,9 +409,8 @@
 <p>引入了<span data-katex="fix_\sigma"></span>之后，<code>letrec</code>就可以用<code>let</code>表示出来了，</p>
 <p><span data-katex="letrec~f:\sigma=t_1~in~t_2\Leftrightarrow let~f:\sigma=(fix_\sigma\lambda f:\sigma.t_1)~in~t_2"></span></p>
 <p><br/></p>
-<h3 id="代数数据类型">代数数据类型</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b810f4430ac7c159.png" /></p>
+<h3 id="代数数据类型"><a href="#代数数据类型" class="headerlink" title="代数数据类型"></a>代数数据类型</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b810f4430ac7c159.png" alt=""></p>
 <p><br/></p>
 <p>在某些编程语言中，可以自定义递归类型，例如在Haskell中，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data List a &#x3D; Nil | Cons a (List a)</span><br><span class="line"></span><br><span class="line">lst :: List Int </span><br><span class="line">lst &#x3D; Cons 1 $ Cons 2 $ Nil</span><br></pre></td></tr></table></figure>
@@ -436,9 +433,8 @@
 <p><span data-katex="\phi"></span>是一个函数，用于表示类型构造器（data constructor）<code>List</code>，</p>
 <p><span data-katex="\mu"></span>算子用来计算类型的不动点。</p>
 <p><br/></p>
-<h3 id="无类型演算">无类型<span data-katex="\lambda"></span>演算</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b7bb889f262aaa84.png" /></p>
+<h3 id="无类型演算"><a href="#无类型演算" class="headerlink" title="无类型演算"></a>无类型<span data-katex="\lambda"></span>演算</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b7bb889f262aaa84.png" alt=""></p>
 <p><br/></p>
 <p>在无类型<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda_\beta"></span>中，</p>
 <p>定义递归类型，<span data-katex="\mu t.t\to t"></span>，它满足类型等式<span data-katex="t=t\to t"></span>。</p>
@@ -451,8 +447,7 @@
 <p>因此，对于支持递归类型的系统而言，</p>
 <p>无类型相当于具有唯一类型（Untyped means uni-typed）。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了递归类型，引入了两个算子<span data-katex="fix_\sigma"></span>和<span data-katex="\mu"></span>，分别用来求解函数和类型的不动点。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了递归类型，引入了两个算子<span data-katex="fix_\sigma"></span>和<span data-katex="\mu"></span>，分别用来求解函数和类型的不动点。</p>
 <p>但是，待求的不动点是否存在，是否唯一，我们仍不能确定。</p>
 <p>要想证明这件事情并不简单，需要补充很多额外的数学知识，例如，良基归纳法和最小不动点定理，</p>
 <p>此外，不动点的存在性，和递归的终止性也有关系。</p>
@@ -462,8 +457,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int </span><br><span class="line">fact 1 &#x3D; 1</span><br><span class="line">fact n &#x3D; n * fact (n - 1)</span><br></pre></td></tr></table></figure>
 <p>将<code>fact</code>写到等式两边，能让我们更方便对<code>fact</code>进行定义。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Algebraic_data_type" target="_blank" rel="noopener">Algebraic data type</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://en.wikipedia.org/wiki/Algebraic_data_type" target="_blank" rel="noopener">Algebraic data type</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Empty_product" target="_blank" rel="noopener">Empty product</a></p>
 <p><a href="https://book.douban.com/subject/1761918/" target="_blank" rel="noopener">Foundations for programmming languages</a></p>
 <p><a href="https://book.douban.com/subject/26782198/" target="_blank" rel="noopener">Practical Foundations for Programming Languages</a></p>

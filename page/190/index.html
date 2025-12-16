@@ -347,9 +347,8 @@
       
         
           
-            <h3 id="匿名函数">1. 匿名函数</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-669ce252032eecd2.png" /></p>
+            <h3 id="1-匿名函数"><a href="#1-匿名函数" class="headerlink" title="1. 匿名函数"></a>1. 匿名函数</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-669ce252032eecd2.png" alt=""></p>
 <p><br/></p>
 <p>现在很多种编程语言都支持匿名函数了，</p>
 <p>例如，<a href="https://msdn.microsoft.com/zh-sg/library/bb397687" target="_blank" rel="noopener">C# 3.0</a>，<a href="https://zh.wikipedia.org/wiki/C%2B%2B11" target="_blank" rel="noopener">C++ 11</a>和<a href="https://en.wikipedia.org/wiki/Java_version_history#Java_SE_8" target="_blank" rel="noopener">Java 8</a>中的lambda表达式，</p>
@@ -366,9 +365,8 @@
 <p><br/></p>
 <p>然而，要想理解这一切，我们首先还得静下心来，从基础的<span data-katex="\lambda"></span>演算开始吧。</p>
 <p><br/></p>
-<h3 id="自然数">2. 自然数</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-cb4665264c58e9e1.png" /></p>
+<h3 id="2-自然数"><a href="#2-自然数" class="headerlink" title="2. 自然数"></a>2. 自然数</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-cb4665264c58e9e1.png" alt=""></p>
 <p><br/></p>
 <p><span data-katex="\lambda"></span>演算听起来是一个高大上的概念，实际上它只是一套“符号推导系统”，</p>
 <p>人们首先定义某些合法的符号，然后再定义一些符号推导规则，</p>
@@ -376,8 +374,7 @@
 <p><br/></p>
 <p>为了让<span data-katex="\lambda"></span>演算更容易被接受，我们暂时先岔开话题，看看自然数是怎么定义的。</p>
 <p><br/></p>
-<h4 id="peano系统">2.1 Peano系统</h4>
-<p>1889年，皮亚诺（<a href="https://zh.wikipedia.org/wiki/%E6%9C%B1%E5%A1%9E%E4%BD%A9%C2%B7%E7%9A%AE%E4%BA%9E%E8%AB%BE" target="_blank" rel="noopener">Peano</a>）为了给出自然数的集合论定义，</p>
+<h4 id="2-1-Peano系统"><a href="#2-1-Peano系统" class="headerlink" title="2.1 Peano系统"></a>2.1 Peano系统</h4><p>1889年，皮亚诺（<a href="https://zh.wikipedia.org/wiki/%E6%9C%B1%E5%A1%9E%E4%BD%A9%C2%B7%E7%9A%AE%E4%BA%9E%E8%AB%BE" target="_blank" rel="noopener">Peano</a>）为了给出自然数的集合论定义，</p>
 <p>他建立了一个包含5条公设的公理系统，后人称之为Peano系统。</p>
 <p><br/></p>
 <p>Peano系统是满足以下公设的有序三元组<span data-katex="(M,F,e)"></span>，</p>
@@ -388,16 +385,14 @@
 <p>（4）<span data-katex="F"></span>是单射</p>
 <p>（5）如果<span data-katex="M"></span>的子集<span data-katex="A"></span>满足，<span data-katex="e\in A"></span>，且<span data-katex="A"></span>在<span data-katex="F"></span>下封闭，则<span data-katex="A=M"></span>。</p>
 <p><br/></p>
-<h4 id="后继">2.2 后继</h4>
-<p>设<span data-katex="A"></span>为一个集合，我们称<span data-katex="A\cup\{A\}"></span>为<span data-katex="A"></span>的后继，记作<span data-katex="A^+"></span>，</p>
+<h4 id="2-2-后继"><a href="#2-2-后继" class="headerlink" title="2.2 后继"></a>2.2 后继</h4><p>设<span data-katex="A"></span>为一个集合，我们称<span data-katex="A\cup\{A\}"></span>为<span data-katex="A"></span>的后继，记作<span data-katex="A^+"></span>，</p>
 <p>求集合后继的操作，称为后继运算。</p>
 <p><br/></p>
 <p>例如，<span data-katex="\varnothing^+=\varnothing\cup\{\varnothing\}=\{\varnothing\}"></span></p>
 <p><span data-katex="\varnothing^{++}=\varnothing^+\cup\{\varnothing^+\}=\{\varnothing\}\cup\{\{\varnothing\}\}=\{\varnothing,\{\varnothing\}\}"></span></p>
 <p><span data-katex="\varnothing^{+++}=\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}\}"></span>。</p>
 <p><br/></p>
-<h4 id="归纳集">2.3 归纳集</h4>
-<p>设<span data-katex="A"></span>为一个集合，若<span data-katex="A"></span>满足，</p>
+<h4 id="2-3-归纳集"><a href="#2-3-归纳集" class="headerlink" title="2.3 归纳集"></a>2.3 归纳集</h4><p>设<span data-katex="A"></span>为一个集合，若<span data-katex="A"></span>满足，</p>
 <p>（1）<span data-katex="\varnothing\in A"></span></p>
 <p>（2）<span data-katex="\forall a\in A"></span>，<span data-katex="a^+\in A"></span></p>
 <p>则称<span data-katex="A"></span>是归纳集。</p>
@@ -409,15 +404,13 @@
 <p>设<span data-katex="\sigma:N\rightarrow N"></span>，满足<span data-katex="\sigma(n)=n^+"></span>，则称<span data-katex="\sigma"></span>为后继函数，</p>
 <p>则可以证明<span data-katex="(N,\sigma,\varnothing)"></span>是一个Peano系统。</p>
 <p><br/></p>
-<h3 id="演算">3. <span data-katex="\lambda"></span>演算</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-93f8d59a3b3b1bcb.png" /></p>
+<h3 id="3-演算"><a href="#3-演算" class="headerlink" title="3. 演算"></a>3. <span data-katex="\lambda"></span>演算</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-06-type-2/1023733-93f8d59a3b3b1bcb.png" alt=""></p>
 <p><br/></p>
 <p><a href="https://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97" target="_blank" rel="noopener"><span data-katex="\lambda"></span>演算</a>，是1930年由邱奇（<a href="https://zh.wikipedia.org/zh-hans/%E9%98%BF%E9%9A%86%E4%BD%90%C2%B7%E9%82%B1%E5%A5%87" target="_blank" rel="noopener">Alonzo Church</a>）发明的一套<a href="https://zh.wikipedia.org/zh/%E5%BD%A2%E5%BC%8F%E7%B3%BB%E7%B5%B1" target="_blank" rel="noopener">形式系统</a>，</p>
 <p>它是从具体的函数定义，函数调用和函数复合中，抽象出来的数学概念。</p>
 <p><br/></p>
-<h4 id="语法">3.1 语法</h4>
-<p>形式上，<span data-katex="\lambda"></span>演算由3种语法项（term）组成，</p>
+<h4 id="3-1-语法"><a href="#3-1-语法" class="headerlink" title="3.1 语法"></a>3.1 语法</h4><p>形式上，<span data-katex="\lambda"></span>演算由3种语法项（term）组成，</p>
 <p>（1）一个变量<span data-katex="x"></span>本身，是一个合法的<span data-katex="\lambda"></span>项，</p>
 <p>（2）<span data-katex="\lambda x.t_1"></span>，是一个合法的<span data-katex="\lambda"></span>项，称为从项<span data-katex="t_1"></span>中抽象出<span data-katex="x"></span>，</p>
 <p>（3）<span data-katex="t_1 t_2"></span>，是一个合法的<span data-katex="\lambda"></span>项，称为将<span data-katex="t_1"></span>应用于<span data-katex="t_2"></span>。</p>
@@ -434,8 +427,7 @@
 <p>很显然给这些符号指定不同的推导规则，会得到不同的公理系统，</p>
 <p>在众多<span data-katex="\lambda"></span>演算系统中，最简单的是<span data-katex="\lambda_\beta"></span>系统，它指定了<span data-katex="\alpha"></span>和<span data-katex="\beta"></span>两种变换。</p>
 <p><br/></p>
-<h4 id="变换">3.2 <span data-katex="\alpha"></span>变换</h4>
-<p>设<span data-katex="\lambda"></span>项<span data-katex="P"></span>中包含了<span data-katex="\lambda x.M"></span>，</p>
+<h4 id="3-2-变换"><a href="#3-2-变换" class="headerlink" title="3.2 变换"></a>3.2 <span data-katex="\alpha"></span>变换</h4><p>设<span data-katex="\lambda"></span>项<span data-katex="P"></span>中包含了<span data-katex="\lambda x.M"></span>，</p>
 <p>则我们可以把<span data-katex="M"></span>中所有自由出现的<span data-katex="x"></span>，全都换成y，即<span data-katex="\lambda y.[y/x]M"></span>，</p>
 <p>这种更名变换，称为<span data-katex="\alpha"></span>变换。</p>
 <p><br/></p>
@@ -451,8 +443,7 @@
 <p><span data-katex="\equiv_\alpha\lambda u.(\lambda v.u(uv))"></span></p>
 <p><span data-katex="=\lambda uv.u(uv)"></span></p>
 <p><br/></p>
-<h4 id="变换-1">3.3 <span data-katex="\beta"></span>变换</h4>
-<p>形如<span data-katex="(\lambda x.M)N"></span>的<span data-katex="\lambda"></span>项，可以经由<span data-katex="\beta"></span>变换转换为<span data-katex="[N/x]M"></span>，</p>
+<h4 id="3-3-变换"><a href="#3-3-变换" class="headerlink" title="3.3 变换"></a>3.3 <span data-katex="\beta"></span>变换</h4><p>形如<span data-katex="(\lambda x.M)N"></span>的<span data-katex="\lambda"></span>项，可以经由<span data-katex="\beta"></span>变换转换为<span data-katex="[N/x]M"></span>，</p>
 <p>指的是，把<span data-katex="M"></span>中所有自由出现的<span data-katex="x"></span>都换成<span data-katex="N"></span>。</p>
 <p><br/></p>
 <p>如果<span data-katex="P"></span>可以经过有限步<span data-katex="\beta"></span>变换转换为<span data-katex="Q"></span>，就写为<span data-katex="P\triangleright_\beta Q"></span>。</p>
@@ -464,8 +455,7 @@
 <p>我们发现，某些<span data-katex="\lambda"></span>项，可以无限进行<span data-katex="\beta"></span>变换。</p>
 <p>而那些最终会终止的<span data-katex="\beta"></span>变换的结果，称为<span data-katex="\beta"></span>范式（<span data-katex="\beta"></span> normal form）。</p>
 <p><br/></p>
-<h4 id="邱奇编码">3.4 邱奇编码</h4>
-<p>现在我们有<span data-katex="\lambda_\beta"></span>公理系统了，就可以依照<span data-katex="\alpha"></span>或<span data-katex="\beta"></span>变换，对任意合法的<span data-katex="\lambda"></span>项进行变换。</p>
+<h4 id="3-4-邱奇编码"><a href="#3-4-邱奇编码" class="headerlink" title="3.4 邱奇编码"></a>3.4 邱奇编码</h4><p>现在我们有<span data-katex="\lambda_\beta"></span>公理系统了，就可以依照<span data-katex="\alpha"></span>或<span data-katex="\beta"></span>变换，对任意合法的<span data-katex="\lambda"></span>项进行变换。</p>
 <p><br/></p>
 <p>假设我们有一个<span data-katex="\lambda"></span>项，<span data-katex="\lambda f.\lambda x.x"></span>，</p>
 <p>还有另外一个<span data-katex="\lambda"></span>项，<span data-katex="\lambda n.\lambda f.\lambda x.f(nfx)"></span>，记为<span data-katex="succ"></span>，</p>
@@ -488,8 +478,7 @@
 <p><br/></p>
 <p>可以看到邱奇编码与归纳集之间有异曲同工之妙。</p>
 <p><br/></p>
-<h4 id="语义">3.5 语义</h4>
-<p>到目前为止，我们并未谈及<span data-katex="\lambda"></span>项到底表示什么含义，</p>
+<h4 id="3-5-语义"><a href="#3-5-语义" class="headerlink" title="3.5 语义"></a>3.5 语义</h4><p>到目前为止，我们并未谈及<span data-katex="\lambda"></span>项到底表示什么含义，</p>
 <p>虽然<span data-katex="\lambda x.M"></span>看起来像是函数定义，<span data-katex="(\lambda x.M)N"></span>看起来像是函数调用。</p>
 <p><br/></p>
 <p>我们谨慎的使用公理化方法，从什么是合法的<span data-katex="\lambda"></span>项出发，</p>
@@ -499,8 +488,7 @@
 <p><br/></p>
 <p>后文中，我们将谈及<span data-katex="\lambda"></span>项的语义，然后再逐渐给它加上类型。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
 <p><a href="https://book.douban.com/subject/4323391/" target="_blank" rel="noopener">Lambda-Calculus and Combinators，an Introduction</a></p>
 <p><a href="https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/Selinger-Lambda-Calculus-Notes.pdf" target="_blank" rel="noopener">Lecture Notes on the Lambda Calculus</a></p>
 

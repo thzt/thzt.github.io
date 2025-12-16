@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾 上文我们简单的介绍了一些范畴论相关的内容， 范畴由一些对象和箭头组成，范畴之间的箭头称为函子， 函子之间的一族箭头称为自然变换。  范畴的对象不一定是集合，所有的箭头也不一定构成一个集合。 如果一个范畴，它的对象都是集合，所有的箭头也构成了一个集合， 就称该范畴是一个小范畴（small categories）。  1. 定义域和值域    在集合论中，函数自变量所有可取值的集合，称为函数">
+<meta name="description" content="回顾上文我们简单的介绍了一些范畴论相关的内容， 范畴由一些对象和箭头组成，范畴之间的箭头称为函子， 函子之间的一族箭头称为自然变换。  范畴的对象不一定是集合，所有的箭头也不一定构成一个集合。 如果一个范畴，它的对象都是集合，所有的箭头也构成了一个集合， 就称该范畴是一个小范畴（small categories#Small_and_large_categories)）。  1. 定义域和值域">
 <meta property="og:type" content="article">
 <meta property="og:title" content="语言背后的代数学（九）：笛卡尔闭范畴">
 <meta property="og:url" content="https://thzt.github.io/2018/02/19/semantics-9/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾 上文我们简单的介绍了一些范畴论相关的内容， 范畴由一些对象和箭头组成，范畴之间的箭头称为函子， 函子之间的一族箭头称为自然变换。  范畴的对象不一定是集合，所有的箭头也不一定构成一个集合。 如果一个范畴，它的对象都是集合，所有的箭头也构成了一个集合， 就称该范畴是一个小范畴（small categories）。  1. 定义域和值域    在集合论中，函数自变量所有可取值的集合，称为函数">
+<meta property="og:description" content="回顾上文我们简单的介绍了一些范畴论相关的内容， 范畴由一些对象和箭头组成，范畴之间的箭头称为函子， 函子之间的一族箭头称为自然变换。  范畴的对象不一定是集合，所有的箭头也不一定构成一个集合。 如果一个范畴，它的对象都是集合，所有的箭头也构成了一个集合， 就称该范畴是一个小范畴（small categories#Small_and_large_categories)）。  1. 定义域和值域">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-cb66a46077b03ab6.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-57ed84963b06aca7.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-813d7932c1fb3fb5.png">
@@ -351,20 +351,18 @@
       
 
       
-        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-cb66a46077b03ab6.png" /></p>
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-cb66a46077b03ab6.png" alt=""></p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文我们简单的介绍了一些范畴论相关的内容，</p>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上文我们简单的介绍了一些范畴论相关的内容，</p>
 <p>范畴由一些对象和箭头组成，范畴之间的箭头称为函子，</p>
 <p>函子之间的一族箭头称为自然变换。</p>
 <p><br/></p>
 <p>范畴的对象不一定是集合，所有的箭头也不一定构成一个集合。</p>
 <p>如果一个范畴<span data-katex="C"></span>，它的对象都是集合，所有的箭头也构成了一个集合，</p>
-<p>就称该范畴是一个小范畴（<a href="https://en.wikipedia.org/wiki/Category_(mathematics)#Small_and_large_categories" target="_blank" rel="noopener">small categories</a>）。</p>
+<p>就称该范畴是一个小范畴（<a href="https://en.wikipedia.org/wiki/Category_(mathematics" target="_blank" rel="noopener">small categories</a>#Small_and_large_categories)）。</p>
 <p><br/></p>
-<h3 id="定义域和值域">1. 定义域和值域</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-57ed84963b06aca7.png" /></p>
+<h3 id="1-定义域和值域"><a href="#1-定义域和值域" class="headerlink" title="1. 定义域和值域"></a>1. 定义域和值域</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-57ed84963b06aca7.png" alt=""></p>
 <p><br/></p>
 <p>在集合论中，函数自变量所有可取值的集合，称为函数的<strong>定义域</strong>，</p>
 <p>给定函数<span data-katex="f:A\to B"></span>，其中<span data-katex="A"></span>就是<span data-katex="f"></span>的定义域，记为<span data-katex="D_f"></span>，</p>
@@ -378,27 +376,23 @@
 <p>由此，我们还可以定义范畴<span data-katex="C"></span>中，从对象<span data-katex="a"></span>到对象<span data-katex="b"></span>所有箭头的集合，</p>
 <p><span data-katex="hom(a,b)=\{f|f\in C,dom~f=a,cod~f=b\}"></span>，常被称为<strong><a href="https://en.wikipedia.org/wiki/Morphism#Definition" target="_blank" rel="noopener">hom-set</a></strong>。</p>
 <p><br/></p>
-<h3 id="笛卡尔闭范畴">2. 笛卡尔闭范畴</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-813d7932c1fb3fb5.png" /></p>
+<h3 id="2-笛卡尔闭范畴"><a href="#2-笛卡尔闭范畴" class="headerlink" title="2. 笛卡尔闭范畴"></a>2. 笛卡尔闭范畴</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-813d7932c1fb3fb5.png" alt=""></p>
 <p><br/></p>
 <p>笛卡尔闭范畴是一种带有附加结构的范畴，这个名字虽然不是那么熟悉，</p>
 <p>而实际上，我们经常遇到它。</p>
 <p><br/></p>
-<h4 id="笛卡尔积">2.1 笛卡尔积</h4>
-<p>两个集合<span data-katex="X"></span>和<span data-katex="Y"></span>的笛卡尔积，是以下所有可能有序对构成的集合，</p>
+<h4 id="2-1-笛卡尔积"><a href="#2-1-笛卡尔积" class="headerlink" title="2.1 笛卡尔积"></a>2.1 笛卡尔积</h4><p>两个集合<span data-katex="X"></span>和<span data-katex="Y"></span>的笛卡尔积，是以下所有可能有序对构成的集合，</p>
 <p><span data-katex="X\times Y=\{(x,y)|x\in X,y\in Y\}"></span>。</p>
 <p><br/></p>
-<h4 id="笛卡尔积上的函数">2.2 笛卡尔积上的函数</h4>
-<p><span data-katex="f:X\times Y\to Z"></span>，是从笛卡尔积<span data-katex="X\times Y"></span>到<span data-katex="Z"></span>的函数，</p>
+<h4 id="2-2-笛卡尔积上的函数"><a href="#2-2-笛卡尔积上的函数" class="headerlink" title="2.2 笛卡尔积上的函数"></a>2.2 笛卡尔积上的函数</h4><p><span data-katex="f:X\times Y\to Z"></span>，是从笛卡尔积<span data-katex="X\times Y"></span>到<span data-katex="Z"></span>的函数，</p>
 <p>我们可以用两种不同的视角来看待它，</p>
 <p>（1）它是一个一元函数，参数取遍<span data-katex="X\times Y"></span>中的所有元素。</p>
 <p>（2）它是一个二元函数，一个参数来自于<span data-katex="X"></span>，另一个来自于<span data-katex="Y"></span>。</p>
 <p>原则上，这两种理解应该是不同的，然而它们却是等价的。</p>
 <p><br/></p>
-<h4 id="柯里化">2.3 柯里化</h4>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-28c21c09edf2f2f3.png" /></p>
+<h4 id="2-3-柯里化"><a href="#2-3-柯里化" class="headerlink" title="2.3 柯里化"></a>2.3 柯里化</h4><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-28c21c09edf2f2f3.png" alt=""></p>
 <p><br/></p>
 <p>笛卡尔闭范畴就是反映这一类性质的数学结构，</p>
 <p>一个范畴中，定义在乘积对象<span data-katex="a\times b"></span>上的箭头<span data-katex="f"></span>，</p>
@@ -416,8 +410,7 @@
 <p>用hom-set的术语来表述就是，存在一个一一映射，使得，</p>
 <p><span data-katex="hom(X\times Y,Z)\cong hom(X,Z^Y)"></span></p>
 <p><br/></p>
-<h4 id="cartesian-closed">2.4 Cartesian Closed</h4>
-<p>将以上柯里化的概念推广到范畴论中，我们就有，</p>
+<h4 id="2-4-Cartesian-Closed"><a href="#2-4-Cartesian-Closed" class="headerlink" title="2.4 Cartesian Closed"></a>2.4 Cartesian Closed</h4><p>将以上柯里化的概念推广到范畴论中，我们就有，</p>
 <p>一个笛卡尔闭范畴（cartesian closed category）<span data-katex="C"></span>，是满足以下几个额外条件的范畴。</p>
 <p><br/></p>
 <p>（1）<span data-katex="C"></span>中存在一个对象<span data-katex="1"></span>，使得对于任意对象<span data-katex="A\in C"></span>，有唯一的箭头<span data-katex="A\to 1"></span>，</p>
@@ -434,10 +427,9 @@
 <p>即，<span data-katex="(e\circ (g\times I))(X\times Y)=e((g\times I)(X\times Y))=e(Z^Y\times Y)=Z"></span>。</p>
 <p>其中<span data-katex="I:Y\to Y"></span>，为对象<span data-katex="Y"></span>的恒等箭头，<span data-katex="Z^Y"></span>称为指数对象（exponential object）。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-475047e7eb5b9b6f.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-19-semantics-9/1023733-475047e7eb5b9b6f.png" alt=""></p>
 <p><br/></p>
-<h3 id="项的解释">3. 项的解释</h3>
-<p>在<a href="http://thzt.github.io/2018/02/04/semantics-6/">第六篇</a>中，为了解释简单类型化<span data-katex="\lambda"></span>演算，</p>
+<h3 id="3-项的解释"><a href="#3-项的解释" class="headerlink" title="3. 项的解释"></a>3. 项的解释</h3><p>在<a href="http://thzt.github.io/2018/02/04/semantics-6/">第六篇</a>中，为了解释简单类型化<span data-katex="\lambda"></span>演算，</p>
 <p>我们为每一个<span data-katex="\lambda"></span>项，找到了一个<span data-katex="\Sigma"></span>代数中数学对象与之对应，</p>
 <p>简要的说，我们用<span data-katex="\Sigma"></span>代数的载体<span data-katex="A^\sigma"></span>来解释基本类型<span data-katex="\sigma"></span>，</p>
 <p>用载体上的函数集<span data-katex="A^{\sigma\to\tau}"></span>来解释类型为<span data-katex="\sigma\to\tau"></span>的所有函数。</p>
@@ -446,15 +438,13 @@
 <p>而将项常量<span data-katex="b"></span>解释为范畴中的一个箭头<span data-katex="unit\to\mathscr{A}[\![b]\!]"></span>（原因在下文解释），</p>
 <p>其中<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>为我们在Henkin模型中定义的含义函数。</p>
 <p><br/></p>
-<h4 id="封闭项的解释">3.1 封闭项的解释</h4>
-<p>我们这样定义一个<strong>含义函数</strong><span data-katex="\mathscr{C}[\![\cdot]\!]"></span>，</p>
+<h4 id="3-1-封闭项的解释"><a href="#3-1-封闭项的解释" class="headerlink" title="3.1 封闭项的解释"></a>3.1 封闭项的解释</h4><p>我们这样定义一个<strong>含义函数</strong><span data-katex="\mathscr{C}[\![\cdot]\!]"></span>，</p>
 <p>（1）<span data-katex="\mathscr{C}[\![unit]\!]=unit"></span></p>
 <p>（2）<span data-katex="\mathscr{C}[\![b]\!]=unit\to\mathscr{A}[\![b]\!]"></span></p>
 <p>（3）<span data-katex="\mathscr{C}[\![\sigma\times\tau]\!]=\mathscr{C}[\![\sigma]\!]\times\mathscr{C}[\![\tau]\!]"></span></p>
 <p>（4）<span data-katex="\mathscr{C}[\![\sigma\to\tau]\!]=\mathscr{C}[\![\sigma]\!]\to\mathscr{C}[\![\tau]\!]"></span></p>
 <p><br/></p>
-<h4 id="带有自由变量的项">3.2 带有自由变量的项</h4>
-<p>如果<span data-katex="\Gamma\vdash M:\sigma"></span>是一个含有自由变量的<span data-katex="\lambda"></span>项，</p>
+<h4 id="3-2-带有自由变量的项"><a href="#3-2-带有自由变量的项" class="headerlink" title="3.2 带有自由变量的项"></a>3.2 带有自由变量的项</h4><p>如果<span data-katex="\Gamma\vdash M:\sigma"></span>是一个含有自由变量的<span data-katex="\lambda"></span>项，</p>
 <p>则在笛卡尔闭范畴中，它应该解释为从自由变量的语义对象到<span data-katex="\sigma"></span>的语义对象的一个箭头，</p>
 <p><span data-katex="\mathscr{C}[\![\Gamma\vdash M:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\to\mathscr{C}[\![\sigma]\!]"></span>。</p>
 <p><br/></p>
@@ -466,18 +456,16 @@
 <p>（1）<span data-katex="\mathscr{C}[\![\varnothing]\!]=unit"></span></p>
 <p>（2）<span data-katex="\mathscr{C}[\![\Gamma,x:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\times\mathscr{C}[\![\sigma]\!]"></span></p>
 <p><br/></p>
-<h3 id="回顾-1">回顾</h3>
-<p>本文介绍了笛卡尔闭范畴，是一种具有特殊结构的范畴，</p>
+<h3 id="回顾-1"><a href="#回顾-1" class="headerlink" title="回顾"></a>回顾</h3><p>本文介绍了笛卡尔闭范畴，是一种具有特殊结构的范畴，</p>
 <p>它补充了柯里化这一概念所需满足的约束条件。</p>
 <p><br/></p>
 <p>接着我们用笛卡尔闭范畴解释了，</p>
 <p>带有<a href="http://thzt.github.io/2017/09/19/type-6/">单位类型</a>，乘积类型的简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^{unit,\times,\to}"></span>。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://thzt.github.io/2017/09/19/type-6/">你好，类型（六）：Simply typed lambda calculus</a></p>
 <p><a href="http://thzt.github.io/2018/02/04/semantics-6/">语言背后的代数学（六）：Henkin模型</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Category_(mathematics)#Small_and_large_categories" target="_blank" rel="noopener">Small and Large Categories</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Class_(set_theory)" target="_blank" rel="noopener">Class</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Category_(mathematics" target="_blank" rel="noopener">Small and Large Categories</a>#Small_and_large_categories)</p>
+<p><a href="https://en.wikipedia.org/wiki/Class_(set_theory" target="_blank" rel="noopener">Class</a>)</p>
 <p><a href="https://book.douban.com/subject/26684696/" target="_blank" rel="noopener">Category Theory for Computing Science</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Cartesian_closed_category" target="_blank" rel="noopener">Cartesian closed category</a></p>
 
@@ -669,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义域和值域"><span class="nav-number">2.</span> <span class="nav-text">1. 定义域和值域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#笛卡尔闭范畴"><span class="nav-number">3.</span> <span class="nav-text">2. 笛卡尔闭范畴</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#笛卡尔积"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 笛卡尔积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#笛卡尔积上的函数"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 笛卡尔积上的函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#柯里化"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 柯里化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cartesian-closed"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Cartesian Closed</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项的解释"><span class="nav-number">4.</span> <span class="nav-text">3. 项的解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#封闭项的解释"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 封闭项的解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#带有自由变量的项"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 带有自由变量的项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾-1"><span class="nav-number">5.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-定义域和值域"><span class="nav-number">2.</span> <span class="nav-text">1. 定义域和值域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-笛卡尔闭范畴"><span class="nav-number">3.</span> <span class="nav-text">2. 笛卡尔闭范畴</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-笛卡尔积"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 笛卡尔积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-笛卡尔积上的函数"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 笛卡尔积上的函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-柯里化"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 柯里化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-Cartesian-Closed"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Cartesian Closed</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-项的解释"><span class="nav-number">4.</span> <span class="nav-text">3. 项的解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-封闭项的解释"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 封闭项的解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-带有自由变量的项"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 带有自由变量的项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾-1"><span class="nav-number">5.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

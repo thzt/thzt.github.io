@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾 上文我们讨论了集合上的偏序结构，之所以谈论它们是因为， 完全偏序集上的连续函数具有最小不动点，这称之为最小不动点定理， 除了集合论的一些知识之外，我们还要讨论到底什么是连续函数，以及什么是完全偏序集。  有向子集与完全偏序    偏序集的非空子集叫做有向子集（directed subset）， 当且仅当，对于中的任意元素， 存在中的一个元素，有且。  如果一个偏序集的每个有向子集都有上确界（">
+<meta name="description" content="回顾上文我们讨论了集合上的偏序结构，之所以谈论它们是因为， 完全偏序集上的连续函数具有最小不动点，这称之为最小不动点定理， 除了集合论的一些知识之外，我们还要讨论到底什么是连续函数，以及什么是完全偏序集。  有向子集与完全偏序   偏序集的非空子集叫做有向子集（directed subset）， 当且仅当，对于中的任意元素， 存在中的一个元素，有且。  如果一个偏序集的每个有向子集都有上确界（记为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="递归函数（九）：最小不动点定理">
 <meta property="og:url" content="https://thzt.github.io/2017/03/21/recursive-function-9/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾 上文我们讨论了集合上的偏序结构，之所以谈论它们是因为， 完全偏序集上的连续函数具有最小不动点，这称之为最小不动点定理， 除了集合论的一些知识之外，我们还要讨论到底什么是连续函数，以及什么是完全偏序集。  有向子集与完全偏序    偏序集的非空子集叫做有向子集（directed subset）， 当且仅当，对于中的任意元素， 存在中的一个元素，有且。  如果一个偏序集的每个有向子集都有上确界（">
+<meta property="og:description" content="回顾上文我们讨论了集合上的偏序结构，之所以谈论它们是因为， 完全偏序集上的连续函数具有最小不动点，这称之为最小不动点定理， 除了集合论的一些知识之外，我们还要讨论到底什么是连续函数，以及什么是完全偏序集。  有向子集与完全偏序   偏序集的非空子集叫做有向子集（directed subset）， 当且仅当，对于中的任意元素， 存在中的一个元素，有且。  如果一个偏序集的每个有向子集都有上确界（记为">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-cc5d7e479b1911da.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-eb3b6c096d73d399.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-7c12a71b029409d8.png">
@@ -351,14 +351,12 @@
       
 
       
-        <h3 id="回顾">回顾</h3>
-<p>上文我们讨论了集合上的偏序结构，之所以谈论它们是因为，</p>
+        <h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上文我们讨论了集合上的偏序结构，之所以谈论它们是因为，</p>
 <p>完全偏序集上的连续函数具有最小不动点，这称之为最小不动点定理，</p>
 <p>除了集合论的一些知识之外，我们还要讨论到底什么是连续函数，以及什么是完全偏序集。</p>
 <p><br/></p>
-<h3 id="有向子集与完全偏序">有向子集与完全偏序</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-cc5d7e479b1911da.png" /></p>
+<h3 id="有向子集与完全偏序"><a href="#有向子集与完全偏序" class="headerlink" title="有向子集与完全偏序"></a>有向子集与完全偏序</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-cc5d7e479b1911da.png" alt=""></p>
 <p><br/></p>
 <p>偏序集<span data-katex="(D,\leqslant )"></span>的非空子集<span data-katex="S\subseteq D"></span>叫做有向子集（directed subset），</p>
 <p>当且仅当，对于<span data-katex="S"></span>中的任意元素<span data-katex="a,b\in S"></span>，</p>
@@ -371,34 +369,31 @@
 <p>注意，完全偏序集并不是每一个子集都有上确界，</p>
 <p>而是它的每一个有向子集都有上确界。</p>
 <p><br/></p>
-<h3 id="连续函数">连续函数</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-eb3b6c096d73d399.png" /></p>
+<h3 id="连续函数"><a href="#连续函数" class="headerlink" title="连续函数"></a>连续函数</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-eb3b6c096d73d399.png" alt=""></p>
 <p><br/></p>
 <p>假设<span data-katex="(D,\leqslant )"></span>与<span data-katex="(E,\leqslant )"></span>是完全偏序集，</p>
 <p><span data-katex="f:D\rightarrow E"></span>是集合上定义的一个函数，</p>
 <p>如果<span data-katex="S\subseteq D"></span>，则<span data-katex="f(S)"></span>为<span data-katex="E"></span>的子集，</p>
 <p>其中<span data-katex="f(S)=\lbrace f(d)|\ d\in S \rbrace"></span>。</p>
 <p><br/></p>
-<p>对于任意的<span data-katex="d,d&#39;\in D"></span>，如果<span data-katex="d\leqslant d&#39;"></span>就有<span data-katex="f(d)\leqslant f(d&#39;)"></span>，</p>
+<p>对于任意的<span data-katex="d,d'\in D"></span>，如果<span data-katex="d\leqslant d'"></span>就有<span data-katex="f(d)\leqslant f(d')"></span>，</p>
 <p>我们就说<span data-katex="f"></span>是单调的。</p>
 <p>可以看出，如果<span data-katex="f"></span>是单调的，且<span data-katex="S"></span>是<span data-katex="D"></span>的有向子集，那么<span data-katex="f(S)"></span>也是<span data-katex="E"></span>的有向子集。</p>
 <p><br/></p>
 <p>如果<span data-katex="f"></span>是单调的，且对于任意有向子集<span data-katex="S\subseteq D"></span>，</p>
 <p>有<span data-katex="f(\bigvee S)=\bigvee f(S)"></span>，就称<span data-katex="f"></span>是连续的。</p>
 <p><br/></p>
-<h3 id="连续函数集上的偏序结构">连续函数集上的偏序结构</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-7c12a71b029409d8.png" /></p>
+<h3 id="连续函数集上的偏序结构"><a href="#连续函数集上的偏序结构" class="headerlink" title="连续函数集上的偏序结构"></a>连续函数集上的偏序结构</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-7c12a71b029409d8.png" alt=""></p>
 <p><br/></p>
 <p>完全偏序集<span data-katex="(D,\leqslant )"></span>到<span data-katex="(E,\leqslant )"></span>的连续函数，也可以定义出一个偏序结构，</p>
 <p>我们称<span data-katex="f\leqslant g"></span>，当且仅当对于每一个<span data-katex="d\in D"></span>，我们有<span data-katex="f(d)\leqslant g(d)"></span>。</p>
 <p>这样我们就得到了一个元素为连续函数的偏序集，<span data-katex="(D\rightarrow E,\leqslant )"></span>。</p>
 <p>可以证明，<span data-katex="(D\rightarrow E,\leqslant )"></span>也是一个完全偏序集。（证略</p>
 <p><br/></p>
-<h3 id="最小不动点定理">最小不动点定理</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-212453ef1b86ac04.png" /></p>
+<h3 id="最小不动点定理"><a href="#最小不动点定理" class="headerlink" title="最小不动点定理"></a>最小不动点定理</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-212453ef1b86ac04.png" alt=""></p>
 <p><br/></p>
 <p>如果<span data-katex="(D,\leqslant )"></span>是一个完全偏序集，且<span data-katex="f:D\rightarrow D"></span>是连续的，</p>
 <p>则<span data-katex="f"></span>有最小不动点，<span data-katex="fix_D\ f=\bigvee \lbrace f^n(\perp )|\ n\geqslant 0 \rbrace "></span>。</p>
@@ -424,9 +419,8 @@
 <p>因此<span data-katex="b"></span>是集合<span data-katex="\lbrace f^n(\perp )|\ n\geqslant 0 \rbrace"></span>的上界。</p>
 <p>由于集合的最小上界是<span data-katex="a"></span>，所以有<span data-katex="a\leqslant b"></span>。</p>
 <p><br/></p>
-<h3 id="后继函数的不动点">后继函数的不动点</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-be19cfece5c3589e.png" /></p>
+<h3 id="后继函数的不动点"><a href="#后继函数的不动点" class="headerlink" title="后继函数的不动点"></a>后继函数的不动点</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-21-recursive-function-9/1023733-be19cfece5c3589e.png" alt=""></p>
 <p><br/></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">succ :: Int -&gt; Int</span><br><span class="line">succ n &#x3D; n+1</span><br></pre></td></tr></table></figure>
 <p><br/></p>
@@ -457,8 +451,7 @@
 <p>因此，<span data-katex="fix\ succ=\bigvee \lbrace succ^n(\perp )|\ n\geqslant 0 \rbrace =\perp "></span>，</p>
 <p>即，<code>succ</code>的最小不动点是<span data-katex="\perp "></span>，<code>fix succ</code>的计算不会终止。</p>
 <p><br/></p>
-<h3 id="求解阶乘函数">求解阶乘函数</h3>
-<p>上一篇中，我们证明了阶乘函数<code>fact</code>是以下函数的不动点，<code>fact = fix g</code>，</p>
+<h3 id="求解阶乘函数"><a href="#求解阶乘函数" class="headerlink" title="求解阶乘函数"></a>求解阶乘函数</h3><p>上一篇中，我们证明了阶乘函数<code>fact</code>是以下函数的不动点，<code>fact = fix g</code>，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g :: (Int -&gt; Int) -&gt; Int -&gt; Int</span><br><span class="line">g f n &#x3D; case n of</span><br><span class="line">  1 -&gt; 1</span><br><span class="line">  _ -&gt; n * f (n-1)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
 <p>现在我们来看一下，如何运用最小不动点定理来得到这个答案。</p>
@@ -484,14 +477,12 @@
 <p><br/></p>
 <p>即，<code>fact</code>函数就是<code>g</code>函数的最小不动点。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>到此为止，我想这个系列的文章已经讨论完了，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>到此为止，我想这个系列的文章已经讨论完了，</p>
 <p>本系列文章一直围绕着递归函数和不动点进行分析，</p>
 <p>在内容上可以分为两个部分，前半部分主要与可计算性理论有关，</p>
 <p>后半部分与不动点定理有关，希望对大家有所帮助。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://zh.wikipedia.org/wiki/%E6%9C%89%E5%90%91%E9%9B%86%E5%90%88" target="_blank" rel="noopener">有向集合</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zh.wikipedia.org/wiki/%E6%9C%89%E5%90%91%E9%9B%86%E5%90%88" target="_blank" rel="noopener">有向集合</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E5%AE%8C%E5%85%A8%E5%81%8F%E5%BA%8F" target="_blank" rel="noopener">完全偏序</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Kleene_fixed-point_theorem" target="_blank" rel="noopener">Kleene fixed-point theorem</a></p>
 <p><a href="https://book.douban.com/subject/1761918/" target="_blank" rel="noopener">Foundations for Programming Languages</a></p>

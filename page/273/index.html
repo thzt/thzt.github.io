@@ -362,8 +362,7 @@
 <p>这是怎么回事呢？</p>
 <p>又要从头开始了。</p>
 <p><br/></p>
-<h2 id="non-strictness"><strong>non-strictness</strong></h2>
-<p>non-strict function，是<strong>指称语义</strong>中的概念，</p>
+<h2 id="non-strictness"><a href="#non-strictness" class="headerlink" title="non-strictness"></a><strong>non-strictness</strong></h2><p>non-strict function，是<strong>指称语义</strong>中的概念，</p>
 <p>指称语义将每一段代码，与一个数学对象相对应，</p>
 <p>借此来研究程序的语义。</p>
 <p><br/></p>
@@ -394,8 +393,8 @@
 <p><br/></p>
 <p>Haskell用undefined来表示⊥，</p>
 <p>undefined也确实包含在所有类型中，</p>
-<p>&gt; :t undefined</p>
-<p>&gt; undefined :: a</p>
+<p>> :t undefined</p>
+<p>> undefined :: a</p>
 <p><br/></p>
 <p>通常情况下，</p>
 <p>如果一个数学函数的参数是⊥，则结果就是⊥。</p>
@@ -406,7 +405,7 @@
 <p>nonStrictFn :: Integer -&gt; Integer</p>
 <p>nonStrictFn 0 _ = 0</p>
 <p><br/></p>
-<p>nonStrictFn 0 undefined &gt; 0</p>
+<p>nonStrictFn 0 undefined<br>> 0</p>
 <p><br/></p>
 <p>函数nonStrictFn在参数包含undefined的时候，</p>
 <p>并没有得到undefined，而是得到了一个明确的值0，</p>
@@ -415,8 +414,7 @@
 <p>函数的指称语义是non-strict function，</p>
 <p>这样的语言，称为non-strict language。</p>
 <p><br/></p>
-<h2 id="lazy-evaluation"><strong>lazy evaluation</strong></h2>
-<p>求值，是<strong>操作语义</strong>中的概念。</p>
+<h2 id="lazy-evaluation"><a href="#lazy-evaluation" class="headerlink" title="lazy evaluation"></a><strong>lazy evaluation</strong></h2><p>求值，是<strong>操作语义</strong>中的概念。</p>
 <p><strong>能实现non-strict指称语义的求值策略并不是唯一的</strong>。</p>
 <p><br/></p>
 <p>GHC是Haskell目前最流行的编译器，</p>
@@ -427,27 +425,27 @@
 <p>y = 2</p>
 <p>z = (x, y)</p>
 <p><br/></p>
-<p>&gt; :sprint x</p>
-<p>&gt; x = _</p>
-<p>&gt; :sprint y</p>
-<p>&gt; y = _</p>
-<p>&gt; :sprint z</p>
-<p>&gt; y = _</p>
+<p>> :sprint x</p>
+<p>> x = _</p>
+<p>> :sprint y</p>
+<p>> y = _</p>
+<p>> :sprint z</p>
+<p>> y = _</p>
 <p><br/></p>
 <p>这里“:sprint”只是打印表达式，而不会求值它。</p>
 <p>“_”用来表示“未求值的”，或称为一个“<strong>thunk</strong>”。</p>
 <p><br/></p>
 <p>thunk在使用的时候，<strong>并不一定被完全求值</strong>。</p>
-<p>&gt; let first = (u, _) = u</p>
-<p>&gt; first z</p>
-<p>&gt; 1</p>
+<p>> let first = (u, _) = u</p>
+<p>> first z</p>
+<p>> 1</p>
 <p><br/></p>
-<p>&gt; :sprint x</p>
-<p>&gt; x = 1</p>
-<p>&gt; :sprint y</p>
-<p>&gt; y = _</p>
-<p>&gt; :sprint z</p>
-<p>&gt; y = (1, _)</p>
+<p>> :sprint x</p>
+<p>> x = 1</p>
+<p>> :sprint y</p>
+<p>> y = _</p>
+<p>> :sprint z</p>
+<p>> y = (1, _)</p>
 <p><br/></p>
 <p>first函数，只求值了第一个参数，</p>
 <p>第二个参数，仍然是未求值的。</p>
@@ -459,8 +457,7 @@
 <p>如果不能满足需要，</p>
 <p>就会继续将对应的sub-thunk，再求值为WHNF。</p>
 <p><br/></p>
-<h2 id="weak-head-normal-form"><strong>Weak head normal form</strong></h2>
-<p>一个WHNF（weak head normal form），</p>
+<h2 id="Weak-head-normal-form"><a href="#Weak-head-normal-form" class="headerlink" title="Weak head normal form"></a><strong>Weak head normal form</strong></h2><p>一个WHNF（weak head normal form），</p>
 <p>是表达式求值的一种结果形式。</p>
 <p><br/></p>
 <p>WHNF，只将表达式求值到，</p>
@@ -468,13 +465,13 @@
 <p><br/></p>
 <p>例如：以下表达式是WHNF，</p>
 <p>(1 + 1, 2 + 2)，最外层是一个值构造器，(,)</p>
-<p>-&gt; 2 + 2，最外层是一个lambda抽象，</p>
-<p>'h' : ("e" ++ "llo")，最外层是一个值构造器，(:)</p>
+<p>\x -&gt; 2 + 2，最外层是一个lambda抽象，</p>
+<p>‘h’ : (“e” ++ “llo”)，最外层是一个值构造器，(:)</p>
 <p><br/></p>
 <p>以下表达式不是WHNF：</p>
 <p>1 + 2，最外层是加法函数调用，(+)</p>
-<p>(-&gt; x + 1) 2，最外层是一个匿名函数调用</p>
-<p>"he" ++ "llo"，最外层是列表的连接函数调用，(++)</p>
+<p>(\x -&gt; x + 1) 2，最外层是一个匿名函数调用</p>
+<p>“he” ++ “llo”，最外层是列表的连接函数调用，(++)</p>
 <p><br/></p>
 <p>因此，</p>
 <p>表达式(1 + 1, 2 + 2)会按需首先求值为(thunk1,thunk2),</p>
@@ -482,16 +479,15 @@
 <p><br/></p>
 <p>例如：</p>
 <p>testFn1 _ = 1</p>
-<p>testFn2 (<em>, </em>) = 2</p>
+<p>testFn2 (_, _) = 2</p>
 <p>tettFn3 (u, _) = 3</p>
 <p>这3个函数会导致表达式(1 + 1, 2 + 2)进行<strong>不同层次</strong>的求值。</p>
 <p><br/></p>
-<h2 id="seq"><strong>seq</strong></h2>
-<p>为了控制求值程度，</p>
+<h2 id="seq"><a href="#seq" class="headerlink" title="seq"></a><strong>seq</strong></h2><p>为了控制求值程度，</p>
 <p>GHC内置了seq函数。</p>
 <p><br/></p>
-<p>&gt; :t seq</p>
-<p>&gt; seq :: a -&gt; b -&gt; b</p>
+<p>> :t seq</p>
+<p>> seq :: a -&gt; b -&gt; b</p>
 <p><br/></p>
 <p>它表示，<strong>在结果求值为WHNF之前</strong>，</p>
 <p><strong>会先将seq的第一个参数求值为WHNF</strong>。</p>
@@ -503,40 +499,39 @@
 <p>x = 1</p>
 <p>y = seq x (x, x)</p>
 <p><br/></p>
-<p>&gt; :sprint u</p>
-<p>&gt; u = _</p>
-<p>&gt; :sprint v</p>
-<p>&gt; v = _</p>
+<p>> :sprint u</p>
+<p>> u = _</p>
+<p>> :sprint v</p>
+<p>> v = _</p>
 <p><br/></p>
-<p>&gt; :sprint x</p>
-<p>&gt; x = _</p>
-<p>&gt; :sprint y</p>
-<p>&gt; y = _</p>
+<p>> :sprint x</p>
+<p>> x = _</p>
+<p>> :sprint y</p>
+<p>> y = _</p>
 <p><br/></p>
 <p>我们定义一个函数，用来把参数求值WHNF，</p>
-<p>&gt; let whnf (<em>, </em>) = ()</p>
+<p>> let whnf (_, _) = ()</p>
 <p><br/></p>
 <p>则，</p>
-<p>&gt; whnf v</p>
-<p>&gt; ()</p>
-<p>&gt; whnf y</p>
-<p>&gt; ()</p>
+<p>> whnf v</p>
+<p>> ()</p>
+<p>> whnf y</p>
+<p>> ()</p>
 <p><br/></p>
-<p>&gt; :sprint u</p>
-<p>&gt; u = _</p>
-<p>&gt; :sprint v</p>
-<p>&gt; v = (<em>, </em>)</p>
+<p>> :sprint u</p>
+<p>> u = _</p>
+<p>> :sprint v</p>
+<p>> v = (_, _)</p>
 <p><br/></p>
-<p>&gt; :sprint x</p>
-<p>&gt; x = 1</p>
-<p>&gt; :sprint y</p>
-<p>&gt; y = (1, 1)</p>
+<p>> :sprint x</p>
+<p>> x = 1</p>
+<p>> :sprint y</p>
+<p>> y = (1, 1)</p>
 <p><br/></p>
 <p>使用seq控制求值深度，</p>
 <p>可以防止创建过多的thunk。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>当我们在REPL中输入一个表达式时，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>当我们在REPL中输入一个表达式时，</p>
 <p>实际上调用了print函数，</p>
 <p>它会对表达式完全求值。</p>
 <p><br/></p>

@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾 上文我们介绍了一阶逻辑的语义模型，它包括结构和赋值两个部分， 其中，结构给出了常元符号、函数符号以及谓词符号在论域中的解释， 而赋值给出了变元符号在论域中的解释。  我们通过这种方式，建立了形式符号和论域中数学对象之间的关联， 本文将继续研究符号和其语义之间的关系。  1. 语义方面（模型）    1.1 公式的可满足性 我们知道在公理化系统中，逻辑公式可以用来表示推导规则的前提和结论，">
+<meta name="description" content="回顾上文我们介绍了一阶逻辑的语义模型，它包括结构和赋值两个部分， 其中，结构给出了常元符号、函数符号以及谓词符号在论域中的解释， 而赋值给出了变元符号在论域中的解释。  我们通过这种方式，建立了形式符号和论域中数学对象之间的关联， 本文将继续研究符号和其语义之间的关系。  1. 语义方面（模型）   1.1 公式的可满足性我们知道在公理化系统中，逻辑公式可以用来表示推导规则的前提和结论， 它在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="语言背后的代数学（四）：哥德尔定理">
 <meta property="og:url" content="https://thzt.github.io/2018/01/30/semantics-4/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾 上文我们介绍了一阶逻辑的语义模型，它包括结构和赋值两个部分， 其中，结构给出了常元符号、函数符号以及谓词符号在论域中的解释， 而赋值给出了变元符号在论域中的解释。  我们通过这种方式，建立了形式符号和论域中数学对象之间的关联， 本文将继续研究符号和其语义之间的关系。  1. 语义方面（模型）    1.1 公式的可满足性 我们知道在公理化系统中，逻辑公式可以用来表示推导规则的前提和结论，">
+<meta property="og:description" content="回顾上文我们介绍了一阶逻辑的语义模型，它包括结构和赋值两个部分， 其中，结构给出了常元符号、函数符号以及谓词符号在论域中的解释， 而赋值给出了变元符号在论域中的解释。  我们通过这种方式，建立了形式符号和论域中数学对象之间的关联， 本文将继续研究符号和其语义之间的关系。  1. 语义方面（模型）   1.1 公式的可满足性我们知道在公理化系统中，逻辑公式可以用来表示推导规则的前提和结论， 它在">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-f62f4160dd83402d.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-e261ec02b84764ca.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-c7afbb49c56cb45a.png">
@@ -353,22 +353,19 @@
       
 
       
-        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-f62f4160dd83402d.png" /></p>
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-f62f4160dd83402d.png" alt=""></p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文我们介绍了一阶逻辑的语义模型，它包括结构和赋值两个部分，</p>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上文我们介绍了一阶逻辑的语义模型，它包括结构和赋值两个部分，</p>
 <p>其中，结构给出了常元符号、函数符号以及谓词符号在论域中的解释，</p>
 <p>而赋值给出了变元符号在论域中的解释。</p>
 <p><br/></p>
 <p>我们通过这种方式，建立了形式符号和论域中数学对象之间的关联，</p>
 <p>本文将继续研究符号和其语义之间的关系。</p>
 <p><br/></p>
-<h3 id="语义方面模型">1. 语义方面（模型）</h3>
+<h3 id="1-语义方面（模型）"><a href="#1-语义方面（模型）" class="headerlink" title="1. 语义方面（模型）"></a>1. 语义方面（模型）</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-e261ec02b84764ca.png" alt=""></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-e261ec02b84764ca.png" /></p>
-<p><br/></p>
-<h4 id="公式的可满足性">1.1 公式的可满足性</h4>
-<p>我们知道在公理化系统中，逻辑公式<span data-katex="A"></span>可以用来表示推导规则的前提和结论，</p>
+<h4 id="1-1-公式的可满足性"><a href="#1-1-公式的可满足性" class="headerlink" title="1.1 公式的可满足性"></a>1.1 公式的可满足性</h4><p>我们知道在公理化系统中，逻辑公式<span data-katex="A"></span>可以用来表示推导规则的前提和结论，</p>
 <p>它在给定模型<span data-katex="(M,\sigma)"></span>中的语义<span data-katex="A_{M[\sigma]}"></span>是一个真假值。</p>
 <p>这是合情合理的。</p>
 <p>因为推导本来就应该是从真命题推导出另一个真命题的过程。</p>
@@ -384,8 +381,7 @@
 <p>其中的每一个公式关于模型<span data-katex="(M, \sigma)"></span>都是可满足的，</p>
 <p>我们就称，公式集<span data-katex="\Gamma"></span>关于模型<span data-katex="(M, \sigma )"></span>是可满足的，</p>
 <p>记为<span data-katex="M\models _\sigma\Gamma"></span>。</p>
-<h4 id="重言式">1.2 重言式</h4>
-<p>如果公式<span data-katex="A"></span>，对于任意模型<span data-katex="(M, \sigma)"></span>都是可满足的，</p>
+<h4 id="1-2-重言式"><a href="#1-2-重言式" class="headerlink" title="1.2 重言式"></a>1.2 重言式</h4><p>如果公式<span data-katex="A"></span>，对于任意模型<span data-katex="(M, \sigma)"></span>都是可满足的，</p>
 <p>即，对任意结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，<span data-katex="M\models _\sigma A"></span>都成立，</p>
 <p>我们就称<span data-katex="A"></span>是永真公式，也称为<strong>重言式</strong>，记为<span data-katex="\models A"></span>。</p>
 <p><br/></p>
@@ -393,9 +389,8 @@
 <p>它们在任何模型下都为真。</p>
 <p><br/></p>
 <p>例：<span data-katex="A\vee \neg A"></span>，<span data-katex="\forall x(x\doteq x)"></span>都是重言式。</p>
-<h4 id="逻辑推理">1.3 逻辑推理</h4>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-c7afbb49c56cb45a.png" /></p>
+<h4 id="1-3-逻辑推理"><a href="#1-3-逻辑推理" class="headerlink" title="1.3 逻辑推理"></a>1.3 逻辑推理</h4><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-c7afbb49c56cb45a.png" alt=""></p>
 <p><br/></p>
 <p>有了可满足性，我们就可以进行逻辑推理了。</p>
 <p><br/></p>
@@ -407,12 +402,10 @@
 <p>因此，<span data-katex="\Gamma \models A"></span>表示了一种语义关系，</p>
 <p>它指出，对任意<span data-katex="M"></span>和任意<span data-katex="\sigma"></span>，如果<span data-katex="\Gamma"></span>为真，那么<span data-katex="A"></span>也为真。</p>
 <p><br/></p>
-<h3 id="语法方面符号">2. 语法方面（符号）</h3>
+<h3 id="2-语法方面（符号）"><a href="#2-语法方面（符号）" class="headerlink" title="2. 语法方面（符号）"></a>2. 语法方面（符号）</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-1d077dc211a8eae4.png" alt=""></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-1d077dc211a8eae4.png" /></p>
-<p><br/></p>
-<h4 id="序贯">2.1 序贯</h4>
-<p>在《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型</a>》系列文章中，</p>
+<h4 id="2-1-序贯"><a href="#2-1-序贯" class="headerlink" title="2.1 序贯"></a>2.1 序贯</h4><p>在《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型</a>》系列文章中，</p>
 <p>我们介绍过序贯的概念。</p>
 <p><br/></p>
 <p>我们知道，在公理系统中，序贯可以用来表示前提和结论之间的符号联系。</p>
@@ -423,9 +416,8 @@
 <p><br/></p>
 <p>值得注意的是，序贯谈论的都是语法层面（符号层面）上的，</p>
 <p>和这些符号的所选择的具体语义无关。</p>
-<h4 id="协调性一致性">2.2 协调性（一致性）</h4>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-73ceac7a2a671bb1.png" /></p>
+<h4 id="2-2-协调性（一致性）"><a href="#2-2-协调性（一致性）" class="headerlink" title="2.2 协调性（一致性）"></a>2.2 协调性（一致性）</h4><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-73ceac7a2a671bb1.png" alt=""></p>
 <p><br/></p>
 <p>设<span data-katex="\Gamma"></span>为公式集，</p>
 <p>如果不存在一个公式<span data-katex="A"></span>使得序贯<span data-katex="\Gamma \vdash A"></span>与<span data-katex="\Gamma \vdash \neg A"></span>均可证，</p>
@@ -434,19 +426,16 @@
 <p>设<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的公式集，该集合可以是有限集或可数集，</p>
 <p>如果<span data-katex="\Gamma"></span>协调，则称<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的<strong>形式理论</strong>。</p>
 <p><br/></p>
-<h3 id="语法符号和语义模型">3. 语法（符号）和语义（模型）</h3>
+<h3 id="3-语法（符号）和语义（模型）"><a href="#3-语法（符号）和语义（模型）" class="headerlink" title="3. 语法（符号）和语义（模型）"></a>3. 语法（符号）和语义（模型）</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-17d1a64e7702d9eb.png" alt=""></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-17d1a64e7702d9eb.png" /></p>
-<p><br/></p>
-<h4 id="可靠性和完全性">3.1 可靠性和完全性</h4>
-<p>把公理系统的语法和语义联合起来，</p>
+<h4 id="3-1-可靠性和完全性"><a href="#3-1-可靠性和完全性" class="headerlink" title="3.1 可靠性和完全性"></a>3.1 可靠性和完全性</h4><p>把公理系统的语法和语义联合起来，</p>
 <p>我们还可以定义出以下这些系统性质。</p>
 <p><br/></p>
 <p>如果序贯<span data-katex="\Gamma \vdash \Lambda"></span>可证，那么<span data-katex="\Gamma \models \Lambda"></span>成立，就说系统是<strong>可靠的</strong>。</p>
 <p>如果<span data-katex="\Gamma \models A"></span>成立，那么<span data-katex="\Gamma \vdash A"></span>可证，就说系统是<strong>完全的</strong>。</p>
-<h4 id="不完全性与协调性不可证">3.2 不完全性与协调性不可证</h4>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-12d70538c2c4cada.png" /></p>
+<h4 id="3-2-不完全性与协调性不可证"><a href="#3-2-不完全性与协调性不可证" class="headerlink" title="3.2 不完全性与协调性不可证"></a>3.2 不完全性与协调性不可证</h4><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-30-semantics-4/1023733-12d70538c2c4cada.png" alt=""></p>
 <p><br/></p>
 <p>是不是任意一个公理系统都是可靠且完全的呢？</p>
 <p>可惜并不是如此。</p>
@@ -466,14 +455,12 @@
 <p>所以，在软件开发过程中，检查一个软件系统是否符合设计要求，所使用的方法就是对它进行测试，在这个软件系统之外进行证明。</p>
 </blockquote>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>文本介绍语法（符号证明）和语义（模型）之间的关系，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>文本介绍语法（符号证明）和语义（模型）之间的关系，</p>
 <p>让我们认识到了形式化方法的局限性。</p>
 <p>一个足够有用的系统，总会出现不可证的事实，</p>
 <p>并且，在该系统内部，我们甚至都无法证明它是否含有矛盾。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional log</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional log</a></p>
 <p><a href="https://book.douban.com/subject/2364517/" target="_blank" rel="noopener">数理逻辑</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B0%94%E4%B8%8D%E5%AE%8C%E5%A4%87%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">哥德尔不完备定理</a></p>
 
@@ -665,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义方面模型"><span class="nav-number">2.</span> <span class="nav-text">1. 语义方面（模型）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#公式的可满足性"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 公式的可满足性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重言式"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 重言式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑推理"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 逻辑推理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法方面符号"><span class="nav-number">3.</span> <span class="nav-text">2. 语法方面（符号）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#序贯"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 序贯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协调性一致性"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 协调性（一致性）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法符号和语义模型"><span class="nav-number">4.</span> <span class="nav-text">3. 语法（符号）和语义（模型）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可靠性和完全性"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 可靠性和完全性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不完全性与协调性不可证"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 不完全性与协调性不可证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-语义方面（模型）"><span class="nav-number">2.</span> <span class="nav-text">1. 语义方面（模型）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-公式的可满足性"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 公式的可满足性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-重言式"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 重言式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-逻辑推理"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 逻辑推理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-语法方面（符号）"><span class="nav-number">3.</span> <span class="nav-text">2. 语法方面（符号）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-序贯"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 序贯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-协调性（一致性）"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 协调性（一致性）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-语法（符号）和语义（模型）"><span class="nav-number">4.</span> <span class="nav-text">3. 语法（符号）和语义（模型）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-可靠性和完全性"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 可靠性和完全性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-不完全性与协调性不可证"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 不完全性与协调性不可证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

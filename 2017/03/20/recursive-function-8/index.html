@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾 上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式， 这一篇我们根据不动点算子的性质来证明fact函数就是g函数的不动点。 随后，我们回归到了数学中，讨论集合上的一种偏序结构， 这为下文完全偏序集，以及完全偏序集上连续函数的不动点定理做好准备。  不动点算子的性质    上文我们介绍了不动点算子fix， 它可以用来求取任意函数的不动点。  12fix :: (a -&gt; a">
+<meta name="description" content="回顾上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式， 这一篇我们根据不动点算子的性质来证明fact函数就是g函数的不动点。 随后，我们回归到了数学中，讨论集合上的一种偏序结构， 这为下文完全偏序集，以及完全偏序集上连续函数的不动点定理做好准备。  不动点算子的性质   上文我们介绍了不动点算子fix， 它可以用来求取任意函数的不动点。  12fix :: (a -&gt; a)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="递归函数（八）：偏序结构">
 <meta property="og:url" content="https://thzt.github.io/2017/03/20/recursive-function-8/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾 上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式， 这一篇我们根据不动点算子的性质来证明fact函数就是g函数的不动点。 随后，我们回归到了数学中，讨论集合上的一种偏序结构， 这为下文完全偏序集，以及完全偏序集上连续函数的不动点定理做好准备。  不动点算子的性质    上文我们介绍了不动点算子fix， 它可以用来求取任意函数的不动点。  12fix :: (a -&gt; a">
+<meta property="og:description" content="回顾上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式， 这一篇我们根据不动点算子的性质来证明fact函数就是g函数的不动点。 随后，我们回归到了数学中，讨论集合上的一种偏序结构， 这为下文完全偏序集，以及完全偏序集上连续函数的不动点定理做好准备。  不动点算子的性质   上文我们介绍了不动点算子fix， 它可以用来求取任意函数的不动点。  12fix :: (a -&gt; a)">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-a8ca5067e631ea34.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-0a009ed0d24a4df6.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-548b287983ed9034.png">
@@ -352,15 +352,13 @@
       
 
       
-        <h3 id="回顾">回顾</h3>
-<p>上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式，</p>
+        <h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上一篇我们介绍了不动点算子和Y组合子，以及Y组合子的具体表现形式，</p>
 <p>这一篇我们根据不动点算子的性质来证明<code>fact</code>函数就是<code>g</code>函数的不动点。</p>
 <p>随后，我们回归到了数学中，讨论集合上的一种偏序结构，</p>
 <p>这为下文完全偏序集，以及完全偏序集上连续函数的不动点定理做好准备。</p>
 <p><br/></p>
-<h3 id="不动点算子的性质">不动点算子的性质</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-a8ca5067e631ea34.png" /></p>
+<h3 id="不动点算子的性质"><a href="#不动点算子的性质" class="headerlink" title="不动点算子的性质"></a>不动点算子的性质</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-a8ca5067e631ea34.png" alt=""></p>
 <p><br/></p>
 <p>上文我们介绍了不动点算子<code>fix</code>，</p>
 <p>它可以用来求取任意函数的不动点。</p>
@@ -387,9 +385,8 @@
 <p>因此，对于任意的自然数<span data-katex="n"></span>，<code>fact n = fix g n</code>。</p>
 <p>即，<code>fact = fix g</code>。</p>
 <p><br/></p>
-<h3 id="不动点算子的有限展开">不动点算子的有限展开</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-0a009ed0d24a4df6.png" /></p>
+<h3 id="不动点算子的有限展开"><a href="#不动点算子的有限展开" class="headerlink" title="不动点算子的有限展开"></a>不动点算子的有限展开</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-0a009ed0d24a4df6.png" alt=""></p>
 <p><br/></p>
 <p>根据上一节<code>fact = fix g</code>的证明，我们看到，</p>
 <p>每一步递推，我们都使用了不动点算子<code>fix</code>的性质<code>fix g = g (fix g)</code>，</p>
@@ -410,9 +407,8 @@
 <p>为此，我们需要先认识什么是偏序集，什么是连续函数。</p>
 <p>使用完全偏序集上的连续函数解释程序中函数的方式，称为<a href="https://zh.wikipedia.org/wiki/%E5%9F%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">域论模型</a>。</p>
 <p><br/></p>
-<h3 id="偏序集与哈斯图">偏序集与哈斯图</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-548b287983ed9034.png" /></p>
+<h3 id="偏序集与哈斯图"><a href="#偏序集与哈斯图" class="headerlink" title="偏序集与哈斯图"></a>偏序集与哈斯图</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-548b287983ed9034.png" alt=""></p>
 <p><br/></p>
 <p>在第三篇中，我们讨论过<a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">偏序关系</a>，</p>
 <p>一个偏序集<span data-katex="(D,\leqslant )"></span>是一个集合<span data-katex="D"></span>，</p>
@@ -431,23 +427,22 @@
 <p>对于任意的<span data-katex="x,y\in D"></span>，如果总是有<span data-katex="x\leqslant y"></span>或者<span data-katex="y\leqslant x"></span>成立，</p>
 <p>则称<span data-katex="x"></span>和<span data-katex="y"></span>是可比的。</p>
 <p><br/></p>
-<p><span data-katex="x\leqslant y"></span>，且<span data-katex="x\neq y"></span>，则记为<span data-katex="x&lt;y"></span>。</p>
-<p>如果<span data-katex="x"></span>和<span data-katex="y"></span>是可比的，且<span data-katex="x&lt;y"></span>，如果不存在<span data-katex="z\in D"></span>，使得<span data-katex="x&lt;z&lt;y"></span>，则称<span data-katex="y"></span>覆盖<span data-katex="x"></span>。</p>
+<p><span data-katex="x\leqslant y"></span>，且<span data-katex="x\neq y"></span>，则记为<span data-katex="x<y"></span>。</p>
+<p>如果<span data-katex="x"></span>和<span data-katex="y"></span>是可比的，且<span data-katex="x<y"></span>，如果不存在<span data-katex="z\in D"></span>，使得<span data-katex="x<z<y"></span>，则称<span data-katex="y"></span>覆盖<span data-katex="x"></span>。</p>
 <p><br/></p>
 <p>根据可比性和覆盖性，我们就可以将偏序关系用无向图表示出来了，</p>
 <p>其中，顶点表示元素，边表示覆盖关系，并且省去图中每个顶点处的环，</p>
 <p><span data-katex="y"></span>覆盖<span data-katex="x"></span>就将代表<span data-katex="y"></span>的顶点放在代表<span data-katex="x"></span>的顶点之上，并在<span data-katex="x"></span>和<span data-katex="y"></span>之间连线，</p>
-<p>如果<span data-katex="x&lt;y"></span>，但是<span data-katex="y"></span>不覆盖<span data-katex="x"></span>，就省掉<span data-katex="x"></span>与<span data-katex="y"></span>之间的连线。</p>
+<p>如果<span data-katex="x<y"></span>，但是<span data-katex="y"></span>不覆盖<span data-katex="x"></span>，就省掉<span data-katex="x"></span>与<span data-katex="y"></span>之间的连线。</p>
 <p><br/></p>
 <p>这样用来表示有限偏序集的无向图，称为<a href="https://zh.wikipedia.org/wiki/%E5%93%88%E6%96%AF%E5%9C%96" target="_blank" rel="noopener">哈斯图</a>。</p>
 <p><br/></p>
 <p>例如，易证整除关系是整数集上的一种偏序关系，</p>
 <p>我们可以画出偏序集<span data-katex="\lbrace 1,2,3,4,5,6,9,10,15 \rbrace"></span>对应的哈斯图，如下，</p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-3619f4e73479ac87.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-3619f4e73479ac87.png" alt=""></p>
 <p><br/></p>
-<h3 id="全序集与拟序集">全序集与拟序集</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-69bf19c128135d6a.png" /></p>
+<h3 id="全序集与拟序集"><a href="#全序集与拟序集" class="headerlink" title="全序集与拟序集"></a>全序集与拟序集</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-69bf19c128135d6a.png" alt=""></p>
 <p><br/></p>
 <p>设<span data-katex="(D,\leqslant )"></span>是一个偏序集，如果对于任意<span data-katex="x,y\in D"></span>，<span data-katex="x"></span>和<span data-katex="y"></span>都可比，</p>
 <p>则称<span data-katex="\leqslant "></span>为<span data-katex="D"></span>上的全序关系，此时称<span data-katex="(D,\leqslant )"></span>为全序集。</p>
@@ -456,20 +451,19 @@
 <p>哈斯图为从下至上的“一条线”，是全序集的充要条件。</p>
 <p><br/></p>
 <p>设<span data-katex="R"></span>是非空集合<span data-katex="A"></span>上的，反自反的和传递的二元关系，</p>
-<p>则称<span data-katex="R"></span>为<span data-katex="A"></span>上的拟序关系，常将拟序关系记为<span data-katex="&lt;"></span>，并称<span data-katex="(A,&lt;)"></span>为拟序集。</p>
+<p>则称<span data-katex="R"></span>为<span data-katex="A"></span>上的拟序关系，常将拟序关系记为<span data-katex="<"></span>，并称<span data-katex="(A,<)"></span>为拟序集。</p>
 <p>拟序关系自然具有反对称性。</p>
-<p>（其中，反自反关系，指的是不存在<span data-katex="x\in A"></span>，使得<span data-katex="x&lt;x"></span>。</p>
+<p>（其中，反自反关系，指的是不存在<span data-katex="x\in A"></span>，使得<span data-katex="x<x"></span>。</p>
 <p><br/></p>
 <p>拟序关系与偏序关系的哈斯图在画法上完全相同，只是拟序关系的哈斯图的各顶点都没有环。</p>
 <p><br/></p>
-<p>设<span data-katex="(A,&lt;)"></span>是一个拟序集，如果对于任意的<span data-katex="x,y\in A"></span>，</p>
-<p><span data-katex="x&lt;y"></span>，<span data-katex="x=y"></span>，<span data-katex="y&lt;x"></span>三式有且仅有一式成立，则称<span data-katex="&lt;"></span>具有三歧性，</p>
-<p>这样的拟序关系<span data-katex="&lt;"></span>，称为拟全序关系，这样的拟序集<span data-katex="(A,&lt;)"></span>，称为拟全序集。</p>
+<p>设<span data-katex="(A,<)"></span>是一个拟序集，如果对于任意的<span data-katex="x,y\in A"></span>，</p>
+<p><span data-katex="x<y"></span>，<span data-katex="x=y"></span>，<span data-katex="y<x"></span>三式有且仅有一式成立，则称<span data-katex="<"></span>具有三歧性，</p>
+<p>这样的拟序关系<span data-katex="<"></span>，称为拟全序关系，这样的拟序集<span data-katex="(A,<)"></span>，称为拟全序集。</p>
 <p>拟全序集的哈斯图也是“一条线”。</p>
 <p><br/></p>
-<h3 id="最小元与上确界">最小元与上确界</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-848d5a4650be6c32.png" /></p>
+<h3 id="最小元与上确界"><a href="#最小元与上确界" class="headerlink" title="最小元与上确界"></a>最小元与上确界</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-20-recursive-function-8/1023733-848d5a4650be6c32.png" alt=""></p>
 <p><br/></p>
 <p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
 <p>如果存在<span data-katex="y\in S"></span>，且对于任意的<span data-katex="x\in S"></span>，有<span data-katex="y\leqslant x"></span>，</p>
@@ -496,18 +490,16 @@
 <p><br/></p>
 <p><span data-katex="S"></span>的上界和下界不一定存在，即使存在，上确界和下确界也不一定存在。</p>
 <p><br/></p>
-<p>设<span data-katex="(A,&lt;)"></span>是一个拟全序集，如果对于<span data-katex="A"></span>中的任何非空子集<span data-katex="S"></span>都有最小元，</p>
-<p>则称<span data-katex="&lt;"></span>是一个良序关系，<span data-katex="(A,&lt;)"></span>是一个良序集。</p>
-<p>例如，自然数集以及自然数集上的小于关系，构成了一个良序集<span data-katex="(N,&lt;)"></span>，</p>
+<p>设<span data-katex="(A,<)"></span>是一个拟全序集，如果对于<span data-katex="A"></span>中的任何非空子集<span data-katex="S"></span>都有最小元，</p>
+<p>则称<span data-katex="<"></span>是一个良序关系，<span data-katex="(A,<)"></span>是一个良序集。</p>
+<p>例如，自然数集以及自然数集上的小于关系，构成了一个良序集<span data-katex="(N,<)"></span>，</p>
 <p>但是，整数集以及整数集上的小于关系，并不构成良序集，而仅仅是一个拟全序集。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文从一个证明出发，我们了解了不动点算子的工作原理，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文从一个证明出发，我们了解了不动点算子的工作原理，</p>
 <p>然后引出了一些数学概念，序关系在不动点算子理论中占有很重要的地位，</p>
 <p>所以，这里给出了详细的介绍，下文我们开始讨论最小不动点定理。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%8F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">序理论</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zh.wikipedia.org/wiki/%E5%BA%8F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">序理论</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E5%9F%9F%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">域论模型</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">偏序关系</a></p>
 <p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>

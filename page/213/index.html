@@ -347,7 +347,7 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-02-25-recursive-function-2/1023733-497eef3766876271.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-02-25-recursive-function-2/1023733-497eef3766876271.png" alt=""></p>
 <p><br/></p>
 <p>递归，是一个熟悉而陌生的概念，说它熟悉，是因为人们经常提起它，</p>
 <p>而说它陌生，指的是人们在实际编程中几乎不会主动使用它。</p>
@@ -359,8 +359,7 @@
 <p>本系列文章的目的，可能并不局限于指出如何编写一个递归函数，</p>
 <p>而是期望想从递归函数开始，了解它相关的科学知识，以达到对不同领域触类旁通的效果。</p>
 <p><br/></p>
-<h3 id="从一个简单的例子开始">1. 从一个简单的例子开始</h3>
-<p>首先，我们来重温一下递归的概念，</p>
+<h3 id="1-从一个简单的例子开始"><a href="#1-从一个简单的例子开始" class="headerlink" title="1. 从一个简单的例子开始"></a>1. 从一个简单的例子开始</h3><p>首先，我们来重温一下递归的概念，</p>
 <p>维基百科上是这样描述的，</p>
 <blockquote>
 <p>递归（recursion），在数学与计算机科学中，是指在函数的定义中使用函数自身的方法。</p>
@@ -380,8 +379,7 @@
 <p><br/></p>
 <p>嗯嗯，<code>fact</code>就是阶乘函数。</p>
 <p><br/></p>
-<h3 id="写递归函数的步骤">2. 写递归函数的步骤</h3>
-<p>那么，给定一个问题，我们编写一个递归函数，要如何开始呢？</p>
+<h3 id="2-写递归函数的步骤"><a href="#2-写递归函数的步骤" class="headerlink" title="2. 写递归函数的步骤"></a>2. 写递归函数的步骤</h3><p>那么，给定一个问题，我们编写一个递归函数，要如何开始呢？</p>
 <p><br/></p>
 <p>####（1）递推式</p>
 <p>首先，我们要找到“递推式”。</p>
@@ -419,8 +417,7 @@
 <p>我们用<code>fact 1 = 1</code>表示了<span data-katex="f(1)=1"></span>，</p>
 <p>用<code>fact n = n * fact (n-1)</code>表示了<span data-katex="f(n)=n*f(n-1)"></span>。</p>
 <p><br/></p>
-<h3 id="小技巧">3. 小技巧</h3>
-<p>我们再看个复杂一点的例子。</p>
+<h3 id="3-小技巧"><a href="#3-小技巧" class="headerlink" title="3. 小技巧"></a>3. 小技巧</h3><p>我们再看个复杂一点的例子。</p>
 <p><br/></p>
 <p>在实际项目中，我们可能会遇到循环n次的场景，</p>
 <p>在循环过程中，我们会根据索引进行运算，然后将某些符合条件的运算放到最终的结果中。</p>
@@ -455,12 +452,12 @@
 <p>我们可以编写一个辅助的递归函数，通过增加参数的办法，提高灵活性。</p>
 </blockquote>
 <p><br/></p>
-<p>例如，我们可以编写一个辅助函数<code>myLoop'</code>，然后用<code>myLoop'</code>来实现<code>myLoop</code>。</p>
+<p>例如，我们可以编写一个辅助函数<code>myLoop&#39;</code>，然后用<code>myLoop&#39;</code>来实现<code>myLoop</code>。</p>
 <p><br/></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">myLoop :: Int -&gt; (Int -&gt; Maybe a) -&gt; [a]</span><br><span class="line">myLoop n fn &#x3D; myLoop&#39; n 0 fn []</span><br><span class="line"></span><br><span class="line">myLoop&#39; :: Int -&gt; Int -&gt; (Int -&gt; Maybe a) -&gt; [a] -&gt; [a]</span><br><span class="line">myLoop&#39; 0 i fn lst &#x3D; lst</span><br><span class="line">myLoop&#39; n i fn lst &#x3D; case fn i of</span><br><span class="line">  Just x -&gt; myLoop&#39; (n-1) (i+1) fn (lst++[x])</span><br><span class="line">  Nothing -&gt; myLoop&#39; (n-1) (i+1) fn lst</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>以上，我们为<code>myLoop'</code>增加了参数<code>i</code>和<code>lst</code>，分别表示“索引”和“积累”的列表。</p>
-<p>然后，<code>myLoop</code>就可以用<code>myLoop'</code>来实现了。</p>
+<p>以上，我们为<code>myLoop&#39;</code>增加了参数<code>i</code>和<code>lst</code>，分别表示“索引”和“积累”的列表。</p>
+<p>然后，<code>myLoop</code>就可以用<code>myLoop&#39;</code>来实现了。</p>
 <p><br/></p>
 <p>别忘了测试一下最终的结果，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myLoop 10 (\x -&gt; if x &#96;mod&#96; 2 &#x3D;&#x3D; 0 then Just x else Nothing)</span><br><span class="line">[0,2,4,6,8]</span><br></pre></td></tr></table></figure>
@@ -472,8 +469,7 @@
 <p>但最终得到的递归函数就不是<a href="https://zh.wikipedia.org/wiki/%E5%B0%BE%E8%B0%83%E7%94%A8" target="_blank" rel="noopener">尾递归</a>了，</p>
 <p>关于尾递归，我们将在后续文章中讨论它。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92" target="_blank" rel="noopener">维基百科 - 递归</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92" target="_blank" rel="noopener">维基百科 - 递归</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E9%81%9E%E8%BF%B4%E9%97%9C%E4%BF%82%E5%BC%8F" target="_blank" rel="noopener">维基百科 - 递推关系式</a></p>
 
           

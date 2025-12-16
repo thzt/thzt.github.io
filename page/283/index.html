@@ -352,7 +352,7 @@
 <p><br/></p>
 <p>例如：</p>
 <p>(+ 1 (call/cc (lambda (k)</p>
-<p>    (* 2 (k 3)))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(* 2 (k 3)))))</p>
 <p>=&gt; 4</p>
 <p><br/></p>
 <p>CPS，是Continuation Passing Style的缩写，</p>
@@ -363,14 +363,14 @@
 <p>例如，</p>
 <p>函数通过返回值的方式，通常这样写，</p>
 <p>(define (add x y)</p>
-<p>    (+ x y))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x y))</p>
 <p><br/></p>
 <p>(display (add 1 2))</p>
 <p>=&gt; 3</p>
 <p><br/></p>
 <p>改写成CPS方式，</p>
 <p>(define (add x y <strong>k</strong>)</p>
-<p>        <strong>(k</strong> (+ x y)<strong>)</strong>)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k</strong> (+ x y)<strong>)</strong>)</p>
 <p><br/></p>
 <p>(add 1 2 <strong>display</strong>)</p>
 <p>=&gt; 3</p>
@@ -380,8 +380,7 @@
 <p>等add函数体的计算(+ x y)执行完后，</p>
 <p>并没有通过返回值，而是直接调用了它的Continuation——k。</p>
 <p><br/></p>
-<h2 id="cps的误区"><strong>CPS的误区</strong></h2>
-<p>CPS是一种代码风格，</p>
+<h2 id="CPS的误区"><a href="#CPS的误区" class="headerlink" title="CPS的误区"></a><strong>CPS的误区</strong></h2><p>CPS是一种代码风格，</p>
 <p>它可以用来做任何适当的事情，</p>
 <p>并不是为了call/cc而出现的。</p>
 <p><br/></p>
@@ -402,8 +401,7 @@
 <p>CPS与尾递归，也没有必然的联系。</p>
 <p>虽然很多地方都喜欢通过把函数转换成尾递归化来介绍CPS。</p>
 <p><br/></p>
-<h2 id="转换成cps"><strong>转换成CPS</strong></h2>
-<p>有关CPS的研究很多，</p>
+<h2 id="转换成CPS"><a href="#转换成CPS" class="headerlink" title="转换成CPS"></a><strong>转换成CPS</strong></h2><p>有关CPS的研究很多，</p>
 <p>将任意函数转换成CPS，</p>
 <p>已经不是困难的事情了。</p>
 <p><br/></p>
@@ -414,7 +412,7 @@
 <p>(define y 1)</p>
 <p><br/></p>
 <p>(define (f x)</p>
-<p>    (+ x <strong>y</strong>))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x <strong>y</strong>))</p>
 <p><br/></p>
 <p>(display (f 2))</p>
 <p>=&gt; 3</p>
@@ -426,11 +424,11 @@
 <p>y，应该去<strong>定义f的环境中</strong>查找。</p>
 <p>得到y =&gt; 1。</p>
 <p><br/></p>
-<p>我们通过<strong>为f增加附加参数k</strong>的方法， 将具有返回值的函数转换成CPS。</p>
+<p>我们通过<strong>为f增加附加参数k</strong>的方法，<br>将具有返回值的函数转换成CPS。</p>
 <p>(define y 1)</p>
 <p><br/></p>
 <p>(define (f x <strong>k</strong>)</p>
-<p>    <strong>(k</strong> (+ x y)<strong>)</strong>)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k</strong> (+ x y)<strong>)</strong>)</p>
 <p><br/></p>
 <p>(f 2 display)</p>
 <p>=&gt; 3</p>
@@ -438,9 +436,9 @@
 <p><strong>例二：</strong>阶乘函数</p>
 <p><br/></p>
 <p>(define (fact n)</p>
-<p>    (if (&lt;= n 2)</p>
-<p>        n</p>
-<p>        (* (fact (- n 1)) n)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* (fact (- n 1)) n)))</p>
 <p><br/></p>
 <p>(display (fact 5))</p>
 <p>=&gt; 120</p>
@@ -450,7 +448,7 @@
 <p>难以修改的地方，可以思考一下实际的计算顺序，作为方向。</p>
 <p><br/></p>
 <p>(if (&lt;= n 2)</p>
-<p>    n</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;n</p>
 <p>这里，返回n后要执行k所示的剩余计算，</p>
 <p>相当于(k n)。</p>
 <p><br/></p>
@@ -463,15 +461,15 @@
 <p>所以，</p>
 <p>? =&gt;</p>
 <p>(lambda (v)</p>
-<p>    (k (* v n)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k (* v n)))</p>
 <p><br/></p>
 <p>整理得，</p>
 <p>(define (fact n <strong>k</strong>)</p>
-<p>    (if (&lt;= n 2)</p>
-<p>        <strong>(k</strong> n<strong>)</strong></p>
-<p>        (fact (- n 1)</p>
-<p>            <strong>(lambda (v)</strong></p>
-<p>                <strong>(k (* v n)))</strong>)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k</strong> n<strong>)</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v)</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (* v n)))</strong>)))</p>
 <p><br/></p>
 <p>(fact 5 display)</p>
 <p>=&gt; 120</p>
@@ -479,9 +477,9 @@
 <p><strong>例三：</strong>斐波那契函数</p>
 <p><br/></p>
 <p>(define (fib n)</p>
-<p>    (if (&lt;= n 2)</p>
-<p>        1</p>
-<p>        (+ (fib (- n 1)) (fib (- n 2)))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (fib (- n 1)) (fib (- n 2)))))</p>
 <p><br/></p>
 <p>(display (fib 5))</p>
 <p>=&gt; 5</p>
@@ -491,10 +489,10 @@
 <p><br/></p>
 <p>再改变非递归情况的返回值方式，</p>
 <p>(if (&lt;= n 2)</p>
-<p>    1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
 <p><br/></p>
 <p>(if (&lt;= n 2)</p>
-<p>    (k 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k 1)</p>
 <p><br/></p>
 <p>然后考虑(+ (fib (- n 1)) (fib (- n 2)))的运算顺序，</p>
 <p>是从计算(fib (- n 1))开始的，</p>
@@ -505,22 +503,22 @@
 <p><br/></p>
 <p>? =&gt;</p>
 <p>(lambda (v1)</p>
-<p>    <strong>(fib (- n 2) ??)</strong>)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fib (- n 2) ??)</strong>)</p>
 <p>=&gt;</p>
 <p>(lambda (v1)</p>
-<p>    (fib (- n 2)</p>
-<p>        <strong>(lambda (v2)</strong></p>
-<p>            <strong>(k (+ v1 v2)))</strong>))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v2)</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (+ v1 v2)))</strong>))</p>
 <p><br/></p>
 <p>整理得，</p>
 <p>(define (fib n k)</p>
-<p>    (if (&lt;= n 2)</p>
-<p>        <strong>(k</strong> 1<strong>)</strong></p>
-<p>        (fib (- n 1)</p>
-<p>            <strong>(lambda (v1)</strong></p>
-<p>                (fib (- n 2)</p>
-<p>                    <strong>(lambda (v2)</strong></p>
-<p>                        <strong>(k (+ v1 v2)))))</strong>)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k</strong> 1<strong>)</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v1)</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (v2)</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (+ v1 v2)))))</strong>)))</p>
 <p><br/></p>
 <p>(fib 5 display)</p>
 <p>=&gt; 5</p>
@@ -530,12 +528,11 @@
 <p>然后<strong>在Continuation中处理后续的计算</strong>。</p>
 <p><br/></p>
 <p>(fn x)</p>
-<p>=&gt; (fn x (lambda (v) ...))</p>
+<p>=&gt; (fn x (lambda (v) …))</p>
 <p>其中v是原来(fn x)的返回值，</p>
-<p>(fn x)的后续计算，写在“...”处。</p>
+<p>(fn x)的后续计算，写在“…”处。</p>
 <p><br/></p>
-<h2 id="闭包变换"><strong>闭包变换</strong></h2>
-<p>限于目前大多数计算机的体系结构，</p>
+<h2 id="闭包变换"><a href="#闭包变换" class="headerlink" title="闭包变换"></a><strong>闭包变换</strong></h2><p>限于目前大多数计算机的体系结构，</p>
 <p>函数求值时，并不直接支持对词法变量的查找规则。</p>
 <p><br/></p>
 <p>我们可以继续改变CPS，</p>
@@ -560,7 +557,7 @@
 <p>(define y 1)</p>
 <p><br/></p>
 <p>(define (f x k)</p>
-<p>    (k (+ x y)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k (+ x y)))</p>
 <p><br/></p>
 <p>(f 2 display)</p>
 <p>=&gt; 3</p>
@@ -568,8 +565,8 @@
 <p>我们再增加一个参数e，来表示函数定义时的环境。</p>
 <p>(define y 1)</p>
 <p>(define (f x k <strong>e</strong>)</p>
-<p>    <strong>(define y (vector-ref e 0))</strong></p>
-<p>    (k (+ x y)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define y (vector-ref e 0))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k (+ x y)))</p>
 <p><br/></p>
 <p><strong>(define e0 (vector y f))</strong></p>
 <p>(f 2 display <strong>e0</strong>)</p>
@@ -581,23 +578,23 @@
 <p><br/></p>
 <p><strong>例二：</strong>阶乘函数</p>
 <p>(define (fact n k)</p>
-<p>    (if (&lt;= n 2)</p>
-<p>        (k n)</p>
-<p>        (fact (- n 1)</p>
-<p>            (lambda (v)</p>
-<p>                (k (* v n))))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k n)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (v)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (* v n))))))</p>
 <p><br/></p>
 <p>(fact 5 display)</p>
 <p>=&gt; 120</p>
 <p><br/></p>
 <p>我们先将Continuation中的lambda表达式写成定义式，便于理解，</p>
 <p>(define (fact n k)</p>
-<p>    <strong>(define (k1 v)</strong></p>
-<p>        <strong>(k (* v n)))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define (k1 v)</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (* v n)))</strong></p>
 <p><br/></p>
-<p>    (if (&lt;= n 2)</p>
-<p>        (k n)</p>
-<p>        (fact (- n 1) <strong>k1</strong>)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k n)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1) <strong>k1</strong>)))</p>
 <p><br/></p>
 <p>我们看到，在Continuation函数中也包含了自由变量，</p>
 <p>所以，情况比较复杂，</p>
@@ -605,21 +602,21 @@
 <p>用来区分fact函数定义时的环境。</p>
 <p><br/></p>
 <p>(define (k0 v <strong>e</strong>)</p>
-<p>    (display v))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v))</p>
 <p><br/></p>
 <p>(define (fact n k <strong>fact-e k-e</strong>)</p>
-<p>    (define (k1 v <strong>e</strong>)</p>
-<p>        <strong>(define n (vector-ref e 0))</strong></p>
-<p>        <strong>(define k (vector-ref e 1))</strong></p>
-<p>        <strong>(define k-e (vector-ref e 3))</strong></p>
-<p>        (k (* v n) <strong>k-e</strong>))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(define (k1 v <strong>e</strong>)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define n (vector-ref e 0))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k (vector-ref e 1))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k-e (vector-ref e 3))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (* v n) <strong>k-e</strong>))</p>
 <p><br/></p>
-<p>    <strong>(define fact (vector-ref fact-e 1))</strong></p>
-<p>    <strong>(define k1-e (vector n k fact-e k-e k1 fact))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define fact (vector-ref fact-e 1))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k1-e (vector n k fact-e k-e k1 fact))</strong></p>
 <p><br/></p>
-<p>    (if (&lt;= n 2)</p>
-<p>        (k n <strong>k-e</strong>)</p>
-<p>        (fact (- n 1) k1 <strong>fact-e k1-e</strong>)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k n <strong>k-e</strong>)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact (- n 1) k1 <strong>fact-e k1-e</strong>)))</p>
 <p><br/></p>
 <p><strong>(define fact-e0 (vector k0 fact))</strong></p>
 <p><strong>(define k-e0 fact-e0)</strong></p>
@@ -631,53 +628,53 @@
 <p><br/></p>
 <p><strong>例三：</strong>斐波那契函数</p>
 <p>(define (fib n k)</p>
-<p>    (if (&lt;= n 2)</p>
-<p>        (k 1)</p>
-<p>        (fib (- n 1)</p>
-<p>            (lambda (v1)</p>
-<p>                (fib (- n 2)</p>
-<p>                    (lambda (v2)</p>
-<p>                        (k (+ v1 v2))))))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (v1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (v2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (+ v1 v2))))))))</p>
 <p><br/></p>
 <p>(fib 5 display)</p>
 <p>=&gt; 5</p>
 <p><br/></p>
 <p>先将Continuation中的lambda表达式写成定义式</p>
 <p>(define (fib n k)</p>
-<p>    <strong>(define (k1 v1)</strong></p>
-<p>        <strong>(define (k2 v2)</strong></p>
-<p>            <strong>(k (+ v1 v2)))</strong></p>
-<p>        <strong>(fib (- n 2) k2))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define (k1 v1)</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define (k2 v2)</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (+ v1 v2)))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fib (- n 2) k2))</strong></p>
 <p><br/></p>
-<p>    (if (&lt;= n 2)</p>
-<p>        (k 1)</p>
-<p>        (fib (- n 1) <strong>k1</strong>)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k 1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 1) <strong>k1</strong>)))</p>
 <p><br/></p>
 <p>将函数定义时的环境，当做附加参数传递，</p>
 <p><br/></p>
 <p>(define (k0 v <strong>fib-e k-e</strong>)</p>
-<p>    (display v))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v))</p>
 <p><br/></p>
 <p>(define (fib n k <strong>fib-e k-e</strong>)</p>
-<p>    (define (k1 v1 <strong>fib-e k-e</strong>)</p>
-<p>        (define (k2 v2 <strong>fib-e k-e</strong>)</p>
-<p>            <strong>(define k (vector-ref (vector-ref k-e 2) 1))</strong></p>
-<p>            <strong>(define v1 (vector-ref k-e 0))</strong></p>
-<p>            <strong>(define k-k-e (vector-ref (vector-ref k-e 2) 3))</strong></p>
-<p>            (k (+ v1 v2) <strong>fib-e k-k-e</strong>))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(define (k1 v1 <strong>fib-e k-e</strong>)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(define (k2 v2 <strong>fib-e k-e</strong>)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k (vector-ref (vector-ref k-e 2) 1))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define v1 (vector-ref k-e 0))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k-k-e (vector-ref (vector-ref k-e 2) 3))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (+ v1 v2) <strong>fib-e k-k-e</strong>))</p>
 <p><br/></p>
-<p>        <strong>(define fib (vector-ref fib-e 1))</strong></p>
-<p>        <strong>(define n (vector-ref k-e 0))</strong></p>
-<p>        <strong>(define k2-e (vector v1 fib-e k-e k2 fib n))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define fib (vector-ref fib-e 1))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define n (vector-ref k-e 0))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k2-e (vector v1 fib-e k-e k2 fib n))</strong></p>
 <p><br/></p>
-<p>        (fib (- n 2) k2 <strong>fib-e k2-e</strong>))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2) k2 <strong>fib-e k2-e</strong>))</p>
 <p><br/></p>
-<p>    <strong>(define fib (vector-ref fib-e 1))</strong></p>
-<p>    <strong>(define k1-e (vector n k fib-e k-e k1 fib))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define fib (vector-ref fib-e 1))</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(define k1-e (vector n k fib-e k-e k1 fib))</strong></p>
 <p><br/></p>
-<p>    (if (&lt;= n 2)</p>
-<p>        (k 1 <strong>fib-e k-e</strong>)</p>
-<p>        (fib (- n 1) k1 <strong>fib-e k1-e</strong>)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k 1 <strong>fib-e k-e</strong>)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 1) k1 <strong>fib-e k1-e</strong>)))</p>
 <p><br/></p>
 <p><strong>(define fib-e0 (vector k0 fib))</strong></p>
 <p><strong>(define k-e0 fib-e0)</strong></p>
@@ -687,8 +684,7 @@
 <p><br/></p>
 <p>至此，三个例子中，所有的函数都没有自由变量了。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>本文只是手动处理了CPS变换和闭包变换。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>本文只是手动处理了CPS变换和闭包变换。</p>
 <p>CPS的用处还不止于此。</p>
 <p>然而，我认为，<strong>重要的是这种附加参数的思想</strong>。</p>
 <p><br/></p>

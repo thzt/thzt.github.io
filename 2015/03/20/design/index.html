@@ -369,8 +369,7 @@
 <p>但只有设计者才知道，</p>
 <p>怎样用准备好的方式来解决它。</p>
 <p><br/></p>
-<h2 id="设计和实现"><strong>设计和实现</strong></h2>
-<p>水平较高的程序员，通常会被安排做设计。</p>
+<h2 id="设计和实现"><a href="#设计和实现" class="headerlink" title="设计和实现"></a><strong>设计和实现</strong></h2><p>水平较高的程序员，通常会被安排做设计。</p>
 <p>而普通程序员，则要求去实现他们的设计。</p>
 <p><br/></p>
 <p>这其实是非常危险的。</p>
@@ -400,8 +399,7 @@
 <p>普通程序员，可以去做简单的模块。</p>
 <p>让他们互相隔离，尽量少的产生影响。</p>
 <p><br/></p>
-<h2 id="模块的自我保护输入保护"><strong>模块的自我保护——输入保护</strong></h2>
-<p>软件提供的功能是分层次的，</p>
+<h2 id="模块的自我保护——输入保护"><a href="#模块的自我保护——输入保护" class="headerlink" title="模块的自我保护——输入保护"></a><strong>模块的自我保护——输入保护</strong></h2><p>软件提供的功能是分层次的，</p>
 <p>虽然整个软件是交由目标用户来使用的，</p>
 <p>但是，也可能软件的一部分是另一个部分的用户。</p>
 <p><br/></p>
@@ -434,9 +432,9 @@
 <p><br/></p>
 <p>然后，我们可以寻找任何已有的组件来实现需要。</p>
 <p>var dialog={</p>
-<p>    pop:function(message){</p>
-<p>        //调用已有组件，实现弹出消息功能</p>
-<p>    }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pop:function(message){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//调用已有组件，实现弹出消息功能</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p>};</p>
 <p><br/></p>
 <p>这样的话，如果我们用来实现功能的组件发生了变化，</p>
@@ -450,8 +448,7 @@
 <p>我们清楚的知道自己需要什么，</p>
 <p>而别人提供的功能，我们并不清楚。</p>
 <p><br/></p>
-<h2 id="模块的自我保护输出保护"><strong>模块的自我保护——输出保护</strong></h2>
-<p>好的模块，内部也是层次良好的。</p>
+<h2 id="模块的自我保护——输出保护"><a href="#模块的自我保护——输出保护" class="headerlink" title="模块的自我保护——输出保护"></a><strong>模块的自我保护——输出保护</strong></h2><p>好的模块，内部也是层次良好的。</p>
 <p>它们不是为同一目的而服务的。</p>
 <p>也像整个软件那样，模块的一部分为另一部分提供服务。</p>
 <p><br/></p>
@@ -491,19 +488,18 @@
 <p>然后，我们拼装产品。</p>
 <p><br/></p>
 <p>var dialog={</p>
-<p>    pop:function(message){</p>
-<p>        myDialog.create(html);</p>
-<p>        myDialog.addClass(style);</p>
-<p>        myDialog.bindEvent(event);</p>
-<p>        myDialog.setMessage(message);</p>
-<p>    }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pop:function(message){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.create(html);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.addClass(style);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.bindEvent(event);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myDialog.setMessage(message);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 <p>};</p>
 <p><br/></p>
 <p>这样的话，当需求发生变化时，myDialog不会整体受到影响，</p>
 <p>增加或者更改部分功能以后，就可以制造新的产品了。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>对模块的保护，在输入端和输出端，是不同的。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>对模块的保护，在输入端和输出端，是不同的。</p>
 <p>不进行保护，或者不区分的进行保护，</p>
 <p>都是危险的。</p>
 <p><br/></p>
@@ -704,7 +700,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计和实现"><span class="nav-number">1.</span> <span class="nav-text">设计和实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块的自我保护输入保护"><span class="nav-number">2.</span> <span class="nav-text">模块的自我保护——输入保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块的自我保护输出保护"><span class="nav-number">3.</span> <span class="nav-text">模块的自我保护——输出保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计和实现"><span class="nav-number">1.</span> <span class="nav-text">设计和实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块的自我保护——输入保护"><span class="nav-number">2.</span> <span class="nav-text">模块的自我保护——输入保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块的自我保护——输出保护"><span class="nav-number">3.</span> <span class="nav-text">模块的自我保护——输出保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>

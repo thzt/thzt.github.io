@@ -347,19 +347,17 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-e24e6ddb6c6118a2.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-e24e6ddb6c6118a2.png" alt=""></p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文我们介绍了Henkin模型，以及它的环境模型条件和组合模型条件，</p>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上文我们介绍了Henkin模型，以及它的环境模型条件和组合模型条件，</p>
 <p>它们分别为合法的<span data-katex="\lambda"></span>项和<span data-katex="CL"></span>项，找到了对应的语义解释。</p>
 <p>然而这只是简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>的其中一种解释。</p>
 <p><br/></p>
 <p>另一种常用的解释方式，建立在范畴论基础之上，称为<strong>笛卡尔闭范畴</strong>。</p>
 <p>为了理解这个概念，我们需要补充一些简单的范畴论方面的内容。</p>
 <p><br/></p>
-<h3 id="数学结构">1. 数学结构</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-ce31cbd5a6af6c3a.png" /></p>
+<h3 id="1-数学结构"><a href="#1-数学结构" class="headerlink" title="1. 数学结构"></a>1. 数学结构</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-ce31cbd5a6af6c3a.png" alt=""></p>
 <p><br/></p>
 <p>范畴论的研究数学结构的形式化方法，</p>
 <p>它不考虑具体的数学对象，而是考虑数学对象以及它们之间的联系。</p>
@@ -371,9 +369,8 @@
 <p>后文中，我们会首先介绍最常被提及的群结构，然后再介绍拓扑空间和CPO（完全偏序）。</p>
 <p>有了这些例子之后，对抽象概念的理解是事半功倍的。</p>
 <p><br/></p>
-<h3 id="群结构">2. 群结构</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-3f960ea2439e2f98.png" /></p>
+<h3 id="2-群结构"><a href="#2-群结构" class="headerlink" title="2. 群结构"></a>2. 群结构</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-3f960ea2439e2f98.png" alt=""></p>
 <p><br/></p>
 <p>群是一种满足结合律的乘法结构，</p>
 <p>但是它的运算对象，却并不局限于整数，有理数甚至实数上。</p>
@@ -405,7 +402,7 @@
 <p><br/></p>
 <p><strong>幺半群</strong></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-3fa823cd8d83854d.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-3fa823cd8d83854d.png" alt=""></p>
 <p><br/></p>
 <p>设<span data-katex="G"></span>是半群，元素<span data-katex="e\in G"></span>，称为半群<span data-katex="G"></span>的幺元，</p>
 <p>如果<span data-katex="\forall x\in G"></span>，<span data-katex="ex=xe=x"></span>。</p>
@@ -440,20 +437,20 @@
 <p><br/></p>
 <p><strong>群同态</strong></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-346888ad855e2420.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-346888ad855e2420.png" alt=""></p>
 <p><br/></p>
 <p>有了群之后，很自然的一步我们会考虑两个群是否足够相似，</p>
 <p>这就需要我们找到两个群之间的对应关系。</p>
 <p><br/></p>
-<p>设<span data-katex="(G,\cdot)"></span>和<span data-katex="(G&#39;,\circ)"></span>是两个群，</p>
-<p>我们把映射<span data-katex="f:G\to G&#39;"></span>称为<strong>群同态</strong>，如果<span data-katex="\forall a,b\in G"></span>，</p>
+<p>设<span data-katex="(G,\cdot)"></span>和<span data-katex="(G',\circ)"></span>是两个群，</p>
+<p>我们把映射<span data-katex="f:G\to G'"></span>称为<strong>群同态</strong>，如果<span data-katex="\forall a,b\in G"></span>，</p>
 <p>都有<span data-katex="f(a\cdot b)=f(a)\circ f(b)"></span>。</p>
 <p><br/></p>
 <p>如果<span data-katex="f"></span>是单射，则称<span data-katex="f"></span>为单同态，</p>
 <p>如果<span data-katex="f"></span>是满射，则称<span data-katex="f"></span>为满同态。</p>
 <p><br/></p>
 <p>如果<span data-katex="f"></span>是双射，则称<span data-katex="f"></span>为<strong>群同构</strong>。</p>
-<p>同构的两个群，记为<span data-katex="G\cong G&#39;"></span>。</p>
+<p>同构的两个群，记为<span data-katex="G\cong G'"></span>。</p>
 <p><br/></p>
 <p><strong>小结</strong></p>
 <p>现在我们理解了半群，幺半群，群，群同态，</p>
@@ -463,9 +460,8 @@
 <p>为了更好的理解数学结构，</p>
 <p>下面我们来介绍另一个概念，它来自拓扑学，称为拓扑空间。</p>
 <p><br/></p>
-<h3 id="拓扑结构">3. 拓扑结构</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-e87418f9539b42b7.png" /></p>
+<h3 id="3-拓扑结构"><a href="#3-拓扑结构" class="headerlink" title="3. 拓扑结构"></a>3. 拓扑结构</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-e87418f9539b42b7.png" alt=""></p>
 <p><br/></p>
 <p>拓扑学，被人们戏称橡皮膜上的几何学，</p>
 <p>它主要研究在连续变换下保持不变的几何性质，</p>
@@ -492,7 +488,7 @@
 <p><br/></p>
 <p><strong>连续映射</strong></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-0926fa9e83c0403c.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-0926fa9e83c0403c.png" alt=""></p>
 <p><br/></p>
 <p>设<span data-katex="X"></span>和<span data-katex="Y"></span>都是拓扑空间，<span data-katex="f:X\rightarrow Y"></span>是一个映射，</p>
 <p><span data-katex="x\in X"></span>，如果对于包含<span data-katex="f(x)\in Y"></span>的每一个开集<span data-katex="V"></span>，必存在包含<span data-katex="x"></span>的开集<span data-katex="U"></span>，</p>
@@ -523,9 +519,8 @@
 <p>接下来我们来介绍CPO（完全偏序）。</p>
 <p>它在范畴论中，对于摆脱集合论的观念束缚，帮助是很大的。</p>
 <p><br/></p>
-<h3 id="完全偏序">4. 完全偏序</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-da911483f36bc6fa.png" /></p>
+<h3 id="4-完全偏序"><a href="#4-完全偏序" class="headerlink" title="4. 完全偏序"></a>4. 完全偏序</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-da911483f36bc6fa.png" alt=""></p>
 <p><br/></p>
 <p>在《<a href="https://thzt.github.io/2017/03/21/recursive-function-9/">递归函数</a>》系列文章中，</p>
 <p>我们已经介绍过CPO（<a href="https://zh.wikipedia.org/zh-hans/%E5%AE%8C%E5%85%A8%E5%81%8F%E5%BA%8F" target="_blank" rel="noopener">完全偏序</a>）的概念了。</p>
@@ -553,7 +548,7 @@
 <p><br/></p>
 <p><strong>最小元与上确界</strong></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-47acd03f6e8d8a00.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-47acd03f6e8d8a00.png" alt=""></p>
 <p><br/></p>
 <p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
 <p>如果存在<span data-katex="y\in S"></span>，且对于任意的<span data-katex="x\in S"></span>，有<span data-katex="y\leqslant x"></span>，</p>
@@ -578,7 +573,7 @@
 <p><br/></p>
 <p><strong>连续函数</strong></p>
 <p>假设<span data-katex="(D,\leqslant )"></span>与<span data-katex="(E,\leqslant )"></span>是完全偏序集，<span data-katex="f:D\rightarrow E"></span>是集合上定义的一个函数，</p>
-<p>对于任意的<span data-katex="d,d&#39;\in D"></span>，如果<span data-katex="d\leqslant d&#39;"></span>就有<span data-katex="f(d)\leqslant f(d&#39;)"></span>，</p>
+<p>对于任意的<span data-katex="d,d'\in D"></span>，如果<span data-katex="d\leqslant d'"></span>就有<span data-katex="f(d)\leqslant f(d')"></span>，</p>
 <p>我们就说<span data-katex="f"></span>是<strong>单调的</strong>。</p>
 <p><br/></p>
 <p>如果<span data-katex="f"></span>是单调的，且对于任意有向子集<span data-katex="S\subseteq D"></span>，</p>
@@ -592,15 +587,13 @@
 <p>群范畴的对象是集合，而CPO（完全偏序）范畴的对象不一定是集合。</p>
 <p>这对摆脱集合论来理解范畴是很关键的。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了三种数学结构，群结构，拓扑结构，以及CPO（完全偏序）。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了三种数学结构，群结构，拓扑结构，以及CPO（完全偏序）。</p>
 <p>作为例子，可以为后面学习范畴论打下扎实的基础。</p>
 <p><br/></p>
 <p>我们看到了这些数学结构之间的相似性，</p>
 <p>从下一篇开始，我们要开始范畴论的学习之旅了。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Category_theory" target="_blank" rel="noopener">Category theory</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://en.wikipedia.org/wiki/Category_theory" target="_blank" rel="noopener">Category theory</a></p>
 <p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
 <p><a href="https://book.douban.com/subject/4201293/" target="_blank" rel="noopener">近世代数引论</a></p>
 <p><a href="https://book.douban.com/subject/1230382/" target="_blank" rel="noopener">基础拓扑学讲义</a></p>

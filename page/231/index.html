@@ -347,8 +347,7 @@
       
         
           
-            <h2 id="域论模型"><strong>域论模型</strong></h2>
-<p>类型化lambda演算，有两个常用模型。</p>
+            <h2 id="域论模型"><a href="#域论模型" class="headerlink" title="域论模型"></a><strong>域论模型</strong></h2><p>类型化lambda演算，有两个常用模型。</p>
 <p>其一，域论模型。其二，递归函数论模型。</p>
 <p><br/></p>
 <p>在众多域论模型中，</p>
@@ -357,8 +356,7 @@
 <p>而且它还提供了一种解释递归类型表达式的方法。</p>
 <p>域论方法是递归函数论模型的基础。</p>
 <p><br/></p>
-<h2 id="递归"><strong>递归</strong></h2>
-<p>加入递归之后，对表达式进行归约就可能会无限的进行下去，</p>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a><strong>递归</strong></h2><p>加入递归之后，对表达式进行归约就可能会无限的进行下去，</p>
 <p>因此将出现没有范式（normal form）的表达式。</p>
 <p>于是，把每个表达式指称为一个数值，这种想法就可能有问题了。</p>
 <p>下面我们引入不动点算子（fixed-point operator），用来它定义递归。</p>
@@ -375,8 +373,7 @@
 <p>其中<span data-katex="f"></span>是下列等式的解。</p>
 <p><span data-katex="f=\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
 <p><br/></p>
-<h2 id="不动点算子"><strong>不动点算子</strong></h2>
-<p>从数学的角度来看，并不是所有形如<span data-katex="f:\sigma =M"></span>的等式都有解，</p>
+<h2 id="不动点算子"><a href="#不动点算子" class="headerlink" title="不动点算子"></a><strong>不动点算子</strong></h2><p>从数学的角度来看，并不是所有形如<span data-katex="f:\sigma =M"></span>的等式都有解，</p>
 <p>如果有多个解，也不知道选择哪个解。</p>
 <p>我们先假设每个这样的等式都有解，为此我们增加一个不动点算子来得到这个解。</p>
 <p><br/></p>
@@ -397,8 +394,7 @@
 <p>我们就可以用<span data-katex="let"></span>和<span data-katex="fix_\sigma"></span>表示<span data-katex="letrec"></span>了。</p>
 <p><span data-katex="letrec~f:\sigma =M~in~N=_{def}let~f:\sigma =(fix_\sigma \lambda f:\sigma .~M)~in~N"></span></p>
 <p><br/></p>
-<h2 id="归约"><strong>归约</strong></h2>
-<p>我们以阶乘函数为例，来说明带有不动点算子的表达式是如何归约的。</p>
+<h2 id="归约"><a href="#归约" class="headerlink" title="归约"></a><strong>归约</strong></h2><p>我们以阶乘函数为例，来说明带有不动点算子的表达式是如何归约的。</p>
 <p>为了行文方便，我们省略<span data-katex="fix_{nat\rightarrow nat}"></span>的下标，直接记为<span data-katex="fix"></span>。</p>
 <p>定义阶乘函数<span data-katex="fact=_{def}fix~F"></span>，其中，</p>
 <p><span data-katex="F=_{def}\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1)"></span></p>
@@ -410,8 +406,7 @@
 <p><span data-katex="=((\lambda f:nat\rightarrow nat.~\lambda y:nat.~if~Eq?~y~0~then~1~else~y*f(y-1))~(fix~F))~n"></span></p>
 <p><span data-katex="=(if~Eq?~n~0~then~1~else~n*(fix~F))~(n-1)"></span></p>
 <p><br/></p>
-<h2 id="无法终止的运算"><strong>无法终止的运算</strong></h2>
-<p>由于递归允许我们写出没有范式的表达式，</p>
+<h2 id="无法终止的运算"><a href="#无法终止的运算" class="headerlink" title="无法终止的运算"></a><strong>无法终止的运算</strong></h2><p>由于递归允许我们写出没有范式的表达式，</p>
 <p>所以我们相应的必须给这样的表达式赋予含义。</p>
 <p><br/></p>
 <p>例如，</p>
@@ -427,8 +422,7 @@
 <p>用来表示类型<span data-katex="nat"></span>上无法终止的运算（nonterminating computation）。</p>
 <p>这给了我们一个把部分函数看成完全函数（total function）的方法。</p>
 <p><br/></p>
-<h2 id="cpo"><strong>CPO</strong></h2>
-<p><strong>偏序</strong></p>
+<h2 id="CPO"><a href="#CPO" class="headerlink" title="CPO"></a><strong>CPO</strong></h2><p><strong>偏序</strong></p>
 <p>一个偏序（partial order）<span data-katex="\left \langle D,\leqslant  \right \rangle"></span>是一个集合<span data-katex="D"></span>，以及集合上的一个关系（relation）<span data-katex="\leqslant"></span>，</p>
 <p>这个关系具有自反性，反对称性，和传递性。</p>
 <p><br/></p>
@@ -454,8 +448,7 @@
 <p>一个不是CPO的例子是自然数集，自然数集<span data-katex="N"></span>本身是有向的，但没有最小上界。</p>
 <p>如果我们加入一个比其他自然数都大的元素<span data-katex="\infty"></span>，我们就得到了一个CPO。</p>
 <p><br/></p>
-<h2 id="cpo的提升"><strong>CPO的提升</strong></h2>
-<p><strong>有奇点的CPO</strong></p>
+<h2 id="CPO的提升"><a href="#CPO的提升" class="headerlink" title="CPO的提升"></a><strong>CPO的提升</strong></h2><p><strong>有奇点的CPO</strong></p>
 <p>如果<span data-katex="\mathscr{D}=\left \langle D,\leqslant  \right \rangle"></span>是一个有最小元（least element）的偏序，</p>
 <p>则称为<span data-katex="\mathscr{D}"></span>是有奇点（pointed）的，我们用<span data-katex="\perp _D"></span>表示<span data-katex="D"></span>的最小元。</p>
 <p><br/></p>
@@ -470,8 +463,7 @@
 <p><br/></p>
 <p>可证，如果<span data-katex="\mathscr{D}"></span>是一个CPO，则<span data-katex="\mathscr{D}_\perp"></span>是一个有奇点的CPO。</p>
 <p><br/></p>
-<h2 id="连续函数"><strong>连续函数</strong></h2>
-<p><strong>单调函数</strong></p>
+<h2 id="连续函数"><a href="#连续函数" class="headerlink" title="连续函数"></a><strong>连续函数</strong></h2><p><strong>单调函数</strong></p>
 <p>设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>和<span data-katex="\mathscr{E}=\left \langle E,\leqslant _E \right \rangle"></span>是CPO，</p>
 <p><span data-katex="f:D\rightarrow E"></span>是集合<span data-katex="D"></span>到<span data-katex="E"></span>的一个函数，我们说<span data-katex="f"></span>是单调的（monotonic），</p>
 <p>如果<span data-katex="a\leqslant b"></span>就有<span data-katex="f(a)\leqslant f(b)"></span>。</p>
@@ -488,8 +480,7 @@
 <p>对于连续函数<span data-katex="f,g:D\rightarrow E"></span>，我们称<span data-katex="f\leqslant_{D\rightarrow E} g"></span>，如果对于任意<span data-katex="d\in D"></span>，都有<span data-katex="f(d)\leqslant _E g(d)"></span>。</p>
 <p>于是，所有这些连续函数构成了一个CPO，记为<span data-katex="\mathscr{D}\rightarrow \mathscr{E}=\left \langle D\rightarrow E,\leqslant _{D\rightarrow E} \right \rangle"></span>。</p>
 <p><br/></p>
-<h2 id="最小不动点"><strong>最小不动点</strong></h2>
-<p>我们称<span data-katex="a"></span>是<span data-katex="f"></span>的最小不动点（least fixed point），</p>
+<h2 id="最小不动点"><a href="#最小不动点" class="headerlink" title="最小不动点"></a><strong>最小不动点</strong></h2><p>我们称<span data-katex="a"></span>是<span data-katex="f"></span>的最小不动点（least fixed point），</p>
 <p>如果<span data-katex="a=f(a)"></span>且对于任意的<span data-katex="b=f(b)"></span>，我们有<span data-katex="a\leqslant b"></span>。</p>
 <p><br/></p>
 <p>如果<span data-katex="\mathscr{D}"></span>是一个有奇点的CPO，且<span data-katex="f:D\rightarrow D"></span>是连续的，则<span data-katex="f"></span>有最小不动点，</p>
@@ -498,8 +489,7 @@
 <p><br/></p>
 <p>例如，设<span data-katex="\mathscr{D}=\left \langle D,\leqslant _D \right \rangle"></span>是有奇点的CPO，则恒等函数<span data-katex="id:D\rightarrow D"></span>的最小不动点是<span data-katex="\perp _D"></span>。</p>
 <p><span data-katex="fix_D~id=\bigvee \{ id^n(\perp _D)~|~n\geqslant 0 \}=\bigvee \{ \perp _D \}=\perp _D"></span></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>初等数学中，某些函数是没有不动点的。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>初等数学中，某些函数是没有不动点的。</p>
 <p>那么在什么情况下，形如<span data-katex="f:\sigma =M"></span>的表达式有解呢？</p>
 <p>定义了递归之后，对类型化lambda演算的模型产生了什么影响呢？</p>
 <p><br/></p>

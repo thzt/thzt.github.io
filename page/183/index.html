@@ -347,10 +347,9 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-0936c5b2e82c8756.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-0936c5b2e82c8756.png" alt=""></p>
 <p><br/></p>
-<h3 id="对象和类">对象和类</h3>
-<p>子类型几乎是面向对象编程语言所特有的，</p>
+<h3 id="对象和类"><a href="#对象和类" class="headerlink" title="对象和类"></a>对象和类</h3><p>子类型几乎是面向对象编程语言所特有的，</p>
 <p>在面向对象的编程语言中，计算是由对象和对象之间消息传递来完成的，</p>
 <p>对象（object）通常包含两个组成部分，数据（data）和代码（method）。</p>
 <p><br/></p>
@@ -366,9 +365,8 @@
 <p>类（class）实际上可以看做一个工厂函数，用来生成对象。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">; lambda over let over lambda</span><br><span class="line">(define create-counter</span><br><span class="line">    (lambda () </span><br><span class="line">        (let ((n 0)) </span><br><span class="line">            (lambda () (set! n (+ n 1)) n))))</span><br><span class="line"></span><br><span class="line">(define counter </span><br><span class="line">    (create-counter))</span><br><span class="line"></span><br><span class="line">(counter)    ; 1</span><br><span class="line">(counter)    ; 2</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<h3 id="类型和类">类型和类</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-e7993bfcd4e48572.png" /></p>
+<h3 id="类型和类"><a href="#类型和类" class="headerlink" title="类型和类"></a>类型和类</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-e7993bfcd4e48572.png" alt=""></p>
 <p><br/></p>
 <p>类型（type）是与类（class）不同的概念。</p>
 <p>对象所属的类（class）是它的工厂函数，</p>
@@ -394,36 +392,33 @@
 <p>因此，不带子类型的简单类型化<span data-katex="\lambda"></span>演算，它的推导规则就显得过于严谨了。</p>
 <p><br/></p>
 <p>我们可以引入记录类型（record）之间的子类型关系，记为，</p>
-<p><span data-katex="\{x:Nat,y:Nat\}&lt;:\{x:Nat\}"></span></p>
+<p><span data-katex="\{x:Nat,y:Nat\}<:\{x:Nat\}"></span></p>
 <p>用于表示类型<span data-katex="\{x:Nat,y:Nat\}"></span>是<span data-katex="\{x:Nat\}"></span>的子类型。</p>
 <p>对于记录类型来说，这里可能有些奇怪，因为更“小”的类型却包含更多的字段。</p>
 <p><br/></p>
-<p>一般的，<span data-katex="S&lt;:T"></span>表示<span data-katex="S"></span>为<span data-katex="T"></span>的子类型，</p>
+<p>一般的，<span data-katex="S<:T"></span>表示<span data-katex="S"></span>为<span data-katex="T"></span>的子类型，</p>
 <p>如果在某个上下文中，期待一个<span data-katex="T"></span>类型的项，那么<span data-katex="S"></span>在这个上下文中也是合法的，</p>
-<p>即，<span data-katex="\frac{\Gamma\vdash t:S~~~~S&lt;:T}{\Gamma\vdash t:T}"></span></p>
+<p>即，<span data-katex="\frac{\Gamma\vdash t:S~~~~S<:T}{\Gamma\vdash t:T}"></span></p>
 <p>该推导规则，通常称之为安全替换原则。</p>
 <p><br/></p>
-<p>为了能够安全替换，子类型应该具有自反性：<span data-katex="S&lt;:S"></span>，</p>
-<p>还应该具有传递性，<span data-katex="\frac{S&lt;:U~~~~U&lt;:T}{S&lt;:T}"></span>。</p>
+<p>为了能够安全替换，子类型应该具有自反性：<span data-katex="S<:S"></span>，</p>
+<p>还应该具有传递性，<span data-katex="\frac{S<:U~~~~U<:T}{S<:T}"></span>。</p>
 <p><br/></p>
-<h3 id="top类型与bottom类型">Top类型与Bottom类型</h3>
+<h3 id="Top类型与Bottom类型"><a href="#Top类型与Bottom类型" class="headerlink" title="Top类型与Bottom类型"></a>Top类型与Bottom类型</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-6aa9284168e9c36f.png" alt=""></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-10-13-type-8/1023733-6aa9284168e9c36f.png" /></p>
-<p><br/></p>
-<h4 id="top类型">（1）Top类型</h4>
-<p>理解了子类型之后，我们就可以引入一个新的类型常量<span data-katex="Top"></span>，称为Top类型。</p>
-<p>所有其它类型都是它的子类型，<span data-katex="S&lt;:Top"></span>。</p>
+<h4 id="（1）Top类型"><a href="#（1）Top类型" class="headerlink" title="（1）Top类型"></a>（1）Top类型</h4><p>理解了子类型之后，我们就可以引入一个新的类型常量<span data-katex="Top"></span>，称为Top类型。</p>
+<p>所有其它类型都是它的子类型，<span data-katex="S<:Top"></span>。</p>
 <p><br/></p>
 <p>因为具有自反性和传递性，子类型之间构成了一个前序关系（<a href="https://en.wikipedia.org/wiki/Preorder" target="_blank" rel="noopener">preorder</a>），</p>
 <p>由于记录类型中的字段，顺序是可以置换的，</p>
 <p><span data-katex="\{x:Nat,y:Nat\}"></span>和<span data-katex="\{y:Nat,x:Nat\}"></span>分别为另一个的子类型，</p>
 <p>因此，子类型关系不是一个偏序关系（<a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Formal_definition" target="_blank" rel="noopener">partial order</a>）（自反，传递，反对称）。</p>
 <p><br/></p>
-<h4 id="bottom类型">（2）Bottom类型</h4>
-<p>除了Top类型之外，我们很自然的会问，</p>
+<h4 id="（2）Bottom类型"><a href="#（2）Bottom类型" class="headerlink" title="（2）Bottom类型"></a>（2）Bottom类型</h4><p>除了Top类型之外，我们很自然的会问，</p>
 <p>是否存在一个类型，它是所有其他类型的子类型，</p>
 <p>为此，我们需要对类型系统再扩展，引入<span data-katex="Bot"></span>类型常量，称为Bottom类型，</p>
-<p>满足<span data-katex="Bot&lt;:T"></span>。</p>
+<p>满足<span data-katex="Bot<:T"></span>。</p>
 <p><br/></p>
 <p><span data-katex="Bot"></span>类型中是不能有闭值的，否则，假设<span data-katex="v"></span>是<span data-katex="Bot"></span>类型的一个值，</p>
 <p>则根据安全替换原则有<span data-katex="v:Top\to Top"></span>，表明<span data-katex="v"></span>是一个函数，</p>
@@ -451,8 +446,7 @@
 <p><a href="https://www.typescriptlang.org/index.html" target="_blank" rel="noopener">TypeScript</a>中的<a href="https://www.typescriptlang.org/docs/handbook/basic-types.html#any" target="_blank" rel="noopener">any</a>类型，是一个Top类型，</p>
 <p>而<a href="https://www.typescriptlang.org/docs/handbook/basic-types.html#never" target="_blank" rel="noopener">never</a>类型，是一个Bottom类型。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文为简单类型化<span data-katex="\lambda"></span>演算添加了子类型，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文为简单类型化<span data-katex="\lambda"></span>演算添加了子类型，</p>
 <p>并且对比了类（class）与类型（type）这两个概念。</p>
 <p><br/></p>
 <p>lambda calculus是函数式编程语言的计算模型，</p>
@@ -466,10 +460,9 @@
 <p>这印证了我们之前在第一篇中提到的一句话，</p>
 <p>类型系统，可以看做是附着在语言语法之上的一套符号证明系统。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/3864436/" target="_blank" rel="noopener">Let Over Lambda</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://book.douban.com/subject/3864436/" target="_blank" rel="noopener">Let Over Lambda</a></p>
 <p><a href="https://book.douban.com/subject/1761910/" target="_blank" rel="noopener">Types and programming languages</a></p>
-<p><a href="http://lucacardelli.name/Talks/1997-06%20A%20Theory%20of%20Object%20(LICS).pdf" target="_blank" rel="noopener">A Theory of Objects</a></p>
+<p><a href="http://lucacardelli.name/Talks/1997-06%20A%20Theory%20of%20Object%20(LICS" target="_blank" rel="noopener">A Theory of Objects</a>.pdf)</p>
 
           
         

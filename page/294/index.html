@@ -347,8 +347,7 @@
       
         
           
-            <h2 id="作用域"><strong>作用域</strong></h2>
-<p>作用域，是自由变量的<strong>查找</strong>规则。</p>
+            <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a><strong>作用域</strong></h2><p>作用域，是自由变量的<strong>查找</strong>规则。</p>
 <p><br/></p>
 <p>如果变量具有词法作用域，</p>
 <p>语言实现会相继到<strong>更外层的词法范围</strong>内查找绑定值。</p>
@@ -356,18 +355,17 @@
 <p>如果变量具有动态作用域，</p>
 <p>语言实现会回溯到<strong>更早的嵌套调用</strong>中查找绑定值。</p>
 <p><br/></p>
-<h2 id="词法作用域"><strong>词法作用域</strong></h2>
-<p>(define test-lexical-binding</p>
-<p>    (<strong>let</strong> [(x 1)]</p>
-<p>        (lambda (y) (+ x y))))</p>
+<h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a><strong>词法作用域</strong></h2><p>(define test-lexical-binding</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>let</strong> [(x 1)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (+ x y))))</p>
 <p><br/></p>
-<p>(test-lexical-binding 2)</p>
+<p>(test-lexical-binding 2) </p>
 <p>=&gt; 3</p>
 <p><br/></p>
 <p>其中，<strong>let</strong>表达式返回了一个函数，作为test-lexical-binding的值。</p>
 <p>根据函数调用规则，我们知道，</p>
-<p>(test-lexical-binding 2)</p>
-<p>-&gt; ((lambda (y) (+ x y)) 2)</p>
+<p>(test-lexical-binding 2) </p>
+<p>-&gt; ((lambda (y) (+ x y)) 2) </p>
 <p>-&gt; (+ x 2)</p>
 <p>变量x是自由变量。</p>
 <p><br/></p>
@@ -375,23 +373,22 @@
 <p>则x的值，就是x所在函数，在定义时，外层作用域的值。</p>
 <p>(lambda (y) (+ x y))的外层是let表达式，</p>
 <p>(let [(x 1)]</p>
-<p>    ...)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;…)</p>
 <p><br/></p>
 <p>因此，x =&gt; 1，(+ x 2) =&gt; 3</p>
 <p><br/></p>
-<h2 id="动态作用域"><strong>动态作用域</strong></h2>
-<p>(define parameter-object</p>
-<p>    (<strong>make-parameter</strong> 1))</p>
+<h2 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a><strong>动态作用域</strong></h2><p>(define parameter-object</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>make-parameter</strong> 1))</p>
 <p><br/></p>
 <p>(define (test-dynamic-binding)</p>
-<p>    (parameter-object))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(parameter-object))</p>
 <p><br/></p>
-<p>    </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p>(<strong>parameterize</strong> [(parameter-object 2)]</p>
-<p>    (test-dynamic-binding))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(test-dynamic-binding)) </p>
 <p>=&gt; 2</p>
 <p><br/></p>
-<p>(test-dynamic-binding)</p>
+<p>(test-dynamic-binding) </p>
 <p>=&gt; 1</p>
 <p><br/></p>
 <p>其中，(make-parameter 1)返回一个包含值1的参数对象<strong>#&lt;parameter object&gt;</strong>。</p>
@@ -402,8 +399,8 @@
 <p>并且parameterize表达式内部会在新的动态作用域环境中求值。</p>
 <p><br/></p>
 <p>(<strong>parameterize</strong> [(parameter-object 2)]</p>
-<p>    (test-dynamic-binding))</p>
-<p>-&gt; (test-dynamic-binding)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(test-dynamic-binding)) </p>
+<p>-&gt; (test-dynamic-binding) </p>
 <p>-&gt; (parameter-object)</p>
 <p><br/></p>
 <p>(parameter-object)要查找调用过程中最近的绑定值，</p>
@@ -411,17 +408,16 @@
 <p>找到了parameterize对它的更改，值为2。</p>
 <p>所以，</p>
 <p>(<strong>parameterize</strong> [(parameter-object 2)]</p>
-<p>    (test-dynamic-binding))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(test-dynamic-binding)) </p>
 <p>=&gt; 2</p>
 <p><br/></p>
 <p>而最后的直接调用(test-dynamic-binding) ，</p>
 <p>调用过程中最近的绑定是对参数对象parameter-object的定义，</p>
 <p>(define parameter-object</p>
-<p>    (<strong>make-parameter</strong> 1))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>make-parameter</strong> 1))</p>
 <p>所以，(test-dynamic-binding) =&gt; 1</p>
 <p><br/></p>
-<h2 id="词法闭包"><strong>词法闭包</strong></h2>
-<p>如果变量具有动态作用域，我们就要一直<strong>记着函数的调用过程</strong>。</p>
+<h2 id="词法闭包"><a href="#词法闭包" class="headerlink" title="词法闭包"></a><strong>词法闭包</strong></h2><p>如果变量具有动态作用域，我们就要一直<strong>记着函数的调用过程</strong>。</p>
 <p>这在复杂的程序中，是很困难又容易出错的事情。</p>
 <p>因此，Scheme中的变量，默认具有词法作用域。</p>
 <p><br/></p>
@@ -430,9 +426,9 @@
 <p><br/></p>
 <p>例如：</p>
 <p>(define-values (get-value set-value!)</p>
-<p>    (<strong>let</strong> [(field 0)]</p>
-<p>        (values (<strong>lambda</strong> () field)</p>
-<p>            (<strong>lambda</strong> (new-value) (set! field new-value)))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>let</strong> [(field 0)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(values (<strong>lambda</strong> () field)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lambda</strong> (new-value) (set! field new-value)))))</p>
 <p><br/></p>
 <p>(get-value)</p>
 <p>=&gt; 0</p>
@@ -450,8 +446,7 @@
 <p><br/></p>
 <p>正因为有这样的封闭性，我们将函数连同定义时的环境一起，称为<strong>闭包</strong>。</p>
 <p><br/></p>
-<h2 id="对象"><strong>对象</strong></h2>
-<p>熟悉面向对象编程的人们，可能会清晰的认识到。</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a><strong>对象</strong></h2><p>熟悉面向对象编程的人们，可能会清晰的认识到。</p>
 <p>对象同样也是封闭和隔离了它包含的字段。</p>
 <p>因此，<strong>在这种封装意义上来说，闭包就是对象</strong>。</p>
 <p><br/></p>
@@ -460,13 +455,13 @@
 <p><br/></p>
 <p>例如：</p>
 <p>(define create-object</p>
-<p>    (<strong>lambda</strong> (init)</p>
-<p>        (<strong>let</strong> [(field init)]</p>
-<p>            (values (<strong>lambda</strong> () field)</p>
-<p>                (<strong>lambda</strong> (new-value) (set! field new-value))))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lambda</strong> (init)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>let</strong> [(field init)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(values (<strong>lambda</strong> () field)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lambda</strong> (new-value) (set! field new-value))))))</p>
 <p><br/></p>
 <p>(define-values (get-value set-value!)</p>
-<p>    (create-object 1))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(create-object 1))</p>
 <p><br/></p>
 <p>(get-value)</p>
 <p>=&gt; 1</p>
@@ -481,17 +476,17 @@
 <p><br/></p>
 <p>例如：</p>
 <p>(define-values create-object</p>
-<p>    (<strong>let</strong> [(static 1)]</p>
-<p>        (<strong>lambda</strong> (x)</p>
-<p>            (<strong>let</strong> [(field x)]</p>
-<p>                (values (<strong>lambda</strong> () (+ static field))</p>
-<p>                    (<strong>lambda</strong> (new-value) (set! field new-value)))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(<strong>let</strong> [(static 1)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lambda</strong> (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>let</strong> [(field x)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(values (<strong>lambda</strong> () (+ static field))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<strong>lambda</strong> (new-value) (set! field new-value)))))</p>
 <p><br/></p>
 <p>最外层的let表达式返回了一个函数create-object，</p>
 <p>我们来使用create-object创建两个对象。</p>
 <p><br/></p>
 <p>(define-values (get-value1 set-value1!)</p>
-<p>    (create-object 2))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(create-object 2))</p>
 <p><br/></p>
 <p>(get-value1)</p>
 <p>=&gt; 3</p>
@@ -502,7 +497,7 @@
 <p>=&gt; 4</p>
 <p><br/></p>
 <p>(define-values (get-value2 set-value2!)</p>
-<p>    (create-object 3))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(create-object 3))</p>
 <p><br/></p>
 <p>(get-value2)</p>
 <p>=&gt; 4</p>
@@ -515,8 +510,7 @@
 <p>结果，最外层let表达式中的变量static，可以同时被两个对象访问。</p>
 <p>在面向对象编程中，与之对应的概念就是<strong>“类的静态变量”</strong>。</p>
 <p><br/></p>
-<h2 id="思想比手段更重要"><strong>思想比手段更重要</strong></h2>
-<p>我们看到[let返回lambda]，就是一个“对象”，</p>
+<h2 id="思想比手段更重要"><a href="#思想比手段更重要" class="headerlink" title="思想比手段更重要"></a><strong>思想比手段更重要</strong></h2><p>我们看到[let返回lambda]，就是一个“对象”，</p>
 <p>[lambda返回[let返回lambda]]，就是一个“类”，</p>
 <p>[let返回[lambda返回[let返回lambda]]]，就为类增加了“静态变量”。</p>
 <p><br/></p>
@@ -531,8 +525,7 @@
 <p>函数式和面向对象之间似乎水火不容，</p>
 <p>我们可不要在讨论手段的同时，偏废了思想。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p><br/></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p><br/></p>
 <p>封装，具有深刻的内涵，</p>
 <p>它有几层含义，表达了很多与编程范型无关的思想，</p>
 <p>“<a href="https://thzt.github.io/blog/2015/01/29/encapsulation/">封装的内涵</a>”和大家一起详细探讨了这些内容。</p>

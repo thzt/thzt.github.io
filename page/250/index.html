@@ -358,10 +358,9 @@
 <p>范畴论统一了这些相似结构。</p>
 <p>然而，这还要从抽象代数说起。</p>
 <p><br/></p>
-<h2 id="幺半群monoid">幺半群（monoid）</h2>
-<p>在抽象代数中，<strong>幺半群</strong>是这样定义的。</p>
+<h2 id="幺半群（monoid）"><a href="#幺半群（monoid）" class="headerlink" title="幺半群（monoid）"></a>幺半群（monoid）</h2><p>在抽象代数中，<strong>幺半群</strong>是这样定义的。</p>
 <p><br/></p>
-<p>集合S和S上满足结合律的封闭二元运算"•"，</p>
+<p>集合S和S上满足结合律的封闭二元运算”•”，</p>
 <p>所形成的代数结构称为<strong>半群</strong>，记为(S, •)，简记为S</p>
 <p><br/></p>
 <p>设S是半群，元素e∈S，称为半群S的<strong>幺元素</strong>，</p>
@@ -374,26 +373,28 @@
 <p>半群G如果有幺元素，且每个元素均可逆，</p>
 <p>则称G为<strong>群</strong></p>
 <p><br/></p>
-<h2 id="图示法diagram">图示法（diagram）</h2>
-<p>一个幺半群M，可以描述为一个集合M，和两个函数</p>
+<h2 id="图示法（diagram）"><a href="#图示法（diagram）" class="headerlink" title="图示法（diagram）"></a>图示法（diagram）</h2><p>一个幺半群M，可以描述为一个集合M，和两个函数</p>
 <p>µ : M × M -&gt; M</p>
 <p>η : 1 -&gt; M</p>
 <p><br/></p>
 <p>其中，1 = {0}是只有一个元素的集合。</p>
 <p><br/></p>
 <pre>           1 × µ<br>M × M × M -------&gt; M × M<br>    |                |<br>    | µ × 1          | µ<br>    |                |<br>    v                v<br>  M × M   -------&gt;   M<br>             µ</pre>
+
 <pre>        η × 1          1 × η<br>1 × M -------&gt; M × M &lt; ------- M × 1<br>  |              |               |<br>  | α            | µ             | β<br>  |              |               |<br>  v              v               v<br>  M      =       M        =      M</pre>
+
 <p><br/></p>
 <p>用元素来表示图表，可以写为，</p>
 <p><br/></p>
 <pre>&lt;x,y,z&gt; |-------&gt;    &lt;x,yz&gt;<br>   -                   -<br>   |                   |<br>   |                   |<br>   v                   v<br>&lt;xy,z&gt;  |-------&gt; (xy)z=x(yz)</pre>
+
 <pre>&lt;0,x&gt; |-------&gt; &lt;e,x&gt;    &lt;x,e&gt; &lt;-------| &lt;x,0&gt;<br>  -               -        -               -<br>  |               |        |               |<br>  |               |        |               |<br>  v               v        v               v<br>  x       =      ex       xe       =       x</pre>
+
 <p><br/></p>
 <p>可以看出，(xy)z=x(yz)表示了群乘法的结合律，</p>
 <p>x=ex,xe=x表示了幺元e，因此图表展示了幺半群的结构。</p>
 <p><br/></p>
-<h2 id="范畴category">范畴（category）</h2>
-<p>一个<strong>范畴</strong>C由一系列<strong>对象</strong>（object）和<strong>箭头</strong>（arrow）组成。</p>
+<h2 id="范畴（category）"><a href="#范畴（category）" class="headerlink" title="范畴（category）"></a>范畴（category）</h2><p>一个<strong>范畴</strong>C由一系列<strong>对象</strong>（object）和<strong>箭头</strong>（arrow）组成。</p>
 <p>对于每一个箭头f，有两个对象与之关联，</p>
 <p>称为箭头f的定义域（domain）和值域（codomain）。</p>
 <p>并且，满足以下几条规则，</p>
@@ -411,8 +412,7 @@
 <p>所有的微分流形，以微分流形作为对象，流形间的光滑映射为箭头，构成了一个范畴，</p>
 <p>Haskell中，以类型作为对象（类型是值的集合），函数作为箭头，构成了一个范畴（<strong>Hask范畴</strong>）。</p>
 <p><br/></p>
-<h2 id="函子functor">函子（functor）</h2>
-<p>如果把范畴看做对象，则函子可以看做箭头。</p>
+<h2 id="函子（functor）"><a href="#函子（functor）" class="headerlink" title="函子（functor）"></a>函子（functor）</h2><p>如果把范畴看做对象，则函子可以看做箭头。</p>
 <p><br/></p>
 <p>一个<strong>函子</strong>F是范畴C到范畴D的箭头，F:C -&gt; D，</p>
 <p>它满足以下条件，</p>
@@ -420,8 +420,8 @@
 <p>且满足分配律，F (f•g)=(F f)•(F g)</p>
 <p><br/></p>
 <p>注：</p>
-<p>等式左边的"•"表示C中的箭头组合运算，</p>
-<p>等式右边的"•"表示D中的箭头组合运算。</p>
+<p>等式左边的”•”表示C中的箭头组合运算，</p>
+<p>等式右边的”•”表示D中的箭头组合运算。</p>
 <p><br/></p>
 <p>范畴C到自身的函子，称为<strong>自函子</strong>（endofunctor）。</p>
 <p><br/></p>
@@ -429,29 +429,29 @@
 <p>把类型a到类型b的函数，映射为类型f a到类型f b的函数。</p>
 <p><br/></p>
 <p>class Functor f where</p>
-<p>        fmap :: (a -&gt; b) -&gt; f a -&gt; f b</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmap :: (a -&gt; b) -&gt; f a -&gt; f b</p>
 <p><br/></p>
 <p>class Functor f =&gt; Applicative f where</p>
-<p>        pure :: a -&gt; f a</p>
-<p>        (&lt;*&gt;) :: f (a -&gt; b) -&gt; f a -&gt; f b</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pure :: a -&gt; f a</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;*&gt;) :: f (a -&gt; b) -&gt; f a -&gt; f b</p>
 <p><br/></p>
 <p>我们看到，pure和fmap放在一起，</p>
 <p>构成了一个Hask范畴的自函子。</p>
 <p><br/></p>
-<h2 id="自然变换natural-transformation">自然变换（natural transformation）</h2>
-<p>如果把函子看做对象，则自然变换可以看做箭头。</p>
+<h2 id="自然变换（natural-transformation）"><a href="#自然变换（natural-transformation）" class="headerlink" title="自然变换（natural transformation）"></a>自然变换（natural transformation）</h2><p>如果把函子看做对象，则自然变换可以看做箭头。</p>
 <p><br/></p>
 <p>若F和G是范畴C到D的函子，则<strong>自然变换</strong>τ是一个箭头，τ: F -&gt; G，</p>
 <p>它满足以下条件，</p>
 <p><br/></p>
 <pre>     f<br>a -------&gt; b</pre>
+
 <pre>      F f<br>F a -------&gt; F b<br>|            |<br>| τ a        | τ b<br>|            |<br>v            v<br>G a -------&gt; G b<br>      G f</pre>
+
 <p><br/></p>
 <p>注：</p>
 <p>F a是D中与a对应的对象，F b是D中与b对应的对象，F f是D中与f对应的箭头</p>
 <p><br/></p>
-<h2 id="函子范畴functor-category">函子范畴（functor category）</h2>
-<p>以范畴C到D的函子为对象，以函子间的自然变换为箭头，</p>
+<h2 id="函子范畴（functor-category）"><a href="#函子范畴（functor-category）" class="headerlink" title="函子范畴（functor category）"></a>函子范畴（functor category）</h2><p>以范畴C到D的函子为对象，以函子间的自然变换为箭头，</p>
 <p>构成了一个范畴，称为<strong>函子范畴</strong>。</p>
 <p><br/></p>
 <p>易知，自然变换可以进行组合运算，</p>
@@ -463,16 +463,17 @@
 <p>函子范畴的对象，不是一个集合，</p>
 <p>函子范畴的箭头，也不是映射。</p>
 <p><br/></p>
-<h2 id="monad">Monad</h2>
-<p>范畴C上的monad，是一个<strong>三元组</strong>(F,µ,η)，其中</p>
+<h2 id="Monad"><a href="#Monad" class="headerlink" title="Monad"></a>Monad</h2><p>范畴C上的monad，是一个<strong>三元组</strong>(F,µ,η)，其中</p>
 <p>F是范畴C上的自函子，</p>
-<p>µ是F<sup>2到F的自然变换，µ:F</sup>2-&gt;F，</p>
+<p>µ是F^2到F的自然变换，µ:F^2-&gt;F，</p>
 <p>η是单位自函子I到F的自然变换，η:I-&gt;F</p>
 <p><br/></p>
 <p>且满足以下条件</p>
 <p><br/></p>
 <pre>           F • µ<br>F • F • F -------&gt; F • F<br>    |                |<br>    | µ • F          | µ<br>    |                |<br>    v                v<br>  F • F   -------&gt;   F<br>             µ</pre>
+
 <pre>        η • F          F • η<br>I • F -------&gt; F • F &lt; ------- F • I<br>                 |                <br>  ||             | µ            ||<br>                 |               <br>                 v                <br>  F      =       F        =      F</pre>
+
 <p><br/></p>
 <p>在Haskell中可以这样表示：</p>
 <p><br/></p>
@@ -506,18 +507,21 @@
 <p>{- 自然变换η:I-&gt;F，（η a:I a-&gt;F a） -}</p>
 <p>η :: (Applicative f) =&gt; a -&gt; a -&gt; (f a)</p>
 <p><br/></p>
-<h2 id="自函子范畴上的幺半群">自函子范畴上的幺半群</h2>
-<p>以范畴C上的自函子为对象，自然变换为箭头，</p>
+<h2 id="自函子范畴上的幺半群"><a href="#自函子范畴上的幺半群" class="headerlink" title="自函子范畴上的幺半群"></a>自函子范畴上的幺半群</h2><p>以范畴C上的自函子为对象，自然变换为箭头，</p>
 <p>构成的函子范畴，称为<strong>自函子范畴</strong>。</p>
 <p><br/></p>
 <p>对比Monad定义中的自函子F与幺半群中的集合M，</p>
 <p><br/></p>
 <p><strong>结合律</strong>：</p>
 <pre>           1 × µ<br>M × M × M -------&gt; M × M<br>    |                |<br>    | µ × 1          | µ<br>    |                |<br>    v                v<br>  M × M   -------&gt;   M<br>             µ</pre>
+
 <pre>           F • µ<br>F • F • F -------&gt; F • F<br>    |                |<br>    | µ • F          | µ<br>    |                |<br>    v                v<br>  F • F   -------&gt;   F<br>             µ</pre>
+
 <p><strong>幺元</strong>：</p>
 <pre>        η × 1          1 × η<br>1 × M -------&gt; M × M &lt; ------- M × 1<br>  |              |               |<br>  | α            | µ             | β<br>  |              |               |<br>  v              v               v<br>  M      =       M        =      M</pre>
+
 <pre>        η • F          F • η<br>I • F -------&gt; F • F &lt; ------- F • I<br>                 |                <br>  ||             | µ            ||<br>                 |               <br>                 v                <br>  F      =       F        =      F</pre>
+
 <p><br/></p>
 <p>可知，自函子F相当于群的集合M，自然变换µ相当于群乘法，单位自函子相当于幺元，它们构成了一个<strong>幺半群</strong>，</p>
 <p>即<strong>Monad是Hask自函子范畴上的幺半群</strong>。</p>
@@ -526,8 +530,7 @@
 <p>M × M × M表示集合M的笛卡尔积，</p>
 <p>而F • F • F表示自函子F的组合。</p>
 <p><br/></p>
-<h2 id="幺半群范畴monoidal-category">幺半群范畴（monoidal category）</h2>
-<p>幺半群在范畴论中是有了新的意义，</p>
+<h2 id="幺半群范畴（monoidal-category）"><a href="#幺半群范畴（monoidal-category）" class="headerlink" title="幺半群范畴（monoidal category）"></a>幺半群范畴（monoidal category）</h2><p>幺半群在范畴论中是有了新的意义，</p>
 <p>比群论中的概念更一般化。</p>
 <p><br/></p>
 <p>我们可以为范畴增加一个满足结合律的二元函子，</p>
@@ -549,10 +552,11 @@
 <p>其中c是B中的对象，µ : c □ c -&gt; c，η : e -&gt; c是范畴B中的箭头，</p>
 <p>且满足以下条件</p>
 <pre>               σ                  µ □ 1<br>c □ (c □ c) -------&gt; (c □ c) □ c -------&gt; c □ c<br>    |                                       |<br>    | 1 □ µ                                 | µ<br>    |                                       |<br>    v                                       v<br>  c □ c ----------------------------------&gt; c<br>                        µ</pre>
+
 <pre>        η □ 1          1 □ η<br>e □ c -------&gt; c □ c &lt; ------- c □ e<br>  |              |               |<br>  | α            | µ             | β<br>  |              |               |<br>  v              v               v<br>  c      =       c        =      c</pre>
+
 <p><br/></p>
-<h2 id="结语">结语</h2>
-<p>『All told, a monad in X is just a monoid in the category of endofunctors of X,</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>『All told, a monad in X is just a monoid in the category of endofunctors of X,</p>
 <p>with the product × replaced by composition of endofunctors</p>
 <p>and unit set by the identity endofunctor.』</p>
 <p><br/></p>
@@ -569,8 +573,8 @@
 <p>《<a href="http://book.douban.com/subject/4201293/" target="_blank" rel="noopener">近世代数引论</a>》</p>
 <p>《<a href="http://book.douban.com/subject/1823110/" target="_blank" rel="noopener">Categories for the Working Mathematician 2nd</a>》</p>
 <p><a href="https://medium.com/@brettwines/implementing-a-category-theoretic-hask-monad-in-haskell-7bf662f2e98b" target="_blank" rel="noopener">Implementing a category-theoretic Hask-monad in Haskell</a></p>
-<p><a href="http://stackoverflow.com/questions/3870088/a-monad-is-just-a-monoid-in-the-category-of-endofunctors-whats-the-problem" target="_blank" rel="noopener">A monad is just a monoid in the category of endofunctors, what's the problem?</a></p>
-<p><a href="http://slides.com/julientournay/a-monad-is-just-a-monoid-in-the-category-of-endofunctors-what-s-the-problem/fullscreen" target="_blank" rel="noopener">A MONAD IS JUST A MONOID IN THE CATEGORY OF ENDOFUNCTORS. WHAT'S THE PROBLEM ?</a></p>
+<p><a href="http://stackoverflow.com/questions/3870088/a-monad-is-just-a-monoid-in-the-category-of-endofunctors-whats-the-problem" target="_blank" rel="noopener">A monad is just a monoid in the category of endofunctors, what’s the problem?</a></p>
+<p><a href="http://slides.com/julientournay/a-monad-is-just-a-monoid-in-the-category-of-endofunctors-what-s-the-problem/fullscreen" target="_blank" rel="noopener">A MONAD IS JUST A MONOID IN THE CATEGORY OF ENDOFUNCTORS. WHAT’S THE PROBLEM ?</a></p>
 
           
         

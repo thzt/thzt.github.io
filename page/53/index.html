@@ -349,63 +349,84 @@
           
             <p>客制化键盘，指的自己准备所需要的配件，自己攒一把键盘。</p>
 <ul>
-<li><p>PCB</p></li>
-<li><p>定位板</p></li>
-<li><p>轴体</p></li>
-<li><p>键帽</p></li>
-<li><p>外壳</p></li>
-<li><p>卫星轴</p></li>
-<li><p>拔键器</p></li>
+<li><p>PCB</p>
+</li>
+<li><p>定位板</p>
+</li>
+<li><p>轴体</p>
+</li>
+<li><p>键帽</p>
+</li>
+<li><p>外壳</p>
+</li>
+<li><p>卫星轴</p>
+</li>
+<li><p>拔键器</p>
+</li>
 </ul>
 <p>我攒了一把 HHKB 配列的静音茶轴键盘，下面来记录一下所做的准备工作。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/07.jpg" /></p>
-<h3 id="pcb">PCB</h3>
-<p>PCB 是键盘内部的电路板，是整个键盘中唯一的电子原件，有点像 PC 机上面的主板。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/07.jpg" alt=""></p>
+<h3 id="PCB"><a href="#PCB" class="headerlink" title="PCB"></a>PCB</h3><p>PCB 是键盘内部的电路板，是整个键盘中唯一的电子原件，有点像 PC 机上面的主板。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/04.jpg" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/04.jpg" alt=""></p>
 <p><br/></p>
 <p>PCB 可关注这些特征：</p>
 <ul>
-<li><p>支持什么配列（键盘大小）</p></li>
-<li><p>是否支持轴体可拔插，还是需要焊接</p></li>
-<li><p>是否支持蓝牙功能</p></li>
-<li><p>键位设置软件</p></li>
+<li><p>支持什么配列（键盘大小）</p>
+</li>
+<li><p>是否支持轴体可拔插，还是需要焊接</p>
+</li>
+<li><p>是否支持蓝牙功能</p>
+</li>
+<li><p>键位设置软件</p>
+</li>
 </ul>
 <p><br/></p>
 <p>支持 60% 配列 PCB 比较多，最常见的是 <a href="https://github.com/komar007/gh60" target="_blank" rel="noopener">GH60</a>，</p>
 <p>它是一个开源项目，支持多种布局（键位）。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/01.jpg" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/01.jpg" alt=""></p>
 <p><br/></p>
 <p>支持 hhkb 配列的 GH60 PCB 我查到了两个，</p>
 <ul>
 <li><p><a href="https://item.taobao.com/item.htm?id=634679924246" target="_blank" rel="noopener">G60BLE Rev 2</a></p>
 <ul>
-<li><p>轴体热拔插</p></li>
-<li><p>支持蓝牙</p></li>
-<li><p>改键软件：<a href="https://caniusevia.com/" target="_blank" rel="noopener">VIA</a></p></li>
-</ul></li>
+<li><p>轴体热拔插</p>
+</li>
+<li><p>支持蓝牙</p>
+</li>
+<li><p>改键软件：<a href="https://caniusevia.com/" target="_blank" rel="noopener">VIA</a></p>
+</li>
+</ul>
+</li>
 <li><p><a href="https://item.taobao.com/item.htm?id=618103068641" target="_blank" rel="noopener">龙卷风 62 Standard 键圈奇人订制版</a></p>
 <ul>
-<li><p>轴体热拔插</p></li>
-<li><p>不支持蓝牙</p></li>
+<li><p>轴体热拔插</p>
+</li>
+<li><p>不支持蓝牙</p>
+</li>
 <li><p>改键软件：</p>
 <ul>
-<li><p>网页设置布局：生成 json（记录配置）和 hex 文件（刷机用）- <a href="http://qmkeyboard.cn/" target="_blank" rel="noopener">豆仔客制 Qmkeyboard</a></p></li>
-<li><p>刷 PCB 的软件 - <a href="https://github.com/qmk/qmk_toolbox" target="_blank" rel="noopener">QMK Toolbox</a></p></li>
-</ul></li>
-</ul></li>
+<li><p>网页设置布局：生成 json（记录配置）和 hex 文件（刷机用）- <a href="http://qmkeyboard.cn/" target="_blank" rel="noopener">豆仔客制 Qmkeyboard</a></p>
+</li>
+<li><p>刷 PCB 的软件 - <a href="https://github.com/qmk/qmk_toolbox" target="_blank" rel="noopener">QMK Toolbox</a></p>
+</li>
 </ul>
-<h3 id="定位板">定位板</h3>
-<p>定位板是用来固定轴体用的，还能承接键帽的按压力。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="定位板"><a href="#定位板" class="headerlink" title="定位板"></a>定位板</h3><p>定位板是用来固定轴体用的，还能承接键帽的按压力。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/03.jpg" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/03.jpg" alt=""></p>
 <p><br/></p>
 <p>定位板主要关注这些特征：</p>
 <ul>
-<li><p>是否支持左移 shift 键</p></li>
-<li><p>材质：铝合金、黄铜、PC、碳纤维、玻纤</p></li>
+<li><p>是否支持左移 shift 键</p>
+</li>
+<li><p>材质：铝合金、黄铜、PC、碳纤维、玻纤</p>
+</li>
 </ul>
 <p><br/></p>
 <p>有的键位布局会缩短左边 shift 宽度，</p>
@@ -414,16 +435,18 @@
 <p><br/></p>
 <p>不同材质的定位板，按压触底时会有不同的手感，这里有个视频（<a href="https://www.bilibili.com/video/av838400144/" target="_blank" rel="noopener">说说定位板的几种材质</a>）介绍。</p>
 <p>看完的体会是，“段落轴” 最好用硬质定位板，“线性轴” 都可以（轴体相关的后面介绍）。</p>
-<h3 id="轴体">轴体</h3>
-<p>据说轴体是最影响手感的因素之一，机械键盘发烧友们对各种轴的讨论也比较多。</p>
+<h3 id="轴体"><a href="#轴体" class="headerlink" title="轴体"></a>轴体</h3><p>据说轴体是最影响手感的因素之一，机械键盘发烧友们对各种轴的讨论也比较多。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/05.jpg" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/05.jpg" alt=""></p>
 <p><br/></p>
 <p>轴体可关注这些特征：</p>
 <ul>
-<li><p>压力曲线：段落轴/线性轴、触发压力、触底压力</p></li>
-<li><p>轴体类别：青轴、黑轴、茶轴、红轴</p></li>
-<li><p>引脚个数：三脚轴/五脚轴</p></li>
+<li><p>压力曲线：段落轴/线性轴、触发压力、触底压力</p>
+</li>
+<li><p>轴体类别：青轴、黑轴、茶轴、红轴</p>
+</li>
+<li><p>引脚个数：三脚轴/五脚轴</p>
+</li>
 </ul>
 <p><br/></p>
 <p>不同类别的轴体一般根据颜色区分，它们有不同的压力曲线。</p>
@@ -435,20 +458,25 @@
 <p>出了老牌的青黑茶红之外，TTC 最近出了很多新的轴体，例如 金粉轴、静音茶轴、金茶轴，等等。</p>
 <p><br/></p>
 <ul>
-<li><p><a href="https://item.taobao.com/item.htm?id=621012134230" target="_blank" rel="noopener">TTC 静音茶轴</a></p></li>
-<li><p><a href="https://item.taobao.com/item.htm?id=616588609868" target="_blank" rel="noopener">TTC 金粉轴</a></p></li>
+<li><p><a href="https://item.taobao.com/item.htm?id=621012134230" target="_blank" rel="noopener">TTC 静音茶轴</a></p>
+</li>
+<li><p><a href="https://item.taobao.com/item.htm?id=616588609868" target="_blank" rel="noopener">TTC 金粉轴</a></p>
+</li>
 </ul>
-<h3 id="键帽">键帽</h3>
-<p>键帽其实也挺影响手感的，会影响触摸感、触底撞击定位板的感觉、弹起来的声音。</p>
+<h3 id="键帽"><a href="#键帽" class="headerlink" title="键帽"></a>键帽</h3><p>键帽其实也挺影响手感的，会影响触摸感、触底撞击定位板的感觉、弹起来的声音。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/06.jpg" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/06.jpg" alt=""></p>
 <p><br/></p>
 <p>键帽主要关注以下几点：</p>
 <ul>
-<li><p>材质：ABS/PBT</p></li>
-<li><p>高度：OEM 高度、原厂高度、XDA 高度、SA 高度</p></li>
-<li><p>适配的键轴类型：MX 轴体、Topre 轴体</p></li>
-<li><p>宽度</p></li>
+<li><p>材质：ABS/PBT</p>
+</li>
+<li><p>高度：OEM 高度、原厂高度、XDA 高度、SA 高度</p>
+</li>
+<li><p>适配的键轴类型：MX 轴体、Topre 轴体</p>
+</li>
+<li><p>宽度</p>
+</li>
 </ul>
 <p><br/></p>
 <p>材质方面，其实有很多种选项的，甚至按一颗纯金的键帽都可以。</p>
@@ -463,7 +491,7 @@
 <p>hhkb 从下往上是 R1 R1 R2 R3 R4。</p>
 <p>不同 R 的高度是不同的，所以选择或安装键帽时就得注意了。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/02.jpg" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/02.jpg" alt=""></p>
 <p><br/></p>
 <p>适配的轴体也应该注意到，hhkb 和 realforce 静电容键盘采用了 topre 接口（火山口）的轴体，</p>
 <p>普通机械键盘用的比较多的是 mx 轴体（十字轴）。</p>
@@ -473,22 +501,23 @@
 <p>键帽的宽度计算方式比较直接，esc 键的宽度为 1u，其他键按比例计算。</p>
 <p>hhkb 右边的 shift 宽度有点特殊（宽度为 1.75u），一般需要买 “大全套”，再加 Mac 增补键。</p>
 <p>例如，<a href="https://www.zfrontier.com/app/mch/1kGabZN5NPP1" target="_blank" rel="noopener">GMK Minimall 极简白 R2</a></p>
-<h3 id="外壳">外壳</h3>
-<p>外壳也是水很深的，一个贵的外壳完全可以纯金打造。</p>
+<h3 id="外壳"><a href="#外壳" class="headerlink" title="外壳"></a>外壳</h3><p>外壳也是水很深的，一个贵的外壳完全可以纯金打造。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/08.jpg" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2021-04-12-keyboard/08.jpg" alt=""></p>
 <p><br/></p>
 <p>hhkb 配列的外壳比较少，因为上半部分的两个键是没有的，这里需要上壳挡住才行。</p>
 <p>否则就会很难看，看到底下的定位板和 PCB 了。</p>
 <p><br/></p>
 <p>这里只列一下 hhkb 的外壳选择吧，</p>
 <ul>
-<li><p><a href="https://item.taobao.com/item.htm?id=633781811713" target="_blank" rel="noopener">KBDFans D60 套件</a></p></li>
-<li><p><a href="https://item.taobao.com/item.htm?id=562737390073" target="_blank" rel="noopener">酷品世家 XD60 外壳</a></p></li>
-<li><p>闲鱼上定制的 hhkb 亚克力堆叠外壳</p></li>
+<li><p><a href="https://item.taobao.com/item.htm?id=633781811713" target="_blank" rel="noopener">KBDFans D60 套件</a></p>
+</li>
+<li><p><a href="https://item.taobao.com/item.htm?id=562737390073" target="_blank" rel="noopener">酷品世家 XD60 外壳</a></p>
+</li>
+<li><p>闲鱼上定制的 hhkb 亚克力堆叠外壳</p>
+</li>
 </ul>
-<h3 id="结语">结语</h3>
-<p><br/></p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p><br/></p>
 <p>组一把客制化机械键盘，需要调研一堆资料，尤其是 hhkb 配列的，圈子也比较小众。</p>
 <p>我看了一篇 <a href="https://www.zfrontier.com/app/flow/D7pGWAM1OxrE" target="_blank" rel="noopener">美好搭配：G60BLE pcb+亚克力tofu hhkb</a> 的文章，</p>
 <p>介绍怎么组一把支持蓝牙的 hhkb 键盘。</p>
@@ -496,10 +525,14 @@
 <p><br/></p>
 <p>最后汇总一下自己整套键盘用到的配件，</p>
 <ul>
-<li><p>PCB：<a href="https://item.taobao.com/item.htm?id=618103068641" target="_blank" rel="noopener">龙卷风 62 Standard 键圈奇人订制版</a></p></li>
-<li><p>外壳：<a href="https://item.taobao.com/item.htm?id=562737390073" target="_blank" rel="noopener">酷品世家 XD60 外壳</a></p></li>
-<li><p>键轴：<a href="https://item.taobao.com/item.htm?id=621012134230" target="_blank" rel="noopener">TTC 静音茶轴</a></p></li>
-<li><p>键帽：闲鱼上买的 “hhkb pbt 纯白键帽”</p></li>
+<li><p>PCB：<a href="https://item.taobao.com/item.htm?id=618103068641" target="_blank" rel="noopener">龙卷风 62 Standard 键圈奇人订制版</a></p>
+</li>
+<li><p>外壳：<a href="https://item.taobao.com/item.htm?id=562737390073" target="_blank" rel="noopener">酷品世家 XD60 外壳</a></p>
+</li>
+<li><p>键轴：<a href="https://item.taobao.com/item.htm?id=621012134230" target="_blank" rel="noopener">TTC 静音茶轴</a></p>
+</li>
+<li><p>键帽：闲鱼上买的 “hhkb pbt 纯白键帽”</p>
+</li>
 </ul>
 <p><br/></p>
 <p>再写一下手感，</p>

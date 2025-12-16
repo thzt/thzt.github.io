@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾    上文我们讨论了集合上的关系，还讨论了数学归纳法的一种普遍形式，称为良基归纳法， 它建立在集合上的良基关系之上。  本文开始讨论函数，我们将回顾函数的定义， 然后解释什么是全函数（total function），什么是部分函数（partial function）。  我们会看到，在证明一个递归函数是全函数时， 良基归纳法起到了重要作用。  在分析学中，人们似乎很少关心函数的完全性， 只关">
+<meta name="description" content="回顾   上文我们讨论了集合上的关系，还讨论了数学归纳法的一种普遍形式，称为良基归纳法， 它建立在集合上的良基关系之上。  本文开始讨论函数，我们将回顾函数的定义， 然后解释什么是全函数（total function），什么是部分函数（partial function）。  我们会看到，在证明一个递归函数是全函数时， 良基归纳法起到了重要作用。  在分析学中，人们似乎很少关心函数的完全性， 只关心">
 <meta property="og:type" content="article">
 <meta property="og:title" content="递归函数（四）：全函数与计算的可终止性">
 <meta property="og:url" content="https://thzt.github.io/2017/03/06/recursive-function-4/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾    上文我们讨论了集合上的关系，还讨论了数学归纳法的一种普遍形式，称为良基归纳法， 它建立在集合上的良基关系之上。  本文开始讨论函数，我们将回顾函数的定义， 然后解释什么是全函数（total function），什么是部分函数（partial function）。  我们会看到，在证明一个递归函数是全函数时， 良基归纳法起到了重要作用。  在分析学中，人们似乎很少关心函数的完全性， 只关">
+<meta property="og:description" content="回顾   上文我们讨论了集合上的关系，还讨论了数学归纳法的一种普遍形式，称为良基归纳法， 它建立在集合上的良基关系之上。  本文开始讨论函数，我们将回顾函数的定义， 然后解释什么是全函数（total function），什么是部分函数（partial function）。  我们会看到，在证明一个递归函数是全函数时， 良基归纳法起到了重要作用。  在分析学中，人们似乎很少关心函数的完全性， 只关心">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-2b1f2577d5df7bd1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-7cdea02903039737.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-48920b73b056a92c.png">
@@ -351,9 +351,8 @@
       
 
       
-        <h3 id="回顾">回顾</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-2b1f2577d5df7bd1.png" /></p>
+        <h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-2b1f2577d5df7bd1.png" alt=""></p>
 <p><br/></p>
 <p>上文我们讨论了集合上的关系，还讨论了数学归纳法的一种普遍形式，称为良基归纳法，</p>
 <p>它建立在集合上的良基关系之上。</p>
@@ -373,8 +372,7 @@
 <p>为了描述程序的非终止性，就得扩充这个数学函数的定义域和值域。</p>
 <p>为了理解这些事情，我们先要从函数的定义开始。</p>
 <p><br/></p>
-<h3 id="函数">函数</h3>
-<p>集合<span data-katex="A,B"></span>上的关系，是笛卡尔积<span data-katex="A\times B"></span>的一个子集。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>集合<span data-katex="A,B"></span>上的关系，是笛卡尔积<span data-katex="A\times B"></span>的一个子集。</p>
 <p><br/></p>
 <p>而函数<span data-katex="f:A\rightarrow B"></span>，则是集合<span data-katex="A,B"></span>上的一种特殊关系，</p>
 <p>它要求<span data-katex="A"></span>中的每一个元素，都有<span data-katex="B"></span>中唯一确定的元素与之对应。</p>
@@ -384,7 +382,7 @@
 <p><br/></p>
 <p>（1）部分函数（partial function）</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-7cdea02903039737.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-7cdea02903039737.png" alt=""></p>
 <p><br/></p>
 <p>如果<span data-katex="f"></span>是从<span data-katex="A"></span>到<span data-katex="B"></span>的二元关系，且<span data-katex="\forall a\in A"></span>，<span data-katex="f(a)=\varnothing "></span>或<span data-katex="\lbrace b\rbrace "></span>，</p>
 <p>则称<span data-katex="f"></span>是从<span data-katex="A"></span>到<span data-katex="B"></span>的部分函数，或<span data-katex="A"></span>上的部分函数。</p>
@@ -395,7 +393,7 @@
 <p><br/></p>
 <p>（2）全函数（total function）</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-48920b73b056a92c.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-48920b73b056a92c.png" alt=""></p>
 <p><br/></p>
 <p>如果<span data-katex="\forall a\in A"></span>都有<span data-katex="f(a)\downarrow "></span>，则称<span data-katex="f"></span>是<span data-katex="A"></span>上的全函数，</p>
 <p>此时，可以记为<span data-katex="f:A\rightarrow B"></span>。</p>
@@ -404,8 +402,7 @@
 <p>值得注意的是，部分函数的定义已经包含了我们学过的“函数”的定义，</p>
 <p>后文中，我们提到的“函数”如果不强调它的完全性的话，都泛指部分函数。</p>
 <p><br/></p>
-<h3 id="非终止性">非终止性</h3>
-<p>部分函数在计算机科学中是非常重要的，</p>
+<h3 id="非终止性"><a href="#非终止性" class="headerlink" title="非终止性"></a>非终止性</h3><p>部分函数在计算机科学中是非常重要的，</p>
 <p>因为对于每一个<span data-katex="a\in A"></span>，一个算法可以表示为，计算出集合<span data-katex="B"></span>中与之对应元素的过程，</p>
 <p>这个算法可能对于某些值<span data-katex="a\in A"></span>不会终止，而这种情况是很常见的。</p>
 <p><br/></p>
@@ -429,9 +426,8 @@
 <p>即，<span data-katex="f(\perp )=\perp "></span>。</p>
 <p>否则，称函数为不严格的（non-strict）。</p>
 <p><br/></p>
-<h3 id="原始递归函数">原始递归函数</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-dd7212553dc36d37.png" /></p>
+<h3 id="原始递归函数"><a href="#原始递归函数" class="headerlink" title="原始递归函数"></a>原始递归函数</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-dd7212553dc36d37.png" alt=""></p>
 <p><br/></p>
 <p>我们看到在程序中使用递归，可能会导致非终止性的计算，而有些递归又不会。</p>
 <p>这是为什么呢？</p>
@@ -477,9 +473,8 @@
 <p>另一方面，在进行原始递归运算时，如果<span data-katex="f"></span>和<span data-katex="g"></span>是全函数，则<span data-katex="h"></span>也一定是全函数，</p>
 <p>这是因为原始递归运算在<span data-katex="h"></span>的参数集上的定义了一个良基关系，由良基归纳法可证，<span data-katex="h"></span>是全函数。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-930070b361ad4a52.png" /></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-03-06-recursive-function-4/1023733-930070b361ad4a52.png" alt=""></p>
 <p><br/></p>
 <p>本文介绍了全函数与部分函数，以及计算可终止性相关的概念，</p>
 <p>我们对程序中函数的指称，进行了定义域和值域的扩充，</p>
@@ -489,8 +484,7 @@
 <p>讨论部分可计算函数和可计算函数的区别，讨论递归函数与原始递归函数的关系，</p>
 <p>引出递归可枚举集这个重要的概念。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Function_(mathematics)" target="_blank" rel="noopener">function (mathematics)</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://en.wikipedia.org/wiki/Function_(mathematics" target="_blank" rel="noopener">function (mathematics)</a>)</p>
 <p><a href="https://en.wikipedia.org/wiki/Strict_function" target="_blank" rel="noopener">strict function</a></p>
 <p><a href="https://book.douban.com/subject/1310925/" target="_blank" rel="noopener">可计算性与计算复杂性导引</a></p>
 

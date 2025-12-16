@@ -347,20 +347,16 @@
       
         
           
-            <h3 id="代数数据类型"><strong>代数数据类型</strong></h3>
-<p>一个代数数据类型，由值的一些集合，以及这些集合之间的一些函数构成。</p>
+            <h3 id="代数数据类型"><a href="#代数数据类型" class="headerlink" title="代数数据类型"></a><strong>代数数据类型</strong></h3><p>一个代数数据类型，由值的一些集合，以及这些集合之间的一些函数构成。</p>
 <p>这些函数都是一阶函数，不能以其他函数作为参数。</p>
 <p><br/></p>
-<h3 id="泛代数"><strong>泛代数</strong></h3>
-<p>泛代数（universal algebra）也称为等式逻辑（equational logic），</p>
+<h3 id="泛代数"><a href="#泛代数" class="headerlink" title="泛代数"></a><strong>泛代数</strong></h3><p>泛代数（universal algebra）也称为等式逻辑（equational logic），</p>
 <p>是用于研究代数数据类型的一个数学框架。</p>
 <p><br/></p>
 <p>在泛代数中，代数数据类型的语法由代数项（algebraic term）描述，公理语义用项之间的等式集（a set of equations）描述，</p>
 <p>而指称语义对应于一个<span data-katex="\Sigma"></span>代数，操作语义通过给等式设定方向来表示。</p>
-<hr />
-<h2 id="代数数据类型的语法"><strong>代数数据类型的语法</strong></h2>
-<h3 id="代数项和签名"><strong>代数项和签名</strong></h3>
-<p>一个代数项（algebraic term）由符号和类型来定义，</p>
+<hr>
+<h2 id="代数数据类型的语法"><a href="#代数数据类型的语法" class="headerlink" title="代数数据类型的语法"></a><strong>代数数据类型的语法</strong></h2><h3 id="代数项和签名"><a href="#代数项和签名" class="headerlink" title="代数项和签名"></a><strong>代数项和签名</strong></h3><p>一个代数项（algebraic term）由符号和类型来定义，</p>
 <p>这些信息放在一起称为代数项的签名（signature）。</p>
 <p><br/></p>
 <p>构成代数项的基本类型称为sort。</p>
@@ -380,21 +376,17 @@
 <p><span data-katex="fctns:0,1:nat"></span></p>
 <p><span data-katex="+,*:nat\times nat\rightarrow nat"></span></p>
 <p><br/></p>
-<h3 id="变量的指派"><strong>变量的指派</strong></h3>
-<p>一个指派（sort assignment），是如下一个有限集合，用来指定变量的类型，</p>
+<h3 id="变量的指派"><a href="#变量的指派" class="headerlink" title="变量的指派"></a><strong>变量的指派</strong></h3><p>一个指派（sort assignment），是如下一个有限集合，用来指定变量的类型，</p>
 <p><span data-katex="\Gamma=\left \{ x_1:s_1,\cdots ,x_k:s_k \right \}"></span></p>
 <p>不能为同一个变量指派不同的sort。</p>
 <p><br/></p>
-<h3 id="合法代数项的集合"><strong>合法代数项的集合</strong></h3>
-<p>基于签名<span data-katex="\Sigma"></span>和指派<span data-katex="\Gamma"></span>，可以定义一个sort为<span data-katex="s"></span>的代数项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>，</p>
+<h3 id="合法代数项的集合"><a href="#合法代数项的集合" class="headerlink" title="合法代数项的集合"></a><strong>合法代数项的集合</strong></h3><p>基于签名<span data-katex="\Sigma"></span>和指派<span data-katex="\Gamma"></span>，可以定义一个sort为<span data-katex="s"></span>的代数项的集合<span data-katex="Terms^s\left ( \Sigma,\Gamma \right )"></span>，</p>
 <p>它满足以下几个条件，</p>
 <p>（1）如果<span data-katex="x:s\in \Gamma"></span>则<span data-katex="x\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
 <p>（2）如果<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>且<span data-katex="M_i\in Terms^{s_i}\left ( \Sigma,\Gamma \right )"></span>，</p>
 <p><span data-katex="i=1,\cdots ,n"></span>，则<span data-katex="fM_1\cdots M_k\in Terms^s\left ( \Sigma,\Gamma \right )"></span></p>
-<hr />
-<h2 id="代数数据类型的指称语义"><strong>代数数据类型的指称语义</strong></h2>
-<h3 id="代数"><strong><span data-katex="\Sigma"></span>代数</strong></h3>
-<p><span data-katex="\Sigma"></span>代数是一种数学结构，它为代数项提供了含义或指称语义。</p>
+<hr>
+<h2 id="代数数据类型的指称语义"><a href="#代数数据类型的指称语义" class="headerlink" title="代数数据类型的指称语义"></a><strong>代数数据类型的指称语义</strong></h2><h3 id="代数"><a href="#代数" class="headerlink" title="代数"></a><strong><span data-katex="\Sigma"></span>代数</strong></h3><p><span data-katex="\Sigma"></span>代数是一种数学结构，它为代数项提供了含义或指称语义。</p>
 <p><br/></p>
 <p>一个<span data-katex="\Sigma"></span>代数，包含了一个或多个集合，称为载体（carrier），</p>
 <p>以及一些特征元素，和载体上的一些一阶函数，</p>
@@ -410,15 +402,13 @@
 <p>其中<span data-katex="N"></span>是自然数集，<span data-katex="B"></span>是布尔值集，</p>
 <p><span data-katex="0,1,\cdots"></span>是自然数，<span data-katex="+"></span>是加法函数。</p>
 <p><br/></p>
-<h3 id="代数项的解释"><strong>代数项的解释</strong></h3>
-<p>我们说<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>是与所有合法代数项<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>对应的<span data-katex="\Sigma"></span>代数，</p>
+<h3 id="代数项的解释"><a href="#代数项的解释" class="headerlink" title="代数项的解释"></a><strong>代数项的解释</strong></h3><p>我们说<span data-katex="\mathscr{A}=\left \langle \left \{ A^s \right \}_{s\in S}, \mathscr{I} \right \rangle"></span>是与所有合法代数项<span data-katex="\left \{ Terms^s\left ( \Sigma,\Gamma \right ) \right \}_{s\in S}"></span>对应的<span data-katex="\Sigma"></span>代数，</p>
 <p>指的是如下对应关系成立，</p>
 <p>（1）每一个sort，<span data-katex="s\in S"></span>，恰好对应一个载体<span data-katex="A^s"></span></p>
 <p>（2）每一个函数符号<span data-katex="f:s_1\times \cdots \times s_k\rightarrow s"></span>，恰好对应一个函数<span data-katex="\mathscr{I}(f):A^{s_1}\times \cdots \times A^{s_k}\rightarrow A^s"></span></p>
 <p>习惯上把<span data-katex="\mathscr{I}(f)"></span>写成<span data-katex="f^{\mathscr{A}}"></span>。</p>
 <p><br/></p>
-<h3 id="含变量代数项的解释"><strong>含变量代数项的解释</strong></h3>
-<p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射。</p>
+<h3 id="含变量代数项的解释"><a href="#含变量代数项的解释" class="headerlink" title="含变量代数项的解释"></a><strong>含变量代数项的解释</strong></h3><p><span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的环境<span data-katex="\eta"></span>，是把变量映射到<span data-katex="\mathscr{A}"></span>的各载体中元素的一个映射。</p>
 <p><span data-katex="\eta :\mathscr{V} \rightarrow\cup _sA^s"></span></p>
 <p>需要环境的原因是，对于含变量<span data-katex="x"></span>的项<span data-katex="M"></span>，叙述<span data-katex="M"></span>的含义必须先给<span data-katex="x"></span>指定一个确定的值。</p>
 <p>如果对于每个<span data-katex="x:s\in \Gamma"></span>，都有<span data-katex="\eta (x)\in A^s"></span>，就说环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>。</p>
@@ -430,18 +420,15 @@
 <p><br/></p>
 <p>若<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在上下文中是明确的，通常省略<span data-katex="\mathscr{A}"></span>而直接写<span data-katex="[[M]]\eta"></span>，</p>
 <p>若<span data-katex="M"></span>中没有变量，则<span data-katex="\mathscr{A}[[M]]\eta"></span>不依赖于<span data-katex="\eta"></span>，可以写为<span data-katex="\mathscr{A}[[M]]"></span>。</p>
-<hr />
-<h2 id="语法和语义的关系"><strong>语法和语义的关系</strong></h2>
-<h3 id="可靠性与完备性"><strong>可靠性与完备性</strong></h3>
-<p>代数数据类型的公理语义是由代数项之间的等式集给出的，签名和等式集合称代数规范（algebraic specification）。</p>
+<hr>
+<h2 id="语法和语义的关系"><a href="#语法和语义的关系" class="headerlink" title="语法和语义的关系"></a><strong>语法和语义的关系</strong></h2><h3 id="可靠性与完备性"><a href="#可靠性与完备性" class="headerlink" title="可靠性与完备性"></a><strong>可靠性与完备性</strong></h3><p>代数数据类型的公理语义是由代数项之间的等式集给出的，签名和等式集合称代数规范（algebraic specification）。</p>
 <p>一个代数规范，或者可以使用等式证明系统推导出代数项之间的其他等式，或者可以检验代数项对应的<span data-katex="\Sigma"></span>代数是否满足这些等式的要求。</p>
 <p><br/></p>
 <p>代数项对应的<span data-katex="\Sigma"></span>代数并不是唯一的。</p>
 <p>从一个代数规范推导得到的等式，在该规范对应的任何<span data-katex="\Sigma"></span>代数中都成立，就称该代数证明系统是可靠的（sound）。</p>
 <p>一个代数规范对应的任何<span data-katex="\Sigma"></span>代数中都成立的等式，在该规范中都可证，就称该代数证明系统是完备的（complete）。</p>
 <p><br/></p>
-<h3 id="等式的可满足性"><strong>等式的可满足性</strong></h3>
-<p>等式（equation）是一个公式<span data-katex="M=N[\Gamma ]"></span>，其中<span data-katex="M,N\in Terms^s\left ( \Sigma ,\Gamma \right )"></span>，<span data-katex="s\in S"></span>。</p>
+<h3 id="等式的可满足性"><a href="#等式的可满足性" class="headerlink" title="等式的可满足性"></a><strong>等式的可满足性</strong></h3><p>等式（equation）是一个公式<span data-katex="M=N[\Gamma ]"></span>，其中<span data-katex="M,N\in Terms^s\left ( \Sigma ,\Gamma \right )"></span>，<span data-katex="s\in S"></span>。</p>
 <p>如果环境<span data-katex="\eta"></span>满足指派<span data-katex="\Gamma"></span>，且<span data-katex="[[M]]\eta =[[N]]\eta"></span>，</p>
 <p>就说<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>在环境<span data-katex="\eta"></span>下满足<span data-katex="M=N[\Gamma ]"></span>，记为</p>
 <p><span data-katex="\mathscr{A},\eta \models M=N[\Gamma]"></span></p>
@@ -461,22 +448,19 @@
 <p><br/></p>
 <p>若<span data-katex="\mathscr{A}"></span>满足签名<span data-katex="\Sigma=\left \langle S,F \right \rangle"></span>上的所有等式，就说<span data-katex="\Sigma"></span>代数是平凡的（trivial）。</p>
 <p><br/></p>
-<h3 id="语义蕴含semantic-implication"><strong>语义蕴含（semantic implication）</strong></h3>
-<p>若满足等式集<span data-katex="E"></span>的每一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>都满足等式<span data-katex="M=N[\Gamma ]"></span>，</p>
+<h3 id="语义蕴含（semantic-implication）"><a href="#语义蕴含（semantic-implication）" class="headerlink" title="语义蕴含（semantic implication）"></a><strong>语义蕴含（semantic implication）</strong></h3><p>若满足等式集<span data-katex="E"></span>的每一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>都满足等式<span data-katex="M=N[\Gamma ]"></span>，</p>
 <p>则称签名<span data-katex="\Sigma"></span>上的等式集<span data-katex="E"></span>在语义上蕴含等式<span data-katex="M=N[\Gamma ]"></span>，记为，</p>
 <p><span data-katex="E\models M=N[\Gamma ]"></span></p>
 <p><br/></p>
 <p>有了签名<span data-katex="\Sigma"></span>和等式集<span data-katex="E"></span>，我们定义代数规范<span data-katex="Spec=\left \langle \Sigma,E \right \rangle"></span>，</p>
 <p>则满足代数规范的，在所有<span data-katex="\Sigma"></span>代数中都成立的等式，就是那些由等式集<span data-katex="E"></span>语义蕴含的等式。</p>
 <p><br/></p>
-<h3 id="语义理论"><strong>语义理论</strong></h3>
-<p>如果等式集<span data-katex="E"></span>在语义蕴含下封闭（closed），则把它称为一个理论（theory）。</p>
+<h3 id="语义理论"><a href="#语义理论" class="headerlink" title="语义理论"></a><strong>语义理论</strong></h3><p>如果等式集<span data-katex="E"></span>在语义蕴含下封闭（closed），则把它称为一个理论（theory）。</p>
 <p>更准确的说，如果<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语义理论（semantic theory）。</p>
 <p>一个<span data-katex="\Sigma"></span>代数<span data-katex="\mathscr{A}"></span>的理论<span data-katex="Th(\mathscr{A})"></span>，就是在<span data-katex="\mathscr{A}"></span>中成立的所有等式的集合。</p>
 <p>可以证明一个<span data-katex="\Sigma"></span>代数的理论是一个语义理论。</p>
 <p><br/></p>
-<h3 id="形式证明"><strong>形式证明</strong></h3>
-<p>一个证明系统的推导规则如下，<span data-katex="\frac{antecedent}{consequent}"></span>，</p>
+<h3 id="形式证明"><a href="#形式证明" class="headerlink" title="形式证明"></a><strong>形式证明</strong></h3><p>一个证明系统的推导规则如下，<span data-katex="\frac{antecedent}{consequent}"></span>，</p>
 <p>使得从前件（antecedent）的任何实例出发，通过使用该证明系统的公理和其他规则，</p>
 <p>可以推导出后件（consequent）的相应实例。</p>
 <p><br/></p>
@@ -490,17 +474,14 @@
 <p>使得每个等式或者是公理（axiom），或者是<span data-katex="E"></span>中的等式，</p>
 <p>或者是从序列中之前出现的一个或多个等式经一步推导得到的结果。</p>
 <p><br/></p>
-<h3 id="语法理论"><strong>语法理论</strong></h3>
-<p>若在可证性下等式集<span data-katex="E"></span>是封闭的，则称<span data-katex="E"></span>是一个语法理论（syntactic theory）。</p>
+<h3 id="语法理论"><a href="#语法理论" class="headerlink" title="语法理论"></a><strong>语法理论</strong></h3><p>若在可证性下等式集<span data-katex="E"></span>是封闭的，则称<span data-katex="E"></span>是一个语法理论（syntactic theory）。</p>
 <p>换句话说，如果<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="M=N[\Gamma ]\in E"></span>，那么等式集<span data-katex="E"></span>就称为一个语法理论。</p>
 <p><span data-katex="E"></span>的语法理论<span data-katex="Th(E)"></span>就是从<span data-katex="E"></span>可证的所有等式的集合。</p>
 <p><br/></p>
-<h3 id="等式证明系统的性质"><strong>等式证明系统的性质</strong></h3>
-<p>可靠性（soundness）：若<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="E\models M=N[\Gamma ]"></span></p>
+<h3 id="等式证明系统的性质"><a href="#等式证明系统的性质" class="headerlink" title="等式证明系统的性质"></a><strong>等式证明系统的性质</strong></h3><p>可靠性（soundness）：若<span data-katex="E\vdash M=N[\Gamma ]"></span>，则<span data-katex="E\models M=N[\Gamma ]"></span></p>
 <p>演绎完备性（deductive completeness）：若<span data-katex="E\models M=N[\Gamma ]"></span>，则<span data-katex="E\vdash M=N[\Gamma ]"></span></p>
-<hr />
-<h2 id="结语"><strong>结语</strong></h2>
-<p>《<a href="https://book.douban.com/subject/1761918/" target="_blank" rel="noopener">Foundations for Programming Languages</a>》是一本好书，</p>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>《<a href="https://book.douban.com/subject/1761918/" target="_blank" rel="noopener">Foundations for Programming Languages</a>》是一本好书，</p>
 <p>可是中文的翻译《<a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a>》简直是晦涩难懂，</p>
 <p>把sort翻译为『类子』，把signature翻译为『基调』，容易让人误以为和同调代数有什么联系。</p>
 <p>原版书拿到后，看起来轻松了不少，这里只是对第三章部分内容做了个小结，以便卸下包袱轻装上阵。</p>

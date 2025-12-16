@@ -359,12 +359,11 @@
 <p>我们要讨论的是关于回调函数的。</p>
 <p>如果函数的参数可以是另一个函数，这将是一个有趣的事情。</p>
 <p><br/></p>
-<h2 id="闭包"><strong>闭包</strong></h2>
-<p>先写几个简单的小函数，来练练手。</p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a><strong>闭包</strong></h2><p>先写几个简单的小函数，来练练手。</p>
 <p>看看函数是怎样作为参数传递的。</p>
 <p>我们先定义一个高阶函数，它接受一个数字和函数作为参数。</p>
 <p>(define (high-order-fn data fn)</p>
-<p>  (fn data))</p>
+<p>&nbsp;&nbsp;(fn data))</p>
 <p><br/></p>
 <p>我们使用数字1和函数“-”作为参数调用高阶函数。</p>
 <p>(high-order-fn 1 -)</p>
@@ -372,12 +371,12 @@
 <p><br/></p>
 <p>我们使用数字1和一个lambda表达式作为参数调用。</p>
 <p>(high-order-fn 1</p>
-<p>  (lambda (x) (+ 1 x)))</p>
+<p>&nbsp;&nbsp;(lambda (x) (+ 1 x)))</p>
 <p>=&gt; 2</p>
 <p><br/></p>
 <p>我们看一下函数的副作用。</p>
 <p>(high-order-fn 1</p>
-<p>  (lambda (x) (display x)))</p>
+<p>&nbsp;&nbsp;(lambda (x) (display x)))</p>
 <p>=&gt; 1</p>
 <p><br/></p>
 <p>看起来很简单，不是吗。</p>
@@ -386,25 +385,25 @@
 <p><br/></p>
 <p>那么，请猜一下：</p>
 <p>(high-order-fn 1</p>
-<p>  (let [(y 2)]</p>
-<p>    (lambda (x) (+ x y))))</p>
+<p>&nbsp;&nbsp;(let [(y 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) (+ x y))))</p>
 <p><br/></p>
 <p>答案是3，因为这看起来十分“显然”。</p>
 <p>然而，这里面却藏有玄机。</p>
 <p><br/></p>
 <p>我们变换一下，将函数参数拿出来，并把它放在一个let表达式下面。</p>
 <p>(define callback</p>
-<p>  (let [(y 2)]</p>
-<p>    (lambda (x) (+ x y))))</p>
+<p>&nbsp;&nbsp;(let [(y 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x) (+ x y))))</p>
 <p><br/></p>
 <p>然后我们用let表达式把高阶函数的调用包装起来。</p>
 <p>(let ([y 3])</p>
-<p>  (high-order-fn 1 callback))</p>
+<p>&nbsp;&nbsp;(high-order-fn 1 callback))</p>
 <p>=&gt; 3</p>
 <p><br/></p>
 <p>我们用另一个表达式把高阶函数的调用包装起来。</p>
 <p>(let ([y 4])</p>
-<p>  (high-order-fn 1 callback))</p>
+<p>&nbsp;&nbsp;(high-order-fn 1 callback))</p>
 <p>=&gt; 3</p>
 <p><br/></p>
 <p>这两个结果是相同的，</p>
@@ -427,8 +426,7 @@
 <p>而在面向对象语言中，我们却要先建立一个类，再new一个对象。</p>
 <p>如果想了解更多的对应关系，可以参考《Let Over Lambda》。</p>
 <p><br/></p>
-<h2 id="嵌套回调函数"><strong>嵌套回调函数</strong></h2>
-<p>很多人说自己讨厌函数式编程，</p>
+<h2 id="嵌套回调函数"><a href="#嵌套回调函数" class="headerlink" title="嵌套回调函数"></a><strong>嵌套回调函数</strong></h2><p>很多人说自己讨厌函数式编程，</p>
 <p>一方面，可能是觉得闭包太抽象了。</p>
 <p>另一方面，可能是听别人说嵌套回调函数会导致逻辑混乱。</p>
 <p><br/></p>
@@ -438,14 +436,14 @@
 <p>首先，我们定义了一个小函数，它接受一个数字和两个函数作为参数。</p>
 <p>如果数字小于10，就执行success回调函数，否则就执行error回调函数。</p>
 <p>(define (async-task data success error)</p>
-<p>  (if (&lt; data 10)</p>
-<p>    (success data)</p>
-<p>    (error)))</p>
+<p>&nbsp;&nbsp;(if (&lt; data 10)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(success data)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(error)))</p>
 <p><br/></p>
 <p>然后，我们拿数字1来试试，并设置success显示这个值，success显示-1。</p>
 <p>(async-task 1</p>
-<p>  (lambda (x) (display (list x)))</p>
-<p>  (lambda () (display -1)))</p>
+<p>&nbsp;&nbsp;(lambda (x) (display (list x)))</p>
+<p>&nbsp;&nbsp;(lambda () (display -1)))</p>
 <p>=&gt; (1)</p>
 <p><br/></p>
 <p>现在，我们想这么做，</p>
@@ -453,30 +451,30 @@
 <p>否则就直接失败(display -1)。</p>
 <p>为了这样做，我们只能把async-task的第二次调用写在success回调函数中。</p>
 <p>(async-task 1</p>
-<p>  (lambda (x)</p>
-<p>    (async-task 2</p>
-<p>      (lambda (y) (display (list x y)))</p>
-<p>      (lambda () (display -1))))</p>
-<p>    (lambda () (display -1)))</p>
+<p>&nbsp;&nbsp;(lambda (x) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(async-task 2 </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (display (list x y))) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda () (display -1))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda () (display -1)))</p>
 <p>=&gt; (1 2)</p>
 <p><br/></p>
 <p>逻辑也不是太混乱，可以理顺它。</p>
 <p>别忙，紧接着我们要在第二次async-task执行成功后，再拿3调用。</p>
 <p>那我们再写一层吧。</p>
 <p>(async-task 1</p>
-<p>  (lambda (x)</p>
-<p>    (async-task 2</p>
-<p>      (lambda (y)</p>
-<p>        (async-task 3</p>
-<p>          (lambda (z) (display (list x y z)))</p>
-<p>          (lambda () (display -1))))</p>
-<p>      (lambda () (display -1))))</p>
-<p>  (lambda () (display -1)))</p>
+<p>&nbsp;&nbsp;(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(async-task 2</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(async-task 3</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (display (list x y z)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda () (display -1))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda () (display -1))))</p>
+<p>&nbsp;&nbsp;(lambda () (display -1)))</p>
 <p>=&gt; (1 2 3)</p>
 <p><br/></p>
 <p>看吧，人们所说的嵌套回调函数问题果然出现了。</p>
 <p>一眼望去，根本不知道在做什么。</p>
-<p>这样下去，我们想继续拿4,5...9,10调用，那要写多少层呀。</p>
+<p>这样下去，我们想继续拿4,5…9,10调用，那要写多少层呀。</p>
 <p><br/></p>
 <p>很多人看到这里就断定，函数式编程是反人类的。</p>
 <p>这也是情有可原的。</p>
@@ -489,22 +487,22 @@
 <p>于是，我们定义了一个辅助函数execute，这个函数实现很简单，暂可以略过，</p>
 <p>我们只需要看看它怎么使用的。</p>
 <p>(define (execute value-list fn)</p>
-<p>  (define (continue value-list result-list)</p>
-<p>    (fn value-list result-list continue))</p>
-<p>  (continue value-list '()))</p>
+<p>&nbsp;&nbsp;(define (continue value-list result-list)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn value-list result-list continue))</p>
+<p>&nbsp;&nbsp;(continue value-list ‘()))</p>
 <p><br/></p>
 <p>使用execute函数之后，我们就可以这样写了。</p>
-<p>(execute '(1 2 3 4 5 6 7 8 9)</p>
-<p>  (lambda (values results continue)</p>
-<p>    (if (not (null? values))</p>
-<p>      (async-task (car values)</p>
-<p>        (lambda (x)</p>
-<p>          (let [(remainders (cdr values))]</p>
-<p>            (set! results (append results (list x)))</p>
-<p>            (if (null? remainders)</p>
-<p>              (display results)</p>
-<p>              (continue remainders results))))</p>
-<p>        (lambda () (display -1))))))</p>
+<p>(execute ‘(1 2 3 4 5 6 7 8 9)</p>
+<p>&nbsp;&nbsp;(lambda (values results continue)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(if (not (null? values))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(async-task (car values)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let [(remainders (cdr values))]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(set! results (append results (list x)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (null? remainders)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(display results)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(continue remainders results))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda () (display -1))))))</p>
 <p>=&gt; (1 2 3 4 5 6 7 8 9)</p>
 <p><br/></p>
 <p>太好了，我们就不用写很多层嵌套回调函数了。</p>
@@ -514,8 +512,7 @@
 <p>至于函数的解释，限于篇幅，还是请直接阅读源代码吧。</p>
 <p>因为，源代码是最好的对计算过程的描述方式。</p>
 <p><br/></p>
-<h2 id="总结"><strong>总结</strong></h2>
-<p>以上回调函数的例子，</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>以上回调函数的例子，</p>
 <p>源于某次讨论中，有人问及如何连续使用JavaScript发送AJAX请求。</p>
 <p>先有一些聪明的人说，async这个库实现了，去看吧。</p>
 <p>再有一些大牛的人说，为了避免嵌套回调函数，还是用Promise来实现吧。</p>

@@ -347,37 +347,32 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-f3c4e7374c59c264.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-f3c4e7374c59c264.png" alt=""></p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文我们介绍了笛卡尔闭范畴，它给出了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^{unit,\times,\to}"></span>的语义，</p>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上文我们介绍了笛卡尔闭范畴，它给出了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^{unit,\times,\to}"></span>的语义，</p>
 <p>我们还看到了笛卡尔闭范畴与柯里化之间的关系。</p>
 <p><br/></p>
 <p>结合《<a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型</a>》系列文章，</p>
 <p>到目前为止我们已经有了，类型理论，逻辑学和范畴论的知识基础了。</p>
 <p>现在我们介绍Curry-Howard-Lambek correspondence，将三者联系起来。</p>
 <p><br/></p>
-<h3 id="类型方面">1. 类型方面</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-09a5fa1690d11143.png" /></p>
+<h3 id="1-类型方面"><a href="#1-类型方面" class="headerlink" title="1. 类型方面"></a>1. 类型方面</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-09a5fa1690d11143.png" alt=""></p>
 <p><br/></p>
 <p>参考《<a href="https://thzt.github.io/2017/09/06/type-2/">你好，类型（二）：Lambda calculus</a>》，</p>
 <p>我们来回顾一下简单类型化<span data-katex="\lambda"></span>演算系统。</p>
-<h4 id="语法">1.1 语法</h4>
-<p><span data-katex="t::=x|tu|\lambda x.t"></span></p>
+<h4 id="1-1-语法"><a href="#1-1-语法" class="headerlink" title="1.1 语法"></a>1.1 语法</h4><p><span data-katex="t::=x|tu|\lambda x.t"></span></p>
 <p><br/></p>
 <p>例子：</p>
 <p><span data-katex="\lambda x.x+1"></span></p>
 <p><span data-katex="\lambda f.\lambda x.fx"></span></p>
-<h4 id="类型">1.2 类型</h4>
-<p>基本类型（basic types），<span data-katex="B::=\iota|\cdots"></span></p>
+<h4 id="1-2-类型"><a href="#1-2-类型" class="headerlink" title="1.2 类型"></a>1.2 类型</h4><p>基本类型（basic types），<span data-katex="B::=\iota|\cdots"></span></p>
 <p>一般类型（general types），<span data-katex="T::=B|T\to T|T\times T"></span></p>
 <p><br/></p>
 <p>例子：</p>
 <p><span data-katex="\iota\to\iota\to\iota"></span>，</p>
 <p><span data-katex="(\iota\to\iota)\to\iota"></span></p>
-<h4 id="类型推导规则">1.3 类型推导规则</h4>
-<p>（1）<span data-katex="\frac{~}{\Gamma,x:t\vdash x:T}"></span></p>
+<h4 id="1-3-类型推导规则"><a href="#1-3-类型推导规则" class="headerlink" title="1.3 类型推导规则"></a>1.3 类型推导规则</h4><p>（1）<span data-katex="\frac{~}{\Gamma,x:t\vdash x:T}"></span></p>
 <p><br/></p>
 <p>（2）<span data-katex="\frac{\Gamma\vdash t:T~~~~\Gamma\vdash u:U}{\Gamma\vdash\left\langle t,u\right\rangle:T\times U}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_1v:T}"></span>，<span data-katex="\frac{\Gamma\vdash v:T\times U}{\Gamma\vdash\pi_2v:U}"></span></p>
 <p><br/></p>
@@ -385,20 +380,17 @@
 <p><br/></p>
 <p>其中，<span data-katex="\pi_1\left\langle v_1,v_2 \right\rangle=v_1"></span>，<span data-katex="\pi_2\left\langle v_1,v_2 \right\rangle=v_2"></span>。</p>
 <p><br/></p>
-<h3 id="逻辑方面">2. 逻辑方面</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-1a02678c20564afc.png" /></p>
+<h3 id="2-逻辑方面"><a href="#2-逻辑方面" class="headerlink" title="2. 逻辑方面"></a>2. 逻辑方面</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-1a02678c20564afc.png" alt=""></p>
 <p><br/></p>
 <p>参考《<a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a>》，</p>
 <p>我们构建一个只包含逻辑联接词<span data-katex="\wedge"></span>和<span data-katex="\to"></span>的命题逻辑系统。</p>
-<h4 id="逻辑推导规则">2.1 逻辑推导规则</h4>
-<p>（1）<span data-katex="\frac{~}{\Gamma,A\vdash A}"></span></p>
+<h4 id="2-1-逻辑推导规则"><a href="#2-1-逻辑推导规则" class="headerlink" title="2.1 逻辑推导规则"></a>2.1 逻辑推导规则</h4><p>（1）<span data-katex="\frac{~}{\Gamma,A\vdash A}"></span></p>
 <p><br/></p>
 <p>（2）<span data-katex="\frac{\Gamma\vdash A~~~~\Gamma\vdash B}{\Gamma\vdash A\wedge B}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A}"></span>，<span data-katex="\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}"></span></p>
 <p><br/></p>
 <p>（3）<span data-katex="\frac{\Gamma,A\vdash B}{\Gamma\vdash A\to B}"></span>，<span data-katex="\frac{\Gamma\vdash A\to B~~~~\Gamma\vdash A}{\Gamma\vdash B}"></span></p>
-<h4 id="curry-howard-correspondence">2.2 Curry-Howard correspondence</h4>
-<p>我们看到，只要将逻辑系统中的<span data-katex="\wedge"></span>和<span data-katex="\to"></span>，替换成简单类型化<span data-katex="\lambda"></span>演算中的<span data-katex="\times"></span>和<span data-katex="\to"></span>，</p>
+<h4 id="2-2-Curry-Howard-correspondence"><a href="#2-2-Curry-Howard-correspondence" class="headerlink" title="2.2 Curry-Howard correspondence"></a>2.2 Curry-Howard correspondence</h4><p>我们看到，只要将逻辑系统中的<span data-katex="\wedge"></span>和<span data-katex="\to"></span>，替换成简单类型化<span data-katex="\lambda"></span>演算中的<span data-katex="\times"></span>和<span data-katex="\to"></span>，</p>
 <p>那么这两个系统从推导规则上来看是一致的。</p>
 <p><br/></p>
 <p>逻辑中的命题，对应了简单类型化<span data-katex="\lambda"></span>演算中的类型，</p>
@@ -411,21 +403,17 @@
 <p>考虑到以上命题逻辑与类型之间的对应关系，</p>
 <p>我们可以说，<a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">proofs as programs</a>。</p>
 <p><br/></p>
-<h3 id="范畴论方面">3. 范畴论方面</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-ef752d2a808eaf01.png" /></p>
+<h3 id="3-范畴论方面"><a href="#3-范畴论方面" class="headerlink" title="3. 范畴论方面"></a>3. 范畴论方面</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-ef752d2a808eaf01.png" alt=""></p>
 <p><br/></p>
 <p>结合《<a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a>》，</p>
 <p>我们给出了简单类型化<span data-katex="\lambda"></span>演算的范畴论解释。</p>
-<h4 id="对象">3.1 对象</h4>
-<p>将简单类型化<span data-katex="\lambda"></span>演算系统的类型，解释为笛卡尔闭范畴<span data-katex="C"></span>中的对象。</p>
+<h4 id="3-1-对象"><a href="#3-1-对象" class="headerlink" title="3.1 对象"></a>3.1 对象</h4><p>将简单类型化<span data-katex="\lambda"></span>演算系统的类型，解释为笛卡尔闭范畴<span data-katex="C"></span>中的对象。</p>
 <p><span data-katex="\mathscr{C}[\![\sigma\times\tau]\!]=\mathscr{C}[\![\sigma]\!]\times\mathscr{C}[\![\tau]\!]"></span></p>
 <p><span data-katex="\mathscr{C}[\![\sigma\to\tau]\!]=\mathscr{C}[\![\sigma]\!]\to\mathscr{C}[\![\tau]\!]"></span></p>
-<h4 id="箭头">3.2 箭头</h4>
-<p>将带有自变量项，解释为从自变量类型到项类型的箭头。</p>
+<h4 id="3-2-箭头"><a href="#3-2-箭头" class="headerlink" title="3.2 箭头"></a>3.2 箭头</h4><p>将带有自变量项，解释为从自变量类型到项类型的箭头。</p>
 <p><span data-katex="\mathscr{C}[\![\Gamma\vdash M:\sigma]\!]=\mathscr{C}[\![\Gamma]\!]\to\mathscr{C}[\![\sigma]\!]"></span></p>
-<h4 id="curry-howard-lambek-correspondance">3.3 Curry-Howard-Lambek correspondance</h4>
-<p>根据简单类型化<span data-katex="\lambda"></span>演算系统中的推导规则，</p>
+<h4 id="3-3-Curry-Howard-Lambek-correspondance"><a href="#3-3-Curry-Howard-Lambek-correspondance" class="headerlink" title="3.3 Curry-Howard-Lambek correspondance"></a>3.3 Curry-Howard-Lambek correspondance</h4><p>根据简单类型化<span data-katex="\lambda"></span>演算系统中的推导规则，</p>
 <p>我们可以为范畴<span data-katex="C"></span>添加对象和箭头之间的约束条件，</p>
 <p><br/></p>
 <p>（1）<span data-katex="\frac{~}{\pi_2:\Gamma\times A\to A}"></span></p>
@@ -444,9 +432,8 @@
 <p>因此，类型理论，逻辑学和范畴论产生了关联，</p>
 <p>这种三者的对应关系，称为<strong>Curry-Howard-Lambek correspondance</strong>。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-cfb15d029385cd31.png" /></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-23-semantics-10/1023733-cfb15d029385cd31.png" alt=""></p>
 <p><br/></p>
 <p>本文介绍了Curry-Howard-Lambek correspondance，</p>
 <p>它将本来毫无关系的三个学科联系在了一起，</p>
@@ -457,8 +444,7 @@
 <p>例如，quotient algebra，comonad，adjoint functor，free monoid，等等概念，</p>
 <p><strong>书山有路勤为径，学海无涯苦作舟</strong>，让我们一起努力吧。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
 <p><a href="https://thzt.github.io/2017/09/10/type-4/">你好，类型（四）：Propositional logic</a></p>
 <p><a href="http://thzt.github.io/2018/02/19/semantics-9/">语言背后的代数学（九）：笛卡尔闭范畴</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence" target="_blank" rel="noopener">Curry–Howard correspondence</a></p>

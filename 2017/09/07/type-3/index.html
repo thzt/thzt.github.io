@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾 上一篇中，我们介绍了演算， 它是由一堆合法的符号和一些推导规则构成的公理系统， 在众多演算中，我们介绍了最常用的系统， 它指定了和两种对项的变换规则。  作为形式系统，上一篇中，我们展现了它的编码能力， 将邱奇编码，与公理集合论中自然数的归纳集定义，进行了对比。  本文我们将介绍另一套形式系统， 组合子逻辑（combinatory logic）。  1. 组合子逻辑    （组合子逻辑）">
+<meta name="description" content="回顾上一篇中，我们介绍了演算， 它是由一堆合法的符号和一些推导规则构成的公理系统， 在众多演算中，我们介绍了最常用的系统， 它指定了和两种对项的变换规则。  作为形式系统，上一篇中，我们展现了它的编码能力， 将邱奇编码，与公理集合论中自然数的归纳集定义，进行了对比。  本文我们将介绍另一套形式系统， 组合子逻辑（combinatory logic）。  1. 组合子逻辑   （组合子逻辑），与">
 <meta property="og:type" content="article">
 <meta property="og:title" content="你好，类型（三）：Combinatory logic">
 <meta property="og:url" content="https://thzt.github.io/2017/09/07/type-3/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾 上一篇中，我们介绍了演算， 它是由一堆合法的符号和一些推导规则构成的公理系统， 在众多演算中，我们介绍了最常用的系统， 它指定了和两种对项的变换规则。  作为形式系统，上一篇中，我们展现了它的编码能力， 将邱奇编码，与公理集合论中自然数的归纳集定义，进行了对比。  本文我们将介绍另一套形式系统， 组合子逻辑（combinatory logic）。  1. 组合子逻辑    （组合子逻辑）">
+<meta property="og:description" content="回顾上一篇中，我们介绍了演算， 它是由一堆合法的符号和一些推导规则构成的公理系统， 在众多演算中，我们介绍了最常用的系统， 它指定了和两种对项的变换规则。  作为形式系统，上一篇中，我们展现了它的编码能力， 将邱奇编码，与公理集合论中自然数的归纳集定义，进行了对比。  本文我们将介绍另一套形式系统， 组合子逻辑（combinatory logic）。  1. 组合子逻辑   （组合子逻辑），与">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-4a9e412b8a890927.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-c22a4eec9f8ab941.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-252bce1d956bac05.png">
@@ -350,10 +350,9 @@
       
 
       
-        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-4a9e412b8a890927.png" /></p>
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-4a9e412b8a890927.png" alt=""></p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上一篇中，我们介绍了<span data-katex="\lambda"></span>演算，</p>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上一篇中，我们介绍了<span data-katex="\lambda"></span>演算，</p>
 <p>它是由一堆合法的符号和一些推导规则构成的公理系统，</p>
 <p>在众多<span data-katex="\lambda"></span>演算中，我们介绍了最常用的<span data-katex="\lambda_\beta"></span>系统，</p>
 <p>它指定了<span data-katex="\alpha"></span>和<span data-katex="\beta"></span>两种对<span data-katex="\lambda"></span>项的变换规则。</p>
@@ -364,9 +363,8 @@
 <p>本文我们将介绍另一套形式系统，</p>
 <p>组合子逻辑（combinatory logic）。</p>
 <p><br/></p>
-<h3 id="组合子逻辑">1. 组合子逻辑</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-c22a4eec9f8ab941.png" /></p>
+<h3 id="1-组合子逻辑"><a href="#1-组合子逻辑" class="headerlink" title="1. 组合子逻辑"></a>1. 组合子逻辑</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-c22a4eec9f8ab941.png" alt=""></p>
 <p><br/></p>
 <p><span data-katex="CL"></span>（组合子逻辑），与<span data-katex="\lambda"></span>演算很相似，只是不需要对变量进行绑定，</p>
 <p>和函数作用在值上不同的是，组合子作用在函数上，从而生成另一个函数。</p>
@@ -383,9 +381,8 @@
 <p>同样为了简化，某些情况下括号是可以省略的，如果我们默认各个<span data-katex="CL"></span>项都是左结合的，</p>
 <p>因此，<span data-katex="(((UV)W)X)"></span>可以简写为<span data-katex="UVWX"></span>。</p>
 <p><br/></p>
-<h3 id="weak-reduction">2. Weak reduction</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-252bce1d956bac05.png" /></p>
+<h3 id="2-Weak-reduction"><a href="#2-Weak-reduction" class="headerlink" title="2. Weak reduction"></a>2. Weak reduction</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-252bce1d956bac05.png" alt=""></p>
 <p><br/></p>
 <p>现在，我们要完成公理化的第二步了，那就是给合法的<span data-katex="CL"></span>项指定变换规则，</p>
 <p>在<span data-katex="CL"></span>（组合子逻辑中）中，我们称之为weak reduction，即我们令，</p>
@@ -407,9 +404,8 @@
 <p>有了合法的<span data-katex="CL"></span>项（公理），以及weak reduction（推导规则），</p>
 <p>我们就建立了另一个形式系统<span data-katex="CL_w"></span>。</p>
 <p><br/></p>
-<h3 id="与演算之间的关系">3. <span data-katex="CL"></span>与<span data-katex="\lambda"></span>演算之间的关系</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-bb0fb9c0c8923e03.png" /></p>
+<h3 id="3-与演算之间的关系"><a href="#3-与演算之间的关系" class="headerlink" title="3. 与演算之间的关系"></a>3. <span data-katex="CL"></span>与<span data-katex="\lambda"></span>演算之间的关系</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-07-type-3/1023733-bb0fb9c0c8923e03.png" alt=""></p>
 <p><br/></p>
 <p><br/></p>
 <p>以上我们看到<span data-katex="CL"></span>项，似乎只能进行项的应用（application）操作，对应于<span data-katex="\lambda"></span>项的用法为<span data-katex="(MN)"></span>，</p>
@@ -437,20 +433,17 @@
 <p>相应的，<span data-katex="I"></span>，<span data-katex="K"></span>，<span data-katex="S"></span>也可以使用<span data-katex="\lambda"></span>项来表示，</p>
 <p><span data-katex="I=\lambda x.x"></span>，<span data-katex="K=\lambda xy.x"></span>，<span data-katex="S=\lambda xyz.xz(yz)"></span>。</p>
 <p><br/></p>
-<h3 id="不动点定理">4. 不动点定理</h3>
-<p>在<span data-katex="\lambda"></span>演算和<span data-katex="CL"></span>中，存在组合子<span data-katex="Y"></span>，使得<span data-katex="Yx\triangleright_{\beta,w} x(Yx)"></span>。</p>
+<h3 id="4-不动点定理"><a href="#4-不动点定理" class="headerlink" title="4. 不动点定理"></a>4. 不动点定理</h3><p>在<span data-katex="\lambda"></span>演算和<span data-katex="CL"></span>中，存在组合子<span data-katex="Y"></span>，使得<span data-katex="Yx\triangleright_{\beta,w} x(Yx)"></span>。</p>
 <p><br/></p>
 <p>证明：令<span data-katex="U=\lambda ux.x(uux)"></span>，<span data-katex="Y=UU"></span>，则，</p>
 <p><span data-katex="Yx=(\lambda u.(\lambda x.x(uux)))Ux=x(UUx)=x(Yx)"></span>。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文我们用公理化的方法，创建了另一个形式系统<span data-katex="CL_w"></span>，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文我们用公理化的方法，创建了另一个形式系统<span data-katex="CL_w"></span>，</p>
 <p>接着，我们发现<span data-katex="CL_w"></span>实际上是与<span data-katex="\lambda_\beta"></span>等价的。</p>
 <p><br/></p>
 <p>可悲的是，知道<span data-katex="\lambda"></span>演算的人很多，但是知道<span data-katex="CL"></span>（组合子逻辑）的人却很少，这简直是不可思议的。</p>
 <p>下文中，我们将继续沿着公理化和形式系统的道路向前走，敲开数理逻辑的大门。</p>
-<h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/4323391/" target="_blank" rel="noopener">Lambda-Calculus and Combinators，an Introduction</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://book.douban.com/subject/4323391/" target="_blank" rel="noopener">Lambda-Calculus and Combinators，an Introduction</a></p>
 
       
     </div>
@@ -640,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合子逻辑"><span class="nav-number">2.</span> <span class="nav-text">1. 组合子逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#weak-reduction"><span class="nav-number">3.</span> <span class="nav-text">2. Weak reduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与演算之间的关系"><span class="nav-number">4.</span> <span class="nav-text">3. 与演算之间的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不动点定理"><span class="nav-number">5.</span> <span class="nav-text">4. 不动点定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-组合子逻辑"><span class="nav-number">2.</span> <span class="nav-text">1. 组合子逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Weak-reduction"><span class="nav-number">3.</span> <span class="nav-text">2. Weak reduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-与演算之间的关系"><span class="nav-number">4.</span> <span class="nav-text">3. 与演算之间的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-不动点定理"><span class="nav-number">5.</span> <span class="nav-text">4. 不动点定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

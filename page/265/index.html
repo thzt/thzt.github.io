@@ -368,8 +368,7 @@
 <p>与测试驱动开发，</p>
 <p>有异曲同工之妙。</p>
 <p><br/></p>
-<h2 id="放飞自己的想象力"><strong>放飞自己的想象力</strong></h2>
-<p><strong>假如</strong>，我们有了一堆符号，</p>
+<h2 id="放飞自己的想象力"><a href="#放飞自己的想象力" class="headerlink" title="放飞自己的想象力"></a><strong>放飞自己的想象力</strong></h2><p><strong>假如</strong>，我们有了一堆符号，</p>
 <p>如何手动控制程序跳转？</p>
 <p><br/></p>
 <p>这个跳转方式，既然可以手动触发，</p>
@@ -390,9 +389,9 @@
 <p><strong>假如</strong>我们已经有k了，</p>
 <p>并且在一个函数执行过程中调用了它，</p>
 <p>(lambda (x)</p>
-<p>    0</p>
-<p>    (k 2)</p>
-<p>    3)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k 2)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;3)</p>
 <p>执行完(k 2)后面的3还执行吗？</p>
 <p>不执行了。</p>
 <p>当前执行的这个函数还返回吗？</p>
@@ -414,8 +413,7 @@
 <p>就这么干，先从函数体执行后，</p>
 <p>可以控制跳转位置开始。</p>
 <p><br/></p>
-<h2 id="把以后要做什么当做参数传过去"><strong>把以后要做什么当做参数传过去</strong></h2>
-<p>我们先看看，</p>
+<h2 id="把以后要做什么当做参数传过去"><a href="#把以后要做什么当做参数传过去" class="headerlink" title="把以后要做什么当做参数传过去"></a><strong>把以后要做什么当做参数传过去</strong></h2><p>我们先看看，</p>
 <p>旧观念中的“函数返回”是怎么绑架我们思维的。</p>
 <p><strong>为什么函数一定要“返回”？</strong></p>
 <p><br/></p>
@@ -431,11 +429,11 @@
 <p><br/></p>
 <p>例如：</p>
 <p>(define (fn x)</p>
-<p>    (+ x 1))</p>
-<p>    </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ x 1))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p>(define (gn y)</p>
-<p>    (fn y))</p>
-<p>    </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p>(gn 2)</p>
 <p><br/></p>
 <p>我们调用了gn，gn又调用了fn，</p>
@@ -449,14 +447,14 @@
 <p><strong>把“要做什么”当做参数传过去。</strong></p>
 <p><br/></p>
 <p>(define (final-cont v)</p>
-<p>    (display v))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v))</p>
 <p><br/></p>
 <p>(define (fn x cont)</p>
-<p>    (cont (+ x 1)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (+ x 1)))</p>
 <p><br/></p>
 <p>(define (gn y cont)</p>
-<p>    (fn y (lambda (v)</p>
-<p>        (cont v))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y (lambda (v)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(cont v))))</p>
 <p><br/></p>
 <p>我们在REPL中，一个表达式求值以后，就是打印它。</p>
 <p>所以，我们创建一个最终要做的事情，final-cont</p>
@@ -476,13 +474,13 @@
 <p>(gn 2 final-cont)</p>
 <p>就会去调用</p>
 <p>(fn y (lambda (v)</p>
-<p>    (cont v)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont v)))</p>
 <p>这里cont是final-cont</p>
 <p><br/></p>
 <p>然后调用fn了，(cont (+ x 1))</p>
 <p>fn中的cont就是</p>
 <p>(lambda (v)</p>
-<p>    (final-cont v))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(final-cont v))</p>
 <p><br/></p>
 <p>结果也是打印了3，正确输出。</p>
 <p><br/></p>
@@ -492,7 +490,7 @@
 <p>我们只需要把gn中的cont传递给fn即可。</p>
 <p><br/></p>
 <p>(define (gn y cont)</p>
-<p>    (fn y cont))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y cont))</p>
 <p><br/></p>
 <p>gn中的cont本来是final-cont，</p>
 <p>是gn执行完以后要做的事情，</p>
@@ -503,8 +501,7 @@
 <p>其中，作为参数传递的cont，称为<strong>Continuation</strong>，</p>
 <p>这种把“要做什么”当做参数传递的手法，称为<strong>Continuation传递风格（CPS）</strong>。</p>
 <p><br/></p>
-<h2 id="用callcc设置跳转点"><strong>用call/cc设置跳转点</strong></h2>
-<p>我们实际上不想每次都传递continuation，</p>
+<h2 id="用call-cc设置跳转点"><a href="#用call-cc设置跳转点" class="headerlink" title="用call/cc设置跳转点"></a><strong>用call/cc设置跳转点</strong></h2><p>我们实际上不想每次都传递continuation，</p>
 <p>只想在需要的时候调用它，</p>
 <p>怎样产生我们需要的跳转点呢？</p>
 <p><br/></p>
@@ -512,13 +509,13 @@
 <p><br/></p>
 <p>;before</p>
 <p>(call/cc (lambda(k)</p>
-<p>    (define (fn x)</p>
-<p>        (k (+ x 1)))</p>
-<p>        </p>
-<p>    (define (gn y)</p>
-<p>        (fn y))</p>
-<p>        </p>
-<p>    (gn 2))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(define (fn x)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(k (+ x 1)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(define (gn y)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fn y))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(gn 2))</p>
 <p>;after</p>
 <p><br/></p>
 <p>用call/cc产生了一个跳转点，</p>
@@ -537,17 +534,17 @@
 <p>我们看下执行流程，</p>
 <p>先调用call/cc，设置了跳转点。</p>
 <p><br/></p>
-<p>然后，就进入(lambda (k) ...)中了，</p>
+<p>然后，就进入(lambda (k) …)中了，</p>
 <p>其中k是call/cc处的continuation，</p>
 <p>可以表示为</p>
 <p>k = (lambda (v)</p>
-<p>    ;after</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;;after</p>
 <p>)</p>
 <p><br/></p>
 <p>拿着call/cc的值，再执行after操作，</p>
 <p>不就是“要做什么”的意思吗？</p>
 <p><br/></p>
-<p>进入(lambda (k) ...)以后，</p>
+<p>进入(lambda (k) …)以后，</p>
 <p>定义了两个函数，fn和gn，</p>
 <p>然后调用gn。</p>
 <p><br/></p>
@@ -555,26 +552,25 @@
 <p>那么call/cc就直接返回了，程序跑到了k所示的跳转点了，</p>
 <p>接着执行after操作。</p>
 <p><br/></p>
-<h2 id="一种实现方式"><strong>一种实现方式</strong></h2>
-<p>有了用例，</p>
+<h2 id="一种实现方式"><a href="#一种实现方式" class="headerlink" title="一种实现方式"></a><strong>一种实现方式</strong></h2><p>有了用例，</p>
 <p>实现起来就简单多了。</p>
 <p><br/></p>
 <p>call/cc有很多方式实现，</p>
 <p>我们只看下简单的解释实现。</p>
 <p><br/></p>
 <p>首先解释器的入口eval-exp要改，</p>
-<p>(eval-exp '1 *env* *cont*)</p>
+<p>(eval-exp ‘1 *env* *cont*)</p>
 <p>需要传递一个最原始的“以后要做什么”，</p>
 <p>(define *cont* (lambda (v)</p>
-<p>    (display v)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v)))</p>
 <p><br/></p>
-<p>然后，遇到(call/cc ...)，我们这样处理，</p>
+<p>然后，遇到(call/cc …)，我们这样处理，</p>
 <p><br/></p>
 <p>(define (eval-call/cc exp env cont)</p>
-<p>    (display "eval-call/cc")</p>
-<p>        (let ((fn (cadr exp))</p>
-<p>            (continuation (make-continuation cont)))</p>
-<p>            (eval-function-call-list `(,fn ,continuation) env cont)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display “eval-call/cc\n”)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let ((fn (cadr exp))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(continuation (make-continuation cont)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(eval-function-call-list `(,fn ,continuation) env cont)))</p>
 <p><br/></p>
 <p>先拿到call/cc后面的那个lamabda，</p>
 <p>然后用一个包装过的对象调用它，</p>
@@ -583,13 +579,13 @@
 <p>我们再看看continuation对象调用的时候怎么处理，</p>
 <p><br/></p>
 <p>(define (eval-continuation-call exp env cont)</p>
-<p>    (display "eval-continuation-call")</p>
-<p>    (eval-exp (car exp) env</p>
-<p>        (lambda (continuation)</p>
-<p>            (let ((wrapped-cont (continuation-cont continuation)))</p>
-<p>                (eval-exp (cadr exp) env</p>
-<p>                    (lambda (arg)</p>
-<p>                        (wrapped-cont arg)))))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display “eval-continuation-call\n”)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(eval-exp (car exp) env</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (continuation)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let ((wrapped-cont (continuation-cont continuation)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(eval-exp (cadr exp) env</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (arg)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(wrapped-cont arg)))))))</p>
 <p><br/></p>
 <p>嵌套很深嘛，</p>
 <p>没关系，其实只是解开continuation对象的封装，</p>
@@ -601,30 +597,29 @@
 <p><strong>这里比较新颖的地方是，因为整个解释器已经改成了CPS方式</strong>，</p>
 <p><strong>所以，顺序结构都要改成回调方式，</strong></p>
 <p>(let ((arg (eval-exp (cadr exp) env)))</p>
-<p>    (wrapped-cont arg))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(wrapped-cont arg))</p>
 <p><br/></p>
 <p>要变成，</p>
 <p>(eval-exp (cadr exp) env</p>
-<p>    (lambda (arg)</p>
-<p>        (wrapped-cont arg)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (arg)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(wrapped-cont arg)))</p>
 <p><br/></p>
 <p>然后呢，</p>
 <p>还需要做什么呢？</p>
 <p>没有了。</p>
 <p>就完了。</p>
 <p><br/></p>
-<h2 id="偷偷借用的scheme尾调用优化机制"><strong>偷偷借用的Scheme尾调用优化机制</strong></h2>
-<p><strong>我们前面埋了一个雷。</strong></p>
+<h2 id="偷偷借用的Scheme尾调用优化机制"><a href="#偷偷借用的Scheme尾调用优化机制" class="headerlink" title="偷偷借用的Scheme尾调用优化机制"></a><strong>偷偷借用的Scheme尾调用优化机制</strong></h2><p><strong>我们前面埋了一个雷。</strong></p>
 <p><br/></p>
 <p>重新来看看，</p>
 <p>(define (final-cont v)</p>
-<p>    (display v))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(display v))</p>
 <p><br/></p>
 <p>(define (fn x cont)</p>
-<p>    (cont (+ x 1)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(cont (+ x 1)))</p>
 <p><br/></p>
 <p>(define (gn y cont)</p>
-<p>    (fn y cont))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(fn y cont))</p>
 <p><br/></p>
 <p>(gn 2)</p>
 <p><br/></p>
@@ -655,8 +650,7 @@
 <p><br/></p>
 <p>因为解释器实现中所有的函数调用都是尾调用。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>实际上，call/cc的编译实现还是比较麻烦的，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>实际上，call/cc的编译实现还是比较麻烦的，</p>
 <p><br/></p>
 <p>本来调用结构是<strong>栈型</strong>的，</p>
 <p>函数调用时，新建一个frame，添加到环境顶端，</p>

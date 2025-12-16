@@ -347,8 +347,7 @@
       
         
           
-            <h3 id="背景">背景</h3>
-<p>上一篇文章中，我们<a href="https://thzt.github.io/2021/01/06/parser/">编写了一个简单的 parser</a>，</p>
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>上一篇文章中，我们<a href="https://thzt.github.io/2021/01/06/parser/">编写了一个简单的 parser</a>，</p>
 <p>将字符串转换成了有结构的数据 AST，</p>
 <p>也提到了 parser 其实只是编译领域中很小的一部分业务。</p>
 <p><br/></p>
@@ -360,22 +359,23 @@
 <p>刚好几年前我用 Scheme 写过一个类似的<a href="https://github.com/thzt/scheme-interpreter" target="_blank" rel="noopener">解释器</a>，正好可以接上了。</p>
 <p><br/></p>
 <p>下文源码地址在这里：<a href="https://github.com/thzt/tiny-language" target="_blank" rel="noopener">github: tiny-language</a></p>
-<h3 id="回顾解析">回顾解析</h3>
-<p>这个解析过程，跟<a href="http://thzt.github.io/2021/01/06/parser/">上文</a>逻辑相同，只是用 typescript 重写了一遍。</p>
+<h3 id="回顾解析"><a href="#回顾解析" class="headerlink" title="回顾解析"></a>回顾解析</h3><p>这个解析过程，跟<a href="http://thzt.github.io/2021/01/06/parser/">上文</a>逻辑相同，只是用 typescript 重写了一遍。</p>
 <p>并且适当的进行了文件拆分，parser 入口在这里 <a href="https://github.com/thzt/tiny-language/blob/main/src/parse/index.ts" target="_blank" rel="noopener">github: tiny-parser/parse</a>。</p>
 <p>它的结构跟之前介绍的 parser 写法并无二致，为了完整性起见，这里还是再贴一下吧，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">export function letParse() &#123;</span><br><span class="line">  let sourceCode: string;</span><br><span class="line">  let length: number;</span><br><span class="line">  let pos: number;</span><br><span class="line">  let token: Token;</span><br><span class="line"></span><br><span class="line">  return parse;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; ---- ---- ---- ---- ---- ---- ---- ----</span><br><span class="line"></span><br><span class="line">  &#x2F;**</span><br><span class="line">   * syntax</span><br><span class="line">   * </span><br><span class="line">   * Expr &#x3D; Atom | List</span><br><span class="line">   * Atom &#x3D; Identifier</span><br><span class="line">   * List &#x3D; &#39;(&#39; Exprs &#39;)&#39;</span><br><span class="line">   * Exprs &#x3D; Expr Exprs</span><br><span class="line">   *&#x2F;</span><br><span class="line">  function parse(code): Node &#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; ---- ---- ---- ---- ---- ---- ---- ----</span><br><span class="line"></span><br><span class="line">  &#x2F;**</span><br><span class="line">   * 向后扫描下一个 token，并修改当前 &#96;token&#96; 变量</span><br><span class="line">   *&#x2F;</span><br><span class="line">  function nextToken() &#123;    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>主要由 3 部分构成：</p>
 <ul>
-<li><p>闭包内的全局变量：<code>sourceCode</code>、<code>length</code>、<code>pos</code>、<code>token</code></p></li>
-<li><p>解析入口函数：<code>parse</code></p></li>
-<li><p>词法分析器：<code>nextToken</code></p></li>
+<li><p>闭包内的全局变量：<code>sourceCode</code>、<code>length</code>、<code>pos</code>、<code>token</code></p>
+</li>
+<li><p>解析入口函数：<code>parse</code></p>
+</li>
+<li><p>词法分析器：<code>nextToken</code></p>
+</li>
 </ul>
 <p><br/></p>
 <p>值得一提的时，我们手写的 parser 采用了递归下降解析的方法，</p>
 <p><code>parse</code> 和几个 <code>parseXXX</code> 函数互相递归，完成了在字符串递归结构上进行解析的过程。</p>
-<h3 id="解释器">解释器</h3>
-<p>对代码进行解释，指的是直接执行代码得到结果，不用翻译成其他代码再执行。</p>
+<h3 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h3><p>对代码进行解释，指的是直接执行代码得到结果，不用翻译成其他代码再执行。</p>
 <p>一个比较简单的解释方式是，直接在 AST 结构上进行递归 eval。</p>
 <p>我们可以假定每一个表达式的含义，是由它的子表达式决定的。</p>
 <p><br/></p>
@@ -385,8 +385,7 @@
 <p>它比 parser 的结构更简单，只有一个闭包内的全局变量 <code>env</code> 为表达式的求值环境，</p>
 <p>剩下的都是互递归一些 <code>evalXXX</code> 函数了。</p>
 <p>eval 每个表达式的时候，要分 AST 节点类型的不同进行处理。</p>
-<h3 id="实现函数定义">实现函数定义</h3>
-<p>一个常见的编程语言构成要素就是函数了，我们来看下如何在这门极简的编程语言中添加函数特性。</p>
+<h3 id="实现函数定义"><a href="#实现函数定义" class="headerlink" title="实现函数定义"></a>实现函数定义</h3><p>一个常见的编程语言构成要素就是函数了，我们来看下如何在这门极简的编程语言中添加函数特性。</p>
 <p>我们希望的函数定义是这样的，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(lambda (x) (add x 1))</span><br></pre></td></tr></table></figure>
 <p>这个表达式定义了一个匿名函数，它接收 <code>x</code> 作为参数，返回 <code>x+1</code> 的结果。</p>
@@ -415,9 +414,7 @@
 <p>再在这个新环境中求值函数体 <code>body</code>，</p>
 <p>求值完后，再把栈帧弹出来，这样就是实现了函数调用后恢复环境的功能。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">env.push(frame);</span><br><span class="line">const funcReturn &#x3D; evalList(body.value, env);</span><br><span class="line">env.pop(frame);</span><br></pre></td></tr></table></figure>
-<h3 id="作用域">作用域</h3>
-<h4 id="动态作用域">动态作用域</h4>
-<p>作用域指定了标识符（变量）的查找规则，</p>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><h4 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h4><p>作用域指定了标识符（变量）的查找规则，</p>
 <p>上文我们实现的 eval 函数，是动态作用域的，</p>
 <p>指的是每次函数调用，都是针对全局 <code>env</code> 在做压栈和弹栈操作。</p>
 <p><br/></p>
@@ -435,8 +432,7 @@
 <p>这是因为函数 <code>f</code> 返回之后，全局 <code>env</code> 又会退到最初的状态了，</p>
 <p>并没有保存 <code>{x: 1}</code> 这个值。</p>
 <p>对 <code>g</code> 进行调用时（即求值 <code>(add x y)</code> 时），<code>x</code> 是多少完全，取决于全局 <code>env</code> 里 <code>x</code> 设置了多少。</p>
-<h4 id="静态作用域">静态作用域</h4>
-<p>那么如何实现像 js 那样的静态（词法）作用域特性呢？</p>
+<h4 id="静态作用域"><a href="#静态作用域" class="headerlink" title="静态作用域"></a>静态作用域</h4><p>那么如何实现像 js 那样的静态（词法）作用域特性呢？</p>
 <p>神奇的是，并不需要修改多少代码。</p>
 <p><br/></p>
 <p>第一步，我们需要将函数定义时的那个环境存起来，</p>
@@ -453,8 +449,7 @@
 <p>对于里面那个 <code>(lambda (y) (add x y))</code> 来说，它定义的时候，环境中是由 <code>x</code> 的值的，</p>
 <p>因为它在 <code>(lambda (x) ...)</code> 函数体中。</p>
 <p>这样我们就实现了静态（词法）作用域，现在代码的执行结果应该是 <code>3</code> 了。</p>
-<h3 id="实现递归">实现递归</h3>
-<p>一个递归函数是可以不停机的，因此理论上它可以执行任意复杂的计算，例如 js 中计算阶乘的函数，</p>
+<h3 id="实现递归"><a href="#实现递归" class="headerlink" title="实现递归"></a>实现递归</h3><p>一个递归函数是可以不停机的，因此理论上它可以执行任意复杂的计算，例如 js 中计算阶乘的函数，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const fact &#x3D; function (n) &#123;</span><br><span class="line">  return n &#x3D;&#x3D; 0 ? 1 : n * fact(n - 1);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">console.log(fact(5));  &#x2F;&#x2F; 120</span><br></pre></td></tr></table></figure>
 <p><code>fact</code> 函数体中又调用了自己，这也许需要在计算函数求值环境时，把函数自己也放到 <code>env</code> 中。</p>
 <p>实践上就是这么做的，但也可以不这样做。</p>
@@ -465,8 +460,7 @@
 <p>因此，Y 组合子可以对匿名函数实现递归。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(begin</span><br><span class="line">  (define y-combinator (lambda (k) (begin</span><br><span class="line">    (define f (lambda (g)</span><br><span class="line">      (g g)))</span><br><span class="line">    (define p (lambda (r)</span><br><span class="line">      (lambda (n)</span><br><span class="line">        ((k (r r)) n))))</span><br><span class="line">    (f p))))</span><br><span class="line"></span><br><span class="line">  (define fact-proto (lambda (h)</span><br><span class="line">    (lambda (x)</span><br><span class="line">      (if (equal x 0) 1 (mul x (h (sub x 1)))))))</span><br><span class="line"></span><br><span class="line">  (display ((y-combinator fact-proto) 5)))</span><br></pre></td></tr></table></figure>
 <p>以上代码在我们的实现中是可以运行的。</p>
-<h3 id="结语">结语</h3>
-<p>本文介绍了如何实现编写一个简单的解释器，分析了 eval 的写法套路。</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>本文介绍了如何实现编写一个简单的解释器，分析了 eval 的写法套路。</p>
 <p>实现了动态作用域和静态（词法）作用域这两种语言特性。</p>
 <p>因为语法本身就简单，所以 eval 对 AST 进行递归解释的时候，也变得简单了。</p>
 <p><br/></p>

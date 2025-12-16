@@ -362,7 +362,7 @@
 <p>而使用“a =&gt; b”表示，表达式a的值为b。</p>
 <p><br/></p>
 <p>例子：</p>
-<p>'a -&gt; (quote a)，其中“'”是一个读取宏。</p>
+<p>‘a -&gt; (quote a)，其中“’”是一个读取宏。</p>
 <p>读取宏可以将任意表达式转换为S表达式。</p>
 <p><br/></p>
 <p>很多常见的表达式调用，其实是编译宏。</p>
@@ -372,22 +372,21 @@
 <p>我们通常说的宏，指的是编译宏。</p>
 <p>Scheme语言暂时不支持自定义的读取宏。</p>
 <p><br/></p>
-<h2 id="定义一个宏"><strong>定义一个宏</strong></h2>
-<p>Scheme语言中使用define-syntax来定义宏，</p>
+<h2 id="定义一个宏"><a href="#定义一个宏" class="headerlink" title="定义一个宏"></a><strong>定义一个宏</strong></h2><p>Scheme语言中使用define-syntax来定义宏，</p>
 <p>定义一个宏，有时也称为绑定一个关键字（keyword binding）。</p>
 <p>宏展开的结果，最终都转换成了一些Scheme语言内置的表达式。</p>
 <p><br/></p>
 <p>例如：宏and是这样的定义的，</p>
 <p>(define-syntax and</p>
-<p>    (syntax-rules ()</p>
-<p>        [(and) #t]</p>
-<p>        [(and test) test]</p>
-<p>        [(and test1 test2 ...)</p>
-<p>            (if test1</p>
-<p>                (and test2 ...)</p>
-<p>                #f)]))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(syntax-rules ()</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(and) #t]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(and test) test]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(and test1 test2 …)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if test1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(and test2 …)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#f)]))</p>
 <p><br/></p>
-<p>其中，(syntax-rules ...)的值是一个转换器。</p>
+<p>其中，(syntax-rules …)的值是一个转换器。</p>
 <p>define-syntax将关键字and和这个转换器相关联。</p>
 <p><br/></p>
 <p>Scheme语言中有很多表达式可以返回转换器，</p>
@@ -402,7 +401,7 @@
 <p>模式 = (and)</p>
 <p>模板 = #t</p>
 <p><br/></p>
-<p>模式和模板中的“...”是syntax-rules模板语言的一部分。</p>
+<p>模式和模板中的“…”是syntax-rules模板语言的一部分。</p>
 <p>具体用法，也可以参考Scheme语言手册。</p>
 <p><br/></p>
 <p>如果宏调用匹配了某个模式，就会按照相应模板展开。</p>
@@ -418,8 +417,7 @@
 <p>[(_) #t]</p>
 <p>[(_ test) test]</p>
 <p><br/></p>
-<h2 id="卫生宏"><strong>卫生宏</strong></h2>
-<p>Scheme是第一个支持卫生宏（hygienic macro）的Lisp方言。</p>
+<h2 id="卫生宏"><a href="#卫生宏" class="headerlink" title="卫生宏"></a><strong>卫生宏</strong></h2><p>Scheme是第一个支持卫生宏（hygienic macro）的Lisp方言。</p>
 <p>也是第一个支持卫生宏的编程语言。</p>
 <p><br/></p>
 <p>“卫生”这个词表示，宏展开后，不会污染原来的词法作用域。</p>
@@ -427,11 +425,11 @@
 <p><br/></p>
 <p>例1：宏展开后，原表达式处于新的词法环境中。</p>
 <p>(let-syntax [(insert-binding (syntax-rules ()</p>
-<p>    [(_ x) (let [(a 1)]</p>
-<p>        (+ x a))]))]</p>
-<p>    </p>
-<p>    (let [(a 2)]</p>
-<p>        (insert-binding (+ a 3))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;[(_ x) (let [(a 1)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x a))]))]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(a 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3))))</p>
 <p>=&gt; 6</p>
 <p><br/></p>
 <p>其中，let-syntax用来绑定局部关键字。</p>
@@ -447,17 +445,17 @@
 <p>我们的例子就是这种情况。</p>
 <p><br/></p>
 <p>(let [(a 2)]</p>
-<p>    (insert-binding (+ a 3)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
 <p>-&gt;</p>
 <p>(let [(a 2)]</p>
-<p>    (let [(a 1)]</p>
-<p>        (+ (+ a 3) a)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(a 1)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) a)))</p>
 <p>=&gt; 5</p>
 <p><br/></p>
 <p>结果出错了。</p>
 <p>从(+ a 3)所在的原始词法环境来看，</p>
 <p>(let [(a 2)]</p>
-<p>    (insert-binding (+ a 3)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
 <p>(+ a 3)中a的值，应该是2才对。</p>
 <p>宏展开污染了原始的词法环境。</p>
 <p><br/></p>
@@ -469,32 +467,32 @@
 <p>其中，:g0001是语言实现生成的唯一名字，不会与任何已有的名字冲突。</p>
 <p><br/></p>
 <p>(let [(a 2)]</p>
-<p>    (insert-binding (+ a 3)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
 <p>-&gt;</p>
 <p>(let [(a 2)]</p>
-<p>    (let [(:g0001 1)]</p>
-<p>        (+ (+ a 3) :g0001)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(:g0001 1)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) :g0001)))</p>
 <p>=&gt; 6</p>
 <p><br/></p>
 <p>这样就得到了正确的结果。</p>
 <p><br/></p>
 <p>例2：宏展开后，引入了不在原来词法作用域中的标识符。</p>
 <p>(let [(a 1)]</p>
-<p>    (let-syntax [(insert-free (syntax-rules ()</p>
-<p>        [(_ x) (+ x a)]))]</p>
-<p>        </p>
-<p>        (let [(a 2)]</p>
-<p>            (insert-free (+ a 3)))))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let-syntax [(insert-free (syntax-rules ()</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(_ x) (+ x a)]))]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let [(a 2)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))))</p>
 <p>=&gt; 6</p>
 <p><br/></p>
 <p>同样根据定义，我们知道(insert-free x) -&gt; (+ x a)</p>
 <p><br/></p>
 <p>所以，</p>
 <p>(let [(a 2)]</p>
-<p>    (insert-free (+ a 3)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))</p>
 <p>-&gt;</p>
 <p>(let [(a 2)]</p>
-<p>    (+ (+ a 3) a))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) a))</p>
 <p>=&gt; 7</p>
 <p><br/></p>
 <p>结果又出错了。</p>
@@ -512,14 +510,13 @@
 <p>即，宏展开式(+ x a)中，a具有宏定义环境中的值a =&gt; 1，(insert-free x) -&gt; (+ x 1)</p>
 <p><br/></p>
 <p>(let [(a 2)]</p>
-<p>    (insert-free (+ a 3)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))</p>
 <p>-&gt;</p>
 <p>(let [(a 2)]</p>
-<p>    (+ (+ a 3) 1))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) 1))</p>
 <p>=&gt; 6</p>
 <p><br/></p>
-<h2 id="规律总结"><strong>规律总结</strong></h2>
-<p>我们遇到了一个问题。</p>
+<h2 id="规律总结"><a href="#规律总结" class="headerlink" title="规律总结"></a><strong>规律总结</strong></h2><p>我们遇到了一个问题。</p>
 <p>我们知道，“+”在Scheme中表示加法函数，</p>
 <p>它和a地位相同，也是一个变量，只不过它的值是一个函数。</p>
 <p><br/></p>
@@ -527,11 +524,11 @@
 <p><br/></p>
 <p>例1中，</p>
 <p>(let [(a 2)]</p>
-<p>    (insert-binding (+ a 3)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-binding (+ a 3)))</p>
 <p>-&gt;</p>
 <p>(let [(a 2)]</p>
-<p>    (let [(:g0001 1)]</p>
-<p>        (+ (+ a 3) :g0001)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(let [(:g0001 1)]</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) :g0001)))</p>
 <p><br/></p>
 <p>经过分析，我们知道了，</p>
 <p>(+ (+ a 3) :g0001)))中第一个+来自宏定义处的词法作用域，</p>
@@ -539,10 +536,10 @@
 <p><br/></p>
 <p>例2中，</p>
 <p>(let [(a 2)]</p>
-<p>    (insert-free (+ a 3)))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(insert-free (+ a 3)))</p>
 <p>-&gt;</p>
 <p>(let [(a 2)]</p>
-<p>    (+ (+ a 3) 1))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ (+ a 3) 1))</p>
 <p><br/></p>
 <p>同样经过分析，我们知道了，</p>
 <p>(+ (+ a 3) 1))中第一个+来自宏定义处的词法作用域，</p>
@@ -555,21 +552,20 @@
 <p>我们试着分析一下这两个例子。</p>
 <p>例1展开式，</p>
 <p>(let [(a 2)]</p>
-<p>    <strong>(let [(:g0001 1)]</strong></p>
-<p>        <strong>(+</strong> (+ a 3) <strong>:g0001))</strong>)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(let [(:g0001 1)]</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(+</strong> (+ a 3) <strong>:g0001))</strong>)</p>
 <p>粗体来源于宏定义处，普通字体来源于宏替换处。</p>
 <p>展开后，它们仍然处于各自来源处的词法作用域中。</p>
 <p><br/></p>
 <p>例2展开式，</p>
 <p>(let [(a 2)]</p>
-<p>    <strong>(+</strong> (+ a 3) <strong>1)</strong>)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>(+</strong> (+ a 3) <strong>1)</strong>)</p>
 <p>上述规则同样满足。</p>
 <p><br/></p>
 <p>宏展开式中的标识符，虽然来源不同，但互不污染。</p>
 <p>这就达到卫生宏的目的了。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>在Lisp编程中，宏展开后造成了非预期的污染，是经常出现问题的地方。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>在Lisp编程中，宏展开后造成了非预期的污染，是经常出现问题的地方。</p>
 <p>Common Lisp目前并不支持卫生宏，</p>
 <p>但是可以实现自己的宏定义，用自己的宏来定义宏，达到简洁可控的目的。</p>
 <p><br/></p>

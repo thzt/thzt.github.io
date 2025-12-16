@@ -365,12 +365,11 @@
 <p>因此，输入输出操作，也是纯函数，</p>
 <p>理解执行环境和现实世界的区别，是关键。</p>
 <p><br/></p>
-<h2 id="io"><strong>IO</strong></h2>
-<p>Haskell是一门静态强类型的语言。</p>
+<h2 id="IO"><a href="#IO" class="headerlink" title="IO"></a><strong>IO</strong></h2><p>Haskell是一门静态强类型的语言。</p>
 <p>任何表达式在编译前类型都是确定的。</p>
 <p><br/></p>
 <p>输入输出与IO a类型有关。</p>
-<p>其中，IO是类型构造器，:k IO = * -&gt; *</p>
+<p>其中，IO是类型构造器，:k IO = <em> -&gt; </em></p>
 <p>因此，IO a才是一个具体类型。</p>
 <p><br/></p>
 <p>IO是如何定义的呢？</p>
@@ -406,12 +405,11 @@
 <p>它接受String类型的值作为参数，</p>
 <p>返回一个IO ( )类型的action。</p>
 <p><br/></p>
-<h2 id="do"><strong>do</strong></h2>
-<p>main :: IO ( )</p>
+<h2 id="do"><a href="#do" class="headerlink" title="do"></a><strong>do</strong></h2><p>main :: IO ( )</p>
 <p>main = do</p>
-<p>    putStrLn "Please input: "</p>
-<p>    inpStr &lt;- getLine</p>
-<p>    putStrLn $ "Hello " ++ inpStr</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn “Please input: “</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;inpStr &lt;- getLine</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn $ “Hello “ ++ inpStr</p>
 <p><br/></p>
 <p>以上程序定义了main函数，是一个IO ( )类型的action。</p>
 <p><br/></p>
@@ -422,20 +420,19 @@
 <p>putStrLn :: String -&gt; IO ( )</p>
 <p>getLine :: IO String</p>
 <p><br/></p>
-<p>putStrLn $ "Hello " ++ inpStr</p>
-<p>= putStrLn ( "Hello " ++ inpStr )</p>
+<p>putStrLn $ “Hello “ ++ inpStr</p>
+<p>= putStrLn ( “Hello “ ++ inpStr )</p>
 <p><br/></p>
 <p>因此，</p>
-<p>putStrLn "Please input: " :: IO ( )，在屏幕上输出字符串“Please input: ”，</p>
+<p>putStrLn “Please input: “ :: IO ( )，在屏幕上输出字符串“Please input: ”，</p>
 <p>inpStr &lt;- getLine，求值惰性表达式getLine，<strong>把action里面包含的值拿出来</strong>，绑定到inpStr上。</p>
-<p>putStrLn $ "Hello " ++ inpStr，在屏幕上输出字符串"Hello "与变量inpStr连接后的结果。</p>
+<p>putStrLn $ “Hello “ ++ inpStr，在屏幕上输出字符串”Hello “与变量inpStr连接后的结果。</p>
 <p><br/></p>
 <p>IO操作，每次执行的效果并不相同，</p>
 <p>但<strong>仍然都是纯函数</strong>，</p>
 <p>在于它们不会修改执行环境中的变量绑定关系。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>很多人指出，Haskell使用了Monad将纯函数与不纯函数分离开，</p>
 <p>这种说法，其实是为了解释给不熟悉的人看的。</p>
 <p>事实上，<strong>Haskell中的任何函数都是纯函数</strong>。</p>
 <p><br/></p>

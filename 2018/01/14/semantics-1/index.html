@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="1. 初窥语义 在《你好，类型》系列中，我们介绍了一些形式系统， 例如系统（演算），（组合子逻辑）， 它们由一些合法的符号，以及这些符号的推导规则构成， 命题逻辑与谓词逻辑，也可以用这种公理化的方式构建起来。  然而，在讨论这些系统的时候，我们只是把它们看成了单纯的符号演算， 并没有过多考虑这些符号到底代表什么含义。  例如，项，经过变换， 我们可以得到，， 。  它看起来真的好像一个函数调用">
+<meta name="description" content="1. 初窥语义在《你好，类型》系列中，我们介绍了一些形式系统， 例如系统（演算），（组合子逻辑）， 它们由一些合法的符号，以及这些符号的推导规则构成， 命题逻辑与谓词逻辑，也可以用这种公理化的方式构建起来。  然而，在讨论这些系统的时候，我们只是把它们看成了单纯的符号演算， 并没有过多考虑这些符号到底代表什么含义。  例如，项，经过变换， 我们可以得到，， 。  它看起来真的好像一个函数调用啊">
 <meta property="og:type" content="article">
 <meta property="og:title" content="语言背后的代数学（一）：语义解释">
 <meta property="og:url" content="https://thzt.github.io/2018/01/14/semantics-1/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="1. 初窥语义 在《你好，类型》系列中，我们介绍了一些形式系统， 例如系统（演算），（组合子逻辑）， 它们由一些合法的符号，以及这些符号的推导规则构成， 命题逻辑与谓词逻辑，也可以用这种公理化的方式构建起来。  然而，在讨论这些系统的时候，我们只是把它们看成了单纯的符号演算， 并没有过多考虑这些符号到底代表什么含义。  例如，项，经过变换， 我们可以得到，， 。  它看起来真的好像一个函数调用">
+<meta property="og:description" content="1. 初窥语义在《你好，类型》系列中，我们介绍了一些形式系统， 例如系统（演算），（组合子逻辑）， 它们由一些合法的符号，以及这些符号的推导规则构成， 命题逻辑与谓词逻辑，也可以用这种公理化的方式构建起来。  然而，在讨论这些系统的时候，我们只是把它们看成了单纯的符号演算， 并没有过多考虑这些符号到底代表什么含义。  例如，项，经过变换， 我们可以得到，， 。  它看起来真的好像一个函数调用啊">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-c6a63de4fdfe220f.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-23d71a952f33acd0.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-747577f261f6c384.png">
@@ -351,10 +351,9 @@
       
 
       
-        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-c6a63de4fdfe220f.png" /></p>
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-c6a63de4fdfe220f.png" alt=""></p>
 <p><br/></p>
-<h3 id="初窥语义">1. 初窥语义</h3>
-<p>在《<a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型</a>》系列中，我们介绍了一些形式系统，</p>
+<h3 id="1-初窥语义"><a href="#1-初窥语义" class="headerlink" title="1. 初窥语义"></a>1. 初窥语义</h3><p>在《<a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型</a>》系列中，我们介绍了一些形式系统，</p>
 <p>例如<span data-katex="\lambda_\beta"></span>系统（<span data-katex="\lambda"></span>演算），<span data-katex="CL_w"></span>（组合子逻辑），</p>
 <p>它们由一些合法的符号，以及这些符号的推导规则构成，</p>
 <p>命题逻辑与谓词逻辑，也可以用这种公理化的方式构建起来。</p>
@@ -380,9 +379,8 @@
 <p><span data-katex="\beta"></span>变换与函数调用之间的关系是唯一确定的吗？</p>
 <p>为了回答好这些问题，还得重新研读<a href="https://zh.wikipedia.org/wiki/%E8%AF%AD%E4%B9%89%E5%AD%A6" target="_blank" rel="noopener">语义学</a>这个有趣的学科。</p>
 <p><br/></p>
-<h3 id="公理化">2. 公理化</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-23d71a952f33acd0.png" /></p>
+<h3 id="2-公理化"><a href="#2-公理化" class="headerlink" title="2. 公理化"></a>2. 公理化</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-23d71a952f33acd0.png" alt=""></p>
 <p><br/></p>
 <p>首先我们先回顾一下，</p>
 <p>形式系统是怎么用公理化的方式构建的。</p>
@@ -390,8 +388,7 @@
 <p>我们以一个称之为“pq”的系统为例。</p>
 <p>（出自《<a href="https://book.douban.com/subject/1291204/" target="_blank" rel="noopener">哥德尔、艾舍尔、巴赫——集异璧之大成</a>》）</p>
 <p><br/></p>
-<h4 id="公理化步骤">2.1 公理化步骤</h4>
-<p><strong>第一步</strong>，</p>
+<h4 id="2-1-公理化步骤"><a href="#2-1-公理化步骤" class="headerlink" title="2.1 公理化步骤"></a>2.1 公理化步骤</h4><p><strong>第一步</strong>，</p>
 <p>我们要有一些符号。</p>
 <p>例如：“pq系统”只有三个符号，<code>p</code>，<code>q</code>，<code>-</code>。</p>
 <p><br/></p>
@@ -428,9 +425,8 @@
 <p>在其他系统中，公理和定理的个数可能是有限的，</p>
 <p>而“pq”系统则是无限的。</p>
 <p><br/></p>
-<h4 id="解释">2.2 解释</h4>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-747577f261f6c384.png" /></p>
+<h4 id="2-2-解释"><a href="#2-2-解释" class="headerlink" title="2.2 解释"></a>2.2 解释</h4><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-747577f261f6c384.png" alt=""></p>
 <p><br/></p>
 <p>我们说以上“pq系统”定义了一个形式语言，</p>
 <p>这里的“语言”是一种数学上的定义，指的是字符串的集合。</p>
@@ -454,9 +450,8 @@
 <p>值得注意的是，合理的解释并不一定是唯一的，</p>
 <p>例如，我们将<code>q</code>解释为“减”，将<code>p</code>解释为“等于”，也是可以的。</p>
 <p><br/></p>
-<h3 id="重新解释">3. 重新解释</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-f5ca327b60317783.png" /></p>
+<h3 id="3-重新解释"><a href="#3-重新解释" class="headerlink" title="3. 重新解释"></a>3. 重新解释</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-f5ca327b60317783.png" alt=""></p>
 <p><br/></p>
 <p>上文中我们先给出了形式系统，</p>
 <p>然后再为系统选择一个合理的解释，</p>
@@ -489,9 +484,8 @@
 <p>这是整个19世纪数学的最深刻的教训之一。</p>
 </blockquote>
 <p><br/></p>
-<h3 id="非欧几何">4. 非欧几何</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-673c392410fee9a8.png" /></p>
+<h3 id="4-非欧几何"><a href="#4-非欧几何" class="headerlink" title="4. 非欧几何"></a>4. 非欧几何</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-673c392410fee9a8.png" alt=""></p>
 <p><br/></p>
 <p>大家应该都听说过欧几里得<a href="https://zh.wikipedia.org/wiki/%E5%B9%B3%E8%A1%8C%E5%85%AC%E8%A8%AD" target="_blank" rel="noopener">第五公设</a>的故事，</p>
 <p>欧几里得采用了公理化的方式构建了几何学，</p>
@@ -526,16 +520,14 @@
 <p>称为欧几里得几何，罗巴切夫斯基几何，以及黎曼几何。</p>
 <p>这些公理系统，对研究不同的数学对象起到了关键作用。</p>
 <p><br/></p>
-<h3 id="总结">5. 总结</h3>
-<p>本文通过一个称之为“pq”的系统，介绍了形式系统公理化的典型步骤，</p>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h3><p>本文通过一个称之为“pq”的系统，介绍了形式系统公理化的典型步骤，</p>
 <p>并且严格区分了，公理系统中的结论与对它的解释之间的不同。</p>
 <p><br/></p>
 <p>通过更改公理系统，不论修改公理或者修改推导规则，我们将得到一个新的系统，</p>
 <p>从而对新系统中的结论，我们就得采用审慎的方式重新解释。</p>
 <p>这是数学史给我们带来的最有价值的经验教训之一。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Formal_system" target="_blank" rel="noopener">Formal system</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Formal_language" target="_blank" rel="noopener">Formal language</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E8%AF%AD%E4%B9%89%E5%AD%A6" target="_blank" rel="noopener">语义学</a></p>
@@ -731,7 +723,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#初窥语义"><span class="nav-number">1.</span> <span class="nav-text">1. 初窥语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公理化"><span class="nav-number">2.</span> <span class="nav-text">2. 公理化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#公理化步骤"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 公理化步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解释"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 解释</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新解释"><span class="nav-number">3.</span> <span class="nav-text">3. 重新解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非欧几何"><span class="nav-number">4.</span> <span class="nav-text">4. 非欧几何</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">5. 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-初窥语义"><span class="nav-number">1.</span> <span class="nav-text">1. 初窥语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-公理化"><span class="nav-number">2.</span> <span class="nav-text">2. 公理化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-公理化步骤"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 公理化步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-解释"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 解释</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-重新解释"><span class="nav-number">3.</span> <span class="nav-text">3. 重新解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-非欧几何"><span class="nav-number">4.</span> <span class="nav-text">4. 非欧几何</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-总结"><span class="nav-number">5.</span> <span class="nav-text">5. 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

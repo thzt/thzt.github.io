@@ -89,12 +89,12 @@
 
 
 
-<meta name="description" content="回顾 上文中，我们用群，拓扑空间，CPO作为例子， 来说明什么是数学结构，以及数学结构是如何通过映射来保持的。 群同态保持了群结构，连续映射保持了拓扑结构， 连续函数保持了完全偏序结构。  那么群结构与拓扑结构之间是否有联系呢？ 我们能否建立拓扑空间与群之间的对应关系呢？  在代数拓扑中，就存在这样的例子， 人们找到了和拓扑空间相关的群论概念，例如基本群和同调群， 拓扑空间的连续映射可以导出这">
+<meta name="description" content="回顾上文中，我们用群，拓扑空间，CPO作为例子， 来说明什么是数学结构，以及数学结构是如何通过映射来保持的。 群同态保持了群结构，连续映射保持了拓扑结构， 连续函数保持了完全偏序结构。  那么群结构与拓扑结构之间是否有联系呢？ 我们能否建立拓扑空间与群之间的对应关系呢？  在代数拓扑中，就存在这样的例子， 人们找到了和拓扑空间相关的群论概念，例如基本群和同调群， 拓扑空间的连续映射可以导出这些">
 <meta property="og:type" content="article">
 <meta property="og:title" content="语言背后的代数学（八）：范畴">
 <meta property="og:url" content="https://thzt.github.io/2018/02/11/semantics-8/index.html">
 <meta property="og:site_name" content="何幻">
-<meta property="og:description" content="回顾 上文中，我们用群，拓扑空间，CPO作为例子， 来说明什么是数学结构，以及数学结构是如何通过映射来保持的。 群同态保持了群结构，连续映射保持了拓扑结构， 连续函数保持了完全偏序结构。  那么群结构与拓扑结构之间是否有联系呢？ 我们能否建立拓扑空间与群之间的对应关系呢？  在代数拓扑中，就存在这样的例子， 人们找到了和拓扑空间相关的群论概念，例如基本群和同调群， 拓扑空间的连续映射可以导出这">
+<meta property="og:description" content="回顾上文中，我们用群，拓扑空间，CPO作为例子， 来说明什么是数学结构，以及数学结构是如何通过映射来保持的。 群同态保持了群结构，连续映射保持了拓扑结构， 连续函数保持了完全偏序结构。  那么群结构与拓扑结构之间是否有联系呢？ 我们能否建立拓扑空间与群之间的对应关系呢？  在代数拓扑中，就存在这样的例子， 人们找到了和拓扑空间相关的群论概念，例如基本群和同调群， 拓扑空间的连续映射可以导出这些">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-cf6fe04651d9f2d5.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-83faca1582ad5a4b.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-485a513f584ec085.png">
@@ -353,10 +353,9 @@
       
 
       
-        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-cf6fe04651d9f2d5.png" /></p>
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-cf6fe04651d9f2d5.png" alt=""></p>
 <p><br/></p>
-<h3 id="回顾">回顾</h3>
-<p>上文中，我们用群，拓扑空间，CPO作为例子，</p>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>上文中，我们用群，拓扑空间，CPO作为例子，</p>
 <p>来说明什么是数学结构，以及数学结构是如何通过映射来保持的。</p>
 <p>群同态保持了群结构，连续映射保持了拓扑结构，</p>
 <p>连续函数保持了完全偏序结构。</p>
@@ -371,42 +370,40 @@
 <p>这就为了人们使用代数学方法研究其他数学分支，奠定了基础，</p>
 <p>实际上，最原始的范畴论想法也是起源于此。</p>
 <p><br/></p>
-<h3 id="图示法">1. 图示法</h3>
-<p>在前一篇中我们学过了幺半群，</p>
+<h3 id="1-图示法"><a href="#1-图示法" class="headerlink" title="1. 图示法"></a>1. 图示法</h3><p>在前一篇中我们学过了幺半群，</p>
 <p>它指的是一个集合<span data-katex="M"></span>，以及<span data-katex="M"></span>上的二元运算<span data-katex="\cdot"></span>，满足以下两个条件，</p>
 <p>（1）<span data-katex="\forall x,y,z\in M"></span>，<span data-katex="(x\cdot y)\cdot z=x\cdot (y\cdot z)"></span>，</p>
 <p>（2）<span data-katex="\exists e\in M"></span>，<span data-katex="\forall x\in M"></span>，<span data-katex="x\cdot e=e\cdot x=x"></span>。</p>
 <p><br/></p>
 <p>这两个条件除了可以用等式来表示，还可以用<strong>图</strong>（diagram）来表示，</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-83faca1582ad5a4b.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-83faca1582ad5a4b.png" alt=""></p>
 <p><br/></p>
 <p>我们称以上两张图都是<strong>可交换的</strong>（commutative），</p>
 <p>即，沿着不同的路径进行运算，只要起点和终点相同，则运算的结果就相同。</p>
 <p><br/></p>
-<p>例如，<span data-katex="&lt;x,y,z&gt;\mapsto &lt;x,yz&gt;\mapsto x(yz)"></span>，</p>
-<p>总是等于<span data-katex="&lt;x,y,z&gt;\mapsto &lt;xy,z&gt;\mapsto (xy)z"></span>，</p>
+<p>例如，<span data-katex="<x,y,z>\mapsto <x,yz>\mapsto x(yz)"></span>，</p>
+<p>总是等于<span data-katex="<x,y,z>\mapsto <xy,z>\mapsto (xy)z"></span>，</p>
 <p>即，<span data-katex="x(yz)=(xy)z"></span>，表明<span data-katex="M"></span>中元素的运算满足结合律。</p>
 <p><br/></p>
-<p>又例，<span data-katex="&lt;0,x&gt;\mapsto &lt;e,x&gt;\mapsto ex"></span>，总是等于<span data-katex="&lt;0,x&gt;\mapsto x"></span>，即<span data-katex="ex=x"></span>，</p>
-<p><span data-katex="&lt;x,0&gt;\mapsto &lt;x,e&gt;\mapsto xe"></span>，总是等于<span data-katex="&lt;x,0&gt;\mapsto x"></span>，即<span data-katex="xe=x"></span>。</p>
+<p>又例，<span data-katex="<0,x>\mapsto <e,x>\mapsto ex"></span>，总是等于<span data-katex="<0,x>\mapsto x"></span>，即<span data-katex="ex=x"></span>，</p>
+<p><span data-katex="<x,0>\mapsto <x,e>\mapsto xe"></span>，总是等于<span data-katex="<x,0>\mapsto x"></span>，即<span data-katex="xe=x"></span>。</p>
 <p>因此，<span data-katex="ex=x=xe"></span>，表明<span data-katex="M"></span>中存在幺元<span data-katex="e"></span>。</p>
 <p><br/></p>
 <p>所以，我们可以用以上两个图表，作为幺半群的定义，称为<strong>图示法</strong>。</p>
 <p><br/></p>
 <p>另一方面，考虑在集合论中讨论映射的时候，一般都不写具体元素，还可以表示为，</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-485a513f584ec085.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-485a513f584ec085.png" alt=""></p>
 <p><br/></p>
 <p>其中，<span data-katex="\mu:M\times M\to M"></span>，<span data-katex="\eta:1\to M"></span>，是两个函数，</p>
 <p><span data-katex="1=\{0\}"></span>是只有一个元素的集合。</p>
 <p><br/></p>
 <p>用图示法来表示幺半群，更具一般性。</p>
 <p><br/></p>
-<h3 id="范畴">2. 范畴</h3>
-<p>范畴是一个数学概念，也可以用图示法来表示。</p>
+<h3 id="2-范畴"><a href="#2-范畴" class="headerlink" title="2. 范畴"></a>2. 范畴</h3><p>范畴是一个数学概念，也可以用图示法来表示。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-d19a23f4b1b256b2.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-d19a23f4b1b256b2.png" alt=""></p>
 <p><br/></p>
 <p>一个<strong>范畴</strong><span data-katex="Cat"></span>由一系列<strong>对象</strong>（object）和<strong>箭头</strong>（arrow）组成。</p>
 <p>对于每一个箭头<span data-katex="f"></span>，有两个对象与之关联，</p>
@@ -433,10 +430,9 @@
 <p>例如，完全偏序<span data-katex="(D,\leqslant)"></span>，</p>
 <p>以<span data-katex="D"></span>中的元素作为对象，以<span data-katex="x\leqslant y"></span>作为<span data-katex="x,y"></span>之间的箭头，同样构成了一个范畴。</p>
 <p><br/></p>
-<h3 id="函子">3. 函子</h3>
-<p>函子就是两个范畴之间的箭头。</p>
+<h3 id="3-函子"><a href="#3-函子" class="headerlink" title="3. 函子"></a>3. 函子</h3><p>函子就是两个范畴之间的箭头。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f50234610ae6c94e.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f50234610ae6c94e.png" alt=""></p>
 <p><br/></p>
 <p>一个<strong>函子</strong><span data-katex="F"></span>是范畴<span data-katex="C"></span>到范畴<span data-katex="D"></span>的箭头，<span data-katex="F:C\to D"></span>，它满足以下条件，</p>
 <p><span data-katex="F"></span>把<span data-katex="C"></span>中的对象<span data-katex="c"></span>映射为<span data-katex="D"></span>中的对象<span data-katex="F~c"></span>，把<span data-katex="C"></span>中的箭头<span data-katex="f"></span>映射为<span data-katex="D"></span>中的箭头<span data-katex="F~f"></span>。</p>
@@ -446,19 +442,17 @@
 <p>等式左边的<span data-katex="\cdot"></span>，表示<span data-katex="C"></span>中的箭头组合运算，</p>
 <p>等式右边的<span data-katex="\cdot"></span>，表示<span data-katex="D"></span>中的箭头组合运算。</p>
 <p><br/></p>
-<h3 id="自然变换">4. 自然变换</h3>
-<p>自然变换（natural transformation）是一族箭头，</p>
+<h3 id="4-自然变换"><a href="#4-自然变换" class="headerlink" title="4. 自然变换"></a>4. 自然变换</h3><p>自然变换（natural transformation）是一族箭头，</p>
 <p>将范畴<span data-katex="A"></span>在一个函子中的像（picture），变换成了另一个函子的像。</p>
 <p><br/></p>
 <p>给定两个函子<span data-katex="S,T:A\to B"></span>，其中<span data-katex="A"></span>和<span data-katex="B"></span>是范畴。</p>
 <p>自然变换的每个分量（components）使下图可交换。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-7a6b0cbdb0347ac2.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-7a6b0cbdb0347ac2.png" alt=""></p>
 <p><br/></p>
 <p>其中，<span data-katex="\tau_a"></span>是<span data-katex="B"></span>中的箭头，<span data-katex="\tau_a:Sa\to Ta"></span>。</p>
 <p><br/></p>
-<h3 id="monad">5. Monad</h3>
-<p>范畴到自身的函子，称为<strong>自函子</strong>（endofunctor）。</p>
+<h3 id="5-Monad"><a href="#5-Monad" class="headerlink" title="5. Monad"></a>5. Monad</h3><p>范畴到自身的函子，称为<strong>自函子</strong>（endofunctor）。</p>
 <p>设<span data-katex="T:X\to X"></span>是任意范畴<span data-katex="X"></span>上的自函子，自函子复合之后仍为自函子，</p>
 <p><span data-katex="T^2=T\circ T:X\to X"></span>，<span data-katex="T^3=T^2\circ T:X\to X"></span>。</p>
 <p><br/></p>
@@ -470,7 +464,7 @@
 <p>范畴<span data-katex="X"></span>上的一个<strong>Monad</strong>，指的是三元组<span data-katex="\left \langle T,\eta,\mu \right \rangle"></span>，</p>
 <p>它们使下图可交换，</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f24983986f2eab9d.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-11-semantics-8/1023733-f24983986f2eab9d.png" alt=""></p>
 <p><br/></p>
 <p>其中，<span data-katex="T:X\to X"></span>是范畴<span data-katex="X"></span>上的自函子，</p>
 <p><span data-katex="\eta:I_X\to T"></span>，<span data-katex="\mu:T^2\to T"></span>是两个自然变换。</p>
@@ -484,8 +478,7 @@
 <p>All told, a monad in X is just a monoid in the category of endofunctors of X, with product x replaced by composition of endofunctors and unit set by the identity endofunctor.</p>
 </blockquote>
 <p><br/></p>
-<h3 id="hask范畴上的monad">6. Hask范畴上的Monad</h3>
-<p>如果把Haskell语言中的类型作为对象，把类型之间的函数看做箭头，</p>
+<h3 id="6-Hask范畴上的Monad"><a href="#6-Hask范畴上的Monad" class="headerlink" title="6. Hask范畴上的Monad"></a>6. Hask范畴上的Monad</h3><p>如果把Haskell语言中的类型作为对象，把类型之间的函数看做箭头，</p>
 <p>则在函数复合运算下，构成了一个范畴，称为<strong>Hask范畴</strong>。</p>
 <p><br/></p>
 <p><strong>函子</strong></p>
@@ -511,8 +504,7 @@
 <p>可以<a href="https://en.wikibooks.org/wiki/Haskell/Category_theory#Monads" target="_blank" rel="noopener">证明</a>，</p>
 <p>这些“Monad Law”刚好使<code>m</code>，<code>&gt;&gt;=</code>和<code>return</code>构成了范畴论意义上的Monad。</p>
 <p><br/></p>
-<h3 id="总结">总结</h3>
-<p>本文介绍了范畴论相关的一些内容，</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了范畴论相关的一些内容，</p>
 <p>介绍了什么是范畴，什么是函子，什么是自然变换，</p>
 <p>这些都是理解笛卡尔闭范畴所必须的。</p>
 <p><br/></p>
@@ -522,8 +514,7 @@
 <p>下文我们将继续学习范畴论，</p>
 <p>理解什么是笛卡尔闭范畴，以及如何用它解释简单类型<span data-katex="\lambda"></span>演算的语义。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Category_(mathematics)" target="_blank" rel="noopener">Category (mathematics)</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://en.wikipedia.org/wiki/Category_(mathematics" target="_blank" rel="noopener">Category (mathematics)</a>)</p>
 <p><a href="https://en.wikibooks.org/wiki/Haskell/Category_theory" target="_blank" rel="noopener">Haskell/Category theory</a></p>
 <p><a href="https://book.douban.com/subject/1823110/" target="_blank" rel="noopener">Categories for the Working Mathematician</a></p>
 
@@ -715,7 +706,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图示法"><span class="nav-number">2.</span> <span class="nav-text">1. 图示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范畴"><span class="nav-number">3.</span> <span class="nav-text">2. 范畴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函子"><span class="nav-number">4.</span> <span class="nav-text">3. 函子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自然变换"><span class="nav-number">5.</span> <span class="nav-text">4. 自然变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#monad"><span class="nav-number">6.</span> <span class="nav-text">5. Monad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hask范畴上的monad"><span class="nav-number">7.</span> <span class="nav-text">6. Hask范畴上的Monad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-图示法"><span class="nav-number">2.</span> <span class="nav-text">1. 图示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-范畴"><span class="nav-number">3.</span> <span class="nav-text">2. 范畴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-函子"><span class="nav-number">4.</span> <span class="nav-text">3. 函子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-自然变换"><span class="nav-number">5.</span> <span class="nav-text">4. 自然变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Monad"><span class="nav-number">6.</span> <span class="nav-text">5. Monad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Hask范畴上的Monad"><span class="nav-number">7.</span> <span class="nav-text">6. Hask范畴上的Monad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

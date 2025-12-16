@@ -353,7 +353,7 @@
 <p>2</p>
 <p>length :: [Int] -&gt; Int</p>
 <p><br/></p>
-<p>ghci&gt; length ["a", "b", "c"]</p>
+<p>ghci&gt; length [“a”, “b”, “c”]</p>
 <p>3</p>
 <p>length :: [String] -&gt; Int</p>
 <p><br/></p>
@@ -363,34 +363,32 @@
 <p><br/></p>
 <p>像这样的函数，称为多态函数。</p>
 <p><br/></p>
-<h2 id="函数"><strong>函数&gt;&gt;=</strong></h2>
-<p>函数&gt;&gt;=定义在Monad类型类中，</p>
+<h2 id="函数-gt-gt"><a href="#函数-gt-gt" class="headerlink" title="函数&gt;&gt;="></a><strong>函数&gt;&gt;=</strong></h2><p>函数&gt;&gt;=定义在Monad类型类中，</p>
 <p>class Monad m where</p>
-<p>    (&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
 <p><br/></p>
-<p>其中，m是Monad类型类的实例类型，它的kind是* -&gt; *，</p>
-<p>:k m = * -&gt; *</p>
+<p>其中，m是Monad类型类的实例类型，它的kind是<em> -&gt; </em>，</p>
+<p>:k m = <em> -&gt; </em></p>
 <p>类型m a是一个具体类型，该类型的值称为monad value。</p>
 <p><br/></p>
 <p>我们看到，在m确定的情况下，&gt;&gt;=的类型签名中仍然包含类型变量。</p>
 <p>因此，对Monad类型类的某个实例来说，</p>
-<p>&gt;&gt;=可以操作相同m类型但是不同a类型的monad value :: m a。</p>
+<p>>&gt;=可以操作相同m类型但是不同a类型的monad value :: m a。</p>
 <p><br/></p>
-<h2 id="io-monad"><strong>IO monad</strong></h2>
-<p>以Monad类型类的实例IO为例，对于IO来说，IO monad value称为IO action。</p>
+<h2 id="IO-monad"><a href="#IO-monad" class="headerlink" title="IO monad"></a><strong>IO monad</strong></h2><p>以Monad类型类的实例IO为例，对于IO来说，IO monad value称为IO action。</p>
 <p>main = do</p>
-<p>    putStrLn "Please input: "</p>
-<p>    inpStr &lt;- getLine</p>
-<p>    putStrLn $ "Hello " ++ inpStr</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn “Please input: “</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;inpStr &lt;- getLine</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;putStrLn $ “Hello “ ++ inpStr</p>
 <p><br/></p>
 <p>其中，</p>
 <p>putStrLn :: String -&gt; IO ( )</p>
 <p>getLine :: IO String</p>
 <p><br/></p>
 <p>我们来分析一下这3个IO action的类型，</p>
-<p>putStrLn "Please input: " :: IO ( )</p>
+<p>putStrLn “Please input: “ :: IO ( )</p>
 <p>getLine :: IO String</p>
-<p>putStrLn $ "Hello " ++ inpStr :: IO ( )</p>
+<p>putStrLn $ “Hello “ ++ inpStr :: IO ( )</p>
 <p><br/></p>
 <p>它们的具体类型都是m a，</p>
 <p>m相同，m = IO。而a不同，分别是( )，String，( )。</p>
@@ -400,29 +398,27 @@
 <p>(&gt;&gt;) :: x &gt;&gt; y = x &gt;&gt;= \ _ -&gt; y</p>
 <p><br/></p>
 <p>这样的话，我们就可以将main函数还原成&gt;&gt;和&gt;&gt;=的串联形式了，</p>
-<p>putStrLn "Please input: " &gt;&gt; getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
-<p>= putStrLn "Please input: " &gt;&gt;= \ _ -&gt; getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
-<p>= putStrLn "Please input: " &gt;&gt;= ( \ _ -&gt; getLine &gt;&gt;= ( -&gt; putStrLn $ "Hello " ++ inpStr ) )</p>
+<p>putStrLn “Please input: “ &gt;&gt; getLine &gt;&gt;= \inpStr -&gt; putStrLn $ “Hello “ ++ inpStr</p>
+<p>= putStrLn “Please input: “ &gt;&gt;= \ _ -&gt; getLine &gt;&gt;= \inpStr -&gt; putStrLn $ “Hello “ ++ inpStr</p>
+<p>= putStrLn “Please input: “ &gt;&gt;= ( \ _ -&gt; getLine &gt;&gt;= ( \inpStr -&gt; putStrLn $ “Hello “ ++ inpStr ) )</p>
 <p><br/></p>
-<h2 id="类型不同的同时出现"><strong>类型不同的&gt;&gt;=同时出现</strong></h2>
-<p>对于第一个&gt;&gt;=，我们能推断出它的大概类型，</p>
-<p>&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ?) -&gt; IO ?</p>
+<h2 id="类型不同的-gt-gt-同时出现"><a href="#类型不同的-gt-gt-同时出现" class="headerlink" title="类型不同的&gt;&gt;=同时出现"></a><strong>类型不同的&gt;&gt;=同时出现</strong></h2><p>对于第一个&gt;&gt;=，我们能推断出它的大概类型，</p>
+<p>>&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ?) -&gt; IO ?</p>
 <p>其中“?”表示尚未确定的类型。</p>
 <p><br/></p>
 <p>而第二个&gt;&gt;=的类型，可以完全确定下来。</p>
-<p>getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
-<p>&gt;&gt;= :: IO String -&gt; (String -&gt; IO ( )) -&gt; IO ( )</p>
+<p>getLine &gt;&gt;= \inpStr -&gt; putStrLn $ “Hello “ ++ inpStr</p>
+<p>>&gt;= :: IO String -&gt; (String -&gt; IO ( )) -&gt; IO ( )</p>
 <p><br/></p>
 <p>那么，第一个&gt;&gt;=的类型也就可以完全确定下来了，</p>
-<p>&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ( )) -&gt; IO ( )</p>
+<p>>&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ( )) -&gt; IO ( )</p>
 <p><br/></p>
 <p>由此可见，</p>
 <p>第一个&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ( )) -&gt; IO ( )</p>
 <p>第二个&gt;&gt;= :: IO String -&gt; (String -&gt; IO ( )) -&gt; IO ( )</p>
 <p>两个&gt;&gt;=的类型不同，它们同时出现了。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>do notation是&gt;&gt;和&gt;&gt;=串联形式的语法糖，IO action是 IO monad value，因此可以使用它。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>do notation是&gt;&gt;和&gt;&gt;=串联形式的语法糖，IO action是 IO monad value，因此可以使用它。</p>
 <p>认为do notation中每行的monad value类型必须相同，是不正确的。</p>
 <p>事实上，他们的类型是m a，m是相同的，而a可以不同。</p>
 <p><br/></p>

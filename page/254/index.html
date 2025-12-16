@@ -350,11 +350,11 @@
             <p><strong>逻辑学</strong>真是博大精深，</p>
 <p>first-order logic，propositional logic，predicate logic，</p>
 <p>mathematical logic，second-order Logic，intuitionistic logic，</p>
-<p>modal logic，free logic，plural logic...</p>
+<p>modal logic，free logic，plural logic…</p>
 <p><br/></p>
 <p>所涉及的内容也很广，</p>
 <p>set theory，proof theory，model theory，recursion theory，</p>
-<p>theory of computation，computability and decidability...</p>
+<p>theory of computation，computability and decidability…</p>
 <p><br/></p>
 <p>学习它，对<strong>数学</strong>，<strong>计算机科学</strong>或其他学科都有指导意义。</p>
 <p><br/></p>
@@ -374,8 +374,7 @@
 <p>到此，我们还是从一阶谓词逻辑开始，慢慢打好基础吧。</p>
 <p>以下摘自《<a href="http://book.douban.com/subject/2364517/" target="_blank" rel="noopener">数理逻辑</a>》——李未</p>
 <p><br/></p>
-<h2 id="一阶语言的定义"><strong>一阶语言的定义</strong></h2>
-<p>每个一阶语言的字符集由两类符号集合组成。</p>
+<h2 id="一阶语言的定义"><a href="#一阶语言的定义" class="headerlink" title="一阶语言的定义"></a><strong>一阶语言的定义</strong></h2><p>每个一阶语言的字符集由两类符号集合组成。</p>
 <p>一类称为逻辑符号集合，另一类称为非逻辑符号集合。</p>
 <p><br/></p>
 <p><strong>逻辑符号集合</strong>包括：</p>
@@ -394,10 +393,9 @@
 <p>初等算术语言是一个一阶语言，</p>
 <p>它的常元符号集为<span data-katex="\{0\}"></span>，</p>
 <p>函数符号集为<span data-katex="\{S, +, \cdot \}"></span>，</p>
-<p>谓词符号集合为<span data-katex="\{&lt;\}"></span>。</p>
+<p>谓词符号集合为<span data-katex="\{<\}"></span>。</p>
 <p><br/></p>
-<h2 id="项"><strong>项</strong></h2>
-<p>一阶语言<span data-katex="\mathscr{L}"></span>中的项被下述三个规则归纳的定义：</p>
+<h2 id="项"><a href="#项" class="headerlink" title="项"></a><strong>项</strong></h2><p>一阶语言<span data-katex="\mathscr{L}"></span>中的项被下述三个规则归纳的定义：</p>
 <p><span data-katex="T_1"></span>：每一个常元是一个项</p>
 <p><span data-katex="T_2"></span>：每一个变元是一个项</p>
 <p><span data-katex="T_3"></span>：如果<span data-katex="t_1, ..., t_n"></span>是项，而f是一个n元函数符号，那么，<span data-katex="ft_1\cdot \cdot \cdot t_n"></span>是一个项</p>
@@ -408,8 +406,7 @@
 <p><strong>例子：</strong><span data-katex="\mathscr{A}"></span>的项</p>
 <p><span data-katex="S0, Sx_1, +S0SSx, \cdot x_1+Sx_1x_2"></span></p>
 <p><br/></p>
-<h2 id="逻辑公式"><strong>逻辑公式</strong></h2>
-<p>语言<span data-katex="\mathscr{L}"></span>中的逻辑公式，简称<strong>公式</strong>，用大写字母<span data-katex="A, B, ..."></span>表示，并用下述五条规则归纳的定义：</p>
+<h2 id="逻辑公式"><a href="#逻辑公式" class="headerlink" title="逻辑公式"></a><strong>逻辑公式</strong></h2><p>语言<span data-katex="\mathscr{L}"></span>中的逻辑公式，简称<strong>公式</strong>，用大写字母<span data-katex="A, B, ..."></span>表示，并用下述五条规则归纳的定义：</p>
 <p><br/></p>
 <p><span data-katex="F_1"></span>：如果<span data-katex="t_1"></span>和<span data-katex="t_2"></span>为项，那么<span data-katex="t_1\doteq t_2"></span>是公式</p>
 <p><span data-katex="F_2"></span>：如果<span data-katex="t_1, ..., t_n"></span>为项，而<span data-katex="R"></span>是一个n元谓词，那么<span data-katex="Rt_1\cdot \cdot \cdot t_n"></span>是公式</p>
@@ -421,48 +418,42 @@
 <p><span data-katex="A ::= t_1\doteq t_2 | Rt_1\cdot \cdot \cdot t_n | \neg A | A\wedge B | A\vee B | A\rightarrow B | A\leftrightarrow B | \forall xA | \exists xA"></span></p>
 <p><br/></p>
 <p><strong>例子：</strong><span data-katex="\mathscr{A}"></span>的公式</p>
-<p><span data-katex="\forall x\neg (Sx\doteq 0), \forall x\forall y(&lt; xy\rightarrow(\exists (y\doteq +xz)))"></span></p>
+<p><span data-katex="\forall x\neg (Sx\doteq 0), \forall x\forall y(< xy\rightarrow(\exists (y\doteq +xz)))"></span></p>
 <p><br/></p>
-<h2 id="的结构"><strong><span data-katex="\mathscr{L}"></span>的结构</strong></h2>
-<p>一阶语言<span data-katex="\mathscr{L}"></span>的<strong>结构</strong><span data-katex="M"></span>是一个偶对，记为<span data-katex="M=(\mathbb{M}, I)"></span>，其中，</p>
+<h2 id="的结构"><a href="#的结构" class="headerlink" title="的结构"></a><strong><span data-katex="\mathscr{L}"></span>的结构</strong></h2><p>一阶语言<span data-katex="\mathscr{L}"></span>的<strong>结构</strong><span data-katex="M"></span>是一个偶对，记为<span data-katex="M=(\mathbb{M}, I)"></span>，其中，</p>
 <p>（1）<span data-katex="\mathbb{M}"></span>是一个非空集合，称为<strong>论域</strong></p>
 <p>（2）<span data-katex="I"></span>是从<span data-katex="\mathscr{L}"></span>到<span data-katex="\mathbb{M}"></span>的映射，称为<strong>解释</strong>，记为<span data-katex="I:\mathscr{L} \rightarrow \mathbb{M}"></span>，它满足下面三个条件</p>
-<ol type="a">
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个常元符号<span data-katex="c"></span>，<span data-katex="I(c)"></span>是<span data-katex="\mathbb{M}"></span>中的元素</p></li>
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个n元函数符号<span data-katex="f"></span>，<span data-katex="I(f)"></span>是<span data-katex="\mathbb{M}"></span>上的n元函数</p></li>
-<li><p>对<span data-katex="\mathscr{L}"></span>中的每一个n元谓词符号<span data-katex="P"></span>，<span data-katex="I(P)"></span>是<span data-katex="\mathbb{M}"></span>上的一个n元关系</p></li>
-</ol>
+<p>a) 对<span data-katex="\mathscr{L}"></span>中的每一个常元符号<span data-katex="c"></span>，<span data-katex="I(c)"></span>是<span data-katex="\mathbb{M}"></span>中的元素</p>
+<p>b) 对<span data-katex="\mathscr{L}"></span>中的每一个n元函数符号<span data-katex="f"></span>，<span data-katex="I(f)"></span>是<span data-katex="\mathbb{M}"></span>上的n元函数</p>
+<p>c) 对<span data-katex="\mathscr{L}"></span>中的每一个n元谓词符号<span data-katex="P"></span>，<span data-katex="I(P)"></span>是<span data-katex="\mathbb{M}"></span>上的一个n元关系</p>
 <p><br/></p>
 <p><strong>例子：</strong><span data-katex="\mathscr{A}"></span>的结构</p>
 <p><span data-katex="\mathscr{A}"></span>的常元符号为<span data-katex="0"></span>，</p>
 <p>函数符号有<span data-katex="\{S, +, \cdot \}"></span>，</p>
-<p>谓词符号只有一个，它是<span data-katex="&lt;"></span>。</p>
+<p>谓词符号只有一个，它是<span data-katex="<"></span>。</p>
 <p><br/></p>
 <p>我们定义偶对<span data-katex="N=(\mathbb{N}, I)"></span>，其中论域<span data-katex="\mathbb{N}"></span>为自然数系。</p>
 <p>令<span data-katex="s"></span>为<span data-katex="\mathbb{N}"></span>上的加1函数，即<span data-katex="s(x)=x+1"></span>，</p>
 <p><span data-katex="+, \cdot"></span>代表<span data-katex="\mathbb{N}"></span>上的加法和乘法，</p>
-<p><span data-katex="&lt;"></span>为<span data-katex="\mathbb{N}"></span>上的小于关系。</p>
+<p><span data-katex="<"></span>为<span data-katex="\mathbb{N}"></span>上的小于关系。</p>
 <p><br/></p>
 <p>我们定义解释映射<span data-katex="I"></span>如下：</p>
-<p><span data-katex="I(0)=0, I(S)=s, I(+)=+, I(\cdot )=\cdot , I(&lt;)=&lt;"></span></p>
+<p><span data-katex="I(0)=0, I(S)=s, I(+)=+, I(\cdot )=\cdot , I(<)=<"></span></p>
 <p><br/></p>
 <p>解释映射<span data-katex="I"></span>将常元符号<span data-katex="0"></span>解释为自然数<span data-katex="0"></span>，</p>
 <p>将一元函数符号<span data-katex="S"></span>解释为自然数集合上的加1运算<span data-katex="s"></span>，</p>
 <p>将二元函数符号<span data-katex="+"></span>和<span data-katex="\cdot"></span>分别解释为自然数集合上的加法和乘法，</p>
-<p>将二元谓词符号<span data-katex="&lt;"></span>解释为自然数集合上的小于关系，</p>
+<p>将二元谓词符号<span data-katex="<"></span>解释为自然数集合上的小于关系，</p>
 <p>而<span data-katex="N"></span>是初等算术语言<span data-katex="\mathscr{A}"></span>的一个结构。</p>
 <p><br/></p>
-<h2 id="赋值"><strong>赋值</strong></h2>
-<p>赋值<span data-katex="\sigma"></span>是一个定义域为变元集合<span data-katex="V"></span>，值域为<span data-katex="\mathbb{M}"></span>的一个映射，记为<span data-katex="\sigma :V\rightarrow \mathbb{M}"></span>。</p>
+<h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a><strong>赋值</strong></h2><p>赋值<span data-katex="\sigma"></span>是一个定义域为变元集合<span data-katex="V"></span>，值域为<span data-katex="\mathbb{M}"></span>的一个映射，记为<span data-katex="\sigma :V\rightarrow \mathbb{M}"></span>。</p>
 <p>赋值<span data-katex="\sigma"></span>把<span data-katex="\mathscr{L}"></span>中的每一个变元<span data-katex="x"></span>，赋以论域<span data-katex="\mathbb{M}"></span>中的一个元素<span data-katex="a\in \mathbb{M}"></span>，</p>
 <p>记为<span data-katex="\sigma (x)=a"></span>。</p>
 <p><br/></p>
-<h2 id="模型"><strong>模型</strong></h2>
-<p>给定一阶语言<span data-katex="\mathscr{L}"></span>，以及它的结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a><strong>模型</strong></h2><p>给定一阶语言<span data-katex="\mathscr{L}"></span>，以及它的结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，</p>
 <p>偶对<span data-katex="(M, \sigma )"></span>称为<span data-katex="\mathscr{L}"></span>的一个<strong>模型</strong>。</p>
 <p><br/></p>
-<h2 id="项的语义"><strong>项的语义</strong></h2>
-<p>给定一阶语言<span data-katex="\mathscr{L}"></span>，结构<span data-katex="M=(\mathbb{M}, I)"></span>和赋值<span data-katex="\sigma :V\rightarrow \mathbb{M}"></span>。</p>
+<h2 id="项的语义"><a href="#项的语义" class="headerlink" title="项的语义"></a><strong>项的语义</strong></h2><p>给定一阶语言<span data-katex="\mathscr{L}"></span>，结构<span data-katex="M=(\mathbb{M}, I)"></span>和赋值<span data-katex="\sigma :V\rightarrow \mathbb{M}"></span>。</p>
 <p>在模型<span data-katex="(M, \sigma )"></span>下，项<span data-katex="t"></span>的语义是<span data-katex="\mathbb{M}"></span>中的一个元素，它用<span data-katex="t_{M[\sigma]}"></span>表示，并被归纳的定义：</p>
 <p>（1）<span data-katex="x_{M[\sigma ]}=\sigma (x)"></span>，<span data-katex="x"></span>为变元符号</p>
 <p>（2）<span data-katex="c_{M[\sigma ]}=c_M"></span>，<span data-katex="c"></span>为常元符号</p>
@@ -471,8 +462,7 @@
 <p><strong>例子：</strong><span data-katex="\mathscr{A}"></span>项的语义</p>
 <p><span data-katex="(+x_1Sx_7)_{N[\sigma ]}=(x_1)_{N[\sigma ]}+(Sx_7)_{N[\sigma ]}=1+((x_7)_{N[\sigma ]}+1)=1+(7+1)=9"></span></p>
 <p><br/></p>
-<h2 id="逻辑连接词符号的语义"><strong>逻辑连接词符号的语义</strong></h2>
-<p>为了避免逻辑连接词符号的多义性，我们把每一个逻辑连接词符号的语义都定义为一个真值函数，</p>
+<h2 id="逻辑连接词符号的语义"><a href="#逻辑连接词符号的语义" class="headerlink" title="逻辑连接词符号的语义"></a><strong>逻辑连接词符号的语义</strong></h2><p>为了避免逻辑连接词符号的多义性，我们把每一个逻辑连接词符号的语义都定义为一个真值函数，</p>
 <p>此函数的定义域是一个真值集合或两个真值集合的笛卡尔积，而函数值是一个真假值。</p>
 <p>对于一阶语言而言，逻辑连接词符号<span data-katex="\neg"></span>的真值函数为<span data-katex="B_\neg"></span>，</p>
 <p>其自变量是<span data-katex="X"></span>，<span data-katex="X"></span>只能取<span data-katex="T"></span>和<span data-katex="F"></span>，</p>
@@ -481,21 +471,19 @@
 <p><br/></p>
 <p>二元函数<span data-katex="B_\wedge, B_\vee, B_\rightarrow, B_\leftrightarrow"></span>分别为逻辑连接词符号<span data-katex="\wedge, \vee, \rightarrow, \leftrightarrow"></span>的真值函数。</p>
 <p><br/></p>
-<h2 id="公式的语义"><strong>公式的语义</strong></h2>
-<p>设<span data-katex="M"></span>和<span data-katex="\sigma"></span>分别为一阶语言<span data-katex="\mathscr{L}"></span>的结构和赋值，而<span data-katex="A"></span>为<span data-katex="\mathscr{L}"></span>的公式。</p>
+<h2 id="公式的语义"><a href="#公式的语义" class="headerlink" title="公式的语义"></a><strong>公式的语义</strong></h2><p>设<span data-katex="M"></span>和<span data-katex="\sigma"></span>分别为一阶语言<span data-katex="\mathscr{L}"></span>的结构和赋值，而<span data-katex="A"></span>为<span data-katex="\mathscr{L}"></span>的公式。</p>
 <p>公式<span data-katex="A"></span>在模型<span data-katex="(M, \sigma )"></span>下的语义是一个真假值，用<span data-katex="A_{M[\sigma ]}"></span>表示，被归纳的定义如下：</p>
 <p>（1）<span data-katex="(Pt_1\cdot \cdot \cdot t_n)_{M[\sigma ]}=P_M((t_1)_{M[\sigma ]},\cdot \cdot \cdot ,(t_n)_{M[\sigma ]})"></span></p>
-<p>（2）<span data-katex="(t_1\doteq t_2)_{M[\sigma ]}=\begin{cases}T,&amp;\text{if }(t_1)_{M[\sigma ]}=(t_2)_{M[\sigma ]}\\F,&amp;\text{otherwise}\end{cases}"></span></p>
+<p>（2）<span data-katex="(t_1\doteq t_2)_{M[\sigma ]}=\begin{cases}T,&\text{if }(t_1)_{M[\sigma ]}=(t_2)_{M[\sigma ]}\\F,&\text{otherwise}\end{cases}"></span> </p>
 <p>（3）<span data-katex="(\neg A)_{M[\sigma ]}=B_\neg (A_{M[\sigma ]})"></span></p>
 <p>（4）<span data-katex="(A\vee B)_{M[\sigma ]}=B_\vee (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
 <p>（5）<span data-katex="(A\wedge B)_{M[\sigma ]}=B_\wedge (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
 <p>（6）<span data-katex="(A\rightarrow B)_{M[\sigma ]}=B_\rightarrow (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
 <p>（7）<span data-katex="(A\leftrightarrow B)_{M[\sigma ]}=B_\leftrightarrow (A_{M[\sigma ]}, B_{M[\sigma ]})"></span></p>
-<p>（8）<span data-katex="(\forall x_iA)_{M[\sigma ]}=\begin{cases}T,&amp;\forall a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&amp;\text{otherwise}\end{cases}"></span></p>
-<p>（9）<span data-katex="(\exists x_iA)_{M[\sigma ]}=\begin{cases}T,&amp;\exists a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&amp;\text{otherwise}\end{cases}"></span></p>
+<p>（8）<span data-katex="(\forall x_iA)_{M[\sigma ]}=\begin{cases}T,&\forall a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&\text{otherwise}\end{cases}"></span></p>
+<p>（9）<span data-katex="(\exists x_iA)_{M[\sigma ]}=\begin{cases}T,&\exists a\in M, A_{M[\sigma [x_i:=a]]}=T\\F,&\text{otherwise}\end{cases}"></span></p>
 <p><br/></p>
-<h2 id="可满足性"><strong>可满足性</strong></h2>
-<p>给定一阶语言<span data-katex="\mathscr{L}"></span>和它的公式<span data-katex="A"></span>以及公式集合<span data-katex="\Gamma"></span>。</p>
+<h2 id="可满足性"><a href="#可满足性" class="headerlink" title="可满足性"></a><strong>可满足性</strong></h2><p>给定一阶语言<span data-katex="\mathscr{L}"></span>和它的公式<span data-katex="A"></span>以及公式集合<span data-katex="\Gamma"></span>。</p>
 <p>如果存在模型<span data-katex="(M, \sigma )"></span>，使得<span data-katex="A_{M[\sigma ]}=T"></span>成立，</p>
 <p>那么称公式<span data-katex="A"></span>关于模型<span data-katex="(M, \sigma )"></span>是<strong>可满足的</strong>，</p>
 <p>简称<span data-katex="A"></span>可满足，也称为模型<span data-katex="(M, \sigma )"></span>满足<span data-katex="A"></span>，记为<span data-katex="M\models _\sigma A"></span>。</p>
@@ -508,8 +496,7 @@
 <p>也称模型<span data-katex="(M, \sigma )"></span>满足公式集合<span data-katex="\Gamma"></span>，或<span data-katex="(M, \sigma )"></span>是<span data-katex="\Gamma"></span>的模型，记为<span data-katex="M\models _\sigma \Gamma"></span>。</p>
 <p>如果<span data-katex="\Gamma"></span>是由语句组成的集合，那么记为<span data-katex="M\models \Gamma"></span>。</p>
 <p><br/></p>
-<h2 id="永真性"><strong>永真性</strong></h2>
-<p>称公式<span data-katex="A"></span>是<strong>永真的</strong>或有效的，如果<span data-katex="A"></span>对<span data-katex="\mathscr{L}"></span>的任意模型<span data-katex="(M, \sigma )"></span>均可满足，</p>
+<h2 id="永真性"><a href="#永真性" class="headerlink" title="永真性"></a><strong>永真性</strong></h2><p>称公式<span data-katex="A"></span>是<strong>永真的</strong>或有效的，如果<span data-katex="A"></span>对<span data-katex="\mathscr{L}"></span>的任意模型<span data-katex="(M, \sigma )"></span>均可满足，</p>
 <p>即，对任意结构<span data-katex="M"></span>和赋值<span data-katex="\sigma"></span>，<span data-katex="M\models _\sigma A"></span>成立，记为<span data-katex="\models A"></span>。</p>
 <p>称公式集合<span data-katex="\Gamma"></span>是永真的或有效的，如果<span data-katex="\Gamma"></span>中的每一个公式<span data-katex="A"></span>都是永真的，记为<span data-katex="\models \Gamma"></span></p>
 <p>永真公式，也称为重言式，是与模型无关的公式，它们在任何模型下都为真。</p>
@@ -517,8 +504,7 @@
 <p><strong>例子：</strong>重言式</p>
 <p><span data-katex="A\vee \neg A, \forall x(x\doteq x)"></span></p>
 <p><br/></p>
-<h2 id="逻辑结论"><strong>逻辑结论</strong></h2>
-<p>设<span data-katex="A"></span>为公式，<span data-katex="\Gamma"></span>为公式集合，如果<span data-katex="M"></span>为任意结构，<span data-katex="\sigma"></span>为任意赋值，并且，</p>
+<h2 id="逻辑结论"><a href="#逻辑结论" class="headerlink" title="逻辑结论"></a><strong>逻辑结论</strong></h2><p>设<span data-katex="A"></span>为公式，<span data-katex="\Gamma"></span>为公式集合，如果<span data-katex="M"></span>为任意结构，<span data-katex="\sigma"></span>为任意赋值，并且，</p>
 <p>如果<span data-katex="M\models _\sigma \Gamma"></span>成立，则有<span data-katex="M\models _\sigma A"></span>成立，</p>
 <p>那么称<span data-katex="A"></span>是<span data-katex="\Gamma"></span>的<strong>逻辑结论</strong>或语义结论，记为<span data-katex="\Gamma \models A"></span>，也称<span data-katex="\Gamma \models A"></span>有效。</p>
 <p><br/></p>
@@ -533,18 +519,15 @@
 <p><span data-katex="\Gamma \models A"></span>也是一个语义关系式，它表示对任意<span data-katex="M"></span>和任意<span data-katex="\sigma"></span>，</p>
 <p>如果<span data-katex="\Gamma"></span>为真，那么<span data-katex="A"></span>也为真。</p>
 <p><br/></p>
-<h2 id="序贯"><strong>序贯</strong></h2>
-<p>设<span data-katex="\Gamma ,\Delta"></span>为公式的有穷集合，<span data-katex="\Gamma \vdash \Delta"></span>称为<strong>序贯</strong>。</p>
+<h2 id="序贯"><a href="#序贯" class="headerlink" title="序贯"></a><strong>序贯</strong></h2><p>设<span data-katex="\Gamma ,\Delta"></span>为公式的有穷集合，<span data-katex="\Gamma \vdash \Delta"></span>称为<strong>序贯</strong>。</p>
 <p><span data-katex="\Gamma"></span>称为序贯的前提，<span data-katex="\Delta"></span>称为序贯的结论。</p>
 <p><br/></p>
-<h2 id="公理"><strong>公理</strong></h2>
-<p>设<span data-katex="\Gamma ,\Delta ,\Lambda ,\Theta"></span>为有穷公式集合，<span data-katex="A"></span>为公式，</p>
+<h2 id="公理"><a href="#公理" class="headerlink" title="公理"></a><strong>公理</strong></h2><p>设<span data-katex="\Gamma ,\Delta ,\Lambda ,\Theta"></span>为有穷公式集合，<span data-katex="A"></span>为公式，</p>
 <p>则序贯<span data-katex="\Gamma ,A,\Delta \vdash \Lambda ,A,\Theta"></span>称为<strong>公理</strong>。</p>
 <p><br/></p>
 <p><strong>注：</strong>公理序贯之所以成立，是因为证明结论中至少有一个公式包含在公理序贯的前提之中。</p>
 <p><br/></p>
-<h2 id="g推理系统"><strong>G推理系统</strong></h2>
-<p>（1）<span data-katex="\neg"></span>规则</p>
+<h2 id="G推理系统"><a href="#G推理系统" class="headerlink" title="G推理系统"></a><strong>G推理系统</strong></h2><p>（1）<span data-katex="\neg"></span>规则</p>
 <p><span data-katex="\neg -L:\frac{\Gamma ,\Delta \vdash A,\Lambda }{\Gamma ,\neg A,\Delta \vdash \Lambda}"></span></p>
 <p><span data-katex="\neg -R:\frac{A,\Gamma \vdash \Lambda ,\Delta }{\Gamma \vdash \Lambda ,\neg A,\Delta }"></span></p>
 <p>（2）<span data-katex="\vee"></span>规则</p>
@@ -563,8 +546,7 @@
 <p><span data-katex="\exists -L:\frac{\Gamma ,A[y/x],\Delta \vdash \Lambda }{\Gamma ,\exists xA(x),\Delta \vdash \Lambda }"></span></p>
 <p><span data-katex="\exists -L:\frac{\Gamma ,A[y/x],\Delta \vdash \Lambda }{\Gamma ,\exists xA(x),\Delta \vdash \Lambda }"></span></p>
 <p><br/></p>
-<h2 id="可靠性紧致性协调性完全性"><strong>可靠性，紧致性，协调性，完全性</strong></h2>
-<p><strong>可靠性</strong></p>
+<h2 id="可靠性，紧致性，协调性，完全性"><a href="#可靠性，紧致性，协调性，完全性" class="headerlink" title="可靠性，紧致性，协调性，完全性"></a><strong>可靠性，紧致性，协调性，完全性</strong></h2><p><strong>可靠性</strong></p>
 <p>如果序贯<span data-katex="\Gamma \vdash \Lambda"></span>可证，那么<span data-katex="\Gamma \models \Lambda"></span>成立。</p>
 <p><br/></p>
 <p><strong>紧致性</strong></p>
@@ -583,8 +565,7 @@
 <p>（1）<span data-katex="\Gamma \models A"></span>有效，当且仅当<span data-katex="\Gamma \vdash A"></span></p>
 <p>（2）<span data-katex="\Gamma"></span>可满足，当且仅当<span data-katex="\Gamma"></span>协调</p>
 <p><br/></p>
-<h2 id="形式理论"><strong>形式理论</strong></h2>
-<p>设<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的有穷或可数无穷的语句集合，</p>
+<h2 id="形式理论"><a href="#形式理论" class="headerlink" title="形式理论"></a><strong>形式理论</strong></h2><p>设<span data-katex="\Gamma"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的有穷或可数无穷的语句集合，</p>
 <p>如果<span data-katex="\Gamma"></span>协调，则称<span data-katex="\Gamma"></span>是一阶语言的形式理论，简称<strong>形式理论</strong>。</p>
 <p>而称<span data-katex="\Gamma"></span>中的语句为<span data-katex="\Gamma"></span>的<strong>公理</strong>。</p>
 <p><br/></p>
@@ -597,17 +578,14 @@
 <p><br/></p>
 <p>如果<span data-katex="M"></span>是<span data-katex="\mathscr{L}"></span>的模型，并且<span data-katex="M\models \Gamma"></span>，那么称<span data-katex="M"></span>是<span data-katex="\Gamma"></span>的模型。</p>
 <p><br/></p>
-<h2 id="关于模型的形式理论"><strong>关于模型的形式理论</strong></h2>
-<p>如果<span data-katex="M"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的模型，那么称语句集合，</p>
+<h2 id="关于模型的形式理论"><a href="#关于模型的形式理论" class="headerlink" title="关于模型的形式理论"></a><strong>关于模型的形式理论</strong></h2><p>如果<span data-katex="M"></span>是一阶语言<span data-katex="\mathscr{L}"></span>的模型，那么称语句集合，</p>
 <p><span data-katex="Th(M)=\{A|A"></span>是<span data-katex="\mathscr{L}"></span>的语句，并且<span data-katex="M\models A\}"></span></p>
 <p>为<span data-katex="\mathscr{L}"></span>关于模型<span data-katex="M"></span>的形式理论。</p>
 <p><br/></p>
-<h2 id="形式理论的完全性"><strong>形式理论的完全性</strong></h2>
-<p>称形式理论<span data-katex="\Gamma"></span>是完全的，如果对任意语句<span data-katex="A"></span>，</p>
+<h2 id="形式理论的完全性"><a href="#形式理论的完全性" class="headerlink" title="形式理论的完全性"></a><strong>形式理论的完全性</strong></h2><p>称形式理论<span data-katex="\Gamma"></span>是完全的，如果对任意语句<span data-katex="A"></span>，</p>
 <p><span data-katex="\Gamma \vdash A"></span>及<span data-katex="\Gamma \vdash \neg A"></span>中必有一个可证。</p>
 <p><br/></p>
-<h2 id="函数的可表示性"><strong>函数的可表示性</strong></h2>
-<p>设<span data-katex="f:\mathbb{N}^k\rightarrow \mathbb{N}"></span>是<span data-katex="\mathbb{N}"></span>上的<span data-katex="k"></span>元函数，</p>
+<h2 id="函数的可表示性"><a href="#函数的可表示性" class="headerlink" title="函数的可表示性"></a><strong>函数的可表示性</strong></h2><p>设<span data-katex="f:\mathbb{N}^k\rightarrow \mathbb{N}"></span>是<span data-katex="\mathbb{N}"></span>上的<span data-katex="k"></span>元函数，</p>
 <p>如果存在<span data-katex="\mathscr{A}"></span>公式<span data-katex="A(x_1,...,x_{k+1})"></span>，使得对任意自然数<span data-katex="n_1,...,n_{k+1}"></span>，</p>
 <p>如果<span data-katex="f(n_1,...,n_k)=n_{k+1}"></span>，那么<span data-katex="\Pi \vdash A[S^{n_1}0,...,S^{n_{k+1}}0]"></span>可证</p>
 <p>如果<span data-katex="f(n_1,...,n_k)\neq n_{k+1}"></span>，那么<span data-katex="\Pi \vdash \neg A[S^{n_1}0,...,S^{n_{k+1}}0]"></span>可证</p>
@@ -617,8 +595,7 @@
 <p><strong>定理：</strong>如果<span data-katex="f:\mathbb{N}^k\rightarrow \mathbb{N}"></span>是<span data-katex="\mathbb{N}"></span>上的<span data-katex="k"></span>元可计算函数，</p>
 <p>那么函数<span data-katex="f"></span>在<span data-katex="\Pi"></span>中可表示。</p>
 <p><br/></p>
-<h2 id="关系的可表示性"><strong>关系的可表示性</strong></h2>
-<p>设<span data-katex="r"></span>是<span data-katex="\mathbb{N}"></span>上的<span data-katex="k"></span>元关系，</p>
+<h2 id="关系的可表示性"><a href="#关系的可表示性" class="headerlink" title="关系的可表示性"></a><strong>关系的可表示性</strong></h2><p>设<span data-katex="r"></span>是<span data-katex="\mathbb{N}"></span>上的<span data-katex="k"></span>元关系，</p>
 <p>如果存在<span data-katex="\mathscr{A}"></span>公式<span data-katex="A(x_1,...,x_{k+1})"></span>，使得对任意自然数<span data-katex="n_1,...,n_{k+1}"></span>，有</p>
 <p>如果<span data-katex="r(n_1,...,n_k)=n_{k+1}"></span>，那么<span data-katex="\Pi \vdash A[S^{n_1}0,...,S^{n_{k+1}}0]"></span>可证</p>
 <p>如果<span data-katex="r(n_1,...,n_k)\neq n_{k+1}"></span>，那么<span data-katex="\Pi \vdash \neg A[S^{n_1}0,...,S^{n_{k+1}}0]"></span>可证</p>
@@ -628,8 +605,7 @@
 <p><strong>定理：</strong>如果<span data-katex="r:\mathbb{N}^k\rightarrow \mathbb{N}"></span>是<span data-katex="\mathbb{N}"></span>上的<span data-katex="k"></span>元可判定关系，</p>
 <p>那么<span data-katex="r"></span>在<span data-katex="\Pi"></span>中可表示。</p>
 <p><br/></p>
-<h2 id="哥德尔定理"><strong>哥德尔定理</strong></h2>
-<p><strong>哥德尔不完全性定理</strong></p>
+<h2 id="哥德尔定理"><a href="#哥德尔定理" class="headerlink" title="哥德尔定理"></a><strong>哥德尔定理</strong></h2><p><strong>哥德尔不完全性定理</strong></p>
 <p>如果<span data-katex="\Gamma"></span>是一个有穷并包含初等算术<span data-katex="\Pi"></span>的形式理论，</p>
 <p>那么<span data-katex="\Gamma"></span>是一个不完全的形式理论。</p>
 <p><br/></p>
@@ -637,8 +613,7 @@
 <p>如果形式理论<span data-katex="\Gamma"></span>包含初等算术<span data-katex="\Pi"></span>，</p>
 <p>那么<span data-katex="\Pi"></span>的协调性不能在<span data-katex="\Gamma"></span>中被证明。</p>
 <p><br/></p>
-<h2 id="结语"><strong>结语</strong></h2>
-<p>以上，只是对谓词逻辑中用到的部分公式，进行了整理，</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><strong>结语</strong></h2><p>以上，只是对谓词逻辑中用到的部分公式，进行了整理，</p>
 <p>对建立<strong>用证明论和模型论的观点来理解公理系统</strong>，是很有帮助的。</p>
 <p>然而，从更高的角度来看，有些观点很有可能就是<strong>错误</strong>的，</p>
 <p>因此，此篇只是一个开始，督促我朝着更广阔的方向努力学习。</p>

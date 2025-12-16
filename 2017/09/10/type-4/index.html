@@ -351,7 +351,7 @@
       
 
       
-        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-205ba4a361e6b282.png" /></p>
+        <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-205ba4a361e6b282.png" alt=""></p>
 <p><br/></p>
 <p>前两篇中，我们介绍了<span data-katex="\lambda"></span>演算和<span data-katex="CL"></span>（组合子逻辑），</p>
 <p>我们采用了公理化的方法，先定义系统中的公理，然后定义推导规则，</p>
@@ -364,9 +364,8 @@
 <p>从这一篇开始，我们先开始介绍数理逻辑，</p>
 <p>看看逻辑学是怎么看待形式化问题的。</p>
 <p><br/></p>
-<h3 id="命题逻辑形式系统">1. 命题逻辑形式系统</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-a9e587bd763a4a88.png" /></p>
+<h3 id="1-命题逻辑形式系统"><a href="#1-命题逻辑形式系统" class="headerlink" title="1. 命题逻辑形式系统"></a>1. 命题逻辑形式系统</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-a9e587bd763a4a88.png" alt=""></p>
 <p><br/></p>
 <p>下文中，我们采用与<span data-katex="\lambda_\beta"></span>系统，<span data-katex="CL_w"></span>系统相同的方式，</p>
 <p>来介绍命题逻辑（<a href="https://zh.wikipedia.org/zh-hans/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91" target="_blank" rel="noopener">propositional logic</a>）。</p>
@@ -374,8 +373,7 @@
 <p>命题逻辑，是在研究命题的证明和推理的过程中抽象出来的，</p>
 <p>先不考虑语义，仅仅从符号的角度（形式化）来考虑它，则是更简单直接的。</p>
 <p><br/></p>
-<h3 id="公理和推导规则">1.1 公理和推导规则</h3>
-<p>首先我们给出命题逻辑形式系统中的公理，</p>
+<h3 id="1-1-公理和推导规则"><a href="#1-1-公理和推导规则" class="headerlink" title="1.1 公理和推导规则"></a>1.1 公理和推导规则</h3><p>首先我们给出命题逻辑形式系统中的公理，</p>
 <p>（1）<span data-katex="\alpha\to(\beta\to\alpha)"></span></p>
 <p>（2）<span data-katex="(\alpha\to(\beta\to\gamma))\to((\alpha\to\beta)\to(\alpha\to\gamma))"></span></p>
 <p>（3）<span data-katex="(\neg\alpha\to\neg\beta)\to(\beta\to\alpha)"></span></p>
@@ -393,8 +391,7 @@
 <p>在命题逻辑中，根据公理和推导规则，得到的公式称为<strong>定理</strong>。</p>
 <p>根据公理，定理和推导规则，得到的公式也是定理。</p>
 <p><br/></p>
-<h3 id="例子">1.2 例子</h3>
-<p>下面我们来看一个例子，</p>
+<h3 id="1-2-例子"><a href="#1-2-例子" class="headerlink" title="1.2 例子"></a>1.2 例子</h3><p>下面我们来看一个例子，</p>
 <p>求证：<span data-katex="(\alpha\to\beta)\to(\alpha\to\alpha)"></span>是一个定理。</p>
 <p><br/></p>
 <p>证明：</p>
@@ -409,9 +406,8 @@
 <p><br/></p>
 <p>证毕。</p>
 <p><br/></p>
-<h3 id="hilbert-style和gentzen-style">2. Hilbert-style和Gentzen-style</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-e4f97978f3ad51a3.png" /></p>
+<h3 id="2-Hilbert-style和Gentzen-style"><a href="#2-Hilbert-style和Gentzen-style" class="headerlink" title="2. Hilbert-style和Gentzen-style"></a>2. Hilbert-style和Gentzen-style</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-e4f97978f3ad51a3.png" alt=""></p>
 <p><br/></p>
 <p>以上的证明过程中，每一行断言，是一个不包含条件的定理，</p>
 <p>这种风格的演绎系统（deduction system）称为具有<strong>Hilbert-style</strong>。</p>
@@ -433,30 +429,26 @@
 <p>如果有限序列，<span data-katex="\Gamma_1\vdash\alpha_1,\Gamma_2\vdash\alpha_2,\cdots,\Gamma_n\vdash\alpha_n"></span>，满足，</p>
 <p>（1）<span data-katex="\Gamma_1,\Gamma_2,\cdots,\Gamma_n"></span>为有限公式集</p>
 <p>（2）<span data-katex="\alpha_1,\alpha_2,\cdots,\alpha_n"></span>为公式</p>
-<p>（3）每个<span data-katex="\Gamma_i\vdash\alpha_i"></span>，<span data-katex="(1\leqslant i\leqslant n)"></span>，都是它之前若干个<span data-katex="\Gamma_j\vdash\alpha_j"></span>，<span data-katex="(1\leqslant j&lt;i\leqslant n)"></span>，应用某条推导规则得到的</p>
+<p>（3）每个<span data-katex="\Gamma_i\vdash\alpha_i"></span>，<span data-katex="(1\leqslant i\leqslant n)"></span>，都是它之前若干个<span data-katex="\Gamma_j\vdash\alpha_j"></span>，<span data-katex="(1\leqslant j<i\leqslant n)"></span>，应用某条推导规则得到的</p>
 <p><br/></p>
 <p>我们就称这个有限序列，为<span data-katex="\Gamma_n\vdash\alpha_n"></span>的一个<strong>（形式）证明序列</strong>。</p>
 <p>此时，也称<span data-katex="\alpha_n"></span>可由<span data-katex="\Gamma_n"></span><strong>（形式）证明</strong>。</p>
 <p><br/></p>
-<h3 id="命题逻辑的自然演绎系统">3. 命题逻辑的自然演绎系统</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-5a6df9ddc8e52da4.png" /></p>
+<h3 id="3-命题逻辑的自然演绎系统"><a href="#3-命题逻辑的自然演绎系统" class="headerlink" title="3. 命题逻辑的自然演绎系统"></a>3. 命题逻辑的自然演绎系统</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-5a6df9ddc8e52da4.png" alt=""></p>
 <p><br/></p>
 <p>以上定义的形式系统，称为命题逻辑形式系统<span data-katex="P"></span>，</p>
 <p>下面我们再定义一个与之等价的，命题逻辑的自然演绎系统<span data-katex="N"></span>。</p>
 <p><br/></p>
-<h4 id="语法">3.1 语法</h4>
-<p>（1）可数个命题符号：<span data-katex="p_1,p_2,\cdots"></span></p>
+<h4 id="3-1-语法"><a href="#3-1-语法" class="headerlink" title="3.1 语法"></a>3.1 语法</h4><p>（1）可数个命题符号：<span data-katex="p_1,p_2,\cdots"></span></p>
 <p>（2）5个联接词符号：<span data-katex="\neg,\lor,\land,\to,\leftrightarrow"></span></p>
 <p>（3）2个辅助符号：<span data-katex="),("></span></p>
 <p><br/></p>
-<h4 id="合法的公式">3.2 合法的公式</h4>
-<p>我们使用<a href="https://zh.wikipedia.org/wiki/%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F" target="_blank" rel="noopener">BNF</a>来定义，</p>
+<h4 id="3-2-合法的公式"><a href="#3-2-合法的公式" class="headerlink" title="3.2 合法的公式"></a>3.2 合法的公式</h4><p>我们使用<a href="https://zh.wikipedia.org/wiki/%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F" target="_blank" rel="noopener">BNF</a>来定义，</p>
 <p><br/></p>
 <p><span data-katex="\alpha::=p|(\neg\alpha)|(\alpha_1\lor\alpha_2)|(\alpha_1\land\alpha_2)|(\alpha_1\to\alpha_2)|(\alpha_1\leftrightarrow\alpha_2)"></span></p>
 <p><br/></p>
-<h4 id="推导规则">3.3 推导规则</h4>
-<p>（1）包含律：<span data-katex="\frac{\alpha\in\Gamma}{\Gamma\vdash\alpha}"></span></p>
+<h4 id="3-3-推导规则"><a href="#3-3-推导规则" class="headerlink" title="3.3 推导规则"></a>3.3 推导规则</h4><p>（1）包含律：<span data-katex="\frac{\alpha\in\Gamma}{\Gamma\vdash\alpha}"></span></p>
 <p>（2）<span data-katex="\neg"></span>消去律：<span data-katex="\frac{\Gamma,\neg\alpha\vdash\beta;\Gamma,\neg\alpha\vdash\neg\beta}{\Gamma\vdash\alpha}"></span></p>
 <p>（3）<span data-katex="\to"></span>消去律：<span data-katex="\frac{\Gamma\vdash(\alpha\to\beta);\Gamma\to\alpha}{\Gamma\vdash\beta}"></span></p>
 <p>（4）<span data-katex="\to"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta}{\Gamma\vdash\alpha\to\beta}"></span></p>
@@ -467,8 +459,7 @@
 <p>（9）<span data-katex="\leftrightarrow"></span>消去律：<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\alpha}{\Gamma\vdash\beta}"></span>，<span data-katex="\frac{\Gamma\vdash\alpha\leftrightarrow\beta;\Gamma\vdash\beta}{\Gamma\vdash\alpha}"></span></p>
 <p>（10）<span data-katex="\leftrightarrow"></span>引入律：<span data-katex="\frac{\Gamma,\alpha\vdash\beta;\Gamma,\beta\vdash\alpha}{\Gamma\vdash\alpha\leftrightarrow\beta}"></span></p>
 <p><br/></p>
-<h4 id="例子-1">3.4 例子</h4>
-<p>以上，我们定义了命题逻辑的自然演绎系统<span data-katex="N"></span>，</p>
+<h4 id="3-4-例子"><a href="#3-4-例子" class="headerlink" title="3.4 例子"></a>3.4 例子</h4><p>以上，我们定义了命题逻辑的自然演绎系统<span data-katex="N"></span>，</p>
 <p>它比命题逻辑形式系统<span data-katex="P"></span>更复杂一些，但是这两个系统是等价的。</p>
 <p><br/></p>
 <p>我们来看一个例子。</p>
@@ -484,9 +475,8 @@
 <p><br/></p>
 <p>证毕。</p>
 <p><br/></p>
-<h3 id="系统和的等价性">4. 系统<span data-katex="N"></span>和<span data-katex="P"></span>的等价性</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-20b8095e4265990d.png" /></p>
+<h3 id="4-系统和的等价性"><a href="#4-系统和的等价性" class="headerlink" title="4. 系统和的等价性"></a>4. 系统<span data-katex="N"></span>和<span data-katex="P"></span>的等价性</h3><p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-10-type-4/1023733-20b8095e4265990d.png" alt=""></p>
 <p><br/></p>
 <p>本文我们介绍了两个形式系统，</p>
 <p>命题逻辑形式系统<span data-katex="P"></span>，以及命题逻辑的自然演绎系统<span data-katex="N"></span>，</p>
@@ -508,14 +498,12 @@
 <p>在学数理逻辑的时候，一开始就将形式系统与它的语义模型相区分，</p>
 <p>是非常有益的，后文我们将看到这样做的好处。</p>
 <p><br/></p>
-<h3 id="总结">5. 总结</h3>
-<p>本文介绍了命题逻辑，以及与之相关的两个形式系统<span data-katex="P"></span>和<span data-katex="N"></span>，</p>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h3><p>本文介绍了命题逻辑，以及与之相关的两个形式系统<span data-katex="P"></span>和<span data-katex="N"></span>，</p>
 <p>和<span data-katex="\lambda_\beta"></span>，<span data-katex="CL_w"></span>一样，我们采用了公理化的方式构建它们，</p>
 <p>这样得到的形式系统，只是符号演算，还没有被赋予特定的语义，</p>
 <p>下文我们开始介绍一阶谓词逻辑。</p>
 <p><br/></p>
-<h3 id="参考">参考</h3>
-<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
 <p><a href="https://book.douban.com/subject/2364517/" target="_blank" rel="noopener">数理逻辑</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Proof_calculus" target="_blank" rel="noopener">Proof calculus</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Hilbert_system" target="_blank" rel="noopener">Hilbert system</a></p>
@@ -712,7 +700,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#命题逻辑形式系统"><span class="nav-number">1.</span> <span class="nav-text">1. 命题逻辑形式系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公理和推导规则"><span class="nav-number">2.</span> <span class="nav-text">1.1 公理和推导规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">3.</span> <span class="nav-text">1.2 例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hilbert-style和gentzen-style"><span class="nav-number">4.</span> <span class="nav-text">2. Hilbert-style和Gentzen-style</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命题逻辑的自然演绎系统"><span class="nav-number">5.</span> <span class="nav-text">3. 命题逻辑的自然演绎系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">5.1.</span> <span class="nav-text">3.1 语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#合法的公式"><span class="nav-number">5.2.</span> <span class="nav-text">3.2 合法的公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推导规则"><span class="nav-number">5.3.</span> <span class="nav-text">3.3 推导规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-1"><span class="nav-number">5.4.</span> <span class="nav-text">3.4 例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统和的等价性"><span class="nav-number">6.</span> <span class="nav-text">4. 系统和的等价性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">5. 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-命题逻辑形式系统"><span class="nav-number">1.</span> <span class="nav-text">1. 命题逻辑形式系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-公理和推导规则"><span class="nav-number">2.</span> <span class="nav-text">1.1 公理和推导规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-例子"><span class="nav-number">3.</span> <span class="nav-text">1.2 例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Hilbert-style和Gentzen-style"><span class="nav-number">4.</span> <span class="nav-text">2. Hilbert-style和Gentzen-style</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-命题逻辑的自然演绎系统"><span class="nav-number">5.</span> <span class="nav-text">3. 命题逻辑的自然演绎系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-语法"><span class="nav-number">5.1.</span> <span class="nav-text">3.1 语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-合法的公式"><span class="nav-number">5.2.</span> <span class="nav-text">3.2 合法的公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-推导规则"><span class="nav-number">5.3.</span> <span class="nav-text">3.3 推导规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-例子"><span class="nav-number">5.4.</span> <span class="nav-text">3.4 例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-系统和的等价性"><span class="nav-number">6.</span> <span class="nav-text">4. 系统和的等价性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-总结"><span class="nav-number">7.</span> <span class="nav-text">5. 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

@@ -347,14 +347,12 @@
       
         
           
-            <h3 id="背景">背景</h3>
-<p>最近由于工作需要，接触了几个与代码解析（parse）相关的工具，</p>
-<p>比如，<a href="https://www.npmjs.com/package/@babel/parser" target="_blank" rel="noopener">@babel/parser</a>，<a href="https://www.npmjs.com/package/typescript" target="_blank" rel="noopener">typescript</a>，<a href="https://www.npmjs.com/package/yaml" target="_blank" rel="noopener">yaml</a>，</p>
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近由于工作需要，接触了几个与代码解析（parse）相关的工具，</p>
+<p>比如，<a href="https://www.npmjs.com/package/\@babel/parser" target="_blank" rel="noopener">\@babel/parser</a>，<a href="https://www.npmjs.com/package/typescript" target="_blank" rel="noopener">typescript</a>，<a href="https://www.npmjs.com/package/yaml" target="_blank" rel="noopener">yaml</a>，</p>
 <p>读过一点源码，也在这些优秀工具之上，做过一些简单的工作。</p>
 <p><br/></p>
 <p>本文就记录一下当前我对 “代码解析技术” 的浅显理解。</p>
-<h3 id="解析器">解析器</h3>
-<p>解析器（parser）的功能是，将一段字符串，转换成有结构的数据。</p>
+<h3 id="解析器"><a href="#解析器" class="headerlink" title="解析器"></a>解析器</h3><p>解析器（parser）的功能是，将一段字符串，转换成有结构的数据。</p>
 <p>解析过程看起来很神秘，但其实并没有黑魔法。</p>
 <p>人们之所以觉得编写 parser 是一件有难度的事情，主要是由以下几方面决定的。</p>
 <p><br/></p>
@@ -376,8 +374,7 @@
 <p><br/></p>
 <p>这就好比下棋一样，称为象棋大师是挺难的，没有一定的智商是办不到的，</p>
 <p>但是走棋规则并不难学，大家都能学会。</p>
-<h3 id="编译领域">编译领域</h3>
-<p>如果我们打算投身于编译领域进行开发的话，其实 parser 只是很小的一部分业务，</p>
+<h3 id="编译领域"><a href="#编译领域" class="headerlink" title="编译领域"></a>编译领域</h3><p>如果我们打算投身于编译领域进行开发的话，其实 parser 只是很小的一部分业务，</p>
 <p>大多数常用的语言，都已经有成熟的 parser 工具了，</p>
 <p>所以很难会需要我们从零开始写一个 parser。</p>
 <p><br/></p>
@@ -391,8 +388,7 @@
 <p><br/></p>
 <p>所以从这个角度来看，parser 只是编译团队所负责的一块很小的业务，</p>
 <p>除非有明确的业务场景，才会将编写 parser 作为一块独立的项目来推进。</p>
-<h3 id="极简主义">极简主义</h3>
-<p>一个极简主义的 parser，其实并不难实现。</p>
+<h3 id="极简主义"><a href="#极简主义" class="headerlink" title="极简主义"></a>极简主义</h3><p>一个极简主义的 parser，其实并不难实现。</p>
 <p>我写了一个 parser，包括注释在内，总共也就 200 多行代码。</p>
 <p>源码在这里：<a href="https://github.com/thzt/web.frontend.component/blob/master/library/list-parser/parser.js" target="_blank" rel="noopener">github: list-parser</a></p>
 <p><br/></p>
@@ -401,8 +397,7 @@
 <p>解析结果如下，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;expr&quot;: &#123;</span><br><span class="line">    &quot;list&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;name&quot;: &quot;Identifier&quot;,</span><br><span class="line">        &quot;pos&quot;: 2,</span><br><span class="line">        &quot;end&quot;: 3,</span><br><span class="line">        &quot;text&quot;: &quot;a&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;list&quot;: [</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;list&quot;: [</span><br><span class="line">              &#123;</span><br><span class="line">                &quot;name&quot;: &quot;Identifier&quot;,</span><br><span class="line">                &quot;pos&quot;: 14,</span><br><span class="line">                &quot;end&quot;: 15,</span><br><span class="line">                &quot;text&quot;: &quot;c&quot;</span><br><span class="line">              &#125;</span><br><span class="line">            ]</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;name&quot;: &quot;Identifier&quot;,</span><br><span class="line">            &quot;pos&quot;: 21,</span><br><span class="line">            &quot;end&quot;: 22,</span><br><span class="line">            &quot;text&quot;: &quot;d&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;name&quot;: &quot;Identifier&quot;,</span><br><span class="line">        &quot;pos&quot;: 28,</span><br><span class="line">        &quot;end&quot;: 31,</span><br><span class="line">        &quot;text&quot;: &quot;e-f&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>下面我来介绍它是怎么解析的，以及编写这种 parser 的套路是什么。</p>
-<h4 id="代码结构">（1）代码结构</h4>
-<p>一个手写的递归下降语法解析器，代码结构一般是这样的，</p>
+<h4 id="（1）代码结构"><a href="#（1）代码结构" class="headerlink" title="（1）代码结构"></a>（1）代码结构</h4><p>一个手写的递归下降语法解析器，代码结构一般是这样的，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const parse &#x3D; (() &#x3D;&gt; &#123;</span><br><span class="line">  let sourceCode;</span><br><span class="line">  let pos;</span><br><span class="line">  let end;</span><br><span class="line">  let token;</span><br><span class="line"></span><br><span class="line">  return parse;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; ---- ---- ---- ---- ---- ---- ---- ---- ----</span><br><span class="line"></span><br><span class="line">  function parse(code) &#123; &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; ---- ---- ---- ---- ---- ---- ---- ---- ----</span><br><span class="line"></span><br><span class="line">  function nextToken() &#123; &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; ---- ---- ---- ---- ---- ---- ---- ---- ----</span><br><span class="line"></span><br><span class="line">  function assert(nameList) &#123; &#125;</span><br><span class="line"></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 <p>首先，我们将私有变量都放到了一个立即执行的函数中（闭包），以避免污染全局空间，</p>
 <p>这样做比将它们定义为 <code>class</code> 的私有变量，会更简洁一些，</p>
@@ -414,12 +409,14 @@
 <p><br/></p>
 <p>最后，一个 parser 总共包含了以下 3 个部分，</p>
 <ul>
-<li><p>parse: 语法分析器，由互递归调用的一堆函数组成</p></li>
-<li><p>nextToken: 词法分析器，读取下一个 token</p></li>
-<li><p>assert: 解析过程中，对上下文进行断言，便于快速排查问题</p></li>
+<li><p>parse: 语法分析器，由互递归调用的一堆函数组成</p>
+</li>
+<li><p>nextToken: 词法分析器，读取下一个 token</p>
+</li>
+<li><p>assert: 解析过程中，对上下文进行断言，便于快速排查问题</p>
+</li>
 </ul>
-<h4 id="词法分析器">（2）词法分析器</h4>
-<p><code>nextToken</code> 实现了一个极简的词法分析器，</p>
+<h4 id="（2）词法分析器"><a href="#（2）词法分析器" class="headerlink" title="（2）词法分析器"></a>（2）词法分析器</h4><p><code>nextToken</code> 实现了一个极简的词法分析器，</p>
 <p>调用 <code>nextToken()</code> 就会向后扫描下一个 token，</p>
 <p>如果需要向前看多个 token，只需将扫描结果保存一下就可以了。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 向后扫描一个 token</span><br><span class="line"> *&#x2F;</span><br><span class="line">function nextToken() &#123;</span><br><span class="line">  while (true) &#123;</span><br><span class="line">    if (pos &gt;&#x3D; end) &#123;</span><br><span class="line">      return token &#x3D; createToken(&#39;EndOfFile&#39;, pos, pos, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const ch &#x3D; sourceCode.charAt(pos);</span><br><span class="line">    switch (ch) &#123;</span><br><span class="line">      case &#39;(&#39;:</span><br><span class="line">        return token &#x3D; createToken(&#39;LeftBracket&#39;, pos, ++pos, ch);</span><br><span class="line">      case &#39;)&#39;:</span><br><span class="line">        return token &#x3D; createToken(&#39;RightBracket&#39;, pos, ++pos, ch);</span><br><span class="line"></span><br><span class="line">      case &#39; &#39;:</span><br><span class="line">      case &#39;\n&#39;:</span><br><span class="line">        ++pos;</span><br><span class="line">        continue;</span><br><span class="line"></span><br><span class="line">      default:</span><br><span class="line">        if (isIdentifierStart(ch)) &#123;</span><br><span class="line">          return token &#x3D; scanIdentifier();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -435,19 +432,25 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(a </span><br><span class="line">  (</span><br><span class="line">    (c)</span><br><span class="line">    d</span><br><span class="line">  )</span><br><span class="line"> e-f</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>对于我们要解析的语言来说，总共只有 4 种 token，跳过了空格和换行符，</p>
 <ul>
-<li><p>左括号：<code>(</code></p></li>
-<li><p>右括号：<code>)</code></p></li>
-<li><p>标识符：例如 <code>a</code>，<code>c</code>，<code>d</code>，<code>e-f</code></p></li>
-<li><p>文件结尾（EOF: end of file）</p></li>
+<li><p>左括号：<code>(</code></p>
+</li>
+<li><p>右括号：<code>)</code></p>
+</li>
+<li><p>标识符：例如 <code>a</code>，<code>c</code>，<code>d</code>，<code>e-f</code></p>
+</li>
+<li><p>文件结尾（EOF: end of file）</p>
+</li>
 </ul>
-<h4 id="语法分析器">（3）语法分析器</h4>
-<p>语法分析器，是由可互递归调用的多个函数组成的，以下是完整的语法分析器代码，</p>
+<h4 id="（3）语法分析器"><a href="#（3）语法分析器" class="headerlink" title="（3）语法分析器"></a>（3）语法分析器</h4><p>语法分析器，是由可互递归调用的多个函数组成的，以下是完整的语法分析器代码，</p>
 <p>因为语言比较简单，所以语法分析器也就不会特别复杂。</p>
 <p><br/></p>
 <ul>
-<li><p><code>parse</code> 调用了 <code>parseExpr</code></p></li>
-<li><p><code>parseExpr</code> 调用了 <code>parseList</code></p></li>
-<li><p><code>parseList</code> 又调用了 <code>parseExpr</code></p></li>
+<li><p><code>parse</code> 调用了 <code>parseExpr</code></p>
+</li>
+<li><p><code>parseExpr</code> 调用了 <code>parseList</code></p>
+</li>
+<li><p><code>parseList</code> 又调用了 <code>parseExpr</code></p>
+</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(a </span><br><span class="line">  (</span><br><span class="line">    (c)</span><br><span class="line">    d</span><br><span class="line">  )</span><br><span class="line"> e-f</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>这个 list 的语言构成规则如下：</p>
@@ -462,8 +465,7 @@
 <p>向前看一个（或多个）token，递归的分层次处理问题。</p>
 <p><br/></p>
 <p>其中，<code>assert</code> 起到了关键作用，便于我们在编写代码时，立即发现问题。</p>
-<h3 id="结语">结语</h3>
-<p>以上就是一个 200 行左右的极简 parser 了，但麻雀虽小五脏俱全，</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>以上就是一个 200 行左右的极简 parser 了，但麻雀虽小五脏俱全，</p>
 <p>包含了一些常见的 parser 编写套路。</p>
 <p><br/></p>
 <p>根据二八定律，一个实际 parser 中可能花费了 80% 的时间来处理剩下 20% 的问题。</p>
