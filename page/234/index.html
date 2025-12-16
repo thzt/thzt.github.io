@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/05/19/type-theory-in-my-eye/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/05/29/let-things-happen/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/05/19/type-theory-in-my-eye/" itemprop="url">类型理论之拙见</a></h1>
+                <a class="post-title-link" href="/2016/05/29/let-things-happen/" itemprop="url">让事情去发生</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-19T00:00:00+08:00">
-                2016-05-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-29T00:00:00+08:00">
+                2016-05-29
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logic/" itemprop="url" rel="index">
-                    <span itemprop="name">Logic</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,67 +347,116 @@
       
         
           
-            <p>类型系统，是指一种根据所计算出值的种类，对词语进行分类，</p>
-<p>从而证明某程序行为不会发生的，</p>
-<p>可行语法手段。——《TAPL》</p>
+            <p>经验增长，并不完全是一件好事，</p>
+<p>它也许会阻止本来可能发生的事情。</p>
 <p><br/></p>
-<p>可见类型系统是形式方法的一种，</p>
-<p>也是一种证明方法。</p>
+<p>我们凭着经验来进行判断，</p>
+<p>除非遇到完全相同的初始条件，</p>
+<p>否则，这样的判断和随意猜测并没有什么不同。</p>
 <p><br/></p>
-<p>当我们把自己写好的程序提交给别人时，</p>
-<p>如果别人质疑『你怎么证明它是对的』，</p>
-<p>是不好回答的。</p>
+<p>我们踩到的坑多了，走路都战战兢兢，</p>
+<p>一年被蛇咬，十年怕井绳。</p>
 <p><br/></p>
-<p>因为通过测试用例来检测程序行为，</p>
-<p>本身就是在进行不完全归纳，</p>
-<p>我们只能断定验证过的事情是正确，</p>
-<p>却不能断定一般性质。</p>
+<p>如何打破经验主义的误区呢？</p>
+<p>那就是，让事情去发生。</p>
 <p><br/></p>
-<p>类型理论与数学，逻辑学，计算机科学相关，</p>
-<p>甚至渗透到了其他学科之中。</p>
+<p>现实世界中的事情都是发展中的，</p>
+<p>我们得有胆量让事情去发展，</p>
+<p>然后掌控它的发展过程。</p>
 <p><br/></p>
-<p>类型系统是程序语言之上的一套逻辑系统，</p>
-<p>可以对程序进行推理，来断定某些性质。</p>
-<p>不同的逻辑系统，『诱导』出了不同的类型系统。</p>
+<h2 id="把责任交出去"><strong>把责任交出去</strong></h2>
+<p>篮球是一项团体运动，</p>
+<p>在打篮球时，我们用的最多的是传接球。</p>
 <p><br/></p>
-<p>形式系统有个特点，那就是稍微改变一点约束条件，</p>
-<p>就会得到一系列好玩的附加特性，</p>
-<p>有大量丰富的逻辑系统可以玩。</p>
-<p>例如，直觉主义逻辑，模态逻辑，时态逻辑，等等。</p>
+<p>可是，新手组织后卫往往无法理解，</p>
+<p>球传出去以后，自己都无法掌控它了，</p>
+<p>怎样组织这次进攻呢？</p>
 <p><br/></p>
-<p>可是，仅从代码进行静态分析，来断定程序运行时的所有行为，是不可判定的。</p>
-<p>因此只能保证well typed的程序没有某类错误，</p>
-<p>每个类型系统有各自要阻止的行为。</p>
+<p>这类似于其他团队合作中的责任，</p>
+<p>不敢把责任交出去，</p>
+<p>担心别人做不好。</p>
 <p><br/></p>
-<p>类型系统种类繁多，支持各种好玩的特性，</p>
-<p>例如，支持Polymorphism的类型系统，某类型可以由其他类型参数化，</p>
-<p>支持Dependent type的系统，类型可以由值来决定，</p>
-<p>子类型允许我们适当放宽类型要求，</p>
-<p>递归类型，存在类型，全称类型。</p>
+<p>这样就无法达到默契的配合。</p>
 <p><br/></p>
-<p>1934年，Curry意识到简单类型化lambda演算中的类型，与直觉主义逻辑之间的关系，</p>
-<p>后面的研究发现，人们把这种对应关系推广为了Curry-Howard-Lambek Correspondance，</p>
-<p>它将程序语言的类型，逻辑系统中的命题，和指称语义笛卡尔闭范畴，联系起来了。</p>
-<p>一个合法项的存在，就证明了对应它类型的一个命题为真，程序即构造出来的证明。</p>
+<p>高手组织后卫怎样理解这件事情呢？</p>
+<p>他首先会观察比赛的发展态势，</p>
+<p>然后通过运球去影响这个态势的走向，</p>
+<p>随后，把球顺着态势传出去。</p>
 <p><br/></p>
-<p>类型理论的实用内容还有很多，</p>
-<p>Gradual typing的动静结合，例如flow，</p>
-<p>以及Rust和Linear typeing的应用，</p>
-<p>另外还有，Hindley–Milner类型推导算法。</p>
+<p>这样的话，其他人的行为就会被态势所牵引。</p>
+<p>比赛仍然在掌控中。</p>
 <p><br/></p>
-<p>类型系统有一些性质可以衡量，</p>
-<p>例如，type soundness，type safety，</p>
-<p>以及检查类型的方式，static check，dynamic check，</p>
-<p>包括某些语言是explicitly typed，而某些是implicitly typed，</p>
-<p>某些语言是被stronger checked，有些则是weaker checked。</p>
+<p>所以，难能可贵的是，</p>
+<p>让比赛进行，把球传出去。</p>
 <p><br/></p>
-<p>现在是学习时间了。</p>
+<h2 id="最佳实践"><strong>最佳实践</strong></h2>
+<p>软件项目中，有前人总结的无数最佳实践，</p>
+<p>不遵循它们，会犯很多前人已经犯过的错误。</p>
 <p><br/></p>
-<p>参考：</p>
-<p><a href="https://wiki.haskell.org/Curry-Howard-Lambek_correspondence" target="_blank" rel="noopener">Curry-Howard-Lambek correspondence</a></p>
-<p><a href="https://book.douban.com/subject/1318672/" target="_blank" rel="noopener">类型和程序设计语言</a></p>
-<p><a href="http://lucacardelli.name/papers/typesystems.pdf" target="_blank" rel="noopener">Type System - Luca Cardelli</a></p>
-<p><a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a></p>
+<p>然而，完全遵循它们，</p>
+<p>又会抹杀掉未来的某些可能性。</p>
+<p><br/></p>
+<p>每种方案都有适得其所的用处，</p>
+<p>没有在任何情况下都不适用的方案，</p>
+<p>不用它，其实很多人是因为没有真正掌握它。</p>
+<p><br/></p>
+<p>很多方案是发展而来的，</p>
+<p>到了那个境地，解决方案是显而易见的，</p>
+<p>现在不用费尽心思，假定到时候很糟。</p>
+<p><br/></p>
+<p>最佳实践的作用，应该是为了选择方向，</p>
+<p>强行预测未来的细节，会担惊受怕，畏首畏尾。</p>
+<p><br/></p>
+<p>你有胆量让不那么好的事情发生吗？</p>
+<p>其实，不那么好与不那么坏，并没有什么区别。</p>
+<p><br/></p>
+<h2 id="如何培养人"><strong>如何培养人</strong></h2>
+<p>世界上最困难的就是把一件你很拿手的工作交给别人，</p>
+<p>再眼睁睁看着他把事情搞砸，</p>
+<p>而你却还能心平气和不发一言，</p>
+<p>那是培养人。</p>
+<p>世界上最容易的就是把一件你很拿手的工作交给别人，</p>
+<p>再手把手地教他把事情做对，</p>
+<p>不给他犯错机会，</p>
+<p>那不是培养人，而是锻炼你自己。</p>
+<p>——《有一种培养叫放手》</p>
+<p><br/></p>
+<p>并不是每件事情按计划发生就是好的，</p>
+<p>不同的发展轨迹，人们从中的收获也不同。</p>
+<p><br/></p>
+<p>不让坏事情去发生，就不会身临其境，</p>
+<p>没有把事情搞砸过，就不会反思过程。</p>
+<h2 id="人与事情的发展"><strong>人与事情的发展</strong></h2>
+<p>事情的发展，总是会涉及到很多人，</p>
+<p>因此，个人的作用其实并不那么重要。</p>
+<p><br/></p>
+<p>让事情去发展，才能观察态势，</p>
+<p>才能改变它，才能影响它。</p>
+<p><br/></p>
+<p>不要把自己看得那么重要，</p>
+<p>包括自己在内，大家都是顺势而为，</p>
+<p>不改变态势，结果早就被决定了，</p>
+<p>有你没你都一样。</p>
+<p><br/></p>
+<p>所以，要想赢得比赛，</p>
+<p>就得做那个能影响比赛走势的人。</p>
+<p><br/></p>
+<p>不然的话，</p>
+<p>胜败已定，预测的再准又有什么用？</p>
+<p><br/></p>
+<h2 id="结语"><strong>结语</strong></h2>
+<p>Let things happen, let them win.</p>
+<p>这不仅仅是一种洒脱的态度，</p>
+<p>更多的是为了影响事情的整个发展过程。</p>
+<p><br/></p>
+<p>如果说，新手从犯错，到学会提前意识到错误，是一个进步，</p>
+<p>那么老手从丰富的经验，到违反经验的大胆尝试，更是一个进步。</p>
+<p><br/></p>
+<p>新手，通常把方案静态的理解为当前场景的解，</p>
+<p>而高手，更能看到事情的发展过程，</p>
+<p>以及采取某个方案，会对事情发展产生什么影响。</p>
+<p><br/></p>
+<p>让事情发生吧，我来做观众。</p>
 
           
         
@@ -446,7 +495,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/233/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/233/">233</a><span class="page-number current">234</span><a class="page-number" href="/page/235/">235</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/235/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/233/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/233/">233</a><span class="page-number current">234</span><a class="page-number" href="/page/235/">235</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/235/">&gt;</a>
   </nav>
 
 
@@ -492,7 +541,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

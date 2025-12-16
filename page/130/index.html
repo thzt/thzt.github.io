@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/12/15/beyond-generality/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/12/27/not-enough/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/15/beyond-generality/" itemprop="url">一般性之外的考虑</a></h1>
+                <a class="post-title-link" href="/2018/12/27/not-enough/" itemprop="url">我们付出的努力还不够</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-15T00:00:00+08:00">
-                2018-12-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T00:00:00+08:00">
+                2018-12-27
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,105 +347,120 @@
       
         
           
-            <p>软件工程师们对社会的价值，</p>
-<p>得益于人们认识到<strong>机器可以大幅度的减少重复劳动时间</strong>。</p>
+            <p>目前我们正处于一个高速发展的<strong>信息社会</strong>，</p>
+<p>这是继农业，工业社会后的另一种不同的社会形态，</p>
+<p>在信息社会中，信息和知识成为了重要的<strong>生产力因素</strong>。</p>
 <p><br/></p>
-<p>于是，程序员们经常通过探索多个不同场景中的<strong>相似之处</strong>，</p>
-<p>用软件手段<strong>一次性的</strong>解决多个问题。</p>
+<p>然而不幸的是，<strong>信息爆炸</strong>的危害也越来越明显，</p>
+<p>很多时候，我们都得<strong>被迫接受</strong>自身处理能力之外的信息量，</p>
+<p>营销变成了对人们<strong>心智</strong>的掠夺战。</p>
 <p><br/></p>
-<p>但是好景不长。</p>
-<p>因为随着<strong>待覆盖</strong>的问题场景增多，</p>
-<p>它们就变得<strong>不那么相似了</strong>，而是各有各的不同。</p>
+<p>在此之前，我一直不明白为什么人们经常把<strong>信息技术</strong>与<strong>计算机技术</strong>放在一起讨论，</p>
+<p>可能<strong>计算机</strong>和<strong>通信</strong>促进了信息技术的发展吧。</p>
+<p>可是，直到最近我才有了另外一种不同的认识。</p>
 <p><br/></p>
-<p>于是问题就来了，</p>
-<p>我们是应该<strong>简化</strong>需求，以发挥软件的最大作用，</p>
-<p>还是应该处理好所有<strong>细节</strong>，以满足用户的多样性需求。</p>
+<h3 id="技术密集型-vs-信息密集型">技术密集型 vs 信息密集型</h3>
+<p>几年前刚开始写软件的时候，我以为软件是一种<strong>技术密集型</strong>的行业，</p>
+<p>因为，<strong>编程</strong>和<strong>调试</strong>实际上就是在解决问题，</p>
+<p>我们会通过表面现象，找到问题根本性的<strong>技术原因</strong>，再从技术角度去解决它。</p>
 <p><br/></p>
-<p>这是一件值得深思的事情。</p>
+<p>且不论各种职业都需要的职场技能，</p>
+<p>软件问题也并不是只有<strong>技术问题</strong>这么简单，</p>
+<p>上文提到的信息爆炸现象，在<strong>大规模软件系统</strong>中，也日渐凸出了。</p>
 <p><br/></p>
-<h3 id="相似之处的不稳定性">相似之处的不稳定性</h3>
-<p>提取不同事情之间的相似之处，通常有两种方式。</p>
+<p>所以，这让我产生了疑问，是不是随着软件行业的发展，</p>
+<p>它已经逐渐的从<strong>技术密集型</strong>转化到了<strong>信息密集型</strong>的行业了。</p>
 <p><br/></p>
-<p>其一，是从具体细节上来看，它们都要做一部分<strong>相同的事情</strong>。</p>
-<p>例如，两个页面要展示同一块内容。</p>
+<p>软件工程师们都知道，为了避免向代码中引入缺陷，</p>
+<p>就应当尽可能避免<strong>未料到的</strong>场景出现，</p>
+<p>于是，就不得不对现有的代码库进行足够的<strong>了解</strong>，还要对已有功能做好完备的<strong>自测</strong>。</p>
 <p><br/></p>
-<p>其二，是从抽象层次上来看，它们要做的事情可以<strong>一概而言</strong>，</p>
-<p>例如，两个页面都要向服务端发起请求，但具体的请求内容是不同的。</p>
+<p>在这个过程中，工程师们就不得不<strong>学习</strong>大量的知识，</p>
+<p>而这些知识正是由其他工程师<strong>创造</strong>出来的。</p>
 <p><br/></p>
-<p>这两种提取相似性的方式，都很有效，但不完美。</p>
-<p>我们很容易找出反例，破坏它们的<strong>稳定性</strong>，</p>
-<p>尤其是当需要考虑的事情增多时。</p>
+<p>当软件规模较小的时候，每天需要学习的知识量是<strong>可控的</strong>，</p>
+<p>但是随着行业的发展，我们发现，自己已经<strong>跟不上</strong>这些知识的演变速度了。</p>
 <p><br/></p>
-<p>这里有个常见的<strong>误区</strong>，</p>
-<p>人们通常会认为，抽象意味着稳定，其实不是这么回事，</p>
-<p>事实上，<strong>我们很难判断当前的抽象是否合理。</strong></p>
+<p>因此，可以认为，在信息社会早期，</p>
+<p>计算机只是起到了信息的编码，存储，和传递的作用，</p>
+<p>而一旦信息畅通无阻的时候，新的问题就来了。</p>
 <p><br/></p>
-<p>而大多数软件灾难的发生，均在于，</p>
-<p>对可能发生的场景了解得不够深入，而过早的建立了<strong>不正确的抽象</strong>。</p>
+<h3 id="知识的传递问题">知识的传递问题</h3>
+<p>当前，我们已经不对信息如何在计算机里<strong>存储</strong>，</p>
+<p>计算机之间如何<strong>通信</strong>，这些问题过问太多了，</p>
+<p>因为，它们几乎成为了当今软件系统的<strong>基础设施</strong>了。</p>
 <p><br/></p>
-<h3 id="软件的目标用户和现有用户">软件的目标用户和现有用户</h3>
-<p>值得一提的是，软件的<strong>目标用户</strong>可以和<strong>现有用户</strong>不同，</p>
-<p>我们打算提供什么样的特性，</p>
-<p>与现有用户期望得到什么样的特性，应该有所<strong>区分</strong>。</p>
+<p>除了专门从事基础设施层面开发的工程师之外，</p>
+<p>大部分软件工程师，做的事情都是在这些基础设施<strong>之上</strong>，</p>
+<p>进行相应<strong>领域</strong>的业务开发。</p>
 <p><br/></p>
-<p>否则，我们永远也无法满足当前用户的所有需求，</p>
-<p>或者即使满足了一部分用户的需求，</p>
-<p>也难免<strong>损害</strong>另一部分用户。</p>
+<p>这里所谓的业务，并不一定是非技术性的，</p>
+<p>而是指的工程师们待解决的<strong>问题域</strong>。</p>
 <p><br/></p>
-<p>因此，<strong>考虑好放弃什么，比考虑要提供什么，更重要</strong>。</p>
-<p>软件可以不令它现有的用户全部满意，</p>
-<p>但不可以没有自己的<strong>发展目标</strong>。</p>
+<p>上文提到的观点是，即使这些基础设施无需开发者担心，</p>
+<p>由于编码的<strong>效率</strong>越来越快，</p>
+<p>开发者们每天产出的<strong>新代码</strong>，就已经可以阻碍他们继续开发了。</p>
 <p><br/></p>
-<p>实际上，为人处世也当如此，</p>
-<p>不论我们怎样做，都改变不了一部分人的<strong>评价</strong>。</p>
-<p>所以，我们不能以得到更多的好评为目标。</p>
+<p>因此，瓶颈已经从如何解决业务领域的问题，</p>
+<p>转变成了，代码产生的<strong>新知识</strong>如何被快速<strong>消化</strong>的问题了。</p>
 <p><br/></p>
-<p>软件也当有自身的独立<strong>品格</strong>。</p>
+<h3 id="从写代码到读代码">从写代码到读代码</h3>
+<p>我发现，介绍<strong>如何把代码写好</strong>的书籍和文章非常多，</p>
+<p>可能是作者所处的那个年代，把代码写好是<strong>主要矛盾</strong>。</p>
 <p><br/></p>
-<h3 id="软件方案的不确定性">软件方案的不确定性</h3>
-<p>如果从产品维度考虑问题的话，软件功能将是<strong>可取舍的</strong>，</p>
-<p>而一旦确定了功能列表，本来我认为具体实现将是不可妥协的。</p>
+<p>而如今，情况有所不同，</p>
+<p><strong>如何理解现有的代码</strong>，变得越来越重要了，</p>
+<p>而一旦理解清楚，把自己想写的写出来，倒是轻松的事情。</p>
 <p><br/></p>
-<p>其实仍有商量的余地。</p>
-<p>如果将自己跳出功能的实现者这个角色，</p>
-<p>具体的实现方式，也是可以影响到<strong>上层决策</strong>的。</p>
+<p>这可能是因为网络上现成的解决方案，比以前更容易获取到了，</p>
+<p>有过<strong>小众编程语言</strong>学习经历的朋友们，可能更容易有同感，</p>
+<p>资料的多少完全影响了<strong>解决问题的门槛</strong>。</p>
 <p><br/></p>
-<p>我在实现层面的种种考量，以及面向未来的<strong>远见</strong>和<strong>铺垫</strong>，</p>
-<p>其实都来源于我们对软件产品的<strong>预期</strong>和<strong>判断</strong>。</p>
+<p>因此综上所言，实际工作中，</p>
+<p>我们正在从<strong>如何写代码</strong>到<strong>怎样读代码</strong>进行过渡。</p>
 <p><br/></p>
-<p>因此在开发阶段早期进行<strong>不必要的优化</strong>，是危险的，</p>
-<p>我们对问题的理解还不够深入，</p>
-<p>很容易沉溺于自己的<strong>想象</strong>中。</p>
+<h3 id="阅读能力">阅读能力</h3>
+<p>在讲究把代码写好的年代，我们经常将代码难以阅读归结为代码本身写的不好，</p>
+<p>而如今，我们的确应该强调<strong>阅读能力</strong>了，</p>
+<p>对于同样的代码，有较好阅读能力的人能获得更多的<strong>信息</strong>。</p>
 <p><br/></p>
-<p>其实，人们很难区分<strong>什么是自己的假设</strong>，什么是事实，</p>
-<p>这可以认为是一个人性的弱点。</p>
+<p><strong>总是会有难懂的老代码</strong>，</p>
+<p>与其怀有抵抗心理，不如想办法去容忍它，</p>
+<p>如果不读懂工作就无法进展，那么说白了就是<strong>该付出努力</strong>了。</p>
 <p><br/></p>
-<p>例如，拥有代码洁癖的程序员，</p>
-<p>其实并不能<strong>证明</strong>特定的代码对别人来说也是干净的，</p>
-<p>因此，干净的代码更好，就是一种人为假设。</p>
+<p>其实，有的时候只是我们的<strong>付出还不够</strong>。</p>
+<p>或者不认为阅读代码也是一种付出。</p>
 <p><br/></p>
-<p>我们只能说，有时候是这样，有时候又不是。</p>
-<p>软件设计便是如此，我们根据经验所得到的一些判断，只是一种假设，而不是事实。</p>
-<p><strong>越笃定，往往越容易出问题。</strong></p>
+<p>也许是时代造成的原因，大家做任何事情都很<strong>急</strong>，</p>
+<p>我们急着把代码写好，急着完成一个个功能，</p>
+<p>急着补齐单测，急着把文档写好。</p>
 <p><br/></p>
-<blockquote>
-<p>解决问题的能力，就是为印证假设不辞劳苦的行动力。</p>
-</blockquote>
-<blockquote>
-<p>——《<a href="https://book.douban.com/subject/26633567/" target="_blank" rel="noopener">思考的技术</a>》</p>
-</blockquote>
+<p>这样其实并没有节省多少时间。</p>
+<p><br/></p>
+<p>有一天时间很晚了，我还在加班写单测，</p>
+<p>我们知道单元测试中的代码，通常都写的很乱，当时我就很急，想赶紧写完它。</p>
+<p><br/></p>
+<p>读不懂别人的写法，让我很<strong>暴躁</strong>，</p>
+<p>但我最终还是冷静下来了，<strong>耐心的</strong>加上注释，把覆盖率提高到100%，</p>
+<p>结果，下班时间<strong>并没有晚多久</strong>。</p>
+<p><br/></p>
+<p>这次经历让我体会到，</p>
+<p>并不是事情本身有多么困难，而是我们自己<strong>缺乏耐心</strong>。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>越有经验的开发者，就越容易相信自己的经验，</p>
-<p>软件工程师们也经常认为自己工作在<strong>确定的</strong>问题背景之中。</p>
+<p>人们常说，付出才有回报，但是对<strong>什么是付出</strong>的理解有所不同，</p>
+<p>做自己想做的事情，是付出，</p>
+<p><strong>做自己不想做的事情</strong>，更需要付出。</p>
 <p><br/></p>
-<p>其实实际项目中的很多问题都是<strong>不能确定的</strong>，</p>
-<p>各个参与者，影响了软件的最终形态，</p>
-<p>并非是由<strong>市场</strong>这个单一因素所驱动的。</p>
+<p>面对信息爆炸，面对必须要学习的代码库，</p>
+<p>能耐住性子，老老实实的把难懂的代码理解透，</p>
+<p>无疑能让我们成为一名更出色的工程师。</p>
 <p><br/></p>
-<p>当我们意识到自己处于混沌之中的时候，</p>
-<p>才能看清软件的真实目标，</p>
-<p>它就像迷雾中的探险船一样，<strong>即使暂时找不到方向，也要先找一个方向前行。</strong></p>
+<p>虽然我们付出了<strong>时间</strong>，</p>
+<p>但是，不理解它们就会对新项目造成风险，</p>
+<p>所以，阅读代码其实也是<strong>工作内容</strong>的一部分。</p>
+<p><br/></p>
+<p>只知道怎么把代码写好还<strong>远远不够</strong>。</p>
 
           
         
@@ -484,7 +499,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/129/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/129/">129</a><span class="page-number current">130</span><a class="page-number" href="/page/131/">131</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/131/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/129/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/129/">129</a><span class="page-number current">130</span><a class="page-number" href="/page/131/">131</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/131/">&gt;</a>
   </nav>
 
 
@@ -530,7 +545,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

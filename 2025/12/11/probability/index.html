@@ -1,0 +1,803 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="这些年来写文章对我来说，不仅仅是总结、积累的过程，更加是一种强行让自己从消极转变为积极的手段。 1. 重塑世界 现在很多人都猜测大模型的发展已经到了尽头。  这体现在几个方面  虽然各大厂商的 LLM 仍然在更新版本，但是在能力水平上已经趋于相似。边际效用递减，投入多一倍，能力只提升 1% LLM 底层原理所致，不可能通向 AGI。LLM 的能力十分受限于样本训练集，也只能对下一个 token 进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="复读机的概率游戏">
+<meta property="og:url" content="https://thzt.github.io/2025/12/11/probability/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="这些年来写文章对我来说，不仅仅是总结、积累的过程，更加是一种强行让自己从消极转变为积极的手段。 1. 重塑世界 现在很多人都猜测大模型的发展已经到了尽头。  这体现在几个方面  虽然各大厂商的 LLM 仍然在更新版本，但是在能力水平上已经趋于相似。边际效用递减，投入多一倍，能力只提升 1% LLM 底层原理所致，不可能通向 AGI。LLM 的能力十分受限于样本训练集，也只能对下一个 token 进">
+<meta property="article:published_time" content="2025-12-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-16T04:18:01.923Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2025/12/11/probability/"/>
+
+
+
+
+
+  <title>复读机的概率游戏 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2025/12/11/probability/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">复读机的概率游戏</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-12-11T00:00:00+08:00">
+                2025-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">AI</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这些年来写文章对我来说，不仅仅是总结、积累的过程，更加是一种强行让自己从消极转变为积极的手段。</p>
+<h3 id="重塑世界">1. 重塑世界</h3>
+<p>现在很多人都猜测大模型的发展已经到了尽头。</p>
+<p><br/></p>
+<p>这体现在几个方面</p>
+<ul>
+<li><p>虽然各大厂商的 LLM 仍然在更新版本，但是在能力水平上已经趋于相似。边际效用递减，投入多一倍，能力只提升 1%</p></li>
+<li><p>LLM 底层原理所致，不可能通向 AGI。LLM 的能力十分受限于样本训练集，也只能对下一个 token 进行预测。「复读机」无法真正的「思考」</p></li>
+<li><p>大家都知道了 AI 不像传说的那样神，有些事情确实不太适合用 AI 解决。说到底是一种概率游戏，要想提升概率就得不断的增加成本</p></li>
+</ul>
+<p><br/></p>
+<p>但即便如此，基于 LLM 进行「应用层」开发，还远没有到尽头，反而变得越来越火热。</p>
+<p>也就是说即使 LLM 能力不再发展了，应用层仍然有太多事情可以做，AI 真的在重塑世界。</p>
+<p><br/></p>
+<ul>
+<li><p>比如说，AI 对编程的影响。前端开发已经习惯使用 Cursor 这类的编程工具了，现在大家想弄明白的，已经是 AI 能提效多少的问题，而不是 AI 能不能提效的问题。这已经完全改变了开发习惯。</p></li>
+<li><p>此外，另一个影响较大的是搜索。不论是开发遇到的问题，还是日常生活，搜索引擎我已经很久没有用过了。日常问题直接问豆包，开发问题直接问 Cursor。以前的先 Google 搜索问题，然后阅读其他人编写的技术文章找到解法，这样的复杂过程已经彻底不用了。当我需要了解某个技术问题的原理、某个三方库的使用方法时，直接让 Cursor 给出教程、编写示例 即可。</p></li>
+</ul>
+<p><br/></p>
+<p>除了上面提到的两个场景之外，还有很多很多。</p>
+<p>让我认识到，程序员还有很多事情可以做，未来并不是不再需要软件了，而是需要的更多。</p>
+<p>旧软件正在经历更新换代，有很多开发工作要做。</p>
+<h3 id="概率特性">2. 概率特性</h3>
+<p>当大家认识 AI 的概率本质之后，才能快速理解到它能干什么、不能干什么。</p>
+<p>AI 不适合解决那些「对结果要求非常严格」的问题。</p>
+<ul>
+<li><p>ChatGPT 为什么那么成功。是因为对话场景本身对结果的要求就不那么严格。AI 只要能回答出来就行了，对错其实无所谓。只要大概率是正确的，那就是有用的，也就会有人来使用。类似的场景还有 智能客服、内容搜索 等。</p></li>
+<li><p>Cursor 为什么那么成功。我觉得也是如此，在某些特定场景，程序员对结果的要求也不是那么高。比如说 Tab 补全，它只要能大致推断出来就行了。就算不太对，立即人工改正就行。</p></li>
+</ul>
+<p><br/></p>
+<p>周围很多事情，对结果的要求也不高，即使它是用严谨的代码编写出来的。</p>
+<p>比如说，我想翻译一篇文章、或者学习一个历史典故，就没有必要太准确。</p>
+<p>又比如，创业者需要快速开发原型验证市场，也没必要太苛刻，差不多就足够了。</p>
+<p>以上这些场景，使用 AI 就会有明显效果。</p>
+<p><br/></p>
+<p>但是也有另外一些场景，就不适合使用 AI。</p>
+<p>比如说一些可能存在较高风险的场景，你也不希望所乘坐的飞机，导航系统是用 AI 写的吧，即使它通过了测试。</p>
+<p><br/></p>
+<p>提供足够多的上下文，可以能提升概率，却无法改变「它是一种概率」的本质。</p>
+<p>所以上下文工程，其实在一定程度上掩盖了问题，它强行把结果与努力程度挂钩。</p>
+<p>除此之外，提升概率是有代价的，也有极限，对结果正确性的要求越严格，成本就越高，就得考虑值不值得的问题了。</p>
+<p>举个似乎不太恰当的例子，即使给出再多的上下文，对比 AI 两次生成的代码，也不可能完全一样。</p>
+<h3 id="掌控-ai">3. 掌控 AI</h3>
+<p>认识到 AI 的概率本质之后，我们会不会对大模型感到失望呢？反而不会。</p>
+<ul>
+<li><p>无数历史表明，当人们开始认识到工具的局限性之后，非但不会弃用工具，反而是能把它用得更好了。因为在迷信阶段人们会滥用工具，很多场景都用得不对，所以成效甚微。一旦破除了迷信，就能大幅度的降低成本，提升性价比，反而显得工具更加重要的了。</p></li>
+<li><p>并且，一旦我们提升了认知，摸清了工具的局限和边界之后，看待问题的方式也就变了。我们会考虑，怎么转化问题，让 AI 可以解决它。或者拆分问题，让 AI 低成本的解决问题的一部分（想到 MCP 了）。</p></li>
+</ul>
+<p><br/></p>
+<p>回到 AI 编程，当 Cursor 总是无法准确的完成需求时，我们不再「只是」反思是否自己没有提供足够的上下文，是否自己用的不对。</p>
+<p>还会考虑，原始问题是否真的适合用 AI 全部解决，能否换一种思路，让 AI 解决它擅长的部分。</p>
+<p>比如说，即使一个完整的需求对实现方式的要求非常严格，也可以分成几个阶段。</p>
+<p>或者先让 AI 去完成草图，再由人类精确调整。或者先让 AI 开发某些模块，再由人类拼起来。</p>
+<p>这肯定会降低问题的原始复杂度，将问题转化成适合用 AI 解决的问题。</p>
+<p><br/></p>
+<p>AI 工具跟以往的其他工具，并没有什么太多的不同。</p>
+<p>能被人类掌控，才是发展的第一步。</p>
+<p>网上有很多文章，很少提及 AI 不好/不适合的场景，这是不完整的。</p>
+<p>不适合也不一定不用它，知道哪里不适合反而才可以更好的使用它。</p>
+<h3 id="结语">结语</h3>
+<p>从人类认识到 AI 的局限性，开始思考它的适用场景开始，才进入到 AI 的理性发展阶段。</p>
+<p>在阅读相关资料和文章的时候，很多论点都是有意修饰过的，需要我们时刻保有自己的认知，最好的办法就是亲身实践。</p>
+<p>当有了一个新概念、新趋势的时候，亲自去试试，而不是人云亦云，会发现很多事情不是传说的那样。</p>
+<p><br/></p>
+<p>当然未来 AI 如何发展，是不可预知的。</p>
+<p>本文也只是对最近这段时间的 AI 使用，做了一些总结。</p>
+<p>不排除这些观点以后有被推翻的可能，但认识的发展本来就是螺旋上升的。</p>
+<p>即使理解错了，也能代表现在最成熟的想法。以此为基础更新迭代，仍然是有用的。</p>
+<h3 id="后记">后记</h3>
+<p>最近随着 GPT 5.2 的发布，又一次加深了我的理解，</p>
+<ul>
+<li><p>大模型幻觉问题确实无法根除，最聪明的模型，连<a href="https://36kr.com/p/3596739654156289" target="_blank" rel="noopener">手指</a>都数不清楚，你敢让这样的模型做手术吗。概率本质 +1</p></li>
+<li><p>大模型之间的能力差距，已经小到可以忽略不计了。新模型再怎么吹牛，提升其实也没多大。边际效用递减 +1</p></li>
+<li><p>互联网上 AI 生成的内容越来越多，再拿这些内容去训练新模型，幻觉问题肯定会更严重，大模型快要吃完「好内容」的红利了。「复读机」无法真正的「思考」 +1</p></li>
+</ul>
+<p><br/></p>
+<p>这不是说 AI 不行了，而是说它有局限性。</p>
+<p>虽然有很多场景已经离不开 AI 了，但我们也不应该迷信广告，而是要看「疗效」。</p>
+<p><br/></p>
+<p>此外，AI 的发展前景，也不全是积极的，也有消极的一面。</p>
+<p>这很明显，当前 Cursor 这么好用，是因为参考代码都是人写的。</p>
+<p>等大部分的代码都是由 AI 生成乱写的时候，你猜它会给你推荐什么。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2025/12/02/efficiency/" rel="next" title="作为一线开发，我是如何使用 AI 提效的">
+                <i class="fa fa-chevron-left"></i> 作为一线开发，我是如何使用 AI 提效的
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">314</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#重塑世界"><span class="nav-number">1.</span> <span class="nav-text">1. 重塑世界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概率特性"><span class="nav-number">2.</span> <span class="nav-text">2. 概率特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#掌控-ai"><span class="nav-number">3.</span> <span class="nav-text">3. 掌控 AI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后记"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>

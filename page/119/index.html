@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/02/25/what-are-people-saying/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2019/02/26/algebraic-effects/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/25/what-are-people-saying/" itemprop="url">别人在说什么</a></h1>
+                <a class="post-title-link" href="/2019/02/26/algebraic-effects/" itemprop="url">Algebraic Effects 是什么鬼</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T00:00:00+08:00">
-                2019-02-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T00:00:00+08:00">
+                2019-02-26
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -347,128 +347,250 @@
       
         
           
-            <blockquote>
-<p>你们不要论断人，免得你们被论断。</p>
-</blockquote>
-<blockquote>
-<p>因为你们怎样论断人，也必怎样被论断；</p>
-</blockquote>
-<blockquote>
-<p>你们用什么量器量给人，也必用什么量器量给你们。</p>
-</blockquote>
-<blockquote>
-<p>—— 马太福音 7:1,7:2</p>
-</blockquote>
+            <h3 id="背景">背景</h3>
+<p><a href="https://github.com/facebook/react/releases/tag/v16.8.0" target="_blank" rel="noopener">React 16.8.0</a>开始已经支持 <a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">Hooks</a>了，</p>
+<p>传言 Hooks 受到了<a href="https://github.com/reactjs/rfcs/blob/master/text/0068-react-hooks.md#credits-and-prior-art" target="_blank" rel="noopener">Algebraic Effects</a>的启发，</p>
+<p>毕竟React团队有不少<a href="https://github.com/ocamllabs/ocaml-effects-tutorial#2-effectful-computations-in-a-pure-setting" target="_blank" rel="noopener">OCaml</a>开发者。</p>
 <p><br/></p>
 <blockquote>
-<p>你们不要论断人，就不被论断；</p>
+<p>OCaml with support for (unchecked) algebraic effects and handlers.</p>
 </blockquote>
 <blockquote>
-<p>你们不要定人的罪，就不被定罪；</p>
+<p>Effects and handlers provide concurrency and compose part of <a href="https://github.com/ocamllabs/ocaml-multicore" target="_blank" rel="noopener">Multicore OCaml</a>.</p>
 </blockquote>
 <blockquote>
-<p>你们要饶恕人，就必蒙饶恕。</p>
+<p>—— <a href="http://ocamllabs.io/doc/effects.html" target="_blank" rel="noopener">Algebraic Effects and Handlers</a></p>
+</blockquote>
+<p><br/></p>
+<p>以下我将algebraic effects当做专题来进行了调研，其中涉及了很多能力之外的知识，</p>
+<p>因此，出现理解上的错误是不可避免的。</p>
+<p>就当是阶段性的总结吧，读者还请注意分辨，茶余饭后止增笑耳。</p>
+<h3 id="delimited-continuation">1. delimited continuation</h3>
+<p>但是究竟什么是Algebraic Effects，查了很多资料都没找到答案，</p>
+<p>Sam Galson有一篇文章<a href="https://medium.com/yld-engineering-blog/continuations-coroutines-fibers-effects-e163dda9dedc" target="_blank" rel="noopener">Continuations, coroutines, fibers, effects</a>从JS的角度介绍了react的理论基础，</p>
+<p>里面提到了<a href="https://en.wikipedia.org/wiki/Delimited_continuation" target="_blank" rel="noopener">Delimited Continuation</a>，它可用来实现各种effects。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-9631b2677b32eaaa.png" /></p>
+<p><br/></p>
+<p>其中<a href="https://en.wikipedia.org/wiki/Continuation" target="_blank" rel="noopener">Continuation</a>应该是一个很熟悉的概念了，</p>
+<p>current continuation（当前位置的continuation）表示程序从某个位置开始，之后到程序结束所有后续的计算，</p>
+<p>Scheme中的<code>call/cc</code>就可以用来获取当前位置的 continuation。</p>
+<p><br/></p>
+<p>至于Delimited Continuation则表示“有界的” continuation，它需要两个操作符，</p>
+<p>例如在Racket中，它们是<code>reset</code>和<code>shift</code>，</p>
+<p>（1）<code>shift</code>用来捕获当前位置的continuation</p>
+<p>（2）<code>reset</code>用来表示<code>shift</code>生效的时间范围（调用顺序）</p>
+<p><br/></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(* 2 </span><br><span class="line">  (reset </span><br><span class="line">    (+ 1 </span><br><span class="line">      (shift k (k 5))</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>以上代码中，<code>shift</code>捕获了当前位置的continuation，并绑定到<code>k</code>上，</p>
+<p>这个continuation是以<code>reset</code>开始调用时未界限的，即，这个continuation可以表示为<code>(+ 1 [*])</code>，</p>
+<p>其中的<code>*</code>为continuation中待填充的值。</p>
+<p><br/></p>
+<p>后面的<code>* 2</code>在<code>reset</code>调用之前，因此不包含在<code>shift</code>捕获的continuation中。</p>
+<p>这种截止到<code>reset</code>为止的continuation，就是<strong>delimited continuation</strong>。</p>
+<p><br/></p>
+<p>下面我们来看下执行逻辑，</p>
+<p>（1）<code>shift</code>中直接调用了<code>(k 5)</code>，它会调用continuation，</p>
+<p>（2）最后<code>shift</code>的返回值将作为<code>reset</code>的值。</p>
+<p><br/></p>
+<p>所以，以上代码相当于，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(* 2 </span><br><span class="line">  (+ 1 5)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>更多例子，可参考<a href="https://en.wikipedia.org/wiki/Delimited_continuation" target="_blank" rel="noopener">Delimited Continuation</a>，</p>
+<p>与一般的Continuation（undelimited continuation）不同的是，</p>
+<p>delimited continuation可以看做是一个函数调用，它是有返回值的。</p>
+<p><br/></p>
+<p>多个<code>shift</code>的场景，<code>k</code>里面又有<code>shift</code>，</p>
+<p>第二个<code>shift</code>返回并不会导致<code>reset</code>结束，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(reset</span><br><span class="line">   (begin</span><br><span class="line">     (shift k (cons 1 (k (void))))</span><br><span class="line">     (shift k (cons 2 (k (void))))</span><br><span class="line">     null))</span><br></pre></td></tr></table></figure>
+<h3 id="模拟-generator">2. 模拟 generator</h3>
+<p>有了delimited continuation我们就可以实现很多常见的effects了，</p>
+<p>包括IO操作，yield，try/catch等等，</p>
+<p><br/></p>
+<p>下面直接引用这篇文章中的例子，<a href="https://medium.com/yld-engineering-blog/continuations-coroutines-fibers-effects-e163dda9dedc" target="_blank" rel="noopener">Continuations, coroutines, fibers, effects</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const octuple &#x3D; n &#x3D;&gt;</span><br><span class="line">  reset(() &#x3D;&gt; &#123;</span><br><span class="line">    const continueWith &#x3D; shift(cont &#x3D;&gt; &#123;</span><br><span class="line">      const doubled &#x3D; cont(n);</span><br><span class="line">      const quadrupled &#x3D; cont(doubled);</span><br><span class="line">      return cont(quadrupled);</span><br><span class="line">    &#125;);</span><br><span class="line">    return continueWith * 2;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>其中<code>shift</code>中的<code>cont</code>，表示从<code>shift</code>开始截止到<code>reset</code>为止的delimited continuation，即，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x &#x3D;&gt; x * 2</span><br></pre></td></tr></table></figure>
+<p>并且<code>shift</code>中对<code>cont</code>调用了好几次，<code>shift</code>的返回值将作为<code>reset</code>的值。</p>
+<p>因此，<code>return continueWith * 2;</code>是当做<code>cont</code>执行的，而不是执行完<code>shift</code>再<code>return continueWith * 2;</code>。</p>
+<p><code>shift</code>中<code>return cont(quadrupled);</code>的时候，<code>reset</code>就返回了。</p>
+<p><br/></p>
+<p>有了delimited continuation我们就可以事先generator了，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const getAddressByUsername &#x3D; username &#x3D;&gt;</span><br><span class="line">  reset(() &#x3D;&gt; &#123;</span><br><span class="line">    const userId &#x3D; shift(getUserId.bind(username));</span><br><span class="line">    const address &#x3D; shift(getUserAddressById.bind(userId));</span><br><span class="line">    &#x2F;* continue with address *&#x2F;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>其中<code>getUserId</code>中会调用<code>cont</code>，而这个<code>cont</code>则是，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">userId &#x3D;&gt; &#123;</span><br><span class="line">    const address &#x3D; shift(getUserAddressById.bind(userId));</span><br><span class="line">    &#x2F;* continue with address *&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以调用<code>cont</code>的时候，会导致第二个<code>shift</code>执行，</p>
+<p>第二个<code>shift</code>又产生一个新的<code>cont</code>，表示第二个<code>shift</code>之后的continuation。</p>
+<p><br/></p>
+<p>我们看到有了delimited continuation，很多复杂的控制结构都可以用它来实现了，</p>
+<p>甚至try/catch都可以。</p>
+<p><br/></p>
+<p>通过改写<code>shift</code>的写法，我们将它放到<code>reset</code>尾部，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">onst hello &#x3D; () &#x3D;&gt;</span><br><span class="line">  reset(() &#x3D;&gt; &#123;</span><br><span class="line">    const continueWith &#x3D; shift()</span><br><span class="line">    return continueWith + &#39;world&#39;;</span><br><span class="line">  &#125;, cont &#x3D;&gt; &#123;</span><br><span class="line">    return cont(&#39;hello&#39;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>然后将<code>reset</code>改成<code>handle</code>，将<code>shift</code>改成<code>effect</code>，</p>
+<p>并且为了区分其他的<code>handle</code>调用，把<code>effect</code>写为<code>handle</code>的形参。</p>
+<p><br/></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const hello &#x3D; () &#x3D;&gt;</span><br><span class="line">  handle((effect) &#x3D;&gt; &#123;</span><br><span class="line">    const continueWith &#x3D; effect(false)</span><br><span class="line">    return continueWith + &#39;world&#39;;</span><br><span class="line">  &#125;, (isShy, cont) &#x3D;&gt; &#123;</span><br><span class="line">    return isShy ? cont(&#39;goodbye&#39;) : cont(&#39;hello&#39;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="algebraic-effects">3. algebraic? effects?</h3>
+<p>但是，为什么<code>shift</code>是一种<code>effect</code>呢？</p>
+<p>这个<code>effect</code>为什么又是<code>algebraic</code>的呢？</p>
+<p><br/></p>
+<p>要揭开这个谜题还得去啃论文了。</p>
+<h4 id="model-effects">3.1 model effects</h4>
+<p>首先在<a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/08/algeff-tr-2016-v2.pdf" target="_blank" rel="noopener">Algebraic Effects for Functional Programming</a>中，作者Daan Leijen提到，</p>
+<blockquote>
+<p>Algebraic effect handlers, are recently gaining in popularity as a purely functional approach to modeling effects.</p>
 </blockquote>
 <blockquote>
-<p>—— 路加福音 6:37</p>
+<p>In this article, we give an end-to-end overview of practical algebraic effects in the context of a compiled implementation in the Koka language.</p>
 </blockquote>
-<h3 id="揣测动机">揣测动机</h3>
-<p>诚如圣经中指出的那样，我们不要论断别人（don't judge），</p>
-<p>因为论断别人是<strong>用自己的标准</strong>衡量别人。</p>
+<p><br/></p>
+<p>所以，<code>algebraic effect handlers</code>是一种model（建模） effect的方式。</p>
+<p>作者在<code>Koka</code>语言中，实践了一把<code>algebraic effects</code>。</p>
+<p><br/></p>
+<p>后文作者还说，</p>
+<blockquote>
+<p>Algebraic effects (introduced by Plotkin and Power in 2002 [34]) and algebraic effect handlers (introduced by Plotkin and Pretnar in 2009 [33]), are recently gaining in popularity as a purely functional approach to modeling effects.</p>
+</blockquote>
+<p><br/></p>
+<p>因此，引文[34]中肯定提到了Algebraic effects和algebraic effect handlers，</p>
+<p>他们都是建模effect的手段。</p>
+<h4 id="computational-λ-calculus">3.2 computational λ-calculus</h4>
+<p>我们找到了这篇文献，<a href="http://homepages.inf.ed.ac.uk/gdp/publications/alg_ops_gen_effects.pdf" target="_blank" rel="noopener">Algebraic Operations and Generic Effects</a>，作者Gordon Plotkin and John Power是这么说的，</p>
+<blockquote>
+<p>Eugenio Moggi, in [13, 15], introduced the idea of giving a uniﬁed category theoretic semantics for computational eﬀects, ...</p>
+</blockquote>
+<blockquote>
+<p>Examples of such eﬀects are: nondeterminism, probabilistic nonde-terminism, exceptions, interactive input/output, side-eﬀects, and continuations with, ...</p>
+</blockquote>
+<p><br/></p>
+<p>作者说Eugenio Moggi从category theory出发，给computational effects提供了统一的语义（这个理论模型叫computational λ-calculus），</p>
+<p>这些effects可以涵盖 nondeterminism, probabilistic nonde-terminism, exceptions, interactive input/output, side-eﬀects, and continuations，这么多场景。</p>
+<p>也就是这些东西可以用统一的框架来解释。</p>
+<p><br/></p>
+<p>作者还说，Eugenio Moggi发明的computational λ-calculus其实跟类型化 λ-calculus差不多，</p>
+<blockquote>
+<p>The computational λ-calculus is essentially the same as the simply typed λ-calculus except for making a careful systematic distinction between computations and values.</p>
+</blockquote>
+<p>唯一不同的是，computational λ-calculus严格区分的values和computations。</p>
 <p><br/></p>
 <blockquote>
-<p>Judging a person does not define who they are, it defines who you are.</p>
+<p>However, the calculus does not contain operations, the constructs that actually create the eﬀects.</p>
+</blockquote>
+<p>不过computational λ-calculus也有缺陷，它不包含operations。</p>
+<p>而所谓operations，就是那些可以产生effects的东西。</p>
+<p><br/></p>
+<p>但是，Eugenio Moggi还是很强的，虽然computational λ-calculus不包含operations，但是computational metalanguage包含了，</p>
+<blockquote>
+<p>Moggi’s computational metalanguage does contain operations, and his paper [14] includes semantics for them, but he only demanded naturality of the operations in C, and he did not develop a body of theory in support of that semantics. Here, by demanding the stronger coherence condition of parametrised naturality in CT ,</p>
+</blockquote>
+<blockquote>
+<p>we provide a notion of algebraic operations, which we support by equivalence theorems to indicate deﬁnitiveness of the axioms, and which are further supported by our development of a uniﬁed operational semantics in [20].</p>
+</blockquote>
+<p>只是语义方面，Eugenio Moggi做的还不够。</p>
+<p><br/></p>
+<p>因此，作者发明了一个概念称为algebraic operations，来在语义层面进行统一。</p>
+<p>所谓，algebraic operations，说白了不过是，</p>
+<blockquote>
+<p>Algebraic operations are, in the sense we shall make precise, a natural generalisation, from Set to an arbitrary symmetric monoidal V-category C with cotensors, of the usual operations of universal algebra, taking T to be a strong V-monad on C.</p>
 </blockquote>
 <p><br/></p>
-<p>可是，到底什么叫做<strong>用自己的标准</strong>呢？我之前也很不能理解。</p>
-<p>后来才慢慢认识到，用自己的标准就是<strong>站在自己的角度</strong>，</p>
-<p>用自己的<strong>是非观</strong>衡量别人的对错，并认为这是<strong>唯一的</strong>结论。</p>
+<p>当然新概念总是会有定义的，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-200782f6dccd0c8b.png" /></p>
 <p><br/></p>
-<p>事实上，同样的行为用不同的<strong>标准</strong>进行<strong>评判</strong>，将得出不一样的结论来，</p>
-<p>岳飞抗金到底是爱国还是阻碍了历史的进程？</p>
-<p>诸葛亮的五次北伐，到底是不是正确的决定？</p>
+<p>所以，<code>algebraic operations</code>主要还是从语义角度来看的。</p>
+<p>它给computational λ-calculus扩充了operation，还给这些operation选了一个catetory theory的语义。</p>
 <p><br/></p>
-<p>结论是会受<strong>评判标准</strong>所影响的，很多事情也根本没有标准答案。</p>
-<p>我们需要摒弃<strong>结论的唯一性</strong>，才能看清不一样的<strong>标准</strong>。</p>
+<p>至于computational λ-calculus的细节，可以查阅这几篇，</p>
+<p><a href="https://core.ac.uk/download/pdf/21173011.pdf" target="_blank" rel="noopener">Notions of computation and monads</a></p>
+<p><a href="https://www.irif.fr/~mellies/mpri/mpri-ens/articles/moggi-computational-lambda-calculus-and-monads.pdf" target="_blank" rel="noopener">Computational Lambda-Calculus and Monads</a></p>
+<p><a href="https://www.ics.uci.edu/~jajones/INF102-S18/readings/09_Moggi.pdf" target="_blank" rel="noopener">An Abstract View of Programming Languages</a></p>
+<h4 id="operations-vs-effects">3.3 operations vs effects</h4>
+<p>以上提到了computational effects，algebraic operation，</p>
+<p>怎么就变成algebraic effects了呢？</p>
 <p><br/></p>
-<p>此外，除了论断别人的<strong>行为</strong>之外，有时候我们还会<strong>揣测别人的动机</strong>。</p>
-<p>这是一件很<strong>危险</strong>的事情，因为非常容易陷入自己的假设之中，</p>
-<p>形成一个又一个<strong>误解</strong>。</p>
+<p>这个名词来自这篇文献，<a href="http://homepages.inf.ed.ac.uk/gdp/publications/Op_Sem_Comp_Lam.pdf" target="_blank" rel="noopener">Adequacy for Algebraic Eﬀects</a>，它是上一篇文献的引文，作者还是Gordon Plotkin and John Power</p>
+<blockquote>
+<p>Moggi proposed a monadic account of computational eﬀects. He also presented the computational λ-calculus ... a core call-by-value functional programming language for eﬀects; the eﬀects are obtained by adding appropriate operations.</p>
+</blockquote>
+<p>嗯嗯，跟我们理解的一致。</p>
 <p><br/></p>
-<p>比如，岳飞抗金的动机到底是什么？他安的什么心？</p>
-<p>诸葛亮北伐的动机又是什么？</p>
+<blockquote>
+<p>The question arises as to whether one can give a corresponding treatment of operational semantics.</p>
+</blockquote>
+<blockquote>
+<p>In this paper we give such a treatment in the case of algebraic eﬀects where the operations are given by a single-sorted algebraic signature Σ; semantically such an n-ary operation f is taken to denote a family of morphisms fx : T(x) n −→ T(x) parametrically natural with respect to morphisms in the Kleisli category C T ; T is then said to support the family f x .</p>
+</blockquote>
 <p><br/></p>
-<p>这样考虑问题，很容易对他人的<strong>真实意图</strong>造成<strong>曲解</strong>。</p>
-<p>而且被妄加揣测的动机，是很难澄清的，当事人经常是<strong>百口莫辩</strong>。</p>
-<h3 id="理解动机">理解动机</h3>
-<p>然而，论断别人和揣测动机，也并非一无是处，</p>
-<p>我们总是可以找出有用的<strong>部分</strong>。</p>
+<p>这里它把operation的语法用single-sorted sigma代数来描述，</p>
+<p>而这些operation的语义用category进行解释。</p>
 <p><br/></p>
-<p>为了避免自己一错再错，首先需要的是<strong>提醒自己</strong>，</p>
-<p>论断和揣测都只是自己做出的一种<strong>假设</strong>，</p>
-<p>这些假设的正确与否，还要用<strong>新事实</strong>不断进行<strong>检验</strong>。</p>
+<p>所以，operation是一个语法概念，effects是语义概念。</p>
+<p>从 <a href="https://www.eff-lang.org/handlers-tutorial.pdf" target="_blank" rel="noopener">An Introduction to Algebraic Eﬀects and Handlers</a>这篇文献中我们可以看出来，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-b653060aab9f0da8.png" /></p>
 <p><br/></p>
-<p>假设只有<strong>暂时的</strong>正确性，可以随时被推翻。</p>
-<p>理解了这一点之后，我们就安全的得到了一种<strong>高效的沟通</strong>方法了。</p>
+<blockquote>
+<p>Algebraic eﬀects are an approach to computational eﬀects based on a premise that impure behaviour arises from a set of operations such as get &amp; set for mutable store, read &amp; print for interactive input &amp; output, or raise for exceptions [16,18].</p>
+</blockquote>
+<blockquote>
+<p>This naturally gives rise to handlers not only of exceptions, but of any other eﬀect, yielding a novel concept that, amongst others, can capture stream redirection, backtracking, co-operative multi-threading, and delimited continuations [21,22,5].</p>
+</blockquote>
 <p><br/></p>
-<p>我们知道，在工作和生活中，沟通和交流是必不可少的，</p>
-<p>人们用语言或文字，表达了自己心中的<strong>想法</strong>，</p>
-<p>因此我们知道，讲究<strong>说话方式</strong>，才能让别人更容易理解自己。</p>
+<p>原来加入到computational λ-calculus中的operation，初衷是为了表示effects，</p>
+<p>并且其语义还是algebraic的，所以，称为algebraic effects还是挺合适的，</p>
+<p>只不过algebraic太笼统了，容易让人产生其他联系。</p>
+<p>把algebraic effects理解为algebraic operation的定义可能更好一些。</p>
+<h4 id="handler">3.4 handler</h4>
+<p>这篇文章<a href="https://www.eff-lang.org/handlers-tutorial.pdf" target="_blank" rel="noopener">An Introduction to Algebraic Eﬀects and Handlers</a>中介绍了algebraic effects handler的用法，</p>
+<p>加上handler之后，就和delimited continuation的概念串起来了。</p>
+<p>后文还介绍了用delimited continuation实现各种effects的方法，</p>
+<p>例如，对于input/output</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-b9b39c23f7786869.png" /></p>
 <p><br/></p>
-<p>另一方面，讲究<strong>聆听技巧</strong>，也才能更容易理解别人想表达什么。</p>
-<p>须知对方要表达的不是语言，而是语言背后的<strong>想法</strong>。</p>
+<p>对于exception，</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-ad3d214f7968ef96.png" /></p>
 <p><br/></p>
-<p>所以，透过语言识别想法，才是沟通的第一要务。</p>
-<p>对方说的不准确，诚然是有问题的，但是<strong>不要纠结</strong>于此，</p>
-<p>我们的目的是<strong>理解</strong>，而不是指正别人的错误。</p>
-<h3 id="跳出字面含义">跳出字面含义</h3>
-<p>揣测别人<strong>为什么要这么说</strong>，比<strong>理解别人说的是什么</strong>，更加重要，</p>
-<p>虽然这是有风险的，我们很容易揣测失败，</p>
-<p>但是如果我们已经知道这是一种<strong>假设</strong>，就没有太大问题了。</p>
+<p>对于non-determinism</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-1ec0cf263b903d6e.png" /></p>
 <p><br/></p>
-<p>我们很容易停留在理解<strong>字面含义</strong>上，</p>
-<p>比如，早晨打招呼时进行的问候，说“吃了吗”，不是问是否吃饭了没有，</p>
-<p>仔细观察我们会发现，人们的日常沟通，其实大多数也是“言不由衷”的。</p>
-<p><br/></p>
-<p>语言<strong>并没有准确</strong>的表达人们的想法，也<strong>并不是为了</strong>准确的表达，</p>
-<p>更多的是表达一种<strong>情绪</strong>，以得到<strong>共鸣</strong>。</p>
-<p><br/></p>
-<p>在软件开发过程中，与别人讨论解决方案，</p>
-<p>讨论的并不是方案本身，而是自己对问题的看法。</p>
-<p><br/></p>
-<p>问题来源于不能达成的预期，解决方案<strong>缓解</strong>了这种痛苦。</p>
-<p>因此，我们要体谅别人的情绪，不要太在意对方说的是什么。</p>
-<p>所以说，<strong>解决问题</strong>本身，正是一种<strong>情绪的表达</strong>。</p>
-<h3 id="杠精的自知之明">杠精的自知之明</h3>
-<p>“杠精”是网络用语，指的是抬杠成瘾的一类群体。</p>
-<p>他们不管别人说的是什么，总是先反驳挑刺，为了反对而反对。</p>
-<p><br/></p>
-<p>这里提到了“杠精”，其实并不是为了反对这种做法，</p>
-<p>因为，在某些情况下，我们未必不是别人眼中的“杠精”。</p>
-<p>所以要有杠精的<strong>自知之明</strong>。</p>
-<p><br/></p>
-<p>为了避免自己成为“杠精”，就要使用上文提到的沟通方式了，</p>
-<p>以<strong>理解和体谅别人</strong>作为沟通的出发点，没必要纠结谁对谁错。</p>
-<p><br/></p>
-<p>杠精反驳的通常是，“你不该这么想”“你不该这么说”“你的逻辑有问题”，</p>
-<p>作为擅于聆听的沟通者而言，本没有“该不该”的，</p>
-<p>我们需要理解对方的<strong>情感</strong>和<strong>痛苦</strong>。</p>
-<p><br/></p>
-<p>同时，纠正别人的错误也是需要方法的，抬杠是效率最低的一种。</p>
-<p>即便是错的不能再错的论点，也应该考虑<strong>特殊情况下的适用性</strong>，</p>
-<p>同时还要考虑回话方式。况且，对方很可能不是为了表达论点这么简单。</p>
+<p>还有好多，毕竟computational λ-calculus中的operation就是为了建模各种effects的。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2019-02-26-algebraic-effects/1023733-4ef97b9314b0222c.png" /></p>
+<p>出自<a href="https://core.ac.uk/download/pdf/21173011.pdf" target="_blank" rel="noopener">Notions of computation and monads</a></p>
+<hr />
 <h3 id="结语">结语</h3>
-<p>我们说的并非我们所想的，总是有言外之音，</p>
-<p>这些言外之音就是对话者自身的<strong>真实意图</strong>，以及想要宣泄的<strong>感情</strong>，</p>
-<p>不考虑言外之音，纠结字面含义的沟通方式，就失去了沟通的灵魂。</p>
+<ol type="1">
+<li>λ calculus 只建模了values不包含computaion。</li>
+<li>Eugenio Moggi发明了computational λ-calculus基于category theory建模了values和computation。</li>
+<li>作为扩展Gordon Plotkin and John Power为computational λ-calculus增加了operation用来建模effect。</li>
+<li>operation的语法用a single-sorted algebraic signature Σ表示，语义用a family of morphisms（algebraic operation）表示。</li>
+<li>由于operation可以表示effect，所以这样的algebraic operation，又称为algebraic effects。</li>
+<li>nondeterminism, probabilistic nonde-terminism, exceptions, interactive input/output, side-eﬀects, and continuations 都是effects。</li>
+<li>它们都可以用delimited continuation实现。</li>
+</ol>
 <p><br/></p>
-<p>理解别人的想法是困难的，也很容易造成误解，</p>
-<p>这没什么，只要我们<strong>存疑</strong>自己，不断纠正自己的认识，</p>
-<p>更重要的则是，有一颗<strong>愿意倾听别人</strong>的善心。</p>
+<p>暂且这么理解吧，中间肯定会有很多理解不当之处，</p>
+<p>因为我个人也不是学习这个方向的，所以阅读者还请多多见谅，</p>
+<p>有专业人士路过的话，请不吝指正。</p>
+<hr />
+<h3 id="参考">参考</h3>
+<p><a href="https://github.com/facebook/react/releases/tag/v16.8.0" target="_blank" rel="noopener">React 16.8.0</a></p>
+<p><a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">Hooks</a></p>
+<p><a href="https://github.com/reactjs/rfcs/blob/master/text/0068-react-hooks.md" target="_blank" rel="noopener">github: reactjs/rfcs</a></p>
+<p><a href="https://github.com/ocamllabs/ocaml-effects-tutorial#2-effectful-computations-in-a-pure-setting" target="_blank" rel="noopener">OCaml: Concurrent Programming with Effect Handlers</a></p>
+<p><a href="https://github.com/ocamllabs/ocaml-multicore" target="_blank" rel="noopener">Multicore OCaml</a></p>
+<p><a href="http://ocamllabs.io/doc/effects.html" target="_blank" rel="noopener">Algebraic Effects and Handlers</a></p>
+<p><a href="https://medium.com/yld-engineering-blog/continuations-coroutines-fibers-effects-e163dda9dedc" target="_blank" rel="noopener">Continuations, coroutines, fibers, effects</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Delimited_continuation" target="_blank" rel="noopener">Delimited Continuation</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Continuation" target="_blank" rel="noopener">Continuation</a></p>
 <p><br/></p>
-<blockquote>
-<p>上善若水，水善利万物而不争。</p>
-</blockquote>
+<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/08/algeff-tr-2016-v2.pdf" target="_blank" rel="noopener">Algebraic Effects for Functional Programming</a></p>
+<p><a href="http://homepages.inf.ed.ac.uk/gdp/publications/alg_ops_gen_effects.pdf" target="_blank" rel="noopener">Algebraic Operations and Generic Effects</a></p>
+<p><a href="https://core.ac.uk/download/pdf/21173011.pdf" target="_blank" rel="noopener">Notions of computation and monads</a></p>
+<p><a href="https://www.irif.fr/~mellies/mpri/mpri-ens/articles/moggi-computational-lambda-calculus-and-monads.pdf" target="_blank" rel="noopener">Computational Lambda-Calculus and Monads</a></p>
+<p><a href="https://www.ics.uci.edu/~jajones/INF102-S18/readings/09_Moggi.pdf" target="_blank" rel="noopener">An Abstract View of Programming Languages</a></p>
+<p><a href="http://homepages.inf.ed.ac.uk/gdp/publications/Op_Sem_Comp_Lam.pdf" target="_blank" rel="noopener">Adequacy for Algebraic Eﬀects</a></p>
+<p><a href="https://www.eff-lang.org/handlers-tutorial.pdf" target="_blank" rel="noopener">An Introduction to Algebraic Eﬀects and Handlers</a></p>
 
           
         
@@ -507,7 +629,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/118/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/118/">118</a><span class="page-number current">119</span><a class="page-number" href="/page/120/">120</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/120/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/118/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/118/">118</a><span class="page-number current">119</span><a class="page-number" href="/page/120/">120</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/120/">&gt;</a>
   </nav>
 
 
@@ -553,7 +675,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

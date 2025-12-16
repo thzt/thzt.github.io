@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/02/24/recursive-function-1/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/02/25/recursive-function-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/24/recursive-function-1/" itemprop="url">递归函数（一）：开篇</a></h1>
+                <a class="post-title-link" href="/2017/02/25/recursive-function-2/" itemprop="url">递归函数（二）：编写递归函数的思路和技巧</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-24T00:00:00+08:00">
-                2017-02-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-25T00:00:00+08:00">
+                2017-02-25
               </time>
             
 
@@ -347,40 +347,134 @@
       
         
           
-            <p>提到函数式编程，人们最多想到的可能是它的某些性质，</p>
-<p>例如，不可变性，无副作用，惰性求值，类型推导，等等。</p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-02-25-recursive-function-2/1023733-497eef3766876271.png" /></p>
 <p><br/></p>
-<p>然而，这些性质可能并不是它能吸引粉丝的根本原因，</p>
-<p>而是它从工业界触手可及的直接应用出发，带我们看到了人类能力的边界，</p>
-<p>函数式编程仿佛一座桥梁，让我们普通程序员也能窥探计算机科学的奥秘。</p>
+<p>递归，是一个熟悉而陌生的概念，说它熟悉，是因为人们经常提起它，</p>
+<p>而说它陌生，指的是人们在实际编程中几乎不会主动使用它。</p>
 <p><br/></p>
-<p><span data-katex="\lambda"></span>演算是一个简洁的演算系统，但是它的计算能力却能比肩复杂的现代计算机，</p>
-<p>因为它的简洁性质，以及与Lisp语言的紧密关系，对<span data-katex="\lambda"></span>演算有所了解的程序员也比较多。</p>
+<p>给定一个问题，如果本质上它能看做一个调用自身的规模较小的一个子问题来求解，</p>
+<p>那么给出一个递归的算法解，就是很自然的。</p>
+<p>然而，即使是这样，编制一个递归函数也是一件令人头疼的事情。</p>
 <p><br/></p>
-<p>提到编程语言，上下文无关文法，以及正则文法，熟悉的人可能会更多，</p>
-<p>书写正则表达式，开发和应用DSL，甚至阅读编程语言的语法规范，都离不开它们。</p>
+<p>本系列文章的目的，可能并不局限于指出如何编写一个递归函数，</p>
+<p>而是期望想从递归函数开始，了解它相关的科学知识，以达到对不同领域触类旁通的效果。</p>
 <p><br/></p>
-<p>然而，逻辑系统和递归函数论却鲜有人提及，</p>
-<p>对如何书写递归函数人们可能仍旧心存畏惧，对类型的推导过程和原理也如坠迷雾。</p>
+<h3 id="从一个简单的例子开始">1. 从一个简单的例子开始</h3>
+<p>首先，我们来重温一下递归的概念，</p>
+<p>维基百科上是这样描述的，</p>
+<blockquote>
+<p>递归（recursion），在数学与计算机科学中，是指在函数的定义中使用函数自身的方法。</p>
+</blockquote>
 <p><br/></p>
-<p>其实，这是一块广袤的领域，其背景知识可能涉及了数学归纳法，良基或结构归纳法，</p>
-<p>可计算性理论，不动点算子，哥德尔定理，以及证明论，模型论，等等。</p>
-<p>数学背景，我们可能还需要补充，抽象代数，集合论，数理逻辑等离散数学的内容。</p>
+<p>我们来看一个简单的例子吧。（<a href="https://www.haskell.org/" target="_blank" rel="noopener">Haskell</a>代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int</span><br><span class="line">fact 1 &#x3D; 1</span><br><span class="line">fact n &#x3D; n * fact (n-1)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>然而，我们的收获将是巨大的，</p>
-<p>我们会看到用有限表示无限的递归思想，以及由这种思想导致的各种计算模型的能力限制。</p>
-<p>递归与其他领域触类旁通之后，我们将走到数学，逻辑，计算机科学的交叉点上，</p>
-<p>我认为这是一件值得高兴的事情。</p>
-<hr />
-<p><a href="http://thzt.github.io/2017/02/24/recursive-function-1/">递归函数（一）：开篇</a></p>
-<p><a href="http://thzt.github.io/2017/02/25/recursive-function-2/">递归函数（二）：编写递归函数的思路和技巧</a></p>
-<p><a href="http://thzt.github.io/2017/03/03/recursive-function-3/">递归函数（三）：归纳原理</a></p>
-<p><a href="http://thzt.github.io/2017/03/06/recursive-function-4/">递归函数（四）：全函数与计算的可终止性</a></p>
-<p><a href="http://thzt.github.io/2017/03/09/recursive-function-5/">递归函数（五）：递归集与递归可枚举集</a></p>
-<p><a href="http://thzt.github.io/2017/03/10/recursive-function-6/">递归函数（六）：最多有多少个程序</a></p>
-<p><a href="http://thzt.github.io/2017/03/14/recursive-function-7/">递归函数（七）：不动点算子</a></p>
-<p><a href="http://thzt.github.io/2017/03/20/recursive-function-8/">递归函数（八）：偏序结构</a></p>
-<p><a href="http://thzt.github.io/2017/03/21/recursive-function-9/">递归函数（九）：最小不动点定理</a></p>
+<p>在这个例子中，</p>
+<p>第一行<code>fact :: Int -&gt; Int</code>表示了<code>fact</code>函数的类型，</p>
+<p>第二行和第三行定义了函数<code>fact</code>，</p>
+<p>我们看到第三行，在对<code>fact</code>函数定义的时候，等式右边又出现了<code>fact</code>，</p>
+<p>这样定义的函数<code>fact</code>是递归的。</p>
+<p><br/></p>
+<p>我们调用一下<code>fact</code>，来看看结果，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fact 10</span><br><span class="line">3628800</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>嗯嗯，<code>fact</code>就是阶乘函数。</p>
+<p><br/></p>
+<h3 id="写递归函数的步骤">2. 写递归函数的步骤</h3>
+<p>那么，给定一个问题，我们编写一个递归函数，要如何开始呢？</p>
+<p><br/></p>
+<p>####（1）递推式</p>
+<p>首先，我们要找到“递推式”。</p>
+<p><br/></p>
+<p>例如，在数学上阶乘的定义是，<span data-katex="f(n)=n!"></span>，这样的表述形式，不具有递推性。</p>
+<p>我们先要想办法把<span data-katex="f(n)"></span>用<span data-katex="f(n-1)"></span>表示出来。</p>
+<p><br/></p>
+<p>经过思考之后，我们可以证明，<span data-katex="f(n)=n*f(n-1)"></span>，</p>
+<p>于是，我们就走出了关键的第一步，得到了“递推式”。</p>
+<p><br/></p>
+<p>####（2）找出终止条件</p>
+<p>有了“递推式”还不行，我们还需要确定递推在什么时候终止。</p>
+<p>我们知道<span data-katex="f(1)=1"></span>，<span data-katex="f(2)=2*f(1)"></span>，<span data-katex="f(3)=3*f(2)"></span>，等等，</p>
+<p>因此，我们只需要指定<span data-katex="f(1)=1"></span>，那么递推就会在<span data-katex="f(n)"></span>，当<span data-katex="n=1"></span>的时候终止了。</p>
+<p><br/></p>
+<p>终止，就是不再调用规模更小的问题了。</p>
+<p>这时，终止条件是<span data-katex="f(1)=1"></span>。</p>
+<p><br/></p>
+<p>####（3）用数学归纳法证明解的正确性</p>
+<p>这一步是很重要的，有很多人都缺少证明递推式正确性的环节，</p>
+<p>但是，考虑到介绍<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95" target="_blank" rel="noopener">数学归纳法</a>及其扩展会占用不少篇幅，</p>
+<p>这里先略去，下一篇我们再回来讨论它。</p>
+<p><br/></p>
+<p>这里，我们先假定，根据“递推式”和“终止条件”，使用数学归纳法，</p>
+<p>我们已经证明了这样定义的<span data-katex="f(n)"></span>就是<span data-katex="n!"></span>。</p>
+<p><br/></p>
+<p>####（4）根据递推式和终止条件，编写程序</p>
+<p>有了“递推式”和“终止条件”，再编写程序就水到渠成了。</p>
+<p>很多人一上来就开始编码，就会感觉毫无头绪。</p>
+<p><br/></p>
+<p>我们再来看下那段程序，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int</span><br><span class="line">fact 1 &#x3D; 1</span><br><span class="line">fact n &#x3D; n * fact (n-1)</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>这不就是“递推式”和“终止条件”的忠实表示吗？</p>
+<p>我们用<code>fact 1 = 1</code>表示了<span data-katex="f(1)=1"></span>，</p>
+<p>用<code>fact n = n * fact (n-1)</code>表示了<span data-katex="f(n)=n*f(n-1)"></span>。</p>
+<p><br/></p>
+<h3 id="小技巧">3. 小技巧</h3>
+<p>我们再看个复杂一点的例子。</p>
+<p><br/></p>
+<p>在实际项目中，我们可能会遇到循环n次的场景，</p>
+<p>在循环过程中，我们会根据索引进行运算，然后将某些符合条件的运算放到最终的结果中。</p>
+<p><br/></p>
+<p>例如，我们选择10以内的所有偶数，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[x|x &lt;- [0..9], x &#96;mod&#96; 2 &#x3D;&#x3D; 0]</span><br><span class="line">[0,2,4,6,8]</span><br></pre></td></tr></table></figure>
+<p>使用以上列表解析（<a href="http://www.haskell.org/haskellwiki/List_comprehension" target="_blank" rel="noopener">list comprehension</a>）的方法，我们可以快速得到结果。</p>
+<p>但是这里，我们想要拿它来举例，介绍一个编写递归函数常用的小技巧。</p>
+<p><br/></p>
+<p>为了通用性，我们考虑循环<code>n</code>次，将索引传入函数<code>fn</code>，根据<code>fn</code>的返回值，将结果放入一个列表中。</p>
+<p>完成这个功能的函数我们记为<code>myLoop</code>。</p>
+<p><br/></p>
+<p>####（1）困境</p>
+<p>根据前文介绍的编写步骤，我们需要先找到“递推式”和“终止条件”。</p>
+<p><br/></p>
+<p>“终止条件”怎么写呢？</p>
+<p>假如我们定义的递归函数称为<code>myLoop</code>，那么<span data-katex="myLoop(0,fn)"></span>就是终止条件，它应该返回一个列表。</p>
+<p>但是这个列表在参数中没有，它随着递归调用的过程“积累”得到的。</p>
+<p><br/></p>
+<p>好吧，那我们看“递推式”。</p>
+<p><span data-katex="myLoop(n,fn)"></span>要用<span data-katex="myLoop(n-1,fn)"></span>的结果计算出来，</p>
+<p>我们需要先用索引调用<code>fn</code>，然后再根据<code>fn</code>的返回值，放入结果列表，再继续调用<span data-katex="myLoop(n-1,fn)"></span>。</p>
+<p>可是，索引从哪来呢？（<code>n</code>不是索引，因为索引从0开始，而n是逐渐变小的。</p>
+<p><br/></p>
+<p>这是两个典型的困难，</p>
+<p>其一，我们在递归的过程中“积累”了某些东西，</p>
+<p>其二，我们需要传递和递归过程相关的“索引”。</p>
+<p><br/></p>
+<p>####（2）解法</p>
+<p>这时候，我们的小技巧就有用武之地了。</p>
+<blockquote>
+<p>我们可以编写一个辅助的递归函数，通过增加参数的办法，提高灵活性。</p>
+</blockquote>
+<p><br/></p>
+<p>例如，我们可以编写一个辅助函数<code>myLoop'</code>，然后用<code>myLoop'</code>来实现<code>myLoop</code>。</p>
+<p><br/></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">myLoop :: Int -&gt; (Int -&gt; Maybe a) -&gt; [a]</span><br><span class="line">myLoop n fn &#x3D; myLoop&#39; n 0 fn []</span><br><span class="line"></span><br><span class="line">myLoop&#39; :: Int -&gt; Int -&gt; (Int -&gt; Maybe a) -&gt; [a] -&gt; [a]</span><br><span class="line">myLoop&#39; 0 i fn lst &#x3D; lst</span><br><span class="line">myLoop&#39; n i fn lst &#x3D; case fn i of</span><br><span class="line">  Just x -&gt; myLoop&#39; (n-1) (i+1) fn (lst++[x])</span><br><span class="line">  Nothing -&gt; myLoop&#39; (n-1) (i+1) fn lst</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>以上，我们为<code>myLoop'</code>增加了参数<code>i</code>和<code>lst</code>，分别表示“索引”和“积累”的列表。</p>
+<p>然后，<code>myLoop</code>就可以用<code>myLoop'</code>来实现了。</p>
+<p><br/></p>
+<p>别忘了测试一下最终的结果，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myLoop 10 (\x -&gt; if x &#96;mod&#96; 2 &#x3D;&#x3D; 0 then Just x else Nothing)</span><br><span class="line">[0,2,4,6,8]</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>####（3）其他考虑</p>
+<p>合理的利用递归函数的返回值，会减少附加参数的数量，例如，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">myLoop :: Int -&gt; (Int -&gt; Maybe a) -&gt; [a]</span><br><span class="line">myLoop n fn &#x3D; myLoop&#39; n 0 fn</span><br><span class="line"></span><br><span class="line">myLoop&#39; :: Int -&gt; Int -&gt; (Int -&gt; Maybe a) -&gt; [a]</span><br><span class="line">myLoop&#39; 0 i fn &#x3D; []</span><br><span class="line">myLoop&#39; n i fn &#x3D; case fn i of</span><br><span class="line">  Just x -&gt; x:(myLoop&#39; (n-1) (i+1) fn)</span><br><span class="line">  Nothing -&gt; myLoop&#39; (n-1) (i+1) fn</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>但最终得到的递归函数就不是<a href="https://zh.wikipedia.org/wiki/%E5%B0%BE%E8%B0%83%E7%94%A8" target="_blank" rel="noopener">尾递归</a>了，</p>
+<p>关于尾递归，我们将在后续文章中讨论它。</p>
+<p><br/></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92" target="_blank" rel="noopener">维基百科 - 递归</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E9%81%9E%E8%BF%B4%E9%97%9C%E4%BF%82%E5%BC%8F" target="_blank" rel="noopener">维基百科 - 递推关系式</a></p>
 
           
         
@@ -419,7 +513,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/212/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/212/">212</a><span class="page-number current">213</span><a class="page-number" href="/page/214/">214</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/214/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/212/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/212/">212</a><span class="page-number current">213</span><a class="page-number" href="/page/214/">214</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/214/">&gt;</a>
   </nav>
 
 
@@ -465,7 +559,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

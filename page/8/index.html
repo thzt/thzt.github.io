@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2024/04/28/ci-cd/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2024/09/19/debugger/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2024/04/28/ci-cd/" itemprop="url">持续交付</a></h1>
+                <a class="post-title-link" href="/2024/09/19/debugger/" itemprop="url">如何编写一个简单的 debugger</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-04-28T00:00:00+08:00">
-                2024-04-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-09-19T00:00:00+08:00">
+                2024-09-19
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ToD/" itemprop="url" rel="index">
-                    <span itemprop="name">ToD</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,186 +347,175 @@
       
         
           
-            <blockquote>
-<p>持续交付是指持续的将各类变更（包括新功能、缺陷修复、配置变化、实验等）安全、快速、高质量地落实到生产环境或用户手中的能力。</p>
+            <h3 id="背景">背景</h3>
+<p>时隔三年，这是相继 <a href="https://thzt.github.io/2021/01/06/parser/">如何编写一个简单的 parser</a>，</p>
+<p>以及 <a href="https://thzt.github.io/2021/01/15/eval/">如何编写一个简单的解释器</a>，之后的 第三篇，</p>
+<p><strong>如何编写一个简单的 debugger</strong>。</p>
+<p><br/></p>
+<p>众所周知，VSCode 通过 <a href="https://microsoft.github.io/language-server-protocol" target="_blank" rel="noopener">LSP</a> 支持了不同的 语言特性，</p>
+<p>而通过 <a href="https://microsoft.github.io/debug-adapter-protocol/" target="_blank" rel="noopener">DAP</a> 实现了不同语言的 调试功能。</p>
+<p><br/></p>
+<p>在前两篇文章中，我们基于 LISP 语法，</p>
+<p>分别实现了 语法解析 parse（将字符串转换成有结构的数据），</p>
+<p>以及 语义解释 eval（对结构化的数据进行求值） 两个过程。</p>
+<p><br/></p>
+<p>但如果只有这些，对于了解语言技术而言还仍显不够。</p>
+<p>市面上有太多资料介绍 parser 了，但其实这只是故事的开始罢了。</p>
+<p><br/></p>
+<p>本文就从 语法设计、解析、解释、调试 整条链路，尝试写点不一样的内容。</p>
+<p>重点写一写 debugger 的实现细节。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/01.png" /></p>
+<p><br/></p>
+<p>值得一提的是，有一类专门的工程师，称为编程语言工程师，</p>
+<p>以下所述的内容，对于他们而言，可能太过班门弄斧了。</p>
+<p>在这个语言领域中，我还只是一个小学徒。</p>
+<p>有任何理解不当的地方，还请不吝指出，我也仍在不断的学习中。</p>
+<h3 id="语法设计">语法设计</h3>
+<p>当我们萌生「让字符串跑起来」的想法之后，</p>
+<p>首先应该考虑的是，如何设计一套<strong>无歧义的文法</strong>。</p>
+<p><br/></p>
+<p>所谓文法，就是用来描述语言结构的规则集。</p>
+<p>根据文法我们能够知道，哪些字符串是语言中合法的语句，哪些不是。</p>
+<p>最常见的文法形式，就是 <a href="https://baike.baidu.com/item/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/2001908" target="_blank" rel="noopener">上下文无关文法</a>。</p>
+<p><br/></p>
+<p>上下文无关文法 由一堆产生式 构成（其次还有 终结符、非终结符），</p>
+<p>举个例子，这就是一段有效的文法（取自 TypeScript 语言，略有删减），</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SourceFile &#x3D; StatementList</span><br><span class="line">StatementList &#x3D; Statement | Statement StatementList</span><br><span class="line"></span><br><span class="line">Statement &#x3D; VariableDeclaration | FunctionDeclaration</span><br><span class="line"></span><br><span class="line">VariableDeclaration &#x3D; &#39;let&#39; Identifier &#39;&#x3D;&#39; Value</span><br><span class="line">Value &#x3D; NUMBER | CallExpression</span><br><span class="line"></span><br><span class="line">FunctionDeclaration &#x3D; Identifier &#39;(&#39; Identifier &#39;)&#39; &#39;&#123;&#39; FunctionBody &#39;&#125;&#39;</span><br><span class="line">FunctionBody &#x3D; StatementList ReturnStatement</span><br><span class="line">ReturnStatement &#x3D; &#39;return&#39; ReturnExpression</span><br><span class="line"></span><br><span class="line">ReturnExpression &#x3D; Identifier | PlusExpression</span><br><span class="line"></span><br><span class="line">PlusExpression &#x3D; Identifier &#39;+&#39; Identifier</span><br><span class="line">CallExpression &#x3D; Identifier &#39;(&#39; Identifier &#39;)&#39;</span><br><span class="line"></span><br><span class="line">Identifier &#x3D; [a-z]+</span><br><span class="line">Number &#x3D; [0-9]+</span><br><span class="line">Keyword &#x3D; &#39;let&#39; | &#39;return&#39;</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>其中，<code>VariableDeclaration = 'let' Identifier '=' Value</code> 这一行称为一个<strong>产生式</strong>，</p>
+<p>左边 <code>VariableDeclaration</code> 是<strong>非终结符</strong>（它会被展开成右边），</p>
+<p>右边 <code>'let'</code> <code>'='</code> 称为<strong>终结符</strong>（它不能再被展开了），</p>
+<p>右边 <code>Identifier</code> <code>Value</code> 仍为非终结符，可以根据其他相应的产生式规则，继续展开。</p>
+<p><br/></p>
+<p>以上文法，可以用来描述下面这样的语言结构，</p>
+<p>（类似 TypeScript 语言，只是去掉了 <code>function</code> 关键字）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let a &#x3D; 1</span><br><span class="line">let b &#x3D; 2</span><br><span class="line"></span><br><span class="line">f(x)&#123;</span><br><span class="line">  let b &#x3D; 3</span><br><span class="line">  g(y)&#123;</span><br><span class="line">    return y+b</span><br><span class="line">  &#125;</span><br><span class="line">  return g</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let c &#x3D; f(a)</span><br><span class="line">let d &#x3D; c(b)</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/02.png" /></p>
+<p><br/></p>
+<p>我们看到，不论是从<strong>语言</strong>还是从<strong>文法</strong>上，都能反映出一种<strong>递归结构</strong>。</p>
+<p>最直观的感受是，函数定义里面还可以再嵌套一个函数，并可以无限嵌套下去（都是合法的）。</p>
+<p>所以，这就对我们如何解析上下文无关语言，提供了启发 —— <strong>递归处理</strong>。</p>
+<p><br/></p>
+<p>解析过程，无非就是将字符串转成对象而已，</p>
+<p>所以我们才需要 文法尽量的准确（无歧义），对于同一段字符串，有且仅有一种转换方式。</p>
+<h3 id="解析器">解析器</h3>
+<blockquote>
+<p>代码：<a href="https://github.com/thzt/dsl-parser" target="_blank" rel="noopener">thzt/dsl-parser</a></p>
 </blockquote>
-<p></br></p>
-<p>持续交付是软件工程领域的重要概念，</p>
-<p>与之相关的还有 持续集成（CI）、持续部署（CD） ，甚至 DevOps 等等。</p>
-<p></br></p>
-<p>有很多文章，已经在技术视角，关于如何实现 CI/CD 做出了解释。</p>
-<p>本文想继续深究，为什么会有这个概念，如何做好，以及未来的发展方向。</p>
-<h3 id="动机">动机</h3>
-<h4 id="交付能力">交付能力</h4>
-<p>持续交付是一种能力，代表着人们在软件工程领域的强烈意愿，</p>
-<p>人们希望，软件团队可以<strong>更快速的响应市场需求</strong>，</p>
-<p>并且还要在保证质量、安全性的前提下。</p>
-<p></br></p>
-<p>所以说，持续交付从一开始，并不是单指支撑团队进行持续交付的软件系统。</p>
-<p>而是，<strong>团队本身</strong>所具备的一种能力。</p>
-<p></br></p>
-<p>为了能让团队具备这种能力，可以采取很多种不同的办法，</p>
-<p>其中，将基础设施工具化、将操作流程自动化，用以辅助团队，是最容易出结果的。</p>
-<p>而这些工具、系统 确实也能在很大程度上提升团队的持续交付水平。</p>
-<p></br></p>
-<p>但仅仅看到这些还不够。</p>
-<h4 id="交付主体">交付主体</h4>
-<p>事实上，整个团队才是交付的主体。</p>
-<p>空有一套系统，而未抓住精髓，并不能有效的帮助团队达到高水平交付。</p>
-<p></br></p>
-<p>我们从团队的边界来看，<strong>整个团队就像一个大型的持续交付系统</strong>。</p>
-<p>它能吞吐多少需求，能以多高效的响应市场变化，</p>
-<p>才是最终需要解决的问题、衡量的标准。</p>
-<p></br></p>
-<p>这个时候需要考虑的点就非常多了。</p>
+<p><br/></p>
+<p>有不少文章，重点介绍了 parser 的实现过程，这里就不赘述了，</p>
+<p>日常工作中，我们从零编写一个 parser 的情况很少，基本都用现成的。</p>
+<p>即使有特殊情况，手写<strong>递归下降语法解析器</strong>，也能满足大多数场景了。</p>
+<p><br/></p>
+<p>在 第一篇文章 <a href="https://thzt.github.io/2021/01/06/parser/">如何编写一个简单的 parser</a>中，</p>
+<p>我们已经介绍了编写递归下降语法解析器的<strong>套路</strong>，</p>
+<p>一个 parser 是由一些互递归的函数调用组成（每一个 非终结符/产生式 对应一个函数）。</p>
+<p><br/></p>
+<p>parser 内部会包含一个 nextToken 词法分析器，</p>
+<p>把单个字符组装成带有类型标识的 token 单词，再进行处理。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/03.png" /></p>
+<p><br/></p>
+<p>具体处理的时候后，这些互递归函数，会读取当前 token（或者之后的 token），</p>
+<p>来判定 按照哪个产生式进行解析。</p>
+<p>最终会得到一个树形结构 —— AST（树是递归结构的真实写照），</p>
+<p>这个树形结构的节点，就是文法中的非终结符。</p>
+<p><br/></p>
+<h3 id="解释器">解释器</h3>
+<blockquote>
+<p>代码：<a href="https://github.com/thzt/dsl-interpreter" target="_blank" rel="noopener">thzt/dsl-interpreter</a></p>
+</blockquote>
+<p><br/></p>
+<p>解释器也比较简单，就是一个在<strong>递归结构</strong>中，进行<strong>递归求值</strong>的过程。</p>
+<p>解释器的实现套路在 第二篇 <a href="https://thzt.github.io/2021/01/15/eval/">如何编写一个简单的解释器</a> 中有过介绍，</p>
+<p>每一个 AST 节点，对应一个 <code>evalXXX</code> 函数，然后递归调用。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/04.png" /></p>
+<p><br/></p>
+<p>稍微有些复杂的是<strong>词法作用域</strong>的实现，</p>
+<p>需要在解释的过程中，遇到函数定义（FunctionDeclaration），先将求值环境与函数关联起来。</p>
+<p>然后等到函数调用（CallExpression）的时候，再取出<strong>当时</strong>的环境进行求值。</p>
+<p><br/></p>
+<p>函数+环境就是<strong>闭包</strong>了，希望这次把它讲清楚了。</p>
+<h3 id="调试器">调试器</h3>
+<h4 id="yield">yield</h4>
+<p>终于可以介绍调试器了。首先应该考虑的是，用什么工具对语言进行调试。</p>
+<p>最常见的调试方式有命令行方式（例如 <a href="https://sourceware.org/gdb/" target="_blank" rel="noopener">GDB</a>），还有 IDE 集成方式。</p>
+<p>本文选择较为直观的方式，通过 <a href="https://microsoft.github.io/debug-adapter-protocol/" target="_blank" rel="noopener">DAP</a> 借用 VSCode 进行调试。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/05.png" /></p>
+<p><br/></p>
+<p>第一步，我们需要对解释器进行改造，让它可以<strong>停下来</strong>。</p>
+<p>常见的办法是将函数改造为 generator，将递归调用改成 <code>yield*</code>，</p>
+<p>然后在特定阶段（需要停下来的时候），通过 <code>yield</code> 把<strong>内部状态</strong>返回出来。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/06.png" /></p>
+<p><br/></p>
+<p>然后，就可以实现步进了，</p>
+<p>只有我们手动调用 <code>next</code> 的时候，解释器才会继续向下执行。</p>
+<p><br/></p>
+<p>更有甚者，我们还可以写一个 runtime，把控制逻辑包一层。</p>
+<p>如下图，模拟我们在 VSCode 中启动调试后，按 Step Over（下一步）所发生的事情，</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/07.png" /></p>
+<h4 id="vscode-extension">vscode extension</h4>
+<blockquote>
+<p>代码：<a href="https://github.com/thzt/vscode-dsl-debugger" target="_blank" rel="noopener">thzt/vscode-dsl-debugger</a></p>
+</blockquote>
+<p><br/></p>
+<p>第二步，就是实现一个 VSCode 插件了， 它实现了 <a href="https://microsoft.github.io/debug-adapter-protocol/" target="_blank" rel="noopener">DAP</a> 协议。</p>
+<p><br/></p>
+<p>例如，生命周期事件</p>
 <ul>
-<li><p>如何获取市场所需，打造什么样的产品可以赢</p></li>
-<li><p>需求如何进行转换，可以快速的被开发人员所理解和把控</p></li>
-<li><p>系统如何设计，能够更加灵活，用更少的变更将功能实现</p></li>
-<li><p>质量和安全如何保障</p></li>
-<li><p>服务如何提供给用户，用户反馈如何获取</p></li>
+<li><p>初始化 initializeRequest</p></li>
+<li><p>启动调试 launchRequest</p></li>
+<li><p>获取调用栈里面的进程 threadsRequest</p></li>
+<li><p>获取给定进程的调用栈帧 stackTraceRequest</p></li>
+<li><p>获取给定栈帧的作用域分类 scopesRequest</p></li>
+<li><p>获取不同栈帧分类的变量 variablesRequest</p></li>
 </ul>
-<p></br></p>
-<p>这是一个大的<strong>反馈循环</strong>，从市场来到市场去，软件功能从实现到更新。</p>
-<p>整个团队通过产品形态不断的跟外界进行<strong>交互</strong>。</p>
-<p></br></p>
-<p>关于团队内部如何支撑这个循环，属于内部行为。</p>
-<h3 id="策略">策略</h3>
-<p>做好持续交付，比完成持续交付软件系统的建设难得多。</p>
-<p>因为需要关注<strong>方方面面</strong>，</p>
-<p>甚至包括 产研销全流程、团队的组织形态与文化、以及人的因素。</p>
-<p></br></p>
-<p>可以假想一下 50 年后的软件研发团队，看看持续交付的<strong>极限</strong>在哪里。</p>
-<h4 id="等待时间">等待时间</h4>
-<p>当前持续交付的第一个瓶颈点在于，<strong>等待时间过长</strong>，大部分人并没有有效的进行工作。</p>
-<p></br></p>
+<p><br/></p>
+<p>还有 操作按钮事件</p>
 <ul>
-<li>等待上游</li>
+<li><p>Step Over（单行执行）：nextRequest</p></li>
+<li><p>Step In（单步执行）：stepInRequest</p></li>
 </ul>
-<p>上游完不成，<strong>下游</strong>就不能开展工作，只能等着，这些损耗是巨大的。</p>
-<p>精益生产提供了解决这个问题的办法，</p>
-<p>就是把大任务拆散，一小块一小块，在流水线中完成（增强流动性）。</p>
-<p></br></p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/08.png" /></p>
+<p><br/></p>
+<p>我们需要做的事情是，如何驱动解释器，按照我们指定的方式执行。</p>
+<p>比如，我们总是可以将复杂操作封装到 runtime 中去。</p>
+<p>需要注意的是 VSCode 所需要的一些 Event（<code>this.sendEvent</code>）和 Response（<code>this.sendResponse</code>）。</p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/09.png" /></p>
+<h4 id="最终效果">最终效果</h4>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2024-09-19-debugger/10.gif" /></p>
+<p><br/></p>
+<p>至此，我们实现了上述语言的调试功能，</p>
+<p>借助了解释器的能力，语言本身支持词法作用域。</p>
 <ul>
-<li>沟通时间</li>
+<li><p><code>f</code> 返回一个函数 <code>g</code>，并把它赋值给了 <code>c</code></p></li>
+<li><p><code>c</code> 调用的时候，就会调用内层函数 <code>g</code>，并且 <code>g</code> 的变量 <code>b</code> 取自词法作用域 <code>b=3</code>，而不是最外层的 <code>2</code></p></li>
+<li><p>而 <code>y</code> 的值是 <code>c</code> 的入参 <code>2</code>，因此 <code>d</code> 的返回值为 <code>5</code></p></li>
 </ul>
-<p>还有很大一部分时间，耗费在团队内部的<strong>共识达成</strong>上。</p>
-<p>团队内部有很多讨论，在众多可选的方案中，用何种办法解决会更好。</p>
-<p>确定负责人、区分利益相关者，是一个不错的实践。</p>
-<p></br></p>
-<ul>
-<li>多任务切换</li>
-</ul>
-<p>人脑的<strong>上下文切换</strong>能力是有限的，最高效的办法是不要一次处理多件事。</p>
-<p>同时涌入很多任务，而这些任务又是相互关联的时候，</p>
-<p>应当以何种顺序解决它们，得需要管理者、或系统加以辅助。</p>
-<p></br></p>
-<ul>
-<li>疲劳度</li>
-</ul>
-<p>工作会产生<strong>疲劳</strong>，高效的工作则更甚。所以效率与产出并不总是正相关的。</p>
-<p>这取决于完整工作时间内的自动化水平，以及干扰水平。</p>
-<p>这甚至跟团队文化相关，是加班还是追求效率（实际上工作更累）。</p>
-<h4 id="基础设施">基础设施</h4>
-<p>团队能够交付更快，取决于自动化工具的丰富度、可用性和稳定性。</p>
-<p>首先要有工具，其次这些工具必须能被用上，最后，还要好用、够稳。</p>
-<p>因此，如何形成一套有效的工具、流程实践，才是重中之重。</p>
-<p></br></p>
-<ul>
-<li>技术、非技术</li>
-</ul>
-<p>这套实践不只包括 开发环节，还要包括 市场、需求、测试、运维、运营 等等。</p>
-<p>开发也只是很小的一个关注阶段。</p>
-<p>大部分团队可能没有意识到，<strong>其他阶段对持续交付的影响</strong>。</p>
-<p></br></p>
-<p>也就是说，仅开发人员能够持续交付软件功能，这远远不够。</p>
-<p>所以我们提供的基础设施，应当是面向 <strong>产研销全链路</strong> 的，而不只是开发。</p>
-<p>尤其是这些不同职能角色之间的边界上，中间产物、价值 如何流转。</p>
-<p></br></p>
-<p>这可能并不是以一人之力，或者一个团队之力能够解决的。</p>
-<p>往往会动摇多个团队的利害关系，甚至部门内外的<strong>大协同</strong>。</p>
-<p>因此，组织架构的设计和团队的职责划分很重要，什么样的划分就有什么样的系统和产品。</p>
-<p></br></p>
-<p>很多团队做好了基础设施，但是整个业务线还是无法达到高水平交付，</p>
-<p>可能的原因之一，就在于各职能之间的<strong>关系</strong>没有理顺。</p>
-<p>或者没有<strong>共同达到</strong>较高的交付水平。</p>
-<p></br></p>
-<ul>
-<li>业务开发、基础架构</li>
-</ul>
-<p>如果只考虑开发阶段的话，主要包括两种<strong>角色</strong>，一种是业务开发，另一种是基础架构。</p>
-<p>基础架构为业务开发提供<strong>可编程的</strong>、可复用的软件工具。</p>
-<p>这一层封装，是为了减少整体的技术多样性和复杂度，便于<strong>量产</strong>。</p>
-<p></br></p>
-<p>难点在于，稳定好用的封装层，不容易打造。</p>
-<p>在提高效率的同时，也增加了新手的<strong>门槛</strong>，一开始甚至还会降低效率。</p>
-<p></br></p>
-<p>并且增加依赖深度的同时，也容易让整个系统变得更加<strong>脆弱</strong>。</p>
-<p>链路上的每个环节，一旦出现问题，就容易影响全局。</p>
-<p></br></p>
-<p>所以基础架构团队的交付产物，必然还要比业务研发团队具备更高的质量要求。</p>
-<p>而且还要从一开始就考虑<strong>兼容性</strong>问题。</p>
-<p>沉重的技术债务最容易出现在基础架构团队，而且影响面非常广。</p>
-<h4 id="目标设定">目标设定</h4>
-<p>比起单个人提升效率而言，如何让多人沿着<strong>相同的目标</strong>前进，无疑更重要。</p>
-<p>此外，如何激发每个人的动力，发挥主动性，也很重要。</p>
-<p>所以在部门团队层面，如何设定目标，能很大程度上影响持续交付。</p>
-<p></br></p>
-<p>目标不能是拍脑袋想出来的，需要非常多的<strong>沟通</strong>。</p>
-<p>但实际执行下来，不论是自底向上，还是自顶向下的设计目标，都有问题。</p>
-<p></br></p>
-<ul>
-<li>自底向上</li>
-</ul>
-<p>往往最底层员工，是最了解问题的，或者说是离问题最近的。</p>
-<p>但并不一定是最善于解决问题，或者最适合、最能够解决问题的。</p>
-<p>因为第一眼看到的可能只是<strong>问题的表象</strong>。</p>
-<p></br></p>
-<p>所以自底向上的考虑目标，容易使得目标无法解决<strong>真正的问题</strong>。</p>
-<p>也容易缺少规划，因为规划能力底层员工所欠缺的。</p>
-<p></br></p>
-<p>自底向上的<strong>传导</strong>，也很容易造成信息折损，重心也容易<strong>跑偏</strong>。</p>
-<p>甚至还取决于不同员工，向上反馈问题时的个人水平。</p>
-<p></br></p>
-<ul>
-<li>自顶向下</li>
-</ul>
-<p>自顶向下的拆分，会使得目标更有格局，眼光更加深远。</p>
-<p>但难免会与实际<strong>脱节</strong>，或者没有完整考虑各种<strong>细节</strong>因素。</p>
-<p>人的精力有限，全局和细节，真的很难兼得。</p>
-<p></br></p>
-<p>当企业采取这样的拆分方式时，很容易形成<strong>揣摩</strong>上意的风气。</p>
-<p>上层的一次些微调整，底层就得转的飞起，就像齿轮套齿轮一样。</p>
-<p></br></p>
-<p>为了能够完成上级的目标，拆分容易促进层层<strong>加码</strong>，</p>
-<p>到了底层可能会变成无法完成的任务。</p>
-<p></br></p>
-<ul>
-<li>改进</li>
-</ul>
-<p>有了以上思考之后，</p>
-<p>既能了解上层目标，又能了解底层问题，就显得非常重要。</p>
-<p></br></p>
-<p>这取决于，目标在制定之后，<strong>能否、以及用什么样的方式可做出修订</strong>。</p>
-<p>以及企业文化，能否支撑不同层级的员工，就目标进行修订。</p>
-<p></br></p>
-<p>只有可以被修订、不断被修订的目标，才能使得上下同心。</p>
-<p>当然修订的周期、涉众 也是需要考量的。</p>
 <h3 id="结语">结语</h3>
-<p>未来仍然是人的社会，不论新兴技术如何发展，最后还是要<strong>解决人的问题</strong>。</p>
-<p>只不过机器与人边界会进一步压缩、调整。</p>
-<p></br></p>
-<p>当一个产业变成全自动化时，再讨论持续交付就是失去了意义。</p>
-<p>因为进一步提高生产力的关键，只剩下了科技。</p>
-<p>全自动化产业的人力投入，也将极大程度的缩减。</p>
-<p></br></p>
-<p>此外，这也意味着，这个产业的<strong>需求</strong>也趋近稳定。</p>
-<p>比如农副产品，人们会种植、量产、销售 特定品类的农副产品。</p>
-<p>发达国家中，几乎所有的生产活动都被机器所取代。</p>
-<p></br></p>
-<p>软件行业还远没有达到这种丰富程度，因为人们的想法无穷无尽。</p>
-<p>所以除了一些特定领域，随着需求不断稳定之外，</p>
-<p>持续交付在软件行业，还有很长的路要走。</p>
+<p>上文我们编写了一个简单的 debugger，它可以对所设计的语言进行调试。</p>
+<p>有了这些能力之后，我们就可以 debug everything 了（只要世界可以停下来）。</p>
+<p><br/></p>
+<p>在自己实现 debugger 之前，会认为这些技术蕴含着难以理解的理论知识，</p>
+<p>实际写完之后却发现，主要还是对「树」结构数据进行的处理，</p>
+<p>只要了解 <strong>递归、封装、会调用 API、有工程思想</strong>，都能把它写出来。</p>
+<p>比较困难的是，如何对现有实现进行<strong>优化</strong>。这些往往是某些文章、资料、书籍重点介绍的内容。</p>
+<p><br/></p>
+<p>我们知道，软件领域正在经历翻天覆地的变革，</p>
+<p>但不论怎样变革，知识本身并没有太多变化。</p>
+<p><br/></p>
+<p>以上介绍的内容，可能颇为小众。</p>
+<p>然而这些小众知识，反而能让我们在实际工作中 如虎添翼、立竿见影。</p>
+<p><br/></p>
+<p>再接再厉。</p>
 
           
         
@@ -565,7 +554,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/9/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/9/">&gt;</a>
   </nav>
 
 
@@ -611,7 +600,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

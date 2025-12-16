@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/04/semantics-6/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/02/09/semantics-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/04/semantics-6/" itemprop="url">语言背后的代数学（六）：Henkin模型</a></h1>
+                <a class="post-title-link" href="/2018/02/09/semantics-7/" itemprop="url">语言背后的代数学（七）：数学结构</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T00:00:00+08:00">
-                2018-02-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T00:00:00+08:00">
+                2018-02-09
               </time>
             
 
@@ -347,156 +347,263 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-5f7af604e7dc18d6.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-e24e6ddb6c6118a2.png" /></p>
 <p><br/></p>
 <h3 id="回顾">回顾</h3>
-<p>为了解释简单类型化演算<span data-katex="\lambda^\to"></span>中项，</p>
-<p>我们介绍了<span data-katex="\Sigma"></span>代数，</p>
-<p>用<span data-katex="\Sigma"></span>代数中的载体<span data-katex="A^\sigma"></span>来解释基本类型<span data-katex="\sigma"></span>，</p>
-<p>用载体上的函数集<span data-katex="A^{\sigma\to\tau}=\{f|f:A^\sigma\to A^\tau\}"></span>来解释类型为<span data-katex="\sigma\to\tau"></span>的所有函数。</p>
+<p>上文我们介绍了Henkin模型，以及它的环境模型条件和组合模型条件，</p>
+<p>它们分别为合法的<span data-katex="\lambda"></span>项和<span data-katex="CL"></span>项，找到了对应的语义解释。</p>
+<p>然而这只是简单类型化<span data-katex="\lambda"></span>演算<span data-katex="\lambda^\to"></span>的其中一种解释。</p>
 <p><br/></p>
-<p>但只是做这些对应关系，还是不够的，</p>
-<p>我们还得证明，这样的解释是“足够多的”，</p>
-<p>以保证每一个合法<span data-katex="\lambda^\to"></span>项的解释，都在这个<span data-katex="\Sigma"></span>代数中。</p>
+<p>另一种常用的解释方式，建立在范畴论基础之上，称为<strong>笛卡尔闭范畴</strong>。</p>
+<p>为了理解这个概念，我们需要补充一些简单的范畴论方面的内容。</p>
 <p><br/></p>
-<p>尤其是使用集合上的函数，来解释具有不动点的<span data-katex="\lambda"></span>项时，</p>
-<p><span data-katex="A^{\sigma\to\tau}"></span>的条件应当适当放宽一些，它不一定恰好是函数集<span data-katex="\{f|f:A^\sigma\to A^\tau\}"></span>。</p>
-<p>为此我们需要更抽象的，从语义角度定义函数是如何作用到它的参数上的。</p>
+<h3 id="数学结构">1. 数学结构</h3>
 <p><br/></p>
-<h3 id="作用结构">1. 作用结构</h3>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-ce31cbd5a6af6c3a.png" /></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-506b2f2655924ecf.png" /></p>
+<p>范畴论的研究数学结构的形式化方法，</p>
+<p>它不考虑具体的数学对象，而是考虑数学对象以及它们之间的联系。</p>
 <p><br/></p>
-<p>从形式系统的角度来看，<span data-katex="\lambda"></span>项的“应用”，是推导规则的一部分，</p>
-<p>包括类型推导规则，<span data-katex="\frac{\Gamma\vdash t_1:T_1\to T_2~~~~\Gamma\vdash t_2:T_1}{\Gamma\vdash t_1~t_2:T_2}"></span>，</p>
-<p>还包括求值规则，<span data-katex="(\lambda x:T.t)~v\to [x\mapsto v]t"></span>。</p>
+<p>学习范畴论最好的办法，我认为不宜马上从抽象的概念开始，</p>
+<p>而是先回到具体的例子上面，找到相似性，<strong>理解概念被发明的动机</strong>。</p>
 <p><br/></p>
-<p>项的“应用”，我们可以定义为<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong>（applicative structure）。</p>
+<p>因此，我们要先理解什么是<strong>数学结构</strong>。</p>
+<p>后文中，我们会首先介绍最常被提及的群结构，然后再介绍拓扑空间和CPO（完全偏序）。</p>
+<p>有了这些例子之后，对抽象概念的理解是事半功倍的。</p>
 <p><br/></p>
-<p>假设<span data-katex="\lambda x:\sigma.t"></span>是一个类型为<span data-katex="\sigma\to\tau"></span>的<span data-katex="\lambda"></span>项，</p>
-<p>我们可以把它“应用于”类型为<span data-katex="\sigma"></span>的项<span data-katex="v:\sigma"></span>，</p>
-<p>我们有，<span data-katex="(\lambda x:\sigma.t)~v=([x\mapsto v]t):\tau"></span>。</p>
+<h3 id="群结构">2. 群结构</h3>
 <p><br/></p>
-<p>因此，<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong><span data-katex="App^{\sigma,\tau}"></span>，</p>
-<p>指的是这样的一个映射，<span data-katex="App^{\sigma,\tau}:A^{\sigma\to\tau}\to A^\sigma \to A^\tau"></span>，</p>
-<p>它将集合<span data-katex="A^{\sigma\to\tau}"></span>中的一个函数，以及集合<span data-katex="A^\sigma"></span>中的一个元素，</p>
-<p>映射成集合<span data-katex="A^\tau"></span>中的一个元素。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-3f960ea2439e2f98.png" /></p>
 <p><br/></p>
-<p>一个有效的作用结构，必须具有<strong>外延性条件</strong>（extensional），</p>
-<p>即，<span data-katex="\forall f,g\in A^\sigma\to\tau"></span>，</p>
-<p>如果对于任意的<span data-katex="d\in A^\sigma"></span>，都有<span data-katex="App~f~d=App~g~d"></span>，则必有<span data-katex="f=g"></span>。</p>
+<p>群是一种满足结合律的乘法结构，</p>
+<p>但是它的运算对象，却并不局限于整数，有理数甚至实数上。</p>
+<p>因此，群论对概念采用了不同的定义方式，和初等代数有明显的不同。</p>
 <p><br/></p>
-<p>它指出集合<span data-katex="A^\sigma\to\tau"></span>的两个函数，如果在<span data-katex="App^{\sigma,\tau}"></span>下的作用效果相同，</p>
-<p>那么它们必须是同一个函数。</p>
+<p>在初等代数中，我们研究的是具体的运算系统，</p>
+<p>例如，我们会先介绍什么是自然数，然后再介绍自然数上的四则运算。</p>
+<p>群论则不然。</p>
 <p><br/></p>
-<h3 id="项的唯一解释">2. 项的唯一解释</h3>
+<p>它会先抽象的定义满足哪些条件的运算系统是<strong>群</strong>，</p>
+<p>然后再去寻找（或证明）具体的运算系统满足这些条件。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-c8757c95811cbd2d.png" /></p>
+<p>为此，我们先从条件最弱的<strong>半群</strong>开始，</p>
+<p>逐渐增加约束条件，最终认识群结构是怎么建立起来的。</p>
 <p><br/></p>
-<p>有了满足外延性条件的作用结构之后，</p>
-<p>我们就可以归纳的定义出<strong>含义函数</strong>（meaning function）<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>了，</p>
+<p><strong>半群</strong></p>
+<p>集合<span data-katex="G"></span>和<span data-katex="G"></span>上满足结合律的二元运算<span data-katex="\cdot"></span>，</p>
+<p>所形成的代数结构，叫做<strong>半群</strong>，记为<span data-katex="(G,\cdot)"></span>，</p>
+<p>半群运算<span data-katex="x\cdot y"></span>，也常简记为<span data-katex="xy"></span>。</p>
 <p><br/></p>
-<p>（1）<span data-katex="\mathscr{A}[\![\varnothing\vdash c:\sigma]\!]\eta=Const(c)"></span></p>
-<p>（2）<span data-katex="\mathscr{A}[\![x:\sigma\vdash x:\sigma]\!]\eta=\eta(x)"></span></p>
-<p>（3）<span data-katex="\mathscr{A}[\![\Gamma,x:\sigma\vdash M:\tau]\!]\eta=\mathscr{A}[\![\Gamma\vdash M:\tau]\!]\eta"></span></p>
-<p>（4）<span data-katex="\mathscr{A}[\![\Gamma\vdash MN:\tau]\!]\eta=App^{\sigma,\tau}~\mathscr{A}[\![\Gamma\vdash M:\sigma\to\tau]\!]\eta~\mathscr{A}[\![\Gamma\vdash N:\sigma]\!]\eta"></span></p>
-<p>（5）<span data-katex="\mathscr{A}[\![\Gamma\vdash\lambda x:\sigma.M:\sigma\to\tau]\!]\eta="></span>，存在唯一的<span data-katex="f\in A^{\sigma\to\tau}"></span>，使得，</p>
-<p><span data-katex="\forall d\in A^\sigma"></span>，<span data-katex="App~f~d=\mathscr{A}[\![\Gamma,x:\sigma\vdash M:\tau]\!]\eta[x\mapsto d]"></span></p>
+<p>好在我们<a href="https://thzt.github.io/2018/01/20/semantics-2/">第二篇</a>中，对“什么是代数”进行了严谨的定义，</p>
+<p>因此，对这里提到的“代数结构”应该并不陌生，很显然半群是一个代数。</p>
 <p><br/></p>
-<p>其中，<span data-katex="\eta"></span>是满足指派<span data-katex="\Gamma"></span>的环境，</p>
-<p><span data-katex="Const"></span>是一个映射，将项常量映射到所有<span data-katex="A^\sigma"></span>并集的元素上，</p>
-<p>使得，如果<span data-katex="c:\sigma"></span>，则<span data-katex="Const(c)\in A^\sigma"></span>。</p>
+<p>满足半群条件的例子是非常多的，</p>
+<p>例如，自然数集以及自然数上的乘法运算，构成了一个半群。</p>
 <p><br/></p>
-<p>由于以上几个等式覆盖了所有的<span data-katex="\lambda"></span>项，因此这样定义的含义函数是完全的。</p>
-<p>并且由于它为每一个<span data-katex="\lambda"></span>项都指定了确定的语义，因此它给出的解释方式也是唯一的。</p>
-<p>它称为<strong>Henkin模型</strong>。</p>
+<p>值得注意的是，集合和运算要放在一起考虑才行，</p>
+<p>集合包含了运算对象，运算表明了运算对象之间的关系。</p>
 <p><br/></p>
-<p>Henkin模型是可靠的，</p>
-<p>设<span data-katex="\mathscr{A}"></span>是<span data-katex="\lambda^\to"></span>的任意Henkin模型，</p>
-<p><span data-katex="\Gamma\vdash M:\sigma"></span>是可证的，<span data-katex="\eta"></span>是一个满足指派<span data-katex="\Gamma"></span>的环境，</p>
-<p>则<span data-katex="\mathscr{A}[\![\Gamma\vdash M:\sigma]\!]\eta\in A^\sigma"></span>。</p>
+<p><strong>幺半群</strong></p>
 <p><br/></p>
-<p>即，如果一个类型断言是可证的，则它在语义上也成立。</p>
-<p>（关于完全性的讨论，略）</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-3fa823cd8d83854d.png" /></p>
 <p><br/></p>
-<h3 id="例子">3. 例子</h3>
+<p>设<span data-katex="G"></span>是半群，元素<span data-katex="e\in G"></span>，称为半群<span data-katex="G"></span>的幺元，</p>
+<p>如果<span data-katex="\forall x\in G"></span>，<span data-katex="ex=xe=x"></span>。</p>
+<p>可以证明，如果半群存在幺元，则必定是唯一的。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-edbc7c129e5a928d.png" /></p>
+<p>幺元常被记为<span data-katex="1_S"></span>，或者直接写成<span data-katex="1"></span>。</p>
+<p>具有幺元的半群，称为<strong>幺半群</strong>，记为<span data-katex="(G,\cdot,e)"></span>。</p>
 <p><br/></p>
-<p>我们可以对具有单一类型<span data-katex="nat"></span>的<span data-katex="\lambda"></span>演算，定义它的Henkin模型，</p>
-<p>令<span data-katex="A^{nat}"></span>为自然数集，<span data-katex="A^{\sigma\to\tau}"></span>为所有从<span data-katex="A^\sigma"></span>到<span data-katex="A^\tau"></span>的函数集合，</p>
-<p>这称为<strong>自然数上的完全集合论函数体系</strong>，</p>
-<p>（full set-theoretic function hierarchy over the natural number）。</p>
+<p>幺半群的例子，我们可以考虑字符串及其连接运算，</p>
+<p>在连接运算下，空串是幺元。</p>
 <p><br/></p>
-<p>我们通过<span data-katex="App~f~x=f(x)"></span>，把函数<span data-katex="f\in A^{\sigma\to\tau}"></span>，作用到参数<span data-katex="x\in A^\sigma"></span>上。</p>
-<p>下面我们得出<span data-katex="\lambda x:nat\to nat.\lambda y:nat.xy"></span>的语义。</p>
+<p><strong>群</strong></p>
+<p>设<span data-katex="G"></span>是幺半群，如果它的每个元素都可逆，我们就称它为<strong>群</strong>。</p>
 <p><br/></p>
-<p>由于该项是封闭项，选择什么样的环境<span data-katex="\eta"></span>都是无关紧要的。</p>
-<p>根据上文“含义函数”<span data-katex="\mathscr{A}[\![\cdot]\!]"></span>的归纳定义，我们有，</p>
-<p><span data-katex="\mathscr{A}[\![\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy]\!]\eta="></span></p>
-<p>唯一的<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>，使得，</p>
-<p><span data-katex="\forall h\in A^{nat\to nat}"></span>，<span data-katex="App~f~h=\mathscr{A}[\![x:nat\to nat\vdash\lambda y:nat.xy]\!]\eta[x\mapsto h]"></span></p>
+<p>所谓可逆指的是，<span data-katex="\forall g\in G"></span>，<span data-katex="\exists g^{-1}\in G"></span>，</p>
+<p>使得<span data-katex="gg^{-1}=g^{-1}g=e"></span>，</p>
+<p>其中<span data-katex="e\in G"></span>为<span data-katex="G"></span>的幺元。</p>
 <p><br/></p>
-<p>然后我们再来看下，<span data-katex="\mathscr{A}[\![x:nat\to nat\vdash\lambda y:nat.xy]\!]\eta[x\mapsto h]="></span>，</p>
-<p>唯一的<span data-katex="g\in A^{nat\to nat}"></span>，使得，</p>
-<p><span data-katex="\forall n\in A^{nat}"></span>，<span data-katex="App~g~n=[\![x:nat\to nat,y:nat\vdash xy]\!]\eta[x\mapsto h][y\mapsto n]"></span></p>
-<p>即，唯一的<span data-katex="g\in A^{nat\to nat}"></span>，使得，<span data-katex="\forall n\in A^{nat}"></span>，<span data-katex="App~g~n=App~h~n"></span>。</p>
-<p>那么这个唯一的<span data-katex="g\in A^{nat\to nat}"></span>，实际上就是<span data-katex="h"></span>了。</p>
+<p>自然数集以及自然数上的乘法运算组成的代数结构，是半群，</p>
+<p>如果把自然数<span data-katex="1"></span>看做幺元，则构成了一个幺半群，但是它不是群。</p>
+<p>因为，除了<span data-katex="1"></span>之外，任何自然数都没有逆元。</p>
 <p><br/></p>
-<p>其中，<span data-katex="App~g~n=App~h~n"></span>是因为，</p>
-<p><span data-katex="App~g~n=[\![x:nat\to nat,y:nat\vdash xy]\!]\eta[x\mapsto h][y\mapsto n]"></span></p>
-<p><span data-katex="=[\![h:nat\to nat,n:nat\vdash hn]\!]\eta"></span></p>
-<p><span data-katex="=App~h~n"></span></p>
+<p>字符串及其连接运算，构成了一个幺半群，但也不是群，</p>
+<p>因为，没有任何两个非空字符串连接在一起会得到空串。</p>
 <p><br/></p>
-<p>综合以上两个步骤，<span data-katex="\mathscr{A}[\![\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy]\!]\eta="></span>，</p>
-<p>唯一的<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>，使得，</p>
-<p><span data-katex="\forall h\in A^{nat\to nat}"></span>，<span data-katex="App~f~h=h"></span>。</p>
-<p>因此，<span data-katex="f\in A^{(nat\to nat)\to nat\to nat}"></span>的语义是一个恒等函数。</p>
+<p>下面我们来看一个群的例子。</p>
 <p><br/></p>
-<p>我们从语义上证明了以下等式，</p>
-<p><span data-katex="\varnothing\vdash\lambda x:nat\to nat.\lambda y:nat.xy=\lambda x:nat\to nat.x"></span>。</p>
+<p>如果我们把整数集（包含正负整数）看做运算对象的集合，</p>
+<p>把整数集上的加法运算看做群定义中的二元运算，</p>
+<p>整数<span data-katex="0"></span>看做加法运算的幺元，则这样的运算系统构成了一个群。</p>
+<p>因为，每一个整数的相反数，都是它的逆元。</p>
 <p><br/></p>
-<h3 id="环境模型条件和组合模型条件">4. 环境模型条件和组合模型条件</h3>
+<p><strong>群同态</strong></p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-04-semantics-6/1023733-00c5200af9d0405a.png" /></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-346888ad855e2420.png" /></p>
 <p><br/></p>
-<p>以上定义的作用结构<span data-katex="App^{\sigma,\tau}"></span>称为满足<strong>环境模型条件</strong>（enviroment model condition），</p>
-<p>依赖了环境<span data-katex="\eta"></span>这一附加概念。</p>
-<p>它使得每一个合法的<span data-katex="\lambda"></span>项，都有模型中一个唯一确定的数学对象与之对应。</p>
+<p>有了群之后，很自然的一步我们会考虑两个群是否足够相似，</p>
+<p>这就需要我们找到两个群之间的对应关系。</p>
 <p><br/></p>
-<p>由于<span data-katex="\lambda"></span>项有<span data-katex="\lambda"></span>“抽象”和<span data-katex="\lambda"></span>“应用”双重复杂性，</p>
-<p>所以，建立一个合理的解释也比较麻烦。</p>
-<p>在《<a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型</a>》系列文章中，</p>
-<p>我们介绍过组合子逻辑，我们知道可以将任意的<span data-katex="\lambda"></span>项转换成对应的<span data-katex="CL"></span>项，反之亦然。</p>
+<p>设<span data-katex="(G,\cdot)"></span>和<span data-katex="(G&#39;,\circ)"></span>是两个群，</p>
+<p>我们把映射<span data-katex="f:G\to G&#39;"></span>称为<strong>群同态</strong>，如果<span data-katex="\forall a,b\in G"></span>，</p>
+<p>都有<span data-katex="f(a\cdot b)=f(a)\circ f(b)"></span>。</p>
 <p><br/></p>
-<p>因此，如果存在模型可以解释所有的<span data-katex="CL"></span>项，那么使用它也就可以解释所有<span data-katex="\lambda"></span>项了。</p>
-<p><span data-katex="CL"></span>项比<span data-katex="\lambda"></span>项更为简洁，它不包含<span data-katex="\lambda"></span>“抽象”，只包含<span data-katex="K"></span>和<span data-katex="S"></span>这两个组合子。</p>
+<p>如果<span data-katex="f"></span>是单射，则称<span data-katex="f"></span>为单同态，</p>
+<p>如果<span data-katex="f"></span>是满射，则称<span data-katex="f"></span>为满同态。</p>
 <p><br/></p>
-<p>类似于<span data-katex="\lambda"></span>项的“应用”，</p>
-<p>对于<span data-katex="K"></span>和<span data-katex="S"></span>的“组合”，我们同样可以定义<span data-katex="\Sigma"></span>代数上的一个<strong>作用结构</strong>。</p>
+<p>如果<span data-katex="f"></span>是双射，则称<span data-katex="f"></span>为<strong>群同构</strong>。</p>
+<p>同构的两个群，记为<span data-katex="G\cong G&#39;"></span>。</p>
 <p><br/></p>
-<p>给定<span data-katex="\Sigma"></span>代数，对任意类型<span data-katex="\rho,\sigma,\tau"></span>，如果存在元素<span data-katex="K_{\sigma,\tau}\in A^{\sigma\to(\tau\to\sigma)}"></span>，</p>
-<p><span data-katex="S_{\rho,\sigma,\tau}\in A^{(\rho\to\sigma\to\tau)\to(\rho\to\sigma)\to\rho\tau}"></span>，</p>
-<p>满足下列对合适类型<span data-katex="x,y,z"></span>的等式条件，</p>
-<p><span data-katex="K_{\sigma,\tau}xy=x"></span>，<span data-katex="S_{\rho,\sigma,\tau}xyz=(xz)(yz)"></span>，</p>
-<p>我们就称，该作用结构满足<strong>组合模型条件</strong>（combinatory model condition）。</p>
+<p><strong>小结</strong></p>
+<p>现在我们理解了半群，幺半群，群，群同态，</p>
+<p>这些概念放在一起，就是所谓的群结构。</p>
+<p>结构一般所指的是一些运算规则，或者约束条件。</p>
 <p><br/></p>
-<p>由于所有<span data-katex="CL"></span>项都可以表示成<span data-katex="K"></span>和<span data-katex="S"></span>的“组合”，</p>
-<p>因此，满足组合模型条件的作用结构，可以唯一解释所有<span data-katex="CL"></span>项。</p>
+<p>为了更好的理解数学结构，</p>
+<p>下面我们来介绍另一个概念，它来自拓扑学，称为拓扑空间。</p>
 <p><br/></p>
-<p>可以证明，一个满足外延性条件的作用结构，</p>
-<p>如果它满足环境模型条件，当且仅当它也同样满足组合模型条件。</p>
+<h3 id="拓扑结构">3. 拓扑结构</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-e87418f9539b42b7.png" /></p>
+<p><br/></p>
+<p>拓扑学，被人们戏称橡皮膜上的几何学，</p>
+<p>它主要研究在连续变换下保持不变的几何性质，</p>
+<p>例如，连通性和紧致性。</p>
+<p><br/></p>
+<p>这里我们先不展开，</p>
+<p>主要看一下在拓扑学中是怎么建立数学结构的。</p>
+<p><br/></p>
+<p><strong>子集族</strong></p>
+<p>设<span data-katex="X"></span>是一个非空集合，<span data-katex="2^X"></span>是<span data-katex="X"></span>的幂集（所有子集构成的集合），</p>
+<p>把<span data-katex="2^X"></span>的子集（即以<span data-katex="X"></span>的一部分子集为成员的集合）称为<span data-katex="X"></span>的<strong>子集族</strong>。</p>
+<p><br/></p>
+<p><strong>拓扑空间</strong></p>
+<p>设<span data-katex="X"></span>是一个非空集合，<span data-katex="X"></span>的一个子集族<span data-katex="\tau"></span>称为<span data-katex="X"></span>的一个<strong>拓扑</strong>，</p>
+<p>如果它满足</p>
+<p>（1）<span data-katex="X"></span>和<span data-katex="\varnothing"></span>都包含在<span data-katex="\tau"></span>中</p>
+<p>（2）<span data-katex="\tau"></span>中任意多个成员的并集仍在<span data-katex="\tau"></span>中</p>
+<p>（3）<span data-katex="\tau"></span>中有限多个成员的交集仍在<span data-katex="\tau"></span>中</p>
+<p><br/></p>
+<p>集合<span data-katex="X"></span>和它的一个拓扑<span data-katex="\tau"></span>一起称为一个<strong>拓扑空间</strong>，记作<span data-katex="(X,\tau)"></span>。</p>
+<p>称<span data-katex="\tau"></span>中的成员为这个拓扑空间的<strong>开集</strong>。</p>
+<p><br/></p>
+<p>从定义看出，给出集合的一个拓扑就是规定它的哪些子集是开集。</p>
+<p><br/></p>
+<p><strong>连续映射</strong></p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-0926fa9e83c0403c.png" /></p>
+<p><br/></p>
+<p>设<span data-katex="X"></span>和<span data-katex="Y"></span>都是拓扑空间，<span data-katex="f:X\rightarrow Y"></span>是一个映射，</p>
+<p><span data-katex="x\in X"></span>，如果对于包含<span data-katex="f(x)\in Y"></span>的每一个开集<span data-katex="V"></span>，必存在包含<span data-katex="x"></span>的开集<span data-katex="U"></span>，</p>
+<p>使得，<span data-katex="f(U)\subseteq V"></span>，则我们就说，<span data-katex="f"></span>在<span data-katex="x"></span>处<strong>连续</strong>。</p>
+<p><br/></p>
+<p>如果映射<span data-katex="f:X\rightarrow Y"></span>在任一点<span data-katex="x\in X"></span>都连续，</p>
+<p>则说<span data-katex="f"></span>是<strong>连续映射</strong>。</p>
+<p><br/></p>
+<p><strong>同胚映射</strong></p>
+<p>如果<span data-katex="f:X\rightarrow Y"></span>是双射，</p>
+<p>并且<span data-katex="f"></span>及其逆<span data-katex="f^{-1}:Y\rightarrow X"></span>都是连续的，</p>
+<p>则称<span data-katex="f"></span>是一个<strong>同胚映射</strong>，简称同胚。</p>
+<p><br/></p>
+<p>当存在<span data-katex="X"></span>到<span data-katex="Y"></span>的同胚映射时，就称<span data-katex="X"></span>与<span data-katex="Y"></span>同胚，</p>
+<p>记作<span data-katex="X \cong Y"></span>。</p>
+<p><br/></p>
+<p>值得注意的是，同胚映射中条件<span data-katex="f^{-1}"></span>连续不可忽视，</p>
+<p>它不能从双射和<span data-katex="f"></span>的连续性推出来。</p>
+<p><br/></p>
+<p><strong>小结</strong></p>
+<p>以上我们介绍了拓扑空间，以及两个拓扑空间之间的连续映射，</p>
+<p>这和群以及两个群之间的群同态是很相似的。</p>
+<p><br/></p>
+<p>它们表现出了一种结构上的相似性，</p>
+<p>范畴论正是看到这种相似性，于是跳出具体的运算系统，</p>
+<p>例如，它可以考虑群结构与拓扑结构之间的关系。</p>
+<p><br/></p>
+<p>接下来我们来介绍CPO（完全偏序）。</p>
+<p>它在范畴论中，对于摆脱集合论的观念束缚，帮助是很大的。</p>
+<p><br/></p>
+<h3 id="完全偏序">4. 完全偏序</h3>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-da911483f36bc6fa.png" /></p>
+<p><br/></p>
+<p>在《<a href="https://thzt.github.io/2017/03/21/recursive-function-9/">递归函数</a>》系列文章中，</p>
+<p>我们已经介绍过CPO（<a href="https://zh.wikipedia.org/zh-hans/%E5%AE%8C%E5%85%A8%E5%81%8F%E5%BA%8F" target="_blank" rel="noopener">完全偏序</a>）的概念了。</p>
+<p>为了方便与本文中其他概念进行对比，我们再简单的梳理一下。</p>
+<p><br/></p>
+<p><strong>二元关系</strong></p>
+<p>集合<span data-katex="S"></span>和<span data-katex="T"></span>上的<strong>二元关系</strong><span data-katex="R"></span>，</p>
+<p>指的是它们笛卡尔积<span data-katex="S\times T"></span>的子集，<span data-katex="R\subseteq S\times T"></span>。</p>
+<p><br/></p>
+<p><strong>自反性，对称性，反对称性，传递性</strong></p>
+<p>一个二元关系<span data-katex="R\subseteq A\times A"></span>是<strong>自反的</strong>，如果<span data-katex="R(a,a)"></span>对于所有的<span data-katex="a\in A"></span>成立；</p>
+<p>是<strong>对称的</strong>，如果<span data-katex="R(a,b)"></span>就有<span data-katex="R(b,a)"></span>，对于所有的<span data-katex="a,b\in A"></span>都成立；</p>
+<p>是<strong>反对称的</strong>，如果<span data-katex="R(a,b)"></span>且<span data-katex="R(b,a)"></span>，则<span data-katex="a,b"></span>是同一个元素，对于所有的<span data-katex="a,b\in A"></span>都成立；</p>
+<p>是<strong>传递的</strong>，如果<span data-katex="R(a,b)"></span>和<span data-katex="R(b,c)"></span>能推出<span data-katex="R(a,c)"></span>，对于所有的<span data-katex="a,b,c\in A"></span>都成立。</p>
+<p><br/></p>
+<p><strong>偏序关系</strong></p>
+<p>等价关系是同时具有自反性，对称性和传递性的关系。</p>
+<p><strong>偏序关系</strong>是具有自反性，反对称性和传递性的关系。</p>
+<p><br/></p>
+<p>等价关系的一个例子就是相等性，</p>
+<p>相等性关系<span data-katex="R(a,b)"></span>当且仅当<span data-katex="a,b"></span>是同一个元素。</p>
+<p><br/></p>
+<p>偏序关系，例如通常的序关系<span data-katex="R\subseteq N\times N"></span>，</p>
+<p><span data-katex="R(a,b)"></span>当且仅当<span data-katex="a\leqslant b"></span>。</p>
+<p><br/></p>
+<p><strong>最小元与上确界</strong></p>
+<p><br/></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-02-09-semantics-7/1023733-47acd03f6e8d8a00.png" /></p>
+<p><br/></p>
+<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
+<p>如果存在<span data-katex="y\in S"></span>，且对于任意的<span data-katex="x\in S"></span>，有<span data-katex="y\leqslant x"></span>，</p>
+<p>则称<span data-katex="y"></span>为<span data-katex="S"></span>的<strong>最小元</strong>。</p>
+<p><br/></p>
+<p>对于偏序集<span data-katex="(D,\leqslant )"></span>，以及它的一个子集<span data-katex="S\subseteq D"></span>，</p>
+<p>如果存在<span data-katex="y\in D"></span>，（注意，<span data-katex="y"></span>不一定在子集<span data-katex="S"></span>中）</p>
+<p>使得对于任意的<span data-katex="x\in S"></span>，<span data-katex="x\leqslant y"></span>，则称<span data-katex="y"></span>为<span data-katex="S"></span>的<strong>上界</strong>，</p>
+<p>如果<span data-katex="S"></span>的所有上界存在最小元，则称它为<span data-katex="S"></span>最小上界，或<strong>上确界</strong>。</p>
+<p><br/></p>
+<p><strong>完全偏序集</strong></p>
+<p>偏序集<span data-katex="(D,\leqslant )"></span>的非空子集<span data-katex="S\subseteq D"></span>叫做<strong>有向子集</strong>，</p>
+<p>当且仅当，对于<span data-katex="S"></span>中的任意元素<span data-katex="a,b\in S"></span>，</p>
+<p>存在<span data-katex="S"></span>中的一个元素<span data-katex="c"></span>，有<span data-katex="a\leqslant c"></span>且<span data-katex="b\leqslant c"></span>。</p>
+<p><br/></p>
+<p>如果一个偏序集<span data-katex="(D,\leqslant )"></span>的每个有向子集<span data-katex="S\subseteq D"></span>都有上确界（记为<span data-katex="\bigvee S"></span>）</p>
+<p>就称它是一个有向完全偏序集，</p>
+<p>此外，如果它还有最小元，就称它是一个<strong>完全偏序集</strong>。</p>
+<p><br/></p>
+<p>注意，完全偏序集并不是每一个子集都有上确界，</p>
+<p>而是它的每一个有向子集都有上确界。</p>
+<p><br/></p>
+<p><strong>连续函数</strong></p>
+<p>假设<span data-katex="(D,\leqslant )"></span>与<span data-katex="(E,\leqslant )"></span>是完全偏序集，<span data-katex="f:D\rightarrow E"></span>是集合上定义的一个函数，</p>
+<p>对于任意的<span data-katex="d,d&#39;\in D"></span>，如果<span data-katex="d\leqslant d&#39;"></span>就有<span data-katex="f(d)\leqslant f(d&#39;)"></span>，</p>
+<p>我们就说<span data-katex="f"></span>是<strong>单调的</strong>。</p>
+<p><br/></p>
+<p>如果<span data-katex="f"></span>是单调的，且对于任意有向子集<span data-katex="S\subseteq D"></span>，</p>
+<p>有<span data-katex="f(\bigvee S)=\bigvee f(S)"></span>，就称<span data-katex="f"></span>是<strong>连续的</strong>。</p>
+<p><br/></p>
+<p><strong>小结</strong></p>
+<p>我们又重新回顾了完全偏序这一概念，</p>
+<p>实际上，任意一个CPO（完全偏序），都构成了一个范畴，</p>
+<p>而所有的群，也构成了一个范畴。</p>
+<p><br/></p>
+<p>群范畴的对象是集合，而CPO（完全偏序）范畴的对象不一定是集合。</p>
+<p>这对摆脱集合论来理解范畴是很关键的。</p>
 <p><br/></p>
 <h3 id="总结">总结</h3>
-<p>本文介绍了Henkin模型作用结构所满足的条件，环境模型条件和组合模型条件，</p>
-<p>它们是等价的，有了它们我们才能给出<span data-katex="\lambda"></span>项的可靠解释，</p>
-<p>即，任何合法的<span data-katex="\lambda"></span>项都有唯一解释，且在语法上可证的<span data-katex="\lambda"></span>项，在语义上也成立。</p>
+<p>本文介绍了三种数学结构，群结构，拓扑结构，以及CPO（完全偏序）。</p>
+<p>作为例子，可以为后面学习范畴论打下扎实的基础。</p>
 <p><br/></p>
-<p>下文我们开始学习范畴论，为理解笛卡尔闭范畴打好基础。</p>
+<p>我们看到了这些数学结构之间的相似性，</p>
+<p>从下一篇开始，我们要开始范畴论的学习之旅了。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="http://thzt.github.io/2017/09/07/type-3/">你好，类型（三）：Combinatory logic</a></p>
-<p><a href="https://book.douban.com/subject/1944729/" target="_blank" rel="noopener">程序设计语言理论基础</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Category_theory" target="_blank" rel="noopener">Category theory</a></p>
+<p><a href="https://book.douban.com/subject/1230394/" target="_blank" rel="noopener">离散数学教程</a></p>
+<p><a href="https://book.douban.com/subject/4201293/" target="_blank" rel="noopener">近世代数引论</a></p>
+<p><a href="https://book.douban.com/subject/1230382/" target="_blank" rel="noopener">基础拓扑学讲义</a></p>
 
           
         
@@ -535,7 +642,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/166/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/168/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/166/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/168/">&gt;</a>
   </nav>
 
 
@@ -581,7 +688,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

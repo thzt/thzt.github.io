@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/04/15/exception-first/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/04/23/craftsman/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/15/exception-first/" itemprop="url">异常先行</a></h1>
+                <a class="post-title-link" href="/2018/04/23/craftsman/" itemprop="url">也谈工匠精神</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T00:00:00+08:00">
-                2018-04-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-23T00:00:00+08:00">
+                2018-04-23
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index">
-                    <span itemprop="name">Design</span>
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
                   </a>
                 </span>
 
@@ -347,142 +347,104 @@
       
         
           
-            <p>一个软件系统，只是可以提供相应的<a href="https://zh.wikipedia.org/wiki/%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">功能</a>，还不能算是完成了预期的目标，</p>
-<p>它还要满足一些<a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" target="_blank" rel="noopener">非功能</a>方面的限制条件。</p>
+            <p>最近经常听到人们提起“工匠精神”，</p>
+<p>比起当今浮躁的社会现状来说，</p>
+<p>平心静气，精益求精，这种处事方式确实值得提倡。</p>
 <p><br/></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%81%A5%E5%A3%AE%E6%80%A7_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)" target="_blank" rel="noopener">健壮性</a>就是一个典型的例子，</p>
-<p>它反映了系统对于规范要求以外输入情况的处理能力。</p>
+<p>宋代文学家欧阳修写过一则寓言——《<a href="https://baike.baidu.com/item/%E5%8D%96%E6%B2%B9%E7%BF%81" target="_blank" rel="noopener">卖油翁</a>》，</p>
+<p>记叙了陈尧咨射箭和卖油翁酌油的故事，</p>
+<p>通过卖油翁自钱孔滴油技能的描写，以及对技能获得途径的议论，</p>
+<p>说明了<strong>熟能生巧</strong>的道理。</p>
 <p><br/></p>
-<p>为了实现健壮性，我们不仅需要考虑所有可能的输入，</p>
-<p>更重要的是要考虑<strong>异常流</strong>，即系统在遭遇异常时究竟如何表现。</p>
+<blockquote>
+<p>熟生巧，巧生精，精益求精，则臻至化境，非敬事敬业者而不可得。</p>
+</blockquote>
 <p><br/></p>
-<p>这里有一个常见的误区，那就是，人们为了防止系统崩溃，</p>
-<p>不论是否出现错误，总是让它看起来是正常，</p>
-<p>这其实是一种<strong>自欺欺人</strong>的做法。</p>
+<h3 id="社会价值">社会价值</h3>
+<p>只有不厌其烦的重复训练，才能熟练的掌握一项技能。</p>
+<p>只有百尺竿头更进一步，才能登峰造极。</p>
+<p>这是大家都能明白的道理。</p>
 <p><br/></p>
-<p>这种做法不仅不能够提高系统的健壮性，</p>
-<p>反而人为的向定位问题增添了很多障碍，提高了沟通成本，</p>
-<p>出错的场景被隐藏掉了，只有接口的提供者才知道原因。</p>
+<p>沉迷于技巧的练习，是一件好事，</p>
+<p>但也容易掉入另外一个误区之中。</p>
 <p><br/></p>
-<p>那么如何设计一个健壮的系统呢？</p>
-<p>本文提供了一些思路。</p>
+<p>醉心于射箭的武士，想的可能并不是如何用箭杀敌，</p>
+<p>想的可能是如何把射箭技巧练得更加纯熟。</p>
 <p><br/></p>
-<h3 id="fail-fast-哲学">1. Fail Fast 哲学</h3>
-<p><a href="http://wiki.c2.com/?FailFast" target="_blank" rel="noopener">Fail Fast</a>是<a href="https://www.erlang.org/" target="_blank" rel="noopener">Erlang</a>语言的编程哲学之一，</p>
-<p>说的是一个子系统在遇到问题的时候，应该尽早崩溃。</p>
+<p>软件行业也是如此，醉心于计算机科学技术的工程师，</p>
+<p>想的可能并不是如何用知识去解决问题，</p>
+<p>想的可能是如何掌握更多的知识。</p>
 <p><br/></p>
-<p>常见的<code>if-return</code>模式（或者<code>if-throw</code>），就是Fail Fast思想的一种应用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function failSlow() &#123;</span><br><span class="line">    if (x !&#x3D; null) &#123;</span><br><span class="line">        &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function failFast(x) &#123;</span><br><span class="line">    if (x &#x3D;&#x3D; null) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上两个JavaScript函数，表现了不同的处理问题风格。</p>
-<p>如果代码后文要用到<code>x</code>，且当前没有<code>x</code>，那不如<strong>尽早返回</strong>。</p>
+<p>练就不想用来杀敌的射箭本领，更像是一种<strong>自私的情怀</strong>，</p>
+<p>因为它并没有给别人提供更多的帮助，</p>
+<p>即，对别人来说是没有用的，没有社会价值。</p>
 <p><br/></p>
-<p>还有一种写法，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function assertPrecondition(x) &#123;</span><br><span class="line">    assert(x &#x3D;&#x3D; null);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 使用x做一些事情</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上代码，通过<code>assert</code>对函数的<strong>前置条件</strong>进行了<strong>断言</strong>。</p>
+<h3 id="精于服务">精于服务</h3>
+<p>我们知道，优秀的工匠擅于用工具来解决问题，</p>
+<p>但是，懂得制造工具的工匠，就一定能制造出好的工具来吗？</p>
+<p>这不一定，尤其是对那种为别人制造的工具来说。</p>
 <p><br/></p>
-<p>使用<code>if-return</code>或者<code>assert</code>，会在很大程度上避免嵌套<code>if</code>的出现，</p>
-<p>否则，我们就不得不在很多<code>if</code>条件中编写业务逻辑。</p>
+<p>在制造工具之前，工匠们总是会事先调查待解决的问题，</p>
+<p>工具被制造出来之后，工匠们还得向使用者讲解如何使用它，</p>
+<p>收到了使用者反馈之后，工匠们还要维护或者改良这个工具。</p>
 <p><br/></p>
-<p>例如，以下展示了嵌套<code>if</code>的某个场景，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (x !&#x3D; null) &#123;</span><br><span class="line">    if (y &gt; 0) &#123;</span><br><span class="line">        if (z) &#123;</span><br><span class="line">            &#x2F;&#x2F; 业务逻辑</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这才是一个工具完整的生命周期。</p>
+<p>而制造，只是其中的一环。</p>
 <p><br/></p>
-<p>改成<code>assert</code>后，将前置条件与正常的业务逻辑解耦了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">assert(x !&#x3D; null);</span><br><span class="line">assert(y &gt; 0);</span><br><span class="line">assert(z);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 业务逻辑</span><br></pre></td></tr></table></figure>
+<p>因此，一个好的工匠，提供的不应该是工具，而应该是<strong>整套解决方案</strong>。</p>
+<p>工具只是解决方案的载体罢了。</p>
 <p><br/></p>
-<h3 id="不要吃掉异常">2. 不要吃掉异常</h3>
-<p><strong>如果子系统无法处理某个错误，那就把它抛出来，而不是吃掉它。</strong></p>
+<p>工具可以改良，也可以废弃，</p>
+<p>但是，帮客户解决问题创造客户价值，是始终不变的。</p>
 <p><br/></p>
-<p>下面我们来看一个例子，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function service() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        &#x2F;&#x2F; 什么也不做</span><br><span class="line">        &#x2F;&#x2F; 或者即使是写日志</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好的工匠，会致力于提供整套服务，而不是仅一个工具而已。</p>
 <p><br/></p>
-<p>以上代码，我们在<code>application</code>函数中调用了<code>service</code>，</p>
-<p>但是<code>service</code>吃掉了异常。</p>
+<h3 id="客户角度">客户角度</h3>
+<p>至于如何确定待解决的问题，以及如何改良既有的方案，这都值得单独拿出来讨论，</p>
+<p>而本文想强调的是，关于工具的使用说明，</p>
+<p>实际上，工匠有义务告诉客户，到底该如何使用他们制造的工具。</p>
 <p><br/></p>
-<p>那么一旦<code>application</code>的用户指出了错误，定位问题就是一件麻烦事，</p>
-<p><code>application</code>的编写者，要去询问每一个<code>service</code>的提供者，到底出现了什么状况。</p>
+<p>从事软件行业的工程师们，也常常会不由自主的产生类似的错觉，</p>
+<p>认为设计优良的，我们用之能解决问题的工具库，就一定能为客户解决问题。</p>
 <p><br/></p>
-<p>我们再来看下，如果不吃掉异常会怎样，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function service() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        &#x2F;&#x2F; 写日志</span><br><span class="line">        throw e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实，很不幸，仅从教会客户如何使用这点来看，就还相差甚远。</p>
+<p>我们自己能解决问题，和<strong>让别人有能力解决问题</strong>，有根本的不同。</p>
 <p><br/></p>
-<p>以上代码，我们修改了<code>service</code>函数，</p>
-<p>它确实捕获了异常，但是如果这个异常<code>service</code>无法处理，那就向上抛出去。</p>
+<p>使用陌生的工具，并不能解决问题，反而会浪费时间，</p>
+<p>而这一点经常被人们所忽视。</p>
 <p><br/></p>
-<p>这样的话，甚至根本轮不到<code>application</code>的用户指出错误了，</p>
-<p><code>application</code>自己都能拿到异常的调用栈信息，</p>
-<p>并且，即使由用户指出了，也能不依赖于<code>service</code>来定位问题的原因。</p>
-<p><br/></p>
-<p>可能有人会说，如果异常都被抛出了，没有人处理怎么办？</p>
-<p>是的，吃掉异常不也是没人处理它吗？</p>
-<p>所以，抛出异常就相当于<strong>显式的</strong>向调用者提问，这个异常到底应该如何处理。</p>
-<p><br/></p>
-<p>换句话说，</p>
-<p><strong>异常被静默处理，应该是大家协商后的决定。</strong></p>
-<p><br/></p>
-<h3 id="让异常成为一种约定">3. 让异常成为一种约定</h3>
-<p>异常和异常的处理应该是一体的，它们应该被<strong>统一的</strong>设计和使用。</p>
-<p>各个系统的边界处，应该如何反馈异常，以及这些异常应该如何被处理，应该事先被约定好。</p>
-<p>这样才会减少冗余的个性化的异常处理逻辑。</p>
-<p><br/></p>
-<p>例如，使用<a href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E4%BE%A7%E9%9D%A2%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1" target="_blank" rel="noopener">面向切面编程</a>，</p>
-<p>我们可以在系统的边界上定义一个<strong>异常切面</strong>，统一处理错误。</p>
-<p><br/></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">function application() &#123;</span><br><span class="line">    MyService.service();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他service</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 装饰器是一个高阶函数</span><br><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const service &#x3D; Class.service;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            &#x2F;&#x2F; 写日志</span><br><span class="line">            throw e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class MyService &#123;</span><br><span class="line">    @exceptionAOP</span><br><span class="line">    static service() &#123;</span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><br/></p>
-<p>以上代码，为了简洁起见，我们用<a href="https://tc39.github.io/proposal-decorators/" target="_blank" rel="noopener">装饰器</a>实现了一个异常切面，</p>
-<p>目前，装饰器是<a href="https://github.com/tc39/proposals" target="_blank" rel="noopener">ECMAScript TC39</a> Stage2的特性。</p>
-<p><br/></p>
-<p>在这个切面中，我们统一的将异常写入了日志中，</p>
-<p>再将异常抛出。</p>
-<p><br/></p>
-<h3 id="主动抛出异常">4. 主动抛出异常</h3>
-<p>有了异常切面，我们就不用担心未被捕获的异常了，</p>
-<p>向系统中添加一种异常，总是伴随着修改异常切面来完成。</p>
-<p>有了这种异常处理机制，我们就可以<strong>主动抛出一些业务异常</strong>了。</p>
-<p><br/></p>
-<p>例如，上文中提到的<code>assert</code>，如果不满足前置条件断言，</p>
-<p>我们可以主动抛异常。</p>
-<p><br/></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1. 新增异常</span><br><span class="line">class PreconditionException extends Error &#123; &#125;;</span><br><span class="line"></span><br><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const &#123; service &#125; &#x3D; Class;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 2. 新增处理方式</span><br><span class="line">            if (e instanceof PreconditionException) &#123;</span><br><span class="line">                &#x2F;&#x2F; 写日志，前置条件断言失败</span><br><span class="line">                throw e;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 写日志</span><br><span class="line">            throw e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const assert &#x3D; condition &#x3D;&gt; &#123;</span><br><span class="line">    if (!condition) &#123;</span><br><span class="line">        throw new PreconditionException;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyService &#123;</span><br><span class="line">    @exceptionAOP</span><br><span class="line">    static service(x) &#123;</span><br><span class="line">        assert(x);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><br/></p>
-<p><strong>注：</strong></p>
-<p>如果认为每次都修改<code>exceptionAOP</code>是一件麻烦事，我们可以这样做，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1. 新增异常</span><br><span class="line">class PreconditionException extends Error &#123; &#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 2. 新增处理方式</span><br><span class="line">exceptionHandler.add(&#123;</span><br><span class="line">    exception: PreconditionException,</span><br><span class="line">    handler: e &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; 写日志，前置条件断言失败</span><br><span class="line">        throw e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><br/></p>
-<p>其中<code>exceptionHandler</code>是我们编写的辅助对象，具体实现方式可以灵活选择，</p>
-<p>在切面上的用法如下，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const exceptionAOP &#x3D; Class &#x3D;&gt; &#123;</span><br><span class="line">    const service &#x3D; Class.service;</span><br><span class="line"></span><br><span class="line">    Class.service &#x3D; function (...args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return service.call(this, ...args);</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            &#x2F;&#x2F; 使用exceptionHandler处理异常</span><br><span class="line">            exceptionHandler.handle(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Class;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><br/></p>
-<h3 id="先考虑异常处理">5. 先考虑异常处理</h3>
-<p>在设计系统的时候，异常以及异常处理方式应该事先考虑，</p>
-<p>否则人们就会按照各自的便利来编写逻辑，</p>
-<p>这样很容易产生<strong>兼容性问题</strong>。</p>
-<p><br/></p>
-<p>例如，有些接口可能会通过<strong>返回异常值</strong>来反馈异常，</p>
-<p>而有的接口会通过<strong>上抛异常</strong>来反馈，</p>
-<p>这样在处理方式上就很难统一处理，业务逻辑写起来会比较繁琐。</p>
-<p><br/></p>
-<p>即使已经确定为返回异常值的方式，也容易出现以下问题，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 接口1</span><br><span class="line">&#123;</span><br><span class="line">    isSuccess: boolean,</span><br><span class="line">    message: string,</span><br><span class="line">    data: object</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 接口2</span><br><span class="line">&#123;</span><br><span class="line">    succeed: boolean,</span><br><span class="line">    msg: string,</span><br><span class="line">    data: object</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上两个接口的数据类型是不同的，</p>
-<p>第一个接口用<code>isSuccess</code>来标志异常，第二个用<code>succeed</code>，</p>
-<p>那么这两个接口的调用者，就不得不<strong>分别处理</strong>它们。</p>
-<p><br/></p>
-<p>因此，这是下层服务返回了两种异常，但是期望它们用相同的方式处理，</p>
-<p>这很显然是<strong>系统设计</strong>的不恰当。</p>
-<p><br/></p>
-<p>并且，当我们意识到这个问题的时候，再进行修改就难了，</p>
-<p>抛出异常和处理异常的代码要同时修改，是一种<strong>接口变更</strong>，</p>
-<p>会涉及兼容性问题。</p>
+<p>因此，把工具打磨的闪闪发光，这不是工匠的精髓，</p>
+<p>真正的工匠精神必须从客户的角度出发。</p>
 <p><br/></p>
 <h3 id="结语">结语</h3>
-<p>我们可能都体会过，知道错误但是不知道原因的那种<strong>憋闷感</strong>，</p>
-<p>在整个调用链路上，一环一环的排查，结果发现是某个服务吃掉了异常。</p>
+<p>不错，精益求精的态度，的确值得赞赏，</p>
+<p>而一个工具仅从制造的难度来看，不是问题的关键，</p>
+<p>如何借用一个工具，让本来不具备解决问题能力的客户解决了问题，这才是重点。</p>
 <p><br/></p>
-<p>如果有日志可循，这还不是难事，最多是花费一些时间，</p>
-<p>但如果日志都不健全，定位一个问题简直是难于登天，甚至要手动debug才行。</p>
-<p>究其原因可能是，<strong>人们想要隐藏错误，以使得系统看似健壮。</strong></p>
+<p>所以，不关注用户体验的工具提供者，不是好工匠。</p>
+<p>不注重客户<strong>使用感受</strong>的供应商，还需要重新理解一下什么是“客户第一”。</p>
 <p><br/></p>
-<p>所以，哪有不出错的系统，我们只能<strong>及时修正</strong>。</p>
+<blockquote>
+<p>庄子与惠子游于濠梁之上。</p>
+</blockquote>
+<blockquote>
+<p>庄子曰：“鲦鱼出游从容，是鱼乐也。”</p>
+</blockquote>
+<blockquote>
+<p>惠子曰：“子非鱼，安知鱼之乐？”</p>
+</blockquote>
+<blockquote>
+<p>庄子曰：“子非我，安知我不知鱼之乐？”</p>
+</blockquote>
+<blockquote>
+<p>惠子曰：“我非子，固不知子矣，子固非鱼也，子不知鱼之乐，全矣。”</p>
+</blockquote>
+<blockquote>
+<p>庄子曰：“请循其本。子曰‘汝安知鱼乐’云者，既已知吾知之而问我，我知之濠上也。”</p>
+</blockquote>
+<blockquote>
+<p>——《庄子·秋水》</p>
+</blockquote>
 
           
         
@@ -521,7 +483,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/156/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><span class="page-number current">157</span><a class="page-number" href="/page/158/">158</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/158/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/156/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><span class="page-number current">157</span><a class="page-number" href="/page/158/">158</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/158/">&gt;</a>
   </nav>
 
 
@@ -567,7 +529,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

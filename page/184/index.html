@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/19/type-6/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2017/09/23/type-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/19/type-6/" itemprop="url">你好，类型（六）：Simply typed lambda calculus</a></h1>
+                <a class="post-title-link" href="/2017/09/23/type-7/" itemprop="url">你好，类型（七）：Recursive type</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-19T00:00:00+08:00">
-                2017-09-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T00:00:00+08:00">
+                2017-09-23
               </time>
             
 
@@ -347,140 +347,126 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-19-type-6/1023733-b561d8b10bfe0e7f.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d2143e00a8cc56ad.png" /></p>
 <p><br/></p>
-<p>简单类型化<span data-katex="\lambda"></span>演算（simply typed lambda calculus）<span data-katex="\lambda^\to"></span>，</p>
-<p>是无类型<span data-katex="\lambda"></span>演算的类型化版本，</p>
-<p>它是众多类型化<span data-katex="\lambda"></span>演算中最简单的一个。</p>
+<p>上文我们介绍了简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^\to"></span>，并给它扩充了单位类型，</p>
+<p>本文继续为它添加新的特性。</p>
 <p><br/></p>
-<p>它只包含一个类型构造器（type constructor）<span data-katex="\to"></span>，</p>
-<p>即，接受两个类型<span data-katex="T_1,T_2"></span>作为参数，返回一个函数类型<span data-katex="T_1\to T_2"></span>。</p>
+<p>我们将提到<code>let</code>和<code>letrec</code>表达式，函数的不动点，</p>
+<p>代数数据类型，以及递归类型。</p>
 <p><br/></p>
-<p>下文中，我们首先从最基础的概念说起，</p>
-<p>详细的区分项（term）和值（value）的概念，</p>
-<p>然后介绍简单类型化<span data-katex="\lambda"></span>演算系统的求值规则和类型规则。</p>
+<p>最后我们发现，无类型系统实际上是具有，唯一递归类型的一种情形。</p>
 <p><br/></p>
-<h3 id="项和值">1. 项和值</h3>
+<h3 id="let绑定">let绑定</h3>
+<p>当写一个复杂表达式的时候，为了避免重复和增加可读性，</p>
+<p>通常我们会给某些子表达式命名，</p>
+<p>其中一个常用办法是，使用<code>let</code>表达式。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-19-type-6/1023733-1f335eebf1ae892a.png" /></p>
+<p>为此，我们要对简单类型化<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda^\to"></span>进行扩展，</p>
+<p>添加<code>let</code>表达式的语法项，求值规则以及类型规则。</p>
 <p><br/></p>
-<h4 id="项">1.1 项</h4>
-<p>项（term）是一个语法概念，一个合法的项，指的是一段符合语法的字符串。例如，</p>
-<p>在<span data-katex="\lambda_\beta"></span>系统中，项的定义如下，</p>
-<p><span data-katex="t::=x|\lambda x.t|t~t"></span></p>
+<p>新的语法：</p>
+<p><span data-katex="t::=...|let~x:T=t~in~t"></span></p>
 <p><br/></p>
-<p>它表明，一个合法的<span data-katex="\lambda_\beta"></span>项，要么是一个变量<span data-katex="x"></span>，</p>
-<p>要么是一个<span data-katex="\lambda"></span>抽象（abstraction）<span data-katex="\lambda x.t"></span>，</p>
-<p>要么是一个<span data-katex="\lambda"></span>应用（application）<span data-katex="t~t"></span>。</p>
+<p>新的求值规则：</p>
+<p><span data-katex="let~x:T=v~in~t\to [x\mapsto v]t"></span></p>
+<p><span data-katex="\frac{t_1\to t&#39;_1}{let~x:T_1=t_1~in~t_2\to let~x:T_1=t&#39;_1~in~t_2}"></span></p>
 <p><br/></p>
-<h4 id="值">1.2 值</h4>
-<p>值（value）是一个和语义相关的概念，有三种常用的方法为项指定语义。</p>
-<p>（1）操作语义，通过定义一个简单的抽象机器，来说明一个程序语言的行为。</p>
-<p>（2）指称语义，一个项的语义是一个数学对象。</p>
-<p>（3）公理语义，不是首先定义程序的行为，而是用项所满足的规则限定它的语义。</p>
+<p>新的类型规则：</p>
+<p><span data-katex="\frac{\Gamma\vdash t_1:T_1~~~~\Gamma,x:T_1\vdash t_2:T_2}{\Gamma\vdash let~x:T_1=t_1~in~t_2:T_2}"></span></p>
 <p><br/></p>
-<p>下面我们采用操作语义的方法，来定义求值的概念。</p>
-<p>首先，我们人为指定项的一个子集，将其中的元素称为值。</p>
+<p>这样我们就可以写出<code>let</code>表达式了，</p>
+<p><span data-katex="let~x:T_1=t_1~in~t_2"></span>，</p>
+<p>它表示，求值表达式<span data-katex="t_1"></span>，然后将其绑定到<span data-katex="t_2"></span>中自由出现的<span data-katex="x"></span>上面，</p>
+<p>即在当前这种情况下（顾及<a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system#Let-polymorphism" target="_blank" rel="noopener">let polymorphism</a>），<code>let</code>可以表示为，<span data-katex="(\lambda x:T_1.t_2)t_1"></span>。</p>
 <p><br/></p>
-<p>假如项的定义如下，<span data-katex="t::=true|false|if~t~then~t~else~t"></span>，</p>
-<p>我们可以定义值，<span data-katex="v::=true|false"></span>。</p>
-<p>值可能是项被求值的最终结果，但也不全是，因为对某些项的求值过程可能不会终止。</p>
+<h3 id="不动点">不动点</h3>
 <p><br/></p>
-<h4 id="求值规则">1.3 求值规则</h4>
-<p>求值规则，是定义在项上的推导规则，例如，</p>
-<p>（1）<span data-katex="if~true~then~t_1~else~t_2\to t_1"></span>，</p>
-<p>（2）<span data-katex="if~false~then~t_1~else~t_2\to t_2"></span>，</p>
-<p>（3）<span data-katex="\frac{t_1\to t&#39;_1}{if~t_1~then~t_2~else~t_3\to if~t&#39;_1~then~t_2~else~t_3}"></span></p>
-<p>其中，<span data-katex="x\to y"></span>表示，项<span data-katex="x"></span>可以一步求值为项<span data-katex="y"></span>。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-d43b3ce324057f79.png" /></p>
 <p><br/></p>
-<h4 id="范式">1.4 范式</h4>
-<p>一个不含自由变量的项，称为封闭项，封闭项也称为组合子。</p>
-<p>例如，恒等函数<span data-katex="id=\lambda x.x"></span>就是一个封闭项。</p>
+<p>以上<code>let</code>表达式，<span data-katex="let~x:T_1=t_1~in~t_2"></span>，</p>
+<p>对<span data-katex="t_1"></span>求值的时候有一个限制，那就是<span data-katex="t_1"></span>中不能出现<span data-katex="x"></span>，</p>
+<p>否则就像方程一样，<span data-katex="x"></span>出现在了等式的两边，<span data-katex="x=t_1(x)"></span>，</p>
+<p>此时，<span data-katex="t_2"></span>中自由出现的<span data-katex="x"></span>，将是这个方程的解。</p>
 <p><br/></p>
-<p>如果没有求值规则可用于项<span data-katex="t"></span>，就称该项是一个范式。</p>
-<p>范式可能是一个值，也可能不是，但每一个值都应该是范式。</p>
+<p>不过，通常而言，<span data-katex="t_1"></span>中是可以出现<span data-katex="x"></span>的，</p>
+<p>这时候我们就需要使用<code>letrec</code>进行绑定了。</p>
 <p><br/></p>
-<p>如果一个封闭项是一个范式，但不是一个值，就称该项受阻。</p>
-<p>不是值的范式，在运行时间错误分析中起着极其重要的作用。</p>
+<p>为了看清<code>letrec</code>的真面目，我们用一个求阶乘的例子来说明问题，</p>
+<p><span data-katex="letrec~f:nat\to nat=\lambda y:nat.(if~Eq?~y~0~then~1~else~y*f(y-1))~in~f~5"></span></p>
+<p>其中，<span data-katex="nat"></span>表示整数类型。</p>
 <p><br/></p>
-<h3 id="类型">2. 类型</h3>
+<p>为了求解<span data-katex="f=\lambda y:nat.(if~Eq?~y~0~then~1~else~y*f(y-1))"></span>，</p>
+<p>我们定义一个新函数<span data-katex="F"></span>，使得，</p>
+<p><span data-katex="F=\lambda f:nat\to nat.\lambda y:nat.(if~Eq?~y~0~then~1~else~y*f(y-1))"></span>，</p>
+<p>注意到<span data-katex="f=F(f)"></span>，所以<span data-katex="f"></span>是<span data-katex="F"></span>的不动点。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-19-type-6/1023733-f8ef18f167c5e4c1.png" /></p>
+<p>这里我们暂且不讨论不动点的存在性和唯一性问题，</p>
+<p>只是引入一个不动点算子，<span data-katex="fix_\sigma:(\sigma\to\sigma)\to\sigma"></span>，</p>
+<p>它可以用来计算任意函数<span data-katex="F:\sigma\to\sigma"></span>的不动点。</p>
 <p><br/></p>
-<h4 id="类型上下文">2.1 类型上下文</h4>
-<p>一个类型上下文（也称类型环境）<span data-katex="\Gamma"></span>，是一个变量和类型之间绑定关系的集合。</p>
-<p>空上下文，可以记为<span data-katex="\varnothing"></span>，但是我们经常省略它。</p>
+<p>为了达到这个目的，<span data-katex="fix_\sigma"></span>必须满足以下约束条件，</p>
+<p><span data-katex="fix_\sigma=\lambda f:\sigma\to\sigma.f(fix_\sigma f)"></span>。</p>
 <p><br/></p>
-<p>用逗号可以在<span data-katex="\Gamma"></span>右边加入一个新的绑定，例如，<span data-katex="\Gamma,x:T"></span>。</p>
-<p><span data-katex="\vdash t:T"></span>，表示项<span data-katex="t"></span>在空的类型上下文中，有类型<span data-katex="T"></span>。</p>
+<p>引入了<span data-katex="fix_\sigma"></span>之后，<code>letrec</code>就可以用<code>let</code>表示出来了，</p>
+<p><span data-katex="letrec~f:\sigma=t_1~in~t_2\Leftrightarrow let~f:\sigma=(fix_\sigma\lambda f:\sigma.t_1)~in~t_2"></span></p>
 <p><br/></p>
-<h4 id="类型规则">2.1 类型规则</h4>
-<p><span data-katex="\lambda^\to"></span>是一个新的系统，比起<span data-katex="\lambda_\beta"></span>而言，</p>
-<p>增加了一些基于类型的推导规则。</p>
+<h3 id="代数数据类型">代数数据类型</h3>
 <p><br/></p>
-<p>其中，<span data-katex="\lambda^\to"></span>中<span data-katex="\lambda"></span>项的语法如下：</p>
-<p>（1）<span data-katex="t::=x|\lambda x:T.t|t~t"></span></p>
-<p>（2）<span data-katex="T::=T\to T"></span></p>
-<p>（3）<span data-katex="\Gamma::=\varnothing|\Gamma,x:T"></span></p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b810f4430ac7c159.png" /></p>
 <p><br/></p>
-<p>推导规则：</p>
-<p>（1）<span data-katex="\frac{x:T\in\Gamma}{\Gamma\vdash x:T}"></span></p>
-<p>（2）<span data-katex="\frac{\Gamma,x:T_1\vdash t:T_2}{\Gamma\vdash\lambda x:T_1.t:T_1\to T_2}"></span></p>
-<p>（3）<span data-katex="\frac{\Gamma\vdash t_1:T_1\to T_2~~~~\Gamma\vdash t_2:T_1}{\Gamma\vdash t_1~t_2:T_2}"></span></p>
+<p>在某些编程语言中，可以自定义递归类型，例如在Haskell中，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data List a &#x3D; Nil | Cons a (List a)</span><br><span class="line"></span><br><span class="line">lst :: List Int </span><br><span class="line">lst &#x3D; Cons 1 $ Cons 2 $ Nil</span><br></pre></td></tr></table></figure>
+<p>以上定义采用了递归的方式，定义了一个<a href="https://wiki.haskell.org/Algebraic_data_type" target="_blank" rel="noopener">代数数据类型</a><code>List</code>，</p>
+<p>所谓代数数据类型，是由基本类型经过复合运算，得来的类型。</p>
 <p><br/></p>
-<p>根据以上的推导规则，我们可以证明，</p>
-<p><span data-katex="\vdash(\lambda x:Bool.x)~true:Bool"></span></p>
+<p>Haskell中，使用<code>|</code>表示和类型（sum type），</p>
+<p>而带参数值构造器（value constructor）<code>Cons</code>，用于表示各参数（<code>a</code>，<code>List a</code>）类型的积类型（product type），</p>
+<p>无参构造器<code>Nil</code>，用来表示单位乘积类型（empty product）。</p>
+<p>（关于函数类型与指数的关系，以后有机会再介绍。）</p>
 <p><br/></p>
-<h4 id="求值规则-1">2.3 求值规则</h4>
-<p><span data-katex="\lambda^\to"></span>系统中，值的定义如下：</p>
-<p>（1）<span data-katex="v::=\lambda x:T.t"></span></p>
+<p>和<code>letrec</code>中的场景相似的是，<code>List</code>也出现在了等式的两边，</p>
+<p>于是，我们定义<span data-katex="\mu t.\sigma"></span>，表示满足等式<span data-katex="t=\sigma"></span>的最小类型，</p>
+<p>其中，<span data-katex="t"></span>和<span data-katex="\sigma"></span>是类型，且<span data-katex="t"></span>通常会在<span data-katex="\sigma"></span>中出现。</p>
 <p><br/></p>
-<p>求值规则，定义如下：</p>
-<p>（1）<span data-katex="\frac{t_1\to t&#39;_1}{t_1~t_2\to t&#39;_1~t_2}"></span></p>
-<p>（2）<span data-katex="\frac{t_2\to t&#39;_2}{t_1~t_2\to t_1~t&#39;_2}"></span></p>
-<p>（3）<span data-katex="(\lambda x:T.t)~v\to [x\mapsto v]t"></span></p>
+<p>因此，以上递归定义的<code>List</code>类型可以表示为，</p>
+<p><span data-katex="\mu\phi.\lambda\alpha.(1+\alpha\times(\phi~\alpha))"></span></p>
 <p><br/></p>
-<p>其中（2），相当于<span data-katex="\beta"></span>变换，</p>
-<p><span data-katex="[x\mapsto v]t"></span>，表示将<span data-katex="t"></span>中所有自由出现的<span data-katex="x"></span>换为<span data-katex="v"></span>。</p>
+<p>其中，<span data-katex="\alpha"></span>表示类型参数<code>a</code>，</p>
+<p><span data-katex="\phi"></span>是一个函数，用于表示类型构造器（data constructor）<code>List</code>，</p>
+<p><span data-katex="\mu"></span>算子用来计算类型的不动点。</p>
 <p><br/></p>
-<h4 id="curry-style-and-church-style">2.4 Curry-style and Church-style</h4>
-<p>对于<span data-katex="\lambda^\to"></span>系统来说，通常有两种不同风格的解释方式，</p>
-<p>如果我们首先定义项，然后定义项的求值规则——语义，</p>
-<p>最后再定义一个类型系统，用以排除掉我们不需要的项，</p>
-<p>这种语义先于类型的定义方式，称为Curry-style。</p>
+<h3 id="无类型演算">无类型<span data-katex="\lambda"></span>演算</h3>
 <p><br/></p>
-<p>另一方面，如果我们定义项，然后再给出良类型的定义，</p>
-<p>最后再给出这些良类型项的语义，就称为Church-style，类型先于语义，</p>
-<p>在Church-style的系统中，我们不关心不良类型项的语义。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2017-09-23-type-7/1023733-b7bb889f262aaa84.png" /></p>
 <p><br/></p>
-<p>历史上，隐式类型的<span data-katex="\lambda"></span>演算系统，通常是Curry-style的，</p>
-<p>而显式类型的<span data-katex="\lambda"></span>演算系统，通常是Church-style的。</p>
+<p>在无类型<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda_\beta"></span>中，</p>
+<p>定义递归类型，<span data-katex="\mu t.t\to t"></span>，它满足类型等式<span data-katex="t=t\to t"></span>。</p>
 <p><br/></p>
-<h3 id="关于单位类型">3. 关于单位类型</h3>
-<p>简单类型化<span data-katex="\lambda"></span>演算，直接用起来可能并不好用，</p>
-<p>人们会再为它扩充一些类型，例如，添加一些基本类型<span data-katex="Bool"></span>，<span data-katex="Nat"></span>或者<span data-katex="String"></span>，</p>
-<p>定义单位类型，列表类型，元组类型，和类型，等等。</p>
+<p>这样的话，无类型<span data-katex="\lambda"></span>演算系统<span data-katex="\lambda_\beta"></span>，</p>
+<p>就可以无缝的嵌入到一个类型化的系统中去了，</p>
+<p>该系统只存在一个类型，即递归类型<span data-katex="\mu t.t\to t"></span>，</p>
+<p>所有的项，都具有这个类型。</p>
 <p><br/></p>
-<p>下面我们选择单位类型进行介绍。</p>
+<p>因此，对于支持递归类型的系统而言，</p>
+<p>无类型相当于具有唯一类型（Untyped means uni-typed）。</p>
 <p><br/></p>
-<p>满足单位类型的项只有一个，为此我们新增一个项的定义，</p>
-<p><span data-katex="t::=...|unit"></span></p>
+<h3 id="总结">总结</h3>
+<p>本文介绍了递归类型，引入了两个算子<span data-katex="fix_\sigma"></span>和<span data-katex="\mu"></span>，分别用来求解函数和类型的不动点。</p>
+<p>但是，待求的不动点是否存在，是否唯一，我们仍不能确定。</p>
+<p>要想证明这件事情并不简单，需要补充很多额外的数学知识，例如，良基归纳法和最小不动点定理，</p>
+<p>此外，不动点的存在性，和递归的终止性也有关系。</p>
 <p><br/></p>
-<p>再新增一个类型的定义，</p>
-<p><span data-katex="T::=Unit"></span></p>
-<p><br/></p>
-<p>以及一个推导规则，</p>
-<p><span data-katex="\Gamma\vdash unit:Unit"></span></p>
-<p><br/></p>
-<p><span data-katex="Unit"></span>的作用类似于C和Java中的<span data-katex="void"></span>类型，主要用于表示副作用，</p>
-<p>在这样的语言中，我们往往并不关心表达式的结果，而只关心它的副作用，</p>
-<p>因此，用<span data-katex="Unit"></span>来表示结果的类型，是一个合适的选择。</p>
-<p><br/></p>
-<p>这里提到单位类型，是为以后Top类型和Bot类型做铺垫。</p>
+<p>好在我们所遇到的大多数场景，都是满足这些要求的，</p>
+<p>因为，我们总是先确信这个解是存在的，然后再去编程，例如，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fact :: Int -&gt; Int </span><br><span class="line">fact 1 &#x3D; 1</span><br><span class="line">fact n &#x3D; n * fact (n - 1)</span><br></pre></td></tr></table></figure>
+<p>将<code>fact</code>写到等式两边，能让我们更方便对<code>fact</code>进行定义。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus" target="_blank" rel="noopener">Wikipedia: Simply typed lambda calculus</a></p>
-<p><a href="https://book.douban.com/subject/1318672/" target="_blank" rel="noopener">类型和程序设计语言</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Algebraic_data_type" target="_blank" rel="noopener">Algebraic data type</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Empty_product" target="_blank" rel="noopener">Empty product</a></p>
+<p><a href="https://book.douban.com/subject/1761918/" target="_blank" rel="noopener">Foundations for programmming languages</a></p>
+<p><a href="https://book.douban.com/subject/26782198/" target="_blank" rel="noopener">Practical Foundations for Programming Languages</a></p>
 
           
         
@@ -519,7 +505,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/183/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/183/">183</a><span class="page-number current">184</span><a class="page-number" href="/page/185/">185</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/185/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/183/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/183/">183</a><span class="page-number current">184</span><a class="page-number" href="/page/185/">185</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/185/">&gt;</a>
   </nav>
 
 
@@ -565,7 +551,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

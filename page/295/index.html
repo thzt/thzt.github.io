@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/17/quotation/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2015/03/18/polymorphism-of-chain-function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/17/quotation/" itemprop="url">Lisp语言中的引用</a></h1>
+                <a class="post-title-link" href="/2015/03/18/polymorphism-of-chain-function/" itemprop="url">函数>>=的多态性</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-17T00:00:00+08:00">
-                2015-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-18T00:00:00+08:00">
+                2015-03-18
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lisp/" itemprop="url" rel="index">
-                    <span itemprop="name">Lisp</span>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index">
+                    <span itemprop="name">Haskell</span>
                   </a>
                 </span>
 
@@ -347,166 +347,93 @@
       
         
           
-            <p>在lisp语言中，引用（quotation）是一个很独特的概念。</p>
-<p>这与按引用传参（call by reference）完全是两码事。</p>
-<p><br/></p>
-<p>至于引用（quote）的含义是什么，</p>
-<p>为什么要有这个概念，</p>
-<p>刚开始学lisp时，很容易感到迷惑。</p>
-<p><br/></p>
-<p>既然如此，</p>
-<p>我们不妨一起探险吧。</p>
-<p><br/></p>
-<h2 id="程序执行就是一系列表达式的求值过程"><strong>程序执行就是一系列表达式的求值过程</strong></h2>
-<p>lisp程序中没有语句，只有表达式。</p>
-<p>程序执行过程，就是一系列表达式的求值过程。</p>
-<p><br/></p>
-<p>这句话再强调几次都不为过，是初学者最容易忽视的一句话。</p>
-<p>它指出了理解程序执行的必要条件。</p>
-<p>每当我们不知道下一步该如何进行时，都可以问自己，表达式的值是什么。</p>
-<p><br/></p>
-<p>我们用x =&gt; 1来表示，表达式x的值是1，或者说（表达式）x求值为1。</p>
-<p><br/></p>
+            <p>Haskell中一些函数可以作用在多种类型上。</p>
 <p>例如：</p>
-<p>(define add1</p>
-<p>    (lambda (x)</p>
-<p>        (+ x 1)))</p>
+<p>ghci&gt; length [1, 2]</p>
+<p>2</p>
+<p>length :: [Int] -&gt; Int</p>
 <p><br/></p>
-<p>(add1 2)</p>
+<p>ghci&gt; length ["a", "b", "c"]</p>
+<p>3</p>
+<p>length :: [String] -&gt; Int</p>
 <p><br/></p>
-<p>我们仔细考虑一下(add1 2)。这段程序怎么执行呢？</p>
-<p>我们问自己，(add1 2)的值是什么呢？</p>
+<p>我们看length的类型，</p>
+<p>length :: [a] -&gt; Int</p>
+<p>它类型签名中，包含类型变量，类型变量可以具体化为任意类型。</p>
 <p><br/></p>
-<p>这是一个函数调用表达式，求值规则如下：</p>
-<p>函数调用表达式的值等于函数体的值。</p>
-<p>而函数体中形参的值等于实参的值。</p>
+<p>像这样的函数，称为多态函数。</p>
 <p><br/></p>
-<p>所以，求(add1 2)的值就转换成了求add1的函数体(+ x 1)的值，x是形参。</p>
+<h2 id="函数"><strong>函数&gt;&gt;=</strong></h2>
+<p>函数&gt;&gt;=定义在Monad类型类中，</p>
+<p>class Monad m where</p>
+<p>    (&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</p>
 <p><br/></p>
-<p>从一开始，我们就将实参和实参的值进行区分，是很重要的。</p>
-<p>对于(add1 2)来说，实参是2，实参的值是2的值。</p>
-<p>而2是一个数字，数字是自求值对象，所以2的值还是2。</p>
-<p>（多此一举是必要的）</p>
+<p>其中，m是Monad类型类的实例类型，它的kind是* -&gt; *，</p>
+<p>:k m = * -&gt; *</p>
+<p>类型m a是一个具体类型，该类型的值称为monad value。</p>
 <p><br/></p>
-<p>因此，形参x的值就是2了。x =&gt; 2</p>
+<p>我们看到，在m确定的情况下，&gt;&gt;=的类型签名中仍然包含类型变量。</p>
+<p>因此，对Monad类型类的某个实例来说，</p>
+<p>&gt;&gt;=可以操作相同m类型但是不同a类型的monad value :: m a。</p>
 <p><br/></p>
-<p>我们来求值函数体，(+ x 1)</p>
-<p>(+ x 1)又是一个函数调用表达式，</p>
-<p>只不过+是一个内置函数，我们看不到它的函数体。</p>
-<p>我们只知道加法的结果是两个加数之和。</p>
+<h2 id="io-monad"><strong>IO monad</strong></h2>
+<p>以Monad类型类的实例IO为例，对于IO来说，IO monad value称为IO action。</p>
+<p>main = do</p>
+<p>    putStrLn "Please input: "</p>
+<p>    inpStr &lt;- getLine</p>
+<p>    putStrLn $ "Hello " ++ inpStr</p>
 <p><br/></p>
-<p>于是，x的值是2，2+1=3。</p>
-<p>对吗？</p>
+<p>其中，</p>
+<p>putStrLn :: String -&gt; IO ( )</p>
+<p>getLine :: IO String</p>
 <p><br/></p>
-<p>结果对了，但是执行过程不对，缺少对1这个实参的求值过程。</p>
+<p>我们来分析一下这3个IO action的类型，</p>
+<p>putStrLn "Please input: " :: IO ( )</p>
+<p>getLine :: IO String</p>
+<p>putStrLn $ "Hello " ++ inpStr :: IO ( )</p>
 <p><br/></p>
-<p>根据函数调用表达式的求值规则，(+ x 1)的值是x的值与1的值相加的结果。</p>
-<p>x =&gt; 2，1 =&gt; 1</p>
-<p>所以，结果为2+1=3</p>
+<p>它们的具体类型都是m a，</p>
+<p>m相同，m = IO。而a不同，分别是( )，String，( )。</p>
 <p><br/></p>
-<p>这样繁琐有什么用呢？</p>
-<p>那不妨分析一下(= 1 '1) =&gt; #t</p>
+<p>在do notation中，如果某一行我们没有使用&lt;-为monad value绑定值，</p>
+<p>就相当于使用了函数&gt;&gt;，表示不需要这个绑定值。</p>
+<p>(&gt;&gt;) :: x &gt;&gt; y = x &gt;&gt;= \ _ -&gt; y</p>
 <p><br/></p>
-<p>引用出现了，其中'1是(quote 1)的简写。</p>
-<p>1和(quote 1)为什么相等的呢？</p>
-<p>其实是，它们两个不相等，它们的值相等。</p>
+<p>这样的话，我们就可以将main函数还原成&gt;&gt;和&gt;&gt;=的串联形式了，</p>
+<p>putStrLn "Please input: " &gt;&gt; getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
+<p>= putStrLn "Please input: " &gt;&gt;= \ _ -&gt; getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
+<p>= putStrLn "Please input: " &gt;&gt;= ( \ _ -&gt; getLine &gt;&gt;= ( -&gt; putStrLn $ "Hello " ++ inpStr ) )</p>
 <p><br/></p>
-<p>在函数=调用之前，实参1和(quote 1)都要先求值。</p>
-<p>1 =&gt; 1，(quote 1) =&gt; 1</p>
-<p>因此，(= 1 (quote 1)) =&gt; #t</p>
+<h2 id="类型不同的同时出现"><strong>类型不同的&gt;&gt;=同时出现</strong></h2>
+<p>对于第一个&gt;&gt;=，我们能推断出它的大概类型，</p>
+<p>&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ?) -&gt; IO ?</p>
+<p>其中“?”表示尚未确定的类型。</p>
 <p><br/></p>
-<h2 id="从求值的角度理解quote"><strong>从求值的角度理解quote</strong></h2>
-<p>怎样理解(quote 1) =&gt; 1呢？</p>
+<p>而第二个&gt;&gt;=的类型，可以完全确定下来。</p>
+<p>getLine &gt;&gt;= -&gt; putStrLn $ "Hello " ++ inpStr</p>
+<p>&gt;&gt;= :: IO String -&gt; (String -&gt; IO ( )) -&gt; IO ( )</p>
 <p><br/></p>
-<p>其实，我们只是遵循了quote表达式的求值规则而已，</p>
-<p>(quote a) =&gt; a</p>
+<p>那么，第一个&gt;&gt;=的类型也就可以完全确定下来了，</p>
+<p>&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ( )) -&gt; IO ( )</p>
 <p><br/></p>
-<p>那么a是什么呢？</p>
-<p><br/></p>
-<p>其实这个问题提的不合理。</p>
-<p>因为，在lisp程序执行过程中，我们不关心“xxx是什么”，我们只关心“xxx的值是什么”。</p>
-<p><br/></p>
-<p>那么a的值是什么呢？</p>
-<p><br/></p>
-<p>这个问题在这种情况下提的也不合理。</p>
-<p>因为，我们需要求值的是(quote a)，我们已经知道了它的值是a，就不必再求a的值了。</p>
-<p><br/></p>
-<p>例如：</p>
-<p>(define a 1)</p>
-<p>(list a 'a) =&gt; (1 a)</p>
-<p><br/></p>
-<p>我们来分析一下，程序的执行过程。</p>
-<p>问程序怎么执行，就是问(list a 'a)的值是什么，</p>
-<p>而(list a 'a)是函数调用，list是内置函数，结果值是用实参值拼成的一个列表。</p>
-<p><br/></p>
-<p>根据函数调用规则，首先我们要求实参的值。</p>
-<p>a =&gt; 1，因为(define a 1)就是定义a的值为1</p>
-<p>'a =&gt; a，根据quote表达式的求值规则(quote a) =&gt; a</p>
-<p><br/></p>
-<p>所以(list a 'a) =&gt; (1 a)</p>
-<p>这里我们看到了实参与实参值的区别。</p>
-<p>我们也看到了，在调用函数之前，要先求值实参。</p>
-<p><br/></p>
-<p>回顾一下，这其实是拿着一堆符号在玩而已。</p>
-<p>求值，就是进行符号替换罢了。</p>
-<p><br/></p>
-<p>对的，</p>
-<p>lisp语言的计算模型是建立在lambda演算基础上的。</p>
-<p>而lambda演算就是一个使用符号进行计算的形式系统。</p>
-<p>函数调用在lambda演算中称为beta归约。</p>
-<p><br/></p>
-<h2 id="编码一致性"><strong>编码一致性</strong></h2>
-<p>我们已经知道了quote表达式的求值规则了。</p>
-<p>相信判断程序的执行过程，已经难不倒我们了。</p>
-<p><br/></p>
-<p>可是，为什么要有引用这个概念呢？</p>
-<p><br/></p>
-<p>这其实是为了将数据和程序进行统一编码。</p>
-<p>lisp程序中，我们知道(+ 1 2)是一个加法调用，</p>
-<p>但是它也可以表示由3个符号+，1和2构成的列表</p>
-<p><br/></p>
-<p>列表是数据，加法调用是程序，</p>
-<p>它们采用了相同的编码。</p>
-<p>我们没有办法区分。</p>
-<p><br/></p>
-<p>首先想到的，就是让它们采用不同的编码。</p>
-<p>例如：</p>
-<p>我们把函数调用编码为+[1;2]，而列表编码为(+ 1 2)</p>
-<p><br/></p>
-<p>看起来不错，</p>
-<p>人们一开始也是这么做的，</p>
-<p>+[1;2]称为M表达式。</p>
-<p>(+ 1 2)称为S表达式。</p>
-<p><br/></p>
-<p>可是，后来人们发现，如果用lisp语言来处理lisp程序文本时，</p>
-<p>不同的编码，会增加难度。</p>
-<p><br/></p>
-<p>又因为，程序主要是由函数调用组成的。</p>
-<p>所以，人们进行了以下编码，</p>
-<p>函数调用编码为(+ 1 2)</p>
-<p>而列表编码为(quote (+ 1 2))</p>
-<p><br/></p>
-<p>即，(+ 1 2)求值，会导致函数调用。</p>
-<p>(quote (+ 1 2))求值，会得到一个列表。</p>
-<p>于是，我们就统一的用S表达式，完成了对程序和数据的相同编码。</p>
-<p><br/></p>
-<p>也正因为有这样的一致性。</p>
-<p>在进行元编程时，相比其他语言，lisp宏的威力才更强大。</p>
+<p>由此可见，</p>
+<p>第一个&gt;&gt;= :: IO ( ) -&gt; (( ) -&gt; IO ( )) -&gt; IO ( )</p>
+<p>第二个&gt;&gt;= :: IO String -&gt; (String -&gt; IO ( )) -&gt; IO ( )</p>
+<p>两个&gt;&gt;=的类型不同，它们同时出现了。</p>
 <p><br/></p>
 <h2 id="结语"><strong>结语</strong></h2>
-<p>lisp语言中的引用，是一个很深刻的概念。</p>
-<p>远不是通常想像的那么简单。</p>
+<p>do notation是&gt;&gt;和&gt;&gt;=串联形式的语法糖，IO action是 IO monad value，因此可以使用它。</p>
+<p>认为do notation中每行的monad value类型必须相同，是不正确的。</p>
+<p>事实上，他们的类型是m a，m是相同的，而a可以不同。</p>
 <p><br/></p>
-<p>比如，我们如何判断两个引用相等呢？</p>
-<p>从符号的角度来看，似乎很简单，</p>
-<p>但是从实现的角度来看，我们就需要在程序执行之前，让引用指向相同的位置。</p>
+<p>相似的，Functor和Applicative类型类也定义了一些多态函数。</p>
 <p><br/></p>
-<p>然而，这样对于引用的列表来说，就是个问题。</p>
-<p>如果程序执行过程中，修改了列表元素，其他引用也会受到影响。</p>
+<p>此外，对于IO类型，《Programming in Haskell》P88说的最清楚</p>
+<p>type IO a = World -&gt; (a, World)</p>
 <p><br/></p>
-<p>类似的问题还有很多。</p>
-<p>因此，Scheme和Common Lisp规范都建议不要修改引用返回的值。</p>
-<p>应该只把它当做一个常量来使用。</p>
+<p>World类型的值表示环境的当前状态。</p>
+<p>World -&gt; (a, World)类型的值是一个函数，</p>
+<p>它接受环境状态作为参数，返回一个a类型的值，并影响了环境状态。</p>
 
           
         
@@ -545,7 +472,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/294/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/294/">294</a><span class="page-number current">295</span><a class="page-number" href="/page/296/">296</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/296/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/294/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/294/">294</a><span class="page-number current">295</span><a class="page-number" href="/page/296/">296</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/296/">&gt;</a>
   </nav>
 
 
@@ -591,7 +518,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

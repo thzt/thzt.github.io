@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/11/08/features-of-individuals/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2016/12/27/the-art-of-software-tools/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/11/08/features-of-individuals/" itemprop="url">遥远的侧面</a></h1>
+                <a class="post-title-link" href="/2016/12/27/the-art-of-software-tools/" itemprop="url">软件工具的设计艺术</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-08T00:00:00+08:00">
-                2016-11-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-27T00:00:00+08:00">
+                2016-12-27
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Design</span>
                   </a>
                 </span>
 
@@ -347,66 +347,56 @@
       
         
           
-            <h3 id="没有什么习惯总是好的">没有什么习惯总是好的</h3>
-<p>从小我们被教导学习各种优秀的习惯，</p>
-<p>可是后来才发现，这些优秀习惯有可能是相互克制的。</p>
+            <h3 id="getdefaultprops">getDefaultProps</h3>
+<p>在确定软件方案之前，除了要先确定问题之外，还要确定人们到底想不想解决它。</p>
+<p>解决某些问题，通常以损失另外的东西为代价，人们是否愿意买单。</p>
+<p>此外，为了增加合作的可能性，双方会特意隐瞒需求的细节和实现难度，使之容易达成合作关系。</p>
 <p><br/></p>
-<p>我们无法既容易接受别人的观点，又能坚持自己的想法，</p>
-<p>无法既谦虚谨慎，又狂傲不羁，</p>
-<p>无法既能保持细节的完美，还总是能站在全局考虑问题。</p>
+<p>代码不一定要实现产品的所有功能，产品也不一定满足用户的所有的需要。</p>
+<p>我们既可以通过设计，满足用户的所有潜在功能，也可以通过限制用户的场景，减少设计复杂度。</p>
 <p><br/></p>
-<p>我们只能选一种，或者在某个瞬间我们只能具有某种性格的一种。</p>
-<p>这就好比观察某座宏伟大厦就不得不站远一点一样，</p>
-<p>最终的完整印象，由各个角度的观察结果混合而成。</p>
+<h3 id="getinitialstate">getInitialState</h3>
+<p>编程的艺术在于引入间接性，是否可以把直接的实现，看做是先实现一个工具，再由这个工具来实现原来的目的。</p>
+<p>而且，在实现一个工具的过程中，仍然可以再引入间接性。</p>
+<p>而艺术本身在于我们引入的间接性在什么程度上是适度的。</p>
 <p><br/></p>
-<p>不同的环境塑造了不同的人，性格特征也很大程度上区分了人们之间的不同，</p>
-<p>然而，可能恰恰我们有什么优点，才不得不具备相应的缺点，</p>
-<p>人们的精力总是有限，经常站在某个角度观察，容易对偏见产生习惯。</p>
+<p>当用户只需要工具中的部分功能，但又不得不整个工具一起拿过来用时，我们就说这个工具比较重，绑架了用户的选择。</p>
+<p>工具的作用，不该是教用户怎么做，而是辅助用户来完成工作，简化已有工作，给用户提供方便。</p>
+<p>不要帮用户做所有事情，但也不要所有事情都要用户来做。</p>
 <p><br/></p>
-<h3 id="知识是为了缓解迷信">知识是为了缓解迷信</h3>
-<p>另一方面，每个人有不同的教育背景，看到的侧面自然是多样性的，</p>
-<p>我们学的任何知识都是有用的，影响了现在的所有判断。</p>
+<p>有的工具是给其它的软件系统用的，而有的工具是给人用的。</p>
+<p>我们的工具在什么场景中被使用，是需要事先考虑清楚的，这决定了我们到底提供一个什么样的工具。</p>
 <p><br/></p>
-<p>要知道，学过的知识并不常被有意识的用到，</p>
-<p>大多数我们认为是常识的事情，没有相同经验的人就会觉得很蹊跷。</p>
-<p>我们给出的所有解决方案，都依赖于自己独特的人生阅历。</p>
+<p>优秀的开发者，会区分工具提供的功能和自己需要的功能。</p>
+<p>如果工具不好用，但是功能完备，那么用的人就会想办法对它包装，让所有其它场景都使用这层包装。</p>
 <p><br/></p>
-<p>所以，不要为自己学了一些感觉永远用不到的知识而感到羞愧，</p>
-<p>知识就在那里，默默的发挥价值，只是自己感觉不到而已。</p>
+<h3 id="componentwillmount">componentWillMount</h3>
+<p>在考虑该不该的时候，先问目的，该不该做某件事情，还要看解决它是为了达成什么目的。</p>
+<p>不考虑目的，讨论任何方法的好坏，都是空想。</p>
 <p><br/></p>
-<p>一个有过读研经历的人，可能并不会认为读研对自己有什么帮助，</p>
-<p>但是如果没有这段经历，就容易让自己相信读研会有帮助。</p>
-<p>人们倾向于把解答问题的方法，指向陌生领域。</p>
+<p>对软件附加上任何诸如可维护性，可扩展性，可伸缩性，都是需要成本的，我们需要考虑的是这些成本是否值得投入。</p>
+<p>没有绝对的错误，只有不够好的选择。</p>
 <p><br/></p>
-<p>一个学过编译原理自己设计过语言的程序员，可能觉得这些知识并没有什么用，</p>
-<p>但是没有学过它的人可能会产生迷信，认为DSL会带来神奇的效果。</p>
+<p>只要描述现在的系统没有什么功能，造成了什么不适，就能马上看到需求。</p>
+<p>而如果别人直接指出他们需要什么，这很可能只是一种方案。</p>
 <p><br/></p>
-<h3 id="不要坚持自己的思维习惯">不要坚持自己的思维习惯</h3>
-<p>有的时候，我们感到自己遇到了瓶颈期，</p>
-<p>不知道该怎样做，没有目标和方向，因此也没有动力。</p>
-<p>此时此刻，不再进步是显然的。</p>
+<h3 id="render">render</h3>
+<p>过度设计指的是，软件在被重写之前，我们所担心的事情一次都没有发生。</p>
+<p>然而，合理的抽象是必需的，所以关键问题不在于是否进行抽象，而是在于如何进行恰如其分的抽象。</p>
 <p><br/></p>
-<p>这可能是和我们习惯了目前的思维方式有关，</p>
-<p>手电可以让我们看清夜路，但是手电本身就变得模糊了，</p>
-<p>优势可以帮我们实现价值，但是它所带来的恶性结果就不那么明显了。</p>
+<p>不要预测未来，而是想办法让代码具有良好的特征，这些特征让现在的代码更适应变更。</p>
+<p>工程师的职责，就是想办法让软件健康成长，是人响应了变更，而不是工具本身。</p>
 <p><br/></p>
-<p>我们经常反思自己，可能恰恰因为这样，产生了不好的结果，</p>
-<p>我们经常沟通交流，可能恰恰因为这样，产生了不好的结果，</p>
-<p>我们经常努力学习，可能恰恰因为这样，产生了不好的结果。</p>
+<h3 id="componentdidmount">componentDidMount</h3>
+<p>能让别人在不看源码的情况下会用，才叫封装。</p>
 <p><br/></p>
-<p>没有一劳永逸的从不产生坏影响的行为。</p>
-<p>适当的时候，我们应该换一种思维方式，换一种性格模式。</p>
+<p>在使用的时候找不到文档，但是在学会之后又不想写下文档。</p>
+<p>知识就是这样，缺乏之时如饥似渴，掌握之后就觉得可有可无了。</p>
+<p>掌握知识的人，从来都觉得没有分享的必要，而需要这些知识的人们，却觉得走投无路。</p>
 <p><br/></p>
-<p>尝试从自己讨厌的人那里学点什么，也是一个好的办法，</p>
-<p>我们讨厌的品行，最有可能是自己欠缺的，</p>
-<p>如果我们从自己的讨厌的人那里都能得到收获，</p>
-<p>就具有了看清事物正反两面的本领。</p>
-<p><br/></p>
-<h3 id="结语">结语</h3>
-<p>我们可以站在不同的角度，以不同的身份，看待问题，</p>
-<p>可以以任何人，任何性格特征，灵活处事。</p>
-<p>与其伪装自己，不如主动切换角色，</p>
-<p>随机应变后回归天性，坦然的面对一切纷争。</p>
+<h3 id="componentwillunmount">componentWillUnmount</h3>
+<p>软件说白了，无非就是考虑生活中什么可以自动化，以及如何自动化。</p>
+<p>编程说白了，无非就是考虑用哪些符号，以及如何用这些符号来解决问题。</p>
 
           
         
@@ -445,7 +435,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/215/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/215/">215</a><span class="page-number current">216</span><a class="page-number" href="/page/217/">217</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/217/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/215/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/215/">215</a><span class="page-number current">216</span><a class="page-number" href="/page/217/">217</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/217/">&gt;</a>
   </nav>
 
 
@@ -491,7 +481,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

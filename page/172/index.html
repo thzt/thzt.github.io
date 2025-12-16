@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/01/14/semantics-1/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2018/01/20/semantics-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/14/semantics-1/" itemprop="url">语言背后的代数学（一）：语义解释</a></h1>
+                <a class="post-title-link" href="/2018/01/20/semantics-2/" itemprop="url">语言背后的代数学（二）：初等代数</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-14T00:00:00+08:00">
-                2018-01-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-20T00:00:00+08:00">
+                2018-01-20
               </time>
             
 
@@ -347,197 +347,159 @@
       
         
           
-            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-c6a63de4fdfe220f.png" /></p>
+            <p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-20-semantics-2/1023733-4b18ee5ad046fa02.png" /></p>
 <p><br/></p>
-<h3 id="初窥语义">1. 初窥语义</h3>
-<p>在《<a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型</a>》系列中，我们介绍了一些形式系统，</p>
-<p>例如<span data-katex="\lambda_\beta"></span>系统（<span data-katex="\lambda"></span>演算），<span data-katex="CL_w"></span>（组合子逻辑），</p>
-<p>它们由一些合法的符号，以及这些符号的推导规则构成，</p>
-<p>命题逻辑与谓词逻辑，也可以用这种公理化的方式构建起来。</p>
+<h3 id="回顾">回顾</h3>
+<p>上文中我们介绍了一个称为“pq”的系统，</p>
+<p>并且给它选择了一个合理的语义解释。</p>
+<p>我们将<code>---q-p--</code>解释为“3等于1加2”。</p>
 <p><br/></p>
-<p>然而，在讨论这些系统的时候，我们只是把它们看成了单纯的符号演算，</p>
-<p>并没有过多考虑这些符号到底代表什么含义。</p>
+<p>此外，我们还知道了，</p>
+<p>解释的方式，是随着形式系统的公理化条件而改变的。</p>
+<p>更改了“pq系统”的公理或者推导规则的时候，</p>
+<p>系统中公理和定理的含义都会发生改变。</p>
 <p><br/></p>
-<p>例如，<span data-katex="\lambda"></span>项<span data-katex="(\lambda x.x(xy))N"></span>，经过<span data-katex="\beta"></span>变换，</p>
-<p>我们可以得到，<span data-katex="N(Ny)"></span>，</p>
-<p><span data-katex="(\lambda x.x(xy))N\triangleright_\beta N(Ny)"></span>。</p>
+<p>为此我们回顾了几何学中的欧几里得第五公设问题，</p>
+<p>看到了语义问题对数学家们造成的困扰。</p>
 <p><br/></p>
-<p>它看起来真的好像一个函数调用啊。</p>
+<h3 id="自然数语言">自然数语言</h3>
 <p><br/></p>
-<p>这就给我们带来了以下思考，</p>
-<p>是否可以把<span data-katex="(\lambda x.x(xy))"></span>解释为一个函数呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function (x)&#123;</span><br><span class="line">    return x(x(y));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>是否可以认为，<span data-katex="(\lambda x.x(xy))N"></span>是用参数<span data-katex="N"></span>对该函数进行调用呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(function (x)&#123;</span><br><span class="line">    return x(x(y));</span><br><span class="line">&#125;(N));</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 调用后相当于返回了以下结果</span><br><span class="line">N(N(y))</span><br></pre></td></tr></table></figure>
-<p>这样解释的话，<span data-katex="\beta"></span>变换就可以看做函数调用了。</p>
-<p>这一切似乎顺理成章，显而易见。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-20-semantics-2/1023733-01697e17f3942233.png" /></p>
 <p><br/></p>
-<p>可是，我们为什么可以这样做呢？</p>
-<p><span data-katex="\beta"></span>变换与函数调用之间的关系是唯一确定的吗？</p>
-<p>为了回答好这些问题，还得重新研读<a href="https://zh.wikipedia.org/wiki/%E8%AF%AD%E4%B9%89%E5%AD%A6" target="_blank" rel="noopener">语义学</a>这个有趣的学科。</p>
+<p>从读小学的时候开始，我们就认识了自然数，</p>
+<p>我们可以从零开始计数，每个数字比它前面的多一，</p>
+<p><span data-katex="0~1~2~3~4~5~6~\cdots"></span></p>
+<p>这些数字可以用来表示物品的个数。</p>
 <p><br/></p>
-<h3 id="公理化">2. 公理化</h3>
+<p>它们是如此的贴近生活，如此自然，</p>
+<p>以致我们一直以来，就把两个不同的<strong>概念混淆</strong>在了一起。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-23d71a952f33acd0.png" /></p>
+<p>一个概念是自然数的语法构造，属于编码问题，</p>
+<p>另一个概念则是对这种语法构造的解释，属于语义问题。</p>
 <p><br/></p>
-<p>首先我们先回顾一下，</p>
-<p>形式系统是怎么用公理化的方式构建的。</p>
+<p>为了看清这一点，</p>
+<p>我们使用公理化方式定义一个<strong>自然数形式系统</strong>。</p>
+<p>为此我们要问自己这些问题。</p>
 <p><br/></p>
-<p>我们以一个称之为“pq”的系统为例。</p>
-<p>（出自《<a href="https://book.douban.com/subject/1291204/" target="_blank" rel="noopener">哥德尔、艾舍尔、巴赫——集异璧之大成</a>》）</p>
+<p>（1）这个形式系统包含了哪些符号呢？</p>
+<p>它只包含<code>0~9</code>，这个十个字符。</p>
 <p><br/></p>
-<h4 id="公理化步骤">2.1 公理化步骤</h4>
-<p><strong>第一步</strong>，</p>
-<p>我们要有一些符号。</p>
-<p>例如：“pq系统”只有三个符号，<code>p</code>，<code>q</code>，<code>-</code>。</p>
+<p>（2）哪些符号串是合法的？</p>
+<p>一位符号串，或者不是<code>0</code>开头的多位符号串，都是合法的。</p>
+<p>所有这些合法的符号串，构成了一个集合，称为该形式系统的“<strong>语言</strong>”。</p>
 <p><br/></p>
-<p><strong>第二步</strong>，</p>
-<p>我们要说明什么样的符号串是合法的，即指定一套语法。</p>
+<p>（3）哪些符号串被认为是公理或定理，定理之间的推导规则是什么？</p>
+<p>对于自然数形式系统来说，符号串<code>0</code>可以看做公理，后继函数可以看做推导规则。</p>
 <p><br/></p>
-<p>例如，我们规定“pq系统”中合法的符号串，形如<code>xqypz</code>，</p>
-<p>其中，<code>x</code>，<code>y</code>，<code>z</code>仅由一串短杠组成。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">term :&#x3D; n &#39;q&#39; n &#39;p&#39; n</span><br><span class="line">n :&#x3D; &#39;-&#39; | &#39;-&#39; n</span><br></pre></td></tr></table></figure>
-<p>因此，<code>--q-p-</code>，<code>---q--p-</code>都是合法的符号串。</p>
+<p>（4）这些符号串的含义是什么？</p>
+<p>简单起见，我们可以直接指定符号串的含义为它所对应的那个自然数。</p>
+<p>例如，<code>3</code>是一个符号串，我们指定它对应<span data-katex="3"></span>这个自然数。</p>
+<p>其中<code>3</code>是语法符号，<span data-katex="3"></span>是数学对象。</p>
 <p><br/></p>
-<p><strong>第三步，</strong></p>
-<p>我们要指定公理和推导规则，</p>
-<p>其中公理是推导的出发点，由公理推导得出的符号串称为定理。</p>
+<h3 id="peano系统">Peano系统</h3>
 <p><br/></p>
-<p>（1）“pq”系统的公理如下，</p>
-<p>只要<code>x</code>仅由一串短杠组成，那么<code>x-qxp-</code>就是一条公理。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-20-semantics-2/1023733-d8be20b2cb624111.png" /></p>
 <p><br/></p>
-<p>（2）“pq”系统的推导规则是这样的，</p>
-<p>假设<code>x</code>，<code>y</code>和<code>z</code>都代表只包含短杠的特定的符号串，</p>
-<p>并且假设<code>xqypz</code>是一条已知的公理/定理，</p>
-<p>那么<code>x-qypz-</code>就是一条定理。</p>
+<p>上一节我们使用公理化的方式建立了一个形式系统，</p>
+<p>并且选择了自然数作为该形式系统中符号串的解释。</p>
 <p><br/></p>
-<p>即它们满足<span data-katex="\frac{xqypz}{x-qypz-}"></span>，表示如果<span data-katex="xqypz"></span>是定理，则<span data-katex="x-qypz-"></span>也是定理。</p>
+<p>可是在数学上，自然数到底是什么呢？</p>
 <p><br/></p>
-<p>例子，根据公理的定义，我们知道<code>--q-p-</code>是一条公理，</p>
-<p>又根据这条公理和推导规则，我们得到了<code>---q-p--</code>是一条定理。</p>
+<p>要回答这个问题，</p>
+<p>还要回顾《<a href="https://thzt.github.io/2017/09/06/type-2/">你好，类型</a>》系列文章中介绍的<a href="https://zh.wikipedia.org/wiki/%E7%9A%AE%E4%BA%9A%E8%AF%BA%E5%85%AC%E7%90%86" target="_blank" rel="noopener">Peano系统</a>，</p>
+<p>皮亚诺（<a href="https://zh.wikipedia.org/wiki/%E6%9C%B1%E5%A1%9E%E4%BD%A9%C2%B7%E7%9A%AE%E4%BA%9E%E8%AB%BE" target="_blank" rel="noopener">Peano</a>）将自然数理论建立在了集合论之上。</p>
 <p><br/></p>
-<p><strong>小结：</strong></p>
-<p>以上三步我们通过公理化的方式构建了一个形式系统，</p>
-<p>它由符号，语法，公理，推导规则组成，</p>
-<p>我们可以用公理和旧定理生成新定理，不断演算。</p>
+<p>其中，<span data-katex="\{\varnothing,\varnothing^+,\varnothing^{++},\cdots\}"></span>构成了一个<a href="https://thzt.github.io/2017/09/06/type-2/">归纳集</a>。</p>
+<p>我们将<span data-katex="\varnothing,\varnothing^+,\varnothing^{++},\cdots"></span>定义为<strong>自然数</strong>，（<a href="https://en.wikipedia.org/wiki/Natural_number#Von_Neumann_construction" target="_blank" rel="noopener">von Neumann construction</a>）</p>
+<p>每一个自然数就和一个集合对应起来了。</p>
 <p><br/></p>
-<p>在其他系统中，公理和定理的个数可能是有限的，</p>
-<p>而“pq”系统则是无限的。</p>
+<p>因此，自然数<span data-katex="3"></span>是一个集合，</p>
+<p><span data-katex="\varnothing^{+++}=\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}\}"></span>，</p>
+<p>其中，<span data-katex="A^+"></span>为集合<span data-katex="A"></span>的后继运算，<span data-katex="A^+=A\cup\{A\}"></span>。</p>
 <p><br/></p>
-<h4 id="解释">2.2 解释</h4>
+<p>总而言之，符号串<code>3</code>的数学解释，</p>
+<p>是一个集合<span data-katex="\varnothing^{+++}"></span>。</p>
+<p>（不必惊讶。</p>
 <p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-747577f261f6c384.png" /></p>
+<h3 id="自然数代数">自然数代数</h3>
 <p><br/></p>
-<p>我们说以上“pq系统”定义了一个形式语言，</p>
-<p>这里的“语言”是一种数学上的定义，指的是字符串的集合。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-20-semantics-2/1023733-efabb0b56f7e72c4.png" /></p>
 <p><br/></p>
-<p>“pq”系统的形式语言，</p>
-<p>就是系统中公理和定理的集合。</p>
+<p>在读小学的时候，数学课只有一门，主要学有理数的四则运算，</p>
+<p>而到了初中，数学就变成了两门，分为代数课与几何课，</p>
+<p>代数课主要讲方程和函数，几何课主要讲平面几何。</p>
 <p><br/></p>
-<p>考察一个形式语言，通常我们要研究它的两个方面，</p>
-<p>其一，形式语言的语法，指的是字符串的构成方式，</p>
-<p>其二，形式语言的语义，指的是每个字符串的含义。</p>
+<p>平面几何是很直观的，也很容易和其他数学划清界线，</p>
+<p>因此，初中生们对“什么是几何”都没有太多疑惑。</p>
+<p>但是至于“<strong>什么是代数</strong>”，就比较费解了，这个问题也困扰了我很久。</p>
 <p><br/></p>
-<p>我想大家都已经读过《<a href="https://book.douban.com/subject/1148282/" target="_blank" rel="noopener">计算机程序的构造与解释</a>》了吧，</p>
-<p>所谓构造，指的就是语法，而解释指的就是语义。</p>
+<p>到大学，我们又学了线性代数，这种困扰日益加深，</p>
+<p>因为居然出现了一种“线性的”“代数”，</p>
+<p>却没有人事先告诉我们到底什么是“代数”。</p>
 <p><br/></p>
-<p>那我们来看一看“pq系统”的形式语言该怎样解释吧。</p>
-<p>我们可以选择这样的解释方式，</p>
-<p>例如，我们可以将<code>q</code>解释为“等于”，而将<code>p</code>解释为“加”，</p>
-<p>将短杠解释为数字。</p>
-<p>于是，<code>---q-p--</code>就可以被解释为“3等于1加2”了。</p>
+<p>后来我们学了抽象代数，这个问题才得以解决，</p>
+<p>我找到了一个令自己满意的答案。</p>
 <p><br/></p>
-<p>值得注意的是，合理的解释并不一定是唯一的，</p>
-<p>例如，我们将<code>q</code>解释为“减”，将<code>p</code>解释为“等于”，也是可以的。</p>
-<p><br/></p>
-<h3 id="重新解释">3. 重新解释</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-f5ca327b60317783.png" /></p>
-<p><br/></p>
-<p>上文中我们先给出了形式系统，</p>
-<p>然后再为系统选择一个合理的解释，</p>
-<p>这种思维过程是值得提倡的。</p>
-<p><br/></p>
-<p>考虑语义问题的时候，</p>
-<p>我们应该总是先想想，当前在对什么系统进行解释。</p>
-<p><br/></p>
-<p>例如，对“pq”系统，我们再引入一条新的公理，</p>
-<p><br/></p>
-<p><strong>新公理：</strong></p>
-<p>只要<code>x</code>仅由一串短杠组成，那么<code>xqxp-</code>也是一条公理。</p>
-<p><br/></p>
-<p>现在来看，引入的新公理对“pq系统”产生了什么影响。</p>
-<p>首先，<code>-q-p-</code>在新系统中是一条公理，而在老系统中不是。</p>
-<p>其次，根据推导规则，<code>--q-p--</code>是新系统中的一条定理，而在老系统中也不是。</p>
-<p><br/></p>
-<p>考虑到我们之前对符号串的解释，我们发现，</p>
-<p>如果仍然沿用老系统对符号串的解释，</p>
-<p><code>--q-p--</code>应该被解释为“2等于1加2”，</p>
-<p>这显然是不正确的。</p>
-<p><br/></p>
-<p>因此，在系统发生变化的时候，旧的解释可能就行不通了，</p>
-<p>我们要对系统选择一个新的解释。</p>
-<p><br/></p>
-<p>例如，我们只需要将<code>q</code>解释为“小于或等于”就行了。</p>
-<p><br/></p>
-<p>然而，现在看来这种顺利成章的事情，却困扰了数学家们很多年。</p>
-<blockquote>
-<p>这是整个19世纪数学的最深刻的教训之一。</p>
-</blockquote>
-<p><br/></p>
-<h3 id="非欧几何">4. 非欧几何</h3>
-<p><br/></p>
-<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-14-semantics-1/1023733-673c392410fee9a8.png" /></p>
-<p><br/></p>
-<p>大家应该都听说过欧几里得<a href="https://zh.wikipedia.org/wiki/%E5%B9%B3%E8%A1%8C%E5%85%AC%E8%A8%AD" target="_blank" rel="noopener">第五公设</a>的故事，</p>
-<p>欧几里得采用了公理化的方式构建了几何学，</p>
-<p>其中第五公设又称平行公设，它既不能被其他公设证明，也不能证否，</p>
-<p>两千年来，在第五公设问题上，耗费了无数年轻数学家的生命和心血。</p>
+<p>为了说明“什么是代数”，最简单的办法就是下定义，</p>
+<p>设集合<span data-katex="M"></span>上定义了一组运算，<span data-katex="a_1,a_2,\cdots,a_n"></span>，</p>
+<p>运算结果仍是<span data-katex="M"></span>中的元素，则称<span data-katex="M"></span>相对于这<span data-katex="n"></span>个运算，构成了一个<strong>代数</strong>。</p>
 <p><br/></p>
 <blockquote>
-<p>如果两条直线与第三条直线相交时，在第三条直线的某一侧三条线所夹的内角之和小于两个直角的和，则那两条直线沿着这一侧延伸足够长之后必然相交</p>
+<p>一般来说，代数问题的特点，</p>
+</blockquote>
+<blockquote>
+<p>是对一类问题，利用统一的运算性质，求出所有可能的解答。</p>
 </blockquote>
 <p><br/></p>
-<p>1820年左右，俄国喀山大学教授<a href="https://zh.wikipedia.org/wiki/%E5%B0%BC%E5%8F%A4%E6%8B%89%C2%B7%E7%BD%97%E5%B7%B4%E5%88%87%E5%A4%AB%E6%96%AF%E5%9F%BA" target="_blank" rel="noopener">罗巴切夫斯基</a>，</p>
-<p>提出了一个与第五公设相矛盾的命题，</p>
-<p>然后与欧几里得的前四个公设结合成一个公理系统，展开一系列的推理。</p>
-<p>他认为如果这个系统在推理中出现矛盾，就等于证明了第五公设，</p>
-<p>此即数学中的反证法。</p>
+<p>因此，代数学就是研究<strong>运算系统性质</strong>的学问。</p>
+<p>而Peano系统，是最简单的运算系统之一，又称为<a href="https://zh.wikipedia.org/wiki/%E7%9A%AE%E4%BA%9A%E8%AF%BA%E5%85%AC%E7%90%86" target="_blank" rel="noopener">一阶算术系统</a>。</p>
+<p>自然数就是这个系统中的运算对象。</p>
 <p><br/></p>
-<p>但是，在他极为细致深入的推理过程中，</p>
-<p>得出了一个又一个在直觉上匪夷所思，</p>
-<p>但在逻辑上毫无矛盾的命题。</p>
+<p>因此，小学数学也称为“算术”。</p>
 <p><br/></p>
-<p>这在当时是一件很难理解的事情，</p>
-<p>因为人们一致认为，欧几里得几何是物质空间中图形性质的正确理想化。</p>
-<p>正确的几何结论不应该与我们的直观感受不符。</p>
+<h3 id="代数学观点">代数学观点</h3>
 <p><br/></p>
-<p>现在看来，这样理解当然是有问题的，</p>
-<p>因为，它混淆了公理系统中的结论，和对这些结论的解释。</p>
+<p><img src="https://raw.githubusercontent.com/thzt/hexo-blog/master/source/images/_posts/2018-01-20-semantics-2/1023733-654c337731424032.png" /></p>
 <p><br/></p>
-<p>就好像上文中我们为“pq”系统增加了新公理一样，</p>
-<p>新定理仍然是正确推导的产物，只是不能沿用旧方式进行解释了。</p>
+<p>随着代数学的发展，人们发明了许多运算系统，</p>
+<p>例如，整数的加减法，有理数的四则运算，实数的根式或指数运算，等等。</p>
+<p>它们都有现实的对应物，<strong>仿佛</strong>数学的研究对象就是现实世界一样。</p>
 <p><br/></p>
-<p>关于欧几里得第五公设，最终人们得到了三种常用的几何学，</p>
-<p>称为欧几里得几何，罗巴切夫斯基几何，以及黎曼几何。</p>
-<p>这些公理系统，对研究不同的数学对象起到了关键作用。</p>
+<p>然而，实际上并非如此。</p>
 <p><br/></p>
-<h3 id="总结">5. 总结</h3>
-<p>本文通过一个称之为“pq”的系统，介绍了形式系统公理化的典型步骤，</p>
-<p>并且严格区分了，公理系统中的结论与对它的解释之间的不同。</p>
+<p>例如，复数<span data-katex="1+2i"></span>，它是没有现实对应的，</p>
+<p>但是我们仍然可以对复数进行运算。</p>
+<p>一个<span data-katex="n"></span>次方程可能在实数范围内无解，但必定会存在<span data-katex="n"></span>个复数解。</p>
 <p><br/></p>
-<p>通过更改公理系统，不论修改公理或者修改推导规则，我们将得到一个新的系统，</p>
-<p>从而对新系统中的结论，我们就得采用审慎的方式重新解释。</p>
-<p>这是数学史给我们带来的最有价值的经验教训之一。</p>
+<p>引入了复数之后，我们也才能体会到欧拉公式之美，</p>
+<p><span data-katex="e^{i\pi}+1=0"></span></p>
+<p><br/></p>
+<p>另一方面，代数学的研究重点也发生了改变，</p>
+<p>一开始人们研究的是单个的，独立的，具体的运算系统，</p>
+<p>但是后来人们逐渐发现，很多运算系统有相同的运算性质，</p>
+<p>可以<strong>抽象</strong>出来进行讨论。</p>
+<p><br/></p>
+<p>例如，计算机系统中的无符号数，连同加法运算，构成了一个阿贝尔群。</p>
+<p>而阿贝尔群中的加法，满足交换律和结合律，</p>
+<p>因此，编译器就可以采用任意的顺序进行计算，不影响最终结果。</p>
+<p><br/></p>
+<p>从运算性质的角度来分析问题，越来越流行了，</p>
+<p>成为了现代数学不可或缺的一部分，</p>
+<p>并且，代数学考虑问题的方法，也逐渐影响着其他学科。</p>
+<p><br/></p>
+<h3 id="总结">总结</h3>
+<p>本文从语义和代数学角度重新认识了自然数，</p>
+<p>自然数是Peano系统中的运算对象，</p>
+<p>自然数集连同其上定义的后继运算，构成了一个代数（一阶算术系统）。</p>
+<p><br/></p>
+<p>更重要的是，从代数学角度来看待问题，</p>
+<p>有利于我们抓住系统中所隐含的<strong>运算性质</strong>。</p>
 <p><br/></p>
 <h3 id="参考">参考</h3>
-<p><a href="https://thzt.github.io/2017/09/05/type-1/">你好，类型（一）：开篇</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Formal_system" target="_blank" rel="noopener">Formal system</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Formal_language" target="_blank" rel="noopener">Formal language</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E8%AF%AD%E4%B9%89%E5%AD%A6" target="_blank" rel="noopener">语义学</a></p>
-<p><a href="https://book.douban.com/subject/1291204/" target="_blank" rel="noopener">哥德尔、艾舍尔、巴赫——集异璧之大成</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%B9%B3%E8%A1%8C%E5%85%AC%E8%A8%AD" target="_blank" rel="noopener">平行公设</a></p>
-<p><a href="http://www.kepu.net.cn/gb/basic/szsx/4/44/4_44_1005.htm" target="_blank" rel="noopener">非欧几何学的诞生</a></p>
+<p><a href="https://thzt.github.io/2017/09/06/type-2/">你好，类型（二）：Lambda calculus</a></p>
+<p><a href="https://book.douban.com/subject/4114998/" target="_blank" rel="noopener">计算机语言的形式语义</a></p>
+<p><a href="https://book.douban.com/subject/1833230/" target="_blank" rel="noopener">近世代数初步</a></p>
+<p><a href="https://book.douban.com/subject/1896753/" target="_blank" rel="noopener">深入理解计算机系统</a></p>
 
           
         
@@ -576,7 +538,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/171/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/171/">171</a><span class="page-number current">172</span><a class="page-number" href="/page/173/">173</a><span class="space">&hellip;</span><a class="page-number" href="/page/313/">313</a><a class="extend next" rel="next" href="/page/173/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/171/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/171/">171</a><span class="page-number current">172</span><a class="page-number" href="/page/173/">173</a><span class="space">&hellip;</span><a class="page-number" href="/page/314/">314</a><a class="extend next" rel="next" href="/page/173/">&gt;</a>
   </nav>
 
 
@@ -622,7 +584,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">313</span>
+                <span class="site-state-item-count">314</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
