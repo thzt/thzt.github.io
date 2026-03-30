@@ -1,0 +1,1004 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="从本文开始，如无特殊说明，文章均为 AI 自动生成。  从一个具体的失败开始 假设你设计了一套自动化测试框架，用 AI 驱动执行，最后生成汇总报告。 框架的汇总逻辑写得很清楚：  扫描报告目录下所有文件，逐一读取，汇总结果。   你满怀期待地触发「生成汇总」，AI 给出了一份漂亮的报告—— 但只包含了本次会话里跑过的 3 个用例，而目录里明明有 11 个。  哪里出了问题？  AI 没有「扫描目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="弱模型的特点与防范">
+<meta property="og:url" content="https://thzt.github.io/2026/03/23/weak/index.html">
+<meta property="og:site_name" content="何幻">
+<meta property="og:description" content="从本文开始，如无特殊说明，文章均为 AI 自动生成。  从一个具体的失败开始 假设你设计了一套自动化测试框架，用 AI 驱动执行，最后生成汇总报告。 框架的汇总逻辑写得很清楚：  扫描报告目录下所有文件，逐一读取，汇总结果。   你满怀期待地触发「生成汇总」，AI 给出了一份漂亮的报告—— 但只包含了本次会话里跑过的 3 个用例，而目录里明明有 11 个。  哪里出了问题？  AI 没有「扫描目">
+<meta property="article:published_time" content="2026-03-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-30T14:45:29.937Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thzt.github.io/2026/03/23/weak/"/>
+
+
+
+
+
+  <title>弱模型的特点与防范 | 何幻</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?33605c59a8749f3e0404d9f438b66667";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何幻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming is about ideas, <br/>languages are just a way to express them.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2026/03/23/weak/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何幻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">弱模型的特点与防范</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2026-03-23T00:00:00+08:00">
+                2026-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mind/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>从本文开始，如无特殊说明，文章均为 AI 自动生成。</p>
+</blockquote>
+<h3 id="从一个具体的失败开始">从一个具体的失败开始</h3>
+<p>假设你设计了一套自动化测试框架，用 AI 驱动执行，最后生成汇总报告。</p>
+<p>框架的汇总逻辑写得很清楚：</p>
+<blockquote>
+<p>扫描报告目录下所有文件，逐一读取，汇总结果。</p>
+</blockquote>
+<p><br/></p>
+<p>你满怀期待地触发「生成汇总」，AI 给出了一份漂亮的报告——</p>
+<p>但只包含了本次会话里跑过的 3 个用例，而目录里明明有 11 个。</p>
+<p><br/></p>
+<p>哪里出了问题？</p>
+<p><br/></p>
+<p>AI 没有「扫描目录」，它用会话记忆里的列表代替了文件系统的实际内容。</p>
+<p>它不知道自己偏了，也没有任何迹象表明它在犹豫。</p>
+<p>它的输出流畅自信，和正确时没有任何区别。</p>
+<p><br/></p>
+<p>这就是弱模型的典型行为。</p>
+<h3 id="弱模型的核心特征">弱模型的核心特征</h3>
+<p>「弱模型」不是一个精确的技术定义，而是一类行为模式的描述：</p>
+<p><strong>在能力边界处不报错、不停止，而是悄悄降级为一个看起来合理但实际有偏的结果。</strong></p>
+<p><br/></p>
+<h4 id="特征一不知道自己不知道">特征一：不知道自己不知道</h4>
+<p>强模型面对不确定时会说「我不确定」或「我需要更多信息」。</p>
+<p>弱模型没有这种元认知——它的不确定性不会转化为输出上的犹豫，</p>
+<p>而是被内部平滑掉，变成一个自信的错误答案。</p>
+<p><br/></p>
+<p>这比直接报错危险得多。报错是可见的失败，自信的错误是隐形的失败。</p>
+<h4 id="特征二用相似的东西替代正确的东西">特征二：用「相似的东西」替代「正确的东西」</h4>
+<p>弱模型执行「扫描目录」时，会用最容易获取的近似物——会话记忆——来替代实际的文件系统操作。</p>
+<p>这不是故意欺骗，而是它的注意力机制在近似匹配：</p>
+<p>目录内容和会话记忆在语义上很接近，它选了成本更低的那个。</p>
+<p><br/></p>
+<p>类似地，让它「调用 A 工具」，如果 A 不可用，它可能悄悄用 B 完成任务，然后报告说成功了。</p>
+<p>结果正确，但工具不对——问题被绕过而不是被发现。</p>
+<h4 id="特征三上下文越长越容易偏">特征三：上下文越长越容易偏</h4>
+<p>弱模型读完一个长文档后，前面的内容权重会衰减。</p>
+<p>你在第一行写了「你是执行者，不要转发指令」，</p>
+<p>等它读到第五个步骤时，这条约束可能已经被稀释到几乎没有影响。</p>
+<p><br/></p>
+<p>这意味着：指令越长，执行越不可靠。</p>
+<p>悖论在于，为了防止偏轨你会想写更多约束，但更多约束让文档更长，反而加剧了这个问题。</p>
+<h4 id="特征四理解过度与创造性发挥">特征四：「理解过度」与「创造性发挥」</h4>
+<p>弱模型有时不是做得少，而是做得多。</p>
+<p>它读到「记录报告目录，本次会话均写入此目录」，</p>
+<p>可能会「好心」地创建一个 <code>running_context.txt</code> 把路径存下来——它觉得自己在帮忙。</p>
+<p>这种计划外行为无法预测，因为它来自模型对意图的「过度理解」。</p>
+<h3 id="无效的防范手段">无效的防范手段</h3>
+<p>在真正有效的方法之前，先列出那些看起来合理但实际没用的做法。</p>
+<p><br/></p>
+<p><strong>「告诉它自己是弱模型」</strong></p>
+<blockquote>
+<p>你是一个能力有限的模型，执行时要格外小心。</p>
+</blockquote>
+<p>没用。模型不会因此变得更谨慎，因为它没有自我评估能力。</p>
+<p>它不知道自己「能力有限」体现在哪里，更不知道哪个具体步骤会出问题。</p>
+<p>这句话对它的行为没有任何约束力。</p>
+<p><br/></p>
+<p><strong>「告诉它遇到不确定时照字面执行」</strong></p>
+<blockquote>
+<p>如果不确定怎么做，优先按字面意思执行，不要自己发挥。</p>
+</blockquote>
+<p>同样没用。问题的根源是它不知道自己不确定，它觉得自己完全理解了指令。</p>
+<p>这条元指令无法触达实际出问题的那个时刻。</p>
+<p><br/></p>
+<p><strong>「写更详细的规范」</strong></p>
+<p>规范加倍，文档加长，弱模型读完前半段就忘了后半段。</p>
+<p>而且规范越多，覆盖不到的边缘情况也越多——弱模型总能找到新的偏轨方式。</p>
+<p>这是一场没有终点的追赶游戏。</p>
+<p><br/></p>
+<p><strong>「依赖模型的自我检查」</strong></p>
+<blockquote>
+<p>完成后请验证结果是否正确。</p>
+</blockquote>
+<p>弱模型的自我验证和执行使用同一套有缺陷的推理，它验证不出自己产生的错误。</p>
+<p>这就像让一个有色盲的人检查自己的色觉测试结果。</p>
+<h3 id="真正有效的防范手段">真正有效的防范手段</h3>
+<p>有效的防范有一个共同原则：</p>
+<p><strong>不依赖执行者的自我约束，而是从外部限制它能做什么、能看到什么。</strong></p>
+<p><br/></p>
+<h4 id="手段一把关键逻辑从自然语言换成代码">手段一：把关键逻辑从自然语言换成代码</h4>
+<p>自然语言给了弱模型太多解释空间。「扫描目录」这四个字可以被解释成很多种行为。但：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">files = sorted(glob.glob(<span class="string">f"<span class="subst">&#123;report_dir&#125;</span>/[0-9][0-9][0-9].md"</span>))</span><br></pre></td></tr></table></figure>
+<p>没有解释空间。代码是强约束，自然语言是弱约束。</p>
+<p><br/></p>
+<p>关键原则是：<strong>机械逻辑用代码，需要判断的部分才用 AI</strong>。</p>
+<p>流程控制（下一步是什么、读哪些文件、结果存在哪）是机械逻辑，应该用代码；</p>
+<p>内容判断（这个输出是否符合预期）才是 AI 的领域。</p>
+<p><br/></p>
+<p>很多系统的问题是把这两类混在了一起，让 AI 同时负责执行和控制流程。</p>
+<h4 id="手段二缩短单次指令的跨度">手段二：缩短单次指令的跨度</h4>
+<p>不要给一个 AI 一份包含 5 个步骤的流程文档，让它从头执行到尾。</p>
+<p>而是每次只给它一件事：</p>
+<ul>
+<li>「执行这一个步骤，告诉我结果」</li>
+<li>「根据这份输出，填写这一行报告」</li>
+</ul>
+<p>跨度越短，偏轨的机会越少，偏了也更容易发现和纠正。</p>
+<h4 id="手段三在关键节点强制人工介入">手段三：在关键节点强制人工介入</h4>
+<p>不要让 AI 全自动跑完所有步骤。</p>
+<p>在关键节点——尤其是「结果判断」和「状态转移」这两类操作——强制暂停让人确认。</p>
+<p><br/></p>
+<p>这不是因为人比 AI 更聪明，而是因为人的介入本身就是一次外部校验。</p>
+<p>AI 偏了，人在旁边能看出来；没有人，偏轨可能一直传播到最终报告。</p>
+<h4 id="手段四明确指定工具消除替代路径">手段四：明确指定工具，消除替代路径</h4>
+<p>自然语言里的动词（读取、扫描、获取）给了弱模型选择实现方式的自由，</p>
+<p>它会选成本最低的那个，不一定是你期望的那个。</p>
+<p><br/></p>
+<p>改成明确的工具调用要求：</p>
+<blockquote>
+<p><del>读取目录下的文件</del> 调用 <code>execute_shell_command</code> 执行 <code>ls {目录}/*.md</code></p>
+</blockquote>
+<p>消除了替代路径，就消除了偏轨的入口。</p>
+<h4 id="手段五把最关键的约束放在文档第一行">手段五：把最关键的约束放在文档第一行</h4>
+<p>弱模型对文档开头的权重高于结尾。</p>
+<p>如果你有一条绝对不能被忘记的约束，它必须在第一行——</p>
+<p>不是第一个章节，是字面意义上的第一行。</p>
+<h3 id="人类的镜像">人类的镜像</h3>
+<p>读到这里，你可能已经意识到：上面描述的所有特征和防范手段，对某一类人类同样成立。</p>
+<p><br/></p>
+<p>一个执行能力弱或认知负荷过高的人：</p>
+<ul>
+<li>不知道自己理解有误，自信地执行了错误的操作</li>
+<li>遇到模糊指令时，用「自己觉得合理的」代替「实际要求的」</li>
+<li>面对长篇规范，读完就忘，执行时凭印象</li>
+<li>偶尔好心办坏事，做了计划外的「优化」</li>
+</ul>
+<p><br/></p>
+<p>而对他们有效的管理方式，也和防范弱模型惊人地相似：</p>
+<ul>
+<li>流程设计让他没有犯错的机会，而不是依赖他的自觉</li>
+<li>每次只交代一件事，不给他同时管理多个状态的机会</li>
+<li>在关键节点设置检查点，而不是等最终结果出来再发现问题</li>
+<li>把重要约束写在最显眼的地方，而不是埋在第 17 条</li>
+</ul>
+<p><br/></p>
+<p>这不是巧合。弱模型的行为模式，在某种意义上是人类认知局限的一种压缩版本。</p>
+<p>大语言模型在海量人类文本上训练，它继承的不只是人类的知识，</p>
+<p>也继承了人类认知的弱点——注意力有限、倾向于走捷径、不擅长承认不确定。</p>
+<p><br/></p>
+<p>好的系统设计从来不假设执行者是完美的，不管执行者是模型还是人。</p>
+<h3 id="语言与代码的边界">语言与代码的边界</h3>
+<p>这一切最终指向一个更深的问题：<strong>什么时候用自然语言描述，什么时候用代码刻画？</strong></p>
+<p><br/></p>
+<p>自然语言的优势是表达力和灵活性。</p>
+<p>它能描述意图、处理模糊情况、传达上下文。</p>
+<p>但它的代价是：执行者需要「理解」，而理解是不可靠的——无论执行者是人还是 AI。</p>
+<p><br/></p>
+<p>代码的优势是精确性和可验证性。</p>
+<p>一段代码的行为是确定的，不依赖执行者的理解能力。</p>
+<p>但它的代价是：表达力有限，无法覆盖所有情况，维护成本高。</p>
+<p><br/></p>
+<p>在实际系统中，这两者的分工应该是：</p>
+<table>
+<thead>
+<tr class="header">
+<th>适合自然语言</th>
+<th>适合代码</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>描述目标和意图</td>
+<td>定义执行步骤</td>
+</tr>
+<tr class="even">
+<td>处理边缘情况的判断</td>
+<td>流程控制和状态转移</td>
+</tr>
+<tr class="odd">
+<td>需要灵活解读的内容</td>
+<td>数据处理和聚合</td>
+</tr>
+<tr class="even">
+<td>人与系统的交互界面</td>
+<td>验证和断言</td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<p>一个常见的错误是用自然语言描述本该是代码的部分——</p>
+<p>不是因为懒，而是因为自然语言写起来更快更容易。</p>
+<p>这种「便利」的代价，是把确定性的要求变成了对执行者理解能力的依赖。</p>
+<p><br/></p>
+<p>另一个常见的错误是试图用代码覆盖所有情况，包括那些本质上需要判断的部分。</p>
+<p>这导致代码越来越复杂，最终维护成本超过了它带来的确定性收益。</p>
+<p><br/></p>
+<p><strong>尺度的把控，本质上是对「执行者在哪里是可靠的」这个问题的判断。</strong></p>
+<p><br/></p>
+<p>弱模型（和能力有限的人）在机械、确定、步骤少的任务上是可靠的；</p>
+<p>在需要记忆跨步骤状态、做模糊判断、控制复杂流程的任务上是不可靠的。</p>
+<p>系统设计应该把前者尽量用代码固化，把后者尽量缩小范围、减少依赖。</p>
+<h3 id="一个未完成的结尾">一个未完成的结尾</h3>
+<p>没有一个系统能完全消除弱执行者带来的不确定性。</p>
+<p>代码能覆盖已知的偏轨模式，但弱模型（和人）总能找到新的方式出错。</p>
+<p><br/></p>
+<p>真正重要的不是「如何让弱模型不出错」，而是：</p>
+<ol type="1">
+<li><strong>让错误可见</strong>：偏轨时有信号，不要让错误静默传播</li>
+<li><strong>让错误可恢复</strong>：在关键节点留有人工干预的入口</li>
+<li><strong>让错误可学习</strong>：每次出现新的偏轨模式，沉淀为新的规则或代码约束</li>
+</ol>
+<p><br/></p>
+<p>这是一个迭代的过程，不是一次性解决的问题。</p>
+<p>系统随着运行积累越来越多的「已知偏轨模式」，</p>
+<p>逐渐从依赖执行者自觉走向结构性约束。</p>
+<p><br/></p>
+<p>从某种意义上说，所有好的工程实践都在做这件事——用过去的错误换来未来的确定性。</p>
+<p>弱模型只是让这个过程更快速、更显性地发生了。</p>
+<p><br/></p>
+<blockquote>
+<p>写这篇文章时，我意识到它描述的不只是 AI 系统设计，也是任何需要管理「不可靠执行者」的系统设计——流水线、检查清单、双人复核、代码审查——都是同一个问题的不同形态。我们在 AI 身上发现的局限，大多数时候只是人类早已知道但习以为常的局限的另一面。</p>
+</blockquote>
+<h3 id="附录当执行者本身拥有元认知">附录：当执行者本身拥有元认知</h3>
+<p>本文描述的所有防范手段，有一个共同的前提：</p>
+<p>执行者没有自我意识，所以只能从外部施加约束。</p>
+<p>弱模型不知道自己不知道，告诉它「你可能会出错」毫无用处。</p>
+<p><br/></p>
+<p>但人不一样。</p>
+<p><strong>一个人一旦意识到自己是不可靠执行者，就获得了弱模型永远无法获得的工具：把元认知用作实时错误探测器。</strong></p>
+<p><br/></p>
+<p>这不意味着结构性约束就不需要了——它们同样有效，而且更省力。</p>
+<p>区别在于：人可以在结构失效的地方用元认知补位，而模型不能。</p>
+<p><br/></p>
+<p>以下是几种具体的策略。</p>
+<p><br/></p>
+<h4 id="把自信感当成警报而不是确认">把「自信感」当成警报，而不是确认</h4>
+<p>弱模型最危险的特征是「自信的错误」——它感觉不到自己偏了。人可以感觉到，但常常不去留意。</p>
+<p><br/></p>
+<p>训练自己识别这个信号：</p>
+<p><strong>当你对某步骤感到「显然就该这么做」时，这正是最容易偏轨的时刻。</strong></p>
+<p>「显然」是大脑在节省计算的信号，而节省计算意味着它可能走了捷径。</p>
+<p>这时主动停下来问：我是真的验证过，还是只是觉得自己知道？</p>
+<h4 id="把替代行为说出来不要悄悄做">把「替代行为」说出来，不要悄悄做</h4>
+<p>弱模型用 B 替代 A 时不会声明，所以问题被掩盖。</p>
+<p>人有能力做到弱模型做不到的事：<strong>把替代行为变成显性声明。</strong></p>
+<p><br/></p>
+<p>当你意识到自己在用「差不多的东西」代替「正确的东西」时——</p>
+<p>工具不可用、资源缺失、步骤被跳过——明确说出来：</p>
+<p>「正式流程要求 X，我实际用了 Y，因为……结果需要额外验证。」</p>
+<p>这把一个隐性的、无法追踪的偏差，变成了一个可见的、可纠正的决策。</p>
+<h4 id="把理解了拆成复述一遍">把「理解了」拆成「复述一遍」</h4>
+<p>弱模型接到指令后会立即执行，它的「理解」是黑盒。</p>
+<p>人可以把这个黑盒打开：<strong>收到复杂指令后，先用自己的话复述一遍，再开始执行。</strong></p>
+<p><br/></p>
+<p>复述的目的不是礼貌，而是把内部的理解变成外部可验证的输出。</p>
+<p>你复述出来的内容如果有偏差，对方可以当场纠正；</p>
+<p>如果你自己在复述时发现说不清楚，那就是理解还没到位的信号。</p>
+<h4 id="周期性重读关键约束">周期性重读关键约束</h4>
+<p>知道自己有「长文档失忆」的问题，就主动对抗它。</p>
+<p>执行多步骤任务时，<strong>每隔几步回头重读一遍最关键的约束</strong>——</p>
+<p>不是整份文档，是那一两条绝对不能忘的。</p>
+<p><br/></p>
+<p>弱模型做不到这一点，因为它没有「我应该检查一下」的意识。</p>
+<p>人有这个意识，只是通常懒得用。</p>
+<h4 id="外化工作记忆不跨步骤相信自己的头脑">外化工作记忆，不跨步骤相信自己的头脑</h4>
+<p>弱模型用会话记忆代替实际操作，因为它无法区分两者的可靠性差异。</p>
+<p>人可以区分，但经常高估自己的记忆可靠性。</p>
+<p><br/></p>
+<p><strong>边执行边用书面记录当前状态</strong>：</p>
+<p>「已完成：步骤 1、2；当前在：步骤 3；待确认：X 是否符合预期。」</p>
+<p>状态写在纸上（或屏幕上），而不是在脑子里维护。</p>
+<p>头脑负责判断，纸负责记忆。</p>
+<h4 id="主动标记不确定性而不是用合理猜测填充">主动标记不确定性，而不是用「合理猜测」填充</h4>
+<p>弱模型不知道自己不确定，所以无法标记。</p>
+<p><strong>人知道自己不确定的时候，最重要的事是说出来，而不是用看起来合理的猜测填充空白。</strong></p>
+<p><br/></p>
+<p>具体的习惯：遇到模糊之处，停下来明确说「我对这里不确定，我的理解是 X，请确认」，</p>
+<p>而不是默默选一种解法继续往下走。</p>
+<p>被确认的不确定性不会造成偏差；被掩盖的不确定性会一路传播到最终结果。</p>
+<p><br/></p>
+<hr />
+<p><br/></p>
+<p>这些策略有一个共同结构：<strong>把内部状态外化</strong>。</p>
+<p>弱模型的危险在于它的不确定性、替代行为、偏差全部发生在黑盒内部，外部看不到。</p>
+<p>人拥有元认知，意味着可以主动打开这个黑盒——</p>
+<p>不是等外部结构来约束，而是自己先把关键信息显性化，让错误变得可见。</p>
+<p><br/></p>
+<p>元认知是一种能力，但它不会自动工作。</p>
+<p>它需要刻意练习，需要在疲劳时强制触发，需要在「感觉自己完全理解了」时反而更警惕。</p>
+<p><strong>人与弱模型真正的差距，不在于犯错的概率，而在于能不能在犯错之前，先感觉到那个危险的「理所当然」。</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2026/03/12/ai-native/" rel="next" title="程序员如何克服思维定式">
+                <i class="fa fa-chevron-left"></i> 程序员如何克服思维定式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">316</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/thzt" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f6393998072f" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#从一个具体的失败开始"><span class="nav-number">1.</span> <span class="nav-text">从一个具体的失败开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弱模型的核心特征"><span class="nav-number">2.</span> <span class="nav-text">弱模型的核心特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特征一不知道自己不知道"><span class="nav-number">2.1.</span> <span class="nav-text">特征一：不知道自己不知道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特征二用相似的东西替代正确的东西"><span class="nav-number">2.2.</span> <span class="nav-text">特征二：用「相似的东西」替代「正确的东西」</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特征三上下文越长越容易偏"><span class="nav-number">2.3.</span> <span class="nav-text">特征三：上下文越长越容易偏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特征四理解过度与创造性发挥"><span class="nav-number">2.4.</span> <span class="nav-text">特征四：「理解过度」与「创造性发挥」</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无效的防范手段"><span class="nav-number">3.</span> <span class="nav-text">无效的防范手段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#真正有效的防范手段"><span class="nav-number">4.</span> <span class="nav-text">真正有效的防范手段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#手段一把关键逻辑从自然语言换成代码"><span class="nav-number">4.1.</span> <span class="nav-text">手段一：把关键逻辑从自然语言换成代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手段二缩短单次指令的跨度"><span class="nav-number">4.2.</span> <span class="nav-text">手段二：缩短单次指令的跨度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手段三在关键节点强制人工介入"><span class="nav-number">4.3.</span> <span class="nav-text">手段三：在关键节点强制人工介入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手段四明确指定工具消除替代路径"><span class="nav-number">4.4.</span> <span class="nav-text">手段四：明确指定工具，消除替代路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手段五把最关键的约束放在文档第一行"><span class="nav-number">4.5.</span> <span class="nav-text">手段五：把最关键的约束放在文档第一行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#人类的镜像"><span class="nav-number">5.</span> <span class="nav-text">人类的镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语言与代码的边界"><span class="nav-number">6.</span> <span class="nav-text">语言与代码的边界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个未完成的结尾"><span class="nav-number">7.</span> <span class="nav-text">一个未完成的结尾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附录当执行者本身拥有元认知"><span class="nav-number">8.</span> <span class="nav-text">附录：当执行者本身拥有元认知</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#把自信感当成警报而不是确认"><span class="nav-number">8.1.</span> <span class="nav-text">把「自信感」当成警报，而不是确认</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#把替代行为说出来不要悄悄做"><span class="nav-number">8.2.</span> <span class="nav-text">把「替代行为」说出来，不要悄悄做</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#把理解了拆成复述一遍"><span class="nav-number">8.3.</span> <span class="nav-text">把「理解了」拆成「复述一遍」</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#周期性重读关键约束"><span class="nav-number">8.4.</span> <span class="nav-text">周期性重读关键约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外化工作记忆不跨步骤相信自己的头脑"><span class="nav-number">8.5.</span> <span class="nav-text">外化工作记忆，不跨步骤相信自己的头脑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主动标记不确定性而不是用合理猜测填充"><span class="nav-number">8.6.</span> <span class="nav-text">主动标记不确定性，而不是用「合理猜测」填充</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="/js/katex.js"></script>
+</body>
+</html>
