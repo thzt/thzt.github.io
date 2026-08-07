@@ -351,7 +351,8 @@
 <p>两级弹框，第一级是bootstrap的modal，里面有一个jqgrid，第二级是jqgrid添加记录的弹框</p>
 <p>第二级弹框中的textarea在IE9中不能换行，而在chrome中可以</p>
 <p><br/></p>
-<h2 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a><strong>Day 1</strong></h2><p>bootstrap的modal和jqgrid全部在实验室环境中搭建起来，比较麻烦，先考虑别的办法</p>
+<h2 id="day-1"><strong>Day 1</strong></h2>
+<p>bootstrap的modal和jqgrid全部在实验室环境中搭建起来，比较麻烦，先考虑别的办法</p>
 <p>因为IE9调试工具太弱了，看看firefox有没有同样的问题</p>
 <p>发现firefox中的问题是textarea不能聚焦</p>
 <p>以前遇到过不能获得焦点的问题，跟tabindex有关，把tabindex删掉，没作用</p>
@@ -365,7 +366,8 @@
 <p>但是在IE9中仍然不可换行</p>
 <p><strong>解决了firefox不能聚焦的问题</strong></p>
 <p><br/></p>
-<h2 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a><strong>Day 2</strong></h2><p>现在Chrome和Firefox都没问题了，只好硬着头皮用IE9调试了，鉴于昨天的结论，先从样式角度考虑</p>
+<h2 id="day-2"><strong>Day 2</strong></h2>
+<p>现在Chrome和Firefox都没问题了，只好硬着头皮用IE9调试了，鉴于昨天的结论，先从样式角度考虑</p>
 <p>发现一级弹框去掉所有样式，就可以换行了</p>
 <p>但是聚焦不到特定的某一条样式上，怀疑是脏乱的样式加成结果导致CSS解析器出错了</p>
 <p>发现在错误的样式下，只要隐藏对话框也是可换行的，可能是浏览器计算位置时出错了</p>
@@ -378,11 +380,12 @@
 <p>不能过度依赖调试工具了，得想办法把本地服务器端运行起来，不然剩下的办法只能是实验室环境中把网页重新静态构建起来了</p>
 <p><strong>找到一个可行的解决方案，弹出第二级对话框时，把第一级隐藏掉</strong></p>
 <p><br/></p>
-<h2 id="Day-3"><a href="#Day-3" class="headerlink" title="Day 3"></a><strong>Day 3</strong></h2><p>搭建本机环境，把服务器端运行起来</p>
+<h2 id="day-3"><strong>Day 3</strong></h2>
+<p>搭建本机环境，把服务器端运行起来</p>
 <p>删掉一级弹框中的所有代码，控制台命令弹出二级纯html弹框，没作用</p>
 <p>先用控制台命令弹出二级纯html弹框，再在页面点击弹出一级弹框，没作用</p>
 <p>控制台命令弹出二级纯html弹框，再控制台命令弹出一级纯html弹框，好了，应该是一级弹框弹出的过程中做了什么</p>
-<p>发现是bootstrap的modal(‘show’)这条语句弹出的框有问题</p>
+<p>发现是bootstrap的modal('show')这条语句弹出的框有问题</p>
 <p>因为IE9不容易跟源码，所以先不看源码，在实验室环境中，造一个一模一样modal，然后二级弹框果然出问题了，并且firefox和chrome都无法获得焦点</p>
 <p>实验室环境中复现了问题，问题快解决了</p>
 <p>找到bootstrap的modal插件的官方例子，弹出二级弹框，没问题</p>
@@ -404,7 +407,8 @@
 <p>chrome和firefox在实验室环境中，textarea是不能获得焦点的，但是网站中可以，原因未知</p>
 <p><strong>通过覆盖自动聚焦事件，解决了问题</strong></p>
 <p><br/></p>
-<h2 id="困难"><a href="#困难" class="headerlink" title="困难"></a><strong>困难</strong></h2><p>IE9的调试工具太差，Chrome调试工具虽好，但是Chrome没有问题</p>
+<h2 id="困难"><strong>困难</strong></h2>
+<p>IE9的调试工具太差，Chrome调试工具虽好，但是Chrome没有问题</p>
 <p>bootstrap大量的样式名污染的全局空间，每一个元素有大量冗余的层叠样式</p>
 <p>很多事件可能是跟样式名相关联的，删了样式名会影响事件</p>
 <p>前两天本机环境没有搭建好，只能通过浏览器调试</p>
@@ -415,13 +419,15 @@
 <p>项目代码的问题写的太差，互相依赖，很难对功能进行隔离，不能以功能模块为单位进行测试</p>
 <p>二级弹框并不是一级弹框的子元素，而是body的子元素，与一级弹框的位置相距很远，从直觉上很难发现有关联</p>
 <p><br/></p>
-<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h2><p>电脑配置不错，两个显示器，16G内存装了虚拟机可以模拟IE8-11,Edge</p>
+<h2 id="优势"><strong>优势</strong></h2>
+<p>电脑配置不错，两个显示器，16G内存装了虚拟机可以模拟IE8-11,Edge</p>
 <p>没有时间压力，没人催我，没有别的项目或会议打断我</p>
 <p>服务器端同事配合，没有怀疑我的能力</p>
 <p>bootstrap和jqgrid源码不是太烂</p>
 <p>这不是一个偶现的bug，没次都能出现，难度降低了不少</p>
 <p><br/></p>
-<h2 id="误区"><a href="#误区" class="headerlink" title="误区"></a><strong>误区</strong></h2><p>其实IE的问题并不是那么多，更多的是可见代码的问题</p>
+<h2 id="误区"><strong>误区</strong></h2>
+<p>其实IE的问题并不是那么多，更多的是可见代码的问题</p>
 <p>黑盒试错，不如静下心来跟进源码看看原理</p>
 <p>不能过度依赖调试工具的结论</p>
 <p>可以通过改动来试错的代码越多，排除假设的机会就越大</p>

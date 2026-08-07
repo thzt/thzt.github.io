@@ -368,14 +368,16 @@
 <p>源码看起来并不是那么优美，</p>
 <p>可是，最终会给用户提供优雅一致的接口（界面）。</p>
 <p><br/></p>
-<h3 id="不要让用户关心细节"><a href="#不要让用户关心细节" class="headerlink" title="不要让用户关心细节"></a>不要让用户关心细节</h3><p>我们在编码的时候，如果只是为了<strong>功能性</strong>的目的来实现它，</p>
+<h3 id="不要让用户关心细节">不要让用户关心细节</h3>
+<p>我们在编码的时候，如果只是为了<strong>功能性</strong>的目的来实现它，</p>
 <p>那么，用户在使用的时候，就会感到非常难受。</p>
 <p>他们不得不转换思维，将已有知识用我们提供的接口（界面）来表示，</p>
 <p>甚至不得不搞清楚我们到底做了什么，才能猜到它的用法。</p>
 <p><br/></p>
 <p>我们先暂时岔开话题，</p>
 <p>我们知道，汇编语言具备与现代高级语言一样的图灵完备性，</p>
-<p>是编译器或解释器提高了语言的易用性，减小了<a href="https://en.wikipedia.org/wiki/Semantic_gap" target="_blank" rel="noopener">Semantic Gap</a>。</p>
+<p>是编译器或解释器提高了语言的易用性，减小了<a
+href="https://en.wikipedia.org/wiki/Semantic_gap">Semantic Gap</a>。</p>
 <p><br/></p>
 <p>用户使用高级语言，或者DSL，来描述领域知识，</p>
 <p>然后计算机将它们翻译成可执行的过程。</p>
@@ -395,7 +397,8 @@
 <p>关注用户应该<strong>怎样使用</strong>这些功能。</p>
 <p>至于实现手段，却是灵活多样的，也是用户不必关心的。</p>
 <p><br/></p>
-<h3 id="源码并不是那么重要"><a href="#源码并不是那么重要" class="headerlink" title="源码并不是那么重要"></a>源码并不是那么重要</h3><p>软件业是一个年轻的行业，也是一个高速发展的行业，</p>
+<h3 id="源码并不是那么重要">源码并不是那么重要</h3>
+<p>软件业是一个年轻的行业，也是一个高速发展的行业，</p>
 <p>这使得软件行业的从业者们，普遍缺乏经验，</p>
 <p>浮躁和唯利是图，让好的编程方式，难以传承。</p>
 <p><br/></p>
@@ -407,23 +410,27 @@
 <p>我们会看到，作者实现的太巧妙了，内部结构太优雅了，</p>
 <p>却没有看到，同样的功能，作者居然可以提供这种方式让用户使用。</p>
 <p><br/></p>
-<p>例如：这个前端日志库，<a href="https://github.com/adamschwartz/log" target="_blank" rel="noopener">log</a></p>
+<p>例如：这个前端日志库，<a
+href="https://github.com/adamschwartz/log">log</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log(&#39;this is *italic*&#39;)</span><br><span class="line">log(&#39;this word _bold_&#39;)</span><br><span class="line">log(&#39;this word &#96;code&#96;&#39;)</span><br></pre></td></tr></table></figure>
 <p>将会在控制台上，分别打印斜体，粗体和代码片段。</p>
 <p>还提供了这样的语法，让用户编写自定义样式，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log(&#39;this is [c&#x3D;&quot;color: red&quot;]red[c]&#39;)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>提供一套类似<a href="https://en.wikipedia.org/wiki/Markdown" target="_blank" rel="noopener">markdown</a>的语法，是非常漂亮直接的，</p>
+<p>提供一套类似<a
+href="https://en.wikipedia.org/wiki/Markdown">markdown</a>的语法，是非常漂亮直接的，</p>
 <p>而原生的<code>console.log</code>写法就比较麻烦。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&#39;%c error &#39;,&#39;color:#fff;background:red;&#39;)</span><br></pre></td></tr></table></figure>
 <p><br/></p>
 <p>所以，一个简单的类库，稍有经验的开发者，都可以实现出来，</p>
 <p>但是，并不是每个人都能想出好的办法，让用户易于使用。</p>
 <p><br/></p>
-<h3 id="用户接口（界面）的设计之道"><a href="#用户接口（界面）的设计之道" class="headerlink" title="用户接口（界面）的设计之道"></a>用户接口（界面）的设计之道</h3><p>现在我们知道用户接口（界面）的重要性了。</p>
+<h3 id="用户接口界面的设计之道">用户接口（界面）的设计之道</h3>
+<p>现在我们知道用户接口（界面）的重要性了。</p>
 <p>那么，到底应该如何设计一个好用的用户接口（界面）呢？</p>
 <p><br/></p>
-<p>这需要我们先理解“<strong>知识的诅咒</strong>”，这一<a href="https://zh.wikipedia.org/wiki/%E8%AA%8D%E7%9F%A5%E5%81%8F%E8%AA%A4" target="_blank" rel="noopener">认知偏误</a>，</p>
+<p>这需要我们先理解“<strong>知识的诅咒</strong>”，这一<a
+href="https://zh.wikipedia.org/wiki/%E8%AA%8D%E7%9F%A5%E5%81%8F%E8%AA%A4">认知偏误</a>，</p>
 <p>它指的是，懂得多的人，通常难以从懂得少的人的角度思考问题。</p>
 <p><br/></p>
 <p>例如，专家常用术语交谈，却丧失了与非专业人士的沟通能力，</p>
@@ -451,12 +458,14 @@
 <p><br/></p>
 <p>能把事情讲明白，是一件不容易的事情。</p>
 <p><br/></p>
-<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>以上提到的三点，看起来和代码没有什么关系，</p>
+<h3 id="结语">结语</h3>
+<p>以上提到的三点，看起来和代码没有什么关系，</p>
 <p>是因为，设计接口（界面）并不是一个编码过程，</p>
 <p>而是一个<strong>知识传递</strong>过程。</p>
 <p><br/></p>
 <p>我们必须为用户筛选出期望他们了解的知识，</p>
-<p>像电影一样，调动观众情绪的一个重要手段，就是信息配比（<a href="https://www.zhihu.com/question/39947219/answer/214338328" target="_blank" rel="noopener">框视觉</a>），</p>
+<p>像电影一样，调动观众情绪的一个重要手段，就是信息配比（<a
+href="https://www.zhihu.com/question/39947219/answer/214338328">框视觉</a>），</p>
 <p>即，导演对“信息露出”和“信息隐藏”的控制。</p>
 <p><br/></p>
 <p>在阅读源码时，聚焦到每一段的代码中，人们很容易忽视整体性，</p>
@@ -663,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#不要让用户关心细节"><span class="nav-number">1.</span> <span class="nav-text">不要让用户关心细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码并不是那么重要"><span class="nav-number">2.</span> <span class="nav-text">源码并不是那么重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户接口（界面）的设计之道"><span class="nav-number">3.</span> <span class="nav-text">用户接口（界面）的设计之道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#不要让用户关心细节"><span class="nav-number">1.</span> <span class="nav-text">不要让用户关心细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码并不是那么重要"><span class="nav-number">2.</span> <span class="nav-text">源码并不是那么重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户接口界面的设计之道"><span class="nav-number">3.</span> <span class="nav-text">用户接口（界面）的设计之道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>

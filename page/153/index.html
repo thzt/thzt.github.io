@@ -348,12 +348,15 @@
         
           
             <p>和其他行业一样，编程行业中不同从业者的生产率是有差别的，</p>
-<p>《<a href="https://book.douban.com/subject/4908230/" target="_blank" rel="noopener">人月神话</a>》中提到过一项调查，</p>
+<p>《<a
+href="https://book.douban.com/subject/4908230/">人月神话</a>》中提到过一项调查，</p>
 <blockquote>
 <p>同样有两年经验而且在受到同样的培训的情况下，优秀的专业程序员的工作效率是较差程序员的十倍。</p>
 </blockquote>
 <p><br/></p>
-<p><a href="https://zh.wikipedia.org/zh-hans/%E5%8F%B2%E8%92%82%E5%A4%AB%C2%B7%E4%B9%94%E5%B8%83%E6%96%AF" target="_blank" rel="noopener">乔布斯</a>也注意到了这一现象，他在<a href="https://movie.douban.com/subject/6974319/" target="_blank" rel="noopener">遗失的访谈</a>中谈到，</p>
+<p><a
+href="https://zh.wikipedia.org/zh-hans/%E5%8F%B2%E8%92%82%E5%A4%AB%C2%B7%E4%B9%94%E5%B8%83%E6%96%AF">乔布斯</a>也注意到了这一现象，他在<a
+href="https://movie.douban.com/subject/6974319/">遗失的访谈</a>中谈到，</p>
 <blockquote>
 <p>最棒的司机与普通司机之间的差距大概是30%，最好的与普通之间的差距有多大呢？20%？</p>
 </blockquote>
@@ -369,7 +372,9 @@
 <p><br/></p>
 <p>本文总结了一些“可行的”办法，茶余饭后来看下，止增笑耳。</p>
 <p><br/></p>
-<h3 id="分工"><a href="#分工" class="headerlink" title="分工"></a>分工</h3><p>根据<a href="https://en.wikipedia.org/wiki/Conway%27s_law" target="_blank" rel="noopener">康威定律</a>，产品结构与设计该产品组织的沟通结构是一致的，</p>
+<h3 id="分工">分工</h3>
+<p>根据<a
+href="https://en.wikipedia.org/wiki/Conway%27s_law">康威定律</a>，产品结构与设计该产品组织的沟通结构是一致的，</p>
 <p>因此，为了让工作看起来像十个人完成的，首先就要进行分工，</p>
 <p>强行把功能划分成十个模块，不多不少。</p>
 <p><br/></p>
@@ -379,11 +384,13 @@
 <p>至于这十个模块以后怎么集成起来，那是后期的事情，</p>
 <p>记住，要想看起来像十个人开发的，早期就不要考虑集成的问题。</p>
 <p><br/></p>
-<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>完成模块划分之后，接下来的事情，就是约定接口了，</p>
+<h3 id="接口">接口</h3>
+<p>完成模块划分之后，接下来的事情，就是约定接口了，</p>
 <p>即使是一个人，也要腼腆一些，</p>
 <p>尽量不要对其他模块过问太多，以免打扰到其他模块的正常开发工作。</p>
 <p><br/></p>
-<p>这是面向对象开发中，<a href="https://zh.wikipedia.org/zh-hans/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F" target="_blank" rel="noopener">信息隐藏</a>思想的绝好实践。</p>
+<p>这是面向对象开发中，<a
+href="https://zh.wikipedia.org/zh-hans/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F">信息隐藏</a>思想的绝好实践。</p>
 <p><br/></p>
 <p>凭借当前模块对其他模块的猜测，</p>
 <p>每一个模块都要独立写出它期望其他模块应该提供的接口，</p>
@@ -391,7 +398,8 @@
 <p><br/></p>
 <p>要做到看起来像十个人一样在开发，就得这么干。</p>
 <p><br/></p>
-<h3 id="mock数据"><a href="#mock数据" class="headerlink" title="mock数据"></a>mock数据</h3><p>有了接口约定，并不代表着这些接口可用啊，</p>
+<h3 id="mock数据">mock数据</h3>
+<p>有了接口约定，并不代表着这些接口可用啊，</p>
 <p>没问题，</p>
 <p>我们现在要开始mock数据了。</p>
 <p><br/></p>
@@ -406,20 +414,26 @@
 <p>对了，如果时间比较紧急的话，最好再开发一个接口管理平台，</p>
 <p>这样可以提高效率。</p>
 <p><br/></p>
-<h3 id="联调"><a href="#联调" class="headerlink" title="联调"></a>联调</h3><p>一定要在每个模块的功能实现完之前启动联调，我们的时间很紧急，不是么，</p>
+<h3 id="联调">联调</h3>
+<p>一定要在每个模块的功能实现完之前启动联调，我们的时间很紧急，不是么，</p>
 <p>提前启动联调可以发现更多的问题。</p>
 <p><br/></p>
 <p>在联调的过程中，可不能为了接口的稳定，而不做出任何修改，</p>
-<p>应该采用<a href="https://book.douban.com/subject/1140457/" target="_blank" rel="noopener">敏捷开发方法</a>，在依赖者人工<a href="https://book.douban.com/subject/1230036/" target="_blank" rel="noopener">测试的覆盖下</a>，<a href="https://book.douban.com/subject/4262627/" target="_blank" rel="noopener">持续重构</a>，</p>
+<p>应该采用<a
+href="https://book.douban.com/subject/1140457/">敏捷开发方法</a>，在依赖者人工<a
+href="https://book.douban.com/subject/1230036/">测试的覆盖下</a>，<a
+href="https://book.douban.com/subject/4262627/">持续重构</a>，</p>
 <p>用大步快跑的方式，迭代开发。</p>
 <p><br/></p>
 <p>如果有日常部署环境，那就更好了，</p>
 <p>必须可以随时重启服务器，让依赖方经常性的无缘无故的挂掉，</p>
-<p>已测试它的<a href="https://baike.baidu.com/item/%E8%BD%AF%E4%BB%B6%E5%8F%AF%E9%9D%A0%E6%80%A7" target="_blank" rel="noopener">可靠性</a>。</p>
+<p>已测试它的<a
+href="https://baike.baidu.com/item/%E8%BD%AF%E4%BB%B6%E5%8F%AF%E9%9D%A0%E6%80%A7">可靠性</a>。</p>
 <p><br/></p>
 <p>这是一项看起来像十个人一样开发的重要法则。</p>
 <p><br/></p>
-<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>由于功能被划分成了十个模块，它们之间有一些依赖关系，</p>
+<h3 id="异常">异常</h3>
+<p>由于功能被划分成了十个模块，它们之间有一些依赖关系，</p>
 <p>如果服务发生异常怎么办？</p>
 <p><br/></p>
 <p>怎么可能要让服务发生异常。</p>
@@ -431,11 +445,13 @@
 <p><br/></p>
 <p>这是软件工程的一项最佳实践。</p>
 <p><br/></p>
-<p>它会促使调用方更好的理解<a href="https://zh.wikipedia.org/zh-hans/%E4%B8%9A%E5%8A%A1" target="_blank" rel="noopener">业务</a>，只传递符合业务逻辑的参数，</p>
+<p>它会促使调用方更好的理解<a
+href="https://zh.wikipedia.org/zh-hans/%E4%B8%9A%E5%8A%A1">业务</a>，只传递符合业务逻辑的参数，</p>
 <p>传错了，那是你的问题，</p>
 <p>反正我没有报错，返回null已经暗示了这一点，请注意判断。</p>
 <p><br/></p>
-<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>为了秉持好的代码本身就是文档的指导原则，</p>
+<h3 id="文档">文档</h3>
+<p>为了秉持好的代码本身就是文档的指导原则，</p>
 <p>我们在代码中绝对不能出现一行注释，否则就不是好代码了。</p>
 <p><br/></p>
 <p>此外，接口文档必须能自动生成，否则人工写文档的方式太落伍了，</p>
@@ -448,8 +464,11 @@
 </blockquote>
 <p><br/></p>
 <p>就是这个含义。</p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>这十个模块必须先经过独立测试，然后才能集成到一起，</p>
-<p>因此，每个模块必须先写<a href="https://zh.wikipedia.org/zh-hans/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95" target="_blank" rel="noopener">单元测试</a>，保证<a href="https://zh.wikipedia.org/zh-hans/%E4%BB%A3%E7%A2%BC%E8%A6%86%E8%93%8B%E7%8E%87" target="_blank" rel="noopener">单测覆盖率</a>。</p>
+<h3 id="测试">测试</h3>
+<p>这十个模块必须先经过独立测试，然后才能集成到一起，</p>
+<p>因此，每个模块必须先写<a
+href="https://zh.wikipedia.org/zh-hans/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">单元测试</a>，保证<a
+href="https://zh.wikipedia.org/zh-hans/%E4%BB%A3%E7%A2%BC%E8%A6%86%E8%93%8B%E7%8E%87">单测覆盖率</a>。</p>
 <p><br/></p>
 <p>为了单测覆盖率，我们必须手动调用其他模块一次，将返回值完全贴到单元测试中，</p>
 <p>这样是效率最高的办法，也能保证覆盖掉处理逻辑的所有分支，</p>
@@ -462,7 +481,8 @@
 <p>一定要先fix，再改代码，</p>
 <p>当测试问起的时候，就说是缓存问题，让他刷新一下。</p>
 <p><br/></p>
-<h3 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h3><p>为了快速上线，让用户更早的用上产品，</p>
+<h3 id="上线">上线</h3>
+<p>为了快速上线，让用户更早的用上产品，</p>
 <p>我们应当在测试完所有功能之前的一个深夜发布产品。</p>
 <p><br/></p>
 <p>开发者，我，必须看起来像十个人一样，忙得焦头烂额，</p>
@@ -474,7 +494,8 @@
 <p><br/></p>
 <p>长舒一口气之后，赶紧把手机关掉，回家睡觉。</p>
 <p><br/></p>
-<h3 id="反馈"><a href="#反馈" class="headerlink" title="反馈"></a>反馈</h3><p>为了表明我们团队有十个人，或者说我拥有十倍效率开发者的体质，</p>
+<h3 id="反馈">反馈</h3>
+<p>为了表明我们团队有十个人，或者说我拥有十倍效率开发者的体质，</p>
 <p>在接到用户反馈的时候，一定要花十倍的时间去定位问题。</p>
 <p><br/></p>
 <p>并且还要采用多种办法证明自己足够专业，</p>
@@ -487,7 +508,8 @@
 <p><br/></p>
 <p>这是十倍效率程序员的最后秘诀。</p>
 <p><br/></p>
-<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>本文展示了，为了让自己看起来像十个人一样开发，必须制造的问题，</p>
+<h3 id="结语">结语</h3>
+<p>本文展示了，为了让自己看起来像十个人一样开发，必须制造的问题，</p>
 <p>在中国古代，人们已经看到这一点了，</p>
 <blockquote>
 <p>善战者无赫赫之功，赤忠者无夸夸之言，善医者无煌煌之名。</p>
@@ -505,20 +527,31 @@
 <p><br/></p>
 <p>你的腰包才会鼓鼓的，你的江湖地位才会如日中天。</p>
 <p><br/></p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://book.douban.com/subject/4214142/" target="_blank" rel="noopener">卓有成效的程序员</a></p>
+<h3 id="参考">参考</h3>
+<p><a
+href="https://book.douban.com/subject/4214142/">卓有成效的程序员</a></p>
 <p><a href="https://book.douban.com/subject/4908230/" target="_blank" rel="noopener">人月神话</a></p>
-<p><a href="https://book.douban.com/subject/24868904/" target="_blank" rel="noopener">高效能程序员的修炼</a></p>
-<p><a href="https://movie.douban.com/subject/6974319/" target="_blank" rel="noopener">遗失的访谈</a></p>
-<p><a href="https://book.douban.com/subject/25884108/" target="_blank" rel="noopener">程序员的呐喊</a></p>
-<p><a href="https://book.douban.com/subject/11614538/" target="_blank" rel="noopener">程序员的职业素养</a></p>
-<p><a href="https://book.douban.com/subject/26419766/" target="_blank" rel="noopener">程序开发心理学</a></p>
-<p><a href="https://book.douban.com/subject/21323647/" target="_blank" rel="noopener">程序员修炼之道</a></p>
+<p><a
+href="https://book.douban.com/subject/24868904/">高效能程序员的修炼</a></p>
+<p><a
+href="https://movie.douban.com/subject/6974319/">遗失的访谈</a></p>
+<p><a
+href="https://book.douban.com/subject/25884108/">程序员的呐喊</a></p>
+<p><a
+href="https://book.douban.com/subject/11614538/">程序员的职业素养</a></p>
+<p><a
+href="https://book.douban.com/subject/26419766/">程序开发心理学</a></p>
+<p><a
+href="https://book.douban.com/subject/21323647/">程序员修炼之道</a></p>
 <p><a href="https://book.douban.com/subject/27069503/" target="_blank" rel="noopener">构建之法</a></p>
-<p><a href="https://book.douban.com/subject/2208597/" target="_blank" rel="noopener">测试驱动开发</a></p>
+<p><a
+href="https://book.douban.com/subject/2208597/">测试驱动开发</a></p>
 <p><a href="https://book.douban.com/subject/4262627/" target="_blank" rel="noopener">重构</a></p>
 <p><a href="https://book.douban.com/subject/6021440/" target="_blank" rel="noopener">黑客与画家</a></p>
-<p><a href="https://book.douban.com/subject/21372237/" target="_blank" rel="noopener">极客与团队</a></p>
-<p><a href="https://book.douban.com/subject/1140457/" target="_blank" rel="noopener">敏捷软件开发</a></p>
+<p><a
+href="https://book.douban.com/subject/21372237/">极客与团队</a></p>
+<p><a
+href="https://book.douban.com/subject/1140457/">敏捷软件开发</a></p>
 
           
         

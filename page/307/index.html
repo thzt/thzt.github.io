@@ -347,129 +347,131 @@
       
         
           
-            <h2 id="fact的尾递归化"><a href="#fact的尾递归化" class="headerlink" title="fact的尾递归化"></a><strong>fact的尾递归化</strong></h2><p><br/></p>
+            <h2 id="fact的尾递归化"><strong>fact的尾递归化</strong></h2>
+<p><br/></p>
 <p>非尾递归的fact定义</p>
 <p>(define fact</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 1)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* x (fact (- x 1))))))</p>
+<p>    (lambda (x)</p>
+<p>        (if (= x 1)</p>
+<p>            1</p>
+<p>            (* x (fact (- x 1))))))</p>
 <p><br/></p>
 <p>尾递归的fact-tail定义</p>
 <p>(define fact-tail</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x k)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (= x 1)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k 1)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail (- x 1) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (y) (k (* y x)))</strong>))))</p>
+<p>    (lambda (x k)</p>
+<p>        (if (= x 1)</p>
+<p>            <strong>(k 1)</strong></p>
+<p>            (fact-tail (- x 1)</p>
+<p>                <strong>(lambda (y) (k (* y x)))</strong>))))</p>
 <p><br/></p>
 <p>分析调用过程</p>
-<p>(fact-tail 3 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n))</p>
+<p>(fact-tail 3</p>
+<p>    (lambda(n) n))</p>
 <p>&lt;=&gt;</p>
-<p>(fact-tail 2 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 3)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
+<p>(fact-tail 2</p>
+<p>    (lambda (y) (</p>
+<p>        (lambda(n) n)</p>
+<p>        (* y 3)</p>
+<p>    )))</p>
 <p>&lt;=&gt;</p>
 <p>(fact-tail 1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 2)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
+<p>    (lambda (y) (</p>
+<p>        (lambda (z) (</p>
+<p>            (lambda(n) n)</p>
+<p>            (* z 3)</p>
+<p>        ))</p>
+<p>        (* y 2)</p>
+<p>    )))</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* y 2)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>    (lambda (y) (</p>
+<p>        (lambda (z) (</p>
+<p>            (lambda(n) n)</p>
+<p>            (* z 3)</p>
+<p>        ))</p>
+<p>        (* y 2)</p>
+<p>    ))</p>
+<p>    1</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) (</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(* z 3)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;)) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(* 1 2)</p>
+<p>    (lambda (z) (</p>
+<p>        (lambda(n) n)</p>
+<p>        (* z 3)</p>
+<p>    ))</p>
+<p>    (* 1 2)</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda(n) n) </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(<em> (</em> 1 2) 3)</p>
+<p>    (lambda(n) n)</p>
+<p>    (* (* 1 2) 3)</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
-<p>(<em> (</em> 1 2) 3)</p>
+<p>(* (* 1 2) 3)</p>
 <p><br/></p>
-<h2 id="fib的尾递归化"><a href="#fib的尾递归化" class="headerlink" title="fib的尾递归化"></a><strong>fib的尾递归化</strong></h2><p>非尾递归的fib定义</p>
+<h2 id="fib的尾递归化"><strong>fib的尾递归化</strong></h2>
+<p>非尾递归的fib定义</p>
 <p>(define fib</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ (fib (- n 1))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fib (- n 2))))))</p>
+<p>    (lambda (n)</p>
+<p>        (if (&lt;= n 2)</p>
+<p>            1</p>
+<p>            (+ (fib (- n 1))</p>
+<p>                (fib (- n 2))))))</p>
 <p><br/></p>
 <p>尾递归的fib-tail定义</p>
 <p>(define fib-tail</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (n k)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if (&lt;= n 2)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k 1)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fib-tail (- n 1)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (x)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(fact-tail (- n 2)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(lambda (y)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(k (+ x y))))))</strong>)))</p>
+<p>    (lambda (n k)</p>
+<p>        (if (&lt;= n 2)</p>
+<p>            <strong>(k 1)</strong></p>
+<p>            <strong>(fib-tail (- n 1)</strong></p>
+<p>                <strong>(lambda (x)</strong></p>
+<p>                    <strong>(fact-tail (- n 2)</strong></p>
+<p>                        <strong>(lambda (y)</strong></p>
+<p>                            <strong>(k (+ x y))))))</strong>)))</p>
 <p><br/></p>
 <p>分析调用过程</p>
 <p>(fib-tail 3</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z))</p>
+<p>    (lambda (z) z))</p>
 <p>&lt;=&gt;</p>
 <p>(fib-tail 2</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail 1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)))))</p>
+<p>    (lambda (x)</p>
+<p>        (fact-tail 1</p>
+<p>            (lambda (y)</p>
+<p>                (</p>
+<p>                    (lambda (z) z)</p>
+<p>                    (+ x y)</p>
+<p>                )))))</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (x)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fact-tail 1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ x y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>    (lambda (x)</p>
+<p>        (fact-tail 1</p>
+<p>            (lambda (y)</p>
+<p>                (</p>
+<p>                    (lambda (z) z)</p>
+<p>                    (+ x y)</p>
+<p>                ))))</p>
+<p>    1</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
 <p>(fact-tail 1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)))</p>
+<p>    (lambda (y)</p>
+<p>        (</p>
+<p>            (lambda (z) z)</p>
+<p>            (+ 1 y)</p>
+<p>        )))</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 y)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+<p>    (lambda (y)</p>
+<p>        (</p>
+<p>            (lambda (z) z)</p>
+<p>            (+ 1 y)</p>
+<p>        ))</p>
+<p>    1</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
 <p>(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(lambda (z) z)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(+ 1 1)</p>
+<p>    (lambda (z) z)</p>
+<p>    (+ 1 1)</p>
 <p>)</p>
 <p>&lt;=&gt;</p>
 <p>(+ 1 1)</p>

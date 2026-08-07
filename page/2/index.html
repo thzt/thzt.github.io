@@ -356,10 +356,12 @@
 <p><br/></p>
 <p>后来认真研究了一下。</p>
 <p>发现 Harness 的实现思路，就是让 LLM 做选择题，而不是问答题。</p>
-<h3 id="一、Harness-是怎么来的"><a href="#一、Harness-是怎么来的" class="headerlink" title="一、Harness 是怎么来的"></a>一、Harness 是怎么来的</h3><p>在说 Harness 之前，得先说说它出现之前经历了什么。</p>
+<h3 id="一harness-是怎么来的">一、Harness 是怎么来的</h3>
+<p>在说 Harness 之前，得先说说它出现之前经历了什么。</p>
 <p><br/></p>
 <p>这几个概念不是谁发明的理论，而是工程问题一步步暴露出来的结果。</p>
-<h4 id="Prompt"><a href="#Prompt" class="headerlink" title="Prompt"></a>Prompt</h4><p>最早的问题是 Prompt。</p>
+<h4 id="prompt">Prompt</h4>
+<p>最早的问题是 Prompt。</p>
 <p>模型刚出来的时候，大家发现同一个问题换个问法，结果就差很多。</p>
 <p>提示词怎么写，很大程度上决定了模型输出的质量。</p>
 <p>于是有了 Prompt Engineer 这个角色，研究怎么提问能让模型答得更好。</p>
@@ -367,22 +369,26 @@
 <p>但 Prompt 能解决的问题是有限的。</p>
 <p>它只能影响模型在给定输入分布上「更可能说对话、写对代码」。</p>
 <p>它解决不了模型缺乏边界感的问题，也解决不了模型接入真实系统后的风险。</p>
-<h4 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h4><p>接着发现光会提问不够。</p>
+<h4 id="context">Context</h4>
+<p>接着发现光会提问不够。</p>
 <p>模型是无状态的，每次调用都是接收一段输入 token，输出一段 token。</p>
 <p>本身不维护持久系统状态。</p>
 <p><br/></p>
 <p>它不知道仓库里有什么分支、生产环境有哪些约束、什么算上线、什么算事故。</p>
 <p>这些东西只能通过文本告诉它。</p>
-<p>于是有了 Context Engineer，研究如何为这一轮调用，准备正确、充分的输入信息。</p>
+<p>于是有了 Context
+Engineer，研究如何为这一轮调用，准备正确、充分的输入信息。</p>
 <p><br/></p>
 <p>Context 解决的是信息完整性问题。</p>
 <p>让模型在这一轮看到更多关键信息，从而减少胡编乱造。</p>
 <p>但它仍然解决不了执行层面的问题。</p>
-<h4 id="Harness"><a href="#Harness" class="headerlink" title="Harness"></a>Harness</h4><p>再往后，模型开始接入真实系统——读写文件、执行命令、操作数据库。</p>
+<h4 id="harness">Harness</h4>
+<p>再往后，模型开始接入真实系统——读写文件、执行命令、操作数据库。</p>
 <p>这时候问题变了。</p>
 <p><br/></p>
 <p>不再是答对答错的问题了。</p>
-<p>之前讲 Prompt 和 Context，不管怎么讲，都是想让模型「答得好一点」。</p>
+<p>之前讲 Prompt 和
+Context，不管怎么讲，都是想让模型「答得好一点」。</p>
 <p>但模型一旦真的动起手来，问题就不是答得好不好的问题了。</p>
 <p><br/></p>
 <p>关键是，模型有幻觉。</p>
@@ -391,14 +397,10 @@
 <p><br/></p>
 <p>比如：</p>
 <ul>
-<li><p>你让它改某个文件，它顺手把不相干的几个文件也改了</p>
-</li>
-<li><p>你让它修个 bug，它跑偏去重写了整个模块</p>
-</li>
-<li><p>你让它跑个命令，它生成了错误的代码去执行</p>
-</li>
-<li><p>它可能误删文件，可能胡乱往外发请求，可能改了不该改的配置</p>
-</li>
+<li><p>你让它改某个文件，它顺手把不相干的几个文件也改了</p></li>
+<li><p>你让它修个 bug，它跑偏去重写了整个模块</p></li>
+<li><p>你让它跑个命令，它生成了错误的代码去执行</p></li>
+<li><p>它可能误删文件，可能胡乱往外发请求，可能改了不该改的配置</p></li>
 </ul>
 <p><br/></p>
 <p>提示词里写得再清楚都没用。</p>
@@ -410,7 +412,8 @@
 <p>怎么让它只做你预期内的事，不要顺手搞出别的来。</p>
 <p><br/></p>
 <p>这就是 Harness 要解决的问题。</p>
-<h4 id="Loop"><a href="#Loop" class="headerlink" title="Loop"></a>Loop</h4><p>光有 Harness 还不够。</p>
+<h4 id="loop">Loop</h4>
+<p>光有 Harness 还不够。</p>
 <p>因为前面这些都还是单次执行的场景——模型动一步，本质上是单轮的事。</p>
 <p>但 Agent 真正的用法，是要长时间、一轮一轮自己跑下去的。</p>
 <p><br/></p>
@@ -423,7 +426,8 @@
 <p>agent 可选地启用这种特性。</p>
 <p><br/></p>
 <p>但它也有适用性。</p>
-<p>如果你本身的工作流就不是这种迭代的、一轮一轮推进的，那强行套一个 Loop 上去，意义也不大。</p>
+<p>如果你本身的工作流就不是这种迭代的、一轮一轮推进的，那强行套一个 Loop
+上去，意义也不大。</p>
 <p><br/></p>
 <p>这四个概念是递进的：</p>
 <table>
@@ -453,22 +457,24 @@
 </tbody>
 </table>
 <p>每一层都建立在上一层的基础上。</p>
-<h3 id="二、为什么我之前总是理解不了"><a href="#二、为什么我之前总是理解不了" class="headerlink" title="二、为什么我之前总是理解不了"></a>二、为什么我之前总是理解不了</h3><p>因为这些术语是给平台开发者说的。</p>
+<h3 id="二为什么我之前总是理解不了">二、为什么我之前总是理解不了</h3>
+<p>因为这些术语是给平台开发者说的。</p>
 <p><br/></p>
 <p>什么是平台开发者？</p>
 <p>开发「能开发 Agent 的工具」的人。</p>
 <p><br/></p>
 <ul>
-<li><p>Anthropic 公司的工程师，写的是 Claude Code</p>
-</li>
-<li><p>Cursor 公司的工程师，写的是 Cursor</p>
-</li>
-<li><p>OpenAI 公司的工程师，写的是 Codex</p>
-</li>
+<li><p>Anthropic 公司的工程师，写的是 Claude Code</p></li>
+<li><p>Cursor 公司的工程师，写的是 Cursor</p></li>
+<li><p>OpenAI 公司的工程师，写的是 Codex</p></li>
 </ul>
 <p><br/></p>
 <p>对他们来说，这些概念对应着具体需要实现的工程问题：</p>
 <table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
 <thead>
 <tr>
 <th>术语</th>
@@ -502,6 +508,11 @@
 <p><br/></p>
 <p>如果在整个 Agent 工程里分个层，会更清楚：</p>
 <table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
 <thead>
 <tr>
 <th>层</th>
@@ -513,7 +524,8 @@
 <tr>
 <td>平台层</td>
 <td>平台开发者</td>
-<td>搭好那套壳，让所有 Agent 在同一个壳里跑；模型怎么接、工具怎么调、权限怎么控、验证怎么跑，都是他们定的</td>
+<td>搭好那套壳，让所有 Agent
+在同一个壳里跑；模型怎么接、工具怎么调、权限怎么控、验证怎么跑，都是他们定的</td>
 </tr>
 <tr>
 <td>Agent 开发者层</td>
@@ -530,7 +542,9 @@
 <p><br/></p>
 <p>大多数人都在中间这层，或者最上面那层。</p>
 <p>不是造平台的人，自然理解不了 Harness 在解决自己什么痛点。</p>
-<h3 id="三、那-Harness-到底解决了什么问题"><a href="#三、那-Harness-到底解决了什么问题" class="headerlink" title="三、那 Harness 到底解决了什么问题"></a>三、那 Harness 到底解决了什么问题</h3><p>回到 Harness 本身。</p>
+<h3 id="三那-harness-到底解决了什么问题">三、那 Harness
+到底解决了什么问题</h3>
+<p>回到 Harness 本身。</p>
 <p><br/></p>
 <p>它要解决的问题是：模型接入真实系统后，怎么让它不要乱执行。</p>
 <p><br/></p>
@@ -576,7 +590,8 @@
 <p>背后是写好的测试流程，跑完之后结果会被结构化地返回给模型。</p>
 <p><br/></p>
 <p>模型要操作 git，不是让它自己敲 git push。</p>
-<p>是给它 <code>commit_changes(message)</code> 这样的工具，背后自动在 feature 分支上干活，禁止推主分支。</p>
+<p>是给它 <code>commit_changes(message)</code> 这样的工具，背后自动在
+feature 分支上干活，禁止推主分支。</p>
 <p><br/></p>
 <p>这样一来，模型能做的事，就被限定在这几个工具里了。</p>
 <p>它再有幻觉，最多也就是选错了工具、传错了参数。</p>
@@ -586,9 +601,12 @@
 <p>模型可能选错，但选错的结果不是直接操作系统。</p>
 <p>而是调用了某个工具——工具的执行结果可以被验证、被回滚、被记录。</p>
 <p>这就是「可控」的真正含义。</p>
-<h3 id="四、内置工具"><a href="#四、内置工具" class="headerlink" title="四、内置工具"></a>四、内置工具</h3><p>前面一直在说「给模型几个工具去调」，那这些工具是哪来的，先交代清楚。</p>
+<h3 id="四内置工具">四、内置工具</h3>
+<p>前面一直在说「给模型几个工具去调」，那这些工具是哪来的，先交代清楚。</p>
 <p><br/></p>
-<p>像 <code>Read</code>、<code>Write</code>、<code>Edit</code>、<code>Bash</code>、<code>Glob</code>、<code>Grep</code>、<code>WebFetch</code> 这些，都是平台自带的内置工具。</p>
+<p>像
+<code>Read</code>、<code>Write</code>、<code>Edit</code>、<code>Bash</code>、<code>Glob</code>、<code>Grep</code>、<code>WebFetch</code>
+这些，都是平台自带的内置工具。</p>
 <p>不是每个项目自己造的，而是平台层统一提供的。</p>
 <p>所有在这个平台上跑的 agent，默认都能用这一套。</p>
 <p><br/></p>
@@ -598,8 +616,10 @@
 <p>平台把这些公共能力收进来，顺手在每一个工具外面，包上权限检查、参数校验、日志记录。</p>
 <p>这样 agent 一上来，能干的事就是受限的、可观测的。</p>
 <p><br/></p>
-<p>至于这些工具的 schema 怎么传给模型、模型怎么决定调哪个、平台怎么执行、结果怎么回到模型，是一条完整的调用链路，放在文末附录展开。</p>
-<h3 id="五、出错了怎么办"><a href="#五、出错了怎么办" class="headerlink" title="五、出错了怎么办"></a>五、出错了怎么办</h3><p>光拦住还不够，模型还是会选错，工具调下去还是会出问题。</p>
+<p>至于这些工具的 schema
+怎么传给模型、模型怎么决定调哪个、平台怎么执行、结果怎么回到模型，是一条完整的调用链路，放在文末附录展开。</p>
+<h3 id="五出错了怎么办">五、出错了怎么办</h3>
+<p>光拦住还不够，模型还是会选错，工具调下去还是会出问题。</p>
 <p><br/></p>
 <p>所以 Harness 还得兜住出错的情况。</p>
 <p>关键操作之后，强制验证——改完代码跑测试，测试没过，就把错误信息结构化地丢回给模型，让它继续改。</p>
@@ -607,9 +627,12 @@
 <p>失败的时候，区分是可重试的错，还是必须人工介入的硬失败，分别处理。</p>
 <p>整个过程记进日志，错了能查到、能回滚。</p>
 <p><br/></p>
-<p>这其实就是把「交付要测试、要 review、错了要回滚」这件很朴素的事，从人盯，变成了代码自动盯。</p>
-<h3 id="六、一条完整的链路"><a href="#六、一条完整的链路" class="headerlink" title="六、一条完整的链路"></a>六、一条完整的链路</h3><p>举个具体的例子。</p>
-<p>一个 TypeScript monorepo 项目，Agent 接到一个任务：修复 src/foo.ts 里的 bug，并补上测试。</p>
+<p>这其实就是把「交付要测试、要
+review、错了要回滚」这件很朴素的事，从人盯，变成了代码自动盯。</p>
+<h3 id="六一条完整的链路">六、一条完整的链路</h3>
+<p>举个具体的例子。</p>
+<p>一个 TypeScript monorepo 项目，Agent 接到一个任务：修复 src/foo.ts
+里的 bug，并补上测试。</p>
 <p><br/></p>
 <p>链路大致是这样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 读取文件      Agent 通过工具读相关文件和已有测试</span><br><span class="line">2. 生成方案      Agent 生成 patch，平台应用到临时工作区（不动主代码）</span><br><span class="line">3. 强制测试      平台跑对应测试</span><br><span class="line">                 - 过了：进入候选完成</span><br><span class="line">                 - 没过：错误结构化反馈给 Agent，再改一轮</span><br><span class="line">4. 二次校验      项目 Linter 和安全扫描跑一遍，过了才标记可提交</span><br><span class="line">5. 人工 review   合并到主分支，整个链路写进日志</span><br></pre></td></tr></table></figure>
@@ -617,16 +640,14 @@
 <p>整个过程里，模型始终在壳内提建议。</p>
 <p>什么时候读文件、怎么改代码、怎么解释失败原因。</p>
 <p>而所有「能不能真的动仓库」「什么时候算完成」「失败怎么处理」，都是平台说了算。</p>
-<h3 id="七、那为什么文章都爱讲这些"><a href="#七、那为什么文章都爱讲这些" class="headerlink" title="七、那为什么文章都爱讲这些"></a>七、那为什么文章都爱讲这些</h3><p>讲到这里，应该能看出来 Harness 做的事其实不复杂。</p>
+<h3 id="七那为什么文章都爱讲这些">七、那为什么文章都爱讲这些</h3>
+<p>讲到这里，应该能看出来 Harness 做的事其实不复杂。</p>
 <p><br/></p>
 <p>它做的事情其实很朴素：</p>
 <ul>
-<li><p>把模型能干的事，收窄成几个受控的工具</p>
-</li>
-<li><p>在工具周围包上检查、验证、回滚</p>
-</li>
-<li><p>出错的时候自动收场，而不是任由它越跑越偏</p>
-</li>
+<li><p>把模型能干的事，收窄成几个受控的工具</p></li>
+<li><p>在工具周围包上检查、验证、回滚</p></li>
+<li><p>出错的时候自动收场，而不是任由它越跑越偏</p></li>
 </ul>
 <p><br/></p>
 <p>那为什么网上那些文章，都把它说得那么复杂、那么玄呢？</p>
@@ -643,6 +664,10 @@
 <p><br/></p>
 <p>有个简单的自查方法：</p>
 <table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
 <thead>
 <tr>
 <th>你主要在写</th>
@@ -664,7 +689,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="八、结语"><a href="#八、结语" class="headerlink" title="八、结语"></a>八、结语</h3><p>本文主要想说的是，Harness 这个概念没有那么复杂。</p>
+<h3 id="八结语">八、结语</h3>
+<p>本文主要想说的是，Harness 这个概念没有那么复杂。</p>
 <p><br/></p>
 <p>它就是让 LLM 做选择题，而不是问答题。</p>
 <p>把模型能干的事收窄成几个受控的工具，在工具周围包上检查、验证、回滚。</p>
@@ -672,12 +698,20 @@
 <p>这些术语是平台开发者在解决自己的工程问题时用的。</p>
 <p>对于 Agent 开发者来说，用好平台提供的功能就够了。</p>
 <p>对于 Agent 用户来说，那就更不用管了。</p>
-<h3 id="附录：tool-call-的完整调用过程"><a href="#附录：tool-call-的完整调用过程" class="headerlink" title="附录：tool call 的完整调用过程"></a>附录：tool call 的完整调用过程</h3><p>前面说 Harness 让 LLM 做选择题、平台负责执行，但没展开具体是怎么调的。</p>
-<p>这一节把整条链路走一遍，工具 schema 怎么传、模型怎么决定调哪个、平台怎么执行、结果怎么回到模型。</p>
+<h3 id="附录tool-call-的完整调用过程">附录：tool call
+的完整调用过程</h3>
+<p>前面说 Harness 让 LLM
+做选择题、平台负责执行，但没展开具体是怎么调的。</p>
+<p>这一节把整条链路走一遍，工具 schema
+怎么传、模型怎么决定调哪个、平台怎么执行、结果怎么回到模型。</p>
 <p>以 Anthropic 的 Messages 协议为例。</p>
-<h4 id="1-工具是谁写的，怎么注入的"><a href="#1-工具是谁写的，怎么注入的" class="headerlink" title="1. 工具是谁写的，怎么注入的"></a>1. 工具是谁写的，怎么注入的</h4><p>工具分两类。</p>
-<p>一类是平台自带的内置工具，像 <code>Read</code>、<code>Write</code>、<code>Edit</code>、<code>Bash</code>、<code>Glob</code>、<code>Grep</code>、<code>WebFetch</code>，平台工程师写死的，所有 agent 一上来都能用。</p>
-<p>一类是项目自己加的，通过 MCP、Skills、CLI 注入进来，agent 开发者写的，只在特定项目里生效。</p>
+<h4 id="工具是谁写的怎么注入的">1. 工具是谁写的，怎么注入的</h4>
+<p>工具分两类。</p>
+<p>一类是平台自带的内置工具，像
+<code>Read</code>、<code>Write</code>、<code>Edit</code>、<code>Bash</code>、<code>Glob</code>、<code>Grep</code>、<code>WebFetch</code>，平台工程师写死的，所有
+agent 一上来都能用。</p>
+<p>一类是项目自己加的，通过 MCP、Skills、CLI 注入进来，agent
+开发者写的，只在特定项目里生效。</p>
 <p><br/></p>
 <p>每个工具都是一个独立模块，自己定义四样东西：</p>
 <ul>
@@ -687,8 +721,10 @@
 <li><code>call</code>：被调用时真正干活的逻辑</li>
 </ul>
 <p><br/></p>
-<p>平台在每轮请求前，把当前生效的工具收拢成一张列表，塞进请求里的 <code>tools</code>。</p>
-<h4 id="2-传：把工具-schema-塞进请求"><a href="#2-传：把工具-schema-塞进请求" class="headerlink" title="2. 传：把工具 schema 塞进请求"></a>2. 传：把工具 schema 塞进请求</h4><p>得先说一个前提：LLM 是无状态的。</p>
+<p>平台在每轮请求前，把当前生效的工具收拢成一张列表，塞进请求里的
+<code>tools</code>。</p>
+<h4 id="传把工具-schema-塞进请求">2. 传：把工具 schema 塞进请求</h4>
+<p>得先说一个前提：LLM 是无状态的。</p>
 <p>它不记得上一轮自己说了什么，每次调用都是一次全新的请求。</p>
 <p>所以平台每一轮都要把之前的对话历史，原样塞进请求里，模型才能接上之前的上下文。</p>
 <p><br/></p>
@@ -699,40 +735,56 @@
 <ul>
 <li><code>system</code>：身份和约束，大边界</li>
 <li><code>messages</code>：对话历史，用户要它干嘛、之前调过哪些工具、每次结果是什么，它据此判断现在该干什么</li>
-<li><code>tools</code>：这轮可用的菜单，每个工具的 <code>description</code> 说这道菜是干什么的，<code>input_schema</code> 说要填哪些参数</li>
+<li><code>tools</code>：这轮可用的菜单，每个工具的
+<code>description</code> 说这道菜是干什么的，<code>input_schema</code>
+说要填哪些参数</li>
 </ul>
 <p><br/></p>
 <p><code>tools</code> 这张菜单是收窄动作空间的第一道关。</p>
 <p>里面没有 <code>rm</code> 这种裸命令。</p>
 <p>模型只能点菜单上有的菜，点不到 <code>rm</code>。</p>
-<h4 id="3-选：模型决定调哪个"><a href="#3-选：模型决定调哪个" class="headerlink" title="3. 选：模型决定调哪个"></a>3. 选：模型决定调哪个</h4><p>模型把这三块读进去，预测出「下一步该调哪个工具、参数填什么」，回一个 assistant 消息：</p>
+<h4 id="选模型决定调哪个">3. 选：模型决定调哪个</h4>
+<p>模型把这三块读进去，预测出「下一步该调哪个工具、参数填什么」，回一个
+assistant 消息：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"role"</span>: <span class="string">"assistant"</span>,</span><br><span class="line">  <span class="attr">"content"</span>: [</span><br><span class="line">    &#123; <span class="attr">"type"</span>: <span class="string">"text"</span>, <span class="attr">"text"</span>: <span class="string">"我先读一下这个文件。"</span> &#125;,     <span class="comment">// 可以先说句话</span></span><br><span class="line">    &#123;                                                    <span class="comment">// 再点菜</span></span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"tool_use"</span>,</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"toolu_02ABC"</span>,            <span class="comment">// 这次调用的唯一标识，回传结果靠它对号</span></span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"Write"</span>,                <span class="comment">// 点的哪道菜</span></span><br><span class="line">      <span class="attr">"input"</span>: &#123; <span class="attr">"file_path"</span>: <span class="string">"src/foo.ts"</span>, <span class="attr">"content"</span>: <span class="string">"..."</span> &#125;   <span class="comment">// 照 schema 填的参数</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"stop_reason"</span>: <span class="string">"tool_use"</span>           <span class="comment">// 停下来，等平台执行完把结果塞回来</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p><code>content</code> 是个数组，可以同时装 <code>text</code> 和 <code>tool_use</code> 好几种 block。</p>
+<p><code>content</code> 是个数组，可以同时装 <code>text</code> 和
+<code>tool_use</code> 好几种 block。</p>
 <p><br/></p>
 <p>注意，到这里为止，什么都没被执行。</p>
 <p>模型只是说了一句「我想这么干」。</p>
 <p>它不是在执行，是在生成一段结构化的选择。</p>
-<h4 id="4-调：平台执行"><a href="#4-调：平台执行" class="headerlink" title="4. 调：平台执行"></a>4. 调：平台执行</h4><p>平台拿到这个 <code>tool_use</code>，先不急着执行，过几道检查：参数校验、权限检查，过了才真正调用工具的 <code>call</code>。</p>
+<h4 id="调平台执行">4. 调：平台执行</h4>
+<p>平台拿到这个
+<code>tool_use</code>，先不急着执行，过几道检查：参数校验、权限检查，过了才真正调用工具的
+<code>call</code>。</p>
 <p>对照源码里的 <code>Tool</code> 定义，每个工具自己管这几件事：</p>
 <ul>
 <li><code>validateInput</code>：参数对不对，缺没缺</li>
 <li><code>checkPermissions</code>：这个操作允不允许</li>
 <li><code>call</code>：真正干活的逻辑</li>
-<li>还有 <code>isReadOnly</code>、<code>isDestructive</code>、<code>isConcurrencySafe</code> 这些标记，决定能不能并发、是不是危险</li>
+<li>还有
+<code>isReadOnly</code>、<code>isDestructive</code>、<code>isConcurrencySafe</code>
+这些标记，决定能不能并发、是不是危险</li>
 </ul>
 <p><br/></p>
 <p>检查不过，直接拒绝。</p>
 <p>过了，才真正执行。</p>
-<h4 id="5-回：结果回到模型"><a href="#5-回：结果回到模型" class="headerlink" title="5. 回：结果回到模型"></a>5. 回：结果回到模型</h4><p>注意，平台不是只回传一条 <code>tool_result</code>。</p>
-<p>它回传的，还是上面那个完整结构——<code>model</code>、<code>system</code>、<code>messages</code>、<code>tools</code> 原样都在，只是把新结果追加到 <code>messages</code> 末尾，然后作为下一轮请求整体发给模型：</p>
+<h4 id="回结果回到模型">5. 回：结果回到模型</h4>
+<p>注意，平台不是只回传一条 <code>tool_result</code>。</p>
+<p>它回传的，还是上面那个完整结构——<code>model</code>、<code>system</code>、<code>messages</code>、<code>tools</code>
+原样都在，只是把新结果追加到 <code>messages</code>
+末尾，然后作为下一轮请求整体发给模型：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"model"</span>: <span class="string">"claude-..."</span>,</span><br><span class="line">  <span class="attr">"system"</span>: <span class="string">"你是编码助手，工作目录是 /repo，只能改 src/..."</span>,  <span class="comment">// 身份和约束</span></span><br><span class="line">  <span class="attr">"messages"</span>: [</span><br><span class="line">    <span class="comment">// 下面整段对话历史，每轮都要原样重传，因为模型是无状态的</span></span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"user"</span>,      <span class="attr">"content"</span>: <span class="string">"修复 src/foo.ts 里的 bug"</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"assistant"</span>, <span class="attr">"content"</span>: [&#123; <span class="attr">"type"</span>: <span class="string">"tool_use"</span>, <span class="attr">"id"</span>: <span class="string">"toolu_01"</span>, <span class="attr">"name"</span>: <span class="string">"Read"</span>, <span class="attr">"input"</span>: &#123; <span class="attr">"file_path"</span>: <span class="string">"src/foo.ts"</span> &#125; &#125;] &#125;,</span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"user"</span>,      <span class="attr">"content"</span>: [&#123; <span class="attr">"type"</span>: <span class="string">"tool_result"</span>, <span class="attr">"tool_use_id"</span>: <span class="string">"toolu_01"</span>, <span class="attr">"content"</span>: <span class="string">"export function foo() &#123;...&#125;"</span> &#125;] &#125;,</span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"assistant"</span>, <span class="attr">"content"</span>: [&#123; <span class="attr">"type"</span>: <span class="string">"tool_use"</span>, <span class="attr">"id"</span>: <span class="string">"toolu_02ABC"</span>, <span class="attr">"name"</span>: <span class="string">"Write"</span>, <span class="attr">"input"</span>: &#123; <span class="attr">"file_path"</span>: <span class="string">"prod.config.ts"</span>, <span class="attr">"content"</span>: <span class="string">"..."</span> &#125; &#125;] &#125;,</span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"user"</span>, <span class="attr">"content"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"tool_result"</span>,</span><br><span class="line">        <span class="attr">"tool_use_id"</span>: <span class="string">"toolu_02ABC"</span>,          <span class="comment">// 对上前面的 tool_use 的 id</span></span><br><span class="line">        <span class="attr">"is_error"</span>: <span class="literal">true</span>,                      <span class="comment">// 成功 false，失败 true</span></span><br><span class="line">        <span class="attr">"content"</span>: <span class="string">"Error: path not writable"</span>  <span class="comment">// 结果正文（输出或错误信息）</span></span><br><span class="line">      &#125;</span><br><span class="line">    ] &#125;</span><br><span class="line">    <span class="comment">// ... 之前每一轮的 user/assistant/tool_result 都在这</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"tools"</span>: [                          <span class="comment">// 这轮可用的工具列表（菜单）</span></span><br><span class="line">    &#123; <span class="attr">"name"</span>: <span class="string">"Read"</span>,  <span class="attr">"description"</span>: <span class="string">"读取文件"</span>,  <span class="attr">"input_schema"</span>: &#123; <span class="comment">/* file_path: string */</span> &#125; &#125;,</span><br><span class="line">    &#123; <span class="attr">"name"</span>: <span class="string">"Write"</span>, <span class="attr">"description"</span>: <span class="string">"覆盖文件"</span>,  <span class="attr">"input_schema"</span>: &#123; <span class="comment">/* file_path, content */</span> &#125; &#125;,</span><br><span class="line">    &#123; <span class="attr">"name"</span>: <span class="string">"Bash"</span>,  <span class="attr">"description"</span>: <span class="string">"执行命令"</span>,  <span class="attr">"input_schema"</span>: &#123; <span class="comment">/* command: string */</span> &#125; &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>新结果就是最后那条 <code>tool_result</code>，<code>tool_use_id</code> 对上前面的 <code>tool_use</code> 的 <code>id</code>，模型就知道这次结果是给哪次调用的。</p>
+<p>新结果就是最后那条 <code>tool_result</code>，<code>tool_use_id</code>
+对上前面的 <code>tool_use</code> 的
+<code>id</code>，模型就知道这次结果是给哪次调用的。</p>
 <p><code>is_error</code> 区分成败，<code>content</code> 装结果正文。</p>
 <p><br/></p>
 <p>模型在下一轮看到这个结果，再决定接下来点哪个菜。</p>
-<h4 id="6-一轮接一轮"><a href="#6-一轮接一轮" class="headerlink" title="6. 一轮接一轮"></a>6. 一轮接一轮</h4><p>所以整个流程就是这样一个循环：</p>
+<h4 id="一轮接一轮">6. 一轮接一轮</h4>
+<p>所以整个流程就是这样一个循环：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">传(tools + messages) → 选(tool_use) → 调(校验并执行) → 回(tool_result) → 追加到 messages → 下一轮 ...</span><br></pre></td></tr></table></figure>
 <p>模型从头到尾干的事情只有一件：不停地输出「下一步调哪个工具、带什么参数」。</p>
 <p>至于这个调用要不要执行、执行成什么样，都是平台控制的。</p>
