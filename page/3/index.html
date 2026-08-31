@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2026/06/22/loop/">
+    <link itemprop="mainEntityOfPage" href="https://thzt.github.io/2026/07/17/platform/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2026/06/22/loop/" itemprop="url">技术浪潮与资本循环</a></h1>
+                <a class="post-title-link" href="/2026/07/17/platform/" itemprop="url">如何理解 Harness</a></h1>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2026-06-22T00:00:00+08:00">
-                2026-06-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2026-07-17T00:00:00+08:00">
+                2026-07-17
               </time>
             
 
@@ -311,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mind/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind</span>
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">AI</span>
                   </a>
                 </span>
 
@@ -347,346 +347,449 @@
       
         
           
-            <blockquote>
-<p>本文内容由 AI 生成</p>
-</blockquote>
+            <p>之前我一直没搞懂 Harness 到底是什么。</p>
 <p><br/></p>
-<p>人类社会在面对“新事物”时，往往不是先把它当成一个普通工具来使用，</p>
-<p>而是先把它视为一种可以下注的未来。</p>
+<p>文章翻了不少，都在讲 Harness 很重要。</p>
+<p>说它关系到权限、可靠性、验证、可控性、安全性、约束。</p>
+<p>看完我反而更糊涂了。</p>
+<p>每个词都听着对，但没有一篇讲清楚它具体是个什么东西。</p>
 <p><br/></p>
-<p>人们会围绕它构建故事，资本会围绕它设计交易，媒体会围绕它放大想象，</p>
-<p>然后在一个并不短的时间尺度上，把这种未来感不断“金融化”。</p>
+<p>后来认真研究了一下。</p>
+<p>发现 Harness 的实现思路，就是让 LLM 做选择题，而不是问答题。</p>
+<h3 id="一harness-是怎么来的">一、Harness 是怎么来的</h3>
+<p>在说 Harness 之前，得先说说它出现之前经历了什么。</p>
 <p><br/></p>
-<p>查尔斯·麦基在《大癫狂：非同寻常的大众幻想与群众性疯狂》中，</p>
-<p>系统梳理了几百年间各种集体非理性事件：</p>
-<p>从郁金香狂热、密西西比计划到南海泡沫，</p>
-<p>揭示了大众如何一再在相似机制下做出相似选择。</p>
+<p>这几个概念不是谁发明的理论，而是工程问题一步步暴露出来的结果。</p>
+<h4 id="prompt">Prompt</h4>
+<p>最早的问题是 Prompt。</p>
+<p>模型刚出来的时候，大家发现同一个问题换个问法，结果就差很多。</p>
+<p>提示词怎么写，很大程度上决定了模型输出的质量。</p>
+<p>于是有了 Prompt Engineer 这个角色，研究怎么提问能让模型答得更好。</p>
 <p><br/></p>
-<p>如果把书里的那些历史案例与今天的房地产、互联网、AI 放在一起看，</p>
-<p>会发现它们并不是彼此无关的孤立事件，</p>
-<p>而是同一套“技术（或资产）—叙事—资本—扩散—兑现”机制，在不同年代的重复演出。</p>
+<p>但 Prompt 能解决的问题是有限的。</p>
+<p>它只能影响模型在给定输入分布上「更可能说对话、写对代码」。</p>
+<p>它解决不了模型缺乏边界感的问题，也解决不了模型接入真实系统后的风险。</p>
+<h4 id="context">Context</h4>
+<p>接着发现光会提问不够。</p>
+<p>模型是无状态的，每次调用都是接收一段输入 token，输出一段 token。</p>
+<p>本身不维护持久系统状态。</p>
 <p><br/></p>
-<p>这篇文章尝试做三件事：</p>
+<p>它不知道仓库里有什么分支、生产环境有哪些约束、什么算上线、什么算事故。</p>
+<p>这些东西只能通过文本告诉它。</p>
+<p>于是有了 Context
+Engineer，研究如何为这一轮调用，准备正确、充分的输入信息。</p>
+<p><br/></p>
+<p>Context 解决的是信息完整性问题。</p>
+<p>让模型在这一轮看到更多关键信息，从而减少胡编乱造。</p>
+<p>但它仍然解决不了执行层面的问题。</p>
+<h4 id="harness">Harness</h4>
+<p>再往后，模型开始接入真实系统——读写文件、执行命令、操作数据库。</p>
+<p>这时候问题变了。</p>
+<p><br/></p>
+<p>不再是答对答错的问题了。</p>
+<p>之前讲 Prompt 和
+Context，不管怎么讲，都是想让模型「答得好一点」。</p>
+<p>但模型一旦真的动起手来，问题就不是答得好不好的问题了。</p>
+<p><br/></p>
+<p>关键是，模型有幻觉。</p>
+<p>你写在提示词里的规则，它不一定照着执行。</p>
+<p>它可能自己脑补，胡乱执行一通。</p>
+<p><br/></p>
+<p>比如：</p>
 <ul>
-<li><p>一是用更长的时间轴，把不同世纪的典型浪潮串起来，让这种“重复性”变得可感；</p></li>
-<li><p>二是讨论为什么普通人往往身处浪潮之中而难以及时识别；</p></li>
-<li><p>三是回到 AI
-本身，用时间线和现实落地情况，看看它现在大致走到了哪一步。</p></li>
-</ul>
-<h3
-id="一书中提供的视角从个案变成模式">一、书中提供的视角：从个案变成模式</h3>
-<p>《大癫狂》的价值在于，它把许多看似荒诞的事件放在了一起：</p>
-<p>17 世纪的郁金香狂潮，18 世纪的密西西比计划和南海泡沫，</p>
-<p>以及各种宗教、炼金术和末日预言引发的群体行为。</p>
-<p><br/></p>
-<p>单看其中任意一件，很容易觉得只是“那一代人太冲动”。</p>
-<p>但当这些案例排成一列，我们看到的是一种反复出现的模式：</p>
-<ul>
-<li><p>一种新事物或新叙事出现，带来巨大的不确定性。</p></li>
-<li><p>社会精英或意见领袖围绕它编织未来、财富与安全感。</p></li>
-<li><p>金融机制为这些预期提供交易工具，让更多人可以“参与未来”。</p></li>
-<li><p>大众在信息不对称、群体情绪和环境压力下，集体进入其中。</p></li>
-<li><p>最终，现实的兑现速度跟不上预期，价格和估值开始调整，少数人带着收益离场，多数人承担后果。</p></li>
-</ul>
-<p><br/></p>
-<p>麦基关注的重点，不是哪个时代的人更“愚蠢”，</p>
-<p>而是群体在面对不确定性时，会如何被叙事和利益结构共同塑形。</p>
-<p><br/></p>
-<p>这套思路，给我们今天看 AI 提供了一种方法：</p>
-<p>不要只盯着技术细节，而要问，</p>
-<p>它是如何被叙事化、被金融化、被制度化的；</p>
-<p>又是谁在这过程中获得主动权，谁成了被动角色。</p>
-<h3
-id="二每个世纪都有自己的浪潮从-17-世纪到-21-世纪">二、每个世纪都有自己的浪潮：从
-17 世纪到 21 世纪</h3>
-<p>如果按照时间顺序，每隔几十年看一次，</p>
-<p>就能发现几乎每个长周期里，都会出现一两个“全民热点”。</p>
-<h4 id="世纪郁金香与早期泡沫">17 世纪：郁金香与早期泡沫</h4>
-<p>17 世纪的荷兰郁金香狂热，常被视为最早的泡沫事件之一。</p>
-<p>郁金香本来只是花卉，但在特定的贸易环境、审美风潮和身份竞争中，</p>
-<p>它逐渐被赋予了稀缺、品位和社会象征的意义。</p>
-<p>人们开始追逐的，不再是花本身，而是花所代表的价格上涨机会。</p>
-<p><br/></p>
-<p>这种转变很关键。</p>
-<p>一个东西只要被当成“未来还能更贵”的对象，</p>
-<p>它就从商品变成了资产，从使用品变成了下注标的。</p>
-<p><br/></p>
-<p>郁金香热的故事告诉我们，稀缺叙事本身就能制造金融属性；</p>
-<p>而一旦大家都相信“还能继续涨”，价格就会被自己推动自己，直到接盘者减少，链条断裂。</p>
-<h4 id="世纪密西西比计划与南海泡沫">18 世纪：密西西比计划与南海泡沫</h4>
-<p>18 世纪的法国“密西西比计划”和英国“南海公司”泡沫，</p>
-<p>是《大癫狂》中着墨很多的案例。</p>
-<p><br/></p>
-<p>两者都以殖民开发和海外贸易为名，号称掌握未来巨大利润来源，发行股票，</p>
-<p>让普通民众可以分享“帝国扩张的红利”。</p>
-<p>结果是股价在极短时间内暴涨，随后崩塌，留下广泛的社会震荡。</p>
-<p><br/></p>
-<p>这里，海外殖民与贸易不完全是虚构，它确实存在收益空间。</p>
-<p>但问题在于，收益被过早地、过度地转化为可以交易的“金融想象”，</p>
-<p>远远超出了当时经济结构能支持的范围。</p>
-<h4 id="世纪铁路与基础设施热">19 世纪：铁路与基础设施热</h4>
-<p>19 世纪的铁路建设，是一次典型的“技术革命+资本狂热”的组合。</p>
-<p>铁路真正改变了运输、产业布局和城市结构，但同时也引发了大规模投机与泡沫。</p>
-<p>大量资本涌入铁路公司，许多线路在缺乏充分需求分析的情况下被仓促建设，</p>
-<p>股价先涨后跌，多次引发金融危机。</p>
-<p><br/></p>
-<p>铁路的意义不容否认，但从资本视角来看，它也曾经历过一个“远超实际盈利能力的估值阶段”。</p>
-<h4 id="世纪房地产与长期杠杆">20 世纪：房地产与长期杠杆</h4>
-<p>20
-世纪中后段开始，尤其在一些快速城市化国家，房地产逐渐成为家庭资产配置的核心。</p>
-<p><br/></p>
-<p>城市土地稀缺、人口流入、信贷扩张、政策引导等因素叠加，</p>
-<p>使房地产兼具居住、投资、抵押品和社会身份多重属性。</p>
-<p>房价的上涨不再只是供需问题，而是整个金融体系、地方财政和居民预期共同驱动的结果。</p>
-<p><br/></p>
-<p>这类资产的特殊性在于：</p>
-<p>就算个体意识到泡沫存在，也很难完全不参与。</p>
-<p>房地产因此成为一种“结构性强制下注”：</p>
-<p>不进场，有现实生活层面的代价；进场，又不得不承受价格波动和周期风险。</p>
-<h4 id="世纪初互联网与真的革命真的泡沫">21
-世纪初：互联网与“真的革命，真的泡沫”</h4>
-<p>互联网泡沫发生在 1990 年代末到 2000 年左右。</p>
-<p>万维网的普及、浏览器的出现、在线服务的兴起，让“互联网会改变一切”的叙事非常有说服力。</p>
-<p>大量公司以“.com”为名上市，股价在短期内被炒至远高于自身盈利能力的水平。</p>
-<p>泡沫破灭时，指数大幅回调，大量企业消失。</p>
-<p><br/></p>
-<p>但和郁金香不同的是，互联网本身并没有消失。</p>
-<p>搜索引擎、电商平台、社交网络、云计算基础设施最终成为新经济体系的支柱。</p>
-<p>这个案例提醒我们：<strong>泡沫与真实变革可以同时存在</strong>。</p>
-<p>泡沫不会否定技术，技术也不能豁免泡沫。</p>
-<p><br/></p>
-<p>在这个长时间维度下，我们很容易看到：</p>
-<p>几乎每个世纪，都会有一个或数个对象，成为“集体预期与金融机制”共同作用的焦点。</p>
-<p>从郁金香到铁路，从海外公司到房地产，再到互联网，</p>
-<p>它们共同构成了《大癫狂》那条跨世纪的主线：</p>
-<p>大众幻想与群体性行为，在不断重复。</p>
-<h3
-id="三为什么很多人看不见浪潮时间尺度与个人生命经验">三、为什么很多人看不见浪潮：时间尺度与个人生命经验</h3>
-<p>从宏观历史图像看，浪潮很清晰；</p>
-<p>但对个体而言，恰恰相反——大多数人并不容易意识到自己正站在浪潮之中。</p>
-<p><br/></p>
-<p>一个重要原因是，经济和技术浪潮的完整周期往往以“几十年”为单位。</p>
-<p>技术从萌芽到普及，从叙事到泡沫，</p>
-<p>从泡沫到回落，再到沉淀为基础设施，通常要跨越至少一到两代人的时间。</p>
-<p>而个人的职业生涯高度参与期，也就二三十年。</p>
-<p>想要凭个人经历完整体会多轮循环，几乎是不可能的。</p>
-<p><br/></p>
-<p>结果就是：</p>
-<p>当一个人开始具备系统性认知和经济判断能力时，他往往已经处在某一浪潮的中段或后段。</p>
-<p>这时，很多现象被视为“理所当然的背景”，而不是“值得警惕的周期”。例如：</p>
-<ul>
-<li><p>出生在房价长期上涨时代的人，很难把上涨本身当作一个问题；</p></li>
-<li><p>在互联网已经高度普及的环境中成长的人，很难直观意识到那曾经是一轮剧烈泡沫；</p></li>
-<li><p>在 AI
-工具已经广泛进入办公和生活场景的未来人看来，今天的热议可能只是历史开端的一部分。</p></li>
+<li><p>你让它改某个文件，它顺手把不相干的几个文件也改了</p></li>
+<li><p>你让它修个 bug，它跑偏去重写了整个模块</p></li>
+<li><p>你让它跑个命令，它生成了错误的代码去执行</p></li>
+<li><p>它可能误删文件，可能胡乱往外发请求，可能改了不该改的配置</p></li>
 </ul>
 <p><br/></p>
-<p>正因为个人的时间窗口有限，</p>
-<p>如果不主动去看历史材料、读类似《大癫狂》这样的书、对照不同周期，</p>
-<p>就很难意识到：</p>
-<p>“这不是第一次发生，也不会是最后一次发生”。</p>
-<p>对很多人而言，浪潮更像是空气——存在，却不被具体地看见。</p>
-<h3
-id="四普通人为何更容易被卷入信息角色与制度环境">四、普通人为何更容易被卷入：信息、角色与制度环境</h3>
-<p>普通人相比专业研究者、政策制定者和金融机构，有几个天然的不利位置。</p>
+<p>提示词里写得再清楚都没用。</p>
+<p>因为它不是在「遵守规则」，它只是在「生成像是在遵守规则的输出」。</p>
+<p>一旦输出落到真实系统里，就由不得你了。</p>
 <p><br/></p>
-<p>第一，信息与工具的不对称。</p>
-<p>经济史学家、金融专业人士、决策者，可以接触到更系统的数据和理论，</p>
-<p>例如关于长周期、金融化趋势、技术革命与资本关系的研究。</p>
+<p>所以 Harness 要解决的问题是：</p>
+<p>模型接入真实系统后，怎么让它尽量不要乱执行。</p>
+<p>怎么让它只做你预期内的事，不要顺手搞出别的来。</p>
 <p><br/></p>
-<p>卡洛塔·佩雷斯在《技术革命与金融资本》中，</p>
-<p>就明确提出了“技术突破—金融狂热—泡沫破裂—制度重构—黄金时代”的框架。</p>
-<p>这些观点在专业圈内广为传播，但很少进入日常公共讨论。</p>
+<p>这就是 Harness 要解决的问题。</p>
+<h4 id="loop">Loop</h4>
+<p>光有 Harness 还不够。</p>
+<p>因为前面这些都还是单次执行的场景——模型动一步，本质上是单轮的事。</p>
+<p>但 Agent 真正的用法，是要长时间、一轮一轮自己跑下去的。</p>
 <p><br/></p>
-<p>第二，角色的差异。</p>
-<p>政策制定者、企业高层和金融机构，往往处在“设计规则”或“选择参与方式”的一端；</p>
-<p>普通人则更多是“给出响应”的一端。</p>
+<p>这里说的 Loop，不是简单的「人需要审批每一步」。</p>
+<p>而是人们在实践里发现，「迭代开发」这种模式可以抽象出来。</p>
+<p>一个目标，拆成一轮一轮去做，每一轮做完看结果、再决定下一轮怎么走。</p>
+<p>这种模式提炼出来，就是 Loop。</p>
 <p><br/></p>
-<p>比如某些产业鼓励政策、信贷投放方向、资本市场监管尺度，都会影响浪潮的形成与演化。</p>
-<p>这些决定并不是由普通个体做出的。</p>
+<p>平台需要把这种模式抽象成一种能力，提供给开发出来的 agent。</p>
+<p>agent 可选地启用这种特性。</p>
 <p><br/></p>
-<p>第三，制度与社会环境的导向。</p>
-<p>以房地产为例，它之所以能成为许多人“不得不参与”的赛道，</p>
-<p>很大程度上是因为制度安排、金融结构和社会舆论共同强化了“一定要有房”的共识。</p>
+<p>但它也有适用性。</p>
+<p>如果你本身的工作流就不是这种迭代的、一轮一轮推进的，那强行套一个 Loop
+上去，意义也不大。</p>
 <p><br/></p>
-<p>在这样的环境下，即便有人怀疑房价的合理性，也难以做出完全“旁观者”的选择。</p>
+<p>这四个概念是递进的：</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>解决的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt</td>
+<td>单次回答的质量</td>
+</tr>
+<tr>
+<td>Context</td>
+<td>信息的完整性</td>
+</tr>
+<tr>
+<td>Harness</td>
+<td>单次执行的安全性</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>长时间迭代的可靠性</td>
+</tr>
+</tbody>
+</table>
+<p>每一层都建立在上一层的基础上。</p>
+<h3 id="二为什么我之前总是理解不了">二、为什么我之前总是理解不了</h3>
+<p>因为这些术语是给平台开发者说的。</p>
 <p><br/></p>
-<p>因此，技术和资产浪潮往往不是单纯“自然发生”的，更不是完全“自下而上”的。</p>
-<p>它们在很大程度上，是在制度允许、政策默许甚至在某些时期被鼓励的框架下展开的。</p>
-<p>这并不意味着存在某种统一的阴谋，</p>
-<p>而是说：在推动增长、调整结构、分配资源的过程中，</p>
-<p>对“可被金融化的新事物”的容忍度，往往比表面上看起来要高。</p>
+<p>什么是平台开发者？</p>
+<p>开发「能开发 Agent 的工具」的人。</p>
 <p><br/></p>
-<p>在这样的环境中，普通人一方面缺少系统的历史视角，</p>
-<p>一方面处在被动响应的位置，</p>
-<p>于是更容易被情绪、舆论和身边人的选择带着走。</p>
-<p>等意识到自己身在浪潮中，往往已经在车上了。</p>
-<h3
-id="五金融属性为什么总是先买未来再被现实纠偏">五、金融属性：为什么总是“先买未来，再被现实纠偏”</h3>
-<p>理解浪潮，离不开“金融属性”这三个字。</p>
-<p>这里可以借用一些经济学和金融史上的思路，而不是只停留在情绪层面的抱怨。</p>
 <ul>
-<li><p>从金融经济学角度看，资产价格往往不只是当前收益的函数，更是未来预期收益的折现。只要未来存在不确定性，预期就有被放大的空间。</p></li>
-<li><p>长周期研究者（如熊彼特、佩雷斯）指出，技术革命往往伴随金融资本的活跃期。金融资本会把对新技术的期待，放大为一轮又一轮的投资与估值循环。</p></li>
-<li><p>在这种框架下，泡沫不再被视为“偶发错误”，而是一种结构性特征：当新技术出现时，金融体系总会倾向于先行放大，再由现实来纠偏。</p></li>
+<li><p>Anthropic 公司的工程师，写的是 Claude Code</p></li>
+<li><p>Cursor 公司的工程师，写的是 Cursor</p></li>
+<li><p>OpenAI 公司的工程师，写的是 Codex</p></li>
 </ul>
 <p><br/></p>
-<p>简单说，金融属性的核心不是“有人炒”，而是“可以提前交易未来”。只要一个对象满足：</p>
+<p>对他们来说，这些概念对应着具体需要实现的工程问题：</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>术语</th>
+<th>对平台开发者意味着什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt</td>
+<td>如何设计系统提示词，让模型理解自己的工作方式和边界</td>
+</tr>
+<tr>
+<td>Context</td>
+<td>如何管理上下文窗口，如何拼装和裁剪信息，如何处理记忆</td>
+</tr>
+<tr>
+<td>Harness</td>
+<td>如何搭那套壳——模型怎么接、工具怎么调、权限怎么控、验证怎么跑</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>如何设计任务调度、重试策略、异常处理、人工接管机制</td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<p>这些都是平台层需要解决的实际问题。</p>
+<p>因为它们是用平台开发出来的每一个 agent，都会遇到的共性问题。</p>
+<p><br/></p>
+<p>但大多数人并不是平台开发者。</p>
+<p><br/></p>
+<p>如果在整个 Agent 工程里分个层，会更清楚：</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>层</th>
+<th>是谁</th>
+<th>在干什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平台层</td>
+<td>平台开发者</td>
+<td>搭好那套壳，让所有 Agent
+在同一个壳里跑；模型怎么接、工具怎么调、权限怎么控、验证怎么跑，都是他们定的</td>
+</tr>
+<tr>
+<td>Agent 开发者层</td>
+<td>做扩展的人</td>
+<td>在别人搭好的壳里，写 Skills、配规则、写 MCP 工具</td>
+</tr>
+<tr>
+<td>Agent 使用者层</td>
+<td>用现成产品的人</td>
+<td>通过自然语言或简单界面让 Agent 干活，自己审查结果、做决策</td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<p>大多数人都在中间这层，或者最上面那层。</p>
+<p>不是造平台的人，自然理解不了 Harness 在解决自己什么痛点。</p>
+<h3 id="三那-harness-到底解决了什么问题">三、那 Harness
+到底解决了什么问题</h3>
+<p>回到 Harness 本身。</p>
+<p><br/></p>
+<p>它要解决的问题是：模型接入真实系统后，怎么让它不要乱执行。</p>
+<p><br/></p>
+<p>前面说了，模型有幻觉，不照提示词执行，可能胡乱执行。</p>
+<p>那 Harness 是怎么解决这个问题的呢？</p>
+<p><br/></p>
+<p>办法其实很简单——不让模型自由生成命令，只给它几个写好的工具去调。</p>
+<p>模型只负责「调哪个工具、传什么参数」。</p>
+<p>工具被调用之后干什么，是提前写好的代码决定的，不由模型说了算。</p>
+<p><br/></p>
+<p>这就是「做选择题，而不是问答题」。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>答案空间</th>
+<th>谁说了算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>问答题</td>
+<td>无限的，模型想写什么写什么</td>
+<td>模型</td>
+</tr>
+<tr>
+<td>选择题</td>
+<td>有限的，每个选项干什么是确定的</td>
+<td>代码</td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<p>举个例子。</p>
+<p>模型要改文件，不是让它直接 rm、直接 echo、直接重写整个仓库。</p>
+<p>是给它一个 <code>write_file(path, content)</code> 的工具。</p>
+<p>调用之前，先检查这个 path 在不在允许目录里。</p>
+<p>不在，直接拒绝。</p>
+<p>在，才执行。</p>
+<p><br/></p>
+<p>模型要跑测试，不是让它自己拼 shell 命令。</p>
+<p>是给它一个 <code>run_tests(pattern)</code> 的工具。</p>
+<p>背后是写好的测试流程，跑完之后结果会被结构化地返回给模型。</p>
+<p><br/></p>
+<p>模型要操作 git，不是让它自己敲 git push。</p>
+<p>是给它 <code>commit_changes(message)</code> 这样的工具，背后自动在
+feature 分支上干活，禁止推主分支。</p>
+<p><br/></p>
+<p>这样一来，模型能做的事，就被限定在这几个工具里了。</p>
+<p>它再有幻觉，最多也就是选错了工具、传错了参数。</p>
+<p>但工具背后干什么，是代码定的，它改不了。</p>
+<p>它绕不过去。</p>
+<p><br/></p>
+<p>模型可能选错，但选错的结果不是直接操作系统。</p>
+<p>而是调用了某个工具——工具的执行结果可以被验证、被回滚、被记录。</p>
+<p>这就是「可控」的真正含义。</p>
+<h3 id="四内置工具">四、内置工具</h3>
+<p>前面一直在说「给模型几个工具去调」，那这些工具是哪来的，先交代清楚。</p>
+<p><br/></p>
+<p>像
+<code>Read</code>、<code>Write</code>、<code>Edit</code>、<code>Bash</code>、<code>Glob</code>、<code>Grep</code>、<code>WebFetch</code>
+这些，都是平台自带的内置工具。</p>
+<p>不是每个项目自己造的，而是平台层统一提供的。</p>
+<p>所有在这个平台上跑的 agent，默认都能用这一套。</p>
+<p><br/></p>
+<p>平台为什么要内置这些？</p>
+<p>因为读写文件、跑命令、搜代码，是几乎所有 agent 都要做的事。</p>
+<p>每个项目都自己写一遍，没必要，也写不齐。</p>
+<p>平台把这些公共能力收进来，顺手在每一个工具外面，包上权限检查、参数校验、日志记录。</p>
+<p>这样 agent 一上来，能干的事就是受限的、可观测的。</p>
+<p><br/></p>
+<p>至于这些工具的 schema
+怎么传给模型、模型怎么决定调哪个、平台怎么执行、结果怎么回到模型，是一条完整的调用链路，放在文末附录展开。</p>
+<h3 id="五出错了怎么办">五、出错了怎么办</h3>
+<p>光拦住还不够，模型还是会选错，工具调下去还是会出问题。</p>
+<p><br/></p>
+<p>所以 Harness 还得兜住出错的情况。</p>
+<p>关键操作之后，强制验证——改完代码跑测试，测试没过，就把错误信息结构化地丢回给模型，让它继续改。</p>
+<p>「完成」也不是模型说做完了就算数，是平台检查该跑的验证跑没跑、过没过。</p>
+<p>失败的时候，区分是可重试的错，还是必须人工介入的硬失败，分别处理。</p>
+<p>整个过程记进日志，错了能查到、能回滚。</p>
+<p><br/></p>
+<p>这其实就是把「交付要测试、要
+review、错了要回滚」这件很朴素的事，从人盯，变成了代码自动盯。</p>
+<h3 id="六一条完整的链路">六、一条完整的链路</h3>
+<p>举个具体的例子。</p>
+<p>一个 TypeScript monorepo 项目，Agent 接到一个任务：修复 src/foo.ts
+里的 bug，并补上测试。</p>
+<p><br/></p>
+<p>链路大致是这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 读取文件      Agent 通过工具读相关文件和已有测试</span><br><span class="line">2. 生成方案      Agent 生成 patch，平台应用到临时工作区（不动主代码）</span><br><span class="line">3. 强制测试      平台跑对应测试</span><br><span class="line">                 - 过了：进入候选完成</span><br><span class="line">                 - 没过：错误结构化反馈给 Agent，再改一轮</span><br><span class="line">4. 二次校验      项目 Linter 和安全扫描跑一遍，过了才标记可提交</span><br><span class="line">5. 人工 review   合并到主分支，整个链路写进日志</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<p>整个过程里，模型始终在壳内提建议。</p>
+<p>什么时候读文件、怎么改代码、怎么解释失败原因。</p>
+<p>而所有「能不能真的动仓库」「什么时候算完成」「失败怎么处理」，都是平台说了算。</p>
+<h3 id="七那为什么文章都爱讲这些">七、那为什么文章都爱讲这些</h3>
+<p>讲到这里，应该能看出来 Harness 做的事其实不复杂。</p>
+<p><br/></p>
+<p>它做的事情其实很朴素：</p>
 <ul>
-<li><p>能被讲成一个足够大的未来；</p></li>
-<li><p>有对应的资产载体（股票、债券、期货、代币、份额等）；</p></li>
-<li><p>有足够多的参与者愿意根据故事调整出价；</p></li>
+<li><p>把模型能干的事，收窄成几个受控的工具</p></li>
+<li><p>在工具周围包上检查、验证、回滚</p></li>
+<li><p>出错的时候自动收场，而不是任由它越跑越偏</p></li>
 </ul>
 <p><br/></p>
-<p>它就会自然地成为金融化的目标。</p>
-<p>郁金香、海外公司、铁路、房子、互联网企业、乃至今天的 AI
-基础设施和应用公司，都是如此。</p>
+<p>那为什么网上那些文章，都把它说得那么复杂、那么玄呢？</p>
 <p><br/></p>
-<p>这并不意味着金融一定是负面的。</p>
-<p>佩雷斯就指出，金融狂热虽然会造成泡沫，但也会在导入期帮助新技术迅速铺开基础设施，</p>
-<p>为后续“黄金时代”打好底子。</p>
+<p>因为写文章的是平台方，站的是自己的视角。</p>
+<p>把自己的内部架构说得越复杂，平台就显得越有价值。</p>
+<p>读者焦虑了，觉得搞不定，最后买他们的服务。</p>
 <p><br/></p>
-<p>问题在于：谁在狂热期获利，谁在纠偏期承担成本，这往往是不均衡的。</p>
-<h3 id="六把-ai-放回时间线从萌芽到当前阶段">六、把 AI
-放回时间线：从萌芽到当前阶段</h3>
-<p>回到 AI 本身，如果按照时间顺序来梳理，</p>
-<p>而不是只看最近一两年的热度，可以更清晰地看到它与历史浪潮的相似之处。</p>
-<h4 id="早期学术和工业界的局部突破">早期：学术和工业界的局部突破</h4>
-<p>人工智能作为研究方向，最早可以追溯到 20
-世纪中叶，此后经历了多次“寒冬”和局部复兴。</p>
-<p>真正开始引发广泛社会关注的，是深度学习在图像识别、语音识别和机器翻译上的突破，</p>
-<p>尤其是 2010 年代后的几次关键竞赛和产品落地。</p>
-<p>那时候，AI 更多还被看成“特定任务上的专家系统”，远未成为全民话题。</p>
-<h4 id="转折点大模型与生成式-ai-出圈">转折点：大模型与生成式 AI
-出圈</h4>
-<p>真正的拐点发生在大型预训练模型出现之后，尤其是自然语言处理领域的大规模语言模型。</p>
-<p>预训练+微调的范式、Transformer 架构的应用，</p>
-<p>让通用模型具备了在开放领域生成文本、回答问题、辅助创作的能力。</p>
-<p>2022
-年之后，一些开放式的聊天模型产品进入大众视野，引发了全球范围内的讨论与试验。</p>
+<p>这不是阴谋，只是立场不同。</p>
+<p>每个做平台的人，都希望自己的平台看起来更强大、更专业。</p>
 <p><br/></p>
-<p>从时间线上看，这一阶段对应的，是“叙事迅速扩散”的时期：</p>
+<p>但作为开发者，得有自己的判断。</p>
+<p>知道什么是自己该关心的，什么不是。</p>
+<p><br/></p>
+<p>有个简单的自查方法：</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>你主要在写</th>
+<th>你处在哪一层</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SDK、runtime、权限、验证、状态、日志</td>
+<td>平台层工程（Prompt、Context、Harness、Loop 真正的落地点）</td>
+</tr>
+<tr>
+<td>系统提示、规则文件、Skills、MCP、CLI</td>
+<td>Agent 层产品与扩展（重要，但不同于平台层的壳）</td>
+</tr>
+<tr>
+<td>发任务、审查结果、做决策</td>
+<td>使用者层（关注怎么用、什么时候该介入，而不是怎么造）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="八结语">八、结语</h3>
+<p>本文主要想说的是，Harness 这个概念没有那么复杂。</p>
+<p><br/></p>
+<p>它就是让 LLM 做选择题，而不是问答题。</p>
+<p>把模型能干的事收窄成几个受控的工具，在工具周围包上检查、验证、回滚。</p>
+<p><br/></p>
+<p>这些术语是平台开发者在解决自己的工程问题时用的。</p>
+<p>对于 Agent 开发者来说，用好平台提供的功能就够了。</p>
+<p>对于 Agent 用户来说，那就更不用管了。</p>
+<h3 id="附录tool-call-的完整调用过程">附录：tool call
+的完整调用过程</h3>
+<p>前面说 Harness 让 LLM
+做选择题、平台负责执行，但没展开具体是怎么调的。</p>
+<p>这一节把整条链路走一遍，工具 schema
+怎么传、模型怎么决定调哪个、平台怎么执行、结果怎么回到模型。</p>
+<p>以 Anthropic 的 Messages 协议为例。</p>
+<h4 id="工具是谁写的怎么注入的">1. 工具是谁写的，怎么注入的</h4>
+<p>工具分两类。</p>
+<p>一类是平台自带的内置工具，像
+<code>Read</code>、<code>Write</code>、<code>Edit</code>、<code>Bash</code>、<code>Glob</code>、<code>Grep</code>、<code>WebFetch</code>，平台工程师写死的，所有
+agent 一上来都能用。</p>
+<p>一类是项目自己加的，通过 MCP、Skills、CLI 注入进来，agent
+开发者写的，只在特定项目里生效。</p>
+<p><br/></p>
+<p>每个工具都是一个独立模块，自己定义四样东西：</p>
 <ul>
-<li><p>主流媒体大量报道“AI 对许多岗位的替代可能”；</p></li>
-<li><p>科技公司高层不断强调 AI 将重塑几乎所有行业；</p></li>
-<li><p>资本市场对算力、芯片、云服务、模型公司的估值明显抬升；</p></li>
-<li><p>各类创业项目涌现，从写作辅助到代码补全，从客服机器人到营销自动化。</p></li>
+<li><code>name</code>：叫什么名字</li>
+<li><code>description</code>：是干什么的</li>
+<li><code>input_schema</code>：要填哪些参数、什么类型、哪些必填</li>
+<li><code>call</code>：被调用时真正干活的逻辑</li>
 </ul>
 <p><br/></p>
-<p>这有点像互联网在 1990 年代末期的状态：</p>
-<p>技术确有突破，叙事迅速放大，市场愿意为“未来可能性”付较高溢价。</p>
-<h4
-id="当前从无边界想象走向分层与算账">当前：从无边界想象走向分层与算账</h4>
-<p>如果用前面提到的周期框架来套，会发现 AI
-现在更接近“狂热之后的结构分化期”：</p>
+<p>平台在每轮请求前，把当前生效的工具收拢成一张列表，塞进请求里的
+<code>tools</code>。</p>
+<h4 id="传把工具-schema-塞进请求">2. 传：把工具 schema 塞进请求</h4>
+<p>得先说一个前提：LLM 是无状态的。</p>
+<p>它不记得上一轮自己说了什么，每次调用都是一次全新的请求。</p>
+<p>所以平台每一轮都要把之前的对话历史，原样塞进请求里，模型才能接上之前的上下文。</p>
 <p><br/></p>
-<p><strong>1. 企业端正在收紧用量与成本控制</strong></p>
-<p>许多公司开始规范内部 AI 工具使用，设置预算、监控 token 消耗，</p>
-<p>部分企业内部提出了“用在关键场景，而非全面覆盖”的原则。</p>
-<p>这说明，AI 正从“试用期”进入“成本项”视角。</p>
+<p>平台发给模型的请求，大致是这样：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"model"</span>: <span class="string">"claude-..."</span>,</span><br><span class="line">  <span class="attr">"system"</span>: <span class="string">"你是编码助手，工作目录是 /repo，只能改 src/..."</span>,  <span class="comment">// 身份和约束</span></span><br><span class="line">  <span class="attr">"messages"</span>: [</span><br><span class="line">    <span class="comment">// 下面整段对话历史，每轮都要原样重传，因为模型是无状态的</span></span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"user"</span>,      <span class="attr">"content"</span>: <span class="string">"修复 src/foo.ts 里的 bug"</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"assistant"</span>, <span class="attr">"content"</span>: [&#123; <span class="attr">"type"</span>: <span class="string">"tool_use"</span>, <span class="attr">"id"</span>: <span class="string">"toolu_01"</span>, <span class="attr">"name"</span>: <span class="string">"Read"</span>, <span class="attr">"input"</span>: &#123; <span class="attr">"file_path"</span>: <span class="string">"src/foo.ts"</span> &#125; &#125;] &#125;,</span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"user"</span>,      <span class="attr">"content"</span>: [&#123; <span class="attr">"type"</span>: <span class="string">"tool_result"</span>, <span class="attr">"tool_use_id"</span>: <span class="string">"toolu_01"</span>, <span class="attr">"content"</span>: <span class="string">"export function foo() &#123;...&#125;"</span> &#125;] &#125;</span><br><span class="line">    <span class="comment">// ... 之前每一轮的 user/assistant/tool_result 都在这</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"tools"</span>: [                          <span class="comment">// 这轮可用的工具列表（菜单）</span></span><br><span class="line">    &#123; <span class="attr">"name"</span>: <span class="string">"Read"</span>,  <span class="attr">"description"</span>: <span class="string">"读取文件"</span>,  <span class="attr">"input_schema"</span>: &#123; <span class="comment">/* file_path: string */</span> &#125; &#125;,</span><br><span class="line">    &#123; <span class="attr">"name"</span>: <span class="string">"Write"</span>, <span class="attr">"description"</span>: <span class="string">"覆盖文件"</span>,  <span class="attr">"input_schema"</span>: &#123; <span class="comment">/* file_path, content */</span> &#125; &#125;,</span><br><span class="line">    &#123; <span class="attr">"name"</span>: <span class="string">"Bash"</span>,  <span class="attr">"description"</span>: <span class="string">"执行命令"</span>,  <span class="attr">"input_schema"</span>: &#123; <span class="comment">/* command: string */</span> &#125; &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p><strong>2. 行业落地出现明显主干与支线</strong></p>
-<p>公共报道和行业分析中，被反复提及的高价值落地方向，包括：</p>
+<p>模型做选择就读三块：</p>
 <ul>
-<li><p>软件开发：代码补全、自动生成单元测试、重构辅助等，已经在开发者工具链中形成较稳定使用习惯。</p></li>
-<li><p>客户服务与销售支持：智能客服、对话机器人、售前售后问答、FAQ
-自动回复等，正在从简单脚本升级到基于大模型的对话系统。</p></li>
-<li><p>内容与营销：文案生成、图片与视频辅助制作、广告投放方案建议等，在媒体、品牌和
-MCN 等行业中大量使用。</p></li>
-<li><p>知识管理与办公：会议记录整理、文档摘要、内部搜索问答、简单分析报告生成等，成为不少企业的“基础工具”。</p></li>
+<li><code>system</code>：身份和约束，大边界</li>
+<li><code>messages</code>：对话历史，用户要它干嘛、之前调过哪些工具、每次结果是什么，它据此判断现在该干什么</li>
+<li><code>tools</code>：这轮可用的菜单，每个工具的
+<code>description</code> 说这道菜是干什么的，<code>input_schema</code>
+说要填哪些参数</li>
 </ul>
 <p><br/></p>
-<p>与此同时，一些最初被寄予厚望的泛化场景，</p>
-<p>比如“完全自动的 AI 老师”“全流程无人干预的自动驾驶”之类，</p>
-<p>大多仍停留在局部试点或长周期研发阶段。</p>
+<p><code>tools</code> 这张菜单是收窄动作空间的第一道关。</p>
+<p>里面没有 <code>rm</code> 这种裸命令。</p>
+<p>模型只能点菜单上有的菜，点不到 <code>rm</code>。</p>
+<h4 id="选模型决定调哪个">3. 选：模型决定调哪个</h4>
+<p>模型把这三块读进去，预测出「下一步该调哪个工具、参数填什么」，回一个
+assistant 消息：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"role"</span>: <span class="string">"assistant"</span>,</span><br><span class="line">  <span class="attr">"content"</span>: [</span><br><span class="line">    &#123; <span class="attr">"type"</span>: <span class="string">"text"</span>, <span class="attr">"text"</span>: <span class="string">"我先读一下这个文件。"</span> &#125;,     <span class="comment">// 可以先说句话</span></span><br><span class="line">    &#123;                                                    <span class="comment">// 再点菜</span></span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"tool_use"</span>,</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"toolu_02ABC"</span>,            <span class="comment">// 这次调用的唯一标识，回传结果靠它对号</span></span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"Write"</span>,                <span class="comment">// 点的哪道菜</span></span><br><span class="line">      <span class="attr">"input"</span>: &#123; <span class="attr">"file_path"</span>: <span class="string">"src/foo.ts"</span>, <span class="attr">"content"</span>: <span class="string">"..."</span> &#125;   <span class="comment">// 照 schema 填的参数</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"stop_reason"</span>: <span class="string">"tool_use"</span>           <span class="comment">// 停下来，等平台执行完把结果塞回来</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p>它们并非没有前景，而是短期内难以达到宣传中的那种“全面替代”水平。</p>
+<p><code>content</code> 是个数组，可以同时装 <code>text</code> 和
+<code>tool_use</code> 好几种 block。</p>
 <p><br/></p>
-<p><strong>3. 舆论开始出现“审慎”和“质疑”的声音</strong></p>
-<p>在教育领域，关于 AI 能否真正提高学习深度的讨论明显增多；</p>
-<p>在人力资源和职场领域，也有人开始担心过度依赖 AI
-工具会削弱人的能力。</p>
-<p>这些讨论本质上是在做“效果与代价”的平衡，而不再是单向的热情。</p>
-<p><br/></p>
-<p><strong>4. 资本市场对 AI 相关资产的定价开始更加分化</strong></p>
-<p>一些基础设施类公司（如芯片、云算力、数据中心）的投入仍在增加，</p>
-<p>而部分纯概念型公司则面临更严苛的业绩与盈利质疑。</p>
-<p>这与互联网泡沫后“基础设施留下，概念公司出清”的走势，有一定相似性。</p>
-<p><br/></p>
-<p>从这条时间线看，AI
-已经明显不再处于“刚刚开始所有都可以想象”的阶段，</p>
-<p>而是进入了“哪些能落地、哪些要被放弃”的阶段。</p>
-<p>这并不是退潮，而是一轮浪潮在向深水区过渡。</p>
-<h3
-id="七落地场景哪些已经相对明确哪些还在摇摆">七、落地场景：哪些已经相对明确，哪些还在摇摆</h3>
-<p>就目前公开信息和行业研究来看，AI 的应用落地大致可以分成几类：</p>
-<p><br/></p>
-<p><strong>1. 效率工具型场景</strong></p>
+<p>注意，到这里为止，什么都没被执行。</p>
+<p>模型只是说了一句「我想这么干」。</p>
+<p>它不是在执行，是在生成一段结构化的选择。</p>
+<h4 id="调平台执行">4. 调：平台执行</h4>
+<p>平台拿到这个
+<code>tool_use</code>，先不急着执行，过几道检查：参数校验、权限检查，过了才真正调用工具的
+<code>call</code>。</p>
+<p>对照源码里的 <code>Tool</code> 定义，每个工具自己管这几件事：</p>
 <ul>
-<li><p>软件开发：辅助写代码、检查漏洞、生成测试、查文档，已经渗透到主流
-IDE 和协作平台中。</p></li>
-<li><p>办公自动化：摘要、翻译、写邮件草稿、整理会议纪要等，成为很多知识工作者的“后台助手”。</p></li>
+<li><code>validateInput</code>：参数对不对，缺没缺</li>
+<li><code>checkPermissions</code>：这个操作允不允许</li>
+<li><code>call</code>：真正干活的逻辑</li>
+<li>还有
+<code>isReadOnly</code>、<code>isDestructive</code>、<code>isConcurrencySafe</code>
+这些标记，决定能不能并发、是不是危险</li>
 </ul>
 <p><br/></p>
-<p><strong>2. 服务与交互型场景</strong></p>
-<ul>
-<li><p>客服与咨询：更自然的对话机器人、更高的首问解决率、更高的并发处理能力，使这一类应用在银行、电商、电信等行业里不断扩张。</p></li>
-<li><p>营销与推荐：个性化推荐、广告投放优化、用户行为分析，使企业能更高效地触达目标群体。</p></li>
-</ul>
+<p>检查不过，直接拒绝。</p>
+<p>过了，才真正执行。</p>
+<h4 id="回结果回到模型">5. 回：结果回到模型</h4>
+<p>注意，平台不是只回传一条 <code>tool_result</code>。</p>
+<p>它回传的，还是上面那个完整结构——<code>model</code>、<code>system</code>、<code>messages</code>、<code>tools</code>
+原样都在，只是把新结果追加到 <code>messages</code>
+末尾，然后作为下一轮请求整体发给模型：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"model"</span>: <span class="string">"claude-..."</span>,</span><br><span class="line">  <span class="attr">"system"</span>: <span class="string">"你是编码助手，工作目录是 /repo，只能改 src/..."</span>,  <span class="comment">// 身份和约束</span></span><br><span class="line">  <span class="attr">"messages"</span>: [</span><br><span class="line">    <span class="comment">// 下面整段对话历史，每轮都要原样重传，因为模型是无状态的</span></span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"user"</span>,      <span class="attr">"content"</span>: <span class="string">"修复 src/foo.ts 里的 bug"</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"assistant"</span>, <span class="attr">"content"</span>: [&#123; <span class="attr">"type"</span>: <span class="string">"tool_use"</span>, <span class="attr">"id"</span>: <span class="string">"toolu_01"</span>, <span class="attr">"name"</span>: <span class="string">"Read"</span>, <span class="attr">"input"</span>: &#123; <span class="attr">"file_path"</span>: <span class="string">"src/foo.ts"</span> &#125; &#125;] &#125;,</span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"user"</span>,      <span class="attr">"content"</span>: [&#123; <span class="attr">"type"</span>: <span class="string">"tool_result"</span>, <span class="attr">"tool_use_id"</span>: <span class="string">"toolu_01"</span>, <span class="attr">"content"</span>: <span class="string">"export function foo() &#123;...&#125;"</span> &#125;] &#125;,</span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"assistant"</span>, <span class="attr">"content"</span>: [&#123; <span class="attr">"type"</span>: <span class="string">"tool_use"</span>, <span class="attr">"id"</span>: <span class="string">"toolu_02ABC"</span>, <span class="attr">"name"</span>: <span class="string">"Write"</span>, <span class="attr">"input"</span>: &#123; <span class="attr">"file_path"</span>: <span class="string">"prod.config.ts"</span>, <span class="attr">"content"</span>: <span class="string">"..."</span> &#125; &#125;] &#125;,</span><br><span class="line">    &#123; <span class="attr">"role"</span>: <span class="string">"user"</span>, <span class="attr">"content"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"tool_result"</span>,</span><br><span class="line">        <span class="attr">"tool_use_id"</span>: <span class="string">"toolu_02ABC"</span>,          <span class="comment">// 对上前面的 tool_use 的 id</span></span><br><span class="line">        <span class="attr">"is_error"</span>: <span class="literal">true</span>,                      <span class="comment">// 成功 false，失败 true</span></span><br><span class="line">        <span class="attr">"content"</span>: <span class="string">"Error: path not writable"</span>  <span class="comment">// 结果正文（输出或错误信息）</span></span><br><span class="line">      &#125;</span><br><span class="line">    ] &#125;</span><br><span class="line">    <span class="comment">// ... 之前每一轮的 user/assistant/tool_result 都在这</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"tools"</span>: [                          <span class="comment">// 这轮可用的工具列表（菜单）</span></span><br><span class="line">    &#123; <span class="attr">"name"</span>: <span class="string">"Read"</span>,  <span class="attr">"description"</span>: <span class="string">"读取文件"</span>,  <span class="attr">"input_schema"</span>: &#123; <span class="comment">/* file_path: string */</span> &#125; &#125;,</span><br><span class="line">    &#123; <span class="attr">"name"</span>: <span class="string">"Write"</span>, <span class="attr">"description"</span>: <span class="string">"覆盖文件"</span>,  <span class="attr">"input_schema"</span>: &#123; <span class="comment">/* file_path, content */</span> &#125; &#125;,</span><br><span class="line">    &#123; <span class="attr">"name"</span>: <span class="string">"Bash"</span>,  <span class="attr">"description"</span>: <span class="string">"执行命令"</span>,  <span class="attr">"input_schema"</span>: &#123; <span class="comment">/* command: string */</span> &#125; &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br/></p>
-<p><strong>3. 内容生产与创意支持</strong></p>
-<ul>
-<li>文案、图片、视频的初稿生成与辅助修改，大幅降低了“从 0 到
-1”的门槛，但“从 1 到 10”的精细化仍依赖人类专业者。</li>
-</ul>
+<p>新结果就是最后那条 <code>tool_result</code>，<code>tool_use_id</code>
+对上前面的 <code>tool_use</code> 的
+<code>id</code>，模型就知道这次结果是给哪次调用的。</p>
+<p><code>is_error</code> 区分成败，<code>content</code> 装结果正文。</p>
 <p><br/></p>
-<p><strong>4. 行业垂直场景试点</strong></p>
-<ul>
-<li>医疗影像辅助诊断、法律文书初审、金融风控辅助分析、供应链预测等，都在不同程度上做了落地尝试，有的已进入商业化，有的还在验证阶段。</li>
-</ul>
+<p>模型在下一轮看到这个结果，再决定接下来点哪个菜。</p>
+<h4 id="一轮接一轮">6. 一轮接一轮</h4>
+<p>所以整个流程就是这样一个循环：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">传(tools + messages) → 选(tool_use) → 调(校验并执行) → 回(tool_result) → 追加到 messages → 下一轮 ...</span><br></pre></td></tr></table></figure>
+<p>模型从头到尾干的事情只有一件：不停地输出「下一步调哪个工具、带什么参数」。</p>
+<p>至于这个调用要不要执行、执行成什么样，都是平台控制的。</p>
 <p><br/></p>
-<p>可以看到，AI
-在“帮助人做事更快、更好”的方向上，已经有大量场景真正落地并创造价值。</p>
-<p>但在“完全替代人”的方向上，仍然有很长的路。</p>
-<p>很多最有声量的宣传，恰恰集中在那些最难短期实现全面替代的领域。</p>
-<p><br/></p>
-<p>从浪潮角度看，这种情况非常典型——叙事会先指向“全局革命”，</p>
-<p>现实则会在后续的落地过程中，慢慢收缩到“高价值局部”。</p>
-<p>AI 正是在经历这样一种从“无边界”到“有边界”的收缩。</p>
-<h3 id="八对-ai-的位置做一个冷静的判断">八、对 AI
-的位置做一个冷静的判断</h3>
-<p>把历史的长镜头和 AI
-的时间线叠在一起，可以得到一个相对冷静的判断：</p>
-<ul>
-<li><p>AI
-不是第一次出现的“全民热点”，也不会是最后一次。它延续的是一条从郁金香到互联网的长链条——新事物出现，预期被放大，金融属性被激活，群体进入，然后再由现实来筛选与分层。</p></li>
-<li><p>AI
-同时又是一个真实的技术进步，它确实在多个行业提高了效率、改变了工作方式、降低了部分门槛。把它简单归类为“骗局”或“泡沫”，都低估了它的技术含量和长期影响。</p></li>
-<li><p>当前阶段的“降温”和“分化”，并不意味着浪潮结束，而是说明它开始进入成熟轨道：成本开始被重视，场景开始被筛选，估值开始被重新校准。</p></li>
-</ul>
-<p><br/></p>
-<p>从普通人的视角看，这一切有点复杂：某些岗位和行业正在被重塑，某些技能的边际价值在下降，新的机会和风险同时出现。对很多人来说，最难的是两件事：</p>
-<ul>
-<li><p>一边要在现实中学习和使用这些工具，避免被动落后；</p></li>
-<li><p>一边要保持对浪潮机制的清醒认识，不把所有短期的叙事都当成不容置疑的必然。</p></li>
-</ul>
-<h3 id="九展望未来ai-之后还会有别的浪潮">九、展望未来：AI
-之后，还会有别的浪潮</h3>
-<p>从更长远的角度看，AI 浪潮并不是一个终点，而是一个中继站。</p>
-<p>在它之后，极有可能还会出现新的技术和资产，成为下一轮故事的主角：</p>
-<p>也许是更成熟的机器人系统，也许是脑机接口，</p>
-<p>也许是新型能源或生物技术，也许是我们现在还难以想象的组合。</p>
-<p><br/></p>
-<p>那些未来的浪潮，极大概率也会遵循类似的轨迹：</p>
-<p>新事物出现 → 预期放大 → 金融化 → 扩散 → 分化 →
-沉淀为基础设施或长期资产。</p>
-<p><br/></p>
-<p>从这个意义上说，AI 提供的，除了具体应用之外，还有一个更大的提醒：</p>
-<p>技术变化和资本循环会不断交替上演，而个人生命经验很难完整覆盖多个周期。</p>
-<p>想要保持一定的主动性，需要刻意地把眼光拉长，</p>
-<p>把自己从单个时代故事中抽离出来，用历史的视角看当下。</p>
-<p><br/></p>
-<p>这并不容易，但可能是对浪潮最现实、也最稳妥的一种态度。</p>
+<p>模型的角色，始终是个「出主意的」，真正动手的是平台。</p>
 
           
         
@@ -725,7 +828,7 @@ IDE 和协作平台中。</p></li>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/">&lt;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/319/">319</a><a class="extend next" rel="next" href="/page/4/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&lt;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/320/">320</a><a class="extend next" rel="next" href="/page/4/">&gt;</a>
   </nav>
 
 
@@ -771,7 +874,7 @@ IDE 和协作平台中。</p></li>
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">319</span>
+                <span class="site-state-item-count">320</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
